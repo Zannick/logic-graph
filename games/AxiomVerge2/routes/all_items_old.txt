@@ -1,0 +1,214 @@
+* Collect Ice_Axe from Antarctica > Shed > Interior > Shelf
+  EarthSavewarp to Antarctica > West > Helipad
+* Collect Station_Power from Antarctica > Power Room > Switch > Flip
+  EarthSavewarp to Antarctica > East > Save Point
+* Collect Compass from Glacier > Compass Room > Center > Table
+* Collect Amashilama from Glacier > Sea Burial > Collapsing Ceiling > Drown ==> Glacier > Revival > Save Point
+* Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
+* Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
+* Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
+* Collect Flask from Glacier > Vertical Room > Peak > Flask
+! Do Ebih > Base Camp > Save Point > Save
+* Collect Companies_Layoff from Interior > Tent Interior > Desk > Note
+* Collect Record_Losses from Interior > Garage > Boxes > Under Boxes
+* Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
+! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
+! Do Ebih > Ebih East > Moving Platform > Activate Ride
+* Collect Under_Siege from Ebih > Ebih East > East Ledge > Note
+* Collect Terminal_Breakthrough_1 from Ebih > Grid 26,10-11 > Ledge > Note
+* Collect Flask from Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
+! Do Ebih > Drone Room > Portal Exit > Activate Platform
+* Collect Remote_Drone from Ebih > Drone Room > Middle Platform > Urn Quick Grab ==> Ebih > Drone Room > Portal
+! Do Ebih > Drone Room > Pit Left > Activate Lift
+! Do Ebih > Drone Room > Moving Platform > Throw Drone
+* Collect Flask from Ebih > Drone Pit > Pit > Item
+! Do Recall Drone
+* Collect Infect_L1 from Menu > Upgrade Menu > Infection > Infection Level 1
+* Collect Drone_Melee_Damage from Menu > Upgrade Menu > Drone > Drone Melee Damage 1
+
+* Collect Health_Node from Ebih > Boss Room > East Ledge > Item
+* Collect Ebih_Alu from Ebih > Boss Room > Boss > Fight Alu
+* Collect Flask from Ebih > Boss Room > Boss > Boss Reward
+
+* Collect Dear_Ernest from Interior > Bunker Interior > Desk > Note
+  Move... to Amagi > Main Area > Platform 2
+! Do Deploy Drone
+* Collect Underwater_Movement from Amagi > Liru Room > Shrine > Item
+! Do Recall Drone
+! Do Amagi > Main Area > Carving > Key Combo
+! Do Interior > Cave Behind Waterfall > Middle > Throw Drone
+* Collect Flask from Amagi > Main Area > Way Off To The Side > Item
+! Do Recall Drone
+* Collect Health_Upgrade from Menu > Upgrade Menu > Physiology > Health Upgrade 1
+
+  Move... to Amagi > West Lake > Cavern Refill Station
+! Do Deploy Drone
+* Collect Shockwave from Amagi > West Lake > Stronghold Item > Item
+! Do Recall Drone
+* Collect Defeat_MUS_A_M20 from Amagi > West Lake > Cavern Refill Station > Defeat MUS A M20 ==> Amagi > West Lake > Cavern Rear Pillar
+* Collect Flask from Amagi > West Lake > Cavern Rear Pillar > Boss Reward
+# This is actually done first for timing reasons but it's hard to represent
+* Collect Flask from Amagi > West Lake > Cavern Tear Duct > Remote Flask
+
+  Collect Ebih_Waterfall_Block_Right from Ebih > Waterfall > Alcove Right > Block Right
+! Do Deploy Drone
+  Collect Bronze_Axe from Ebih > Waterfall > Alcove > Pedestal
+! Do Recall Drone
+  Move... to Ebih > Ebih West > Mid Save
+! Do Deploy Drone
+* Collect Heretics_Tablet from Ebih > Ebih West > Alcove > Tablet
+! Do Recall Drone
+
+! Do Ebih > Waterfall > Ledge Below Hole > Throw Drone
+! Do Ebih > Waterfall > Below Left Switch > Open Door
+! Do Recall Drone
+  Move... to Ebih > Waterfall > West Main Path
+! Do Deploy Drone
+* Collect Health_Fragment from Interior > Ebih Cave > Entry > Health
+! Do Recall Drone
+
+! Do Ebih > Ebih West > Medium High Platform > Throw Drone Long
+! Do Giguna > Giguna Northeast > Save Point > Save
+! Do Recall Drone
+* Collect Infect_L2 from Menu > Upgrade Menu > Infection > Infection Level 2
+  ExitMenuWarp
+  MainSavewarp to Giguna > Giguna Northeast > Save Point
+
+  Move... to Giguna > Carnelian > East Cliff
+! Do Deploy Drone
+! Do Giguna > Carnelian > Switch > Open Door
+  Move... to Giguna > Carnelian > Vault
+* Collect Carnelian_Ring from Giguna > Carnelian > Vault > Item
+! Do Recall Drone
+
+! Do Giguna > Carnelian > Upper Susar > Hack
+! Do Giguna > West Caverns > Small Platform > Throw Drone Up
+* Collect Power_Matrix from Giguna > West Caverns > Cache > Item
+* Collect Power_Core from Giguna > West Caverns > Bush > Item
+! Do Recall Drone
+! Do Giguna > West Caverns > East Susar > Hack
+! Do Giguna > Giguna Base > Stone Knob > Throw Drone
+* Collect Wall_Climb from Giguna > Giguna Base > Ruin > Item
+! Do Recall Drone
+* Collect Researchers_Missing from Giguna > Giguna Base > Table > News
+* Collect Letter_from_Trace from Interior > Outpost Interior > Bookshelf > Note
+
+  MainSavewarp to Giguna > Giguna Northeast > Save Point
+! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
+* Collect Flask from Giguna > Ruins Top > Small Ledge > Shockwave Flask
+  Move... to Giguna > Ruins Top > Portal Left
+! Do Deploy Drone
+  Move... to Giguna > Ruins Top > Portal
+  Portalwarp to Giguna Breach > Peak > Save Point
+* Collect Health_Fragment from Giguna Breach > Cubby > Rocks > Health
+* Collect Slingshot_Hook from Giguna Breach > Slingshot > Ravine > Urn
+* Collect Flask from Giguna Breach > Chimney > Cache > Flask
+  Move... to Giguna Breach > Peak > Portal
+  Portalwarp to Giguna > Ruins Top > Save Point
+
+! Do Recall Drone
+  MainSavewarp to Giguna > Ruins Top > Save Point
+! Do Giguna > Ruins Top > Turret Balcony West > Throw Drone onto Tower
+* Collect The_Ideal_Kiengir from Giguna > West Tower > Top > Tablet
+* Collect Flask from Giguna > Far Corner > Grass > Obscured Item
+
+! Do Irikar > Hub > Save Point > Save
+* Collect Commemorative_Speech from Irikar > Hub > Sat Tower Top Ledge > Tablet
+* Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn Collection Skip ==> Menu > Warp Only > Kiengir
+
+  MainSavewarp to Irikar > Hub > Save Point
+  Move... to Irikar > Hub > Portal Stand
+  Portalwarp to Irikar Breach > Gauntlet > Save Point
+* Collect Flask from Irikar Breach > Gauntlet > Hidden Path Reward > Item
+* Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
+  Move... to Irikar Breach > Save Room > West
+* Collect Flask from Irikar Breach > Worm Rave > Corner > Item
+  Move... to Irikar Breach > Exit Corridor > Portal Stand
+  Portalwarp to Irikar > Abandoned Room > Empty Pedestal
+
+# Enter Uhrum
+  Move... to Uhrum > West Entrance > Southwest Tree
+* Collect Terminal_Breakthrough_2 from Irikar > Lamassu > Desk > Item
+* Collect Health_Fragment from Uhrum > Siege Corridor > Center Box > Box
+* Collect Storm_Bomb from Uhrum > Siege Corridor > Pond > Item
+* Collect Fast_Travel from Uhrum > Siege Corridor > Upper Rock Item > Urn
+  Move... to Uhrum > Save Room > East
+* Collect Suspension_Bridge from Uhrum > Waterfalls > West Water Nook > Tablet
+* Collect Infect_L3 from Menu > Upgrade Menu > Infection > Infection Level 3
+  ExitMenuWarp
+! Do Recall Fast Travel
+
+  Move... to Uhrum > Waterfalls > Water Pillar
+! Do Deploy Drone
+* Collect Flask from Interior > Uhrum Waterfall Cave > Cache > Flask
+! Do Recall Drone
+
+* Collect Uhrum_Waterfalls_Block from Uhrum > Waterfalls > Below Block > Shockwave Block
+* Collect Uhrum_Annuna_Corridor_Block from Uhrum > Annuna Corridor > Block West > Dislodge Block
+
+! Do Uhrum > Annuna Corridor > Between Two Flowers > Throw Drone Up
+* Collect Plague_of_Thoughts from Uhrum > Annuna Corridor > East Cubby > Tablet
+* Collect Flask from Uhrum > Annuna Corridor > Statue > Item
+  Move... to Annuna > Mirror Match > West Gap
+! Do Recall Fast Travel
+
+* Collect Nano_Lattice_2 from Annuna > West Bridge > Plinth > Item
+! Do Annuna > East Bridge > Center Gap East > Throw Drone into Tower
+* Collect Lament_for_Fools from Annuna > East Bridge > Tower Gate > Tablet
+* Collect Annuna_East_Bridge_Gate from Annuna > East Bridge > Gate Button > Switch
+! Do Recall Drone
+! Do Annuna > East Bridge > Tower Opening > Climb and Throw Drone
+! Do Annuna > East Bridge > Tower East Ledge > Enter Combo
+* Collect Royal_Ring from Annuna > East Bridge > Tower Secret > Item
+
+# Enter the factory
+* Collect Destruction_Pogrom from Annuna > Twisty Passages > Top > Tablet
+! Do Annuna > West Climb > Switch Ledge > Open Door
+* Collect Eye_Ring from Annuna > West Climb > Cache > Item
+  Move... to Annuna > Vertical Room > West 20
+* Collect Infection_Range from Menu > Upgrade Menu > Infection > Infection Range 1
+  ExitMenuWarp
+! Do Recall Fast Travel
+* Collect Boomerang_Upgrade from Annuna > Vertical Room > Plinth > Item
+  Move... to Annuna > Middle Hallway > East
+! Do Deploy Drone
+* Collect The_Eternal_Arm from Annuna > Filter Teleporter > Northeast Cubby > Tablet
+* Collect Hammond_Auth from Filter > Core > Terminal East > Authorize Hammond
+! Do Recall Drone
+* Collect Flask from Annuna > Filter Teleporter > Shaft Bottom > Flask
+
+# Through the Spider Room
+! Do Annuna > Filter Teleporter > Shaft Top > Throw Drone
+* Collect Beware_the_Patternmind from Annuna > Vertical Room > Upper Cache > Tablet
+! Do Glacier > Vertical Room > Lower Switch > Open Lower Gatestones
+* Collect Breach_Attractor from Glacier > Crystals > Lower Corner > Item
+* Collect Dr_Gloria from Glacier > Sea Burial > Inside the Grate > Notes
+
+# Glacier Breach section to get Mist 
+  Move... to Annuna > Lamassu > Portal Stand
+  Portalwarp to Glacier Breach > South Save > Save Point
+* Collect Big_Flask from Glacier Breach > Control > Upper Corner > Control Enemy
+  Move... to Glacier Breach > West Save > Save Point
+  Move... to Glacier Breach > Save and Exit > Portal Stand
+  Portalwarp to Glacier > Hammond's End > Upper Right Pedestal
+! Do Glacier > Hammond's End > Upper Right Mid-air > Move Portal to Corner
+* Collect Goodbye from Glacier > Hammond's End > Corner > Quick Note
+! Do Glacier Breach > Angry Lions > North > Summon Portal to Second Platform
+  Portalwarp to Annuna > Siuna Storage > Second Platform
+* Collect Siuna_Storage_Wall from Annuna > Siuna Storage > Wall Right > Break Through Wall as Drone
+* Collect Nanite_Mist from Annuna > Siuna Storage > Cache > Urn
+* Collect Mist_Upgrade from Menu > Upgrade Menu > Physiology > Mist Upgrade
+  ExitMenuWarp
+
+! Do Recall Fast Travel
+! Do Glacier > Revival > Save Point > Throw Drone West
+* Collect Flask from Glacier > Grid 39-40,7-9 > Floating Rock > Item
+! Do Recall Drone
+* Collect Health_Node from Glacier > Revival > Pillar > Health
+* Collect Notes_2053_02_27 from Glacier > Dock Outside > Ruins Stairs > Note
+! Do Glacier > Dock Outside > Ruins Platform > Throw Drone Up
+* Collect Big_Flask from Glacier > Dock Outside > Cave Treasure > Flask Fast Travel ==> Menu > Kiengir Map > Glacier Dock Flask
+
+# Breach Exit
+* Collect Forbidden_Knowledge from Amagi > East Lake > Foot > Tablet
+# Moving the portal is not something we can do yet!

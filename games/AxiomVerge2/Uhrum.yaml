@@ -23,7 +23,7 @@ areas:
     - name: West 27
       coord: [19.05, 26.8]
       local:
-        - to: Southeast Tree
+        - to: Southwest Tree
       exits:
         - to: Irikar > Lamassu > East 27
           tags: [xshift]
@@ -90,7 +90,7 @@ areas:
     - name: Middle West Ledge
       coord: [19.3, 26.5]
       local:
-        - to: Southeast Tree
+        - to: Southwest Tree
         - to: South Platform
         - to: Save Point
       exits:
@@ -103,7 +103,7 @@ areas:
           movement: base
           jumps: 4
 
-    - name: Southeast Tree
+    - name: Southwest Tree
       coord: [19.2, 27.05]
       local:
         - to: Save Point
@@ -119,7 +119,7 @@ areas:
       data:
         flipside: Uhrum Breach > Rock and Gate > Gate West
       local:
-        - to: Southeast Tree
+        - to: Southwest Tree
         - to: Save Point
         - to: Lower Wall West
       exits:
@@ -134,7 +134,7 @@ areas:
     - name: Save Point
       coord: [19.5, 27.35]
       local:
-        - to: Southeast Tree
+        - to: Southwest Tree
           jumps: 2
       exits:
         - to: South Platform

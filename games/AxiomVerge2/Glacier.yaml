@@ -326,7 +326,7 @@ areas:
           do: $save
           tags: [save]
         - name: Throw Drone West
-          req: $can_deploy and $hover
+          req: $can_deploy and Drone_Hover
           do: $deploy_drone
           to: Just Thrown
           time: 0.75

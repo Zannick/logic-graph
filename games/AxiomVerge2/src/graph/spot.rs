@@ -17342,9 +17342,9 @@ static SPOT_DEFS: [SpotDef; 2896] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Uhrum__West_Entrance__Southeast_Tree,
+        id: SpotId::Uhrum__West_Entrance__Southwest_Tree,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1, ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1)),
+        exit_range: Some((ExitId::Uhrum__West_Entrance__Southwest_Tree__ex__South_Platform_1, ExitId::Uhrum__West_Entrance__Southwest_Tree__ex__South_Platform_1)),
         action_range: None,
     },
     SpotDef {

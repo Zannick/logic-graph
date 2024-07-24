@@ -155,7 +155,7 @@
 * Collect Eye_Ring from Annuna > West Climb > Cache > Item
   Move... to Annuna > Vertical Room > Save Point
 ! Do Recall Drone
-* Collect Boomerang_Upgrade from Annuna > Vertical Room > Plinth > Item  
+* Collect Boomerang_Upgrade from Annuna > Vertical Room > Plinth > Item
 * Collect Flask from Annuna > Filter Teleporter > Door Ledge > Shockwave Flask
 ! Do Deploy Drone
 * Collect The_Eternal_Arm from Annuna > Filter Teleporter > Northeast Cubby > Tablet

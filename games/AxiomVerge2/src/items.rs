@@ -689,6 +689,5 @@ pub fn unused_item(id: Item) -> bool {
             | Item::Nano_Points_3
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3
-            | Item::Royal_Ring
     )
 }

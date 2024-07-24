@@ -2038,10 +2038,6 @@ pub fn access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ((helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Slingshot_Hook))
 }
-pub fn access_invoke_can_deploy_and_invoke_hover(ctx: &Context, world: &World) -> bool {
-    // $can_deploy and $hover
-    (helper__can_deploy!(ctx, world) && helper__hover!(ctx, world))
-}
 pub fn access_invoke_can_deploy_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // $can_deploy and Slingshot_Hook
     (helper__can_deploy!(ctx, world) && ctx.has(Item::Slingshot_Hook))
@@ -11412,33 +11408,6 @@ pub fn explain_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
                 let h = ctx.has(Item::Slingshot_Hook);
                 edict.insert("Slingshot_Hook", format!("{}", h));
                 (h, vec!["Slingshot_Hook"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_invoke_can_deploy_and_invoke_hover(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $can_deploy and $hover
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-            edict.insert("$can_deploy", format!("{:?}", res));
-            refs.push("$can_deploy");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-                edict.insert("$hover", format!("{:?}", res));
-                refs.push("$hover");
-                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -21810,14 +21779,6 @@ pub fn observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
             full_obs.observe_slingshot_hook();
             ctx.has(Item::Slingshot_Hook)
         }))
-}
-pub fn observe_access_invoke_can_deploy_and_invoke_hover(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $can_deploy and $hover
-    (hobserve__can_deploy!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs)))
 }
 pub fn observe_access_invoke_can_deploy_and_slingshot_hook(
     ctx: &Context,

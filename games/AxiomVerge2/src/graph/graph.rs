@@ -274,7 +274,7 @@ pub fn get_area(spot: SpotId) -> AreaId {
         SpotId::Uhrum_Breach__South_Slime__West | SpotId::Uhrum_Breach__South_Slime__Center | SpotId::Uhrum_Breach__South_Slime__East => AreaId::Uhrum_Breach__South_Slime,
         SpotId::Uhrum_Breach__West_Copse__West_27 | SpotId::Uhrum_Breach__West_Copse__West_28 => AreaId::Uhrum_Breach__West_Copse,
         SpotId::Uhrum_Breach__Blob__West_Side | SpotId::Uhrum_Breach__Blob__Plinth | SpotId::Uhrum_Breach__Blob__East_Side => AreaId::Uhrum_Breach__Blob,
-        SpotId::Uhrum__West_Entrance__West_27 | SpotId::Uhrum__West_Entrance__West_26 | SpotId::Uhrum__West_Entrance__Hidden_Passage_West | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry | SpotId::Uhrum__West_Entrance__West_25 | SpotId::Uhrum__West_Entrance__Top_West_Ledge | SpotId::Uhrum__West_Entrance__Middle_West_Ledge | SpotId::Uhrum__West_Entrance__Southeast_Tree | SpotId::Uhrum__West_Entrance__South_Platform | SpotId::Uhrum__West_Entrance__Save_Point | SpotId::Uhrum__West_Entrance__Portal_Stand | SpotId::Uhrum__West_Entrance__Clear_Passage | SpotId::Uhrum__West_Entrance__West_of_Gate | SpotId::Uhrum__West_Entrance__Inner_Dais | SpotId::Uhrum__West_Entrance__Portal_Exit | SpotId::Uhrum__West_Entrance__Gate_Switch | SpotId::Uhrum__West_Entrance__Upper_Wall_West | SpotId::Uhrum__West_Entrance__Upper_Wall_East | SpotId::Uhrum__West_Entrance__Upper_Fork | SpotId::Uhrum__West_Entrance__East_26 | SpotId::Uhrum__West_Entrance__Lower_Wall_West | SpotId::Uhrum__West_Entrance__Lower_Wall_East | SpotId::Uhrum__West_Entrance__Lower_Path_Rock | SpotId::Uhrum__West_Entrance__Lower_Path_Gap | SpotId::Uhrum__West_Entrance__Sand | SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge | SpotId::Uhrum__West_Entrance__East_28 => AreaId::Uhrum__West_Entrance,
+        SpotId::Uhrum__West_Entrance__West_27 | SpotId::Uhrum__West_Entrance__West_26 | SpotId::Uhrum__West_Entrance__Hidden_Passage_West | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry | SpotId::Uhrum__West_Entrance__West_25 | SpotId::Uhrum__West_Entrance__Top_West_Ledge | SpotId::Uhrum__West_Entrance__Middle_West_Ledge | SpotId::Uhrum__West_Entrance__Southwest_Tree | SpotId::Uhrum__West_Entrance__South_Platform | SpotId::Uhrum__West_Entrance__Save_Point | SpotId::Uhrum__West_Entrance__Portal_Stand | SpotId::Uhrum__West_Entrance__Clear_Passage | SpotId::Uhrum__West_Entrance__West_of_Gate | SpotId::Uhrum__West_Entrance__Inner_Dais | SpotId::Uhrum__West_Entrance__Portal_Exit | SpotId::Uhrum__West_Entrance__Gate_Switch | SpotId::Uhrum__West_Entrance__Upper_Wall_West | SpotId::Uhrum__West_Entrance__Upper_Wall_East | SpotId::Uhrum__West_Entrance__Upper_Fork | SpotId::Uhrum__West_Entrance__East_26 | SpotId::Uhrum__West_Entrance__Lower_Wall_West | SpotId::Uhrum__West_Entrance__Lower_Wall_East | SpotId::Uhrum__West_Entrance__Lower_Path_Rock | SpotId::Uhrum__West_Entrance__Lower_Path_Gap | SpotId::Uhrum__West_Entrance__Sand | SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge | SpotId::Uhrum__West_Entrance__East_28 => AreaId::Uhrum__West_Entrance,
         SpotId::Uhrum__Siege_Corridor__West_26 | SpotId::Uhrum__Siege_Corridor__Western_Cache | SpotId::Uhrum__Siege_Corridor__Western_Rock | SpotId::Uhrum__Siege_Corridor__Northwest_Door | SpotId::Uhrum__Siege_Corridor__Northwest_Platform | SpotId::Uhrum__Siege_Corridor__West_Greenery | SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge | SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge | SpotId::Uhrum__Siege_Corridor__West_Loop | SpotId::Uhrum__Siege_Corridor__West_Middle_Tree | SpotId::Uhrum__Siege_Corridor__Center_West | SpotId::Uhrum__Siege_Corridor__Center_Platform_1 | SpotId::Uhrum__Siege_Corridor__Center_Platform_3 | SpotId::Uhrum__Siege_Corridor__Center_East | SpotId::Uhrum__Siege_Corridor__Center_Box | SpotId::Uhrum__Siege_Corridor__Center_Valley | SpotId::Uhrum__Siege_Corridor__Mideast_Hill | SpotId::Uhrum__Siege_Corridor__Mideast_Tree | SpotId::Uhrum__Siege_Corridor__Upper_Rock_West | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item | SpotId::Uhrum__Siege_Corridor__Upper_Rock_East | SpotId::Uhrum__Siege_Corridor__Pond | SpotId::Uhrum__Siege_Corridor__East_Hill | SpotId::Uhrum__Siege_Corridor__East_25 => AreaId::Uhrum__Siege_Corridor,
         SpotId::Uhrum__Glitchy_Corridor__West_28 | SpotId::Uhrum__Glitchy_Corridor__West_Glitch_West | SpotId::Uhrum__Glitchy_Corridor__Behind_West_Glitch | SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge | SpotId::Uhrum__Glitchy_Corridor__Northwest_Platform | SpotId::Uhrum__Glitchy_Corridor__West_Pillar_West | SpotId::Uhrum__Glitchy_Corridor__West_Pillar_East | SpotId::Uhrum__Glitchy_Corridor__Portal_Stand | SpotId::Uhrum__Glitchy_Corridor__Center_Platform_West | SpotId::Uhrum__Glitchy_Corridor__Center_Platform_East | SpotId::Uhrum__Glitchy_Corridor__Middle_Lower | SpotId::Uhrum__Glitchy_Corridor__East_Ledge | SpotId::Uhrum__Glitchy_Corridor__East_Platform | SpotId::Uhrum__Glitchy_Corridor__Wall_West_Platform | SpotId::Uhrum__Glitchy_Corridor__Wall_West | SpotId::Uhrum__Glitchy_Corridor__Wall_East | SpotId::Uhrum__Glitchy_Corridor__Wall_East_Platform | SpotId::Uhrum__Glitchy_Corridor__East_Hookable | SpotId::Uhrum__Glitchy_Corridor__East_27 | SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West | SpotId::Uhrum__Glitchy_Corridor__East_Glitch_East | SpotId::Uhrum__Glitchy_Corridor__East_28 => AreaId::Uhrum__Glitchy_Corridor,
         SpotId::Uhrum__Spring__West | SpotId::Uhrum__Spring__Center => AreaId::Uhrum__Spring,
@@ -550,7 +550,7 @@ pub fn get_region(spot: SpotId) -> RegionId {
         SpotId::Uhrum_Breach__South_Slime__West | SpotId::Uhrum_Breach__South_Slime__Center | SpotId::Uhrum_Breach__South_Slime__East => RegionId::Uhrum_Breach,
         SpotId::Uhrum_Breach__West_Copse__West_27 | SpotId::Uhrum_Breach__West_Copse__West_28 => RegionId::Uhrum_Breach,
         SpotId::Uhrum_Breach__Blob__West_Side | SpotId::Uhrum_Breach__Blob__Plinth | SpotId::Uhrum_Breach__Blob__East_Side => RegionId::Uhrum_Breach,
-        SpotId::Uhrum__West_Entrance__West_27 | SpotId::Uhrum__West_Entrance__West_26 | SpotId::Uhrum__West_Entrance__Hidden_Passage_West | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry | SpotId::Uhrum__West_Entrance__West_25 | SpotId::Uhrum__West_Entrance__Top_West_Ledge | SpotId::Uhrum__West_Entrance__Middle_West_Ledge | SpotId::Uhrum__West_Entrance__Southeast_Tree | SpotId::Uhrum__West_Entrance__South_Platform | SpotId::Uhrum__West_Entrance__Save_Point | SpotId::Uhrum__West_Entrance__Portal_Stand | SpotId::Uhrum__West_Entrance__Clear_Passage | SpotId::Uhrum__West_Entrance__West_of_Gate | SpotId::Uhrum__West_Entrance__Inner_Dais | SpotId::Uhrum__West_Entrance__Portal_Exit | SpotId::Uhrum__West_Entrance__Gate_Switch | SpotId::Uhrum__West_Entrance__Upper_Wall_West | SpotId::Uhrum__West_Entrance__Upper_Wall_East | SpotId::Uhrum__West_Entrance__Upper_Fork | SpotId::Uhrum__West_Entrance__East_26 | SpotId::Uhrum__West_Entrance__Lower_Wall_West | SpotId::Uhrum__West_Entrance__Lower_Wall_East | SpotId::Uhrum__West_Entrance__Lower_Path_Rock | SpotId::Uhrum__West_Entrance__Lower_Path_Gap | SpotId::Uhrum__West_Entrance__Sand | SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge | SpotId::Uhrum__West_Entrance__East_28 => RegionId::Uhrum,
+        SpotId::Uhrum__West_Entrance__West_27 | SpotId::Uhrum__West_Entrance__West_26 | SpotId::Uhrum__West_Entrance__Hidden_Passage_West | SpotId::Uhrum__West_Entrance__Hidden_Passage_Entry | SpotId::Uhrum__West_Entrance__West_25 | SpotId::Uhrum__West_Entrance__Top_West_Ledge | SpotId::Uhrum__West_Entrance__Middle_West_Ledge | SpotId::Uhrum__West_Entrance__Southwest_Tree | SpotId::Uhrum__West_Entrance__South_Platform | SpotId::Uhrum__West_Entrance__Save_Point | SpotId::Uhrum__West_Entrance__Portal_Stand | SpotId::Uhrum__West_Entrance__Clear_Passage | SpotId::Uhrum__West_Entrance__West_of_Gate | SpotId::Uhrum__West_Entrance__Inner_Dais | SpotId::Uhrum__West_Entrance__Portal_Exit | SpotId::Uhrum__West_Entrance__Gate_Switch | SpotId::Uhrum__West_Entrance__Upper_Wall_West | SpotId::Uhrum__West_Entrance__Upper_Wall_East | SpotId::Uhrum__West_Entrance__Upper_Fork | SpotId::Uhrum__West_Entrance__East_26 | SpotId::Uhrum__West_Entrance__Lower_Wall_West | SpotId::Uhrum__West_Entrance__Lower_Wall_East | SpotId::Uhrum__West_Entrance__Lower_Path_Rock | SpotId::Uhrum__West_Entrance__Lower_Path_Gap | SpotId::Uhrum__West_Entrance__Sand | SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge | SpotId::Uhrum__West_Entrance__East_28 => RegionId::Uhrum,
         SpotId::Uhrum__Siege_Corridor__West_26 | SpotId::Uhrum__Siege_Corridor__Western_Cache | SpotId::Uhrum__Siege_Corridor__Western_Rock | SpotId::Uhrum__Siege_Corridor__Northwest_Door | SpotId::Uhrum__Siege_Corridor__Northwest_Platform | SpotId::Uhrum__Siege_Corridor__West_Greenery | SpotId::Uhrum__Siege_Corridor__West_Grassy_Ledge | SpotId::Uhrum__Siege_Corridor__West_Rocky_Ledge | SpotId::Uhrum__Siege_Corridor__West_Loop | SpotId::Uhrum__Siege_Corridor__West_Middle_Tree | SpotId::Uhrum__Siege_Corridor__Center_West | SpotId::Uhrum__Siege_Corridor__Center_Platform_1 | SpotId::Uhrum__Siege_Corridor__Center_Platform_3 | SpotId::Uhrum__Siege_Corridor__Center_East | SpotId::Uhrum__Siege_Corridor__Center_Box | SpotId::Uhrum__Siege_Corridor__Center_Valley | SpotId::Uhrum__Siege_Corridor__Mideast_Hill | SpotId::Uhrum__Siege_Corridor__Mideast_Tree | SpotId::Uhrum__Siege_Corridor__Upper_Rock_West | SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item | SpotId::Uhrum__Siege_Corridor__Upper_Rock_East | SpotId::Uhrum__Siege_Corridor__Pond | SpotId::Uhrum__Siege_Corridor__East_Hill | SpotId::Uhrum__Siege_Corridor__East_25 => RegionId::Uhrum,
         SpotId::Uhrum__Glitchy_Corridor__West_28 | SpotId::Uhrum__Glitchy_Corridor__West_Glitch_West | SpotId::Uhrum__Glitchy_Corridor__Behind_West_Glitch | SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge | SpotId::Uhrum__Glitchy_Corridor__Northwest_Platform | SpotId::Uhrum__Glitchy_Corridor__West_Pillar_West | SpotId::Uhrum__Glitchy_Corridor__West_Pillar_East | SpotId::Uhrum__Glitchy_Corridor__Portal_Stand | SpotId::Uhrum__Glitchy_Corridor__Center_Platform_West | SpotId::Uhrum__Glitchy_Corridor__Center_Platform_East | SpotId::Uhrum__Glitchy_Corridor__Middle_Lower | SpotId::Uhrum__Glitchy_Corridor__East_Ledge | SpotId::Uhrum__Glitchy_Corridor__East_Platform | SpotId::Uhrum__Glitchy_Corridor__Wall_West_Platform | SpotId::Uhrum__Glitchy_Corridor__Wall_West | SpotId::Uhrum__Glitchy_Corridor__Wall_East | SpotId::Uhrum__Glitchy_Corridor__Wall_East_Platform | SpotId::Uhrum__Glitchy_Corridor__East_Hookable | SpotId::Uhrum__Glitchy_Corridor__East_27 | SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West | SpotId::Uhrum__Glitchy_Corridor__East_Glitch_East | SpotId::Uhrum__Glitchy_Corridor__East_28 => RegionId::Uhrum,
         SpotId::Uhrum__Spring__West | SpotId::Uhrum__Spring__Center => RegionId::Uhrum,
@@ -3459,7 +3459,7 @@ static RAW_SPOTS: [SpotId; 2896] = [
     SpotId::Uhrum__West_Entrance__Sand,
     SpotId::Uhrum__West_Entrance__Save_Point,
     SpotId::Uhrum__West_Entrance__South_Platform,
-    SpotId::Uhrum__West_Entrance__Southeast_Tree,
+    SpotId::Uhrum__West_Entrance__Southwest_Tree,
     SpotId::Uhrum__West_Entrance__Top_West_Ledge,
     SpotId::Uhrum__West_Entrance__Upper_Fork,
     SpotId::Uhrum__West_Entrance__Upper_Wall_East,
@@ -5221,6 +5221,11 @@ impl world::World for World {
                                 map.insert(Item::Royal_Dagger, 1);
                             }
                         }
+                        if !ctx.has(Item::Royal_Ring) {
+                            if !map.contains_key(&Item::Royal_Ring) {
+                                map.insert(Item::Royal_Ring, 1);
+                            }
+                        }
                         if !ctx.has(Item::Shockwave) {
                             if !map.contains_key(&Item::Shockwave) {
                                 map.insert(Item::Shockwave, 1);
@@ -5701,6 +5706,11 @@ impl world::World for World {
                                 map.insert(Item::Royal_Dagger, 1);
                             }
                         }
+                        if !ctx.has(Item::Royal_Ring) {
+                            if !map.contains_key(&Item::Royal_Ring) {
+                                map.insert(Item::Royal_Ring, 1);
+                            }
+                        }
                         if !ctx.has(Item::Shockwave) {
                             if !map.contains_key(&Item::Shockwave) {
                                 map.insert(Item::Shockwave, 1);
@@ -6082,6 +6092,9 @@ impl world::World for World {
                         if !map.contains_key(&Item::Royal_Dagger) {
                             map.insert(Item::Royal_Dagger, 1);
                         }
+                        if !map.contains_key(&Item::Royal_Ring) {
+                            map.insert(Item::Royal_Ring, 1);
+                        }
                         if !map.contains_key(&Item::Shockwave) {
                             map.insert(Item::Shockwave, 1);
                         }
@@ -6377,6 +6390,9 @@ impl world::World for World {
                         }
                         if !map.contains_key(&Item::Royal_Dagger) {
                             map.insert(Item::Royal_Dagger, 1);
+                        }
+                        if !map.contains_key(&Item::Royal_Ring) {
+                            map.insert(Item::Royal_Ring, 1);
                         }
                         if !map.contains_key(&Item::Shockwave) {
                             map.insert(Item::Shockwave, 1);
@@ -9607,7 +9623,7 @@ impl world::World for World {
             ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__West_of_Gate_1 => true,
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => true,
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => true,
-            ExitId::Uhrum__West_Entrance__Southeast_Tree__ex__South_Platform_1 => true,
+            ExitId::Uhrum__West_Entrance__Southwest_Tree__ex__South_Platform_1 => true,
             ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => true,
             ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => true,
             ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => true,
@@ -12542,7 +12558,7 @@ impl world::World for World {
             SpotId::Uhrum__West_Entrance__West_25 => true,
             SpotId::Uhrum__West_Entrance__Top_West_Ledge => true,
             SpotId::Uhrum__West_Entrance__Middle_West_Ledge => true,
-            SpotId::Uhrum__West_Entrance__Southeast_Tree => true,
+            SpotId::Uhrum__West_Entrance__Southwest_Tree => true,
             SpotId::Uhrum__West_Entrance__South_Platform => true,
             SpotId::Uhrum__West_Entrance__Save_Point => true,
             SpotId::Uhrum__West_Entrance__Portal_Stand => true,
@@ -12707,7 +12723,7 @@ impl World {
                         matches!(item, Item::Aansur | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Ensis_Bracelet | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Kazakh_Assault | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Sickle_Sword | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
-                        matches!(item, Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
+                        matches!(item, Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3)
                     }
                     RuleObjective::AllUrns => {
                         matches!(item, Item::Aansur | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Ensis_Bracelet | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Kazakh_Assault | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Sickle_Sword | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
@@ -12720,7 +12736,7 @@ impl World {
                         matches!(item, Item::Aansur | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Charge | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Ensis_Bracelet | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Kazakh_Assault | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Charge | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Sickle_Sword | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
                     }
                     RuleObjective::AllItems => {
-                        matches!(item, Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Royal_Ring)
+                        matches!(item, Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Escape | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Points_3 | Item::Ranged_Damage_3 | Item::Ranged_Speed_3)
                     }
                     RuleObjective::AllUrns => {
                         matches!(item, Item::Aansur | Item::Becoming_An_Arm | Item::Beware_the_Patternmind | Item::Bounty_List | Item::Bronze_Axe | Item::Building_of_the_School | Item::Carnelian_Ring | Item::Commemorative_Speech | Item::Companies_Layoff | Item::Compass | Item::Dangerous_Ideas | Item::Dear_Ernest | Item::Destruction_Pogrom | Item::Diviners_Gem | Item::Double_Axe | Item::Dr_Gloria | Item::Drone_Melee_Damage_3 | Item::Drone_Melee_Speed_3 | Item::Ensis_Bracelet | Item::Escape | Item::Eye_Ring | Item::Family_Tragedy | Item::Forbidden_Knowledge | Item::Freedom_from_Aansur | Item::Goodbye | Item::Health_Upgrade_5 | Item::Heretics_Granddaughter | Item::Heretics_Tablet | Item::Infection_Speed_2 | Item::Journal_2049_10_29 | Item::Kazakh_Assault | Item::Lament_for_Fools | Item::Letter_from_Trace | Item::Melee_Damage_3 | Item::Melee_Speed_3 | Item::Nano_Lattice_1 | Item::Nano_Lattice_2 | Item::Nano_Points_3 | Item::Notes_2053_02_27 | Item::Plague_of_Thoughts | Item::Ranged_Damage_3 | Item::Ranged_Speed_3 | Item::Re_Does_Technology | Item::Record_Losses | Item::Researchers_Missing | Item::Royal_Dagger | Item::Royal_Ring | Item::Sickle_Sword | Item::Storm_Bomb | Item::Submarine_Progress | Item::Suspension_Bridge | Item::Terminal_Breakthrough_1 | Item::Terminal_Breakthrough_2 | Item::The_Eternal_Arm | Item::The_Ideal_Kiengir | Item::The_Student | Item::Udusan | Item::Under_Siege)
@@ -12811,7 +12827,6 @@ impl World {
                         iset.insert(Item::Nano_Points_3);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Royal_Ring);
                         iset
                     }
                     RuleObjective::AllUrns => {
@@ -12956,7 +12971,6 @@ impl World {
                         iset.insert(Item::Nano_Points_3);
                         iset.insert(Item::Ranged_Damage_3);
                         iset.insert(Item::Ranged_Speed_3);
-                        iset.insert(Item::Royal_Ring);
                         iset
                     }
                     RuleObjective::AllUrns => {

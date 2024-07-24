@@ -3171,7 +3171,7 @@ digraph AxiomVerge2 {
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__West_of_Gate;
     Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Portal_Stand;
     Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Portal_Stand;
-    Uhrum__West_Entrance__Southeast_Tree -> Uhrum__West_Entrance__South_Platform;
+    Uhrum__West_Entrance__Southwest_Tree -> Uhrum__West_Entrance__South_Platform;
     Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__West_27;
     Uhrum__West_Entrance__Save_Point -> Uhrum__West_Entrance__Lower_Wall_West;
@@ -7536,7 +7536,7 @@ digraph AxiomVerge2 {
     Uhrum_Breach__Blob__Plinth -> Uhrum_Breach__Blob__West_Side;
     Uhrum_Breach__Blob__Plinth -> Uhrum_Breach__Blob__East_Side;
     Uhrum_Breach__Blob__East_Side -> Uhrum_Breach__Blob__Plinth;
-    Uhrum__West_Entrance__West_27 -> Uhrum__West_Entrance__Southeast_Tree;
+    Uhrum__West_Entrance__West_27 -> Uhrum__West_Entrance__Southwest_Tree;
     Uhrum__West_Entrance__West_26 -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__Hidden_Passage_West -> Uhrum__West_Entrance__Hidden_Passage_Entry;
     Uhrum__West_Entrance__Hidden_Passage_Entry -> Uhrum__West_Entrance__West_26;
@@ -7547,15 +7547,15 @@ digraph AxiomVerge2 {
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__West_25;
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__Portal_Stand;
-    Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Southeast_Tree;
+    Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Southwest_Tree;
     Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__South_Platform;
     Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Save_Point;
-    Uhrum__West_Entrance__Southeast_Tree -> Uhrum__West_Entrance__West_27;
-    Uhrum__West_Entrance__Southeast_Tree -> Uhrum__West_Entrance__Save_Point;
-    Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__Southeast_Tree;
+    Uhrum__West_Entrance__Southwest_Tree -> Uhrum__West_Entrance__West_27;
+    Uhrum__West_Entrance__Southwest_Tree -> Uhrum__West_Entrance__Save_Point;
+    Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__Southwest_Tree;
     Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__Save_Point;
     Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__Lower_Wall_West;
-    Uhrum__West_Entrance__Save_Point -> Uhrum__West_Entrance__Southeast_Tree;
+    Uhrum__West_Entrance__Save_Point -> Uhrum__West_Entrance__Southwest_Tree;
     Uhrum__West_Entrance__Portal_Stand -> Uhrum__West_Entrance__West_26;
     Uhrum__West_Entrance__Portal_Stand -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__Portal_Stand -> Uhrum__West_Entrance__Clear_Passage;

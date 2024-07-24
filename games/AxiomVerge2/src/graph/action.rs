@@ -165,7 +165,7 @@ impl world::Accessible for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::access_breach_attractor_and_anuman(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::access_invoke_open(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => true,
-            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::access_invoke_can_deploy_and_invoke_hover(ctx, world),
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => true,
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::access_invoke_open(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_invoke_open(ctx, world),
@@ -321,7 +321,7 @@ impl world::Accessible for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
-            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_invoke_hover(ctx, world, full_obs),
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => rules::observe_access_breach_attractor(ctx, world, full_obs),
@@ -1332,7 +1332,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
-                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_invoke_hover(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Just Thrown"));

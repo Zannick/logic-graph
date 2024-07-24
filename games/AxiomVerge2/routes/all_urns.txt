@@ -112,6 +112,8 @@ MainSavewarp to Ebih > Ebih West > Upper Save
   Move... to Giguna > Labyrinth > Portal Stand
   Portalwarp
 * Collect Drone_Melee_Charge from Giguna Breach > Labyrinth > Plinth > Urn Fast Travel ==> Menu > Breach Map > Drone Melee Charge
+* Collect Glacier_Breach_Spidery_Connector_Gate from Glacier Breach > Spidery Connector > Button > Hit Button
+* Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn Fast Travel ==> Menu > Breach Map > Slingshot Weapon
   Move... to Glacier Breach > Stable Floor > East
 * Collect Apocalypse_Bomb from Annuna > Apocalypse > Center Scaffold West > Boss Fight ==> Annuna > Apocalypse > Bomb Northwest
 * Collect Escape from Glacier > Apocalypse Entry > Grate Ledge > Escape ==> Glacier > Apocalypse Entry > Terminal

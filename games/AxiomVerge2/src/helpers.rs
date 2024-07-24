@@ -3019,7 +3019,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring,  Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Udusan]
+/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring,  Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Royal_Ring, Udusan]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -3032,6 +3032,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Nano_Lattice_1)
             && $ctx.has(Item::Nano_Lattice_2)
             && $ctx.count(Item::Power_Matrix) >= 4
+            && $ctx.has(Item::Royal_Ring)
             && $ctx.has(Item::Udusan)
     }};
 }
@@ -3122,6 +3123,15 @@ macro_rules! hexplain__other_items {
                 return (false, refs);
             };
             let mut h = {
+                let h = $ctx.has(Item::Royal_Ring);
+                $edict.insert("Royal_Ring", format!("{}", h));
+                (h, vec!["Royal_Ring"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
                 let h = $ctx.has(Item::Udusan);
                 $edict.insert("Udusan", format!("{}", h));
                 (h, vec!["Udusan"])
@@ -3161,6 +3171,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_power_matrix(IntegerObservation::Ge(4));
             $ctx.count(Item::Power_Matrix) >= 4
+        }) && ({
+            $full_obs.observe_royal_ring();
+            $ctx.has(Item::Royal_Ring)
         }) && ({
             $full_obs.observe_udusan();
             $ctx.has(Item::Udusan)
