@@ -4585,7 +4585,7 @@ pub struct World {
     global_actions: Range<usize>,
     min_warp_time: u32,
     // Condensed edges
-    condensed: Option<EnumMap<SpotId, Vec<CondensedEdge<Context, SpotId, ExitId>>>>,
+    condensed: EnumMap<SpotId, Vec<CondensedEdge<Context, SpotId, ExitId>>>,
 }
 
 impl world::World for World {
@@ -4610,6 +4610,7 @@ impl world::World for World {
             end: ActionId::Global__Recall_Fast_Travel.into_usize() + 1,
         };
         world.min_warp_time = 2000;
+        world.condensed = EnumMap::default();
 
         build_locations(&mut world.locations);
         build_exits(&mut world.exits);
@@ -12678,13 +12679,11 @@ impl world::World for World {
     }
 
     fn condense_graph(&mut self) {
-        let mut emap = EnumMap::default();
-        emap.extend(condense_graph(self));
-        self.condensed = Some(emap);
+        self.condensed.extend(condense_graph(self));
     }
 
     fn get_condensed_edges_from(&self, spot_id: SpotId) -> &[CondensedEdge<Context, SpotId, ExitId>] {
-        &self.condensed.as_ref().expect("Graph must be condensed first!")[spot_id]
+        &self.condensed[spot_id]
     }
 }
 

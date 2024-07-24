@@ -948,7 +948,7 @@ where
     W::Location: Location<Context = T>,
 {
     let mut world = W::new();
-    world.condense_graph();
+    //world.condense_graph();
     let startctx = T::default();
     let shortest_paths = Arc::new(Box::new(ContextScorer::shortest_paths_tree_only(
         &*world, &startctx,
