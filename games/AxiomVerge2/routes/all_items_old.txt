@@ -226,7 +226,6 @@
 
 # Zal Tu / Slingshot Weapon
 * Collect Glacier_Breach_Spidery_Connector_Gate from Glacier Breach > Spidery Connector > Button > Hit Button
-* Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn
 * Collect Big_Flask from Glacier Breach > Spidery Connector > Midway > Flask
 * Collect Flask from Ebih Breach > Spider Guards > East Sand Pit > Flask
 * Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn
