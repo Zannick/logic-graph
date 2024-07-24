@@ -247,10 +247,26 @@ subgraph Amagi
     end
     subgraph Amagi__Gated_Community[Gated Community]
         Amagi__Gated_Community__East_17(East 17);
+        Amagi__Gated_Community__Middle_East_Ledge(Middle East Ledge);
+        Amagi__Gated_Community__Upper_East_Ledge(Upper East Ledge);
         Amagi__Gated_Community__East_18(East 18);
+        Amagi__Gated_Community__Button(Button);
+        Amagi__Gated_Community__Dur_Esla(Dur-Esla);
+        Amagi__Gated_Community__Lower_Gate_East(Lower Gate East);
+        Amagi__Gated_Community__Lower_Gate_West(Lower Gate West);
+        Amagi__Gated_Community__Upper_Gate_East(Upper Gate East);
+        Amagi__Gated_Community__Upper_Gate_East_Mid_air(Upper Gate East Mid-air);
+        Amagi__Gated_Community__Upper_Gate_West(Upper Gate West);
         Amagi__Gated_Community__West_18(West 18);
         Amagi__Gated_Community__West_16(West 16);
+        Amagi__Gated_Community__Platform_1_West(Platform 1 West);
+        Amagi__Gated_Community__Platform_1_East(Platform 1 East);
         Amagi__Gated_Community__Platform_2_West(Platform 2 West);
+        Amagi__Gated_Community__Platform_2_East(Platform 2 East);
+        Amagi__Gated_Community__Platform_3_West(Platform 3 West);
+        Amagi__Gated_Community__Platform_3_East(Platform 3 East);
+        Amagi__Gated_Community__Upper_West_Ledge(Upper West Ledge);
+        Amagi__Gated_Community__Upper_West_Hook_Point(Upper West Hook Point);
     end
     subgraph Amagi__Wiggly_Room[Wiggly Room]
         Amagi__Wiggly_Room__West(West);
@@ -2903,6 +2919,8 @@ subgraph Menu
         Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station(Amagi West Lake Refill Station);
         Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask(Amagi Dragon Eye Flask);
         Menu__Kiengir_Map__MUS_A_M20_Flask(MUS A M20 Flask);
+        Menu__Kiengir_Map__Amagi_Gated_Community_Button(Amagi Gated Community Button);
+        Menu__Kiengir_Map__Amagi_Gated_Community_Flask(Amagi Gated Community Flask);
         Menu__Kiengir_Map__Annuna_Mirror_Match_Flask(Annuna Mirror Match Flask);
         Menu__Kiengir_Map__Nano_Lattice_2(Nano Lattice 2);
         Menu__Kiengir_Map__Lament_for_Fools(Lament for Fools);
@@ -3550,8 +3568,8 @@ Amagi__East_Lake__Southwest_Column_West --> Amagi__East_Lake__Portal_Ledge
 Amagi__East_Lake__Underwater_Hill --> Amagi__East_Lake__Center_Lower_Platform_East
 Amagi__East_Lake__Underwater_Hill --> Amagi__East_Lake__Center_Northeast_Platform
 Amagi__East_Lake__Underwater_Hill --> Amagi__East_Lake__East_Hill
-Amagi__East_Lake__West_17 --> Amagi__Gated_Community__East_17
-Amagi__East_Lake__West_18 --> Amagi__Gated_Community__East_18
+Amagi__East_Lake__West_17 <--> Amagi__Gated_Community__East_17
+Amagi__East_Lake__West_18 <--> Amagi__Gated_Community__East_18
 Amagi__East_Lake__West_Platform_1_East --> Amagi__East_Lake__West_Platform_2_West
 Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Center_Lower_Platform_East
 Amagi__East_Lake__West_Platform_1_West_Hook --> Amagi__East_Lake__Center_Northeast_Platform
@@ -3568,6 +3586,35 @@ Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Foot
 Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Kum_Abala
 Amagi__East_Lake__West_Platform_3_Hook --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__West_Water_Surface --> Amagi__East_Lake__Center_West_Platform
+Amagi__Gated_Community__Dur_Esla --> Amagi__Gated_Community__Upper_East_Ledge
+Amagi__Gated_Community__Lower_Gate_East <--> Amagi__Gated_Community__Lower_Gate_West
+Amagi__Gated_Community__Lower_Gate_East --> Amagi__Gated_Community__Platform_1_East
+Amagi__Gated_Community__Lower_Gate_West --> Amagi__East_Lake__Southwest_Brick
+Amagi__Gated_Community__Lower_Gate_West --> Amagi__Gated_Community__Platform_1_East
+Amagi__Gated_Community__Lower_Gate_West --> Amagi__Gated_Community__Platform_3_East
+Amagi__Gated_Community__Middle_East_Ledge --> Amagi__Gated_Community__Upper_East_Ledge
+Amagi__Gated_Community__Middle_East_Ledge --> Amagi__Gated_Community__Upper_Gate_East
+Amagi__Gated_Community__Platform_1_East --> Amagi__Gated_Community__Platform_2_East
+Amagi__Gated_Community__Platform_1_West --> Amagi__Gated_Community__Platform_2_East
+Amagi__Gated_Community__Platform_1_West --> Amagi__Gated_Community__Platform_3_West
+Amagi__Gated_Community__Platform_2_West <--> Amagi__Main_Area__Catwalk_Far_East
+Amagi__Gated_Community__Platform_2_West --> Amagi__Main_Area__Southeast_Ledge
+Amagi__Gated_Community__Platform_3_East --> Amagi__Gated_Community__Upper_Gate_West
+Amagi__Gated_Community__Platform_3_East --> Amagi__Gated_Community__Upper_West_Hook_Point
+Amagi__Gated_Community__Platform_3_East --> Amagi__Gated_Community__Upper_West_Ledge
+Amagi__Gated_Community__Platform_3_West --> Amagi__Gated_Community__Upper_West_Hook_Point
+Amagi__Gated_Community__Platform_3_West --> Amagi__Gated_Community__Upper_West_Ledge
+Amagi__Gated_Community__Upper_East_Ledge <--> Amagi__Gated_Community__Upper_Gate_East
+Amagi__Gated_Community__Upper_Gate_East <--> Amagi__Gated_Community__Upper_Gate_West
+Amagi__Gated_Community__Upper_Gate_East --> Amagi__Gated_Community__Upper_West_Hook_Point
+Amagi__Gated_Community__Upper_Gate_West --> Amagi__East_Lake__Portal_Stand
+Amagi__Gated_Community__Upper_Gate_West --> Amagi__Gated_Community__Upper_East_Ledge
+Amagi__Gated_Community__Upper_West_Hook_Point --> Amagi__Main_Area__Cache_Ledge
+Amagi__Gated_Community__Upper_West_Hook_Point --> Amagi__Main_Area__Northeast_Ledge
+Amagi__Gated_Community__Upper_West_Ledge --> Amagi__Gated_Community__Upper_Gate_West
+Amagi__Gated_Community__West_16 --> Amagi__Main_Area__East_16
+Amagi__Gated_Community__West_18 --> Amagi__Gated_Community__Platform_1_West
+Amagi__Gated_Community__West_18 <--> Amagi__Main_Area__East_18
 Amagi__Grid_31_19__East <--> Amagi__Liru_Room__West_19
 Amagi__Grid_31_19__West <--> Amagi__Main_Area__East_19
 Amagi__Liru_Room__East_Passage --> Amagi__Liru_Room__East_Platform_1_Left
@@ -3589,11 +3636,9 @@ Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__East_Ledge
 Amagi__Main_Area__Catwalk_Center --> Amagi__Main_Area__West_18_Hook_Point
 Amagi__Main_Area__Catwalk_East_Edge --> Amagi__Main_Area__East_19
 Amagi__Main_Area__Catwalk_East_Edge --> Amagi__Main_Area__Southeast_Ledge
-Amagi__Main_Area__Catwalk_Far_East --> Amagi__Gated_Community__Platform_2_West
 Amagi__Main_Area__Catwalk_Far_East --> Amagi__Main_Area__Cache_Ledge
 Amagi__Main_Area__East_15 <--> Glacier__Lake_Main_Entrance__Lake_Access
 Amagi__Main_Area__East_16 --> Amagi__Main_Area__Cache_Ledge
-Amagi__Main_Area__East_18 --> Amagi__Gated_Community__West_18
 Amagi__Main_Area__East_18 --> Amagi__Main_Area__Cache_Ledge
 Amagi__Main_Area__Flat_Ruin --> Amagi__Main_Area__West_18_Hook_Point
 Amagi__Main_Area__Northeast_Ledge --> Amagi__Main_Area__Cache_Ledge

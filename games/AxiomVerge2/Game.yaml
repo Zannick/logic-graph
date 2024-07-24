@@ -176,8 +176,11 @@ time:  # MARK: time
   # Note that downward transitions usually have to use the fall speed to determine time
   fast_hover.1: 0.25
   fast_hover.2: 0.50
+  # this is really the speed of movement "water" or not in water
   base.1: 0.35
   base.2: 0.7
+  # in water
+  slow.1: 0.45
   # These are specifically y-dir?
   fall.2: 0.2
   mist1.2: 0.8
@@ -360,7 +363,7 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{42}, Big_Flask{21}]
+    [Flask{43}, Big_Flask{21}]
   $all_health:itemList: >
     [Health_Node{4}, Health_Fragment{19}]
   $all_weapons:itemList: >

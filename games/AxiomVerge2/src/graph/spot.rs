@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2896] = [
+static SPOT_DEFS: [SpotDef; 2914] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -602,13 +602,61 @@ static SPOT_DEFS: [SpotDef; 2896] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Amagi__Gated_Community__East_17,
-        loc_range: None,
+        id: SpotId::Amagi__Gated_Community__Button,
+        loc_range: Some((LocationId::Amagi__Gated_Community__Button__Hit_Button, LocationId::Amagi__Gated_Community__Button__Hit_Button)),
         exit_range: None,
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Amagi__Gated_Community__Dur_Esla,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Dur_Esla__ex__Upper_East_Ledge_1, ExitId::Amagi__Gated_Community__Dur_Esla__ex__Upper_East_Ledge_1)),
+        action_range: Some((ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla, ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla)),
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__East_17,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__East_17__ex__East_Lake__West_17_1, ExitId::Amagi__Gated_Community__East_17__ex__East_Lake__West_17_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Amagi__Gated_Community__East_18,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__East_18__ex__East_Lake__West_18_1, ExitId::Amagi__Gated_Community__East_18__ex__East_Lake__West_18_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Lower_Gate_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Lower_Gate_East__ex__Lower_Gate_West_1, ExitId::Amagi__Gated_Community__Lower_Gate_East__ex__Platform_1_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Lower_Gate_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Lower_Gate_West__ex__East_Lake__Southwest_Brick_1, ExitId::Amagi__Gated_Community__Lower_Gate_West__ex__Platform_3_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Middle_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Middle_East_Ledge__ex__Upper_East_Ledge_1, ExitId::Amagi__Gated_Community__Middle_East_Ledge__ex__Upper_Gate_East_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Platform_1_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Platform_1_East__ex__Platform_2_East_1, ExitId::Amagi__Gated_Community__Platform_1_East__ex__Platform_2_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Platform_1_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Platform_1_West__ex__Platform_2_East_1, ExitId::Amagi__Gated_Community__Platform_1_West__ex__Platform_3_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Platform_2_East,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -616,19 +664,67 @@ static SPOT_DEFS: [SpotDef; 2896] = [
     SpotDef {
         id: SpotId::Amagi__Gated_Community__Platform_2_West,
         loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Platform_2_West__ex__Main_Area__Catwalk_Far_East_1, ExitId::Amagi__Gated_Community__Platform_2_West__ex__Main_Area__Southeast_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Platform_3_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Platform_3_East__ex__Upper_Gate_West_1, ExitId::Amagi__Gated_Community__Platform_3_East__ex__Upper_West_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Platform_3_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Platform_3_West__ex__Upper_West_Hook_Point_1, ExitId::Amagi__Gated_Community__Platform_3_West__ex__Upper_West_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Upper_East_Ledge,
+        loc_range: Some((LocationId::Amagi__Gated_Community__Upper_East_Ledge__Flask, LocationId::Amagi__Gated_Community__Upper_East_Ledge__Shockwave_Flask)),
+        exit_range: Some((ExitId::Amagi__Gated_Community__Upper_East_Ledge__ex__Upper_Gate_East_1, ExitId::Amagi__Gated_Community__Upper_East_Ledge__ex__Upper_Gate_East_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Upper_Gate_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Upper_Gate_East__ex__Upper_East_Ledge_1, ExitId::Amagi__Gated_Community__Upper_Gate_East__ex__Upper_West_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Upper_Gate_East_Mid_air,
+        loc_range: Some((LocationId::Amagi__Gated_Community__Upper_Gate_East_Mid_air__Boomerang_Flask_Fast_Travel, LocationId::Amagi__Gated_Community__Upper_Gate_East_Mid_air__Boomerang_Flask_and_Hover)),
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Upper_Gate_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Upper_Gate_West__ex__East_Lake__Portal_Stand_1, ExitId::Amagi__Gated_Community__Upper_Gate_West__ex__Upper_Gate_East_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Upper_West_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Upper_West_Hook_Point__ex__Main_Area__Cache_Ledge_1, ExitId::Amagi__Gated_Community__Upper_West_Hook_Point__ex__Main_Area__Northeast_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Gated_Community__Upper_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__Upper_West_Ledge__ex__Upper_Gate_West_1, ExitId::Amagi__Gated_Community__Upper_West_Ledge__ex__Upper_Gate_West_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Amagi__Gated_Community__West_16,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__West_16__ex__Main_Area__East_16_1, ExitId::Amagi__Gated_Community__West_16__ex__Main_Area__East_16_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Amagi__Gated_Community__West_18,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi__Gated_Community__West_18__ex__Main_Area__East_18_1, ExitId::Amagi__Gated_Community__West_18__ex__Platform_1_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -795,7 +891,7 @@ static SPOT_DEFS: [SpotDef; 2896] = [
     },
     SpotDef {
         id: SpotId::Amagi__Main_Area__Cache_Jump,
-        loc_range: Some((LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask, LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask)),
+        loc_range: Some((LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask, LocationId::Amagi__Main_Area__Cache_Jump__Shockwave_Flask)),
         exit_range: None,
         action_range: None,
     },
@@ -14351,6 +14447,18 @@ static SPOT_DEFS: [SpotDef; 2896] = [
         id: SpotId::Menu__Kiengir_Map__Amagi_East_Lake,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1, ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Button,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Flask,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {

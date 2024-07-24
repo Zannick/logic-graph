@@ -212,6 +212,8 @@ areas:
           tags: [xdoor]
     - name: West Bubbly Pillar
       coord: [31.4, 17.2]
+      data:
+        flipside: Amagi > Gated Community > Platform 1 West
       local:
         - to: West
         - to: West Bubbly Platform

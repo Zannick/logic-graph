@@ -32,6 +32,7 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => true,
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::access_invoke_melee(ctx, world),
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_amagi__main_area__carving__key_combo__req(ctx, world),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
@@ -220,6 +221,7 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::observe_access_invoke_melee(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_amagi__main_area__carving__key_combo__req(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
@@ -418,6 +420,15 @@ impl world::Accessible for Action {
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Arch West"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
+                let (ret, mut tags) = rules::explain_invoke_melee(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -1616,6 +1627,7 @@ impl world::Action for Action {
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
             ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone(ctx, world),
@@ -1933,6 +1945,9 @@ impl world::Action for Action {
             }
             ActionId::Amagi__East_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
+                rules::observe_action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world, full_obs);
             }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2421,7 +2436,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 184] = [
+static ACT_DEFS: [Action; 185] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2465,6 +2480,11 @@ static ACT_DEFS: [Action; 184] = [
     Action {
         id: ActionId::Amagi__East_Lake__Save_Point__Save,
         time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla,
+        time: 1000,
         price: Currency::Free,
     },
     Action {
@@ -3370,6 +3390,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower_Hover,
         ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => SpotId::Amagi__East_Lake__Center_Upper_Platform,
         ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
+        ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => SpotId::Amagi__Gated_Community__Dur_Esla,
         ActionId::Annuna__Mirror_Match__Save_Point__Save => SpotId::Annuna__Mirror_Match__Save_Point,
         ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_West,
         ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_East,

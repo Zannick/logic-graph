@@ -2818,11 +2818,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{42}, Big_Flask{21}]
+/// [Flask{43}, Big_Flask{21}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 42 && $ctx.count(Item::Big_Flask) >= 21
+        $ctx.count(Item::Flask) >= 43 && $ctx.count(Item::Big_Flask) >= 21
     }};
 }
 #[macro_export]
@@ -2833,7 +2833,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 42, vec!["Flask count"])
+                (ct >= 43, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2853,8 +2853,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(42));
-            $ctx.count(Item::Flask) >= 42
+            $full_obs.observe_flask(IntegerObservation::Ge(43));
+            $ctx.count(Item::Flask) >= 43
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(21));
             $ctx.count(Item::Big_Flask) >= 21

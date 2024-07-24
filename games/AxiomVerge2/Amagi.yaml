@@ -384,6 +384,12 @@ areas:
           item: Flask
           req: $boomerang
           tags: [nearby_flask]
+        - name: Shockwave Flask  # Not actually in the air but close enough
+          canon: Amagi_Main_Area_Water_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
     - name: Cache
       coord: [30.3, 15.8]
       local:
@@ -2191,19 +2197,364 @@ areas:
 
 - name: Gated Community  # MARK: Gated Community
   on_entry: $reset_old_area(^newpos)
+  reset:
+    _dur_esla: false
+  map:
+    button: [32, 17, 33, 18]
+    flask: [32, 15, 33, 16]
+  datamap:
+    map_spot:
+      button: Menu > Kiengir Map > Amagi Gated Community Button
+      flask: Menu > Kiengir Map > Amagi Gated Community Flask
   spots:
     - name: East 17
       coord: [32.95, 16.6]
+      local:
+        - to: Middle East Ledge
+      exits:
+        - to: East Lake > West 17
+          tags: [xshift]
+    - name: Middle East Ledge
+      coord: [32.7, 16.75]
+      local:
+        - to: East 17
+          jumps: 1
+        - to: East 18
+        - to: Button
+      exits:
+        - to: Upper East Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper East Ledge
+          req: $mist2
+          movement: mist2
+        - to: Upper Gate East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Gate East
+          req: $mist2
+          movement: mist2
+    - name: Upper East Ledge
+      coord: [32.55, 15.6]
+      local:
+        - to: Middle East Ledge
+        - to: East 17
+          thru: [32.55, 15.85]
+        - to: Lower Gate East
+      locations:
+        - name: Flask
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          tags: [flask]
+        - name: Shockwave Flask
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Flask Collection Skip
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Upper Gate East
+          req: $hover and Underwater_Movement
+          movement: water
+        - to: Upper Gate East
+          req: $hover
+          movement: base
     - name: East 18
       coord: [32.95, 17.7]
+      local:
+        - to: Button
+          jumps: 1
+      exits:
+        - to: East Lake > West 18
+          tags: [xshift]
+
+    - name: Button
+      coord: [32.65, 17.65]
+      local:
+        - to: Dur-Esla
+        - to: East 18
+      locations:
+        - name: Hit Button
+          item: Amagi_Gated_Community_Gate
+          req: $can_damage
+          tags: [button]
+    - name: Dur-Esla
+      coord: [32.4, 17.75]
+      local:
+        - to: Button
+          jumps: 1
+        - to: Lower Gate East
+          jumps: 2
+      exits:
+        - to: Upper East Ledge
+          req: $mist2 and ^_dur_esla
+          movement: mist2
+      actions:
+        - name: Kill Dur-Esla
+          req: $melee
+          do: ^_dur_esla = true
+          time: 1
+
+    - name: Lower Gate East
+      coord: [32.1, 17.55]
+      local:
+        - to: Dur-Esla
+      exits:
+        - to: Platform 1 East
+          req: $hookhover and Underwater_Movement and Amagi_Gated_Community_Gate
+          movement: fast_hover
+          jumps: 2
+        - to: Lower Gate West
+          req: Amagi_Gated_Community_Gate
+          movement: base
+        - to: Lower Gate West
+          req: Amagi_Gated_Community_Gate and Underwater_Movement
+          movement: water
+    - name: Lower Gate West
+      coord: [31.95, 17.55]
+      local:
+        - to: West 18
+      exits:
+        - to: Platform 1 East
+          req: ($hook or $hover) and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: East Lake > Southwest Brick
+          req: $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Lower Gate East
+          req: Amagi_Gated_Community_Gate
+          movement: base
+        - to: Lower Gate East
+          req: Amagi_Gated_Community_Gate and Underwater_Movement
+          movement: water
+        - to: Platform 3 East
+          req: $mist2
+          movement: mist2
+
+    - name: Upper Gate East
+      coord: [32.1, 15.8]
+      local:
+        - to: Upper Gate East Mid-air
+          jumps: 1
+      exits:
+        - to: Upper East Ledge
+          req: ($hook or $hover) and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Upper Gate West
+          req: Amagi_Gated_Community_Gate
+          movement: base
+        - to: Upper Gate West
+          req: Amagi_Gated_Community_Gate and Underwater_Movement
+          movement: water
+        - to: Upper West Hook Point
+          req: $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
+          movement: fast_hover
+    - name: Upper Gate East Mid-air
+      coord: [32.25, 15.6]
+      locations:
+        - name: Boomerang Flask and Fall Left
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $boomerang
+          to: Lower Gate East
+          movement: base
+          penalty_tags: [throw, flask]
+        - name: Boomerang Flask and Fall Right
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $boomerang
+          to: Button
+          movement: base
+          penalty_tags: [throw, flask]
+        - name: Boomerang Flask and Hover
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $hover and Anuman and Underwater_Movement and (Boomerang or Boomerang_Upgrade)
+          to: East 17
+          movement: water
+          penalty_tags: [throw, flask]
+        - name: Boomerang Flask Fast Travel
+          canon: Amagi_Gated_Community_Flask
+          item: Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [throw]
+    - name: Upper Gate West
+      coord: [31.95, 15.8]
+      local:
+        - to: Platform 3 East
+        - to: Platform 1 East
+      exits:
+        - to: Upper Gate East
+          req: Amagi_Gated_Community_Gate
+          movement: base
+        - to: Upper Gate East
+          req: Amagi_Gated_Community_Gate and Underwater_Movement
+          movement: water
+        - to: Upper East Ledge
+          req: $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+        - to: East Lake > Portal Stand
+          req: $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
 
     - name: West 18
       coord: [31.05, 17.75]
+      local:
+        - to: Lower Gate West
+          jumps: 1
+      exits:
+        - to: Main Area > East 18
+          tags: [xshift]
+        - to: Platform 1 West
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
     - name: West 16
       coord: [31.05, 16.0]
+      local:
+        - to: Upper East Ledge
+          jumps: 1
+      exits:
+        - to: Main Area > East 16
+          tags: [xshift]
 
+    - name: Platform 1 West
+      coord: [31.4, 17.2]
+      data:
+        flipside: Amagi Breach > East Ruins > West Bubbly Pillar
+      local:
+        - to: West 18
+        - to: Platform 1 East
+      exits:
+        - to: Platform 2 East
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: Platform 3 West
+          req: $hookhover and Underwater_Movement
+          movement: water
+          jumps: 3
+    - name: Platform 1 East
+      coord: [31.6, 17.2]
+      local:
+        - to: Platform 1 West
+        - to: Lower Gate West
+      exits:
+        - to: Platform 2 East
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
     - name: Platform 2 West
       coord: [31.1, 16.7]
+      local:
+        - to: Platform 2 East
+      exits:
+        - to: Main Area > Catwalk Far East
+          req: $hover and Underwater_Movement
+          movement: water
+          penalty_tags: [xshift, -base.1]
+        - to: Main Area > Southeast Ledge
+          movement: base
+          penalty_tags: [xshift, -slow.1]
+        - to: Main Area > Southeast Ledge
+          req: Underwater_Movement
+          movement: water
+          penalty_tags: [xshift, -base.1]
+    - name: Platform 2 East
+      coord: [31.3, 16.7]
+      local:
+        - to: Platform 1 East
+        - to: Platform 3 West
+          jumps: 1
+        - to: Platform 2 West
+    - name: Platform 3 West
+      coord: [31.55, 16.5]
+      local:
+        - to: Platform 2 East
+        - to: Platform 3 East
+      exits:
+        - to: Upper West Hook Point
+          req: $hookhover and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Upper West Ledge
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: Upper West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper West Ledge
+          req: $mist2
+          movement: mist2
+    - name: Platform 3 East
+      coord: [31.65, 16.5]
+      local:
+        - to: Platform 3 West
+        - to: Lower Gate West
+      exits:
+        - to: Upper West Hook Point
+          req: $hookhover and Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Upper West Ledge
+          req: $hook and Underwater_Movement
+          movement: water
+          jumps: 2
+        - to: Upper West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Upper Gate West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Gate West
+          req: $mist2
+          movement: mist2
+    - name: Upper West Ledge
+      coord: [31.3, 15.95]
+      local:
+        - to: West 16
+        - to: Platform 2 East
+        - to: Platform 3 East
+      exits:
+        - to: Upper Gate West
+          req: $hookhover and Underwater_Movement
+          movement: water
+          jumps: 1
+    - name: Upper West Hook Point
+      coord: [31.4, 16.1]
+      exits:
+        - to: Main Area > Cache Ledge
+          req: $hookhover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Main Area > Northeast Ledge
+          req: $hookhover and Underwater_Movement
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
 
 - name: Wiggly Room
   on_entry: $reset_old_area(^newpos)

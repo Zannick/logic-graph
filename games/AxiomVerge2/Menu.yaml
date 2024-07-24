@@ -630,6 +630,10 @@ areas:
       coord: [24, 17]
     - name: MUS A M20 Flask
       coord: [22, 16]
+    - name: Amagi Gated Community Button
+      coord: [32, 18]
+    - name: Amagi Gated Community Flask
+      coord: [32, 16]
 
     - name: Annuna Mirror Match Flask
       coord: [33, 26]

@@ -63,6 +63,14 @@ pub fn access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_moveme
     (((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
         && ctx.has(Item::Underwater_Movement))
 }
+pub fn access___invoke_hook_or_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ($hook or $hover) and Underwater_Movement
+    ((helper__hook!(ctx, world) || helper__hover!(ctx, world))
+        && ctx.has(Item::Underwater_Movement))
+}
 pub fn access___invoke_objective(ctx: &Context, world: &World) -> bool {
     // [$objective]
     rule__objective!(ctx, world)
@@ -137,6 +145,31 @@ pub fn access_allow_warps_and_within_antarctica(ctx: &Context, world: &World) ->
             _ => false,
         }))
 }
+pub fn access_amagi__gated_community__dur_esla__ex__upper_east_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $mist2 and ^_dur_esla
+    (helper__mist2!(ctx, world) && ctx.amagi__gated_community__ctx__dur_esla())
+}
+pub fn access_amagi__gated_community__lower_gate_west__ex__east_lake__southwest_brick_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+    (((helper__hookhover!(ctx, world) && ctx.has(Item::Amagi_Gated_Community_Gate))
+        && ctx.has(Item::Underwater_Movement))
+        && ctx.amagi__gated_community__ctx__dur_esla())
+}
+pub fn access_amagi__gated_community__upper_gate_west__ex__east_lake__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+    (((helper__hookhover!(ctx, world) && ctx.has(Item::Amagi_Gated_Community_Gate))
+        && ctx.has(Item::Underwater_Movement))
+        && ctx.amagi__gated_community__ctx__dur_esla())
+}
 pub fn access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
     world: &World,
@@ -159,6 +192,17 @@ pub fn access_amagi__main_area__carving__key_combo__req(ctx: &Context, world: &W
 pub fn access_amagi_dragon_eye_passage(ctx: &Context, world: &World) -> bool {
     // Amagi_Dragon_Eye_Passage
     ctx.has(Item::Amagi_Dragon_Eye_Passage)
+}
+pub fn access_amagi_gated_community_gate(ctx: &Context, world: &World) -> bool {
+    // Amagi_Gated_Community_Gate
+    ctx.has(Item::Amagi_Gated_Community_Gate)
+}
+pub fn access_amagi_gated_community_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Amagi_Gated_Community_Gate and Underwater_Movement
+    (ctx.has(Item::Amagi_Gated_Community_Gate) && ctx.has(Item::Underwater_Movement))
 }
 pub fn access_amagi_stronghold_boulder_1(ctx: &Context, world: &World) -> bool {
     // Amagi_Stronghold_Boulder_1
@@ -2267,6 +2311,26 @@ pub fn access_invoke_hookhover(ctx: &Context, world: &World) -> bool {
     // $hookhover
     helper__hookhover!(ctx, world)
 }
+pub fn access_invoke_hookhover_and_amagi_gated_community_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
+    ((helper__hookhover!(ctx, world) && ctx.has(Item::Amagi_Gated_Community_Gate))
+        && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_hookhover_and_underwater_movement(ctx: &Context, world: &World) -> bool {
+    // $hookhover and Underwater_Movement
+    (helper__hookhover!(ctx, world) && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_invoke_hookhover_and_underwater_movement_and_amagi_gated_community_gate(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hookhover and Underwater_Movement and Amagi_Gated_Community_Gate
+    ((helper__hookhover!(ctx, world) && ctx.has(Item::Underwater_Movement))
+        && ctx.has(Item::Amagi_Gated_Community_Gate))
+}
 pub fn access_invoke_hookhover_or_invoke_spin(ctx: &Context, world: &World) -> bool {
     // $hookhover or $spin
     (helper__hookhover!(ctx, world) || helper__spin!(ctx, world))
@@ -2278,6 +2342,14 @@ pub fn access_invoke_hover(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_hover_and_anuman(ctx: &Context, world: &World) -> bool {
     // $hover and Anuman
     (helper__hover!(ctx, world) && ctx.has(Item::Anuman))
+}
+pub fn access_invoke_hover_and_anuman_and_underwater_movement_and___boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hover and Anuman and Underwater_Movement and (Boomerang or Boomerang_Upgrade)
+    (((helper__hover!(ctx, world) && ctx.has(Item::Anuman)) && ctx.has(Item::Underwater_Movement))
+        && (ctx.has(Item::Boomerang) || ctx.has(Item::Boomerang_Upgrade)))
 }
 pub fn access_invoke_hover_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hover and $hook
@@ -3363,6 +3435,13 @@ pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &World) -> bool 
         _ => false,
     })
 }
+pub fn action_amagi__gated_community__dur_esla__kill_dur_esla__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_dur_esla = true
+    ctx.set_amagi__gated_community__ctx__dur_esla(true);
+}
 pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context, world: &World) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
@@ -4287,6 +4366,46 @@ pub fn explain___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwater_movem
         }
     }
 }
+pub fn explain___invoke_hook_or_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ($hook or $hover) and Underwater_Movement
+    {
+        let mut left = ({
+            let mut left = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain___invoke_objective(
     ctx: &Context,
     world: &World,
@@ -4689,6 +4808,136 @@ pub fn explain_allow_warps_and_within_antarctica(
         }
     }
 }
+pub fn explain_amagi__gated_community__dur_esla__ex__upper_east_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $mist2 and ^_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+            edict.insert("$mist2", format!("{:?}", res));
+            refs.push("$mist2");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.amagi__gated_community__ctx__dur_esla();
+                edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
+                (r, vec!["^amagi__gated_community__ctx__dur_esla"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__gated_community__lower_gate_west__ex__east_lake__southwest_brick_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                    edict.insert("$hookhover", format!("{:?}", res));
+                    refs.push("$hookhover");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Amagi_Gated_Community_Gate);
+                        edict.insert("Amagi_Gated_Community_Gate", format!("{}", h));
+                        (h, vec!["Amagi_Gated_Community_Gate"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.amagi__gated_community__ctx__dur_esla();
+                edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
+                (r, vec!["^amagi__gated_community__ctx__dur_esla"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__gated_community__upper_gate_west__ex__east_lake__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                    edict.insert("$hookhover", format!("{:?}", res));
+                    refs.push("$hookhover");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Amagi_Gated_Community_Gate);
+                        edict.insert("Amagi_Gated_Community_Gate", format!("{}", h));
+                        (h, vec!["Amagi_Gated_Community_Gate"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.amagi__gated_community__ctx__dur_esla();
+                edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
+                (r, vec!["^amagi__gated_community__ctx__dur_esla"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
     world: &World,
@@ -4780,6 +5029,43 @@ pub fn explain_amagi_dragon_eye_passage(
         let h = ctx.has(Item::Amagi_Dragon_Eye_Passage);
         edict.insert("Amagi_Dragon_Eye_Passage", format!("{}", h));
         (h, vec!["Amagi_Dragon_Eye_Passage"])
+    }
+}
+pub fn explain_amagi_gated_community_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Gated_Community_Gate
+    {
+        let h = ctx.has(Item::Amagi_Gated_Community_Gate);
+        edict.insert("Amagi_Gated_Community_Gate", format!("{}", h));
+        (h, vec!["Amagi_Gated_Community_Gate"])
+    }
+}
+pub fn explain_amagi_gated_community_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Gated_Community_Gate and Underwater_Movement
+    {
+        let mut left = {
+            let h = ctx.has(Item::Amagi_Gated_Community_Gate);
+            edict.insert("Amagi_Gated_Community_Gate", format!("{}", h));
+            (h, vec!["Amagi_Gated_Community_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_amagi_stronghold_boulder_1(
@@ -12849,6 +13135,110 @@ pub fn explain_invoke_hookhover(
         (res, refs)
     }
 }
+pub fn explain_invoke_hookhover_and_amagi_gated_community_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Amagi_Gated_Community_Gate);
+                    edict.insert("Amagi_Gated_Community_Gate", format!("{}", h));
+                    (h, vec!["Amagi_Gated_Community_Gate"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hookhover_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and Underwater_Movement
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+            edict.insert("$hookhover", format!("{:?}", res));
+            refs.push("$hookhover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hookhover_and_underwater_movement_and_amagi_gated_community_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and Underwater_Movement and Amagi_Gated_Community_Gate
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Amagi_Gated_Community_Gate);
+                edict.insert("Amagi_Gated_Community_Gate", format!("{}", h));
+                (h, vec!["Amagi_Gated_Community_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hookhover_or_invoke_spin(
     ctx: &Context,
     world: &World,
@@ -12910,6 +13300,71 @@ pub fn explain_invoke_hover_and_anuman(
                 edict.insert("Anuman", format!("{}", h));
                 (h, vec!["Anuman"])
             };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_anuman_and_underwater_movement_and___boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and Anuman and Underwater_Movement and (Boomerang or Boomerang_Upgrade)
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Anuman);
+                        edict.insert("Anuman", format!("{}", h));
+                        (h, vec!["Anuman"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Boomerang);
+                    edict.insert("Boomerang", format!("{}", h));
+                    (h, vec!["Boomerang"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Boomerang_Upgrade);
+                        edict.insert("Boomerang_Upgrade", format!("{}", h));
+                        (h, vec!["Boomerang_Upgrade"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -17959,6 +18414,18 @@ pub fn observe_access___invoke_grab_or_invoke_climb_or_invoke_hook_and_underwate
             ctx.has(Item::Underwater_Movement)
         }))
 }
+pub fn observe_access___invoke_hook_or_invoke_hover_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ($hook or $hover) and Underwater_Movement
+    ((hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
 pub fn observe_access___invoke_objective(
     ctx: &Context,
     world: &World,
@@ -18085,6 +18552,58 @@ pub fn observe_access_allow_warps_and_within_antarctica(
             _ => false,
         }))
 }
+pub fn observe_access_amagi__gated_community__dur_esla__ex__upper_east_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $mist2 and ^_dur_esla
+    (hobserve__mist2!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_amagi__gated_community__ctx__dur_esla();
+            ctx.amagi__gated_community__ctx__dur_esla()
+        }))
+}
+pub fn observe_access_amagi__gated_community__lower_gate_west__ex__east_lake__southwest_brick_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+    (((hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_amagi_gated_community_gate();
+            ctx.has(Item::Amagi_Gated_Community_Gate)
+        }))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+        && ({
+            full_obs.observe_amagi__gated_community__ctx__dur_esla();
+            ctx.amagi__gated_community__ctx__dur_esla()
+        }))
+}
+pub fn observe_access_amagi__gated_community__upper_gate_west__ex__east_lake__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement and ^_dur_esla
+    (((hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_amagi_gated_community_gate();
+            ctx.has(Item::Amagi_Gated_Community_Gate)
+        }))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+        && ({
+            full_obs.observe_amagi__gated_community__ctx__dur_esla();
+            ctx.amagi__gated_community__ctx__dur_esla()
+        }))
+}
 pub fn observe_access_amagi__main_area__carving__ex__secret_outcropping_1__req(
     ctx: &Context,
     world: &World,
@@ -18128,6 +18647,31 @@ pub fn observe_access_amagi_dragon_eye_passage(
         full_obs.observe_amagi_dragon_eye_passage();
         ctx.has(Item::Amagi_Dragon_Eye_Passage)
     }
+}
+pub fn observe_access_amagi_gated_community_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Gated_Community_Gate
+    {
+        full_obs.observe_amagi_gated_community_gate();
+        ctx.has(Item::Amagi_Gated_Community_Gate)
+    }
+}
+pub fn observe_access_amagi_gated_community_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Gated_Community_Gate and Underwater_Movement
+    ({
+        full_obs.observe_amagi_gated_community_gate();
+        ctx.has(Item::Amagi_Gated_Community_Gate)
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }))
 }
 pub fn observe_access_amagi_stronghold_boulder_1(
     ctx: &Context,
@@ -22427,6 +22971,50 @@ pub fn observe_access_invoke_hookhover(
     // $hookhover
     hobserve__hookhover!(ctx, world, full_obs)
 }
+pub fn observe_access_invoke_hookhover_and_amagi_gated_community_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
+    ((hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_amagi_gated_community_gate();
+            ctx.has(Item::Amagi_Gated_Community_Gate)
+        }))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access_invoke_hookhover_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and Underwater_Movement
+    (hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+}
+pub fn observe_access_invoke_hookhover_and_underwater_movement_and_amagi_gated_community_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and Underwater_Movement and Amagi_Gated_Community_Gate
+    ((hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+        && ({
+            full_obs.observe_amagi_gated_community_gate();
+            ctx.has(Item::Amagi_Gated_Community_Gate)
+        }))
+}
 pub fn observe_access_invoke_hookhover_or_invoke_spin(
     ctx: &Context,
     world: &World,
@@ -22453,6 +23041,29 @@ pub fn observe_access_invoke_hover_and_anuman(
         && ({
             full_obs.observe_anuman();
             ctx.has(Item::Anuman)
+        }))
+}
+pub fn observe_access_invoke_hover_and_anuman_and_underwater_movement_and___boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and Anuman and Underwater_Movement and (Boomerang or Boomerang_Upgrade)
+    (((hobserve__hover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+        && ({
+            full_obs.observe_underwater_movement();
+            ctx.has(Item::Underwater_Movement)
+        }))
+        && ({
+            full_obs.observe_boomerang();
+            ctx.has(Item::Boomerang)
+        } || {
+            full_obs.observe_boomerang_upgrade();
+            ctx.has(Item::Boomerang_Upgrade)
         }))
 }
 pub fn observe_access_invoke_hover_and_invoke_hook(
@@ -25141,6 +25752,13 @@ pub fn observe_access_within_menu_gt_upgrade_menu(
         AreaId::Menu__Upgrade_Menu => true,
         _ => false,
     })
+}
+pub fn observe_action_amagi__gated_community__dur_esla__kill_dur_esla__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_dur_esla = true
 }
 pub fn observe_action_amagi__main_area__carving__key_combo__do(
     ctx: &Context,

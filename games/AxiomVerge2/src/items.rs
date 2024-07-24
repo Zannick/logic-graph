@@ -24,6 +24,7 @@ pub enum Item {
     None,
     Aansur,
     Amagi_Dragon_Eye_Passage,
+    Amagi_Gated_Community_Gate,
     Amagi_Stronghold_Boulder_1,
     Amagi_Stronghold_Boulder_2,
     Amagi_Stronghold_Boulder_And_Wall_2,
@@ -230,6 +231,7 @@ impl fmt::Display for Item {
             Item::None => write!(f, "{}", "None"),
             Item::Aansur => write!(f, "{}", "Aansur"),
             Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
+            Item::Amagi_Gated_Community_Gate => write!(f, "{}", "Amagi_Gated_Community_Gate"),
             Item::Amagi_Stronghold_Boulder_1 => write!(f, "{}", "Amagi_Stronghold_Boulder_1"),
             Item::Amagi_Stronghold_Boulder_2 => write!(f, "{}", "Amagi_Stronghold_Boulder_2"),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => {
@@ -468,6 +470,7 @@ impl std::str::FromStr for Item {
         match s {
             "Aansur" => Ok(Item::Aansur),
             "Amagi_Dragon_Eye_Passage" => Ok(Item::Amagi_Dragon_Eye_Passage),
+            "Amagi_Gated_Community_Gate" => Ok(Item::Amagi_Gated_Community_Gate),
             "Amagi_Stronghold_Boulder_1" => Ok(Item::Amagi_Stronghold_Boulder_1),
             "Amagi_Stronghold_Boulder_2" => Ok(Item::Amagi_Stronghold_Boulder_2),
             "Amagi_Stronghold_Boulder_And_Wall_2" => Ok(Item::Amagi_Stronghold_Boulder_And_Wall_2),

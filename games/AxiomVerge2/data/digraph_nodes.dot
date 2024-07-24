@@ -128,10 +128,26 @@
         }
         {
             Amagi__Gated_Community__East_17 [label = "", pos = "98.85,-27.666667!"];
+            Amagi__Gated_Community__Middle_East_Ledge [label = "", pos = "98.1,-27.916667!"];
+            Amagi__Gated_Community__Upper_East_Ledge [label = "", pos = "97.65,-26.0!"];
             Amagi__Gated_Community__East_18 [label = "", pos = "98.85,-29.5!"];
+            Amagi__Gated_Community__Button [label = "", pos = "97.95,-29.416667!"];
+            Amagi__Gated_Community__Dur_Esla [label = "", pos = "97.2,-29.583333!"];
+            Amagi__Gated_Community__Lower_Gate_East [label = "", pos = "96.3,-29.25!"];
+            Amagi__Gated_Community__Lower_Gate_West [label = "", pos = "95.85,-29.25!"];
+            Amagi__Gated_Community__Upper_Gate_East [label = "", pos = "96.3,-26.333333!"];
+            Amagi__Gated_Community__Upper_Gate_East_Mid_air [label = "", pos = "96.75,-26.0!"];
+            Amagi__Gated_Community__Upper_Gate_West [label = "", pos = "95.85,-26.333333!"];
             Amagi__Gated_Community__West_18 [label = "", pos = "93.15,-29.583333!"];
             Amagi__Gated_Community__West_16 [label = "", pos = "93.15,-26.666667!"];
+            Amagi__Gated_Community__Platform_1_West [label = "", pos = "94.2,-28.666667!"];
+            Amagi__Gated_Community__Platform_1_East [label = "", pos = "94.8,-28.666667!"];
             Amagi__Gated_Community__Platform_2_West [label = "", pos = "93.3,-27.833333!"];
+            Amagi__Gated_Community__Platform_2_East [label = "", pos = "93.9,-27.833333!"];
+            Amagi__Gated_Community__Platform_3_West [label = "", pos = "94.65,-27.5!"];
+            Amagi__Gated_Community__Platform_3_East [label = "", pos = "94.95,-27.5!"];
+            Amagi__Gated_Community__Upper_West_Ledge [label = "", pos = "93.9,-26.583333!"];
+            Amagi__Gated_Community__Upper_West_Hook_Point [label = "", pos = "94.2,-26.833333!"];
         }
         {
             Amagi__Grid_31_19__West [label = "", pos = "93.15,-31.166667!"];
@@ -2993,6 +3009,8 @@
             Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station [label = "", pos = "69.0,-28.333333!"];
             Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask [label = "", pos = "72.0,-28.333333!"];
             Menu__Kiengir_Map__MUS_A_M20_Flask [label = "", pos = "66.0,-26.666667!"];
+            Menu__Kiengir_Map__Amagi_Gated_Community_Button [label = "", pos = "96.0,-30.0!"];
+            Menu__Kiengir_Map__Amagi_Gated_Community_Flask [label = "", pos = "96.0,-26.666667!"];
             Menu__Kiengir_Map__Annuna_Mirror_Match_Flask [label = "", pos = "99.0,-43.333333!"];
             Menu__Kiengir_Map__Nano_Lattice_2 [label = "", pos = "105.0,-41.666667!"];
             Menu__Kiengir_Map__Lament_for_Fools [label = "", pos = "114.0,-40.0!"];
