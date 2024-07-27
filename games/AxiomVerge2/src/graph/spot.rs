@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2914] = [
+static SPOT_DEFS: [SpotDef; 2950] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -10286,6 +10286,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier_Breach__Floaters__Hidden,
+        loc_range: Some((LocationId::Glacier_Breach__Floaters__Hidden__Flask, LocationId::Glacier_Breach__Floaters__Hidden__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Glacier_Breach__Floaters__Hidden__ex__West_Save__Hidden_1, ExitId::Glacier_Breach__Floaters__Hidden__ex__West_Save__Hidden_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier_Breach__Floaters__West,
         loc_range: None,
         exit_range: Some((ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1, ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1)),
@@ -10604,6 +10610,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier_Breach__West_Save__Hidden,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__West_Save__Hidden__ex__Floaters__Hidden_1, ExitId::Glacier_Breach__West_Save__Hidden__ex__Floaters__Hidden_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier_Breach__West_Save__Save_Point,
         loc_range: None,
         exit_range: None,
@@ -10649,6 +10661,42 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         id: SpotId::Glacier_Breach__Zappers__West,
         loc_range: None,
         exit_range: Some((ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1, ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Angry_Guards__Corner,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Angry_Guards__Corner__ex__Middle_1, ExitId::Glacier__Angry_Guards__Corner__ex__Middle_1)),
+        action_range: Some((ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here, ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here)),
+    },
+    SpotDef {
+        id: SpotId::Glacier__Angry_Guards__East_11,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Angry_Guards__East_11__ex__Gate_1, ExitId::Glacier__Angry_Guards__East_11__ex__Ledge_Grab_Room__West_11_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Angry_Guards__East_12,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Angry_Guards__East_12__ex__Sliced_Cavern__West_12_1, ExitId::Glacier__Angry_Guards__East_12__ex__Sliced_Cavern__West_12_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Angry_Guards__Gate,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Angry_Guards__Gate__ex__East_11_1, ExitId::Glacier__Angry_Guards__Gate__ex__Ledge_Grab_Room__Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Angry_Guards__Middle,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Angry_Guards__Middle__ex__Corner_1, ExitId::Glacier__Angry_Guards__Middle__ex__Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Angry_Guards__Portal_Stand,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Angry_Guards__Portal_Stand__ex__Corner_1, ExitId::Glacier__Angry_Guards__Portal_Stand__ex__Middle_1)),
         action_range: None,
     },
     SpotDef {
@@ -11276,9 +11324,93 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         action_range: Some((ActionId::Glacier__Hammonds_End__West_11__Open_Doors, ActionId::Glacier__Hammonds_End__West_11__Open_Doors)),
     },
     SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__Center_Bottom,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__Center_Bottom__ex__West_Shaft_Hook_Point_1, ExitId::Glacier__Inner_Caverns__Center_Bottom__ex__West_Shaft_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__Northwest_Drone,
+        loc_range: Some((LocationId::Glacier__Inner_Caverns__Northwest_Drone__Item, LocationId::Glacier__Inner_Caverns__Northwest_Drone__Item)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__Northwest_Stone,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__Northwest_Stone__ex__Sliced_Cavern__Upper_Middle_1, ExitId::Glacier__Inner_Caverns__Northwest_Stone__ex__Sliced_Cavern__Upper_Middle_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__Southwest_Hill,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Sliced_Cavern__Cache_1, ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__West_Shaft_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__Southwest_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1, ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__West_12,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__West_12__ex__Sliced_Cavern__East_12_1, ExitId::Glacier__Inner_Caverns__West_12__ex__Sliced_Cavern__East_12_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__West_13,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__West_13__ex__Sliced_Cavern__East_13_1, ExitId::Glacier__Inner_Caverns__West_13__ex__Sliced_Cavern__East_13_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__West_13_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Bottom_1, ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__West_14,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__West_14__ex__Sliced_Cavern__East_14_1, ExitId::Glacier__Inner_Caverns__West_14__ex__Sliced_Cavern__East_14_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__West_Shaft_Bottom,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__West_Shaft_Bottom__ex__Northwest_Stone_1, ExitId::Glacier__Inner_Caverns__West_Shaft_Bottom__ex__Southwest_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Inner_Caverns__West_Shaft_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__Southwest_Ledge_1, ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__West_Shaft_Bottom_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__Lake_Main_Entrance__Bottom,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lake_Main_Entrance__Cache,
+        loc_range: Some((LocationId::Glacier__Lake_Main_Entrance__Cache__Flask, LocationId::Glacier__Lake_Main_Entrance__Cache__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lake_Main_Entrance__Close_Enough,
+        loc_range: Some((LocationId::Glacier__Lake_Main_Entrance__Close_Enough__Boomerang_Fast_Travel, LocationId::Glacier__Lake_Main_Entrance__Close_Enough__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lake_Main_Entrance__East_13,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Lake_Main_Entrance__East_13__ex__Sliced_Cavern__West_13_1, ExitId::Glacier__Lake_Main_Entrance__East_13__ex__Sliced_Cavern__West_13_1)),
         action_range: None,
     },
     SpotDef {
@@ -11374,7 +11506,7 @@ static SPOT_DEFS: [SpotDef; 2914] = [
     SpotDef {
         id: SpotId::Glacier__Ledge_Grab_Room__Gate,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1, ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1)),
+        exit_range: Some((ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1, ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1)),
         action_range: None,
     },
     SpotDef {
@@ -11459,6 +11591,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         id: SpotId::Glacier__Ledge_Grab_Room__Upper_at_Wall,
         loc_range: None,
         exit_range: Some((ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1, ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Ledge_Grab_Room__West_11,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Angry_Guards__East_11_1, ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Gate_2)),
         action_range: None,
     },
     SpotDef {
@@ -11697,6 +11835,54 @@ static SPOT_DEFS: [SpotDef; 2914] = [
     },
     SpotDef {
         id: SpotId::Glacier__Secret_Chamber__East_11,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__Cache,
+        loc_range: Some((LocationId::Glacier__Sliced_Cavern__Cache__Note, LocationId::Glacier__Sliced_Cavern__Cache__Note)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__East_12,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Sliced_Cavern__East_12__ex__Inner_Caverns__West_12_1, ExitId::Glacier__Sliced_Cavern__East_12__ex__Inner_Caverns__West_12_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__East_13,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Sliced_Cavern__East_13__ex__Inner_Caverns__West_13_1, ExitId::Glacier__Sliced_Cavern__East_13__ex__Inner_Caverns__West_13_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__East_14,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Sliced_Cavern__East_14__ex__Inner_Caverns__West_14_1, ExitId::Glacier__Sliced_Cavern__East_14__ex__Inner_Caverns__West_14_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__Upper_Middle,
+        loc_range: Some((LocationId::Glacier__Sliced_Cavern__Upper_Middle__Health, LocationId::Glacier__Sliced_Cavern__Upper_Middle__Health)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__West_12,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Sliced_Cavern__West_12__ex__Angry_Guards__East_12_1, ExitId::Glacier__Sliced_Cavern__West_12__ex__Angry_Guards__East_12_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__West_13,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Sliced_Cavern__West_13__ex__Glacier__Lake_Main_Entrance__East_13_1, ExitId::Glacier__Sliced_Cavern__West_13__ex__Glacier__Lake_Main_Entrance__East_13_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Sliced_Cavern__West_Rock,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -14138,6 +14324,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__GlB_Floaters,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__GlB_Grate_Flask,
         loc_range: None,
         exit_range: None,
@@ -15182,6 +15374,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Angry_Guards_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Glacier_Dock_Flask,
         loc_range: None,
         exit_range: None,
@@ -15189,6 +15387,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Lake_Main_Entrance_Flask,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -15207,6 +15411,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Glacier_Sea_Burial_Health,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Sliced_Cavern_Health,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -15399,6 +15609,12 @@ static SPOT_DEFS: [SpotDef; 2914] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Royal_Ring,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Sagiga_on_the_Worldstream,
         loc_range: None,
         exit_range: None,
         action_range: None,

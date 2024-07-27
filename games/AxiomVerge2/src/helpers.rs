@@ -2343,7 +2343,7 @@ macro_rules! hobserve__attract {
 }
 
 /// $all_notes (  )
-/// [Aansur, Becoming_An_Arm, Beware_the_Patternmind, Bounty_List, Building_of_the_School, Commemorative_Speech,  Companies_Layoff, Dangerous_Ideas, Dear_Ernest, Destruction_Pogrom, Dr_Gloria, Family_Tragedy, Forbidden_Knowledge,  Freedom_from_Aansur, Goodbye, Heretics_Granddaughter, Heretics_Tablet, Journal_2049_10_29, Kazakh_Assault,  Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,  Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,  Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege]
+/// [Aansur, Becoming_An_Arm, Beware_the_Patternmind, Bounty_List, Building_of_the_School, Commemorative_Speech,  Companies_Layoff, Dangerous_Ideas, Dear_Ernest, Destruction_Pogrom, Dr_Gloria, Family_Tragedy, Forbidden_Knowledge,  Freedom_from_Aansur, Goodbye, Heretics_Granddaughter, Heretics_Tablet, Journal_2049_10_29, Kazakh_Assault,  Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,  Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,  Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Sagiga_on_the_Worldstream]
 #[macro_export]
 macro_rules! helper__all_notes {
     ($ctx:expr, $world:expr) => {{
@@ -2382,6 +2382,7 @@ macro_rules! helper__all_notes {
             && $ctx.has(Item::The_Ideal_Kiengir)
             && $ctx.has(Item::The_Student)
             && $ctx.has(Item::Under_Siege)
+            && $ctx.has(Item::Sagiga_on_the_Worldstream)
     }};
 }
 #[macro_export]
@@ -2701,6 +2702,15 @@ macro_rules! hexplain__all_notes {
                 (h, vec!["Under_Siege"])
             };
             refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
+                let h = $ctx.has(Item::Sagiga_on_the_Worldstream);
+                $edict.insert("Sagiga_on_the_Worldstream", format!("{}", h));
+                (h, vec!["Sagiga_on_the_Worldstream"])
+            };
+            refs.append(&mut h.1);
             (h.0, refs)
         }
     }};
@@ -2813,16 +2823,19 @@ macro_rules! hobserve__all_notes {
         }) && ({
             $full_obs.observe_under_siege();
             $ctx.has(Item::Under_Siege)
+        }) && ({
+            $full_obs.observe_sagiga_on_the_worldstream();
+            $ctx.has(Item::Sagiga_on_the_Worldstream)
         })
     }};
 }
 
 /// $all_flasks (  )
-/// [Flask{43}, Big_Flask{21}]
+/// [Flask{43}, Big_Flask{23}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 43 && $ctx.count(Item::Big_Flask) >= 21
+        $ctx.count(Item::Flask) >= 43 && $ctx.count(Item::Big_Flask) >= 23
     }};
 }
 #[macro_export]
@@ -2842,7 +2855,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 21, vec!["Big_Flask count"])
+                (ct >= 23, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2856,8 +2869,8 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(43));
             $ctx.count(Item::Flask) >= 43
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(21));
-            $ctx.count(Item::Big_Flask) >= 21
+            $full_obs.observe_big_flask(IntegerObservation::Ge(23));
+            $ctx.count(Item::Big_Flask) >= 23
         })
     }};
 }

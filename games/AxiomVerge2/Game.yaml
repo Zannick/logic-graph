@@ -359,11 +359,11 @@ helpers:  # MARK: helpers
      Freedom_from_Aansur, Goodbye, Heretics_Granddaughter, Heretics_Tablet, Journal_2049_10_29, Kazakh_Assault,
      Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,
      Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
-     Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege]
+     Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Sagiga_on_the_Worldstream]
   # TODO: can we check canon visits rather than reserve an i8?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{43}, Big_Flask{21}]
+    [Flask{43}, Big_Flask{23}]
   $all_health:itemList: >
     [Health_Node{4}, Health_Fragment{19}]
   $all_weapons:itemList: >

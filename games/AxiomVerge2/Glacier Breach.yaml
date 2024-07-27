@@ -374,6 +374,8 @@ areas:
 
 - name: Floaters  # MARK: Floaters
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Breach Map > GlB Floaters
   spots:
     - name: East
       coord: [33.9, 11.7]
@@ -389,6 +391,28 @@ areas:
       exits:
         - to: West Save > East 12
           tags: [xdoor]
+    - name: Hidden
+      coord: [33.2, 11.35]
+      locations:
+        - name: Flask
+          canon: Glacier_Breach_Floaters_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Glacier_Breach_Floaters_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Glacier_Breach_Floaters_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: West Save > Hidden
+          movement: base
+          penalty_tags: [xshift, -base.1]
 
 - name: West Save  # MARK: West Save
   on_entry: $reset_old_area(^newpos)
@@ -410,6 +434,8 @@ areas:
           tags: [xdoor]
     - name: Save Point
       coord: [32.525, 11.6]
+      data:
+        flipside: Glacier > Angry Guards > Portal Stand
       local:
         - to: East 12
         - to: West Nub
@@ -470,6 +496,14 @@ areas:
       exits:
         - to: Spidery Connector > East
           tags: [xdoor]
+    - name: Hidden
+      coord: [32.9, 11.35]
+      data:
+        flipside: Glacier > Angry Guards > Corner
+      exits:
+        - to: Floaters > Hidden
+          movement: base
+          penalty_tags: [xshift, -base.1]
 
 - name: Guarded Corridor  # MARK: Guarded Corridor
   on_entry: $reset_old_area(^newpos)

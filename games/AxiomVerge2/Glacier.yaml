@@ -1734,6 +1734,27 @@ areas:
         - to: West End
           req: $grab
           time: 3.1
+        - to: West 11
+          req: Nanite_Mist
+          movement: mist1
+        - to: West 11
+          req: $mist2
+          movement: mist2
+        - to: Angry Guards > Gate
+          req: $mist2
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+    - name: West 11
+      coord: [33.05, 10.85]
+      exits:
+        - to: Angry Guards > East 11
+          tags: [xshift]
+        - to: Gate
+          req: Nanite_Mist
+          movement: mist1
+        - to: Gate
+          req: $mist2
+          movement: mist2
 
     - name: West End
       coord: [33.3, 9.8]
@@ -2151,6 +2172,11 @@ areas:
 
 - name: Lake Main Entrance  # MARK: Lake Main Entrance
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [32, 12, 33, 13]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Glacier Lake Main Entrance Flask
   spots:
     - name: Ebih Access
       coord: [31.05, 12.7]
@@ -2248,6 +2274,60 @@ areas:
       exits:
         - to: Amagi > Main Area > East 15
           tags: [xshift]
+
+    - name: East 13
+      coord: [32.95, 12.7]
+      local:
+        - to: Close Enough
+          jumps: 1
+      exits:
+        - to: Sliced Cavern > West 13
+          tags: [xshift]
+    - name: Close Enough
+      coord: [32.75, 12.4]
+      local:
+        - to: Cache
+          jumps: 1
+        - to: East 13
+      locations:
+        - name: Shockwave Flask
+          canon: Glacier_Lake_Main_Entrance_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Boomerang Flask
+          canon: Glacier_Lake_Main_Entrance_Flask
+          item: Big_Flask
+          req: $boomerang
+          tags: [remote_flask]
+        - name: Boomerang Fast Travel
+          canon: Glacier_Lake_Main_Entrance_Flask
+          item: Big_Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [throw]
+    - name: Cache
+      coord: [32.6, 12.3]
+      local:
+        - to: Close Enough
+      locations:
+        - name: Flask
+          canon: Glacier_Lake_Main_Entrance_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Glacier_Lake_Main_Entrance_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Glacier_Lake_Main_Entrance_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
 
 - name: Apocalypse Entry  # MARK: Apocalypse Entry
   on_entry: $reset_old_area(^newpos)
@@ -2812,3 +2892,318 @@ areas:
       coord: [38.95, 9.75]
     - name: East 11
       coord: [38.95, 10.7]
+
+- name: Angry Guards  # MARK: Angry Guards
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    portal: [32, 11, 33, 12]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Glacier Angry Guards Portal
+  spots:
+    - name: East 11
+      coord: [32.95, 10.85]
+      exits:
+        - to: Ledge Grab Room > West 11
+          tags: [xshift]
+        - to: Gate
+          req: Nanite_Mist
+          movement: mist1
+        - to: Gate
+          req: $mist2
+          movement: mist2
+    - name: Gate
+      coord: [32.85, 10.85]
+      local:
+        - to: Middle
+      exits:
+        - to: Ledge Grab Room > Gate
+          req: $mist2
+          movement: mist2
+        - to: East 11
+          req: Nanite_Mist
+          movement: mist1
+        - to: East 11
+          req: $mist2
+          movement: mist2
+    - name: Middle
+      coord: [32.7, 11.1]
+      local:
+        - to: Portal Stand
+        - to: East 12
+      exits:
+        - to: Gate
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Corner
+          req: $hook or $hover
+          movement: base
+    - name: Corner
+      coord: [32.9, 11.35]
+      data:
+        flipside: Glacier Breach > West Save > Hidden
+      local:
+        - to: Portal Stand
+        - to: East 12
+          thru: [32.8, 11.45]
+      exits:
+        - to: Middle
+          req: $hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Move Portal Here
+          req: Breach_Attractor and ^mode == 'drone' and ^indra WITHIN (`Glacier > Grid 39-40,7-9`, `Glacier > Revival`, `Glacier > Dock Outside`) and ^portal == ^portal_start
+          do: ^portal = ^position
+          time: 0.1
+          penalties:
+            - calc: $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * 0.5
+    - name: Portal Stand
+      coord: [32.525, 11.6]
+      data:
+        flipside: Glacier Breach > West Save > Save Point
+      local:
+        - to: East 12
+      exits:
+        - to: Middle
+          req: $hookhover
+          movement: base
+          jumps: 4
+        - to: Corner
+          req: $hook or $hover
+          movement: base
+          jumps: 1
+    - name: East 12
+      coord: [32.95, 11.7]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Corner
+          req: $hook
+          movement: base
+          jumps: 3
+      exits:
+        - to: Sliced Cavern > West 12
+          tags: [xshift]
+
+- name: Sliced Cavern  # MARK: Sliced Cavern
+  on_entry: $reset_old_area(^newpos)
+  map:
+    health: [33, 11, 34, 12]
+    note: [33, 13, 34, 14]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Glacier Sliced Cavern Health
+      note: Menu > Kiengir Map > Sagiga on the Worldstream
+  spots:
+    - name: West 12
+      coord: [33.05, 11.7]
+      local:
+        - to: Upper Middle
+      exits:
+        - to: Angry Guards > East 12
+          tags: [xshift]
+    - name: Upper Middle
+      coord: [33.525, 11.9]
+      local:
+        - to: West 12
+          jumps: 3
+        - to: East 12
+          jumps: 3
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: East 12
+      coord: [33.95, 11.7]
+      local:
+        - to: Upper Middle
+      exits:
+        - to: Inner Caverns > West 12
+          tags: [xshift]
+
+    - name: West 13
+      coord: [33.05, 12.6]
+      local:
+        - to: East 13
+          jumps: 1
+      exits:
+        - to: Glacier > Lake Main Entrance > East 13
+          tags: [xshift]
+    - name: East 13
+      coord: [33.95, 12.7]
+      local:
+        - to: West 13
+          jumps: 1
+      exits:
+        - to: Inner Caverns > West 13
+          tags: [xshift]
+    - name: West Rock
+      coord: [33.25, 12.75]
+      local:
+        - to: West 13
+          jumps: 1
+
+    - name: Cache
+      coord: [33.7, 13.35]
+      local:
+        - to: East 14
+      locations:
+        - name: Note
+          item: Sagiga_on_the_Worldstream
+          tags: [standing]
+    - name: East 14
+      coord: [33.95, 13.7]
+      local:
+        - to: Cache
+          thru: [33.8, 13.5]
+          jumps: [2, 1]
+      exits:
+        - to: Inner Caverns > West 14
+          tags: [xshift]
+
+- name: Inner Caverns  # MARK: Inner Caverns
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 12
+      coord: [34.05, 11.7]
+      local:
+        - to: Northwest Drone
+      exits:
+        - to: Sliced Cavern > East 12
+          tags: [xshift]
+    - name: Northwest Drone
+      coord: [34.25, 11.75]
+      local:
+        - to: West 12
+          jumps: 1
+        - to: Northwest Stone
+          jumps: 1
+      locations:
+        - name: Item
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+    - name: Northwest Stone
+      coord: [34.5, 11.7]
+      local:
+        - to: Northwest Drone
+        - to: West Shaft Bottom
+        - to: West Shaft Hook Point
+          thru: [34.7, 12.8]
+      exits:
+        - to: Sliced Cavern > Upper Middle
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: West Shaft Bottom
+      coord: [34.75, 12.85]
+      local:
+        - to: West Shaft Hook Point
+      exits:
+        - to: Northwest Stone
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Southwest Ledge
+          req: $hook or $hover
+          movement: base
+    - name: West Shaft Hook Point
+      coord: [34.55, 13.3]
+      local:
+        - to: Southwest Hill
+        - to: Center Bottom
+      exits:
+        - to: Southwest Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: West Shaft Bottom
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Southwest Ledge
+      coord: [34.35, 13.2]
+      local:
+        - to: Southwest Hill
+      exits:
+        - to: West 13
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: West 13 Hook Point
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: West 13
+          req: $grab
+          movement: base
+          jumps: 3
+    - name: West 13 Hook Point
+      coord: [34.25, 12.8]
+      local:
+        - to: Southwest Ledge
+        - to: Center Bottom
+      exits:
+        - to: Sliced Cavern > West Rock
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+      exits:
+        - to: West Shaft Hook Point
+          req: $hover
+          movement: base
+        - to: West Shaft Bottom
+          req: $hookhover
+          movement: base
+    - name: West 13
+      coord: [34.05, 12.7]
+      local:
+        - to: Southwest Ledge
+        - to: West 13 Hook Point
+      exits:
+        - to: Sliced Cavern > East 13
+          tags: [xshift]
+
+    - name: Southwest Hill
+      coord: [34.3, 13.55]
+      local:
+        - to: West 14
+        - to: Center Bottom
+      exits:
+        - to: Sliced Cavern > Cache
+          req: $hover
+          movement: base
+          jumps: 2
+          penalty_tags: [xshift, -base.1]
+        - to: Southwest Ledge
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 1
+        - to: West Shaft Hook Point
+          req: $hookhover
+          movement: base
+          jumps: 1
+    - name: West 14
+      coord: [34.05, 13.7]
+      local:
+        - to: Southwest Hill
+          jumps: 2
+      exits:
+        - to: Sliced Cavern > East 14
+          tags: [xshift]
+
+    - name: Center Bottom
+      coord: [34.85, 13.75]
+      local:
+        - to: Southwest Hill
+          jumps: 1
+      exits:
+        - to: West Shaft Hook Point
+          req: $hookhover
+          movement: base
+          jumps: 2

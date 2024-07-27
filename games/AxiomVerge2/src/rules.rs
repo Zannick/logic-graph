@@ -2295,6 +2295,10 @@ pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &World) 
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_invoke_hook_or___anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
+    // $hook or (Anuman and $grab)
+    (helper__hook!(ctx, world) || (ctx.has(Item::Anuman) && helper__grab!(ctx, world)))
+}
 pub fn access_invoke_hook_or___invoke_grab_and_anuman(ctx: &Context, world: &World) -> bool {
     // $hook or ($grab and Anuman)
     (helper__hook!(ctx, world) || (helper__grab!(ctx, world) && ctx.has(Item::Anuman)))
@@ -13029,6 +13033,46 @@ pub fn explain_invoke_hook_and_underwater_movement(
         }
     }
 }
+pub fn explain_invoke_hook_or___anuman_and_invoke_grab(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook or (Anuman and $grab)
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                        edict.insert("$grab", format!("{:?}", res));
+                        refs.push("$grab");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_or___invoke_grab_and_anuman(
     ctx: &Context,
     world: &World,
@@ -22930,6 +22974,18 @@ pub fn observe_access_invoke_hook_and_underwater_movement(
             full_obs.observe_underwater_movement();
             ctx.has(Item::Underwater_Movement)
         }))
+}
+pub fn observe_access_invoke_hook_or___anuman_and_invoke_grab(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook or (Anuman and $grab)
+    (hobserve__hook!(ctx, world, full_obs)
+        || ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        } && (hobserve__grab!(ctx, world, full_obs))))
 }
 pub fn observe_access_invoke_hook_or___invoke_grab_and_anuman(
     ctx: &Context,

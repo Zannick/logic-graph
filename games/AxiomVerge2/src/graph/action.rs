@@ -156,6 +156,7 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__South__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
+            ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world),
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::access_invoke_open_and_invoke_range2(ctx, world),
@@ -315,6 +316,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::observe_access_giguna__west_caverns__east_susar__hack__req(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::observe_access_giguna_breach__sw_save__west_11__open_door__req(ctx, world, full_obs),
+            ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::observe_access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
@@ -359,6 +361,13 @@ impl world::Accessible for Action {
         self.time
             + match self.id {
                 ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
+                    if true {
+                        (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
+                    } else {
+                        0
+                    }
+                }
+                ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
                     if true {
                         (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
                     } else {
@@ -1270,6 +1279,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
+                let (ret, mut tags) = rules::explain_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1762,6 +1780,7 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::action_glacier__hammonds_end__switch_from_ledge__open_doors__do(ctx, world),
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__hammonds_end__switch_near__open_doors__do(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
+            ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::action_mode_set_drone(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => rules::action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world),
@@ -2351,6 +2370,9 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
                 rules::observe_action_glacier__hammonds_end__west_11__open_doors__do(ctx, world, full_obs);
             }
+            ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
+                rules::observe_action_portal_set_position(ctx, world, full_obs);
+            }
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => {
                 rules::observe_action_mode_set_drone(ctx, world, full_obs);
             }
@@ -2436,7 +2458,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 185] = [
+static ACT_DEFS: [Action; 186] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -3123,6 +3145,11 @@ static ACT_DEFS: [Action; 185] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here,
+        time: 100,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone,
         time: 1500,
         price: Currency::Free,
@@ -3508,6 +3535,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
         ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_Near,
         ActionId::Glacier__Hammonds_End__West_11__Open_Doors => SpotId::Glacier__Hammonds_End__West_11,
+        ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => SpotId::Glacier__Angry_Guards__Corner,
         ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => SpotId::Interior__Observatory__East_Staircase_Top,
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Middle,
         ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => SpotId::Interior__Facility_Interior__Freight_Elevator,
