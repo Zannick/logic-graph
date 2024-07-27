@@ -686,7 +686,6 @@ pub fn unused_item(id: Item) -> bool {
     matches!(
         id,
         Item::None
-            | Item::Drone_Melee_Damage_3
             | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5
             | Item::Infection_Speed_2

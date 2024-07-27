@@ -76,6 +76,7 @@ pub enum OneObservation {
     CBits7{ mask: flags::ContextBits7, result: flags::ContextBits7 },
     CBits8{ mask: flags::ContextBits8, result: flags::ContextBits8 },
     CBits9{ mask: flags::ContextBits9, result: flags::ContextBits9 },
+    CBits10{ mask: flags::ContextBits10, result: flags::ContextBits10 },
 }
 
 impl OneObservation {
@@ -139,6 +140,7 @@ impl OneObservation {
             OneObservation::CBits7{ mask, result } => (ctx.cbits7 & mask) == result,
             OneObservation::CBits8{ mask, result } => (ctx.cbits8 & mask) == result,
             OneObservation::CBits9{ mask, result } => (ctx.cbits9 & mask) == result,
+            OneObservation::CBits10{ mask, result } => (ctx.cbits10 & mask) == result,
         }
     }
 }
@@ -177,6 +179,7 @@ pub struct FullObservation {
     cbits7: flags::ContextBits7,
     cbits8: flags::ContextBits8,
     cbits9: flags::ContextBits9,
+    cbits10: flags::ContextBits10,
     pub strict: bool,
 }
 
@@ -369,7 +372,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Upgraded_Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Upgraded_Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
+                self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
@@ -536,10 +539,13 @@ impl Observer for FullObservation {
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_BREACH_SIGHT);
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam_With_Strong_Drone | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_IRIKAR_GUDAM);
             }
-            LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask | LocationId::Irikar__Midwest__Right_Platform_Start__Flask => {
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Boss_Reward => {
+                self.cbits6.insert(flags::ContextBits6::VISITED_IRIKAR_GUDAM_FLASK);
+            }
+            LocationId::Irikar__Midwest__Left_Platform_Dest__Shockwave_Flask | LocationId::Irikar__Midwest__Right_Platform_Start__Flask | LocationId::Irikar__Midwest__Right_Platform_Start__Flask_Collection_Skip | LocationId::Irikar__Midwest__Right_Platform_Start__Flask_Fast_Travel => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_IRIKAR_MIDWEST_FLASK);
             }
             LocationId::Irikar__Beach_Save__Top_Platform__Urn | LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn => {
@@ -552,7 +558,7 @@ impl Observer for FullObservation {
                 self.cbits9.insert(flags::ContextBits9::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK);
             }
             LocationId::Uhrum_Breach__West_Glitch__Narrow_Glitch__Break_Through_Glitch | LocationId::Uhrum_Breach__West_Glitch__Past_Glitch__Break_Through_Glitch => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_UHRUM_WEST_GLITCH);
+                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_GLITCH);
             }
             LocationId::Uhrum_Breach__East_Glitch__Glitch_West__Break_Through_Glitch | LocationId::Uhrum_Breach__East_Glitch__Glitch_East__Break_Through_Glitch => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_UHRUM_EAST_GLITCH);
@@ -618,13 +624,13 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM);
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL);
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Defeat_MUS_A_M20 => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__DEFEAT_MUS_A_M20);
             }
             LocationId::Amagi__West_Lake__Cavern_Rear_Pillar__Boss_Reward => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REAR_PILLAR__BOSS_REWARD);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REAR_PILLAR__BOSS_REWARD);
             }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER);
@@ -789,7 +795,7 @@ impl Observer for FullObservation {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_EAST__WAY_UP_HIGH__ITEM);
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
             }
             LocationId::Giguna__West_Tower__Top__Tablet => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
@@ -834,7 +840,7 @@ impl Observer for FullObservation {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__MURAL__NW_CACHE__NOTE);
             }
             LocationId::Giguna__Mural__Pedestal__Item => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
             }
             LocationId::Giguna__Separator__Switch__Separation => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
@@ -938,9 +944,6 @@ impl Observer for FullObservation {
             LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BASEMENT_PIPES__HIGH_PIPE__TABLET);
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BOSS_ROOM__BULLS_FEET__BOSS_REWARD);
-            }
             LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH);
             }
@@ -1011,7 +1014,7 @@ impl Observer for FullObservation {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
@@ -2602,6 +2605,9 @@ impl Observer for FullObservation {
             if !self.cbits9.is_empty() {
                 vec.push(OneObservation::CBits9{ mask: self.cbits9, result: self.cbits9 & ctx.cbits9 });
             }
+            if !self.cbits10.is_empty() {
+                vec.push(OneObservation::CBits10{ mask: self.cbits10, result: self.cbits10 & ctx.cbits10 });
+            }
         vec
     }
 }
@@ -2635,6 +2641,7 @@ impl FullObservation {
         if !self.cbits7.is_empty() { fields += 1; }
         if !self.cbits8.is_empty() { fields += 1; }
         if !self.cbits9.is_empty() { fields += 1; }
+        if !self.cbits10.is_empty() { fields += 1; }
         fields
     }
 
@@ -3514,6 +3521,12 @@ impl FullObservation {
     pub fn clear_drone_melee_damage_2(&mut self) {
         self.cbits3.remove(flags::ContextBits3::DRONE_MELEE_DAMAGE_2);
     }
+    pub fn observe_drone_melee_damage_3(&mut self) {
+        self.cbits3.insert(flags::ContextBits3::DRONE_MELEE_DAMAGE_3);
+    }
+    pub fn clear_drone_melee_damage_3(&mut self) {
+        self.cbits3.remove(flags::ContextBits3::DRONE_MELEE_DAMAGE_3);
+    }
     pub fn observe_drone_melee_speed(&mut self) {
         self.cbits3.insert(flags::ContextBits3::DRONE_MELEE_SPEED);
     }
@@ -3905,10 +3918,10 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::HERETICS_GRANDDAUGHTER);
     }
     pub fn observe_heretics_tablet(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::HERETICS_TABLET);
+        self.cbits4.insert(flags::ContextBits4::HERETICS_TABLET);
     }
     pub fn clear_heretics_tablet(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::HERETICS_TABLET);
+        self.cbits4.remove(flags::ContextBits4::HERETICS_TABLET);
     }
     pub fn observe_ice_axe(&mut self) {
         self.cbits4.insert(flags::ContextBits4::ICE_AXE);
@@ -4299,10 +4312,10 @@ impl FullObservation {
         self.cbits4.remove(flags::ContextBits4::THE_STUDENT);
     }
     pub fn observe_udusan(&mut self) {
-        self.cbits4.insert(flags::ContextBits4::UDUSAN);
+        self.cbits5.insert(flags::ContextBits5::UDUSAN);
     }
     pub fn clear_udusan(&mut self) {
-        self.cbits4.remove(flags::ContextBits4::UDUSAN);
+        self.cbits5.remove(flags::ContextBits5::UDUSAN);
     }
     pub fn observe_uhrum_annuna_corridor_block(&mut self) {
         self.cbits5.insert(flags::ContextBits5::UHRUM_ANNUNA_CORRIDOR_BLOCK);
@@ -4610,6 +4623,10 @@ pub enum ObservationMatcher {
         mask: flags::ContextBits9,
         matcher: LookupMatcher<Node<Self>, flags::ContextBits9, SolutionSuffix<Context>>,
     },
+    LookupCBits10 {
+        mask: flags::ContextBits10,
+        matcher: LookupMatcher<Node<Self>, flags::ContextBits10, SolutionSuffix<Context>>,
+    },
 }
 
 impl Default for ObservationMatcher {
@@ -4856,6 +4873,10 @@ impl MatcherDispatch for ObservationMatcher {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits9 { mask, matcher })
             }
+            &OneObservation::CBits10{ mask, result } => {
+                let (node, matcher) = LookupMatcher::new_with(result);
+                (node, ObservationMatcher::LookupCBits10 { mask, matcher })
+            }
         }
     }
 
@@ -4919,6 +4940,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits7 { matcher, .. } => matcher.clear(),
             Self::LookupCBits8 { matcher, .. } => matcher.clear(),
             Self::LookupCBits9 { matcher, .. } => matcher.clear(),
+            Self::LookupCBits10 { matcher, .. } => matcher.clear(),
         }
     }
 
@@ -4982,6 +5004,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits7 { mask, matcher } => matcher.lookup(val.cbits7 & *mask),
             Self::LookupCBits8 { mask, matcher } => matcher.lookup(val.cbits8 & *mask),
             Self::LookupCBits9 { mask, matcher } => matcher.lookup(val.cbits9 & *mask),
+            Self::LookupCBits10 { mask, matcher } => matcher.lookup(val.cbits10 & *mask),
         }
     }
 
@@ -5045,6 +5068,7 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::LookupCBits7 { mask, matcher }, OneObservation::CBits7 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             (Self::LookupCBits8 { mask, matcher }, OneObservation::CBits8 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             (Self::LookupCBits9 { mask, matcher }, OneObservation::CBits9 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
+            (Self::LookupCBits10 { mask, matcher }, OneObservation::CBits10 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             _ => None,
         }
     }
@@ -5109,6 +5133,7 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::LookupCBits7 { mask, matcher }, OneObservation::CBits7 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             (Self::LookupCBits8 { mask, matcher }, OneObservation::CBits8 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             (Self::LookupCBits9 { mask, matcher }, OneObservation::CBits9 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
+            (Self::LookupCBits10 { mask, matcher }, OneObservation::CBits10 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             _ => (),
         }
     }
@@ -5173,6 +5198,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits7 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits8 { matcher, .. } => matcher.nodes(),
             Self::LookupCBits9 { matcher, .. } => matcher.nodes(),
+            Self::LookupCBits10 { matcher, .. } => matcher.nodes(),
         }
     }
 
@@ -5236,6 +5262,7 @@ impl MatcherDispatch for ObservationMatcher {
             Self::LookupCBits7 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits8 { matcher, .. } => matcher.num_values(),
             Self::LookupCBits9 { matcher, .. } => matcher.num_values(),
+            Self::LookupCBits10 { matcher, .. } => matcher.num_values(),
         }
     }
 }

@@ -742,6 +742,12 @@ areas:
           req: $hook
           movement: base
           jumps: 1
+      actions:
+        - name: Throw Drone and Hover
+          req: $can_deploy and Drone_Hover
+          do: $deploy_drone
+          to: Lower Hallway West
+          movement: fast_hover
     - name: Lower Hallway West
       coord: [10.2, 25.8]
       local:
@@ -1470,7 +1476,13 @@ areas:
           item: Irikar_Gudam
           canon: Irikar_Gudam
           req: $can_damage
-          time: 20  # around 10s with fully upgraded drone + 3s explode animation
+          time: 20  # including 3s explode animation
+        - name: Defeat Gudam With Strong Drone
+          item: Irikar_Gudam
+          canon: Irikar_Gudam
+          req: ^mode == 'drone' and Drone_Melee_Damage_3 and Drone_Melee_Speed_2 and Infect
+          price: 100
+          time: 10
         - name: Shockwave Gudam
           item: Irikar_Gudam
           canon: Irikar_Gudam
@@ -1480,8 +1492,15 @@ areas:
           tags: [shockwave]
         - name: Boss Reward
           item: Big_Flask
+          canon: Irikar_Gudam_Flask
           req: Irikar_Gudam
           tags: [flask]
+        - name: Shockwave Boss Reward
+          item: Big_Flask
+          canon: Irikar_Gudam_Flask
+          req: Irikar_Gudam and $shockwave
+          price: 100
+          tags: [shockwave]
       # TODO: is it possible to climb up as drone?
     - name: East 28
       coord: [16.95, 27.7]
@@ -1742,6 +1761,18 @@ areas:
           canon: Irikar_Midwest_Flask
           item: Big_Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Irikar_Midwest_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Irikar_Midwest_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       actions:
         - name: Hack and Ride Platform
           req: not ^_right_platform and $activate

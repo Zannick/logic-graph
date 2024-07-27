@@ -9,14 +9,10 @@
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
 * Collect Flask from Glacier > Vertical Room > Peak > Flask
 ! Do Ebih > Base Camp > Save Point > Save
-* Collect Companies_Layoff from Interior > Tent Interior > Desk > Note
-* Collect Record_Losses from Interior > Garage > Boxes > Under Boxes
 * Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
 ! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
 ! Do Ebih > Ebih East > Moving Platform > Activate Ride
 * Collect Under_Siege from Ebih > Ebih East > East Ledge > Note
-* Collect Terminal_Breakthrough_1 from Ebih > Grid 26,10-11 > Ledge > Note
-* Collect Flask from Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
 ! Do Ebih > Drone Room > Portal Exit > Activate Platform
 * Collect Remote_Drone from Ebih > Drone Room > Middle Platform > Urn Quick Grab ==> Ebih > Drone Room > Portal
 ! Do Ebih > Drone Room > Pit Left > Activate Lift
@@ -231,4 +227,112 @@
 * Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn
 * Collect Flask from Ebih Breach > Rocky Cages > Cage Bottom > Flask Fast Travel ==> Menu > Breach Map > MEB Rocky Cages Flask
 
-# Next: Glacier Breach hidden flask
+# Section "Lower Ebih Cleanup"
+! Do Glacier > Angry Guards > Corner > Move Portal Here
+* Collect Big_Flask from Glacier Breach > Floaters > Hidden > Flask
+* Collect Health_Fragment from Glacier > Sliced Cavern > Upper Middle > Health
+* Collect Sagiga_on_the_Worldstream from Glacier > Sliced Cavern > Cache > Note
+* Collect Big_Flask from Glacier > Lake Main Entrance > Cache > Flask
+* Collect Nano_Points from Menu > Upgrade Menu > Infection > Nano Points 1
+* Collect Nano_Points_2 from Menu > Upgrade Menu > Infection > Nano Points 2
+* Collect Nano_Points_3 from Menu > Upgrade Menu > Infection > Nano Points 3
+* Collect Drone_Melee_Damage_2 from Menu > Upgrade Menu > Drone > Drone Melee Damage 2
+* Collect Drone_Melee_Speed from Menu > Upgrade Menu > Drone > Drone Melee Speed 1
+* Collect Melee_Damage from Menu > Upgrade Menu > Combat > Melee Damage 1
+  ExitMenuWarp
+! Do Recall Fast Travel
+
+* Collect Health_Fragment from Ebih > Base Camp > Top Platform > Item
+! Do Ebih > Base Camp > Top Platform > Throw Drone and Drop
+* Collect Health_Fragment from Glacier > Peak > Bird's Eye > Item
+! Do Recall Drone
+* Collect Melee_Charge from Interior > Building Interior > Entry > Urn Collection Skip ==> Ebih > Base Camp > Building Entry
+* Collect Companies_Layoff from Interior > Tent Interior > Desk > Note
+  Move... to Ebih > By Garage > Crawlspace Opening
+! Do Deploy Drone
+* Collect Health_Fragment from Ebih > By Garage > Crawlspace > Fragment
+* Collect Record_Losses from Interior > Garage > Boxes > Under Boxes
+! Do Recall Drone
+  Move... to Ebih > By Garage > East Bush
+! Do Deploy Drone
+! Do Ebih > Truck Gate > Switch > Open Door
+* Collect Power_Matrix from Ebih Breach > In 'n Out > Gate East > Item
+  ExitBreachWarp
+
+! Do Ebih > Grid 25,10-12 > Door Left > Open Door
+* Collect Terminal_Breakthrough_1 from Ebih > Grid 26,10-11 > Ledge > Note
+* Collect Flask from Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
+! Do Recall Drone
+! Do Ebih > Grid 25,10-12 > Below Bush > Throw Drone and Hover
+* Collect Ebih_Walled_Off_Wall from Ebih > Walled Off > Wall Right > Break Through Wall Faster ==> Ebih > Walled Off > Wall Left
+* Collect Health_Fragment from Ebih > Guarded Health > West Basin > Health
+! Do Recall Drone
+! Do Ebih > Grid 25,10-12 > Below Bush > Throw Drone and Hover Further
+* Collect Ebih_Gem_Room_Gate from Ebih > Gem Room > Button Nearby > Hit Button
+* Collect Diviners_Gem from Ebih > Gem Room > Between Gates > Gem
+* Collect Flask from Ebih > Gem Room > Hidden Cache > Flask
+! Do Recall Fast Travel
+
+# Section "Irikar Cleanup"
+* Collect Journal_2049_10_29 from Giguna > Helipad > Tablet Ledge > Tablet
+! Do Giguna > Clouds > Platform Start > Hack and Maybe Get Off Early
+! Do Giguna > Clouds > Platform Early > Continue to Early Portal
+! Do Deploy Drone
+  Portalwarp to Giguna Breach > Pink Clouds > Quick Entry
+  Move... to Giguna Breach > Pink Clouds > Corner
+  ExitBreachwarp to Giguna > Clouds > Cache
+* Collect Big_Flask from Giguna > Clouds > Cache > Item
+! Do Recall Drone
+! Do Irikar > Hub > West Rim > Throw Drone Far East High
+* Collect Big_Flask from Irikar > Airy > Cavern Cache > Flask
+* Collect Big_Flask from Giguna > Breachable Wall > Wall Interior > Flask
+* Collect Heretics_Granddaughter from Irikar > East Rooftops > Top Rooftop > Tablet
+* Collect Health_Fragment from Irikar > Boss Room > Healthy Rooftop > Health
+# Irikar Gudam
+* Collect Drone_Melee_Damage_3 from Menu > Upgrade Menu > Drone > Drone Melee Damage 3
+* Collect Drone_Melee_Speed_2 from Menu > Upgrade Menu > Drone > Drone Melee Speed 2
+* Collect Irikar_Gudam from Irikar > Boss Room > Bull's Feet > Defeat Gudam With Strong Drone
+* Collect Big_Flask from Irikar > Boss Room > Bull's Feet > Boss Reward
+
+* Collect Royal_Dagger from Irikar > Hub > Dagger Altar > Weapon
+  Move... to Irikar > Basement Portal > Portal Stand
+  Portalwarp
+* Collect Irikar_Breach_Buried_Treasure_Pillar from Irikar Breach > Buried Treasure > Pillar Left > Mist Into Pillar ==> Irikar Breach > Buried Treasure > Pillar Middle
+  Move... to Irikar Breach > Buried Treasure > Pillar Bottom
+* Collect Health_Fragment from Irikar Breach > Buried Treasure > Pillar Bottom > Health
+* Collect Health_Fragment from Irikar Breach > Rocky Dunes > Ditch > Health
+* Collect Big_Flask from Irikar Breach > Beach > Cache > Flask
+  ExitBreachWarp
+* Collect Power_Matrix from Irikar > Beach > Cache > Item
+! Do Recall Drone
+
+* Collect Flask from Irikar > Hub > Ruined Hallway By Well > Shockwave Well
+* Collect Flask from Irikar > Hub > Collapsed Column > Shockwave to Get Item
+! Do Irikar > Hub > Collapsed Column Debris > Throw Drone and Hover
+* Collect The_Student from Irikar > Basement Pipes > High Pipe > Tablet
+* Collect Freedom_from_Aansur from Irikar > Midwest > Tablet Platform > Tablet
+* Collect Big_Flask from Irikar > Midwest > Right Platform Start > Flask Fast Travel ==> Menu > Kiengir Map > Irikar Midwest Flask
+
+* Collect Anuman from Uhrum > Annuna Corridor > Pedestal > Urn Fast Travel ==> Menu > Kiengir Map > Anuman
+
+# Uhrum South
+  Move... to Uhrum > West Entrance > South Platform
+! Do Move Portal Here
+  Portalwarp
+* Collect Uhrum_Breach_Rock_and_Gate_Gate from Uhrum Breach > Rock and Gate > Gate West > Hit Button
+* Collect Big_Flask from Irikar Breach > Uhrum Connector > Sand Swarm > Flask
+* Collect Uhrum_West_Glitch from Uhrum Breach > West Glitch > Narrow Glitch > Break Through Glitch ==> Uhrum Breach > West Glitch > Past Glitch
+  ExitBreachwarp to Uhrum > Glitchy Corridor > Behind West Glitch
+* Collect Big_Flask from Uhrum > Glitchy Corridor > Behind West Glitch > Flask
+  Move... to Uhrum > Glitchy Corridor > East Glitch West
+! Do Move Portal Here
+* Collect Uhrum_East_Glitch from Uhrum Breach > East Glitch > Glitch West > Break Through Glitch ==> Uhrum Breach > East Glitch > Glitch East
+  ExitBreachWarp
+* Collect Health_Node from Uhrum > Spring > Center > Health
+* Collect Uhrum_Glitchy_Corridor_Rock from Uhrum > Glitchy Corridor > Wall West > Upgraded Mist Through Wall ==> Uhrum Glitchy Corridor > Wall East
+  Move... to Uhrum > Glitchy Corridor > Wall East Platform
+! Do Move Portal Here
+  Portalwarp
+* Collect Health_Fragment from Uhrum Breach > East Glitch > Northeast Flower > Health
+
+# Next: Remainder of Uhrum Breach

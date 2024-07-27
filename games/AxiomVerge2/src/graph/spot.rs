@@ -4085,7 +4085,7 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         id: SpotId::Ebih__Base_Camp__Top_Platform,
         loc_range: Some((LocationId::Ebih__Base_Camp__Top_Platform__Item, LocationId::Ebih__Base_Camp__Top_Platform__Item)),
         exit_range: Some((ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_1, ExitId::Ebih__Base_Camp__Top_Platform__ex__Left_Platform_Moved_1)),
-        action_range: None,
+        action_range: Some((ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop, ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop)),
     },
     SpotDef {
         id: SpotId::Ebih__Base_Camp__West_11,
@@ -4876,13 +4876,13 @@ static SPOT_DEFS: [SpotDef; 2950] = [
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Below_Bush,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1, ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1)),
-        action_range: None,
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1, ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_2)),
+        action_range: Some((ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover, ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further)),
     },
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Bush,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1, ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1)),
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1, ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_2)),
         action_range: None,
     },
     SpotDef {
@@ -4924,7 +4924,7 @@ static SPOT_DEFS: [SpotDef; 2950] = [
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1, ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2)),
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__Door_Left_1, ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2)),
         action_range: None,
     },
     SpotDef {
@@ -11020,7 +11020,7 @@ static SPOT_DEFS: [SpotDef; 2950] = [
     SpotDef {
         id: SpotId::Glacier__Grid_31_9_12__Midair,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1, ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1)),
+        exit_range: Some((ExitId::Glacier__Grid_31_9_12__Midair__ex__East_10_1, ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1)),
         action_range: None,
     },
     SpotDef {
@@ -11092,7 +11092,7 @@ static SPOT_DEFS: [SpotDef; 2950] = [
     SpotDef {
         id: SpotId::Glacier__Grid_32_7_10__West_9,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1, ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1)),
+        exit_range: Some((ExitId::Glacier__Grid_32_7_10__West_9__ex__Column_1, ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -13457,7 +13457,7 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         id: SpotId::Irikar__Hub__Collapsed_Column_Debris,
         loc_range: None,
         exit_range: Some((ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1, ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1)),
-        action_range: None,
+        action_range: Some((ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover, ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover)),
     },
     SpotDef {
         id: SpotId::Irikar__Hub__Dagger_Altar,
@@ -14049,7 +14049,7 @@ static SPOT_DEFS: [SpotDef; 2950] = [
     },
     SpotDef {
         id: SpotId::Irikar__Midwest__Right_Platform_Start,
-        loc_range: Some((LocationId::Irikar__Midwest__Right_Platform_Start__Flask, LocationId::Irikar__Midwest__Right_Platform_Start__Flask)),
+        loc_range: Some((LocationId::Irikar__Midwest__Right_Platform_Start__Flask, LocationId::Irikar__Midwest__Right_Platform_Start__Flask_Fast_Travel)),
         exit_range: None,
         action_range: Some((ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform, ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform)),
     },

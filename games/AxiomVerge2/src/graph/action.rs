@@ -63,6 +63,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::access_ebih__base_camp__left_platform__move_left_platform__req(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::access_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => true,
+            ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::access_ebih__drone_room__pit_left__activate_lift__req(ctx, world),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(ctx, world),
@@ -77,6 +78,8 @@ impl world::Accessible for Action {
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => true,
             ActionId::Ebih__Ebih_West__Upper_Save__Save => true,
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => rules::access_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(ctx, world),
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Hidden_Portal__Save_Point__Save => true,
@@ -192,6 +195,7 @@ impl world::Accessible for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::access_invoke_activate(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => true,
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world),
+            ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
@@ -243,6 +247,7 @@ impl world::Accessible for Action {
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::observe_access_annuna__west_climb__switch_ledge__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::observe_access_ebih__base_camp__left_platform__move_left_platform__req(ctx, world, full_obs),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::observe_access_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world, full_obs),
+            ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::observe_access_ebih__drone_room__pit_left__activate_lift__req(ctx, world, full_obs),
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::observe_access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(ctx, world, full_obs),
@@ -254,6 +259,8 @@ impl world::Accessible for Action {
             ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::observe_access_infect(ctx, world, full_obs),
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => rules::observe_access_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(ctx, world, full_obs),
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::observe_access_ebih__truck_gate__portal_stand__open_door__req(ctx, world, full_obs),
@@ -342,6 +349,7 @@ impl world::Accessible for Action {
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::observe_access_invoke_infinite_climb_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world, full_obs),
+            ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
@@ -622,6 +630,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Glacier > Grid 31,9-12 > Midair"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -717,6 +734,24 @@ impl world::Accessible for Action {
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Giguna > Giguna Northeast > Inner Wall"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Walled Off > Wall Right"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Walled Off > Upper Slope"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -1513,6 +1548,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Lower Hallway West"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1668,8 +1712,11 @@ impl world::Action for Action {
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
+            ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => rules::action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(ctx, world),
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::action_ebih__truck_gate__switch__open_door__do(ctx, world),
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::action_ebih__truck_gate__portal_stand__open_door__do(ctx, world),
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx, world),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx, world),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
@@ -1795,6 +1842,7 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
+            ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::action_irikar__midwest__left_platform_start__hack_and_ride__do(ctx, world),
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(ctx, world),
@@ -1844,6 +1892,9 @@ impl world::Action for Action {
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform,
+            ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => SpotId::Glacier__Grid_31_9_12__Midair,
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => SpotId::Ebih__Walled_Off__Wall_Right,
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => SpotId::Ebih__Walled_Off__Upper_Slope,
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => SpotId::Ebih__Waterfall__Below_Left_Switch,
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => SpotId::Giguna__Giguna_Northeast__Inner_Wall,
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => SpotId::Ebih__Ebih_East__Middle_Platform,
@@ -1883,6 +1934,7 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Airy__South_Center,
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => SpotId::Irikar__Airy__Right_Hover_Throw_End,
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Airy__South_Center,
+            ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => SpotId::Irikar__Hub__Lower_Hallway_West,
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => SpotId::Irikar__Basement_Portal__Moving_Platform_End,
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => SpotId::Irikar__Midwest__Left_Platform_Dest,
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => SpotId::Irikar__Midwest__Right_Platform_Dest,
@@ -2034,11 +2086,20 @@ impl world::Action for Action {
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
                 rules::observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world, full_obs);
             }
+            ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => {
+                rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(ctx, world, full_obs);
+            }
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
                 rules::observe_action_ebih__truck_gate__switch__open_door__do(ctx, world, full_obs);
             }
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
                 rules::observe_action_ebih__truck_gate__portal_stand__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
                 rules::observe_action_ebih__grid_25_10_12__door_left__open_door__do(ctx, world, full_obs);
@@ -2415,6 +2476,9 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
                 rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world, full_obs);
             }
+            ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+            }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
             }
@@ -2458,7 +2522,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 186] = [
+static ACT_DEFS: [Action; 190] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2660,6 +2724,11 @@ static ACT_DEFS: [Action; 186] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop,
+        time: 4975,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone,
         time: 1500,
         price: Currency::Free,
@@ -2730,13 +2799,23 @@ static ACT_DEFS: [Action; 186] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover,
+        time: 2599,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further,
+        time: 3349,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door,
-        time: 1000,
+        time: 500,
         price: Currency::Free,
     },
     Action {
         id: ActionId::Ebih__Grid_25_10_12__East_11__Open_Door,
-        time: 1000,
+        time: 500,
         price: Currency::Free,
     },
     Action {
@@ -3295,6 +3374,11 @@ static ACT_DEFS: [Action; 186] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover,
+        time: 4000,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall,
         time: 3500,
         price: Currency::Energy(100),
@@ -3440,8 +3524,10 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Ebih__Base_Camp__Save_Point__Save => SpotId::Ebih__Base_Camp__Save_Point,
         ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform,
         ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
+        ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => SpotId::Ebih__Base_Camp__Top_Platform,
         ActionId::Ebih__Truck_Gate__Switch__Open_Door => SpotId::Ebih__Truck_Gate__Switch,
         ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => SpotId::Ebih__Truck_Gate__Portal_Stand,
+        ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover | ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => SpotId::Ebih__Grid_25_10_12__Below_Bush,
         ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => SpotId::Ebih__Grid_25_10_12__Door_Left,
         ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => SpotId::Ebih__Grid_25_10_12__East_11,
         ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => SpotId::Ebih__Waterfall__Ledge_Below_Hole,
@@ -3547,6 +3633,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
         ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
         ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => SpotId::Irikar__Hub__Collapsed_Column,
+        ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => SpotId::Irikar__Hub__Collapsed_Column_Debris,
         ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => SpotId::Irikar__Basement_Portal__Moving_Platform_Start,
         ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => SpotId::Irikar__Midwest__Left_Platform_Start,
         ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => SpotId::Irikar__Midwest__Right_Platform_Start,

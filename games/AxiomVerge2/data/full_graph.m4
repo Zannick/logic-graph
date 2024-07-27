@@ -834,8 +834,11 @@ digraph AxiomVerge2 {
     Ebih__Gem_Room__Between_Gates -> Ebih__Gem_Room__West_Gate;
     Ebih__Grid_25_10_12__East_12 -> Ebih__By_Garage__West_12;
     Ebih__Grid_25_10_12__Bush -> Ebih__Grid_25_10_12__Mid_Ledge;
+    Ebih__Grid_25_10_12__Bush -> Ebih__Grid_25_10_12__Mid_Ledge;
     Ebih__Grid_25_10_12__West_12 -> Ebih__Walled_Off__East_12;
     Ebih__Grid_25_10_12__Below_Bush -> Ebih__Grid_25_10_12__Bush;
+    Ebih__Grid_25_10_12__Below_Bush -> Ebih__Grid_25_10_12__Bush;
+    Ebih__Grid_25_10_12__Mid_Ledge -> Ebih__Grid_25_10_12__Door_Left;
     Ebih__Grid_25_10_12__Mid_Ledge -> Ebih__Grid_25_10_12__West_11;
     Ebih__Grid_25_10_12__Mid_Ledge -> Ebih__Grid_25_10_12__West_11;
     Ebih__Grid_25_10_12__Door_Left -> Ebih__Grid_25_10_12__Door;
@@ -2211,10 +2214,13 @@ digraph AxiomVerge2 {
     Glacier__Grid_31_9_12__East_9 -> Glacier__Grid_32_7_10__West_9;
     Glacier__Grid_31_9_12__East_10 -> Glacier__Grid_32_7_10__West_10;
     Glacier__Grid_31_9_12__West_12 -> Ebih__Base_Camp__East_12;
+    Glacier__Grid_31_9_12__Midair -> Glacier__Grid_31_9_12__East_10;
     Glacier__Grid_31_9_12__Midair -> Ebih__Base_Camp__East_11;
     Glacier__Grid_32_7_10__East_8 -> Glacier__Peak__West_8;
     Glacier__Grid_32_7_10__Left_Rock -> Glacier__Grid_32_7_10__Column;
     Glacier__Grid_32_7_10__Left_Rock -> Glacier__Grid_32_7_10__Column;
+    Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_32_7_10__Column;
+    Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_32_7_10__Grate_Left_Upper;
     Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_31_9_12__East_9;
     Glacier__Grid_32_7_10__West_10 -> Glacier__Grid_32_7_10__Left_Rock;
     Glacier__Grid_32_7_10__West_10 -> Glacier__Grid_32_7_10__Left_Rock;
@@ -8243,6 +8249,7 @@ digraph AxiomVerge2 {
     Annuna__Filter_Teleporter__Northeast_Ministair -> Annuna__Filter_Teleporter__Northeast_Cubby;
     Ebih__Base_Camp__Left_Platform -> Ebih__Base_Camp__Left_Platform_Moved;
     Ebih__Base_Camp__Left_Platform_Moved -> Ebih__Base_Camp__Left_Platform;
+    Ebih__Base_Camp__Top_Platform -> Glacier__Grid_31_9_12__Midair;
     Ebih__Drone_Room__Pit_Left -> Ebih__Drone_Room__Moving_Platform;
     Ebih__Drone_Room__Pit_Left -> Ebih__Drone_Room__West_6;
     Ebih__Drone_Room__Moving_Platform -> Ebih__Drone_Room__East_4;
@@ -8251,6 +8258,8 @@ digraph AxiomVerge2 {
     Ebih__Ebih_East__Lower_Moving_Platform -> Ebih__Ebih_East__Dispenser;
     Ebih__Ebih_East__Dispenser -> Ebih__Ebih_East__Ledge_End;
     Ebih__Ebih_West__Medium_High_Platform -> Giguna__Giguna_Northeast__Inner_Wall;
+    Ebih__Grid_25_10_12__Below_Bush -> Ebih__Walled_Off__Wall_Right;
+    Ebih__Grid_25_10_12__Below_Bush -> Ebih__Walled_Off__Upper_Slope;
     Ebih__Waterfall__Ledge_Below_Hole -> Ebih__Waterfall__Below_Left_Switch;
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Platform_Early;
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Platform_Stop;
@@ -8281,6 +8290,7 @@ digraph AxiomVerge2 {
     Irikar__Hub__West_Rim -> Irikar__Airy__South_Center;
     Irikar__Hub__East_Rim -> Irikar__Airy__Right_Hover_Throw_End;
     Irikar__Hub__East_Rim -> Irikar__Airy__South_Center;
+    Irikar__Hub__Collapsed_Column_Debris -> Irikar__Hub__Lower_Hallway_West;
     Irikar__Midwest__Left_Platform_Start -> Irikar__Midwest__Left_Platform_Dest;
     Irikar__Midwest__Right_Platform_Start -> Irikar__Midwest__Right_Platform_Dest;
     Uhrum__Annuna_Corridor__Between_Two_Flowers -> Uhrum__Annuna_Corridor__Lower_Platform;

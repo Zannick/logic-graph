@@ -2089,6 +2089,14 @@ pub fn access_invoke_can_deploy_and_drone_hover(ctx: &Context, world: &World) ->
     // $can_deploy and Drone_Hover
     (helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
 }
+pub fn access_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $can_deploy and Drone_Hover and Ebih_Walled_Off_Wall
+    ((helper__can_deploy!(ctx, world) && ctx.has(Item::Drone_Hover))
+        && ctx.has(Item::Ebih_Walled_Off_Wall))
+}
 pub fn access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -2672,6 +2680,10 @@ pub fn access_irikar_gudam(ctx: &Context, world: &World) -> bool {
     // Irikar_Gudam
     ctx.has(Item::Irikar_Gudam)
 }
+pub fn access_irikar_gudam_and_invoke_shockwave(ctx: &Context, world: &World) -> bool {
+    // Irikar_Gudam and $shockwave
+    (ctx.has(Item::Irikar_Gudam) && helper__shockwave!(ctx, world))
+}
 pub fn access_irikar_royal_storage_wall(ctx: &Context, world: &World) -> bool {
     // Irikar_Royal_Storage_Wall
     ctx.has(Item::Irikar_Royal_Storage_Wall)
@@ -2887,6 +2899,15 @@ pub fn access_mode_eq_drone(ctx: &Context, world: &World) -> bool {
 pub fn access_mode_eq_drone_and_apocalypse_seals_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Apocalypse_Seals_Wall
     (ctx.mode() == enums::Mode::Drone && ctx.has(Item::Apocalypse_Seals_Wall))
+}
+pub fn access_mode_eq_drone_and_drone_melee_damage_3_and_drone_melee_speed_2_and_infect(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^mode == 'drone' and Drone_Melee_Damage_3 and Drone_Melee_Speed_2 and Infect
+    (((ctx.mode() == enums::Mode::Drone && ctx.has(Item::Drone_Melee_Damage_3))
+        && ctx.has(Item::Drone_Melee_Speed_2))
+        && ctx.has(Item::Infect))
 }
 pub fn access_mode_eq_drone_and_ebih_waterfall_block_left(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Ebih_Waterfall_Block_Left
@@ -3902,6 +3923,13 @@ pub fn action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_
 ) {
     // $deploy_drone_and_move(`Annuna > East Bridge > Tower Base East`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Annuna__East_Bridge__Tower_Base_East);
+}
+pub fn action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $deploy_drone_and_move(`Ebih > Base Camp > Save Point`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Base_Camp__Save_Point);
 }
 pub fn action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     ctx: &mut Context,
@@ -11759,6 +11787,45 @@ pub fn explain_invoke_can_deploy_and_drone_hover(
         }
     }
 }
+pub fn explain_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $can_deploy and Drone_Hover and Ebih_Walled_Off_Wall
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Ebih_Walled_Off_Wall);
+                edict.insert("Ebih_Walled_Off_Wall", format!("{}", h));
+                (h, vec!["Ebih_Walled_Off_Wall"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -14901,6 +14968,32 @@ pub fn explain_irikar_gudam(
         (h, vec!["Irikar_Gudam"])
     }
 }
+pub fn explain_irikar_gudam_and_invoke_shockwave(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Irikar_Gudam and $shockwave
+    {
+        let mut left = {
+            let h = ctx.has(Item::Irikar_Gudam);
+            edict.insert("Irikar_Gudam", format!("{}", h));
+            (h, vec!["Irikar_Gudam"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                edict.insert("$shockwave", format!("{:?}", res));
+                refs.push("$shockwave");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_irikar_royal_storage_wall(
     ctx: &Context,
     world: &World,
@@ -15585,6 +15678,64 @@ pub fn explain_mode_eq_drone_and_apocalypse_seals_wall(
                 let h = ctx.has(Item::Apocalypse_Seals_Wall);
                 edict.insert("Apocalypse_Seals_Wall", format!("{}", h));
                 (h, vec!["Apocalypse_Seals_Wall"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_eq_drone_and_drone_melee_damage_3_and_drone_melee_speed_2_and_infect(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and Drone_Melee_Damage_3 and Drone_Melee_Speed_2 and Infect
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = ctx.mode();
+                        edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Drone;
+                    edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Drone_Melee_Damage_3);
+                        edict.insert("Drone_Melee_Damage_3", format!("{}", h));
+                        (h, vec!["Drone_Melee_Damage_3"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Melee_Speed_2);
+                    edict.insert("Drone_Melee_Speed_2", format!("{}", h));
+                    (h, vec!["Drone_Melee_Speed_2"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Infect);
+                edict.insert("Infect", format!("{}", h));
+                (h, vec!["Infect"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -22483,6 +22634,22 @@ pub fn observe_access_invoke_can_deploy_and_drone_hover(
             ctx.has(Item::Drone_Hover)
         }))
 }
+pub fn observe_access_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $can_deploy and Drone_Hover and Ebih_Walled_Off_Wall
+    ((hobserve__can_deploy!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
+        }))
+        && ({
+            full_obs.observe_ebih_walled_off_wall();
+            ctx.has(Item::Ebih_Walled_Off_Wall)
+        }))
+}
 pub fn observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -23754,6 +23921,17 @@ pub fn observe_access_irikar_gudam(
         ctx.has(Item::Irikar_Gudam)
     }
 }
+pub fn observe_access_irikar_gudam_and_invoke_shockwave(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Irikar_Gudam and $shockwave
+    ({
+        full_obs.observe_irikar_gudam();
+        ctx.has(Item::Irikar_Gudam)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
+}
 pub fn observe_access_irikar_royal_storage_wall(
     ctx: &Context,
     world: &World,
@@ -24355,6 +24533,29 @@ pub fn observe_access_mode_eq_drone_and_apocalypse_seals_wall(
     } && ({
         full_obs.observe_apocalypse_seals_wall();
         ctx.has(Item::Apocalypse_Seals_Wall)
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_drone_melee_damage_3_and_drone_melee_speed_2_and_infect(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and Drone_Melee_Damage_3 and Drone_Melee_Speed_2 and Infect
+    ((({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_drone_melee_damage_3();
+        ctx.has(Item::Drone_Melee_Damage_3)
+    })) && ({
+        full_obs.observe_drone_melee_speed_2();
+        ctx.has(Item::Drone_Melee_Speed_2)
+    })) && ({
+        full_obs.observe_infect();
+        ctx.has(Item::Infect)
     }))
 }
 pub fn observe_access_mode_eq_drone_and_ebih_waterfall_block_left(
@@ -26471,6 +26672,17 @@ pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tow
         SpotId::Annuna__East_Bridge__Tower_Base_East,
         full_obs
     );
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Ebih > Base Camp > Save Point`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Ebih__Base_Camp__Save_Point, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(

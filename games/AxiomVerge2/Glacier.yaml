@@ -2070,6 +2070,14 @@ areas:
       exits:
         - to: Grid 31,9-12 > East 9
           tags: [xshift]
+        - to: Column
+          req: $hookhover
+          movement: base
+          jumps: 1
+        - to: Grate Left Upper
+          req: $hookhover
+          movement: base
+          jumps: 1
     - name: West 10
       coord: [32.05, 9.275]
       exits:
@@ -2169,6 +2177,9 @@ areas:
       exits:
         - to: Ebih > Base Camp > East 11
           tags: [xshift]
+        - to: East 10
+          req: $mist2
+          movement: mist2
 
 - name: Lake Main Entrance  # MARK: Lake Main Entrance
   on_entry: $reset_old_area(^newpos)

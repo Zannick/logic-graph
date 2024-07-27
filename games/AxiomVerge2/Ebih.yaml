@@ -204,6 +204,14 @@ areas:
           req: $hover and not ^_left_platform_moved
         - to: Left Platform Moved
           req: ^_left_platform_moved
+      actions:
+        - name: Throw Drone and Drop
+          req: $can_deploy and Drone_Hover
+          do: $deploy_drone_and_move(`Ebih > Base Camp > Save Point`)
+          to: Glacier > Grid 31,9-12 > Midair
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
 
 - name: By Garage  # MARK: By Garage
   on_entry: $reset_old_area(^newpos)
@@ -453,7 +461,12 @@ areas:
       exits:
         - to: Mid-Ledge
           req: $grab
-          time: 1.5
+          movement: base
+          jumps: 3
+        - to: Mid-Ledge
+          req: $hook
+          movement: base
+          jumps: 2
     - name: West 12
       coord: [25.05, 11.8]
       local:
@@ -468,7 +481,25 @@ areas:
       exits:
         - to: Bush
           req: $grab
-          time: 0.75
+          movement: base
+          jumps: 2
+        - to: Bush
+          req: $hook
+          movement: base
+          jumps: 1
+      actions:
+        - name: Throw Drone and Hover
+          req: $can_deploy and Drone_Hover
+          do: $deploy_drone
+          to: Walled Off > Wall Right
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - name: Throw Drone and Hover Further
+          req: $can_deploy and Drone_Hover and Ebih_Walled_Off_Wall
+          do: $deploy_drone
+          to: Walled Off > Upper Slope
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Mid-Ledge
       coord: [25.3, 11.1]
       local:
@@ -479,11 +510,16 @@ areas:
       exits:
         - to: West 11
           req: $grab
-          time: 1.5
+          movement: base
+          jumps: 3
         - to: West 11
           req: $hook
           movement: base
           jumps: 2
+        - to: Door Left
+          req: $hook
+          movement: base
+          jumps: 1
     - name: Door Left
       coord: [25.6, 10.75]
       local:
@@ -501,6 +537,7 @@ areas:
         - name: Open Door
           req: $open
           do: ^_door_open = true
+          tags: [hack]
     - name: Top Platform
       coord: [25.4, 10.5]
       local:
@@ -553,6 +590,7 @@ areas:
         - name: Open Door
           req: $open
           do: ^_door_open = true
+          tags: [hack]
     - name: East 10
       coord: [25.95, 9.7]
       local:
