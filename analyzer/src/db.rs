@@ -1074,6 +1074,7 @@ where
         let mut new_seen = 0;
         let cf = self.best_cf();
 
+        vec.sort_by_key(ContextWrapper::elapsed);
         let (prev_key, prev_scoreinfo) = if let Some(c) = prev {
             let prev_key = Self::serialize_state(c);
             let scoreinfo = self
