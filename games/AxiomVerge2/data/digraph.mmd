@@ -273,6 +273,12 @@ subgraph Amagi
         Amagi__Wiggly_Room__South(South);
     end
 end
+subgraph Annuna_Breach
+    subgraph Annuna_Breach__Smiley[Smiley]
+        Annuna_Breach__Smiley__West(West);
+        Annuna_Breach__Smiley__Upper_Portal_Stand(Upper Portal Stand);
+    end
+end
 subgraph Annuna
     subgraph Annuna__Mirror_Match[Mirror Match]
         Annuna__Mirror_Match__West_25(West 25);
@@ -3166,11 +3172,12 @@ subgraph Menu
         Menu__Breach_Map__MEB_Spider_Guards_Flask(MEB Spider Guards Flask);
         Menu__Breach_Map__MEB_Spider_Guards_Button(MEB Spider Guards Button);
         Menu__Breach_Map__Slingshot_Weapon(Slingshot Weapon);
-        Menu__Breach_Map__UVB_West_Glitches(UVB West Glitches);
-        Menu__Breach_Map__UVB_Save_and_Go_Portal(UVB Save and Go Portal);
-        Menu__Breach_Map__UVB_East_Glitches(UVB East Glitches);
-        Menu__Breach_Map__UVB_East_Glitch_Health(UVB East Glitch Health);
         Menu__Breach_Map__UVB_Blob(UVB Blob);
+        Menu__Breach_Map__UVB_East_Copse_Flask(UVB East Copse Flask);
+        Menu__Breach_Map__UVB_East_Glitch_Health(UVB East Glitch Health);
+        Menu__Breach_Map__UVB_East_Glitches(UVB East Glitches);
+        Menu__Breach_Map__UVB_Save_and_Go_Portal(UVB Save and Go Portal);
+        Menu__Breach_Map__UVB_West_Glitches(UVB West Glitches);
     end
 end
 subgraph Uhrum_Breach
@@ -3238,14 +3245,49 @@ subgraph Uhrum_Breach
         Uhrum_Breach__South_Slime__Center(Center);
         Uhrum_Breach__South_Slime__East(East);
     end
-    subgraph Uhrum_Breach__West_Copse[West Copse]
-        Uhrum_Breach__West_Copse__West_27(West 27);
-        Uhrum_Breach__West_Copse__West_28(West 28);
-    end
     subgraph Uhrum_Breach__Blob[Blob]
         Uhrum_Breach__Blob__West_Side(West Side);
         Uhrum_Breach__Blob__Plinth(Plinth);
         Uhrum_Breach__Blob__East_Side(East Side);
+    end
+    subgraph Uhrum_Breach__West_Copse[West Copse]
+        Uhrum_Breach__West_Copse__West_27(West 27);
+        Uhrum_Breach__West_Copse__West_Slope(West Slope);
+        Uhrum_Breach__West_Copse__Lower_West_Ledge(Lower West Ledge);
+        Uhrum_Breach__West_Copse__Small_Flower(Small Flower);
+        Uhrum_Breach__West_Copse__Bottom_West(Bottom West);
+        Uhrum_Breach__West_Copse__West_28(West 28);
+        Uhrum_Breach__West_Copse__Center_West(Center West);
+        Uhrum_Breach__West_Copse__Center_East(Center East);
+        Uhrum_Breach__West_Copse__Center_Pillar(Center Pillar);
+        Uhrum_Breach__West_Copse__East_Ledge(East Ledge);
+        Uhrum_Breach__West_Copse__East(East);
+    end
+    subgraph Uhrum_Breach__East_Copse[East Copse]
+        Uhrum_Breach__East_Copse__West(West);
+        Uhrum_Breach__East_Copse__Lower_West_Ledge(Lower West Ledge);
+        Uhrum_Breach__East_Copse__Center_West(Center West);
+        Uhrum_Breach__East_Copse__Center_East(Center East);
+        Uhrum_Breach__East_Copse__Hidden_Passage(Hidden Passage);
+        Uhrum_Breach__East_Copse__Hidden_Cache(Hidden Cache);
+        Uhrum_Breach__East_Copse__Platform_West(Platform West);
+        Uhrum_Breach__East_Copse__Platform_East(Platform East);
+        Uhrum_Breach__East_Copse__East(East);
+    end
+    subgraph Uhrum_Breach__Annuna_Gate[Annuna Gate]
+        Uhrum_Breach__Annuna_Gate__West(West);
+        Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge(Building Roof Ledge);
+        Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge(Building Corner Ledge);
+        Uhrum_Breach__Annuna_Gate__Upper_Ledge(Upper Ledge);
+        Uhrum_Breach__Annuna_Gate__North(North);
+        Uhrum_Breach__Annuna_Gate__Structure_West(Structure West);
+        Uhrum_Breach__Annuna_Gate__Structure(Structure);
+        Uhrum_Breach__Annuna_Gate__Button(Button);
+        Uhrum_Breach__Annuna_Gate__Save_Point(Save Point);
+        Uhrum_Breach__Annuna_Gate__East(East);
+    end
+    subgraph Uhrum_Breach__Locked_Down[Locked Down]
+        Uhrum_Breach__Locked_Down__South(South);
     end
 end
 subgraph Uhrum
@@ -5434,10 +5476,40 @@ Menu__Upgrade_Menu__Combat <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Infection
 Menu__Upgrade_Menu__Drone <--> Menu__Upgrade_Menu__Physiology
 Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
+Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge --> Uhrum_Breach__Annuna_Gate__Upper_Ledge
+Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge <--> Uhrum_Breach__Annuna_Gate__Structure
+Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge --> Uhrum_Breach__Annuna_Gate__Upper_Ledge
+Uhrum_Breach__Annuna_Gate__Button --> Annuna_Breach__Smiley__Upper_Portal_Stand
+Uhrum_Breach__Annuna_Gate__Button --> Uhrum_Breach__Annuna_Gate__Save_Point
+Uhrum_Breach__Annuna_Gate__Button --> Uhrum_Breach__Annuna_Gate__Structure
+Uhrum_Breach__Annuna_Gate__East --> Uhrum_Breach__Annuna_Gate__Button
+Uhrum_Breach__Annuna_Gate__East --> Uhrum_Breach__Annuna_Gate__Structure
+Uhrum_Breach__Annuna_Gate__North --> Uhrum_Breach__Locked_Down__South
+Uhrum_Breach__Annuna_Gate__Structure --> Annuna_Breach__Smiley__Upper_Portal_Stand
+Uhrum_Breach__Annuna_Gate__Structure --> Uhrum_Breach__Annuna_Gate__Save_Point
+Uhrum_Breach__Annuna_Gate__Structure <--> Uhrum_Breach__Annuna_Gate__Upper_Ledge
+Uhrum_Breach__Annuna_Gate__Structure_West --> Annuna_Breach__Smiley__Upper_Portal_Stand
+Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge
+Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Button
+Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Save_Point
+Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Upper_Ledge
+Uhrum_Breach__Annuna_Gate__West --> Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge
+Uhrum_Breach__Annuna_Gate__West <--> Uhrum_Breach__East_Copse__East
 Uhrum_Breach__Blob__East_Side --> Giguna_Breach__Secret_Tunnel__Button_Obverse
 Uhrum_Breach__Blob__East_Side --> Giguna_Breach__Secret_Tunnel__Narrow_Point
 Uhrum_Breach__Blob__East_Side --> Uhrum_Breach__Blob__Plinth
 Uhrum_Breach__Blob__West_Side --> Uhrum_Breach__Blob__Plinth
+Uhrum_Breach__East_Copse__Center_East --> Uhrum_Breach__East_Copse__Hidden_Passage
+Uhrum_Breach__East_Copse__Center_West --> Uhrum_Breach__East_Copse__Center_East
+Uhrum_Breach__East_Copse__Center_West --> Uhrum_Breach__East_Copse__Platform_East
+Uhrum_Breach__East_Copse__Center_West <--> Uhrum_Breach__East_Copse__West
+Uhrum_Breach__East_Copse__Lower_West_Ledge --> Uhrum_Breach__East_Copse__Center_West
+Uhrum_Breach__East_Copse__Lower_West_Ledge --> Uhrum_Breach__East_Copse__West
+Uhrum_Breach__East_Copse__Platform_East --> Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge
+Uhrum_Breach__East_Copse__Platform_East --> Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge
+Uhrum_Breach__East_Copse__Platform_West --> Uhrum_Breach__East_Copse__Center_East
+Uhrum_Breach__East_Copse__Platform_West --> Uhrum_Breach__East_Copse__Center_West
+Uhrum_Breach__East_Copse__West <--> Uhrum_Breach__West_Copse__East
 Uhrum_Breach__East_Glitch__Above_West_Flower --> Uhrum_Breach__East_Glitch__East_Flower_West
 Uhrum_Breach__East_Glitch__Above_West_Flower --> Uhrum_Breach__East_Glitch__Wall_West_Platform
 Uhrum_Breach__East_Glitch__East_27 --> Uhrum_Breach__East_Glitch__Northeast_Flower
@@ -5460,7 +5532,7 @@ Uhrum_Breach__East_Glitch__Wall_East_Platform --> Uhrum_Breach__East_Glitch__Nor
 Uhrum_Breach__East_Glitch__Wall_West_Platform --> Uhrum_Breach__East_Glitch__Middle_Platform_East
 Uhrum_Breach__East_Glitch__West <--> Uhrum_Breach__Rock_and_Gate__East
 Uhrum_Breach__East_Glitch__West_Flower --> Uhrum_Breach__East_Glitch__Middle_Ledge
-Uhrum_Breach__North_Slime__East --> Uhrum_Breach__West_Copse__West_27
+Uhrum_Breach__North_Slime__East <--> Uhrum_Breach__West_Copse__West_27
 Uhrum_Breach__Rock_and_Gate__Button --> Irikar_Breach__Uhrum_Connector__Sand_Swarm
 Uhrum_Breach__Rock_and_Gate__Center_Area_West --> Uhrum_Breach__Rock_and_Gate__North
 Uhrum_Breach__Rock_and_Gate__Center_Area_West <--> Uhrum_Breach__Rock_and_Gate__Rock_West
@@ -5487,7 +5559,18 @@ Uhrum_Breach__Save_and_Go__West_Rock_Ledge --> Uhrum_Breach__Save_and_Go__West_P
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Rock_Ledge
 Uhrum_Breach__South_Slime__Center --> Uhrum_Breach__East_Glitch__Glitch_East
-Uhrum_Breach__South_Slime__East --> Uhrum_Breach__West_Copse__West_28
+Uhrum_Breach__South_Slime__East <--> Uhrum_Breach__West_Copse__West_28
+Uhrum_Breach__West_Copse__Bottom_West --> Uhrum_Breach__West_Copse__Lower_West_Ledge
+Uhrum_Breach__West_Copse__Center_East --> Uhrum_Breach__West_Copse__West_27
+Uhrum_Breach__West_Copse__Center_Pillar --> Uhrum_Breach__West_Copse__Center_East
+Uhrum_Breach__West_Copse__Center_Pillar --> Uhrum_Breach__West_Copse__East_Ledge
+Uhrum_Breach__West_Copse__Center_West --> Uhrum_Breach__West_Copse__East_Ledge
+Uhrum_Breach__West_Copse__Center_West <--> Uhrum_Breach__West_Copse__West_27
+Uhrum_Breach__West_Copse__East_Ledge --> Uhrum_Breach__East_Copse__Center_West
+Uhrum_Breach__West_Copse__East_Ledge --> Uhrum_Breach__East_Copse__Lower_West_Ledge
+Uhrum_Breach__West_Copse__Lower_West_Ledge --> Uhrum_Breach__West_Copse__Center_West
+Uhrum_Breach__West_Copse__Small_Flower --> Uhrum_Breach__West_Copse__Center_Pillar
+Uhrum_Breach__West_Copse__West_Slope --> Uhrum_Breach__West_Copse__Center_West
 Uhrum_Breach__West_Glitch__Middle --> Uhrum_Breach__West_Glitch__Narrow_Glitch
 Uhrum_Breach__West_Glitch__Middle --> Uhrum_Breach__West_Glitch__Pillar_East
 Uhrum_Breach__West_Glitch__Narrow_Glitch <--> Uhrum_Breach__West_Glitch__Past_Glitch

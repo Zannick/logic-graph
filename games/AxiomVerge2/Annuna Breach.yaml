@@ -1,0 +1,13 @@
+name: Annuna Breach
+graph_offset: [0, 30]
+data:
+  realm: breach
+
+areas:
+- name: Smiley  # Smiley
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [32.1, 26.75]
+    - name: Upper Portal Stand
+      coord: [32.475, 26.6]

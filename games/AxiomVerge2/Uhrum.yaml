@@ -1716,6 +1716,8 @@ areas:
           jumps: 1
     - name: Center Island West
       coord: [26.7, 26.9]
+      data:
+        flipside: Uhrum Breach > West Copse > Center West
       local:
         - to: Center Island Middle
         - to: Island Water West
@@ -1737,6 +1739,8 @@ areas:
           time: 2
     - name: Center Island East
       coord: [27.0, 26.9]
+      data:
+        flipside: Uhrum Breach > West Copse > Center East
       local:
         - to: Center Island Middle
         - to: Water Pillar
@@ -1754,6 +1758,8 @@ areas:
         - to: West Water Ledge
     - name: West Water Ledge
       coord: [26.65, 27.4]
+      data:
+        flipside: Uhrum Breach > West Copse > Lower West Ledge
       local:
         - to: West Water's Edge
           jumps: 3
@@ -1796,6 +1802,8 @@ areas:
         - to: West Water Nook
     - name: Water Pillar
       coord: [27.1, 27.15]
+      data:
+        flipside: Uhrum Breach > West Copse > Center Pillar
       local:
         - to: West Water Nook
         - to: Water Slope
@@ -1831,6 +1839,8 @@ areas:
           tags: [xshift]
     - name: East Water's Edge
       coord: [27.45, 26.9]
+      data:
+        flipside: Uhrum Breach > West Copse > East Ledge
       local:
         - to: East 27
         - to: East Water Surface
@@ -1932,6 +1942,8 @@ areas:
           tags: [cave]
     - name: West Underwater Ledge
       coord: [28.45, 27.2]
+      data:
+        flipside: Uhrum Breach > East Copse > Lower West Ledge
       local:
         - to: West Underwater Hill
         - to: West 28
@@ -1997,6 +2009,8 @@ areas:
             - add: 1  # ?
     - name: East Block
       coord: [29.0, 26.7]
+      data:
+        flipside: Uhrum Breach > East Copse > Center East
       local:
         - to: Island West
         - to: Island West Hook Point
@@ -2021,6 +2035,8 @@ areas:
           penalty_tags: [xshift, -fast_hover.1]
     - name: Island West
       coord: [29.25, 26.9]
+      data:
+        flipside: Uhrum Breach > East Copse > Platform West
       local:
         - to: Island West Hook Point
         - to: Island East
@@ -2035,6 +2051,8 @@ areas:
           jumps: 2
     - name: Island East
       coord: [29.55, 26.9]
+      data:
+        flipside: Uhrum Breach > East Copse > Platform East
       local:
         - to: Island West
         - to: East Underwater Ledge
@@ -2159,6 +2177,8 @@ areas:
           jumps: 5
     - name: Wall Left
       coord: [31.15, 26.8]
+      data:
+        flipside: Uhrum Breach > Annuna Gate > Structure West
       local:
         - to: Bottom
       locations:
@@ -2267,6 +2287,8 @@ areas:
           movement: fast_hover
     - name: Pedestal
       coord: [31.5, 26.75]
+      data:
+        flipside: Uhrum Breach > Annuna Gate > Save Point
       local:
         - to: Wall Right
       locations:

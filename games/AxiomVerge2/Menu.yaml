@@ -1226,14 +1226,16 @@ areas:
     - name: Slingshot Weapon
       coord: [21, 9]
 
-    - name: UVB West Glitches
-      coord: [21, 28]
-    - name: UVB Save and Go Portal
-      coord: [20, 25]
-    - name: UVB East Glitches
-      coord: [24, 28]
-    - name: UVB East Glitch Health
-      coord: [24, 27]
     - name: UVB Blob
       coord: [22, 21]
+    - name: UVB East Copse Flask
+      coord: [28, 27]
+    - name: UVB East Glitch Health
+      coord: [24, 27]
+    - name: UVB East Glitches
+      coord: [24, 28]
+    - name: UVB Save and Go Portal
+      coord: [20, 25]
+    - name: UVB West Glitches
+      coord: [21, 28]
     #endregion

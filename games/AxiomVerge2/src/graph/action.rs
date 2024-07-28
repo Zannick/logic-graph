@@ -215,6 +215,7 @@ impl world::Accessible for Action {
             ActionId::Uhrum__Save_Room__Save_Point__Save => true,
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::access_invoke_can_deploy_and_slingshot_hook(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => true,
+            ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save => true,
             ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save => true,
         }
     }
@@ -1849,6 +1850,7 @@ impl world::Action for Action {
             ActionId::Irikar__Midwest__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum__West_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Uhrum__Save_Room__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -2497,6 +2499,9 @@ impl world::Action for Action {
             ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2522,7 +2527,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 190] = [
+static ACT_DEFS: [Action; 191] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -3434,6 +3439,11 @@ static ACT_DEFS: [Action; 190] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
@@ -3640,6 +3650,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Irikar__Midwest__Save_Point__Save => SpotId::Irikar__Midwest__Save_Point,
         ActionId::Irikar__Beach_Save__Save_Point__Save => SpotId::Irikar__Beach_Save__Save_Point,
         ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save => SpotId::Uhrum_Breach__East_Glitch__Save_Point,
+        ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save => SpotId::Uhrum_Breach__Annuna_Gate__Save_Point,
         ActionId::Uhrum__West_Entrance__Save_Point__Save => SpotId::Uhrum__West_Entrance__Save_Point,
         ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => SpotId::Uhrum__Waterfalls__Center_Island_Middle,
         ActionId::Uhrum__Save_Room__Save_Point__Save => SpotId::Uhrum__Save_Room__Save_Point,

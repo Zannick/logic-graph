@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2950] = [
+static SPOT_DEFS: [SpotDef; 2982] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -1413,6 +1413,18 @@ static SPOT_DEFS: [SpotDef; 2950] = [
     },
     SpotDef {
         id: SpotId::Amagi__Wiggly_Room__West,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Smiley__Upper_Portal_Stand,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Smiley__West,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -14558,6 +14570,12 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__UVB_East_Copse_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__UVB_East_Glitch_Health,
         loc_range: None,
         exit_range: None,
@@ -15890,6 +15908,66 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge__ex__Upper_Ledge_1, ExitId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge__ex__Upper_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1, ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Upper_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Button,
+        loc_range: Some((LocationId::Uhrum_Breach__Annuna_Gate__Button__Hit_Button, LocationId::Uhrum_Breach__Annuna_Gate__Button__Hit_Button)),
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Annuna_Breach__Smiley__Upper_Portal_Stand_1, ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Button_1, ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Structure_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__North__ex__Locked_Down__South_1, ExitId::Uhrum_Breach__Annuna_Gate__North__ex__Locked_Down__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save, ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Structure,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Annuna_Breach__Smiley__Upper_Portal_Stand_1, ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Structure_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Annuna_Breach__Smiley__Upper_Portal_Stand_1, ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Upper_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__Upper_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__Upper_Ledge__ex__Structure_1, ExitId::Uhrum_Breach__Annuna_Gate__Upper_Ledge__ex__Structure_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Annuna_Gate__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Annuna_Gate__West__ex__Building_Roof_Ledge_1, ExitId::Uhrum_Breach__Annuna_Gate__West__ex__East_Copse__East_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Uhrum_Breach__Blob__East_Side,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Button_Obverse_1, ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1)),
@@ -15905,6 +15983,60 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         id: SpotId::Uhrum_Breach__Blob__West_Side,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum_Breach__Blob__West_Side__ex__Giguna_Breach__Secret_Tunnel__East_1, ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Center_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_1, ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Center_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1, ExitId::Uhrum_Breach__East_Copse__Center_West__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__East__ex__Annuna_Gate__West_1, ExitId::Uhrum_Breach__East_Copse__East__ex__Annuna_Gate__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Hidden_Cache,
+        loc_range: Some((LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask, LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Hidden_Passage,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Lower_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__Lower_West_Ledge__ex__Center_West_1, ExitId::Uhrum_Breach__East_Copse__Lower_West_Ledge__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Platform_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__Platform_East__ex__Annuna_Gate__Building_Corner_Ledge_1, ExitId::Uhrum_Breach__East_Copse__Platform_East__ex__Annuna_Gate__Building_Roof_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__Platform_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__Platform_West__ex__Center_East_1, ExitId::Uhrum_Breach__East_Copse__Platform_West__ex__Center_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__East_Copse__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__East_Copse__West__ex__Center_West_1, ExitId::Uhrum_Breach__East_Copse__West__ex__West_Copse__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -16013,6 +16145,12 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         id: SpotId::Uhrum_Breach__East_Glitch__West_Flower,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1, ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__South,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -16184,15 +16322,69 @@ static SPOT_DEFS: [SpotDef; 2950] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__Bottom_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__Bottom_West__ex__Lower_West_Ledge_1, ExitId::Uhrum_Breach__West_Copse__Bottom_West__ex__Lower_West_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__Center_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__Center_East__ex__West_27_1, ExitId::Uhrum_Breach__West_Copse__Center_East__ex__West_27_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__Center_Pillar,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1, ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__Center_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__Center_West__ex__East_Ledge_1, ExitId::Uhrum_Breach__West_Copse__Center_West__ex__West_27_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__East__ex__East_Copse__West_1, ExitId::Uhrum_Breach__West_Copse__East__ex__East_Copse__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Center_West_1, ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Lower_West_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__Lower_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__Lower_West_Ledge__ex__Center_West_1, ExitId::Uhrum_Breach__West_Copse__Lower_West_Ledge__ex__Center_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__Small_Flower,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1, ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Uhrum_Breach__West_Copse__West_27,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__West_27__ex__Center_West_1, ExitId::Uhrum_Breach__West_Copse__West_27__ex__North_Slime__East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum_Breach__West_Copse__West_28,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__West_28__ex__South_Slime__East_1, ExitId::Uhrum_Breach__West_Copse__West_28__ex__South_Slime__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__West_Copse__West_Slope,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__West_Copse__West_Slope__ex__Center_West_1, ExitId::Uhrum_Breach__West_Copse__West_Slope__ex__Center_West_1)),
         action_range: None,
     },
     SpotDef {

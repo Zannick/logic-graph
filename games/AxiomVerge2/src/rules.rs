@@ -3045,6 +3045,10 @@ pub fn access_not_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // not Slingshot_Hook
     !ctx.has(Item::Slingshot_Hook)
 }
+pub fn access_not_slingshot_weapon(ctx: &Context, world: &World) -> bool {
+    // not Slingshot_Weapon
+    !ctx.has(Item::Slingshot_Weapon)
+}
 pub fn access_not_within_menu_and_anuman_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // NOT WITHIN `Menu` and Anuman and ^mode != 'drone'
     (((match get_region(ctx.position()) {
@@ -3164,6 +3168,14 @@ pub fn access_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook
     ctx.has(Item::Slingshot_Hook)
 }
+pub fn access_slingshot_hook_and___slingshot_weapon_or_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and (Slingshot_Weapon or Drone_Hover)
+    (ctx.has(Item::Slingshot_Hook)
+        && (ctx.has(Item::Slingshot_Weapon) || ctx.has(Item::Drone_Hover)))
+}
 pub fn access_slingshot_hook_and_drone_hover(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Drone_Hover
     (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
@@ -3278,6 +3290,25 @@ pub fn access_switch_40_12(ctx: &Context, world: &World) -> bool {
 pub fn access_uhrum_annuna_corridor_block(ctx: &Context, world: &World) -> bool {
     // Uhrum_Annuna_Corridor_Block
     ctx.has(Item::Uhrum_Annuna_Corridor_Block)
+}
+pub fn access_uhrum_breach_annuna_gate_gate(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Breach_Annuna_Gate_Gate
+    ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate)
+}
+pub fn access_uhrum_breach_annuna_gate_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook
+    (ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate) && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
+    ((ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate) && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
 }
 pub fn access_uhrum_breach_rock_and_gate_gate(ctx: &Context, world: &World) -> bool {
     // Uhrum_Breach_Rock_and_Gate_Gate
@@ -16578,6 +16609,18 @@ pub fn explain_not_slingshot_hook(
         (!h, vec!["Slingshot_Hook"])
     }
 }
+pub fn explain_not_slingshot_weapon(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Slingshot_Weapon
+    {
+        let h = ctx.has(Item::Slingshot_Weapon);
+        edict.insert("Slingshot_Weapon", format!("{}", h));
+        (!h, vec!["Slingshot_Weapon"])
+    }
+}
 pub fn explain_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
     world: &World,
@@ -17152,6 +17195,44 @@ pub fn explain_slingshot_hook(
         (h, vec!["Slingshot_Hook"])
     }
 }
+pub fn explain_slingshot_hook_and___slingshot_weapon_or_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and (Slingshot_Weapon or Drone_Hover)
+    {
+        let mut left = {
+            let h = ctx.has(Item::Slingshot_Hook);
+            edict.insert("Slingshot_Hook", format!("{}", h));
+            (h, vec!["Slingshot_Hook"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Slingshot_Weapon);
+                    edict.insert("Slingshot_Weapon", format!("{}", h));
+                    (h, vec!["Slingshot_Weapon"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Drone_Hover);
+                        edict.insert("Drone_Hover", format!("{}", h));
+                        (h, vec!["Drone_Hover"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_slingshot_hook_and_drone_hover(
     ctx: &Context,
     world: &World,
@@ -17689,6 +17770,81 @@ pub fn explain_uhrum_annuna_corridor_block(
         let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
         edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
         (h, vec!["Uhrum_Annuna_Corridor_Block"])
+    }
+}
+pub fn explain_uhrum_breach_annuna_gate_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Annuna_Gate_Gate
+    {
+        let h = ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate);
+        edict.insert("Uhrum_Breach_Annuna_Gate_Gate", format!("{}", h));
+        (h, vec!["Uhrum_Breach_Annuna_Gate_Gate"])
+    }
+}
+pub fn explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate);
+            edict.insert("Uhrum_Breach_Annuna_Gate_Gate", format!("{}", h));
+            (h, vec!["Uhrum_Breach_Annuna_Gate_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate);
+                edict.insert("Uhrum_Breach_Annuna_Gate_Gate", format!("{}", h));
+                (h, vec!["Uhrum_Breach_Annuna_Gate_Gate"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_uhrum_breach_rock_and_gate_gate(
@@ -24999,6 +25155,17 @@ pub fn observe_access_not_slingshot_hook(
         !ctx.has(Item::Slingshot_Hook)
     }
 }
+pub fn observe_access_not_slingshot_weapon(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Slingshot_Weapon
+    {
+        full_obs.observe_slingshot_weapon();
+        !ctx.has(Item::Slingshot_Weapon)
+    }
+}
 pub fn observe_access_not_within_menu_and_anuman_and_mode_ne_drone(
     ctx: &Context,
     world: &World,
@@ -25274,6 +25441,23 @@ pub fn observe_access_slingshot_hook(
         full_obs.observe_slingshot_hook();
         ctx.has(Item::Slingshot_Hook)
     }
+}
+pub fn observe_access_slingshot_hook_and___slingshot_weapon_or_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and (Slingshot_Weapon or Drone_Hover)
+    ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_slingshot_weapon();
+        ctx.has(Item::Slingshot_Weapon)
+    } || {
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
 }
 pub fn observe_access_slingshot_hook_and_drone_hover(
     ctx: &Context,
@@ -25563,6 +25747,48 @@ pub fn observe_access_uhrum_annuna_corridor_block(
         full_obs.observe_uhrum_annuna_corridor_block();
         ctx.has(Item::Uhrum_Annuna_Corridor_Block)
     }
+}
+pub fn observe_access_uhrum_breach_annuna_gate_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Annuna_Gate_Gate
+    {
+        full_obs.observe_uhrum_breach_annuna_gate_gate();
+        ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate)
+    }
+}
+pub fn observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook
+    ({
+        full_obs.observe_uhrum_breach_annuna_gate_gate();
+        ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
+pub fn observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
+    (({
+        full_obs.observe_uhrum_breach_annuna_gate_gate();
+        ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
 }
 pub fn observe_access_uhrum_breach_rock_and_gate_gate(
     ctx: &Context,

@@ -208,6 +208,7 @@ pub enum Item {
     The_Student,
     Udusan,
     Uhrum_Annuna_Corridor_Block,
+    Uhrum_Breach_Annuna_Gate_Gate,
     Uhrum_Breach_Rock_and_Gate_Gate,
     Uhrum_Breach_Rock_and_Gate_Rock,
     Uhrum_Cavern_Wall,
@@ -436,6 +437,7 @@ impl fmt::Display for Item {
             Item::The_Student => write!(f, "{}", "The_Student"),
             Item::Udusan => write!(f, "{}", "Udusan"),
             Item::Uhrum_Annuna_Corridor_Block => write!(f, "{}", "Uhrum_Annuna_Corridor_Block"),
+            Item::Uhrum_Breach_Annuna_Gate_Gate => write!(f, "{}", "Uhrum_Breach_Annuna_Gate_Gate"),
             Item::Uhrum_Breach_Rock_and_Gate_Gate => {
                 write!(f, "{}", "Uhrum_Breach_Rock_and_Gate_Gate")
             }
@@ -660,6 +662,7 @@ impl std::str::FromStr for Item {
             "The_Student" => Ok(Item::The_Student),
             "Udusan" => Ok(Item::Udusan),
             "Uhrum_Annuna_Corridor_Block" => Ok(Item::Uhrum_Annuna_Corridor_Block),
+            "Uhrum_Breach_Annuna_Gate_Gate" => Ok(Item::Uhrum_Breach_Annuna_Gate_Gate),
             "Uhrum_Breach_Rock_and_Gate_Gate" => Ok(Item::Uhrum_Breach_Rock_and_Gate_Gate),
             "Uhrum_Breach_Rock_and_Gate_Rock" => Ok(Item::Uhrum_Breach_Rock_and_Gate_Rock),
             "Uhrum_Cavern_Wall" => Ok(Item::Uhrum_Cavern_Wall),

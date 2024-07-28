@@ -780,6 +780,10 @@ impl world::Accessible for Location {
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => rules::access_invoke_mist2(ctx, world),
+            LocationId::Uhrum_Breach__Annuna_Gate__Button__Hit_Button => true,
+            LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask => true,
+            LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Collection_Skip => true,
+            LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Uhrum_Breach__East_Glitch__Glitch_East__Break_Through_Glitch => true,
             LocationId::Uhrum_Breach__East_Glitch__Glitch_West__Break_Through_Glitch => true,
             LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health => true,
@@ -1337,6 +1341,7 @@ impl world::Accessible for Location {
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__Charge_Through_Rock => rules::observe_access_invoke_charge(ctx, world, full_obs),
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Upgraded_Mist_Through_Rock => rules::observe_access_invoke_mist2(ctx, world, full_obs),
@@ -1994,6 +1999,7 @@ impl world::Accessible for Location {
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__Charge_Through_Rock => rules::explain_invoke_charge(ctx, world, edict),
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Upgraded_Mist_Through_Rock => rules::explain_invoke_mist2(ctx, world, edict),
@@ -2027,7 +2033,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 763] = [
+static LOC_DEFS: [Location; 767] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -7744,6 +7750,42 @@ static LOC_DEFS: [Location; 763] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Uhrum_Breach__Annuna_Gate__Button__Hit_Button,
+        canonical: CanonId::Loc_Uhrum_Breach__Annuna_Gate__Button__Hit_Button,
+        item: Item::Uhrum_Breach_Annuna_Gate_Gate,
+        price: Currency::Free,
+        time: 100,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask,
+        canonical: CanonId::Uhrum_Breach_East_Copse_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Collection_Skip,
+        canonical: CanonId::Uhrum_Breach_East_Copse_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Fast_Travel,
+        canonical: CanonId::Uhrum_Breach_East_Copse_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__UVB_East_Copse_Flask,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Uhrum_Breach__East_Glitch__Glitch_East__Break_Through_Glitch,
         canonical: CanonId::Uhrum_East_Glitch,
         item: Item::Uhrum_East_Glitch,
@@ -9290,6 +9332,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Uhrum_Breach__East_Glitch__Glitch_West__Break_Through_Glitch => SpotId::Uhrum_Breach__East_Glitch__Glitch_West,
         LocationId::Uhrum_Breach__East_Glitch__Glitch_East__Break_Through_Glitch => SpotId::Uhrum_Breach__East_Glitch__Glitch_East,
         LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health => SpotId::Uhrum_Breach__East_Glitch__Northeast_Flower,
+        LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask | LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Collection_Skip | LocationId::Uhrum_Breach__East_Copse__Hidden_Cache__Flask_Fast_Travel => SpotId::Uhrum_Breach__East_Copse__Hidden_Cache,
+        LocationId::Uhrum_Breach__Annuna_Gate__Button__Hit_Button => SpotId::Uhrum_Breach__Annuna_Gate__Button,
         LocationId::Uhrum__West_Entrance__Inner_Dais__Item => SpotId::Uhrum__West_Entrance__Inner_Dais,
         LocationId::Uhrum__West_Entrance__Gate_Switch__Open_Gate => SpotId::Uhrum__West_Entrance__Gate_Switch,
         LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => SpotId::Uhrum__West_Entrance__Upper_Wall_West,

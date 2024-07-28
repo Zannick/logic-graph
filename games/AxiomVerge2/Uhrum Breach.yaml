@@ -776,16 +776,6 @@ areas:
           movement: base
           penalty_tags: [xdoor, -base.2]
 
-- name: West Copse  # MARK: West Copse
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: West 27
-      coord: [26.1, 26.75]
-    - name: West 28
-      coord: [26.15, 27.75]  # Shifted over to match a flipside
-      data:
-        flipside: Uhrum > Waterfalls > West Water Nook
-
 - name: Blob  # MARK: Blob
   on_entry: $reset_old_area(^newpos)
   data:
@@ -834,3 +824,475 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalty_tags: [xdoor, -fast_hover.2]
+
+- name: West Copse  # MARK: West Copse
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 27
+      coord: [26.1, 26.75]
+      local:
+        - to: West Slope
+      exits:
+        - to: North Slime > East
+          tags: [xdoor]
+        - to: Center West
+          req: Drone_Hover
+          movement: base
+    - name: West Slope
+      coord: [26.35, 26.9]
+      local:
+        - to: West 27
+          jumps: 1
+        - to: Lower West Ledge
+      exits:
+        - to: Center West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Lower West Ledge
+      coord: [26.65, 27.4]
+      data:
+        flipside: Uhrum > Waterfalls > West Water Ledge
+      local:
+        - to: West Slope
+          jumps: 3
+        - to: Small Flower
+        - to: Bottom West
+      exits:
+        - to: Center West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Small Flower
+      coord: [26.8, 27.55]
+      local:
+        - to: Lower West Ledge
+          jumps: 1
+        - to: Bottom West
+        - to: Center Pillar
+          jumps: 3
+      exits:
+        - to: Center Pillar
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Bottom West
+      coord: [26.65, 27.8]
+      local:
+        - to: West 28
+          jumps: 1
+        - to: Small Flower
+          jumps: 1
+      exits:
+        - to: Lower West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West 28
+      coord: [26.15, 27.75]  # Shifted over to match a flipside
+      data:
+        flipside: Uhrum > Waterfalls > West Water Nook
+      local:
+        - to: Bottom West
+      exits:
+        - to: South Slime > East
+          tags: [xdoor]
+
+    - name: Center West
+      coord: [26.7, 26.9]
+      data:
+        flipside: Uhrum > Waterfalls > Center Island West
+      local:
+        - to: Lower West Ledge
+        - to: West Slope
+          jumps: 2
+        - to: Center East
+      exits:
+        - to: West 27
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Center East
+      coord: [27.0, 26.9]
+      data:
+        flipside: Uhrum > Waterfalls > Center Island East
+      local:
+        - to: Center West
+        - to: Center Pillar
+        - to: Small Flower
+          thru: [27.0, 27.2]
+      exits:
+        - to: West 27
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Center Pillar
+      coord: [27.1, 27.15]
+      data:
+        flipside: Uhrum > Waterfalls > Water Pillar
+      local:
+        - to: Small Flower
+      exits:
+        - to: Center East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Center East
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+        - to: East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: East Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+    - name: East Ledge
+      coord: [27.45, 26.9]
+      data:
+        flipside: Uhrum > Waterfalls > East Water's Edge
+      local:
+        - to: Center Pillar
+        - to: East
+          jumps: 1
+      exits:
+        - to: East Copse > Center West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+        - to: East Copse > Lower West Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: East
+      coord: [27.9, 26.75]
+      local:
+        - to: East Ledge
+      exits:
+        - to: East Copse > West
+          tags: [xdoor]
+
+- name: East Copse  # MARK: East Copse
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [28, 26, 29, 27]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > UVB East Copse Flask
+  spots:
+    - name: West
+      coord: [28.1, 26.75]
+      local:
+        - to: Lower West Ledge
+      exits:
+        - to: West Copse > East
+          tags: [xdoor]
+        - to: Center West
+          req: Drone_Hover
+          movement: base
+    - name: Lower West Ledge
+      coord: [28.45, 27.2]
+      data:
+        flipside: Uhrum > East Lake > West Underwater Ledge
+      exits:
+        - to: West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Center West
+          req: Slingshot_Hook and (Slingshot_Weapon or Drone_Hover)
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not Slingshot_Weapon  # Avoid the spiders
+              add: 0.5
+    - name: Center West
+      coord: [28.6, 26.8]
+      local:
+        - to: Lower West Ledge
+        - to: Center East
+          jumps: 2
+      exits:
+        - to: West
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Center East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Platform East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Center East
+      coord: [29.0, 26.7]
+      data:
+        flipside: Uhrum > East Lake > East Block
+      local:
+        - to: Center West
+        - to: Platform East
+      exits:
+        - to: Hidden Passage
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Hidden Passage
+          req: Nanite_Mist
+          movement: mist1
+        - to: Hidden Passage
+          req: $mist2
+          movement: mist2
+    - name: Hidden Passage
+      coord: [29.0, 26.25]
+      local:
+        - to: Hidden Cache
+        - to: Center East
+        - to: Center West
+        - to: Platform East
+    - name: Hidden Cache
+      coord: [28.8, 26.25]
+      local:
+        - to: Hidden Passage
+      locations:
+        - name: Flask
+          canon: Uhrum_Breach_East_Copse_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Breach_East_Copse_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Uhrum_Breach_East_Copse_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Platform West
+      coord: [29.25, 26.9]
+      data:
+        flipside: Uhrum > East Lake > Island West
+      local:
+        - to: Platform East
+      exits:
+        - to: Center East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Center West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Platform East
+      coord: [29.55, 26.9]
+      data:
+        flipside: Uhrum > East Lake > Island East
+      local:
+        - to: East
+          jumps: 3
+        - to: Platform West
+      exits:
+        - to: Annuna Gate > Building Roof Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.1]
+        - to: Annuna Gate > Building Corner Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.1]
+    - name: East
+      coord: [29.9, 26.75]
+      local:
+        - to: Platform East
+      exits:
+        - to: Annuna Gate > West
+          tags: [xdoor]
+
+- name: Annuna Gate
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [31, 26, 23, 27]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > UVB East
+  spots:
+    - name: West
+      coord: [30.1, 26.75]
+      local:
+        - to: Building Corner Ledge
+      exits:
+        - to: East Copse > East
+          tags: [xdoor]
+        - to: Building Roof Ledge
+          req: Drone_Hover
+          movement: base
+    - name: Building Roof Ledge
+      coord: [30.55, 26.9]
+      local:
+        - to: Building Corner Ledge
+        - to: West
+          jumps: 3
+      exits:
+        - to: Structure
+          req: Uhrum_Breach_Annuna_Gate_Gate
+          movement: base
+          jumps: 1
+        - to: Structure
+          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Upper Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Building Corner Ledge
+      coord: [30.5, 27.0]
+      local:
+        - to: Building Roof Ledge
+          jumps: 1
+        - to: West
+          jumps: 3
+      exits:
+        - to: Upper Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+    - name: Upper Ledge
+      coord: [30.55, 26.4]
+      local:
+        - to: North
+          jumps: 1
+        - to: Building Roof Ledge
+        - to: Building Corner Ledge
+      exits:
+        - to: Structure
+          req: Uhrum_Breach_Annuna_Gate_Gate
+          movement: base
+    - name: North
+      coord: [30.5, 26.2]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Locked Down > South
+          tags: [ydoor]
+
+    # East of Gate
+    - name: Structure West
+      coord: [31.15, 26.8]
+      data:
+        flipside: Uhrum > Cavern > Wall Left
+      local:
+        - to: Structure
+      exits:
+        - to: Save Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Building Roof Ledge
+          req: Uhrum_Breach_Annuna_Gate_Gate
+          movement: base
+        - to: Upper Ledge
+          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Button
+          req: Slingshot_Hook and Slingshot_Weapon
+          movement: fast_hover
+        - to: Annuna Breach > Smiley > Upper Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Structure
+      coord: [31.2, 26.8]
+      local:
+        - to: Button
+        - to: Save Point
+          jumps: 1
+        - to: Structure West
+      exits:
+        - to: Building Roof Ledge
+          req: Uhrum_Breach_Annuna_Gate_Gate
+          movement: base
+        - to: Upper Ledge
+          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Building Roof Ledge
+          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Upper Ledge
+          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Save Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Annuna Breach > Smiley > Upper Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Button
+      coord: [31.35, 26.95]
+      local:
+        - to: Structure
+          jumps: 1
+        - to: Save Point
+          jumps: 1
+      locations:
+        - name: Hit Button
+          item: Uhrum_Breach_Annuna_Gate_Gate
+          tags: [button]
+      exits:
+        - to: Structure
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Save Point
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Annuna Breach > Smiley > Upper Portal Stand
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Save Point
+      coord: [31.5, 26.75]
+      data:
+        flipside: Uhrum > Cavern > Pedestal
+      local:
+        - to: Structure
+        - to: Button
+        - to: East
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East
+      coord: [31.9, 26.75]
+      local:
+        - to: Save Point
+      exits:
+        - to: Structure
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Button
+          req: Slingshot_Hook
+          movement: fast_hover
+
+- name: Locked Down
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: South
+      coord: [30.5, 25.8]

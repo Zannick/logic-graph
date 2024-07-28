@@ -360,12 +360,12 @@ helpers:  # MARK: helpers
      Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,
      Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Sagiga_on_the_Worldstream]
-  # TODO: can we check canon visits rather than reserve an i8?
+  # TODO: can we check canon visits rather than reserve an i8 for counting items?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{43}, Big_Flask{23}]
+    [Flask{44}, Big_Flask{23}]
   $all_health:itemList: >
-    [Health_Node{4}, Health_Fragment{19}]
+    [Health_Node{4}, Health_Fragment{20}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
