@@ -3176,6 +3176,8 @@ subgraph Menu
         Menu__Breach_Map__UVB_East_Copse_Flask(UVB East Copse Flask);
         Menu__Breach_Map__UVB_East_Glitch_Health(UVB East Glitch Health);
         Menu__Breach_Map__UVB_East_Glitches(UVB East Glitches);
+        Menu__Breach_Map__UVB_Overgrown_Ruins_Flask(UVB Overgrown Ruins Flask);
+        Menu__Breach_Map__UVB_Overgrown_Ruins_Portal(UVB Overgrown Ruins Portal);
         Menu__Breach_Map__UVB_Save_and_Go_Portal(UVB Save and Go Portal);
         Menu__Breach_Map__UVB_West_Glitches(UVB West Glitches);
     end
@@ -3288,6 +3290,27 @@ subgraph Uhrum_Breach
     end
     subgraph Uhrum_Breach__Locked_Down[Locked Down]
         Uhrum_Breach__Locked_Down__South(South);
+        Uhrum_Breach__Locked_Down__Center_Right_Pillar(Center Right Pillar);
+        Uhrum_Breach__Locked_Down__East_Enemy(East Enemy);
+        Uhrum_Breach__Locked_Down__Gate_Left(Gate Left);
+        Uhrum_Breach__Locked_Down__Item_Behind_Gate(Item Behind Gate);
+        Uhrum_Breach__Locked_Down__Save_Point(Save Point);
+        Uhrum_Breach__Locked_Down__East_Stone(East Stone);
+        Uhrum_Breach__Locked_Down__Button(Button);
+        Uhrum_Breach__Locked_Down__West_Path(West Path);
+        Uhrum_Breach__Locked_Down__West_Stone_East(West Stone East);
+        Uhrum_Breach__Locked_Down__West(West);
+    end
+    subgraph Uhrum_Breach__Overgrown_Ruins[Overgrown Ruins]
+        Uhrum_Breach__Overgrown_Ruins__East(East);
+        Uhrum_Breach__Overgrown_Ruins__East_Corner(East Corner);
+        Uhrum_Breach__Overgrown_Ruins__Portal_Stand(Portal Stand);
+        Uhrum_Breach__Overgrown_Ruins__Branches(Branches);
+        Uhrum_Breach__Overgrown_Ruins__Two_Guards(Two Guards);
+        Uhrum_Breach__Overgrown_Ruins__Wall_East(Wall East);
+        Uhrum_Breach__Overgrown_Ruins__Wall_West(Wall West);
+        Uhrum_Breach__Overgrown_Ruins__West_Floor(West Floor);
+        Uhrum_Breach__Overgrown_Ruins__Cache(Cache);
     end
 end
 subgraph Uhrum
@@ -3388,6 +3411,7 @@ subgraph Uhrum
         Uhrum__Waterfalls__East_24(East 24);
         Uhrum__Waterfalls__West_Wall(West Wall);
         Uhrum__Waterfalls__West_Platform(West Platform);
+        Uhrum__Waterfalls__Sloped_Rock(Sloped Rock);
         Uhrum__Waterfalls__Large_Rock(Large Rock);
         Uhrum__Waterfalls__Medium_Rock(Medium Rock);
         Uhrum__Waterfalls__Small_Rock(Small Rock);
@@ -5443,6 +5467,9 @@ Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
 Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point
 Menu__Breach_Map__MEB_Southwest --> Ebih_Breach__Rock_Block__Save_Point
 Menu__Breach_Map__UVB_Center --> Uhrum_Breach__East_Glitch__Save_Point
+Menu__Breach_Map__UVB_Dead_end --> Uhrum_Breach__Locked_Down__Save_Point
+Menu__Breach_Map__UVB_East --> Uhrum_Breach__Annuna_Gate__Save_Point
+Menu__Breach_Map__UVB_West --> Uhrum_Breach__Save_and_Go__Save_Point
 Menu__Emergence_Map__Camp --> Emergence__Camp_Exterior__Save_Point
 Menu__Kiengir_Map__Amagi_East_Lake --> Amagi__East_Lake__Save_Point
 Menu__Kiengir_Map__Amagi_Main_Area --> Amagi__Main_Area__Save_Point
@@ -5484,7 +5511,7 @@ Uhrum_Breach__Annuna_Gate__Button --> Uhrum_Breach__Annuna_Gate__Save_Point
 Uhrum_Breach__Annuna_Gate__Button --> Uhrum_Breach__Annuna_Gate__Structure
 Uhrum_Breach__Annuna_Gate__East --> Uhrum_Breach__Annuna_Gate__Button
 Uhrum_Breach__Annuna_Gate__East --> Uhrum_Breach__Annuna_Gate__Structure
-Uhrum_Breach__Annuna_Gate__North --> Uhrum_Breach__Locked_Down__South
+Uhrum_Breach__Annuna_Gate__North <--> Uhrum_Breach__Locked_Down__South
 Uhrum_Breach__Annuna_Gate__Structure --> Annuna_Breach__Smiley__Upper_Portal_Stand
 Uhrum_Breach__Annuna_Gate__Structure --> Uhrum_Breach__Annuna_Gate__Save_Point
 Uhrum_Breach__Annuna_Gate__Structure <--> Uhrum_Breach__Annuna_Gate__Upper_Ledge
@@ -5532,7 +5559,28 @@ Uhrum_Breach__East_Glitch__Wall_East_Platform --> Uhrum_Breach__East_Glitch__Nor
 Uhrum_Breach__East_Glitch__Wall_West_Platform --> Uhrum_Breach__East_Glitch__Middle_Platform_East
 Uhrum_Breach__East_Glitch__West <--> Uhrum_Breach__Rock_and_Gate__East
 Uhrum_Breach__East_Glitch__West_Flower --> Uhrum_Breach__East_Glitch__Middle_Ledge
+Uhrum_Breach__Locked_Down__Button --> Uhrum_Breach__Locked_Down__East_Stone
+Uhrum_Breach__Locked_Down__Button --> Uhrum_Breach__Locked_Down__Save_Point
+Uhrum_Breach__Locked_Down__East_Enemy --> Uhrum_Breach__Locked_Down__Center_Right_Pillar
+Uhrum_Breach__Locked_Down__East_Enemy --> Uhrum_Breach__Locked_Down__Gate_Left
+Uhrum_Breach__Locked_Down__East_Stone <--> Uhrum_Breach__Locked_Down__Item_Behind_Gate
+Uhrum_Breach__Locked_Down__Gate_Left <--> Uhrum_Breach__Locked_Down__Item_Behind_Gate
+Uhrum_Breach__Locked_Down__Gate_Left --> Uhrum_Breach__Locked_Down__Save_Point
+Uhrum_Breach__Locked_Down__Save_Point --> Uhrum_Breach__Locked_Down__East_Stone
+Uhrum_Breach__Locked_Down__Save_Point --> Uhrum_Breach__Locked_Down__Item_Behind_Gate
+Uhrum_Breach__Locked_Down__South --> Uhrum_Breach__Locked_Down__Center_Right_Pillar
+Uhrum_Breach__Locked_Down__West <--> Uhrum_Breach__Locked_Down__West_Stone_East
+Uhrum_Breach__Locked_Down__West <--> Uhrum_Breach__Overgrown_Ruins__East
+Uhrum_Breach__Locked_Down__West_Path --> Uhrum_Breach__Locked_Down__East_Enemy
+Uhrum_Breach__Locked_Down__West_Path --> Uhrum_Breach__Locked_Down__South
+Uhrum_Breach__Locked_Down__West_Stone_East --> Uhrum_Breach__Overgrown_Ruins__East_Corner
 Uhrum_Breach__North_Slime__East <--> Uhrum_Breach__West_Copse__West_27
+Uhrum_Breach__Overgrown_Ruins__Cache <--> Uhrum_Breach__Overgrown_Ruins__Wall_West
+Uhrum_Breach__Overgrown_Ruins__East_Corner --> Uhrum_Breach__Overgrown_Ruins__Portal_Stand
+Uhrum_Breach__Overgrown_Ruins__Two_Guards --> Uhrum_Breach__Overgrown_Ruins__Branches
+Uhrum_Breach__Overgrown_Ruins__Two_Guards --> Uhrum_Breach__Overgrown_Ruins__Wall_East
+Uhrum_Breach__Overgrown_Ruins__Wall_East <--> Uhrum_Breach__Overgrown_Ruins__Wall_West
+Uhrum_Breach__Overgrown_Ruins__West_Floor --> Uhrum_Breach__Overgrown_Ruins__Cache
 Uhrum_Breach__Rock_and_Gate__Button --> Irikar_Breach__Uhrum_Connector__Sand_Swarm
 Uhrum_Breach__Rock_and_Gate__Center_Area_West --> Uhrum_Breach__Rock_and_Gate__North
 Uhrum_Breach__Rock_and_Gate__Center_Area_West <--> Uhrum_Breach__Rock_and_Gate__Rock_West
@@ -5779,12 +5827,15 @@ Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__Green_Middle_Ledge
 Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__West_Platform
 Uhrum__Waterfalls__Medium_Rock --> Uhrum__Waterfalls__West_Wall
 Uhrum__Waterfalls__Northeast_Ledge --> Uhrum__Waterfalls__Ceiling_Opening
+Uhrum__Waterfalls__Sloped_Rock --> Uhrum__Waterfalls__Green_Middle_Ledge
+Uhrum__Waterfalls__Sloped_Rock --> Uhrum__Waterfalls__West_25
 Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__Center_Island_East
 Uhrum__Waterfalls__Water_Pillar --> Uhrum__Waterfalls__East_Waters_Edge
 Uhrum__Waterfalls__West_24 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_25 --> Uhrum__Waterfalls__Below_Block
 Uhrum__Waterfalls__West_27 --> Uhrum__Waterfalls__Large_Rock
 Uhrum__Waterfalls__West_Platform --> Uhrum__Waterfalls__Green_Middle_Ledge
+Uhrum__Waterfalls__West_Platform --> Uhrum__Waterfalls__Sloped_Rock
 Uhrum__Waterfalls__West_Shallow_End --> Uhrum__Waterfalls__Center_Island_West
 Uhrum__Waterfalls__West_Wall --> Uhrum__Waterfalls__West_25
 Uhrum__Waterfalls__West_Water_Nook --> Uhrum__Waterfalls__West_Water_Ledge

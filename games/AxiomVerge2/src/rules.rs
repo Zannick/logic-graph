@@ -504,6 +504,10 @@ pub fn access_drone_melee_damage_2(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Damage_2
     ctx.has(Item::Drone_Melee_Damage_2)
 }
+pub fn access_drone_melee_damage_3(ctx: &Context, world: &World) -> bool {
+    // Drone_Melee_Damage_3
+    ctx.has(Item::Drone_Melee_Damage_3)
+}
 pub fn access_drone_melee_speed(ctx: &Context, world: &World) -> bool {
     // Drone_Melee_Speed
     ctx.has(Item::Drone_Melee_Speed)
@@ -2872,9 +2876,21 @@ pub fn access_map__uhrum__west_entrance__save(ctx: &Context, world: &World) -> b
     // ^map__uhrum__west_entrance__save
     ctx.map__uhrum__west_entrance__save()
 }
+pub fn access_map__uhrum_breach__annuna_gate__save(ctx: &Context, world: &World) -> bool {
+    // ^map__uhrum_breach__annuna_gate__save
+    ctx.map__uhrum_breach__annuna_gate__save()
+}
 pub fn access_map__uhrum_breach__east_glitch__save(ctx: &Context, world: &World) -> bool {
     // ^map__uhrum_breach__east_glitch__save
     ctx.map__uhrum_breach__east_glitch__save()
+}
+pub fn access_map__uhrum_breach__locked_down__save(ctx: &Context, world: &World) -> bool {
+    // ^map__uhrum_breach__locked_down__save
+    ctx.map__uhrum_breach__locked_down__save()
+}
+pub fn access_map__uhrum_breach__save_and_go__save(ctx: &Context, world: &World) -> bool {
+    // ^map__uhrum_breach__save_and_go__save
+    ctx.map__uhrum_breach__save_and_go__save()
 }
 pub fn access_melee_damage(ctx: &Context, world: &World) -> bool {
     // Melee_Damage
@@ -3309,6 +3325,21 @@ pub fn access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(
     // Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
     ((ctx.has(Item::Uhrum_Breach_Annuna_Gate_Gate) && ctx.has(Item::Slingshot_Hook))
         && ctx.has(Item::Drone_Hover))
+}
+pub fn access_uhrum_breach_locked_down_gate(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Breach_Locked_Down_Gate
+    ctx.has(Item::Uhrum_Breach_Locked_Down_Gate)
+}
+pub fn access_uhrum_breach_locked_down_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Uhrum_Breach_Locked_Down_Gate and Slingshot_Hook
+    (ctx.has(Item::Uhrum_Breach_Locked_Down_Gate) && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_uhrum_breach_overgrown_ruins_wall(ctx: &Context, world: &World) -> bool {
+    // Uhrum_Breach_Overgrown_Ruins_Wall
+    ctx.has(Item::Uhrum_Breach_Overgrown_Ruins_Wall)
 }
 pub fn access_uhrum_breach_rock_and_gate_gate(ctx: &Context, world: &World) -> bool {
     // Uhrum_Breach_Rock_and_Gate_Gate
@@ -6138,6 +6169,18 @@ pub fn explain_drone_melee_damage_2(
         let h = ctx.has(Item::Drone_Melee_Damage_2);
         edict.insert("Drone_Melee_Damage_2", format!("{}", h));
         (h, vec!["Drone_Melee_Damage_2"])
+    }
+}
+pub fn explain_drone_melee_damage_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Drone_Melee_Damage_3
+    {
+        let h = ctx.has(Item::Drone_Melee_Damage_3);
+        edict.insert("Drone_Melee_Damage_3", format!("{}", h));
+        (h, vec!["Drone_Melee_Damage_3"])
     }
 }
 pub fn explain_drone_melee_speed(
@@ -15604,6 +15647,18 @@ pub fn explain_map__uhrum__west_entrance__save(
         (r, vec!["^map__uhrum__west_entrance__save"])
     }
 }
+pub fn explain_map__uhrum_breach__annuna_gate__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__uhrum_breach__annuna_gate__save
+    {
+        let r = ctx.map__uhrum_breach__annuna_gate__save();
+        edict.insert("^map__uhrum_breach__annuna_gate__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum_breach__annuna_gate__save"])
+    }
+}
 pub fn explain_map__uhrum_breach__east_glitch__save(
     ctx: &Context,
     world: &World,
@@ -15614,6 +15669,30 @@ pub fn explain_map__uhrum_breach__east_glitch__save(
         let r = ctx.map__uhrum_breach__east_glitch__save();
         edict.insert("^map__uhrum_breach__east_glitch__save", format!("{:?}", r));
         (r, vec!["^map__uhrum_breach__east_glitch__save"])
+    }
+}
+pub fn explain_map__uhrum_breach__locked_down__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__uhrum_breach__locked_down__save
+    {
+        let r = ctx.map__uhrum_breach__locked_down__save();
+        edict.insert("^map__uhrum_breach__locked_down__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum_breach__locked_down__save"])
+    }
+}
+pub fn explain_map__uhrum_breach__save_and_go__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__uhrum_breach__save_and_go__save
+    {
+        let r = ctx.map__uhrum_breach__save_and_go__save();
+        edict.insert("^map__uhrum_breach__save_and_go__save", format!("{:?}", r));
+        (r, vec!["^map__uhrum_breach__save_and_go__save"])
     }
 }
 pub fn explain_melee_damage(
@@ -17847,6 +17926,55 @@ pub fn explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(
         }
     }
 }
+pub fn explain_uhrum_breach_locked_down_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Locked_Down_Gate
+    {
+        let h = ctx.has(Item::Uhrum_Breach_Locked_Down_Gate);
+        edict.insert("Uhrum_Breach_Locked_Down_Gate", format!("{}", h));
+        (h, vec!["Uhrum_Breach_Locked_Down_Gate"])
+    }
+}
+pub fn explain_uhrum_breach_locked_down_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Locked_Down_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_Breach_Locked_Down_Gate);
+            edict.insert("Uhrum_Breach_Locked_Down_Gate", format!("{}", h));
+            (h, vec!["Uhrum_Breach_Locked_Down_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_uhrum_breach_overgrown_ruins_wall(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_Breach_Overgrown_Ruins_Wall
+    {
+        let h = ctx.has(Item::Uhrum_Breach_Overgrown_Ruins_Wall);
+        edict.insert("Uhrum_Breach_Overgrown_Ruins_Wall", format!("{}", h));
+        (h, vec!["Uhrum_Breach_Overgrown_Ruins_Wall"])
+    }
+}
 pub fn explain_uhrum_breach_rock_and_gate_gate(
     ctx: &Context,
     world: &World,
@@ -19665,6 +19793,17 @@ pub fn observe_access_drone_melee_damage_2(
     {
         full_obs.observe_drone_melee_damage_2();
         ctx.has(Item::Drone_Melee_Damage_2)
+    }
+}
+pub fn observe_access_drone_melee_damage_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Drone_Melee_Damage_3
+    {
+        full_obs.observe_drone_melee_damage_3();
+        ctx.has(Item::Drone_Melee_Damage_3)
     }
 }
 pub fn observe_access_drone_melee_speed(
@@ -24605,6 +24744,17 @@ pub fn observe_access_map__uhrum__west_entrance__save(
         ctx.map__uhrum__west_entrance__save()
     }
 }
+pub fn observe_access_map__uhrum_breach__annuna_gate__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__uhrum_breach__annuna_gate__save
+    {
+        full_obs.observe_map__uhrum_breach__annuna_gate__save();
+        ctx.map__uhrum_breach__annuna_gate__save()
+    }
+}
 pub fn observe_access_map__uhrum_breach__east_glitch__save(
     ctx: &Context,
     world: &World,
@@ -24614,6 +24764,28 @@ pub fn observe_access_map__uhrum_breach__east_glitch__save(
     {
         full_obs.observe_map__uhrum_breach__east_glitch__save();
         ctx.map__uhrum_breach__east_glitch__save()
+    }
+}
+pub fn observe_access_map__uhrum_breach__locked_down__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__uhrum_breach__locked_down__save
+    {
+        full_obs.observe_map__uhrum_breach__locked_down__save();
+        ctx.map__uhrum_breach__locked_down__save()
+    }
+}
+pub fn observe_access_map__uhrum_breach__save_and_go__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__uhrum_breach__save_and_go__save
+    {
+        full_obs.observe_map__uhrum_breach__save_and_go__save();
+        ctx.map__uhrum_breach__save_and_go__save()
     }
 }
 pub fn observe_access_melee_damage(
@@ -25789,6 +25961,42 @@ pub fn observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone
         full_obs.observe_drone_hover();
         ctx.has(Item::Drone_Hover)
     }))
+}
+pub fn observe_access_uhrum_breach_locked_down_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Locked_Down_Gate
+    {
+        full_obs.observe_uhrum_breach_locked_down_gate();
+        ctx.has(Item::Uhrum_Breach_Locked_Down_Gate)
+    }
+}
+pub fn observe_access_uhrum_breach_locked_down_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Locked_Down_Gate and Slingshot_Hook
+    ({
+        full_obs.observe_uhrum_breach_locked_down_gate();
+        ctx.has(Item::Uhrum_Breach_Locked_Down_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
+pub fn observe_access_uhrum_breach_overgrown_ruins_wall(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_Breach_Overgrown_Ruins_Wall
+    {
+        full_obs.observe_uhrum_breach_overgrown_ruins_wall();
+        ctx.has(Item::Uhrum_Breach_Overgrown_Ruins_Wall)
+    }
 }
 pub fn observe_access_uhrum_breach_rock_and_gate_gate(
     ctx: &Context,

@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 2982] = [
+static SPOT_DEFS: [SpotDef; 3004] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -14560,13 +14560,13 @@ static SPOT_DEFS: [SpotDef; 2982] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__UVB_Dead_end,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__UVB_Dead_end__ex__Uhrum_Breach__Locked_Down__Save_Point_1, ExitId::Menu__Breach_Map__UVB_Dead_end__ex__Uhrum_Breach__Locked_Down__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Menu__Breach_Map__UVB_East,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__UVB_East__ex__Uhrum_Breach__Annuna_Gate__Save_Point_1, ExitId::Menu__Breach_Map__UVB_East__ex__Uhrum_Breach__Annuna_Gate__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -14588,6 +14588,18 @@ static SPOT_DEFS: [SpotDef; 2982] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__UVB_Overgrown_Ruins_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__UVB_Overgrown_Ruins_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__UVB_Save_and_Go_Portal,
         loc_range: None,
         exit_range: None,
@@ -14596,7 +14608,7 @@ static SPOT_DEFS: [SpotDef; 2982] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__UVB_West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__UVB_West__ex__Uhrum_Breach__Save_and_Go__Save_Point_1, ExitId::Menu__Breach_Map__UVB_West__ex__Uhrum_Breach__Save_and_Go__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -16148,9 +16160,69 @@ static SPOT_DEFS: [SpotDef; 2982] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Uhrum_Breach__Locked_Down__South,
+        id: SpotId::Uhrum_Breach__Locked_Down__Button,
+        loc_range: Some((LocationId::Uhrum_Breach__Locked_Down__Button__Hit_Button, LocationId::Uhrum_Breach__Locked_Down__Button__Hit_Button)),
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__Button__ex__East_Stone_1, ExitId::Uhrum_Breach__Locked_Down__Button__ex__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__Center_Right_Pillar,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__East_Enemy,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1, ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__East_Stone,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__East_Stone__ex__Item_Behind_Gate_1, ExitId::Uhrum_Breach__Locked_Down__East_Stone__ex__Item_Behind_Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__Gate_Left,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1, ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__Item_Behind_Gate,
+        loc_range: Some((LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask, LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__East_Stone_1, ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__Gate_Left_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__Save_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1, ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__South__ex__Annuna_Gate__North_1, ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__West__ex__Overgrown_Ruins__East_1, ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__West_Path,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__East_Enemy_1, ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Locked_Down__West_Stone_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__Overgrown_Ruins__East_Corner_1, ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1)),
         action_range: None,
     },
     SpotDef {
@@ -16169,6 +16241,60 @@ static SPOT_DEFS: [SpotDef; 2982] = [
         id: SpotId::Uhrum_Breach__North_Slime__West,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1, ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__Branches,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__Cache,
+        loc_range: Some((LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask, LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__Cache__ex__Wall_West_1, ExitId::Uhrum_Breach__Overgrown_Ruins__Cache__ex__Wall_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__East__ex__Locked_Down__West_1, ExitId::Uhrum_Breach__Overgrown_Ruins__East__ex__Locked_Down__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__East_Corner,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1, ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__Portal_Stand,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__Two_Guards,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1, ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__Wall_East,
+        loc_range: Some((LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall, LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1, ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__Wall_West,
+        loc_range: Some((LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall, LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Upgraded_Mist_Through_Wall)),
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Cache_1, ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Wall_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum_Breach__Overgrown_Ruins__West_Floor,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__West_Floor__ex__Cache_1, ExitId::Uhrum_Breach__Overgrown_Ruins__West_Floor__ex__Cache_1)),
         action_range: None,
     },
     SpotDef {
@@ -17672,6 +17798,12 @@ static SPOT_DEFS: [SpotDef; 2982] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Uhrum__Waterfalls__Sloped_Rock,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1, ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Uhrum__Waterfalls__Small_Rock,
         loc_range: None,
         exit_range: None,
@@ -17710,7 +17842,7 @@ static SPOT_DEFS: [SpotDef; 2982] = [
     SpotDef {
         id: SpotId::Uhrum__Waterfalls__West_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1, ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2)),
+        exit_range: Some((ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1, ExitId::Uhrum__Waterfalls__West_Platform__ex__Sloped_Rock_1)),
         action_range: None,
     },
     SpotDef {

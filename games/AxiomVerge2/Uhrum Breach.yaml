@@ -1117,7 +1117,7 @@ areas:
         - to: Annuna Gate > West
           tags: [xdoor]
 
-- name: Annuna Gate
+- name: Annuna Gate  # MARK: Annuna Gate
   on_entry: $reset_old_area(^newpos)
   data:
     save_point: Save Point
@@ -1291,8 +1291,351 @@ areas:
           req: Slingshot_Hook
           movement: fast_hover
 
-- name: Locked Down
+- name: Locked Down  # MARK: Locked Down
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [31, 25, 32, 26]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > UVB Dead-end
   spots:
     - name: South
       coord: [30.5, 25.8]
+      local:
+        - to: West Path
+          jumps: 2
+      exits:
+        - to: Center Right Pillar
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Center Right Pillar
+          req: Drone_Hover
+          movement: base
+          jumps: 3
+        - to: Annuna Gate > North
+          tags: [ydoor]
+    - name: Center Right Pillar
+      coord: [30.65, 25.5]
+      local:
+        - to: West Path
+        - to: South
+        - to: East Enemy
+    - name: East Enemy
+      coord: [30.85, 25.75]
+      data:
+        flipside: Uhrum > Annuna Corridor > Between Two Flowers
+      local:
+        - to: Center Right Pillar
+          jumps: 2
+        - to: Gate Left
+          jumps: 1
+      exits:
+        - to: Center Right Pillar
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Gate Left
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Gate Left
+      coord: [31.05, 25.55]
+      local:
+        - to: East Enemy
+      exits:
+        - to: Item Behind Gate
+          req: Uhrum_Breach_Locked_Down_Gate
+          movement: base
+          jumps: 1
+        - to: Item Behind Gate
+          req: Uhrum_Breach_Locked_Down_Gate and Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Save Point
+          req: Fast_Travel
+          tags: [ft_room]
+    - name: Item Behind Gate
+      coord: [31.25, 25.5]
+      data:
+        flipside: Uhrum > Annuna Corridor > Wall Remnant
+      local:
+        - to: Save Point
+      locations:
+        - name: Flask
+          canon: Uhrum_Breach_Locked_Down_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Breach_Locked_Down_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Uhrum_Breach_Locked_Down_Flask
+          item: Flask
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: East Stone
+          req: Drone_Hover
+          movement: base
+        - to: Gate Left
+          req: Uhrum_Breach_Locked_Down_Gate
+          movement: base
+    - name: Save Point
+      coord: [31.475, 25.7]
+      local:
+        - to: Item Behind Gate
+          jumps: 1
+        - to: East Stone
+          jumps: 1
+      exits:
+        - to: Item Behind Gate
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: East Stone
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: East Stone
+      coord: [31.6, 25.5]
+      local:
+        - to: Button
+        - to: Save Point
+      exits:
+        - to: Item Behind Gate
+          req: Drone_Hover
+          movement: base
+    - name: Button
+      coord: [31.8, 25.75]
+      locations:
+        - name: Hit Button
+          item: Uhrum_Breach_Locked_Down_Gate
+          tags: [button]
+      exits:
+        - to: East Stone
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Save Point
+          req: Fast_Travel
+          tags: [ft_room]
+
+    - name: West Path
+      coord: [30.1, 25.6]
+      data:
+        flipside: Uhrum > Annuna Corridor > Open Pillar
+      local:
+        - to: South
+        - to: West Stone East
+      exits:
+        - to: East Enemy
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: South
+          req: Slingshot_Hook
+          movement: fast_hover
+    - name: West Stone East
+      coord: [29.4, 25.6]
+      local:
+        - to: West Path
+          jumps: 2
+        - to: West
+          jumps: 1
+      exits:
+        - to: West
+          req: Slingshot_Hook
+          movement: fast_hover
+        - to: Overgrown Ruins > East Corner
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: West
+      coord: [29.1, 25.6]
+      data:
+        flipside: Uhrum > Annuna Corridor > Block East
+      local:
+        - to: West Stone East
+      exits:
+        - to: West Stone East
+          req: Slingshot_Hook
+          movement: fast_hover
+        - to: Overgrown Ruins > East
+          tags: [xdoor]
+
+- name: Overgrown Ruins  # MARK: Overgrown Ruins
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    portal: [28, 25, 29, 26]
+    flask: [26, 25, 27, 26]
+  datamap:
+    map_spot:
+      portal: Menu > Breach Map > UVB Overgrown Ruins Portal
+      flask: Menu > Breach Map > UVB Overgrown Ruins Flask
+  spots:
+    - name: East
+      coord: [28.9, 25.6]
+      data:
+        flipside: Uhrum > Annuna Corridor > Block West
+      local:
+        - to: East Corner
+      exits:
+        - to: Locked Down > West
+          tags: [xdoor]
+    - name: East Corner
+      coord: [28.7, 25.9]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: East
+          jumps: 1
+      exits:
+        - to: Portal Stand
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Portal Stand
+      coord: [28.5, 25.7]
+      data:
+        flipside: Uhrum > Annuna Corridor > Save Point
+      local:
+        - to: Branches
+          jumps: 2
+        - to: East Corner
+    - name: Branches
+      coord: [28.15, 25.6]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Two Guards
+    - name: Two Guards
+      coord: [27.65, 25.8]
+      data:
+        flipside: Uhrum > Waterfalls > Above Block
+      local:
+        - to: Branches
+          jumps: 1
+        - to: Wall East
+          jumps: 1
+      exits:
+        - to: Wall East
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Branches
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+    - name: Wall East
+      coord: [27.35, 25.6]
+      local:
+        - to: Two Guards
+      locations:
+        - name: Break Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          to: Wall West
+          movement: drone_blocks_1
+          tags: [event]
+        - name: Smash Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          req: Drone_Melee_Damage_3
+          to: Wall West
+          movement: base
+          tags: [event]
+        - name: Mist Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          req: Nanite_Mist
+          to: Wall West
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          req: $mist2
+          to: Wall West
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Wall West
+          req: Uhrum_Breach_Overgrown_Ruins_Wall
+          movement: base
+    - name: Wall West
+      coord: [26.8, 25.6]
+      local:
+        - to: West Floor
+      locations:
+        - name: Smash Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          req: Drone_Melee_Damage_3
+          to: Wall East
+          movement: base
+          tags: [event]
+        - name: Mist Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          req: Nanite_Mist
+          to: Wall East
+          movement: mist1
+          tags: [event]
+        - name: Upgraded Mist Through Wall
+          canon: Uhrum_Breach_Overgrown_Ruins_Wall
+          item: Uhrum_Breach_Overgrown_Ruins_Wall
+          req: $mist2
+          to: Wall East
+          movement: mist2
+          tags: [event]
+      exits:
+        - to: Wall East
+          req: Uhrum_Breach_Overgrown_Ruins_Wall
+          movement: base
+        - to: Cache
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: West Floor
+      coord: [26.6, 25.8]
+      local:
+        - to: Wall West
+          jumps: 1
+      exits:
+        - to: Cache
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Cache
+      coord: [26.4, 25.5]
+      data:
+        flipside: Uhrum > Waterfalls > Sloped Rock
+      local:
+        - to: West Floor
+      locations:
+        - name: Flask
+          canon: Uhrum_Breach_Overgrown_Ruins_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Uhrum_Breach_Overgrown_Ruins_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Uhrum_Breach_Overgrown_Ruins_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Wall West
+          req: Drone_Hover
+          movement: base

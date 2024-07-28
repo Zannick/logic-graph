@@ -1152,10 +1152,25 @@ areas:
           tags: [warp]
     - name: UVB Dead-end
       coord: [31, 26]
+      exits:
+        - to: Uhrum Breach > Locked Down > Save Point
+          req: ^map__uhrum_breach__locked_down__save
+          time: 12
+          tags: [warp]
     - name: UVB East
       coord: [31, 27]
+      exits:
+        - to: Uhrum Breach > Annuna Gate > Save Point
+          req: ^map__uhrum_breach__annuna_gate__save
+          time: 12
+          tags: [warp]
     - name: UVB West
       coord: [19, 26]
+      exits:
+        - to: Uhrum Breach > Save and Go > Save Point
+          req: ^map__uhrum_breach__save_and_go__save
+          time: 12
+          tags: [warp]
     #endregion
 
     #region Breach other entry points
@@ -1234,6 +1249,10 @@ areas:
       coord: [24, 27]
     - name: UVB East Glitches
       coord: [24, 28]
+    - name: UVB Overgrown Ruins Flask
+      coord: [26, 26]
+    - name: UVB Overgrown Ruins Portal
+      coord: [28, 26]
     - name: UVB Save and Go Portal
       coord: [20, 25]
     - name: UVB West Glitches

@@ -2971,6 +2971,8 @@
             Menu__Breach_Map__UVB_East_Copse_Flask [label = "", pos = "84.0,-95.0!"];
             Menu__Breach_Map__UVB_East_Glitch_Health [label = "", pos = "72.0,-95.0!"];
             Menu__Breach_Map__UVB_East_Glitches [label = "", pos = "72.0,-96.666667!"];
+            Menu__Breach_Map__UVB_Overgrown_Ruins_Flask [label = "", pos = "78.0,-93.333333!"];
+            Menu__Breach_Map__UVB_Overgrown_Ruins_Portal [label = "", pos = "84.0,-93.333333!"];
             Menu__Breach_Map__UVB_Save_and_Go_Portal [label = "", pos = "60.0,-91.666667!"];
             Menu__Breach_Map__UVB_West_Glitches [label = "", pos = "63.0,-96.666667!"];
         }
@@ -3244,11 +3246,32 @@
         }
         {
             Uhrum_Breach__Locked_Down__South [label = "", pos = "91.5,-93.0!"];
+            Uhrum_Breach__Locked_Down__Center_Right_Pillar [label = "", pos = "91.95,-92.5!"];
+            Uhrum_Breach__Locked_Down__East_Enemy [label = "", pos = "92.55,-92.916667!"];
+            Uhrum_Breach__Locked_Down__Gate_Left [label = "", pos = "93.15,-92.583333!"];
+            Uhrum_Breach__Locked_Down__Item_Behind_Gate [label = "", pos = "93.75,-92.5!"];
+            Uhrum_Breach__Locked_Down__Save_Point [label = "", pos = "94.425,-92.833333!"];
+            Uhrum_Breach__Locked_Down__East_Stone [label = "", pos = "94.8,-92.5!"];
+            Uhrum_Breach__Locked_Down__Button [label = "", pos = "95.4,-92.916667!"];
+            Uhrum_Breach__Locked_Down__West_Path [label = "", pos = "90.3,-92.666667!"];
+            Uhrum_Breach__Locked_Down__West_Stone_East [label = "", pos = "88.2,-92.666667!"];
+            Uhrum_Breach__Locked_Down__West [label = "", pos = "87.3,-92.666667!"];
         }
         {
             Uhrum_Breach__North_Slime__West [label = "", pos = "75.3,-94.583333!"];
             Uhrum_Breach__North_Slime__Center [label = "", pos = "76.5,-94.583333!"];
             Uhrum_Breach__North_Slime__East [label = "", pos = "77.7,-94.583333!"];
+        }
+        {
+            Uhrum_Breach__Overgrown_Ruins__East [label = "", pos = "86.7,-92.666667!"];
+            Uhrum_Breach__Overgrown_Ruins__East_Corner [label = "", pos = "86.1,-93.166667!"];
+            Uhrum_Breach__Overgrown_Ruins__Portal_Stand [label = "", pos = "85.5,-92.833333!"];
+            Uhrum_Breach__Overgrown_Ruins__Branches [label = "", pos = "84.45,-92.666667!"];
+            Uhrum_Breach__Overgrown_Ruins__Two_Guards [label = "", pos = "82.95,-93.0!"];
+            Uhrum_Breach__Overgrown_Ruins__Wall_East [label = "", pos = "82.05,-92.666667!"];
+            Uhrum_Breach__Overgrown_Ruins__Wall_West [label = "", pos = "80.4,-92.666667!"];
+            Uhrum_Breach__Overgrown_Ruins__West_Floor [label = "", pos = "79.8,-93.0!"];
+            Uhrum_Breach__Overgrown_Ruins__Cache [label = "", pos = "79.2,-92.5!"];
         }
         {
             Uhrum_Breach__Rock_and_Gate__West [label = "", pos = "57.3,-94.583333!"];
@@ -3534,6 +3557,7 @@
             Uhrum__Waterfalls__East_24 [label = "", pos = "83.85,-39.666667!"];
             Uhrum__Waterfalls__West_Wall [label = "", pos = "78.75,-43.166667!"];
             Uhrum__Waterfalls__West_Platform [label = "", pos = "79.5,-43.0!"];
+            Uhrum__Waterfalls__Sloped_Rock [label = "", pos = "79.2,-42.5!"];
             Uhrum__Waterfalls__Large_Rock [label = "", pos = "79.65,-44.0!"];
             Uhrum__Waterfalls__Medium_Rock [label = "", pos = "80.1,-43.5!"];
             Uhrum__Waterfalls__Small_Rock [label = "", pos = "81.0,-44.166667!"];

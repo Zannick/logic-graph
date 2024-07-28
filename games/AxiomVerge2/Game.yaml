@@ -115,6 +115,9 @@ exit_movements:  # MARK: exit_movements
   water_bubbles:
     x: .285
     fall: 0.9
+  drone_blocks_1:
+    # Speed of breaking blocks while moving through them
+    x: .08  # ?
 
 time:  # MARK: time
   default: 1
@@ -145,6 +148,7 @@ time:  # MARK: time
   button: 0.1  # melee button
   susar: 3.0  # caught by susar
   combo: 1.75  # entering a key combo
+  ft_room: 6  # fast travel within the same room
   # need to test slingshot charge time
 
   ## Transitions
@@ -363,7 +367,7 @@ helpers:  # MARK: helpers
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{44}, Big_Flask{23}]
+    [Flask{46}, Big_Flask{23}]
   $all_health:itemList: >
     [Health_Node{4}, Health_Fragment{20}]
   $all_weapons:itemList: >
