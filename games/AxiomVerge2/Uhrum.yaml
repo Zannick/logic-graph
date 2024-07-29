@@ -84,7 +84,10 @@ areas:
         - to: Hidden Passage Entry
           req: ^mode == 'drone'
           movement: base
-        - to: West of Gate
+        - to: Gate West
+          req: $hover
+          movement: base
+        - to: Gate West Ledge
           req: $hover
           movement: base
     - name: Middle West Ledge
@@ -166,11 +169,11 @@ areas:
           req: $hook
           movement: base
           jumps: 1
-        - to: West of Gate
+        - to: Gate West Ledge
           req: $grab
           movement: base
           jumps: 3
-        - to: West of Gate
+        - to: Gate West Ledge
           req: $hook
           movement: base
           jumps: 2
@@ -190,10 +193,29 @@ areas:
           movement: base
           jumps: 2
 
-    - name: West of Gate
-      coord: [19.65, 25.1]
+    - name: Gate West
+      coord: [19.75, 24.9]
+      data:
+        flipside: Uhrum Breach > Save and Go > West Stone Wall
+      local:
+        - to: Gate West Ledge
+      exits:
+        - to: Inner Dais
+          req: Uhrum_West_Entrance_Gate
+          movement: base
+          jumps: 2
+        - to: Inner Dais
+          req: Uhrum_West_Entrance_Gate and $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Gate West Ledge
+      coord: [19.6, 25.1]
+      data:
+        flipside: Uhrum Breach > Save and Go > West Stone Ledge
       local:
         - to: Portal Stand
+        - to: Gate West
+          jumps: 1
       exits:
         - to: Top West Ledge
           req: $hover
@@ -220,7 +242,7 @@ areas:
           item: Udusan
           tags: [standing]
       exits:
-        - to: West of Gate
+        - to: Gate West
           req: Uhrum_West_Entrance_Gate
           movement: base
         - to: Top West Ledge
@@ -244,7 +266,7 @@ areas:
         - name: Open Gate
           item: Uhrum_West_Entrance_Gate
           req: $can_damage
-          time: 0.25  # ?
+          tags: [button]
 
     - name: Upper Wall West
       coord: [20.3, 25.2]

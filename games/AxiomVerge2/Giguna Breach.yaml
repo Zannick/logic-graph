@@ -782,7 +782,6 @@ areas:
       local:
         - to: Bottom
 
-
 - name: Labyrinth  # MARK: Labyrinth
   on_entry: $reset_old_area(^newpos)
   data:
@@ -1261,6 +1260,8 @@ areas:
           tags: [xdoor]
     - name: Center Pillar West
       coord: [19.8, 21.8]
+      data:
+        flipside: Giguna > Mural > Lower Middle Column
       local:
         - to: West Piston Middle
         - to: West
@@ -1309,6 +1310,8 @@ areas:
           movement: mist2
     - name: East Mid-air
       coord: [20.65, 21.7]
+      data:
+        flipside: Giguna > Mural > Platform Below Ledge
       local:
         - to: East Between Pistons
       exits:
@@ -1493,12 +1496,30 @@ areas:
         - to: West Tower
           jumps: 1
         - to: South
+        - to: Northeast Scaffold
+    - name: Northeast Scaffold
+      coord: [20.6, 17.8]
+      data:
+        flipside: Giguna > Gateway > Far Ledge
+      local:
+        - to: Top Scaffold
+          jumps: 1
+        - to: South
+      exits:
+        - to: Top Scaffold
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
     - name: South
       coord: [20.5, 18.75]
       data:
         flipside: Giguna > Gateway > Near Button
       exits:
         - to: Top Scaffold
+          req: Slingshot_Hook
+          movement: base
+          jumps: 4
+        - to: Northeast Scaffold
           req: Slingshot_Hook
           movement: base
           jumps: 4

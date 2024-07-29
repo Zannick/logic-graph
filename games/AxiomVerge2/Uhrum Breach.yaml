@@ -338,6 +338,8 @@ areas:
           jumps: 4
     - name: West Stone Ledge
       coord: [19.6, 25.1]
+      data:
+        flipside: Uhrum > West Entrance > Gate West Ledge
       local:
         - to: Save Point
       exits:
@@ -345,6 +347,17 @@ areas:
           req: Drone_Hover
           movement: base
           jumps: 1
+        - to: West Platform
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+    - name: West Stone Wall
+      coord: [19.75, 24.9]
+      data:
+        flipside: Uhrum > West Entrance > Gate West
+      local:
+        - to: West Stone Ledge
+      exits:
         - to: West Platform
           req: Slingshot_Hook and Drone_Hover
           movement: base

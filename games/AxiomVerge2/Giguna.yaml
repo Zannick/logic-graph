@@ -2447,29 +2447,66 @@ areas:
       local:
         - to: Head
         - to: Deposit
+        - to: Deposit Ledge
         - to: Rear Gap
           jumps: 1
     - name: Rear Gap
       coord: [15.8, 18.0]
       local:
-        - to: Deposit
+        - to: Deposit Ledge
         - to: Wingtip
       exits:
         - to: East 18
           req: $grab
           movement: base
           jumps: 4
+    - name: Deposit Ledge
+      coord: [15.7, 19.2]
+      local:
+        - to: Deposit
+        - to: Wingtip
+          jumps: 6
+        - to: Rear Gap
+          jumps: 7
+      locations:
+        - name: Shockwave Flask
+          canon: Giguna_Lamassu_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Wingtip
+          req: $hook
+          movement: base
+          jumps: 4
     - name: Deposit
       coord: [15.65, 19.5]
       local:
-        - to: Wingtip
-          jumps: 8
-        - to: Rear Gap
-          jumps: 9
+        - to: Deposit Ledge
+          jumps: 2
       locations:
         - name: Flask
+          canon: Giguna_Lamassu_Flask
           item: Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Lamassu_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Lamassu_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Deposit Ledge
+          req: $hook
+          movement: base
+          jumps: 1
     - name: East 18
       coord: [15.95, 17.5]
       local:
@@ -3462,6 +3499,7 @@ areas:
       local:
         - to: Block Left
         - to: Refill Station
+          jumps: 1
       locations:
         - name: Shockwave
           item: Giguna_Gateway_Block
@@ -3474,15 +3512,18 @@ areas:
           req: Giguna_Gateway_Block
           movement: base
     - name: Refill Station
-      coord: [20.4, 18.2]
+      coord: [20.4, 18.15]
       local:
         - to: Block Right
       exits:
         - to: Far Ledge
           req: $hook
-          time: 1  # ?
+          movement: base
+          jumps: 1
     - name: Far Ledge
-      coord: [20.6, 17.85]
+      coord: [20.6, 17.8]
+      data:
+        flipside: Giguna Breach > Upper Machinery > Northeast Scaffold
       local:
         - to: Refill Station
         - to: Block Right
@@ -3491,18 +3532,32 @@ areas:
       exits:
         - to: Flask Ledge
           req: $hook
-          time: 1  # ?
+          movement: base
+          jumps: 2
         - to: Flask Ledge
           req: $grab and $climb
           movement: base
           jumps: 3
         - to: Right Platform
           req: $hook
-          time: 1.2  # ?
+          movement: base
+          jumps: 1
+        - to: Giguna > Dual Path > Below Right Switch
+          req: $hookhover and ^_door_opened
+          movement: fast_hover
+          jumps: 2
+          penalty_tags: [xshift, -fast_hover.1]
     - name: One Jump
       coord: [20.65, 17.7]
       local:
         - to: Far Ledge
+      locations:
+        - name: Shockwave Flask
+          canon: Giguna_Gateway_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
       actions:
         - name: Open Door
           req: $open and $range2
@@ -3516,8 +3571,21 @@ areas:
         - to: Block Right
       locations:
         - name: Item
+          canon: Giguna_Gateway_Flask
           item: Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Gateway_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Gateway_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
         # TODO: with boomerang?
       actions:
         - name: Open Door
@@ -5233,6 +5301,8 @@ areas:
         - to: Rock Upper Ledge
     - name: Rock Upper Ledge
       coord: [20.6, 21.3]
+      local:
+        - to: Platform Below Ledge
       exits:
         - to: Grass Gap
           req: $hook
@@ -5246,6 +5316,24 @@ areas:
           movement: mist2
 
     # TODO: Lower half
+    - name: Platform Below Ledge
+      coord: [20.65, 21.7]
+      data:
+        flipside: Giguna Breach > Lower Machinery > East Mid-air
+      local:
+        - to: Lower Middle Column
+      exits:
+        - to: Rock Upper Ledge
+          req: $hook or ($grab and Anuman)
+          movement: base
+          jumps: 2
+    - name: Lower Middle Column
+      coord: [19.8, 21.8]
+      data:
+        flipside: Giguna Breach > Lower Machinery > Center Pillar West
+      local:
+        - to: Platform Below Ledge
+          jumps: 2
 
 - name: Breachable Wall  # MARK: Breachable Wall
   on_entry: $reset_old_area(^newpos)

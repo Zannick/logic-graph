@@ -207,7 +207,7 @@ impl Observer for FullObservation {
     fn observe_visit(&mut self, loc_id: LocationId) {
         match loc_id {
             LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item | LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip | LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LAB_EAST_RUINS_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LAB_EAST_RUINS_FLASK);
             }
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn | LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip | LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EXIT_BREACH);
@@ -425,6 +425,9 @@ impl Observer for FullObservation {
             LocationId::Giguna__Clouds__Cache__Item | LocationId::Giguna__Clouds__Cache__Flask_Collection_Skip | LocationId::Giguna__Clouds__Cache__Flask_Fast_Travel | LocationId::Giguna__Clouds__Cache__Shockwave_Flask => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_CLOUDS_FLASK);
             }
+            LocationId::Giguna__Lamassu__Deposit_Ledge__Shockwave_Flask | LocationId::Giguna__Lamassu__Deposit__Flask | LocationId::Giguna__Lamassu__Deposit__Flask_Collection_Skip | LocationId::Giguna__Lamassu__Deposit__Flask_Fast_Travel => {
+                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_LAMASSU_FLASK);
+            }
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch | LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_DUAL_PATH_SWITCH);
             }
@@ -439,6 +442,9 @@ impl Observer for FullObservation {
             }
             LocationId::Giguna__Gateway__Block_Left__Shockwave | LocationId::Giguna__Gateway__Block_Right__Shockwave => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK);
+            }
+            LocationId::Giguna__Gateway__One_Jump__Shockwave_Flask | LocationId::Giguna__Gateway__Flask_Ledge__Item | LocationId::Giguna__Gateway__Flask_Ledge__Flask_Collection_Skip | LocationId::Giguna__Gateway__Flask_Ledge__Flask_Fast_Travel => {
+                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
             }
             LocationId::Giguna__Vertical_Interchange__Gate__Jump_Boomerang_Flask | LocationId::Giguna__Vertical_Interchange__Dead_end_Ledge__Shockwave_Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_VERTICAL_INTERCHANGE_FLASK);
@@ -489,7 +495,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GLACIER_40_8_FLASK);
             }
             LocationId::Glacier__Ledge_Grab_Room__Cliff_Bottom__Quick_Grab | LocationId::Glacier__Ledge_Grab_Room__Pedestal__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_LEDGE_GRAB);
+                self.cbits7.insert(flags::ContextBits7::VISITED_LEDGE_GRAB);
             }
             LocationId::Glacier__Lake_Main_Entrance__Close_Enough__Shockwave_Flask | LocationId::Glacier__Lake_Main_Entrance__Close_Enough__Boomerang_Flask | LocationId::Glacier__Lake_Main_Entrance__Close_Enough__Boomerang_Fast_Travel | LocationId::Glacier__Lake_Main_Entrance__Cache__Flask | LocationId::Glacier__Lake_Main_Entrance__Cache__Flask_Collection_Skip | LocationId::Glacier__Lake_Main_Entrance__Cache__Flask_Fast_Travel => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GLACIER_LAKE_MAIN_ENTRANCE_FLASK);
@@ -818,17 +824,11 @@ impl Observer for FullObservation {
             LocationId::Giguna__Helipad__Tablet_Ledge__Tablet => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__HELIPAD__TABLET_LEDGE__TABLET);
             }
-            LocationId::Giguna__Lamassu__Deposit__Flask => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__LAMASSU__DEPOSIT__FLASK);
-            }
             LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__DUAL_PATH__WALL_SECRET__HEALTH);
             }
             LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__HARD_ROCK__ROCK_CENTER__TABLET);
-            }
-            LocationId::Giguna__Gateway__Flask_Ledge__Item => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__GATEWAY__FLASK_LEDGE__ITEM);
             }
             LocationId::Giguna__Gateway__Button__Hit_Switch => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__GATEWAY__BUTTON__HIT_SWITCH);
@@ -843,7 +843,7 @@ impl Observer for FullObservation {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__BOSS_REWARD);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__GUBI_LAIR__CENTER_PLATFORM__BOSS_REWARD);
             }
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__GUBI_LAIR__PEDESTAL__AXE);

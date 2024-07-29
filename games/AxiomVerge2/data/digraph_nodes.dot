@@ -82,7 +82,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Amagi__East_Lake__East_15_Flat [label = "", pos = "107.85,-24.25!"];
             Amagi__East_Lake__East_15_Lower [label = "", pos = "107.85,-24.5!"];
@@ -1555,6 +1555,7 @@
             Giguna_Breach__Upper_Machinery__Center_Ledge [label = "", pos = "59.1,-78.916667!"];
             Giguna_Breach__Upper_Machinery__West_Tower [label = "", pos = "60.75,-79.25!"];
             Giguna_Breach__Upper_Machinery__Top_Scaffold [label = "", pos = "61.2,-79.583333!"];
+            Giguna_Breach__Upper_Machinery__Northeast_Scaffold [label = "", pos = "61.8,-79.666667!"];
             Giguna_Breach__Upper_Machinery__South [label = "", pos = "61.5,-81.25!"];
         }
         {
@@ -1567,7 +1568,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="3"];
         {
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
@@ -1702,8 +1703,8 @@
             Giguna__Gateway__Right_Platform [label = "", pos = "60.6,-29.416667!"];
             Giguna__Gateway__Block_Left [label = "", pos = "59.7,-30.333333!"];
             Giguna__Gateway__Block_Right [label = "", pos = "60.3,-30.333333!"];
-            Giguna__Gateway__Refill_Station [label = "", pos = "61.2,-30.333333!"];
-            Giguna__Gateway__Far_Ledge [label = "", pos = "61.8,-29.75!"];
+            Giguna__Gateway__Refill_Station [label = "", pos = "61.2,-30.25!"];
+            Giguna__Gateway__Far_Ledge [label = "", pos = "61.8,-29.666667!"];
             Giguna__Gateway__One_Jump [label = "", pos = "61.95,-29.5!"];
             Giguna__Gateway__Flask_Ledge [label = "", pos = "62.1,-29.083333!"];
             Giguna__Gateway__Block_Lowered [label = "", pos = "60.0,-30.833333!"];
@@ -1849,6 +1850,7 @@
             Giguna__Lamassu__Rear_Platform [label = "", pos = "46.5,-29.666667!"];
             Giguna__Lamassu__Wingtip [label = "", pos = "47.1,-30.166667!"];
             Giguna__Lamassu__Rear_Gap [label = "", pos = "47.4,-30.0!"];
+            Giguna__Lamassu__Deposit_Ledge [label = "", pos = "47.1,-32.0!"];
             Giguna__Lamassu__Deposit [label = "", pos = "46.95,-32.5!"];
             Giguna__Lamassu__East_18 [label = "", pos = "47.85,-29.166667!"];
         }
@@ -1870,6 +1872,8 @@
             Giguna__Mural__Grass_and_Tree [label = "", pos = "60.6,-34.25!"];
             Giguna__Mural__Grass_Gap [label = "", pos = "61.5,-34.75!"];
             Giguna__Mural__Rock_Upper_Ledge [label = "", pos = "61.8,-35.5!"];
+            Giguna__Mural__Platform_Below_Ledge [label = "", pos = "61.95,-36.166667!"];
+            Giguna__Mural__Lower_Middle_Column [label = "", pos = "59.4,-36.333333!"];
         }
         {
             Giguna__Ruins_Center__East_8 [label = "", pos = "47.85,-12.5!"];
@@ -3295,6 +3299,7 @@
             Uhrum_Breach__Save_and_Go__Stone_Mouth [label = "", pos = "59.85,-91.333333!"];
             Uhrum_Breach__Save_and_Go__Save_Point [label = "", pos = "58.575,-92.5!"];
             Uhrum_Breach__Save_and_Go__West_Stone_Ledge [label = "", pos = "58.8,-91.833333!"];
+            Uhrum_Breach__Save_and_Go__West_Stone_Wall [label = "", pos = "59.25,-91.5!"];
             Uhrum_Breach__Save_and_Go__West_Rock_Ledge [label = "", pos = "57.6,-91.5!"];
             Uhrum_Breach__Save_and_Go__West_Platform [label = "", pos = "57.9,-91.0!"];
             Uhrum_Breach__Save_and_Go__North [label = "", pos = "58.5,-90.333333!"];
@@ -3597,7 +3602,8 @@
             Uhrum__West_Entrance__Save_Point [label = "", pos = "58.5,-45.583333!"];
             Uhrum__West_Entrance__Portal_Stand [label = "", pos = "58.575,-42.5!"];
             Uhrum__West_Entrance__Clear_Passage [label = "", pos = "59.85,-42.916667!"];
-            Uhrum__West_Entrance__West_of_Gate [label = "", pos = "58.95,-41.833333!"];
+            Uhrum__West_Entrance__Gate_West [label = "", pos = "59.25,-41.5!"];
+            Uhrum__West_Entrance__Gate_West_Ledge [label = "", pos = "58.8,-41.833333!"];
             Uhrum__West_Entrance__Inner_Dais [label = "", pos = "59.85,-41.333333!"];
             Uhrum__West_Entrance__Portal_Exit [label = "", pos = "61.575,-41.0!"];
             Uhrum__West_Entrance__Gate_Switch [label = "", pos = "61.8,-41.166667!"];

@@ -187,4 +187,5 @@
 ! Do Become Drone
   Portalwarp to Glacier Breach > South Save > Save Point
 * Collect Glacier_Breach_Spidery_Connector_Gate from Glacier Breach > Spidery Connector > Button > Hit Button
+  Move... to Ebih Breach > Bubble Bobble > Upper Ledge
 * Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn

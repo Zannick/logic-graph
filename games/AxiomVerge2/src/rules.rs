@@ -1447,6 +1447,13 @@ pub fn access_giguna__gateway__door__ex__passage_entry_1__req(
     // ^_door_opened
     ctx.giguna__gateway__ctx__door_opened()
 }
+pub fn access_giguna__gateway__far_ledge__ex__giguna__dual_path__below_right_switch_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hookhover and ^_door_opened
+    (helper__hookhover!(ctx, world) && ctx.giguna__gateway__ctx__door_opened())
+}
 pub fn access_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
     world: &World,
@@ -3442,6 +3449,10 @@ pub fn access_uhrum_waterfalls_block_and_invoke_hook(ctx: &Context, world: &Worl
 pub fn access_uhrum_west_entrance_gate(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Gate
     ctx.has(Item::Uhrum_West_Entrance_Gate)
+}
+pub fn access_uhrum_west_entrance_gate_and_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // Uhrum_West_Entrance_Gate and $hook
+    (ctx.has(Item::Uhrum_West_Entrance_Gate) && helper__hook!(ctx, world))
 }
 pub fn access_uhrum_west_entrance_gate_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Uhrum_West_Entrance_Gate and $hover
@@ -9732,6 +9743,32 @@ pub fn explain_giguna__gateway__door__ex__passage_entry_1__req(
         let r = ctx.giguna__gateway__ctx__door_opened();
         edict.insert("^giguna__gateway__ctx__door_opened", format!("{:?}", r));
         (r, vec!["^giguna__gateway__ctx__door_opened"])
+    }
+}
+pub fn explain_giguna__gateway__far_ledge__ex__giguna__dual_path__below_right_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and ^_door_opened
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+            edict.insert("$hookhover", format!("{:?}", res));
+            refs.push("$hookhover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.giguna__gateway__ctx__door_opened();
+                edict.insert("^giguna__gateway__ctx__door_opened", format!("{:?}", r));
+                (r, vec!["^giguna__gateway__ctx__door_opened"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_giguna__gateway__passage_entry__ex__door_1__req(
@@ -18418,6 +18455,32 @@ pub fn explain_uhrum_west_entrance_gate(
         (h, vec!["Uhrum_West_Entrance_Gate"])
     }
 }
+pub fn explain_uhrum_west_entrance_gate_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Uhrum_West_Entrance_Gate and $hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Uhrum_West_Entrance_Gate);
+            edict.insert("Uhrum_West_Entrance_Gate", format!("{}", h));
+            (h, vec!["Uhrum_West_Entrance_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_uhrum_west_entrance_gate_and_invoke_hover(
     ctx: &Context,
     world: &World,
@@ -21679,6 +21742,18 @@ pub fn observe_access_giguna__gateway__door__ex__passage_entry_1__req(
         full_obs.observe_giguna__gateway__ctx__door_opened();
         ctx.giguna__gateway__ctx__door_opened()
     }
+}
+pub fn observe_access_giguna__gateway__far_ledge__ex__giguna__dual_path__below_right_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and ^_door_opened
+    (hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_giguna__gateway__ctx__door_opened();
+            ctx.giguna__gateway__ctx__door_opened()
+        }))
 }
 pub fn observe_access_giguna__gateway__passage_entry__ex__door_1__req(
     ctx: &Context,
@@ -26249,6 +26324,17 @@ pub fn observe_access_uhrum_west_entrance_gate(
         full_obs.observe_uhrum_west_entrance_gate();
         ctx.has(Item::Uhrum_West_Entrance_Gate)
     }
+}
+pub fn observe_access_uhrum_west_entrance_gate_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Uhrum_West_Entrance_Gate and $hook
+    ({
+        full_obs.observe_uhrum_west_entrance_gate();
+        ctx.has(Item::Uhrum_West_Entrance_Gate)
+    } && (hobserve__hook!(ctx, world, full_obs)))
 }
 pub fn observe_access_uhrum_west_entrance_gate_and_invoke_hover(
     ctx: &Context,

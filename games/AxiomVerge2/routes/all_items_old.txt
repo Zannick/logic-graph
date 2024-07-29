@@ -204,6 +204,8 @@
 * Collect Notes_2053_02_27 from Glacier > Dock Outside > Ruins Stairs > Note
 ! Do Glacier > Dock Outside > Ruins Platform > Throw Drone Up
 * Collect Big_Flask from Glacier > Dock Outside > Cave Treasure > Flask Fast Travel ==> Menu > Kiengir Map > Glacier Dock Flask
+  Move... to Annuna > Upper Save > Save Point
+  Move... to Glacier > Vertical Room > Lower Switch
 
 # Breach Exit
 * Collect Forbidden_Knowledge from Amagi > East Lake > Foot > Tablet
@@ -324,6 +326,7 @@
 * Collect Uhrum_West_Glitch from Uhrum Breach > West Glitch > Narrow Glitch > Break Through Glitch ==> Uhrum Breach > West Glitch > Past Glitch
   ExitBreachwarp to Uhrum > Glitchy Corridor > Behind West Glitch
 * Collect Big_Flask from Uhrum > Glitchy Corridor > Behind West Glitch > Flask
+  Move... to Uhrum > Glitchy Corridor > Portal Stand
   Move... to Uhrum > Glitchy Corridor > East Glitch West
 ! Do Move Portal Here
 * Collect Uhrum_East_Glitch from Uhrum Breach > East Glitch > Glitch West > Break Through Glitch ==> Uhrum Breach > East Glitch > Glitch East
@@ -335,4 +338,81 @@
   Portalwarp
 * Collect Health_Fragment from Uhrum Breach > East Glitch > Northeast Flower > Health
 
-# Next: Remainder of Uhrum Breach
+* Collect Flask from Uhrum Breach > East Copse > Hidden Cache > Flask
+* Collect Uhrum_Cavern_Wall from Uhrum > Cavern > Wall Left > Spin Through Wall and Hover ==> Uhrum > Cavern > Pedestal
+* Collect Ensis_Bracelet from Uhrum > Cavern > Pedestal > Item
+! Do Move Portal Here
+  Portalwarp
+
+# TODO: Collect health from Annuna Breach > Smiley
+
+* Collect Uhrum_Breach_Annuna_Gate_Gate from Uhrum Breach > Annuna Gate > Button > Hit Button
+* Collect Uhrum_Breach_Locked_Down_Gate from Uhrum Breach > Locked Down > Button > Hit Button
+* Collect Flask from Uhrum Breach > Locked Down > Item Behind Gate > Flask
+* Collect Uhrum_Breach_Overgrown_Ruins_Wall from Uhrum Breach > Overgrown Ruins > Wall East > Smash Through Wall ==> Uhrum Breach > Overgrown Ruins > Wall West
+* Collect Flask from Uhrum Breach > Overgrown Ruins > Cache > Flask
+  ExitBreachWarp
+
+* Collect Flask from Uhrum > Waterfalls > Ceiling Cache > Flask
+* Collect Becoming_An_Arm from Uhrum > Artillery Practice > Tunnel Entrance > Tablet
+* Collect Power_Matrix from Uhrum > Glen > Center > Item
+
+# Section "Giguna South"
+* Collect Uhrum_West_Entrance_Upper_Wall from Uhrum > West Entrance > Upper Wall East > Spin through Wall ==> Uhrum > West Entrance > Upper Wall West
+* Collect Uhrum_West_Entrance_Gate from Uhrum > West Entrance > Gate Switch > Open Gate
+* Collect Udusan from Uhrum > West Entrance > Inner Dais > Item
+  Move... to Uhrum > West Entrance > Gate West
+! Do Move Portal Here
+  Portalwarp
+* Collect Big_Flask from Giguna > Secrecy > East Column > Flask
+* Collect Flask from Giguna Breach > Lower Machinery > Bottom > Flask
+* Collect Giguna_Breach_Lower_Machinery_Gate from Giguna Breach > Lower Machinery > Button > Hit Button
+  Move... to Uhrum Breach > Blob > West Side
+  ExitBreachWarp
+* Collect Big_Flask from Uhrum > Seclusion > Close Range > Flask
+  Move... to Uhrum > Seclusion > Portal East
+! Do Move Portal Here
+  Portalwarp
+* Collect Big_Flask from Giguna > Vertical Interchange > Dead-end > Flask
+* Collect Sickle_Sword from Giguna > Mural > Pedestal > Item
+  Move... to Giguna > Mural > Lower Middle Column
+! Do Move Portal Here
+  Portalwarp
+* Collect Health_Fragment from Giguna > Cache > Pit > Item
+! Do Giguna > Labyrinth > Switch Ledge > Open Door
+* Collect Nano_Lattice_1 from Giguna > Labyrinth > Door Ledge > Item
+* Collect Flask from Giguna Breach > Labyrinth > Pipe Cache > Flask
+* Collect Drone_Melee_Charge from Giguna Breach > Labyrinth > Plinth Approach > Mid-air Urn
+
+* Collect Kazakh_Assault from Giguna > Mural > NW Cache > Note
+  Move... to Giguna > Mural > NW Bottom
+! Do Move Portal Here
+  Portalwarp
+  Move... to Giguna Breach > Portal Exchange > Bottom
+  ExitBreachwarp
+! Do Move Portal Here
+! Do Become Indra
+  Move... to Giguna > Mural > Shocking Distance
+* Collect Flask from Giguna > Mural > Shocking Distance > Shockwave Flask
+! Do Become Drone
+  Move... to Giguna Breach > East > Save Point
+  Move... to Giguna Breach > Upper Machinery > Northeast Scaffold
+  ExitBreachWarp
+* Collect Flask from Giguna > Gateway > Flask Ledge > Item
+* Collect Giguna_Dual_Path_Switch from Giguna > Dual Path > Right Switch > Hit Switch
+* Collect Giguna_Dual_Path_Wall from Giguna > Dual Path > Base of Wall > Upgraded Mist into Wall ==> Giguna > Dual Path > Wall Secret
+* Collect Health_Fragment from Giguna > Dual Path > Wall Secret > Health
+* Collect Giguna_Boulder from Giguna > Hard Rock > Rock Right > Enter Rock as Upgraded Mist ==> Giguna > Hard Rock > Rock Center
+* Collect Building_of_the_School from Giguna > Hard Rock > Rock Center > Tablet
+* Collect Flask from Giguna > Lamassu > Deposit > Flask Fast Travel ==> Menu > Kiengir Map > Giguna Lamassu Flask
+  Move... to Ebih > Ebih West > Upper Save
+
+# Section "Ebih Mountain"
+* Collect Flask from Ebih > Ebih West > Highest Platform > Flask
+* Collect Big_Flask from Ebih > West Face > Lower Ledge > Flask
+! Do Ebih > Hidden Portal > Save Point > Save
+* Collect Flask from Interior > Observatory > Catwalk > Flask
+* Collect Submarine_Progress from Interior > Observatory > East Desk > Notes
+* Collect Flask from Ebih > Drone Pit > Highest Point > Flask
+
+# Next: Ebih Breach Peak

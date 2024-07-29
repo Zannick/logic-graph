@@ -1475,6 +1475,7 @@ subgraph Giguna_Breach
         Giguna_Breach__Upper_Machinery__Center_Ledge(Center Ledge);
         Giguna_Breach__Upper_Machinery__West_Tower(West Tower);
         Giguna_Breach__Upper_Machinery__Top_Scaffold(Top Scaffold);
+        Giguna_Breach__Upper_Machinery__Northeast_Scaffold(Northeast Scaffold);
         Giguna_Breach__Upper_Machinery__South(South);
     end
     subgraph Giguna_Breach__Gate_and_Wall[Gate and Wall]
@@ -1794,6 +1795,7 @@ subgraph Giguna
         Giguna__Lamassu__Rear_Platform(Rear Platform);
         Giguna__Lamassu__Wingtip(Wingtip);
         Giguna__Lamassu__Rear_Gap(Rear Gap);
+        Giguna__Lamassu__Deposit_Ledge(Deposit Ledge);
         Giguna__Lamassu__Deposit(Deposit);
         Giguna__Lamassu__East_18(East 18);
     end
@@ -2006,6 +2008,8 @@ subgraph Giguna
         Giguna__Mural__Grass_and_Tree(Grass and Tree);
         Giguna__Mural__Grass_Gap(Grass Gap);
         Giguna__Mural__Rock_Upper_Ledge(Rock Upper Ledge);
+        Giguna__Mural__Platform_Below_Ledge(Platform Below Ledge);
+        Giguna__Mural__Lower_Middle_Column(Lower Middle Column);
     end
     subgraph Giguna__Breachable_Wall[Breachable Wall]
         Giguna__Breachable_Wall__West_Mid_air(West Mid-air);
@@ -3205,6 +3209,7 @@ subgraph Uhrum_Breach
         Uhrum_Breach__Save_and_Go__Stone_Mouth(Stone Mouth);
         Uhrum_Breach__Save_and_Go__Save_Point(Save Point);
         Uhrum_Breach__Save_and_Go__West_Stone_Ledge(West Stone Ledge);
+        Uhrum_Breach__Save_and_Go__West_Stone_Wall(West Stone Wall);
         Uhrum_Breach__Save_and_Go__West_Rock_Ledge(West Rock Ledge);
         Uhrum_Breach__Save_and_Go__West_Platform(West Platform);
         Uhrum_Breach__Save_and_Go__North(North);
@@ -3327,7 +3332,8 @@ subgraph Uhrum
         Uhrum__West_Entrance__Save_Point(Save Point);
         Uhrum__West_Entrance__Portal_Stand(Portal Stand);
         Uhrum__West_Entrance__Clear_Passage(Clear Passage);
-        Uhrum__West_Entrance__West_of_Gate(West of Gate);
+        Uhrum__West_Entrance__Gate_West(Gate West);
+        Uhrum__West_Entrance__Gate_West_Ledge(Gate West Ledge);
         Uhrum__West_Entrance__Inner_Dais(Inner Dais);
         Uhrum__West_Entrance__Portal_Exit(Portal Exit);
         Uhrum__West_Entrance__Gate_Switch(Gate Switch);
@@ -4618,8 +4624,10 @@ Giguna_Breach__South__South --> Giguna_Breach__South__North
 Giguna_Breach__South__South <--> Uhrum_Breach__Save_and_Go__North
 Giguna_Breach__Upper_Machinery__Center_Ledge --> Giguna_Breach__Upper_Machinery__Top_Scaffold
 Giguna_Breach__Upper_Machinery__Lower_Path --> Giguna_Breach__Upper_Machinery__Lower_Ledge
+Giguna_Breach__Upper_Machinery__Northeast_Scaffold --> Giguna_Breach__Upper_Machinery__Top_Scaffold
 Giguna_Breach__Upper_Machinery__Passage_Entrance --> Giguna_Breach__Upper_Machinery__Center_Ledge
 Giguna_Breach__Upper_Machinery__Passage_Entrance --> Giguna_Breach__Upper_Machinery__North
+Giguna_Breach__Upper_Machinery__South --> Giguna_Breach__Upper_Machinery__Northeast_Scaffold
 Giguna_Breach__Upper_Machinery__South --> Giguna_Breach__Upper_Machinery__Top_Scaffold
 Giguna_Breach__White_Clouds__Bottom --> Giguna_Breach__White_Clouds__Exit
 Giguna_Breach__White_Clouds__Entry --> Giguna_Breach__White_Clouds__East_Ledge
@@ -4728,6 +4736,7 @@ Giguna__Gateway__Door --> Giguna__Gateway__Block_Left
 Giguna__Gateway__Door --> Giguna__Gateway__Left_Platform
 Giguna__Gateway__Door <--> Giguna__Gateway__Passage_Entry
 Giguna__Gateway__East_19 <--> Giguna__Vertical_Interchange__West_19
+Giguna__Gateway__Far_Ledge --> Giguna__Dual_Path__Below_Right_Switch
 Giguna__Gateway__Far_Ledge --> Giguna__Gateway__Flask_Ledge
 Giguna__Gateway__Far_Ledge <--> Giguna__Gateway__Right_Platform
 Giguna__Gateway__Left_Platform --> Giguna__Gateway__Block_Lowered
@@ -4805,6 +4814,8 @@ Giguna__Labyrinth__Save_Point --> Giguna__Labyrinth__Ledge_22
 Giguna__Labyrinth__Save_Point --> Giguna__Labyrinth__Rocky_Stair
 Giguna__Labyrinth__Second_Tier_Lower --> Giguna__Labyrinth__Second_Tier_Upper
 Giguna__Lamassu__Broken_Pillar --> Giguna__Lamassu__Staircase_Landing
+Giguna__Lamassu__Deposit --> Giguna__Lamassu__Deposit_Ledge
+Giguna__Lamassu__Deposit_Ledge --> Giguna__Lamassu__Wingtip
 Giguna__Lamassu__Lower_Platform_Left --> Giguna__Lamassu__Upper_Platform_Edge
 Giguna__Lamassu__Lower_Platform_Right --> Giguna__Lamassu__Head
 Giguna__Lamassu__Rear_Gap --> Giguna__Lamassu__East_18
@@ -4818,6 +4829,7 @@ Giguna__Mural__East_Platform <--> Giguna__Mural__Pedestal_Ledge
 Giguna__Mural__NE_Ledge <--> Giguna__Mural__Pedestal
 Giguna__Mural__NE_Ledge <--> Giguna__Mural__Pedestal_Ledge
 Giguna__Mural__Pedestal --> Giguna__Mural__East_Platform
+Giguna__Mural__Platform_Below_Ledge --> Giguna__Mural__Rock_Upper_Ledge
 Giguna__Mural__Rock_Upper_Ledge --> Giguna__Mural__Grass_Gap
 Giguna__Ruins_Center__East_8 <--> Giguna__Ruins_East__West_8
 Giguna__Ruins_Center__East_9 <--> Giguna__Ruins_East__West_9
@@ -5606,6 +5618,7 @@ Uhrum_Breach__Save_and_Go__West_Platform --> Uhrum_Breach__Save_and_Go__North
 Uhrum_Breach__Save_and_Go__West_Rock_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Rock_Ledge
+Uhrum_Breach__Save_and_Go__West_Stone_Wall --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__South_Slime__Center --> Uhrum_Breach__East_Glitch__Glitch_East
 Uhrum_Breach__South_Slime__East <--> Uhrum_Breach__West_Copse__West_28
 Uhrum_Breach__West_Copse__Bottom_West --> Uhrum_Breach__West_Copse__Lower_West_Ledge
@@ -5841,15 +5854,17 @@ Uhrum__Waterfalls__West_Wall --> Uhrum__Waterfalls__West_25
 Uhrum__Waterfalls__West_Water_Nook --> Uhrum__Waterfalls__West_Water_Ledge
 Uhrum__West_Entrance__Clear_Passage --> Uhrum__West_Entrance__Portal_Stand
 Uhrum__West_Entrance__East_28 --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
+Uhrum__West_Entrance__Gate_West <--> Uhrum__West_Entrance__Inner_Dais
+Uhrum__West_Entrance__Gate_West_Ledge --> Uhrum__West_Entrance__Inner_Dais
+Uhrum__West_Entrance__Gate_West_Ledge <--> Uhrum__West_Entrance__Top_West_Ledge
 Uhrum__West_Entrance__Inner_Dais --> Uhrum__West_Entrance__Top_West_Ledge
-Uhrum__West_Entrance__Inner_Dais <--> Uhrum__West_Entrance__West_of_Gate
 Uhrum__West_Entrance__Lower_Path_Gap --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__West_Entrance__Lower_Path_Gap --> Uhrum__West_Entrance__Lower_Wall_West
 Uhrum__West_Entrance__Lower_Wall_East <--> Uhrum__West_Entrance__Lower_Wall_West
 Uhrum__West_Entrance__Lower_Wall_West --> Uhrum__West_Entrance__South_Platform
 Uhrum__West_Entrance__Middle_West_Ledge --> Uhrum__West_Entrance__Portal_Stand
+Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__Gate_West_Ledge
 Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__Hidden_Passage_Entry
-Uhrum__West_Entrance__Portal_Stand --> Uhrum__West_Entrance__West_of_Gate
 Uhrum__West_Entrance__Sand --> Uhrum__West_Entrance__Lower_Path_Gap
 Uhrum__West_Entrance__Sand --> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__West_Entrance__Save_Point --> Uhrum__West_Entrance__Lower_Wall_West
@@ -5857,8 +5872,8 @@ Uhrum__West_Entrance__Save_Point --> Uhrum__West_Entrance__South_Platform
 Uhrum__West_Entrance__South_Platform --> Uhrum__West_Entrance__Middle_West_Ledge
 Uhrum__West_Entrance__South_Platform <--> Uhrum__West_Entrance__West_27
 Uhrum__West_Entrance__Southwest_Tree --> Uhrum__West_Entrance__South_Platform
+Uhrum__West_Entrance__Top_West_Ledge --> Uhrum__West_Entrance__Gate_West
 Uhrum__West_Entrance__Top_West_Ledge --> Uhrum__West_Entrance__Hidden_Passage_Entry
-Uhrum__West_Entrance__Top_West_Ledge <--> Uhrum__West_Entrance__West_of_Gate
 Uhrum__West_Entrance__Upper_Fork --> Uhrum__West_Entrance__Upper_Wall_East
 Uhrum__West_Entrance__Upper_Wall_East <--> Uhrum__West_Entrance__Upper_Wall_West
 Uhrum__West_Entrance__Upper_Wall_West --> Uhrum__West_Entrance__Portal_Exit
