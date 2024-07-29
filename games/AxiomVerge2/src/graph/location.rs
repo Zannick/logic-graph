@@ -99,15 +99,19 @@ impl world::Accessible for Location {
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => rules::access_invoke_can_damage(ctx, world),
             LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => rules::access_invoke_boomerang_and_fast_travel(ctx, world),
+            LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             LocationId::Annuna__Mirror_Match__Plinth__Item => true,
+            LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::access_separation(ctx, world),
-            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => true,
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::access_mode_eq_drone(ctx, world),
             LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::access_mode_eq_drone_and_invoke_mist2(ctx, world),
             LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::access_mode_eq_drone_and_nanite_mist(ctx, world),
             LocationId::Annuna__Siuna_Storage__Cache__Urn => true,
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::access_fast_travel_and_invoke_melee_cskip(ctx, world),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => rules::access_mode_eq_drone(ctx, world),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => rules::access_nanite_mist(ctx, world),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => rules::access_invoke_mist2(ctx, world),
@@ -140,6 +144,7 @@ impl world::Accessible for Location {
             LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => true,
             LocationId::Annuna__West_Bridge__Plinth__Item => true,
             LocationId::Annuna__West_Climb__Cache__Item => true,
+            LocationId::Annuna_Breach__Smiley__Drool__Health => true,
             LocationId::Antarctica__Building_2__Behind_Boxes__Note => true,
             LocationId::Antarctica__Power_Room__Switch__Flip => true,
             LocationId::Antarctica__Shed__Interior__Shelf => true,
@@ -873,12 +878,17 @@ impl world::Accessible for Location {
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => rules::observe_access_invoke_boomerang_and_fast_travel(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::observe_access_separation(ctx, world, full_obs),
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::observe_access_mode_eq_drone_and_invoke_mist2(ctx, world, full_obs),
             LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::observe_access_fast_travel_and_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
@@ -1392,6 +1402,13 @@ impl world::Accessible for Location {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
+                LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
+                    if true {
+                        350
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Annuna__Siuna_Storage__Cache__Urn => {
                     if rules::access_anuman(ctx, world) {
                         10000
@@ -1544,12 +1561,17 @@ impl world::Accessible for Location {
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => rules::explain_invoke_can_damage(ctx, world, edict),
             LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => rules::explain_invoke_boomerang_and_fast_travel(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => rules::explain_separation(ctx, world, edict),
+            LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall => rules::explain_mode_eq_drone(ctx, world, edict),
             LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => rules::explain_mode_eq_drone_and_invoke_mist2(ctx, world, edict),
             LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
             LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
-            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::explain_fast_travel_and_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone => rules::explain_mode_eq_drone(ctx, world, edict),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => rules::explain_invoke_mist2(ctx, world, edict),
@@ -2079,7 +2101,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 787] = [
+static LOC_DEFS: [Location; 792] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -2513,6 +2535,15 @@ static LOC_DEFS: [Location; 787] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Annuna_Breach__Smiley__Drool__Health,
+        canonical: CanonId::Loc_Annuna_Breach__Smiley__Drool__Health,
+        item: Item::Health_Fragment,
+        price: Currency::Free,
+        time: 0,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight,
         canonical: CanonId::Apocalypse_Bomb,
         item: Item::Apocalypse_Bomb,
@@ -2666,6 +2697,42 @@ static LOC_DEFS: [Location; 787] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel,
+        canonical: CanonId::Annuna_Mirror_Match_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 500,
+        dest: SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask,
+        canonical: CanonId::Annuna_Mirror_Match_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Energy(100),
+        time: 3500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip,
+        canonical: CanonId::Annuna_Mirror_Match_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Kiengir,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel,
+        canonical: CanonId::Annuna_Mirror_Match_Flask,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Annuna__Mirror_Match__Plinth__Item,
         canonical: CanonId::Annuna_Mirror_Match_Flask,
         item: Item::Big_Flask,
@@ -2687,7 +2754,7 @@ static LOC_DEFS: [Location; 787] = [
         id: LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask,
         canonical: CanonId::Annuna_Mirror_Match_Flask,
         item: Item::Big_Flask,
-        price: Currency::Free,
+        price: Currency::Energy(100),
         time: 3500,
         dest: SpotId::None,
         skippable: false,
@@ -9209,12 +9276,14 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Amagi__Gated_Community__Upper_East_Ledge__Flask | LocationId::Amagi__Gated_Community__Upper_East_Ledge__Flask_Collection_Skip | LocationId::Amagi__Gated_Community__Upper_East_Ledge__Flask_Fast_Travel | LocationId::Amagi__Gated_Community__Upper_East_Ledge__Shockwave_Flask => SpotId::Amagi__Gated_Community__Upper_East_Ledge,
         LocationId::Amagi__Gated_Community__Button__Hit_Button => SpotId::Amagi__Gated_Community__Button,
         LocationId::Amagi__Gated_Community__Upper_Gate_East_Mid_air__Boomerang_Flask_and_Fall_Left | LocationId::Amagi__Gated_Community__Upper_Gate_East_Mid_air__Boomerang_Flask_and_Fall_Right | LocationId::Amagi__Gated_Community__Upper_Gate_East_Mid_air__Boomerang_Flask_and_Hover | LocationId::Amagi__Gated_Community__Upper_Gate_East_Mid_air__Boomerang_Flask_Fast_Travel => SpotId::Amagi__Gated_Community__Upper_Gate_East_Mid_air,
+        LocationId::Annuna_Breach__Smiley__Drool__Health => SpotId::Annuna_Breach__Smiley__Drool,
         LocationId::Annuna__Mirror_Match__Save_Point__Fight => SpotId::Annuna__Mirror_Match__Save_Point,
         LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => SpotId::Annuna__Mirror_Match__Below_Switch,
-        LocationId::Annuna__Mirror_Match__Plinth__Item => SpotId::Annuna__Mirror_Match__Plinth,
+        LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip | LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel | LocationId::Annuna__Mirror_Match__Plinth__Item => SpotId::Annuna__Mirror_Match__Plinth,
+        LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask => SpotId::Annuna__Mirror_Match__Plinth_Adjacent,
         LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => SpotId::Annuna__Mirror_Match__Waving_Distance,
         LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Lower,
-        LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => SpotId::Annuna__Mirror_Match__East_26_Upper,
+        LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => SpotId::Annuna__Mirror_Match__East_26_Upper,
         LocationId::Annuna__West_Bridge__Plinth__Item => SpotId::Annuna__West_Bridge__Plinth,
         LocationId::Annuna__East_Bridge__Gate_Button__Switch => SpotId::Annuna__East_Bridge__Gate_Button,
         LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => SpotId::Annuna__East_Bridge__Below_Gate_Button,
@@ -9247,8 +9316,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Wall_Left,
         LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => SpotId::Annuna__Siuna_Storage__Within_Range,
         LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Within_Range,
-        LocationId::Annuna__Siuna_Storage__Cache__Urn => SpotId::Annuna__Siuna_Storage__Cache,
-        LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Cache,
+        LocationId::Annuna__Siuna_Storage__Cache__Urn | LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => SpotId::Annuna__Siuna_Storage__Cache,
         LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => SpotId::Annuna__Seals__Breakable_Rock,
         LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => SpotId::Annuna__Apocalypse__Center_Scaffold_West,
         LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,

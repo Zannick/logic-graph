@@ -343,7 +343,12 @@
 ! Do Move Portal Here
   Portalwarp
 
-# TODO: Collect health from Annuna Breach > Smiley
+  Move... to Annuna Breach > Smiley > West Ground
+  ExitBreachWarp
+  Move... to Annuna > Smiley Room > Bottom
+! Do Move Portal Here
+  Portalwarp
+* Collect Health_Fragment from Annuna Breach > Smiley > Drool > Health
 
 * Collect Uhrum_Breach_Annuna_Gate_Gate from Uhrum Breach > Annuna Gate > Button > Hit Button
 * Collect Uhrum_Breach_Locked_Down_Gate from Uhrum Breach > Locked Down > Button > Hit Button

@@ -1226,7 +1226,7 @@ areas:
         - to: Button
           req: Slingshot_Hook and Slingshot_Weapon
           movement: fast_hover
-        - to: Annuna Breach > Smiley > Upper Portal Stand
+        - to: Annuna Breach > Smiley > Upper Portal Exit
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
@@ -1256,7 +1256,7 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
-        - to: Annuna Breach > Smiley > Upper Portal Stand
+        - to: Annuna Breach > Smiley > Upper Portal Exit
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
@@ -1280,7 +1280,7 @@ areas:
           req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
-        - to: Annuna Breach > Smiley > Upper Portal Stand
+        - to: Annuna Breach > Smiley > Upper Portal Exit
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2

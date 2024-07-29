@@ -750,9 +750,16 @@ where
         }
         TestMode::Route(route) => {
             let mut ctx = ContextWrapper::new(initial);
+            let mut output = Vec::new();
+
             for (i, (h, s)) in route.into_iter().enumerate() {
-                ctx = step_from_route(ctx, i, h, world, &shortest_paths)
-                    .map_err(|e| format!("At \"{}\": {}", s, e))?;
+                let mut next =
+                    step_from_route(ctx.clone(), i, h, world, &shortest_paths).map_err(|e| {
+                        format!("At \"{}\": {}\nroute summary:\n{}", s, e, output.join("\n"))
+                    })?;
+                output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
+                output.push(next.get().diff(ctx.get()));
+                ctx = next;
             }
             ctx.get().assert_expectations(&expects)?;
         }

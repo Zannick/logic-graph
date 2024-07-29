@@ -95,3 +95,28 @@ tests:
         Move... to Ebih Breach > Double Gate > North
         Move... to Ebih Breach > The Vault > East
       * Collect Slingshot_Weapon from Ebih Breach > The Vault > Dais Center > Urn
+
+  - name: ExitSaveFastTravelPortalWarp
+    start: Giguna Breach > Isolated Test Area > Test
+    with:
+      - Nanite_Mist
+      - Slingshot_Hook
+      - Drone_Hover
+      - Fast_Travel
+      - Exit_Breach
+      - Breach_Sight
+    context:
+      map__giguna__giguna_northeast__save: true
+      map__irikar__hub__save: true
+      map__uhrum_breach__annuna_gate__save: true
+      mode: drone
+      save: Giguna > Giguna Northeast > Save Point
+    route: |
+      ExitBreachWarp
+      MainSaveWarp
+      FastTravelKiengirWarp
+      Move... to Irikar > Hub > Save Point
+      Move... to Irikar > Hub > Portal Stand
+      Portalwarp
+      FastTravelBreachWarp
+      Move... to Uhrum Breach > Annuna Gate > Save Point

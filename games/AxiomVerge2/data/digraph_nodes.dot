@@ -280,8 +280,23 @@
     {
         node[fillcolor="4"];
         {
+            Annuna_Breach__Corner__South [label = "", pos = "100.5,-93.0!"];
+            Annuna_Breach__Corner__Somewhat_Middle_ish [label = "", pos = "100.8,-93.0!"];
+            Annuna_Breach__Corner__East [label = "", pos = "101.7,-93.0!"];
+        }
+        {
             Annuna_Breach__Smiley__West [label = "", pos = "96.3,-94.583333!"];
-            Annuna_Breach__Smiley__Upper_Portal_Stand [label = "", pos = "97.425,-94.333333!"];
+            Annuna_Breach__Smiley__West_Ground [label = "", pos = "96.6,-94.75!"];
+            Annuna_Breach__Smiley__Upper_Portal_Exit [label = "", pos = "97.425,-94.333333!"];
+            Annuna_Breach__Smiley__Column_East [label = "", pos = "98.4,-94.0!"];
+            Annuna_Breach__Smiley__Northeast_Ledge [label = "", pos = "100.05,-93.916667!"];
+            Annuna_Breach__Smiley__Northeast_Corner [label = "", pos = "100.575,-93.916667!"];
+            Annuna_Breach__Smiley__North [label = "", pos = "100.5,-93.666667!"];
+            Annuna_Breach__Smiley__Lower_Portal_Exit [label = "", pos = "97.425,-95.833333!"];
+            Annuna_Breach__Smiley__Drool [label = "", pos = "99.15,-96.25!"];
+        }
+        {
+            Annuna_Breach__Underbelly__West [label = "", pos = "102.3,-93.0!"];
         }
     }
     {
@@ -483,6 +498,7 @@
             Annuna__Mirror_Match__Below_Switch [label = "", pos = "100.8,-40.5!"];
             Annuna__Mirror_Match__Central_Pillar [label = "", pos = "99.3,-40.5!"];
             Annuna__Mirror_Match__Plinth [label = "", pos = "100.65,-42.666667!"];
+            Annuna__Mirror_Match__Plinth_Adjacent [label = "", pos = "100.8,-43.0!"];
             Annuna__Mirror_Match__Waving_Distance [label = "", pos = "101.1,-42.666667!"];
             Annuna__Mirror_Match__East_26_Lower [label = "", pos = "101.85,-43.0!"];
             Annuna__Mirror_Match__East_26_Upper [label = "", pos = "101.85,-42.5!"];
@@ -510,6 +526,16 @@
             Annuna__Siuna_Storage__Wall_Left [label = "", pos = "119.25,-24.0!"];
             Annuna__Siuna_Storage__Within_Range [label = "", pos = "118.95,-24.0!"];
             Annuna__Siuna_Storage__Cache [label = "", pos = "118.05,-24.0!"];
+        }
+        {
+            Annuna__Smiley_Room__West_Side [label = "", pos = "96.6,-44.75!"];
+            Annuna__Smiley_Room__Upper_Portal_Stand [label = "", pos = "97.425,-44.333333!"];
+            Annuna__Smiley_Room__Middle_Platform [label = "", pos = "99.0,-44.166667!"];
+            Annuna__Smiley_Room__East_Column_West [label = "", pos = "100.05,-43.916667!"];
+            Annuna__Smiley_Room__East_Column_East [label = "", pos = "100.575,-43.916667!"];
+            Annuna__Smiley_Room__Shaft_Middle [label = "", pos = "100.65,-45.25!"];
+            Annuna__Smiley_Room__Bottom [label = "", pos = "99.15,-46.25!"];
+            Annuna__Smiley_Room__Lower_Portal_Stand [label = "", pos = "97.425,-45.833333!"];
         }
         {
             Annuna__Sniper_Valley__West_25_Upper [label = "", pos = "120.15,-40.5!"];
@@ -1436,6 +1462,9 @@
             Giguna_Breach__Grid_14_10_11__East_10 [label = "", pos = "44.7,-66.333333!"];
             Giguna_Breach__Grid_14_10_11__High_Ledge [label = "", pos = "43.95,-65.666667!"];
             Giguna_Breach__Grid_14_10_11__North [label = "", pos = "43.5,-65.333333!"];
+        }
+        {
+            Giguna_Breach__Isolated_Test_Area__Test [label = "", pos = "55.425,-67.333333!"];
         }
         {
             Giguna_Breach__Labyrinth__South [label = "", pos = "52.5,-84.666667!"];
@@ -2473,7 +2502,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="1"];
         {
             Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
             Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
@@ -2941,6 +2970,8 @@
             Menu__Breach_Map__UVB_Dead_end [label = "", pos = "93.0,-93.333333!"];
             Menu__Breach_Map__UVB_East [label = "", pos = "93.0,-95.0!"];
             Menu__Breach_Map__UVB_West [label = "", pos = "57.0,-93.333333!"];
+            Menu__Breach_Map__AGB_Smiley_Health [label = "", pos = "99.0,-96.666667!"];
+            Menu__Breach_Map__AGB_Smiley_Northwest [label = "", pos = "96.0,-95.0!"];
             Menu__Breach_Map__GSB_Chimney_Flask [label = "", pos = "39.0,-63.333333!"];
             Menu__Breach_Map__GSB_Crab_Rave_Flask [label = "", pos = "51.0,-71.666667!"];
             Menu__Breach_Map__GSB_Cubby_Health [label = "", pos = "39.0,-68.333333!"];
@@ -3081,6 +3112,8 @@
             Menu__Kiengir_Map__Eye_Ring [label = "", pos = "108.0,-33.333333!"];
             Menu__Kiengir_Map__Annuna_Egg_Room_Flask [label = "", pos = "114.0,-30.0!"];
             Menu__Kiengir_Map__Annuna_Egg_Room_SE [label = "", pos = "114.0,-31.666667!"];
+            Menu__Kiengir_Map__Annuna_Smiley_Room_Portal [label = "", pos = "96.0,-45.0!"];
+            Menu__Kiengir_Map__Annuna_Smiley_Room_Southeast [label = "", pos = "99.0,-46.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_West [label = "", pos = "84.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_East [label = "", pos = "90.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_Health [label = "", pos = "87.0,-18.333333!"];
@@ -3200,7 +3233,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="7"];
         {
             Uhrum_Breach__Annuna_Gate__West [label = "", pos = "90.3,-94.583333!"];
             Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge [label = "", pos = "91.65,-94.833333!"];

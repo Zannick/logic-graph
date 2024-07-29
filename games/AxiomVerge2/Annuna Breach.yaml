@@ -6,8 +6,169 @@ data:
 areas:
 - name: Smiley  # MARK: Smiley
   on_entry: $reset_old_area(^newpos)
+  map:
+    nw: [32, 26, 33, 27]
+    health: [33, 27, 34, 28]
+  datamap:
+    map_spot:
+      nw: Menu > Breach Map > AGB Smiley Northwest
+      health: Menu > Breach Map > AGB Smiley Health
   spots:
     - name: West
       coord: [32.1, 26.75]
-    - name: Upper Portal Stand
+      local:
+        - to: West Ground
+      exits:
+        - to: Uhrum Breach > Annuna Gate > East
+          tags: [xdoor]
+        - to: Upper Portal Exit
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: West Ground
+      coord: [32.2, 26.85]
+      data:
+        flipside: Annuna > Smiley Room > West Side
+      local:
+        - to: West
+          jumps: 1
+        - to: Upper Portal Exit
+          jumps: 2
+      exits:
+        - to: Upper Portal Exit
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Upper Portal Exit
       coord: [32.475, 26.6]
+      data:
+        flipside: Annuna > Smiley Room > Upper Portal Stand
+      local:
+        - to: West Ground
+        - to: Column East
+          jumps: 1
+      exits:
+        - to: Northeast Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.5  # timing to evade the enemy
+        - to: North
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.5  # timing to evade the enemy
+        - to: Column East
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Column East
+      coord: [32.8, 26.4]
+      local:
+        - to: Upper Portal Exit
+      exits:
+        - to: Northeast Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Northeast Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Upper Portal Exit
+          req: Slingshot_Hook and Drone_Hover and Slingshot_Weapon
+          movement: fast_hover
+        - to: Uhrum Breach > Annuna Gate > Save Point
+          req: Slingshot_Hook and Drone_Hover and Slingshot_Weapon
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Northeast Ledge
+      coord: [33.35, 26.35]
+      data:
+        flipside: Annuna > Smiley Room > East Column West
+      local:
+        - to: Northeast Corner
+        - to: North
+          jumps: 1
+      exits:
+        - to: Column East
+          req: Drone_Hover
+          movement: base
+        - to: Column East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Northeast Corner
+      coord: [33.525, 26.35]
+      data:
+        flipside: Annuna > Smiley Room > East Column East
+      local:
+        - to: North
+          jumps: 1
+        - to: Northeast Ledge
+    - name: North
+      coord: [33.5, 26.2]
+      local:
+        - to: Northeast Ledge
+        - to: Northeast Corner
+      exits:
+        - to: Corner > South
+          tags: [ydoor]
+
+    - name: Lower Portal Exit
+      coord: [32.475, 27.5]
+      data:
+        flipside: Annuna > Smiley Room > Lower Portal Stand
+      local:
+        - to: Drool
+    - name: Drool
+      coord: [33.05, 27.75]
+      data:
+        flipside: Annuna > Smiley Room > Bottom
+      local:
+        - to: Lower Portal Exit
+          jumps: 3
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Lower Portal Exit
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+
+- name: Corner  # MARK: Corner
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: South
+      coord: [33.5, 25.8]
+      local:
+        - to: Somewhat Middle-ish
+      exits:
+        - to: Smiley > North
+          tags: [ydoor]
+    - name: Somewhat Middle-ish
+      coord: [33.6, 25.8]
+      data:
+        flipside: Annuna > Mirror Match > Plinth Adjacent
+      local:
+        - to: South
+        - to: East
+    - name: East
+      coord: [33.9, 25.8]
+      local:
+        - to: Somewhat Middle-ish
+      exits:
+        - to: Underbelly > West
+          tags: [xdoor]
+
+- name: Underbelly  # MARK: Underbelly
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [34.1, 25.8]

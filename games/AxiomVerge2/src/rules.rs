@@ -3235,6 +3235,14 @@ pub fn access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasu
     ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
         && !ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar))
 }
+pub fn access_slingshot_hook_and_drone_hover_and_slingshot_weapon(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and Slingshot_Weapon
+    ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
+        && ctx.has(Item::Slingshot_Weapon))
+}
 pub fn access_slingshot_hook_and_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Ebih_Breach_Lake_Gate
     (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Ebih_Breach_Lake_Gate))
@@ -3964,10 +3972,6 @@ pub fn action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platfo
 pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
-}
-pub fn action_invoke_clear_breach_save(ctx: &mut Context, world: &World) {
-    // $clear_breach_save
-    helper__clear_breach_save!(ctx, world);
 }
 pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(
     ctx: &mut Context,
@@ -17526,6 +17530,44 @@ pub fn explain_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treas
         }
     }
 }
+pub fn explain_slingshot_hook_and_drone_hover_and_slingshot_weapon(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Drone_Hover and Slingshot_Weapon
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Hover);
+                    edict.insert("Drone_Hover", format!("{}", h));
+                    (h, vec!["Drone_Hover"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Weapon);
+                edict.insert("Slingshot_Weapon", format!("{}", h));
+                (h, vec!["Slingshot_Weapon"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_slingshot_hook_and_ebih_breach_lake_gate(
     ctx: &Context,
     world: &World,
@@ -25788,6 +25830,23 @@ pub fn observe_access_slingshot_hook_and_drone_hover_and_not_irikar_breach_burie
         !ctx.has(Item::Irikar_Breach_Buried_Treasure_Pillar)
     }))
 }
+pub fn observe_access_slingshot_hook_and_drone_hover_and_slingshot_weapon(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and Slingshot_Weapon
+    (({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })) && ({
+        full_obs.observe_slingshot_weapon();
+        ctx.has(Item::Slingshot_Weapon)
+    }))
+}
 pub fn observe_access_slingshot_hook_and_ebih_breach_lake_gate(
     ctx: &Context,
     world: &World,
@@ -27128,17 +27187,6 @@ pub fn observe_action_indra_set_invoke_default(
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
-}
-pub fn observe_action_invoke_clear_breach_save(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // $clear_breach_save
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    hobserve__clear_breach_save!(ctx, world, full_obs);
-    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(
     ctx: &Context,

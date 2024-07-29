@@ -2381,3 +2381,10 @@ areas:
           jumps: 4
         - to: Upper Machinery > North
           tags: [ydoor]
+
+- name: Isolated Test Area  # MARK: Isolated Test Area
+  spots:
+    - name: Test
+      coord: [18.475, 10.4]
+      data:
+        flipside: Giguna > Giguna Northeast > Portal Hole

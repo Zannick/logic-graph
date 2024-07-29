@@ -127,9 +127,45 @@ areas:
           item: Big_Flask
           canon: Annuna_Mirror_Match_Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       exits:
         - to: East 26 Upper
           req: $hover
+          movement: base
+          jumps: 1
+    - name: Plinth Adjacent
+      coord: [33.6, 25.8]
+      data:
+        flipside: Annuna Breach > Corner > Somewhat Middle-ish
+      local:
+        - to: Plinth
+          jumps: 1
+        - to: East 26 Lower
+      locations:
+        - name: Shockwave Flask
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: East 26 Upper
+          req: $hover
+          movement: base
+          jumps: 3
+        - to: East 26 Upper
+          req: Anuman
           movement: base
           jumps: 1
     - name: Waving Distance
@@ -140,6 +176,8 @@ areas:
         - name: Shockwave Flask
           item: Big_Flask
           canon: Annuna_Mirror_Match_Flask
+          req: $shockwave
+          price: 100
           tags: [shockwave]
     - name: East 26 Lower
       coord: [33.95, 25.8]
@@ -148,6 +186,7 @@ areas:
           jumps: 1
         - to: Waving Distance
           jumps: 1
+        - to: Plinth Adjacent
       locations:
         - name: Remote Flask
           item: Big_Flask
@@ -161,17 +200,26 @@ areas:
       coord: [33.95, 25.5]
       local:
         - to: Plinth
+        - to: Plinth Adjacent
         - to: Waving Distance
-      exits:
-        - to: West Bridge > West 26 Upper
-          tags: [xshift]
-      hybrid:
+      locations:
         - name: Remote Flask
           item: Big_Flask
           canon: Annuna_Mirror_Match_Flask
           req: $boomerang
           to: East 26 Lower
           tags: [remote_flask]
+        - name: Remote Flask Fast Travel
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [throw]
+          penalties:
+            - add: 0.35  # getting into throw distance
+      exits:
+        - to: West Bridge > West 26 Upper
+          tags: [xshift]
     #endregion
 
     #region Lamassu
@@ -3186,7 +3234,6 @@ areas:
           penalties:
             - when: Anuman
               add: 10.0
-      hybrid:
         - name: Urn Collection Skip
           item: Nanite_Mist
           canon: Nanite_Mist
@@ -3199,12 +3246,119 @@ areas:
         - name: Urn Fast Travel
           item: Nanite_Mist
           canon: Nanite_Mist
-          req: Fast_Travel and $melee_cskip
+          req: $melee_cskip and Fast_Travel
           to: ^map_spot
           tags: [cskip]
           penalties:
             - when: Anuman
               add: 10.0
+
+- name: Smiley Room  # MARK: Smiley Room
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Upper Portal Stand
+    portal_hidden: true
+  map:
+    portal: [32, 26, 33, 27]
+    se: [33, 27, 34, 28]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Annuna Smiley Room Portal
+      se: Menu > Kiengir Map > Annuna Smiley Room Southeast
+  spots:
+    - name: West Side
+      coord: [32.2, 26.85]
+      data:
+        flipside: Annuna Breach > Smiley > West Ground
+      local:
+        - to: Upper Portal Stand
+          jumps: 2
+      exits:
+        - to: Upper Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Upper Portal Stand
+      coord: [32.475, 26.6]
+      data:
+        flipside: Annuna Breach > Smiley > Upper Portal Exit
+      local:
+        - to: West Side
+        - to: Middle Platform
+          jumps: 2
+      exits:
+        - to: East Column East
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+    - name: Middle Platform
+      coord: [33.0, 26.5]
+      local:
+        - to: Upper Portal Stand
+      exits:
+        - to: East Column West
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: East Column West
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Column West
+          req: $mist2
+          movement: mist2
+        - to: Upper Portal Stand
+          req: $hookhover
+          movement: fast_hover
+        - to: West Side
+          req: $hookhover
+          movement: fast_hover
+    - name: East Column West
+      coord: [33.35, 26.35]
+      data:
+        flipside: Annuna Breach > Smiley > Northeast Ledge
+      local:
+        - to: Middle Platform
+        - to: East Column East
+    - name: East Column East
+      coord: [33.525, 26.35]
+      data:
+        flipside: Annuna Breach > Smiley > Northeast Corner
+      local:
+        - to: East Column West
+        - to: Shaft Middle
+    - name: Shaft Middle
+      coord: [33.55, 27.15]
+      local:
+        - to: Bottom
+      exits:
+        - to: East Column East
+          req: $grab and $climb
+          movement: base
+          jumps: 4
+        - to: East Column East
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Bottom
+      coord: [33.05, 27.75]
+      data:
+        flipside: Annuna Breach > Smiley > Drool
+      local:
+        - to: Shaft Middle
+          jumps: 4
+        - to: Lower Portal Stand
+          jumps: 3
+      exits:
+        - to: Shaft Middle
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Lower Portal Stand
+      coord: [32.475, 27.5]
+      data:
+        flipside: Annuna Breach > Smiley > Lower Portal Exit
+      local:
+        - to: Bottom
 
 #region Apocalypse
 - name: Apocalypse Hallway  # MARK: Apocalypse Hallway

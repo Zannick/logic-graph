@@ -21,6 +21,8 @@ areas:
   spots:
     - name: Portal Hole
       coord: [18.475, 10.4]
+      data:
+        flipside: SpotId::None
     - name: Northeast Wall
       coord: [18.8, 8.75]
       data:

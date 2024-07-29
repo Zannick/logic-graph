@@ -669,6 +669,10 @@ areas:
       coord: [38, 18]
     - name: Annuna Egg Room SE
       coord: [38, 19]
+    - name: Annuna Smiley Room Portal
+      coord: [32, 27]
+    - name: Annuna Smiley Room Southeast
+      coord: [33, 28]
 
     - name: Ebih Base Camp West
       coord: [28, 13]
@@ -1174,6 +1178,11 @@ areas:
     #endregion
 
     #region Breach other entry points
+    - name: AGB Smiley Health
+      coord: [33, 28]
+    - name: AGB Smiley Northwest
+      coord: [32, 27]
+
     - name: GSB Chimney Flask
       coord: [13, 8]
     - name: GSB Crab Rave Flask

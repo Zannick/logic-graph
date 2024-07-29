@@ -276,7 +276,22 @@ end
 subgraph Annuna_Breach
     subgraph Annuna_Breach__Smiley[Smiley]
         Annuna_Breach__Smiley__West(West);
-        Annuna_Breach__Smiley__Upper_Portal_Stand(Upper Portal Stand);
+        Annuna_Breach__Smiley__West_Ground(West Ground);
+        Annuna_Breach__Smiley__Upper_Portal_Exit(Upper Portal Exit);
+        Annuna_Breach__Smiley__Column_East(Column East);
+        Annuna_Breach__Smiley__Northeast_Ledge(Northeast Ledge);
+        Annuna_Breach__Smiley__Northeast_Corner(Northeast Corner);
+        Annuna_Breach__Smiley__North(North);
+        Annuna_Breach__Smiley__Lower_Portal_Exit(Lower Portal Exit);
+        Annuna_Breach__Smiley__Drool(Drool);
+    end
+    subgraph Annuna_Breach__Corner[Corner]
+        Annuna_Breach__Corner__South(South);
+        Annuna_Breach__Corner__Somewhat_Middle_ish(Somewhat Middle-ish);
+        Annuna_Breach__Corner__East(East);
+    end
+    subgraph Annuna_Breach__Underbelly[Underbelly]
+        Annuna_Breach__Underbelly__West(West);
     end
 end
 subgraph Annuna
@@ -291,6 +306,7 @@ subgraph Annuna
         Annuna__Mirror_Match__Below_Switch(Below Switch);
         Annuna__Mirror_Match__Central_Pillar(Central Pillar);
         Annuna__Mirror_Match__Plinth(Plinth);
+        Annuna__Mirror_Match__Plinth_Adjacent(Plinth Adjacent);
         Annuna__Mirror_Match__Waving_Distance(Waving Distance);
         Annuna__Mirror_Match__East_26_Lower(East 26 Lower);
         Annuna__Mirror_Match__East_26_Upper(East 26 Upper);
@@ -585,6 +601,16 @@ subgraph Annuna
         Annuna__Siuna_Storage__Wall_Left(Wall Left);
         Annuna__Siuna_Storage__Within_Range(Within Range);
         Annuna__Siuna_Storage__Cache(Cache);
+    end
+    subgraph Annuna__Smiley_Room[Smiley Room]
+        Annuna__Smiley_Room__West_Side(West Side);
+        Annuna__Smiley_Room__Upper_Portal_Stand(Upper Portal Stand);
+        Annuna__Smiley_Room__Middle_Platform(Middle Platform);
+        Annuna__Smiley_Room__East_Column_West(East Column West);
+        Annuna__Smiley_Room__East_Column_East(East Column East);
+        Annuna__Smiley_Room__Shaft_Middle(Shaft Middle);
+        Annuna__Smiley_Room__Bottom(Bottom);
+        Annuna__Smiley_Room__Lower_Portal_Stand(Lower Portal Stand);
     end
     subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
         Annuna__Apocalypse_Hallway__Lower_East(Lower East);
@@ -1554,6 +1580,9 @@ subgraph Giguna_Breach
         Giguna_Breach__Pinkness__Rock_Top(Rock Top);
         Giguna_Breach__Pinkness__Rock_Bottom(Rock Bottom);
         Giguna_Breach__Pinkness__South(South);
+    end
+    subgraph Giguna_Breach__Isolated_Test_Area[Isolated Test Area]
+        Giguna_Breach__Isolated_Test_Area__Test(Test);
     end
 end
 subgraph Giguna
@@ -2986,6 +3015,8 @@ subgraph Menu
         Menu__Kiengir_Map__Eye_Ring(Eye Ring);
         Menu__Kiengir_Map__Annuna_Egg_Room_Flask(Annuna Egg Room Flask);
         Menu__Kiengir_Map__Annuna_Egg_Room_SE(Annuna Egg Room SE);
+        Menu__Kiengir_Map__Annuna_Smiley_Room_Portal(Annuna Smiley Room Portal);
+        Menu__Kiengir_Map__Annuna_Smiley_Room_Southeast(Annuna Smiley Room Southeast);
         Menu__Kiengir_Map__Ebih_Base_Camp_West(Ebih Base Camp West);
         Menu__Kiengir_Map__Ebih_Base_Camp_East(Ebih Base Camp East);
         Menu__Kiengir_Map__Ebih_Base_Camp_Health(Ebih Base Camp Health);
@@ -3146,6 +3177,8 @@ subgraph Menu
         Menu__Breach_Map__UVB_Dead_end(UVB Dead-end);
         Menu__Breach_Map__UVB_East(UVB East);
         Menu__Breach_Map__UVB_West(UVB West);
+        Menu__Breach_Map__AGB_Smiley_Health(AGB Smiley Health);
+        Menu__Breach_Map__AGB_Smiley_Northwest(AGB Smiley Northwest);
         Menu__Breach_Map__GSB_Chimney_Flask(GSB Chimney Flask);
         Menu__Breach_Map__GSB_Crab_Rave_Flask(GSB Crab Rave Flask);
         Menu__Breach_Map__GSB_Cubby_Health(GSB Cubby Health);
@@ -3786,6 +3819,17 @@ Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_20 <--> Giguna__Vertical_Interchange__East_20
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
 Amagi__West_Lake__West_Stronghold_Gate <--> Amagi__West_Lake__West_Stronghold_Wall
+Annuna_Breach__Corner__East --> Annuna_Breach__Underbelly__West
+Annuna_Breach__Corner__South <--> Annuna_Breach__Smiley__North
+Annuna_Breach__Smiley__Column_East <--> Annuna_Breach__Smiley__Northeast_Ledge
+Annuna_Breach__Smiley__Column_East <--> Annuna_Breach__Smiley__Upper_Portal_Exit
+Annuna_Breach__Smiley__Column_East --> Uhrum_Breach__Annuna_Gate__Save_Point
+Annuna_Breach__Smiley__Drool --> Annuna_Breach__Smiley__Lower_Portal_Exit
+Annuna_Breach__Smiley__Upper_Portal_Exit --> Annuna_Breach__Smiley__North
+Annuna_Breach__Smiley__Upper_Portal_Exit --> Annuna_Breach__Smiley__Northeast_Ledge
+Annuna_Breach__Smiley__West --> Annuna_Breach__Smiley__Upper_Portal_Exit
+Annuna_Breach__Smiley__West --> Uhrum_Breach__Annuna_Gate__East
+Annuna_Breach__Smiley__West_Ground --> Annuna_Breach__Smiley__Upper_Portal_Exit
 Annuna__Apocalypse_Hallway__Center_Pillar <--> Annuna__Apocalypse_Hallway__West
 Annuna__Apocalypse_Hallway__East_Pillar --> Annuna__Apocalypse_Hallway__Center_Pillar
 Annuna__Apocalypse_Hallway__Lower_East <--> Glacier__Apocalypse_Entry__West_15_Lower
@@ -3942,6 +3986,7 @@ Annuna__Mirror_Match__East_26_Lower --> Annuna__West_Bridge__West_26_Lower
 Annuna__Mirror_Match__East_26_Upper --> Annuna__West_Bridge__West_26_Upper
 Annuna__Mirror_Match__Eastward <--> Annuna__Mirror_Match__Staircase
 Annuna__Mirror_Match__Plinth --> Annuna__Mirror_Match__East_26_Upper
+Annuna__Mirror_Match__Plinth_Adjacent --> Annuna__Mirror_Match__East_26_Upper
 Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
 Annuna__Seals__Breakable_Rock <--> Annuna__Seals__Inner_Wall
 Annuna__Seals__East_17_Lower --> Annuna__Seals__Lower_Ledge
@@ -3958,6 +4003,13 @@ Annuna__Siuna_Storage__Second_Platform --> Annuna__Siuna_Storage__Upper_Ledge
 Annuna__Siuna_Storage__Third_Platform --> Annuna__Siuna_Storage__Second_Platform
 Annuna__Siuna_Storage__Wall_Left <--> Annuna__Siuna_Storage__Wall_Right
 Annuna__Siuna_Storage__West --> Annuna__Siuna_Storage__Third_Platform
+Annuna__Smiley_Room__Bottom --> Annuna__Smiley_Room__Shaft_Middle
+Annuna__Smiley_Room__Middle_Platform --> Annuna__Smiley_Room__East_Column_West
+Annuna__Smiley_Room__Middle_Platform --> Annuna__Smiley_Room__Upper_Portal_Stand
+Annuna__Smiley_Room__Middle_Platform --> Annuna__Smiley_Room__West_Side
+Annuna__Smiley_Room__Shaft_Middle --> Annuna__Smiley_Room__East_Column_East
+Annuna__Smiley_Room__Upper_Portal_Stand --> Annuna__Smiley_Room__East_Column_East
+Annuna__Smiley_Room__West_Side --> Annuna__Smiley_Room__Upper_Portal_Stand
 Annuna__Sniper_Valley__Bridge_End --> Annuna__Sniper_Valley__Bridge_Lower_Ledge
 Annuna__Sniper_Valley__Bridge_Upper_Middle --> Annuna__Sniper_Valley__West_24
 Annuna__Sniper_Valley__Cavern_Cache <--> Annuna__Sniper_Valley__Cavern_Tight_Corner
@@ -5520,16 +5572,16 @@ Menu__Upgrade_Menu__Infection <--> Menu__Upgrade_Menu__Physiology
 Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge --> Uhrum_Breach__Annuna_Gate__Upper_Ledge
 Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge <--> Uhrum_Breach__Annuna_Gate__Structure
 Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge --> Uhrum_Breach__Annuna_Gate__Upper_Ledge
-Uhrum_Breach__Annuna_Gate__Button --> Annuna_Breach__Smiley__Upper_Portal_Stand
+Uhrum_Breach__Annuna_Gate__Button --> Annuna_Breach__Smiley__Upper_Portal_Exit
 Uhrum_Breach__Annuna_Gate__Button --> Uhrum_Breach__Annuna_Gate__Save_Point
 Uhrum_Breach__Annuna_Gate__Button --> Uhrum_Breach__Annuna_Gate__Structure
 Uhrum_Breach__Annuna_Gate__East --> Uhrum_Breach__Annuna_Gate__Button
 Uhrum_Breach__Annuna_Gate__East --> Uhrum_Breach__Annuna_Gate__Structure
 Uhrum_Breach__Annuna_Gate__North <--> Uhrum_Breach__Locked_Down__South
-Uhrum_Breach__Annuna_Gate__Structure --> Annuna_Breach__Smiley__Upper_Portal_Stand
+Uhrum_Breach__Annuna_Gate__Structure --> Annuna_Breach__Smiley__Upper_Portal_Exit
 Uhrum_Breach__Annuna_Gate__Structure --> Uhrum_Breach__Annuna_Gate__Save_Point
 Uhrum_Breach__Annuna_Gate__Structure <--> Uhrum_Breach__Annuna_Gate__Upper_Ledge
-Uhrum_Breach__Annuna_Gate__Structure_West --> Annuna_Breach__Smiley__Upper_Portal_Stand
+Uhrum_Breach__Annuna_Gate__Structure_West --> Annuna_Breach__Smiley__Upper_Portal_Exit
 Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge
 Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Button
 Uhrum_Breach__Annuna_Gate__Structure_West --> Uhrum_Breach__Annuna_Gate__Save_Point

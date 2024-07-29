@@ -197,7 +197,6 @@ impl world::Warp for Warp {
         match self.id {
             WarpId::BreachSave => rules::action_invoke_reload(ctx, world),
             WarpId::EarthSave => rules::action_invoke_reload(ctx, world),
-            WarpId::ExitBreach => rules::action_invoke_clear_breach_save(ctx, world),
             WarpId::ExitMenu => rules::action_last_set_invoke_default(ctx, world),
             WarpId::MainSave => rules::action_invoke_reload(ctx, world),
             WarpId::Portal => rules::action_invoke_post_portal_save_update(ctx, world),
@@ -239,7 +238,6 @@ impl world::Warp for Warp {
                 rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::ExitBreach => {
-                rules::observe_action_invoke_clear_breach_save(ctx, world, full_obs);
             }
             WarpId::ExitMenu => {
                 rules::observe_action_last_set_invoke_default(ctx, world, full_obs);

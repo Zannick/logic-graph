@@ -2831,11 +2831,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{46}, Big_Flask{23}]
+/// [Flask{46}, Big_Flask{24}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 46 && $ctx.count(Item::Big_Flask) >= 23
+        $ctx.count(Item::Flask) >= 46 && $ctx.count(Item::Big_Flask) >= 24
     }};
 }
 #[macro_export]
@@ -2855,7 +2855,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 23, vec!["Big_Flask count"])
+                (ct >= 24, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2869,18 +2869,18 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(46));
             $ctx.count(Item::Flask) >= 46
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(23));
-            $ctx.count(Item::Big_Flask) >= 23
+            $full_obs.observe_big_flask(IntegerObservation::Ge(24));
+            $ctx.count(Item::Big_Flask) >= 24
         })
     }};
 }
 
 /// $all_health (  )
-/// [Health_Node{4}, Health_Fragment{20}]
+/// [Health_Node{4}, Health_Fragment{21}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 4 && $ctx.count(Item::Health_Fragment) >= 20
+        $ctx.count(Item::Health_Node) >= 4 && $ctx.count(Item::Health_Fragment) >= 21
     }};
 }
 #[macro_export]
@@ -2900,7 +2900,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Fragment);
                 $edict.insert("Health_Fragment count", format!("{}", ct));
-                (ct >= 20, vec!["Health_Fragment count"])
+                (ct >= 21, vec!["Health_Fragment count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2914,8 +2914,8 @@ macro_rules! hobserve__all_health {
             $full_obs.observe_health_node(IntegerObservation::Ge(4));
             $ctx.count(Item::Health_Node) >= 4
         }) && ({
-            $full_obs.observe_health_fragment(IntegerObservation::Ge(20));
-            $ctx.count(Item::Health_Fragment) >= 20
+            $full_obs.observe_health_fragment(IntegerObservation::Ge(21));
+            $ctx.count(Item::Health_Fragment) >= 21
         })
     }};
 }
@@ -3543,40 +3543,41 @@ macro_rules! hobserve__save_last {
 }
 
 /// $reset_old_area ( TypedVar(name='newpos', type='SpotId') )
-/// IF (^position NOT WITHIN `Menu`     AND ^position NOT WITHIN ^prev_area     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos NOT WITHIN ^prev_area) {             $reset_area(^prev_area);             ^prev_portal = ^portal;             ^portal = @^newpos^portal_start;         } ELSE {             SWAP ^portal, ^prev_portal;         };         ^prev_area = $get_area(^position);         ^last = $default; } ELSE IF (^position WITHIN (`Menu > Warp Only`, `Menu > Kiengir Map`, `Menu > Breach Map`)            AND ^last NOT WITHIN ^prev_area            AND ^newpos NOT WITHIN $get_area(^last)) {               IF (^newpos NOT WITHIN ^prev_area) {                   $reset_area(^prev_area);                   ^prev_portal = ^portal;                   ^portal = @^newpos^portal_start;               } ELSE {                   SWAP ^portal, ^prev_portal;               };               ^prev_area = $get_area(^last);               ^last = $default; }
+/// IF (^position NOT WITHIN `Menu`     AND ^newpos NOT WITHIN $get_area(^position)) {         IF (^newpos WITHIN ^prev_area) {             SWAP ^portal, ^prev_portal;         } ELSE {             IF (^position NOT WITHIN ^prev_area) {                 $reset_area(^prev_area);             };             ^prev_portal = ^portal;             ^portal = @^newpos^portal_start;         };         ^prev_area = $get_area(^position);         ^last = $default; } ELSE IF (^position WITHIN (`Menu > Kiengir Map`, `Menu > Breach Map`, `Menu > Emergence Map`)            AND ^newpos NOT WITHIN $get_area(^last)) {               IF (^newpos WITHIN ^prev_area) {                   SWAP ^portal, ^prev_portal;               } ELSE {                   IF (^last NOT WITHIN ^prev_area) {                       $reset_area(^prev_area);                   };                   ^prev_portal = ^portal;                   ^portal = @^newpos^portal_start;               };               ^prev_area = $get_area(^last);               ^last = $default; }
 #[macro_export]
 macro_rules! helper__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr) => {{
-        if (($ctx.position() != SpotId::None
+        if ($ctx.position() != SpotId::None
             && get_region($ctx.position()) != RegionId::Menu
-            && $ctx.position() != SpotId::None
-            && get_area($ctx.position()) != $ctx.prev_area())
             && get_area($newpos) != get_area($ctx.position()))
         {
-            if get_area($newpos) != $ctx.prev_area() {
-                $ctx.reset_area($ctx.prev_area(), $world);
+            if get_area($newpos) == $ctx.prev_area() {
+                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
+            } else {
+                if $ctx.position() != SpotId::None && get_area($ctx.position()) != $ctx.prev_area()
+                {
+                    $ctx.reset_area($ctx.prev_area(), $world);
+                }
                 $ctx.set_prev_portal($ctx.portal());
                 $ctx.set_portal(data::portal_start($newpos));
-            } else {
-                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             }
             $ctx.set_prev_area(get_area($ctx.position()));
             $ctx.set_last(Default::default());
-        } else if (($ctx.position() != SpotId::None
+        } else if ($ctx.position() != SpotId::None
             && matches!(
                 get_area($ctx.position()),
-                AreaId::Menu__Warp_Only | AreaId::Menu__Kiengir_Map | AreaId::Menu__Breach_Map
+                AreaId::Menu__Kiengir_Map | AreaId::Menu__Breach_Map | AreaId::Menu__Emergence_Map
             )
-            && $ctx.last() != SpotId::None
-            && get_area($ctx.last()) != $ctx.prev_area())
             && get_area($newpos) != get_area($ctx.last()))
         {
-            if get_area($newpos) != $ctx.prev_area() {
-                $ctx.reset_area($ctx.prev_area(), $world);
+            if get_area($newpos) == $ctx.prev_area() {
+                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
+            } else {
+                if $ctx.last() != SpotId::None && get_area($ctx.last()) != $ctx.prev_area() {
+                    $ctx.reset_area($ctx.prev_area(), $world);
+                }
                 $ctx.set_prev_portal($ctx.portal());
                 $ctx.set_portal(data::portal_start($newpos));
-            } else {
-                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             }
             $ctx.set_prev_area(get_area($ctx.last()));
             $ctx.set_last(Default::default());
@@ -3586,7 +3587,7 @@ macro_rules! helper__reset_old_area {
 #[macro_export]
 macro_rules! hobserve__reset_old_area {
     ($ctx:expr, $world:expr, $newpos:expr, $full_obs:expr) => {{
-        if (({
+        if ({
             $full_obs.observe_position();
             $ctx.position()
         } != SpotId::None
@@ -3594,31 +3595,32 @@ macro_rules! hobserve__reset_old_area {
                 $full_obs.observe_position();
                 $ctx.position()
             }) != RegionId::Menu
-            && ({
-                $full_obs.observe_position();
-                $ctx.position()
-            } != SpotId::None
-                && get_area({
-                    $full_obs.observe_position();
-                    $ctx.position()
-                }) != {
-                    $full_obs.observe_prev_area();
-                    $ctx.prev_area()
-                }))
             && (get_area($newpos) != get_area($ctx.position())))
         {
-            if get_area($newpos) != {
+            if get_area($newpos) == {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
             } {
-            } else {
                 $full_obs.swap_portal__prev_portal();
+            } else {
+                if {
+                    $full_obs.observe_position();
+                    $ctx.position()
+                } != SpotId::None
+                    && get_area({
+                        $full_obs.observe_position();
+                        $ctx.position()
+                    }) != {
+                        $full_obs.observe_prev_area();
+                        $ctx.prev_area()
+                    }
+                {}
             }
             let _set = get_area({
                 $full_obs.observe_position();
                 $ctx.position()
             });
-        } else if (({
+        } else if ({
             $full_obs.observe_position();
             $ctx.position()
         } != SpotId::None
@@ -3627,27 +3629,28 @@ macro_rules! hobserve__reset_old_area {
                     $full_obs.observe_position();
                     $ctx.position()
                 }),
-                AreaId::Menu__Warp_Only | AreaId::Menu__Kiengir_Map | AreaId::Menu__Breach_Map
+                AreaId::Menu__Kiengir_Map | AreaId::Menu__Breach_Map | AreaId::Menu__Emergence_Map
             )
-            && ({
-                $full_obs.observe_last();
-                $ctx.last()
-            } != SpotId::None
-                && get_area({
-                    $full_obs.observe_last();
-                    $ctx.last()
-                }) != {
-                    $full_obs.observe_prev_area();
-                    $ctx.prev_area()
-                }))
             && (get_area($newpos) != get_area($ctx.last())))
         {
-            if get_area($newpos) != {
+            if get_area($newpos) == {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
             } {
-            } else {
                 $full_obs.swap_portal__prev_portal();
+            } else {
+                if {
+                    $full_obs.observe_last();
+                    $ctx.last()
+                } != SpotId::None
+                    && get_area({
+                        $full_obs.observe_last();
+                        $ctx.last()
+                    }) != {
+                        $full_obs.observe_prev_area();
+                        $ctx.prev_area()
+                    }
+                {}
             }
             let _set = get_area({
                 $full_obs.observe_last();
@@ -3703,7 +3706,7 @@ macro_rules! hobserve__clear_breach_save {
 }
 
 /// $reload (  )
-/// ^prev_area = $get_area(^position); ^portal = ^portal_start; ^prev_portal = ^portal; $refill_energy
+/// ^prev_area = $get_area(^position); ^portal = ^portal_start; ^prev_portal = ^portal; $refill_energy; ^last = $default
 #[macro_export]
 macro_rules! helper__reload {
     ($ctx:expr, $world:expr) => {{
@@ -3711,6 +3714,7 @@ macro_rules! helper__reload {
         $ctx.set_portal(data::portal_start($ctx.position()));
         $ctx.set_prev_portal($ctx.portal());
         helper__refill_energy!($ctx, $world);
+        $ctx.set_last(Default::default());
     }};
 }
 #[macro_export]

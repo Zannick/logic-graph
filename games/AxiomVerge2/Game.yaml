@@ -229,7 +229,6 @@ warps:  # MARK: warps
     time: 3
     req: ^realm == 'breach' and Exit_Breach and ^flipside != $default
     to: ^flipside
-    after: $clear_breach_save
     bulk_exit: true
     tags: [exit]
   # Fast travels are technically doable from the menu, but it costs time to switch tabs, so just model that
@@ -365,11 +364,10 @@ helpers:  # MARK: helpers
      Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Sagiga_on_the_Worldstream]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
-  # Pending Big_Flask: Annuna Mirror Match
   $all_flasks:itemList: >
-    [Flask{46}, Big_Flask{23}]
+    [Flask{46}, Big_Flask{24}]
   $all_health:itemList: >
-    [Health_Node{4}, Health_Fragment{20}]
+    [Health_Node{4}, Health_Fragment{21}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
@@ -393,34 +391,45 @@ helpers:  # MARK: helpers
   # This is important for any area that's not really a room
   $save_last:action: IF (^last == $default) { ^last = ^position }
   # ^position is the old value
-  # testing to see if area(newpos) != area(position) != prev_area
+  # testing to see if we're entering a new area (area(newpos) != prev_area)
   # and we aren't coming from the menu. If so, then we check if we're returning to prev_area.
   # If we are, we just make the current area the prev_area (i.e. swap).
-  # But if not, then we reset that area and same the area we are leaving.
-  # Case 2. The "Warp Only" area allows warps but does not count toward prev_area.
+  # But if not, then if we're not coming from our prev_area (area(position) != prev_area) we reset that area
+  # and save the area we are leaving.
+  # Case 2. The "Map" areas allows warps but does not count toward prev_area.
   # Instead, we save the actual player position at ^last and use that.
+  # The "Warp Only" areas are not counted, because only savewarps can be done, and savewarps all call $reload.
+  #
+  # C | B -|-> A   pos in B, newpos in A, prev_area = C
+  # If B == A: do nothing (same area)
+  # Assume B != A
+  # If C == A (returning to prev_area) guaranteed that B != C: Swap current and previous.
+  # If C != A and B == C (new area but no prev to reset): Init new area.
+  # If C != A and B != C (new area and reset prev area): Reset prev area and init new area.
   $reset_old_area:action(newpos:SpotId): >
     IF (^position NOT WITHIN `Menu`
-        AND ^position NOT WITHIN ^prev_area
         AND ^newpos NOT WITHIN $get_area(^position)) {
-            IF (^newpos NOT WITHIN ^prev_area) {
-                $reset_area(^prev_area);
+            IF (^newpos WITHIN ^prev_area) {
+                SWAP ^portal, ^prev_portal;
+            } ELSE {
+                IF (^position NOT WITHIN ^prev_area) {
+                    $reset_area(^prev_area);
+                };
                 ^prev_portal = ^portal;
                 ^portal = @^newpos^portal_start;
-            } ELSE {
-                SWAP ^portal, ^prev_portal;
             };
             ^prev_area = $get_area(^position);
             ^last = $default;
-    } ELSE IF (^position WITHIN (`Menu > Warp Only`, `Menu > Kiengir Map`, `Menu > Breach Map`)
-               AND ^last NOT WITHIN ^prev_area
+    } ELSE IF (^position WITHIN (`Menu > Kiengir Map`, `Menu > Breach Map`, `Menu > Emergence Map`)
                AND ^newpos NOT WITHIN $get_area(^last)) {
-                  IF (^newpos NOT WITHIN ^prev_area) {
-                      $reset_area(^prev_area);
+                  IF (^newpos WITHIN ^prev_area) {
+                      SWAP ^portal, ^prev_portal;
+                  } ELSE {
+                      IF (^last NOT WITHIN ^prev_area) {
+                          $reset_area(^prev_area);
+                      };
                       ^prev_portal = ^portal;
                       ^portal = @^newpos^portal_start;
-                  } ELSE {
-                      SWAP ^portal, ^prev_portal;
                   };
                   ^prev_area = $get_area(^last);
                   ^last = $default;
@@ -439,7 +448,7 @@ helpers:  # MARK: helpers
         }
     }
   $clear_breach_save:action: ^breach_save = $default
-  $reload:action: ^prev_area = $get_area(^position); ^portal = ^portal_start; ^prev_portal = ^portal; $refill_energy
+  $reload:action: ^prev_area = $get_area(^position); ^portal = ^portal_start; ^prev_portal = ^portal; $refill_energy; ^last = $default
 
 collect:  # MARK: collect
   Amashilama: ^save = `Glacier > Revival > Save Point`
