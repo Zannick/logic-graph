@@ -326,7 +326,6 @@
 * Collect Uhrum_West_Glitch from Uhrum Breach > West Glitch > Narrow Glitch > Break Through Glitch ==> Uhrum Breach > West Glitch > Past Glitch
   ExitBreachwarp to Uhrum > Glitchy Corridor > Behind West Glitch
 * Collect Big_Flask from Uhrum > Glitchy Corridor > Behind West Glitch > Flask
-  Move... to Uhrum > Glitchy Corridor > Portal Stand
   Move... to Uhrum > Glitchy Corridor > East Glitch West
 ! Do Move Portal Here
 * Collect Uhrum_East_Glitch from Uhrum Breach > East Glitch > Glitch West > Break Through Glitch ==> Uhrum Breach > East Glitch > Glitch East
@@ -390,11 +389,13 @@
   Portalwarp
   Move... to Giguna Breach > Portal Exchange > Bottom
   ExitBreachwarp
-! Do Move Portal Here
 ! Do Become Indra
   Move... to Giguna > Mural > Shocking Distance
 * Collect Flask from Giguna > Mural > Shocking Distance > Shockwave Flask
 ! Do Become Drone
+  Move... to Giguna > Mural > Enclosed Portal
+! Do Move Portal Here
+  Portalwarp
   Move... to Giguna Breach > East > Save Point
   Move... to Giguna Breach > Upper Machinery > Northeast Scaffold
   ExitBreachWarp
