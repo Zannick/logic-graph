@@ -452,7 +452,7 @@ where
         if confirm.elapsed() < elapsed {
             return confirm.into_solution();
         }
-        log::warn!(
+        log::debug!(
             "Solution({:?}) elapsed time from db {}ms is better than history! {}ms. Checking for discrepancies...",
             mode,
             elapsed,
@@ -493,7 +493,7 @@ where
             );
             let (db_hist, db_elapsed) = self.queue.db().get_history(replay.get()).unwrap();
             if replay.elapsed() != db_elapsed {
-                log::warn!(
+                log::debug!(
                     "Replay differs from db at step {}. {}\n{}ms replayed vs {}ms in db",
                     i,
                     step,
@@ -503,13 +503,13 @@ where
                 let mut partial = self.startctx.clone();
                 partial = partial.try_replay_all(self.world, &db_hist).unwrap();
                 if partial.elapsed() != db_elapsed {
-                    log::warn!(
+                    log::debug!(
                         "Replaying partial still does not match: {}ms vs {}ms",
                         partial.elapsed(),
                         db_elapsed
                     );
                     if partial.recent_history() == replay.recent_history() {
-                        log::warn!("History was the same despite discrepancy.");
+                        log::debug!("History was the same despite discrepancy.");
                     };
                 }
 
@@ -520,7 +520,7 @@ where
                     .try_replay_all(self.world, &history)
                     .unwrap()
                     .into_solution();
-                log::warn!(
+                log::debug!(
                     "Replacing solution({:?}) with history from second read: {}ms (previously: {}ms, {}ms)",
                     mode,
                     new_elapsed,
