@@ -1504,6 +1504,7 @@ subgraph Giguna_Breach
         Giguna_Breach__East__South(South);
         Giguna_Breach__East__Lower_Tunnel_Entrance(Lower Tunnel Entrance);
         Giguna_Breach__East__East_Tunnel(East Tunnel);
+        Giguna_Breach__East__Mid_Tunnel(Mid Tunnel);
         Giguna_Breach__East__Upper_Tunnel_Entrance(Upper Tunnel Entrance);
         Giguna_Breach__East__Upper_Ledge(Upper Ledge);
         Giguna_Breach__East__Save_Point(Save Point);
@@ -4521,6 +4522,7 @@ Giguna_Breach__Deadly_Flora__Middle_Platform --> Giguna_Breach__Deadly_Flora__Up
 Giguna_Breach__Deadly_Flora__Upper_Left_Ledge --> Giguna_Breach__Emergence__Right_Mid_air
 Giguna_Breach__Deadly_Flora__Upper_Right_Ledge --> Giguna_Breach__Deadly_Flora__Upper_Left_Ledge
 Giguna_Breach__Deadly_Flora__West <--> Giguna_Breach__Emergence__East
+Giguna_Breach__East__East_Tunnel --> Giguna_Breach__East__Mid_Tunnel
 Giguna_Breach__East__East_Tunnel --> Giguna_Breach__East__Upper_Tunnel_Entrance
 Giguna_Breach__East__East_Tunnel <--> Giguna_Breach__Secret_Tunnel__West
 Giguna_Breach__East__North <--> Giguna_Breach__Upper_Machinery__South
@@ -5382,6 +5384,7 @@ Irikar__Hub__Collapsed_Column_Debris --> Irikar__Hub__Lower_Well
 Irikar__Hub__East_Rim --> Irikar__Airy__Lower_Throw_End
 Irikar__Hub__East_Rim --> Irikar__Airy__Right_Hover_Throw_End
 Irikar__Hub__East_Rim --> Irikar__Hub__Sat_Tower_Roof_West
+Irikar__Hub__East_Rim <--> Irikar__Hub__West_Rim
 Irikar__Hub__Exposed_Passage_Center --> Irikar__Hub__Exposed_Passage_Upper_Ledge
 Irikar__Hub__Exposed_Passage_Upper_Ledge --> Irikar__Hub__Ruined_Hallway_Gap_Left
 Irikar__Hub__Exposed_Passage_Upper_Ledge --> Irikar__Hub__Ruined_Hallway_Gap_Right
@@ -5417,7 +5420,6 @@ Irikar__Hub__West_24_Rooftop <--> Irikar__Midwest__East_24_on_Building
 Irikar__Hub__West_25 --> Irikar__Hub__West_Rooftop_2
 Irikar__Hub__West_25 <--> Irikar__Midwest__East_25
 Irikar__Hub__West_26 <--> Irikar__Midwest__East_26
-Irikar__Hub__West_Rim --> Irikar__Hub__East_Rim
 Irikar__Hub__West_Rooftop_3 --> Irikar__Hub__West_24_Rooftop
 Irikar__Hub__West_Rooftop_3 --> Irikar__Hub__West_Small_Middle_Rooftop
 Irikar__Hub__West_Rooftops_Upper_Staircase --> Irikar__Hub__West_Rooftops_Upper_East
@@ -5618,6 +5620,7 @@ Uhrum_Breach__Save_and_Go__West_Platform --> Uhrum_Breach__Save_and_Go__North
 Uhrum_Breach__Save_and_Go__West_Rock_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__Save_and_Go__West_Stone_Ledge --> Uhrum_Breach__Save_and_Go__West_Rock_Ledge
+Uhrum_Breach__Save_and_Go__West_Stone_Wall --> Uhrum_Breach__Save_and_Go__North
 Uhrum_Breach__Save_and_Go__West_Stone_Wall --> Uhrum_Breach__Save_and_Go__West_Platform
 Uhrum_Breach__South_Slime__Center --> Uhrum_Breach__East_Glitch__Glitch_East
 Uhrum_Breach__South_Slime__East <--> Uhrum_Breach__West_Copse__West_28
@@ -5703,6 +5706,7 @@ Uhrum__Emergence_Facility__Wall_West_Mid_air --> Uhrum__Emergence_Facility__East
 Uhrum__Emergence_Facility__West <--> Uhrum__Emergence_Save__East
 Uhrum__Emergence_Facility__West_Approach --> Uhrum__Emergence_Facility__Upper_Level_Middle
 Uhrum__Emergence_Save__West <--> Uhrum__Grassy_Guardpost__East_22
+Uhrum__Glitchy_Corridor__Behind_West_Glitch <--> Uhrum__Glitchy_Corridor__West_Glitch_West
 Uhrum__Glitchy_Corridor__Center_Platform_East --> Uhrum__Glitchy_Corridor__Portal_Stand
 Uhrum__Glitchy_Corridor__Center_Platform_East --> Uhrum__Glitchy_Corridor__West_Pillar_East
 Uhrum__Glitchy_Corridor__Center_Platform_West --> Uhrum__Glitchy_Corridor__East_Glitch_West
@@ -5730,7 +5734,6 @@ Uhrum__Glitchy_Corridor__West_28 --> Uhrum__Glitchy_Corridor__West_Glitch_Ledge
 Uhrum__Glitchy_Corridor__West_28 <--> Uhrum__West_Entrance__East_28
 Uhrum__Glitchy_Corridor__West_Glitch_Ledge --> Uhrum__Glitchy_Corridor__West_Pillar_West
 Uhrum__Glitchy_Corridor__West_Glitch_Ledge <--> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
-Uhrum__Glitchy_Corridor__West_Glitch_West --> Uhrum__Glitchy_Corridor__Behind_West_Glitch
 Uhrum__Glitchy_Corridor__West_Glitch_West --> Uhrum__Glitchy_Corridor__West_Glitch_Ledge
 Uhrum__Glitchy_Corridor__West_Glitch_West <--> Uhrum__West_Entrance__Lower_Path_Tree_Ledge
 Uhrum__Glitchy_Corridor__West_Pillar_East --> Uhrum__Glitchy_Corridor__West_Glitch_West

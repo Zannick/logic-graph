@@ -1162,6 +1162,7 @@ areas:
           jumps: 2
         - to: West Main Path
         - to: Center Main Path
+        - to: Big Tree
     - name: West 7
       coord: [21.05, 6.75]
       local:

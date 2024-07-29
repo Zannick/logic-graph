@@ -1383,6 +1383,7 @@
             Giguna_Breach__East__South [label = "", pos = "61.5,-84.666667!"];
             Giguna_Breach__East__Lower_Tunnel_Entrance [label = "", pos = "62.1,-84.166667!"];
             Giguna_Breach__East__East_Tunnel [label = "", pos = "62.85,-84.166667!"];
+            Giguna_Breach__East__Mid_Tunnel [label = "", pos = "62.55,-83.333333!"];
             Giguna_Breach__East__Upper_Tunnel_Entrance [label = "", pos = "62.7,-82.416667!"];
             Giguna_Breach__East__Upper_Ledge [label = "", pos = "62.475,-82.5!"];
             Giguna_Breach__East__Save_Point [label = "", pos = "61.425,-82.666667!"];

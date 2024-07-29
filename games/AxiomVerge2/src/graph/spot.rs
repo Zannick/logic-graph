@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3010] = [
+static SPOT_DEFS: [SpotDef; 3011] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -6730,11 +6730,17 @@ static SPOT_DEFS: [SpotDef; 3010] = [
     SpotDef {
         id: SpotId::Giguna_Breach__East__East_Tunnel,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna_Breach__East__East_Tunnel__ex__Secret_Tunnel__West_1, ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_2)),
+        exit_range: Some((ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_1, ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_3)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna_Breach__East__Lower_Tunnel_Entrance,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna_Breach__East__Mid_Tunnel,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -13504,7 +13510,7 @@ static SPOT_DEFS: [SpotDef; 3010] = [
     SpotDef {
         id: SpotId::Irikar__Hub__East_Rim,
         loc_range: None,
-        exit_range: Some((ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1, ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1)),
+        exit_range: Some((ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1, ExitId::Irikar__Hub__East_Rim__ex__West_Rim_3)),
         action_range: Some((ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High, ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low)),
     },
     SpotDef {
@@ -13822,7 +13828,7 @@ static SPOT_DEFS: [SpotDef; 3010] = [
     SpotDef {
         id: SpotId::Irikar__Hub__West_Rim,
         loc_range: None,
-        exit_range: Some((ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1, ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1)),
+        exit_range: Some((ExitId::Irikar__Hub__West_Rim__ex__East_Rim_1, ExitId::Irikar__Hub__West_Rim__ex__East_Rim_3)),
         action_range: Some((ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High, ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low)),
     },
     SpotDef {
@@ -16456,7 +16462,7 @@ static SPOT_DEFS: [SpotDef; 3010] = [
     SpotDef {
         id: SpotId::Uhrum_Breach__Save_and_Go__West_Stone_Wall,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum_Breach__Save_and_Go__West_Stone_Wall__ex__West_Platform_1, ExitId::Uhrum_Breach__Save_and_Go__West_Stone_Wall__ex__West_Platform_1)),
+        exit_range: Some((ExitId::Uhrum_Breach__Save_and_Go__West_Stone_Wall__ex__North_1, ExitId::Uhrum_Breach__Save_and_Go__West_Stone_Wall__ex__West_Platform_1)),
         action_range: None,
     },
     SpotDef {
@@ -17098,7 +17104,7 @@ static SPOT_DEFS: [SpotDef; 3010] = [
     SpotDef {
         id: SpotId::Uhrum__Glitchy_Corridor__Behind_West_Glitch,
         loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask, LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Shockwave_Flask)),
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__ex__West_Glitch_West_1, ExitId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__ex__West_Glitch_West_1)),
         action_range: None,
     },
     SpotDef {

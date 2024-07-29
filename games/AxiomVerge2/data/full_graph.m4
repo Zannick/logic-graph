@@ -1971,7 +1971,11 @@ digraph AxiomVerge2 {
     Giguna_Breach__Deadly_Flora__East -> Giguna_Breach__Deadly_Flora__Lowest_Platform;
     Giguna_Breach__Deadly_Flora__East -> Giguna_Breach__SW_Save__West_11;
     Giguna_Breach__East__South -> Giguna_Breach__Lower_Machinery__North;
+    Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Mid_Tunnel;
+    Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Mid_Tunnel;
+    Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Mid_Tunnel;
     Giguna_Breach__East__East_Tunnel -> Giguna_Breach__Secret_Tunnel__West;
+    Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Upper_Tunnel_Entrance;
     Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Upper_Tunnel_Entrance;
     Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Upper_Tunnel_Entrance;
     Giguna_Breach__East__Save_Point -> Giguna_Breach__East__North;
@@ -2683,9 +2687,14 @@ digraph AxiomVerge2 {
     Irikar__Empty_Foyer__West -> Irikar__Basement_Portal__East_28;
     Irikar__Empty_Foyer__East -> Irikar__Boss_Room__West_28;
     Irikar__Hub__West_Rim -> Irikar__Hub__East_Rim;
+    Irikar__Hub__West_Rim -> Irikar__Hub__East_Rim;
+    Irikar__Hub__West_Rim -> Irikar__Hub__East_Rim;
     Irikar__Hub__East_Rim -> Irikar__Airy__Lower_Throw_End;
     Irikar__Hub__East_Rim -> Irikar__Airy__Right_Hover_Throw_End;
     Irikar__Hub__East_Rim -> Irikar__Hub__Sat_Tower_Roof_West;
+    Irikar__Hub__East_Rim -> Irikar__Hub__West_Rim;
+    Irikar__Hub__East_Rim -> Irikar__Hub__West_Rim;
+    Irikar__Hub__East_Rim -> Irikar__Hub__West_Rim;
     Irikar__Hub__Bowl_Top_Platform -> Irikar__Hub__West_Rim;
     Irikar__Hub__Bowl_Middle_Ledge -> Irikar__Hub__Bowl_Top_Platform;
     Irikar__Hub__Bowl_Middle_Platform_Center -> Irikar__Hub__Bowl_Middle_Ledge;
@@ -3037,6 +3046,7 @@ digraph AxiomVerge2 {
     Uhrum__Glitchy_Corridor__West_Glitch_West -> Uhrum__West_Entrance__Lower_Path_Tree_Ledge;
     Uhrum__Glitchy_Corridor__West_Glitch_West -> Uhrum__Glitchy_Corridor__West_Glitch_Ledge;
     Uhrum__Glitchy_Corridor__West_Glitch_West -> Uhrum__Glitchy_Corridor__West_Glitch_Ledge;
+    Uhrum__Glitchy_Corridor__Behind_West_Glitch -> Uhrum__Glitchy_Corridor__West_Glitch_West;
     Uhrum__Glitchy_Corridor__West_Glitch_Ledge -> Uhrum__West_Entrance__Lower_Path_Tree_Ledge;
     Uhrum__Glitchy_Corridor__West_Glitch_Ledge -> Uhrum__Glitchy_Corridor__West_Pillar_West;
     Uhrum__Glitchy_Corridor__Northwest_Platform -> Uhrum__West_Entrance__Lower_Path_Rock;
@@ -3467,6 +3477,7 @@ digraph AxiomVerge2 {
     Uhrum_Breach__Save_and_Go__Save_Point -> Uhrum_Breach__Save_and_Go__West_Stone_Ledge;
     Uhrum_Breach__Save_and_Go__West_Stone_Ledge -> Uhrum_Breach__Save_and_Go__West_Platform;
     Uhrum_Breach__Save_and_Go__West_Stone_Ledge -> Uhrum_Breach__Save_and_Go__West_Rock_Ledge;
+    Uhrum_Breach__Save_and_Go__West_Stone_Wall -> Uhrum_Breach__Save_and_Go__North;
     Uhrum_Breach__Save_and_Go__West_Stone_Wall -> Uhrum_Breach__Save_and_Go__West_Platform;
     Uhrum_Breach__Save_and_Go__West_Rock_Ledge -> Uhrum_Breach__Save_and_Go__West_Platform;
     Uhrum_Breach__Save_and_Go__West_Platform -> Uhrum_Breach__Save_and_Go__North;
@@ -4895,6 +4906,7 @@ digraph AxiomVerge2 {
     Ebih__Waterfall__East_7 -> Ebih__Waterfall__Top_Waterfall;
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__West_Main_Path;
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__Center_Main_Path;
+    Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__Big_Tree;
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__East_7;
     Ebih__Waterfall__Top_Waterfall -> Ebih__Waterfall__West_7;
     Ebih__Waterfall__West_7 -> Ebih__Waterfall__Cave_Entrance;
@@ -5735,7 +5747,8 @@ digraph AxiomVerge2 {
     Giguna_Breach__East__Lower_Tunnel_Entrance -> Giguna_Breach__East__South;
     Giguna_Breach__East__Lower_Tunnel_Entrance -> Giguna_Breach__East__East_Tunnel;
     Giguna_Breach__East__East_Tunnel -> Giguna_Breach__East__Lower_Tunnel_Entrance;
-    Giguna_Breach__East__Upper_Tunnel_Entrance -> Giguna_Breach__East__East_Tunnel;
+    Giguna_Breach__East__Mid_Tunnel -> Giguna_Breach__East__East_Tunnel;
+    Giguna_Breach__East__Upper_Tunnel_Entrance -> Giguna_Breach__East__Mid_Tunnel;
     Giguna_Breach__East__Upper_Tunnel_Entrance -> Giguna_Breach__East__Upper_Ledge;
     Giguna_Breach__East__Upper_Tunnel_Entrance -> Giguna_Breach__East__Save_Point;
     Giguna_Breach__East__Upper_Ledge -> Giguna_Breach__East__Upper_Tunnel_Entrance;
@@ -6122,6 +6135,7 @@ digraph AxiomVerge2 {
     Giguna__Clouds__North_Middle -> Giguna__Clouds__Southwest;
     Giguna__Clouds__North_Right -> Giguna__Clouds__Pull_Right;
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Straight_Down;
+    Giguna__Clouds__Platform_Early -> Giguna__Clouds__Pull_Right;
     Giguna__Clouds__Platform_Early -> Giguna__Clouds__Southeast;
     Giguna__Clouds__Platform_Stop -> Giguna__Clouds__Pull_Right;
     Giguna__Clouds__Platform_Stop -> Giguna__Clouds__Southeast;

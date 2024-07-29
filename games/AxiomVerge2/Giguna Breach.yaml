@@ -1815,12 +1815,39 @@ areas:
           movement: mist2
           penalties:
             - add: 0.35  # additional to navigate turns
+        - to: Upper Tunnel Entrance
+          req: Slingshot_Hook
+          movement: base
+          jumps: 4
+          penalties:
+            - add: 1  # additional to navigate turns and precision issues
+        - to: Mid Tunnel
+          req: Nanite_Mist
+          movement: mist1
+          penalties:
+            - add: 0.3  # additional to navigate turns
+        - to: Mid Tunnel
+          req: $mist2
+          movement: mist2
+          penalties:
+            - add: 0.15  # additional to navigate turns
+        - to: Mid Tunnel
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+          penalties:
+            - add: 0.5  # additional to navigate turns and precision issues
+    - name: Mid Tunnel
+      coord: [20.85, 20.0]
+      local:
+        - to: East Tunnel
+          thru: [[20.85, 20.1], [20.95, 20.1]]
     - name: Upper Tunnel Entrance
       coord: [20.9, 19.45]
       local:
         - to: Upper Ledge
-        - to: East Tunnel
-          thru: [[20.95, 19.45], [20.95, 19.65], [20.85, 19.65], [20.85, 20.1], [20.95, 20.1]]
+        - to: Mid Tunnel
+          thru: [[20.95, 19.45], [20.95, 19.65], [20.85, 19.65]]
         - to: Save Point
     - name: Upper Ledge
       coord: [20.825, 19.5]

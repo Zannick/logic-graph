@@ -57,6 +57,12 @@ areas:
         - to: East Rim
           req: $hover
           movement: base
+        - to: East Rim
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Rim
+          req: $mist2
+          movement: mist2
       actions:
         - name: Throw Drone Far East High
           req: $can_deploy and Drone_Hover
@@ -96,6 +102,16 @@ areas:
         - to: Airy > Lower Throw End
           movement: base
           penalty_tags: [xshift, -base.1]
+        - to: West Rim
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: West Rim
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Rim
+          req: $mist2
+          movement: mist2
       actions:
         - name: Throw Drone Far East High
           req: $can_deploy and Drone_Hover

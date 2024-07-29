@@ -1284,10 +1284,6 @@ class GameLogic(object):
         return itertools.chain.from_iterable(s.get('locations', []) + s.get('hybrid', [])
                                              for s in self.spots())
 
-    @cached_property
-    def num_locations(self):
-        return sum(1 for _ in self.locations())
-
 
     def exits(self):
         return itertools.chain.from_iterable(s.get('exits', []) for s in self.spots())
@@ -2065,11 +2061,14 @@ if __name__ == '__main__':
 
     if not args.norender:
         logging.info(f'Rendering {gl.game} graph: {len(list(gl.spots()))} spots, '
-                    f'{sum(len(r["loc_ids"]) for r in gl.regions)} locations '
-                    f'({len(gl.canon_places)} canon locations), '
-                    f'{len(list(gl.actions()))} actions, {len(gl.all_items)} items, '
-                    f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
-                    f'{len(gl.warps)} warps, {sum(len(rule.variants) for rule in gl.rules.values())} rule variants')
+                     f'{gl.num_locations} locations '
+                     f'({len(gl.canon_places)} canon locations), '
+                     f'{gl.num_actions} actions, {len(gl.all_items)} items, '
+                     f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
+                     f'{len(gl.warps)} warps, {gl.num_exits} exits, '
+                     f'{sum(len(rule.variants) for rule in gl.rules.values())} rule variants, '
+                     f'{len(gl.access_funcs)} unique access functions, {len(gl.action_funcs)} unique action funcs, '
+                     f'{len(gl.num_funcs)} unique num functions')
         gl.render()
         logging.info(f'Render complete.')
     else:

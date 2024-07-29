@@ -654,6 +654,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Giguna_Breach__Deadly_Flora__West => enums::Realm::Breach,
         SpotId::Giguna_Breach__East__East_Tunnel => enums::Realm::Breach,
         SpotId::Giguna_Breach__East__Lower_Tunnel_Entrance => enums::Realm::Breach,
+        SpotId::Giguna_Breach__East__Mid_Tunnel => enums::Realm::Breach,
         SpotId::Giguna_Breach__East__North => enums::Realm::Breach,
         SpotId::Giguna_Breach__East__Save_Point => enums::Realm::Breach,
         SpotId::Giguna_Breach__East__South => enums::Realm::Breach,
@@ -3103,6 +3104,7 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Emergence__Camp_Exterior__Save_Point => SpotId::Emergence__Camp_Exterior__Save_Point,
         SpotId::Giguna_Breach__East__East_Tunnel => SpotId::Giguna_Breach__East__Save_Point,
         SpotId::Giguna_Breach__East__Lower_Tunnel_Entrance => SpotId::Giguna_Breach__East__Save_Point,
+        SpotId::Giguna_Breach__East__Mid_Tunnel => SpotId::Giguna_Breach__East__Save_Point,
         SpotId::Giguna_Breach__East__North => SpotId::Giguna_Breach__East__Save_Point,
         SpotId::Giguna_Breach__East__Save_Point => SpotId::Giguna_Breach__East__Save_Point,
         SpotId::Giguna_Breach__East__South => SpotId::Giguna_Breach__East__Save_Point,
@@ -3916,6 +3918,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Giguna_Breach__Crab_Rave__Gate_West => SpotId::Menu__Breach_Map__GSB_Crab_Rave_Flask,
         SpotId::Giguna_Breach__Cubby__Entrance => SpotId::Menu__Breach_Map__GSB_Cubby_Health,
         SpotId::Giguna_Breach__Cubby__Rocks => SpotId::Menu__Breach_Map__GSB_Cubby_Health,
+        SpotId::Giguna_Breach__East__Mid_Tunnel => SpotId::Menu__Breach_Map__GSB_East,
         SpotId::Giguna_Breach__East__North => SpotId::Menu__Breach_Map__GSB_East,
         SpotId::Giguna_Breach__East__Save_Point => SpotId::Menu__Breach_Map__GSB_East,
         SpotId::Giguna_Breach__East__Upper_Ledge => SpotId::Menu__Breach_Map__GSB_East,
@@ -12756,6 +12759,10 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Giguna_Breach__Cubby__Rocks => {
+
+                }
+                SpotId::Giguna_Breach__East__Mid_Tunnel => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA_BREACH__EAST__SAVE);
 
                 }
                 SpotId::Giguna_Breach__East__North => {

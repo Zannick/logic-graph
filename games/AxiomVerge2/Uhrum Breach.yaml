@@ -362,6 +362,10 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: base
           jumps: 2
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
     - name: West Rock Ledge
       coord: [19.2, 24.9]
       data:

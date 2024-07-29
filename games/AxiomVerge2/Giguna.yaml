@@ -2289,6 +2289,7 @@ areas:
     - name: Platform Early
       coord: [12.5, 19.5]
       local:
+        - to: Pull Right
         - to: Southeast
       actions:
         - name: Continue to Early Portal

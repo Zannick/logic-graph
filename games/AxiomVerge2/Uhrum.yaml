@@ -907,6 +907,11 @@ areas:
           req: $melee_cskip and Fast_Travel
           to: ^map_spot
           tags: [cskip]
+      exits:
+        - to: West Glitch West
+          req: ^mode == 'drone' and Uhrum_West_Glitch
+          movement: base
+          jumps: 2
     - name: West Glitch Ledge
       coord: [21.45, 27.3]
       local:

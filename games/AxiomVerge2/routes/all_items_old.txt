@@ -366,6 +366,8 @@
 * Collect Big_Flask from Giguna > Secrecy > East Column > Flask
 * Collect Flask from Giguna Breach > Lower Machinery > Bottom > Flask
 * Collect Giguna_Breach_Lower_Machinery_Gate from Giguna Breach > Lower Machinery > Button > Hit Button
+# peek the save point
+  Move... to Giguna Breach > East > Mid Tunnel
   Move... to Uhrum Breach > Blob > West Side
   ExitBreachWarp
 * Collect Big_Flask from Uhrum > Seclusion > Close Range > Flask
