@@ -388,10 +388,12 @@ where
             finished: false.into(),
         };
         for w in wins {
+            log::debug!("Recreating winning route...");
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
                 .unwrap();
         }
         for o in others {
+            log::debug!("Recreating route...");
             s.recreate_store(&s.startctx, o.recent_history(), SearchMode::Start)
                 .unwrap();
         }
