@@ -1008,7 +1008,7 @@ where
     ) -> Result<bool, Error> {
         let state_key = Self::serialize_state(el.get());
 
-        let (prev_key, best_elapsed) = if let Some(c) = prev {
+        let (prev_key, best_elapsed_from_prev) = if let Some(c) = prev {
             let prev_key = Self::serialize_state(c);
             let elapsed = self
                 .get_deserialize_state_data(&prev_key)
@@ -1023,7 +1023,7 @@ where
             // TODO: Maybe we can make this deserialization cheaper as we only need one field?
             if let Some(StateData { elapsed, .. }) = self.get_deserialize_state_data(&state_key)? {
                 // This is a new state being pushed, as it has new history, hence we skip if equal.
-                if elapsed <= best_elapsed {
+                if elapsed <= best_elapsed_from_prev {
                     self.dup_iskips.fetch_add(1, Ordering::Release);
                     return Ok(false);
                 }
@@ -1036,7 +1036,14 @@ where
 
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
-        self.record_one_internal(state_key, el, &prev_key, 0, best_elapsed, &mut next_entries);
+        self.record_one_internal(
+            state_key,
+            el,
+            &prev_key,
+            0,
+            best_elapsed_from_prev,
+            &mut next_entries,
+        );
 
         if let Some(p) = prev {
             if !state_only {
@@ -1365,7 +1372,7 @@ where
             } else {
                 return Err(Error {
                     message: format!(
-                        "Could not find state entry for {:?}",
+                        "Could not find intermediate state entry for {:?}",
                         Self::deserialize_state(&state_key)
                             .expect("Failed to deserialize while reporting an error")
                     ),

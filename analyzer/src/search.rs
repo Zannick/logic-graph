@@ -668,7 +668,7 @@ where
                 for mut ctx in solutions {
                     // The state is added to the db in handle_solution
                     // and the ctx no longer has history attached.
-                    self.handle_solution(&mut ctx, prev, mode)
+                    self.handle_solution(&mut ctx, prev, mode);
                 }
             },
         )
