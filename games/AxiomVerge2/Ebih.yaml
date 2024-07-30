@@ -4192,7 +4192,6 @@ areas:
           canon: Ebih_Party_Central_Flask
           item: Big_Flask
           tags: [flask]
-      hybrid:
         - name: Flask Collection Skip
           canon: Ebih_Party_Central_Flask
           item: Big_Flask

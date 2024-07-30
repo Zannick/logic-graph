@@ -423,4 +423,16 @@
 * Collect Submarine_Progress from Interior > Observatory > East Desk > Notes
 * Collect Flask from Ebih > Drone Pit > Highest Point > Flask
 
-# Next: Ebih Breach Peak
+  Move... to Ebih > Peak > Between West Door and Tree
+! Do Move Portal Here
+  Portalwarp
+* Collect Big_Flask from Ebih Breach > Vertical Room > Cache > Flask
+* Collect Flask from Ebih Breach > Snowy Rocks > Cache > Flask Fast Travel ==> Menu > Breach Map > MEB Snowy Rocks Flask
+  Move... to Ebih Breach > In 'n Out > Save Point
+* Collect Big_Flask from Ebih > Party Central > East Trough > Flask
+  Move... to Ebih > Party Central > Below Between Waterfalls
+! Do Move Portal Here
+  Portalwarp
+
+# Next: Amagi Breach
+
