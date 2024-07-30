@@ -2763,6 +2763,10 @@ pub fn access_map__ebih_breach__in_n_out__save(ctx: &Context, world: &World) -> 
     // ^map__ebih_breach__in_n_out__save
     ctx.map__ebih_breach__in_n_out__save()
 }
+pub fn access_map__ebih_breach__peak__save(ctx: &Context, world: &World) -> bool {
+    // ^map__ebih_breach__peak__save
+    ctx.map__ebih_breach__peak__save()
+}
 pub fn access_map__ebih_breach__portals_101__save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih_breach__portals_101__save
     ctx.map__ebih_breach__portals_101__save()
@@ -2810,6 +2814,10 @@ pub fn access_map__giguna_breach__labyrinth__save(ctx: &Context, world: &World) 
 pub fn access_map__giguna_breach__peak__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__peak__save
     ctx.map__giguna_breach__peak__save()
+}
+pub fn access_map__giguna_breach__south__save(ctx: &Context, world: &World) -> bool {
+    // ^map__giguna_breach__south__save
+    ctx.map__giguna_breach__south__save()
 }
 pub fn access_map__giguna_breach__sw_save__save(ctx: &Context, world: &World) -> bool {
     // ^map__giguna_breach__sw_save__save
@@ -15316,6 +15324,18 @@ pub fn explain_map__ebih_breach__in_n_out__save(
         (r, vec!["^map__ebih_breach__in_n_out__save"])
     }
 }
+pub fn explain_map__ebih_breach__peak__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__ebih_breach__peak__save
+    {
+        let r = ctx.map__ebih_breach__peak__save();
+        edict.insert("^map__ebih_breach__peak__save", format!("{:?}", r));
+        (r, vec!["^map__ebih_breach__peak__save"])
+    }
+}
 pub fn explain_map__ebih_breach__portals_101__save(
     ctx: &Context,
     world: &World,
@@ -15458,6 +15478,18 @@ pub fn explain_map__giguna_breach__peak__save(
         let r = ctx.map__giguna_breach__peak__save();
         edict.insert("^map__giguna_breach__peak__save", format!("{:?}", r));
         (r, vec!["^map__giguna_breach__peak__save"])
+    }
+}
+pub fn explain_map__giguna_breach__south__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__giguna_breach__south__save
+    {
+        let r = ctx.map__giguna_breach__south__save();
+        edict.insert("^map__giguna_breach__south__save", format!("{:?}", r));
+        (r, vec!["^map__giguna_breach__south__save"])
     }
 }
 pub fn explain_map__giguna_breach__sw_save__save(
@@ -24531,6 +24563,17 @@ pub fn observe_access_map__ebih_breach__in_n_out__save(
         ctx.map__ebih_breach__in_n_out__save()
     }
 }
+pub fn observe_access_map__ebih_breach__peak__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__ebih_breach__peak__save
+    {
+        full_obs.observe_map__ebih_breach__peak__save();
+        ctx.map__ebih_breach__peak__save()
+    }
+}
 pub fn observe_access_map__ebih_breach__portals_101__save(
     ctx: &Context,
     world: &World,
@@ -24661,6 +24704,17 @@ pub fn observe_access_map__giguna_breach__peak__save(
     {
         full_obs.observe_map__giguna_breach__peak__save();
         ctx.map__giguna_breach__peak__save()
+    }
+}
+pub fn observe_access_map__giguna_breach__south__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__giguna_breach__south__save
+    {
+        full_obs.observe_map__giguna_breach__south__save();
+        ctx.map__giguna_breach__south__save()
     }
 }
 pub fn observe_access_map__giguna_breach__sw_save__save(

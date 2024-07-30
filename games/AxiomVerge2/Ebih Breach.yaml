@@ -208,11 +208,242 @@ areas:
 
 - name: Snowy Rocks  # MARK: Snowy Rocks
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [23, 5, 24, 6]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > MEB Snowy Rocks Flask
   spots:
     - name: East 4
       coord: [23.9, 3.75]
+      local:
+        - to: Upper East Ledge
+      exits:
+        - to: Portals 101 > West 4
+          tags: [xdoor]
+    - name: Upper East Ledge
+      coord: [23.6, 3.75]
+      local:
+        - to: Large Floating Rock West
+        - to: Large Floating Rock East
+        - to: Column East
+          jumps: 2
+      exits:
+        - to: Column East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: NW Floating Rock East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: NW Floating Rock East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: North Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 3
+    - name: Large Floating Rock East
+      coord: [23.625, 4.35]
+      local:
+        - to: Lower East Ledge
+        - to: Cache
+          thru: [23.625, 4.6]
+        - to: Large Floating Rock West
+          jumps: 1
+      exits:
+        - to: Upper East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+        - to: Large Floating Rock West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Column East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Upper East Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper East Ledge
+          req: $mist2
+          movement: mist2
+    - name: Large Floating Rock West
+      coord: [23.2, 4.3]
+      local:
+        - to: Large Floating Rock East
+        - to: Waterfall Ledge
+        - to: Cache
+          thru: [23.15, 5.0]
+        - to: Column East
+          jumps: 2
+      exits:
+        - to: Column East
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: Upper East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Lower East Ledge
+      coord: [23.6, 5.0]
+      local:
+        - to: Cache
+      exits:
+        - to: Large Floating Rock East
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+        - to: Large Floating Rock East
+          req: Nanite_Mist
+          movement: mist1
+        - to: Large Floating Rock East
+          req: $mist2
+          movement: mist2
+    - name: Cache
+      coord: [23.25, 5.5]
+      local:
+        - to: Waterfall Ledge
+          jumps: 2
+      locations:
+        - name: Flask
+          canon: Ebih_Breach_Snowy_Rocks_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Ebih_Breach_Snowy_Rocks_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Breach_Snowy_Rocks_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Lower East Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: Column East
+          req: $mist2
+          movement: mist2
+    - name: Waterfall Ledge
+      coord: [23.05, 5.1]
+      local:
+        - to: Cache
+        - to: Column East
+          jumps: 6
+        - to: Large Floating Rock West
+          thru: [22.9, 4.3]
+          jumps: [4, 2]
+      exits:
+        - to: Column East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Large Floating Rock West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+
+    - name: North
+      coord: [22.5, 3.2]
+      local:
+        - to: North Ledge
+        - to: South
+        - to: Column West
+        - to: Column East
+          thru: [22.65, 3.7]
+        - to: NW Floating Rock East
+      exits:
+        - to: Peak > South
+          tags: [ydoor]
+    - name: North Ledge
+      coord: [22.5, 3.35]
+      local:
+        - to: North
+          jumps: 1
+        - to: Column West
+        - to: NW Floating Rock East
+        - to: South
+    - name: NW Floating Rock East
+      coord: [22.8, 3.55]
+      local:
+        - to: North Ledge
+          jumps: 1
+        - to: Column East
+        - to: Upper East Ledge
+          jumps: 2
+        - to: Large Floating Rock West
+      exits:
+        - to: East 4
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: North Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Column East
+      coord: [22.85, 3.95]
+      local:
+        - to: Column West
+        - to: Large Floating Rock West
+        - to: Cache
+      exits:
+        - to: Upper East Ledge
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+        - to: NW Floating Rock East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: NW Floating Rock East
+          req: $mist2
+          movement: mist2
+    - name: Column West
+      coord: [22.7, 3.95]
+      local:
+        - to: Column East
+        - to: South
+        - to: North Ledge
+          jumps: 3
+      exits:
+        - to: North Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West
+      coord: [22.1, 5.65]
+      local:
+        - to: South
+      exits:
+        - to: Vertical Room > East 6
+          tags: [xdoor]
     - name: South
       coord: [22.55, 5.8]
+      local:
+        - to: West
+          jumps: 1
+        - to: Column West
+          jumps: 9
+      exits:
+        - to: Column West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 5
+        - to: Column West
+          req: $mist2
+          movement: mist2
+        - to: North Ledge
+          req: $mist2
+          movement: mist2
 
 - name: In 'n Out  # MARK: In 'n Out
   on_entry: $reset_old_area(^newpos)
@@ -1573,4 +1804,309 @@ areas:
         - to: East Shaft Top
       exits:
         - to: Rocky Cages > West 11
+          tags: [xdoor]
+
+- name: Peak  # MARK: Peak
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [24, 2, 25, 3]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > MEB Peak
+  spots:
+    - name: Save Point
+      coord: [24.525, 2.6]
+      data:
+        flipside: Ebih > Peak > Portal Stand
+      local:
+        - to: Column
+          jumps: 4
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Column
+      coord: [24.0, 2.15]
+      local:
+        - to: Save Point
+        - to: Ground Near Column
+      exits:
+        - to: Save Point
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Ground Near Column
+      coord: [23.7, 2.55]
+      local:
+        - to: Ground Near Door
+      exits:
+        - to: Column
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Ground Near Door
+      coord: [22.6, 2.55]
+      data:
+        flipside: Ebih > Peak > Between West Door and Tree
+      local:
+        - to: South
+        - to: West Lower Step
+          jumps: 2
+      exits:
+        - to: West Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Upper Ledge
+          req: $mist2
+          movement: mist2
+        - to: West Lower Step
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: South
+      coord: [22.5, 2.8]
+      local:
+        - to: Ground Near Door
+          jumps: 1
+        - to: West Lower Step
+          jumps: 2
+      exits:
+        - to: Snowy Rocks > North
+          tags: [ydoor]
+    - name: West Lower Step
+      coord: [22.25, 2.35]
+      local:
+        - to: South
+        - to: Ground Near Door
+      exits:
+        - to: West Upper Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 3
+        - to: West Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Upper Ledge
+          req: $mist2
+          movement: mist2
+    - name: West Upper Ledge
+      coord: [22.2, 1.75]
+      local:
+        - to: West
+        - to: West Lower Step
+        - to: South
+        - to: Ground Near Door
+        - to: Ground Near Column
+          jumps: 1
+      exits:
+        - to: Ground Near Column
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: West
+      coord: [22.1, 1.75]
+      local:
+        - to: West Upper Ledge
+      exits:
+        - to: Vertical Room > East 2
+          tags: [xdoor]
+
+- name: Vertical Room  # MARK: Vertical Room
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    flask: [21, 1, 22, 2]
+    portal: [21, 2, 22, 3]
+    bottom: [21, 5, 22, 6]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > MEB Vertical Room Flask
+      portal: Menu > Breach Map > MEB Vertical Room Portal
+      bottom: Menu > Breach Map > MEB Vertical Room Bottom
+  spots:
+    - name: East 2
+      coord: [21.9, 1.75]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Highest Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+        - to: Highest Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Highest Ledge
+          req: $mist2
+          movement: mist2
+        - to: Upper Passage Ledge
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 1
+        - to: Upper Passage Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Passage Ledge
+          req: $mist2
+          movement: mist2
+        - to: Peak > West
+          tags: [xdoor]
+    - name: Highest Ledge
+      coord: [21.6, 1.2]
+      local:
+        - to: Cache
+        - to: East 2
+        - to: Portal Stand
+        - to: Upper Passage Ledge
+    - name: Cache
+      coord: [21.175, 1.2]
+      local:
+        - to: Highest Ledge
+      locations:
+        - name: Flask
+          canon: Ebih_Breach_Vertical_Room_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Ebih_Breach_Vertical_Room_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Ebih_Breach_Vertical_Room_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Upper Passage Ledge
+      coord: [21.55, 1.7]
+      local:
+        - to: Passage Exit
+        - to: Portal Stand
+        - to: Portal Ledge
+        - to: East 2
+      exits:
+        - to: Highest Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+        - to: Highest Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Highest Ledge
+          req: $mist2
+          movement: mist2
+    - name: Passage Exit
+      coord: [21.15, 1.7]
+      local:
+        - to: Upper Passage Ledge
+        - to: Passage High
+    - name: Passage High
+      coord: [21.25, 2.55]
+      local:
+        - to: Passage Middle
+      exits:
+        - to: Passage Middle
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Passage Middle
+          req: $mist2
+          movement: mist2
+    - name: Passage Middle
+      coord: [21.125, 4.2]
+      local:
+        - to: Passage Low
+      exits:
+        - to: Passage High
+          req: Slingshot_Hook
+          movement: base
+          jumps: 7
+        - to: Passage High
+          req: $mist2
+          movement: mist2
+    - name: Passage Low
+      coord: [21.1, 5.6]
+      local:
+        - to: Passage Bottom
+      exits:
+        - to: Passage Middle
+          req: Slingshot_Hook
+          movement: base
+          jumps: 4
+        - to: Passage Middle
+          req: $mist2
+          movement: mist2
+          penalties:
+            - add: 0.5  # twisty
+    - name: Passage Bottom
+      coord: [21.475, 5.7]
+      data:
+        flipside: Ebih > Hidden Portal > Portal Stand
+      local:
+        - to: Passage Low
+          jumps: 1
+
+    - name: Portal Stand
+      coord: [21.5, 2.7]
+      data:
+        flipside: Ebih > Hidden Portal > Save Point
+      local:
+        - to: Portal Ledge
+      exits:
+        - to: Upper Passage Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Passage Ledge
+          req: $mist2
+          movement: mist2
+        - to: Highest Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Highest Ledge
+          req: $mist2
+          movement: mist2
+        - to: East 2
+          req: Nanite_Mist
+          movement: mist1
+        - to: East 2
+          req: $mist2
+          movement: mist2
+    - name: Portal Ledge
+      coord: [21.3, 2.8]
+      local:
+        - to: Portal Stand
+          jumps: 1
+        - to: Middle Building Ledge
+      exits:
+        - to: Portal Stand
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Middle Building Ledge
+      coord: [21.4, 4.4]
+      local:
+        - to: Portal Ledge
+          jumps: 9
+        - to: East 6
+      exits:
+        - to: Portal Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 6
+        - to: Portal Ledge
+          req: $mist2
+          movement: mist2
+    - name: East 6
+      coord: [21.9, 5.65]
+      local:
+        - to: Middle Building Ledge
+          jumps: 8
+      exits:
+        - to: Middle Building Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 5
+        - to: Snowy Rocks > West
           tags: [xdoor]

@@ -2111,6 +2111,8 @@ areas:
           tags: [xshift]
     - name: Portal Stand
       coord: [21.475, 5.7]
+      data:
+        flipside: Ebih Breach > Vertical Room > Passage Bottom
       local:
         - to: West 6
           jumps: 1
@@ -2247,6 +2249,8 @@ areas:
           movement: mist2
     - name: Save Point
       coord: [21.5, 2.7]
+      data:
+        flipside: Ebih Breach > Vertical Room > Portal Stand
       local:
         - to: Save Ledge
         - to: Tunnel Entrance
@@ -2772,15 +2776,21 @@ areas:
       local:
         - to: West 3
           jumps: 1
-        - to: Observatory East
-          jumps: 1
+        - to: Between West Door and Tree
       exits:
         - to: Interior > Observatory > West
           tags: [interior]
+    - name: Between West Door and Tree
+      coord: [22.6, 2.55]
+      data:
+        flipside: Ebih Breach > Peak > Ground Near Door
+      local:
+        - to: Observatory West
+        - to: Observatory East
     - name: Observatory East
       coord: [23.75, 2.55]
       local:
-        - to: Observatory West
+        - to: Between West Door and Tree
       exits:
         - to: Interior > Observatory > East
           tags: [interior]
@@ -2795,7 +2805,7 @@ areas:
     - name: Middle Ledge
       coord: [23.95, 2.15]
       local:
-        - to: Observatory West
+        - to: Between West Door and Tree
         - to: Observatory East
         - to: Tunnel Ledge
         - to: Portal Stand
@@ -2840,6 +2850,8 @@ areas:
           jumps: 2
     - name: Portal Stand
       coord: [24.525, 2.6]
+      data:
+        flipside: Ebih Breach > Peak > Save Point
       local:
         - to: Tunnel Ledge
           thru: [24.25, 2.7]

@@ -1062,6 +1062,11 @@ areas:
           tags: [warp]
     - name: GSB South
       coord: [19, 24]
+      exits:
+        - to: Giguna Breach > South > Save Point
+          req: ^map__giguna_breach__south__save
+          time: 12
+          tags: [warp]
     - name: GSB SW Save
       coord: [12, 12]
       exits:
@@ -1132,6 +1137,11 @@ areas:
           tags: [warp]
     - name: MEB Peak
       coord: [24, 3]
+      exits:
+        - to: Ebih Breach > Peak > Save Point
+          req: ^map__ebih_breach__peak__save
+          time: 12
+          tags: [warp]
     - name: MEB Southeast
       coord: [25, 13]
       exits:
@@ -1243,12 +1253,20 @@ areas:
       coord: [20, 13]
     - name: MEB Rocky Cages Flask
       coord: [22, 10]
+    - name: MEB Snowy Rocks Flask
+      coord: [23, 6]
     - name: MEB Spider Guards Flask
       coord: [25, 7]
     - name: MEB Spider Guards Button
       coord: [23, 7]
     - name: Slingshot Weapon
       coord: [21, 9]
+    - name: MEB Vertical Room Bottom
+      coord: [21, 6]
+    - name: MEB Vertical Room Flask
+      coord: [21, 2]
+    - name: MEB Vertical Room Portal
+      coord: [21, 3]
 
     - name: UVB Blob
       coord: [22, 21]

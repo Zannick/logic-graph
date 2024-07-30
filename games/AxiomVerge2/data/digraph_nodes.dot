@@ -788,6 +788,16 @@
             Ebih_Breach__Lake_Gate__South [label = "", pos = "76.5,-73.0!"];
         }
         {
+            Ebih_Breach__Peak__Save_Point [label = "", pos = "73.575,-54.333333!"];
+            Ebih_Breach__Peak__Column [label = "", pos = "72.0,-53.583333!"];
+            Ebih_Breach__Peak__Ground_Near_Column [label = "", pos = "71.1,-54.25!"];
+            Ebih_Breach__Peak__Ground_Near_Door [label = "", pos = "67.8,-54.25!"];
+            Ebih_Breach__Peak__South [label = "", pos = "67.5,-54.666667!"];
+            Ebih_Breach__Peak__West_Lower_Step [label = "", pos = "66.75,-53.916667!"];
+            Ebih_Breach__Peak__West_Upper_Ledge [label = "", pos = "66.6,-52.916667!"];
+            Ebih_Breach__Peak__West [label = "", pos = "66.3,-52.916667!"];
+        }
+        {
             Ebih_Breach__Portals_101__Save_Point [label = "", pos = "73.575,-59.333333!"];
             Ebih_Breach__Portals_101__East_6 [label = "", pos = "74.7,-59.333333!"];
             Ebih_Breach__Portals_101__West_Lower_Ledge [label = "", pos = "72.6,-59.0!"];
@@ -827,6 +837,18 @@
         }
         {
             Ebih_Breach__Snowy_Rocks__East_4 [label = "", pos = "71.7,-56.25!"];
+            Ebih_Breach__Snowy_Rocks__Upper_East_Ledge [label = "", pos = "70.8,-56.25!"];
+            Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East [label = "", pos = "70.875,-57.25!"];
+            Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West [label = "", pos = "69.6,-57.166667!"];
+            Ebih_Breach__Snowy_Rocks__Lower_East_Ledge [label = "", pos = "70.8,-58.333333!"];
+            Ebih_Breach__Snowy_Rocks__Cache [label = "", pos = "69.75,-59.166667!"];
+            Ebih_Breach__Snowy_Rocks__Waterfall_Ledge [label = "", pos = "69.15,-58.5!"];
+            Ebih_Breach__Snowy_Rocks__North [label = "", pos = "67.5,-55.333333!"];
+            Ebih_Breach__Snowy_Rocks__North_Ledge [label = "", pos = "67.5,-55.583333!"];
+            Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East [label = "", pos = "68.4,-55.916667!"];
+            Ebih_Breach__Snowy_Rocks__Column_East [label = "", pos = "68.55,-56.583333!"];
+            Ebih_Breach__Snowy_Rocks__Column_West [label = "", pos = "68.1,-56.583333!"];
+            Ebih_Breach__Snowy_Rocks__West [label = "", pos = "66.3,-59.416667!"];
             Ebih_Breach__Snowy_Rocks__South [label = "", pos = "67.65,-59.666667!"];
         }
         {
@@ -860,6 +882,21 @@
             Ebih_Breach__The_Vault__Dais_Center [label = "", pos = "64.35,-64.5!"];
             Ebih_Breach__The_Vault__Southwest_Corner [label = "", pos = "63.6,-64.666667!"];
             Ebih_Breach__The_Vault__South [label = "", pos = "67.5,-64.666667!"];
+        }
+        {
+            Ebih_Breach__Vertical_Room__East_2 [label = "", pos = "65.7,-52.916667!"];
+            Ebih_Breach__Vertical_Room__Highest_Ledge [label = "", pos = "64.8,-52.0!"];
+            Ebih_Breach__Vertical_Room__Cache [label = "", pos = "63.525,-52.0!"];
+            Ebih_Breach__Vertical_Room__Upper_Passage_Ledge [label = "", pos = "64.65,-52.833333!"];
+            Ebih_Breach__Vertical_Room__Passage_Exit [label = "", pos = "63.45,-52.833333!"];
+            Ebih_Breach__Vertical_Room__Passage_High [label = "", pos = "63.75,-54.25!"];
+            Ebih_Breach__Vertical_Room__Passage_Middle [label = "", pos = "63.375,-57.0!"];
+            Ebih_Breach__Vertical_Room__Passage_Low [label = "", pos = "63.3,-59.333333!"];
+            Ebih_Breach__Vertical_Room__Passage_Bottom [label = "", pos = "64.425,-59.5!"];
+            Ebih_Breach__Vertical_Room__Portal_Stand [label = "", pos = "64.5,-54.5!"];
+            Ebih_Breach__Vertical_Room__Portal_Ledge [label = "", pos = "63.9,-54.666667!"];
+            Ebih_Breach__Vertical_Room__Middle_Building_Ledge [label = "", pos = "64.2,-57.333333!"];
+            Ebih_Breach__Vertical_Room__East_6 [label = "", pos = "65.7,-59.416667!"];
         }
     }
     {
@@ -1104,6 +1141,7 @@
         {
             Ebih__Peak__West_3 [label = "", pos = "66.15,-4.0!"];
             Ebih__Peak__Observatory_West [label = "", pos = "67.425,-4.25!"];
+            Ebih__Peak__Between_West_Door_and_Tree [label = "", pos = "67.8,-4.25!"];
             Ebih__Peak__Observatory_East [label = "", pos = "71.25,-4.25!"];
             Ebih__Peak__Middle_Ledge [label = "", pos = "71.85,-3.583333!"];
             Ebih__Peak__Tunnel_Ledge [label = "", pos = "72.45,-4.083333!"];
@@ -3000,9 +3038,13 @@
             Menu__Breach_Map__MEB_Lake_Gate [label = "", pos = "75.0,-73.333333!"];
             Menu__Breach_Map__MEB_Rock_Block_Flask [label = "", pos = "60.0,-71.666667!"];
             Menu__Breach_Map__MEB_Rocky_Cages_Flask [label = "", pos = "66.0,-66.666667!"];
+            Menu__Breach_Map__MEB_Snowy_Rocks_Flask [label = "", pos = "69.0,-60.0!"];
             Menu__Breach_Map__MEB_Spider_Guards_Flask [label = "", pos = "75.0,-61.666667!"];
             Menu__Breach_Map__MEB_Spider_Guards_Button [label = "", pos = "69.0,-61.666667!"];
             Menu__Breach_Map__Slingshot_Weapon [label = "", pos = "63.0,-65.0!"];
+            Menu__Breach_Map__MEB_Vertical_Room_Bottom [label = "", pos = "63.0,-60.0!"];
+            Menu__Breach_Map__MEB_Vertical_Room_Flask [label = "", pos = "63.0,-53.333333!"];
+            Menu__Breach_Map__MEB_Vertical_Room_Portal [label = "", pos = "63.0,-55.0!"];
             Menu__Breach_Map__UVB_Blob [label = "", pos = "66.0,-85.0!"];
             Menu__Breach_Map__UVB_East_Copse_Flask [label = "", pos = "84.0,-95.0!"];
             Menu__Breach_Map__UVB_East_Glitch_Health [label = "", pos = "72.0,-95.0!"];

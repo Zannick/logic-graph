@@ -721,6 +721,18 @@ subgraph Ebih_Breach
     end
     subgraph Ebih_Breach__Snowy_Rocks[Snowy Rocks]
         Ebih_Breach__Snowy_Rocks__East_4(East 4);
+        Ebih_Breach__Snowy_Rocks__Upper_East_Ledge(Upper East Ledge);
+        Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East(Large Floating Rock East);
+        Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West(Large Floating Rock West);
+        Ebih_Breach__Snowy_Rocks__Lower_East_Ledge(Lower East Ledge);
+        Ebih_Breach__Snowy_Rocks__Cache(Cache);
+        Ebih_Breach__Snowy_Rocks__Waterfall_Ledge(Waterfall Ledge);
+        Ebih_Breach__Snowy_Rocks__North(North);
+        Ebih_Breach__Snowy_Rocks__North_Ledge(North Ledge);
+        Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East(NW Floating Rock East);
+        Ebih_Breach__Snowy_Rocks__Column_East(Column East);
+        Ebih_Breach__Snowy_Rocks__Column_West(Column West);
+        Ebih_Breach__Snowy_Rocks__West(West);
         Ebih_Breach__Snowy_Rocks__South(South);
     end
     subgraph Ebih_Breach__In_n_Out[In 'n Out]
@@ -852,6 +864,31 @@ subgraph Ebih_Breach
         Ebih_Breach__Rock_Block__East_Shaft_Bottom(East Shaft Bottom);
         Ebih_Breach__Rock_Block__East_Shaft_Top(East Shaft Top);
         Ebih_Breach__Rock_Block__East_11(East 11);
+    end
+    subgraph Ebih_Breach__Peak[Peak]
+        Ebih_Breach__Peak__Save_Point(Save Point);
+        Ebih_Breach__Peak__Column(Column);
+        Ebih_Breach__Peak__Ground_Near_Column(Ground Near Column);
+        Ebih_Breach__Peak__Ground_Near_Door(Ground Near Door);
+        Ebih_Breach__Peak__South(South);
+        Ebih_Breach__Peak__West_Lower_Step(West Lower Step);
+        Ebih_Breach__Peak__West_Upper_Ledge(West Upper Ledge);
+        Ebih_Breach__Peak__West(West);
+    end
+    subgraph Ebih_Breach__Vertical_Room[Vertical Room]
+        Ebih_Breach__Vertical_Room__East_2(East 2);
+        Ebih_Breach__Vertical_Room__Highest_Ledge(Highest Ledge);
+        Ebih_Breach__Vertical_Room__Cache(Cache);
+        Ebih_Breach__Vertical_Room__Upper_Passage_Ledge(Upper Passage Ledge);
+        Ebih_Breach__Vertical_Room__Passage_Exit(Passage Exit);
+        Ebih_Breach__Vertical_Room__Passage_High(Passage High);
+        Ebih_Breach__Vertical_Room__Passage_Middle(Passage Middle);
+        Ebih_Breach__Vertical_Room__Passage_Low(Passage Low);
+        Ebih_Breach__Vertical_Room__Passage_Bottom(Passage Bottom);
+        Ebih_Breach__Vertical_Room__Portal_Stand(Portal Stand);
+        Ebih_Breach__Vertical_Room__Portal_Ledge(Portal Ledge);
+        Ebih_Breach__Vertical_Room__Middle_Building_Ledge(Middle Building Ledge);
+        Ebih_Breach__Vertical_Room__East_6(East 6);
     end
 end
 subgraph Ebih
@@ -1079,6 +1116,7 @@ subgraph Ebih
     subgraph Ebih__Peak[Peak]
         Ebih__Peak__West_3(West 3);
         Ebih__Peak__Observatory_West(Observatory West);
+        Ebih__Peak__Between_West_Door_and_Tree(Between West Door and Tree);
         Ebih__Peak__Observatory_East(Observatory East);
         Ebih__Peak__Middle_Ledge(Middle Ledge);
         Ebih__Peak__Tunnel_Ledge(Tunnel Ledge);
@@ -3207,9 +3245,13 @@ subgraph Menu
         Menu__Breach_Map__MEB_Lake_Gate(MEB Lake Gate);
         Menu__Breach_Map__MEB_Rock_Block_Flask(MEB Rock Block Flask);
         Menu__Breach_Map__MEB_Rocky_Cages_Flask(MEB Rocky Cages Flask);
+        Menu__Breach_Map__MEB_Snowy_Rocks_Flask(MEB Snowy Rocks Flask);
         Menu__Breach_Map__MEB_Spider_Guards_Flask(MEB Spider Guards Flask);
         Menu__Breach_Map__MEB_Spider_Guards_Button(MEB Spider Guards Button);
         Menu__Breach_Map__Slingshot_Weapon(Slingshot Weapon);
+        Menu__Breach_Map__MEB_Vertical_Room_Bottom(MEB Vertical Room Bottom);
+        Menu__Breach_Map__MEB_Vertical_Room_Flask(MEB Vertical Room Flask);
+        Menu__Breach_Map__MEB_Vertical_Room_Portal(MEB Vertical Room Portal);
         Menu__Breach_Map__UVB_Blob(UVB Blob);
         Menu__Breach_Map__UVB_East_Copse_Flask(UVB East Copse Flask);
         Menu__Breach_Map__UVB_East_Glitch_Health(UVB East Glitch Health);
@@ -4161,10 +4203,18 @@ Ebih_Breach__In_n_Out__Southeast_Plains --> Ebih_Breach__In_n_Out__Southeast_Led
 Ebih_Breach__In_n_Out__Southwest <--> Ebih_Breach__Lake_Gate__North
 Ebih_Breach__Lake_Gate__Button <--> Ebih_Breach__Lake_Gate__Gate_East
 Ebih_Breach__Lake_Gate__Interior --> Ebih_Breach__Lake_Gate__Gate_East
+Ebih_Breach__Peak__Column --> Ebih_Breach__Peak__Save_Point
+Ebih_Breach__Peak__Ground_Near_Column --> Ebih_Breach__Peak__Column
+Ebih_Breach__Peak__Ground_Near_Door --> Ebih_Breach__Peak__West_Lower_Step
+Ebih_Breach__Peak__Ground_Near_Door --> Ebih_Breach__Peak__West_Upper_Ledge
+Ebih_Breach__Peak__South <--> Ebih_Breach__Snowy_Rocks__North
+Ebih_Breach__Peak__West <--> Ebih_Breach__Vertical_Room__East_2
+Ebih_Breach__Peak__West_Lower_Step --> Ebih_Breach__Peak__West_Upper_Ledge
+Ebih_Breach__Peak__West_Upper_Ledge --> Ebih_Breach__Peak__Ground_Near_Column
 Ebih_Breach__Portals_101__East_4 <--> Ebih_Breach__Portals_101__West_4
 Ebih_Breach__Portals_101__Portal_Stand --> Ebih_Breach__Portals_101__West_Slope
 Ebih_Breach__Portals_101__Save_Point --> Ebih_Breach__Portals_101__West_Lower_Ledge
-Ebih_Breach__Portals_101__West_4 --> Ebih_Breach__Snowy_Rocks__East_4
+Ebih_Breach__Portals_101__West_4 <--> Ebih_Breach__Snowy_Rocks__East_4
 Ebih_Breach__Portals_101__West_Lower_Ledge --> Ebih_Breach__Portals_101__West_Nook
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_East
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_West
@@ -4186,6 +4236,26 @@ Ebih_Breach__Rock_Block__West_Shaft_West_Ledge --> Ebih_Breach__Rock_Block__Nort
 Ebih_Breach__Rock_Block__West_Shaft_West_Ledge --> Ebih_Breach__Rock_Block__West_Shaft_East_Ledge
 Ebih_Breach__Rocky_Cages__Cage_Bottom --> Ebih_Breach__Rocky_Cages__Cage_North
 Ebih_Breach__Rocky_Cages__Cage_North <--> Ebih_Breach__The_Vault__South
+Ebih_Breach__Snowy_Rocks__Cache --> Ebih_Breach__Snowy_Rocks__Column_East
+Ebih_Breach__Snowy_Rocks__Cache --> Ebih_Breach__Snowy_Rocks__Lower_East_Ledge
+Ebih_Breach__Snowy_Rocks__Column_East --> Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East
+Ebih_Breach__Snowy_Rocks__Column_East <--> Ebih_Breach__Snowy_Rocks__Upper_East_Ledge
+Ebih_Breach__Snowy_Rocks__Column_West --> Ebih_Breach__Snowy_Rocks__North_Ledge
+Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East --> Ebih_Breach__Snowy_Rocks__Column_East
+Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East --> Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West
+Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East --> Ebih_Breach__Snowy_Rocks__Upper_East_Ledge
+Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West --> Ebih_Breach__Snowy_Rocks__Column_East
+Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West --> Ebih_Breach__Snowy_Rocks__Upper_East_Ledge
+Ebih_Breach__Snowy_Rocks__Lower_East_Ledge --> Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East
+Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East --> Ebih_Breach__Snowy_Rocks__East_4
+Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East --> Ebih_Breach__Snowy_Rocks__North_Ledge
+Ebih_Breach__Snowy_Rocks__South --> Ebih_Breach__Snowy_Rocks__Column_West
+Ebih_Breach__Snowy_Rocks__South --> Ebih_Breach__Snowy_Rocks__North_Ledge
+Ebih_Breach__Snowy_Rocks__Upper_East_Ledge --> Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East
+Ebih_Breach__Snowy_Rocks__Upper_East_Ledge --> Ebih_Breach__Snowy_Rocks__North_Ledge
+Ebih_Breach__Snowy_Rocks__Waterfall_Ledge --> Ebih_Breach__Snowy_Rocks__Column_East
+Ebih_Breach__Snowy_Rocks__Waterfall_Ledge --> Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West
+Ebih_Breach__Snowy_Rocks__West <--> Ebih_Breach__Vertical_Room__East_6
 Ebih_Breach__Spider_Guards__Button <--> Ebih_Breach__Spider_Guards__Northwest
 Ebih_Breach__Spider_Guards__Center_Above_Door --> Ebih_Breach__Spider_Guards__Button
 Ebih_Breach__Spider_Guards__Center_Hover_End --> Ebih_Breach__Spider_Guards__Center_Re_hover_Start
@@ -4206,6 +4276,17 @@ Ebih_Breach__The_Vault__South --> Ebih_Breach__The_Vault__Pipe_Gap_East
 Ebih_Breach__The_Vault__South --> Ebih_Breach__The_Vault__Pipe_Gap_West
 Ebih_Breach__The_Vault__Southwest_Corner --> Ebih_Breach__The_Vault__Dais_Center
 Ebih_Breach__The_Vault__West_Hill_Hook_Point --> Ebih_Breach__The_Vault__Pipe_Gap_West
+Ebih_Breach__Vertical_Room__East_2 --> Ebih_Breach__Vertical_Room__Highest_Ledge
+Ebih_Breach__Vertical_Room__East_2 --> Ebih_Breach__Vertical_Room__Upper_Passage_Ledge
+Ebih_Breach__Vertical_Room__East_6 --> Ebih_Breach__Vertical_Room__Middle_Building_Ledge
+Ebih_Breach__Vertical_Room__Middle_Building_Ledge --> Ebih_Breach__Vertical_Room__Portal_Ledge
+Ebih_Breach__Vertical_Room__Passage_High <--> Ebih_Breach__Vertical_Room__Passage_Middle
+Ebih_Breach__Vertical_Room__Passage_Low --> Ebih_Breach__Vertical_Room__Passage_Middle
+Ebih_Breach__Vertical_Room__Portal_Ledge --> Ebih_Breach__Vertical_Room__Portal_Stand
+Ebih_Breach__Vertical_Room__Portal_Stand --> Ebih_Breach__Vertical_Room__East_2
+Ebih_Breach__Vertical_Room__Portal_Stand --> Ebih_Breach__Vertical_Room__Highest_Ledge
+Ebih_Breach__Vertical_Room__Portal_Stand --> Ebih_Breach__Vertical_Room__Upper_Passage_Ledge
+Ebih_Breach__Vertical_Room__Upper_Passage_Ledge --> Ebih_Breach__Vertical_Room__Highest_Ledge
 Ebih__Base_Camp__Building_Entry <--> Interior__Building_Interior__Entry
 Ebih__Base_Camp__Bunker_Entry <--> Interior__Bunker_Interior__Entry
 Ebih__Base_Camp__East_11 --> Ebih__Base_Camp__Top_Platform
@@ -5517,6 +5598,7 @@ Menu__Breach_Map__GSB_East --> Giguna_Breach__East__Save_Point
 Menu__Breach_Map__GSB_Labyrinth --> Giguna_Breach__Labyrinth__Save_Point
 Menu__Breach_Map__GSB_Peak --> Giguna_Breach__Peak__Save_Point
 Menu__Breach_Map__GSB_SW_Save --> Giguna_Breach__SW_Save__Save_Point
+Menu__Breach_Map__GSB_South --> Giguna_Breach__South__Save_Point
 Menu__Breach_Map__GlB_Arena --> Glacier_Breach__Save_and_Exit__Save_Point
 Menu__Breach_Map__GlB_Center --> Glacier_Breach__Guarded_Corridor__Save_Point
 Menu__Breach_Map__GlB_East --> Glacier_Breach__Hammonds_Breach__Save_Point
@@ -5530,6 +5612,7 @@ Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
 Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
+Menu__Breach_Map__MEB_Peak --> Ebih_Breach__Peak__Save_Point
 Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point
 Menu__Breach_Map__MEB_Southwest --> Ebih_Breach__Rock_Block__Save_Point
 Menu__Breach_Map__UVB_Center --> Uhrum_Breach__East_Glitch__Save_Point

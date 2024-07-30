@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3036] = [
+static SPOT_DEFS: [SpotDef; 3074] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -3788,6 +3788,54 @@ static SPOT_DEFS: [SpotDef; 3036] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Ebih_Breach__Peak__Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__Column__ex__Save_Point_1, ExitId::Ebih_Breach__Peak__Column__ex__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__Ground_Near_Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__Ground_Near_Column__ex__Column_1, ExitId::Ebih_Breach__Peak__Ground_Near_Column__ex__Column_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__Ground_Near_Door,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__Ground_Near_Door__ex__West_Lower_Step_1, ExitId::Ebih_Breach__Peak__Ground_Near_Door__ex__West_Upper_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Ebih_Breach__Peak__Save_Point__Save, ActionId::Ebih_Breach__Peak__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__South__ex__Snowy_Rocks__North_1, ExitId::Ebih_Breach__Peak__South__ex__Snowy_Rocks__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__West__ex__Vertical_Room__East_2_1, ExitId::Ebih_Breach__Peak__West__ex__Vertical_Room__East_2_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__West_Lower_Step,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__West_Lower_Step__ex__West_Upper_Ledge_1, ExitId::Ebih_Breach__Peak__West_Lower_Step__ex__West_Upper_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Peak__West_Upper_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Peak__West_Upper_Ledge__ex__Ground_Near_Column_1, ExitId::Ebih_Breach__Peak__West_Upper_Ledge__ex__Ground_Near_Column_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Ebih_Breach__Portals_101__East_4,
         loc_range: None,
         exit_range: Some((ExitId::Ebih_Breach__Portals_101__East_4__ex__Drone_Tutorial__West_4_1, ExitId::Ebih_Breach__Portals_101__East_4__ex__West_4_1)),
@@ -3980,7 +4028,61 @@ static SPOT_DEFS: [SpotDef; 3036] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Cache,
+        loc_range: Some((LocationId::Ebih_Breach__Snowy_Rocks__Cache__Flask, LocationId::Ebih_Breach__Snowy_Rocks__Cache__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Cache__ex__Column_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Cache__ex__Lower_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Column_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Column_East__ex__NW_Floating_Rock_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Column_East__ex__Upper_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Column_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Column_West__ex__North_Ledge_1, ExitId::Ebih_Breach__Snowy_Rocks__Column_West__ex__North_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Ebih_Breach__Snowy_Rocks__East_4,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__East_4__ex__Portals_101__West_4_1, ExitId::Ebih_Breach__Snowy_Rocks__East_4__ex__Portals_101__West_4_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East__ex__Column_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East__ex__Upper_East_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West__ex__Column_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West__ex__Upper_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Lower_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Lower_East_Ledge__ex__Large_Floating_Rock_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Lower_East_Ledge__ex__Large_Floating_Rock_East_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East__ex__East_4_1, ExitId::Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East__ex__North_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__North__ex__Peak__South_1, ExitId::Ebih_Breach__Snowy_Rocks__North__ex__Peak__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__North_Ledge,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -3988,7 +4090,25 @@ static SPOT_DEFS: [SpotDef; 3036] = [
     SpotDef {
         id: SpotId::Ebih_Breach__Snowy_Rocks__South,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__South__ex__Column_West_1, ExitId::Ebih_Breach__Snowy_Rocks__South__ex__North_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Upper_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Upper_East_Ledge__ex__Column_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Upper_East_Ledge__ex__North_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__Waterfall_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__Waterfall_Ledge__ex__Column_East_1, ExitId::Ebih_Breach__Snowy_Rocks__Waterfall_Ledge__ex__Large_Floating_Rock_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Snowy_Rocks__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Snowy_Rocks__West__ex__Vertical_Room__East_6_1, ExitId::Ebih_Breach__Snowy_Rocks__West__ex__Vertical_Room__East_6_1)),
         action_range: None,
     },
     SpotDef {
@@ -4145,6 +4265,84 @@ static SPOT_DEFS: [SpotDef; 3036] = [
         id: SpotId::Ebih_Breach__The_Vault__West_Hill_Hook_Point,
         loc_range: None,
         exit_range: Some((ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1, ExitId::Ebih_Breach__The_Vault__West_Hill_Hook_Point__ex__Pipe_Gap_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Cache,
+        loc_range: Some((LocationId::Ebih_Breach__Vertical_Room__Cache__Flask, LocationId::Ebih_Breach__Vertical_Room__Cache__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__East_2,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__East_2__ex__Highest_Ledge_1, ExitId::Ebih_Breach__Vertical_Room__East_2__ex__Upper_Passage_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__East_6,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__East_6__ex__Middle_Building_Ledge_1, ExitId::Ebih_Breach__Vertical_Room__East_6__ex__Snowy_Rocks__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Highest_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Middle_Building_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Middle_Building_Ledge__ex__Portal_Ledge_1, ExitId::Ebih_Breach__Vertical_Room__Middle_Building_Ledge__ex__Portal_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Passage_Bottom,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Passage_Exit,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Passage_High,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Passage_High__ex__Passage_Middle_1, ExitId::Ebih_Breach__Vertical_Room__Passage_High__ex__Passage_Middle_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Passage_Low,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Passage_Low__ex__Passage_Middle_1, ExitId::Ebih_Breach__Vertical_Room__Passage_Low__ex__Passage_Middle_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Passage_Middle,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Passage_Middle__ex__Passage_High_1, ExitId::Ebih_Breach__Vertical_Room__Passage_Middle__ex__Passage_High_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Portal_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Portal_Ledge__ex__Portal_Stand_1, ExitId::Ebih_Breach__Vertical_Room__Portal_Ledge__ex__Portal_Stand_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Portal_Stand,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Portal_Stand__ex__East_2_1, ExitId::Ebih_Breach__Vertical_Room__Portal_Stand__ex__Upper_Passage_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih_Breach__Vertical_Room__Upper_Passage_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Ebih_Breach__Vertical_Room__Upper_Passage_Ledge__ex__Highest_Ledge_1, ExitId::Ebih_Breach__Vertical_Room__Upper_Passage_Ledge__ex__Highest_Ledge_3)),
         action_range: None,
     },
     SpotDef {
@@ -5385,6 +5583,12 @@ static SPOT_DEFS: [SpotDef; 3036] = [
     },
     SpotDef {
         id: SpotId::Ebih__Party_Central__Waterfall_Platform,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih__Peak__Between_West_Door_and_Tree,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -14476,7 +14680,7 @@ static SPOT_DEFS: [SpotDef; 3036] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__GSB_South,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__GSB_South__ex__Giguna_Breach__South__Save_Point_1, ExitId::Menu__Breach_Map__GSB_South__ex__Giguna_Breach__South__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -14662,7 +14866,7 @@ static SPOT_DEFS: [SpotDef; 3036] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__MEB_Peak,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__MEB_Peak__ex__Ebih_Breach__Peak__Save_Point_1, ExitId::Menu__Breach_Map__MEB_Peak__ex__Ebih_Breach__Peak__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -14673,6 +14877,12 @@ static SPOT_DEFS: [SpotDef; 3036] = [
     },
     SpotDef {
         id: SpotId::Menu__Breach_Map__MEB_Rocky_Cages_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Snowy_Rocks_Flask,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -14697,6 +14907,24 @@ static SPOT_DEFS: [SpotDef; 3036] = [
     },
     SpotDef {
         id: SpotId::Menu__Breach_Map__MEB_Spider_Guards_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Vertical_Room_Bottom,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Vertical_Room_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__MEB_Vertical_Room_Portal,
         loc_range: None,
         exit_range: None,
         action_range: None,
