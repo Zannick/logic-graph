@@ -434,5 +434,21 @@
 ! Do Move Portal Here
   Portalwarp
 
-# Next: Amagi Breach
+# Section "Lower Amagi"
+* Collect Flask from Amagi Breach > West Ruins > Center Platform > Flask
+* Collect Amagi_Breach_West_Ruins_Gate from Amagi Breach > West Ruins > Button > Hit Button
+* Collect Health_Fragment from Amagi Breach > West Ruins > East Platform > Health
+  Move... to Amagi Breach > West Ruins > Bottom Middle
+  ExitBreachWarp
+* Collect Urgent_Message from Amagi > Wiggly Room > Cache > Tablet
+  Move... to Amagi > Wiggly Room > East Chamber
+! Do Move Portal Here
+  Portalwarp
+* Collect Big_Flask from Amagi Breach > Twisty Passages > Closed Chamber > Flask
+  ExitBreachWarp
+  Move... to Amagi > Wiggly Room > Gate East
+! Do Move Portal Here
+  Portalwarp
+
+# Next: Annuna Invisible Enemies room
 
