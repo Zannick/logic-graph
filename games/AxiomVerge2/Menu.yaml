@@ -634,6 +634,14 @@ areas:
       coord: [32, 18]
     - name: Amagi Gated Community Flask
       coord: [32, 16]
+    - name: Amagi Divided Room Portal
+      coord: [31, 20]
+    - name: Urgent Message
+      coord: [27, 20]
+    - name: Amagi Wiggly Room Gate
+      coord: [28, 21]
+    - name: Amagi Wiggly Room Portal
+      coord: [29, 21]
 
     - name: Annuna Mirror Match Flask
       coord: [33, 26]
@@ -1242,8 +1250,16 @@ areas:
       coord: [34, 16]
     - name: Exit Breach
       coord: [34, 18]
+    - name: Halusan
+      coord: [31, 20]
+    - name: LAB Twisty Passages Flask
+      coord: [29, 21]
     - name: LAB Upper Lake Health
       coord: [33, 15]
+    - name: LAB West Ruins Flask
+      coord: [26, 18]
+    - name: LAB West Ruins Health
+      coord: [27, 18]
 
     - name: MEB In 'n Out Matrix
       coord: [25, 12]

@@ -536,6 +536,8 @@ areas:
           tags: [xshift]
     - name: Center
       coord: [31.45, 18.75]
+      data:
+        flipside: Amagi Breach > Upper Hallway > West Hook Point
       local:
         - to: East
           jumps: 1
@@ -687,6 +689,8 @@ areas:
         - to: Shrine
           req: $hook and $hover
           time: 3.5
+        - to: Divided Room > East
+          tags: [xshift]
 
     - name: East Passage
       coord: [33, 19.8]
@@ -882,7 +886,9 @@ areas:
         - to: East Platform
         - to: Tentacle Gap
     - name: East Platform
-      coord: [26.5, 17.1]
+      coord: [26.45, 17.1]
+      data:
+        flipside: Amagi Breach > West Ruins > Center Platform
       local:
         - to: Upper Center Platform
         - to: East 18
@@ -1264,6 +1270,19 @@ areas:
           jumps: 3
           jump_movement: water
         - to: Left of Enemy
+    - name: Mid-water Above Gap
+      coord: [26.25, 17.75]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Tentacle Gap
+        - to: Some Rock
+        - to: Small Hill
+        - to: Somewhat Central Platform
+      exits:
+        - to: Pillar
+          req: Underwater_Movement and ($hook or $hover)
+          movement: water
     - name: Tentacle Gap
       coord: [26.25, 18.7]
       local:
@@ -2556,10 +2575,406 @@ areas:
           jumps: 1
           penalty_tags: [xshift, -fast_hover.1]
 
-- name: Wiggly Room
+- name: Wiggly Room  # MARK: Wiggly Room
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Hole
+  map:
+    tablet: [27, 19, 28, 20]
+    gate: [28, 20, 29, 21]
+    portal: [29, 20, 30, 21]
+  datamap:
+    map_spot:
+      tablet: Menu > Kiengir Map > Urgent Message
+      gate: Menu > Kiengir Map > Amagi Wiggly Room Gate
+      portal: Menu > Kiengir Map > Amagi Wiggly Room Portal
   spots:
     - name: West
       coord: [27.05, 19.75]
+      local:
+        - to: West Ledge
+      exits:
+        - to: West Lake > East 20
+          tags: [xshift]
+    - name: West Ledge
+      coord: [27.35, 20.2]
+      local:
+        - to: West
+          jumps: 2
+        - to: Dur-Esla
+        - to: West Platform
+          jumps: 1
+          jump_mvmt: water
+    - name: Dur-Esla
+      coord: [27.8, 20.8]
+      local:
+        - to: West Ledge
+          jumps: 3
+        - to: Midwest Rock
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: Below West Cache
+          req: $mist2
+          movement: mist2
+          penalties:
+            - add: 1  # kill Dur-Esla first
+    - name: West Platform
+      coord: [27.65, 19.95]
+      local:
+        - to: Below West Cache
+          jumps: 1
+          jump_mvmt: water
+        - to: West Ledge
+        - to: Dur-Esla
+          jumps_down: 1
+      exits:
+        - to: Midwest Rock
+          req: Underwater_Movement
+          movement: water
+    - name: Below West Cache
+      coord: [27.8, 19.8]
+      local:
+        - to: West Platform
+      exits:
+        - to: Cache
+          req: $mist2
+          movement: mist2
+        - to: Cache
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Cache
+      coord: [27.75, 19.5]
+      local:
+        - to: Below West Cache
+        - to: Midwest Rock
+      locations:
+        - name: Tablet
+          item: Urgent_Message
+          tags: [standing]
+    - name: Midwest Rock
+      coord: [28.1, 20.05]
+      local:
+        - to: Dur-Esla
+        - to: Midwest Hook Point
+        - to: West Platform
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Cache
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 2
+        - to: Cache
+          req: $mist2
+          movement: mist2
+        - to: Cache
+          req: $hookhover
+          movement: base
+          jumps: 3
+    - name: Midwest Hook Point
+      coord: [28.4, 20.1]
+      local:
+        - to: Gate East
+          thru: [28.7, 20.3]
+        - to: Middle Rock West
+        - to: Midwest Rock
+          jumps: 1
+      exits:
+        - to: West
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 2
+        - to: Portal Rock West
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 3
+
+    - name: Button
+      coord: [28.25, 20.75]
+      local:
+        - to: South
+      locations:
+        - name: Hit Button
+          item: Amagi_Wiggly_Room_Gate
+          req: $can_damage
+          tags: [button]
     - name: South
       coord: [28.5, 20.8]
+      data:
+        flipside: Amagi Breach > Twisty Passages > South
+      local:
+        - to: Button
+          jumps: 1
+      exits:
+        - to: Uhrum > Tulip Tower > North
+          tags: [ydoor]
+        - to: Gate East
+          req: Underwater_Movement and Amagi_Wiggly_Room_Gate
+          movement: water
+          jumps: 1
+        - to: Gate East
+          req: Amagi_Wiggly_Room_Gate
+          movement: base
+          jumps: 1
+    - name: Gate East
+      coord: [28.7, 20.7]
+      data:
+        flipside: Amagi Breach > Twisty Passages > West Flora
+      local:
+        - to: Middle Rock West
+          jumps: 1
+      exits:
+        - to: Button
+          req: Underwater_Movement and Amagi_Wiggly_Room_Gate
+          movement: water
+        - to: Button
+          req: Amagi_Wiggly_Room_Gate
+          movement: base
+        - to: South
+          req: Underwater_Movement and Amagi_Wiggly_Room_Gate
+          movement: water
+        - to: South
+          req: Amagi_Wiggly_Room_Gate
+          movement: base
+        - to: Portal Rock West
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 2
+        - to: Midwest Hook Point
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 2
+    - name: Middle Rock West
+      coord: [28.85, 20.45]
+      local:
+        - to: Gate East
+        - to: Midwest Hook Point
+          jumps: 2
+        - to: Middle Rock East
+      exits:
+        - to: Midwest Hook Point
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Middle Rock East
+      coord: [29.25, 20.45]
+      local:
+        - to: Middle Rock West
+        - to: Portal Rock West
+          jumps: 1
+      exits:
+        - to: Midwest Hook Point
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Portal Rock West
+      coord: [29.5, 20.4]
+      local:
+        - to: Middle Rock East
+        - to: Portal Rock East
+          jumps: 2
+      exits:
+        - to: East
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: East Bottom
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Portal Rock East
+      coord: [29.8, 20.05]
+      local:
+        - to: Portal Rock West
+        - to: East Rock
+        - to: East Chamber
+      exits:
+        - to: Midwest Hook Point
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: Gate East
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: Portal Hole
+      coord: [29.6, 20.85]
+    - name: East Chamber
+      coord: [29.95, 20.9]
+      data:
+        flipside: Amagi Breach > Twisty Passages > Closed Chamber
+      exits:
+        - to: Portal Rock East
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 3
+    - name: East Rock
+      coord: [30.3, 20.3]
+      local:
+        - to: Portal Rock East
+          jumps: 2
+        - to: East
+          jumps: 1
+      exits:
+        - to: Portal Rock East
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          jumps: 1
+    - name: East Bottom
+      coord: [30.5, 20.6]
+      data:
+        flipside: Amagi Breach > Twisty Passages > East Bottom
+      local:
+        - to: East Rock
+          jumps: 2
+        - to: East Rock
+          jumps: 1
+          jump_mvmt: water
+        - to: East
+          jumps: 1
+    - name: East
+      coord: [30.95, 20.35]
+      local:
+        - to: East Bottom
+      exits:
+        - to: Divided Room > West
+          tags: [xshift]
+        - to: East
+          req: Underwater_Movement and $hover
+          movement: water
+          jumps: 1
+
+- name: Divided Room  # MARK: Divided Room
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    portal: [31, 19, 32, 20]
+  datamap:
+    map_spot:
+      portal: Menu > Kiengir Map > Amagi Divided Room Portal
+  spots:
+    - name: East
+      coord: [31.95, 20]
+      exits:
+        - to: Liru Room > West 20
+          tags: [xshift]
+        - to: Column East
+          req: Underwater_Movement and $grab
+          movement: water
+          jumps: 2
+        - to: Column East
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 1
+        - to: Column East
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: Column East
+      coord: [31.6, 19.8]
+      local:
+        - to: East
+        - to: Column West
+      exits:
+        - to: West
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+        - to: Wiggly Room > East Rock
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Column West
+      coord: [31.4, 19.8]
+      local:
+        - to: West
+          jumps_down: 1
+        - to: Column East
+      exits:
+        - to: East
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+        - to: Liru Room > Platform 3 Left
+          req: Underwater_Movement and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: West
+      coord: [31.05, 20.35]
+      local:
+        - to: Column West
+          jumps: 3
+        - to: Column West
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: Wiggly Room > East
+          tags: [xshift]
+
+    - name: Portal Stand
+      coord: [31.5, 19.4]
+      data:
+        flipside: Amagi Breach > Lower Hallway > Cache
+      local:
+        - to: Portal West
+        - to: Portal East
+    - name: Portal West
+      coord: [31.3, 19.55]
+      data:
+        flipside: Amagi Breach > Lower Hallway > West Ledge
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Portal East
+      coord: [31.8, 19.55]
+      data:
+        flipside: Amagi Breach > Lower Hallway > East Ledge
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Portal East Mid-air
+      coord: [31.75, 19.4]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+
+    - name: Upper Left Corner
+      coord: [31.1, 19.75]
+      data:
+        flipside: Amagi Breach > Lower Hallway > West
+      exits:
+        - to: Wiggly Room > East
+          req: Underwater_Movement
+          movement: water
+          penalty_tags: [xshift, -base.1]
+        - to: Wiggly Room > East
+          movement: base
+          penalty_tags: [xshift, -slow.1]
+    - name: Upper Right Corner
+      coord: [31.9, 19.7]
+      data:
+        flipside: Amagi Breach > Lower Hallway > Middle Bubbles
+      exits:
+        - to: Liru Room > West 20
+          req: Underwater_Movement
+          movement: water
+          penalty_tags: [xshift, -base.1]
+        - to: Liru Room > West 20
+          movement: base
+          penalty_tags: [xshift, -slow.1]

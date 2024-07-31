@@ -189,6 +189,39 @@ pub fn access_amagi__main_area__carving__key_combo__req(ctx: &Context, world: &W
     // not ^_combo
     !ctx.amagi__main_area__ctx__combo()
 }
+pub fn access_amagi_breach_lower_hallway_gate(ctx: &Context, world: &World) -> bool {
+    // Amagi_Breach_Lower_Hallway_Gate
+    ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
+}
+pub fn access_amagi_breach_lower_hallway_gate_and_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Amagi_Breach_Lower_Hallway_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+    (((ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate) && ctx.has(Item::Underwater_Movement))
+        && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
+pub fn access_amagi_breach_west_ruins_gate(ctx: &Context, world: &World) -> bool {
+    // Amagi_Breach_West_Ruins_Gate
+    ctx.has(Item::Amagi_Breach_West_Ruins_Gate)
+}
+pub fn access_amagi_breach_west_ruins_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Amagi_Breach_West_Ruins_Gate and Underwater_Movement
+    (ctx.has(Item::Amagi_Breach_West_Ruins_Gate) && ctx.has(Item::Underwater_Movement))
+}
+pub fn access_amagi_breach_west_ruins_gate_and_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+    (((ctx.has(Item::Amagi_Breach_West_Ruins_Gate) && ctx.has(Item::Underwater_Movement))
+        && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
 pub fn access_amagi_dragon_eye_passage(ctx: &Context, world: &World) -> bool {
     // Amagi_Dragon_Eye_Passage
     ctx.has(Item::Amagi_Dragon_Eye_Passage)
@@ -254,6 +287,10 @@ pub fn access_amagi_west_lake_gate_and_underwater_movement(ctx: &Context, world:
 pub fn access_amagi_west_lake_surface_wall(ctx: &Context, world: &World) -> bool {
     // Amagi_West_Lake_Surface_Wall
     ctx.has(Item::Amagi_West_Lake_Surface_Wall)
+}
+pub fn access_amagi_wiggly_room_gate(ctx: &Context, world: &World) -> bool {
+    // Amagi_Wiggly_Room_Gate
+    ctx.has(Item::Amagi_Wiggly_Room_Gate)
 }
 pub fn access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
     ctx: &Context,
@@ -3498,6 +3535,54 @@ pub fn access_underwater_movement_and___invoke_grab_or_invoke_climb(
     (ctx.has(Item::Underwater_Movement)
         && (helper__grab!(ctx, world) || helper__climb!(ctx, world)))
 }
+pub fn access_underwater_movement_and___invoke_hook_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and ($hook or $hover)
+    (ctx.has(Item::Underwater_Movement)
+        && (helper__hook!(ctx, world) || helper__hover!(ctx, world)))
+}
+pub fn access_underwater_movement_and___slingshot_hook_or_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+    (ctx.has(Item::Underwater_Movement)
+        && (ctx.has(Item::Slingshot_Hook) || ctx.has(Item::Drone_Hover)))
+}
+pub fn access_underwater_movement_and_amagi_breach_lower_hallway_gate(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate))
+}
+pub fn access_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook
+    ((ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate))
+        && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook and Drone_Hover
+    (((ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate))
+        && ctx.has(Item::Slingshot_Hook))
+        && ctx.has(Item::Drone_Hover))
+}
+pub fn access_underwater_movement_and_amagi_wiggly_room_gate(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and Amagi_Wiggly_Room_Gate
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Wiggly_Room_Gate))
+}
+pub fn access_underwater_movement_and_drone_hover(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and Drone_Hover
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Drone_Hover))
+}
 pub fn access_underwater_movement_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -3517,6 +3602,10 @@ pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &World) 
 pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
+}
+pub fn access_underwater_movement_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement and $hookhover
+    (ctx.has(Item::Underwater_Movement) && helper__hookhover!(ctx, world))
 }
 pub fn access_underwater_movement_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hover
@@ -3541,6 +3630,10 @@ pub fn access_underwater_movement_and_slingshot_hook_and_drone_hover(
     // Underwater_Movement and Slingshot_Hook and Drone_Hover
     ((ctx.has(Item::Underwater_Movement) && ctx.has(Item::Slingshot_Hook))
         && ctx.has(Item::Drone_Hover))
+}
+pub fn access_underwater_movement_or_slingshot_hook(ctx: &Context, world: &World) -> bool {
+    // Underwater_Movement or Slingshot_Hook
+    (ctx.has(Item::Underwater_Movement) || ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_within_menu_gt_upgrade_menu(ctx: &Context, world: &World) -> bool {
     // WITHIN `Menu > Upgrade Menu`
@@ -5136,6 +5229,157 @@ pub fn explain_amagi__main_area__carving__key_combo__req(
         (!val.0, val.1)
     }
 }
+pub fn explain_amagi_breach_lower_hallway_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Breach_Lower_Hallway_Gate
+    {
+        let h = ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate);
+        edict.insert("Amagi_Breach_Lower_Hallway_Gate", format!("{}", h));
+        (h, vec!["Amagi_Breach_Lower_Hallway_Gate"])
+    }
+}
+pub fn explain_amagi_breach_lower_hallway_gate_and_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Breach_Lower_Hallway_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let h = ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate);
+                    edict.insert("Amagi_Breach_Lower_Hallway_Gate", format!("{}", h));
+                    (h, vec!["Amagi_Breach_Lower_Hallway_Gate"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Underwater_Movement);
+                        edict.insert("Underwater_Movement", format!("{}", h));
+                        (h, vec!["Underwater_Movement"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi_breach_west_ruins_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Breach_West_Ruins_Gate
+    {
+        let h = ctx.has(Item::Amagi_Breach_West_Ruins_Gate);
+        edict.insert("Amagi_Breach_West_Ruins_Gate", format!("{}", h));
+        (h, vec!["Amagi_Breach_West_Ruins_Gate"])
+    }
+}
+pub fn explain_amagi_breach_west_ruins_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Breach_West_Ruins_Gate and Underwater_Movement
+    {
+        let mut left = {
+            let h = ctx.has(Item::Amagi_Breach_West_Ruins_Gate);
+            edict.insert("Amagi_Breach_West_Ruins_Gate", format!("{}", h));
+            (h, vec!["Amagi_Breach_West_Ruins_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi_breach_west_ruins_gate_and_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let h = ctx.has(Item::Amagi_Breach_West_Ruins_Gate);
+                    edict.insert("Amagi_Breach_West_Ruins_Gate", format!("{}", h));
+                    (h, vec!["Amagi_Breach_West_Ruins_Gate"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Underwater_Movement);
+                        edict.insert("Underwater_Movement", format!("{}", h));
+                        (h, vec!["Underwater_Movement"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_amagi_dragon_eye_passage(
     ctx: &Context,
     world: &World,
@@ -5396,6 +5640,18 @@ pub fn explain_amagi_west_lake_surface_wall(
         let h = ctx.has(Item::Amagi_West_Lake_Surface_Wall);
         edict.insert("Amagi_West_Lake_Surface_Wall", format!("{}", h));
         (h, vec!["Amagi_West_Lake_Surface_Wall"])
+    }
+}
+pub fn explain_amagi_wiggly_room_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Wiggly_Room_Gate
+    {
+        let h = ctx.has(Item::Amagi_Wiggly_Room_Gate);
+        edict.insert("Amagi_Wiggly_Room_Gate", format!("{}", h));
+        (h, vec!["Amagi_Wiggly_Room_Gate"])
     }
 }
 pub fn explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(
@@ -18669,6 +18925,248 @@ pub fn explain_underwater_movement_and___invoke_grab_or_invoke_climb(
         }
     }
 }
+pub fn explain_underwater_movement_and___invoke_hook_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and ($hook or $hover)
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                        edict.insert("$hover", format!("{:?}", res));
+                        refs.push("$hover");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and___slingshot_hook_or_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Drone_Hover);
+                        edict.insert("Drone_Hover", format!("{}", h));
+                        (h, vec!["Drone_Hover"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_amagi_breach_lower_hallway_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate);
+                edict.insert("Amagi_Breach_Lower_Hallway_Gate", format!("{}", h));
+                (h, vec!["Amagi_Breach_Lower_Hallway_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate);
+                    edict.insert("Amagi_Breach_Lower_Hallway_Gate", format!("{}", h));
+                    (h, vec!["Amagi_Breach_Lower_Hallway_Gate"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook and Drone_Hover
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate);
+                        edict.insert("Amagi_Breach_Lower_Hallway_Gate", format!("{}", h));
+                        (h, vec!["Amagi_Breach_Lower_Hallway_Gate"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Hook);
+                    edict.insert("Slingshot_Hook", format!("{}", h));
+                    (h, vec!["Slingshot_Hook"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_amagi_wiggly_room_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Amagi_Wiggly_Room_Gate
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Amagi_Wiggly_Room_Gate);
+                edict.insert("Amagi_Wiggly_Room_Gate", format!("{}", h));
+                (h, vec!["Amagi_Wiggly_Room_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Drone_Hover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Hover);
+                edict.insert("Drone_Hover", format!("{}", h));
+                (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -18778,6 +19276,32 @@ pub fn explain_underwater_movement_and_invoke_hook(
                 let (res, mut refs) = hexplain__hook!(ctx, world, edict);
                 edict.insert("$hook", format!("{:?}", res));
                 refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -18919,6 +19443,31 @@ pub fn explain_underwater_movement_and_slingshot_hook_and_drone_hover(
                 let h = ctx.has(Item::Drone_Hover);
                 edict.insert("Drone_Hover", format!("{}", h));
                 (h, vec!["Drone_Hover"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_underwater_movement_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement or Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -19253,6 +19802,82 @@ pub fn observe_access_amagi__main_area__carving__key_combo__req(
         ctx.amagi__main_area__ctx__combo()
     })
 }
+pub fn observe_access_amagi_breach_lower_hallway_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Breach_Lower_Hallway_Gate
+    {
+        full_obs.observe_amagi_breach_lower_hallway_gate();
+        ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
+    }
+}
+pub fn observe_access_amagi_breach_lower_hallway_gate_and_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Breach_Lower_Hallway_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+    ((({
+        full_obs.observe_amagi_breach_lower_hallway_gate();
+        ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })) && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
+pub fn observe_access_amagi_breach_west_ruins_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Breach_West_Ruins_Gate
+    {
+        full_obs.observe_amagi_breach_west_ruins_gate();
+        ctx.has(Item::Amagi_Breach_West_Ruins_Gate)
+    }
+}
+pub fn observe_access_amagi_breach_west_ruins_gate_and_underwater_movement(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Breach_West_Ruins_Gate and Underwater_Movement
+    ({
+        full_obs.observe_amagi_breach_west_ruins_gate();
+        ctx.has(Item::Amagi_Breach_West_Ruins_Gate)
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    }))
+}
+pub fn observe_access_amagi_breach_west_ruins_gate_and_underwater_movement_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+    ((({
+        full_obs.observe_amagi_breach_west_ruins_gate();
+        ctx.has(Item::Amagi_Breach_West_Ruins_Gate)
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })) && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
 pub fn observe_access_amagi_dragon_eye_passage(
     ctx: &Context,
     world: &World,
@@ -19417,6 +20042,17 @@ pub fn observe_access_amagi_west_lake_surface_wall(
     {
         full_obs.observe_amagi_west_lake_surface_wall();
         ctx.has(Item::Amagi_West_Lake_Surface_Wall)
+    }
+}
+pub fn observe_access_amagi_wiggly_room_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Wiggly_Room_Gate
+    {
+        full_obs.observe_amagi_wiggly_room_gate();
+        ctx.has(Item::Amagi_Wiggly_Room_Gate)
     }
 }
 pub fn observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(
@@ -26515,6 +27151,113 @@ pub fn observe_access_underwater_movement_and___invoke_grab_or_invoke_climb(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs)))
 }
+pub fn observe_access_underwater_movement_and___invoke_hook_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and ($hook or $hover)
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__hook!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_underwater_movement_and___slingshot_hook_or_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } || {
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
+pub fn observe_access_underwater_movement_and_amagi_breach_lower_hallway_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_amagi_breach_lower_hallway_gate();
+        ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
+    }))
+}
+pub fn observe_access_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook
+    (({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_amagi_breach_lower_hallway_gate();
+        ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
+    })) && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
+pub fn observe_access_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slingshot_hook_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook and Drone_Hover
+    ((({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_amagi_breach_lower_hallway_gate();
+        ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
+    })) && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })) && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
+pub fn observe_access_underwater_movement_and_amagi_wiggly_room_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Amagi_Wiggly_Room_Gate
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_amagi_wiggly_room_gate();
+        ctx.has(Item::Amagi_Wiggly_Room_Gate)
+    }))
+}
+pub fn observe_access_underwater_movement_and_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Drone_Hover
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    }))
+}
 pub fn observe_access_underwater_movement_and_drone_hover_and_slingshot_hook(
     ctx: &Context,
     world: &World,
@@ -26564,6 +27307,17 @@ pub fn observe_access_underwater_movement_and_invoke_hook(
         full_obs.observe_underwater_movement();
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_underwater_movement_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and $hookhover
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
 pub fn observe_access_underwater_movement_and_invoke_hover(
     ctx: &Context,
@@ -26631,6 +27385,20 @@ pub fn observe_access_underwater_movement_and_slingshot_hook_and_drone_hover(
         full_obs.observe_drone_hover();
         ctx.has(Item::Drone_Hover)
     }))
+}
+pub fn observe_access_underwater_movement_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement or Slingshot_Hook
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } || {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    })
 }
 pub fn observe_access_within_menu_gt_upgrade_menu(
     ctx: &Context,

@@ -237,6 +237,8 @@ areas:
       coord: [29.05, 22.8]
     - name: Portal Stand
       coord: [30.475, 22.15]
+      data:
+        flipside: Amagi Breach > Lakebed > Save Point
     - name: East 22
       coord: [31.95, 21.65]
     - name: East 23

@@ -503,12 +503,12 @@ areas:
   spots:
     - name: East 18
       coord: [30.9, 17.75]
-
-- name: Upper Hallway  # MARK: Upper Hallway
-  on_entry: $reset_old_area(^newpos)
-  spots:
-    - name: North
-      coord: [32.5, 18.2]
+    - name: East 19
+      coord: [30.9, 18.65]
+    - name: South
+      coord: [30.5, 18.8]
+    - name: West
+      coord: [28.1, 17.75]
 
 - name: Upper Lake  # MARK: Upper Lake
   on_entry: $reset_old_area(^newpos)
@@ -613,9 +613,590 @@ areas:
       exits:
         - to: West Ruins > North
           tags: [ydoor]
+        - to: North
+          req: $mist2
+          movement: mist2
 
 - name: West Ruins  # MARK: West Ruins
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [26, 17, 27, 18]
+    health: [27, 17, 28, 18]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > LAB West Ruins Flask
+      health: Menu > Breach Map > LAB West Ruins Health
   spots:
     - name: North
       coord: [25.5, 16.2]
+      local:
+        - to: West Platform Hook Point
+        - to: Bottom Middle
+      exits:
+        - to: West Platform
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+        - to: West Platform
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+    - name: West Platform
+      coord: [25.8, 16.75]
+      local:
+        - to: Bottom Middle
+      exits:
+        - to: Center Platform West
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+        - to: Center Platform West
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+        - to: North
+          req: $mist2
+          movement: mist2
+    - name: West Platform Hook Point
+      coord: [25.65, 16.8]
+      exits:
+        - to: West Platform
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 1
+        - to: West Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Center Platform
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Center Platform West
+      coord: [26.25, 17.1]
+      local:
+        - to: Center Platform
+        - to: Bottom Middle
+      exits:
+        - to: West Platform
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+          jumps: 1
+        - to: West Platform
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 2
+    - name: Center Platform
+      coord: [26.45, 17.1]
+      data:
+        flipside: Amagi > West Lake > East Platform
+      local:
+        - to: Bottom Middle
+        - to: Button
+        - to: Gate West
+        - to: Center Platform West
+      locations:
+        - name: Flask
+          canon: Amagi_Breach_West_Ruins_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Amagi_Breach_West_Ruins_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Amagi_Breach_West_Ruins_Flask
+          item: Flask
+          to: ^map_spot
+          tags: [cskip]
+    - name: Bottom Middle
+      coord: [26.25, 17.75]
+      data:
+        flipside: Amagi > West Lake > Mid-water Above Gap
+      local:
+        - to: Button
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Button
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Center Platform West
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+    - name: Button
+      coord: [26.8, 17.4]
+      local:
+        - to: Bottom Middle
+        - to: Gate West
+          jumps: 1
+        - to: Center Platform
+          jumps: 1
+          jump_mvmt: water
+      locations:
+        - name: Hit Button
+          item: Amagi_Breach_West_Ruins_Gate
+          tags: [button]
+      exits:
+        - to: East Platform
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: East
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Gate West
+      coord: [26.9, 17.35]
+      local:
+        - to: Button
+        - to: Center Platform
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Gate East
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement
+          movement: water
+        - to: Gate East
+          req: Amagi_Breach_West_Ruins_Gate
+          movement: base
+        - to: Center Platform
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Center Platform West
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Gate East
+      coord: [27.1, 17.35]
+      local:
+        - to: East
+        - to: East Platform
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Gate West
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement
+          movement: water
+        - to: Gate West
+          req: Amagi_Breach_West_Ruins_Gate
+          movement: base
+        - to: Center Platform
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Center Platform West
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Bottom Middle
+          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: East Platform
+      coord: [27.55, 17.3]
+      local:
+        - to: East
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+      exits:
+        - to: Gate East
+          req: Underwater_Movement or Slingshot_Hook
+          movement: water
+        - to: Gate East
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: East
+      coord: [27.9, 17.75]
+      local:
+        - to: Gate East
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: East Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: East Platform
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+
+- name: Twisty Passages  # MARK: Twisty Passages
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [29, 20, 30, 21]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > LAB Twisty Passages Flask
+  spots:
+    - name: South
+      coord: [28.5, 20.8]
+      data:
+        flipside: Amagi > Wiggly Room > South
+      local:
+        - to: West Flora
+          jumps: 1
+      exits:
+        - to: Corner > North
+          tags: [ydoor]
+    - name: West Flora
+      coord: [28.7, 20.7]
+      data:
+        flipside: Amagi > Wiggly Room > Gate East
+      local:
+        - to: South
+      exits:
+        - to: East Bottom
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          time: 30  # ? probably bad
+    - name: Closed Chamber
+      coord: [29.95, 20.9]
+      data:
+        flipside: Amagi > Wiggly Room > East Chamber
+      locations:
+        - name: Flask
+          canon: Amagi_Breach_Twisty_Passages_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Amagi_Breach_Twisty_Passages_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Amagi_Breach_Twisty_Passages_Flask
+          item: Big_Flask
+          to: ^map_spot
+          tags: [cskip]
+    - name: East Bottom
+      coord: [30.5, 20.6]
+      data:
+        flipside: Amagi > Wiggly Room > East Bottom
+      exits:
+        - to: East Bottom
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          time: 30  # ? probably bad
+        - to: East Ledge
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+        - to: East Ledge
+          req: $mist2
+          movement: mist2
+        - to: East Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: East
+          req: $mist2
+          movement: mist2
+        - to: East
+          req: Nanite_Mist
+          movement: mist1
+    - name: East Ledge
+      coord: [30.5, 20.0]
+      local:
+        - to: East Bottom
+      exits:
+        - to: East
+          req: Underwater_Movement and Drone_Hover
+          movement: water
+          jumps: 1
+        - to: East
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+        - to: North
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 3
+        - to: North
+          req: $mist2
+          movement: mist2
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
+    - name: North
+      coord: [30.5, 19.2]
+      local:
+        - to: East Ledge
+      exits:
+        - to: Center Ruins > South
+          tags: [ydoor]
+    - name: East
+      coord: [30.9, 19.75]
+      local:
+        - to: East Bottom
+      exits:
+        - to: East Ledge
+          req: Underwater_Movement
+          movement: water
+        - to: East Ledge
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+        - to: Lower Hallway > West
+          tags: [xdoor]
+
+- name: Lower Hallway  # MARK: Lower Hallway
+  on_entry: $reset_old_area(^newpos)
+  map:
+    halusan: [31, 19, 32, 20]
+  datamap:
+    map_spot:
+      halusan: Menu > Breach Map > Halusan
+  spots:
+    - name: West
+      coord: [31.1, 19.75]
+      data:
+        flipside: Amagi > Divided Room > Upper Left Corner
+      local:
+        - to: West Ledge
+          jumps: 1
+      exits:
+        - to: Twisty Passages > East
+          tags: [xdoor]
+        - to: Middle Bubbles
+          req: Amagi_Breach_Lower_Hallway_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: West Ledge
+          req: Underwater_Movement and Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: West Ledge
+      coord: [31.3, 19.55]
+      data:
+        flipside: Amagi > Divided Room > Portal West
+      local:
+        - to: West
+      exits:
+        - to: Cache
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+          movement: water
+          jumps: 1
+        - to: Cache
+          req: Amagi_Breach_Lower_Hallway_Gate
+          movement: base
+          jumps: 1
+        - to: Cache
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Middle Bubbles
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Cache
+      coord: [31.5, 19.4]
+      data:
+        flipside: Amagi > Divided Room > Portal Stand
+      locations:
+        - name: Item
+          item: Halusan
+          tags: [standing]
+        - name: Hit Button
+          item: Amagi_Breach_Lower_Hallway_Gate
+          tags: [button]
+      exits:
+        - to: West Ledge
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+          movement: water
+        - to: West Ledge
+          req: Amagi_Breach_Lower_Hallway_Gate
+          movement: base
+        - to: Empty Plinth
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+          movement: water
+        - to: Empty Plinth
+          req: Amagi_Breach_Lower_Hallway_Gate
+          movement: base
+    - name: Empty Plinth
+      coord: [31.75, 19.4]
+      data:
+        flipside: Amagi > Divided Room > Portal East Mid-air
+      local:
+        - to: East Ledge
+        - to: Middle Bubbles
+      exits:
+        - to: Cache
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook
+          movement: fast_hover
+        - to: Cache
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate
+          movement: water
+        - to: Cache
+          req: Amagi_Breach_Lower_Hallway_Gate
+          movement: base
+        - to: West
+          req: Underwater_Movement and Amagi_Breach_Lower_Hallway_Gate and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: East Ledge
+      coord: [31.8, 19.55]
+      data:
+        flipside: Amagi > Divided Room > Portal East
+      local:
+        - to: Empty Plinth
+          jumps: 1
+        - to: Middle Bubbles
+      exits:
+        - to: Empty Plinth
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Middle Bubbles
+      coord: [31.9, 19.7]
+      data:
+        flipside: Amagi > Divided Room > Upper Right Corner
+      local:
+        - to: Empty Plinth
+          jumps: 1
+          jump_mvmt: water
+        - to: East Ledge
+          jumps: 1
+        - to: East
+          jumps: 2
+      exits:
+        - to: Empty Plinth
+          req: Underwater_Movement and Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: East
+      coord: [32.9, 19.75]
+      local:
+        - to: Middle Bubbles
+          jumps: 2
+      exits:
+        - to: Split One-Way > West 20
+          tags: [xdoor]
+
+- name: Upper Hallway  # MARK: Upper Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [31.1, 18.65]
+      local:
+        - to: West Hook Point
+      exits:
+        - to: Center Ruins > East 19
+          tags: [xdoor]
+    - name: West Hook Point
+      coord: [31.45, 18.75]
+      data:
+        flipside: Amagi > Grid 31,19 > Center
+      local:
+        - to: West
+          jumps: 1
+        - to: Column West
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Column West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Column West
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        # TODO: fast_hover into Center Ruins
+    - name: Column West
+      coord: [32.45, 18.4]
+      local:
+        - to: West Hook Point
+        - to: Column East
+        - to: North
+          jumps: 1
+      exits:
+        - to: Split One-Way > Upper Middle
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
+    - name: Column East
+      coord: [32.55, 18.4]
+      local:
+        - to: Column West
+        - to: North
+          jumps: 1
+        - to: East
+      exits:
+        - to: West Hook Point
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: North
+      coord: [32.5, 18.2]
+      local:
+        - to: West Hook Point
+        - to: Column West
+        - to: Column East
+        - to: East
+      exits:
+        - to: East Ruins > South
+          tags: [ydoor]
+    - name: East
+      coord: [32.9, 18.65]
+      local:
+        - to: Column East
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Column East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Split One-Way > West 19
+          tags: [xdoor]
+
+- name: Split One-Way  # MARK: Split One-Way
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 20
+      coord: [33.1, 19.75]
+    - name: West 19
+      coord: [33.1, 18.65]
+    - name: Upper Middle
+      coord: [33.45, 18.6]
+    - name: East
+      coord: [33.9, 19.75]
+
+- name: Corner  # MARK: Corner
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [28.5, 21.2]
+      data:
+        flipside: Uhrum > Tulip Tower > North
+      local:
+        - to: East
+      exits:
+        - to: Twisty Passages > South
+          tags: [ydoor]
+    - name: East
+      coord: [28.9, 21.75]
+      local:
+        - to: North
+          thru: [28.65, 21.8]
+          jumps: [0, 2]
+          jump_mvmt: water
+      exits:
+        - to: Lakebed > West
+          tags: [xdoor]
+
+- name: Lakebed  # MARK: Lakebed
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [30, 22, 31, 23]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > LAB Southwest
+  spots:
+    - name: West
+      coord: [29.1, 21.75]
+    - name: Big Rock West
+      coord: [29.2, 21.95]
+    - name: Save Point
+      coord: [30.475, 22.15]
+      data:
+        flipside: Annuna > Invisible Enemies > Portal Stand

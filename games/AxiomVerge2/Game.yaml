@@ -41,9 +41,6 @@ rules:  # MARK: rules
     bench: "[Remote_Drone, Flask{6}]"
   $objective:
     Any%: "[Infect, Nanite_Mist]"
-    # Greedy search will have a problem with purchases if there are insufficient funds;
-    # it will never consider skipping what's available and may be unable to buy something
-    # necessary.
     All Items: >
       [$all_urns, $all_weapons, $other_items, $all_notes, $all_health, $all_flasks]
     All Urns: "[$all_urns]"
@@ -60,7 +57,7 @@ base_movements:  # MARK: base_movements
     x: .285  # about 3.5s per grid x-unit
     jump: .6  # can vary with jump height, so take a rough estimate of usual
     # max jump height is around .2, with Anuman it reaches .3... TODO: real measurement
-    # hover can reach a height of .3 in about 100-110 frames, so 3 "jumps"
+    # hover can increase height by .1 in about 100-110 frames, so 3 "jumps" to get .3 outside of water.
     # Anuman jump plus shift into hover could get even higher
     # other speeds apply
   - data:
@@ -73,6 +70,7 @@ movements:  # MARK: movements
   water:
     x: .285
     req: Underwater_Movement
+    # jump height is around .4 in water with water movement.
   # TODO: anuman "movement" of constantly changing form?
 
 exit_movements:  # MARK: exit_movements
@@ -361,21 +359,22 @@ helpers:  # MARK: helpers
      Companies_Layoff, Dangerous_Ideas, Dear_Ernest, Destruction_Pogrom, Dr_Gloria, Family_Tragedy, Forbidden_Knowledge,
      Freedom_from_Aansur, Goodbye, Heretics_Granddaughter, Heretics_Tablet, Journal_2049_10_29, Kazakh_Assault,
      Lament_for_Fools, Letter_from_Trace, Notes_2053_02_27, Plague_of_Thoughts, Re_Does_Technology, Record_Losses,
-     Researchers_Missing, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
-     Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Sagiga_on_the_Worldstream]
+     Researchers_Missing, Sagiga_on_the_Worldstream, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
+     Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   $all_flasks:itemList: >
-    [Flask{47}, Big_Flask{25}]
+    [Flask{48}, Big_Flask{26}]
   $all_health:itemList: >
-    [Health_Node{4}, Health_Fragment{21}]
+    [Health_Node{4}, Health_Fragment{22}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
-    [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring,
+    [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,
      Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Royal_Ring, Udusan]
   $all_urns:itemList: >
     [Amashilama, Anuman, Breach_Sight, Drone_Hover, Drone_Melee_Charge, Exit_Breach, Fast_Travel, Infect, Ledge_Grab,
-     Melee_Charge, Nanite_Mist, Remote_Drone, Shockwave, Slingshot_Charge, Slingshot_Hook, Slingshot_Weapon, Wall_Climb]
+     Melee_Charge, Nanite_Mist, Remote_Drone, Shockwave, Slingshot_Charge, Slingshot_Hook, Slingshot_Weapon, 
+     Underwater_Movement, Wall_Climb]
 
   # TODO: If the conditional is data-only, can we automatically solve it before render?
   $save:action: IF (^realm == 'breach') { ^breach_save = ^position; } ELSE { ^save = ^position; }; $refill_energy

@@ -55,9 +55,9 @@ subgraph Amagi_Breach
     end
     subgraph Amagi_Breach__Center_Ruins[Center Ruins]
         Amagi_Breach__Center_Ruins__East_18(East 18);
-    end
-    subgraph Amagi_Breach__Upper_Hallway[Upper Hallway]
-        Amagi_Breach__Upper_Hallway__North(North);
+        Amagi_Breach__Center_Ruins__East_19(East 19);
+        Amagi_Breach__Center_Ruins__South(South);
+        Amagi_Breach__Center_Ruins__West(West);
     end
     subgraph Amagi_Breach__Upper_Lake[Upper Lake]
         Amagi_Breach__Upper_Lake__Save_Point(Save Point);
@@ -76,6 +76,57 @@ subgraph Amagi_Breach
     end
     subgraph Amagi_Breach__West_Ruins[West Ruins]
         Amagi_Breach__West_Ruins__North(North);
+        Amagi_Breach__West_Ruins__West_Platform(West Platform);
+        Amagi_Breach__West_Ruins__West_Platform_Hook_Point(West Platform Hook Point);
+        Amagi_Breach__West_Ruins__Center_Platform_West(Center Platform West);
+        Amagi_Breach__West_Ruins__Center_Platform(Center Platform);
+        Amagi_Breach__West_Ruins__Bottom_Middle(Bottom Middle);
+        Amagi_Breach__West_Ruins__Button(Button);
+        Amagi_Breach__West_Ruins__Gate_West(Gate West);
+        Amagi_Breach__West_Ruins__Gate_East(Gate East);
+        Amagi_Breach__West_Ruins__East_Platform(East Platform);
+        Amagi_Breach__West_Ruins__East(East);
+    end
+    subgraph Amagi_Breach__Twisty_Passages[Twisty Passages]
+        Amagi_Breach__Twisty_Passages__South(South);
+        Amagi_Breach__Twisty_Passages__West_Flora(West Flora);
+        Amagi_Breach__Twisty_Passages__Closed_Chamber(Closed Chamber);
+        Amagi_Breach__Twisty_Passages__East_Bottom(East Bottom);
+        Amagi_Breach__Twisty_Passages__East_Ledge(East Ledge);
+        Amagi_Breach__Twisty_Passages__North(North);
+        Amagi_Breach__Twisty_Passages__East(East);
+    end
+    subgraph Amagi_Breach__Lower_Hallway[Lower Hallway]
+        Amagi_Breach__Lower_Hallway__West(West);
+        Amagi_Breach__Lower_Hallway__West_Ledge(West Ledge);
+        Amagi_Breach__Lower_Hallway__Cache(Cache);
+        Amagi_Breach__Lower_Hallway__Empty_Plinth(Empty Plinth);
+        Amagi_Breach__Lower_Hallway__East_Ledge(East Ledge);
+        Amagi_Breach__Lower_Hallway__Middle_Bubbles(Middle Bubbles);
+        Amagi_Breach__Lower_Hallway__East(East);
+    end
+    subgraph Amagi_Breach__Upper_Hallway[Upper Hallway]
+        Amagi_Breach__Upper_Hallway__West(West);
+        Amagi_Breach__Upper_Hallway__West_Hook_Point(West Hook Point);
+        Amagi_Breach__Upper_Hallway__Column_West(Column West);
+        Amagi_Breach__Upper_Hallway__Column_East(Column East);
+        Amagi_Breach__Upper_Hallway__North(North);
+        Amagi_Breach__Upper_Hallway__East(East);
+    end
+    subgraph Amagi_Breach__Split_One_Way[Split One-Way]
+        Amagi_Breach__Split_One_Way__West_20(West 20);
+        Amagi_Breach__Split_One_Way__West_19(West 19);
+        Amagi_Breach__Split_One_Way__Upper_Middle(Upper Middle);
+        Amagi_Breach__Split_One_Way__East(East);
+    end
+    subgraph Amagi_Breach__Corner[Corner]
+        Amagi_Breach__Corner__North(North);
+        Amagi_Breach__Corner__East(East);
+    end
+    subgraph Amagi_Breach__Lakebed[Lakebed]
+        Amagi_Breach__Lakebed__West(West);
+        Amagi_Breach__Lakebed__Big_Rock_West(Big Rock West);
+        Amagi_Breach__Lakebed__Save_Point(Save Point);
     end
 end
 subgraph Amagi
@@ -187,6 +238,7 @@ subgraph Amagi
         Amagi__West_Lake__Stronghold_Front_Door(Stronghold Front Door);
         Amagi__West_Lake__Some_Rock(Some Rock);
         Amagi__West_Lake__Small_Hill(Small Hill);
+        Amagi__West_Lake__Mid_water_Above_Gap(Mid-water Above Gap);
         Amagi__West_Lake__Tentacle_Gap(Tentacle Gap);
         Amagi__West_Lake__Left_of_Enemy(Left of Enemy);
         Amagi__West_Lake__East_20(East 20);
@@ -270,7 +322,37 @@ subgraph Amagi
     end
     subgraph Amagi__Wiggly_Room[Wiggly Room]
         Amagi__Wiggly_Room__West(West);
+        Amagi__Wiggly_Room__West_Ledge(West Ledge);
+        Amagi__Wiggly_Room__Dur_Esla(Dur-Esla);
+        Amagi__Wiggly_Room__West_Platform(West Platform);
+        Amagi__Wiggly_Room__Below_West_Cache(Below West Cache);
+        Amagi__Wiggly_Room__Cache(Cache);
+        Amagi__Wiggly_Room__Midwest_Rock(Midwest Rock);
+        Amagi__Wiggly_Room__Midwest_Hook_Point(Midwest Hook Point);
+        Amagi__Wiggly_Room__Button(Button);
         Amagi__Wiggly_Room__South(South);
+        Amagi__Wiggly_Room__Gate_East(Gate East);
+        Amagi__Wiggly_Room__Middle_Rock_West(Middle Rock West);
+        Amagi__Wiggly_Room__Middle_Rock_East(Middle Rock East);
+        Amagi__Wiggly_Room__Portal_Rock_West(Portal Rock West);
+        Amagi__Wiggly_Room__Portal_Rock_East(Portal Rock East);
+        Amagi__Wiggly_Room__Portal_Hole(Portal Hole);
+        Amagi__Wiggly_Room__East_Chamber(East Chamber);
+        Amagi__Wiggly_Room__East_Rock(East Rock);
+        Amagi__Wiggly_Room__East_Bottom(East Bottom);
+        Amagi__Wiggly_Room__East(East);
+    end
+    subgraph Amagi__Divided_Room[Divided Room]
+        Amagi__Divided_Room__East(East);
+        Amagi__Divided_Room__Column_East(Column East);
+        Amagi__Divided_Room__Column_West(Column West);
+        Amagi__Divided_Room__West(West);
+        Amagi__Divided_Room__Portal_Stand(Portal Stand);
+        Amagi__Divided_Room__Portal_West(Portal West);
+        Amagi__Divided_Room__Portal_East(Portal East);
+        Amagi__Divided_Room__Portal_East_Mid_air(Portal East Mid-air);
+        Amagi__Divided_Room__Upper_Left_Corner(Upper Left Corner);
+        Amagi__Divided_Room__Upper_Right_Corner(Upper Right Corner);
     end
 end
 subgraph Annuna_Breach
@@ -3036,6 +3118,10 @@ subgraph Menu
         Menu__Kiengir_Map__MUS_A_M20_Flask(MUS A M20 Flask);
         Menu__Kiengir_Map__Amagi_Gated_Community_Button(Amagi Gated Community Button);
         Menu__Kiengir_Map__Amagi_Gated_Community_Flask(Amagi Gated Community Flask);
+        Menu__Kiengir_Map__Amagi_Divided_Room_Portal(Amagi Divided Room Portal);
+        Menu__Kiengir_Map__Urgent_Message(Urgent Message);
+        Menu__Kiengir_Map__Amagi_Wiggly_Room_Gate(Amagi Wiggly Room Gate);
+        Menu__Kiengir_Map__Amagi_Wiggly_Room_Portal(Amagi Wiggly Room Portal);
         Menu__Kiengir_Map__Annuna_Mirror_Match_Flask(Annuna Mirror Match Flask);
         Menu__Kiengir_Map__Nano_Lattice_2(Nano Lattice 2);
         Menu__Kiengir_Map__Lament_for_Fools(Lament for Fools);
@@ -3240,7 +3326,11 @@ subgraph Menu
         Menu__Breach_Map__LAB_East_Health(LAB East Health);
         Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
         Menu__Breach_Map__Exit_Breach(Exit Breach);
+        Menu__Breach_Map__Halusan(Halusan);
+        Menu__Breach_Map__LAB_Twisty_Passages_Flask(LAB Twisty Passages Flask);
         Menu__Breach_Map__LAB_Upper_Lake_Health(LAB Upper Lake Health);
+        Menu__Breach_Map__LAB_West_Ruins_Flask(LAB West Ruins Flask);
+        Menu__Breach_Map__LAB_West_Ruins_Health(LAB West Ruins Health);
         Menu__Breach_Map__MEB_In_n_Out_Matrix(MEB In 'n Out Matrix);
         Menu__Breach_Map__MEB_Lake_Gate(MEB Lake Gate);
         Menu__Breach_Map__MEB_Rock_Block_Flask(MEB Rock Block Flask);
@@ -3682,6 +3772,8 @@ subgraph Uhrum
         Uhrum__Seclusion__Close_Range(Close Range);
     end
 end
+Amagi_Breach__Corner__East --> Amagi_Breach__Lakebed__West
+Amagi_Breach__Corner__North <--> Amagi_Breach__Twisty_Passages__South
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
 Amagi_Breach__East_Column__South --> Amagi_Breach__Fishy_Secrets__North
 Amagi_Breach__East_Connector__East <--> Amagi_Breach__East_Entrance__West
@@ -3697,15 +3789,66 @@ Amagi_Breach__East_Ruins__Northeast_Corner --> Amagi_Breach__East_Ruins__Northea
 Amagi_Breach__East_Ruins__Plinth --> Amagi_Breach__East_Ruins__Small_Column_East
 Amagi_Breach__East_Ruins__Plinth --> Amagi_Breach__East_Ruins__Southeast_Rock_Wall
 Amagi_Breach__East_Ruins__Small_Column_West --> Amagi_Breach__East_Ruins__Center_Rock_East
-Amagi_Breach__East_Ruins__South --> Amagi_Breach__Upper_Hallway__North
+Amagi_Breach__East_Ruins__South <--> Amagi_Breach__Upper_Hallway__North
 Amagi_Breach__East_Ruins__Southeast_Rock_Wall --> Amagi_Breach__East_Ruins__Arch_East
 Amagi_Breach__East_Ruins__Under_the_Rock --> Amagi_Breach__East_Ruins__Small_Column_West
 Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
 Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
+Amagi_Breach__Lower_Hallway__Cache <--> Amagi_Breach__Lower_Hallway__Empty_Plinth
+Amagi_Breach__Lower_Hallway__Cache <--> Amagi_Breach__Lower_Hallway__West_Ledge
+Amagi_Breach__Lower_Hallway__East --> Amagi_Breach__Split_One_Way__West_20
+Amagi_Breach__Lower_Hallway__East_Ledge --> Amagi_Breach__Lower_Hallway__Empty_Plinth
+Amagi_Breach__Lower_Hallway__Empty_Plinth --> Amagi_Breach__Lower_Hallway__West
+Amagi_Breach__Lower_Hallway__Middle_Bubbles --> Amagi_Breach__Lower_Hallway__Empty_Plinth
+Amagi_Breach__Lower_Hallway__West --> Amagi_Breach__Lower_Hallway__Middle_Bubbles
+Amagi_Breach__Lower_Hallway__West --> Amagi_Breach__Lower_Hallway__West_Ledge
+Amagi_Breach__Lower_Hallway__West <--> Amagi_Breach__Twisty_Passages__East
+Amagi_Breach__Lower_Hallway__West_Ledge --> Amagi_Breach__Lower_Hallway__Middle_Bubbles
+Amagi_Breach__Twisty_Passages__East <--> Amagi_Breach__Twisty_Passages__East_Ledge
+Amagi_Breach__Twisty_Passages__East_Bottom --> Amagi_Breach__Twisty_Passages__East
+Amagi_Breach__Twisty_Passages__East_Bottom --> Amagi_Breach__Twisty_Passages__East_Ledge
+Amagi_Breach__Twisty_Passages__East_Ledge --> Amagi_Breach__Twisty_Passages__North
+Amagi_Breach__Twisty_Passages__North --> Amagi_Breach__Center_Ruins__South
+Amagi_Breach__Twisty_Passages__West_Flora --> Amagi_Breach__Twisty_Passages__East_Bottom
+Amagi_Breach__Upper_Hallway__Column_East --> Amagi_Breach__Upper_Hallway__West_Hook_Point
+Amagi_Breach__Upper_Hallway__Column_West --> Amagi_Breach__Split_One_Way__Upper_Middle
+Amagi_Breach__Upper_Hallway__East --> Amagi_Breach__Split_One_Way__West_19
+Amagi_Breach__Upper_Hallway__East --> Amagi_Breach__Upper_Hallway__Column_East
+Amagi_Breach__Upper_Hallway__West --> Amagi_Breach__Center_Ruins__East_19
+Amagi_Breach__Upper_Hallway__West_Hook_Point --> Amagi_Breach__Upper_Hallway__Column_West
 Amagi_Breach__Upper_Lake__Near_Column --> Amagi_Breach__Upper_Lake__Column
 Amagi_Breach__Upper_Lake__Portal_Stand --> Amagi_Breach__Upper_Lake__Near_Column
 Amagi_Breach__West_Entrance__North <--> Ebih_Breach__Lake_Gate__South
+Amagi_Breach__West_Entrance__South --> Amagi_Breach__West_Entrance__North
 Amagi_Breach__West_Entrance__South --> Amagi_Breach__West_Ruins__North
+Amagi_Breach__West_Ruins__Bottom_Middle --> Amagi_Breach__West_Ruins__Button
+Amagi_Breach__West_Ruins__Bottom_Middle --> Amagi_Breach__West_Ruins__Center_Platform_West
+Amagi_Breach__West_Ruins__Button --> Amagi_Breach__West_Ruins__East
+Amagi_Breach__West_Ruins__Button --> Amagi_Breach__West_Ruins__East_Platform
+Amagi_Breach__West_Ruins__Center_Platform_West <--> Amagi_Breach__West_Ruins__West_Platform
+Amagi_Breach__West_Ruins__East --> Amagi_Breach__West_Ruins__East_Platform
+Amagi_Breach__West_Ruins__East_Platform --> Amagi_Breach__West_Ruins__Gate_East
+Amagi_Breach__West_Ruins__Gate_East --> Amagi_Breach__West_Ruins__Bottom_Middle
+Amagi_Breach__West_Ruins__Gate_East --> Amagi_Breach__West_Ruins__Center_Platform
+Amagi_Breach__West_Ruins__Gate_East --> Amagi_Breach__West_Ruins__Center_Platform_West
+Amagi_Breach__West_Ruins__Gate_East <--> Amagi_Breach__West_Ruins__Gate_West
+Amagi_Breach__West_Ruins__Gate_West --> Amagi_Breach__West_Ruins__Center_Platform
+Amagi_Breach__West_Ruins__Gate_West --> Amagi_Breach__West_Ruins__Center_Platform_West
+Amagi_Breach__West_Ruins__North <--> Amagi_Breach__West_Ruins__West_Platform
+Amagi_Breach__West_Ruins__West_Platform_Hook_Point --> Amagi_Breach__West_Ruins__Center_Platform
+Amagi_Breach__West_Ruins__West_Platform_Hook_Point --> Amagi_Breach__West_Ruins__West_Platform
+Amagi__Divided_Room__Column_East --> Amagi__Divided_Room__West
+Amagi__Divided_Room__Column_East --> Amagi__Wiggly_Room__East_Rock
+Amagi__Divided_Room__Column_West --> Amagi__Divided_Room__East
+Amagi__Divided_Room__Column_West --> Amagi__Liru_Room__Platform_3_Left
+Amagi__Divided_Room__East --> Amagi__Divided_Room__Column_East
+Amagi__Divided_Room__East <--> Amagi__Liru_Room__West_20
+Amagi__Divided_Room__Portal_East --> Amagi__Divided_Room__Portal_Stand
+Amagi__Divided_Room__Portal_East_Mid_air --> Amagi__Divided_Room__Portal_Stand
+Amagi__Divided_Room__Portal_West --> Amagi__Divided_Room__Portal_Stand
+Amagi__Divided_Room__Upper_Left_Corner --> Amagi__Wiggly_Room__East
+Amagi__Divided_Room__Upper_Right_Corner --> Amagi__Liru_Room__West_20
+Amagi__Divided_Room__West <--> Amagi__Wiggly_Room__East
 Amagi__East_Lake__Arch_East --> Amagi__East_Lake__Underwater_Hill
 Amagi__East_Lake__Arch_West <--> Amagi__East_Lake__Portal_Ledge
 Amagi__East_Lake__Center_East_Water_Surface_Fast --> Amagi__East_Lake__Arch_West
@@ -3848,7 +3991,8 @@ Amagi__Main_Area__West_Side --> Amagi__Main_Area__Carving
 Amagi__West_Lake__Cavern_Front_Pillar --> Amagi__West_Lake__Cavern_Rear_Pillar
 Amagi__West_Lake__Cavern_Middle_Pillar --> Amagi__West_Lake__Cavern_Rear_Pillar
 Amagi__West_Lake__Cavern_Refill_Station <--> Amagi__West_Lake__Cavern_Tear_Duct
-Amagi__West_Lake__East_20 --> Amagi__Wiggly_Room__West
+Amagi__West_Lake__East_20 <--> Amagi__Wiggly_Room__West
+Amagi__West_Lake__Mid_water_Above_Gap --> Amagi__West_Lake__Pillar
 Amagi__West_Lake__Northwest_Platform --> Amagi__West_Lake__West_Cliff
 Amagi__West_Lake__Stronghold_Ceiling_Left <--> Amagi__West_Lake__Stronghold_Middle_Column
 Amagi__West_Lake__Stronghold_Ceiling_Right <--> Amagi__West_Lake__Stronghold_Front_Room
@@ -3861,6 +4005,25 @@ Amagi__West_Lake__West_15 <--> Ebih__Vertical_Interchange__East_15
 Amagi__West_Lake__West_20 <--> Giguna__Vertical_Interchange__East_20
 Amagi__West_Lake__West_Bank --> Amagi__West_Lake__West_Shore
 Amagi__West_Lake__West_Stronghold_Gate <--> Amagi__West_Lake__West_Stronghold_Wall
+Amagi__Wiggly_Room__Below_West_Cache --> Amagi__Wiggly_Room__Cache
+Amagi__Wiggly_Room__Dur_Esla --> Amagi__Wiggly_Room__Below_West_Cache
+Amagi__Wiggly_Room__East_Chamber --> Amagi__Wiggly_Room__Portal_Rock_East
+Amagi__Wiggly_Room__East_Rock --> Amagi__Wiggly_Room__Portal_Rock_East
+Amagi__Wiggly_Room__Gate_East --> Amagi__Wiggly_Room__Button
+Amagi__Wiggly_Room__Gate_East --> Amagi__Wiggly_Room__Midwest_Hook_Point
+Amagi__Wiggly_Room__Gate_East --> Amagi__Wiggly_Room__Portal_Rock_West
+Amagi__Wiggly_Room__Gate_East <--> Amagi__Wiggly_Room__South
+Amagi__Wiggly_Room__Middle_Rock_East --> Amagi__Wiggly_Room__Midwest_Hook_Point
+Amagi__Wiggly_Room__Middle_Rock_West --> Amagi__Wiggly_Room__Midwest_Hook_Point
+Amagi__Wiggly_Room__Midwest_Hook_Point --> Amagi__Wiggly_Room__Portal_Rock_West
+Amagi__Wiggly_Room__Midwest_Hook_Point --> Amagi__Wiggly_Room__West
+Amagi__Wiggly_Room__Midwest_Rock --> Amagi__Wiggly_Room__Cache
+Amagi__Wiggly_Room__Portal_Rock_East --> Amagi__Wiggly_Room__Gate_East
+Amagi__Wiggly_Room__Portal_Rock_East --> Amagi__Wiggly_Room__Midwest_Hook_Point
+Amagi__Wiggly_Room__Portal_Rock_West --> Amagi__Wiggly_Room__East
+Amagi__Wiggly_Room__Portal_Rock_West --> Amagi__Wiggly_Room__East_Bottom
+Amagi__Wiggly_Room__South <--> Uhrum__Tulip_Tower__North
+Amagi__Wiggly_Room__West_Platform --> Amagi__Wiggly_Room__Midwest_Rock
 Annuna_Breach__Corner__East --> Annuna_Breach__Underbelly__West
 Annuna_Breach__Corner__South <--> Annuna_Breach__Smiley__North
 Annuna_Breach__Smiley__Column_East <--> Annuna_Breach__Smiley__Northeast_Ledge
@@ -5938,7 +6101,6 @@ Uhrum__Tulip_Tower__Lower_Column --> Uhrum__Tulip_Tower__Platform_1_West
 Uhrum__Tulip_Tower__Lower_Column <--> Uhrum__Waterfalls__Barrier_East
 Uhrum__Tulip_Tower__Middle_Ledge --> Uhrum__Tulip_Tower__Platform_2_West
 Uhrum__Tulip_Tower__NW_Mid_air --> Uhrum__Tulip_Tower__Upper_Column_West
-Uhrum__Tulip_Tower__North --> Amagi__Wiggly_Room__South
 Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Middle_Ledge
 Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Platform_2_West
 Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Upper_Right_Ledge

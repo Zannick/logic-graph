@@ -7,6 +7,13 @@
         node[fillcolor="1"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
+            Amagi_Breach__Center_Ruins__East_19 [label = "", pos = "92.7,-81.083333!"];
+            Amagi_Breach__Center_Ruins__South [label = "", pos = "91.5,-81.333333!"];
+            Amagi_Breach__Center_Ruins__West [label = "", pos = "84.3,-79.583333!"];
+        }
+        {
+            Amagi_Breach__Corner__North [label = "", pos = "85.5,-85.333333!"];
+            Amagi_Breach__Corner__East [label = "", pos = "86.7,-86.25!"];
         }
         {
             Amagi_Breach__East_Column__East [label = "", pos = "107.7,-76.25!"];
@@ -63,7 +70,41 @@
             Amagi_Breach__Fishy_Secrets__North [label = "", pos = "106.5,-80.333333!"];
         }
         {
+            Amagi_Breach__Lakebed__West [label = "", pos = "87.3,-86.25!"];
+            Amagi_Breach__Lakebed__Big_Rock_West [label = "", pos = "87.6,-86.583333!"];
+            Amagi_Breach__Lakebed__Save_Point [label = "", pos = "91.425,-86.916667!"];
+        }
+        {
+            Amagi_Breach__Lower_Hallway__West [label = "", pos = "93.3,-82.916667!"];
+            Amagi_Breach__Lower_Hallway__West_Ledge [label = "", pos = "93.9,-82.583333!"];
+            Amagi_Breach__Lower_Hallway__Cache [label = "", pos = "94.5,-82.333333!"];
+            Amagi_Breach__Lower_Hallway__Empty_Plinth [label = "", pos = "95.25,-82.333333!"];
+            Amagi_Breach__Lower_Hallway__East_Ledge [label = "", pos = "95.4,-82.583333!"];
+            Amagi_Breach__Lower_Hallway__Middle_Bubbles [label = "", pos = "95.7,-82.833333!"];
+            Amagi_Breach__Lower_Hallway__East [label = "", pos = "98.7,-82.916667!"];
+        }
+        {
+            Amagi_Breach__Split_One_Way__West_20 [label = "", pos = "99.3,-82.916667!"];
+            Amagi_Breach__Split_One_Way__West_19 [label = "", pos = "99.3,-81.083333!"];
+            Amagi_Breach__Split_One_Way__Upper_Middle [label = "", pos = "100.35,-81.0!"];
+            Amagi_Breach__Split_One_Way__East [label = "", pos = "101.7,-82.916667!"];
+        }
+        {
+            Amagi_Breach__Twisty_Passages__South [label = "", pos = "85.5,-84.666667!"];
+            Amagi_Breach__Twisty_Passages__West_Flora [label = "", pos = "86.1,-84.5!"];
+            Amagi_Breach__Twisty_Passages__Closed_Chamber [label = "", pos = "89.85,-84.833333!"];
+            Amagi_Breach__Twisty_Passages__East_Bottom [label = "", pos = "91.5,-84.333333!"];
+            Amagi_Breach__Twisty_Passages__East_Ledge [label = "", pos = "91.5,-83.333333!"];
+            Amagi_Breach__Twisty_Passages__North [label = "", pos = "91.5,-82.0!"];
+            Amagi_Breach__Twisty_Passages__East [label = "", pos = "92.7,-82.916667!"];
+        }
+        {
+            Amagi_Breach__Upper_Hallway__West [label = "", pos = "93.3,-81.083333!"];
+            Amagi_Breach__Upper_Hallway__West_Hook_Point [label = "", pos = "94.35,-81.25!"];
+            Amagi_Breach__Upper_Hallway__Column_West [label = "", pos = "97.35,-80.666667!"];
+            Amagi_Breach__Upper_Hallway__Column_East [label = "", pos = "97.65,-80.666667!"];
             Amagi_Breach__Upper_Hallway__North [label = "", pos = "97.5,-80.333333!"];
+            Amagi_Breach__Upper_Hallway__East [label = "", pos = "98.7,-81.083333!"];
         }
         {
             Amagi_Breach__Upper_Lake__Save_Point [label = "", pos = "103.425,-74.166667!"];
@@ -79,10 +120,32 @@
         }
         {
             Amagi_Breach__West_Ruins__North [label = "", pos = "76.5,-77.0!"];
+            Amagi_Breach__West_Ruins__West_Platform [label = "", pos = "77.4,-77.916667!"];
+            Amagi_Breach__West_Ruins__West_Platform_Hook_Point [label = "", pos = "76.95,-78.0!"];
+            Amagi_Breach__West_Ruins__Center_Platform_West [label = "", pos = "78.75,-78.5!"];
+            Amagi_Breach__West_Ruins__Center_Platform [label = "", pos = "79.35,-78.5!"];
+            Amagi_Breach__West_Ruins__Bottom_Middle [label = "", pos = "78.75,-79.583333!"];
+            Amagi_Breach__West_Ruins__Button [label = "", pos = "80.4,-79.0!"];
+            Amagi_Breach__West_Ruins__Gate_West [label = "", pos = "80.7,-78.916667!"];
+            Amagi_Breach__West_Ruins__Gate_East [label = "", pos = "81.3,-78.916667!"];
+            Amagi_Breach__West_Ruins__East_Platform [label = "", pos = "82.65,-78.833333!"];
+            Amagi_Breach__West_Ruins__East [label = "", pos = "83.7,-79.583333!"];
         }
     }
     {
         node[fillcolor="2"];
+        {
+            Amagi__Divided_Room__East [label = "", pos = "95.85,-33.333333!"];
+            Amagi__Divided_Room__Column_East [label = "", pos = "94.8,-33.0!"];
+            Amagi__Divided_Room__Column_West [label = "", pos = "94.2,-33.0!"];
+            Amagi__Divided_Room__West [label = "", pos = "93.15,-33.916667!"];
+            Amagi__Divided_Room__Portal_Stand [label = "", pos = "94.5,-32.333333!"];
+            Amagi__Divided_Room__Portal_West [label = "", pos = "93.9,-32.583333!"];
+            Amagi__Divided_Room__Portal_East [label = "", pos = "95.4,-32.583333!"];
+            Amagi__Divided_Room__Portal_East_Mid_air [label = "", pos = "95.25,-32.333333!"];
+            Amagi__Divided_Room__Upper_Left_Corner [label = "", pos = "93.3,-32.916667!"];
+            Amagi__Divided_Room__Upper_Right_Corner [label = "", pos = "95.7,-32.833333!"];
+        }
         {
             Amagi__East_Lake__East_15_Flat [label = "", pos = "107.85,-24.25!"];
             Amagi__East_Lake__East_15_Lower [label = "", pos = "107.85,-24.5!"];
@@ -228,7 +291,7 @@
             Amagi__West_Lake__Northeast_Platform [label = "", pos = "78.3,-26.666667!"];
             Amagi__West_Lake__Northwest_Platform [label = "", pos = "77.4,-26.916667!"];
             Amagi__West_Lake__Upper_Center_Platform [label = "", pos = "78.0,-28.5!"];
-            Amagi__West_Lake__East_Platform [label = "", pos = "79.5,-28.5!"];
+            Amagi__West_Lake__East_Platform [label = "", pos = "79.35,-28.5!"];
             Amagi__West_Lake__East_18 [label = "", pos = "80.85,-28.916667!"];
             Amagi__West_Lake__Pillar [label = "", pos = "79.8,-29.833333!"];
             Amagi__West_Lake__Pillar_Platform [label = "", pos = "80.25,-30.5!"];
@@ -257,6 +320,7 @@
             Amagi__West_Lake__Stronghold_Front_Door [label = "", pos = "74.1,-33.0!"];
             Amagi__West_Lake__Some_Rock [label = "", pos = "75.0,-31.583333!"];
             Amagi__West_Lake__Small_Hill [label = "", pos = "75.9,-32.25!"];
+            Amagi__West_Lake__Mid_water_Above_Gap [label = "", pos = "78.75,-29.583333!"];
             Amagi__West_Lake__Tentacle_Gap [label = "", pos = "78.75,-31.166667!"];
             Amagi__West_Lake__Left_of_Enemy [label = "", pos = "78.3,-33.0!"];
             Amagi__West_Lake__East_20 [label = "", pos = "80.85,-32.916667!"];
@@ -274,7 +338,25 @@
         }
         {
             Amagi__Wiggly_Room__West [label = "", pos = "81.15,-32.916667!"];
+            Amagi__Wiggly_Room__West_Ledge [label = "", pos = "82.05,-33.666667!"];
+            Amagi__Wiggly_Room__Dur_Esla [label = "", pos = "83.4,-34.666667!"];
+            Amagi__Wiggly_Room__West_Platform [label = "", pos = "82.95,-33.25!"];
+            Amagi__Wiggly_Room__Below_West_Cache [label = "", pos = "83.4,-33.0!"];
+            Amagi__Wiggly_Room__Cache [label = "", pos = "83.25,-32.5!"];
+            Amagi__Wiggly_Room__Midwest_Rock [label = "", pos = "84.3,-33.416667!"];
+            Amagi__Wiggly_Room__Midwest_Hook_Point [label = "", pos = "85.2,-33.5!"];
+            Amagi__Wiggly_Room__Button [label = "", pos = "84.75,-34.583333!"];
             Amagi__Wiggly_Room__South [label = "", pos = "85.5,-34.666667!"];
+            Amagi__Wiggly_Room__Gate_East [label = "", pos = "86.1,-34.5!"];
+            Amagi__Wiggly_Room__Middle_Rock_West [label = "", pos = "86.55,-34.083333!"];
+            Amagi__Wiggly_Room__Middle_Rock_East [label = "", pos = "87.75,-34.083333!"];
+            Amagi__Wiggly_Room__Portal_Rock_West [label = "", pos = "88.5,-34.0!"];
+            Amagi__Wiggly_Room__Portal_Rock_East [label = "", pos = "89.4,-33.416667!"];
+            Amagi__Wiggly_Room__Portal_Hole [label = "", pos = "88.8,-34.75!"];
+            Amagi__Wiggly_Room__East_Chamber [label = "", pos = "89.85,-34.833333!"];
+            Amagi__Wiggly_Room__East_Rock [label = "", pos = "90.9,-33.833333!"];
+            Amagi__Wiggly_Room__East_Bottom [label = "", pos = "91.5,-34.333333!"];
+            Amagi__Wiggly_Room__East [label = "", pos = "92.85,-33.916667!"];
         }
     }
     {
@@ -3033,7 +3115,11 @@
             Menu__Breach_Map__LAB_East_Health [label = "", pos = "111.0,-75.0!"];
             Menu__Breach_Map__LAB_East_Ruins_Flask [label = "", pos = "102.0,-76.666667!"];
             Menu__Breach_Map__Exit_Breach [label = "", pos = "102.0,-80.0!"];
+            Menu__Breach_Map__Halusan [label = "", pos = "93.0,-83.333333!"];
+            Menu__Breach_Map__LAB_Twisty_Passages_Flask [label = "", pos = "87.0,-85.0!"];
             Menu__Breach_Map__LAB_Upper_Lake_Health [label = "", pos = "99.0,-75.0!"];
+            Menu__Breach_Map__LAB_West_Ruins_Flask [label = "", pos = "78.0,-80.0!"];
+            Menu__Breach_Map__LAB_West_Ruins_Health [label = "", pos = "81.0,-80.0!"];
             Menu__Breach_Map__MEB_In_n_Out_Matrix [label = "", pos = "75.0,-70.0!"];
             Menu__Breach_Map__MEB_Lake_Gate [label = "", pos = "75.0,-73.333333!"];
             Menu__Breach_Map__MEB_Rock_Block_Flask [label = "", pos = "60.0,-71.666667!"];
@@ -3137,6 +3223,10 @@
             Menu__Kiengir_Map__MUS_A_M20_Flask [label = "", pos = "66.0,-26.666667!"];
             Menu__Kiengir_Map__Amagi_Gated_Community_Button [label = "", pos = "96.0,-30.0!"];
             Menu__Kiengir_Map__Amagi_Gated_Community_Flask [label = "", pos = "96.0,-26.666667!"];
+            Menu__Kiengir_Map__Amagi_Divided_Room_Portal [label = "", pos = "93.0,-33.333333!"];
+            Menu__Kiengir_Map__Urgent_Message [label = "", pos = "81.0,-33.333333!"];
+            Menu__Kiengir_Map__Amagi_Wiggly_Room_Gate [label = "", pos = "84.0,-35.0!"];
+            Menu__Kiengir_Map__Amagi_Wiggly_Room_Portal [label = "", pos = "87.0,-35.0!"];
             Menu__Kiengir_Map__Annuna_Mirror_Match_Flask [label = "", pos = "99.0,-43.333333!"];
             Menu__Kiengir_Map__Nano_Lattice_2 [label = "", pos = "105.0,-41.666667!"];
             Menu__Kiengir_Map__Lament_for_Fools [label = "", pos = "114.0,-40.0!"];

@@ -2596,6 +2596,8 @@ areas:
           movement: mist2
     - name: North
       coord: [28.5, 21.2]
+      data:
+        flipside: SpotId::None
       local:
         - to: Upper Column West
         - to: Upper Column East

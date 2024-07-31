@@ -23,6 +23,8 @@ pub enum Item {
     #[default]
     None,
     Aansur,
+    Amagi_Breach_Lower_Hallway_Gate,
+    Amagi_Breach_West_Ruins_Gate,
     Amagi_Dragon_Eye_Passage,
     Amagi_Gated_Community_Gate,
     Amagi_Stronghold_Boulder_1,
@@ -34,6 +36,7 @@ pub enum Item {
     Amagi_Stronghold_Wall_And_Boulder_1,
     Amagi_West_Lake_Gate,
     Amagi_West_Lake_Surface_Wall,
+    Amagi_Wiggly_Room_Gate,
     Amashilama,
     Annuna_East_Bridge_Gate,
     Annuna_Mirror_Match_Switch,
@@ -125,6 +128,7 @@ pub enum Item {
     Glacier_Breach_Spidery_Connector_Gate,
     Glacier_Sea_Burial_Rock,
     Goodbye,
+    Halusan,
     Hammond_Auth,
     Health_Fragment,
     Health_Node,
@@ -227,6 +231,7 @@ pub enum Item {
     Uhrum_West_Glitch,
     Under_Siege,
     Underwater_Movement,
+    Urgent_Message,
     Wall_Climb,
 }
 impl fmt::Display for Item {
@@ -234,6 +239,10 @@ impl fmt::Display for Item {
         match self {
             Item::None => write!(f, "{}", "None"),
             Item::Aansur => write!(f, "{}", "Aansur"),
+            Item::Amagi_Breach_Lower_Hallway_Gate => {
+                write!(f, "{}", "Amagi_Breach_Lower_Hallway_Gate")
+            }
+            Item::Amagi_Breach_West_Ruins_Gate => write!(f, "{}", "Amagi_Breach_West_Ruins_Gate"),
             Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
             Item::Amagi_Gated_Community_Gate => write!(f, "{}", "Amagi_Gated_Community_Gate"),
             Item::Amagi_Stronghold_Boulder_1 => write!(f, "{}", "Amagi_Stronghold_Boulder_1"),
@@ -249,6 +258,7 @@ impl fmt::Display for Item {
             }
             Item::Amagi_West_Lake_Gate => write!(f, "{}", "Amagi_West_Lake_Gate"),
             Item::Amagi_West_Lake_Surface_Wall => write!(f, "{}", "Amagi_West_Lake_Surface_Wall"),
+            Item::Amagi_Wiggly_Room_Gate => write!(f, "{}", "Amagi_Wiggly_Room_Gate"),
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Annuna_East_Bridge_Gate => write!(f, "{}", "Annuna_East_Bridge_Gate"),
             Item::Annuna_Mirror_Match_Switch => write!(f, "{}", "Annuna_Mirror_Match_Switch"),
@@ -352,6 +362,7 @@ impl fmt::Display for Item {
             }
             Item::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             Item::Goodbye => write!(f, "{}", "Goodbye"),
+            Item::Halusan => write!(f, "{}", "Halusan"),
             Item::Hammond_Auth => write!(f, "{}", "Hammond_Auth"),
             Item::Health_Fragment => write!(f, "{}", "Health_Fragment"),
             Item::Health_Node => write!(f, "{}", "Health_Node"),
@@ -468,6 +479,7 @@ impl fmt::Display for Item {
             Item::Uhrum_West_Glitch => write!(f, "{}", "Uhrum_West_Glitch"),
             Item::Under_Siege => write!(f, "{}", "Under_Siege"),
             Item::Underwater_Movement => write!(f, "{}", "Underwater_Movement"),
+            Item::Urgent_Message => write!(f, "{}", "Urgent_Message"),
             Item::Wall_Climb => write!(f, "{}", "Wall_Climb"),
         }
     }
@@ -479,6 +491,8 @@ impl std::str::FromStr for Item {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Aansur" => Ok(Item::Aansur),
+            "Amagi_Breach_Lower_Hallway_Gate" => Ok(Item::Amagi_Breach_Lower_Hallway_Gate),
+            "Amagi_Breach_West_Ruins_Gate" => Ok(Item::Amagi_Breach_West_Ruins_Gate),
             "Amagi_Dragon_Eye_Passage" => Ok(Item::Amagi_Dragon_Eye_Passage),
             "Amagi_Gated_Community_Gate" => Ok(Item::Amagi_Gated_Community_Gate),
             "Amagi_Stronghold_Boulder_1" => Ok(Item::Amagi_Stronghold_Boulder_1),
@@ -490,6 +504,7 @@ impl std::str::FromStr for Item {
             "Amagi_Stronghold_Wall_And_Boulder_1" => Ok(Item::Amagi_Stronghold_Wall_And_Boulder_1),
             "Amagi_West_Lake_Gate" => Ok(Item::Amagi_West_Lake_Gate),
             "Amagi_West_Lake_Surface_Wall" => Ok(Item::Amagi_West_Lake_Surface_Wall),
+            "Amagi_Wiggly_Room_Gate" => Ok(Item::Amagi_Wiggly_Room_Gate),
             "Amashilama" => Ok(Item::Amashilama),
             "Annuna_East_Bridge_Gate" => Ok(Item::Annuna_East_Bridge_Gate),
             "Annuna_Mirror_Match_Switch" => Ok(Item::Annuna_Mirror_Match_Switch),
@@ -583,6 +598,7 @@ impl std::str::FromStr for Item {
             }
             "Glacier_Sea_Burial_Rock" => Ok(Item::Glacier_Sea_Burial_Rock),
             "Goodbye" => Ok(Item::Goodbye),
+            "Halusan" => Ok(Item::Halusan),
             "Hammond_Auth" => Ok(Item::Hammond_Auth),
             "Health_Fragment" => Ok(Item::Health_Fragment),
             "Health_Node" => Ok(Item::Health_Node),
@@ -687,6 +703,7 @@ impl std::str::FromStr for Item {
             "Uhrum_West_Glitch" => Ok(Item::Uhrum_West_Glitch),
             "Under_Siege" => Ok(Item::Under_Siege),
             "Underwater_Movement" => Ok(Item::Underwater_Movement),
+            "Urgent_Message" => Ok(Item::Urgent_Message),
             "Wall_Climb" => Ok(Item::Wall_Climb),
             _ => Err(format!("Could not recognize as a Item: {}", s)),
         }
