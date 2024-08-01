@@ -376,6 +376,63 @@ pub fn access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
 }
+pub fn access_annuna__invisible_enemies__corner_cache__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_nw_utu
+    ctx.annuna__invisible_enemies__ctx__nw_utu()
+}
+pub fn access_annuna__invisible_enemies__corner_cache__flask_collection_skip__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_nw_utu and $melee_cskip
+    (ctx.annuna__invisible_enemies__ctx__nw_utu() && helper__melee_cskip!(ctx, world))
+}
+pub fn access_annuna__invisible_enemies__corner_cache__flask_fast_travel__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_nw_utu and $melee_cskip and Fast_Travel
+    ((ctx.annuna__invisible_enemies__ctx__nw_utu() && helper__melee_cskip!(ctx, world))
+        && ctx.has(Item::Fast_Travel))
+}
+pub fn access_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__middle_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened and $hookhover
+    (ctx.annuna__invisible_enemies__ctx__door_opened() && helper__hookhover!(ctx, world))
+}
+pub fn access_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__platform_2_east_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened and $hookhover
+    (ctx.annuna__invisible_enemies__ctx__door_opened() && helper__hookhover!(ctx, world))
+}
+pub fn access_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__still_hovering_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened and $hookhover
+    (ctx.annuna__invisible_enemies__ctx__door_opened() && helper__hookhover!(ctx, world))
+}
+pub fn access_annuna__invisible_enemies__door_east__ex__west_23_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__invisible_enemies__ctx__door_opened()
+}
+pub fn access_annuna__invisible_enemies__west_23__ex__door_east_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened
+    ctx.annuna__invisible_enemies__ctx__door_opened()
+}
 pub fn access_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
     ctx: &Context,
     world: &World,
@@ -466,6 +523,14 @@ pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
 }
+pub fn access_anuman_and_mode_eq_indra_and___ledge_grab_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Anuman and ^mode == 'Indra' and (Ledge_Grab or Slingshot_Hook)
+    ((ctx.has(Item::Anuman) && ctx.mode() == enums::Mode::Indra)
+        && (ctx.has(Item::Ledge_Grab) || ctx.has(Item::Slingshot_Hook)))
+}
 pub fn access_anuman_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
     // Anuman and ^mode != 'drone'
     (ctx.has(Item::Anuman) && ctx.mode() != enums::Mode::Drone)
@@ -473,6 +538,16 @@ pub fn access_anuman_and_mode_ne_drone(ctx: &Context, world: &World) -> bool {
 pub fn access_anuman_and_slingshot_hook_and_drone_hover(ctx: &Context, world: &World) -> bool {
     // Anuman and Slingshot_Hook and Drone_Hover
     ((ctx.has(Item::Anuman) && ctx.has(Item::Slingshot_Hook)) && ctx.has(Item::Drone_Hover))
+}
+pub fn access_anuman_or___invoke_hook_and___not_slingshot_weapon_or_invoke_visited__annuna_gt_invisible_enemies_gt_corner_cache_gt_flask(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Anuman or ($hook and (not Slingshot_Weapon or $visited(`Annuna > Invisible Enemies > Corner Cache > Flask`)))
+    (ctx.has(Item::Anuman)
+        || (helper__hook!(ctx, world)
+            && (!ctx.has(Item::Slingshot_Weapon)
+                || ctx.visited(LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask))))
 }
 pub fn access_apocalypse_bomb(ctx: &Context, world: &World) -> bool {
     // Apocalypse_Bomb
@@ -2072,6 +2147,10 @@ pub fn access_invoke_activate(ctx: &Context, world: &World) -> bool {
     // $activate
     helper__activate!(ctx, world)
 }
+pub fn access_invoke_allegiance4(ctx: &Context, world: &World) -> bool {
+    // $allegiance4
+    helper__allegiance4!(ctx, world)
+}
 pub fn access_invoke_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
     world: &World,
@@ -3670,6 +3749,34 @@ pub fn action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
 ) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
+}
+pub fn action_annuna__invisible_enemies__corner_cache__charm_utu__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_nw_utu = true
+    ctx.set_annuna__invisible_enemies__ctx__nw_utu(true);
+}
+pub fn action_annuna__invisible_enemies__switch_above__open_door__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_door_opened = true
+    ctx.set_annuna__invisible_enemies__ctx__door_opened(true);
+}
+pub fn action_annuna__invisible_enemies__switch_east__open_door__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_door_opened = true
+    ctx.set_annuna__invisible_enemies__ctx__door_opened(true);
+}
+pub fn action_annuna__invisible_enemies__switch_west__open_door__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_door_opened = true
+    ctx.set_annuna__invisible_enemies__ctx__door_opened(true);
 }
 pub fn action_annuna__vertical_room__door_switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
@@ -5835,6 +5942,209 @@ pub fn explain_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1__req(
         (r, vec!["^annuna__east_bridge__ctx__combo"])
     }
 }
+pub fn explain_annuna__invisible_enemies__corner_cache__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_nw_utu
+    {
+        let r = ctx.annuna__invisible_enemies__ctx__nw_utu();
+        edict.insert(
+            "^annuna__invisible_enemies__ctx__nw_utu",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__invisible_enemies__ctx__nw_utu"])
+    }
+}
+pub fn explain_annuna__invisible_enemies__corner_cache__flask_collection_skip__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_nw_utu and $melee_cskip
+    {
+        let mut left = {
+            let r = ctx.annuna__invisible_enemies__ctx__nw_utu();
+            edict.insert(
+                "^annuna__invisible_enemies__ctx__nw_utu",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__invisible_enemies__ctx__nw_utu"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__melee_cskip!(ctx, world, edict);
+                edict.insert("$melee_cskip", format!("{:?}", res));
+                refs.push("$melee_cskip");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__invisible_enemies__corner_cache__flask_fast_travel__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_nw_utu and $melee_cskip and Fast_Travel
+    {
+        let mut left = {
+            let mut left = {
+                let r = ctx.annuna__invisible_enemies__ctx__nw_utu();
+                edict.insert(
+                    "^annuna__invisible_enemies__ctx__nw_utu",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^annuna__invisible_enemies__ctx__nw_utu"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__melee_cskip!(ctx, world, edict);
+                    edict.insert("$melee_cskip", format!("{:?}", res));
+                    refs.push("$melee_cskip");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Fast_Travel);
+                edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__middle_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened and $hookhover
+    {
+        let mut left = {
+            let r = ctx.annuna__invisible_enemies__ctx__door_opened();
+            edict.insert(
+                "^annuna__invisible_enemies__ctx__door_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__invisible_enemies__ctx__door_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__platform_2_east_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened and $hookhover
+    {
+        let mut left = {
+            let r = ctx.annuna__invisible_enemies__ctx__door_opened();
+            edict.insert(
+                "^annuna__invisible_enemies__ctx__door_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__invisible_enemies__ctx__door_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__still_hovering_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened and $hookhover
+    {
+        let mut left = {
+            let r = ctx.annuna__invisible_enemies__ctx__door_opened();
+            edict.insert(
+                "^annuna__invisible_enemies__ctx__door_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__invisible_enemies__ctx__door_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__invisible_enemies__door_east__ex__west_23_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__invisible_enemies__ctx__door_opened();
+        edict.insert(
+            "^annuna__invisible_enemies__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__invisible_enemies__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna__invisible_enemies__west_23__ex__door_east_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.annuna__invisible_enemies__ctx__door_opened();
+        edict.insert(
+            "^annuna__invisible_enemies__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__invisible_enemies__ctx__door_opened"])
+    }
+}
 pub fn explain_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
     ctx: &Context,
     world: &World,
@@ -6081,6 +6391,64 @@ pub fn explain_anuman_and_invoke_grab(
         }
     }
 }
+pub fn explain_anuman_and_mode_eq_indra_and___ledge_grab_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Anuman and ^mode == 'Indra' and (Ledge_Grab or Slingshot_Hook)
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Anuman);
+                edict.insert("Anuman", format!("{}", h));
+                (h, vec!["Anuman"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let mut refs = vec!["^mode"];
+                    let mut left = {
+                        let r = ctx.mode();
+                        edict.insert("^mode", format!("{:?}", r));
+                        (r, vec!["^mode"])
+                    };
+                    let right = enums::Mode::Indra;
+                    edict.insert("^mode", format!("{}", left.0));
+                    refs.append(&mut left.1);
+                    (left.0 == right, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Ledge_Grab);
+                    edict.insert("Ledge_Grab", format!("{}", h));
+                    (h, vec!["Ledge_Grab"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Slingshot_Hook);
+                        edict.insert("Slingshot_Hook", format!("{}", h));
+                        (h, vec!["Slingshot_Hook"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_anuman_and_mode_ne_drone(
     ctx: &Context,
     world: &World,
@@ -6146,6 +6514,63 @@ pub fn explain_anuman_and_slingshot_hook_and_drone_hover(
                 edict.insert("Drone_Hover", format!("{}", h));
                 (h, vec!["Drone_Hover"])
             };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_anuman_or___invoke_hook_and___not_slingshot_weapon_or_invoke_visited__annuna_gt_invisible_enemies_gt_corner_cache_gt_flask(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Anuman or ($hook and (not Slingshot_Weapon or $visited(`Annuna > Invisible Enemies > Corner Cache > Flask`)))
+    {
+        let mut left = {
+            let h = ctx.has(Item::Anuman);
+            edict.insert("Anuman", format!("{}", h));
+            (h, vec!["Anuman"])
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = ({
+                        let mut left = {
+                            let h = ctx.has(Item::Slingshot_Weapon);
+                            edict.insert("Slingshot_Weapon", format!("{}", h));
+                            (!h, vec!["Slingshot_Weapon"])
+                        };
+                        if left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let res = ctx.visited(
+                                    LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask,
+                                );
+                                edict.insert(
+                                    "$visited(`Annuna > Invisible Enemies > Corner Cache > Flask`)",
+                                    format!("{:?}", res),
+                                );
+                                (res, vec!["$visited(`Annuna > Invisible Enemies > Corner Cache > Flask`)"])
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
+                    });
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -11890,6 +12315,19 @@ pub fn explain_invoke_activate(
         let (res, mut refs) = hexplain__activate!(ctx, world, edict);
         edict.insert("$activate", format!("{:?}", res));
         refs.push("$activate");
+        (res, refs)
+    }
+}
+pub fn explain_invoke_allegiance4(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $allegiance4
+    {
+        let (res, mut refs) = hexplain__allegiance4!(ctx, world, edict);
+        edict.insert("$allegiance4", format!("{:?}", res));
+        refs.push("$allegiance4");
         (res, refs)
     }
 }
@@ -20187,6 +20625,98 @@ pub fn observe_access_annuna__east_bridge__tower_west_ledge__ex__tower_secret_1_
         ctx.annuna__east_bridge__ctx__combo()
     }
 }
+pub fn observe_access_annuna__invisible_enemies__corner_cache__ex__portal_stand_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_nw_utu
+    {
+        full_obs.observe_annuna__invisible_enemies__ctx__nw_utu();
+        ctx.annuna__invisible_enemies__ctx__nw_utu()
+    }
+}
+pub fn observe_access_annuna__invisible_enemies__corner_cache__flask_collection_skip__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_nw_utu and $melee_cskip
+    ({
+        full_obs.observe_annuna__invisible_enemies__ctx__nw_utu();
+        ctx.annuna__invisible_enemies__ctx__nw_utu()
+    } && (hobserve__melee_cskip!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna__invisible_enemies__corner_cache__flask_fast_travel__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_nw_utu and $melee_cskip and Fast_Travel
+    (({
+        full_obs.observe_annuna__invisible_enemies__ctx__nw_utu();
+        ctx.annuna__invisible_enemies__ctx__nw_utu()
+    } && (hobserve__melee_cskip!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_fast_travel();
+            ctx.has(Item::Fast_Travel)
+        }))
+}
+pub fn observe_access_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__middle_ledge_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened and $hookhover
+    ({
+        full_obs.observe_annuna__invisible_enemies__ctx__door_opened();
+        ctx.annuna__invisible_enemies__ctx__door_opened()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__platform_2_east_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened and $hookhover
+    ({
+        full_obs.observe_annuna__invisible_enemies__ctx__door_opened();
+        ctx.annuna__invisible_enemies__ctx__door_opened()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna__invisible_enemies__door_east__ex__uhrum__tulip_tower__still_hovering_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened and $hookhover
+    ({
+        full_obs.observe_annuna__invisible_enemies__ctx__door_opened();
+        ctx.annuna__invisible_enemies__ctx__door_opened()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna__invisible_enemies__door_east__ex__west_23_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__invisible_enemies__ctx__door_opened();
+        ctx.annuna__invisible_enemies__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna__invisible_enemies__west_23__ex__door_east_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_annuna__invisible_enemies__ctx__door_opened();
+        ctx.annuna__invisible_enemies__ctx__door_opened()
+    }
+}
 pub fn observe_access_annuna__vertical_room__middle_platform_2__ex__upper_doorway_1__req(
     ctx: &Context,
     world: &World,
@@ -20350,6 +20880,29 @@ pub fn observe_access_anuman_and_invoke_grab(
         ctx.has(Item::Anuman)
     } && (hobserve__grab!(ctx, world, full_obs)))
 }
+pub fn observe_access_anuman_and_mode_eq_indra_and___ledge_grab_or_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Anuman and ^mode == 'Indra' and (Ledge_Grab or Slingshot_Hook)
+    (({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } && ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Indra
+    })) && ({
+        full_obs.observe_ledge_grab();
+        ctx.has(Item::Ledge_Grab)
+    } || {
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
 pub fn observe_access_anuman_and_mode_ne_drone(
     ctx: &Context,
     world: &World,
@@ -20383,6 +20936,21 @@ pub fn observe_access_anuman_and_slingshot_hook_and_drone_hover(
         full_obs.observe_drone_hover();
         ctx.has(Item::Drone_Hover)
     }))
+}
+pub fn observe_access_anuman_or___invoke_hook_and___not_slingshot_weapon_or_invoke_visited__annuna_gt_invisible_enemies_gt_corner_cache_gt_flask(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Anuman or ($hook and (not Slingshot_Weapon or $visited(`Annuna > Invisible Enemies > Corner Cache > Flask`)))
+    ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } || (hobserve__hook!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_slingshot_weapon();
+            !ctx.has(Item::Slingshot_Weapon)
+        } || ctx.visited(LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask))))
 }
 pub fn observe_access_apocalypse_bomb(
     ctx: &Context,
@@ -23582,6 +24150,14 @@ pub fn observe_access_invoke_activate(
 ) -> bool {
     // $activate
     hobserve__activate!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_allegiance4(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $allegiance4
+    hobserve__allegiance4!(ctx, world, full_obs)
 }
 pub fn observe_access_invoke_block_clip_and_not_ebih_waterfall_block_left(
     ctx: &Context,
@@ -27445,6 +28021,34 @@ pub fn observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+}
+pub fn observe_action_annuna__invisible_enemies__corner_cache__charm_utu__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_nw_utu = true
+}
+pub fn observe_action_annuna__invisible_enemies__switch_above__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_opened = true
+}
+pub fn observe_action_annuna__invisible_enemies__switch_east__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_opened = true
+}
+pub fn observe_action_annuna__invisible_enemies__switch_west__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_opened = true
 }
 pub fn observe_action_annuna__vertical_room__door_switch__open_door__do(
     ctx: &Context,

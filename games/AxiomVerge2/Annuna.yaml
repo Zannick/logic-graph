@@ -223,26 +223,398 @@ areas:
     #endregion
 
     #region Lamassu
+    - name: West 23
+      coord: [32.05, 22.75]
+    - name: Upper Rock East
+      coord: [32.7, 22.7]
+    - name: Middle Rock West
+      coord: [32.25, 23.3]
+    - name: Middle Rock Tree
+      coord: [32.9, 23.0]
+    - name: Middle Rock East
+      coord: [33.55, 22.6]
+    - name: Upper Floor West
+      coord: [32.25, 23.8]
+    - name: Upper Floor East
+      coord: [33.7, 23.8]
+    - name: East 24
+      coord: [33.95, 23.65]
     #endregion
 
 - name: Invisible Enemies  # MARK: Invisible Enemies
   on_entry: $reset_old_area(^newpos)
   start:
     _door_opened: false
+  reset:
+    _nw_utu: false
   data:
     portal_start: Portal Stand
     portal_hidden: true
+  map:
+    flask: [29, 21, 30, 22]
+    switch: [29, 22, 30, 23]
+    portal: [30, 22, 31, 23]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Annuna Invisible Enemies Flask
+      switch: Menu > Kiengir Map > Annuna Invisible Enemies Switch
+      portal: Menu > Kiengir Map > Annuna Invisible Enemies Portal
   spots:
     - name: West 23
       coord: [29.05, 22.8]
+      exits:
+        - to: Uhrum > Tulip Tower > East 23
+          tags: [xshift]
+        - to: Door East
+          req: ^_door_opened
+          movement: base
+    - name: Door East
+      coord: [29.25, 22.8]
+      local:
+        - to: Switch West
+          jumps: 1
+      exits:
+        - to: West 23
+          req: ^_door_opened
+          movement: base
+        - to: Uhrum > Tulip Tower > Platform 2 East
+          req: ^_door_opened and $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Uhrum > Tulip Tower > Middle Ledge
+          req: ^_door_opened and $hookhover
+          movement: fast_hover
+          jumps: 2
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Uhrum > Tulip Tower > Still Hovering
+          req: ^_door_opened and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Switch West
+      coord: [29.45, 22.75]
+      local:
+        - to: Door East
+        - to: Switch East
+      exits:
+        - to: Switch Above
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 2
+      actions:
+        - name: Open Door
+          do: ^_door_opened = true
+          req: $open
+          tags: [hack]
+    - name: Switch Above
+      coord: [29.5, 22.4]
+      data:
+        flipside: Amagi Breach > Lakebed > Lower East Ledge
+      local:
+        - to: Switch East
+        - to: Switch West
+        - to: Shock Distance
+          jumps: 1
+      exits:
+        - to: Shock Distance
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+        - to: West Corner
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+      actions:
+        - name: Open Door
+          do: ^_door_opened = true
+          req: $open and $range2
+          tags: [hack]
+    - name: Shock Distance
+      coord: [29.3, 22.25]
+      data:
+        flipside: Amagi Breach > Lakebed > East Rock Middle
+      local:
+        - to: West Corner
+          jumps: 1
+        - to: Switch Above
+      locations:
+        - name: Shockwave Flask
+          canon: Annuna_Invisible_Enemies_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: West Corner
+      coord: [29.15, 22.2]
+      local:
+        - to: Corner Cache
+          jumps: 2
+        - to: Shock Distance
+      locations:
+        - name: Spin from Underneath
+          canon: Annuna_Invisible_Enemies_Flask
+          item: Flask
+          req: $spin
+          to: Corner Cache
+          movement: base
+          jumps: 3
+          penalty_tags: [flask]
+      exits:
+        - to: Corner Cache
+          req: Anuman or ($hook and (not Slingshot_Weapon or $visited(`Annuna > Invisible Enemies > Corner Cache > Flask`)))
+          movement: base
+          jumps: 1
+    - name: Switch East
+      coord: [29.75, 22.8]
+      data:
+        flipside: Amagi Breach > Lakebed > Bottom
+      local:
+        - to: Switch West
+          jumps: 1
+        - to: Portal Stand
+          jumps: 4
+      exits:
+        - to: Switch Above
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 2
+        - to: Portal Stand
+          req: $hookhover
+          movement: fast_hover
+          jumps: 3
+      actions:
+        - name: Open Door
+          do: ^_door_opened = true
+          req: $open
+          tags: [hack]
+    - name: Corner Cache
+      coord: [29.2, 21.95]
+      data:
+        flipside: Amagi Breach > Lakebed > Big Rock West
+      local:
+        - to: West Corner
+      locations:
+        - name: Flask
+          canon: Annuna_Invisible_Enemies_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Invisible_Enemies_Flask
+          item: Flask
+          req: ^_nw_utu and $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Invisible_Enemies_Flask
+          item: Flask
+          req: ^_nw_utu and $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+        - name: Shockwave Flask
+          canon: Annuna_Invisible_Enemies_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: Portal Stand
+          req: ^_nw_utu
+          movement: base
+          jumps: 2
+      actions:
+        - name: Charm Utu
+          do: ^_nw_utu = true
+          req: $allegiance4
+          price: 100
+          tags: [hack]
     - name: Portal Stand
       coord: [30.475, 22.15]
       data:
         flipside: Amagi Breach > Lakebed > Save Point
-    - name: East 22
-      coord: [31.95, 21.65]
+      local:
+        - to: Switch East
+        - to: East Rock West
+      exits:
+        - to: Corner Cache
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+        - to: East Rock West
+          req: $hookhover
+          movement: fast_hover
+        - to: East Rock Hook Point
+          req: $hookhover
+          movement: fast_hover
+        - to: Upper Passage
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+    - name: East Rock West
+      coord: [31.0, 22.4]
+      local:
+        - to: Portal Stand
+          jumps: 2
+        - to: East Rock Hook Point
+          jumps: 1
+      exits:
+        - to: Upper Passage
+          req: Anuman and ^mode == 'Indra' and (Ledge_Grab or Slingshot_Hook)
+          movement: base
+          jumps: 3
+        - to: Upper Passage
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Passage
+          req: $mist2
+          movement: mist2
+    - name: East Rock Hook Point
+      coord: [31.4, 22.35]
+      exits:
+        - to: East Rock East
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Upper Passage
+          req: Nanite_Mist
+          movement: mist1
+        - to: Upper Passage
+          req: $mist2
+          movement: mist2
+        - to: Mirror Match > Upper Rock East
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Mirror Match > Middle Rock East
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: East Rock East
+      coord: [31.8, 22.3]
+      local:
+        - to: East 23
+        - to: East Rock Hook Point
+        - to: East Rock West
+      exits:
+        - to: Mirror Match > Upper Rock East
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: East 23
       coord: [31.95, 22.75]
+      exits:
+        - to: Mirror Match > West 23
+          tags: [xshift]
+        - to: East Rock East
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Rock East
+          req: $mist2
+          movement: mist2
+    - name: Upper Passage
+      coord: [31.3, 21.75]
+      local:
+        - to: East 22
+          jumps: 1
+        - to: Portal Stand
+        - to: East Rock Hook Point
+    - name: East 22
+      coord: [31.95, 21.65]
+      local:
+        - to: Upper Passage
+      exits:
+        - to: Secret Passage > West
+          tags: [xshift]
+
+- name: Secret Passage
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [32, 21, 33, 22]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Annuna Secret Passage Flask
+  spots:
+    - name: West
+      coord: [32.05, 21.65]
+      local:
+        - to: Wall West
+      exits:
+        - to: Invisible Enemies > East 22
+          tags: [xshift]
+    - name: Wall West
+      coord: [32.1, 21.8]
+      local:
+        - to: West
+          jumps: 1
+      locations:
+        - name: Shockwave Flask
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+        - name: Refill
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+    - name: Wall East
+      coord: [32.4, 21.8]
+      local:
+        - to: In Shock Range
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: In Shock Range
+      coord: [32.6, 21.75]
+      local:
+        - to: Wall East
+        - to: In Boome Range
+      locations:
+        - name: Shockwave Flask
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: In Boome Range
+      coord: [32.75, 21.75]
+      local:
+        - to: In Shock Range
+          jumps: 1
+        - to: East
+          jumps: 3
+      locations:
+        - name: Remote Flask
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          req: $boomerang
+          tags: [remote_flask]
+        - name: Boomerang Flask Fast Travel
+          canon: Annuna_Secret_Passage_Flask
+          item: Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [throw]
+    - name: East
+      coord: [22.95, 21.65]
+      local:
+        - to: In Boome Range
+      exits:
+        - to: West Bridge > West 22
+          tags: [xshift]
 
 - name: West Bridge  # MARK: West Bridge
   on_entry: $reset_old_area(^newpos)
@@ -250,6 +622,7 @@ areas:
     _doors_opened: false
   data:
     save_point: Save Point
+    portal_start: Portal Hole
   map:
     save: [36, 26, 37, 27]
     lattice: [35, 24, 36, 25]
@@ -258,6 +631,8 @@ areas:
       save: Menu > Kiengir Map > Annuna West Bridge
       lattice: Menu > Kiengir Map > Nano Lattice 2
   spots:
+    - name: Portal Hole
+      coord: [35.475, 25.1]
     #region Main Corridor
     - name: West 25 Lower
       coord: [34.05, 24.8]
@@ -341,6 +716,13 @@ areas:
       exits:
         - to: West Climb > South
           tags: [ydoor]
+    #endregion
+
+    #region NW Cavern
+    - name: West 22
+      coord: [23.05, 21.65]
+    - name: Cavern Plinth
+      coord: [23.475, 21.55]
     #endregion
 
 - name: East Bridge  # MARK: East Bridge

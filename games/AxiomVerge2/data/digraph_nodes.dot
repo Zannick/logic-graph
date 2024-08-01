@@ -72,6 +72,9 @@
         {
             Amagi_Breach__Lakebed__West [label = "", pos = "87.3,-86.25!"];
             Amagi_Breach__Lakebed__Big_Rock_West [label = "", pos = "87.6,-86.583333!"];
+            Amagi_Breach__Lakebed__East_Rock_Middle [label = "", pos = "87.9,-87.083333!"];
+            Amagi_Breach__Lakebed__Lower_East_Ledge [label = "", pos = "88.5,-87.333333!"];
+            Amagi_Breach__Lakebed__Bottom [label = "", pos = "89.25,-88.0!"];
             Amagi_Breach__Lakebed__Save_Point [label = "", pos = "91.425,-86.916667!"];
         }
         {
@@ -535,9 +538,20 @@
         }
         {
             Annuna__Invisible_Enemies__West_23 [label = "", pos = "87.15,-38.0!"];
+            Annuna__Invisible_Enemies__Door_East [label = "", pos = "87.75,-38.0!"];
+            Annuna__Invisible_Enemies__Switch_West [label = "", pos = "88.35,-37.916667!"];
+            Annuna__Invisible_Enemies__Switch_Above [label = "", pos = "88.5,-37.333333!"];
+            Annuna__Invisible_Enemies__Shock_Distance [label = "", pos = "87.9,-37.083333!"];
+            Annuna__Invisible_Enemies__West_Corner [label = "", pos = "87.45,-37.0!"];
+            Annuna__Invisible_Enemies__Switch_East [label = "", pos = "89.25,-38.0!"];
+            Annuna__Invisible_Enemies__Corner_Cache [label = "", pos = "87.6,-36.583333!"];
             Annuna__Invisible_Enemies__Portal_Stand [label = "", pos = "91.425,-36.916667!"];
-            Annuna__Invisible_Enemies__East_22 [label = "", pos = "95.85,-36.083333!"];
+            Annuna__Invisible_Enemies__East_Rock_West [label = "", pos = "93.0,-37.333333!"];
+            Annuna__Invisible_Enemies__East_Rock_Hook_Point [label = "", pos = "94.2,-37.25!"];
+            Annuna__Invisible_Enemies__East_Rock_East [label = "", pos = "95.4,-37.166667!"];
             Annuna__Invisible_Enemies__East_23 [label = "", pos = "95.85,-37.916667!"];
+            Annuna__Invisible_Enemies__Upper_Passage [label = "", pos = "93.9,-36.25!"];
+            Annuna__Invisible_Enemies__East_22 [label = "", pos = "95.85,-36.083333!"];
         }
         {
             Annuna__Lamassu__East_17 [label = "", pos = "116.85,-27.916667!"];
@@ -584,6 +598,14 @@
             Annuna__Mirror_Match__Waving_Distance [label = "", pos = "101.1,-42.666667!"];
             Annuna__Mirror_Match__East_26_Lower [label = "", pos = "101.85,-43.0!"];
             Annuna__Mirror_Match__East_26_Upper [label = "", pos = "101.85,-42.5!"];
+            Annuna__Mirror_Match__West_23 [label = "", pos = "96.15,-37.916667!"];
+            Annuna__Mirror_Match__Upper_Rock_East [label = "", pos = "98.1,-37.833333!"];
+            Annuna__Mirror_Match__Middle_Rock_West [label = "", pos = "96.75,-38.833333!"];
+            Annuna__Mirror_Match__Middle_Rock_Tree [label = "", pos = "98.7,-38.333333!"];
+            Annuna__Mirror_Match__Middle_Rock_East [label = "", pos = "100.65,-37.666667!"];
+            Annuna__Mirror_Match__Upper_Floor_West [label = "", pos = "96.75,-39.666667!"];
+            Annuna__Mirror_Match__Upper_Floor_East [label = "", pos = "101.1,-39.666667!"];
+            Annuna__Mirror_Match__East_24 [label = "", pos = "101.85,-39.416667!"];
         }
         {
             Annuna__Seals__East_15 [label = "", pos = "125.85,-24.25!"];
@@ -596,6 +618,14 @@
             Annuna__Seals__Lower_Ledge [label = "", pos = "124.5,-26.833333!"];
             Annuna__Seals__East_17_Upper [label = "", pos = "125.85,-27.333333!"];
             Annuna__Seals__East_17_Lower [label = "", pos = "125.85,-27.916667!"];
+        }
+        {
+            Annuna__Secret_Passage__West [label = "", pos = "96.15,-36.083333!"];
+            Annuna__Secret_Passage__Wall_West [label = "", pos = "96.3,-36.333333!"];
+            Annuna__Secret_Passage__Wall_East [label = "", pos = "97.2,-36.333333!"];
+            Annuna__Secret_Passage__In_Shock_Range [label = "", pos = "97.8,-36.25!"];
+            Annuna__Secret_Passage__In_Boome_Range [label = "", pos = "98.25,-36.25!"];
+            Annuna__Secret_Passage__East [label = "", pos = "68.85,-36.083333!"];
         }
         {
             Annuna__Siuna_Storage__West [label = "", pos = "117.15,-26.333333!"];
@@ -714,6 +744,7 @@
             Annuna__Vertical_Room__West_17 [label = "", pos = "120.3,-27.916667!"];
         }
         {
+            Annuna__West_Bridge__Portal_Hole [label = "", pos = "106.425,-41.833333!"];
             Annuna__West_Bridge__West_25_Lower [label = "", pos = "102.15,-41.333333!"];
             Annuna__West_Bridge__West_25_Upper [label = "", pos = "102.15,-40.5!"];
             Annuna__West_Bridge__West_Outcropping [label = "", pos = "103.05,-41.333333!"];
@@ -729,6 +760,8 @@
             Annuna__West_Bridge__Tunnel_Wall [label = "", pos = "109.65,-36.333333!"];
             Annuna__West_Bridge__Mid_Tunnel [label = "", pos = "109.65,-35.833333!"];
             Annuna__West_Bridge__North [label = "", pos = "109.5,-35.333333!"];
+            Annuna__West_Bridge__West_22 [label = "", pos = "69.15,-36.083333!"];
+            Annuna__West_Bridge__Cavern_Plinth [label = "", pos = "70.425,-35.916667!"];
         }
         {
             Annuna__West_Climb__East_20 [label = "", pos = "110.85,-33.166667!"];
@@ -3246,6 +3279,10 @@
             Menu__Kiengir_Map__Annuna_Egg_Room_SE [label = "", pos = "114.0,-31.666667!"];
             Menu__Kiengir_Map__Annuna_Smiley_Room_Portal [label = "", pos = "96.0,-45.0!"];
             Menu__Kiengir_Map__Annuna_Smiley_Room_Southeast [label = "", pos = "99.0,-46.666667!"];
+            Menu__Kiengir_Map__Annuna_Invisible_Enemies_Flask [label = "", pos = "87.0,-36.666667!"];
+            Menu__Kiengir_Map__Annuna_Invisible_Enemies_Portal [label = "", pos = "90.0,-38.333333!"];
+            Menu__Kiengir_Map__Annuna_Invisible_Enemies_Switch [label = "", pos = "87.0,-38.333333!"];
+            Menu__Kiengir_Map__Annuna_Secret_Passage_Flask [label = "", pos = "96.0,-36.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_West [label = "", pos = "84.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_East [label = "", pos = "90.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_Health [label = "", pos = "87.0,-18.333333!"];
@@ -3699,6 +3736,7 @@
         {
             Uhrum__Tulip_Tower__West_24 [label = "", pos = "84.15,-39.666667!"];
             Uhrum__Tulip_Tower__Lower_Column [label = "", pos = "84.75,-39.0!"];
+            Uhrum__Tulip_Tower__Still_Hovering [label = "", pos = "84.6,-38.75!"];
             Uhrum__Tulip_Tower__Platform_1_West [label = "", pos = "85.5,-38.333333!"];
             Uhrum__Tulip_Tower__Platform_1_East [label = "", pos = "85.95,-38.333333!"];
             Uhrum__Tulip_Tower__Middle_Ledge [label = "", pos = "85.05,-37.833333!"];

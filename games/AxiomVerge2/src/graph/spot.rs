@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3152] = [
+static SPOT_DEFS: [SpotDef; 3188] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -332,15 +332,33 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Amagi_Breach__Lakebed__Save_Point,
+        id: SpotId::Amagi_Breach__Lakebed__Bottom,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Lakebed__Bottom__ex__Lower_East_Ledge_1, ExitId::Amagi_Breach__Lakebed__Bottom__ex__Lower_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Lakebed__East_Rock_Middle,
         loc_range: None,
         exit_range: None,
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Amagi_Breach__Lakebed__West,
+        id: SpotId::Amagi_Breach__Lakebed__Lower_East_Ledge,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Lakebed__Save_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Lakebed__Save_Point__ex__Big_Rock_West_1, ExitId::Amagi_Breach__Lakebed__Save_Point__ex__Big_Rock_West_1)),
+        action_range: Some((ActionId::Amagi_Breach__Lakebed__Save_Point__Save, ActionId::Amagi_Breach__Lakebed__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Lakebed__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Lakebed__West__ex__Corner__East_1, ExitId::Amagi_Breach__Lakebed__West__ex__Corner__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -2648,19 +2666,79 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Corner_Cache,
+        loc_range: Some((LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask, LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask)),
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__Corner_Cache__ex__Portal_Stand_1, ExitId::Annuna__Invisible_Enemies__Corner_Cache__ex__Portal_Stand_1)),
+        action_range: Some((ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu, ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu)),
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Door_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__Door_East__ex__Uhrum__Tulip_Tower__Middle_Ledge_1, ExitId::Annuna__Invisible_Enemies__Door_East__ex__West_23_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__Invisible_Enemies__East_22,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__East_22__ex__Secret_Passage__West_1, ExitId::Annuna__Invisible_Enemies__East_22__ex__Secret_Passage__West_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Annuna__Invisible_Enemies__East_23,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__East_23__ex__East_Rock_East_1, ExitId::Annuna__Invisible_Enemies__East_23__ex__Mirror_Match__West_23_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__East_Rock_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__East_Rock_East__ex__Mirror_Match__Upper_Rock_East_1, ExitId::Annuna__Invisible_Enemies__East_Rock_East__ex__Mirror_Match__Upper_Rock_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__East_Rock_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__East_Rock_Hook_Point__ex__East_Rock_East_1, ExitId::Annuna__Invisible_Enemies__East_Rock_Hook_Point__ex__Upper_Passage_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__East_Rock_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__East_Rock_West__ex__Upper_Passage_1, ExitId::Annuna__Invisible_Enemies__East_Rock_West__ex__Upper_Passage_3)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Annuna__Invisible_Enemies__Portal_Stand,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__Portal_Stand__ex__Corner_Cache_1, ExitId::Annuna__Invisible_Enemies__Portal_Stand__ex__Upper_Passage_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Shock_Distance,
+        loc_range: Some((LocationId::Annuna__Invisible_Enemies__Shock_Distance__Shockwave_Flask, LocationId::Annuna__Invisible_Enemies__Shock_Distance__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Switch_Above,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__Switch_Above__ex__Shock_Distance_1, ExitId::Annuna__Invisible_Enemies__Switch_Above__ex__West_Corner_1)),
+        action_range: Some((ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door, ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door)),
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Switch_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__Switch_East__ex__Portal_Stand_1, ExitId::Annuna__Invisible_Enemies__Switch_East__ex__Switch_Above_1)),
+        action_range: Some((ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door, ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door)),
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Switch_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__Switch_West__ex__Switch_Above_1, ExitId::Annuna__Invisible_Enemies__Switch_West__ex__Switch_Above_1)),
+        action_range: Some((ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door, ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door)),
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__Upper_Passage,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -2668,7 +2746,13 @@ static SPOT_DEFS: [SpotDef; 3152] = [
     SpotDef {
         id: SpotId::Annuna__Invisible_Enemies__West_23,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__West_23__ex__Door_East_1, ExitId::Annuna__Invisible_Enemies__West_23__ex__Uhrum__Tulip_Tower__East_23_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Invisible_Enemies__West_Corner,
+        loc_range: Some((LocationId::Annuna__Invisible_Enemies__West_Corner__Spin_from_Underneath, LocationId::Annuna__Invisible_Enemies__West_Corner__Spin_from_Underneath)),
+        exit_range: Some((ExitId::Annuna__Invisible_Enemies__West_Corner__ex__Corner_Cache_1, ExitId::Annuna__Invisible_Enemies__West_Corner__ex__Corner_Cache_1)),
         action_range: None,
     },
     SpotDef {
@@ -2828,6 +2912,12 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__Mirror_Match__East_24,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__Mirror_Match__East_25_Lower,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1, ExitId::Annuna__Mirror_Match__East_25_Lower__ex__West_Bridge__West_25_Lower_1)),
@@ -2858,6 +2948,24 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__Mirror_Match__Middle_Rock_East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Mirror_Match__Middle_Rock_Tree,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Mirror_Match__Middle_Rock_West,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__Mirror_Match__Plinth,
         loc_range: Some((LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip, LocationId::Annuna__Mirror_Match__Plinth__Item)),
         exit_range: Some((ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1, ExitId::Annuna__Mirror_Match__Plinth__ex__East_26_Upper_1)),
@@ -2882,8 +2990,32 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__Mirror_Match__Upper_Floor_East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Mirror_Match__Upper_Floor_West,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Mirror_Match__Upper_Rock_East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__Mirror_Match__Waving_Distance,
         loc_range: Some((LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask, LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Mirror_Match__West_23,
+        loc_range: None,
         exit_range: None,
         action_range: None,
     },
@@ -2957,6 +3089,42 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         id: SpotId::Annuna__Seals__Upper_Seal,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__Seals__Upper_Seal__ex__Lower_Seal_1, ExitId::Annuna__Seals__Upper_Seal__ex__Middle_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Secret_Passage__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Secret_Passage__East__ex__West_Bridge__West_22_1, ExitId::Annuna__Secret_Passage__East__ex__West_Bridge__West_22_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Secret_Passage__In_Boome_Range,
+        loc_range: Some((LocationId::Annuna__Secret_Passage__In_Boome_Range__Boomerang_Flask_Fast_Travel, LocationId::Annuna__Secret_Passage__In_Boome_Range__Remote_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Secret_Passage__In_Shock_Range,
+        loc_range: Some((LocationId::Annuna__Secret_Passage__In_Shock_Range__Shockwave_Flask, LocationId::Annuna__Secret_Passage__In_Shock_Range__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Secret_Passage__Wall_East,
+        loc_range: Some((LocationId::Annuna__Secret_Passage__Wall_East__Flask, LocationId::Annuna__Secret_Passage__Wall_East__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Secret_Passage__Wall_West,
+        loc_range: Some((LocationId::Annuna__Secret_Passage__Wall_West__Refill, LocationId::Annuna__Secret_Passage__Wall_West__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Secret_Passage__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__Secret_Passage__West__ex__Invisible_Enemies__East_22_1, ExitId::Annuna__Secret_Passage__West__ex__Invisible_Enemies__East_22_1)),
         action_range: None,
     },
     SpotDef {
@@ -3554,6 +3722,12 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__West_Bridge__Cavern_Plinth,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__West_Bridge__East_22,
         loc_range: None,
         exit_range: None,
@@ -3596,6 +3770,12 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__West_Bridge__Portal_Hole,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__West_Bridge__Save_Point,
         loc_range: None,
         exit_range: None,
@@ -3605,6 +3785,12 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         id: SpotId::Annuna__West_Bridge__Tunnel_Wall,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1, ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__West_22,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -15608,6 +15794,24 @@ static SPOT_DEFS: [SpotDef; 3152] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_Invisible_Enemies_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_Invisible_Enemies_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_Invisible_Enemies_Switch,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1, ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1)),
@@ -15615,6 +15819,12 @@ static SPOT_DEFS: [SpotDef; 3152] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Annuna_Mirror_Match_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_Secret_Passage_Flask,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -18484,13 +18694,19 @@ static SPOT_DEFS: [SpotDef; 3152] = [
     SpotDef {
         id: SpotId::Uhrum__Tulip_Tower__Platform_2_East,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Middle_Ledge_1, ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Right_Ledge_1)),
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Middle_Plateau_1, ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Right_Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Uhrum__Tulip_Tower__Platform_2_West,
         loc_range: None,
         exit_range: Some((ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Middle_Ledge_1, ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Right_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Uhrum__Tulip_Tower__Still_Hovering,
+        loc_range: None,
+        exit_range: Some((ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__Barrier_East_1, ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__East_24_1)),
         action_range: None,
     },
     SpotDef {

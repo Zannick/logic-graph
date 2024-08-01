@@ -126,6 +126,9 @@ subgraph Amagi_Breach
     subgraph Amagi_Breach__Lakebed[Lakebed]
         Amagi_Breach__Lakebed__West(West);
         Amagi_Breach__Lakebed__Big_Rock_West(Big Rock West);
+        Amagi_Breach__Lakebed__East_Rock_Middle(East Rock Middle);
+        Amagi_Breach__Lakebed__Lower_East_Ledge(Lower East Ledge);
+        Amagi_Breach__Lakebed__Bottom(Bottom);
         Amagi_Breach__Lakebed__Save_Point(Save Point);
     end
 end
@@ -392,14 +395,42 @@ subgraph Annuna
         Annuna__Mirror_Match__Waving_Distance(Waving Distance);
         Annuna__Mirror_Match__East_26_Lower(East 26 Lower);
         Annuna__Mirror_Match__East_26_Upper(East 26 Upper);
+        Annuna__Mirror_Match__West_23(West 23);
+        Annuna__Mirror_Match__Upper_Rock_East(Upper Rock East);
+        Annuna__Mirror_Match__Middle_Rock_West(Middle Rock West);
+        Annuna__Mirror_Match__Middle_Rock_Tree(Middle Rock Tree);
+        Annuna__Mirror_Match__Middle_Rock_East(Middle Rock East);
+        Annuna__Mirror_Match__Upper_Floor_West(Upper Floor West);
+        Annuna__Mirror_Match__Upper_Floor_East(Upper Floor East);
+        Annuna__Mirror_Match__East_24(East 24);
     end
     subgraph Annuna__Invisible_Enemies[Invisible Enemies]
         Annuna__Invisible_Enemies__West_23(West 23);
+        Annuna__Invisible_Enemies__Door_East(Door East);
+        Annuna__Invisible_Enemies__Switch_West(Switch West);
+        Annuna__Invisible_Enemies__Switch_Above(Switch Above);
+        Annuna__Invisible_Enemies__Shock_Distance(Shock Distance);
+        Annuna__Invisible_Enemies__West_Corner(West Corner);
+        Annuna__Invisible_Enemies__Switch_East(Switch East);
+        Annuna__Invisible_Enemies__Corner_Cache(Corner Cache);
         Annuna__Invisible_Enemies__Portal_Stand(Portal Stand);
-        Annuna__Invisible_Enemies__East_22(East 22);
+        Annuna__Invisible_Enemies__East_Rock_West(East Rock West);
+        Annuna__Invisible_Enemies__East_Rock_Hook_Point(East Rock Hook Point);
+        Annuna__Invisible_Enemies__East_Rock_East(East Rock East);
         Annuna__Invisible_Enemies__East_23(East 23);
+        Annuna__Invisible_Enemies__Upper_Passage(Upper Passage);
+        Annuna__Invisible_Enemies__East_22(East 22);
+    end
+    subgraph Annuna__Secret_Passage[Secret Passage]
+        Annuna__Secret_Passage__West(West);
+        Annuna__Secret_Passage__Wall_West(Wall West);
+        Annuna__Secret_Passage__Wall_East(Wall East);
+        Annuna__Secret_Passage__In_Shock_Range(In Shock Range);
+        Annuna__Secret_Passage__In_Boome_Range(In Boome Range);
+        Annuna__Secret_Passage__East(East);
     end
     subgraph Annuna__West_Bridge[West Bridge]
+        Annuna__West_Bridge__Portal_Hole(Portal Hole);
         Annuna__West_Bridge__West_25_Lower(West 25 Lower);
         Annuna__West_Bridge__West_25_Upper(West 25 Upper);
         Annuna__West_Bridge__West_Outcropping(West Outcropping);
@@ -415,6 +446,8 @@ subgraph Annuna
         Annuna__West_Bridge__Tunnel_Wall(Tunnel Wall);
         Annuna__West_Bridge__Mid_Tunnel(Mid Tunnel);
         Annuna__West_Bridge__North(North);
+        Annuna__West_Bridge__West_22(West 22);
+        Annuna__West_Bridge__Cavern_Plinth(Cavern Plinth);
     end
     subgraph Annuna__East_Bridge[East Bridge]
         Annuna__East_Bridge__West_25_Lower(West 25 Lower);
@@ -3141,6 +3174,10 @@ subgraph Menu
         Menu__Kiengir_Map__Annuna_Egg_Room_SE(Annuna Egg Room SE);
         Menu__Kiengir_Map__Annuna_Smiley_Room_Portal(Annuna Smiley Room Portal);
         Menu__Kiengir_Map__Annuna_Smiley_Room_Southeast(Annuna Smiley Room Southeast);
+        Menu__Kiengir_Map__Annuna_Invisible_Enemies_Flask(Annuna Invisible Enemies Flask);
+        Menu__Kiengir_Map__Annuna_Invisible_Enemies_Portal(Annuna Invisible Enemies Portal);
+        Menu__Kiengir_Map__Annuna_Invisible_Enemies_Switch(Annuna Invisible Enemies Switch);
+        Menu__Kiengir_Map__Annuna_Secret_Passage_Flask(Annuna Secret Passage Flask);
         Menu__Kiengir_Map__Ebih_Base_Camp_West(Ebih Base Camp West);
         Menu__Kiengir_Map__Ebih_Base_Camp_East(Ebih Base Camp East);
         Menu__Kiengir_Map__Ebih_Base_Camp_Health(Ebih Base Camp Health);
@@ -3645,6 +3682,7 @@ subgraph Uhrum
     subgraph Uhrum__Tulip_Tower[Tulip Tower]
         Uhrum__Tulip_Tower__West_24(West 24);
         Uhrum__Tulip_Tower__Lower_Column(Lower Column);
+        Uhrum__Tulip_Tower__Still_Hovering(Still Hovering);
         Uhrum__Tulip_Tower__Platform_1_West(Platform 1 West);
         Uhrum__Tulip_Tower__Platform_1_East(Platform 1 East);
         Uhrum__Tulip_Tower__Middle_Ledge(Middle Ledge);
@@ -3772,7 +3810,7 @@ subgraph Uhrum
         Uhrum__Seclusion__Close_Range(Close Range);
     end
 end
-Amagi_Breach__Corner__East --> Amagi_Breach__Lakebed__West
+Amagi_Breach__Corner__East <--> Amagi_Breach__Lakebed__West
 Amagi_Breach__Corner__North <--> Amagi_Breach__Twisty_Passages__South
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
 Amagi_Breach__East_Column__South --> Amagi_Breach__Fishy_Secrets__North
@@ -3794,6 +3832,8 @@ Amagi_Breach__East_Ruins__Southeast_Rock_Wall --> Amagi_Breach__East_Ruins__Arch
 Amagi_Breach__East_Ruins__Under_the_Rock --> Amagi_Breach__East_Ruins__Small_Column_West
 Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
 Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
+Amagi_Breach__Lakebed__Bottom --> Amagi_Breach__Lakebed__Lower_East_Ledge
+Amagi_Breach__Lakebed__Save_Point --> Amagi_Breach__Lakebed__Big_Rock_West
 Amagi_Breach__Lower_Hallway__Cache <--> Amagi_Breach__Lower_Hallway__Empty_Plinth
 Amagi_Breach__Lower_Hallway__Cache <--> Amagi_Breach__Lower_Hallway__West_Ledge
 Amagi_Breach__Lower_Hallway__East --> Amagi_Breach__Split_One_Way__West_20
@@ -4160,6 +4200,30 @@ Annuna__Hidden_Portal__East <--> Annuna__Lamassu__West_17
 Annuna__Hidden_Portal__Plinth_Left --> Annuna__Lamassu__Bottom_Hill_West
 Annuna__Hidden_Portal__Plinth_Right --> Glacier__Vertical_Room__East_17_while_hovering
 Annuna__Hidden_Portal__West <--> Glacier__Vertical_Room__East_17
+Annuna__Invisible_Enemies__Corner_Cache <--> Annuna__Invisible_Enemies__Portal_Stand
+Annuna__Invisible_Enemies__Door_East <--> Annuna__Invisible_Enemies__West_23
+Annuna__Invisible_Enemies__Door_East --> Uhrum__Tulip_Tower__Middle_Ledge
+Annuna__Invisible_Enemies__Door_East --> Uhrum__Tulip_Tower__Platform_2_East
+Annuna__Invisible_Enemies__Door_East --> Uhrum__Tulip_Tower__Still_Hovering
+Annuna__Invisible_Enemies__East_22 <--> Annuna__Secret_Passage__West
+Annuna__Invisible_Enemies__East_23 --> Annuna__Invisible_Enemies__East_Rock_East
+Annuna__Invisible_Enemies__East_23 --> Annuna__Mirror_Match__West_23
+Annuna__Invisible_Enemies__East_Rock_East --> Annuna__Mirror_Match__Upper_Rock_East
+Annuna__Invisible_Enemies__East_Rock_Hook_Point --> Annuna__Invisible_Enemies__East_Rock_East
+Annuna__Invisible_Enemies__East_Rock_Hook_Point --> Annuna__Invisible_Enemies__Upper_Passage
+Annuna__Invisible_Enemies__East_Rock_Hook_Point --> Annuna__Mirror_Match__Middle_Rock_East
+Annuna__Invisible_Enemies__East_Rock_Hook_Point --> Annuna__Mirror_Match__Upper_Rock_East
+Annuna__Invisible_Enemies__East_Rock_West --> Annuna__Invisible_Enemies__Upper_Passage
+Annuna__Invisible_Enemies__Portal_Stand --> Annuna__Invisible_Enemies__East_Rock_Hook_Point
+Annuna__Invisible_Enemies__Portal_Stand --> Annuna__Invisible_Enemies__East_Rock_West
+Annuna__Invisible_Enemies__Portal_Stand --> Annuna__Invisible_Enemies__Upper_Passage
+Annuna__Invisible_Enemies__Switch_Above --> Annuna__Invisible_Enemies__Shock_Distance
+Annuna__Invisible_Enemies__Switch_Above --> Annuna__Invisible_Enemies__West_Corner
+Annuna__Invisible_Enemies__Switch_East --> Annuna__Invisible_Enemies__Portal_Stand
+Annuna__Invisible_Enemies__Switch_East --> Annuna__Invisible_Enemies__Switch_Above
+Annuna__Invisible_Enemies__Switch_West --> Annuna__Invisible_Enemies__Switch_Above
+Annuna__Invisible_Enemies__West_23 <--> Uhrum__Tulip_Tower__East_23
+Annuna__Invisible_Enemies__West_Corner --> Annuna__Invisible_Enemies__Corner_Cache
 Annuna__Lamassu__Above_Flat_Ground <--> Annuna__Lamassu__East_16
 Annuna__Lamassu__Above_Flat_Ground --> Annuna__Lamassu__Ledge_By_Grate
 Annuna__Lamassu__Bottom_East_Ledge --> Annuna__Lamassu__Bottom_Middle_Ledge
@@ -4202,6 +4266,7 @@ Annuna__Seals__Lower_Seal <--> Annuna__Seals__Middle_Ledge
 Annuna__Seals__Lower_Seal <--> Annuna__Seals__Upper_Seal
 Annuna__Seals__Middle_Ledge <--> Annuna__Seals__Upper_Seal
 Annuna__Seals__Upper_Ledge --> Annuna__Seals__East_15
+Annuna__Secret_Passage__East --> Annuna__West_Bridge__West_22
 Annuna__Siuna_Storage__Portal_Entry --> Annuna__Siuna_Storage__Third_Platform
 Annuna__Siuna_Storage__Second_Platform --> Annuna__Siuna_Storage__Top_Platform
 Annuna__Siuna_Storage__Second_Platform --> Annuna__Siuna_Storage__Upper_Ledge
@@ -6094,7 +6159,6 @@ Uhrum__Siege_Corridor__West_26 <--> Uhrum__West_Entrance__East_26
 Uhrum__Siege_Corridor__West_Greenery --> Uhrum__Siege_Corridor__West_Grassy_Ledge
 Uhrum__Siege_Corridor__Western_Rock --> Uhrum__Siege_Corridor__Northwest_Platform
 Uhrum__Spring__Center --> Uhrum__Glitchy_Corridor__East_Glitch_East
-Uhrum__Tulip_Tower__East_23 --> Annuna__Invisible_Enemies__West_23
 Uhrum__Tulip_Tower__East_23 <--> Uhrum__Tulip_Tower__Platform_1_East
 Uhrum__Tulip_Tower__East_23 --> Uhrum__Tulip_Tower__Platform_2_East
 Uhrum__Tulip_Tower__Lower_Column --> Uhrum__Tulip_Tower__Platform_1_West
@@ -6104,10 +6168,13 @@ Uhrum__Tulip_Tower__NW_Mid_air --> Uhrum__Tulip_Tower__Upper_Column_West
 Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Middle_Ledge
 Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Platform_2_West
 Uhrum__Tulip_Tower__Platform_1_West --> Uhrum__Tulip_Tower__Upper_Right_Ledge
+Uhrum__Tulip_Tower__Platform_2_East --> Uhrum__Tulip_Tower__Middle_Plateau
 Uhrum__Tulip_Tower__Platform_2_East --> Uhrum__Tulip_Tower__Upper_Middle_Ledge
 Uhrum__Tulip_Tower__Platform_2_East --> Uhrum__Tulip_Tower__Upper_Right_Ledge
 Uhrum__Tulip_Tower__Platform_2_West --> Uhrum__Tulip_Tower__Upper_Middle_Ledge
 Uhrum__Tulip_Tower__Platform_2_West --> Uhrum__Tulip_Tower__Upper_Right_Ledge
+Uhrum__Tulip_Tower__Still_Hovering --> Uhrum__Waterfalls__Barrier_East
+Uhrum__Tulip_Tower__Still_Hovering --> Uhrum__Waterfalls__East_24
 Uhrum__Tulip_Tower__Upper_Column_East --> Uhrum__Tulip_Tower__North
 Uhrum__Tulip_Tower__Upper_Middle_Ledge --> Amagi__Wiggly_Room__South
 Uhrum__Tulip_Tower__Upper_Middle_Ledge --> Uhrum__Tulip_Tower__Upper_Column_East

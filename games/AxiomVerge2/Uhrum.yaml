@@ -2392,6 +2392,16 @@ areas:
           req: $hook
           movement: base
           jumps: 1
+    - name: Still Hovering
+      coord: [28.2, 23.25]
+      exits:
+        # This spot should only be accessible from fast_hovering already
+        - to: Waterfalls > Barrier East
+          req: $hookhover
+          movement: fast_hover
+        - to: Waterfalls > East 24
+          req: $hookhover
+          movement: fast_hover
     - name: Platform 1 West
       coord: [28.5, 23.0]
       local:
@@ -2486,6 +2496,9 @@ areas:
         - to: Upper Middle Ledge
           req: $mist2
           movement: mist2
+        - to: Middle Plateau
+          req: $hookhover
+          movement: fast_hover
     - name: East 23
       coord: [28.95, 22.8]
       local:

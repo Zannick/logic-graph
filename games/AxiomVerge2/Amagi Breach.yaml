@@ -1194,9 +1194,68 @@ areas:
   spots:
     - name: West
       coord: [29.1, 21.75]
+      local:
+        - to: Big Rock West
+        - to: East Rock Middle
+        - to: Save Point
+      exits:
+        - to: Corner > East
+          tags: [xdoor]
     - name: Big Rock West
       coord: [29.2, 21.95]
+      data:
+        flipside: Annuna > Invisible Enemies > Corner Cache
+      local:
+        - to: West
+          jumps: 1
+        - to: East Rock Middle
+        - to: Save Point
+    - name: East Rock Middle
+      coord: [29.3, 22.25]
+      data:
+        flipside: Annuna > Invisible Enemies > Shock Distance
+      local:
+        - to: Big Rock West
+          jumps: 2
+        - to: Lower East Ledge
+    - name: Lower East Ledge
+      coord: [29.5, 22.4]
+      data:
+        flipside: Annuna > Invisible Enemies > Switch Above
+      local:
+        - to: Bottom
+        - to: East Rock Middle
+          jumps: 1
+    - name: Bottom
+      coord: [29.75, 22.8]
+      data:
+        flipside: Annuna > Invisible Enemies > Switch East
+      local:
+        - to: Save Point
+          jumps: 4
+        - to: Lower East Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Lower East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
     - name: Save Point
       coord: [30.475, 22.15]
       data:
         flipside: Annuna > Invisible Enemies > Portal Stand
+      local:
+        - to: Bottom
+        - to: Big Rock West
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: Big Rock West
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]

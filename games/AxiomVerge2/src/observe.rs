@@ -251,6 +251,12 @@ impl Observer for FullObservation {
             LocationId::Annuna__Mirror_Match__Plinth__Item | LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip | LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel | LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask | LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask | LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
+            LocationId::Annuna__Invisible_Enemies__Shock_Distance__Shockwave_Flask | LocationId::Annuna__Invisible_Enemies__West_Corner__Spin_from_Underneath | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+            }
+            LocationId::Annuna__Secret_Passage__Wall_West__Shockwave_Flask | LocationId::Annuna__Secret_Passage__Wall_East__Flask | LocationId::Annuna__Secret_Passage__Wall_East__Flask_Collection_Skip | LocationId::Annuna__Secret_Passage__Wall_East__Flask_Fast_Travel | LocationId::Annuna__Secret_Passage__In_Shock_Range__Shockwave_Flask | LocationId::Annuna__Secret_Passage__In_Boome_Range__Remote_Flask | LocationId::Annuna__Secret_Passage__In_Boome_Range__Boomerang_Flask_Fast_Travel => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_SECRET_PASSAGE_FLASK);
+            }
             LocationId::Annuna__East_Bridge__Gate_Button__Switch | LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE);
             }
@@ -270,7 +276,7 @@ impl Observer for FullObservation {
                 self.cbits10.insert(flags::ContextBits10::VISITED_SIUNA_STORAGE_WALL);
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel | LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn | LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel | LocationId::Annuna__Siuna_Storage__Cache__Urn | LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_NANITE_MIST);
+                self.cbits10.insert(flags::ContextBits10::VISITED_NANITE_MIST);
             }
             LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_APOCALYPSE_SEALS_WALL);
@@ -279,7 +285,7 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_APOCALYPSE_BOMB);
             }
             LocationId::Antarctica__Building_2__Behind_Boxes__Note | LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_NOTES_2053_02_27);
+                self.cbits10.insert(flags::ContextBits10::VISITED_NOTES_2053_02_27);
             }
             LocationId::Ebih_Breach__Snowy_Rocks__Cache__Flask | LocationId::Ebih_Breach__Snowy_Rocks__Cache__Flask_Collection_Skip | LocationId::Ebih_Breach__Snowy_Rocks__Cache__Flask_Fast_Travel => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_BREACH_SNOWY_ROCKS_FLASK);
@@ -330,10 +336,10 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WEST_FLASK);
             }
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn | LocationId::Ebih__Ebih_East__Corner__Urn => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_INFECT);
+                self.cbits7.insert(flags::ContextBits7::VISITED_INFECT);
             }
             LocationId::Ebih__Ebih_East__Wall_East__Break_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster | LocationId::Ebih__Ebih_East__Wall_West__Break_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_EAST_WALL);
+                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
             }
             LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button | LocationId::Ebih__Hidden_Portal__Button__Hit_Button | LocationId::Ebih__Hidden_Portal__Gate_Ledge_East__Remote_Button => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_HIDDEN_PORTAL_GATE);
@@ -345,10 +351,10 @@ impl Observer for FullObservation {
                 self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_ALU);
             }
             LocationId::Ebih__Drone_Room__Item__Urn | LocationId::Ebih__Drone_Room__Item__Urn_Collection_Skip | LocationId::Ebih__Drone_Room__Item__Urn_Fast_Travel | LocationId::Ebih__Drone_Room__Middle_Platform__Urn_Quick_Grab => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_REMOTE_DRONE);
+                self.cbits10.insert(flags::ContextBits10::VISITED_REMOTE_DRONE);
             }
             LocationId::Ebih__Drone_Pit__Pit__Item | LocationId::Ebih__Drone_Pit__Pit__Shockwave_Flask | LocationId::Ebih__Drone_Pit__Pit__Flask_Collection_Skip | LocationId::Ebih__Drone_Pit__Pit__Flask_Fast_Travel | LocationId::Ebih__Drone_Pit__Bush_Left__Item | LocationId::Ebih__Drone_Pit__Bush_Left__Shockwave_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_DRONE_PIT_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_DRONE_PIT_FLASK);
             }
             LocationId::Ebih__Drone_Pit__Highest_Point__Flask | LocationId::Ebih__Drone_Pit__Highest_Point__Shockwave_Flask | LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Collection_Skip | LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Fast_Travel => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_HIGH_FLASK);
@@ -360,7 +366,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_GEM_ROOM_GATE);
             }
             LocationId::Ebih__Gem_Room__Button_Corner__Shockwave_Secret_Flask | LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask | LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Collection_Skip | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_GEM_ROOM_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_GEM_ROOM_FLASK);
             }
             LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask | LocationId::Ebih__Party_Central__East_Trough__Flask | LocationId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip | LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_PARTY_CENTRAL_FLASK);
@@ -495,7 +501,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GLACIER_DOCK_FLASK);
             }
             LocationId::Glacier__Revival__Pillar__Health | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_REVIVAL_HEALTH_NODE);
+                self.cbits10.insert(flags::ContextBits10::VISITED_REVIVAL_HEALTH_NODE);
             }
             LocationId::Glacier__The_Big_Drop__West_14__Break_Rock | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GLACIER_BIG_DROP_ROCK);
@@ -516,7 +522,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_ESCAPE);
             }
             LocationId::Glacier__Hammonds_End__Hammond__Note | LocationId::Glacier__Hammonds_End__Corner__Quick_Note => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_HAMMONDS_NOTE);
+                self.cbits7.insert(flags::ContextBits7::VISITED_HAMMONDS_NOTE);
             }
             LocationId::Interior__Building_Interior__Entry__Remote_Urn | LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip | LocationId::Interior__Building_Interior__Corner__Urn => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_MELEE_CHARGE);
@@ -528,7 +534,7 @@ impl Observer for FullObservation {
                 self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
             }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Collection_Skip | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Fast_Travel => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_IB_GAUNTLET_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_IB_GAUNTLET_FLASK);
             }
             LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Upgraded_Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Upgraded_Mist_Into_Pillar => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
@@ -698,6 +704,9 @@ impl Observer for FullObservation {
             LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__MIRROR_MATCH__BELOW_SWITCH__HIT_SWITCH);
             }
+            LocationId::Annuna__Secret_Passage__Wall_West__Refill => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__SECRET_PASSAGE__WALL_WEST__REFILL);
+            }
             LocationId::Annuna__West_Bridge__Plinth__Item => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
             }
@@ -786,16 +795,16 @@ impl Observer for FullObservation {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_EBIH__GRID_26_10_11__LEDGE__NOTE);
             }
             LocationId::Ebih__Vertical_Interchange__Block_Cubby__Shockwave_Block => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK);
             }
             LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__SWITCH__ACTIVATE_SWITCH);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__SWITCH__ACTIVATE_SWITCH);
             }
             LocationId::Ebih__Guarded_Health__West_Basin__Health => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_EBIH__GUARDED_HEALTH__WEST_BASIN__HEALTH);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_EBIH__GUARDED_HEALTH__WEST_BASIN__HEALTH);
             }
             LocationId::Ebih__Guarded_Health__Far_West__Refill => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_EBIH__GUARDED_HEALTH__FAR_WEST__REFILL);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_EBIH__GUARDED_HEALTH__FAR_WEST__REFILL);
             }
             LocationId::Ebih__Gem_Room__Between_Gates__Gem => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_EBIH__GEM_ROOM__BETWEEN_GATES__GEM);
@@ -984,13 +993,13 @@ impl Observer for FullObservation {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__ABANDONED_ROOM__CORNER_CORE__CORE);
             }
             LocationId::Irikar__Basement_Pipes__Left_Vertical_Pipe__Health_Pickup => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BASEMENT_PIPES__LEFT_VERTICAL_PIPE__HEALTH_PICKUP);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_IRIKAR__BASEMENT_PIPES__LEFT_VERTICAL_PIPE__HEALTH_PICKUP);
             }
             LocationId::Irikar__Basement_Pipes__High_Pipe__Tablet => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BASEMENT_PIPES__HIGH_PIPE__TABLET);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_IRIKAR__BASEMENT_PIPES__HIGH_PIPE__TABLET);
             }
             LocationId::Irikar__Boss_Room__Healthy_Rooftop__Health => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH);
             }
             LocationId::Irikar__East_Rooftops__Top_Rooftop__Tablet => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_IRIKAR__EAST_ROOFTOPS__TOP_ROOFTOP__TABLET);
@@ -1002,7 +1011,7 @@ impl Observer for FullObservation {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_IRIKAR__LAMASSU__DESK__ITEM);
             }
             LocationId::Irikar__Beach__Cache__Item => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_IRIKAR__BEACH__CACHE__ITEM);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_IRIKAR__BEACH__CACHE__ITEM);
             }
             LocationId::Menu__Upgrade_Menu__Physiology__Health_Upgrade_1 => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_1);
@@ -1404,6 +1413,11 @@ impl Observer for FullObservation {
                 }
             }
             AreaId::Annuna__Seals => {
+                if get_area(cur.position) != area {
+                    rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
+                }
+            }
+            AreaId::Annuna__Secret_Passage => {
                 if get_area(cur.position) != area {
                     rules::observe_action_invoke_reset_old_area__newpos(cur, world, dest, self);
                 }
@@ -3192,6 +3206,12 @@ impl FullObservation {
     pub fn clear_annuna__invisible_enemies__ctx__door_opened(&mut self) {
         self.cbits1.remove(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__DOOR_OPENED);
     }
+    pub fn observe_annuna__invisible_enemies__ctx__nw_utu(&mut self) {
+        self.cbits1.insert(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
+    }
+    pub fn clear_annuna__invisible_enemies__ctx__nw_utu(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
+    }
     pub fn observe_annuna__west_bridge__ctx__doors_opened(&mut self) {
         self.cbits1.insert(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
     }
@@ -3235,10 +3255,10 @@ impl FullObservation {
         self.cbits1.remove(flags::ContextBits1::EBIH__GRID_25_10_12__CTX__DOOR_OPEN);
     }
     pub fn observe_ebih__waterfall__ctx__west_door_open(&mut self) {
-        self.cbits1.insert(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+        self.cbits2.insert(flags::ContextBits2::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
     }
     pub fn clear_ebih__waterfall__ctx__west_door_open(&mut self) {
-        self.cbits1.remove(flags::ContextBits1::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
+        self.cbits2.remove(flags::ContextBits2::EBIH__WATERFALL__CTX__WEST_DOOR_OPEN);
     }
     pub fn observe_ebih__waterfall__ctx__east_door_open(&mut self) {
         self.cbits2.insert(flags::ContextBits2::EBIH__WATERFALL__CTX__EAST_DOOR_OPEN);
@@ -3629,10 +3649,10 @@ impl FullObservation {
         self.cbits2.remove(flags::ContextBits2::COMPASS);
     }
     pub fn observe_dangerous_ideas(&mut self) {
-        self.cbits2.insert(flags::ContextBits2::DANGEROUS_IDEAS);
+        self.cbits3.insert(flags::ContextBits3::DANGEROUS_IDEAS);
     }
     pub fn clear_dangerous_ideas(&mut self) {
-        self.cbits2.remove(flags::ContextBits2::DANGEROUS_IDEAS);
+        self.cbits3.remove(flags::ContextBits3::DANGEROUS_IDEAS);
     }
     pub fn observe_dear_ernest(&mut self) {
         self.cbits3.insert(flags::ContextBits3::DEAR_ERNEST);
@@ -4023,10 +4043,10 @@ impl FullObservation {
         self.cbits3.remove(flags::ContextBits3::GLACIER_BIG_DROP_ROCK);
     }
     pub fn observe_glacier_breach_spidery_connector_gate(&mut self) {
-        self.cbits3.insert(flags::ContextBits3::GLACIER_BREACH_SPIDERY_CONNECTOR_GATE);
+        self.cbits4.insert(flags::ContextBits4::GLACIER_BREACH_SPIDERY_CONNECTOR_GATE);
     }
     pub fn clear_glacier_breach_spidery_connector_gate(&mut self) {
-        self.cbits3.remove(flags::ContextBits3::GLACIER_BREACH_SPIDERY_CONNECTOR_GATE);
+        self.cbits4.remove(flags::ContextBits4::GLACIER_BREACH_SPIDERY_CONNECTOR_GATE);
     }
     pub fn observe_glacier_sea_burial_rock(&mut self) {
         self.cbits4.insert(flags::ContextBits4::GLACIER_SEA_BURIAL_ROCK);
@@ -4437,10 +4457,10 @@ impl FullObservation {
         self.cbits4.remove(flags::ContextBits4::STATION_POWER);
     }
     pub fn observe_storm_bomb(&mut self) {
-        self.cbits4.insert(flags::ContextBits4::STORM_BOMB);
+        self.cbits5.insert(flags::ContextBits5::STORM_BOMB);
     }
     pub fn clear_storm_bomb(&mut self) {
-        self.cbits4.remove(flags::ContextBits4::STORM_BOMB);
+        self.cbits5.remove(flags::ContextBits5::STORM_BOMB);
     }
     pub fn observe_submarine_progress(&mut self) {
         self.cbits5.insert(flags::ContextBits5::SUBMARINE_PROGRESS);

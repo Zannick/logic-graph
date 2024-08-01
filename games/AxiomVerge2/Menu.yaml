@@ -681,6 +681,14 @@ areas:
       coord: [32, 27]
     - name: Annuna Smiley Room Southeast
       coord: [33, 28]
+    - name: Annuna Invisible Enemies Flask
+      coord: [29, 22]
+    - name: Annuna Invisible Enemies Portal
+      coord: [30, 23]
+    - name: Annuna Invisible Enemies Switch
+      coord: [29, 23]
+    - name: Annuna Secret Passage Flask
+      coord: [32, 22]
 
     - name: Ebih Base Camp West
       coord: [28, 13]

@@ -1343,6 +1343,62 @@ macro_rules! hobserve__allegiance2 {
     }};
 }
 
+/// $allegiance3 (  )
+/// Infect_L2
+#[macro_export]
+macro_rules! helper__allegiance3 {
+    ($ctx:expr, $world:expr) => {{
+        $ctx.has(Item::Infect_L2)
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__allegiance3 {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let h = $ctx.has(Item::Infect_L2);
+            $edict.insert("Infect_L2", format!("{}", h));
+            (h, vec!["Infect_L2"])
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__allegiance3 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.observe_infect_l2();
+            $ctx.has(Item::Infect_L2)
+        }
+    }};
+}
+
+/// $allegiance4 (  )
+/// Infect_L3
+#[macro_export]
+macro_rules! helper__allegiance4 {
+    ($ctx:expr, $world:expr) => {{
+        $ctx.has(Item::Infect_L3)
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__allegiance4 {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let h = $ctx.has(Item::Infect_L3);
+            $edict.insert("Infect_L3", format!("{}", h));
+            (h, vec!["Infect_L3"])
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__allegiance4 {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        {
+            $full_obs.observe_infect_l3();
+            $ctx.has(Item::Infect_L3)
+        }
+    }};
+}
+
 /// $unlock2 (  )
 /// Infect_L1
 #[macro_export]
@@ -2844,11 +2900,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{48}, Big_Flask{26}]
+/// [Flask{50}, Big_Flask{26}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 48 && $ctx.count(Item::Big_Flask) >= 26
+        $ctx.count(Item::Flask) >= 50 && $ctx.count(Item::Big_Flask) >= 26
     }};
 }
 #[macro_export]
@@ -2859,7 +2915,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Flask);
                 $edict.insert("Flask count", format!("{}", ct));
-                (ct >= 48, vec!["Flask count"])
+                (ct >= 50, vec!["Flask count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2879,8 +2935,8 @@ macro_rules! hexplain__all_flasks {
 macro_rules! hobserve__all_flasks {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_flask(IntegerObservation::Ge(48));
-            $ctx.count(Item::Flask) >= 48
+            $full_obs.observe_flask(IntegerObservation::Ge(50));
+            $ctx.count(Item::Flask) >= 50
         }) && ({
             $full_obs.observe_big_flask(IntegerObservation::Ge(26));
             $ctx.count(Item::Big_Flask) >= 26

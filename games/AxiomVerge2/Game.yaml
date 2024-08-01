@@ -316,6 +316,8 @@ helpers:  # MARK: helpers
   $sync: Infect
   $allegiance1: Infect
   $allegiance2: Infect_L1
+  $allegiance3: Infect_L2
+  $allegiance4: Infect_L3
   $unlock2: Infect_L1
   $unlock3: Infect_L2
   $unlock4: Infect_L3
@@ -363,7 +365,7 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   $all_flasks:itemList: >
-    [Flask{48}, Big_Flask{26}]
+    [Flask{50}, Big_Flask{26}]
   $all_health:itemList: >
     [Health_Node{4}, Health_Fragment{22}]
   $all_weapons:itemList: >
