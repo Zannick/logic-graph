@@ -143,10 +143,7 @@ pub trait Ctx:
             History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
-                if spot_id == self.position()
-                    && loc.item() == item
-                    && loc.can_access(self, world)
-                {
+                if spot_id == self.position() && loc.item() == item && loc.can_access(self, world) {
                     observer.observe_visit(loc_id);
                     observer.observe_collect(self, item, world);
                     loc.observe_access(self, world, observer);
@@ -158,10 +155,7 @@ pub trait Ctx:
             History::V(item, loc_id, dest) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
-                if spot_id == self.position()
-                    && loc.item() == item
-                    && loc.can_access(self, world)
-                {
+                if spot_id == self.position() && loc.item() == item && loc.can_access(self, world) {
                     observer.observe_visit(loc_id);
                     observer.observe_collect(self, item, world);
                     observer.observe_on_entry(self, dest, world);
@@ -220,8 +214,7 @@ pub trait Ctx:
                 let movement_state = self.get_movement_state(world);
                 let edges = world.get_condensed_edges_from(self.position());
                 let edge = &edges[idx];
-                if edge.dst == spot_id && edge.can_access(world, self, movement_state)
-                {
+                if edge.dst == spot_id && edge.can_access(world, self, movement_state) {
                     observer.observe_on_entry(self, spot_id, world);
                     edge.observe_access(world, self, movement_state, observer);
                     self.observe_movement_state(world, observer);

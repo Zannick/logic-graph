@@ -113,15 +113,17 @@ where
             }
         }
         History::E(exit_id) => {
-            let exit = world.get_exit(exit_id);
-            ctx = move_to(world, ctx, exit.dest(), shortest_paths).map_err(|s| {
-                format!(
-                    "Could not complete route step {}: couldn't reach {}\n{}",
-                    i,
-                    exit.dest(),
-                    s
-                )
-            })?;
+            let spot_id = world.get_exit_spot(exit_id);
+            if pos != spot_id {
+                ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
+                    format!(
+                        "Could not complete route step {}: couldn't reach {} from {}\n{}",
+                        i, spot_id, pos, s
+                    )
+                })?;
+            }
+            ctx.try_replay(world, h)
+                    .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
         }
         History::L(spot_id) | History::C(spot_id, ..) => {
             ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
