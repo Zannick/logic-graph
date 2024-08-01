@@ -21639,7 +21639,7 @@ static EXIT_DEFS: [Exit; 3769] = [
     },
     Exit {
         id: ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1,
-        time: 1000,
+        time: 1600,
         dest: SpotId::Giguna_Breach__SW_Save__East_12,
         price: Currency::Free,
     },

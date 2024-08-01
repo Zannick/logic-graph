@@ -307,6 +307,7 @@ areas:
         - to: Center
       exits:
         - to: SW Save > East 12
+          tags: [xdoor]
       # TODO: Robopede may take different amounts of time with hook, hover, screw, etc.
     - name: Center
       coord: [14.1, 11.55]

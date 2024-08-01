@@ -449,6 +449,41 @@
   Move... to Amagi > Wiggly Room > Gate East
 ! Do Move Portal Here
   Portalwarp
+  Move... to Amagi Breach > Lakebed > Big Rock West
+  ExitBreachWarp
+* Collect Flask from Annuna > Invisible Enemies > Corner Cache > Flask
+! Do Annuna > Invisible Enemies > Corner Cache > Charm Utu
+  Move... to Annuna > Invisible Enemies > Upper Passage
+! Do Become Indra
+* Collect Flask from Annuna > Secret Passage > Wall West > Shockwave Flask
+! Do Become Drone
 
-# Next: Annuna Invisible Enemies room
+# Section "Emergence"
+! Do Annuna > Invisible Enemies > Switch East > Open Door
+  Take exit Uhrum > Tulip Tower > Platform 2 East ==> Upper Right Ledge (1)
+! Do Become Indra
+  Move... to Uhrum > Tulip Tower > Upper Middle Ledge
+  Take exit Uhrum > Tulip Tower > Upper Middle Ledge ==> Upper Column East (2)
+* Collect Flask from Uhrum > Rocky Guardpost > Middle Step > Shockwave Block
+! Do Become Drone
+* Collect Re_Does_Technology from Uhrum > Rocky Gate > East Ledge > Note
+* Collect Uhrum_Emergence_Wall from Uhrum > Emergence Facility > Wall East Mid-air > Break Wall With Mist Upgrade ==> Uhrum > Emergence Facility > Wall West Mid-air
+* Collect Flask from Uhrum > Emergence Facility > Roof Middle > Flask from Below
+! Do Interior > Facility Interior > Freight Elevator > Enter Emergence
+! Do Emergence > Camp Exterior > Save Point > Save
+* Collect Emergence_Dropoff_Wall from Emergence > Drop-off > Wall Left > Spin Through Wall ==> Emergence > Drop-off > Wall Right
+* Collect Big_Flask from Emergence > Drop-off > Basin > Flask
+* Collect Emergence_Rocks_Fall_Rock_1 from Emergence > Rocks Fall > Wall 1 Northeast > Upgraded Mist Through Rock
+* Collect Emergence_Rocks_Fall_Rock_2 from Emergence > Rocks Fall > Wall 2 Northwest > Upgraded Mist Through Wall
+* Collect Emergence_Rocks_Fall_Rock_3 from Emergence > Rocks Fall > Wall 3 Northeast > Upgraded Mist Through Wall
+* Collect Emergence_Rocks_Fall_Rock_4 from Emergence > Rocks Fall > Wall 4 West > Upgraded Mist Through Wall
+* Collect Emergence_Storage_Rock from Emergence > Storage > Wall Left Ledge > Spin Through Wall
+* Collect Slingshot_Charge from Emergence > Storage > Dais Middle > Urn
+* Collect Flask from Emergence > Audience Chamber > Cache > Flask
+* Collect Emergence_Storage_Tunnel from Emergence > Storage > Tunnel Entrance > Upgraded Mist Through Rock
+  Move... to Emergence > Storage > Secret Corner
+! Do Move Portal Here
+  Portalwarp
+* Collect Flask from Giguna Breach > Emergence > Corner > Flask
+  Move... to Giguna Breach > Robopede > West
 
