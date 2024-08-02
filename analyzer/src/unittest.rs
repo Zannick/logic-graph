@@ -755,7 +755,7 @@ where
             for (i, (h, s)) in route.into_iter().enumerate() {
                 let mut next =
                     step_from_route(ctx.clone(), i, h, world, &shortest_paths).map_err(|e| {
-                        format!("At \"{}\": {}\nroute summary:\n{}", s, e, output.join("\n"))
+                        format!("Route summary:\n{}\nAt {}: {}", output.join("\n"), s, e)
                     })?;
                 output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
                 output.push(next.get().diff(ctx.get()));
