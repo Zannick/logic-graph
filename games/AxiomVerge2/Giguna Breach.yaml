@@ -300,21 +300,76 @@ areas:
 
 - name: Robopede  # MARK: Robopede
   on_entry: $reset_old_area(^newpos)
+  map:
+    reward: [14, 11, 15, 12]
+  datamap:
+    map_spot:
+      reward: Menu > Breach Map > Robopede Flask
   spots:
     - name: West
       coord: [13.1, 11.55]
       local:
         - to: Center
+      locations:
+        # These are actually based on entering the room in a fresh state from the West
+        # but this is one of the most unreliable boss fights due to its movements so
+        # I'm not going to be worried about precision
+        - name: Strong Attacks  # and damage boosting?
+          canon: Robopede
+          item: Robopede
+          req: Slingshot_Hook and Drone_Melee_Damage_3
+          to: Center
+          time: 12
+          penalties:
+            - when: not Drone_Hover
+              add: 6  # ?
+        - name: Medium
+          canon: Robopede
+          item: Robopede
+          req: Slingshot_Hook and Slingshot_Weapon
+          to: Center
+          time: 24  # ?
+          penalties:
+            - when: not Drone_Hover
+              add: 6  # ?
+        - name: Bad
+          canon: Robopede
+          item: Robopede
+          req: Slingshot_Hook
+          time: 40  # ?
       exits:
         - to: SW Save > East 12
           tags: [xdoor]
-      # TODO: Robopede may take different amounts of time with hook, hover, screw, etc.
     - name: Center
       coord: [14.1, 11.55]
       local:
         - to: West
         - to: North
           jumps: 2
+      locations:
+        - name: Strong Attacks  # and damage boosting?
+          canon: Robopede
+          item: Robopede
+          req: Slingshot_Hook and Drone_Melee_Damage_3
+          time: 15 # ?
+          penalties:
+            - when: not Drone_Hover
+              add: 6
+        - name: Medium
+          canon: Robopede
+          item: Robopede
+          req: Slingshot_Hook and Slingshot_Weapon
+          time: 27  # ?
+        - name: Bad
+          canon: Robopede
+          item: Robopede
+          req: Slingshot_Hook
+          time: 43  # ?
+        - name: Boss Reward
+          item: Flask
+          req: Robopede
+          tags: [flask]
+        # Mid-air boss reward means it's much harder to do a collection skip
     - name: North
       coord: [14.5, 11.2]
       local:

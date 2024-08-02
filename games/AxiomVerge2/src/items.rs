@@ -91,6 +91,7 @@ pub enum Item {
     Ebih_Waterfall_Both_Blocks,
     Ebih_Waterfall_Wall,
     Ebih_West_Block,
+    Ellag,
     Emergence_Dropoff_Wall,
     Emergence_Rocks_Fall_Rock_1,
     Emergence_Rocks_Fall_Rock_2,
@@ -187,6 +188,7 @@ pub enum Item {
     Remote_Boomerang,
     Remote_Drone,
     Researchers_Missing,
+    Robopede,
     Royal_Dagger,
     Royal_Ring,
     Sagiga_on_the_Worldstream,
@@ -315,6 +317,7 @@ impl fmt::Display for Item {
             Item::Ebih_Waterfall_Both_Blocks => write!(f, "{}", "Ebih_Waterfall_Both_Blocks"),
             Item::Ebih_Waterfall_Wall => write!(f, "{}", "Ebih_Waterfall_Wall"),
             Item::Ebih_West_Block => write!(f, "{}", "Ebih_West_Block"),
+            Item::Ellag => write!(f, "{}", "Ellag"),
             Item::Emergence_Dropoff_Wall => write!(f, "{}", "Emergence_Dropoff_Wall"),
             Item::Emergence_Rocks_Fall_Rock_1 => write!(f, "{}", "Emergence_Rocks_Fall_Rock_1"),
             Item::Emergence_Rocks_Fall_Rock_2 => write!(f, "{}", "Emergence_Rocks_Fall_Rock_2"),
@@ -425,6 +428,7 @@ impl fmt::Display for Item {
             Item::Remote_Boomerang => write!(f, "{}", "Remote_Boomerang"),
             Item::Remote_Drone => write!(f, "{}", "Remote_Drone"),
             Item::Researchers_Missing => write!(f, "{}", "Researchers_Missing"),
+            Item::Robopede => write!(f, "{}", "Robopede"),
             Item::Royal_Dagger => write!(f, "{}", "Royal_Dagger"),
             Item::Royal_Ring => write!(f, "{}", "Royal_Ring"),
             Item::Sagiga_on_the_Worldstream => write!(f, "{}", "Sagiga_on_the_Worldstream"),
@@ -559,6 +563,7 @@ impl std::str::FromStr for Item {
             "Ebih_Waterfall_Both_Blocks" => Ok(Item::Ebih_Waterfall_Both_Blocks),
             "Ebih_Waterfall_Wall" => Ok(Item::Ebih_Waterfall_Wall),
             "Ebih_West_Block" => Ok(Item::Ebih_West_Block),
+            "Ellag" => Ok(Item::Ellag),
             "Emergence_Dropoff_Wall" => Ok(Item::Emergence_Dropoff_Wall),
             "Emergence_Rocks_Fall_Rock_1" => Ok(Item::Emergence_Rocks_Fall_Rock_1),
             "Emergence_Rocks_Fall_Rock_2" => Ok(Item::Emergence_Rocks_Fall_Rock_2),
@@ -659,6 +664,7 @@ impl std::str::FromStr for Item {
             "Remote_Boomerang" => Ok(Item::Remote_Boomerang),
             "Remote_Drone" => Ok(Item::Remote_Drone),
             "Researchers_Missing" => Ok(Item::Researchers_Missing),
+            "Robopede" => Ok(Item::Robopede),
             "Royal_Dagger" => Ok(Item::Royal_Dagger),
             "Royal_Ring" => Ok(Item::Royal_Ring),
             "Sagiga_on_the_Worldstream" => Ok(Item::Sagiga_on_the_Worldstream),
@@ -714,7 +720,6 @@ pub fn unused_item(id: Item) -> bool {
     matches!(
         id,
         Item::None
-            | Item::Drone_Melee_Speed_3
             | Item::Health_Upgrade_5
             | Item::Infection_Speed_2
             | Item::Melee_Damage_3

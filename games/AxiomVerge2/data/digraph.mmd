@@ -2300,6 +2300,10 @@ subgraph Glacier_Breach
         Glacier_Breach__Electric_Arena__East_Platforms(East Platforms);
         Glacier_Breach__Electric_Arena__East_Ledge(East Ledge);
         Glacier_Breach__Electric_Arena__East(East);
+        Glacier_Breach__Electric_Arena__Upper_East_Platform(Upper East Platform);
+        Glacier_Breach__Electric_Arena__Lower_East_Platform(Lower East Platform);
+        Glacier_Breach__Electric_Arena__Lower_West_Platform(Lower West Platform);
+        Glacier_Breach__Electric_Arena__North(North);
     end
     subgraph Glacier_Breach__Save_and_Exit[Save and Exit]
         Glacier_Breach__Save_and_Exit__West(West);
@@ -2322,6 +2326,16 @@ subgraph Glacier_Breach
     end
     subgraph Glacier_Breach__Stacked_Enemies[Stacked Enemies]
         Glacier_Breach__Stacked_Enemies__West(West);
+        Glacier_Breach__Stacked_Enemies__Northwest(Northwest);
+        Glacier_Breach__Stacked_Enemies__Midwest(Midwest);
+        Glacier_Breach__Stacked_Enemies__Mideast(Mideast);
+        Glacier_Breach__Stacked_Enemies__South(South);
+        Glacier_Breach__Stacked_Enemies__Mid_air_East(Mid-air East);
+        Glacier_Breach__Stacked_Enemies__Northeast(Northeast);
+    end
+    subgraph Glacier_Breach__Fortress[Fortress]
+        Glacier_Breach__Fortress__Southwest(Southwest);
+        Glacier_Breach__Fortress__Southeast(Southeast);
     end
     subgraph Glacier_Breach__Empty_Space[Empty Space]
         Glacier_Breach__Empty_Space__North(North);
@@ -3349,6 +3363,7 @@ subgraph Menu
         Menu__Breach_Map__GSB_Gate_and_Wall_Portal(GSB Gate and Wall Portal);
         Menu__Breach_Map__GSB_Labyrinth_Flask(GSB Labyrinth Flask);
         Menu__Breach_Map__GSB_Lower_Machinery_Flask(GSB Lower Machinery Flask);
+        Menu__Breach_Map__Robopede_Flask(Robopede Flask);
         Menu__Breach_Map__GlB_Control_Flask(GlB Control Flask);
         Menu__Breach_Map__GlB_Floaters(GlB Floaters);
         Menu__Breach_Map__GlB_Grate_Flask(GlB Grate Flask);
@@ -5345,9 +5360,21 @@ Glacier_Breach__Crystals__East --> Glacier_Breach__Crystals__West
 Glacier_Breach__Crystals__West <--> Glacier_Breach__Floaters__East
 Glacier_Breach__Electric_Arena__East <--> Glacier_Breach__Save_and_Exit__West
 Glacier_Breach__Electric_Arena__East_Ledge --> Glacier_Breach__Electric_Arena__East_Platforms
+Glacier_Breach__Electric_Arena__East_Ledge <--> Glacier_Breach__Electric_Arena__North
+Glacier_Breach__Electric_Arena__East_Platforms --> Glacier_Breach__Electric_Arena__Lower_West_Platform
+Glacier_Breach__Electric_Arena__East_Platforms --> Glacier_Breach__Electric_Arena__North
 Glacier_Breach__Electric_Arena__East_Platforms --> Glacier_Breach__Electric_Arena__West
+Glacier_Breach__Electric_Arena__Lower_East_Platform --> Glacier_Breach__Electric_Arena__East_Ledge
+Glacier_Breach__Electric_Arena__Lower_East_Platform <--> Glacier_Breach__Electric_Arena__Lower_West_Platform
+Glacier_Breach__Electric_Arena__Lower_East_Platform --> Glacier_Breach__Electric_Arena__Upper_East_Platform
+Glacier_Breach__Electric_Arena__Lower_West_Platform --> Glacier_Breach__Electric_Arena__West
+Glacier_Breach__Electric_Arena__North --> Glacier_Breach__Electric_Arena__Lower_West_Platform
+Glacier_Breach__Electric_Arena__North --> Glacier_Breach__Electric_Arena__West
+Glacier_Breach__Electric_Arena__North <--> Glacier_Breach__Stacked_Enemies__South
+Glacier_Breach__Electric_Arena__Upper_East_Platform --> Glacier_Breach__Electric_Arena__North
 Glacier_Breach__Electric_Arena__West <--> Glacier_Breach__Piano_Roll__East_10
 Glacier_Breach__Electric_Arena__West_Platforms --> Glacier_Breach__Electric_Arena__East_Ledge
+Glacier_Breach__Electric_Arena__West_Platforms --> Glacier_Breach__Electric_Arena__Upper_East_Platform
 Glacier_Breach__Empty_Space__Lower --> Glacier_Breach__Empty_Space__West
 Glacier_Breach__Empty_Space__West <--> Glacier_Breach__Grate_Work__East
 Glacier_Breach__Floaters__Hidden <--> Glacier_Breach__West_Save__Hidden
@@ -5375,7 +5402,7 @@ Glacier_Breach__Guarded_Corridor__West <--> Glacier_Breach__West_Save__East_11
 Glacier_Breach__Hammonds_Breach__East <--> Glacier_Breach__Stable_Floor__West
 Glacier_Breach__Hammonds_Breach__West_Side --> Glacier_Breach__Stable_Floor__Center
 Glacier_Breach__Piano_Roll__East_10 --> Glacier_Breach__Piano_Roll__Upper_Ledge
-Glacier_Breach__Piano_Roll__East_9 --> Glacier_Breach__Stacked_Enemies__West
+Glacier_Breach__Piano_Roll__East_9 <--> Glacier_Breach__Stacked_Enemies__West
 Glacier_Breach__Piano_Roll__Lower_Ledge --> Glacier_Breach__Piano_Roll__Middle_Ledge
 Glacier_Breach__Piano_Roll__Middle_Ledge --> Glacier_Breach__Piano_Roll__Upper_Ledge
 Glacier_Breach__South_Save__Brick_Ledge --> Glacier_Breach__South_Save__East
@@ -5392,6 +5419,12 @@ Glacier_Breach__Spidery_Connector__West_Mid_air_Lower --> Glacier_Breach__Spider
 Glacier_Breach__Spidery_Connector__West_Mid_air_Upper --> Glacier_Breach__Spidery_Connector__Midway
 Glacier_Breach__Spidery_Connector__West_Mid_air_Upper --> Glacier_Breach__Spidery_Connector__West_Gate
 Glacier_Breach__Stable_Floor__South --> Glacier_Breach__Empty_Space__North
+Glacier_Breach__Stacked_Enemies__Mid_air_East --> Glacier_Breach__Fortress__Southeast
+Glacier_Breach__Stacked_Enemies__Mideast --> Glacier_Breach__Fortress__Southeast
+Glacier_Breach__Stacked_Enemies__Midwest --> Glacier_Breach__Stacked_Enemies__Northwest
+Glacier_Breach__Stacked_Enemies__Northwest --> Glacier_Breach__Fortress__Southwest
+Glacier_Breach__Stacked_Enemies__South --> Glacier_Breach__Stacked_Enemies__Mid_air_East
+Glacier_Breach__Stacked_Enemies__West --> Glacier_Breach__Stacked_Enemies__Northwest
 Glacier_Breach__West_Save__East_11 <--> Glacier_Breach__West_Save__West_Ledge
 Glacier_Breach__West_Save__West_Ledge --> Glacier_Breach__Spidery_Connector__Button
 Glacier_Breach__West_Save__West_Ledge --> Glacier_Breach__West_Save__West_11

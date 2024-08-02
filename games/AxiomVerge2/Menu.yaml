@@ -1227,6 +1227,8 @@ areas:
       coord: [18, 21]
     - name: GSB Lower Machinery Flask
       coord: [19, 23]
+    - name: Robopede Flask
+      coord: [14, 12]
 
     - name: GlB Control Flask
       coord: [36, 13]

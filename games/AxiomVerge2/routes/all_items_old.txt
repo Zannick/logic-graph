@@ -485,5 +485,25 @@
 ! Do Move Portal Here
   Portalwarp
 * Collect Flask from Giguna Breach > Emergence > Corner > Flask
+
   Move... to Giguna Breach > Robopede > West
+* Collect Robopede from Giguna Breach > Robopede > West > Strong Attacks
+* Collect Flask from Giguna Breach > Robopede > Center > Boss Reward
+
+# Section "Glacier Breach/Peak"
+* Collect Health_Fragment from Amagi Breach > East Entrance > Upper Slope > Item
+* Collect Drone_Melee_Speed_3 from Menu > Upgrade Menu > Drone > Drone Melee Speed 3
+* Collect Infection_Speed from Menu > Upgrade Menu > Infection > Infection Speed 1
+* Collect Infection_Speed_2 from Menu > Upgrade Menu > Infection > Infection Speed 2
+* Collect Infection_Range_2 from Menu > Upgrade Menu > Infection > Infection Range 2
+* Collect Infection_Range_3 from Menu > Upgrade Menu > Infection > Infection Range 3
+* Collect Melee_Damage_2 from Menu > Upgrade Menu > Combat > Melee Damage 2
+* Collect Melee_Damage_3 from Menu > Upgrade Menu > Combat > Melee Damage 3
+* Collect Melee_Speed from Menu > Upgrade Menu > Combat > Melee Speed 1
+* Collect Melee_Speed_2 from Menu > Upgrade Menu > Combat > Melee Speed 2
+* Collect Ranged_Damage from Menu > Upgrade Menu > Combat > Ranged Damage 1
+* Collect Ranged_Damage_2 from Menu > Upgrade Menu > Combat > Ranged Damage 2
+* Collect Ranged_Damage_3 from Menu > Upgrade Menu > Combat > Ranged Damage 3
+* Collect Flask from Glacier Breach > Grate Work > Grate Interior > Flask Fast Travel
+* Collect Ellag from Glacier Breach > Electric Arena > Lower West Platform > Defeat Ellag
 

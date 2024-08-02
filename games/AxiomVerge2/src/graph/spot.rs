@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3188] = [
+static SPOT_DEFS: [SpotDef; 3201] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -8343,7 +8343,7 @@ static SPOT_DEFS: [SpotDef; 3188] = [
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Robopede__Center,
-        loc_range: None,
+        loc_range: Some((LocationId::Giguna_Breach__Robopede__Center__Bad, LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks)),
         exit_range: None,
         action_range: None,
     },
@@ -8355,7 +8355,7 @@ static SPOT_DEFS: [SpotDef; 3188] = [
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Robopede__West,
-        loc_range: None,
+        loc_range: Some((LocationId::Giguna_Breach__Robopede__West__Bad, LocationId::Giguna_Breach__Robopede__West__Strong_Attacks)),
         exit_range: Some((ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1, ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1)),
         action_range: None,
     },
@@ -11218,13 +11218,37 @@ static SPOT_DEFS: [SpotDef; 3188] = [
     SpotDef {
         id: SpotId::Glacier_Breach__Electric_Arena__East_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1, ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1)),
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__East_Platforms_1, ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__North_2)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier_Breach__Electric_Arena__East_Platforms,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1, ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1)),
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__Lower_West_Platform_1, ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Electric_Arena__Lower_East_Platform,
+        loc_range: Some((LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward, LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward)),
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__Lower_East_Platform__ex__East_Ledge_1, ExitId::Glacier_Breach__Electric_Arena__Lower_East_Platform__ex__Upper_East_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Electric_Arena__Lower_West_Platform,
+        loc_range: Some((LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag, LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag)),
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__Lower_West_Platform__ex__Lower_East_Platform_1, ExitId::Glacier_Breach__Electric_Arena__Lower_West_Platform__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Electric_Arena__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__North__ex__East_Ledge_1, ExitId::Glacier_Breach__Electric_Arena__North__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Electric_Arena__Upper_East_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__Upper_East_Platform__ex__North_1, ExitId::Glacier_Breach__Electric_Arena__Upper_East_Platform__ex__North_2)),
         action_range: None,
     },
     SpotDef {
@@ -11236,7 +11260,7 @@ static SPOT_DEFS: [SpotDef; 3188] = [
     SpotDef {
         id: SpotId::Glacier_Breach__Electric_Arena__West_Platforms,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1, ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1)),
+        exit_range: Some((ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1, ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__Upper_East_Platform_1)),
         action_range: None,
     },
     SpotDef {
@@ -11276,6 +11300,18 @@ static SPOT_DEFS: [SpotDef; 3188] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Southeast,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Southwest,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier_Breach__Grate_Work__Below_Grate,
         loc_range: None,
         exit_range: Some((ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1, ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1)),
@@ -11307,7 +11343,7 @@ static SPOT_DEFS: [SpotDef; 3188] = [
     },
     SpotDef {
         id: SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
-        loc_range: Some((LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item, LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item)),
+        loc_range: Some((LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Collection_Skip, LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item)),
         exit_range: Some((ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1, ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_2)),
         action_range: None,
     },
@@ -11570,9 +11606,45 @@ static SPOT_DEFS: [SpotDef; 3188] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Glacier_Breach__Stacked_Enemies__West,
+        id: SpotId::Glacier_Breach__Stacked_Enemies__Mid_air_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Stacked_Enemies__Mid_air_East__ex__Fortress__Southeast_1, ExitId::Glacier_Breach__Stacked_Enemies__Mid_air_East__ex__Fortress__Southeast_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Stacked_Enemies__Mideast,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1, ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Stacked_Enemies__Midwest,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1, ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Stacked_Enemies__Northeast,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Stacked_Enemies__Northwest,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Stacked_Enemies__Northwest__ex__Fortress__Southwest_1, ExitId::Glacier_Breach__Stacked_Enemies__Northwest__ex__Fortress__Southwest_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Stacked_Enemies__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Electric_Arena__North_1, ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Stacked_Enemies__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Stacked_Enemies__West__ex__Northwest_1, ExitId::Glacier_Breach__Stacked_Enemies__West__ex__Piano_Roll__East_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -15555,6 +15627,12 @@ static SPOT_DEFS: [SpotDef; 3188] = [
     },
     SpotDef {
         id: SpotId::Menu__Breach_Map__MEB_Vertical_Room_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__Robopede_Flask,
         loc_range: None,
         exit_range: None,
         action_range: None,

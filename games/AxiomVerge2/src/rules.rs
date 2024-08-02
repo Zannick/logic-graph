@@ -1055,6 +1055,10 @@ pub fn access_ebih_west_block(ctx: &Context, world: &World) -> bool {
     // Ebih_West_Block
     ctx.has(Item::Ebih_West_Block)
 }
+pub fn access_ellag(ctx: &Context, world: &World) -> bool {
+    // Ellag
+    ctx.has(Item::Ellag)
+}
 pub fn access_emergence__storage__at_door__ex__portal_stand_1__req(
     ctx: &Context,
     world: &World,
@@ -3145,6 +3149,18 @@ pub fn access_not_apocalypse_bomb(ctx: &Context, world: &World) -> bool {
     // not Apocalypse_Bomb
     !ctx.has(Item::Apocalypse_Bomb)
 }
+pub fn access_not_drone_hover(ctx: &Context, world: &World) -> bool {
+    // not Drone_Hover
+    !ctx.has(Item::Drone_Hover)
+}
+pub fn access_not_drone_melee_damage_3(ctx: &Context, world: &World) -> bool {
+    // not Drone_Melee_Damage_3
+    !ctx.has(Item::Drone_Melee_Damage_3)
+}
+pub fn access_not_drone_melee_speed_3(ctx: &Context, world: &World) -> bool {
+    // not Drone_Melee_Speed_3
+    !ctx.has(Item::Drone_Melee_Speed_3)
+}
 pub fn access_not_ebih_interchange_block(ctx: &Context, world: &World) -> bool {
     // not Ebih_Interchange_Block
     !ctx.has(Item::Ebih_Interchange_Block)
@@ -3289,6 +3305,10 @@ pub fn access_remote_drone(ctx: &Context, world: &World) -> bool {
     // Remote_Drone
     ctx.has(Item::Remote_Drone)
 }
+pub fn access_robopede(ctx: &Context, world: &World) -> bool {
+    // Robopede
+    ctx.has(Item::Robopede)
+}
 pub fn access_separation(ctx: &Context, world: &World) -> bool {
     // Separation
     ctx.has(Item::Separation)
@@ -3351,6 +3371,15 @@ pub fn access_slingshot_hook_and_drone_hover_and_giguna_breach_crab_rave_gate(
     ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Giguna_Breach_Crab_Rave_Gate))
 }
+pub fn access_slingshot_hook_and_drone_hover_and_infect_l1_and_drone_melee_damage_2_and_drone_melee_speed_2(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and Infect_L1 and Drone_Melee_Damage_2 and Drone_Melee_Speed_2
+    ((((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover)) && ctx.has(Item::Infect_L1))
+        && ctx.has(Item::Drone_Melee_Damage_2))
+        && ctx.has(Item::Drone_Melee_Speed_2))
+}
 pub fn access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(
     ctx: &Context,
     world: &World,
@@ -3366,6 +3395,10 @@ pub fn access_slingshot_hook_and_drone_hover_and_slingshot_weapon(
     // Slingshot_Hook and Drone_Hover and Slingshot_Weapon
     ((ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Hover))
         && ctx.has(Item::Slingshot_Weapon))
+}
+pub fn access_slingshot_hook_and_drone_melee_damage_3(ctx: &Context, world: &World) -> bool {
+    // Slingshot_Hook and Drone_Melee_Damage_3
+    (ctx.has(Item::Slingshot_Hook) && ctx.has(Item::Drone_Melee_Damage_3))
 }
 pub fn access_slingshot_hook_and_ebih_breach_lake_gate(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook and Ebih_Breach_Lake_Gate
@@ -8335,6 +8368,18 @@ pub fn explain_ebih_west_block(
         let h = ctx.has(Item::Ebih_West_Block);
         edict.insert("Ebih_West_Block", format!("{}", h));
         (h, vec!["Ebih_West_Block"])
+    }
+}
+pub fn explain_ellag(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ellag
+    {
+        let h = ctx.has(Item::Ellag);
+        edict.insert("Ellag", format!("{}", h));
+        (h, vec!["Ellag"])
     }
 }
 pub fn explain_emergence__storage__at_door__ex__portal_stand_1__req(
@@ -17220,6 +17265,42 @@ pub fn explain_not_apocalypse_bomb(
         (!h, vec!["Apocalypse_Bomb"])
     }
 }
+pub fn explain_not_drone_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Drone_Hover
+    {
+        let h = ctx.has(Item::Drone_Hover);
+        edict.insert("Drone_Hover", format!("{}", h));
+        (!h, vec!["Drone_Hover"])
+    }
+}
+pub fn explain_not_drone_melee_damage_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Drone_Melee_Damage_3
+    {
+        let h = ctx.has(Item::Drone_Melee_Damage_3);
+        edict.insert("Drone_Melee_Damage_3", format!("{}", h));
+        (!h, vec!["Drone_Melee_Damage_3"])
+    }
+}
+pub fn explain_not_drone_melee_speed_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Drone_Melee_Speed_3
+    {
+        let h = ctx.has(Item::Drone_Melee_Speed_3);
+        edict.insert("Drone_Melee_Speed_3", format!("{}", h));
+        (!h, vec!["Drone_Melee_Speed_3"])
+    }
+}
 pub fn explain_not_ebih_interchange_block(
     ctx: &Context,
     world: &World,
@@ -17928,6 +18009,18 @@ pub fn explain_remote_drone(
         (h, vec!["Remote_Drone"])
     }
 }
+pub fn explain_robopede(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Robopede
+    {
+        let h = ctx.has(Item::Robopede);
+        edict.insert("Robopede", format!("{}", h));
+        (h, vec!["Robopede"])
+    }
+}
 pub fn explain_separation(
     ctx: &Context,
     world: &World,
@@ -18218,6 +18311,70 @@ pub fn explain_slingshot_hook_and_drone_hover_and_giguna_breach_crab_rave_gate(
         }
     }
 }
+pub fn explain_slingshot_hook_and_drone_hover_and_infect_l1_and_drone_melee_damage_2_and_drone_melee_speed_2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Drone_Hover and Infect_L1 and Drone_Melee_Damage_2 and Drone_Melee_Speed_2
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let h = ctx.has(Item::Slingshot_Hook);
+                        edict.insert("Slingshot_Hook", format!("{}", h));
+                        (h, vec!["Slingshot_Hook"])
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = ctx.has(Item::Drone_Hover);
+                            edict.insert("Drone_Hover", format!("{}", h));
+                            (h, vec!["Drone_Hover"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Infect_L1);
+                        edict.insert("Infect_L1", format!("{}", h));
+                        (h, vec!["Infect_L1"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Drone_Melee_Damage_2);
+                    edict.insert("Drone_Melee_Damage_2", format!("{}", h));
+                    (h, vec!["Drone_Melee_Damage_2"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Melee_Speed_2);
+                edict.insert("Drone_Melee_Speed_2", format!("{}", h));
+                (h, vec!["Drone_Melee_Speed_2"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(
     ctx: &Context,
     world: &World,
@@ -18288,6 +18445,31 @@ pub fn explain_slingshot_hook_and_drone_hover_and_slingshot_weapon(
                 let h = ctx.has(Item::Slingshot_Weapon);
                 edict.insert("Slingshot_Weapon", format!("{}", h));
                 (h, vec!["Slingshot_Weapon"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_slingshot_hook_and_drone_melee_damage_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and Drone_Melee_Damage_3
+    {
+        let mut left = {
+            let h = ctx.has(Item::Slingshot_Hook);
+            edict.insert("Slingshot_Hook", format!("{}", h));
+            (h, vec!["Slingshot_Hook"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Drone_Melee_Damage_3);
+                edict.insert("Drone_Melee_Damage_3", format!("{}", h));
+                (h, vec!["Drone_Melee_Damage_3"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -21983,6 +22165,13 @@ pub fn observe_access_ebih_west_block(
     {
         full_obs.observe_ebih_west_block();
         ctx.has(Item::Ebih_West_Block)
+    }
+}
+pub fn observe_access_ellag(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
+    // Ellag
+    {
+        full_obs.observe_ellag();
+        ctx.has(Item::Ellag)
     }
 }
 pub fn observe_access_emergence__storage__at_door__ex__portal_stand_1__req(
@@ -26590,6 +26779,39 @@ pub fn observe_access_not_apocalypse_bomb(
         !ctx.has(Item::Apocalypse_Bomb)
     }
 }
+pub fn observe_access_not_drone_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Drone_Hover
+    {
+        full_obs.observe_drone_hover();
+        !ctx.has(Item::Drone_Hover)
+    }
+}
+pub fn observe_access_not_drone_melee_damage_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Drone_Melee_Damage_3
+    {
+        full_obs.observe_drone_melee_damage_3();
+        !ctx.has(Item::Drone_Melee_Damage_3)
+    }
+}
+pub fn observe_access_not_drone_melee_speed_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Drone_Melee_Speed_3
+    {
+        full_obs.observe_drone_melee_speed_3();
+        !ctx.has(Item::Drone_Melee_Speed_3)
+    }
+}
 pub fn observe_access_not_ebih_interchange_block(
     ctx: &Context,
     world: &World,
@@ -26933,6 +27155,17 @@ pub fn observe_access_remote_drone(
         ctx.has(Item::Remote_Drone)
     }
 }
+pub fn observe_access_robopede(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Robopede
+    {
+        full_obs.observe_robopede();
+        ctx.has(Item::Robopede)
+    }
+}
 pub fn observe_access_separation(
     ctx: &Context,
     world: &World,
@@ -27079,6 +27312,29 @@ pub fn observe_access_slingshot_hook_and_drone_hover_and_giguna_breach_crab_rave
         ctx.has(Item::Giguna_Breach_Crab_Rave_Gate)
     }))
 }
+pub fn observe_access_slingshot_hook_and_drone_hover_and_infect_l1_and_drone_melee_damage_2_and_drone_melee_speed_2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Drone_Hover and Infect_L1 and Drone_Melee_Damage_2 and Drone_Melee_Speed_2
+    (((({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_drone_hover();
+        ctx.has(Item::Drone_Hover)
+    })) && ({
+        full_obs.observe_infect_l1();
+        ctx.has(Item::Infect_L1)
+    })) && ({
+        full_obs.observe_drone_melee_damage_2();
+        ctx.has(Item::Drone_Melee_Damage_2)
+    })) && ({
+        full_obs.observe_drone_melee_speed_2();
+        ctx.has(Item::Drone_Melee_Speed_2)
+    }))
+}
 pub fn observe_access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(
     ctx: &Context,
     world: &World,
@@ -27111,6 +27367,20 @@ pub fn observe_access_slingshot_hook_and_drone_hover_and_slingshot_weapon(
     })) && ({
         full_obs.observe_slingshot_weapon();
         ctx.has(Item::Slingshot_Weapon)
+    }))
+}
+pub fn observe_access_slingshot_hook_and_drone_melee_damage_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and Drone_Melee_Damage_3
+    ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_drone_melee_damage_3();
+        ctx.has(Item::Drone_Melee_Damage_3)
     }))
 }
 pub fn observe_access_slingshot_hook_and_ebih_breach_lake_gate(

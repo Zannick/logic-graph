@@ -525,6 +525,13 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::access_nanite_mist(ctx, world),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => rules::access_invoke_mist2(ctx, world),
+            LocationId::Giguna_Breach__Robopede__Center__Bad => rules::access_slingshot_hook(ctx, world),
+            LocationId::Giguna_Breach__Robopede__Center__Boss_Reward => rules::access_robopede(ctx, world),
+            LocationId::Giguna_Breach__Robopede__Center__Medium => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
+            LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => rules::access_slingshot_hook_and_drone_melee_damage_3(ctx, world),
+            LocationId::Giguna_Breach__Robopede__West__Bad => rules::access_slingshot_hook(ctx, world),
+            LocationId::Giguna_Breach__Robopede__West__Medium => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
+            LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => rules::access_slingshot_hook_and_drone_melee_damage_3(ctx, world),
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
@@ -579,9 +586,13 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::access_boomerang(ctx, world),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::access_invoke_sync(ctx, world),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::access_invoke_sync(ctx, world),
+            LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => rules::access_ellag(ctx, world),
+            LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => rules::access_slingshot_hook_and_drone_hover_and_infect_l1_and_drone_melee_damage_2_and_drone_melee_speed_2(ctx, world),
             LocationId::Glacier_Breach__Floaters__Hidden__Flask => true,
             LocationId::Glacier_Breach__Floaters__Hidden__Flask_Collection_Skip => true,
             LocationId::Glacier_Breach__Floaters__Hidden__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Collection_Skip => true,
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => true,
             LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button => true,
             LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask => true,
@@ -1215,6 +1226,13 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__Center__Bad => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__Center__Boss_Reward => rules::observe_access_robopede(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__Center__Medium => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => rules::observe_access_slingshot_hook_and_drone_melee_damage_3(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__West__Bad => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__West__Medium => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => rules::observe_access_slingshot_hook_and_drone_melee_damage_3(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
@@ -1250,7 +1268,10 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::observe_access_invoke_sync(ctx, world, full_obs),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::observe_access_invoke_sync(ctx, world, full_obs),
+            LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => rules::observe_access_ellag(ctx, world, full_obs),
+            LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => rules::observe_access_slingshot_hook_and_drone_hover_and_infect_l1_and_drone_melee_damage_2_and_drone_melee_speed_2(ctx, world, full_obs),
             LocationId::Glacier_Breach__Floaters__Hidden__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
@@ -1550,6 +1571,38 @@ impl world::Accessible for Location {
                 LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => {
                     if true {
                         1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => {
+                    if rules::access_not_drone_hover(ctx, world) {
+                        6000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Robopede__West__Medium => {
+                    if rules::access_not_drone_hover(ctx, world) {
+                        6000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => {
+                    if rules::access_not_drone_hover(ctx, world) {
+                        6000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => {
+                    if rules::access_not_slingshot_weapon(ctx, world) {
+                        2000
+} else if rules::access_not_drone_melee_speed_3(ctx, world) {
+                        5000
+} else if rules::access_not_drone_melee_damage_3(ctx, world) {
+                        5000
                     } else {
                         0
                     }
@@ -1913,6 +1966,13 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__Center__Bad => rules::explain_slingshot_hook(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__Center__Boss_Reward => rules::explain_robopede(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__Center__Medium => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => rules::explain_slingshot_hook_and_drone_melee_damage_3(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__West__Bad => rules::explain_slingshot_hook(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__West__Medium => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => rules::explain_slingshot_hook_and_drone_melee_damage_3(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::explain_boomerang(ctx, world, edict),
@@ -1948,7 +2008,10 @@ impl world::Accessible for Location {
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::explain_boomerang(ctx, world, edict),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => rules::explain_invoke_sync(ctx, world, edict),
             LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => rules::explain_invoke_sync(ctx, world, edict),
+            LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => rules::explain_ellag(ctx, world, edict),
+            LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => rules::explain_slingshot_hook_and_drone_hover_and_infect_l1_and_drone_melee_damage_2_and_drone_melee_speed_2(ctx, world, edict),
             LocationId::Glacier_Breach__Floaters__Hidden__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Interior__Building_Interior__Entry__Remote_Urn => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Interior__Building_Interior__Entry__Urn_Collection_Skip => rules::explain_invoke_boomerang(ctx, world, edict),
@@ -2163,7 +2226,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 824] = [
+static LOC_DEFS: [Location; 835] = [
     Location {
         id: LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item,
         canonical: CanonId::Loc_Amagi_Breach__East_Entrance__Upper_Slope__Item,
@@ -5540,6 +5603,69 @@ static LOC_DEFS: [Location; 824] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Giguna_Breach__Robopede__Center__Bad,
+        canonical: CanonId::Robopede,
+        item: Item::Robopede,
+        price: Currency::Free,
+        time: 43000,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Robopede__Center__Boss_Reward,
+        canonical: CanonId::Loc_Giguna_Breach__Robopede__Center__Boss_Reward,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Robopede__Center__Medium,
+        canonical: CanonId::Robopede,
+        item: Item::Robopede,
+        price: Currency::Free,
+        time: 27000,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks,
+        canonical: CanonId::Robopede,
+        item: Item::Robopede,
+        price: Currency::Free,
+        time: 15000,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Robopede__West__Bad,
+        canonical: CanonId::Robopede,
+        item: Item::Robopede,
+        price: Currency::Free,
+        time: 40000,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Robopede__West__Medium,
+        canonical: CanonId::Robopede,
+        item: Item::Robopede,
+        price: Currency::Free,
+        time: 24000,
+        dest: SpotId::Giguna_Breach__Robopede__Center,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Giguna_Breach__Robopede__West__Strong_Attacks,
+        canonical: CanonId::Robopede,
+        item: Item::Robopede,
+        price: Currency::Free,
+        time: 12000,
+        dest: SpotId::Giguna_Breach__Robopede__Center,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Giguna_Breach__Slingshot__Ravine__Urn,
         canonical: CanonId::Loc_Giguna_Breach__Slingshot__Ravine__Urn,
         item: Item::Slingshot_Hook,
@@ -6611,6 +6737,24 @@ static LOC_DEFS: [Location; 824] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward,
+        canonical: CanonId::Loc_Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward,
+        item: Item::Big_Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag,
+        canonical: CanonId::Loc_Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag,
+        item: Item::Ellag,
+        price: Currency::Energy(70),
+        time: 18000,
+        dest: SpotId::Glacier_Breach__Electric_Arena__Lower_East_Platform,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Glacier_Breach__Floaters__Hidden__Flask,
         canonical: CanonId::Glacier_Breach_Floaters_Flask,
         item: Item::Big_Flask,
@@ -6638,8 +6782,26 @@ static LOC_DEFS: [Location; 824] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Collection_Skip,
+        canonical: CanonId::Glacier_Breach_Grate_Work_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Fast_Travel,
+        canonical: CanonId::Glacier_Breach_Grate_Work_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__GlB_Grate_Flask,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item,
-        canonical: CanonId::Loc_Glacier_Breach__Grate_Work__Grate_Interior__Item,
+        canonical: CanonId::Glacier_Breach_Grate_Work_Flask,
         item: Item::Flask,
         price: Currency::Free,
         time: 5500,
@@ -9793,6 +9955,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Filter__Core__Terminal_East__Authorize_Hammond => SpotId::Filter__Core__Terminal_East,
         LocationId::Giguna_Breach__Chimney__Cache__Flask => SpotId::Giguna_Breach__Chimney__Cache,
         LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
+        LocationId::Giguna_Breach__Robopede__West__Bad | LocationId::Giguna_Breach__Robopede__West__Medium | LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => SpotId::Giguna_Breach__Robopede__West,
+        LocationId::Giguna_Breach__Robopede__Center__Bad | LocationId::Giguna_Breach__Robopede__Center__Boss_Reward | LocationId::Giguna_Breach__Robopede__Center__Medium | LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => SpotId::Giguna_Breach__Robopede__Center,
         LocationId::Giguna_Breach__Slingshot__Ravine__Urn => SpotId::Giguna_Breach__Slingshot__Ravine,
         LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate => SpotId::Giguna_Breach__Labyrinth__Button,
         LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask => SpotId::Giguna_Breach__Labyrinth__Pipe_Cache,
@@ -9880,10 +10044,12 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask | LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask_Fast_Travel => SpotId::Giguna__Secrecy__West_Column_East,
         LocationId::Giguna__Secrecy__Near_East_Column__Shockwave_Flask => SpotId::Giguna__Secrecy__Near_East_Column,
         LocationId::Giguna__Secrecy__East_Column__Flask | LocationId::Giguna__Secrecy__East_Column__Flask_Collection_Skip | LocationId::Giguna__Secrecy__East_Column__Flask_Fast_Travel => SpotId::Giguna__Secrecy__East_Column,
-        LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
+        LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Collection_Skip | LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Flask_Fast_Travel | LocationId::Glacier_Breach__Grate_Work__Grate_Interior__Item => SpotId::Glacier_Breach__Grate_Work__Grate_Interior,
         LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy => SpotId::Glacier_Breach__Control__Upper_Corner,
         LocationId::Glacier_Breach__Control__Upper_Corner__Control_Enemy_And_Jump => SpotId::Glacier_Breach__Control__Upper_Corner,
         LocationId::Glacier_Breach__Floaters__Hidden__Flask | LocationId::Glacier_Breach__Floaters__Hidden__Flask_Collection_Skip | LocationId::Glacier_Breach__Floaters__Hidden__Flask_Fast_Travel => SpotId::Glacier_Breach__Floaters__Hidden,
+        LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => SpotId::Glacier_Breach__Electric_Arena__Lower_East_Platform,
+        LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => SpotId::Glacier_Breach__Electric_Arena__Lower_West_Platform,
         LocationId::Glacier_Breach__Spidery_Connector__Button__Hit_Button => SpotId::Glacier_Breach__Spidery_Connector__Button,
         LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask | LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Collection_Skip | LocationId::Glacier_Breach__Spidery_Connector__Midway__Flask_Fast_Travel => SpotId::Glacier_Breach__Spidery_Connector__Midway,
         LocationId::Glacier__Dock_Outside__Ruins_Stairs__Note => SpotId::Glacier__Dock_Outside__Ruins_Stairs,

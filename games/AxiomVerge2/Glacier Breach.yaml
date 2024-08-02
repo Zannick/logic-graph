@@ -119,8 +119,20 @@ areas:
       coord: [39.55, 12.9]
       locations:
         - name: Item
+          canon: Glacier_Breach_Grate_Work_Flask
           item: Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Glacier_Breach_Grate_Work_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Glacier_Breach_Grate_Work_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       exits:
         - to: Grate West
           req: Nanite_Mist
@@ -265,7 +277,7 @@ areas:
           price: 50
           movement: base
         - to: Trough
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
         - to: Trough
           req: $sync
@@ -277,7 +289,7 @@ areas:
         - to: West
       exits:
         - to: Control > Further In
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalty_tags: [xdoor, -fast_hover.2]
         - to: Hill East
@@ -454,7 +466,7 @@ areas:
           movement: base
           jumps: 2
         - to: East 11
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: base
           jumps: 3
     - name: West Ledge
@@ -521,7 +533,7 @@ areas:
         - to: West Save > East 11
           tags: [xdoor]
         - to: Past the Guards
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           time: 8
         - to: Save Point
           req: $hook
@@ -533,7 +545,7 @@ areas:
         - to: Save Point
       exits:
         - to: Piano Roll > Lower Ledge
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalty_tags: [xdoor, -fast_hover.2]
     - name: Save Point
@@ -626,12 +638,18 @@ areas:
 
 - name: Electric Arena  # MARK: Electric Arena
   on_entry: $reset_old_area(^newpos)
+  map:
+    reward: [38, 10, 39, 11]
+  datamap:
+    reward:
+      map_spot: Menu > Breach Map > Ellag
   spots:
     - name: West
       coord: [37.1, 9.75]
       local:
         - to: West Platforms
           jumps: 1
+        - to: Lower West Platform
       exits:
         - to: Piano Roll > East 10
           tags: [xdoor]
@@ -641,14 +659,27 @@ areas:
         - to: West
       exits:
         - to: East Ledge
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+        - to: Upper East Platform
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
     - name: East Platforms
       coord: [38.5, 9.7]
       exits:
         - to: West
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+        - to: Lower West Platform
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: North
+          req: $mist2
+          movement: mist2
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
     - name: East Ledge
       coord: [38.8, 9.75]
       local:
@@ -658,6 +689,12 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: North
+          req: $mist2
+          movement: mist2
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
     - name: East
       coord: [38.9, 9.75]
       local:
@@ -665,6 +702,84 @@ areas:
       exits:
         - to: Save and Exit > West
           tags: [xdoor]
+    - name: Upper East Platform
+      coord: [38.35, 9.5]
+      exits:
+        - to: North
+          req: $mist2
+          movement: mist2
+        - to: North
+          req: Nanite_Mist
+          movement: mist1
+    - name: Lower East Platform
+      coord: [38.25, 10.2]
+      locations:
+        - name: Reward
+          item: Big_Flask
+          req: Ellag
+          tags: [flask]
+        # Collection Skips can be tricky due to the flask placement not being consistent
+      exits:
+        - to: Lower West Platform
+          req: Drone_Hover
+          movement: base
+        - to: East Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Upper East Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Lower West Platform
+      coord: [37.7, 10.3]
+      locations:
+        - name: Defeat Ellag
+          item: Ellag
+          # Infect_L1 plus 70 energy for Slow + Invert to enable fighting from the floor
+          # (makes phase 2 much easier)
+          req: Slingshot_Hook and Drone_Hover and Infect_L1 and Drone_Melee_Damage_2 and Drone_Melee_Speed_2
+          to: Lower East Platform
+          price: 70
+          time: 18  # estimate from actual run
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 2  # ?
+            - when: not Drone_Melee_Speed_3
+              add: 5  # ?
+            - when: not Drone_Melee_Damage_3
+              add: 5  # ?
+      exits:
+        - to: West
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: Lower East Platform
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: North
+      coord: [38.45, 9.2]
+      local:
+        - to: East Platforms
+      exits:
+        - to: West
+          req: Drone_Hover
+          movement: base
+        - to: Lower West Platform
+          req: Drone_Hover
+          movement: base
+        - to: East Ledge
+          req: Drone_Hover
+          movement: base
+        - to: Stacked Enemies > South
+          req: $mist2
+          movement: mist2
+          penalty_tags: [ydoor, -mist2.2]
+        - to: Stacked Enemies > South
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [ydoor, -mist1.2]
 
 - name: Save and Exit  # MARK: Save and Exit
   on_entry: $reset_old_area(^newpos)
@@ -737,7 +852,7 @@ areas:
           jumps: 1
       exits:
         - to: Stable Floor > Center
-          req: $hook and $hover
+          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalty_tags: [xdoor, -fast_hover.2]
     - name: First Step
@@ -804,6 +919,83 @@ areas:
   spots:
     - name: West
       coord: [37.1, 8.75]
+      local:
+        - to: Midwest
+      exits:
+        - to: Piano Roll > East 9
+          tags: [xdoor]
+        - to: Northwest
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Northwest
+      coord: [37.55, 8.2]
+      local:
+        - to: West
+        - to: Midwest
+      exits:
+        - to: Fortress > Southwest
+          tags: [ydoor]
+    - name: Midwest
+      coord: [37.85, 8.75]
+      local:
+        - to: West
+        - to: Mideast
+      exits:
+        - to: Northwest
+          req: $mist2
+          movement: mist2
+        - to: Northwest
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 3
+    - name: Mideast
+      coord: [38.1, 8.75]
+      local:
+        - to: South
+      exits:
+        - to: Fortress > Southeast
+          req: $mist2
+          movement: mist2
+          penalty_tags: [ydoor, -mist2.2]
+          penalties:
+            - add: 0.5  # evading enemies
+    - name: South
+      coord: [38.45, 8.8]
+      local:
+        - to: Mideast
+          jumps: 1
+      exits:
+        - to: Electric Arena > North
+          tags: [ydoor]
+        - to: Mid-air East
+          req: Slingshot_Hook and Slingshot_Weapon
+          movement: base
+          jumps: 3
+          penalties:
+            - add: 0.5  # positioning to fake out the enemies and spin through them
+        - to: Mid-air East
+          req: Drone_Melee_Damage  # kill the enemies then jump
+          time: 5  # estimate
+    - name: Mid-air East
+      coord: [38.5, 8.5]
+      exits:
+        - to: Fortress > Southeast
+          req: $mist2
+          movement: mist2
+    - name: Northeast
+      coord: [38.45, 8.2]
+      local:
+        - to: Mideast
+        - to: South
+
+- name: Fortress  # MARK: Fortress
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: Southwest
+      coord: [37.55, 7.8]
+    - name: Southeast
+      coord: [38.45, 7.8]
 
 - name: Empty Space  # MARK: Empty Space
   on_entry: $reset_old_area(^newpos)
