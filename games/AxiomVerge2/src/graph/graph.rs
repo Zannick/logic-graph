@@ -5400,11 +5400,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 26 {
+                        if ctx.count(Item::Big_Flask) < 27 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 26 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 27 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 26 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 27 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -5527,11 +5527,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 50 {
+                        if ctx.count(Item::Flask) < 51 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 50 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 51 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 50 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 51 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
@@ -5910,11 +5910,11 @@ impl world::World for World {
                                 map.insert(Item::Beware_the_Patternmind, 1);
                             }
                         }
-                        if ctx.count(Item::Big_Flask) < 26 {
+                        if ctx.count(Item::Big_Flask) < 27 {
                             if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                                *val = std::cmp::max(*val, 26 - ctx.count(Item::Big_Flask));
+                                *val = std::cmp::max(*val, 27 - ctx.count(Item::Big_Flask));
                             } else {
-                                map.insert(Item::Big_Flask, 26 - ctx.count(Item::Big_Flask));
+                                map.insert(Item::Big_Flask, 27 - ctx.count(Item::Big_Flask));
                             }
                         }
                         if !ctx.has(Item::Boomerang) {
@@ -6037,11 +6037,11 @@ impl world::World for World {
                                 map.insert(Item::Fast_Travel, 1);
                             }
                         }
-                        if ctx.count(Item::Flask) < 50 {
+                        if ctx.count(Item::Flask) < 51 {
                             if let Some(val) = map.get_mut(&Item::Flask) {
-                                *val = std::cmp::max(*val, 50 - ctx.count(Item::Flask));
+                                *val = std::cmp::max(*val, 51 - ctx.count(Item::Flask));
                             } else {
-                                map.insert(Item::Flask, 50 - ctx.count(Item::Flask));
+                                map.insert(Item::Flask, 51 - ctx.count(Item::Flask));
                             }
                         }
                         if !ctx.has(Item::Forbidden_Knowledge) {
@@ -6426,9 +6426,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 26);
+                            *val = std::cmp::max(*val, 27);
                         } else {
-                            map.insert(Item::Big_Flask, 26);
+                            map.insert(Item::Big_Flask, 27);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -6503,9 +6503,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 50);
+                            *val = std::cmp::max(*val, 51);
                         } else {
-                            map.insert(Item::Flask, 50);
+                            map.insert(Item::Flask, 51);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
@@ -6740,9 +6740,9 @@ impl world::World for World {
                             map.insert(Item::Beware_the_Patternmind, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Big_Flask) {
-                            *val = std::cmp::max(*val, 26);
+                            *val = std::cmp::max(*val, 27);
                         } else {
-                            map.insert(Item::Big_Flask, 26);
+                            map.insert(Item::Big_Flask, 27);
                         }
                         if !map.contains_key(&Item::Boomerang) {
                             map.insert(Item::Boomerang, 1);
@@ -6817,9 +6817,9 @@ impl world::World for World {
                             map.insert(Item::Fast_Travel, 1);
                         }
                         if let Some(val) = map.get_mut(&Item::Flask) {
-                            *val = std::cmp::max(*val, 50);
+                            *val = std::cmp::max(*val, 51);
                         } else {
-                            map.insert(Item::Flask, 50);
+                            map.insert(Item::Flask, 51);
                         }
                         if !map.contains_key(&Item::Forbidden_Knowledge) {
                             map.insert(Item::Forbidden_Knowledge, 1);
