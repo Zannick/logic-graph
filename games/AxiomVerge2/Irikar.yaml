@@ -1038,6 +1038,7 @@ areas:
           item: Big_Flask
           canon: Irikar_Airy_Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
         - name: Flask Collection Skip
           item: Big_Flask

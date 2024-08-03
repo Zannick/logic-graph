@@ -390,6 +390,7 @@ areas:
           canon: Ebih_Observatory_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
     - name: Catwalk
       coord: [23.4, 0.55]
@@ -405,6 +406,7 @@ areas:
           canon: Ebih_Observatory_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
       hybrid:
         - name: Flask Collection Skip
@@ -425,6 +427,7 @@ areas:
           canon: Ebih_Observatory_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
         - name: Boomerang Steer into Flask
           canon: Ebih_Observatory_Flask

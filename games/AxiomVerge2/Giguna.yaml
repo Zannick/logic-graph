@@ -5400,6 +5400,7 @@ areas:
           item: Big_Flask
           canon: Giguna_Breachable_Wall_Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
     - name: Wall Interior
       coord: [16.9, 23.6]
@@ -5417,6 +5418,7 @@ areas:
           item: Big_Flask
           canon: Giguna_Breachable_Wall_Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
     - name: Cave Mouth West
       coord: [16.7, 23.9]

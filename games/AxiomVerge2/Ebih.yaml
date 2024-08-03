@@ -1363,6 +1363,7 @@ areas:
           item: Ebih_West_Block
           canon: Ebih_West_Block
           req: $shockwave
+          price: 100
           tags: [shockwave, event]
       exits:
         - to: Mid Save
@@ -1654,6 +1655,7 @@ areas:
           item: Ebih_West_Block
           canon: Ebih_West_Block
           req: $shockwave
+          price: 100
           tags: [shockwave, event]
       exits:
         - to: Block Left
@@ -3069,6 +3071,7 @@ areas:
           canon: Ebih_High_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
       hybrid:
         - name: Flask Collection Skip
@@ -4066,6 +4069,7 @@ areas:
           canon: Ebih_Gem_Room_Flask
           item: Flask
           req: $shockwave
+          price: 100
           tags: [shockwave]
         - name: Boomerang Flask
           canon: Ebih_Gem_Room_Flask

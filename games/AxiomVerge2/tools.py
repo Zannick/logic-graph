@@ -155,6 +155,16 @@ def too_expensive():
         for exit in expensive_exits
     ])
 
+def missing_shockwave_price():
+    missing = []
+    for point in AV2.all_points():
+        if 'req' in point and '$shockwave' in point['req'] and 'price' not in point:
+            missing.append(point['fullname'])
+    if not missing:
+        print('All set!')
+    else:
+        pprint(missing)
+
 def repeated_items():
     pprint({k: v for k, v in AV2.placed_item_counts.items() if v > 1})
 
