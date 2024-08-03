@@ -2224,6 +2224,62 @@ macro_rules! hobserve__melee_cskip {
     }};
 }
 
+/// $bomberang (  )
+/// bomberang and $shockwave and Boomerang
+#[macro_export]
+macro_rules! helper__bomberang {
+    ($ctx:expr, $world:expr) => {{
+        (($world.bomberang && helper__shockwave!($ctx, $world)) && $ctx.has(Item::Boomerang))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__bomberang {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let mut left = {
+                    let s = $world.bomberang;
+                    $edict.insert("bomberang", format!("{}", s));
+                    (s, vec!["bomberang"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__shockwave!($ctx, $world, $edict);
+                        $edict.insert("$shockwave", format!("{:?}", res));
+                        refs.push("$shockwave");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = $ctx.has(Item::Boomerang);
+                    $edict.insert("Boomerang", format!("{}", h));
+                    (h, vec!["Boomerang"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__bomberang {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        (($world.bomberang && (hobserve__shockwave!($ctx, $world, $full_obs)))
+            && ({
+                $full_obs.observe_boomerang();
+                $ctx.has(Item::Boomerang)
+            }))
+    }};
+}
+
 /// $attract (  )
 /// Breach_Attractor and (Anuman or Separation or ^mode != 'drone' or ^indra == ^position or ^realm == 'breach' or @^indra^realm == 'interior')
 #[macro_export]
@@ -2900,11 +2956,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{51}, Big_Flask{27}]
+/// [Flask{51}, Big_Flask{28}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 51 && $ctx.count(Item::Big_Flask) >= 27
+        $ctx.count(Item::Flask) >= 51 && $ctx.count(Item::Big_Flask) >= 28
     }};
 }
 #[macro_export]
@@ -2924,7 +2980,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 27, vec!["Big_Flask count"])
+                (ct >= 28, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -2938,18 +2994,18 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(51));
             $ctx.count(Item::Flask) >= 51
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(27));
-            $ctx.count(Item::Big_Flask) >= 27
+            $full_obs.observe_big_flask(IntegerObservation::Ge(28));
+            $ctx.count(Item::Big_Flask) >= 28
         })
     }};
 }
 
 /// $all_health (  )
-/// [Health_Node{4}, Health_Fragment{22}]
+/// [Health_Node{5}, Health_Fragment{22}]
 #[macro_export]
 macro_rules! helper__all_health {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Health_Node) >= 4 && $ctx.count(Item::Health_Fragment) >= 22
+        $ctx.count(Item::Health_Node) >= 5 && $ctx.count(Item::Health_Fragment) >= 22
     }};
 }
 #[macro_export]
@@ -2960,7 +3016,7 @@ macro_rules! hexplain__all_health {
             let mut h = {
                 let ct = $ctx.count(Item::Health_Node);
                 $edict.insert("Health_Node count", format!("{}", ct));
-                (ct >= 4, vec!["Health_Node count"])
+                (ct >= 5, vec!["Health_Node count"])
             };
             refs.append(&mut h.1);
             if !h.0 {
@@ -2980,8 +3036,8 @@ macro_rules! hexplain__all_health {
 macro_rules! hobserve__all_health {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         ({
-            $full_obs.observe_health_node(IntegerObservation::Ge(4));
-            $ctx.count(Item::Health_Node) >= 4
+            $full_obs.observe_health_node(IntegerObservation::Ge(5));
+            $ctx.count(Item::Health_Node) >= 5
         }) && ({
             $full_obs.observe_health_fragment(IntegerObservation::Ge(22));
             $ctx.count(Item::Health_Fragment) >= 22

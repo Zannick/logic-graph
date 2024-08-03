@@ -2335,6 +2335,14 @@ subgraph Glacier_Breach
     end
     subgraph Glacier_Breach__Fortress[Fortress]
         Glacier_Breach__Fortress__Southwest(Southwest);
+        Glacier_Breach__Fortress__Southwest_Stair(Southwest Stair);
+        Glacier_Breach__Fortress__Mid_Tier_West(Mid Tier West);
+        Glacier_Breach__Fortress__Upper_Tier_West(Upper Tier West);
+        Glacier_Breach__Fortress__Upper_Tier_Middle(Upper Tier Middle);
+        Glacier_Breach__Fortress__Upper_Tier_East(Upper Tier East);
+        Glacier_Breach__Fortress__Mid_Tier_East(Mid Tier East);
+        Glacier_Breach__Fortress__East_Ledge(East Ledge);
+        Glacier_Breach__Fortress__Portal_Entry(Portal Entry);
         Glacier_Breach__Fortress__Southeast(Southeast);
     end
     subgraph Glacier_Breach__Empty_Space[Empty Space]
@@ -2442,6 +2450,7 @@ subgraph Glacier
         Glacier__Grid_39_40_7_9__Third_Upper_Platform(Third Upper Platform);
         Glacier__Grid_39_40_7_9__Floating_Rock(Floating Rock);
         Glacier__Grid_39_40_7_9__Fortress_Ledge(Fortress Ledge);
+        Glacier__Grid_39_40_7_9__Fortress_Wall(Fortress Wall);
         Glacier__Grid_39_40_7_9__Upper_Scaffolding(Upper Scaffolding);
         Glacier__Grid_39_40_7_9__West(West);
         Glacier__Grid_39_40_7_9__Under_Scaffolding(Under Scaffolding);
@@ -2482,6 +2491,10 @@ subgraph Glacier
         Glacier__Vertical_Room__East_17_while_hovering(East 17 while hovering);
         Glacier__Vertical_Room__Lower_Gatestone(Lower Gatestone);
         Glacier__Vertical_Room__South(South);
+        Glacier__Vertical_Room__Fortress_Wall(Fortress Wall);
+        Glacier__Vertical_Room__Fortress_Ledge(Fortress Ledge);
+        Glacier__Vertical_Room__Flying_West(Flying West);
+        Glacier__Vertical_Room__Hovering_East(Hovering East);
     end
     subgraph Glacier__Boomerang_Antechamber[Boomerang Antechamber]
         Glacier__Boomerang_Antechamber__West_13(West 13);
@@ -2651,6 +2664,25 @@ subgraph Glacier
         Glacier__Inner_Caverns__Southwest_Hill(Southwest Hill);
         Glacier__Inner_Caverns__West_14(West 14);
         Glacier__Inner_Caverns__Center_Bottom(Center Bottom);
+    end
+    subgraph Glacier__Fortress[Fortress]
+        Glacier__Fortress__Button(Button);
+        Glacier__Fortress__Portal_Stand(Portal Stand);
+        Glacier__Fortress__Inner_East_Ledge(Inner East Ledge);
+        Glacier__Fortress__Inner_Mid_Tier_East(Inner Mid Tier East);
+        Glacier__Fortress__Inner_Upper_Tier_East(Inner Upper Tier East);
+        Glacier__Fortress__Inner_Center(Inner Center);
+        Glacier__Fortress__Inner_Upper_Tier_West(Inner Upper Tier West);
+        Glacier__Fortress__Inner_Mid_Tier_West(Inner Mid Tier West);
+        Glacier__Fortress__West_Staircase(West Staircase);
+        Glacier__Fortress__Parapet_West_Ledge(Parapet West Ledge);
+        Glacier__Fortress__Parapet_West_Hook_Point(Parapet West Hook Point);
+        Glacier__Fortress__Parapet_Crenelle_2(Parapet Crenelle 2);
+        Glacier__Fortress__Parapet_Peak(Parapet Peak);
+        Glacier__Fortress__Parapet_Center_East(Parapet Center East);
+        Glacier__Fortress__Parapet_East_Hook_Point(Parapet East Hook Point);
+        Glacier__Fortress__Parapet_East_Ledge(Parapet East Ledge);
+        Glacier__Fortress__Gate_East(Gate East);
     end
 end
 subgraph Interior
@@ -3239,6 +3271,10 @@ subgraph Menu
         Menu__Kiengir_Map__Glacier_Sliced_Cavern_Health(Glacier Sliced Cavern Health);
         Menu__Kiengir_Map__Sagiga_on_the_Worldstream(Sagiga on the Worldstream);
         Menu__Kiengir_Map__Glacier_Lake_Main_Entrance_Flask(Glacier Lake Main Entrance Flask);
+        Menu__Kiengir_Map__Glacier_Fortress_Northeast(Glacier Fortress Northeast);
+        Menu__Kiengir_Map__Glacier_Fortress_Health(Glacier Fortress Health);
+        Menu__Kiengir_Map__Glacier_Fortress_Portal(Glacier Fortress Portal);
+        Menu__Kiengir_Map__Glacier_Fortress_Flask_Left(Glacier Fortress Flask Left);
         Menu__Kiengir_Map__Carnelian_Ring(Carnelian Ring);
         Menu__Kiengir_Map__Giguna_Northeast_Gate(Giguna Northeast Gate);
         Menu__Kiengir_Map__Giguna_Northeast_Flask(Giguna Northeast Flask);
@@ -5379,6 +5415,15 @@ Glacier_Breach__Empty_Space__Lower --> Glacier_Breach__Empty_Space__West
 Glacier_Breach__Empty_Space__West <--> Glacier_Breach__Grate_Work__East
 Glacier_Breach__Floaters__Hidden <--> Glacier_Breach__West_Save__Hidden
 Glacier_Breach__Floaters__West <--> Glacier_Breach__West_Save__East_12
+Glacier_Breach__Fortress__Mid_Tier_East --> Glacier_Breach__Fortress__Upper_Tier_East
+Glacier_Breach__Fortress__Mid_Tier_West --> Glacier_Breach__Fortress__Upper_Tier_West
+Glacier_Breach__Fortress__Southeast --> Glacier_Breach__Fortress__East_Ledge
+Glacier_Breach__Fortress__Southeast --> Glacier_Breach__Stacked_Enemies__Northeast
+Glacier_Breach__Fortress__Southwest --> Glacier_Breach__Fortress__Southwest_Stair
+Glacier_Breach__Fortress__Southwest <--> Glacier_Breach__Stacked_Enemies__Northwest
+Glacier_Breach__Fortress__Southwest_Stair --> Glacier_Breach__Fortress__Mid_Tier_West
+Glacier_Breach__Fortress__Upper_Tier_East --> Glacier_Breach__Fortress__Upper_Tier_Middle
+Glacier_Breach__Fortress__Upper_Tier_West --> Glacier_Breach__Fortress__Upper_Tier_Middle
 Glacier_Breach__Grate_Work__Below_Grate --> Glacier_Breach__Grate_Work__West_Ledge
 Glacier_Breach__Grate_Work__East_Hill --> Glacier_Breach__Grate_Work__East
 Glacier_Breach__Grate_Work__East_Hill <--> Glacier_Breach__Grate_Work__Grate_East
@@ -5422,7 +5467,6 @@ Glacier_Breach__Stable_Floor__South --> Glacier_Breach__Empty_Space__North
 Glacier_Breach__Stacked_Enemies__Mid_air_East --> Glacier_Breach__Fortress__Southeast
 Glacier_Breach__Stacked_Enemies__Mideast --> Glacier_Breach__Fortress__Southeast
 Glacier_Breach__Stacked_Enemies__Midwest --> Glacier_Breach__Stacked_Enemies__Northwest
-Glacier_Breach__Stacked_Enemies__Northwest --> Glacier_Breach__Fortress__Southwest
 Glacier_Breach__Stacked_Enemies__South --> Glacier_Breach__Stacked_Enemies__Mid_air_East
 Glacier_Breach__Stacked_Enemies__West --> Glacier_Breach__Stacked_Enemies__Northwest
 Glacier_Breach__West_Save__East_11 <--> Glacier_Breach__West_Save__West_Ledge
@@ -5484,6 +5528,30 @@ Glacier__Dock_Outside__Mid_Toward_Cave --> Glacier__Dock_Outside__Cave_Mouth
 Glacier__Dock_Outside__Ruins_Platform --> Glacier__Dock_Outside__High_Toward_Cave
 Glacier__Dock_Outside__Upper_West_Hill <--> Glacier__Revival__Pillar
 Glacier__Dock_Outside__Upper_West_Hill <--> Glacier__Revival__Pillar_Step
+Glacier__Fortress__Gate_East <--> Glacier__Fortress__Inner_Mid_Tier_East
+Glacier__Fortress__Gate_East <--> Glacier__Fortress__Inner_Upper_Tier_East
+Glacier__Fortress__Gate_East --> Glacier__Fortress__Parapet_East_Ledge
+Glacier__Fortress__Gate_East <--> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Fortress__Inner_Mid_Tier_East --> Glacier__Fortress__Inner_Upper_Tier_East
+Glacier__Fortress__Inner_Mid_Tier_West --> Glacier__Fortress__Inner_Upper_Tier_West
+Glacier__Fortress__Inner_Upper_Tier_East --> Glacier__Fortress__Inner_Center
+Glacier__Fortress__Inner_Upper_Tier_West --> Glacier__Fortress__Inner_Center
+Glacier__Fortress__Parapet_Center_East --> Glacier__Fortress__Parapet_East_Hook_Point
+Glacier__Fortress__Parapet_Center_East --> Glacier__Fortress__Parapet_Peak
+Glacier__Fortress__Parapet_Crenelle_2 --> Glacier__Fortress__Parapet_Peak
+Glacier__Fortress__Parapet_Crenelle_2 <--> Glacier__Fortress__Parapet_West_Hook_Point
+Glacier__Fortress__Parapet_East_Hook_Point <--> Glacier__Fortress__Parapet_East_Ledge
+Glacier__Fortress__Parapet_East_Hook_Point <--> Glacier__Fortress__Parapet_Peak
+Glacier__Fortress__Parapet_East_Hook_Point --> Glacier__Grid_39_40_7_9__East_9
+Glacier__Fortress__Parapet_East_Hook_Point --> Glacier__Grid_39_40_7_9__Floating_Rock
+Glacier__Fortress__Parapet_East_Hook_Point --> Glacier__Grid_39_40_7_9__Upper_East
+Glacier__Fortress__Parapet_East_Ledge <--> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Fortress__Parapet_Peak <--> Glacier__Fortress__Parapet_West_Hook_Point
+Glacier__Fortress__Parapet_West_Hook_Point <--> Glacier__Fortress__Parapet_West_Ledge
+Glacier__Fortress__Parapet_West_Hook_Point --> Glacier__Vertical_Room__Flying_West
+Glacier__Fortress__Parapet_West_Ledge <--> Glacier__Vertical_Room__Fortress_Ledge
+Glacier__Fortress__Portal_Stand --> Glacier__Fortress__Inner_East_Ledge
+Glacier__Fortress__West_Staircase --> Glacier__Fortress__Inner_Mid_Tier_West
 Glacier__Grid_31_9_12__East_10 --> Glacier__Grid_32_7_10__West_10
 Glacier__Grid_31_9_12__East_9 <--> Glacier__Grid_32_7_10__West_9
 Glacier__Grid_31_9_12__Midair --> Glacier__Grid_31_9_12__East_10
@@ -5500,12 +5568,16 @@ Glacier__Grid_37_38_9__West <--> Glacier__Vertical_Room__East_9
 Glacier__Grid_39_40_7_9__East_9 <--> Glacier__Grid_39_40_7_9__Under_Scaffolding
 Glacier__Grid_39_40_7_9__East_9 <--> Glacier__Revival__West_9
 Glacier__Grid_39_40_7_9__First_Upper_Platform <--> Glacier__Revival__Save_Point
-Glacier__Grid_39_40_7_9__Floating_Rock --> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Grid_39_40_7_9__Floating_Rock <--> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Grid_39_40_7_9__Fortress_Wall --> Glacier__Grid_39_40_7_9__Fortress_Ledge
 Glacier__Grid_39_40_7_9__Lower_Floor --> Glacier__Grid_39_40_7_9__East_9
 Glacier__Grid_39_40_7_9__Lower_Floor --> Glacier__Grid_39_40_7_9__Under_Scaffolding
 Glacier__Grid_39_40_7_9__Third_Upper_Platform --> Glacier__Grid_39_40_7_9__Fortress_Ledge
+Glacier__Grid_39_40_7_9__Under_Scaffolding --> Glacier__Grid_39_40_7_9__Fortress_Wall
 Glacier__Grid_39_40_7_9__Under_Scaffolding --> Glacier__Grid_39_40_7_9__Upper_Scaffolding
 Glacier__Grid_39_40_7_9__Upper_East <--> Glacier__Revival__West_8
+Glacier__Grid_39_40_7_9__Upper_Scaffolding --> Glacier__Grid_39_40_7_9__Fortress_Wall
+Glacier__Grid_39_40_7_9__West --> Glacier__Grid_39_40_7_9__Fortress_Ledge
 Glacier__Grid_42_10__East <--> Glacier__Grid_43_10_11__Top
 Glacier__Grid_42_10__West <--> Glacier__Revival__Lower_East
 Glacier__Hammonds_End__Between_Center_Doors <--> Glacier__Hammonds_End__Center_Door_Left
@@ -5571,6 +5643,7 @@ Glacier__Ledge_Grab_Room__Upper_at_Wall --> Glacier__Ledge_Grab_Room__Northwest_
 Glacier__Peak__East_8 --> Glacier__Peak__Top_Platform_East
 Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
 Glacier__Peak__Top_Platform_East --> Glacier__Peak__Highest_Platform
+Glacier__Peak__Top_Platform_East --> Glacier__Vertical_Room__Hovering_East
 Glacier__Peak__Top_Rock --> Glacier__Peak__Highest_Platform
 Glacier__Peak__Under_West_Cliff --> Glacier__Peak__West_Cliff
 Glacier__Revival__Just_Thrown --> Glacier__Grid_39_40_7_9__First_Upper_Platform
@@ -5598,9 +5671,15 @@ Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__Upper_Swi
 Glacier__Vertical_Room__East_14 --> Glacier__Vertical_Room__Above_Switch
 Glacier__Vertical_Room__East_17_while_hovering --> Glacier__Vertical_Room__Lower_Gatestone
 Glacier__Vertical_Room__East_17_while_hovering --> Glacier__Vertical_Room__Lower_Switch
+Glacier__Vertical_Room__East_9 --> Glacier__Vertical_Room__Fortress_Ledge
 Glacier__Vertical_Room__East_9 --> Glacier__Vertical_Room__Peak
 Glacier__Vertical_Room__East_Corner --> Glacier__Vertical_Room__East_12
 Glacier__Vertical_Room__Flat_Platform --> Glacier__Vertical_Room__Below_Upper_Switch
+Glacier__Vertical_Room__Flying_West --> Glacier__Peak__Top_Platform_East
+Glacier__Vertical_Room__Fortress_Ledge --> Glacier__Vertical_Room__West_8
+Glacier__Vertical_Room__Fortress_Wall --> Glacier__Vertical_Room__Fortress_Ledge
+Glacier__Vertical_Room__Hovering_East --> Glacier__Fortress__Parapet_West_Hook_Point
+Glacier__Vertical_Room__Hovering_East --> Glacier__Fortress__Parapet_West_Ledge
 Glacier__Vertical_Room__Lower_Gatestone --> Glacier__Vertical_Room__Lower_Switch
 Glacier__Vertical_Room__Lower_Gatestone <--> Glacier__Vertical_Room__South
 Glacier__Vertical_Room__Lower_Switch <--> Glacier__Vertical_Room__Middle_Gatestone
@@ -5611,12 +5690,15 @@ Glacier__Vertical_Room__Middle_Gatestone_Left --> Glacier__Vertical_Room__Lower_
 Glacier__Vertical_Room__Middle_Gatestone_Left --> Glacier__Vertical_Room__Lower_Switch
 Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone --> Glacier__Vertical_Room__Waters_Ledge
 Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
+Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__Fortress_Ledge
+Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__Fortress_Wall
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
 Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Below_Upper_Switch
 Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Upper_Switch
 Glacier__Vertical_Room__Upper_Switch --> Glacier__Vertical_Room__Above_Switch
 Glacier__Vertical_Room__Waters_Ledge --> Amagi__East_Lake__East_15_Lower_Hover
+Glacier__Vertical_Room__West_8 --> Glacier__Vertical_Room__Fortress_Wall
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Middle
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
 Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top

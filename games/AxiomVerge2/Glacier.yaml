@@ -917,6 +917,12 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: Fortress Ledge
+          req: $mist2
+          movement: mist2
+        - to: Fortress Ledge
+          req: Nanite_Mist
+          movement: mist1
       hybrid:
         - name: Flask Collection Skip
           to: Menu > Warp Only > Kiengir
@@ -932,6 +938,33 @@ areas:
           tags: [cskip]
     - name: Fortress Ledge
       coord: [40.05, 6.75]
+      local:
+        - to: Fortress Wall
+        - to: Upper Scaffolding
+        - to: Under Scaffolding
+      exits:
+        - to: Floating Rock
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Fortress > Gate East
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Fortress > Parapet East Ledge
+          movement: base
+          jumps: 2
+          penalty_tags: [xshift, -base.1]
+    - name: Fortress Wall
+      coord: [40.1, 7.75]
+      local:
+        - to: West
+      exits:
+        - to: Fortress Ledge
+          req: $infinite_climb and Slingshot_Hook
+          time: 3.0  # ?
+        - to: Fortress Ledge
+          req: $infinite_climb
+          time: 4.2  # ?
 
     - name: Upper Scaffolding
       coord: [40.3, 7.95]
@@ -940,6 +973,11 @@ areas:
         - to: West
         - to: Under Scaffolding
           jumps_down: 1
+      exits:
+        - to: Fortress Wall
+          req: $hover and Anuman and Wall_Climb
+          movement: base
+          jumps: 2
 
     - name: West
       coord: [39.05, 8.65]
@@ -950,6 +988,12 @@ areas:
       exits:
         - to: Grid 37-38,9 > East
           tags: [xshift]
+        - to: Fortress Ledge
+          req: $mist2
+          movement: mist2
+        - to: Fortress Ledge
+          req: Nanite_Mist
+          movement: mist1
 
     # Southeast
     - name: Under Scaffolding
@@ -968,6 +1012,10 @@ areas:
           req: $grab or $hook
           movement: base
           jumps: 2
+        - to: Fortress Wall
+          req: $hover and Anuman and Wall_Climb
+          movement: base
+          jumps: 3
     - name: Lower Floor
       coord: [40.65, 8.75]
       local:
@@ -1027,11 +1075,15 @@ areas:
   map:
     flask: [36, 8, 37, 9]
     midgatestone: [36, 15, 37, 16]
+    lswitch: [36, 16, 37, 17]
+    south: [36, 17, 37, 18]
   datamap:
     map_spot:
       flask: Menu > Kiengir Map > Glacier Vertical Room Flask
     water:
       midgatestone: true
+      lswitch: true
+      south: true
   start:
     _upper_gatestone: false
     _lower_gatestones: false
@@ -1054,6 +1106,12 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+        - to: Fortress Ledge
+          req: $mist2
+          movement: mist2
+        - to: Fortress Ledge
+          req: Nanite_Mist
+          movement: mist1
     - name: West 9
       coord: [36.05, 8.75]
       local:
@@ -1134,8 +1192,21 @@ areas:
         - to: East 9
       locations:
         - name: Flask
+          canon: Glacier_Vertical_Room_Flask
           item: Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Glacier_Vertical_Room_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Glacier_Vertical_Room_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       exits:
         - to: West 8
           req: $grab
@@ -1144,6 +1215,16 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+        - to: Fortress Wall
+          req: $hover and Anuman and Wall_Climb
+          movement: base
+          jumps: 2
+        - to: Fortress Ledge
+          req: $mist2
+          movement: mist2
+        - to: Fortress Ledge
+          req: Nanite_Mist
+          movement: mist1
     - name: West 8
       coord: [36.05, 7.75]
       local:
@@ -1151,6 +1232,9 @@ areas:
       exits:
         - to: Peak > East 8
           tags: [xshift]
+        - to: Fortress Wall
+          req: $hover and Anuman and Wall_Climb
+          movement: base
     #endregion
 
     #region Upper Mid
@@ -1447,6 +1531,57 @@ areas:
         # There are probably other options without water movement (hook etc)
         - to: Annuna > West Climb > North
           tags: [ydoor]
+    #endregion
+
+    #region Aerial
+    - name: Fortress Wall
+      coord: [36.9, 7.9]
+      local:
+        - to: East 9
+      exits:
+        - to: Fortress Ledge
+          req: $infinite_climb and Slingshot_Hook
+          time: 3.6  # ?
+        - to: Fortress Ledge
+          req: $infinite_climb
+          time: 4.8  # ?
+    - name: Fortress Ledge
+      coord: [36.95, 6.75]
+      local:
+        - to: Peak
+        - to: Mid 9
+        - to: Fortress Wall
+      exits:
+        - to: West 8
+          req: $hover
+          movement: base
+        - to: Fortress > Parapet West Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
+        - to: Fortress > Parapet West Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+          penalty_tags: [xshift, -base.1]
+    - name: Flying West
+      coord: [36.2, 5.9]
+      exits:
+        - to: Peak > Top Platform East
+          req: $hookhover
+          movement: fast_hover
+    - name: Hovering East
+      coord: [36.5, 6.0]
+      exits:
+        - to: Fortress > Parapet West Ledge
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Fortress > Parapet West Hook Point
+          req: $hookhover
+          movement: base
+          penalty_tags: [xshift, -base.1]
     #endregion
 
 - name: Boomerang Antechamber  # MARK: Boomerang Antechamber
@@ -1946,6 +2081,11 @@ areas:
           req: $hover
           movement: base
           jumps: 1
+        - to: Vertical Room > Hovering East
+          req: $hover
+          movement: base
+          jumps: 1
+          penalty_tags: [xshift, -base.1]
     - name: Top Rock
       coord: [34.6, 5.9]
       local:
@@ -2123,7 +2263,6 @@ areas:
           movement: mist2
         - to: Ledge Grab Room > West 9
           tags: [xshift]
-
 
 - name: Grid 31,9-12  # MARK: Grid 31,9-12
   on_entry: $reset_old_area(^newpos)
@@ -2459,6 +2598,8 @@ areas:
     map_spot:
       lower: Menu > Kiengir Map > Breach Attractor
       upper: Menu > Kiengir Map > Bounty List
+    water:
+      lower: true
   spots:
     - name: West
       coord: [37.05, 13.8]
@@ -2546,9 +2687,9 @@ areas:
         - to: Portal Stand
       exits:
         - to: Middle Ledge
-          req: $hook and $hover
-          movement: base
-          jumps: 3
+          req: Underwater_Movement and $hook and $hover
+          movement: water
+          jumps: 2
         - to: Grate Left
           req: Nanite_Mist
           movement: mist1
@@ -2559,7 +2700,10 @@ areas:
       coord: [37.7, 15.6]
       local:
         - to: Lower Slope
+          jumps: 2
+        - to: Lower Slope
           jumps: 1
+          jump_mvmt: water
         - to: Portal Stand
       locations:
         - name: Item
@@ -2571,6 +2715,9 @@ areas:
         flipside: Amagi Breach > East Entrance > Save Point
       local:
         - to: Lower Corner
+        - to: Lower Slope
+          jumps: 1
+          jumps_mvmt: water
       exits:
         - to: Lower Slope
           req: $hover
@@ -3218,3 +3365,346 @@ areas:
           req: $hookhover
           movement: base
           jumps: 2
+
+- name: Fortress  # MARK: Fortress
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal Stand
+  map:
+    health: [38, 6, 39, 7]
+    flask_left: [37, 6, 38, 7]
+    ne: [38, 5, 39, 6]
+    portal: [38, 7, 39, 8]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Glacier Fortress Health
+      flask_left: Menu > Kiengir Map > Glacier Fortress Flask Left
+      ne: Menu > Kiengir Map > Glacier Fortress Northeast
+      portal: Menu > Kiengir Map > Glacier Fortress Portal
+  spots:
+    - name: Button
+      coord: [38.55, 7.75]
+      local:
+        - to: Portal Stand
+          jumps: 1
+      locations:
+        - name: Hit Button
+          item: Glacier_Fortress_Gate
+          req: $can_damage
+          tags: [button]
+    - name: Portal Stand
+      coord: [38.475, 7.7]
+      data:
+        flipside: Glacier Breach > Fortress > Portal Entry
+      local:
+        - to: Button
+      exits:
+        - to: Inner East Ledge
+          req: $mist2
+          movement: mist2
+        - to: Inner East Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Inner East Ledge
+      coord: [38.4, 7.0]
+      data:
+        flipside: Glacier Breach > Fortress > East Ledge
+      local:
+        - to: Portal Stand
+          thru: [38.4, 7.2]
+        - to: Button
+          thru: [38.4, 7.2]
+        - to: Inner Mid Tier East
+    - name: Inner Mid Tier East
+      coord: [38.7, 7.0]
+      data:
+        flipside: Glacier Breach > Fortress > Mid Tier East
+      local:
+        - to: Inner East Ledge
+      exits:
+        - to: Inner Upper Tier East
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Inner Upper Tier East
+          req: $grab or $hover
+          movement: base
+          jumps: 2
+        - to: Gate East
+          req: Glacier_Fortress_Gate and ($hook or Anuman)
+          movement: base
+          jumps: 1
+        - to: Gate East
+          req: Glacier_Fortress_Gate and ($grab or $hover)
+          movement: base
+          jumps: 2
+    - name: Inner Upper Tier East
+      coord: [38.7, 6.75]
+      data:
+        flipside: Glacier Breach > Fortress > Upper Tier East
+      local:
+        - to: Inner Mid Tier East
+        - to: Inner Center
+      exits:
+        - to: Inner Center
+          req: $hookhover
+          movement: fast_hover
+        - to: Gate East
+          req: Glacier_Fortress_Gate
+          movement: base
+    - name: Inner Center
+      coord: [38.075, 6.75]
+      data:
+        flipside: Glacier Breach > Fortress > Upper Tier Middle
+      local:
+        - to: Inner Upper Tier East
+        - to: Inner Upper Tier West
+      locations:
+        - name: Health
+          item: Health_Node
+          tags: [standing]
+        - name: Shockwave Block
+          canon: Glacier_Fortress_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+        - name: Shockwave Fast Travel
+          canon: Glacier_Fortress_Flask
+          item: Big_Flask
+          req: block_fast_travel and $shockwave and Fast_Travel
+          price: 100
+          tags: [shockwave]
+          to: ^map_spot
+          penalty_tags: [cskip]
+    - name: Inner Upper Tier West
+      coord: [37.55, 6.75]
+      data:
+        flipside: Glacier Breach > Fortress > Upper Tier West
+      local:
+        - to: Inner Center
+        - to: Inner Mid Tier West
+      exits:
+        - to: Inner Center
+          req: $hookhover
+          movement: fast_hover
+    - name: Inner Mid Tier West
+      coord: [37.55, 7.0]
+      data:
+        flipside: Glacier Breach > Fortress > Mid Tier West
+      local:
+        - to: West Staircase
+      exits:
+        - to: Inner Upper Tier West
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Inner Upper Tier West
+          req: $grab or $hover
+          movement: base
+          jumps: 2
+    - name: West Staircase
+      coord: [37.85, 7.45]
+      data:
+        flipside: Glacier Breach > Fortress > Southwest Stair
+      exits:
+        - to: Inner Mid Tier West
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+        - to: Inner Mid Tier West
+          req: $hover
+          movement: base
+          jumps: 4
+        - to: Inner Mid Tier West
+          req: Anuman
+          movement: base
+          jumps: 2
+        - to: Inner Mid Tier West
+          req: $grab
+          movement: base
+          jumps: 3
+
+    - name: Parapet West Ledge
+      coord: [37.1, 6.25]
+      local:
+        - to: Parapet West Hook Point
+          jumps: 2
+      exits:
+        - to: Vertical Room > Fortress Ledge
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Parapet West Hook Point
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Parapet West Hook Point
+          req: Anuman
+          movement: base
+          jumps: 1
+    - name: Parapet West Hook Point
+      coord: [37.4, 6.1]
+      local:
+        - to: Parapet West Ledge
+          jumps: 2
+        - to: Parapet Crenelle 2
+          jumps: 2
+      exits:
+        - to: Vertical Room > Flying West
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Parapet Crenelle 2
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Parapet Peak
+          req: $hookhover
+          movement: fast_hover
+          jumps: 3
+        - to: Parapet West Ledge
+          req: $hook
+          movement: fast_hover
+    - name: Parapet Crenelle 2
+      coord: [37.65, 6.15]
+      local:
+        - to: Parapet West Hook Point
+          jumps: 1
+        - to: Parapet Peak
+          jumps: 3
+      locations:
+        - name: Shockwave Block
+          canon: Glacier_Fortress_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+        - name: Shockwave Fast Travel
+          canon: Glacier_Fortress_Flask
+          item: Big_Flask
+          req: block_fast_travel and $shockwave and Fast_Travel
+          price: 100
+          tags: [shockwave]
+          to: ^map_spot
+          penalty_tags: [cskip]
+      exits:
+        - to: Parapet West Hook Point
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Parapet Peak
+          req: $hook
+          movement: fast_hover
+          jumps: 3
+    - name: Parapet Peak
+      coord: [38.0, 5.65]
+      local:
+        - to: Parapet West Hook Point
+        - to: Parapet Crenelle 2
+        - to: Parapet Center East
+        - to: Parapet East Hook Point
+      exits:
+        - to: Parapet West Hook Point
+          req: $hookhover
+          movement: fast_hover
+        - to: Parapet East Hook Point
+          req: $hookhover
+          movement: fast_hover
+    - name: Parapet Center East
+      coord: [38.2, 6.0]
+      local:
+        - to: Parapet Peak
+          jumps: 2
+        - to: Parapet East Hook Point
+      locations:
+        - name: Shockwave Block
+          canon: Glacier_Fortress_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+          penalty_tags: [flask]
+        - name: Shockwave Fast Travel
+          canon: Glacier_Fortress_Flask
+          item: Big_Flask
+          req: block_fast_travel and $shockwave and Fast_Travel
+          price: 100
+          tags: [shockwave]
+          to: ^map_spot
+          penalty_tags: [cskip]
+        - name: Bomberang
+          item: Glacier_Fortress_Bomberang
+          req: $bomberang and Anuman and not $visited(`Glacier > Fortress > Inner Center > Shockwave Block`)
+          price: 100
+          to: Gate East
+          time: 10
+          tags: [shockwave]
+      exits:
+        - to: Parapet Peak
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Parapet East Hook Point
+          req: $hook
+          movement: fast_hover
+    - name: Parapet East Hook Point
+      coord: [38.6, 6.1]
+      local:
+        - to: Parapet Center East
+          jumps: 3
+        - to: Parapet East Ledge
+          jumps: 1
+      exits:
+        - to: Parapet Peak
+          req: $hookhover
+          movement: fast_hover
+          jumps: 3
+        - to: Parapet East Ledge
+          req: $hook
+          movement: fast_hover
+        - to: Grid 39-40,7-9 > Floating Rock
+          req: $hookhover
+          movement: fast_hover
+        - to: Grid 39-40,7-9 > Upper East
+          req: $hookhover
+          movement: fast_hover
+        - to: Grid 39-40,7-9 > East 9
+          req: $hookhover
+          movement: fast_hover
+    - name: Parapet East Ledge
+      coord: [38.9, 6.3]
+      local:
+        - to: Parapet East Hook Point
+          jumps: 2
+        - to: Gate East
+      exits:
+        - to: Parapet East Hook Point
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Parapet East Hook Point
+          req: Anuman
+          movement: base
+          jumps: 1
+        - to: Grid 39-40,7-9 > Fortress Ledge
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Gate East
+      coord: [38.9, 6.75]
+      exits:
+        - to: Parapet East Ledge
+          req: $hook or (Anuman and $climb)
+          movement: base
+          jumps: 2
+        - to: Inner Upper Tier East
+          req: Glacier_Fortress_Gate
+          movement: base
+        - to: Inner Mid Tier East
+          req: Glacier_Fortress_Gate
+          movement: base
+        - to: Grid 39-40,7-9 > Fortress Ledge
+          movement: base
+          penalty_tags: [xshift, -base.1]

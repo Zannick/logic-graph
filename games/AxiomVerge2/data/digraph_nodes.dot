@@ -2283,6 +2283,14 @@
         }
         {
             Glacier_Breach__Fortress__Southwest [label = "", pos = "112.65,-63.0!"];
+            Glacier_Breach__Fortress__Southwest_Stair [label = "", pos = "113.55,-62.416667!"];
+            Glacier_Breach__Fortress__Mid_Tier_West [label = "", pos = "112.65,-61.666667!"];
+            Glacier_Breach__Fortress__Upper_Tier_West [label = "", pos = "112.65,-61.25!"];
+            Glacier_Breach__Fortress__Upper_Tier_Middle [label = "", pos = "114.225,-61.25!"];
+            Glacier_Breach__Fortress__Upper_Tier_East [label = "", pos = "116.1,-61.25!"];
+            Glacier_Breach__Fortress__Mid_Tier_East [label = "", pos = "116.1,-61.666667!"];
+            Glacier_Breach__Fortress__East_Ledge [label = "", pos = "115.2,-61.666667!"];
+            Glacier_Breach__Fortress__Portal_Entry [label = "", pos = "115.425,-62.833333!"];
             Glacier_Breach__Fortress__Southeast [label = "", pos = "115.35,-63.0!"];
         }
         {
@@ -2449,6 +2457,25 @@
             Glacier__Dock_Outside__Cave_Treasure [label = "", pos = "133.8,-14.166667!"];
         }
         {
+            Glacier__Fortress__Button [label = "", pos = "115.65,-12.916667!"];
+            Glacier__Fortress__Portal_Stand [label = "", pos = "115.425,-12.833333!"];
+            Glacier__Fortress__Inner_East_Ledge [label = "", pos = "115.2,-11.666667!"];
+            Glacier__Fortress__Inner_Mid_Tier_East [label = "", pos = "116.1,-11.666667!"];
+            Glacier__Fortress__Inner_Upper_Tier_East [label = "", pos = "116.1,-11.25!"];
+            Glacier__Fortress__Inner_Center [label = "", pos = "114.225,-11.25!"];
+            Glacier__Fortress__Inner_Upper_Tier_West [label = "", pos = "112.65,-11.25!"];
+            Glacier__Fortress__Inner_Mid_Tier_West [label = "", pos = "112.65,-11.666667!"];
+            Glacier__Fortress__West_Staircase [label = "", pos = "113.55,-12.416667!"];
+            Glacier__Fortress__Parapet_West_Ledge [label = "", pos = "111.3,-10.416667!"];
+            Glacier__Fortress__Parapet_West_Hook_Point [label = "", pos = "112.2,-10.166667!"];
+            Glacier__Fortress__Parapet_Crenelle_2 [label = "", pos = "112.95,-10.25!"];
+            Glacier__Fortress__Parapet_Peak [label = "", pos = "114.0,-9.416667!"];
+            Glacier__Fortress__Parapet_Center_East [label = "", pos = "114.6,-10.0!"];
+            Glacier__Fortress__Parapet_East_Hook_Point [label = "", pos = "115.8,-10.166667!"];
+            Glacier__Fortress__Parapet_East_Ledge [label = "", pos = "116.7,-10.5!"];
+            Glacier__Fortress__Gate_East [label = "", pos = "116.7,-11.25!"];
+        }
+        {
             Glacier__Grid_31_9_12__East_9 [label = "", pos = "95.85,-14.25!"];
             Glacier__Grid_31_9_12__East_10 [label = "", pos = "95.85,-15.458333!"];
             Glacier__Grid_31_9_12__Observation_Tower [label = "", pos = "93.9,-17.25!"];
@@ -2477,6 +2504,7 @@
             Glacier__Grid_39_40_7_9__Third_Upper_Platform [label = "", pos = "121.8,-11.583333!"];
             Glacier__Grid_39_40_7_9__Floating_Rock [label = "", pos = "121.2,-11.166667!"];
             Glacier__Grid_39_40_7_9__Fortress_Ledge [label = "", pos = "120.15,-11.25!"];
+            Glacier__Grid_39_40_7_9__Fortress_Wall [label = "", pos = "120.3,-12.916667!"];
             Glacier__Grid_39_40_7_9__Upper_Scaffolding [label = "", pos = "120.9,-13.25!"];
             Glacier__Grid_39_40_7_9__West [label = "", pos = "117.15,-14.416667!"];
             Glacier__Grid_39_40_7_9__Under_Scaffolding [label = "", pos = "120.9,-13.916667!"];
@@ -2666,6 +2694,10 @@
             Glacier__Vertical_Room__East_17_while_hovering [label = "", pos = "110.7,-27.75!"];
             Glacier__Vertical_Room__Lower_Gatestone [label = "", pos = "109.8,-28.333333!"];
             Glacier__Vertical_Room__South [label = "", pos = "109.5,-29.666667!"];
+            Glacier__Vertical_Room__Fortress_Wall [label = "", pos = "110.7,-13.166667!"];
+            Glacier__Vertical_Room__Fortress_Ledge [label = "", pos = "110.85,-11.25!"];
+            Glacier__Vertical_Room__Flying_West [label = "", pos = "108.6,-9.833333!"];
+            Glacier__Vertical_Room__Hovering_East [label = "", pos = "109.5,-10.0!"];
         }
     }
     {
@@ -3345,6 +3377,10 @@
             Menu__Kiengir_Map__Glacier_Sliced_Cavern_Health [label = "", pos = "99.0,-20.0!"];
             Menu__Kiengir_Map__Sagiga_on_the_Worldstream [label = "", pos = "99.0,-23.333333!"];
             Menu__Kiengir_Map__Glacier_Lake_Main_Entrance_Flask [label = "", pos = "96.0,-21.666667!"];
+            Menu__Kiengir_Map__Glacier_Fortress_Northeast [label = "", pos = "114.0,-10.0!"];
+            Menu__Kiengir_Map__Glacier_Fortress_Health [label = "", pos = "114.0,-11.666667!"];
+            Menu__Kiengir_Map__Glacier_Fortress_Portal [label = "", pos = "114.0,-13.333333!"];
+            Menu__Kiengir_Map__Glacier_Fortress_Flask_Left [label = "", pos = "111.0,-11.666667!"];
             Menu__Kiengir_Map__Carnelian_Ring [label = "", pos = "48.0,-18.333333!"];
             Menu__Kiengir_Map__Giguna_Northeast_Gate [label = "", pos = "54.0,-16.666667!"];
             Menu__Kiengir_Map__Giguna_Northeast_Flask [label = "", pos = "51.0,-18.333333!"];

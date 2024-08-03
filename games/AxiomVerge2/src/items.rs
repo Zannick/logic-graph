@@ -127,6 +127,8 @@ pub enum Item {
     Giguna_Wasteland_Passage_H,
     Glacier_Big_Drop_Rock,
     Glacier_Breach_Spidery_Connector_Gate,
+    Glacier_Fortress_Bomberang,
+    Glacier_Fortress_Gate,
     Glacier_Sea_Burial_Rock,
     Goodbye,
     Halusan,
@@ -363,6 +365,8 @@ impl fmt::Display for Item {
             Item::Glacier_Breach_Spidery_Connector_Gate => {
                 write!(f, "{}", "Glacier_Breach_Spidery_Connector_Gate")
             }
+            Item::Glacier_Fortress_Bomberang => write!(f, "{}", "Glacier_Fortress_Bomberang"),
+            Item::Glacier_Fortress_Gate => write!(f, "{}", "Glacier_Fortress_Gate"),
             Item::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             Item::Goodbye => write!(f, "{}", "Goodbye"),
             Item::Halusan => write!(f, "{}", "Halusan"),
@@ -601,6 +605,8 @@ impl std::str::FromStr for Item {
             "Glacier_Breach_Spidery_Connector_Gate" => {
                 Ok(Item::Glacier_Breach_Spidery_Connector_Gate)
             }
+            "Glacier_Fortress_Bomberang" => Ok(Item::Glacier_Fortress_Bomberang),
+            "Glacier_Fortress_Gate" => Ok(Item::Glacier_Fortress_Gate),
             "Glacier_Sea_Burial_Rock" => Ok(Item::Glacier_Sea_Burial_Rock),
             "Goodbye" => Ok(Item::Goodbye),
             "Halusan" => Ok(Item::Halusan),

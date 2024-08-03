@@ -785,6 +785,14 @@ areas:
       coord: [33, 14]
     - name: Glacier Lake Main Entrance Flask
       coord: [32, 13]
+    - name: Glacier Fortress Northeast
+      coord: [38, 6]
+    - name: Glacier Fortress Health
+      coord: [38, 7]
+    - name: Glacier Fortress Portal
+      coord: [38, 8]
+    - name: Glacier Fortress Flask Left
+      coord: [37, 7]
 
     - name: Carnelian Ring
       coord: [16, 11]

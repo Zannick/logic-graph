@@ -557,6 +557,13 @@ pub fn access_apocalypse_bomb_and_invoke_hook(ctx: &Context, world: &World) -> b
     // Apocalypse_Bomb and $hook
     (ctx.has(Item::Apocalypse_Bomb) && helper__hook!(ctx, world))
 }
+pub fn access_block_fast_travel_and_invoke_shockwave_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // block_fast_travel and $shockwave and Fast_Travel
+    ((world.block_fast_travel && helper__shockwave!(ctx, world)) && ctx.has(Item::Fast_Travel))
+}
 pub fn access_boomerang(ctx: &Context, world: &World) -> bool {
     // Boomerang
     ctx.has(Item::Boomerang)
@@ -2091,6 +2098,25 @@ pub fn access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone
     ((ctx.has(Item::Glacier_Breach_Spidery_Connector_Gate) && ctx.has(Item::Slingshot_Hook))
         && ctx.has(Item::Drone_Hover))
 }
+pub fn access_glacier_fortress_gate(ctx: &Context, world: &World) -> bool {
+    // Glacier_Fortress_Gate
+    ctx.has(Item::Glacier_Fortress_Gate)
+}
+pub fn access_glacier_fortress_gate_and___invoke_grab_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Glacier_Fortress_Gate and ($grab or $hover)
+    (ctx.has(Item::Glacier_Fortress_Gate)
+        && (helper__grab!(ctx, world) || helper__hover!(ctx, world)))
+}
+pub fn access_glacier_fortress_gate_and___invoke_hook_or_anuman(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Glacier_Fortress_Gate and ($hook or Anuman)
+    (ctx.has(Item::Glacier_Fortress_Gate) && (helper__hook!(ctx, world) || ctx.has(Item::Anuman)))
+}
 pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Sea_Burial_Rock
     ctx.has(Item::Glacier_Sea_Burial_Rock)
@@ -2183,6 +2209,14 @@ pub fn access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
 ) -> bool {
     // $block_clip_escape and not Uhrum_Annuna_Corridor_Block
     (helper__block_clip_escape!(ctx, world) && !ctx.has(Item::Uhrum_Annuna_Corridor_Block))
+}
+pub fn access_invoke_bomberang_and_anuman_and_not_invoke_visited__glacier_gt_fortress_gt_inner_center_gt_shockwave_block(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $bomberang and Anuman and not $visited(`Glacier > Fortress > Inner Center > Shockwave Block`)
+    ((helper__bomberang!(ctx, world) && ctx.has(Item::Anuman))
+        && !ctx.visited(LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block))
 }
 pub fn access_invoke_boomerang(ctx: &Context, world: &World) -> bool {
     // $boomerang
@@ -2345,6 +2379,10 @@ pub fn access_invoke_grab_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $grab or $hook
     (helper__grab!(ctx, world) || helper__hook!(ctx, world))
 }
+pub fn access_invoke_grab_or_invoke_hover(ctx: &Context, world: &World) -> bool {
+    // $grab or $hover
+    (helper__grab!(ctx, world) || helper__hover!(ctx, world))
+}
 pub fn access_invoke_grab_or_underwater_movement(ctx: &Context, world: &World) -> bool {
     // $grab or Underwater_Movement
     (helper__grab!(ctx, world) || ctx.has(Item::Underwater_Movement))
@@ -2434,6 +2472,10 @@ pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &World) 
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_invoke_hook_or___anuman_and_invoke_climb(ctx: &Context, world: &World) -> bool {
+    // $hook or (Anuman and $climb)
+    (helper__hook!(ctx, world) || (ctx.has(Item::Anuman) && helper__climb!(ctx, world)))
+}
 pub fn access_invoke_hook_or___anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // $hook or (Anuman and $grab)
     (helper__hook!(ctx, world) || (ctx.has(Item::Anuman) && helper__grab!(ctx, world)))
@@ -2493,6 +2535,10 @@ pub fn access_invoke_hover_and_anuman_and_underwater_movement_and___boomerang_or
     // $hover and Anuman and Underwater_Movement and (Boomerang or Boomerang_Upgrade)
     (((helper__hover!(ctx, world) && ctx.has(Item::Anuman)) && ctx.has(Item::Underwater_Movement))
         && (ctx.has(Item::Boomerang) || ctx.has(Item::Boomerang_Upgrade)))
+}
+pub fn access_invoke_hover_and_anuman_and_wall_climb(ctx: &Context, world: &World) -> bool {
+    // $hover and Anuman and Wall_Climb
+    ((helper__hover!(ctx, world) && ctx.has(Item::Anuman)) && ctx.has(Item::Wall_Climb))
 }
 pub fn access_invoke_hover_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hover and $hook
@@ -3715,6 +3761,14 @@ pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &World) 
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
 }
+pub fn access_underwater_movement_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and $hook and $hover
+    ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
+        && helper__hover!(ctx, world))
+}
 pub fn access_underwater_movement_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hookhover
     (ctx.has(Item::Underwater_Movement) && helper__hookhover!(ctx, world))
@@ -4361,6 +4415,16 @@ pub fn action_invoke_visit__giguna_gt_separator_gt_upper_brick_gt_break_bricks_i
     ctx.visit(LocationId::Giguna__Separator__Upper_Brick__Break_Bricks);
     ctx.add_item(Item::Giguna_Separator_Bricks);
     ctx.set_indra(Default::default());
+}
+pub fn action_invoke_visit__glacier_gt_fortress_gt_inner_center_gt_shockwave_block_invoke_visit__glacier_gt_fortress_gt_button_gt_hit_button_invoke_collect__big_flask_invoke_add_item__glacier_fortress_gate(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $visit(`Glacier > Fortress > Inner Center > Shockwave Block`); $visit(`Glacier > Fortress > Button > Hit Button`); $collect(Big_Flask); $add_item(Glacier_Fortress_Gate);
+    ctx.visit(LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block);
+    ctx.visit(LocationId::Glacier__Fortress__Button__Hit_Button);
+    ctx.collect(Item::Big_Flask, world);
+    ctx.add_item(Item::Glacier_Fortress_Gate);
 }
 pub fn action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &mut Context,
@@ -6641,6 +6705,45 @@ pub fn explain_apocalypse_bomb_and_invoke_hook(
                 edict.insert("$hook", format!("{:?}", res));
                 refs.push("$hook");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_block_fast_travel_and_invoke_shockwave_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // block_fast_travel and $shockwave and Fast_Travel
+    {
+        let mut left = {
+            let mut left = {
+                let s = world.block_fast_travel;
+                edict.insert("block_fast_travel", format!("{}", s));
+                (s, vec!["block_fast_travel"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                    edict.insert("$shockwave", format!("{:?}", res));
+                    refs.push("$shockwave");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Fast_Travel);
+                edict.insert("Fast_Travel", format!("{}", h));
+                (h, vec!["Fast_Travel"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12128,6 +12231,97 @@ pub fn explain_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_dron
         }
     }
 }
+pub fn explain_glacier_fortress_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Fortress_Gate
+    {
+        let h = ctx.has(Item::Glacier_Fortress_Gate);
+        edict.insert("Glacier_Fortress_Gate", format!("{}", h));
+        (h, vec!["Glacier_Fortress_Gate"])
+    }
+}
+pub fn explain_glacier_fortress_gate_and___invoke_grab_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Fortress_Gate and ($grab or $hover)
+    {
+        let mut left = {
+            let h = ctx.has(Item::Glacier_Fortress_Gate);
+            edict.insert("Glacier_Fortress_Gate", format!("{}", h));
+            (h, vec!["Glacier_Fortress_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                        edict.insert("$hover", format!("{:?}", res));
+                        refs.push("$hover");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier_fortress_gate_and___invoke_hook_or_anuman(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Fortress_Gate and ($hook or Anuman)
+    {
+        let mut left = {
+            let h = ctx.has(Item::Glacier_Fortress_Gate);
+            edict.insert("Glacier_Fortress_Gate", format!("{}", h));
+            (h, vec!["Glacier_Fortress_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Anuman);
+                        edict.insert("Anuman", format!("{}", h));
+                        (h, vec!["Anuman"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_glacier_sea_burial_rock(
     ctx: &Context,
     world: &World,
@@ -12487,6 +12681,51 @@ pub fn explain_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(
                 let h = ctx.has(Item::Uhrum_Annuna_Corridor_Block);
                 edict.insert("Uhrum_Annuna_Corridor_Block", format!("{}", h));
                 (!h, vec!["Uhrum_Annuna_Corridor_Block"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_bomberang_and_anuman_and_not_invoke_visited__glacier_gt_fortress_gt_inner_center_gt_shockwave_block(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $bomberang and Anuman and not $visited(`Glacier > Fortress > Inner Center > Shockwave Block`)
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__bomberang!(ctx, world, edict);
+                edict.insert("$bomberang", format!("{:?}", res));
+                refs.push("$bomberang");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let res = ctx.visited(LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block);
+                edict.insert(
+                    "not$visited(`Glacier > Fortress > Inner Center > Shockwave Block`)",
+                    format!("{:?}", res),
+                );
+                (
+                    !res,
+                    vec!["not$visited(`Glacier > Fortress > Inner Center > Shockwave Block`)"],
+                )
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -13414,6 +13653,33 @@ pub fn explain_invoke_grab_or_invoke_hook(
         }
     }
 }
+pub fn explain_invoke_grab_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or $hover
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+            edict.insert("$grab", format!("{:?}", res));
+            refs.push("$grab");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_grab_or_underwater_movement(
     ctx: &Context,
     world: &World,
@@ -13962,6 +14228,46 @@ pub fn explain_invoke_hook_and_underwater_movement(
         }
     }
 }
+pub fn explain_invoke_hook_or___anuman_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook or (Anuman and $climb)
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                        edict.insert("$climb", format!("{:?}", res));
+                        refs.push("$climb");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_or___anuman_and_invoke_grab(
     ctx: &Context,
     world: &World,
@@ -14338,6 +14644,45 @@ pub fn explain_invoke_hover_and_anuman_and_underwater_movement_and___boomerang_o
                     (right.0, left.1)
                 }
             });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hover_and_anuman_and_wall_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hover and Anuman and Wall_Climb
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Wall_Climb);
+                edict.insert("Wall_Climb", format!("{}", h));
+                (h, vec!["Wall_Climb"])
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -19903,6 +20248,46 @@ pub fn explain_underwater_movement_and_invoke_hook(
         }
     }
 }
+pub fn explain_underwater_movement_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and $hook and $hover
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                    edict.insert("$hook", format!("{:?}", res));
+                    refs.push("$hook");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_invoke_hookhover(
     ctx: &Context,
     world: &World,
@@ -21155,6 +21540,18 @@ pub fn observe_access_apocalypse_bomb_and_invoke_hook(
         full_obs.observe_apocalypse_bomb();
         ctx.has(Item::Apocalypse_Bomb)
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_block_fast_travel_and_invoke_shockwave_and_fast_travel(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // block_fast_travel and $shockwave and Fast_Travel
+    ((world.block_fast_travel && (hobserve__shockwave!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_fast_travel();
+            ctx.has(Item::Fast_Travel)
+        }))
 }
 pub fn observe_access_boomerang(
     ctx: &Context,
@@ -24176,6 +24573,42 @@ pub fn observe_access_glacier_breach_spidery_connector_gate_and_slingshot_hook_a
         ctx.has(Item::Drone_Hover)
     }))
 }
+pub fn observe_access_glacier_fortress_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Fortress_Gate
+    {
+        full_obs.observe_glacier_fortress_gate();
+        ctx.has(Item::Glacier_Fortress_Gate)
+    }
+}
+pub fn observe_access_glacier_fortress_gate_and___invoke_grab_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Fortress_Gate and ($grab or $hover)
+    ({
+        full_obs.observe_glacier_fortress_gate();
+        ctx.has(Item::Glacier_Fortress_Gate)
+    } && (hobserve__grab!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs)))
+}
+pub fn observe_access_glacier_fortress_gate_and___invoke_hook_or_anuman(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Fortress_Gate and ($hook or Anuman)
+    ({
+        full_obs.observe_glacier_fortress_gate();
+        ctx.has(Item::Glacier_Fortress_Gate)
+    } && (hobserve__hook!(ctx, world, full_obs) || {
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    }))
+}
 pub fn observe_access_glacier_sea_burial_rock(
     ctx: &Context,
     world: &World,
@@ -24399,6 +24832,19 @@ pub fn observe_access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_blo
             full_obs.observe_uhrum_annuna_corridor_block();
             !ctx.has(Item::Uhrum_Annuna_Corridor_Block)
         }))
+}
+pub fn observe_access_invoke_bomberang_and_anuman_and_not_invoke_visited__glacier_gt_fortress_gt_inner_center_gt_shockwave_block(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $bomberang and Anuman and not $visited(`Glacier > Fortress > Inner Center > Shockwave Block`)
+    ((hobserve__bomberang!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+        && (ctx.visited(LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block)))
 }
 pub fn observe_access_invoke_boomerang(
     ctx: &Context,
@@ -24776,6 +25222,14 @@ pub fn observe_access_invoke_grab_or_invoke_hook(
     // $grab or $hook
     (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
 }
+pub fn observe_access_invoke_grab_or_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or $hover
+    (hobserve__grab!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
+}
 pub fn observe_access_invoke_grab_or_underwater_movement(
     ctx: &Context,
     world: &World,
@@ -24987,6 +25441,18 @@ pub fn observe_access_invoke_hook_and_underwater_movement(
             ctx.has(Item::Underwater_Movement)
         }))
 }
+pub fn observe_access_invoke_hook_or___anuman_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook or (Anuman and $climb)
+    (hobserve__hook!(ctx, world, full_obs)
+        || ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        } && (hobserve__climb!(ctx, world, full_obs))))
+}
 pub fn observe_access_invoke_hook_or___anuman_and_invoke_grab(
     ctx: &Context,
     world: &World,
@@ -25132,6 +25598,22 @@ pub fn observe_access_invoke_hover_and_anuman_and_underwater_movement_and___boom
         } || {
             full_obs.observe_boomerang_upgrade();
             ctx.has(Item::Boomerang_Upgrade)
+        }))
+}
+pub fn observe_access_invoke_hover_and_anuman_and_wall_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hover and Anuman and Wall_Climb
+    ((hobserve__hover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }))
+        && ({
+            full_obs.observe_wall_climb();
+            ctx.has(Item::Wall_Climb)
         }))
 }
 pub fn observe_access_invoke_hover_and_invoke_hook(
@@ -28154,6 +28636,18 @@ pub fn observe_access_underwater_movement_and_invoke_hook(
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hook!(ctx, world, full_obs)))
 }
+pub fn observe_access_underwater_movement_and_invoke_hook_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and $hook and $hover
+    (({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__hook!(ctx, world, full_obs)))
+        && (hobserve__hover!(ctx, world, full_obs)))
+}
 pub fn observe_access_underwater_movement_and_invoke_hookhover(
     ctx: &Context,
     world: &World,
@@ -29116,6 +29610,17 @@ pub fn observe_action_invoke_visit__giguna_gt_separator_gt_upper_brick_gt_break_
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Giguna > Separator > Upper Brick > Break Bricks`); $add_item(Giguna_Separator_Bricks); ^indra = $default;
+}
+pub fn observe_action_invoke_visit__glacier_gt_fortress_gt_inner_center_gt_shockwave_block_invoke_visit__glacier_gt_fortress_gt_button_gt_hit_button_invoke_collect__big_flask_invoke_add_item__glacier_fortress_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $visit(`Glacier > Fortress > Inner Center > Shockwave Block`); $visit(`Glacier > Fortress > Button > Hit Button`); $collect(Big_Flask); $add_item(Glacier_Fortress_Gate);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    rules::observe_action_flasks_incr_2(ctx, world, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(
     ctx: &Context,

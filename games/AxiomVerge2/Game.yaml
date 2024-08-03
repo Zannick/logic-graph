@@ -348,8 +348,10 @@ helpers:  # MARK: helpers
   $block_clip_escape: minor_glitches and $hook
 
   # tricks
+  # for infinite climb: dy=.3-.35 per jump, about 1.2-1.6/jump, -1 jump-ish with slingshot hook
   $infinite_climb: Anuman and Wall_Climb and Remote_Drone and Drone_Hover
   $melee_cskip: ($weapon and indra_cskip) or ^mode == 'drone'
+  $bomberang: bomberang and $shockwave and Boomerang
 
   # TODO: this is a temporary hack around the attract issue #131
   # Only allow attract when there's only one target: both at the same place, or Indra doesn't affect it.
@@ -365,9 +367,9 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   $all_flasks:itemList: >
-    [Flask{51}, Big_Flask{27}]
+    [Flask{51}, Big_Flask{28}]
   $all_health:itemList: >
-    [Health_Node{4}, Health_Fragment{22}]
+    [Health_Node{5}, Health_Fragment{22}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
@@ -460,6 +462,14 @@ collect:  # MARK: collect
   Health_Fragment: $refill_energy
   Health_Node: $refill_energy
   Power_Core: ^refills += 1
+  Defeat_MUS_A_M20:
+    $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
+    $add_item(Amagi_Dragon_Eye_Passage);
+  Separation:
+    $visit(`Giguna > Separator > Upper Brick > Break Bricks`);
+    $add_item(Giguna_Separator_Bricks);
+    ^indra = $default;
+  # Item aliases count as items but don't get included in state (if they're unused in rules)
   Amagi_Stronghold_Wall_And_Boulder_1: >
     $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`);
     $add_item(Amagi_Stronghold_Wall_1);
@@ -473,13 +483,11 @@ collect:  # MARK: collect
     $visit(`Ebih > Waterfall > Alcove > Block Right`);
     $add_item(Ebih_Waterfall_Block_Right);
     $add_item(Ebih_Waterfall_Block_Left);
-  Defeat_MUS_A_M20:
-    $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
-    $add_item(Amagi_Dragon_Eye_Passage);
-  Separation:
-    $visit(`Giguna > Separator > Upper Brick > Break Bricks`);
-    $add_item(Giguna_Separator_Bricks);
-    ^indra = $default;
+  Glacier_Fortress_Bomberang: >
+    $visit(`Glacier > Fortress > Inner Center > Shockwave Block`);
+    $visit(`Glacier > Fortress > Button > Hit Button`);
+    $collect(Big_Flask);
+    $add_item(Glacier_Fortress_Gate);
 
 settings:  # MARK: settings
   boomerang_steering:
@@ -492,6 +500,10 @@ settings:  # MARK: settings
     type: bool
     default: true
   indra_cskip:
+    type: bool
+  bomberang:
+    type: bool
+  block_fast_travel:
     type: bool
 
 special:  # MARK: special

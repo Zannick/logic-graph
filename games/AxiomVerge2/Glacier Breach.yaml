@@ -994,8 +994,114 @@ areas:
   spots:
     - name: Southwest
       coord: [37.55, 7.8]
+      local:
+        - to: Southwest Stair
+          jumps: 2
+      exits:
+        - to: Stacked Enemies > Northwest
+          tags: [ydoor]
+        - to: Southwest Stair
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+    - name: Southwest Stair
+      coord: [37.85, 7.45]
+      data:
+        flipside: Glacier > Fortress > West Staircase
+      local:
+        - to: Southwest
+      exits:
+        - to: Mid Tier West
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: Mid Tier West
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+    - name: Mid Tier West
+      coord: [37.55, 7.0]
+      data:
+        flipside: Glacier > Fortress > Inner Mid Tier West
+      local:
+        - to: Southwest Stair
+      exits:
+        - to: Upper Tier West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Upper Tier West
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+    - name: Upper Tier West
+      coord: [37.55, 6.75]
+      data:
+        flipside: Glacier > Fortress > Inner Upper Tier West
+      local:
+        - to: Mid Tier West
+        - to: Upper Tier Middle
+      exits:
+        - to: Upper Tier Middle
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Upper Tier Middle
+      coord: [38.075, 6.75]
+      data:
+        flipside: Glacier > Fortress > Inner Center
+      local:
+        - to: Upper Tier West
+        - to: Upper Tier East
+    - name: Upper Tier East
+      coord: [38.7, 6.75]
+      data:
+        flipside: Glacier > Fortress > Inner Upper Tier East
+      local:
+        - to: Upper Tier Middle
+        - to: Mid Tier East
+      exits:
+        - to: Upper Tier Middle
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Mid Tier East
+      coord: [38.7, 7.0]
+      data:
+        flipside: Glacier > Fortress > Inner Mid Tier East
+      local:
+        - to: East Ledge
+      exits:
+        - to: Upper Tier East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Upper Tier East
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+    - name: East Ledge
+      coord: [38.4, 7.0]
+      data:
+        flipside: Glacier > Fortress > Inner East Ledge
+      local:
+        - to: Mid Tier East
+        - to: Southeast
+    - name: Portal Entry
+      coord: [38.475, 7.7]
+      data:
+        flipside: Glacier > Fortress > Portal Stand
+      local:
+        - to: Southeast
     - name: Southeast
       coord: [38.45, 7.8]
+      exits:
+        - to: Stacked Enemies > Northeast
+          tags: [ydoor]
+        - to: East Ledge
+          req: $mist2
+          movement: mist2
+        - to: East Ledge
+          req: Nanite_Mist
+          movement: mist1
 
 - name: Empty Space  # MARK: Empty Space
   on_entry: $reset_old_area(^newpos)

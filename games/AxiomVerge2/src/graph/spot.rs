@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3201] = [
+static SPOT_DEFS: [SpotDef; 3235] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -11300,15 +11300,63 @@ static SPOT_DEFS: [SpotDef; 3201] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Glacier_Breach__Fortress__Southeast,
+        id: SpotId::Glacier_Breach__Fortress__East_Ledge,
         loc_range: None,
         exit_range: None,
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Glacier_Breach__Fortress__Southwest,
+        id: SpotId::Glacier_Breach__Fortress__Mid_Tier_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1, ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Mid_Tier_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1, ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Portal_Entry,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Southeast,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1, ExitId::Glacier_Breach__Fortress__Southeast__ex__Stacked_Enemies__Northeast_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Southwest,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1, ExitId::Glacier_Breach__Fortress__Southwest__ex__Stacked_Enemies__Northwest_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Southwest_Stair,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1, ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Upper_Tier_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1, ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Upper_Tier_Middle,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier_Breach__Fortress__Upper_Tier_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1, ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1)),
         action_range: None,
     },
     SpotDef {
@@ -12056,6 +12104,108 @@ static SPOT_DEFS: [SpotDef; 3201] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier__Fortress__Button,
+        loc_range: Some((LocationId::Glacier__Fortress__Button__Hit_Button, LocationId::Glacier__Fortress__Button__Hit_Button)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Gate_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Gate_East__ex__Grid_39_40_7_9__Fortress_Ledge_1, ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Inner_Center,
+        loc_range: Some((LocationId::Glacier__Fortress__Inner_Center__Health, LocationId::Glacier__Fortress__Inner_Center__Shockwave_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Inner_East_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Inner_Mid_Tier_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1, ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1, ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Inner_Upper_Tier_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Gate_East_1, ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Inner_Upper_Tier_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1, ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_Center_East,
+        loc_range: Some((LocationId::Glacier__Fortress__Parapet_Center_East__Bomberang, LocationId::Glacier__Fortress__Parapet_Center_East__Shockwave_Fast_Travel)),
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1, ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_Crenelle_2,
+        loc_range: Some((LocationId::Glacier__Fortress__Parapet_Crenelle_2__Shockwave_Block, LocationId::Glacier__Fortress__Parapet_Crenelle_2__Shockwave_Fast_Travel)),
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1, ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_East_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__East_9_1, ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Grid_39_40_7_9__Fortress_Ledge_1, ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_Peak,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1, ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_West_Hook_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1, ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Vertical_Room__Flying_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Parapet_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1, ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Vertical_Room__Fortress_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__Portal_Stand,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1, ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Fortress__West_Staircase,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1, ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_4)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__Grid_31_9_12__East_10,
         loc_range: None,
         exit_range: Some((ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1, ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1)),
@@ -12172,13 +12322,19 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     SpotDef {
         id: SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
         loc_range: Some((LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip, LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item)),
-        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1, ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1)),
+        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1, ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_3)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Floating_Rock_1, ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Parapet_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Grid_39_40_7_9__Fortress_Wall,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1, ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_2)),
         action_range: None,
     },
     SpotDef {
@@ -12208,13 +12364,13 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     SpotDef {
         id: SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__Upper_Scaffolding__ex__Fortress_Wall_1, ExitId::Glacier__Grid_39_40_7_9__Upper_Scaffolding__ex__Fortress_Wall_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Grid_39_40_7_9__West,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1, ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1)),
+        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1, ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -12688,7 +12844,7 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     SpotDef {
         id: SpotId::Glacier__Peak__Top_Platform_East,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1, ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1)),
+        exit_range: Some((ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1, ExitId::Glacier__Peak__Top_Platform_East__ex__Vertical_Room__Hovering_East_1)),
         action_range: None,
     },
     SpotDef {
@@ -13036,7 +13192,7 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__East_9,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1, ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1, ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2)),
         action_range: None,
     },
     SpotDef {
@@ -13049,6 +13205,30 @@ static SPOT_DEFS: [SpotDef; 3201] = [
         id: SpotId::Glacier__Vertical_Room__Flat_Platform,
         loc_range: None,
         exit_range: Some((ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1, ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Vertical_Room__Flying_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Flying_West__ex__Peak__Top_Platform_East_1, ExitId::Glacier__Vertical_Room__Flying_West__ex__Peak__Top_Platform_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Vertical_Room__Fortress_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1, ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Vertical_Room__Fortress_Wall,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1, ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Vertical_Room__Hovering_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Hook_Point_1, ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -13107,8 +13287,8 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     },
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__Peak,
-        loc_range: Some((LocationId::Glacier__Vertical_Room__Peak__Flask, LocationId::Glacier__Vertical_Room__Peak__Flask)),
-        exit_range: Some((ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1, ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2)),
+        loc_range: Some((LocationId::Glacier__Vertical_Room__Peak__Flask, LocationId::Glacier__Vertical_Room__Peak__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1, ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2)),
         action_range: None,
     },
     SpotDef {
@@ -13156,7 +13336,7 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__West_8,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1, ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__West_8__ex__Fortress_Wall_1, ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1)),
         action_range: None,
     },
     SpotDef {
@@ -16575,6 +16755,30 @@ static SPOT_DEFS: [SpotDef; 3201] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Glacier_East_Revival_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Fortress_Flask_Left,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Fortress_Health,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Fortress_Northeast,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Fortress_Portal,
         loc_range: None,
         exit_range: None,
         action_range: None,

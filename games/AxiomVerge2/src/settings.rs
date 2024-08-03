@@ -46,6 +46,12 @@ fn read_key_value(
         Some("indra_cskip") => {
             world.indra_cskip = parse_bool(key, val)?;
         }
+        Some("bomberang") => {
+            world.bomberang = parse_bool(key, val)?;
+        }
+        Some("block_fast_travel") => {
+            world.block_fast_travel = parse_bool(key, val)?;
+        }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
         }
