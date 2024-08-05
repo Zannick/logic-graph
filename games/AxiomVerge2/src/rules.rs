@@ -1635,12 +1635,26 @@ pub fn access_giguna__giguna_northeast__right_column__ex__door_1__req(
     // ^_door_opened
     ctx.giguna__giguna_northeast__ctx__door_opened()
 }
+pub fn access_giguna__giguna_northeast__right_column__ex__door_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened and $hook
+    (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hook!(ctx, world))
+}
+pub fn access_giguna__giguna_northeast__right_column__ex__vault_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened and $hookhover
+    (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hookhover!(ctx, world))
+}
 pub fn access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // $unlock3 and Infection_Range_3 and not ^_door_opened
-    ((helper__unlock3!(ctx, world) && ctx.has(Item::Infection_Range_3))
+    // $unlock3 and $range2 and not ^_door_opened
+    ((helper__unlock3!(ctx, world) && helper__range2!(ctx, world))
         && !ctx.giguna__giguna_northeast__ctx__door_opened())
 }
 pub fn access_giguna__giguna_northeast__switch__ex__door_1__req(
@@ -1662,15 +1676,22 @@ pub fn access_giguna__giguna_northeast__vault__ex__door_1__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // ^_door_opened
-    ctx.giguna__giguna_northeast__ctx__door_opened()
+    // ^_door_opened and $hook
+    (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hook!(ctx, world))
 }
-pub fn access_giguna__giguna_northeast__vault__ex__door_2__req(
+pub fn access_giguna__giguna_northeast__vault__ex__right_column_1__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
-    // ^_door_opened and $hook
-    (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hook!(ctx, world))
+    // ^_door_opened and $hookhover
+    (ctx.giguna__giguna_northeast__ctx__door_opened() && helper__hookhover!(ctx, world))
+}
+pub fn access_giguna__giguna_northeast__vault_east__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_door_opened
+    ctx.giguna__giguna_northeast__ctx__door_opened()
 }
 pub fn access_giguna__labyrinth__door_ledge__ex__door_1__req(ctx: &Context, world: &World) -> bool {
     // ^_door
@@ -1858,9 +1879,13 @@ pub fn access_giguna_gateway_gate(ctx: &Context, world: &World) -> bool {
     // Giguna_Gateway_Gate
     ctx.has(Item::Giguna_Gateway_Gate)
 }
-pub fn access_giguna_gubi(ctx: &Context, world: &World) -> bool {
-    // Giguna_Gubi
-    ctx.has(Item::Giguna_Gubi)
+pub fn access_giguna_gubi_and_invoke_boomerang(ctx: &Context, world: &World) -> bool {
+    // Giguna_Gubi and $boomerang
+    (ctx.has(Item::Giguna_Gubi) && helper__boomerang!(ctx, world))
+}
+pub fn access_giguna_gubi_and_invoke_hover(ctx: &Context, world: &World) -> bool {
+    // Giguna_Gubi and $hover
+    (ctx.has(Item::Giguna_Gubi) && helper__hover!(ctx, world))
 }
 pub fn access_giguna_labyrinth_gate(ctx: &Context, world: &World) -> bool {
     // Giguna_Labyrinth_Gate
@@ -10795,12 +10820,70 @@ pub fn explain_giguna__giguna_northeast__right_column__ex__door_1__req(
         (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
     }
 }
+pub fn explain_giguna__giguna_northeast__right_column__ex__door_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened and $hook
+    {
+        let mut left = {
+            let r = ctx.giguna__giguna_northeast__ctx__door_opened();
+            edict.insert(
+                "^giguna__giguna_northeast__ctx__door_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_giguna__giguna_northeast__right_column__ex__vault_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened and $hookhover
+    {
+        let mut left = {
+            let r = ctx.giguna__giguna_northeast__ctx__door_opened();
+            edict.insert(
+                "^giguna__giguna_northeast__ctx__door_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $unlock3 and Infection_Range_3 and not ^_door_opened
+    // $unlock3 and $range2 and not ^_door_opened
     {
         let mut left = {
             let mut left = {
@@ -10813,9 +10896,10 @@ pub fn explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(
                 left
             } else {
                 let mut right = {
-                    let h = ctx.has(Item::Infection_Range_3);
-                    edict.insert("Infection_Range_3", format!("{}", h));
-                    (h, vec!["Infection_Range_3"])
+                    let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                    edict.insert("$range2", format!("{:?}", res));
+                    refs.push("$range2");
+                    (res, refs)
                 };
                 left.1.append(&mut right.1);
                 (right.0, left.1)
@@ -10920,21 +11004,6 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_1__req(
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // ^_door_opened
-    {
-        let r = ctx.giguna__giguna_northeast__ctx__door_opened();
-        edict.insert(
-            "^giguna__giguna_northeast__ctx__door_opened",
-            format!("{:?}", r),
-        );
-        (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
-    }
-}
-pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
     // ^_door_opened and $hook
     {
         let mut left = {
@@ -10957,6 +11026,50 @@ pub fn explain_giguna__giguna_northeast__vault__ex__door_2__req(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_giguna__giguna_northeast__vault__ex__right_column_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened and $hookhover
+    {
+        let mut left = {
+            let r = ctx.giguna__giguna_northeast__ctx__door_opened();
+            edict.insert(
+                "^giguna__giguna_northeast__ctx__door_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_giguna__giguna_northeast__vault_east__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door_opened
+    {
+        let r = ctx.giguna__giguna_northeast__ctx__door_opened();
+        edict.insert(
+            "^giguna__giguna_northeast__ctx__door_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^giguna__giguna_northeast__ctx__door_opened"])
     }
 }
 pub fn explain_giguna__labyrinth__door_ledge__ex__door_1__req(
@@ -11488,16 +11601,56 @@ pub fn explain_giguna_gateway_gate(
         (h, vec!["Giguna_Gateway_Gate"])
     }
 }
-pub fn explain_giguna_gubi(
+pub fn explain_giguna_gubi_and_invoke_boomerang(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Giguna_Gubi
+    // Giguna_Gubi and $boomerang
     {
-        let h = ctx.has(Item::Giguna_Gubi);
-        edict.insert("Giguna_Gubi", format!("{}", h));
-        (h, vec!["Giguna_Gubi"])
+        let mut left = {
+            let h = ctx.has(Item::Giguna_Gubi);
+            edict.insert("Giguna_Gubi", format!("{}", h));
+            (h, vec!["Giguna_Gubi"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+                edict.insert("$boomerang", format!("{:?}", res));
+                refs.push("$boomerang");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_giguna_gubi_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Giguna_Gubi and $hover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Giguna_Gubi);
+            edict.insert("Giguna_Gubi", format!("{}", h));
+            (h, vec!["Giguna_Gubi"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                edict.insert("$hover", format!("{:?}", res));
+                refs.push("$hover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_giguna_labyrinth_gate(
@@ -23709,17 +23862,35 @@ pub fn observe_access_giguna__giguna_northeast__right_column__ex__door_1__req(
         ctx.giguna__giguna_northeast__ctx__door_opened()
     }
 }
+pub fn observe_access_giguna__giguna_northeast__right_column__ex__door_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened and $hook
+    ({
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_giguna__giguna_northeast__right_column__ex__vault_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened and $hookhover
+    ({
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
 pub fn observe_access_giguna__giguna_northeast__right_column__open_door_from_afar__req(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $unlock3 and Infection_Range_3 and not ^_door_opened
-    ((hobserve__unlock3!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_infection_range_3();
-            ctx.has(Item::Infection_Range_3)
-        }))
+    // $unlock3 and $range2 and not ^_door_opened
+    ((hobserve__unlock3!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
         && (!({
             full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
             ctx.giguna__giguna_northeast__ctx__door_opened()
@@ -23753,22 +23924,33 @@ pub fn observe_access_giguna__giguna_northeast__vault__ex__door_1__req(
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // ^_door_opened
-    {
-        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
-        ctx.giguna__giguna_northeast__ctx__door_opened()
-    }
-}
-pub fn observe_access_giguna__giguna_northeast__vault__ex__door_2__req(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
     // ^_door_opened and $hook
     ({
         full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
         ctx.giguna__giguna_northeast__ctx__door_opened()
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_giguna__giguna_northeast__vault__ex__right_column_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened and $hookhover
+    ({
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_giguna__giguna_northeast__vault_east__ex__door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door_opened
+    {
+        full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
+        ctx.giguna__giguna_northeast__ctx__door_opened()
+    }
 }
 pub fn observe_access_giguna__labyrinth__door_ledge__ex__door_1__req(
     ctx: &Context,
@@ -24123,16 +24305,27 @@ pub fn observe_access_giguna_gateway_gate(
         ctx.has(Item::Giguna_Gateway_Gate)
     }
 }
-pub fn observe_access_giguna_gubi(
+pub fn observe_access_giguna_gubi_and_invoke_boomerang(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Giguna_Gubi
-    {
+    // Giguna_Gubi and $boomerang
+    ({
         full_obs.observe_giguna_gubi();
         ctx.has(Item::Giguna_Gubi)
-    }
+    } && (hobserve__boomerang!(ctx, world, full_obs)))
+}
+pub fn observe_access_giguna_gubi_and_invoke_hover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Giguna_Gubi and $hover
+    ({
+        full_obs.observe_giguna_gubi();
+        ctx.has(Item::Giguna_Gubi)
+    } && (hobserve__hover!(ctx, world, full_obs)))
 }
 pub fn observe_access_giguna_labyrinth_gate(
     ctx: &Context,

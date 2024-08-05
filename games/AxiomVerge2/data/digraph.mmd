@@ -1760,6 +1760,7 @@ subgraph Giguna
         Giguna__Giguna_Northeast__Switch(Switch);
         Giguna__Giguna_Northeast__Door(Door);
         Giguna__Giguna_Northeast__Vault(Vault);
+        Giguna__Giguna_Northeast__Vault_East(Vault East);
     end
     subgraph Giguna__Carnelian[Carnelian]
         Giguna__Carnelian__East_10(East 10);
@@ -5183,12 +5184,15 @@ Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Portal_Ex
 Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Save_Point
 Giguna__Giguna_Northeast__Northeast_Wall --> Giguna__Giguna_Northeast__Upper_Column
 Giguna__Giguna_Northeast__Right_Column --> Giguna__Giguna_Northeast__Door
+Giguna__Giguna_Northeast__Right_Column <--> Giguna__Giguna_Northeast__Vault
 Giguna__Giguna_Northeast__Save_Point --> Giguna__Giguna_Northeast__Gate_Vent
+Giguna__Giguna_Northeast__Shaft_Bottom --> Giguna__Giguna_Northeast__Gate_Right
 Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__Gate_Vent
 Giguna__Giguna_Northeast__Step --> Giguna__Giguna_Northeast__West_9
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__Switch --> Giguna__Giguna_Northeast__Right_Column
 Giguna__Giguna_Northeast__Vault --> Giguna__Giguna_Northeast__Door
+Giguna__Giguna_Northeast__Vault_East --> Giguna__Giguna_Northeast__Door
 Giguna__Giguna_Northeast__West_9 --> Giguna__Giguna_Northeast__Crow_Eating
 Giguna__Giguna_Northeast__West_9 <--> Giguna__Ruins_East__East_9
 Giguna__Gubi_Lair__East_15 --> Giguna__Gubi_Lair__Center_Platform
@@ -5266,7 +5270,11 @@ Giguna__Ruins_Top__Interior_Ledge --> Giguna__Ruins_Top__Upper_Tunnel
 Giguna__Ruins_Top__Portal_Left --> Giguna__Ruins_Top__Small_Ledge
 Giguna__Ruins_Top__Rooftop_East --> Giguna__Ruins_East__Way_Up_High
 Giguna__Ruins_Top__Rooftop_Gutter --> Giguna__Ruins_East__Pillar
+Giguna__Ruins_Top__Rooftop_West --> Giguna__Ruins_East__Ledge
+Giguna__Ruins_Top__Rooftop_West --> Giguna__Ruins_East__Way_Up_High
+Giguna__Ruins_Top__Rooftop_West --> Giguna__Ruins_Top__Rooftop_Gutter
 Giguna__Ruins_Top__Rooftop_West <--> Giguna__Ruins_Top__Turret_Balcony_East
+Giguna__Ruins_Top__Save_Point --> Giguna__Ruins_Top__Switch
 Giguna__Ruins_Top__Small_Ledge --> Giguna__Ruins_Top__Interior_Ledge
 Giguna__Ruins_Top__Switch --> Giguna__Ruins_Top__Rooftop_West
 Giguna__Ruins_Top__Switch --> Giguna__Ruins_Top__Turret_Balcony_East

@@ -1756,13 +1756,13 @@
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
             Giguna__Antechamber__Bottom [label = "", pos = "55.5,-26.416667!"];
-            Giguna__Antechamber__Small_Bricks [label = "", pos = "55.65,-25.333333!"];
-            Giguna__Antechamber__Statue_Head [label = "", pos = "56.4,-24.666667!"];
-            Giguna__Antechamber__Middle_Bricks_Right [label = "", pos = "55.35,-24.666667!"];
-            Giguna__Antechamber__Middle_Bricks_Left [label = "", pos = "54.9,-24.416667!"];
-            Giguna__Antechamber__Left_Wall_Lower [label = "", pos = "54.45,-25.833333!"];
-            Giguna__Antechamber__Left_Wall_Mid [label = "", pos = "54.45,-25.333333!"];
-            Giguna__Antechamber__West_15 [label = "", pos = "54.15,-24.416667!"];
+            Giguna__Antechamber__Small_Bricks [label = "", pos = "55.65,-25.25!"];
+            Giguna__Antechamber__Statue_Head [label = "", pos = "56.25,-24.583333!"];
+            Giguna__Antechamber__Middle_Bricks_Right [label = "", pos = "55.35,-24.583333!"];
+            Giguna__Antechamber__Middle_Bricks_Left [label = "", pos = "54.9,-24.333333!"];
+            Giguna__Antechamber__Left_Wall_Lower [label = "", pos = "54.525,-25.833333!"];
+            Giguna__Antechamber__Left_Wall_Mid [label = "", pos = "54.45,-25.25!"];
+            Giguna__Antechamber__West_15 [label = "", pos = "54.15,-24.333333!"];
         }
         {
             Giguna__Breachable_Wall__West_Mid_air [label = "", pos = "48.15,-40.0!"];
@@ -1941,10 +1941,11 @@
             Giguna__Giguna_Northeast__Right_Column [label = "", pos = "53.7,-17.5!"];
             Giguna__Giguna_Northeast__Switch [label = "", pos = "53.1,-18.0!"];
             Giguna__Giguna_Northeast__Door [label = "", pos = "52.5,-17.5!"];
-            Giguna__Giguna_Northeast__Vault [label = "", pos = "51.6,-18.0!"];
+            Giguna__Giguna_Northeast__Vault [label = "", pos = "51.75,-18.0!"];
+            Giguna__Giguna_Northeast__Vault_East [label = "", pos = "52.2,-17.833333!"];
         }
         {
-            Giguna__Gubi_Lair__East_15 [label = "", pos = "53.85,-24.416667!"];
+            Giguna__Gubi_Lair__East_15 [label = "", pos = "53.85,-24.333333!"];
             Giguna__Gubi_Lair__East_Tree [label = "", pos = "53.25,-24.916667!"];
             Giguna__Gubi_Lair__Rightmost_Platform [label = "", pos = "52.5,-25.166667!"];
             Giguna__Gubi_Lair__Lower_Platform [label = "", pos = "51.75,-25.5!"];

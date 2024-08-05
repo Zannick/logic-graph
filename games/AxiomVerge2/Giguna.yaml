@@ -191,7 +191,18 @@ areas:
         - to: East 11
         - to: Right Column
           jumps: 1
-      # TODO: measure time going back up
+      exits:
+        - to: Gate Right
+          req: $hook
+          movement: base
+          jumps: 4
+        - to: Gate Right
+          req: $grab
+          movement: base
+          jumps: 7
+        - to: Gate Right
+          req: $mist2
+          movement: mist2
     - name: East 11
       coord: [18.95, 10.75]
       local:
@@ -207,13 +218,19 @@ areas:
         - to: Shaft Bottom
       actions:
         - name: Open Door From Afar
-          req: $unlock3 and Infection_Range_3 and not ^_door_opened
+          req: $unlock3 and $range2 and not ^_door_opened
           do: ^_door_opened = true
-          time: 0.5
+          tags: [hack]
       exits:
         - to: Door
           req: ^_door_opened
           movement: base
+        - to: Door
+          req: ^_door_opened and $hook
+          movement: fast_hover
+        - to: Vault
+          req: ^_door_opened and $hookhover
+          movement: fast_hover
     - name: Switch
       coord: [17.7, 10.8]
       data:
@@ -221,12 +238,17 @@ areas:
       exits:
         - to: Door
           req: ^_door_opened and ($grab or $hook)
+          movement: base
+          jumps: 2
         - to: Right Column
           req: $grab or $hook
+          movement: base
+          jumps: 2
       actions:
         - name: Open Door
           req: $unlock3 and not ^_door_opened
           do: ^_door_opened = true
+          tags: [hack]
     - name: Door
       coord: [17.5, 10.5]
       data:
@@ -234,6 +256,7 @@ areas:
       local:
         - to: Right Column
         - to: Vault
+        - to: Vault East
       locations:
         - name: Remote Flask
           item: Flask
@@ -241,20 +264,52 @@ areas:
           req: $boomerang
           tags: [remote_flask]
     - name: Vault
-      coord: [17.2, 10.8]
+      coord: [17.25, 10.8]
+      local:
+        - to: Vault East
+          jumps: 1
       locations:
         - name: Item
           item: Flask
           canon: Giguna_Northeast_Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Door
+          req: ^_door_opened and $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Right Column
+          req: ^_door_opened and $hookhover
+          movement: fast_hover
+          jumps: 2
+    - name: Vault East
+      coord: [17.4, 10.7]
+      local:
+        - to: Vault
+      locations:
+        - name: Shockwave Flask
+          item: Flask
+          canon: Giguna_Northeast_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
       exits:
         - to: Door
           req: ^_door_opened
           movement: base
           jumps: 2
-        - to: Door
-          req: ^_door_opened and $hook
-          time: 0.7
 
 - name: Carnelian  # MARK: Carnelian
   on_entry: $reset_old_area(^newpos)
@@ -1230,7 +1285,7 @@ areas:
         - name: Switch
           canon: Giguna_Wasteland_Switch
           item: Giguna_Wasteland_Door
-          req: $melee
+          req: $can_damage
           tags: [button]
 
 - name: Giguna Base  # MARK: Giguna Base
@@ -1635,8 +1690,27 @@ areas:
         - to: East 9
       locations:
         - name: Item
+          canon: Giguna_Highest_Flask
           item: Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Giguna_Highest_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Giguna_Highest_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+        - name: Shockwave Flask
+          canon: Giguna_Highest_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
       exits:
         - to: Ruins Top > Rooftop Gutter
           req: $hover
@@ -1967,6 +2041,11 @@ areas:
       local:
         - to: Switch
           jumps: 1
+      exits:
+        - to: Switch
+          req: $hook
+          movement: fast_hover
+          jumps: 1
       actions:
         - name: Save
           do: $save
@@ -1983,9 +2062,17 @@ areas:
           tags: [hack]
       exits:
         - to: Rooftop West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Rooftop West
           req: $grab
           movement: base
           jumps: 3
+        - to: Turret Balcony East
+          req: $hook
+          movement: base
+          jumps: 2
         - to: Turret Balcony East
           req: $grab
           movement: base
@@ -2000,6 +2087,17 @@ areas:
           req: $grab
           movement: base
           jumps: 2
+        - to: Rooftop Gutter
+          req: $hookhover
+          movement: fast_hover
+        - to: Ruins East > Way Up High
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Ruins East > Ledge
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Rooftop East
       coord: [15.6, 5.2]
       local:
@@ -4814,7 +4912,8 @@ areas:
       exits:
         - to: Small Bricks
           req: $hook
-          time: 0.6
+          movement: base
+          jumps: 2
     - name: Bottom
       coord: [18.5, 15.85]
       local:
@@ -4823,21 +4922,24 @@ areas:
       exits:
         - to: Left Wall Lower
           req: $hook
-          time: 1.1  # ?
+          movement: base
+          jumps: 2
     - name: Small Bricks
-      coord: [18.55, 15.2]
+      coord: [18.55, 15.15]
       local:
         - to: Statues Ledge
         - to: Bottom
       exits:
         - to: Statue Head
           req: $hook
-          time: 0.8
+          movement: base
+          jumps: 2
         - to: Middle Bricks Right
           req: $hook
-          time: 0.6  # ?
+          movement: base
+          jumps: 2
     - name: Statue Head
-      coord: [18.8, 14.8]
+      coord: [18.75, 14.75]
       local:
         - to: Small Bricks
         - to: Statues Ledge
@@ -4851,9 +4953,9 @@ areas:
           movement: base
         - to: Middle Bricks Right
           req: $hook
-          time: 1  # ?
+          movement: fast_hover
     - name: Middle Bricks Right
-      coord: [18.45, 14.8]
+      coord: [18.45, 14.75]
       local:
         - to: Middle Bricks Left
           jumps: 1
@@ -4865,10 +4967,10 @@ areas:
           movement: base
         - to: Statue Head
           req: $hook
-          time: 1  # ?
+          movement: fast_hover
       # TODO: Throw Drone and mist
     - name: Middle Bricks Left
-      coord: [18.3, 14.65]
+      coord: [18.3, 14.6]
       local:
         - to: Middle Bricks Right
         - to: West 15
@@ -4878,7 +4980,7 @@ areas:
           req: $hook
           time: .75  # ?
     - name: Left Wall Lower
-      coord: [18.15, 15.5]
+      coord: [18.175, 15.5]
       local:
         - to: Bottom
       exits:
@@ -4888,9 +4990,10 @@ areas:
           jumps: 3
         - to: Left Wall Mid
           req: $hook
-          time: 0.75  # ?
+          movement: base
+          jumps: 1
     - name: Left Wall Mid
-      coord: [18.15, 15.2]
+      coord: [18.15, 15.15]
       local:
         - to: Bottom
       exits:
@@ -4900,16 +5003,17 @@ areas:
           jumps: 4
         - to: West 15
           req: $hook
-          time: 1  # ?
+          movement: base
+          jumps: 2
     - name: West 15
-      coord: [18.05, 14.65]
+      coord: [18.05, 14.6]
       local:
         - to: Middle Bricks Left
         - to: Bottom
       exits:
         - to: Small Bricks
           req: $hook
-          time: 1.5  # ?
+          movement: base
         - to: Gubi Lair > East 15
           tags: [xshift]
 
@@ -4924,7 +5028,7 @@ areas:
       axe: Menu > Kiengir Map > Double Axe
   spots:
     - name: East 15
-      coord: [17.95, 14.65]
+      coord: [17.95, 14.6]
       local:
         - to: East Tree
       exits:
@@ -4991,7 +5095,7 @@ areas:
         - name: Hack Gubi
           item: Giguna_Gubi
           canon: Giguna_Gubi
-          req: $overheat
+          req: $overheat  # may also include combat upgrades
           price: 200
           time: 9
         - name: Fight Gubi
@@ -4999,9 +5103,17 @@ areas:
           canon: Giguna_Gubi
           time: 20  # ?
         - name: Boss Reward
+          canon: Giguna_Gubi_Flask
           item: Big_Flask
-          req: Giguna_Gubi
+          req: Giguna_Gubi and $boomerang
           tags: [flask]
+        - name: Fetch Boss Reward
+          canon: Giguna_Gubi_Flask
+          item: Big_Flask
+          req: Giguna_Gubi and $hover
+          tags: [flask]
+          penalties:
+            - add: 3.0  # estimated penalty to get close enough
     - name: Leftmost Platform
       coord: [16.55, 15.25]
       local:

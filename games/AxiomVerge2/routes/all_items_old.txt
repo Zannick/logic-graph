@@ -231,7 +231,7 @@
 
 # Section "Lower Ebih Cleanup"
 ! Do Glacier > Angry Guards > Corner > Move Portal Here
-* Collect Big_Flask from Glacier Breach > Floaters > Hidden > Flask
+* Collect Flask from Glacier Breach > Floaters > Hidden > Flask
 * Collect Health_Fragment from Glacier > Sliced Cavern > Upper Middle > Health
 * Collect Sagiga_on_the_Worldstream from Glacier > Sliced Cavern > Cache > Note
 * Collect Big_Flask from Glacier > Lake Main Entrance > Cache > Flask
@@ -506,4 +506,47 @@
 * Collect Ranged_Damage_3 from Menu > Upgrade Menu > Combat > Ranged Damage 3
 * Collect Flask from Glacier Breach > Grate Work > Grate Interior > Flask Fast Travel
 * Collect Ellag from Glacier Breach > Electric Arena > Lower West Platform > Defeat Ellag
+* Collect Big_Flask from Glacier Breach > Electric Arena > Lower East Platform > Reward
+  Move... to Glacier Breach > Fortress > East Ledge
+  ExitBreachWarp
+  Move... to Glacier > Fortress > Inner Upper Tier East
+! Do Become Indra
+* Collect Health_Node from Glacier > Fortress > Inner Center > Health
+* Collect Big_Flask from Glacier > Fortress > Inner Center > Shockwave Block
+! Do Become Drone
+
+# Section "Giguna Cleanup"
+* Collect Flask from Giguna > Ruins East > Way Up High > Item
+* Collect Aansur from Giguna > Ruins Center > Tablet > Item
+  Move... to Giguna > Giguna Northeast > Gate Right
+! Do Move Portal Here
+! Do Giguna > Giguna Northeast > Right Column > Open Door From Afar
+* Collect Flask from Giguna > Giguna Northeast > Vault > Item
+  Move... to Giguna > Giguna Northeast > Gate Right
+  Portalwarp
+* Collect Health_Node from Giguna Breach > Gate and Wall > Walled Off > Health
+* Collect Ebih_Breach_Rock_Block_Rock from Ebih Breach > Rock Block > Rock Top > Upgraded Mist Down
+* Collect Flask from Ebih Breach > Rock Block > East Tunnel > Flask
+* Collect Flask from Giguna Breach > Crab Rave > A Crab's Treasure > Flask
+  Move to Giguna Breach > Crab Rave > Gate East Mid-air
+  ExitBreachWarp
+* Collect Flask from Giguna > Wasteland > Upper Cache > Flask
+* Collect Giguna_Wasteland_Door from Giguna > Wasteland > Switch > Switch
+* Collect Health_Fragment from Giguna > Wasteland > Door Right > Health
+! Do Giguna > East Caverns > West 14 > Enter Combo
+* Collect Flask from Giguna > East Caverns > Hidden Passage Center > Hidden Flask
+* Collect Melee_Speed_3 from Menu > Upgrade Menu > Combat > Melee Speed 3
+* Collect Ranged_Speed from Menu > Upgrade Menu > Combat > Ranged Speed 1
+* Collect Ranged_Speed_2 from Menu > Upgrade Menu > Combat > Ranged Speed 2
+! Do Giguna > East Caverns > Switch > Open Door
+* Collect Dangerous_Ideas from Giguna > Antechamber > Statue Head > Tablet
+* Collect Giguna_Gubi from Giguna > Gubi Lair > Center Platform > Hack Gubi
+! Do Become Indra
+* Collect Big_Flask from Giguna > Gubi Lair > Center Platform > Boss Reward
+! Do Become Drone
+* Collect Double_Axe from Giguna > Gubi Lair > Pedestal > Axe
+* Collect Health_Upgrade_2 from Menu > Upgrade Menu > Physiology > Health Upgrade 2
+* Collect Health_Upgrade_3 from Menu > Upgrade Menu > Physiology > Health Upgrade 3
+
+# Section "Some Annuna"
 

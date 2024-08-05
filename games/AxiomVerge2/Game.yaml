@@ -339,7 +339,7 @@ helpers:  # MARK: helpers
 
   $more_refills: ^refills < $count(Power_Matrix)
 
-  $max_energy:num: PER Nano_Points { 3 => 450, 2 => 400, 1 => 350, _ => 300 }
+  $max_energy:num: IF (Nano_Points_3) { 450 } ELSE IF (Nano_Points_2) { 400 } ELSE IF (Nano_Points) { 350 } ELSE { 300 }
 
   # glitches
   $bs: boomerang_steering and $boomerang
@@ -367,7 +367,7 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   $all_flasks:itemList: >
-    [Flask{51}, Big_Flask{28}]
+    [Flask{52}, Big_Flask{27}]
   $all_health:itemList: >
     [Health_Node{5}, Health_Fragment{22}]
   $all_weapons:itemList: >

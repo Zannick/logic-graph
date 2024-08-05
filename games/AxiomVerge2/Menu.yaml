@@ -205,7 +205,7 @@ areas:
           req: Drone_Melee_Speed_2
           price: 5
           costs: flasks
-        #- name: Drone Slingshot something
+        #- name: Drone Slingshot something: 3, 6
       exits:
         - to: Physiology
           time: 0.1

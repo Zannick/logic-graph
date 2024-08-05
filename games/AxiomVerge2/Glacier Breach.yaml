@@ -408,16 +408,16 @@ areas:
       locations:
         - name: Flask
           canon: Glacier_Breach_Floaters_Flask
-          item: Big_Flask
+          item: Flask
           tags: [flask]
         - name: Flask Collection Skip
           canon: Glacier_Breach_Floaters_Flask
-          item: Big_Flask
+          item: Flask
           to: Menu > Warp Only > Breach
           tags: [cskip]
         - name: Flask Fast Travel
           canon: Glacier_Breach_Floaters_Flask
-          item: Big_Flask
+          item: Flask
           req: Fast_Travel
           to: ^map_spot
           tags: [cskip]

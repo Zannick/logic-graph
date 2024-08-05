@@ -3215,7 +3215,7 @@ static ACT_DEFS: [Action; 197] = [
     },
     Action {
         id: ActionId::Giguna__Giguna_Northeast__Switch__Open_Door,
-        time: 1000,
+        time: 500,
         price: Currency::Free,
     },
     Action {

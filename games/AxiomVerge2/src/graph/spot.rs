@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3235] = [
+static SPOT_DEFS: [SpotDef; 3236] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -9514,7 +9514,7 @@ static SPOT_DEFS: [SpotDef; 3235] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Northeast__Right_Column,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1, ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1)),
+        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1, ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Vault_1)),
         action_range: Some((ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar, ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar)),
     },
     SpotDef {
@@ -9526,7 +9526,7 @@ static SPOT_DEFS: [SpotDef; 3235] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_1, ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_3)),
         action_range: None,
     },
     SpotDef {
@@ -9549,8 +9549,14 @@ static SPOT_DEFS: [SpotDef; 3235] = [
     },
     SpotDef {
         id: SpotId::Giguna__Giguna_Northeast__Vault,
-        loc_range: Some((LocationId::Giguna__Giguna_Northeast__Vault__Item, LocationId::Giguna__Giguna_Northeast__Vault__Item)),
-        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_1, ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_2)),
+        loc_range: Some((LocationId::Giguna__Giguna_Northeast__Vault__Flask_Collection_Skip, LocationId::Giguna__Giguna_Northeast__Vault__Item)),
+        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Vault__ex__Door_1, ExitId::Giguna__Giguna_Northeast__Vault__ex__Right_Column_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__Giguna_Northeast__Vault_East,
+        loc_range: Some((LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask, LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask)),
+        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Vault_East__ex__Door_1, ExitId::Giguna__Giguna_Northeast__Vault_East__ex__Door_1)),
         action_range: None,
     },
     SpotDef {
@@ -10263,7 +10269,7 @@ static SPOT_DEFS: [SpotDef; 3235] = [
     },
     SpotDef {
         id: SpotId::Giguna__Ruins_East__Way_Up_High,
-        loc_range: Some((LocationId::Giguna__Ruins_East__Way_Up_High__Item, LocationId::Giguna__Ruins_East__Way_Up_High__Item)),
+        loc_range: Some((LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Collection_Skip, LocationId::Giguna__Ruins_East__Way_Up_High__Shockwave_Flask)),
         exit_range: Some((ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1, ExitId::Giguna__Ruins_East__Way_Up_High__ex__Ruins_Top__Rooftop_Gutter_1)),
         action_range: None,
     },
@@ -10342,13 +10348,13 @@ static SPOT_DEFS: [SpotDef; 3235] = [
     SpotDef {
         id: SpotId::Giguna__Ruins_Top__Rooftop_West,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1, ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1)),
+        exit_range: Some((ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Rooftop_Gutter_1, ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Ruins_Top__Save_Point,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1, ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1)),
         action_range: Some((ActionId::Giguna__Ruins_Top__Save_Point__Save, ActionId::Giguna__Ruins_Top__Save_Point__Save)),
     },
     SpotDef {
@@ -10360,7 +10366,7 @@ static SPOT_DEFS: [SpotDef; 3235] = [
     SpotDef {
         id: SpotId::Giguna__Ruins_Top__Switch,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1, ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1)),
+        exit_range: Some((ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1, ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2)),
         action_range: Some((ActionId::Giguna__Ruins_Top__Switch__Open_Doors, ActionId::Giguna__Ruins_Top__Switch__Open_Doors)),
     },
     SpotDef {
