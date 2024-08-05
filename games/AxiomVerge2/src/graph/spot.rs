@@ -3057,7 +3057,7 @@ static SPOT_DEFS: [SpotDef; 3261] = [
     },
     SpotDef {
         id: SpotId::Annuna__Mirror_Match__Plinth_Adjacent,
-        loc_range: Some((LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask, LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask)),
+        loc_range: Some((LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask, LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Spin_into_Flask)),
         exit_range: Some((ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_1, ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_2)),
         action_range: None,
     },
@@ -3345,7 +3345,7 @@ static SPOT_DEFS: [SpotDef; 3261] = [
     },
     SpotDef {
         id: SpotId::Annuna__Sniper_Valley__Cavern_Cache,
-        loc_range: Some((LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item)),
+        loc_range: Some((LocationId::Annuna__Sniper_Valley__Cavern_Cache__Flask_Collection_Skip, LocationId::Annuna__Sniper_Valley__Cavern_Cache__Shockwave_Flask)),
         exit_range: Some((ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1, ExitId::Annuna__Sniper_Valley__Cavern_Cache__ex__Cavern_Tight_Corner_1)),
         action_range: None,
     },

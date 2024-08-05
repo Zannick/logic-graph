@@ -716,17 +716,9 @@ digraph AxiomVerge2 {
     Annuna__Sniper_Valley__Bridge_Upper_Middle -> Annuna__Sniper_Valley__West_24;
     Annuna__Sniper_Valley__Bridge_Upper_Middle -> Annuna__Sniper_Valley__West_24;
     Annuna__Sniper_Valley__Cavern_Outer_Rock_West -> Annuna__Sniper_Valley__Cavern_Outer_Rock_East;
-    Annuna__Sniper_Valley__Cavern_Outer_Rock_West -> Annuna__Sniper_Valley__Cavern_Outer_Rock_East;
-    Annuna__Sniper_Valley__Cavern_Outer_Rock_West -> Annuna__Sniper_Valley__Cavern_Outer_Rock_East;
     Annuna__Sniper_Valley__Cavern_Outer_Rock_East -> Annuna__Sniper_Valley__Cavern_Inner_Rock_West;
     Annuna__Sniper_Valley__Cavern_Outer_Rock_East -> Annuna__Sniper_Valley__Cavern_Outer_Rock_West;
-    Annuna__Sniper_Valley__Cavern_Outer_Rock_East -> Annuna__Sniper_Valley__Cavern_Outer_Rock_West;
-    Annuna__Sniper_Valley__Cavern_Outer_Rock_East -> Annuna__Sniper_Valley__Cavern_Outer_Rock_West;
     Annuna__Sniper_Valley__Cavern_Inner_Rock_West -> Annuna__Sniper_Valley__Cavern_Inner_Rock_East;
-    Annuna__Sniper_Valley__Cavern_Inner_Rock_West -> Annuna__Sniper_Valley__Cavern_Inner_Rock_East;
-    Annuna__Sniper_Valley__Cavern_Inner_Rock_West -> Annuna__Sniper_Valley__Cavern_Inner_Rock_East;
-    Annuna__Sniper_Valley__Cavern_Inner_Rock_East -> Annuna__Sniper_Valley__Cavern_Inner_Rock_West;
-    Annuna__Sniper_Valley__Cavern_Inner_Rock_East -> Annuna__Sniper_Valley__Cavern_Inner_Rock_West;
     Annuna__Sniper_Valley__Cavern_Inner_Rock_East -> Annuna__Sniper_Valley__Cavern_Inner_Rock_West;
     Annuna__Sniper_Valley__Cavern_Tight_Corner -> Annuna__Sniper_Valley__Cavern_Cache;
     Annuna__Sniper_Valley__Cavern_Cache -> Annuna__Sniper_Valley__Cavern_Tight_Corner;

@@ -549,4 +549,21 @@
 * Collect Health_Upgrade_3 from Menu > Upgrade Menu > Physiology > Health Upgrade 3
 
 # Section "Some Annuna"
+  Move... to Annuna > West Bridge > West Outcropping
+! Do Move Portal Here
+  Portalwarp
+  Move... to Annuna Breach > Underbelly > Upper Left
+  ExitBreachWarp
+* Collect Big_Flask from Annuna > Mirror Match > Plinth Adjacent > Spin into Flask
+# TODO: Collect Remote_Boomerang
+* Collect Sniper_Valley_Rock_1 from Annuna > Sniper Valley > Cavern Outer Rock West > Upgraded Mist Through Outer Wall
+* Collect Sniper_Valley_Rock_2 from Annuna > Sniper Valley > Cavern Inner Rock West > Upgraded Mist Through Inner Wall
+* Collect Big_Flask from Annuna > Sniper Valley > Cavern Cache > Item
+* Collect Family_Tragedy from Annuna > Sniper Valley > Table > Item
+# TODO: flask in East Hideout
+  FastTravelKiengirWarp
+  Move... to Annuna > Egg Room > Corner Platform
+! Do Become Indra
+* Collect Big_Flask from Annuna > Egg Room > Corner Platform > Shockwave from Outside
 
+# Then: Annuna Breach in full!

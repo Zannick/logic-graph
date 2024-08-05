@@ -159,6 +159,14 @@ areas:
           req: $shockwave
           price: 100
           tags: [shockwave]
+        - name: Spin into Flask
+          item: Big_Flask
+          canon: Annuna_Mirror_Match_Flask
+          req: $spin
+          to: Plinth
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [flask]
       exits:
         - to: East 26 Upper
           req: $hover
@@ -1626,11 +1634,7 @@ areas:
       coord: [40.25, 22.25]
       local:
         - to: High Ledge
-      exits:
-        - to: Cavern Outer Rock East
-          req: Sniper_Valley_Rock_1
-          movement: base
-      hybrid:
+      locations:
         - name: Break Outer Wall
           to: Cavern Outer Rock East
           item: Sniper_Valley_Rock_1
@@ -1643,8 +1647,25 @@ areas:
           canon: Sniper_Valley_Rock_1
           req: $mist2
           movement: mist2
+      exits:
+        - to: Cavern Outer Rock East
+          req: Sniper_Valley_Rock_1
+          movement: base
     - name: Cavern Outer Rock East
       coord: [41.3, 22.25]
+      locations:
+        - name: Break Outer Wall
+          to: Cavern Outer Rock West
+          item: Sniper_Valley_Rock_1
+          canon: Sniper_Valley_Rock_1
+          req: Nanite_Mist
+          movement: mist1
+        - name: Upgraded Mist Through Outer Wall
+          to: Cavern Outer Rock West
+          item: Sniper_Valley_Rock_1
+          canon: Sniper_Valley_Rock_1
+          req: $mist2
+          movement: mist2
       exits:
         - to: Cavern Inner Rock West
           req: ^mode == 'drone'
@@ -1656,26 +1677,9 @@ areas:
         - to: Cavern Outer Rock West
           req: Sniper_Valley_Rock_1
           movement: base
-      hybrid:
-        - name: Break Outer Wall
-          to: Cavern Outer Rock West
-          item: Sniper_Valley_Rock_1
-          canon: Sniper_Valley_Rock_1
-          req: Nanite_Mist
-          movement: mist1
-        - name: Upgraded Mist Through Outer Wall
-          to: Cavern Outer Rock West
-          item: Sniper_Valley_Rock_1
-          canon: Sniper_Valley_Rock_1
-          req: $mist2
-          movement: mist2
     - name: Cavern Inner Rock West
       coord: [41.65, 22.225]
-      exits:
-        - to: Cavern Inner Rock East
-          req: ^mode == 'drone' and Sniper_Valley_Rock_2
-          movement: base
-      hybrid:
+      locations:
         - name: Break Inner Wall
           to: Cavern Inner Rock East
           item: Sniper_Valley_Rock_2
@@ -1688,16 +1692,16 @@ areas:
           canon: Sniper_Valley_Rock_2
           req: ^mode == 'drone' and $mist2
           movement: mist2
+      exits:
+        - to: Cavern Inner Rock East
+          req: ^mode == 'drone' and Sniper_Valley_Rock_2
+          movement: base
     - name: Cavern Inner Rock East
       coord: [41.95, 22.225]
       local:
         - to: Cavern Tight Corner
           thru: [42.175, 22.4]
-      exits:
-        - to: Cavern Inner Rock West
-          req: ^mode == 'drone' and Sniper_Valley_Rock_2
-          movement: base
-      hybrid:
+      locations:
         - name: Break Inner Wall
           to: Cavern Inner Rock West
           item: Sniper_Valley_Rock_2
@@ -1710,6 +1714,10 @@ areas:
           canon: Sniper_Valley_Rock_2
           req: ^mode == 'drone' and $mist2
           movement: mist2
+      exits:
+        - to: Cavern Inner Rock West
+          req: ^mode == 'drone' and Sniper_Valley_Rock_2
+          movement: base
     - name: Cavern Tight Corner
       coord: [42.175, 22.55]
       local:
@@ -1724,8 +1732,27 @@ areas:
       coord: [42.4, 22.7]
       locations:
         - name: Item
+          canon: Annuna_Sniper_Valley_Flask
           item: Big_Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Sniper_Valley_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Sniper_Valley_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+        - name: Shockwave Flask
+          canon: Annuna_Sniper_Valley_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
       exits:
         - to: Cavern Tight Corner
           req: ^mode == 'drone'
@@ -3642,7 +3669,7 @@ areas:
         - to: Lower Platform
       exits:
         - to: Upper Platform
-          req: $hook
+          req: $spin
           movement: base
           jumps: 4
     - name: Lower Platform
