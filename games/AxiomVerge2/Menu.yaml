@@ -1016,6 +1016,11 @@ areas:
     #region Breach fast travel points
     - name: AGB Bridge Lower
       coord: [35, 25]
+      exits:
+        - to: Annuna Breach > Double Corridor > Save Point
+          req: ^map__annuna_breach__double_corridor__save
+          time: 12
+          tags: [warp]
     - name: AGB Bridge Upper
       coord: [34, 24]
     - name: AGB East
@@ -1235,6 +1240,10 @@ areas:
       coord: [18, 21]
     - name: GSB Lower Machinery Flask
       coord: [19, 23]
+    - name: GSB Portal Exchange Upper
+      coord: [19, 20]
+    - name: GSB Portal Exchange Lower
+      coord: [19, 21]
     - name: Robopede Flask
       coord: [14, 12]
 

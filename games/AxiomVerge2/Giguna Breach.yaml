@@ -1414,6 +1414,16 @@ areas:
 
 - name: Portal Exchange  # MARK: Portal Exchange
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Bottom
+    portal_hidden: true
+  map:
+    upper: [19, 19, 20, 20]
+    lower: [19, 20, 20, 21]
+  datamap:
+    map_spot:
+      upper: Menu > Breach Map > GSB Portal Exchange Upper
+      lower: Menu > Breach Map > GSB Portal Exchange Lower
   spots:
     - name: West
       coord: [19.1, 19.75]
@@ -1467,7 +1477,7 @@ areas:
           movement: fast_hover
           jumps: 2
     - name: Bottom
-      coord: [19.5, 20.8]
+      coord: [19.45, 20.8]
       data:
         flipside: Giguna > Mural > Enclosed Portal
       exits:

@@ -2930,6 +2930,10 @@ pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &World) -> 
     // ^map__annuna__vertical_room__save
     ctx.map__annuna__vertical_room__save()
 }
+pub fn access_map__annuna_breach__double_corridor__save(ctx: &Context, world: &World) -> bool {
+    // ^map__annuna_breach__double_corridor__save
+    ctx.map__annuna_breach__double_corridor__save()
+}
 pub fn access_map__ebih__base_camp__save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__base_camp__save
     ctx.map__ebih__base_camp__save()
@@ -16489,6 +16493,21 @@ pub fn explain_map__annuna__vertical_room__save(
         (r, vec!["^map__annuna__vertical_room__save"])
     }
 }
+pub fn explain_map__annuna_breach__double_corridor__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna_breach__double_corridor__save
+    {
+        let r = ctx.map__annuna_breach__double_corridor__save();
+        edict.insert(
+            "^map__annuna_breach__double_corridor__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__annuna_breach__double_corridor__save"])
+    }
+}
 pub fn explain_map__ebih__base_camp__save(
     ctx: &Context,
     world: &World,
@@ -26571,6 +26590,17 @@ pub fn observe_access_map__annuna__vertical_room__save(
     {
         full_obs.observe_map__annuna__vertical_room__save();
         ctx.map__annuna__vertical_room__save()
+    }
+}
+pub fn observe_access_map__annuna_breach__double_corridor__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna_breach__double_corridor__save
+    {
+        full_obs.observe_map__annuna_breach__double_corridor__save();
+        ctx.map__annuna_breach__double_corridor__save()
     }
 }
 pub fn observe_access_map__ebih__base_camp__save(

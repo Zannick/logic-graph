@@ -170,5 +170,171 @@ areas:
 - name: Underbelly  # MARK: Underbelly
   on_entry: $reset_old_area(^newpos)
   spots:
+    - name: North
+      coord: [34.5, 25.2]
+      local:
+        - to: Upper Left
+        - to: Upper Ledge
+      exits:
+        - to: Double Corridor > South
+          tags: [ydoor]
+    - name: Upper Left
+      coord: [34.4, 25.35]
+      data:
+        flipside: Annuna > West Bridge > Lower West Mid-air
+      local:
+        - to: Upper Ledge
+        - to: North
+          jumps: 1
+    - name: Upper Ledge
+      coord: [35.25, 25.35]
+      local:
+        - to: North
+          jumps: 1
+        - to: Upper Left
+        - to: East Ledge
+        - to: Middle Block
+      exits:
+        - to: Upper Left
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: North
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: East Ledge
+      coord: [35.4, 25.75]
+      data:
+        flipside: Annuna > West Bridge > Lower Brick Column West
+      local:
+        - to: Middle Block
+      exits:
+        - to: Upper Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Middle Block
+      coord: [35.2, 25.9]
+      local:
+        - to: West Block
+        - to: East Ledge
+          jumps: 1
+      exits:
+        - to: Upper Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: East Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: West Block
+      coord: [34.6, 25.9]
+      local:
+        - to: Middle Block
+        - to: Empty Plinth
+      exits:
+        - to: Middle Block
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: West Ledge
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Empty Plinth
+      coord: [34.5, 26.3]
+      exits:
+        - to: West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West Block
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West Block
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+    - name: West Ledge
+      coord: [34.2, 25.8]
+      data:
+        flipside: Annuna > West Bridge > Lower West Ledge
+      local:
+        - to: Empty Plinth
+        - to: West
+      exits:
+        - to: West Block
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+        - to: Corner > South
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          penalty_tags: [xdoor, -fast_hover.2]
     - name: West
       coord: [34.1, 25.8]
+      local:
+        - to: West Ledge
+      exits:
+        - to: Corner > East
+          tags: [xdoor]
+
+- name: Double Corridor  # MARK: Double Corridor
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [35, 24, 36, 25]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > AGB Bridge Lower
+  spots:
+    - name: Save Point
+      coord: [35.475, 24.7]
+      data:
+        flipside: Annuna > West Bridge > Plinth
+      exits:
+        - to: Center Platform East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Center Platform East
+      coord: [35.3, 24.3]
+      local:
+        - to: Center Platform West
+        - to: Save Point
+      exits:
+        - to: Center Platform West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Center Platform West
+      coord: [34.35, 24.3]
+      local:
+        - to: Bottom Left
+        - to: Center Platform East
+      exits:
+        - to: Center Platform East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Bottom Left
+      coord: [34.35, 24.8]
+      data:
+        flipside: Annuna > West Bridge > West Outcropping
+      local:
+        - to: South
+      exits:
+        - to: Center Platform West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: South
+      coord: [34.5, 24.8]
+      local:
+        - to: Bottom Left
+      exits:
+        - to: Underbelly > North
+          tags: [ydoor]

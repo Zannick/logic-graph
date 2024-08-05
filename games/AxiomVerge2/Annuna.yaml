@@ -225,20 +225,88 @@ areas:
     #region Lamassu
     - name: West 23
       coord: [32.05, 22.75]
+      local:
+        - to: Upper Rock East
+          jumps: 3
+      exits:
+        - to: Invisible Enemies > East 23
+          tags: [xshift]
     - name: Upper Rock East
       coord: [32.7, 22.7]
+      local:
+        - to: Middle Rock East
+          jumps: 3
+        - to: Middle Rock Tree
+        - to: Middle Rock West
+          thru: [32.7, 22.95]
     - name: Middle Rock West
       coord: [32.25, 23.3]
+      local:
+        - to: Middle Rock Tree
+          jumps: 3
+        - to: Upper Floor West
+      exits:
+        - to: Middle Rock Tree
+          req: $hookhover
+          movement: fast_hover
+          jumps: 3
+          penalties:
+            - add: 1.0  # move to hook, and not quite reaching the right height
     - name: Middle Rock Tree
       coord: [32.9, 23.0]
+      local:
+        - to: Middle Rock East
+          jumps: 3
+        - to: Middle Rock West
+      exits:
+        - to: Upper Rock East
+          req: $hover
+          movement: base
+          jumps: 3
     - name: Middle Rock East
       coord: [33.55, 22.6]
+      local:
+        - to: Middle Rock Tree
+        - to: East 24
+      exits:
+        - to: Upper Rock East
+          req: $hover
+          movement: base
     - name: Upper Floor West
       coord: [32.25, 23.8]
+      local:
+        - to: Upper Floor East
+      exits:
+        - to: Middle Rock West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Middle Rock West
+          req: $grab and $climb
+          movement: base
+          jumps: 4
     - name: Upper Floor East
       coord: [33.7, 23.8]
+      local:
+        - to: Upper Floor West
+          jumps: 1
+      exits:
+        - to: East 24
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: East 24
+          req: Drone_Hover
+          movement: base
+          jumps: 2
+        # TODO: fast movements into the bridge area
     - name: East 24
-      coord: [33.95, 23.65]
+      coord: [33.95, 23.55]
+      local:
+        - to: Upper Floor East
+      exits:
+        - to: West Bridge > West 24
+          tags: [xshift]
     #endregion
 
 - name: Invisible Enemies  # MARK: Invisible Enemies
@@ -626,10 +694,13 @@ areas:
   map:
     save: [36, 26, 37, 27]
     lattice: [35, 24, 36, 25]
+    water: [34, 26.45, 37, 28]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna West Bridge
       lattice: Menu > Kiengir Map > Nano Lattice 2
+    water:
+      water: true
   spots:
     - name: Portal Hole
       coord: [35.475, 25.1]
@@ -646,12 +717,16 @@ areas:
       coord: [34.05, 24.3]
     - name: West Outcropping
       coord: [34.35, 24.8]
+      data:
+        flipside: Annuna Breach > Double Corridor > Bottom Left
       local:
         - to: West 25 Lower
         - to: Plinth
           jumps: 1
     - name: Plinth
       coord: [35.475, 24.7]
+      data:
+        flipside: Annuna Breach > Double Corridor > Save Point
       local:
         - to: West Outcropping
         - to: East 25 Lower
@@ -674,14 +749,168 @@ areas:
     #region Underneath
     - name: West 26 Lower
       coord: [34.05, 25.8]
+      local:
+        - to: Lower West Ledge
+      exits:
+        - to: Mirror Match > East 26 Lower
+          tags: [xshift]
     - name: West 26 Upper
       coord: [34.05, 25.5]
+      local:
+        - to: Lower West Ledge
+      exits:
+        - to: Mirror Match > East 26 Lower
+          tags: [xshift]
+        - to: Lower Brick Column West
+          req: $hover
+          movement: base
+    - name: Lower West Mid-air
+      coord: [34.4, 25.35]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Lower West Ledge
+        - to: West 26 Upper
+        - to: West 26 Lower
+      exits:
+        - to: Lower Brick Column West
+          req: $hover
+          movement: base
+    - name: Lower West Ledge
+      coord: [34.2, 25.8]
+      data:
+        flipside: Annuna Breach > Underbelly > West Ledge
+      local:
+        - to: West 26 Lower
+      exits:
+        - to: Lower Brick Column West
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Mirror Match > Plinth Adjacent
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+
+    - name: Lower Brick Column West
+      coord: [35.4, 25.75]
+      data:
+        flipside: Annuna Breach > Underbelly > East Ledge
+      local:
+        - to: Lower Brick Column East
+      exits:
+        - to: Lower West Ledge
+          req: $hover
+          movement: base
+        - to: Lower Grassy Column West
+          req: $hookhover
+          movement: fast_hover
+    - name: Lower Brick Column East
+      coord: [35.55, 25.75]
+      local:
+        - to: Lower Brick Column West
+      exits:
+        - to: Lower West Ledge
+          req: $hookhover
+          movement: fast_hover
+        - to: Mirror Match > Plinth Adjacent
+          req: $hookhover
+          movement: fast_hover
+        - to: Lower Grassy Column West
+          req: $hook
+          movement: fast_hover
+        - to: Lower Grassy Column West
+          req: $hover
+          movement: base
+        - to: Lower Grassy Column West
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+    - name: Lower Grassy Column West
+      coord: [35.9, 25.75]
+      local:
+        - to: Lower Grassy Column East
+      exits:
+        - to: East 26
+          req: $hookhover
+          movement: fast_hover
+          jumps: 3
+        - to: Save Point
+          req: $hookhover
+          movement: fast_hover
+        - to: Lower Brick Column East
+          req: $hook
+          movement: fast_hover
+        - to: Lower Brick Column East
+          req: $hover
+          movement: base
+        - to: Lower Brick Column East
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+    - name: Lower Grassy Column East
+      coord: [36.1, 25.75]
+      local:
+        - to: Lower Save Ledge
+        - to: Lower Grassy Column West
+      exits:
+        - to: Lower Brick Column East
+          req: $hookhover
+          movement: fast_hover
+        - to: East 26
+          req: $hover
+          movement: base
+          jumps: 3
+    - name: Lower Save Ledge
+      coord: [35.35, 26.3]
+      local:
+        - to: Save Point
+      exits:
+        - to: Lower Grassy Column East
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower Grassy Column East
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: East 26
+          req: $mist2
+          movement: mist2
+        - to: East 26
+          req: Nanite_Mist
+          movement: mist1
 
     - name: Save Point
       coord: [36.5, 26.7]
+      local:
+        - to: Lower Save Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Lower Save Ledge
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: East 26
+      coord: [36.95, 25.45]
+      local:
+        - to: Save Point
+      exits:
+        - to: Lower Grassy Column East
+          req: $hover
+          movement: base
+        - to: East Bridge > West 26
+          tags: [xshift]
     #endregion
 
     #region Tower
+    - name: West 24
+      coord: [34.05, 23.55]
     #endregion
 
     #region Upper Right
@@ -731,11 +960,14 @@ areas:
     tablet: [38, 23, 39, 24]
     ring: [38, 22, 39, 23]
     flask: [37, 21, 38, 22]
+    water: [37, 26.45, 40, 28]
   datamap:
     map_spot:
       tablet: Menu > Kiengir Map > Lament for Fools
       ring: Menu > Kiengir Map > Royal Ring
       flask: Menu > Kiengir Map > Annuna East Bridge Flask
+    water:
+      water: true
   load:
     _combo: false
   spots:
@@ -1257,6 +1489,11 @@ areas:
       exits:
         - to: Sniper Valley > West 24
           tags: [xshift]
+    #endregion
+
+    #region Underneath
+    - name: West 26
+      coord: [37.05, 25.45]
     #endregion
 
 - name: Sniper Valley  # MARK: Sniper Valley

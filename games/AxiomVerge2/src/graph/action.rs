@@ -64,7 +64,9 @@ impl world::Accessible for Action {
             ActionId::Annuna__Upper_Save__Save_Point__Save => true,
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Annuna__Vertical_Room__Save_Point__Save => true,
+            ActionId::Annuna__West_Bridge__Save_Point__Save => true,
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::access_annuna__west_climb__switch_ledge__open_door__req(ctx, world),
+            ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => true,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::access_ebih__base_camp__left_platform__move_left_platform__req(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::access_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => true,
@@ -1738,11 +1740,13 @@ impl world::Action for Action {
             ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world),
+            ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::action_annuna__invisible_enemies__switch_west__open_door__do(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => rules::action_annuna__invisible_enemies__switch_above__open_door__do(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => rules::action_annuna__invisible_enemies__switch_east__open_door__do(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => rules::action_annuna__invisible_enemies__corner_cache__charm_utu__do(ctx, world),
+            ActionId::Annuna__West_Bridge__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(ctx, world),
@@ -2077,6 +2081,9 @@ impl world::Action for Action {
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
                 rules::observe_action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world, full_obs);
             }
+            ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2091,6 +2098,9 @@ impl world::Action for Action {
             }
             ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => {
                 rules::observe_action_annuna__invisible_enemies__corner_cache__charm_utu__do(ctx, world, full_obs);
+            }
+            ActionId::Annuna__West_Bridge__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                 rules::observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world, full_obs);
@@ -2597,7 +2607,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 197] = [
+static ACT_DEFS: [Action; 199] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2694,6 +2704,11 @@ static ACT_DEFS: [Action; 197] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Annuna__Center_Save__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
@@ -2785,6 +2800,11 @@ static ACT_DEFS: [Action; 197] = [
     },
     Action {
         id: ActionId::Annuna__Vertical_Room__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__West_Bridge__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
     },
@@ -3613,11 +3633,13 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => SpotId::Amagi__East_Lake__Center_Upper_Platform,
         ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
         ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => SpotId::Amagi__Gated_Community__Dur_Esla,
+        ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => SpotId::Annuna_Breach__Double_Corridor__Save_Point,
         ActionId::Annuna__Mirror_Match__Save_Point__Save => SpotId::Annuna__Mirror_Match__Save_Point,
         ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => SpotId::Annuna__Invisible_Enemies__Switch_West,
         ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => SpotId::Annuna__Invisible_Enemies__Switch_Above,
         ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => SpotId::Annuna__Invisible_Enemies__Switch_East,
         ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => SpotId::Annuna__Invisible_Enemies__Corner_Cache,
+        ActionId::Annuna__West_Bridge__Save_Point__Save => SpotId::Annuna__West_Bridge__Save_Point,
         ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_West,
         ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_East,
         ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => SpotId::Annuna__East_Bridge__Tower_Opening,

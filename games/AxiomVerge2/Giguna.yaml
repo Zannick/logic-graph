@@ -5224,7 +5224,7 @@ areas:
           jumps: 2
 
     - name: Enclosed Portal
-      coord: [19.5, 20.8]
+      coord: [19.45, 20.8]
       data:
         flipside: Giguna Breach > Portal Exchange > Bottom
       local:
