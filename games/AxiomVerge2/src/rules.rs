@@ -507,9 +507,24 @@ pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_East_Bridge_Gate
     ctx.has(Item::Annuna_East_Bridge_Gate)
 }
+pub fn access_annuna_east_bridge_gate_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
+    // Annuna_East_Bridge_Gate and $hookhover
+    (ctx.has(Item::Annuna_East_Bridge_Gate) && helper__hookhover!(ctx, world))
+}
 pub fn access_annuna_mirror_match_switch(ctx: &Context, world: &World) -> bool {
     // Annuna_Mirror_Match_Switch
     ctx.has(Item::Annuna_Mirror_Match_Switch)
+}
+pub fn access_annuna_remote_training_gate(ctx: &Context, world: &World) -> bool {
+    // Annuna_Remote_Training_Gate
+    ctx.has(Item::Annuna_Remote_Training_Gate)
+}
+pub fn access_annuna_remote_training_gate_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Annuna_Remote_Training_Gate and $hookhover
+    (ctx.has(Item::Annuna_Remote_Training_Gate) && helper__hookhover!(ctx, world))
 }
 pub fn access_annuna_vertical_room_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_Vertical_Room_Gate
@@ -3786,6 +3801,14 @@ pub fn access_underwater_movement_and_invoke_grab(ctx: &Context, world: &World) 
     // Underwater_Movement and $grab
     (ctx.has(Item::Underwater_Movement) && helper__grab!(ctx, world))
 }
+pub fn access_underwater_movement_and_invoke_grab_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and $grab and $climb
+    ((ctx.has(Item::Underwater_Movement) && helper__grab!(ctx, world))
+        && helper__climb!(ctx, world))
+}
 pub fn access_underwater_movement_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hook
     (ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
@@ -6455,6 +6478,32 @@ pub fn explain_annuna_east_bridge_gate(
         (h, vec!["Annuna_East_Bridge_Gate"])
     }
 }
+pub fn explain_annuna_east_bridge_gate_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_East_Bridge_Gate and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+            edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+            (h, vec!["Annuna_East_Bridge_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_annuna_mirror_match_switch(
     ctx: &Context,
     world: &World,
@@ -6465,6 +6514,44 @@ pub fn explain_annuna_mirror_match_switch(
         let h = ctx.has(Item::Annuna_Mirror_Match_Switch);
         edict.insert("Annuna_Mirror_Match_Switch", format!("{}", h));
         (h, vec!["Annuna_Mirror_Match_Switch"])
+    }
+}
+pub fn explain_annuna_remote_training_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Remote_Training_Gate
+    {
+        let h = ctx.has(Item::Annuna_Remote_Training_Gate);
+        edict.insert("Annuna_Remote_Training_Gate", format!("{}", h));
+        (h, vec!["Annuna_Remote_Training_Gate"])
+    }
+}
+pub fn explain_annuna_remote_training_gate_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Remote_Training_Gate and $hookhover
+    {
+        let mut left = {
+            let h = ctx.has(Item::Annuna_Remote_Training_Gate);
+            edict.insert("Annuna_Remote_Training_Gate", format!("{}", h));
+            (h, vec!["Annuna_Remote_Training_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_annuna_vertical_room_gate(
@@ -20394,6 +20481,46 @@ pub fn explain_underwater_movement_and_invoke_grab(
         }
     }
 }
+pub fn explain_underwater_movement_and_invoke_grab_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and $grab and $climb
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Underwater_Movement);
+                edict.insert("Underwater_Movement", format!("{}", h));
+                (h, vec!["Underwater_Movement"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                    edict.insert("$grab", format!("{:?}", res));
+                    refs.push("$grab");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_invoke_hook(
     ctx: &Context,
     world: &World,
@@ -21579,6 +21706,17 @@ pub fn observe_access_annuna_east_bridge_gate(
         ctx.has(Item::Annuna_East_Bridge_Gate)
     }
 }
+pub fn observe_access_annuna_east_bridge_gate_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_East_Bridge_Gate and $hookhover
+    ({
+        full_obs.observe_annuna_east_bridge_gate();
+        ctx.has(Item::Annuna_East_Bridge_Gate)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
 pub fn observe_access_annuna_mirror_match_switch(
     ctx: &Context,
     world: &World,
@@ -21589,6 +21727,28 @@ pub fn observe_access_annuna_mirror_match_switch(
         full_obs.observe_annuna_mirror_match_switch();
         ctx.has(Item::Annuna_Mirror_Match_Switch)
     }
+}
+pub fn observe_access_annuna_remote_training_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Remote_Training_Gate
+    {
+        full_obs.observe_annuna_remote_training_gate();
+        ctx.has(Item::Annuna_Remote_Training_Gate)
+    }
+}
+pub fn observe_access_annuna_remote_training_gate_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Remote_Training_Gate and $hookhover
+    ({
+        full_obs.observe_annuna_remote_training_gate();
+        ctx.has(Item::Annuna_Remote_Training_Gate)
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
 pub fn observe_access_annuna_vertical_room_gate(
     ctx: &Context,
@@ -28847,6 +29007,18 @@ pub fn observe_access_underwater_movement_and_invoke_grab(
         full_obs.observe_underwater_movement();
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__grab!(ctx, world, full_obs)))
+}
+pub fn observe_access_underwater_movement_and_invoke_grab_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and $grab and $climb
+    (({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && (hobserve__grab!(ctx, world, full_obs)))
+        && (hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_underwater_movement_and_invoke_hook(
     ctx: &Context,

@@ -462,7 +462,12 @@ subgraph Annuna
         Annuna__West_Bridge__Lower_Grassy_Column_East(Lower Grassy Column East);
         Annuna__West_Bridge__Lower_Save_Ledge(Lower Save Ledge);
         Annuna__West_Bridge__Save_Point(Save Point);
+        Annuna__West_Bridge__East_Almost(East Almost);
         Annuna__West_Bridge__East_26(East 26);
+        Annuna__West_Bridge__East_28_Upper(East 28 Upper);
+        Annuna__West_Bridge__Water_Ledge(Water Ledge);
+        Annuna__West_Bridge__Water_Below_Ledge(Water Below Ledge);
+        Annuna__West_Bridge__East_28_Lower(East 28 Lower);
         Annuna__West_Bridge__West_24(West 24);
         Annuna__West_Bridge__East_24(East 24);
         Annuna__West_Bridge__East_22(East 22);
@@ -484,6 +489,7 @@ subgraph Annuna
         Annuna__East_Bridge__Center_Drop_off(Center Drop-off);
         Annuna__East_Bridge__Center_Corridor(Center Corridor);
         Annuna__East_Bridge__Center_Gap_West(Center Gap West);
+        Annuna__East_Bridge__Basement_Corridor(Basement Corridor);
         Annuna__East_Bridge__Center_Gap_East(Center Gap East);
         Annuna__East_Bridge__Gate_Button(Gate Button);
         Annuna__East_Bridge__Below_Gate_Button(Below Gate Button);
@@ -519,6 +525,19 @@ subgraph Annuna
         Annuna__East_Bridge__East_23(East 23);
         Annuna__East_Bridge__East_24(East 24);
         Annuna__East_Bridge__West_26(West 26);
+        Annuna__East_Bridge__Lower_West_Tree_Ledge(Lower West Tree Ledge);
+        Annuna__East_Bridge__Lower_Gate_West(Lower Gate West);
+        Annuna__East_Bridge__West_Water_Ledge(West Water Ledge);
+        Annuna__East_Bridge__Water_Corner(Water Corner);
+        Annuna__East_Bridge__West_28_Upper(West 28 Upper);
+        Annuna__East_Bridge__West_28_Lower(West 28 Lower);
+        Annuna__East_Bridge__Water_Hill(Water Hill);
+        Annuna__East_Bridge__Middle_Water_Ledge(Middle Water Ledge);
+        Annuna__East_Bridge__Lower_East_Tree_Ledge(Lower East Tree Ledge);
+        Annuna__East_Bridge__Lower_Gate_East(Lower Gate East);
+        Annuna__East_Bridge__East_Water_Ledge(East Water Ledge);
+        Annuna__East_Bridge__Lower_East_Ledge(Lower East Ledge);
+        Annuna__East_Bridge__East_27(East 27);
     end
     subgraph Annuna__Sniper_Valley[Sniper Valley]
         Annuna__Sniper_Valley__West_25_Upper(West 25 Upper);
@@ -751,6 +770,18 @@ subgraph Annuna
         Annuna__Smiley_Room__Shaft_Middle(Shaft Middle);
         Annuna__Smiley_Room__Bottom(Bottom);
         Annuna__Smiley_Room__Lower_Portal_Stand(Lower Portal Stand);
+    end
+    subgraph Annuna__Remote_Training[Remote Training]
+        Annuna__Remote_Training__West_27(West 27);
+        Annuna__Remote_Training__Left_Ledge(Left Ledge);
+        Annuna__Remote_Training__Plinth(Plinth);
+        Annuna__Remote_Training__Lower_Gate_East(Lower Gate East);
+        Annuna__Remote_Training__Middle_Climb(Middle Climb);
+        Annuna__Remote_Training__Upper_Climb(Upper Climb);
+        Annuna__Remote_Training__Button(Button);
+        Annuna__Remote_Training__Shaft_Top(Shaft Top);
+        Annuna__Remote_Training__Upper_Gate_East(Upper Gate East);
+        Annuna__Remote_Training__West_26(West 26);
     end
     subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
         Annuna__Apocalypse_Hallway__Lower_East(Lower East);
@@ -3250,6 +3281,7 @@ subgraph Menu
         Menu__Kiengir_Map__Annuna_Invisible_Enemies_Portal(Annuna Invisible Enemies Portal);
         Menu__Kiengir_Map__Annuna_Invisible_Enemies_Switch(Annuna Invisible Enemies Switch);
         Menu__Kiengir_Map__Annuna_Secret_Passage_Flask(Annuna Secret Passage Flask);
+        Menu__Kiengir_Map__Remote_Boomerang(Remote Boomerang);
         Menu__Kiengir_Map__Ebih_Base_Camp_West(Ebih Base Camp West);
         Menu__Kiengir_Map__Ebih_Base_Camp_East(Ebih Base Camp East);
         Menu__Kiengir_Map__Ebih_Base_Camp_Health(Ebih Base Camp Health);
@@ -4189,15 +4221,22 @@ Annuna__Center_Save__East <--> Annuna__Vertical_Room__West_21
 Annuna__Center_Save__Save_Point --> Annuna__Center_Save__West_Catwalk
 Annuna__Center_Save__West_Catwalk <--> Annuna__Twisty_Passages__East_Catwalk
 Annuna__Center_Save__West_Floor <--> Annuna__Twisty_Passages__East_Floor
+Annuna__East_Bridge__Basement_Corridor --> Annuna__East_Bridge__Center_Corridor
+Annuna__East_Bridge__Basement_Corridor --> Annuna__East_Bridge__Center_Drop_off
+Annuna__East_Bridge__Basement_Corridor <--> Annuna__Remote_Training__West_26
 Annuna__East_Bridge__Below_Gate_Button <--> Annuna__East_Bridge__Center_Gap_East
 Annuna__East_Bridge__Bridge_Top_East --> Annuna__East_Bridge__East_24
+Annuna__East_Bridge__Center_Corridor --> Annuna__Remote_Training__West_26
 Annuna__East_Bridge__East_22 <--> Annuna__Vertical_Room__West_22
 Annuna__East_Bridge__East_23 <--> Annuna__Sniper_Valley__West_23
 Annuna__East_Bridge__East_24 <--> Annuna__Sniper_Valley__West_24
 Annuna__East_Bridge__East_25_Lower --> Annuna__East_Bridge__Center_Corridor
 Annuna__East_Bridge__East_25_Lower <--> Annuna__Sniper_Valley__West_25_Lower
 Annuna__East_Bridge__East_25_Upper <--> Annuna__Sniper_Valley__West_25_Upper
+Annuna__East_Bridge__East_27 <--> Annuna__Remote_Training__West_27
 Annuna__East_Bridge__East_Gap_East --> Annuna__East_Bridge__Center_Corridor
+Annuna__East_Bridge__East_Water_Ledge --> Annuna__East_Bridge__Lower_East_Ledge
+Annuna__East_Bridge__East_Water_Ledge <--> Annuna__East_Bridge__Middle_Water_Ledge
 Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__Below_Cavern
 Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__Upper_West_Gap
 Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__West_24
@@ -4206,6 +4245,15 @@ Annuna__East_Bridge__Flung_West --> Annuna__East_Bridge__West_Under_Gap
 Annuna__East_Bridge__Flung_West --> Annuna__West_Bridge__Below_Tunnel
 Annuna__East_Bridge__Flung_West --> Annuna__West_Bridge__Tunnel_Wall
 Annuna__East_Bridge__Gate_Button --> Annuna__East_Bridge__Gate_Button_Gap
+Annuna__East_Bridge__Lower_East_Ledge <--> Annuna__East_Bridge__Lower_East_Tree_Ledge
+Annuna__East_Bridge__Lower_East_Ledge --> Annuna__East_Bridge__Middle_Water_Ledge
+Annuna__East_Bridge__Lower_East_Ledge --> Annuna__Remote_Training__Plinth
+Annuna__East_Bridge__Lower_Gate_East <--> Annuna__East_Bridge__Lower_Gate_West
+Annuna__East_Bridge__Lower_Gate_East --> Annuna__East_Bridge__West_26
+Annuna__East_Bridge__Lower_Gate_West --> Annuna__East_Bridge__Lower_East_Ledge
+Annuna__East_Bridge__Lower_Gate_West --> Annuna__East_Bridge__West_26
+Annuna__East_Bridge__Lower_West_Tree_Ledge <--> Annuna__East_Bridge__West_26
+Annuna__East_Bridge__Middle_Water_Ledge --> Annuna__East_Bridge__Lower_East_Tree_Ledge
 Annuna__East_Bridge__Tower_Base_East --> Annuna__East_Bridge__Tower_Opening
 Annuna__East_Bridge__Tower_Base_West --> Annuna__East_Bridge__Tower_Gate
 Annuna__East_Bridge__Tower_East_Ledge --> Annuna__East_Bridge__East_24
@@ -4231,13 +4279,23 @@ Annuna__East_Bridge__Upper_East_Ledge --> Annuna__East_Bridge__Tower_Opening
 Annuna__East_Bridge__Upper_West_Gap --> Annuna__East_Bridge__West_24
 Annuna__East_Bridge__Upper_West_Partway_East --> Annuna__East_Bridge__Tower_Gate
 Annuna__East_Bridge__Upper_West_Partway_East --> Annuna__East_Bridge__Tower_West_Ledge
+Annuna__East_Bridge__Water_Corner --> Annuna__East_Bridge__West_Water_Ledge
+Annuna__East_Bridge__Water_Hill --> Annuna__East_Bridge__East_Water_Ledge
+Annuna__East_Bridge__Water_Hill --> Annuna__East_Bridge__Middle_Water_Ledge
 Annuna__East_Bridge__West_24 --> Annuna__West_Bridge__East_24
 Annuna__East_Bridge__West_25_Lower --> Annuna__West_Bridge__East_25_Upper
 Annuna__East_Bridge__West_25_Upper --> Annuna__West_Bridge__East_25_Upper
+Annuna__East_Bridge__West_26 <--> Annuna__West_Bridge__East_26
+Annuna__East_Bridge__West_26 --> Annuna__West_Bridge__Lower_Grassy_Column_East
+Annuna__East_Bridge__West_26 --> Annuna__West_Bridge__Save_Point
+Annuna__East_Bridge__West_28_Lower <--> Annuna__West_Bridge__East_28_Lower
+Annuna__East_Bridge__West_28_Upper <--> Annuna__West_Bridge__East_28_Upper
 Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_West_Gap
 Annuna__East_Bridge__West_Staircase_Upper_West --> Annuna__East_Bridge__Upper_West_Gap_East
 Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap
 Annuna__East_Bridge__West_Under_Gap --> Annuna__East_Bridge__Upper_West_Gap_East
+Annuna__East_Bridge__West_Water_Ledge --> Annuna__East_Bridge__Lower_Gate_West
+Annuna__East_Bridge__West_Water_Ledge --> Annuna__East_Bridge__Lower_West_Tree_Ledge
 Annuna__East_Climb__Platform_1_Left --> Annuna__East_Climb__West_25
 Annuna__East_Climb__Platform_2_Left --> Annuna__East_Climb__Platform_3_Right
 Annuna__East_Climb__Platform_3_Left --> Annuna__East_Climb__Platform_4_Left
@@ -4356,6 +4414,13 @@ Annuna__Mirror_Match__Plinth_Adjacent --> Annuna__Mirror_Match__East_26_Upper
 Annuna__Mirror_Match__Upper_Floor_East --> Annuna__Mirror_Match__East_24
 Annuna__Mirror_Match__Upper_Floor_West --> Annuna__Mirror_Match__Middle_Rock_West
 Annuna__Mirror_Match__West_25 <--> Uhrum__Annuna_Corridor__East_25
+Annuna__Remote_Training__Lower_Gate_East --> Annuna__Remote_Training__Middle_Climb
+Annuna__Remote_Training__Middle_Climb --> Annuna__Remote_Training__Upper_Climb
+Annuna__Remote_Training__Plinth --> Annuna__Remote_Training__Left_Ledge
+Annuna__Remote_Training__Plinth --> Annuna__Remote_Training__Lower_Gate_East
+Annuna__Remote_Training__Plinth --> Annuna__Remote_Training__Shaft_Top
+Annuna__Remote_Training__Upper_Climb --> Annuna__Remote_Training__Upper_Gate_East
+Annuna__Remote_Training__Upper_Gate_East --> Annuna__Remote_Training__West_26
 Annuna__Seals__Breakable_Rock <--> Annuna__Seals__Inner_Wall
 Annuna__Seals__East_17_Lower --> Annuna__Seals__Lower_Ledge
 Annuna__Seals__East_17_Upper <--> Annuna__Seals__Lower_Ledge
@@ -4437,15 +4502,16 @@ Annuna__Vertical_Room__West_17 --> Annuna__Vertical_Room__Upper_Platform
 Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Ledge
 Annuna__Vertical_Room__West_22 --> Annuna__Vertical_Room__Lower_Platform_1_Left
 Annuna__West_Bridge__East_25_Lower --> Annuna__East_Bridge__West_25_Lower
-Annuna__West_Bridge__East_26 --> Annuna__East_Bridge__West_26
 Annuna__West_Bridge__East_26 <--> Annuna__West_Bridge__Lower_Grassy_Column_East
+Annuna__West_Bridge__East_Almost --> Annuna__West_Bridge__East_26
 Annuna__West_Bridge__Lower_Brick_Column_East --> Annuna__Mirror_Match__Plinth_Adjacent
 Annuna__West_Bridge__Lower_Brick_Column_East <--> Annuna__West_Bridge__Lower_Grassy_Column_West
 Annuna__West_Bridge__Lower_Brick_Column_East --> Annuna__West_Bridge__Lower_West_Ledge
 Annuna__West_Bridge__Lower_Brick_Column_West --> Annuna__West_Bridge__Lower_Grassy_Column_West
 Annuna__West_Bridge__Lower_Brick_Column_West <--> Annuna__West_Bridge__Lower_West_Ledge
 Annuna__West_Bridge__Lower_Grassy_Column_East --> Annuna__West_Bridge__Lower_Brick_Column_East
-Annuna__West_Bridge__Lower_Grassy_Column_West --> Annuna__West_Bridge__East_26
+Annuna__West_Bridge__Lower_Grassy_Column_West --> Annuna__West_Bridge__East_Almost
+Annuna__West_Bridge__Lower_Grassy_Column_West --> Annuna__West_Bridge__Lower_Grassy_Column_East
 Annuna__West_Bridge__Lower_Grassy_Column_West --> Annuna__West_Bridge__Save_Point
 Annuna__West_Bridge__Lower_Save_Ledge --> Annuna__West_Bridge__East_26
 Annuna__West_Bridge__Lower_Save_Ledge --> Annuna__West_Bridge__Lower_Grassy_Column_East

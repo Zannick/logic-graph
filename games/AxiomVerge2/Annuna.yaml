@@ -839,10 +839,13 @@ areas:
       local:
         - to: Lower Grassy Column East
       exits:
-        - to: East 26
+        - to: Lower Grassy Column East
           req: $hookhover
           movement: fast_hover
-          jumps: 3
+        - to: East Almost
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
         - to: Save Point
           req: $hookhover
           movement: fast_hover
@@ -904,6 +907,19 @@ areas:
         - name: Save
           do: $save
           tags: [save]
+    - name: East Almost
+      coord: [36.8, 25.65]
+      exits:
+        - to: East 26
+          req: $infinite_climb
+          movement: base
+          jumps: 1
+        - to: East 26
+          req: $mist2
+          movement: mist2
+        - to: East 26
+          req: Nanite_Mist
+          movement: mist1
     - name: East 26
       coord: [36.95, 25.45]
       local:
@@ -913,6 +929,37 @@ areas:
           req: $hover
           movement: base
         - to: East Bridge > West 26
+          tags: [xshift]
+
+    - name: East 28 Upper
+      coord: [36.95, 27.4]
+      local:
+        - to: Water Ledge
+          jumps: 2
+      exits:
+        - to: East Bridge > West 28 Upper
+          tags: [xshift]
+    - name: Water Ledge
+      coord: [36.35, 27.35]
+      local:
+        - to: East 28 Upper
+        - to: Water Below Ledge
+    - name: Water Below Ledge
+      coord: [36.35, 27.6]
+      local:
+        - to: Water Ledge
+          jumps: 2
+        - to: Water Ledge
+          jumps: 1
+          jump_mvmt: water
+        - to: East 28 Lower
+    - name: East 28 Lower
+      coord: [36.95, 27.75]
+      local:
+        - to: Water Below Ledge
+          jumps: 1
+      exits:
+        - to: East Bridge > West 28 Lower
           tags: [xshift]
     #endregion
 
@@ -1056,10 +1103,18 @@ areas:
         - to: West Staircase Lower East
           jumps: 1
         - to: Center Corridor
+        - to: Basement Corridor
     - name: Center Corridor
       coord: [38.45, 24.8]
       local:
         - to: Center Drop-off
+        - to: Basement Corridor
+          thru: [38.3, 24.8]
+      exits:
+        - to: Remote Training > West 26
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Center Gap West
       coord: [38.3, 24.3]
       local:
@@ -1073,6 +1128,29 @@ areas:
           to: Tower Core
           time: 2.5
         # TODO: probably doable with anuman
+
+    - name: Basement Corridor
+      coord: [38.35, 25.35]
+      exits:
+        - to: Center Drop-off
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Center Corridor
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Center Drop-off
+          req: $grab and $climb
+          movement: base
+          jumps: 3
+        - to: Center Corridor
+          req: $grab and $climb
+          movement: base
+          jumps: 4
+        - to: Remote Training > West 26
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: Center Gap East
       coord: [38.55, 24.3]
       local:
@@ -1502,6 +1580,215 @@ areas:
     #region Underneath
     - name: West 26
       coord: [37.05, 25.45]
+      exits:
+        - to: West Bridge > East 26
+          tags: [xshift]
+        - to: West Bridge > Lower Grassy Column East
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: West Bridge > Save Point
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Lower West Tree Ledge
+          req: $hover
+          movement: base
+    - name: Lower West Tree Ledge
+      coord: [37.65, 25.75]
+      local:
+        - to: Lower Gate West
+        - to: West Water Ledge
+      exits:
+        - to: West 26
+          req: $hover
+          movement: base
+          jumps: 3
+    - name: Lower Gate West
+      coord: [37.85, 25.85]
+      local:
+        - to: West Water Ledge
+        - to: Lower West Tree Ledge
+          jumps: 1
+      exits:
+        - to: West 26
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+        - to: Lower Gate East
+          req: Annuna_East_Bridge_Gate
+          movement: base
+        - to: Lower East Ledge
+          req: Annuna_East_Bridge_Gate and $hookhover
+          movement: fast_hover
+    - name: West Water Ledge
+      coord: [37.8, 26.6]
+      local:
+        - to: Water Corner
+      exits:
+        - to: Lower Gate West
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Lower West Tree Ledge
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Lower Gate West
+          req: $grab and $climb
+          movement: base
+          jumps: 4
+        - to: Lower West Tree Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 5
+    - name: Water Corner
+      coord: [37.625, 27.3]
+      local:
+        - to: West 28 Upper
+        - to: West Water Ledge
+          jumps: 3
+          jump_mvmt: water
+      exits:
+        - to: West Water Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+    - name: West 28 Upper
+      coord: [37.05, 27.4]
+      local:
+        - to: Water Corner
+          jumps: 2
+      exits:
+        - to: West Bridge > East 28 Upper
+          tags: [xshift]
+
+    - name: West 28 Lower
+      coord: [37.05, 27.75]
+      local:
+        - to: Water Hill
+          jumps: 4
+      exits:
+        - to: West Bridge > East 28 Lower
+          tags: [xshift]
+    - name: Water Hill
+      coord: [38.7, 27.2]
+      local:
+        - to: West 28 Lower
+          jumps: 2
+        - to: East Water Ledge
+          jumps: 4
+        - to: East Water Ledge
+          jumps: 3
+          jump_mvmt: water
+      exits:
+        - to: Middle Water Ledge
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 1
+        - to: Middle Water Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: East Water Ledge
+          req: Underwater_Movement and $hover
+          movement: base
+          jumps: 2
+    - name: Middle Water Ledge
+      coord: [38.75, 26.7]
+      local:
+        - to: West 28 Lower
+        - to: East Water Ledge
+          jumps: 4
+        - to: East Water Ledge
+          jumps: 3
+          jump_mvmt: water
+        - to: Lower East Tree Ledge
+          jumps: 2
+        - to: Lower East Tree Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: East Water Ledge
+          req: Underwater_Movement and $hover
+          movement: base
+        - to: Lower East Tree Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Lower East Tree Ledge
+      coord: [38.6, 26.35]
+      local:
+        - to: Middle Water Ledge
+        - to: Lower Gate East
+          jumps: 3
+      exits:
+        - to: Lower East Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+    - name: Lower Gate East
+      coord: [38.0, 25.85]
+      local:
+        - to: Lower East Tree Ledge
+      locations:
+        - name: Refill
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+      exits:
+        - to: Lower Gate West
+          req: Annuna_East_Bridge_Gate
+          movement: base
+        - to: West 26
+          req: Annuna_East_Bridge_Gate and $hookhover
+          movement: fast_hover
+          jumps: 3
+    - name: East Water Ledge
+      coord: [39.65, 26.8]
+      local:
+        - to: Water Hill
+          jumps: 3
+      exits:
+        - to: Middle Water Ledge
+          req: Underwater_Movement and $hover
+          movement: water
+          jumps: 1
+        - to: Middle Water Ledge
+          req: $hover
+          movement: base
+          jumps: 1
+        - to: Lower East Ledge
+          req: Underwater_Movement and $hook
+          movement: water
+          jumps: 2
+        - to: Lower East Ledge
+          req: Underwater_Movement and $grab and $climb
+          movement: water
+          jumps: 3
+    - name: Lower East Ledge
+      coord: [39.85, 26.2]
+      local:
+        - to: East 27
+        - to: East Water Ledge
+      exits:
+        - to: Lower East Tree Ledge
+          req: $hover
+          movement: base
+        - to: Middle Water Ledge
+          req: $hover
+          movement: base
+        - to: Remote Training > Plinth
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: East 27
+      coord: [39.95, 26.2]
+      local:
+        - to: Lower East Ledge
+      exits:
+        - to: Remote Training > West 27
+          tags: [xshift]
     #endregion
 
 - name: Sniper Valley  # MARK: Sniper Valley
@@ -4007,6 +4294,157 @@ areas:
         flipside: Annuna Breach > Smiley > Lower Portal Exit
       local:
         - to: Bottom
+
+- name: Remote Training  # MARK: Remote Training
+  on_entry: $reset_old_area(^newpos)
+  map:
+    boom: [40, 27, 41, 28]
+  datamap:
+    map_spot:
+      boom: Menu > Kiengir Map > Remote Boomerang
+  spots:
+    - name: West 27
+      coord: [40.05, 26.2]
+      local:
+        - to: Left Ledge
+      exits:
+        - to: East Bridge > East 27
+          tags: [xshift]
+    - name: Left Ledge
+      coord: [40.3, 26.4]
+      local:
+        - to: West 27
+          jumps: 1
+        - to: Plinth
+    - name: Plinth
+      coord: [40.5, 27.6]
+      locations:
+        - name: Item
+          item: Remote_Boomerang
+          tags: [standing]
+        - name: Hit Button from Afar
+          canon: Annuna_Remote_Training_Gate
+          item: Annuna_Remote_Training_Gate
+          req: $remote_boomerang
+          time: 5
+      exits:
+        - to: Left Ledge
+          req: $mist2
+          movement: mist2
+        - to: Left Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Shaft Top
+          req: $mist2
+          movement: mist2
+        - to: Shaft Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: Lower Gate East
+          req: Annuna_Remote_Training_Gate
+          movement: base
+
+    - name: Lower Gate East
+      coord: [40.75, 27.75]
+      local:
+        - to: Plinth
+          req: Annuna_Remote_Training_Gate
+          movement: base
+          jumps: 1
+      exits:
+        - to: Middle Climb
+          req: $hook
+          movement: base
+          jumps: 3
+        - to: Middle Climb
+          req: $grab and Anuman
+          movement: base
+          jumps: 4
+    - name: Middle Climb
+      coord: [40.6, 26.95]
+      local:
+        - to: Lower Gate East
+      exits:
+        - to: Upper Climb
+          req: $hook or Anuman
+          movement: base
+          jumps: 4
+        - to: Upper Climb
+          req: $grab
+          movement: base
+          jumps: 7
+    - name: Upper Climb
+      coord: [40.75, 25.9]
+      local:
+        - to: Middle Climb
+        - to: Button
+          jumps: 1
+        - to: Shaft Top
+        - to: Upper Gate East
+          jumps: 1
+      locations:
+        - name: Remote Button
+          canon: Annuna_Remote_Training_Gate
+          item: Annuna_Remote_Training_Gate
+          req: $boomerang
+          tags: [throw]
+      exits:
+        - to: Upper Gate East
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+    - name: Button
+      coord: [40.8, 25.7]
+      local:
+        - to: Upper Climb
+        - to: Shaft Top
+        - to: Middle Climb
+      locations:
+        - name: Hit Button
+          canon: Annuna_Remote_Training_Gate
+          item: Annuna_Remote_Training_Gate
+          req: $can_damage
+          tags: [button]
+    - name: Shaft Top
+      coord: [40.6, 25.9]
+      local:
+        - to: Button
+          jumps: 1
+        - to: Plinth
+        - to: Upper Climb
+        - to: Upper Gate East
+          jumps: 1
+    - name: Upper Gate East
+      coord: [40.55, 25.7]
+      local:
+        - to: Plinth
+        - to: Shaft Top
+      locations:
+        - name: Remote Button
+          canon: Annuna_Remote_Training_Gate
+          item: Annuna_Remote_Training_Gate
+          req: $boomerang
+          tags: [throw]
+      exits:
+        - to: West 26
+          req: Annuna_Remote_Training_Gate and $hookhover
+          movement: fast_hover
+          jumps: 2
+        - to: West 26
+          req: Annuna_Remote_Training_Gate
+          movement: base
+          jumps: 2
+    - name: West 26
+      coord: [40.05, 25.35]
+      exits:
+        - to: East Bridge > Basement Corridor
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: East Bridge > Basement Corridor
+          movement: base
+          penalty_tags: [xshift, -base.1]
+
 
 #region Apocalypse
 - name: Apocalypse Hallway  # MARK: Apocalypse Hallway

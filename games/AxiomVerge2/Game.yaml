@@ -133,8 +133,10 @@ time:  # MARK: time
   nearby_urn: 6
   nearby_flask: 6
   throw: 0.5
-  # The remote boomerang has a slower speed but can go a more variable amount of distance
-  # so we need a speed reference to estimate or time each one
+  # The remote boomerang has a slower speed than the regular boomerang but can go a more variable amount of distance
+  # max range: dx=1.8/dy=3.1 (~6.2-6.3s)
+  # speed: x=.285, y=.5 (same as mist2)
+  # with boomerang steering, can go offscreen; likely will need to time each one
 
   # item is freestanding -> can be picked up with no delay
   standing: 0
@@ -343,6 +345,7 @@ helpers:  # MARK: helpers
 
   # glitches
   $bs: boomerang_steering and $boomerang
+  $remote_bs: boomerang_steering and $remote_boomerang
   $offset: major_glitches and $weapon
   $block_clip: minor_glitches and ^mode == 'drone'
   $block_clip_escape: minor_glitches and $hook
@@ -374,7 +377,7 @@ helpers:  # MARK: helpers
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
     [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,
-     Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Royal_Ring, Udusan]
+     Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Remote_Boomerang, Royal_Ring, Udusan]
   $all_urns:itemList: >
     [Amashilama, Anuman, Breach_Sight, Drone_Hover, Drone_Melee_Charge, Exit_Breach, Fast_Travel, Infect, Ledge_Grab,
      Melee_Charge, Nanite_Mist, Remote_Drone, Shockwave, Slingshot_Charge, Slingshot_Hook, Slingshot_Weapon, 
@@ -516,6 +519,5 @@ special:  # MARK: special
   map_file: AV2-World-50%.png  # contact me
   map_min_coord: [0, -1]
   map_max_coord: [46, 90]
-  unplaced_items: [Remote_Boomerang]
   ignore_observations:
     - prev_area

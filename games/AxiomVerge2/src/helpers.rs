@@ -1935,6 +1935,45 @@ macro_rules! hobserve__bs {
     }};
 }
 
+/// $remote_bs (  )
+/// boomerang_steering and $remote_boomerang
+#[macro_export]
+macro_rules! helper__remote_bs {
+    ($ctx:expr, $world:expr) => {{
+        ($world.boomerang_steering && helper__remote_boomerang!($ctx, $world))
+    }};
+}
+#[macro_export]
+macro_rules! hexplain__remote_bs {
+    ($ctx:expr, $world:expr, $edict:expr) => {{
+        {
+            let mut left = {
+                let s = $world.boomerang_steering;
+                $edict.insert("boomerang_steering", format!("{}", s));
+                (s, vec!["boomerang_steering"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__remote_boomerang!($ctx, $world, $edict);
+                    $edict.insert("$remote_boomerang", format!("{:?}", res));
+                    refs.push("$remote_boomerang");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        }
+    }};
+}
+#[macro_export]
+macro_rules! hobserve__remote_bs {
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        ($world.boomerang_steering && (hobserve__remote_boomerang!($ctx, $world, $full_obs)))
+    }};
+}
+
 /// $offset (  )
 /// major_glitches and $weapon
 #[macro_export]
@@ -3140,7 +3179,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,  Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Royal_Ring, Udusan]
+/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,  Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Remote_Boomerang, Royal_Ring, Udusan]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -3154,6 +3193,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Nano_Lattice_1)
             && $ctx.has(Item::Nano_Lattice_2)
             && $ctx.count(Item::Power_Matrix) >= 4
+            && $ctx.has(Item::Remote_Boomerang)
             && $ctx.has(Item::Royal_Ring)
             && $ctx.has(Item::Udusan)
     }};
@@ -3254,6 +3294,15 @@ macro_rules! hexplain__other_items {
                 return (false, refs);
             };
             let mut h = {
+                let h = $ctx.has(Item::Remote_Boomerang);
+                $edict.insert("Remote_Boomerang", format!("{}", h));
+                (h, vec!["Remote_Boomerang"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
                 let h = $ctx.has(Item::Royal_Ring);
                 $edict.insert("Royal_Ring", format!("{}", h));
                 (h, vec!["Royal_Ring"])
@@ -3305,6 +3354,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_power_matrix(IntegerObservation::Ge(4));
             $ctx.count(Item::Power_Matrix) >= 4
+        }) && ({
+            $full_obs.observe_remote_boomerang();
+            $ctx.has(Item::Remote_Boomerang)
         }) && ({
             $full_obs.observe_royal_ring();
             $ctx.has(Item::Royal_Ring)
