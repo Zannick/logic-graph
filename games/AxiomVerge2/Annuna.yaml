@@ -3391,9 +3391,94 @@ areas:
 
 - name: East Hideout  # MARK: East Hideout
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [44, 22, 45, 23]
+  datamap:
+    map_spot:
+      flask: Menu > Kiengir Map > Annuna East Hideout Flask
   spots:
     - name: West
       coord: [44.05, 21.75]
+      local:
+        - to: West Ledge
+      exits:
+        - to: Factory Access > East 22
+          tags: [xshift]
+    - name: West Ledge
+      coord: [44.2, 21.75]
+      local:
+        - to: West
+        - to: Ladder Middle
+        - to: Left Mid-air
+        - to: Bottom
+          thru: [44.3, 22.1]
+    - name: Ladder Middle
+      coord: [44.5, 22.0]
+      local:
+        - to: Bottom
+      locations:
+        - name: Throw Down
+          canon: Annuna_East_Hideout_Flask
+          item: Big_Flask
+          req: $boomerang
+          tags: [throw]
+      exits:
+        - to: West Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: West Ledge
+          req: Anuman
+          movement: base
+          jumps: 1
+        - to: West Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Bottom
+      coord: [44.525, 22.55]
+      locations:
+        - name: Flask
+          canon: Annuna_East_Hideout_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_East_Hideout_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_East_Hideout_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+      exits:
+        - to: Ladder Middle
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Ladder Middle
+          req: Anuman
+          movement: base
+          jumps: 2
+        - to: Ladder Middle
+          req: $grab
+          movement: base
+          jumps: 4
+    - name: Left Mid-air
+      coord: [44.35, 22.45]
+      local:
+        - to: Bottom
+          jumps: 1
+      locations:
+        - name: Shockwave Flask
+          canon: Annuna_East_Hideout_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
 
 - name: Center Save  # MARK: Center Save
   on_entry: $reset_old_area(^newpos)

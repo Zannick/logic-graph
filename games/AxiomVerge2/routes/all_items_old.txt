@@ -560,8 +560,7 @@
 * Collect Sniper_Valley_Rock_2 from Annuna > Sniper Valley > Cavern Inner Rock West > Upgraded Mist Through Inner Wall
 * Collect Big_Flask from Annuna > Sniper Valley > Cavern Cache > Item
 * Collect Family_Tragedy from Annuna > Sniper Valley > Table > Item
-# TODO: flask in East Hideout
-  FastTravelKiengirWarp
+* Collect Big_Flask from Annuna > East Hideout > Bottom > Flask Fast Travel
   Move... to Annuna > Egg Room > Corner Platform
 ! Do Become Indra
 * Collect Big_Flask from Annuna > Egg Room > Corner Platform > Shockwave from Outside

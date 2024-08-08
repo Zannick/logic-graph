@@ -694,6 +694,10 @@ subgraph Annuna
     end
     subgraph Annuna__East_Hideout[East Hideout]
         Annuna__East_Hideout__West(West);
+        Annuna__East_Hideout__West_Ledge(West Ledge);
+        Annuna__East_Hideout__Ladder_Middle(Ladder Middle);
+        Annuna__East_Hideout__Bottom(Bottom);
+        Annuna__East_Hideout__Left_Mid_air(Left Mid-air);
     end
     subgraph Annuna__Center_Save[Center Save]
         Annuna__Center_Save__East(East);
@@ -2525,6 +2529,8 @@ subgraph Glacier
         Glacier__Vertical_Room__Mid_11(Mid 11);
         Glacier__Vertical_Room__Under_Switch(Under Switch);
         Glacier__Vertical_Room__Past_Gate(Past Gate);
+        Glacier__Vertical_Room__Secret_Door(Secret Door);
+        Glacier__Vertical_Room__East_11(East 11);
         Glacier__Vertical_Room__Peak(Peak);
         Glacier__Vertical_Room__West_8(West 8);
         Glacier__Vertical_Room__East_Corner(East Corner);
@@ -2689,7 +2695,11 @@ subgraph Glacier
     end
     subgraph Glacier__Secret_Chamber[Secret Chamber]
         Glacier__Secret_Chamber__East_10(East 10);
+        Glacier__Secret_Chamber__Upper_East_Ledge(Upper East Ledge);
         Glacier__Secret_Chamber__East_11(East 11);
+        Glacier__Secret_Chamber__Grate_West(Grate West);
+        Glacier__Secret_Chamber__Door_East(Door East);
+        Glacier__Secret_Chamber__West_11(West 11);
     end
     subgraph Glacier__Angry_Guards[Angry Guards]
         Glacier__Angry_Guards__East_11(East 11);
@@ -3282,6 +3292,7 @@ subgraph Menu
         Menu__Kiengir_Map__Annuna_Invisible_Enemies_Switch(Annuna Invisible Enemies Switch);
         Menu__Kiengir_Map__Annuna_Secret_Passage_Flask(Annuna Secret Passage Flask);
         Menu__Kiengir_Map__Remote_Boomerang(Remote Boomerang);
+        Menu__Kiengir_Map__Annuna_East_Hideout_Flask(Annuna East Hideout Flask);
         Menu__Kiengir_Map__Ebih_Base_Camp_West(Ebih Base Camp West);
         Menu__Kiengir_Map__Ebih_Base_Camp_East(Ebih Base Camp East);
         Menu__Kiengir_Map__Ebih_Base_Camp_Health(Ebih Base Camp Health);
@@ -4305,6 +4316,9 @@ Annuna__East_Climb__West_24 <--> Annuna__Factory_Access__East_24
 Annuna__East_Climb__West_25 <--> Annuna__Factory_Entrance__East
 Annuna__East_Climb__West_26 --> Annuna__East_Climb__Platform_1_Left
 Annuna__East_Climb__West_26 --> Annuna__Udug_Gate__East
+Annuna__East_Hideout__Bottom --> Annuna__East_Hideout__Ladder_Middle
+Annuna__East_Hideout__Ladder_Middle --> Annuna__East_Hideout__West_Ledge
+Annuna__East_Hideout__West <--> Annuna__Factory_Access__East_22
 Annuna__Egg_Room__Corner_Platform <--> Annuna__Egg_Room__East
 Annuna__Egg_Room__First_Egg --> Annuna__Egg_Room__Second_Egg
 Annuna__Egg_Room__Passage_Entrance --> Annuna__Egg_Room__First_Egg
@@ -4316,7 +4330,6 @@ Annuna__Egg_Room__Third_Egg --> Annuna__Egg_Room__East
 Annuna__Egg_Room__West --> Annuna__Egg_Room__First_Egg
 Annuna__Egg_Room__West <--> Annuna__West_Climb__East_19
 Annuna__Factory_Access__Bottom --> Annuna__Factory_Access__Upper_Platform
-Annuna__Factory_Access__East_22 --> Annuna__East_Hideout__West
 Annuna__Factory_Access__East_22 <--> Annuna__Factory_Access__Grate_Left
 Annuna__Factory_Access__Staircase_Top --> Annuna__Factory_Access__West_22
 Annuna__Factory_Access__Upper_Ledge --> Annuna__Factory_Access__West_22
@@ -5731,9 +5744,9 @@ Glacier__Hammonds_End__Upper_Grate_Left --> Glacier__Hammonds_End__Upper_Portal_
 Glacier__Hammonds_End__Upper_Grate_Right --> Glacier__Hammonds_End__Upper_Grate_Left
 Glacier__Hammonds_End__Upper_Portal_Stand --> Glacier__Hammonds_End__Between_Center_Doors
 Glacier__Hammonds_End__Upper_Stair --> Glacier__Hammonds_End__Upper_Portal_Stand
-Glacier__Hammonds_End__West_10 --> Glacier__Secret_Chamber__East_10
+Glacier__Hammonds_End__West_10 <--> Glacier__Secret_Chamber__East_10
 Glacier__Hammonds_End__West_11 --> Glacier__Hammonds_End__Switch_from_Ledge
-Glacier__Hammonds_End__West_11 --> Glacier__Secret_Chamber__East_11
+Glacier__Hammonds_End__West_11 <--> Glacier__Secret_Chamber__East_11
 Glacier__Inner_Caverns__Center_Bottom --> Glacier__Inner_Caverns__West_Shaft_Hook_Point
 Glacier__Inner_Caverns__Northwest_Stone --> Glacier__Sliced_Cavern__Upper_Middle
 Glacier__Inner_Caverns__Southwest_Hill --> Glacier__Inner_Caverns__Southwest_Ledge
@@ -5798,6 +5811,12 @@ Glacier__Sea_Burial__Grate_Left <--> Glacier__Sea_Burial__Grate_Right
 Glacier__Sea_Burial__Grate_Right --> Glacier__Sea_Burial__Grate_Ledge
 Glacier__Sea_Burial__West_Basin --> Glacier__Sea_Burial__Grate_Ledge
 Glacier__Sea_Burial__West_Basin --> Glacier__Sea_Burial__Left_Center_Rock
+Glacier__Secret_Chamber__Door_East <--> Glacier__Secret_Chamber__Grate_West
+Glacier__Secret_Chamber__Door_East <--> Glacier__Secret_Chamber__Upper_East_Ledge
+Glacier__Secret_Chamber__Door_East <--> Glacier__Secret_Chamber__West_11
+Glacier__Secret_Chamber__East_11 --> Glacier__Secret_Chamber__Grate_West
+Glacier__Secret_Chamber__Upper_East_Ledge --> Glacier__Hammonds_End__Upper_Portal_Stand
+Glacier__Secret_Chamber__West_11 <--> Glacier__Vertical_Room__East_11
 Glacier__The_Big_Drop__Breakable_Rock_Right <--> Glacier__The_Big_Drop__West_14
 Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__East
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Sea_Burial__Collapsing_Ceiling
@@ -5806,6 +5825,7 @@ Glacier__Vertical_Room__Above_Switch <--> Glacier__Vertical_Room__Upper_Gateston
 Glacier__Vertical_Room__Below_Upper_Switch --> Amagi__East_Lake__East_15_Upper_Hover
 Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__East_14
 Glacier__Vertical_Room__Below_Upper_Switch --> Glacier__Vertical_Room__Upper_Switch
+Glacier__Vertical_Room__East_11 <--> Glacier__Vertical_Room__Secret_Door
 Glacier__Vertical_Room__East_14 --> Glacier__Vertical_Room__Above_Switch
 Glacier__Vertical_Room__East_17_while_hovering --> Glacier__Vertical_Room__Lower_Gatestone
 Glacier__Vertical_Room__East_17_while_hovering --> Glacier__Vertical_Room__Lower_Switch
@@ -5822,7 +5842,9 @@ Glacier__Vertical_Room__Lower_Gatestone --> Glacier__Vertical_Room__Lower_Switch
 Glacier__Vertical_Room__Lower_Gatestone <--> Glacier__Vertical_Room__South
 Glacier__Vertical_Room__Lower_Switch <--> Glacier__Vertical_Room__Middle_Gatestone
 Glacier__Vertical_Room__Mid_11 --> Glacier__Vertical_Room__Mid_9
+Glacier__Vertical_Room__Mid_11 --> Glacier__Vertical_Room__Secret_Door
 Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Peak
+Glacier__Vertical_Room__Mid_9 --> Glacier__Vertical_Room__Secret_Door
 Glacier__Vertical_Room__Middle_Gatestone --> Glacier__Vertical_Room__Lower_Gatestone
 Glacier__Vertical_Room__Middle_Gatestone_Left --> Glacier__Vertical_Room__Lower_Gatestone
 Glacier__Vertical_Room__Middle_Gatestone_Left --> Glacier__Vertical_Room__Lower_Switch
@@ -5831,12 +5853,14 @@ Glacier__Vertical_Room__Past_Gate <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__Fortress_Ledge
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__Fortress_Wall
 Glacier__Vertical_Room__Peak --> Glacier__Vertical_Room__West_8
+Glacier__Vertical_Room__Secret_Door <--> Glacier__Vertical_Room__Under_Switch
 Glacier__Vertical_Room__Under_Switch --> Glacier__Vertical_Room__Mid_9
 Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Below_Upper_Switch
 Glacier__Vertical_Room__Upper_Gatestone --> Glacier__Vertical_Room__Upper_Switch
 Glacier__Vertical_Room__Upper_Switch --> Glacier__Vertical_Room__Above_Switch
 Glacier__Vertical_Room__Waters_Ledge --> Amagi__East_Lake__East_15_Lower_Hover
 Glacier__Vertical_Room__West_8 --> Glacier__Vertical_Room__Fortress_Wall
+Glacier__Vertical_Room__West_9 --> Glacier__Vertical_Room__Secret_Door
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Middle
 Interior__Cave_Behind_Waterfall__Bottom --> Interior__Cave_Behind_Waterfall__Top
 Interior__Cave_Behind_Waterfall__Middle --> Interior__Cave_Behind_Waterfall__Top

@@ -2001,6 +2001,20 @@ pub fn access_glacier__hammonds_end__upper_portal_stand__ex__between_center_door
     // ^_hammonds_doors
     ctx.glacier__ctx__hammonds_doors()
 }
+pub fn access_glacier__secret_chamber__door_east__ex__west_11_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__secret_chamber__west_11__ex__door_east_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
 pub fn access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
     ctx: &Context,
     world: &World,
@@ -2016,6 +2030,13 @@ pub fn access_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
     ((helper__hook!(ctx, world) && helper__hover!(ctx, world))
         && ctx.glacier__vertical_room__ctx__upper_gatestone())
 }
+pub fn access_glacier__vertical_room__east_11__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
 pub fn access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
     ctx: &Context,
     world: &World,
@@ -2030,6 +2051,27 @@ pub fn access_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req(
     // Underwater_Movement and $hook and ^_lower_gatestones
     ((ctx.has(Item::Underwater_Movement) && helper__hook!(ctx, world))
         && ctx.glacier__vertical_room__ctx__lower_gatestones())
+}
+pub fn access_glacier__vertical_room__mid_11__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__vertical_room__mid_11__ex__secret_door_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors and $hook
+    (ctx.glacier__ctx__hammonds_doors() && helper__hook!(ctx, world))
+}
+pub fn access_glacier__vertical_room__mid_9__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
     ctx: &Context,
@@ -2087,12 +2129,33 @@ pub fn access_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2_
     // ^_lower_gatestones and Underwater_Movement
     (ctx.glacier__vertical_room__ctx__lower_gatestones() && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_glacier__vertical_room__secret_door__ex__east_11_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
+}
+pub fn access_glacier__vertical_room__secret_door__ex__under_switch_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors and $hookhover
+    (ctx.glacier__ctx__hammonds_doors() && helper__hookhover!(ctx, world))
+}
 pub fn access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
     world: &World,
 ) -> bool {
     // Underwater_Movement and ^_lower_gatestones
     (ctx.has(Item::Underwater_Movement) && ctx.glacier__vertical_room__ctx__lower_gatestones())
+}
+pub fn access_glacier__vertical_room__under_switch__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
     ctx: &Context,
@@ -2114,6 +2177,13 @@ pub fn access_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
 ) -> bool {
     // ^_upper_gatestone
     ctx.glacier__vertical_room__ctx__upper_gatestone()
+}
+pub fn access_glacier__vertical_room__west_9__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_hammonds_doors
+    ctx.glacier__ctx__hammonds_doors()
 }
 pub fn access_glacier_big_drop_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Big_Drop_Rock
@@ -12031,6 +12101,30 @@ pub fn explain_glacier__hammonds_end__upper_portal_stand__ex__between_center_doo
         (r, vec!["^glacier__ctx__hammonds_doors"])
     }
 }
+pub fn explain_glacier__secret_chamber__door_east__ex__west_11_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__secret_chamber__west_11__ex__door_east_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
 pub fn explain_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
     ctx: &Context,
     world: &World,
@@ -12084,6 +12178,18 @@ pub fn explain_glacier__vertical_room__above_switch__ex__upper_gatestone_1__req(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_glacier__vertical_room__east_11__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
     }
 }
 pub fn explain_glacier__vertical_room__lower_gatestone__ex__south_1__req(
@@ -12141,6 +12247,56 @@ pub fn explain_glacier__vertical_room__lower_switch__ex__middle_gatestone_1__req
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_glacier__vertical_room__mid_11__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__vertical_room__mid_11__ex__secret_door_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors and $hook
+    {
+        let mut left = {
+            let r = ctx.glacier__ctx__hammonds_doors();
+            edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+            (r, vec!["^glacier__ctx__hammonds_doors"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__vertical_room__mid_9__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
     }
 }
 pub fn explain_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
@@ -12315,6 +12471,44 @@ pub fn explain_glacier__vertical_room__middle_gatestone_left__ex__lower_switch_2
         }
     }
 }
+pub fn explain_glacier__vertical_room__secret_door__ex__east_11_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
+    }
+}
+pub fn explain_glacier__vertical_room__secret_door__ex__under_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors and $hookhover
+    {
+        let mut left = {
+            let r = ctx.glacier__ctx__hammonds_doors();
+            edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+            (r, vec!["^glacier__ctx__hammonds_doors"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
     world: &World,
@@ -12341,6 +12535,18 @@ pub fn explain_glacier__vertical_room__south__ex__lower_gatestone_1__req(
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_glacier__vertical_room__under_switch__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
     }
 }
 pub fn explain_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
@@ -12386,6 +12592,18 @@ pub fn explain_glacier__vertical_room__upper_gatestone__ex__upper_switch_1__req(
             format!("{:?}", r),
         );
         (r, vec!["^glacier__vertical_room__ctx__upper_gatestone"])
+    }
+}
+pub fn explain_glacier__vertical_room__west_9__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_hammonds_doors
+    {
+        let r = ctx.glacier__ctx__hammonds_doors();
+        edict.insert("^glacier__ctx__hammonds_doors", format!("{:?}", r));
+        (r, vec!["^glacier__ctx__hammonds_doors"])
     }
 }
 pub fn explain_glacier_big_drop_rock(
@@ -24696,6 +24914,28 @@ pub fn observe_access_glacier__hammonds_end__upper_portal_stand__ex__between_cen
         ctx.glacier__ctx__hammonds_doors()
     }
 }
+pub fn observe_access_glacier__secret_chamber__door_east__ex__west_11_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__secret_chamber__west_11__ex__door_east_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
 pub fn observe_access_glacier__the_big_drop__west_11_door__ex__hammonds_end__east_11_door_1__req(
     ctx: &Context,
     world: &World,
@@ -24718,6 +24958,17 @@ pub fn observe_access_glacier__vertical_room__above_switch__ex__upper_gatestone_
             full_obs.observe_glacier__vertical_room__ctx__upper_gatestone();
             ctx.glacier__vertical_room__ctx__upper_gatestone()
         }))
+}
+pub fn observe_access_glacier__vertical_room__east_11__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
 }
 pub fn observe_access_glacier__vertical_room__lower_gatestone__ex__south_1__req(
     ctx: &Context,
@@ -24744,6 +24995,39 @@ pub fn observe_access_glacier__vertical_room__lower_switch__ex__middle_gatestone
             full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
             ctx.glacier__vertical_room__ctx__lower_gatestones()
         }))
+}
+pub fn observe_access_glacier__vertical_room__mid_11__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__vertical_room__mid_11__ex__secret_door_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors and $hook
+    ({
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_glacier__vertical_room__mid_9__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
 }
 pub fn observe_access_glacier__vertical_room__middle_gatestone__ex__lower_gatestone_1__req(
     ctx: &Context,
@@ -24845,6 +25129,28 @@ pub fn observe_access_glacier__vertical_room__middle_gatestone_left__ex__lower_s
         ctx.has(Item::Underwater_Movement)
     }))
 }
+pub fn observe_access_glacier__vertical_room__secret_door__ex__east_11_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
+}
+pub fn observe_access_glacier__vertical_room__secret_door__ex__under_switch_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors and $hookhover
+    ({
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
 pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
     ctx: &Context,
     world: &World,
@@ -24858,6 +25164,17 @@ pub fn observe_access_glacier__vertical_room__south__ex__lower_gatestone_1__req(
         full_obs.observe_glacier__vertical_room__ctx__lower_gatestones();
         ctx.glacier__vertical_room__ctx__lower_gatestones()
     }))
+}
+pub fn observe_access_glacier__vertical_room__under_switch__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
+    }
 }
 pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__above_switch_1__req(
     ctx: &Context,
@@ -24890,6 +25207,17 @@ pub fn observe_access_glacier__vertical_room__upper_gatestone__ex__upper_switch_
     {
         full_obs.observe_glacier__vertical_room__ctx__upper_gatestone();
         ctx.glacier__vertical_room__ctx__upper_gatestone()
+    }
+}
+pub fn observe_access_glacier__vertical_room__west_9__ex__secret_door_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_hammonds_doors
+    {
+        full_obs.observe_glacier__ctx__hammonds_doors();
+        ctx.glacier__ctx__hammonds_doors()
     }
 }
 pub fn observe_access_glacier_big_drop_rock(

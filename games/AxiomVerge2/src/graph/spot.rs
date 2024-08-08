@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3291] = [
+static SPOT_DEFS: [SpotDef; 3302] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -2570,7 +2570,31 @@ static SPOT_DEFS: [SpotDef; 3291] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__East_Hideout__Bottom,
+        loc_range: Some((LocationId::Annuna__East_Hideout__Bottom__Flask, LocationId::Annuna__East_Hideout__Bottom__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Annuna__East_Hideout__Bottom__ex__Ladder_Middle_1, ExitId::Annuna__East_Hideout__Bottom__ex__Ladder_Middle_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__East_Hideout__Ladder_Middle,
+        loc_range: Some((LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down, LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down)),
+        exit_range: Some((ExitId::Annuna__East_Hideout__Ladder_Middle__ex__West_Ledge_1, ExitId::Annuna__East_Hideout__Ladder_Middle__ex__West_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__East_Hideout__Left_Mid_air,
+        loc_range: Some((LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask, LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__East_Hideout__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__East_Hideout__West__ex__Factory_Access__East_22_1, ExitId::Annuna__East_Hideout__West__ex__Factory_Access__East_22_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__East_Hideout__West_Ledge,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -13352,15 +13376,39 @@ static SPOT_DEFS: [SpotDef; 3291] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier__Secret_Chamber__Door_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1, ExitId::Glacier__Secret_Chamber__Door_East__ex__West_11_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__Secret_Chamber__East_10,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Glacier__Secret_Chamber__East_10__ex__Hammonds_End__West_10_1, ExitId::Glacier__Secret_Chamber__East_10__ex__Hammonds_End__West_10_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Secret_Chamber__East_11,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1, ExitId::Glacier__Secret_Chamber__East_11__ex__Hammonds_End__West_11_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Secret_Chamber__Grate_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1, ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Secret_Chamber__Upper_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1, ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Hammonds_End__Upper_Portal_Stand_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Secret_Chamber__West_11,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Secret_Chamber__West_11__ex__Door_East_1, ExitId::Glacier__Secret_Chamber__West_11__ex__Vertical_Room__East_11_1)),
         action_range: None,
     },
     SpotDef {
@@ -13478,6 +13526,12 @@ static SPOT_DEFS: [SpotDef; 3291] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier__Vertical_Room__East_11,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Chamber__West_11_1, ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Door_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__Vertical_Room__East_12,
         loc_range: None,
         exit_range: Some((ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1, ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1)),
@@ -13570,13 +13624,13 @@ static SPOT_DEFS: [SpotDef; 3291] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__Mid_11,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1, ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1, ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_2)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__Mid_9,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1, ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1, ExitId::Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1)),
         action_range: None,
     },
     SpotDef {
@@ -13610,6 +13664,12 @@ static SPOT_DEFS: [SpotDef; 3291] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier__Vertical_Room__Secret_Door,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1, ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__Vertical_Room__South,
         loc_range: None,
         exit_range: Some((ExitId::Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1, ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1)),
@@ -13618,7 +13678,7 @@ static SPOT_DEFS: [SpotDef; 3291] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__Under_Switch,
         loc_range: Some((LocationId::Glacier__Vertical_Room__Under_Switch__Switch, LocationId::Glacier__Vertical_Room__Under_Switch__Switch)),
-        exit_range: Some((ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1, ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1, ExitId::Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1)),
         action_range: None,
     },
     SpotDef {
@@ -13660,7 +13720,7 @@ static SPOT_DEFS: [SpotDef; 3291] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__West_9,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1, ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1, ExitId::Glacier__Vertical_Room__West_9__ex__Secret_Door_1)),
         action_range: None,
     },
     SpotDef {
@@ -16359,6 +16419,12 @@ static SPOT_DEFS: [SpotDef; 3291] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Annuna_East_Bridge_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_East_Hideout_Flask,
         loc_range: None,
         exit_range: None,
         action_range: None,

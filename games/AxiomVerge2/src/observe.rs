@@ -272,6 +272,9 @@ impl Observer for FullObservation {
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask | LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_FILTER_TELEPORTER_FLASK);
             }
+            LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down | LocationId::Annuna__East_Hideout__Bottom__Flask | LocationId::Annuna__East_Hideout__Bottom__Flask_Collection_Skip | LocationId::Annuna__East_Hideout__Bottom__Flask_Fast_Travel | LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+            }
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask | LocationId::Annuna__Egg_Room__Cache__Flask | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside | LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EGG_ROOM_FLASK);
             }
@@ -321,7 +324,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_VERTICAL_ROOM_FLASK);
             }
             LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side | LocationId::Ebih__Base_Camp__Top_Platform__Item => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_EBIH_BASE_CAMP_FRAGMENT);
+                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BASE_CAMP_FRAGMENT);
             }
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush | LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BUSH_FLASK);
@@ -480,7 +483,7 @@ impl Observer for FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_VERTICAL_INTERCHANGE_FLASK);
             }
             LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button | LocationId::Giguna__Vertical_Interchange__Switch__Button => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_VERTICAL_INTERCHANGE_GATE);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_GATE);
             }
             LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Upgraded_Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Upwards_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
@@ -756,7 +759,7 @@ impl Observer for FullObservation {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__VERTICAL_ROOM__GATE_BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna__Vertical_Room__Upper_Cache__Tablet => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__VERTICAL_ROOM__UPPER_CACHE__TABLET);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__VERTICAL_ROOM__UPPER_CACHE__TABLET);
             }
             LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__UPPER_HALLWAY__BEHIND_PEDESTAL__HEALTH_PICKUP);
@@ -954,7 +957,7 @@ impl Observer for FullObservation {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__SWITCH);
             }
             LocationId::Glacier__Peak__Birds_Eye__Item => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__PEAK__BIRDS_EYE__ITEM);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GLACIER__PEAK__BIRDS_EYE__ITEM);
             }
             LocationId::Glacier__Crystals__Top_Corner__Tablet => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER__CRYSTALS__TOP_CORNER__TABLET);
@@ -1152,7 +1155,7 @@ impl Observer for FullObservation {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
             }
             LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_UHRUM_BREACH__EAST_GLITCH__NORTHEAST_FLOWER__HEALTH);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_UHRUM_BREACH__EAST_GLITCH__NORTHEAST_FLOWER__HEALTH);
             }
             LocationId::Uhrum_Breach__Annuna_Gate__Button__Hit_Button => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_UHRUM_BREACH__ANNUNA_GATE__BUTTON__HIT_BUTTON);

@@ -691,6 +691,8 @@ areas:
       coord: [32, 22]
     - name: Remote Boomerang
       coord: [40, 28]
+    - name: Annuna East Hideout Flask
+      coord: [44, 23]
 
     - name: Ebih Base Camp West
       coord: [28, 13]

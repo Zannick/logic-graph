@@ -1122,6 +1122,9 @@ areas:
       exits:
         - to: Ledge Grab Room > East 9
           tags: [xshift]
+        - to: Secret Door
+          req: ^_hammonds_doors
+          movement: base
     - name: Mid 9
       coord: [36.5, 8.8]
       local:
@@ -1139,6 +1142,9 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+        - to: Secret Door
+          req: ^_hammonds_doors
+          movement: base
     - name: Mid 11
       coord: [36.5, 11.3]
       local:
@@ -1157,6 +1163,14 @@ areas:
         - to: Mid 9
           req: $grab
           time: 10
+        - to: Secret Door
+          req: ^_hammonds_doors
+          movement: base
+          jumps: 6
+        - to: Secret Door
+          req: ^_hammonds_doors and $hook
+          movement: base
+          jumps: 3
     - name: Under Switch
       coord: [36.15, 10.7]
       local:
@@ -1177,6 +1191,9 @@ areas:
         - to: Past Gate
           req: Switch_36_11
           movement: base
+        - to: Secret Door
+          req: ^_hammonds_doors
+          movement: base
     - name: Past Gate
       coord: [36.05, 10.7]
       exits:
@@ -1184,6 +1201,32 @@ areas:
           req: Switch_36_11
           movement: base
         - to: Ledge Grab Room > East 11
+          tags: [xshift]
+    - name: Secret Door
+      coord: [36.8, 10.75]
+      local:
+        - to: Mid 11
+          thru: [36.5, 11.0]
+        - to: Mid 9
+          jumps: 15
+        - to: West 9
+          jumps: 15
+        - to: Under Switch
+          jumps: 3
+      exits:
+        - to: East 11
+          req: ^_hammonds_doors
+          movement: base
+        - to: Under Switch
+          req: ^_hammonds_doors and $hookhover
+          movement: fast_hover
+          jumps: 2
+    - name: East 11
+      coord: [36.95, 10.75]
+      exits:
+        - to: Secret Door
+          req: ^_hammonds_doors
+        - to: Secret Chamber > West 11
           tags: [xshift]
     - name: Peak
       coord: [36.4, 8.2]
@@ -3048,8 +3091,72 @@ areas:
   spots:
     - name: East 10
       coord: [38.95, 9.75]
+      local:
+        - to: Upper East Ledge
+      exits:
+        - to: Hammond's End > West 10
+          tags: [xshift]
+    - name: Upper East Ledge
+      coord: [38.8, 9.75]
+      local:
+        - to: East 10
+        - to: Grate West
+        - to: Door East
+      exits:
+        - to: Hammond's End > Upper Portal Stand
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Door East
+          req: $hookhover
+          movement: fast_hover
     - name: East 11
       coord: [38.95, 10.7]
+      exits:
+        - to: Hammond's End > West 11
+          tags: [xshift]
+        - to: Grate West
+          req: $mist2
+          movement: mist2
+        - to: Grate West
+          req: Nanite_Mist
+          movement: mist1
+    - name: Grate West
+      coord: [38.8, 10.7]
+      local:
+        - to: Door East
+          jumps: 3
+      exits:
+        - to: Door East
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+    - name: Door East
+      coord: [37.3, 10.75]
+      local:
+        - to: Grate West
+          jumps: 4
+      exits:
+        - to: West 11
+          req: ^_hammonds_doors
+          movement: base
+        - to: Grate West
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+        - to: Upper East Ledge
+          req: $hookhover
+          movement: fast_hover
+          jumps: 4
+    - name: West 11
+      coord: [37.05, 10.75]
+      exits:
+        - to: Door East
+          req: ^_hammonds_doors
+          movement: base
+        - to: Vertical Room > East 11
+          tags: [xshift]
 
 - name: Angry Guards  # MARK: Angry Guards
   on_entry: $reset_old_area(^newpos)

@@ -508,6 +508,10 @@
         }
         {
             Annuna__East_Hideout__West [label = "", pos = "132.15,-36.25!"];
+            Annuna__East_Hideout__West_Ledge [label = "", pos = "132.6,-36.25!"];
+            Annuna__East_Hideout__Ladder_Middle [label = "", pos = "133.5,-36.666667!"];
+            Annuna__East_Hideout__Bottom [label = "", pos = "133.575,-37.583333!"];
+            Annuna__East_Hideout__Left_Mid_air [label = "", pos = "133.05,-37.416667!"];
         }
         {
             Annuna__Egg_Room__West [label = "", pos = "111.15,-31.25!"];
@@ -2698,7 +2702,11 @@
         }
         {
             Glacier__Secret_Chamber__East_10 [label = "", pos = "116.85,-16.25!"];
+            Glacier__Secret_Chamber__Upper_East_Ledge [label = "", pos = "116.4,-16.25!"];
             Glacier__Secret_Chamber__East_11 [label = "", pos = "116.85,-17.833333!"];
+            Glacier__Secret_Chamber__Grate_West [label = "", pos = "116.4,-17.833333!"];
+            Glacier__Secret_Chamber__Door_East [label = "", pos = "111.9,-17.916667!"];
+            Glacier__Secret_Chamber__West_11 [label = "", pos = "111.15,-17.916667!"];
         }
         {
             Glacier__Sliced_Cavern__West_12 [label = "", pos = "99.15,-19.5!"];
@@ -2728,6 +2736,8 @@
             Glacier__Vertical_Room__Mid_11 [label = "", pos = "109.5,-18.833333!"];
             Glacier__Vertical_Room__Under_Switch [label = "", pos = "108.45,-17.833333!"];
             Glacier__Vertical_Room__Past_Gate [label = "", pos = "108.15,-17.833333!"];
+            Glacier__Vertical_Room__Secret_Door [label = "", pos = "110.4,-17.916667!"];
+            Glacier__Vertical_Room__East_11 [label = "", pos = "110.85,-17.916667!"];
             Glacier__Vertical_Room__Peak [label = "", pos = "109.2,-13.666667!"];
             Glacier__Vertical_Room__West_8 [label = "", pos = "108.15,-12.916667!"];
             Glacier__Vertical_Room__East_Corner [label = "", pos = "110.55,-19.25!"];
@@ -3390,6 +3400,7 @@
             Menu__Kiengir_Map__Annuna_Invisible_Enemies_Switch [label = "", pos = "87.0,-38.333333!"];
             Menu__Kiengir_Map__Annuna_Secret_Passage_Flask [label = "", pos = "96.0,-36.666667!"];
             Menu__Kiengir_Map__Remote_Boomerang [label = "", pos = "120.0,-46.666667!"];
+            Menu__Kiengir_Map__Annuna_East_Hideout_Flask [label = "", pos = "132.0,-38.333333!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_West [label = "", pos = "84.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_East [label = "", pos = "90.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_Health [label = "", pos = "87.0,-18.333333!"];
