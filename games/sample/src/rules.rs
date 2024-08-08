@@ -5,166 +5,159 @@
 #![allow(unused)]
 
 use crate::context::*;
-use crate::graph::{self, *};
-use crate::graph_enums::*;
+use crate::graph::*;
 use crate::items::Item;
 use crate::observe::*;
 use crate::prices::Currency;
 use crate::*;
 use analyzer::context::Ctx;
 use analyzer::matchertrie::IntegerObservation;
-use analyzer::world::{self, World};
+use analyzer::world::World as _;
 use rustc_hash::FxHashMap;
 
-pub fn access_default(_ctx: &Context, _world: &graph::World) -> bool {
+pub fn access_default(_ctx: &Context, _world: &World) -> bool {
     true
 }
 
-pub fn access___defeat_ganon(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___defeat_ganon(ctx: &Context, world: &World) -> bool {
     // [Defeat_Ganon]
     ctx.has(Item::Defeat_Ganon)
 }
-pub fn access___deku_lobby_web_kokiri_emerald(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___deku_lobby_web_kokiri_emerald(ctx: &Context, world: &World) -> bool {
     // [Deku_Lobby_Web, Kokiri_Emerald]
     ctx.has(Item::Deku_Lobby_Web) && ctx.has(Item::Kokiri_Emerald)
 }
 pub fn access___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslash(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
     ((helper__Nuts!(ctx, world) || helper__can_use!(ctx, world, Item::Slingshot))
         && helper__can_jumpslash!(ctx, world))
 }
-pub fn access___triforce_piece__triforce_count(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___triforce_piece__triforce_count(ctx: &Context, world: &World) -> bool {
     // [Triforce_Piece{triforce_count}]
     ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
 }
-pub fn access___victory_invoke_objective(ctx: &Context, world: &graph::World) -> bool {
+pub fn access___victory_invoke_objective(ctx: &Context, world: &World) -> bool {
     // [Victory, $objective]
     ctx.has(Item::Victory) && rule__objective!(ctx, world)
 }
-pub fn access_defeat_gohma(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_defeat_gohma(ctx: &Context, world: &World) -> bool {
     // Defeat_Gohma
     ctx.has(Item::Defeat_Gohma)
 }
-pub fn access_deku_back_room_web_and_deku_back_room_wall(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_deku_back_room_web_and_deku_back_room_wall(ctx: &Context, world: &World) -> bool {
     // Deku_Back_Room_Web and Deku_Back_Room_Wall
     (ctx.has(Item::Deku_Back_Room_Web) && ctx.has(Item::Deku_Back_Room_Wall))
 }
 pub fn access_deku_back_room_web_and_invoke_can_blast_or_smash(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Deku_Back_Room_Web and $can_blast_or_smash
     (ctx.has(Item::Deku_Back_Room_Web) && helper__can_blast_or_smash!(ctx, world))
 }
 pub fn access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // Deku_Basement_Block and $is_child and $Sticks
     ((ctx.has(Item::Deku_Basement_Block) && helper__is_child!(ctx, world))
         && helper__Sticks!(ctx, world))
 }
-pub fn access_deku_basement_scrubs(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_deku_basement_scrubs(ctx: &Context, world: &World) -> bool {
     // Deku_Basement_Scrubs
     ctx.has(Item::Deku_Basement_Scrubs)
 }
-pub fn access_deku_basement_switch(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_deku_basement_switch(ctx: &Context, world: &World) -> bool {
     // Deku_Basement_Switch
     ctx.has(Item::Deku_Basement_Switch)
 }
-pub fn access_deku_basement_web(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_deku_basement_web(ctx: &Context, world: &World) -> bool {
     // Deku_Basement_Web
     ctx.has(Item::Deku_Basement_Web)
 }
-pub fn access_deku_lobby_web(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_deku_lobby_web(ctx: &Context, world: &World) -> bool {
     // Deku_Lobby_Web
     ctx.has(Item::Deku_Lobby_Web)
 }
-pub fn access_deku_lobby_web_and_logic_deku_b1_skip(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_deku_lobby_web_and_logic_deku_b1_skip(ctx: &Context, world: &World) -> bool {
     // Deku_Lobby_Web and logic_deku_b1_skip
     (ctx.has(Item::Deku_Lobby_Web) && world.logic_deku_b1_skip)
 }
-pub fn access_deku_slingshot_scrub(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_deku_slingshot_scrub(ctx: &Context, world: &World) -> bool {
     // Deku_Slingshot_Scrub
     ctx.has(Item::Deku_Slingshot_Scrub)
 }
 pub fn access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // ^_torch
     ctx.deku_tree__compass_room__ctx__torch()
 }
 pub fn access_deku_tree__compass_room__entry__light_torch__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $is_child and $Sticks and not ^_torch
     ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world))
         && !ctx.deku_tree__compass_room__ctx__torch())
 }
-pub fn access_false(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_false(ctx: &Context, world: &World) -> bool {
     // False
     false
 }
-pub fn access_gold_skulltula_token__10(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_gold_skulltula_token__10(ctx: &Context, world: &World) -> bool {
     // Gold_Skulltula_Token{10}
     ctx.count(Item::Gold_Skulltula_Token) >= 10
 }
-pub fn access_invoke_can_play__minuet_of_forest(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_play__minuet_of_forest(ctx: &Context, world: &World) -> bool {
     // $can_play(Minuet_of_Forest)
     helper__can_play!(ctx, world, Item::Minuet_of_Forest)
 }
 pub fn access_invoke_can_use__boomerang_or_invoke_can_use__hookshot(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $can_use(Boomerang) or $can_use(Hookshot)
     (helper__can_use!(ctx, world, Item::Boomerang) || helper__can_use!(ctx, world, Item::Hookshot))
 }
-pub fn access_invoke_can_use__slingshot(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_can_use__slingshot(ctx: &Context, world: &World) -> bool {
     // $can_use(Slingshot)
     helper__can_use!(ctx, world, Item::Slingshot)
 }
-pub fn access_invoke_has_fire_source(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_has_fire_source(ctx: &Context, world: &World) -> bool {
     // $has_fire_source
     helper__has_fire_source!(ctx, world)
 }
 pub fn access_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $has_fire_source_with_torch or $can_use(Bow)
     (helper__has_fire_source_with_torch!(ctx, world) || helper__can_use!(ctx, world, Item::Bow))
 }
-pub fn access_invoke_has_shield(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_has_shield(ctx: &Context, world: &World) -> bool {
     // $has_shield
     helper__has_shield!(ctx, world)
 }
-pub fn access_invoke_is_adult(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_is_adult(ctx: &Context, world: &World) -> bool {
     // $is_adult
     helper__is_adult!(ctx, world)
 }
-pub fn access_invoke_is_adult_or_deku_basement_block(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_is_adult_or_deku_basement_block(ctx: &Context, world: &World) -> bool {
     // $is_adult or Deku_Basement_Block
     (helper__is_adult!(ctx, world) || ctx.has(Item::Deku_Basement_Block))
 }
-pub fn access_invoke_is_adult_or_invoke_can_child_attack(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_is_adult_or_invoke_can_child_attack(ctx: &Context, world: &World) -> bool {
     // $is_adult or $can_child_attack
     (helper__is_adult!(ctx, world) || helper__can_child_attack!(ctx, world))
 }
 pub fn access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $is_adult or $can_child_attack or $Nuts
     ((helper__is_adult!(ctx, world) || helper__can_child_attack!(ctx, world))
@@ -172,44 +165,41 @@ pub fn access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
 }
 pub fn access_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $is_adult or $Sticks or Kokiri_Sword
     ((helper__is_adult!(ctx, world) || helper__Sticks!(ctx, world)) || ctx.has(Item::Kokiri_Sword))
 }
-pub fn access_invoke_is_adult_or_kokiri_sword_or_boomerang(
-    ctx: &Context,
-    world: &graph::World,
-) -> bool {
+pub fn access_invoke_is_adult_or_kokiri_sword_or_boomerang(ctx: &Context, world: &World) -> bool {
     // $is_adult or Kokiri_Sword or Boomerang
     ((helper__is_adult!(ctx, world) || ctx.has(Item::Kokiri_Sword)) || ctx.has(Item::Boomerang))
 }
-pub fn access_invoke_is_adult_or_showed_mido(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_is_adult_or_showed_mido(ctx: &Context, world: &World) -> bool {
     // $is_adult or Showed_Mido
     (helper__is_adult!(ctx, world) || ctx.has(Item::Showed_Mido))
 }
 pub fn access_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $is_adult or Slingshot or $Sticks or Kokiri_Sword
     (((helper__is_adult!(ctx, world) || ctx.has(Item::Slingshot)) || helper__Sticks!(ctx, world))
         || ctx.has(Item::Kokiri_Sword))
 }
-pub fn access_invoke_is_child(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_is_child(ctx: &Context, world: &World) -> bool {
     // $is_child
     helper__is_child!(ctx, world)
 }
 pub fn access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $is_child and $Sticks and $Nuts
     ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world)) && helper__Nuts!(ctx, world))
 }
 pub fn access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $is_child and Kokiri_Sword and $Deku_Shield
     ((helper__is_child!(ctx, world) && ctx.has(Item::Kokiri_Sword))
@@ -217,7 +207,7 @@ pub fn access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
 }
 pub fn access_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invoke_sticks__else____biggoron_sword_(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
 ) -> bool {
     // $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
     ((helper__Nuts!(ctx, world) && helper__has_shield!(ctx, world))
@@ -227,20 +217,17 @@ pub fn access_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invo
             ctx.has(Item::Biggoron_Sword)
         })
 }
-pub fn access_invoke_objective(ctx: &Context, world: &graph::World) -> bool {
+pub fn access_invoke_objective(ctx: &Context, world: &World) -> bool {
     // $objective
     rule__objective!(ctx, world)
 }
-pub fn action_deku_tree__compass_room__entry__light_torch__do(
-    ctx: &mut Context,
-    world: &graph::World,
-) {
+pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context, world: &World) {
     // ^_torch = True
     ctx.set_deku_tree__compass_room__ctx__torch(true);
 }
 pub fn action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^rupees = $max(^rupees + 20, $wallet_max)
     ctx.set_rupees(std::cmp::max(
@@ -250,7 +237,7 @@ pub fn action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
 }
 pub fn action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.set_rupees(std::cmp::min(
@@ -260,7 +247,7 @@ pub fn action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
 }
 pub fn action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
     ctx.set_rupees(std::cmp::min(
@@ -270,7 +257,7 @@ pub fn action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(
 }
 pub fn action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
     ctx.set_rupees(std::cmp::min(
@@ -278,13 +265,13 @@ pub fn action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
         helper__wallet_max!(ctx, world),
     ));
 }
-pub fn action_save_set_position(ctx: &mut Context, world: &graph::World) {
+pub fn action_save_set_position(ctx: &mut Context, world: &World) {
     // ^save = ^position
     ctx.set_save(ctx.position());
 }
 pub fn action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
     ctx: &mut Context,
-    world: &graph::World,
+    world: &World,
 ) {
     // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
     ctx.set_tod(match ctx.tod() {
@@ -295,7 +282,7 @@ pub fn action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
 }
 pub fn explain___defeat_ganon(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Defeat_Ganon]
@@ -312,7 +299,7 @@ pub fn explain___defeat_ganon(
 }
 pub fn explain___deku_lobby_web_kokiri_emerald(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Deku_Lobby_Web, Kokiri_Emerald]
@@ -338,7 +325,7 @@ pub fn explain___deku_lobby_web_kokiri_emerald(
 }
 pub fn explain___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslash(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
@@ -379,7 +366,7 @@ pub fn explain___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpsla
 }
 pub fn explain___triforce_piece__triforce_count(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Triforce_Piece{triforce_count}]
@@ -398,7 +385,7 @@ pub fn explain___triforce_piece__triforce_count(
 }
 pub fn explain___victory_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // [Victory, $objective]
@@ -420,7 +407,7 @@ pub fn explain___victory_invoke_objective(
 }
 pub fn explain_defeat_gohma(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Defeat_Gohma
@@ -432,7 +419,7 @@ pub fn explain_defeat_gohma(
 }
 pub fn explain_deku_back_room_web_and_deku_back_room_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Back_Room_Web and Deku_Back_Room_Wall
@@ -457,7 +444,7 @@ pub fn explain_deku_back_room_web_and_deku_back_room_wall(
 }
 pub fn explain_deku_back_room_web_and_invoke_can_blast_or_smash(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Back_Room_Web and $can_blast_or_smash
@@ -483,7 +470,7 @@ pub fn explain_deku_back_room_web_and_invoke_can_blast_or_smash(
 }
 pub fn explain_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Basement_Block and $is_child and $Sticks
@@ -523,7 +510,7 @@ pub fn explain_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
 }
 pub fn explain_deku_basement_scrubs(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Basement_Scrubs
@@ -535,7 +522,7 @@ pub fn explain_deku_basement_scrubs(
 }
 pub fn explain_deku_basement_switch(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Basement_Switch
@@ -547,7 +534,7 @@ pub fn explain_deku_basement_switch(
 }
 pub fn explain_deku_basement_web(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Basement_Web
@@ -559,7 +546,7 @@ pub fn explain_deku_basement_web(
 }
 pub fn explain_deku_lobby_web(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Lobby_Web
@@ -571,7 +558,7 @@ pub fn explain_deku_lobby_web(
 }
 pub fn explain_deku_lobby_web_and_logic_deku_b1_skip(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Lobby_Web and logic_deku_b1_skip
@@ -596,7 +583,7 @@ pub fn explain_deku_lobby_web_and_logic_deku_b1_skip(
 }
 pub fn explain_deku_slingshot_scrub(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Deku_Slingshot_Scrub
@@ -608,7 +595,7 @@ pub fn explain_deku_slingshot_scrub(
 }
 pub fn explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // ^_torch
@@ -620,7 +607,7 @@ pub fn explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
 }
 pub fn explain_deku_tree__compass_room__entry__light_torch__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_child and $Sticks and not ^_torch
@@ -663,7 +650,7 @@ pub fn explain_deku_tree__compass_room__entry__light_torch__req(
 }
 pub fn explain_false(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // False
@@ -671,7 +658,7 @@ pub fn explain_false(
 }
 pub fn explain_gold_skulltula_token__10(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // Gold_Skulltula_Token{10}
@@ -683,7 +670,7 @@ pub fn explain_gold_skulltula_token__10(
 }
 pub fn explain_invoke_can_play__minuet_of_forest(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_play(Minuet_of_Forest)
@@ -696,7 +683,7 @@ pub fn explain_invoke_can_play__minuet_of_forest(
 }
 pub fn explain_invoke_can_use__boomerang_or_invoke_can_use__hookshot(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_use(Boomerang) or $can_use(Hookshot)
@@ -723,7 +710,7 @@ pub fn explain_invoke_can_use__boomerang_or_invoke_can_use__hookshot(
 }
 pub fn explain_invoke_can_use__slingshot(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $can_use(Slingshot)
@@ -736,7 +723,7 @@ pub fn explain_invoke_can_use__slingshot(
 }
 pub fn explain_invoke_has_fire_source(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $has_fire_source
@@ -749,7 +736,7 @@ pub fn explain_invoke_has_fire_source(
 }
 pub fn explain_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $has_fire_source_with_torch or $can_use(Bow)
@@ -776,7 +763,7 @@ pub fn explain_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(
 }
 pub fn explain_invoke_has_shield(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $has_shield
@@ -789,7 +776,7 @@ pub fn explain_invoke_has_shield(
 }
 pub fn explain_invoke_is_adult(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult
@@ -802,7 +789,7 @@ pub fn explain_invoke_is_adult(
 }
 pub fn explain_invoke_is_adult_or_deku_basement_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or Deku_Basement_Block
@@ -828,7 +815,7 @@ pub fn explain_invoke_is_adult_or_deku_basement_block(
 }
 pub fn explain_invoke_is_adult_or_invoke_can_child_attack(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or $can_child_attack
@@ -855,7 +842,7 @@ pub fn explain_invoke_is_adult_or_invoke_can_child_attack(
 }
 pub fn explain_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or $can_child_attack or $Nuts
@@ -896,7 +883,7 @@ pub fn explain_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
 }
 pub fn explain_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or $Sticks or Kokiri_Sword
@@ -936,7 +923,7 @@ pub fn explain_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(
 }
 pub fn explain_invoke_is_adult_or_kokiri_sword_or_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or Kokiri_Sword or Boomerang
@@ -975,7 +962,7 @@ pub fn explain_invoke_is_adult_or_kokiri_sword_or_boomerang(
 }
 pub fn explain_invoke_is_adult_or_showed_mido(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or Showed_Mido
@@ -1001,7 +988,7 @@ pub fn explain_invoke_is_adult_or_showed_mido(
 }
 pub fn explain_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_adult or Slingshot or $Sticks or Kokiri_Sword
@@ -1054,7 +1041,7 @@ pub fn explain_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(
 }
 pub fn explain_invoke_is_child(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_child
@@ -1067,7 +1054,7 @@ pub fn explain_invoke_is_child(
 }
 pub fn explain_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_child and $Sticks and $Nuts
@@ -1108,7 +1095,7 @@ pub fn explain_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
 }
 pub fn explain_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $is_child and Kokiri_Sword and $Deku_Shield
@@ -1148,7 +1135,7 @@ pub fn explain_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
 }
 pub fn explain_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invoke_sticks__else____biggoron_sword_(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
@@ -1212,7 +1199,7 @@ pub fn explain_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____inv
 }
 pub fn explain_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
     // $objective
@@ -1225,7 +1212,7 @@ pub fn explain_invoke_objective(
 }
 pub fn observe_access___defeat_ganon(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Defeat_Ganon]
@@ -1236,7 +1223,7 @@ pub fn observe_access___defeat_ganon(
 }
 pub fn observe_access___deku_lobby_web_kokiri_emerald(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Deku_Lobby_Web, Kokiri_Emerald]
@@ -1250,7 +1237,7 @@ pub fn observe_access___deku_lobby_web_kokiri_emerald(
 }
 pub fn observe_access___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslash(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ($Nuts or $can_use(Slingshot)) and $can_jumpslash
@@ -1260,7 +1247,7 @@ pub fn observe_access___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_
 }
 pub fn observe_access___triforce_piece__triforce_count(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Triforce_Piece{triforce_count}]
@@ -1271,7 +1258,7 @@ pub fn observe_access___triforce_piece__triforce_count(
 }
 pub fn observe_access___victory_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // [Victory, $objective]
@@ -1282,7 +1269,7 @@ pub fn observe_access___victory_invoke_objective(
 }
 pub fn observe_access_defeat_gohma(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Defeat_Gohma
@@ -1293,7 +1280,7 @@ pub fn observe_access_defeat_gohma(
 }
 pub fn observe_access_deku_back_room_web_and_deku_back_room_wall(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Back_Room_Web and Deku_Back_Room_Wall
@@ -1307,7 +1294,7 @@ pub fn observe_access_deku_back_room_web_and_deku_back_room_wall(
 }
 pub fn observe_access_deku_back_room_web_and_invoke_can_blast_or_smash(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Back_Room_Web and $can_blast_or_smash
@@ -1318,7 +1305,7 @@ pub fn observe_access_deku_back_room_web_and_invoke_can_blast_or_smash(
 }
 pub fn observe_access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Basement_Block and $is_child and $Sticks
@@ -1330,7 +1317,7 @@ pub fn observe_access_deku_basement_block_and_invoke_is_child_and_invoke_sticks(
 }
 pub fn observe_access_deku_basement_scrubs(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Basement_Scrubs
@@ -1341,7 +1328,7 @@ pub fn observe_access_deku_basement_scrubs(
 }
 pub fn observe_access_deku_basement_switch(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Basement_Switch
@@ -1352,7 +1339,7 @@ pub fn observe_access_deku_basement_switch(
 }
 pub fn observe_access_deku_basement_web(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Basement_Web
@@ -1363,7 +1350,7 @@ pub fn observe_access_deku_basement_web(
 }
 pub fn observe_access_deku_lobby_web(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Lobby_Web
@@ -1374,7 +1361,7 @@ pub fn observe_access_deku_lobby_web(
 }
 pub fn observe_access_deku_lobby_web_and_logic_deku_b1_skip(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Lobby_Web and logic_deku_b1_skip
@@ -1385,7 +1372,7 @@ pub fn observe_access_deku_lobby_web_and_logic_deku_b1_skip(
 }
 pub fn observe_access_deku_slingshot_scrub(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Deku_Slingshot_Scrub
@@ -1396,7 +1383,7 @@ pub fn observe_access_deku_slingshot_scrub(
 }
 pub fn observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // ^_torch
@@ -1407,7 +1394,7 @@ pub fn observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
 }
 pub fn observe_access_deku_tree__compass_room__entry__light_torch__req(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_child and $Sticks and not ^_torch
@@ -1417,17 +1404,13 @@ pub fn observe_access_deku_tree__compass_room__entry__light_torch__req(
             ctx.deku_tree__compass_room__ctx__torch()
         })))
 }
-pub fn observe_access_false(
-    ctx: &Context,
-    world: &graph::World,
-    full_obs: &mut FullObservation,
-) -> bool {
+pub fn observe_access_false(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
     // False
     false
 }
 pub fn observe_access_gold_skulltula_token__10(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // Gold_Skulltula_Token{10}
@@ -1438,7 +1421,7 @@ pub fn observe_access_gold_skulltula_token__10(
 }
 pub fn observe_access_invoke_can_play__minuet_of_forest(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_play(Minuet_of_Forest)
@@ -1446,7 +1429,7 @@ pub fn observe_access_invoke_can_play__minuet_of_forest(
 }
 pub fn observe_access_invoke_can_use__boomerang_or_invoke_can_use__hookshot(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_use(Boomerang) or $can_use(Hookshot)
@@ -1455,7 +1438,7 @@ pub fn observe_access_invoke_can_use__boomerang_or_invoke_can_use__hookshot(
 }
 pub fn observe_access_invoke_can_use__slingshot(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $can_use(Slingshot)
@@ -1463,7 +1446,7 @@ pub fn observe_access_invoke_can_use__slingshot(
 }
 pub fn observe_access_invoke_has_fire_source(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $has_fire_source
@@ -1471,7 +1454,7 @@ pub fn observe_access_invoke_has_fire_source(
 }
 pub fn observe_access_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $has_fire_source_with_torch or $can_use(Bow)
@@ -1480,7 +1463,7 @@ pub fn observe_access_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(
 }
 pub fn observe_access_invoke_has_shield(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $has_shield
@@ -1488,7 +1471,7 @@ pub fn observe_access_invoke_has_shield(
 }
 pub fn observe_access_invoke_is_adult(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult
@@ -1496,7 +1479,7 @@ pub fn observe_access_invoke_is_adult(
 }
 pub fn observe_access_invoke_is_adult_or_deku_basement_block(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or Deku_Basement_Block
@@ -1507,7 +1490,7 @@ pub fn observe_access_invoke_is_adult_or_deku_basement_block(
 }
 pub fn observe_access_invoke_is_adult_or_invoke_can_child_attack(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or $can_child_attack
@@ -1515,7 +1498,7 @@ pub fn observe_access_invoke_is_adult_or_invoke_can_child_attack(
 }
 pub fn observe_access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or $can_child_attack or $Nuts
@@ -1525,7 +1508,7 @@ pub fn observe_access_invoke_is_adult_or_invoke_can_child_attack_or_invoke_nuts(
 }
 pub fn observe_access_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or $Sticks or Kokiri_Sword
@@ -1536,7 +1519,7 @@ pub fn observe_access_invoke_is_adult_or_invoke_sticks_or_kokiri_sword(
 }
 pub fn observe_access_invoke_is_adult_or_kokiri_sword_or_boomerang(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or Kokiri_Sword or Boomerang
@@ -1550,7 +1533,7 @@ pub fn observe_access_invoke_is_adult_or_kokiri_sword_or_boomerang(
 }
 pub fn observe_access_invoke_is_adult_or_showed_mido(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or Showed_Mido
@@ -1561,7 +1544,7 @@ pub fn observe_access_invoke_is_adult_or_showed_mido(
 }
 pub fn observe_access_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sword(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_adult or Slingshot or $Sticks or Kokiri_Sword
@@ -1576,7 +1559,7 @@ pub fn observe_access_invoke_is_adult_or_slingshot_or_invoke_sticks_or_kokiri_sw
 }
 pub fn observe_access_invoke_is_child(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_child
@@ -1584,7 +1567,7 @@ pub fn observe_access_invoke_is_child(
 }
 pub fn observe_access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_child and $Sticks and $Nuts
@@ -1593,7 +1576,7 @@ pub fn observe_access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
 }
 pub fn observe_access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $is_child and Kokiri_Sword and $Deku_Shield
@@ -1606,7 +1589,7 @@ pub fn observe_access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
 }
 pub fn observe_access_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____invoke_sticks__else____biggoron_sword_(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $Nuts and $has_shield and if ($is_child) { $Sticks } else { Biggoron_Sword }
@@ -1622,7 +1605,7 @@ pub fn observe_access_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child
 }
 pub fn observe_access_invoke_objective(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
     // $objective
@@ -1630,111 +1613,101 @@ pub fn observe_access_invoke_objective(
 }
 pub fn observe_action_deku_tree__compass_room__entry__light_torch__do(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_torch = True
 }
 pub fn observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $max(^rupees + 20, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    {
-        let _set = std::cmp::max(
-            {
-                full_obs.observe_rupees(IntegerObservation::Exact);
-                ctx.rupees()
-            } + 20,
-            helper__wallet_max!(ctx, world),
-        );
-    };
+    let _set = std::cmp::max(
+        {
+            full_obs.observe_rupees(IntegerObservation::Exact);
+            ctx.rupees()
+        } + 20,
+        helper__wallet_max!(ctx, world),
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    {
-        let _set = std::cmp::min(
-            {
-                full_obs.observe_rupees(IntegerObservation::Exact);
-                ctx.rupees()
-            } + 1,
-            helper__wallet_max!(ctx, world),
-        );
-    };
+    let _set = std::cmp::min(
+        {
+            full_obs.observe_rupees(IntegerObservation::Exact);
+            ctx.rupees()
+        } + 1,
+        helper__wallet_max!(ctx, world),
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    {
-        let _set = std::cmp::min(
-            {
-                full_obs.observe_rupees(IntegerObservation::Exact);
-                ctx.rupees()
-            } + 50,
-            helper__wallet_max!(ctx, world),
-        );
-    };
+    let _set = std::cmp::min(
+        {
+            full_obs.observe_rupees(IntegerObservation::Exact);
+            ctx.rupees()
+        } + 50,
+        helper__wallet_max!(ctx, world),
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    {
-        let _set = std::cmp::min(
-            {
-                full_obs.observe_rupees(IntegerObservation::Exact);
-                ctx.rupees()
-            } + 5,
-            helper__wallet_max!(ctx, world),
-        );
-    };
+    let _set = std::cmp::min(
+        {
+            full_obs.observe_rupees(IntegerObservation::Exact);
+            ctx.rupees()
+        } + 5,
+        helper__wallet_max!(ctx, world),
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_save_set_position(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = ^position
 }
 pub fn observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
     ctx: &Context,
-    world: &graph::World,
+    world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    {
-        let _set = match {
-            full_obs.observe_tod();
-            ctx.tod()
-        } {
-            enums::Tod::Day => enums::Tod::Night,
-            enums::Tod::Night => enums::Tod::Day,
-            _ => enums::Tod::Day,
-        };
+    let _set = match {
+        full_obs.observe_tod();
+        ctx.tod()
+    } {
+        enums::Tod::Day => enums::Tod::Night,
+        enums::Tod::Night => enums::Tod::Day,
+        _ => enums::Tod::Day,
     };
     full_obs.strict = old_strict;
 }

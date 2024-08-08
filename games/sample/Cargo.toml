@@ -15,10 +15,12 @@ path = "bin/main.rs"
 [dependencies]
 analyzer = { path = "../../analyzer" }
 bitflags = { version = "2.*", features = ["serde"] }
+bytemuck = { version = "1.*", features = ["extern_crate_alloc", "min_const_generics"] }
 clap = { version = "4.*", features = ["derive"] }
 enum-map = { version = ">=2.7.2", features = ["serde"] }
 lazy_static = "*"
 log4rs = "*"
+phf = { version = "0.11", features = ["macros"] }
 rustc-hash = "*"
 serde = { version = ">=1.0", features = ["derive"] }
 serde_repr = "*"

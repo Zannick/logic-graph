@@ -2,7 +2,7 @@
 
 use analyzer::unittest::*;
 use libsample::context::Context;
-use libsample::graph;
+use libsample::graph::World;
 use std::path::PathBuf;
 
 fn main() {
@@ -11,10 +11,6 @@ fn main() {
     let mut routedir = dir.clone();
     routedir.pop();
     routedir.push("routes");
-    log4rs::init_file(
-        &PathBuf::from("settings/log4unittest.yml"),
-        Default::default(),
-    )
-    .unwrap();
-    run_all_tests_in_dir::<graph::World, Context>(&dir, Some(&routedir));
+    log4rs::init_file(&PathBuf::from("settings/log4unittest.yml"), Default::default()).unwrap();
+    run_all_tests_in_dir::<World, Context>(&dir, Some(&routedir));
 }

@@ -282,7 +282,7 @@ class RustVisitor(RustBaseVisitor):
     def visitStr(self, ctx):
         if ctx.LIT() and self.rettype:
             return f'{self.rettype}::{inflection.camelize(str(ctx.LIT())[1:-1])}'
-        return super().visitStr(ctx)
+        return self.visitChildren(ctx)
 
     def visitPerRefStr(self, ctx):
         ref = str(ctx.ref().REF()[-1])

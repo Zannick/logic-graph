@@ -11,12 +11,11 @@ use analyzer::matchertrie::MatcherTrie;
 use analyzer::observer::record_observations;
 use analyzer::route::route_from_string;
 use analyzer::solutions::Solution;
-use analyzer::world::*;
+use analyzer::world::World as _;
 use criterion::{black_box, criterion_group, criterion_main, BatchSize, Criterion};
 use enum_map::EnumMap;
 use libsample::context::Context;
-use libsample::graph;
-use libsample::graph_enums::RuleVictory;
+use libsample::graph::{RuleVictory, World};
 use libsample::items::Item;
 use libsample::observe::ObservationMatcher;
 use rustc_hash::FxHashSet;
@@ -24,18 +23,14 @@ use std::path::PathBuf;
 use std::sync::Arc;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-    let mut world = graph::World::new();
-    analyzer::world::World::condense_graph(&mut world);
+    let mut world = World::new();
+    world.condense_graph();
     world.update_skippable_locations();
     let mut ctx = Context::default();
-    c.bench_function("can_win_from_scratch", |b| {
-        b.iter(|| can_win(&world, &ctx, u32::MAX))
-    });
+    c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&*world, &ctx, u32::MAX)));
 
     let ctx = ContextWrapper::new(Context::default());
-    c.bench_function("greedy search", |b| {
-        b.iter(|| greedy_search(&world, &ctx, u32::MAX, 2))
-    });
+    c.bench_function("greedy search", |b| b.iter(|| greedy_search(&*world, &ctx, u32::MAX, 2)));
 
     let mut dir = PathBuf::from(file!());
     dir.pop();
@@ -51,27 +46,30 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     }
 
     if !routes.is_empty() {
-        let shortest_paths = ContextScorer::shortest_paths_tree_only(&world, ctx.get());
+        let shortest_paths = ContextScorer::shortest_paths_tree_only(&*world, ctx.get());
         c.bench_function("load routes", |b| {
-            b.iter(|| {
-                for rstr in &routes {
-                    route_from_string(&world, ctx.get(), rstr, &shortest_paths).unwrap();
-                }
+            b.iter(|| for rstr in &routes {
+                route_from_string(&*world, ctx.get(), rstr, &shortest_paths).unwrap();
             })
         });
     }
 
-    if let Ok(win) = greedy_search(&world, &ctx, u32::MAX, 2) {
-        let sol = Arc::new(Solution {
-            elapsed: win.elapsed(),
-            history: win.recent_history().to_vec(),
-        });
+    if let Ok(win) = greedy_search(&*world, &ctx, u32::MAX, 2) {
+        let sol = Arc::new(Solution { elapsed: win.elapsed(), history: win.recent_history().to_vec() });
         c.bench_function("trie insert greedy search", |b| {
             b.iter_batched_ref(
                 || MatcherTrie::<ObservationMatcher>::default(),
-                |trie| record_observations(ctx.get(), &world, sol.clone(), 1, trie),
+                |trie| record_observations(ctx.get(), &*world, sol.clone(), 1, trie),
                 BatchSize::SmallInput,
             );
+        });
+        c.bench_function("replay solution", |b| {
+            b.iter(|| {
+                let mut c2 = ctx.clone();
+                for step in &sol.history {
+                    c2.assert_and_replay(&*world, *step);
+                }
+            });
         });
     }
 }

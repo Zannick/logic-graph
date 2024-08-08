@@ -3,8 +3,7 @@
 #![allow(non_snake_case)]
 #![allow(unused)]
 
-use crate::graph::{self, *};
-use crate::graph_enums::*;
+use crate::graph::*;
 use crate::items::Item;
 use crate::movements;
 use crate::observe::*;
@@ -12,7 +11,7 @@ use crate::prices::Currency;
 use crate::rules;
 use analyzer::context;
 use analyzer::matchertrie::IntegerObservation;
-use analyzer::world::{Exit, World};
+use analyzer::world::{Exit as _, World as _};
 use enum_map::EnumMap;
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
@@ -93,9 +92,9 @@ pub enum Expectation {
 }
 
 pub mod data {
-    #[allow(unused_imports)]
-    use crate::context::enums;
-    use crate::graph_enums::*;
+#[allow(unused_imports)]
+use crate::context::enums;
+use crate::graph::SpotId;
 pub fn save(spot_id: SpotId) -> SpotId {
     match spot_id {
         SpotId::Deku_Tree__Back_Room__East => AreaId::Lobby__Entry,
@@ -138,7 +137,7 @@ use serde::{self, Serialize, Deserialize};
 
 bitflags!{
     #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits1 : u64 {
+    pub struct ContextBits1: u64 {
         const CHILD = 0x1;
         const DEKU_TREE__COMPASS_ROOM__CTX__TORCH = 0x2;
         const BIGGORON_SWORD = 0x4;
@@ -213,7 +212,7 @@ impl Default for ContextBits1 {
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits2 : u16 {
+    pub struct ContextBits2: u16 {
         const VISITED_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE = 0x1;
         const VISITED_LOC_KF__SHOP__ENTRY__BLUE_RUPEE = 0x2;
         const VISITED_LOC_KF__SHOP__ENTRY__ITEM_1 = 0x4;
@@ -265,10 +264,17 @@ impl Default for Context {
 
 impl analyzer::matchertrie::Observable for Context {
     type PropertyObservation = OneObservation;
+
+    fn matches(&self, obs: &OneObservation) -> bool {
+        obs.matches(self)
+    }
+    fn matches_all(&self, observations: &[OneObservation]) -> bool {
+        observations.into_iter().all(|obs| obs.matches(self))
+    }
 }
 
 impl context::Ctx for Context {
-    type World = graph::World;
+    type World = World;
     type ItemId = Item;
     type AreaId = AreaId;
     type RegionId = RegionId;
@@ -352,7 +358,7 @@ impl context::Ctx for Context {
             _ => 0,
         }
     }
-    fn collect(&mut self, item: Item, world: &graph::World) {
+    fn collect(&mut self, item: Item, world: &World) {
         match item {
             Item::Biggoron_Sword => {
                 self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
@@ -923,7 +929,7 @@ impl context::Ctx for Context {
         }
     }
 
-    fn take_exit(&mut self, exit: &graph::Exit, world: &graph::World) {
+    fn take_exit(&mut self, exit: &Exit, world: &World) {
         self.set_position(exit.dest(), world);
         match exit.id() {
             _ => (),
@@ -936,7 +942,7 @@ impl context::Ctx for Context {
     fn set_position_raw(&mut self, pos: SpotId) {
         self.position = pos;
     }
-    fn set_position(&mut self, pos: SpotId, world: &graph::World) {
+    fn set_position(&mut self, pos: SpotId, world: &World) {
         let area = get_area(pos);
         match area {
             AreaId::Deku_Tree__Compass_Room => {
@@ -949,16 +955,16 @@ impl context::Ctx for Context {
         self.position = pos;
     }
 
-    fn reload_game(&mut self, world: &graph::World) {
+    fn reload_game(&mut self, world: &World) {
         self.reset_all(world);
     }
 
-    fn reset_all(&mut self, world: &graph::World) {
+    fn reset_all(&mut self, world: &World) {
     }
 
-    fn reset_region(&mut self, region_id: RegionId, world: &graph::World) {
+    fn reset_region(&mut self, region_id: RegionId, world: &World) {
     }
-    fn reset_area(&mut self, area_id: AreaId, world: &graph::World) {
+    fn reset_area(&mut self, area_id: AreaId, world: &World) {
     }
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
@@ -1416,11 +1422,11 @@ impl context::Ctx for Context {
     fn all_region_checks(&self, id: RegionId) -> bool {
         false
     }
-    fn get_movement_state(&self, world: &graph::World) -> movements::MovementState {
+    fn get_movement_state(&self, world: &World) -> movements::MovementState {
         movements::get_movement_state(self, world)
     }
 
-    fn observe_movement_state(&self, world: &graph::World, full_obs: &mut FullObservation) -> movements::MovementState {
+    fn observe_movement_state(&self, world: &World, full_obs: &mut FullObservation) -> movements::MovementState {
         movements::observe_movement_state(self, world, full_obs)
     }
 

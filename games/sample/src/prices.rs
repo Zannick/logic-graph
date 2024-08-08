@@ -2,15 +2,12 @@
 
 #![allow(non_camel_case_types)]
 
-use serde::{Deserialize, Serialize};
+use serde::{Serialize, Deserialize};
 use std::fmt;
 
-#[derive(
-    Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd, Serialize, Deserialize,
-)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd, Serialize, Deserialize)]
 pub enum Currency {
-    #[default]
-    Free,
+    #[default] Free,
     Rupees(i32),
 }
 
@@ -34,11 +31,8 @@ impl std::str::FromStr for Currency {
         } else if let Some(t) = s.strip_suffix(")") {
             if let Some((price, val)) = t.split_once("(") {
                 match price {
-                    "Rupees" => {
-                        return Ok(Currency::Rupees(
-                            i32::from_str(val).map_err(|e| format!("{}", e))?,
-                        ))
-                    }
+                    "Rupees" => return Ok(Currency::Rupees(
+                        i32::from_str(val).map_err(|e| format!("{}", e))?)),
                     _ => (),
                 }
             }

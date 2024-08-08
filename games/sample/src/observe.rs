@@ -3,9 +3,8 @@
 #![allow(non_snake_case)]
 #![allow(unused)]
 
-use crate::context::{data, enums, flags, Context};
+use crate::context::{Context, data, enums, flags};
 use crate::graph::{self, *};
-use crate::graph_enums::*;
 use crate::items::Item;
 use crate::movements;
 use crate::prices::Currency;
@@ -41,20 +40,47 @@ pub enum OneObservation {
     TriforcePieceLe(i16, bool),
     TriforcePieceRange(i16, i16, bool),
     // bitflags
-    CBits1 {
-        mask: flags::ContextBits1,
-        result: flags::ContextBits1,
-    },
-    CBits2 {
-        mask: flags::ContextBits2,
-        result: flags::ContextBits2,
-    },
+    CBits1{ mask: flags::ContextBits1, result: flags::ContextBits1 },
+    CBits2{ mask: flags::ContextBits2, result: flags::ContextBits2 },
 }
+
+impl OneObservation {
+    pub fn matches(&self, ctx: &Context) -> bool {
+        match *self {
+            OneObservation::Position(v) => ctx.position == v,
+            OneObservation::Tod(v) => ctx.tod == v,
+            OneObservation::RupeesExact(v) => ctx.rupees == v,
+            OneObservation::RupeesEq(v, res) => (ctx.rupees == v) == res,
+            OneObservation::RupeesGe(v, res) => (ctx.rupees >= v) == res,
+            OneObservation::RupeesLe(v, res) => (ctx.rupees <= v) == res,
+            OneObservation::RupeesRange(lo, hi, res) => (ctx.rupees >= lo && ctx.rupees <= hi) == res,
+            OneObservation::GoldSkulltulaTokenExact(v) => ctx.gold_skulltula_token == v,
+            OneObservation::GoldSkulltulaTokenEq(v, res) => (ctx.gold_skulltula_token == v) == res,
+            OneObservation::GoldSkulltulaTokenGe(v, res) => (ctx.gold_skulltula_token >= v) == res,
+            OneObservation::GoldSkulltulaTokenLe(v, res) => (ctx.gold_skulltula_token <= v) == res,
+            OneObservation::GoldSkulltulaTokenRange(lo, hi, res) => (ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi) == res,
+            OneObservation::ProgressiveWalletExact(v) => ctx.progressive_wallet == v,
+            OneObservation::ProgressiveWalletEq(v, res) => (ctx.progressive_wallet == v) == res,
+            OneObservation::ProgressiveWalletGe(v, res) => (ctx.progressive_wallet >= v) == res,
+            OneObservation::ProgressiveWalletLe(v, res) => (ctx.progressive_wallet <= v) == res,
+            OneObservation::ProgressiveWalletRange(lo, hi, res) => (ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi) == res,
+            OneObservation::TriforcePieceExact(v) => ctx.triforce_piece == v,
+            OneObservation::TriforcePieceEq(v, res) => (ctx.triforce_piece == v) == res,
+            OneObservation::TriforcePieceGe(v, res) => (ctx.triforce_piece >= v) == res,
+            OneObservation::TriforcePieceLe(v, res) => (ctx.triforce_piece <= v) == res,
+            OneObservation::TriforcePieceRange(lo, hi, res) => (ctx.triforce_piece >= lo && ctx.triforce_piece <= hi) == res,
+            OneObservation::CBits1{ mask, result } => (ctx.cbits1 & mask) == result,
+            OneObservation::CBits2{ mask, result } => (ctx.cbits2 & mask) == result,
+        }
+    }
+}
+
 
 #[derive(Debug, Default)]
 pub struct FullObservation {
     // context vars: observed or not. Ints get comparisons as well but they are observed-as-true comparisons,
     // or otherwise partitioned as exact
+
     position: bool,
     tod: bool,
     rupees: IntegerObservation<i32>,
@@ -63,8 +89,8 @@ pub struct FullObservation {
     progressive_wallet: IntegerObservation<i8>,
     triforce_piece: IntegerObservation<i16>,
     // bitflags: optionally a mask
-    cbits1: Option<flags::ContextBits1>,
-    cbits2: Option<flags::ContextBits2>,
+    cbits1: flags::ContextBits1,
+    cbits2: flags::ContextBits2,
     pub strict: bool,
 }
 
@@ -85,227 +111,146 @@ impl Observer for FullObservation {
 
     fn observe_visit(&mut self, loc_id: LocationId) {
         match loc_id {
-            LocationId::Deku_Tree__Lobby__Center__Web
-            | LocationId::Deku_Tree__Floor_3__Door__Break_Web
-            | LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
+            LocationId::Deku_Tree__Lobby__Center__Web | LocationId::Deku_Tree__Floor_3__Door__Break_Web | LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
             }
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web
-            | LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web | LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
             }
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma
-            | LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma | LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
             }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
             }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
             }
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
             }
             LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
             }
             LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST);
             }
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
             }
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
             }
             LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
             }
             LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
             }
             LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
             }
             LocationId::Deku_Tree__Basement_1__Corner__Switch => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
             }
             LocationId::Deku_Tree__Basement_1__Corner__Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
             }
             LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
             }
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
             }
             LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL);
             }
             LocationId::Deku_Tree__Skull_Room__Entry__GS => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
             }
             LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
             }
             LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
             }
             LocationId::KF__Kokiri_Village__Training_Center__Victory => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY);
             }
             LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO);
             }
             LocationId::KF__Boulder_Maze__Reward__Chest => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_KF__BOULDER_MAZE__REWARD__CHEST);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__BOULDER_MAZE__REWARD__CHEST);
             }
             LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
             }
             LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
-                self.cbits1
-                    .insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
             }
             LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
             }
             LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
-                self.cbits2.insert(
-                    flags::ContextBits2::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
-                );
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE);
             }
             LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
             }
             LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
             }
             LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
             }
             LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
-                self.cbits1.insert(
-                    flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
-                );
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
             }
             LocationId::KF__Shop__Entry__Blue_Rupee => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__BLUE_RUPEE);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__BLUE_RUPEE);
             }
             LocationId::KF__Shop__Entry__Item_1 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_1);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_1);
             }
             LocationId::KF__Shop__Entry__Item_2 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_2);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_2);
             }
             LocationId::KF__Shop__Entry__Item_3 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_3);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_3);
             }
             LocationId::KF__Shop__Entry__Item_4 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_4);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_4);
             }
             LocationId::KF__Shop__Entry__Item_5 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_5);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_5);
             }
             LocationId::KF__Shop__Entry__Item_6 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_6);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_6);
             }
             LocationId::KF__Shop__Entry__Item_7 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_7);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_7);
             }
             LocationId::KF__Shop__Entry__Item_8 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_8);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_8);
             }
             LocationId::Kak__Spider_House__Entry__Skulls_10 => {
-                self.cbits2
-                    .insert(flags::ContextBits2::VISITED_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
             }
         }
     }
 
     fn observe_collect(&mut self, ctx: &Context, item: Item, world: &World) {
         match item {
-            Item::Rupee_1 => {
-                rules::observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
-                    ctx, world, self,
-                )
-            }
-            Item::Rupees_5 => {
-                rules::observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
-                    ctx, world, self,
-                )
-            }
-            Item::Rupees_50 => {
-                rules::observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(
-                    ctx, world, self,
-                )
-            }
+            Item::Rupee_1 => rules::observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(ctx, world, self),
+            Item::Rupees_5 => rules::observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(ctx, world, self),
+            Item::Rupees_50 => rules::observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(ctx, world, self),
             _ => (),
         }
     }
@@ -317,125 +262,69 @@ impl Observer for FullObservation {
         }
     }
 
+
+
     fn update(&mut self, from: &Context, to: &Context) {
         if from.rupees != to.rupees {
             self.rupees = self.rupees.shift(to.rupees - from.rupees);
         }
         if from.gold_skulltula_token != to.gold_skulltula_token {
-            self.gold_skulltula_token = self
-                .gold_skulltula_token
-                .shift(to.gold_skulltula_token - from.gold_skulltula_token);
+            self.gold_skulltula_token = self.gold_skulltula_token.shift(to.gold_skulltula_token - from.gold_skulltula_token);
         }
         if from.progressive_wallet != to.progressive_wallet {
-            self.progressive_wallet = self
-                .progressive_wallet
-                .shift(to.progressive_wallet - from.progressive_wallet);
+            self.progressive_wallet = self.progressive_wallet.shift(to.progressive_wallet - from.progressive_wallet);
         }
         if from.triforce_piece != to.triforce_piece {
-            self.triforce_piece = self
-                .triforce_piece
-                .shift(to.triforce_piece - from.triforce_piece);
+            self.triforce_piece = self.triforce_piece.shift(to.triforce_piece - from.triforce_piece);
         }
     }
 
     fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
         let mut vec = Vec::with_capacity(self.fields_observed());
-        if self.position {
-            vec.push(OneObservation::Position(ctx.position));
-        }
-        if self.tod {
-            vec.push(OneObservation::Tod(ctx.tod));
-        }
-        match self.rupees {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::RupeesExact(ctx.rupees)),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::RupeesEq(i, ctx.rupees == i)),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::RupeesGe(i, ctx.rupees >= i)),
-            IntegerObservation::Le(i) => vec.push(OneObservation::RupeesLe(i, ctx.rupees <= i)),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RupeesRange(
-                lo,
-                hi,
-                ctx.rupees >= lo && ctx.rupees <= hi,
-            )),
-        }
-        match self.gold_skulltula_token {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::GoldSkulltulaTokenExact(
-                ctx.gold_skulltula_token,
-            )),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::GoldSkulltulaTokenEq(
-                i,
-                ctx.gold_skulltula_token == i,
-            )),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::GoldSkulltulaTokenGe(
-                i,
-                ctx.gold_skulltula_token >= i,
-            )),
-            IntegerObservation::Le(i) => vec.push(OneObservation::GoldSkulltulaTokenLe(
-                i,
-                ctx.gold_skulltula_token <= i,
-            )),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::GoldSkulltulaTokenRange(
-                lo,
-                hi,
-                ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi,
-            )),
-        }
-        match self.progressive_wallet {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => vec.push(OneObservation::ProgressiveWalletExact(
-                ctx.progressive_wallet,
-            )),
-            IntegerObservation::Eq(i) => vec.push(OneObservation::ProgressiveWalletEq(
-                i,
-                ctx.progressive_wallet == i,
-            )),
-            IntegerObservation::Ge(i) => vec.push(OneObservation::ProgressiveWalletGe(
-                i,
-                ctx.progressive_wallet >= i,
-            )),
-            IntegerObservation::Le(i) => vec.push(OneObservation::ProgressiveWalletLe(
-                i,
-                ctx.progressive_wallet <= i,
-            )),
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::ProgressiveWalletRange(
-                lo,
-                hi,
-                ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi,
-            )),
-        }
-        match self.triforce_piece {
-            IntegerObservation::Unknown => (),
-            IntegerObservation::Exact => {
-                vec.push(OneObservation::TriforcePieceExact(ctx.triforce_piece))
+            if self.position {
+                vec.push(OneObservation::Position(ctx.position));
             }
-            IntegerObservation::Eq(i) => {
-                vec.push(OneObservation::TriforcePieceEq(i, ctx.triforce_piece == i))
+            if self.tod {
+                vec.push(OneObservation::Tod(ctx.tod));
             }
-            IntegerObservation::Ge(i) => {
-                vec.push(OneObservation::TriforcePieceGe(i, ctx.triforce_piece >= i))
+            match self.rupees {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::RupeesExact(ctx.rupees)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::RupeesEq(i, ctx.rupees == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::RupeesGe(i, ctx.rupees >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::RupeesLe(i, ctx.rupees <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RupeesRange(lo, hi, ctx.rupees >= lo && ctx.rupees <= hi)),
             }
-            IntegerObservation::Le(i) => {
-                vec.push(OneObservation::TriforcePieceLe(i, ctx.triforce_piece <= i))
+            match self.gold_skulltula_token {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::GoldSkulltulaTokenExact(ctx.gold_skulltula_token)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::GoldSkulltulaTokenEq(i, ctx.gold_skulltula_token == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::GoldSkulltulaTokenGe(i, ctx.gold_skulltula_token >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::GoldSkulltulaTokenLe(i, ctx.gold_skulltula_token <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::GoldSkulltulaTokenRange(lo, hi, ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi)),
             }
-            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::TriforcePieceRange(
-                lo,
-                hi,
-                ctx.triforce_piece >= lo && ctx.triforce_piece <= hi,
-            )),
-        }
-        if let Some(mask) = self.cbits1 {
-            vec.push(OneObservation::CBits1 {
-                mask,
-                result: mask & ctx.cbits1,
-            });
-        }
-        if let Some(mask) = self.cbits2 {
-            vec.push(OneObservation::CBits2 {
-                mask,
-                result: mask & ctx.cbits2,
-            });
-        }
+            match self.progressive_wallet {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::ProgressiveWalletExact(ctx.progressive_wallet)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::ProgressiveWalletEq(i, ctx.progressive_wallet == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::ProgressiveWalletGe(i, ctx.progressive_wallet >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::ProgressiveWalletLe(i, ctx.progressive_wallet <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::ProgressiveWalletRange(lo, hi, ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi)),
+            }
+            match self.triforce_piece {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::TriforcePieceExact(ctx.triforce_piece)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::TriforcePieceEq(i, ctx.triforce_piece == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::TriforcePieceGe(i, ctx.triforce_piece >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::TriforcePieceLe(i, ctx.triforce_piece <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::TriforcePieceRange(lo, hi, ctx.triforce_piece >= lo && ctx.triforce_piece <= hi)),
+            }
+            if !self.cbits1.is_empty() {
+                vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
+            }
+            if !self.cbits2.is_empty() {
+                vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
+            }
         vec
     }
 }
@@ -443,41 +332,34 @@ impl Observer for FullObservation {
 impl FullObservation {
     fn fields_observed(&self) -> usize {
         let mut fields = 0;
-        if self.position {
-            fields += 1;
-        }
-        if self.tod {
-            fields += 1;
-        }
-        if self.rupees != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.gold_skulltula_token != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.progressive_wallet != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.triforce_piece != IntegerObservation::Unknown {
-            fields += 1;
-        }
-        if self.cbits1.is_some() {
-            fields += 1;
-        }
-        if self.cbits2.is_some() {
-            fields += 1;
-        }
+        if self.position { fields += 1; }
+        if self.tod { fields += 1; }
+        if self.rupees != IntegerObservation::Unknown { fields += 1; }
+        if self.gold_skulltula_token != IntegerObservation::Unknown { fields += 1; }
+        if self.progressive_wallet != IntegerObservation::Unknown { fields += 1; }
+        if self.triforce_piece != IntegerObservation::Unknown { fields += 1; }
+        if !self.cbits1.is_empty() { fields += 1; }
+        if !self.cbits2.is_empty() { fields += 1; }
         fields
     }
 
     pub fn observe_position(&mut self) {
         self.position = true;
     }
+    pub fn clear_position(&mut self) {
+        self.position = false;
+    }
     pub fn observe_child(&mut self) {
         self.cbits1.insert(flags::ContextBits1::CHILD);
     }
+    pub fn clear_child(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::CHILD);
+    }
     pub fn observe_tod(&mut self) {
         self.tod = true;
+    }
+    pub fn clear_tod(&mut self) {
+        self.tod = false;
     }
     pub fn observe_rupees(&mut self, obs: IntegerObservation<i32>) {
         if self.strict {
@@ -486,75 +368,140 @@ impl FullObservation {
             self.rupees = self.rupees.combine(obs);
         }
     }
+    pub fn clear_rupees(&mut self) {
+        self.rupees = IntegerObservation::Unknown;
+    }
     pub fn observe_deku_tree__compass_room__ctx__torch(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
+        self.cbits1.insert(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
+    }
+    pub fn clear_deku_tree__compass_room__ctx__torch(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
     }
     pub fn observe_biggoron_sword(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
     }
+    pub fn clear_biggoron_sword(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BIGGORON_SWORD);
+    }
     pub fn observe_bombs(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BOMBS);
+    }
+    pub fn clear_bombs(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BOMBS);
     }
     pub fn observe_boomerang(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BOOMERANG);
     }
+    pub fn clear_boomerang(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BOOMERANG);
+    }
     pub fn observe_bow(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BOW);
+    }
+    pub fn clear_bow(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BOW);
     }
     pub fn observe_buy_deku_nut_10(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
     }
+    pub fn clear_buy_deku_nut_10(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BUY_DEKU_NUT_10);
+    }
     pub fn observe_buy_deku_nut_5(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
+    }
+    pub fn clear_buy_deku_nut_5(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BUY_DEKU_NUT_5);
     }
     pub fn observe_buy_deku_shield(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
     }
+    pub fn clear_buy_deku_shield(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BUY_DEKU_SHIELD);
+    }
     pub fn observe_buy_deku_stick_1(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
+    }
+    pub fn clear_buy_deku_stick_1(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::BUY_DEKU_STICK_1);
     }
     pub fn observe_defeat_ganon(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
     }
+    pub fn clear_defeat_ganon(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEFEAT_GANON);
+    }
     pub fn observe_defeat_gohma(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
+    }
+    pub fn clear_defeat_gohma(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEFEAT_GOHMA);
     }
     pub fn observe_deku_back_room_wall(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
     }
+    pub fn clear_deku_back_room_wall(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+    }
     pub fn observe_deku_back_room_web(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+    }
+    pub fn clear_deku_back_room_web(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
     }
     pub fn observe_deku_basement_block(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
     }
+    pub fn clear_deku_basement_block(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+    }
     pub fn observe_deku_basement_scrubs(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+        self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+    }
+    pub fn clear_deku_basement_scrubs(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
     }
     pub fn observe_deku_basement_switch(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+        self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+    }
+    pub fn clear_deku_basement_switch(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
     }
     pub fn observe_deku_basement_web(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
     }
+    pub fn clear_deku_basement_web(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_WEB);
+    }
     pub fn observe_deku_lobby_web(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
+    }
+    pub fn clear_deku_lobby_web(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_LOBBY_WEB);
     }
     pub fn observe_deku_nut_drop(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
     }
+    pub fn clear_deku_nut_drop(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_NUT_DROP);
+    }
     pub fn observe_deku_shield_drop(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
     }
+    pub fn clear_deku_shield_drop(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_SHIELD_DROP);
+    }
     pub fn observe_deku_slingshot_scrub(&mut self) {
-        self.cbits1
-            .insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+        self.cbits1.insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+    }
+    pub fn clear_deku_slingshot_scrub(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
     }
     pub fn observe_deku_stick_drop(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
+    }
+    pub fn clear_deku_stick_drop(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::DEKU_STICK_DROP);
     }
     pub fn observe_gold_skulltula_token(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -563,20 +510,38 @@ impl FullObservation {
             self.gold_skulltula_token = self.gold_skulltula_token.combine(obs);
         }
     }
+    pub fn clear_gold_skulltula_token(&mut self, obs: IntegerObservation<i8>) {
+        self.gold_skulltula_token = IntegerObservation::Unknown;
+    }
     pub fn observe_hylian_shield(&mut self) {
         self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
+    }
+    pub fn clear_hylian_shield(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::HYLIAN_SHIELD);
     }
     pub fn observe_kokiri_emerald(&mut self) {
         self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
     }
+    pub fn clear_kokiri_emerald(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::KOKIRI_EMERALD);
+    }
     pub fn observe_kokiri_sword(&mut self) {
         self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
+    }
+    pub fn clear_kokiri_sword(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::KOKIRI_SWORD);
     }
     pub fn observe_magic_meter(&mut self) {
         self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
     }
+    pub fn clear_magic_meter(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::MAGIC_METER);
+    }
     pub fn observe_ocarina(&mut self) {
         self.cbits1.insert(flags::ContextBits1::OCARINA);
+    }
+    pub fn clear_ocarina(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::OCARINA);
     }
     pub fn observe_progressive_wallet(&mut self, obs: IntegerObservation<i8>) {
         if self.strict {
@@ -585,11 +550,20 @@ impl FullObservation {
             self.progressive_wallet = self.progressive_wallet.combine(obs);
         }
     }
+    pub fn clear_progressive_wallet(&mut self, obs: IntegerObservation<i8>) {
+        self.progressive_wallet = IntegerObservation::Unknown;
+    }
     pub fn observe_showed_mido(&mut self) {
         self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
     }
+    pub fn clear_showed_mido(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::SHOWED_MIDO);
+    }
     pub fn observe_slingshot(&mut self) {
         self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
+    }
+    pub fn clear_slingshot(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::SLINGSHOT);
     }
     pub fn observe_triforce_piece(&mut self, obs: IntegerObservation<i16>) {
         if self.strict {
@@ -598,8 +572,14 @@ impl FullObservation {
             self.triforce_piece = self.triforce_piece.combine(obs);
         }
     }
+    pub fn clear_triforce_piece(&mut self, obs: IntegerObservation<i16>) {
+        self.triforce_piece = IntegerObservation::Unknown;
+    }
     pub fn observe_victory(&mut self) {
         self.cbits1.insert(flags::ContextBits1::VICTORY);
+    }
+    pub fn clear_victory(&mut self) {
+        self.cbits1.remove(flags::ContextBits1::VICTORY);
     }
 }
 
@@ -737,31 +717,19 @@ impl MatcherDispatch for ObservationMatcher {
             }
             &OneObservation::GoldSkulltulaTokenEq(eq, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::GoldSkulltulaTokenEq { eq, matcher },
-                )
+                (node, ObservationMatcher::GoldSkulltulaTokenEq { eq, matcher })
             }
             &OneObservation::GoldSkulltulaTokenGe(lo, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::GoldSkulltulaTokenGe { lo, matcher },
-                )
+                (node, ObservationMatcher::GoldSkulltulaTokenGe { lo, matcher })
             }
             &OneObservation::GoldSkulltulaTokenLe(hi, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::GoldSkulltulaTokenLe { hi, matcher },
-                )
+                (node, ObservationMatcher::GoldSkulltulaTokenLe { hi, matcher })
             }
             &OneObservation::GoldSkulltulaTokenRange(lo, hi, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::GoldSkulltulaTokenRange { lo, hi, matcher },
-                )
+                (node, ObservationMatcher::GoldSkulltulaTokenRange { lo, hi, matcher })
             }
             &OneObservation::ProgressiveWalletExact(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
@@ -769,31 +737,19 @@ impl MatcherDispatch for ObservationMatcher {
             }
             &OneObservation::ProgressiveWalletEq(eq, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::ProgressiveWalletEq { eq, matcher },
-                )
+                (node, ObservationMatcher::ProgressiveWalletEq { eq, matcher })
             }
             &OneObservation::ProgressiveWalletGe(lo, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::ProgressiveWalletGe { lo, matcher },
-                )
+                (node, ObservationMatcher::ProgressiveWalletGe { lo, matcher })
             }
             &OneObservation::ProgressiveWalletLe(hi, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::ProgressiveWalletLe { hi, matcher },
-                )
+                (node, ObservationMatcher::ProgressiveWalletLe { hi, matcher })
             }
             &OneObservation::ProgressiveWalletRange(lo, hi, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::ProgressiveWalletRange { lo, hi, matcher },
-                )
+                (node, ObservationMatcher::ProgressiveWalletRange { lo, hi, matcher })
             }
             &OneObservation::TriforcePieceExact(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
@@ -813,16 +769,13 @@ impl MatcherDispatch for ObservationMatcher {
             }
             &OneObservation::TriforcePieceRange(lo, hi, res) => {
                 let (node, matcher) = BooleanMatcher::new_with(res);
-                (
-                    node,
-                    ObservationMatcher::TriforcePieceRange { lo, hi, matcher },
-                )
+                (node, ObservationMatcher::TriforcePieceRange { lo, hi, matcher })
             }
-            &OneObservation::CBits1 { mask, result } => {
+            &OneObservation::CBits1{ mask, result } => {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits1 { mask, matcher })
             }
-            &OneObservation::CBits2 { mask, result } => {
+            &OneObservation::CBits2{ mask, result } => {
                 let (node, matcher) = LookupMatcher::new_with(result);
                 (node, ObservationMatcher::LookupCBits2 { mask, matcher })
             }
@@ -866,42 +819,22 @@ impl MatcherDispatch for ObservationMatcher {
             Self::RupeesEq { eq, matcher } => matcher.lookup(val.rupees == *eq),
             Self::RupeesGe { lo, matcher } => matcher.lookup(val.rupees >= *lo),
             Self::RupeesLe { hi, matcher } => matcher.lookup(val.rupees <= *hi),
-            Self::RupeesRange { lo, hi, matcher } => {
-                matcher.lookup(val.rupees >= *lo && val.rupees <= *hi)
-            }
+            Self::RupeesRange { lo, hi, matcher } => matcher.lookup(val.rupees >= *lo && val.rupees <= *hi),
             Self::GoldSkulltulaTokenLookup(m) => m.lookup(val.gold_skulltula_token),
-            Self::GoldSkulltulaTokenEq { eq, matcher } => {
-                matcher.lookup(val.gold_skulltula_token == *eq)
-            }
-            Self::GoldSkulltulaTokenGe { lo, matcher } => {
-                matcher.lookup(val.gold_skulltula_token >= *lo)
-            }
-            Self::GoldSkulltulaTokenLe { hi, matcher } => {
-                matcher.lookup(val.gold_skulltula_token <= *hi)
-            }
-            Self::GoldSkulltulaTokenRange { lo, hi, matcher } => {
-                matcher.lookup(val.gold_skulltula_token >= *lo && val.gold_skulltula_token <= *hi)
-            }
+            Self::GoldSkulltulaTokenEq { eq, matcher } => matcher.lookup(val.gold_skulltula_token == *eq),
+            Self::GoldSkulltulaTokenGe { lo, matcher } => matcher.lookup(val.gold_skulltula_token >= *lo),
+            Self::GoldSkulltulaTokenLe { hi, matcher } => matcher.lookup(val.gold_skulltula_token <= *hi),
+            Self::GoldSkulltulaTokenRange { lo, hi, matcher } => matcher.lookup(val.gold_skulltula_token >= *lo && val.gold_skulltula_token <= *hi),
             Self::ProgressiveWalletLookup(m) => m.lookup(val.progressive_wallet),
-            Self::ProgressiveWalletEq { eq, matcher } => {
-                matcher.lookup(val.progressive_wallet == *eq)
-            }
-            Self::ProgressiveWalletGe { lo, matcher } => {
-                matcher.lookup(val.progressive_wallet >= *lo)
-            }
-            Self::ProgressiveWalletLe { hi, matcher } => {
-                matcher.lookup(val.progressive_wallet <= *hi)
-            }
-            Self::ProgressiveWalletRange { lo, hi, matcher } => {
-                matcher.lookup(val.progressive_wallet >= *lo && val.progressive_wallet <= *hi)
-            }
+            Self::ProgressiveWalletEq { eq, matcher } => matcher.lookup(val.progressive_wallet == *eq),
+            Self::ProgressiveWalletGe { lo, matcher } => matcher.lookup(val.progressive_wallet >= *lo),
+            Self::ProgressiveWalletLe { hi, matcher } => matcher.lookup(val.progressive_wallet <= *hi),
+            Self::ProgressiveWalletRange { lo, hi, matcher } => matcher.lookup(val.progressive_wallet >= *lo && val.progressive_wallet <= *hi),
             Self::TriforcePieceLookup(m) => m.lookup(val.triforce_piece),
             Self::TriforcePieceEq { eq, matcher } => matcher.lookup(val.triforce_piece == *eq),
             Self::TriforcePieceGe { lo, matcher } => matcher.lookup(val.triforce_piece >= *lo),
             Self::TriforcePieceLe { hi, matcher } => matcher.lookup(val.triforce_piece <= *hi),
-            Self::TriforcePieceRange { lo, hi, matcher } => {
-                matcher.lookup(val.triforce_piece >= *lo && val.triforce_piece <= *hi)
-            }
+            Self::TriforcePieceRange { lo, hi, matcher } => matcher.lookup(val.triforce_piece >= *lo && val.triforce_piece <= *hi),
             Self::LookupCBits1 { mask, matcher } => matcher.lookup(val.cbits1 & *mask),
             Self::LookupCBits2 { mask, matcher } => matcher.lookup(val.cbits2 & *mask),
         }
@@ -912,94 +845,27 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::PositionLookup(m), OneObservation::Position(v)) => Some(m.insert(*v)),
             (Self::TodLookup(m), OneObservation::Tod(v)) => Some(m.insert(*v)),
             (Self::RupeesLookup(m), OneObservation::RupeesExact(v)) => Some(m.insert(*v)),
-            (Self::RupeesEq { eq, matcher }, OneObservation::RupeesEq(eq2, v)) if eq2 == eq => {
-                Some(matcher.insert(*v))
-            }
-            (Self::RupeesGe { lo, matcher }, OneObservation::RupeesGe(lo2, v)) if lo2 == lo => {
-                Some(matcher.insert(*v))
-            }
-            (Self::RupeesLe { hi, matcher }, OneObservation::RupeesLe(hi2, v)) if hi2 == hi => {
-                Some(matcher.insert(*v))
-            }
-            (Self::RupeesRange { lo, hi, matcher }, OneObservation::RupeesRange(lo2, hi2, v))
-                if lo2 == lo && hi2 == hi =>
-            {
-                Some(matcher.insert(*v))
-            }
-            (Self::GoldSkulltulaTokenLookup(m), OneObservation::GoldSkulltulaTokenExact(v)) => {
-                Some(m.insert(*v))
-            }
-            (
-                Self::GoldSkulltulaTokenEq { eq, matcher },
-                OneObservation::GoldSkulltulaTokenEq(eq2, v),
-            ) if eq2 == eq => Some(matcher.insert(*v)),
-            (
-                Self::GoldSkulltulaTokenGe { lo, matcher },
-                OneObservation::GoldSkulltulaTokenGe(lo2, v),
-            ) if lo2 == lo => Some(matcher.insert(*v)),
-            (
-                Self::GoldSkulltulaTokenLe { hi, matcher },
-                OneObservation::GoldSkulltulaTokenLe(hi2, v),
-            ) if hi2 == hi => Some(matcher.insert(*v)),
-            (
-                Self::GoldSkulltulaTokenRange { lo, hi, matcher },
-                OneObservation::GoldSkulltulaTokenRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
-            (Self::ProgressiveWalletLookup(m), OneObservation::ProgressiveWalletExact(v)) => {
-                Some(m.insert(*v))
-            }
-            (
-                Self::ProgressiveWalletEq { eq, matcher },
-                OneObservation::ProgressiveWalletEq(eq2, v),
-            ) if eq2 == eq => Some(matcher.insert(*v)),
-            (
-                Self::ProgressiveWalletGe { lo, matcher },
-                OneObservation::ProgressiveWalletGe(lo2, v),
-            ) if lo2 == lo => Some(matcher.insert(*v)),
-            (
-                Self::ProgressiveWalletLe { hi, matcher },
-                OneObservation::ProgressiveWalletLe(hi2, v),
-            ) if hi2 == hi => Some(matcher.insert(*v)),
-            (
-                Self::ProgressiveWalletRange { lo, hi, matcher },
-                OneObservation::ProgressiveWalletRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
-            (Self::TriforcePieceLookup(m), OneObservation::TriforcePieceExact(v)) => {
-                Some(m.insert(*v))
-            }
-            (Self::TriforcePieceEq { eq, matcher }, OneObservation::TriforcePieceEq(eq2, v))
-                if eq2 == eq =>
-            {
-                Some(matcher.insert(*v))
-            }
-            (Self::TriforcePieceGe { lo, matcher }, OneObservation::TriforcePieceGe(lo2, v))
-                if lo2 == lo =>
-            {
-                Some(matcher.insert(*v))
-            }
-            (Self::TriforcePieceLe { hi, matcher }, OneObservation::TriforcePieceLe(hi2, v))
-                if hi2 == hi =>
-            {
-                Some(matcher.insert(*v))
-            }
-            (
-                Self::TriforcePieceRange { lo, hi, matcher },
-                OneObservation::TriforcePieceRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
-            (
-                Self::LookupCBits1 { mask, matcher },
-                OneObservation::CBits1 {
-                    mask: mask2,
-                    result,
-                },
-            ) if mask == mask2 => Some(matcher.insert(*result)),
-            (
-                Self::LookupCBits2 { mask, matcher },
-                OneObservation::CBits2 {
-                    mask: mask2,
-                    result,
-                },
-            ) if mask == mask2 => Some(matcher.insert(*result)),
+            (Self::RupeesEq { eq, matcher }, OneObservation::RupeesEq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
+            (Self::RupeesGe { lo, matcher }, OneObservation::RupeesGe(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
+            (Self::RupeesLe { hi, matcher }, OneObservation::RupeesLe(hi2, v)) if hi2 == hi => Some(matcher.insert(*v)),
+            (Self::RupeesRange { lo, hi, matcher }, OneObservation::RupeesRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
+            (Self::GoldSkulltulaTokenLookup(m), OneObservation::GoldSkulltulaTokenExact(v)) => Some(m.insert(*v)),
+            (Self::GoldSkulltulaTokenEq { eq, matcher }, OneObservation::GoldSkulltulaTokenEq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
+            (Self::GoldSkulltulaTokenGe { lo, matcher }, OneObservation::GoldSkulltulaTokenGe(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
+            (Self::GoldSkulltulaTokenLe { hi, matcher }, OneObservation::GoldSkulltulaTokenLe(hi2, v)) if hi2 == hi => Some(matcher.insert(*v)),
+            (Self::GoldSkulltulaTokenRange { lo, hi, matcher }, OneObservation::GoldSkulltulaTokenRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
+            (Self::ProgressiveWalletLookup(m), OneObservation::ProgressiveWalletExact(v)) => Some(m.insert(*v)),
+            (Self::ProgressiveWalletEq { eq, matcher }, OneObservation::ProgressiveWalletEq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
+            (Self::ProgressiveWalletGe { lo, matcher }, OneObservation::ProgressiveWalletGe(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
+            (Self::ProgressiveWalletLe { hi, matcher }, OneObservation::ProgressiveWalletLe(hi2, v)) if hi2 == hi => Some(matcher.insert(*v)),
+            (Self::ProgressiveWalletRange { lo, hi, matcher }, OneObservation::ProgressiveWalletRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
+            (Self::TriforcePieceLookup(m), OneObservation::TriforcePieceExact(v)) => Some(m.insert(*v)),
+            (Self::TriforcePieceEq { eq, matcher }, OneObservation::TriforcePieceEq(eq2, v)) if eq2 == eq => Some(matcher.insert(*v)),
+            (Self::TriforcePieceGe { lo, matcher }, OneObservation::TriforcePieceGe(lo2, v)) if lo2 == lo => Some(matcher.insert(*v)),
+            (Self::TriforcePieceLe { hi, matcher }, OneObservation::TriforcePieceLe(hi2, v)) if hi2 == hi => Some(matcher.insert(*v)),
+            (Self::TriforcePieceRange { lo, hi, matcher }, OneObservation::TriforcePieceRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => Some(matcher.insert(*v)),
+            (Self::LookupCBits1 { mask, matcher }, OneObservation::CBits1 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
+            (Self::LookupCBits2 { mask, matcher }, OneObservation::CBits2 { mask: mask2, result }) if mask == mask2 => Some(matcher.insert(*result)),
             _ => None,
         }
     }
@@ -1009,94 +875,27 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value(*v, value),
             (Self::TodLookup(m), OneObservation::Tod(v)) => m.add_value(*v, value),
             (Self::RupeesLookup(m), OneObservation::RupeesExact(v)) => m.add_value(*v, value),
-            (Self::RupeesEq { eq, matcher }, OneObservation::RupeesEq(eq2, v)) if eq2 == eq => {
-                matcher.add_value(*v, value)
-            }
-            (Self::RupeesGe { lo, matcher }, OneObservation::RupeesGe(lo2, v)) if lo2 == lo => {
-                matcher.add_value(*v, value)
-            }
-            (Self::RupeesLe { hi, matcher }, OneObservation::RupeesLe(hi2, v)) if hi2 == hi => {
-                matcher.add_value(*v, value)
-            }
-            (Self::RupeesRange { lo, hi, matcher }, OneObservation::RupeesRange(lo2, hi2, v))
-                if lo2 == lo && hi2 == hi =>
-            {
-                matcher.add_value(*v, value)
-            }
-            (Self::GoldSkulltulaTokenLookup(m), OneObservation::GoldSkulltulaTokenExact(v)) => {
-                m.add_value(*v, value)
-            }
-            (
-                Self::GoldSkulltulaTokenEq { eq, matcher },
-                OneObservation::GoldSkulltulaTokenEq(eq2, v),
-            ) if eq2 == eq => matcher.add_value(*v, value),
-            (
-                Self::GoldSkulltulaTokenGe { lo, matcher },
-                OneObservation::GoldSkulltulaTokenGe(lo2, v),
-            ) if lo2 == lo => matcher.add_value(*v, value),
-            (
-                Self::GoldSkulltulaTokenLe { hi, matcher },
-                OneObservation::GoldSkulltulaTokenLe(hi2, v),
-            ) if hi2 == hi => matcher.add_value(*v, value),
-            (
-                Self::GoldSkulltulaTokenRange { lo, hi, matcher },
-                OneObservation::GoldSkulltulaTokenRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
-            (Self::ProgressiveWalletLookup(m), OneObservation::ProgressiveWalletExact(v)) => {
-                m.add_value(*v, value)
-            }
-            (
-                Self::ProgressiveWalletEq { eq, matcher },
-                OneObservation::ProgressiveWalletEq(eq2, v),
-            ) if eq2 == eq => matcher.add_value(*v, value),
-            (
-                Self::ProgressiveWalletGe { lo, matcher },
-                OneObservation::ProgressiveWalletGe(lo2, v),
-            ) if lo2 == lo => matcher.add_value(*v, value),
-            (
-                Self::ProgressiveWalletLe { hi, matcher },
-                OneObservation::ProgressiveWalletLe(hi2, v),
-            ) if hi2 == hi => matcher.add_value(*v, value),
-            (
-                Self::ProgressiveWalletRange { lo, hi, matcher },
-                OneObservation::ProgressiveWalletRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
-            (Self::TriforcePieceLookup(m), OneObservation::TriforcePieceExact(v)) => {
-                m.add_value(*v, value)
-            }
-            (Self::TriforcePieceEq { eq, matcher }, OneObservation::TriforcePieceEq(eq2, v))
-                if eq2 == eq =>
-            {
-                matcher.add_value(*v, value)
-            }
-            (Self::TriforcePieceGe { lo, matcher }, OneObservation::TriforcePieceGe(lo2, v))
-                if lo2 == lo =>
-            {
-                matcher.add_value(*v, value)
-            }
-            (Self::TriforcePieceLe { hi, matcher }, OneObservation::TriforcePieceLe(hi2, v))
-                if hi2 == hi =>
-            {
-                matcher.add_value(*v, value)
-            }
-            (
-                Self::TriforcePieceRange { lo, hi, matcher },
-                OneObservation::TriforcePieceRange(lo2, hi2, v),
-            ) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
-            (
-                Self::LookupCBits1 { mask, matcher },
-                OneObservation::CBits1 {
-                    mask: mask2,
-                    result,
-                },
-            ) if mask == mask2 => matcher.add_value(*result, value),
-            (
-                Self::LookupCBits2 { mask, matcher },
-                OneObservation::CBits2 {
-                    mask: mask2,
-                    result,
-                },
-            ) if mask == mask2 => matcher.add_value(*result, value),
+            (Self::RupeesEq { eq, matcher }, OneObservation::RupeesEq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
+            (Self::RupeesGe { lo, matcher }, OneObservation::RupeesGe(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
+            (Self::RupeesLe { hi, matcher }, OneObservation::RupeesLe(hi2, v)) if hi2 == hi => matcher.add_value(*v, value),
+            (Self::RupeesRange { lo, hi, matcher }, OneObservation::RupeesRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
+            (Self::GoldSkulltulaTokenLookup(m), OneObservation::GoldSkulltulaTokenExact(v)) => m.add_value(*v, value),
+            (Self::GoldSkulltulaTokenEq { eq, matcher }, OneObservation::GoldSkulltulaTokenEq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
+            (Self::GoldSkulltulaTokenGe { lo, matcher }, OneObservation::GoldSkulltulaTokenGe(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
+            (Self::GoldSkulltulaTokenLe { hi, matcher }, OneObservation::GoldSkulltulaTokenLe(hi2, v)) if hi2 == hi => matcher.add_value(*v, value),
+            (Self::GoldSkulltulaTokenRange { lo, hi, matcher }, OneObservation::GoldSkulltulaTokenRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
+            (Self::ProgressiveWalletLookup(m), OneObservation::ProgressiveWalletExact(v)) => m.add_value(*v, value),
+            (Self::ProgressiveWalletEq { eq, matcher }, OneObservation::ProgressiveWalletEq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
+            (Self::ProgressiveWalletGe { lo, matcher }, OneObservation::ProgressiveWalletGe(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
+            (Self::ProgressiveWalletLe { hi, matcher }, OneObservation::ProgressiveWalletLe(hi2, v)) if hi2 == hi => matcher.add_value(*v, value),
+            (Self::ProgressiveWalletRange { lo, hi, matcher }, OneObservation::ProgressiveWalletRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
+            (Self::TriforcePieceLookup(m), OneObservation::TriforcePieceExact(v)) => m.add_value(*v, value),
+            (Self::TriforcePieceEq { eq, matcher }, OneObservation::TriforcePieceEq(eq2, v)) if eq2 == eq => matcher.add_value(*v, value),
+            (Self::TriforcePieceGe { lo, matcher }, OneObservation::TriforcePieceGe(lo2, v)) if lo2 == lo => matcher.add_value(*v, value),
+            (Self::TriforcePieceLe { hi, matcher }, OneObservation::TriforcePieceLe(hi2, v)) if hi2 == hi => matcher.add_value(*v, value),
+            (Self::TriforcePieceRange { lo, hi, matcher }, OneObservation::TriforcePieceRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
+            (Self::LookupCBits1 { mask, matcher }, OneObservation::CBits1 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
+            (Self::LookupCBits2 { mask, matcher }, OneObservation::CBits2 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             _ => (),
         }
     }

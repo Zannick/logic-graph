@@ -48,7 +48,8 @@ def parseBoolExpr(text, name='', verbose=False) -> ParseResult:
     p.removeErrorListeners()
     p.addErrorListener(errl)
     tree = p.boolExpr()
-    errl.handleRemainingText(text, p)
+    if isinstance(text, str):
+        errl.handleRemainingText(text, p)
     return ParseResult(name, text, tree, p, errl.errors)
 
 
