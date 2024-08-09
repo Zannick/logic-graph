@@ -565,4 +565,13 @@
 ! Do Become Indra
 * Collect Big_Flask from Annuna > Egg Room > Corner Platform > Shockwave from Outside
 
-# Then: Annuna Breach in full!
+# Section "Annuna Breach"
+! Do Become Drone
+  Move... to Annuna > Hidden Portal > Portal Stand
+  Portalwarp
+* Collect Nano_Lattice_3 from Annuna Breach > Gate and Floor > Middle Floor > Item
+* Collect Annuna_Breach_Upper_Gate from Annuna Breach > Gate and Floor > Button > Hit Button
+* Collect Annuna_Breach_Lower_Gate from Annuna Breach > Lower Gate > Button > Hit Button
+* Collect Big_Flask from Annuna Breach > Lower Gate > Flower Cache > Flask
+* Collect Big_Flask from Annuna Breach > Factory Foyer > West Flower > Flask
+  Move... to Annuna Breach > Depths > South Overhang
