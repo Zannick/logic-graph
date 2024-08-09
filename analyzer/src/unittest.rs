@@ -977,15 +977,17 @@ where
     }
 
     if let Some(routedirname) = route_dir {
-        for entry in std::fs::read_dir(routedirname).unwrap() {
-            let path = entry.unwrap().path();
-            let ext = path.extension().and_then(|s| s.to_str());
-            if matches!(ext, Some("txt")) {
-                tests.push(parse_route_file::<W, T>(
-                    wp.clone(),
-                    &path,
-                    shortest_paths.clone(),
-                ));
+        if routedirname.exists() {
+            for entry in std::fs::read_dir(routedirname).unwrap() {
+                let path = entry.unwrap().path();
+                let ext = path.extension().and_then(|s| s.to_str());
+                if matches!(ext, Some("txt")) {
+                    tests.push(parse_route_file::<W, T>(
+                        wp.clone(),
+                        &path,
+                        shortest_paths.clone(),
+                    ));
+                }
             }
         }
     }

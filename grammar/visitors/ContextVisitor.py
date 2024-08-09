@@ -154,6 +154,9 @@ class ContextVisitor(RulesVisitor):
     def visitSet(self, ctx):
         ref = str(ctx.REF())[1:]
         self._checkRef(ref)
+        if ref in self.data_types:
+            self.errors.append(f'Cannot modify data value ^{ref} in {self.name}')
+            return
         if ctx.str_():
             self.values[ref].update(self.visit(ctx.str_()))
         elif ctx.ref():
@@ -171,6 +174,9 @@ class ContextVisitor(RulesVisitor):
     def visitAlter(self, ctx):
         ref = str(ctx.REF())[1:]
         self._checkRef(ref)
+        if ref in self.data_types:
+            self.errors.append(f'Cannot modify data value ^{ref} in {self.name}')
+            return
         self.visitChildren(ctx)
         # TODO: check that the var is an int type
 
@@ -179,5 +185,11 @@ class ContextVisitor(RulesVisitor):
         ref2 = str(ctx.REF(1))[1:]
         self._checkRef(ref1)
         self._checkRef(ref2)
+        if ref1 in self.data_types:
+            self.errors.append(f'Cannot modify data value ^{ref1} in {self.name}')
+            return
+        if ref2 in self.data_types:
+            self.errors.append(f'Cannot modify data value ^{ref2} in {self.name}')
+            return
         self._checkTypes(ref1, ref2)
         self.swap_pairs.add((ref1, ref2) if ref1 <= ref2 else (ref2, ref1))

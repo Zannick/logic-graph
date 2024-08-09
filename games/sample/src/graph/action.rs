@@ -29,7 +29,6 @@ impl world::Accessible for Action {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::access_deku_tree__compass_room__entry__light_torch__req(ctx, world),
             ActionId::Global__Change_Time => true,
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => true,
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
@@ -72,7 +71,6 @@ impl world::Action for Action {
             ActionId::Global__Change_Time => rules::action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(ctx, world),
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::action_deku_tree__compass_room__entry__light_torch__do(ctx, world),
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => rules::action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world),
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => rules::action_save_set_position(ctx, world),
         };
         let dest = self.dest(ctx, world);
         if dest != SpotId::None {
@@ -98,14 +96,11 @@ impl world::Action for Action {
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
                 rules::observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world, full_obs);
             }
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => {
-                rules::observe_action_save_set_position(ctx, world, full_obs);
-            }
         }
     }
 }
 
-static ACT_DEFS: [Action; 4] = [
+static ACT_DEFS: [Action; 3] = [
     Action {
         id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
         time: 1000,
@@ -119,11 +114,6 @@ static ACT_DEFS: [Action; 4] = [
     Action {
         id: ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees,
         time: 20000,
-        price: Currency::Free,
-    },
-    Action {
-        id: ActionId::KF__Kokiri_Village__Sarias_Porch__Save,
-        time: 1000,
         price: Currency::Free,
     },
 ];
@@ -141,7 +131,6 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
     match act_id {
         ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => SpotId::Deku_Tree__Compass_Room__Entry,
         ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => SpotId::KF__Kokiri_Village__Midos_Porch,
-        ActionId::KF__Kokiri_Village__Sarias_Porch__Save => SpotId::KF__Kokiri_Village__Sarias_Porch,
         _ => SpotId::None,
     }
 }

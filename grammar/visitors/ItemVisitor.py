@@ -62,7 +62,7 @@ class ItemVisitor(RulesVisitor):
         self.item_max_counts[it] = max(mc, self.item_max_counts[it])
         return self.visitChildren(ctx)
 
-    visitPerItemBool = visitPerItemNum = visitPerItemStr = _switch_count
+    visitPerItemBool = visitPerItemInt = visitPerItemStr = _switch_count
 
     # These will either need to check for the items used in the calls,
     # or the rules could be removed. (Other rules using ref don't use count,

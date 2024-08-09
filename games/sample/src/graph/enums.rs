@@ -636,7 +636,6 @@ pub enum ActionId {
     Deku_Tree__Compass_Room__Entry__Light_Torch,
     Global__Change_Time,
     KF__Kokiri_Village__Midos_Porch__Gather_Rupees,
-    KF__Kokiri_Village__Sarias_Porch__Save,
 }
 impl fmt::Display for ActionId {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -644,7 +643,6 @@ impl fmt::Display for ActionId {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => write!(f, "{}", "Deku Tree > Compass Room > Entry > Light Torch"),
             ActionId::Global__Change_Time => write!(f, "{}", "Change Time"),
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => write!(f, "{}", "KF > Kokiri Village > Mido's Porch > Gather Rupees"),
-            ActionId::KF__Kokiri_Village__Sarias_Porch__Save => write!(f, "{}", "KF > Kokiri Village > Saria's Porch > Save"),
         }
     }
 }
@@ -657,7 +655,6 @@ impl std::str::FromStr for ActionId {
             "Deku Tree > Compass Room > Entry > Light Torch" => Ok(ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch),
             "Change Time" => Ok(ActionId::Global__Change_Time),
             "KF > Kokiri Village > Mido's Porch > Gather Rupees" => Ok(ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees),
-            "KF > Kokiri Village > Saria's Porch > Save" => Ok(ActionId::KF__Kokiri_Village__Sarias_Porch__Save),
             _ => Err(format!("Could not recognize as a ActionId: {}", s)),
         }
     }

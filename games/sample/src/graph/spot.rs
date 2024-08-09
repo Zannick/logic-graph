@@ -263,7 +263,7 @@ static SPOT_DEFS: [SpotDef; 52] = [
         id: SpotId::KF__Kokiri_Village__Sarias_Porch,
         loc_range: None,
         exit_range: Some((ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1, ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1)),
-        action_range: Some((ActionId::KF__Kokiri_Village__Sarias_Porch__Save, ActionId::KF__Kokiri_Village__Sarias_Porch__Save)),
+        action_range: None,
     },
     SpotDef {
         id: SpotId::KF__Kokiri_Village__Shop_Porch,

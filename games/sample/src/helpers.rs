@@ -352,7 +352,7 @@ macro_rules! hexplain__can_play {
                     let r = {
                         let r = $song;
                         if let Some(v) = $edict.get_mut(&"helpers:$can_play.^song") {
-                            v.push_str(format!(", $song: {}", r));
+                            v.push_str(&format!(", $song: {}", r));
                         } else {
                             $edict.insert("helpers:$can_play.^song", format!("$song: {}", r));
                         };
@@ -457,7 +457,7 @@ macro_rules! helper__can_use {
 #[macro_export]
 macro_rules! hexplain__can_use {
     ($ctx:expr, $world:expr, $item:expr, $edict:expr) => {{
-        { let mut refs = Vec::new(); let mut cond = { let (res, mut refs) = hexplain___is_magic_item!($ctx, $world, $item, $edict); $edict.insert("$_is_magic_item(^item)", format!("{:?}", res)); refs.push("$_is_magic_item(^item)"); (res, refs) }; refs.append(cond.1); if cond.0 { let mut then = { let mut left = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; if !left.0 { left } else { let mut right = { let h = $ctx.has(Item::Magic_Meter); $edict.insert("Magic_Meter", format!("{}", h)); (h, vec!["Magic_Meter"]) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else { let mut cond = { let (res, mut refs) = hexplain___is_adult_item!($ctx, $world, $item, $edict); $edict.insert("$_is_adult_item(^item)", format!("{:?}", res)); refs.push("$_is_adult_item(^item)"); (res, refs) }; refs.append(cond.1); if cond.0 { let mut then = { let mut left = { let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict); $edict.insert("$is_adult", format!("{:?}", res)); refs.push("$is_adult"); (res, refs) }; if !left.0 { left } else { let mut right = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else { let mut cond = { let (res, mut refs) = hexplain___is_magic_arrow!($ctx, $world, $item, $edict); $edict.insert("$_is_magic_arrow(^item)", format!("{:?}", res)); refs.push("$_is_magic_arrow(^item)"); (res, refs) }; refs.append(cond.1); if cond.0 { let mut then = { let mut left = { let mut left = { let mut left = { let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict); $edict.insert("$is_adult", format!("{:?}", res)); refs.push("$is_adult"); (res, refs) }; if !left.0 { left } else { let mut right = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; left.1.append(&mut right.1); (right.0, left.1) } }; if !left.0 { left } else { let mut right = { let h = $ctx.has(Item::Bow); $edict.insert("Bow", format!("{}", h)); (h, vec!["Bow"]) }; left.1.append(&mut right.1); (right.0, left.1) } }; if !left.0 { left } else { let mut right = { let h = $ctx.has(Item::Magic_Meter); $edict.insert("Magic_Meter", format!("{}", h)); (h, vec!["Magic_Meter"]) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else { let mut cond = { let (res, mut refs) = hexplain___is_child_item!($ctx, $world, $item, $edict); $edict.insert("$_is_child_item(^item)", format!("{:?}", res)); refs.push("$_is_child_item(^item)"); (res, refs) }; refs.append(cond.1); if cond.0 { let mut then = { let mut left = { let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict); $edict.insert("$is_child", format!("{:?}", res)); refs.push("$is_child"); (res, refs) }; if !left.0 { left } else { let mut right = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else {  (false, refs)  } } } } }
+        { let mut refs = Vec::new(); let mut cond = { let (res, mut refs) = hexplain___is_magic_item!($ctx, $world, $item, $edict); $edict.insert("$_is_magic_item(^item)", format!("{:?}", res)); refs.push("$_is_magic_item(^item)"); (res, refs) }; refs.append(&mut cond.1); if cond.0 { let mut then = { let mut left = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(&format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; if !left.0 { left } else { let mut right = { let h = $ctx.has(Item::Magic_Meter); $edict.insert("Magic_Meter", format!("{}", h)); (h, vec!["Magic_Meter"]) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else { let mut cond = { let (res, mut refs) = hexplain___is_adult_item!($ctx, $world, $item, $edict); $edict.insert("$_is_adult_item(^item)", format!("{:?}", res)); refs.push("$_is_adult_item(^item)"); (res, refs) }; refs.append(&mut cond.1); if cond.0 { let mut then = { let mut left = { let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict); $edict.insert("$is_adult", format!("{:?}", res)); refs.push("$is_adult"); (res, refs) }; if !left.0 { left } else { let mut right = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(&format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else { let mut cond = { let (res, mut refs) = hexplain___is_magic_arrow!($ctx, $world, $item, $edict); $edict.insert("$_is_magic_arrow(^item)", format!("{:?}", res)); refs.push("$_is_magic_arrow(^item)"); (res, refs) }; refs.append(&mut cond.1); if cond.0 { let mut then = { let mut left = { let mut left = { let mut left = { let (res, mut refs) = hexplain__is_adult!($ctx, $world, $edict); $edict.insert("$is_adult", format!("{:?}", res)); refs.push("$is_adult"); (res, refs) }; if !left.0 { left } else { let mut right = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(&format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; left.1.append(&mut right.1); (right.0, left.1) } }; if !left.0 { left } else { let mut right = { let h = $ctx.has(Item::Bow); $edict.insert("Bow", format!("{}", h)); (h, vec!["Bow"]) }; left.1.append(&mut right.1); (right.0, left.1) } }; if !left.0 { left } else { let mut right = { let h = $ctx.has(Item::Magic_Meter); $edict.insert("Magic_Meter", format!("{}", h)); (h, vec!["Magic_Meter"]) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else { let mut cond = { let (res, mut refs) = hexplain___is_child_item!($ctx, $world, $item, $edict); $edict.insert("$_is_child_item(^item)", format!("{:?}", res)); refs.push("$_is_child_item(^item)"); (res, refs) }; refs.append(&mut cond.1); if cond.0 { let mut then = { let mut left = { let (res, mut refs) = hexplain__is_child!($ctx, $world, $edict); $edict.insert("$is_child", format!("{:?}", res)); refs.push("$is_child"); (res, refs) }; if !left.0 { left } else { let mut right = { let r = { let r = $item; if let Some(v) = $edict.get_mut(&"helpers:$can_use.^item") { v.push_str(&format!(", $item: {}", r)); } else { $edict.insert("helpers:$can_use.^item", format!("$item: {}", r)); }; (r, vec!["helpers:$can_use.^item"]) }; ($ctx.has(r.0), r.1) }; left.1.append(&mut right.1); (right.0, left.1) } }; refs.append(&mut then.1); (then.0, refs) } else {  (false, refs)  } } } } }
     }};
 }
 #[macro_export]
@@ -510,7 +510,7 @@ macro_rules! hexplain___is_magic_item {
             let r = {
                 let r = $item;
                 if let Some(v) = $edict.get_mut(&"helpers:$_is_magic_item.^item") {
-                    v.push_str(format!(", $item: {}", r));
+                    v.push_str(&format!(", $item: {}", r));
                 } else {
                     $edict.insert("helpers:$_is_magic_item.^item", format!("$item: {}", r));
                 };
@@ -561,7 +561,7 @@ macro_rules! hexplain___is_adult_item {
             let r = {
                 let r = $item;
                 if let Some(v) = $edict.get_mut(&"helpers:$_is_adult_item.^item") {
-                    v.push_str(format!(", $item: {}", r));
+                    v.push_str(&format!(", $item: {}", r));
                 } else {
                     $edict.insert("helpers:$_is_adult_item.^item", format!("$item: {}", r));
                 };
@@ -619,7 +619,7 @@ macro_rules! hexplain___is_child_item {
             let r = {
                 let r = $item;
                 if let Some(v) = $edict.get_mut(&"helpers:$_is_child_item.^item") {
-                    v.push_str(format!(", $item: {}", r));
+                    v.push_str(&format!(", $item: {}", r));
                 } else {
                     $edict.insert("helpers:$_is_child_item.^item", format!("$item: {}", r));
                 };
@@ -660,7 +660,7 @@ macro_rules! hexplain___is_magic_arrow {
             let r = {
                 let r = $item;
                 if let Some(v) = $edict.get_mut(&"helpers:$_is_magic_arrow.^item") {
-                    v.push_str(format!(", $item: {}", r));
+                    v.push_str(&format!(", $item: {}", r));
                 } else {
                     $edict.insert("helpers:$_is_magic_arrow.^item", format!("$item: {}", r));
                 };

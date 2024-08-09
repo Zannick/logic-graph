@@ -147,7 +147,7 @@ def treeToString(tree: antlr4.ParserRuleContext):
 def get_spot_reference_names(target, source):
     if not target:
         return []
-    local = [source['region'], source.get('area') or source.get('name'),
+    local = [source.get('region') or source.get('name'), source.get('area') or source.get('name'),
              source.get('spot') or source.get('name')]
     targ = target.split('>')
     # targ length = 1 (just spot) => leave 2 (reg/area), 2 (spot+area) => leave 1 (region)
@@ -1828,7 +1828,7 @@ class GameLogic(object):
                         if c in a.get('data', {}):
                             cdict[s['id']] = handle_place(c, a, a['data'][c])
                         elif c in r.get('data', {}):
-                            cdict[s['id']] = r['data'][c]
+                            cdict[s['id']] = handle_place(c, r, r['data'][c])
         self._errors.extend(sorted(errors))
         return d
 

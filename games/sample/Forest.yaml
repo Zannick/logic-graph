@@ -112,9 +112,6 @@ areas:
         - to: Mido's Porch
         - to: Link's Porch
         - to: Shop Porch
-      actions:
-        - name: Save
-          do: ^save = ^position
       exits:
         - to: Kak > Spider House > Entry
           tags: [load, interior]

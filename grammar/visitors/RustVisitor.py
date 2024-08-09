@@ -177,7 +177,7 @@ class RustVisitor(RustBaseVisitor):
             return f'{ref} {ctx.getChild(1)} Item::{ctx.ITEM()}'
         if ctx.PLACE():
             return f'{ref} {ctx.getChild(1)} {construct_place_id(str(ctx.PLACE()))}'
-        return f'{ref} {ctx.getChild(1)} ctx.{ctx.SETTING()}()'
+        return f'{ref} {ctx.getChild(1)} world.{ctx.SETTING()}'
 
     def _refEq(self, val1, val2, op, coerce=False):
         if coerce:
@@ -220,7 +220,7 @@ class RustVisitor(RustBaseVisitor):
         if ctx.INT():
             val = str(ctx.INT())
         else:
-            val = f'ctx.{ctx.SETTING()}()'
+            val = f'world.{ctx.SETTING()}'
         return f'ctx.count(Item::{ctx.ITEM()}) >= {val}'
 
     def visitOneItem(self, ctx):
@@ -245,7 +245,7 @@ class RustVisitor(RustBaseVisitor):
         if ctx.FLOAT():
             return str(ctx.FLOAT())
         if ctx.SETTING():
-            return f'ctx.{ctx::SETTING()}()'
+            return f'world.{ctx::SETTING()}'
         # TODO: constants
         return self.visitChildren(ctx)
 
@@ -440,7 +440,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         if usage[0] == '$':
             tag = f'{self.name}.{ref}'
             return (f'if let Some(v) = edict.get_mut(&"{tag}") {{ '
-                    f'v.push_str(format!(", {usage}: {{}}", {var})); }} '
+                    f'v.push_str(&format!(", {usage}: {{}}", {var})); }} '
                     f'else {{ edict.insert("{tag}", format!("{usage}: {{}}", {var})); }}', tag)
         elif ref[1:] in self.ctxdict:
             tag = ref[0] + self.ctxdict[ref[1:]]
@@ -545,7 +545,7 @@ class RustExplainerVisitor(RustBaseVisitor):
             cond, then, *args = args
             cases.append("; ".join([
                 f'let mut cond = {self.visit(cond)}',
-                'refs.append(cond.1)',
+                'refs.append(&mut cond.1)',
                 'if cond.0 { let mut then = ' + str(self.visit(then)),
                 'refs.append(&mut then.1)',
                 '(then.0, refs) }',
@@ -612,7 +612,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         return f'{{ {"; ".join(lines)} }}'
 
     def visitRefEqSimple(self, ctx):
-        rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else construct_place_id(str(ctx.PLACE())) if ctx.PLACE() else f'ctx.{ctx.SETTING()}()'
+        rval = f'Item::{ctx.ITEM()}' if ctx.ITEM() else construct_place_id(str(ctx.PLACE())) if ctx.PLACE() else f'world.{ctx.SETTING()}'
         lines = [
             f'let left = {self.visit(ctx.ref())}',
             f'(left.0 {ctx.getChild(1)} {rval}, left.1)',
@@ -697,7 +697,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         else:
             sstr = ctx.SETTING().getText()
             lines.extend([
-                f'let s = ctx.{ctx.SETTING()}()',
+                f'let s = world.{ctx.SETTING()}',
                 f'edict.insert("{sstr}", format!("{{}}", s))',
                 f'(ct >= s, vec!["{vstr}", "{sstr}"])',
             ])
@@ -747,7 +747,7 @@ class RustExplainerVisitor(RustBaseVisitor):
         if ctx.SETTING():
             sstr = str(ctx.SETTING())
             lines = [
-                f'let s = ctx.{ctx.SETTING()}()',
+                f'let s = world.{ctx.SETTING()}',
                 f'edict.insert("{sstr}", format!("{{}}", s))',
                 f'(s, vec!["{sstr}"])',
             ]
@@ -1129,7 +1129,7 @@ class RustObservationVisitor(RustBaseVisitor):
         elif ctx.PLACE():
             return f'{{ let left = {getter}; left {ctx.getChild(1)} {construct_place_id(str(ctx.PLACE()))} }}'
         else:
-            return f'{{ let left = {getter}; left {ctx.getChild(1)} ctx.{ctx.SETTING()}() }}'
+            return f'{{ let left = {getter}; left {ctx.getChild(1)} world.{ctx.SETTING()} }}'
 
     def visitRefEqRef(self, ctx):
         return f'{{ let left = {self.visit(ctx.ref(0))}; let right = {self.visit(ctx.ref(1))}; left {ctx.getChild(1)} right }}'
@@ -1168,7 +1168,7 @@ class RustObservationVisitor(RustBaseVisitor):
         if ctx.INT():
             val = str(ctx.INT())
         else:
-            val = f'ctx.{ctx.SETTING()}()'
+            val = f'world.{ctx.SETTING()}'
         item = str(ctx.ITEM())
         if self._getItemType(item) == 'bool':
             obs = f'full_obs.observe_{item.lower()}()'

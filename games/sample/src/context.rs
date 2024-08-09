@@ -94,38 +94,38 @@ pub enum Expectation {
 pub mod data {
 #[allow(unused_imports)]
 use crate::context::enums;
-use crate::graph::SpotId;
+use crate::graph::*;
 pub fn save(spot_id: SpotId) -> SpotId {
     match spot_id {
-        SpotId::Deku_Tree__Back_Room__East => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Back_Room__Northwest => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Back_Room__South => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_1__Center => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_1__Corner => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_1__South_Door => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_2__Boss_Door => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_2__Pool => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_Ledge__Block => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Basement_Ledge__Web => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Boss_Room__Arena => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Boss_Room__Entry => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Compass_Room__Compass => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Compass_Room__Entry => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Compass_Room__Ledge => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Floor_2__Lower => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Floor_2__Slingshot_Door => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Floor_2__Vines => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Floor_3__Climb => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Floor_3__Door => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Lobby__Center => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Lobby__Entry => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Lobby__Vines => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Scrub_Room__Entry => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Scrub_Room__Rear => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Skull_Room__Entry => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Slingshot_Room__Entry => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Slingshot_Room__Slingshot => AreaId::Lobby__Entry,
-        SpotId::Deku_Tree__Slingshot_Upper__Ledge => AreaId::Lobby__Entry,
+        SpotId::Deku_Tree__Back_Room__East => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Back_Room__Northwest => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Back_Room__South => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_1__Center => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_1__Corner => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_1__South_Door => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_2__Boss_Door => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_2__Pool => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_Ledge__Block => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Basement_Ledge__Web => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Boss_Room__Arena => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Boss_Room__Entry => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Compass_Room__Compass => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Compass_Room__Entry => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Compass_Room__Ledge => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Floor_2__Lower => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Floor_2__Slingshot_Door => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Floor_2__Vines => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Floor_3__Climb => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Floor_3__Door => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Lobby__Center => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Lobby__Entry => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Lobby__Vines => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Scrub_Room__Entry => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Scrub_Room__Rear => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Skull_Room__Entry => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Slingshot_Room__Entry => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Slingshot_Room__Slingshot => SpotId::Deku_Tree__Lobby__Entry,
+        SpotId::Deku_Tree__Slingshot_Upper__Ledge => SpotId::Deku_Tree__Lobby__Entry,
         _ => SpotId::KF__Links_House__Start_Point
     }
 }
@@ -313,7 +313,7 @@ impl context::Ctx for Context {
             Item::Kokiri_Sword => self.cbits1.contains(flags::ContextBits1::KOKIRI_SWORD),
             Item::Magic_Meter => self.cbits1.contains(flags::ContextBits1::MAGIC_METER),
             Item::Ocarina => self.cbits1.contains(flags::ContextBits1::OCARINA),
-            Item::Progressive_Wallet => self.progressive_wallet,
+            Item::Progressive_Wallet => self.progressive_wallet >= 1,
             Item::Showed_Mido => self.cbits1.contains(flags::ContextBits1::SHOWED_MIDO),
             Item::Slingshot => self.cbits1.contains(flags::ContextBits1::SLINGSHOT),
             Item::Triforce_Piece => self.triforce_piece >= 1,
@@ -442,7 +442,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::OCARINA);
             }
             Item::Progressive_Wallet => {
-                self.progressive_wallet = true;
+                self.progressive_wallet += 1;
             }
             Item::Showed_Mido => {
                 self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
@@ -549,7 +549,7 @@ impl context::Ctx for Context {
                 self.cbits1.insert(flags::ContextBits1::OCARINA);
             }
             Item::Progressive_Wallet => {
-                self.progressive_wallet = true;
+                self.progressive_wallet += 1;
             }
             Item::Showed_Mido => {
                 self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
@@ -975,7 +975,7 @@ impl context::Ctx for Context {
     fn amount_could_afford(&self, cost: &Currency) -> i16 {
         match cost {
             Currency::Free => 1,
-            Currency::Rupees(_) => self.rupees.into(),
+            Currency::Rupees(_) => self.rupees as i16,
         }
     }
     fn spend(&mut self, cost: &Currency) {

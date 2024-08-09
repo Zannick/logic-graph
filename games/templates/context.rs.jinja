@@ -44,7 +44,7 @@ pub enum Expectation {
 pub mod data {
 #[allow(unused_imports)]
 use crate::context::enums;
-use crate::graph::SpotId;
+use crate::graph::*;
 %% for c, overrides in data_values.items()
 pub fn {{ c }}(spot_id: SpotId) -> {{ data_types[c] }} {
     match spot_id {
@@ -446,7 +446,7 @@ impl context::Ctx for Context {
         match cost {
             Currency::Free => 1,
 %% for ptype in price_types
-            Currency::{{ ptype|capitalize }}(_) => self.{{ ptype }}.into(),
+            Currency::{{ ptype|capitalize }}(_) => self.{{ ptype }} as i16,
 %% endfor
         }
     }

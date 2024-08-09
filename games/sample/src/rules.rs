@@ -37,7 +37,7 @@ pub fn access___invoke_nuts_or_invoke_can_use__slingshot_and_invoke_can_jumpslas
 }
 pub fn access___triforce_piece__triforce_count(ctx: &Context, world: &World) -> bool {
     // [Triforce_Piece{triforce_count}]
-    ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
+    ctx.count(Item::Triforce_Piece) >= world.triforce_count
 }
 pub fn access___victory_invoke_objective(ctx: &Context, world: &World) -> bool {
     // [Victory, $objective]
@@ -265,10 +265,6 @@ pub fn action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
         helper__wallet_max!(ctx, world),
     ));
 }
-pub fn action_save_set_position(ctx: &mut Context, world: &World) {
-    // ^save = ^position
-    ctx.set_save(ctx.position());
-}
 pub fn action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
     ctx: &mut Context,
     world: &World,
@@ -375,7 +371,7 @@ pub fn explain___triforce_piece__triforce_count(
         let mut h = {
             let ct = ctx.count(Item::Triforce_Piece);
             edict.insert("Triforce_Piece count", format!("{}", ct));
-            let s = ctx.triforce_count();
+            let s = world.triforce_count;
             edict.insert("triforce_count", format!("{}", s));
             (ct >= s, vec!["Triforce_Piece count", "triforce_count"])
         };
@@ -1171,7 +1167,7 @@ pub fn explain_invoke_nuts_and_invoke_has_shield_and_if___invoke_is_child____inv
                     refs.push("$is_child");
                     (res, refs)
                 };
-                refs.append(cond.1);
+                refs.append(&mut cond.1);
                 if cond.0 {
                     let mut then = {
                         let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
@@ -1252,8 +1248,8 @@ pub fn observe_access___triforce_piece__triforce_count(
 ) -> bool {
     // [Triforce_Piece{triforce_count}]
     ({
-        full_obs.observe_triforce_piece(IntegerObservation::Ge(ctx.triforce_count()));
-        ctx.count(Item::Triforce_Piece) >= ctx.triforce_count()
+        full_obs.observe_triforce_piece(IntegerObservation::Ge(world.triforce_count));
+        ctx.count(Item::Triforce_Piece) >= world.triforce_count
     })
 }
 pub fn observe_access___victory_invoke_objective(
@@ -1685,13 +1681,6 @@ pub fn observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
         helper__wallet_max!(ctx, world),
     );
     full_obs.strict = old_strict;
-}
-pub fn observe_action_save_set_position(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // ^save = ^position
 }
 pub fn observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
     ctx: &Context,
