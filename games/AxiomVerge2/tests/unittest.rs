@@ -11,6 +11,9 @@ fn main() {
     let mut routedir = dir.clone();
     routedir.pop();
     routedir.push("routes");
-    log4rs::init_file(&PathBuf::from("settings/log4unittest.yml"), Default::default()).unwrap();
+    let pb = &PathBuf::from("settings/log4unittest.yml");
+    if pb.exists() {
+        log4rs::init_file(pb, Default::default()).unwrap();
+    }
     run_all_tests_in_dir::<World, Context>(&dir, Some(&routedir));
 }

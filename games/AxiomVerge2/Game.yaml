@@ -188,6 +188,7 @@ time:  # MARK: time
   # These are specifically y-dir?
   fall.2: 0.2
   mist1.2: 0.8
+  mist1.4: 1.6
   mist2.2: 0.4
   mist2.4: 0.8
 
@@ -370,14 +371,14 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   $all_flasks:itemList: >
-    [Flask{52}, Big_Flask{27}]
+    [Flask{52}, Big_Flask{30}]
   $all_health:itemList: >
     [Health_Node{5}, Health_Fragment{22}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
     [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,
-     Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Remote_Boomerang, Royal_Ring, Udusan]
+     Nano_Lattice_1, Nano_Lattice_2, Nano_Lattice_3, Power_Matrix{4}, Remote_Boomerang, Royal_Ring, Udusan]
   $all_urns:itemList: >
     [Amashilama, Anuman, Breach_Sight, Drone_Hover, Drone_Melee_Charge, Exit_Breach, Fast_Travel, Infect, Ledge_Grab,
      Melee_Charge, Nanite_Mist, Remote_Drone, Shockwave, Slingshot_Charge, Slingshot_Hook, Slingshot_Weapon, 

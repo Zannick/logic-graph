@@ -393,6 +393,77 @@ subgraph Annuna_Breach
         Annuna_Breach__Double_Corridor__Bottom_Left(Bottom Left);
         Annuna_Breach__Double_Corridor__South(South);
     end
+    subgraph Annuna_Breach__Rear_Entrance[Rear Entrance]
+        Annuna_Breach__Rear_Entrance__Save_Point(Save Point);
+        Annuna_Breach__Rear_Entrance__Center_Hill_West(Center Hill West);
+        Annuna_Breach__Rear_Entrance__Center_Hill_East(Center Hill East);
+        Annuna_Breach__Rear_Entrance__East_Hill(East Hill);
+        Annuna_Breach__Rear_Entrance__East(East);
+    end
+    subgraph Annuna_Breach__Gate_and_Floor[Gate and Floor]
+        Annuna_Breach__Gate_and_Floor__Northwest(Northwest);
+        Annuna_Breach__Gate_and_Floor__East_18(East 18);
+        Annuna_Breach__Gate_and_Floor__East_19(East 19);
+        Annuna_Breach__Gate_and_Floor__Middle_Ledge(Middle Ledge);
+        Annuna_Breach__Gate_and_Floor__Middle_Floor(Middle Floor);
+        Annuna_Breach__Gate_and_Floor__Button(Button);
+        Annuna_Breach__Gate_and_Floor__East_20(East 20);
+        Annuna_Breach__Gate_and_Floor__Long_Ledge(Long Ledge);
+        Annuna_Breach__Gate_and_Floor__Lower_Stair(Lower Stair);
+        Annuna_Breach__Gate_and_Floor__East_21(East 21);
+    end
+    subgraph Annuna_Breach__Ambushes[Ambushes]
+        Annuna_Breach__Ambushes__West_18(West 18);
+        Annuna_Breach__Ambushes__Upper_Ledge(Upper Ledge);
+        Annuna_Breach__Ambushes__Below_Ledge(Below Ledge);
+        Annuna_Breach__Ambushes__West_19(West 19);
+    end
+    subgraph Annuna_Breach__North_Hallway[North Hallway]
+        Annuna_Breach__North_Hallway__West(West);
+        Annuna_Breach__North_Hallway__Save_Point(Save Point);
+    end
+    subgraph Annuna_Breach__Center_Hallway[Center Hallway]
+        Annuna_Breach__Center_Hallway__West(West);
+        Annuna_Breach__Center_Hallway__South(South);
+    end
+    subgraph Annuna_Breach__South_Hallway[South Hallway]
+        Annuna_Breach__South_Hallway__North(North);
+        Annuna_Breach__South_Hallway__Hill_East(Hill East);
+        Annuna_Breach__South_Hallway__Hill_West(Hill West);
+        Annuna_Breach__South_Hallway__South(South);
+    end
+    subgraph Annuna_Breach__Lower_Gate[Lower Gate]
+        Annuna_Breach__Lower_Gate__North(North);
+        Annuna_Breach__Lower_Gate__Button(Button);
+        Annuna_Breach__Lower_Gate__Gate_Ledge(Gate Ledge);
+        Annuna_Breach__Lower_Gate__Flower_Cache(Flower Cache);
+        Annuna_Breach__Lower_Gate__Gate_Platform(Gate Platform);
+        Annuna_Breach__Lower_Gate__West(West);
+        Annuna_Breach__Lower_Gate__South(South);
+    end
+    subgraph Annuna_Breach__Factory_Foyer[Factory Foyer]
+        Annuna_Breach__Factory_Foyer__East(East);
+        Annuna_Breach__Factory_Foyer__Middle(Middle);
+        Annuna_Breach__Factory_Foyer__East_Ledge(East Ledge);
+        Annuna_Breach__Factory_Foyer__West_Flower(West Flower);
+        Annuna_Breach__Factory_Foyer__West(West);
+    end
+    subgraph Annuna_Breach__Factory_Gate[Factory Gate]
+        Annuna_Breach__Factory_Gate__East(East);
+    end
+    subgraph Annuna_Breach__Depths[Depths]
+        Annuna_Breach__Depths__North(North);
+        Annuna_Breach__Depths__Upper_East_Corner(Upper East Corner);
+        Annuna_Breach__Depths__South_Overhang(South Overhang);
+        Annuna_Breach__Depths__South(South);
+    end
+    subgraph Annuna_Breach__Bottom[Bottom]
+        Annuna_Breach__Bottom__North(North);
+        Annuna_Breach__Bottom__Save_Point(Save Point);
+    end
+    subgraph Annuna_Breach__Enclosed[Enclosed]
+        Annuna_Breach__Enclosed__Save_Point(Save Point);
+    end
 end
 subgraph Annuna
     subgraph Annuna__Mirror_Match[Mirror Match]
@@ -1348,6 +1419,7 @@ subgraph Ebih
         Ebih__Vertical_Interchange__East_13(East 13);
         Ebih__Vertical_Interchange__Middle_Descent(Middle Descent);
         Ebih__Vertical_Interchange__Middle_Drop(Middle Drop);
+        Ebih__Vertical_Interchange__Under_Switch(Under Switch);
         Ebih__Vertical_Interchange__Cliff_by_Refill(Cliff by Refill);
         Ebih__Vertical_Interchange__Refill_Station(Refill Station);
         Ebih__Vertical_Interchange__Blocked_Refill_Station(Blocked Refill Station);
@@ -3457,8 +3529,11 @@ subgraph Menu
         Menu__Breach_Map__UVB_Dead_end(UVB Dead-end);
         Menu__Breach_Map__UVB_East(UVB East);
         Menu__Breach_Map__UVB_West(UVB West);
+        Menu__Breach_Map__AGB_Factory_Foyer_Flask(AGB Factory Foyer Flask);
+        Menu__Breach_Map__AGB_Lower_Gate_Flask(AGB Lower Gate Flask);
         Menu__Breach_Map__AGB_Smiley_Health(AGB Smiley Health);
         Menu__Breach_Map__AGB_Smiley_Northwest(AGB Smiley Northwest);
+        Menu__Breach_Map__Nano_Lattice_3(Nano Lattice 3);
         Menu__Breach_Map__GSB_Chimney_Flask(GSB Chimney Flask);
         Menu__Breach_Map__GSB_Crab_Rave_Flask(GSB Crab Rave Flask);
         Menu__Breach_Map__GSB_Cubby_Health(GSB Cubby Health);
@@ -4186,12 +4261,42 @@ Amagi__Wiggly_Room__Portal_Rock_West --> Amagi__Wiggly_Room__East
 Amagi__Wiggly_Room__Portal_Rock_West --> Amagi__Wiggly_Room__East_Bottom
 Amagi__Wiggly_Room__South <--> Uhrum__Tulip_Tower__North
 Amagi__Wiggly_Room__West_Platform --> Amagi__Wiggly_Room__Midwest_Rock
+Annuna_Breach__Ambushes__Below_Ledge --> Annuna_Breach__Ambushes__Upper_Ledge
+Annuna_Breach__Ambushes__West_18 <--> Annuna_Breach__Gate_and_Floor__East_18
+Annuna_Breach__Ambushes__West_19 <--> Annuna_Breach__Gate_and_Floor__East_19
+Annuna_Breach__Bottom__Save_Point --> Annuna_Breach__Depths__South
+Annuna_Breach__Center_Hallway__South <--> Annuna_Breach__South_Hallway__North
+Annuna_Breach__Center_Hallway__West <--> Annuna_Breach__Gate_and_Floor__East_21
 Annuna_Breach__Corner__East <--> Annuna_Breach__Underbelly__West
 Annuna_Breach__Corner__South <--> Annuna_Breach__Smiley__North
+Annuna_Breach__Depths__North <--> Annuna_Breach__Lower_Gate__South
+Annuna_Breach__Depths__South --> Annuna_Breach__Bottom__North
+Annuna_Breach__Depths__South_Overhang --> Annuna_Breach__Depths__Upper_East_Corner
+Annuna_Breach__Depths__Upper_East_Corner --> Annuna_Breach__Depths__North
 Annuna_Breach__Double_Corridor__Bottom_Left --> Annuna_Breach__Double_Corridor__Center_Platform_West
 Annuna_Breach__Double_Corridor__Center_Platform_East <--> Annuna_Breach__Double_Corridor__Center_Platform_West
 Annuna_Breach__Double_Corridor__Save_Point --> Annuna_Breach__Double_Corridor__Center_Platform_East
 Annuna_Breach__Double_Corridor__South <--> Annuna_Breach__Underbelly__North
+Annuna_Breach__Factory_Foyer__East <--> Annuna_Breach__Lower_Gate__West
+Annuna_Breach__Factory_Foyer__East_Ledge --> Annuna_Breach__Factory_Foyer__West_Flower
+Annuna_Breach__Factory_Foyer__West --> Annuna_Breach__Factory_Gate__East
+Annuna_Breach__Gate_and_Floor__Button <--> Annuna_Breach__Gate_and_Floor__East_20
+Annuna_Breach__Gate_and_Floor__Button <--> Annuna_Breach__Gate_and_Floor__Long_Ledge
+Annuna_Breach__Gate_and_Floor__East_18 --> Annuna_Breach__Gate_and_Floor__Northwest
+Annuna_Breach__Gate_and_Floor__East_19 --> Annuna_Breach__Gate_and_Floor__Middle_Floor
+Annuna_Breach__Gate_and_Floor__East_20 <--> Annuna_Breach__Gate_and_Floor__Middle_Floor
+Annuna_Breach__Gate_and_Floor__East_20 <--> Annuna_Breach__North_Hallway__West
+Annuna_Breach__Gate_and_Floor__East_21 --> Annuna_Breach__Gate_and_Floor__Lower_Stair
+Annuna_Breach__Gate_and_Floor__Lower_Stair --> Annuna_Breach__Gate_and_Floor__Long_Ledge
+Annuna_Breach__Gate_and_Floor__Middle_Floor --> Annuna_Breach__Gate_and_Floor__Middle_Ledge
+Annuna_Breach__Lower_Gate__Button --> Annuna_Breach__Lower_Gate__North
+Annuna_Breach__Lower_Gate__Gate_Ledge <--> Annuna_Breach__Lower_Gate__Gate_Platform
+Annuna_Breach__Lower_Gate__North <--> Annuna_Breach__South_Hallway__South
+Annuna_Breach__Lower_Gate__South --> Annuna_Breach__Lower_Gate__West
+Annuna_Breach__Lower_Gate__West --> Annuna_Breach__Lower_Gate__Gate_Platform
+Annuna_Breach__Rear_Entrance__Center_Hill_West --> Annuna_Breach__Rear_Entrance__Center_Hill_East
+Annuna_Breach__Rear_Entrance__East --> Annuna_Breach__Gate_and_Floor__Northwest
+Annuna_Breach__Rear_Entrance__East <--> Annuna_Breach__Rear_Entrance__East_Hill
 Annuna_Breach__Smiley__Column_East <--> Annuna_Breach__Smiley__Northeast_Ledge
 Annuna_Breach__Smiley__Column_East <--> Annuna_Breach__Smiley__Upper_Portal_Exit
 Annuna_Breach__Smiley__Column_East --> Uhrum_Breach__Annuna_Gate__Save_Point
@@ -4201,6 +4306,9 @@ Annuna_Breach__Smiley__Upper_Portal_Exit --> Annuna_Breach__Smiley__Northeast_Le
 Annuna_Breach__Smiley__West --> Annuna_Breach__Smiley__Upper_Portal_Exit
 Annuna_Breach__Smiley__West --> Uhrum_Breach__Annuna_Gate__East
 Annuna_Breach__Smiley__West_Ground --> Annuna_Breach__Smiley__Upper_Portal_Exit
+Annuna_Breach__South_Hallway__Hill_East --> Annuna_Breach__South_Hallway__North
+Annuna_Breach__South_Hallway__Hill_East --> Annuna_Breach__South_Hallway__South
+Annuna_Breach__South_Hallway__Hill_West --> Annuna_Breach__South_Hallway__Hill_East
 Annuna_Breach__Underbelly__East_Ledge --> Annuna_Breach__Underbelly__Upper_Ledge
 Annuna_Breach__Underbelly__Empty_Plinth --> Annuna_Breach__Underbelly__West_Block
 Annuna_Breach__Underbelly__Empty_Plinth --> Annuna_Breach__Underbelly__West_Ledge
@@ -6100,6 +6208,10 @@ Irikar__Midwest__West_Platform --> Irikar__Midwest__The_Long_Rock_West
 Irikar__Sight_Room__Above_Room_East --> Irikar__East_Rooftops__Upper_West
 Irikar__Sight_Room__Northwest --> Irikar__Sight_Room__Above_Room_East
 Menu__Breach_Map__AGB_Bridge_Lower --> Annuna_Breach__Double_Corridor__Save_Point
+Menu__Breach_Map__AGB_East --> Annuna_Breach__North_Hallway__Save_Point
+Menu__Breach_Map__AGB_Enclosed --> Annuna_Breach__Enclosed__Save_Point
+Menu__Breach_Map__AGB_North --> Annuna_Breach__Rear_Entrance__Save_Point
+Menu__Breach_Map__AGB_South --> Annuna_Breach__Bottom__Save_Point
 Menu__Breach_Map__GSB_East --> Giguna_Breach__East__Save_Point
 Menu__Breach_Map__GSB_Labyrinth --> Giguna_Breach__Labyrinth__Save_Point
 Menu__Breach_Map__GSB_Peak --> Giguna_Breach__Peak__Save_Point

@@ -3098,6 +3098,8 @@ areas:
           tags: [xshift]
     - name: Upper East Ledge
       coord: [38.8, 9.75]
+      data:
+        flipside: Glacier Breach > Electric Arena > East Ledge
       local:
         - to: East 10
         - to: Grate West

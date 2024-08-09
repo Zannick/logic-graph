@@ -3375,11 +3375,22 @@ areas:
           movement: base
           jumps: 5  # ?
     - name: Middle Drop
-      coord: [21.2, 13.45]
+      coord: [21.2, 13.4]
       local:
         - to: Middle Descent
           jumps: 2
         - to: Cliff by Refill
+        - to: Under Switch
+          jumps: 1
+    - name: Under Switch
+      coord: [21.15, 13.2]
+      local:
+        - to: Middle Drop
+      actions:
+        - name: Unlock Door from Below
+          req: $open and not ^_door_open and $range2
+          do: ^_door_open = true
+          tags: [hack]
     - name: Cliff by Refill
       coord: [21.3, 14.4]
       exits:

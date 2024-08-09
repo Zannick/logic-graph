@@ -338,3 +338,542 @@ areas:
       exits:
         - to: Underbelly > North
           tags: [ydoor]
+
+- name: Rear Entrance  # MARK: Rear Entrance
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [37, 16, 38, 17]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > AGB North
+  spots:
+    - name: Save Point
+      coord: [37.475, 16.7]
+      data:
+        flipside: Annuna > Hidden Portal > Portal Stand
+      local:
+        - to: Center Hill West
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Center Hill West
+      coord: [38.275, 16.8]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Center Hill East
+          req: Slingshot_Hook and Slingshot_Weapon
+          movement: fast_hover
+    - name: Center Hill East
+      coord: [38.65, 16.8]
+      local:
+        - to: Center Hill West
+        - to: East Hill
+          jumps: 1
+    - name: East Hill
+      coord: [39.25, 16.75]
+      local:
+        - to: Center Hill East
+        - to: East
+          jumps: 1
+      exits:
+        - to: East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: East
+      coord: [39.9, 16.75]
+      local:
+        - to: East Hill
+      exits:
+        - to: East Hill
+          req: $spin
+          movement: fast_hover
+        - to: Gate and Floor > Northwest
+          tags: [xdoor]
+
+- name: Gate and Floor  # MARK: Gate and Floor
+  on_entry: $reset_old_area(^newpos)
+  map:
+    lattice: [40, 18, 41, 19]
+  datamap:
+    map_spot:
+      lattice: Menu > Breach Map > Nano Lattice 3
+  spots:
+    - name: Northwest
+      coord: [40.1, 16.75]
+      data:
+        flipside: Annuna > Vertical Room > West 17
+      local:
+        - to: East 18
+    - name: East 18
+      coord: [40.9, 17.6]
+      exits:
+        - to: Northwest
+          req: Slingshot_Hook
+          movement: base
+          jumps: 4
+        - to: Ambushes > West 18
+          tag: [xdoor]
+    - name: East 19
+      coord: [40.9, 18.6]
+      local:
+        - to: Middle Ledge
+          jumps: 1
+      exits:
+        - to: Ambushes > West 19
+          tags: [xdoor]
+        - to: Middle Floor
+          req: Slingshot_Hook and Slingshot_Weapon
+          movement: fast_hover
+    - name: Middle Ledge
+      coord: [40.55, 18.55]
+      local:
+        - to: East 19
+        - to: Middle Floor
+        - to: Button
+    - name: Middle Floor
+      coord: [40.3, 18.95]
+      local:
+        - to: Button
+      locations:
+        - name: Item
+          item: Nano_Lattice_3
+          tags: [standing]
+      exits:
+        - to: Middle Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: East 20
+          req: Annuna_Breach_Upper_Gate
+          movement: base
+    - name: Button
+      coord: [40.55, 19.0]
+      local:
+        - to: Middle Floor
+          jumps: 1
+      locations:
+        - name: Hit Button
+          item: Annuna_Breach_Upper_Gate
+          tags: [button]
+      exits:
+        - to: East 20
+          req: Annuna_Breach_Upper_Gate
+          movement: base
+        - to: Long Ledge
+          req: Annuna_Breach_Upper_Gate
+          movement: base
+    - name: East 20
+      coord: [40.9, 19.6]
+      local:
+        - to: Long Ledge
+      exits:
+        - to: Button
+          req: Annuna_Breach_Upper_Gate and Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Middle Floor
+          req: Annuna_Breach_Upper_Gate and Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: North Hallway > West
+          tags: [xdoor]
+    - name: Long Ledge
+      coord: [40.3, 19.6]
+      data:
+        flipside: Annuna > Vertical Room > Save Point Left
+      local:
+        - to: East 20
+        - to: Lower Stair
+      exits:
+        - to: Button
+          req: Annuna_Breach_Upper_Gate and Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Lower Stair
+      coord: [40.3, 20.0]
+      local:
+        - to: East 21
+      exits:
+        - to: Long Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: East 21
+      coord: [40.9, 20.75]
+      exits:
+        - to: Lower Stair
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Center Hallway > West
+          tags: [xdoor]
+
+- name: Ambushes  # MARK: Ambushes
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West 18
+      coord: [41.1, 17.6]
+      local:
+        - to: Upper Ledge
+      exits:
+        - to: Gate and Floor > East 18
+          tags: [xdoor]
+    - name: Upper Ledge
+      coord: [42.45, 17.75]
+      local:
+        - to: Below Ledge
+        - to: West 19
+    - name: Below Ledge
+      coord: [42.5, 18.2]
+      local:
+        - to: West 19
+      exits:
+        - to: Upper Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West 19
+      coord: [41.1, 18.6]
+      local:
+        - to: Below Ledge
+          jumps: 3
+      exits:
+        - to: Gate and Floor > East 19
+          tags: [xdoor]
+
+- name: North Hallway  # MARK: North Hallway
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+  map:
+    save: [42, 19, 43, 20]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > AGB East
+  spots:
+    - name: West
+      coord: [41.1, 19.6]
+      local:
+        - to: Save Point
+          jumps: 2
+      exits:
+        - to: Gate and Floor > East 20
+          tags: [xdoor]
+    - name: Save Point
+      coord: [42.525, 19.7]
+      local:
+        - to: West
+          jumps: 3
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+
+- name: Center Hallway  # MARK: Center Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: West
+      coord: [41.1, 20.75]
+      local:
+        - to: South
+          jumps: 2
+      exits:
+        - to: Gate and Floor > East 21
+          tags: [xdoor]
+    - name: South
+      coord: [42.5, 20.8]
+      local:
+        - to: West
+          jumps: 2
+      exits:
+        - to: South Hallway > North
+          tags: [ydoor]
+
+- name: South Hallway  # MARK: South Hallway
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [42.5, 21.2]
+      local:
+        - to: Hill East
+          thru: [42.5, 21.3]
+      exits:
+        - to: Center Hallway > South
+          tags: [ydoor]
+    - name: Hill East
+      coord: [42.3, 21.7]
+      local:
+        - to: Hill West
+          jumps: 1
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: South
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Hill West
+      coord: [41.7, 21.7]
+      local:
+        - to: South
+        - to: Hill East
+          jumps: 1
+      exits:
+        - to: Hill East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: South
+      coord: [41.5, 21.8]
+      local:
+        - to: Hill West
+          jumps: 1
+      exits:
+        - to: Lower Gate > North
+          tags: [ydoor]
+
+- name: Lower Gate  # MARK: Lower Gate
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [41, 22, 42, 23]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > AGB Lower Gate Flask
+  spots:
+    - name: North
+      coord: [41.5, 22.2]
+      local:
+        - to: Button
+        - to: Flower Cache
+      exits:
+        - to: South Hallway > South
+          tags: [ydoor]
+    - name: Button
+      coord: [41.6, 22.6]
+      local:
+        - to: Gate Ledge
+        - to: Flower Cache
+      locations:
+        - name: Hit Button
+          item: Annuna_Lower_Gate
+          tags: [button]
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: Gate Ledge
+      coord: [41.65, 22.8]
+      local:
+        - to: Flower Cache
+        - to: Button
+          jumps: 1
+      exits:
+        - to: Gate Platform
+          req: Annuna_Lower_Gate
+          movement: base
+    - name: Flower Cache
+      coord: [41.8, 22.8]
+      local:
+        - to: Gate Ledge
+        - to: Button
+          jumps: 1
+      locations:
+        - name: Flask
+          canon: Annuna_Breach_Lower_Gate_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Breach_Lower_Gate_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Breach_Lower_Gate_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: Gate Platform
+      coord: [41.5, 23.3]
+      local:
+        - to: West
+        - to: South
+      exits:
+        - to: Gate Ledge
+          req: Annuna_Lower_Gate and Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West
+      coord: [41.1, 23.75]
+      local:
+        - to: South
+      exits:
+        - to: Gate Platform
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Factory Foyer > East
+          tags: [xdoor]
+    - name: South
+      coord: [41.5, 24.8]
+      exits:
+        - to: West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 5
+        - to: Depths > North
+          tags: [ydoor]
+
+- name: Factory Foyer  # MARK: Factory Foyer
+  on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [39, 23, 40, 24]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > AGB Factory Foyer Flask
+  spots:
+    - name: East
+      coord: [40.9, 23.75]
+      local:
+        - to: Middle
+      exits:
+        - to: Lower Gate > West
+          tags: [xdoor]
+    - name: Middle
+      coord: [40.4, 23.75]
+      local:
+        - to: East Ledge
+          jumps: 1
+        - to: West Flower
+          jumps: 2
+        - to: East
+    - name: East Ledge
+      coord: [40.2, 23.55]
+      local:
+        - to: Middle
+      exits:
+        - to: West Flower
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: West Flower
+      coord: [39.45, 23.75]
+      local:
+        - to: East Ledge
+          jumps: 3
+        - to: West
+          jumps: 2
+      locations:
+        - name: Flask
+          canon: Annuna_Breach_Factory_Foyer_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Breach_Factory_Foyer_Flask
+          item: Big_Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Breach_Factory_Foyer_Flask
+          item: Big_Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+    - name: West
+      coord: [39.1, 23.55]
+      local:
+        - to: West Flower
+      exits:
+        - to: Factory Gate > East
+          tags: [xdoor]
+
+- name: Factory Gate  # MARK: Factory Gate
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: East
+      coord: [38.9, 23.55]
+
+- name: Depths  # MARK: Depths
+  on_entry: $reset_old_area(^newpos)
+  spots:
+    - name: North
+      coord: [41.5, 25.2]
+      local:
+        - to: South Overhang
+        - to: South
+          thru: [41.575, 26.6]
+      exits:
+        - to: Lower Gate > South
+          tags: [ydoor]
+    - name: Upper East Corner
+      coord: [41.85, 25.75]
+      local:
+        - to: South Overhang
+        - to: South
+      exits:
+        - to: North
+          req: Drone_Hover
+          movement: base
+          jumps: 3
+    - name: South Overhang
+      coord: [41.5, 26.5]
+      local:
+        - to: South
+          thru: [41.575, 26.6]
+      exits:
+        - to: Upper East Corner
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+    - name: South
+      coord: [41.5, 26.75]
+      local:
+        - to: South Overhang
+          jumps: 2
+      exits:
+        - to: Bottom > North
+          tags: [ydoor]
+
+- name: Bottom  # MARK: Bottom
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    map_spot: Menu > Breach Map > AGB South
+  spots:
+    - name: North
+      coord: [41.5, 27.2]
+      local:
+        - to: Save Point
+    - name: Save Point
+      coord: [41.475, 27.55]
+      exits:
+        - to: Depths > South
+          req: $mist2
+          movement: mist2
+          penalty_tags: [ydoor, -mist2.4]
+        - to: Depths > South
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [ydoor, -mist1.4]
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+
+- name: Enclosed  # MARK: Enclosed
+  on_entry: $reset_old_area(^newpos)
+  map: save
+  data:
+    map_spot: Menu > Breach Map > AGB Enclosed
+  spots:
+    - name: Save Point
+      coord: [42.625, 25.5]
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]

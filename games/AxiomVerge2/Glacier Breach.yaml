@@ -682,6 +682,8 @@ areas:
           movement: mist1
     - name: East Ledge
       coord: [38.8, 9.75]
+      data:
+        flipside: Glacier > Secret Chamber > Upper East Ledge
       local:
         - to: East
       exits:

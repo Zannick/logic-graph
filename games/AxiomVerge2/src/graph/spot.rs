@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3302] = [
+static SPOT_DEFS: [SpotDef; 3353] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -1856,6 +1856,54 @@ static SPOT_DEFS: [SpotDef; 3302] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna_Breach__Ambushes__Below_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Ambushes__Below_Ledge__ex__Upper_Ledge_1, ExitId::Annuna_Breach__Ambushes__Below_Ledge__ex__Upper_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Ambushes__Upper_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Ambushes__West_18,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Ambushes__West_18__ex__Gate_and_Floor__East_18_1, ExitId::Annuna_Breach__Ambushes__West_18__ex__Gate_and_Floor__East_18_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Ambushes__West_19,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Ambushes__West_19__ex__Gate_and_Floor__East_19_1, ExitId::Annuna_Breach__Ambushes__West_19__ex__Gate_and_Floor__East_19_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bottom__North,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bottom__Save_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bottom__Save_Point__ex__Depths__South_1, ExitId::Annuna_Breach__Bottom__Save_Point__ex__Depths__South_2)),
+        action_range: Some((ActionId::Annuna_Breach__Bottom__Save_Point__Save, ActionId::Annuna_Breach__Bottom__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Center_Hallway__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Center_Hallway__South__ex__South_Hallway__North_1, ExitId::Annuna_Breach__Center_Hallway__South__ex__South_Hallway__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Center_Hallway__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Center_Hallway__West__ex__Gate_and_Floor__East_21_1, ExitId::Annuna_Breach__Center_Hallway__West__ex__Gate_and_Floor__East_21_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna_Breach__Corner__East,
         loc_range: None,
         exit_range: Some((ExitId::Annuna_Breach__Corner__East__ex__Underbelly__West_1, ExitId::Annuna_Breach__Corner__East__ex__Underbelly__West_1)),
@@ -1871,6 +1919,30 @@ static SPOT_DEFS: [SpotDef; 3302] = [
         id: SpotId::Annuna_Breach__Corner__South,
         loc_range: None,
         exit_range: Some((ExitId::Annuna_Breach__Corner__South__ex__Smiley__North_1, ExitId::Annuna_Breach__Corner__South__ex__Smiley__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Depths__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Depths__North__ex__Lower_Gate__South_1, ExitId::Annuna_Breach__Depths__North__ex__Lower_Gate__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Depths__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Depths__South__ex__Bottom__North_1, ExitId::Annuna_Breach__Depths__South__ex__Bottom__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Depths__South_Overhang,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Depths__South_Overhang__ex__Upper_East_Corner_1, ExitId::Annuna_Breach__Depths__South_Overhang__ex__Upper_East_Corner_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Depths__Upper_East_Corner,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Depths__Upper_East_Corner__ex__North_1, ExitId::Annuna_Breach__Depths__Upper_East_Corner__ex__North_1)),
         action_range: None,
     },
     SpotDef {
@@ -1902,6 +1974,192 @@ static SPOT_DEFS: [SpotDef; 3302] = [
         loc_range: None,
         exit_range: Some((ExitId::Annuna_Breach__Double_Corridor__South__ex__Underbelly__North_1, ExitId::Annuna_Breach__Double_Corridor__South__ex__Underbelly__North_1)),
         action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Enclosed__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Annuna_Breach__Enclosed__Save_Point__Save, ActionId::Annuna_Breach__Enclosed__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Foyer__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Foyer__East__ex__Lower_Gate__West_1, ExitId::Annuna_Breach__Factory_Foyer__East__ex__Lower_Gate__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Foyer__East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Foyer__East_Ledge__ex__West_Flower_1, ExitId::Annuna_Breach__Factory_Foyer__East_Ledge__ex__West_Flower_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Foyer__Middle,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Foyer__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Foyer__West__ex__Factory_Gate__East_1, ExitId::Annuna_Breach__Factory_Foyer__West__ex__Factory_Gate__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Foyer__West_Flower,
+        loc_range: Some((LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask, LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Gate__East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__Button,
+        loc_range: Some((LocationId::Annuna_Breach__Gate_and_Floor__Button__Hit_Button, LocationId::Annuna_Breach__Gate_and_Floor__Button__Hit_Button)),
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__Button__ex__East_20_1, ExitId::Annuna_Breach__Gate_and_Floor__Button__ex__Long_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__East_18,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__East_18__ex__Ambushes__West_18_1, ExitId::Annuna_Breach__Gate_and_Floor__East_18__ex__Northwest_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__East_19,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__East_19__ex__Ambushes__West_19_1, ExitId::Annuna_Breach__Gate_and_Floor__East_19__ex__Middle_Floor_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__East_20,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__East_20__ex__Button_1, ExitId::Annuna_Breach__Gate_and_Floor__East_20__ex__North_Hallway__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__East_21,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__East_21__ex__Center_Hallway__West_1, ExitId::Annuna_Breach__Gate_and_Floor__East_21__ex__Lower_Stair_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__Long_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__Long_Ledge__ex__Button_1, ExitId::Annuna_Breach__Gate_and_Floor__Long_Ledge__ex__Button_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__Lower_Stair,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__Lower_Stair__ex__Long_Ledge_1, ExitId::Annuna_Breach__Gate_and_Floor__Lower_Stair__ex__Long_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__Middle_Floor,
+        loc_range: Some((LocationId::Annuna_Breach__Gate_and_Floor__Middle_Floor__Item, LocationId::Annuna_Breach__Gate_and_Floor__Middle_Floor__Item)),
+        exit_range: Some((ExitId::Annuna_Breach__Gate_and_Floor__Middle_Floor__ex__East_20_1, ExitId::Annuna_Breach__Gate_and_Floor__Middle_Floor__ex__Middle_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__Middle_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Gate_and_Floor__Northwest,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__Button,
+        loc_range: Some((LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button, LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button)),
+        exit_range: Some((ExitId::Annuna_Breach__Lower_Gate__Button__ex__North_1, ExitId::Annuna_Breach__Lower_Gate__Button__ex__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__Flower_Cache,
+        loc_range: Some((LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask, LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__Gate_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Lower_Gate__Gate_Ledge__ex__Gate_Platform_1, ExitId::Annuna_Breach__Lower_Gate__Gate_Ledge__ex__Gate_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__Gate_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Lower_Gate__Gate_Platform__ex__Gate_Ledge_1, ExitId::Annuna_Breach__Lower_Gate__Gate_Platform__ex__Gate_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Lower_Gate__North__ex__South_Hallway__South_1, ExitId::Annuna_Breach__Lower_Gate__North__ex__South_Hallway__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Lower_Gate__South__ex__Depths__North_1, ExitId::Annuna_Breach__Lower_Gate__South__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Lower_Gate__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Lower_Gate__West__ex__Factory_Foyer__East_1, ExitId::Annuna_Breach__Lower_Gate__West__ex__Gate_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__North_Hallway__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Annuna_Breach__North_Hallway__Save_Point__Save, ActionId::Annuna_Breach__North_Hallway__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__North_Hallway__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__North_Hallway__West__ex__Gate_and_Floor__East_20_1, ExitId::Annuna_Breach__North_Hallway__West__ex__Gate_and_Floor__East_20_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Rear_Entrance__Center_Hill_East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Rear_Entrance__Center_Hill_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Rear_Entrance__Center_Hill_West__ex__Center_Hill_East_1, ExitId::Annuna_Breach__Rear_Entrance__Center_Hill_West__ex__Center_Hill_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Rear_Entrance__East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Rear_Entrance__East__ex__East_Hill_1, ExitId::Annuna_Breach__Rear_Entrance__East__ex__Gate_and_Floor__Northwest_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Rear_Entrance__East_Hill,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Rear_Entrance__East_Hill__ex__East_1, ExitId::Annuna_Breach__Rear_Entrance__East_Hill__ex__East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Rear_Entrance__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save, ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save)),
     },
     SpotDef {
         id: SpotId::Annuna_Breach__Smiley__Column_East,
@@ -1955,6 +2213,30 @@ static SPOT_DEFS: [SpotDef; 3302] = [
         id: SpotId::Annuna_Breach__Smiley__West_Ground,
         loc_range: None,
         exit_range: Some((ExitId::Annuna_Breach__Smiley__West_Ground__ex__Upper_Portal_Exit_1, ExitId::Annuna_Breach__Smiley__West_Ground__ex__Upper_Portal_Exit_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__South_Hallway__Hill_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__South_Hallway__Hill_East__ex__North_1, ExitId::Annuna_Breach__South_Hallway__Hill_East__ex__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__South_Hallway__Hill_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__South_Hallway__Hill_West__ex__Hill_East_1, ExitId::Annuna_Breach__South_Hallway__Hill_West__ex__Hill_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__South_Hallway__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__South_Hallway__North__ex__Center_Hallway__South_1, ExitId::Annuna_Breach__South_Hallway__North__ex__Center_Hallway__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__South_Hallway__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__South_Hallway__South__ex__Lower_Gate__North_1, ExitId::Annuna_Breach__South_Hallway__South__ex__Lower_Gate__North_1)),
         action_range: None,
     },
     SpotDef {
@@ -6726,6 +7008,12 @@ static SPOT_DEFS: [SpotDef; 3302] = [
         loc_range: Some((LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch, LocationId::Ebih__Vertical_Interchange__Switch__Activate_Switch)),
         exit_range: Some((ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1, ExitId::Ebih__Vertical_Interchange__Switch__ex__Below_Door_1)),
         action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Ebih__Vertical_Interchange__Under_Switch,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below, ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below)),
     },
     SpotDef {
         id: SpotId::Ebih__Vertical_Interchange__West_13,
@@ -15790,11 +16078,23 @@ static SPOT_DEFS: [SpotDef; 3302] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__AGB_East,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__AGB_East__ex__Annuna_Breach__North_Hallway__Save_Point_1, ExitId::Menu__Breach_Map__AGB_East__ex__Annuna_Breach__North_Hallway__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Menu__Breach_Map__AGB_Enclosed,
+        loc_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__AGB_Enclosed__ex__Annuna_Breach__Enclosed__Save_Point_1, ExitId::Menu__Breach_Map__AGB_Enclosed__ex__Annuna_Breach__Enclosed__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__AGB_Factory_Foyer_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__AGB_Lower_Gate_Flask,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -15802,7 +16102,7 @@ static SPOT_DEFS: [SpotDef; 3302] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__AGB_North,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__AGB_North__ex__Annuna_Breach__Rear_Entrance__Save_Point_1, ExitId::Menu__Breach_Map__AGB_North__ex__Annuna_Breach__Rear_Entrance__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -15820,7 +16120,7 @@ static SPOT_DEFS: [SpotDef; 3302] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__AGB_South,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__AGB_South__ex__Annuna_Breach__Bottom__Save_Point_1, ExitId::Menu__Breach_Map__AGB_South__ex__Annuna_Breach__Bottom__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -16197,6 +16497,12 @@ static SPOT_DEFS: [SpotDef; 3302] = [
     },
     SpotDef {
         id: SpotId::Menu__Breach_Map__MEB_Vertical_Room_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__Nano_Lattice_3,
         loc_range: None,
         exit_range: None,
         action_range: None,

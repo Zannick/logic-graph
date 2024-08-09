@@ -2978,11 +2978,11 @@ macro_rules! hobserve__all_notes {
 }
 
 /// $all_flasks (  )
-/// [Flask{52}, Big_Flask{27}]
+/// [Flask{52}, Big_Flask{30}]
 #[macro_export]
 macro_rules! helper__all_flasks {
     ($ctx:expr, $world:expr) => {{
-        $ctx.count(Item::Flask) >= 52 && $ctx.count(Item::Big_Flask) >= 27
+        $ctx.count(Item::Flask) >= 52 && $ctx.count(Item::Big_Flask) >= 30
     }};
 }
 #[macro_export]
@@ -3002,7 +3002,7 @@ macro_rules! hexplain__all_flasks {
             let mut h = {
                 let ct = $ctx.count(Item::Big_Flask);
                 $edict.insert("Big_Flask count", format!("{}", ct));
-                (ct >= 27, vec!["Big_Flask count"])
+                (ct >= 30, vec!["Big_Flask count"])
             };
             refs.append(&mut h.1);
             (h.0, refs)
@@ -3016,8 +3016,8 @@ macro_rules! hobserve__all_flasks {
             $full_obs.observe_flask(IntegerObservation::Ge(52));
             $ctx.count(Item::Flask) >= 52
         }) && ({
-            $full_obs.observe_big_flask(IntegerObservation::Ge(27));
-            $ctx.count(Item::Big_Flask) >= 27
+            $full_obs.observe_big_flask(IntegerObservation::Ge(30));
+            $ctx.count(Item::Big_Flask) >= 30
         })
     }};
 }
@@ -3179,7 +3179,7 @@ macro_rules! hobserve__all_weapons {
 }
 
 /// $other_items (  )
-/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,  Nano_Lattice_1, Nano_Lattice_2, Power_Matrix{4}, Remote_Boomerang, Royal_Ring, Udusan]
+/// [Breach_Attractor, Carnelian_Ring, Compass, Diviners_Gem, Ensis_Bracelet, Eye_Ring, Halusan,  Nano_Lattice_1, Nano_Lattice_2, Nano_Lattice_3, Power_Matrix{4}, Remote_Boomerang, Royal_Ring, Udusan]
 #[macro_export]
 macro_rules! helper__other_items {
     ($ctx:expr, $world:expr) => {{
@@ -3192,6 +3192,7 @@ macro_rules! helper__other_items {
             && $ctx.has(Item::Halusan)
             && $ctx.has(Item::Nano_Lattice_1)
             && $ctx.has(Item::Nano_Lattice_2)
+            && $ctx.has(Item::Nano_Lattice_3)
             && $ctx.count(Item::Power_Matrix) >= 4
             && $ctx.has(Item::Remote_Boomerang)
             && $ctx.has(Item::Royal_Ring)
@@ -3285,6 +3286,15 @@ macro_rules! hexplain__other_items {
                 return (false, refs);
             };
             let mut h = {
+                let h = $ctx.has(Item::Nano_Lattice_3);
+                $edict.insert("Nano_Lattice_3", format!("{}", h));
+                (h, vec!["Nano_Lattice_3"])
+            };
+            refs.append(&mut h.1);
+            if !h.0 {
+                return (false, refs);
+            };
+            let mut h = {
                 let ct = $ctx.count(Item::Power_Matrix);
                 $edict.insert("Power_Matrix count", format!("{}", ct));
                 (ct >= 4, vec!["Power_Matrix count"])
@@ -3351,6 +3361,9 @@ macro_rules! hobserve__other_items {
         }) && ({
             $full_obs.observe_nano_lattice_2();
             $ctx.has(Item::Nano_Lattice_2)
+        }) && ({
+            $full_obs.observe_nano_lattice_3();
+            $ctx.has(Item::Nano_Lattice_3)
         }) && ({
             $full_obs.observe_power_matrix(IntegerObservation::Ge(4));
             $ctx.count(Item::Power_Matrix) >= 4

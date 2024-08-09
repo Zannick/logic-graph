@@ -616,7 +616,7 @@ areas:
         - to: Invisible Enemies > East 22
           tags: [xshift]
     - name: Wall West
-      coord: [32.1, 21.8]
+      coord: [32.2, 21.8]
       local:
         - to: West
           jumps: 1
@@ -685,7 +685,7 @@ areas:
           to: ^map_spot
           tags: [throw]
     - name: East
-      coord: [22.95, 21.65]
+      coord: [32.95, 21.65]
       local:
         - to: In Boome Range
       exits:
@@ -1004,9 +1004,9 @@ areas:
 
     #region NW Cavern
     - name: West 22
-      coord: [23.05, 21.65]
+      coord: [33.05, 21.65]
     - name: Cavern Plinth
-      coord: [23.475, 21.55]
+      coord: [33.475, 21.55]
     #endregion
 
 - name: East Bridge  # MARK: East Bridge
@@ -2275,6 +2275,8 @@ areas:
           movement: fast_hover
     - name: Save Point Left
       coord: [40.3, 19.6]
+      data:
+        flipside: Annuna Breach > Gate and Floor > Long Ledge
       local:
         - to: West 20
         - to: Middle Ministair
@@ -2461,6 +2463,8 @@ areas:
           jumps: 1
     - name: West 17
       coord: [40.1, 16.75]
+      data:
+        flipside: SpotId::None
       local:
         - to: Near Upper Ledge
         - to: Upper Doorway
@@ -3346,6 +3350,8 @@ areas:
           tags: [xshift]
     - name: Portal Stand
       coord: [37.475, 16.7]
+      data:
+        flipside: Annuna Breach > Rear Entrance > Save Point
       local:
         - to: Plinth Left
         - to: Plinth Right

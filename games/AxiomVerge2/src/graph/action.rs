@@ -66,7 +66,11 @@ impl world::Accessible for Action {
             ActionId::Annuna__Vertical_Room__Save_Point__Save => true,
             ActionId::Annuna__West_Bridge__Save_Point__Save => true,
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::access_annuna__west_climb__switch_ledge__open_door__req(ctx, world),
+            ActionId::Annuna_Breach__Bottom__Save_Point__Save => true,
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => true,
+            ActionId::Annuna_Breach__Enclosed__Save_Point__Save => true,
+            ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => true,
+            ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => true,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::access_ebih__base_camp__left_platform__move_left_platform__req(ctx, world),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::access_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => true,
@@ -92,6 +96,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Hidden_Portal__Save_Point__Save => true,
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::access_ebih__truck_gate__portal_stand__open_door__req(ctx, world),
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::access_ebih__truck_gate__switch__open_door__req(ctx, world),
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::access_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::access_ebih__vertical_interchange__west_13__open_door__req(ctx, world),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::access_invoke_open(ctx, world),
@@ -278,6 +283,7 @@ impl world::Accessible for Action {
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::observe_access_ebih__truck_gate__portal_stand__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::observe_access_ebih__truck_gate__switch__open_door__req(ctx, world, full_obs),
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::observe_access_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(ctx, world, full_obs),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::observe_access_ebih__vertical_interchange__west_13__open_door__req(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
@@ -834,6 +840,15 @@ impl world::Accessible for Action {
             }
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
                 let (ret, mut tags) = rules::explain_ebih__truck_gate__switch__open_door__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => {
+                let (ret, mut tags) = rules::explain_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1741,6 +1756,10 @@ impl world::Action for Action {
             ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world),
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna_Breach__Bottom__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna_Breach__Enclosed__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::action_annuna__invisible_enemies__switch_west__open_door__do(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => rules::action_annuna__invisible_enemies__switch_above__open_door__do(ctx, world),
@@ -1800,6 +1819,7 @@ impl world::Action for Action {
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx, world),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world),
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx, world),
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::action_ebih__vertical_interchange__under_switch__unlock_door_from_below__do(ctx, world),
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Emergence__Storage__At_Door__Open_Door => rules::action_emergence__storage__at_door__open_door__do(ctx, world),
             ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::action_emergence__storage__portal_stand__open_door__do(ctx, world),
@@ -2084,6 +2104,18 @@ impl world::Action for Action {
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna_Breach__Bottom__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna_Breach__Enclosed__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2260,6 +2292,9 @@ impl world::Action for Action {
             }
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
                 rules::observe_action_ebih__vertical_interchange__west_13__open_door__do(ctx, world, full_obs);
+            }
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => {
+                rules::observe_action_ebih__vertical_interchange__under_switch__unlock_door_from_below__do(ctx, world, full_obs);
             }
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2607,7 +2642,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 199] = [
+static ACT_DEFS: [Action; 204] = [
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2704,7 +2739,27 @@ static ACT_DEFS: [Action; 199] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Annuna_Breach__Bottom__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna_Breach__Enclosed__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna_Breach__North_Hallway__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
     },
@@ -2955,6 +3010,11 @@ static ACT_DEFS: [Action; 199] = [
     },
     Action {
         id: ActionId::Ebih__Truck_Gate__Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below,
         time: 500,
         price: Currency::Free,
     },
@@ -3634,6 +3694,10 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
         ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => SpotId::Amagi__Gated_Community__Dur_Esla,
         ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => SpotId::Annuna_Breach__Double_Corridor__Save_Point,
+        ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => SpotId::Annuna_Breach__Rear_Entrance__Save_Point,
+        ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => SpotId::Annuna_Breach__North_Hallway__Save_Point,
+        ActionId::Annuna_Breach__Bottom__Save_Point__Save => SpotId::Annuna_Breach__Bottom__Save_Point,
+        ActionId::Annuna_Breach__Enclosed__Save_Point__Save => SpotId::Annuna_Breach__Enclosed__Save_Point,
         ActionId::Annuna__Mirror_Match__Save_Point__Save => SpotId::Annuna__Mirror_Match__Save_Point,
         ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => SpotId::Annuna__Invisible_Enemies__Switch_West,
         ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => SpotId::Annuna__Invisible_Enemies__Switch_Above,
@@ -3690,6 +3754,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => SpotId::Ebih__Drone_Room__Portal_Exit,
         ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => SpotId::Ebih__Drone_Room__Moving_Platform,
         ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => SpotId::Ebih__Vertical_Interchange__West_13,
+        ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => SpotId::Ebih__Vertical_Interchange__Under_Switch,
         ActionId::Emergence__Camp_Exterior__Save_Point__Save => SpotId::Emergence__Camp_Exterior__Save_Point,
         ActionId::Emergence__Storage__At_Door__Open_Door => SpotId::Emergence__Storage__At_Door,
         ActionId::Emergence__Storage__Portal_Stand__Open_Door => SpotId::Emergence__Storage__Portal_Stand,

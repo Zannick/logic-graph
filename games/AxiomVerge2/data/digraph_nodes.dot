@@ -365,9 +365,29 @@
     {
         node[fillcolor="4"];
         {
+            Annuna_Breach__Ambushes__West_18 [label = "", pos = "123.3,-79.333333!"];
+            Annuna_Breach__Ambushes__Upper_Ledge [label = "", pos = "127.35,-79.583333!"];
+            Annuna_Breach__Ambushes__Below_Ledge [label = "", pos = "127.5,-80.333333!"];
+            Annuna_Breach__Ambushes__West_19 [label = "", pos = "123.3,-81.0!"];
+        }
+        {
+            Annuna_Breach__Bottom__North [label = "", pos = "124.5,-95.333333!"];
+            Annuna_Breach__Bottom__Save_Point [label = "", pos = "124.425,-95.916667!"];
+        }
+        {
+            Annuna_Breach__Center_Hallway__West [label = "", pos = "123.3,-84.583333!"];
+            Annuna_Breach__Center_Hallway__South [label = "", pos = "127.5,-84.666667!"];
+        }
+        {
             Annuna_Breach__Corner__South [label = "", pos = "100.5,-93.0!"];
             Annuna_Breach__Corner__Somewhat_Middle_ish [label = "", pos = "100.8,-93.0!"];
             Annuna_Breach__Corner__East [label = "", pos = "101.7,-93.0!"];
+        }
+        {
+            Annuna_Breach__Depths__North [label = "", pos = "124.5,-92.0!"];
+            Annuna_Breach__Depths__Upper_East_Corner [label = "", pos = "125.55,-92.916667!"];
+            Annuna_Breach__Depths__South_Overhang [label = "", pos = "124.5,-94.166667!"];
+            Annuna_Breach__Depths__South [label = "", pos = "124.5,-94.583333!"];
         }
         {
             Annuna_Breach__Double_Corridor__Save_Point [label = "", pos = "106.425,-91.166667!"];
@@ -375,6 +395,51 @@
             Annuna_Breach__Double_Corridor__Center_Platform_West [label = "", pos = "103.05,-90.5!"];
             Annuna_Breach__Double_Corridor__Bottom_Left [label = "", pos = "103.05,-91.333333!"];
             Annuna_Breach__Double_Corridor__South [label = "", pos = "103.5,-91.333333!"];
+        }
+        {
+            Annuna_Breach__Enclosed__Save_Point [label = "", pos = "127.875,-92.5!"];
+        }
+        {
+            Annuna_Breach__Factory_Foyer__East [label = "", pos = "122.7,-89.583333!"];
+            Annuna_Breach__Factory_Foyer__Middle [label = "", pos = "121.2,-89.583333!"];
+            Annuna_Breach__Factory_Foyer__East_Ledge [label = "", pos = "120.6,-89.25!"];
+            Annuna_Breach__Factory_Foyer__West_Flower [label = "", pos = "118.35,-89.583333!"];
+            Annuna_Breach__Factory_Foyer__West [label = "", pos = "117.3,-89.25!"];
+        }
+        {
+            Annuna_Breach__Factory_Gate__East [label = "", pos = "116.7,-89.25!"];
+        }
+        {
+            Annuna_Breach__Gate_and_Floor__Northwest [label = "", pos = "120.3,-77.916667!"];
+            Annuna_Breach__Gate_and_Floor__East_18 [label = "", pos = "122.7,-79.333333!"];
+            Annuna_Breach__Gate_and_Floor__East_19 [label = "", pos = "122.7,-81.0!"];
+            Annuna_Breach__Gate_and_Floor__Middle_Ledge [label = "", pos = "121.65,-80.916667!"];
+            Annuna_Breach__Gate_and_Floor__Middle_Floor [label = "", pos = "120.9,-81.583333!"];
+            Annuna_Breach__Gate_and_Floor__Button [label = "", pos = "121.65,-81.666667!"];
+            Annuna_Breach__Gate_and_Floor__East_20 [label = "", pos = "122.7,-82.666667!"];
+            Annuna_Breach__Gate_and_Floor__Long_Ledge [label = "", pos = "120.9,-82.666667!"];
+            Annuna_Breach__Gate_and_Floor__Lower_Stair [label = "", pos = "120.9,-83.333333!"];
+            Annuna_Breach__Gate_and_Floor__East_21 [label = "", pos = "122.7,-84.583333!"];
+        }
+        {
+            Annuna_Breach__Lower_Gate__North [label = "", pos = "124.5,-87.0!"];
+            Annuna_Breach__Lower_Gate__Button [label = "", pos = "124.8,-87.666667!"];
+            Annuna_Breach__Lower_Gate__Gate_Ledge [label = "", pos = "124.95,-88.0!"];
+            Annuna_Breach__Lower_Gate__Flower_Cache [label = "", pos = "125.4,-88.0!"];
+            Annuna_Breach__Lower_Gate__Gate_Platform [label = "", pos = "124.5,-88.833333!"];
+            Annuna_Breach__Lower_Gate__West [label = "", pos = "123.3,-89.583333!"];
+            Annuna_Breach__Lower_Gate__South [label = "", pos = "124.5,-91.333333!"];
+        }
+        {
+            Annuna_Breach__North_Hallway__West [label = "", pos = "123.3,-82.666667!"];
+            Annuna_Breach__North_Hallway__Save_Point [label = "", pos = "127.575,-82.833333!"];
+        }
+        {
+            Annuna_Breach__Rear_Entrance__Save_Point [label = "", pos = "112.425,-77.833333!"];
+            Annuna_Breach__Rear_Entrance__Center_Hill_West [label = "", pos = "114.825,-78.0!"];
+            Annuna_Breach__Rear_Entrance__Center_Hill_East [label = "", pos = "115.95,-78.0!"];
+            Annuna_Breach__Rear_Entrance__East_Hill [label = "", pos = "117.75,-77.916667!"];
+            Annuna_Breach__Rear_Entrance__East [label = "", pos = "119.7,-77.916667!"];
         }
         {
             Annuna_Breach__Smiley__West [label = "", pos = "96.3,-94.583333!"];
@@ -386,6 +451,12 @@
             Annuna_Breach__Smiley__North [label = "", pos = "100.5,-93.666667!"];
             Annuna_Breach__Smiley__Lower_Portal_Exit [label = "", pos = "97.425,-95.833333!"];
             Annuna_Breach__Smiley__Drool [label = "", pos = "99.15,-96.25!"];
+        }
+        {
+            Annuna_Breach__South_Hallway__North [label = "", pos = "127.5,-85.333333!"];
+            Annuna_Breach__South_Hallway__Hill_East [label = "", pos = "126.9,-86.166667!"];
+            Annuna_Breach__South_Hallway__Hill_West [label = "", pos = "125.1,-86.166667!"];
+            Annuna_Breach__South_Hallway__South [label = "", pos = "124.5,-86.333333!"];
         }
         {
             Annuna_Breach__Underbelly__North [label = "", pos = "103.5,-92.0!"];
@@ -667,11 +738,11 @@
         }
         {
             Annuna__Secret_Passage__West [label = "", pos = "96.15,-36.083333!"];
-            Annuna__Secret_Passage__Wall_West [label = "", pos = "96.3,-36.333333!"];
+            Annuna__Secret_Passage__Wall_West [label = "", pos = "96.6,-36.333333!"];
             Annuna__Secret_Passage__Wall_East [label = "", pos = "97.2,-36.333333!"];
             Annuna__Secret_Passage__In_Shock_Range [label = "", pos = "97.8,-36.25!"];
             Annuna__Secret_Passage__In_Boome_Range [label = "", pos = "98.25,-36.25!"];
-            Annuna__Secret_Passage__East [label = "", pos = "68.85,-36.083333!"];
+            Annuna__Secret_Passage__East [label = "", pos = "98.85,-36.083333!"];
         }
         {
             Annuna__Siuna_Storage__West [label = "", pos = "117.15,-26.333333!"];
@@ -820,8 +891,8 @@
             Annuna__West_Bridge__Tunnel_Wall [label = "", pos = "109.65,-36.333333!"];
             Annuna__West_Bridge__Mid_Tunnel [label = "", pos = "109.65,-35.833333!"];
             Annuna__West_Bridge__North [label = "", pos = "109.5,-35.333333!"];
-            Annuna__West_Bridge__West_22 [label = "", pos = "69.15,-36.083333!"];
-            Annuna__West_Bridge__Cavern_Plinth [label = "", pos = "70.425,-35.916667!"];
+            Annuna__West_Bridge__West_22 [label = "", pos = "99.15,-36.083333!"];
+            Annuna__West_Bridge__Cavern_Plinth [label = "", pos = "100.425,-35.916667!"];
         }
         {
             Annuna__West_Climb__East_20 [label = "", pos = "110.85,-33.166667!"];
@@ -1340,7 +1411,8 @@
             Ebih__Vertical_Interchange__Passage_East [label = "", pos = "65.4,-21.5!"];
             Ebih__Vertical_Interchange__East_13 [label = "", pos = "65.85,-21.25!"];
             Ebih__Vertical_Interchange__Middle_Descent [label = "", pos = "65.55,-22.166667!"];
-            Ebih__Vertical_Interchange__Middle_Drop [label = "", pos = "63.6,-22.416667!"];
+            Ebih__Vertical_Interchange__Middle_Drop [label = "", pos = "63.6,-22.333333!"];
+            Ebih__Vertical_Interchange__Under_Switch [label = "", pos = "63.45,-22.0!"];
             Ebih__Vertical_Interchange__Cliff_by_Refill [label = "", pos = "63.9,-24.0!"];
             Ebih__Vertical_Interchange__Refill_Station [label = "", pos = "64.35,-24.666667!"];
             Ebih__Vertical_Interchange__Blocked_Refill_Station [label = "", pos = "64.35,-24.5!"];
@@ -3236,8 +3308,11 @@
             Menu__Breach_Map__UVB_Dead_end [label = "", pos = "93.0,-93.333333!"];
             Menu__Breach_Map__UVB_East [label = "", pos = "93.0,-95.0!"];
             Menu__Breach_Map__UVB_West [label = "", pos = "57.0,-93.333333!"];
+            Menu__Breach_Map__AGB_Factory_Foyer_Flask [label = "", pos = "117.0,-90.0!"];
+            Menu__Breach_Map__AGB_Lower_Gate_Flask [label = "", pos = "126.0,-88.333333!"];
             Menu__Breach_Map__AGB_Smiley_Health [label = "", pos = "99.0,-96.666667!"];
             Menu__Breach_Map__AGB_Smiley_Northwest [label = "", pos = "96.0,-95.0!"];
+            Menu__Breach_Map__Nano_Lattice_3 [label = "", pos = "120.0,-81.666667!"];
             Menu__Breach_Map__GSB_Chimney_Flask [label = "", pos = "39.0,-63.333333!"];
             Menu__Breach_Map__GSB_Crab_Rave_Flask [label = "", pos = "51.0,-71.666667!"];
             Menu__Breach_Map__GSB_Cubby_Health [label = "", pos = "39.0,-68.333333!"];

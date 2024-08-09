@@ -503,6 +503,14 @@ pub fn access_annuna__west_climb__switch_ledge__open_door__req(
     // $unlock4 and not ^_door_opened
     (helper__unlock4!(ctx, world) && !ctx.annuna__west_climb__ctx__door_opened())
 }
+pub fn access_annuna_breach_upper_gate(ctx: &Context, world: &World) -> bool {
+    // Annuna_Breach_Upper_Gate
+    ctx.has(Item::Annuna_Breach_Upper_Gate)
+}
+pub fn access_annuna_breach_upper_gate_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
+    // Annuna_Breach_Upper_Gate and Slingshot_Hook
+    (ctx.has(Item::Annuna_Breach_Upper_Gate) && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_East_Bridge_Gate
     ctx.has(Item::Annuna_East_Bridge_Gate)
@@ -510,6 +518,14 @@ pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
 pub fn access_annuna_east_bridge_gate_and_invoke_hookhover(ctx: &Context, world: &World) -> bool {
     // Annuna_East_Bridge_Gate and $hookhover
     (ctx.has(Item::Annuna_East_Bridge_Gate) && helper__hookhover!(ctx, world))
+}
+pub fn access_annuna_lower_gate(ctx: &Context, world: &World) -> bool {
+    // Annuna_Lower_Gate
+    ctx.has(Item::Annuna_Lower_Gate)
+}
+pub fn access_annuna_lower_gate_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
+    // Annuna_Lower_Gate and Slingshot_Hook
+    (ctx.has(Item::Annuna_Lower_Gate) && ctx.has(Item::Slingshot_Hook))
 }
 pub fn access_annuna_mirror_match_switch(ctx: &Context, world: &World) -> bool {
     // Annuna_Mirror_Match_Switch
@@ -889,6 +905,14 @@ pub fn access_ebih__vertical_interchange__door_west__ex__door_1__req(
 ) -> bool {
     // ^_door_open
     ctx.ebih__vertical_interchange__ctx__door_open()
+}
+pub fn access_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $open and not ^_door_open and $range2
+    ((helper__open!(ctx, world) && !ctx.ebih__vertical_interchange__ctx__door_open())
+        && helper__range2!(ctx, world))
 }
 pub fn access_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
@@ -3015,9 +3039,25 @@ pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &World) -> 
     // ^map__annuna__vertical_room__save
     ctx.map__annuna__vertical_room__save()
 }
+pub fn access_map__annuna_breach__bottom__save(ctx: &Context, world: &World) -> bool {
+    // ^map__annuna_breach__bottom__save
+    ctx.map__annuna_breach__bottom__save()
+}
 pub fn access_map__annuna_breach__double_corridor__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna_breach__double_corridor__save
     ctx.map__annuna_breach__double_corridor__save()
+}
+pub fn access_map__annuna_breach__enclosed__save(ctx: &Context, world: &World) -> bool {
+    // ^map__annuna_breach__enclosed__save
+    ctx.map__annuna_breach__enclosed__save()
+}
+pub fn access_map__annuna_breach__north_hallway__save(ctx: &Context, world: &World) -> bool {
+    // ^map__annuna_breach__north_hallway__save
+    ctx.map__annuna_breach__north_hallway__save()
+}
+pub fn access_map__annuna_breach__rear_entrance__save(ctx: &Context, world: &World) -> bool {
+    // ^map__annuna_breach__rear_entrance__save
+    ctx.map__annuna_breach__rear_entrance__save()
 }
 pub fn access_map__ebih__base_camp__save(ctx: &Context, world: &World) -> bool {
     // ^map__ebih__base_camp__save
@@ -4081,6 +4121,13 @@ pub fn action_ebih__truck_gate__portal_stand__open_door__do(ctx: &mut Context, w
 pub fn action_ebih__truck_gate__switch__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
     ctx.set_ebih__truck_gate__ctx__door_open(true);
+}
+pub fn action_ebih__vertical_interchange__under_switch__unlock_door_from_below__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_door_open = true
+    ctx.set_ebih__vertical_interchange__ctx__door_open(true);
 }
 pub fn action_ebih__vertical_interchange__west_13__open_door__do(ctx: &mut Context, world: &World) {
     // ^_door_open = true
@@ -6536,6 +6583,43 @@ pub fn explain_annuna__west_climb__switch_ledge__open_door__req(
         }
     }
 }
+pub fn explain_annuna_breach_upper_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Breach_Upper_Gate
+    {
+        let h = ctx.has(Item::Annuna_Breach_Upper_Gate);
+        edict.insert("Annuna_Breach_Upper_Gate", format!("{}", h));
+        (h, vec!["Annuna_Breach_Upper_Gate"])
+    }
+}
+pub fn explain_annuna_breach_upper_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Breach_Upper_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Annuna_Breach_Upper_Gate);
+            edict.insert("Annuna_Breach_Upper_Gate", format!("{}", h));
+            (h, vec!["Annuna_Breach_Upper_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_annuna_east_bridge_gate(
     ctx: &Context,
     world: &World,
@@ -6568,6 +6652,43 @@ pub fn explain_annuna_east_bridge_gate_and_invoke_hookhover(
                 edict.insert("$hookhover", format!("{:?}", res));
                 refs.push("$hookhover");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna_lower_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Lower_Gate
+    {
+        let h = ctx.has(Item::Annuna_Lower_Gate);
+        edict.insert("Annuna_Lower_Gate", format!("{}", h));
+        (h, vec!["Annuna_Lower_Gate"])
+    }
+}
+pub fn explain_annuna_lower_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Lower_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Annuna_Lower_Gate);
+            edict.insert("Annuna_Lower_Gate", format!("{}", h));
+            (h, vec!["Annuna_Lower_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -8092,6 +8213,52 @@ pub fn explain_ebih__vertical_interchange__door_west__ex__door_1__req(
             format!("{:?}", r),
         );
         (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
+    }
+}
+pub fn explain_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open and not ^_door_open and $range2
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__open!(ctx, world, edict);
+                edict.insert("$open", format!("{:?}", res));
+                refs.push("$open");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let val = {
+                        let r = ctx.ebih__vertical_interchange__ctx__door_open();
+                        edict.insert(
+                            "^ebih__vertical_interchange__ctx__door_open",
+                            format!("{:?}", r),
+                        );
+                        (r, vec!["^ebih__vertical_interchange__ctx__door_open"])
+                    };
+                    (!val.0, val.1)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                edict.insert("$range2", format!("{:?}", res));
+                refs.push("$range2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_ebih__vertical_interchange__west_13__open_door__req(
@@ -16798,6 +16965,18 @@ pub fn explain_map__annuna__vertical_room__save(
         (r, vec!["^map__annuna__vertical_room__save"])
     }
 }
+pub fn explain_map__annuna_breach__bottom__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna_breach__bottom__save
+    {
+        let r = ctx.map__annuna_breach__bottom__save();
+        edict.insert("^map__annuna_breach__bottom__save", format!("{:?}", r));
+        (r, vec!["^map__annuna_breach__bottom__save"])
+    }
+}
 pub fn explain_map__annuna_breach__double_corridor__save(
     ctx: &Context,
     world: &World,
@@ -16811,6 +16990,48 @@ pub fn explain_map__annuna_breach__double_corridor__save(
             format!("{:?}", r),
         );
         (r, vec!["^map__annuna_breach__double_corridor__save"])
+    }
+}
+pub fn explain_map__annuna_breach__enclosed__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna_breach__enclosed__save
+    {
+        let r = ctx.map__annuna_breach__enclosed__save();
+        edict.insert("^map__annuna_breach__enclosed__save", format!("{:?}", r));
+        (r, vec!["^map__annuna_breach__enclosed__save"])
+    }
+}
+pub fn explain_map__annuna_breach__north_hallway__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna_breach__north_hallway__save
+    {
+        let r = ctx.map__annuna_breach__north_hallway__save();
+        edict.insert(
+            "^map__annuna_breach__north_hallway__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__annuna_breach__north_hallway__save"])
+    }
+}
+pub fn explain_map__annuna_breach__rear_entrance__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna_breach__rear_entrance__save
+    {
+        let r = ctx.map__annuna_breach__rear_entrance__save();
+        edict.insert(
+            "^map__annuna_breach__rear_entrance__save",
+            format!("{:?}", r),
+        );
+        (r, vec!["^map__annuna_breach__rear_entrance__save"])
     }
 }
 pub fn explain_map__ebih__base_camp__save(
@@ -21913,6 +22134,31 @@ pub fn observe_access_annuna__west_climb__switch_ledge__open_door__req(
             ctx.annuna__west_climb__ctx__door_opened()
         })))
 }
+pub fn observe_access_annuna_breach_upper_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Breach_Upper_Gate
+    {
+        full_obs.observe_annuna_breach_upper_gate();
+        ctx.has(Item::Annuna_Breach_Upper_Gate)
+    }
+}
+pub fn observe_access_annuna_breach_upper_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Breach_Upper_Gate and Slingshot_Hook
+    ({
+        full_obs.observe_annuna_breach_upper_gate();
+        ctx.has(Item::Annuna_Breach_Upper_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
+}
 pub fn observe_access_annuna_east_bridge_gate(
     ctx: &Context,
     world: &World,
@@ -21934,6 +22180,31 @@ pub fn observe_access_annuna_east_bridge_gate_and_invoke_hookhover(
         full_obs.observe_annuna_east_bridge_gate();
         ctx.has(Item::Annuna_East_Bridge_Gate)
     } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna_lower_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Lower_Gate
+    {
+        full_obs.observe_annuna_lower_gate();
+        ctx.has(Item::Annuna_Lower_Gate)
+    }
+}
+pub fn observe_access_annuna_lower_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Lower_Gate and Slingshot_Hook
+    ({
+        full_obs.observe_annuna_lower_gate();
+        ctx.has(Item::Annuna_Lower_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
 }
 pub fn observe_access_annuna_mirror_match_switch(
     ctx: &Context,
@@ -22739,6 +23010,19 @@ pub fn observe_access_ebih__vertical_interchange__door_west__ex__door_1__req(
         full_obs.observe_ebih__vertical_interchange__ctx__door_open();
         ctx.ebih__vertical_interchange__ctx__door_open()
     }
+}
+pub fn observe_access_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open and not ^_door_open and $range2
+    ((hobserve__open!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_ebih__vertical_interchange__ctx__door_open();
+            ctx.ebih__vertical_interchange__ctx__door_open()
+        })))
+        && (hobserve__range2!(ctx, world, full_obs)))
 }
 pub fn observe_access_ebih__vertical_interchange__west_13__open_door__req(
     ctx: &Context,
@@ -27080,6 +27364,17 @@ pub fn observe_access_map__annuna__vertical_room__save(
         ctx.map__annuna__vertical_room__save()
     }
 }
+pub fn observe_access_map__annuna_breach__bottom__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna_breach__bottom__save
+    {
+        full_obs.observe_map__annuna_breach__bottom__save();
+        ctx.map__annuna_breach__bottom__save()
+    }
+}
 pub fn observe_access_map__annuna_breach__double_corridor__save(
     ctx: &Context,
     world: &World,
@@ -27089,6 +27384,39 @@ pub fn observe_access_map__annuna_breach__double_corridor__save(
     {
         full_obs.observe_map__annuna_breach__double_corridor__save();
         ctx.map__annuna_breach__double_corridor__save()
+    }
+}
+pub fn observe_access_map__annuna_breach__enclosed__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna_breach__enclosed__save
+    {
+        full_obs.observe_map__annuna_breach__enclosed__save();
+        ctx.map__annuna_breach__enclosed__save()
+    }
+}
+pub fn observe_access_map__annuna_breach__north_hallway__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna_breach__north_hallway__save
+    {
+        full_obs.observe_map__annuna_breach__north_hallway__save();
+        ctx.map__annuna_breach__north_hallway__save()
+    }
+}
+pub fn observe_access_map__annuna_breach__rear_entrance__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna_breach__rear_entrance__save
+    {
+        full_obs.observe_map__annuna_breach__rear_entrance__save();
+        ctx.map__annuna_breach__rear_entrance__save()
     }
 }
 pub fn observe_access_map__ebih__base_camp__save(
@@ -29666,6 +29994,13 @@ pub fn observe_action_ebih__truck_gate__portal_stand__open_door__do(
     // ^_door_open = true
 }
 pub fn observe_action_ebih__truck_gate__switch__open_door__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door_open = true
+}
+pub fn observe_action_ebih__vertical_interchange__under_switch__unlock_door_from_below__do(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,

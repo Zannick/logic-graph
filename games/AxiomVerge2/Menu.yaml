@@ -1029,12 +1029,32 @@ areas:
       coord: [34, 24]
     - name: AGB East
       coord: [42, 20]
+      exits:
+        - to: Annuna Breach > North Hallway > Save Point
+          req: ^map__annuna_breach__north_hallway__save
+          time: 12
+          tags: [warp]
     - name: AGB Enclosed
       coord: [42, 26]
+      exits:
+        - to: Annuna Breach > Enclosed > Save Point
+          req: ^map__annuna_breach__enclosed__save
+          time: 12
+          tags: [warp]
     - name: AGB North
       coord: [37, 17]
+      exits:
+        - to: Annuna Breach > Rear Entrance > Save Point
+          req: ^map__annuna_breach__rear_entrance__save
+          time: 12
+          tags: [warp]
     - name: AGB South
       coord: [41, 28]
+      exits:
+        - to: Annuna Breach > Bottom > Save Point
+          req: ^map__annuna_breach__bottom__save
+          time: 12
+          tags: [warp]
     - name: GlB Arena
       coord: [39, 10]
       exits:
@@ -1221,10 +1241,16 @@ areas:
     #endregion
 
     #region Breach other entry points
+    - name: AGB Factory Foyer Flask
+      coord: [39, 24]
+    - name: AGB Lower Gate Flask
+      coord: [42, 23]
     - name: AGB Smiley Health
       coord: [33, 28]
     - name: AGB Smiley Northwest
       coord: [32, 27]
+    - name: Nano Lattice 3
+      coord: [40, 19]
 
     - name: GSB Chimney Flask
       coord: [13, 8]
