@@ -4,7 +4,7 @@
     Center [label = "C", style="invis", pos="69.0,-74.166667!"];
     bgcolor = "transparent";
     {
-        node[fillcolor="1"];
+        node[fillcolor="4"];
         {
             Amagi_Breach__Center_Ruins__East_18 [label = "", pos = "92.7,-79.583333!"];
             Amagi_Breach__Center_Ruins__East_19 [label = "", pos = "92.7,-81.083333!"];
@@ -14,6 +14,14 @@
         {
             Amagi_Breach__Corner__North [label = "", pos = "85.5,-85.333333!"];
             Amagi_Breach__Corner__East [label = "", pos = "86.7,-86.25!"];
+        }
+        {
+            Amagi_Breach__Divided__Portal_Hole [label = "", pos = "105.0,-83.833333!"];
+            Amagi_Breach__Divided__North [label = "", pos = "103.5,-83.666667!"];
+            Amagi_Breach__Divided__Empty_Plinth [label = "", pos = "103.5,-84.5!"];
+            Amagi_Breach__Divided__Wall_East [label = "", pos = "105.375,-84.583333!"];
+            Amagi_Breach__Divided__South [label = "", pos = "106.5,-84.666667!"];
+            Amagi_Breach__Divided__Save_Point [label = "", pos = "106.875,-84.5!"];
         }
         {
             Amagi_Breach__East_Column__East [label = "", pos = "107.7,-76.25!"];
@@ -68,6 +76,15 @@
         }
         {
             Amagi_Breach__Fishy_Secrets__North [label = "", pos = "106.5,-80.333333!"];
+            Amagi_Breach__Fishy_Secrets__Northeast_Corner [label = "", pos = "107.1,-80.833333!"];
+            Amagi_Breach__Fishy_Secrets__Northwest_Ledge [label = "", pos = "103.2,-80.833333!"];
+            Amagi_Breach__Fishy_Secrets__Middle_West [label = "", pos = "103.35,-81.5!"];
+            Amagi_Breach__Fishy_Secrets__Center_Column [label = "", pos = "104.7,-81.5!"];
+            Amagi_Breach__Fishy_Secrets__East_Pentomino [label = "", pos = "105.9,-81.5!"];
+            Amagi_Breach__Fishy_Secrets__East_Corner [label = "", pos = "107.1,-81.833333!"];
+            Amagi_Breach__Fishy_Secrets__Shaft_Bottom [label = "", pos = "104.25,-82.916667!"];
+            Amagi_Breach__Fishy_Secrets__South [label = "", pos = "103.5,-83.0!"];
+            Amagi_Breach__Fishy_Secrets__West [label = "", pos = "102.3,-82.916667!"];
         }
         {
             Amagi_Breach__Lakebed__West [label = "", pos = "87.3,-86.25!"];
@@ -87,9 +104,14 @@
             Amagi_Breach__Lower_Hallway__East [label = "", pos = "98.7,-82.916667!"];
         }
         {
-            Amagi_Breach__Split_One_Way__West_20 [label = "", pos = "99.3,-82.916667!"];
             Amagi_Breach__Split_One_Way__West_19 [label = "", pos = "99.3,-81.083333!"];
             Amagi_Breach__Split_One_Way__Upper_Middle [label = "", pos = "100.35,-81.0!"];
+            Amagi_Breach__Split_One_Way__Column [label = "", pos = "100.8,-80.833333!"];
+            Amagi_Breach__Split_One_Way__East_Ledge [label = "", pos = "101.4,-81.666667!"];
+            Amagi_Breach__Split_One_Way__Lower_Ledge [label = "", pos = "100.05,-82.25!"];
+            Amagi_Breach__Split_One_Way__West_20 [label = "", pos = "99.3,-82.916667!"];
+            Amagi_Breach__Split_One_Way__Gate_West [label = "", pos = "100.2,-82.916667!"];
+            Amagi_Breach__Split_One_Way__Button [label = "", pos = "101.025,-82.916667!"];
             Amagi_Breach__Split_One_Way__East [label = "", pos = "101.7,-82.916667!"];
         }
         {
@@ -136,7 +158,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Amagi__Divided_Room__East [label = "", pos = "95.85,-33.333333!"];
             Amagi__Divided_Room__Column_East [label = "", pos = "94.8,-33.0!"];
@@ -221,6 +243,12 @@
             Amagi__Grid_31_19__East [label = "", pos = "95.85,-31.166667!"];
         }
         {
+            Amagi__Isolation__Portal_Hole [label = "", pos = "107.7,-33.75!"];
+            Amagi__Isolation__Empty_Plinth [label = "", pos = "106.875,-34.5!"];
+            Amagi__Isolation__Midway [label = "", pos = "105.375,-34.583333!"];
+            Amagi__Isolation__Save_Point [label = "", pos = "103.5,-34.5!"];
+        }
+        {
             Amagi__Liru_Room__West_19 [label = "", pos = "96.15,-31.166667!"];
             Amagi__Liru_Room__Hidden_Enemies [label = "", pos = "97.2,-31.166667!"];
             Amagi__Liru_Room__Platform_1_Left [label = "", pos = "97.2,-32.0!"];
@@ -286,6 +314,14 @@
         }
         {
             Amagi__Secret_Chamber__West [label = "", pos = "102.15,-31.333333!"];
+            Amagi__Secret_Chamber__West_Dur_Esla [label = "", pos = "102.9,-32.916667!"];
+            Amagi__Secret_Chamber__East_Dur_Esla [label = "", pos = "104.25,-32.916667!"];
+            Amagi__Secret_Chamber__Column [label = "", pos = "104.7,-31.5!"];
+            Amagi__Secret_Chamber__Middle_Ledge [label = "", pos = "105.9,-31.5!"];
+            Amagi__Secret_Chamber__Upper_Ledge [label = "", pos = "106.05,-30.833333!"];
+            Amagi__Secret_Chamber__Upper_Cache [label = "", pos = "107.1,-30.833333!"];
+            Amagi__Secret_Chamber__Portal_Wall [label = "", pos = "107.55,-31.166667!"];
+            Amagi__Secret_Chamber__Enclosed_Cache [label = "", pos = "107.1,-31.833333!"];
         }
         {
             Amagi__West_Lake__East_15 [label = "", pos = "80.85,-24.75!"];
@@ -363,7 +399,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="7"];
         {
             Annuna_Breach__Ambushes__West_18 [label = "", pos = "123.3,-79.333333!"];
             Annuna_Breach__Ambushes__Upper_Ledge [label = "", pos = "127.35,-79.583333!"];
@@ -373,6 +409,10 @@
         {
             Annuna_Breach__Bottom__North [label = "", pos = "124.5,-95.333333!"];
             Annuna_Breach__Bottom__Save_Point [label = "", pos = "124.425,-95.916667!"];
+        }
+        {
+            Annuna_Breach__Bridge__East [label = "", pos = "107.7,-89.666667!"];
+            Annuna_Breach__Bridge__North [label = "", pos = "106.5,-85.333333!"];
         }
         {
             Annuna_Breach__Center_Hallway__West [label = "", pos = "123.3,-84.583333!"];
@@ -408,6 +448,7 @@
         }
         {
             Annuna_Breach__Factory_Gate__East [label = "", pos = "116.7,-89.25!"];
+            Annuna_Breach__Factory_Gate__West [label = "", pos = "108.3,-89.666667!"];
         }
         {
             Annuna_Breach__Gate_and_Floor__Northwest [label = "", pos = "120.3,-77.916667!"];
@@ -471,7 +512,7 @@
         }
     }
     {
-        node[fillcolor="2"];
+        node[fillcolor="1"];
         {
             Annuna__Apocalypse__West [label = "", pos = "129.15,-27.916667!"];
             Annuna__Apocalypse__Northwest_Mid_air [label = "", pos = "130.05,-27.083333!"];
@@ -908,7 +949,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="4"];
         {
             Antarctica__Building_1E__Connector [label = "", pos = "123.15,-102.333333!"];
             Antarctica__Building_1E__East_Entry [label = "", pos = "125.1,-102.5!"];
@@ -1623,7 +1664,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Giguna_Breach__Antechamber__North [label = "", pos = "49.5,-68.666667!"];
             Giguna_Breach__Antechamber__Middle [label = "", pos = "49.2,-69.166667!"];
@@ -1883,7 +1924,7 @@
         }
     }
     {
-        node[fillcolor="3"];
+        node[fillcolor="2"];
         {
             Giguna__Antechamber__East_16 [label = "", pos = "56.85,-25.75!"];
             Giguna__Antechamber__Statues_Ledge [label = "", pos = "56.25,-25.833333!"];
@@ -2374,7 +2415,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="6"];
         {
             Glacier_Breach__Angry_Lions__North [label = "", pos = "121.5,-73.666667!"];
             Glacier_Breach__Angry_Lions__Top_Platform [label = "", pos = "121.2,-74.0!"];
@@ -2517,7 +2558,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="3"];
         {
             Glacier__Angry_Guards__East_11 [label = "", pos = "98.85,-18.083333!"];
             Glacier__Angry_Guards__Gate [label = "", pos = "98.55,-18.083333!"];
@@ -2840,7 +2881,7 @@
         }
     }
     {
-        node[fillcolor="1"];
+        node[fillcolor="7"];
         {
             Interior__Building_Interior__Entry [label = "", pos = "86.85,-120.25!"];
             Interior__Building_Interior__Corner [label = "", pos = "85.5,-120.25!"];
@@ -2917,7 +2958,7 @@
         }
     }
     {
-        node[fillcolor="6"];
+        node[fillcolor="5"];
         {
             Irikar_Breach__Basement_Save__Save_Point [label = "", pos = "37.575,-95.833333!"];
             Irikar_Breach__Basement_Save__Save_West [label = "", pos = "37.2,-96.0!"];
@@ -3046,7 +3087,7 @@
         }
     }
     {
-        node[fillcolor="4"];
+        node[fillcolor="3"];
         {
             Irikar__Abandoned_Room__Empty_Pedestal [label = "", pos = "43.575,-44.5!"];
             Irikar__Abandoned_Room__Corner_Core [label = "", pos = "44.4,-44.5!"];
@@ -3451,6 +3492,9 @@
             Menu__Kiengir_Map__Urgent_Message [label = "", pos = "81.0,-33.333333!"];
             Menu__Kiengir_Map__Amagi_Wiggly_Room_Gate [label = "", pos = "84.0,-35.0!"];
             Menu__Kiengir_Map__Amagi_Wiggly_Room_Portal [label = "", pos = "87.0,-35.0!"];
+            Menu__Kiengir_Map__Amagi_Isolation_Portal [label = "", pos = "105.0,-35.0!"];
+            Menu__Kiengir_Map__Amagi_Secret_Chamber_Health [label = "", pos = "105.0,-31.666667!"];
+            Menu__Kiengir_Map__Amagi_Secret_Chamber_Flask [label = "", pos = "105.0,-33.333333!"];
             Menu__Kiengir_Map__Annuna_Mirror_Match_Flask [label = "", pos = "99.0,-43.333333!"];
             Menu__Kiengir_Map__Nano_Lattice_2 [label = "", pos = "105.0,-41.666667!"];
             Menu__Kiengir_Map__Lament_for_Fools [label = "", pos = "114.0,-40.0!"];
@@ -3599,7 +3643,7 @@
         }
     }
     {
-        node[fillcolor="7"];
+        node[fillcolor="3"];
         {
             Uhrum_Breach__Annuna_Gate__West [label = "", pos = "90.3,-94.583333!"];
             Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge [label = "", pos = "91.65,-94.833333!"];
@@ -3732,7 +3776,7 @@
         }
     }
     {
-        node[fillcolor="5"];
+        node[fillcolor="4"];
         {
             Uhrum__Annuna_Corridor__West_25 [label = "", pos = "84.15,-41.25!"];
             Uhrum__Annuna_Corridor__Upper_Trees [label = "", pos = "87.6,-41.25!"];

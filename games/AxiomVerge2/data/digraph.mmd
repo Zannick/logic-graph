@@ -69,6 +69,23 @@ subgraph Amagi_Breach
     end
     subgraph Amagi_Breach__Fishy_Secrets[Fishy Secrets]
         Amagi_Breach__Fishy_Secrets__North(North);
+        Amagi_Breach__Fishy_Secrets__Northeast_Corner(Northeast Corner);
+        Amagi_Breach__Fishy_Secrets__Northwest_Ledge(Northwest Ledge);
+        Amagi_Breach__Fishy_Secrets__Middle_West(Middle West);
+        Amagi_Breach__Fishy_Secrets__Center_Column(Center Column);
+        Amagi_Breach__Fishy_Secrets__East_Pentomino(East Pentomino);
+        Amagi_Breach__Fishy_Secrets__East_Corner(East Corner);
+        Amagi_Breach__Fishy_Secrets__Shaft_Bottom(Shaft Bottom);
+        Amagi_Breach__Fishy_Secrets__South(South);
+        Amagi_Breach__Fishy_Secrets__West(West);
+    end
+    subgraph Amagi_Breach__Divided[Divided]
+        Amagi_Breach__Divided__Portal_Hole(Portal Hole);
+        Amagi_Breach__Divided__North(North);
+        Amagi_Breach__Divided__Empty_Plinth(Empty Plinth);
+        Amagi_Breach__Divided__Wall_East(Wall East);
+        Amagi_Breach__Divided__South(South);
+        Amagi_Breach__Divided__Save_Point(Save Point);
     end
     subgraph Amagi_Breach__West_Entrance[West Entrance]
         Amagi_Breach__West_Entrance__North(North);
@@ -114,9 +131,14 @@ subgraph Amagi_Breach
         Amagi_Breach__Upper_Hallway__East(East);
     end
     subgraph Amagi_Breach__Split_One_Way[Split One-Way]
-        Amagi_Breach__Split_One_Way__West_20(West 20);
         Amagi_Breach__Split_One_Way__West_19(West 19);
         Amagi_Breach__Split_One_Way__Upper_Middle(Upper Middle);
+        Amagi_Breach__Split_One_Way__Column(Column);
+        Amagi_Breach__Split_One_Way__East_Ledge(East Ledge);
+        Amagi_Breach__Split_One_Way__Lower_Ledge(Lower Ledge);
+        Amagi_Breach__Split_One_Way__West_20(West 20);
+        Amagi_Breach__Split_One_Way__Gate_West(Gate West);
+        Amagi_Breach__Split_One_Way__Button(Button);
         Amagi_Breach__Split_One_Way__East(East);
     end
     subgraph Amagi_Breach__Corner[Corner]
@@ -204,6 +226,14 @@ subgraph Amagi
     end
     subgraph Amagi__Secret_Chamber[Secret Chamber]
         Amagi__Secret_Chamber__West(West);
+        Amagi__Secret_Chamber__West_Dur_Esla(West Dur-Esla);
+        Amagi__Secret_Chamber__East_Dur_Esla(East Dur-Esla);
+        Amagi__Secret_Chamber__Column(Column);
+        Amagi__Secret_Chamber__Middle_Ledge(Middle Ledge);
+        Amagi__Secret_Chamber__Upper_Ledge(Upper Ledge);
+        Amagi__Secret_Chamber__Upper_Cache(Upper Cache);
+        Amagi__Secret_Chamber__Portal_Wall(Portal Wall);
+        Amagi__Secret_Chamber__Enclosed_Cache(Enclosed Cache);
     end
     subgraph Amagi__West_Lake[West Lake]
         Amagi__West_Lake__East_15(East 15);
@@ -357,6 +387,12 @@ subgraph Amagi
         Amagi__Divided_Room__Upper_Left_Corner(Upper Left Corner);
         Amagi__Divided_Room__Upper_Right_Corner(Upper Right Corner);
     end
+    subgraph Amagi__Isolation[Isolation]
+        Amagi__Isolation__Portal_Hole(Portal Hole);
+        Amagi__Isolation__Empty_Plinth(Empty Plinth);
+        Amagi__Isolation__Midway(Midway);
+        Amagi__Isolation__Save_Point(Save Point);
+    end
 end
 subgraph Annuna_Breach
     subgraph Annuna_Breach__Smiley[Smiley]
@@ -450,6 +486,11 @@ subgraph Annuna_Breach
     end
     subgraph Annuna_Breach__Factory_Gate[Factory Gate]
         Annuna_Breach__Factory_Gate__East(East);
+        Annuna_Breach__Factory_Gate__West(West);
+    end
+    subgraph Annuna_Breach__Bridge[Bridge]
+        Annuna_Breach__Bridge__East(East);
+        Annuna_Breach__Bridge__North(North);
     end
     subgraph Annuna_Breach__Depths[Depths]
         Annuna_Breach__Depths__North(North);
@@ -3340,6 +3381,9 @@ subgraph Menu
         Menu__Kiengir_Map__Urgent_Message(Urgent Message);
         Menu__Kiengir_Map__Amagi_Wiggly_Room_Gate(Amagi Wiggly Room Gate);
         Menu__Kiengir_Map__Amagi_Wiggly_Room_Portal(Amagi Wiggly Room Portal);
+        Menu__Kiengir_Map__Amagi_Isolation_Portal(Amagi Isolation Portal);
+        Menu__Kiengir_Map__Amagi_Secret_Chamber_Health(Amagi Secret Chamber Health);
+        Menu__Kiengir_Map__Amagi_Secret_Chamber_Flask(Amagi Secret Chamber Flask);
         Menu__Kiengir_Map__Annuna_Mirror_Match_Flask(Annuna Mirror Match Flask);
         Menu__Kiengir_Map__Nano_Lattice_2(Nano Lattice 2);
         Menu__Kiengir_Map__Lament_for_Fools(Lament for Fools);
@@ -4009,8 +4053,11 @@ subgraph Uhrum
 end
 Amagi_Breach__Corner__East <--> Amagi_Breach__Lakebed__West
 Amagi_Breach__Corner__North <--> Amagi_Breach__Twisty_Passages__South
+Amagi_Breach__Divided__Empty_Plinth --> Amagi_Breach__Divided__North
+Amagi_Breach__Divided__North <--> Amagi_Breach__Fishy_Secrets__South
+Amagi_Breach__Divided__South --> Annuna_Breach__Bridge__North
 Amagi_Breach__East_Column__East <--> Amagi_Breach__East_Connector__West
-Amagi_Breach__East_Column__South --> Amagi_Breach__Fishy_Secrets__North
+Amagi_Breach__East_Column__South <--> Amagi_Breach__Fishy_Secrets__North
 Amagi_Breach__East_Connector__East <--> Amagi_Breach__East_Entrance__West
 Amagi_Breach__East_Entrance__East <--> Glacier_Breach__South_Save__West
 Amagi_Breach__East_Entrance__Grate_Left <--> Amagi_Breach__East_Entrance__Grate_Right
@@ -4029,11 +4076,15 @@ Amagi_Breach__East_Ruins__Southeast_Rock_Wall --> Amagi_Breach__East_Ruins__Arch
 Amagi_Breach__East_Ruins__Under_the_Rock --> Amagi_Breach__East_Ruins__Small_Column_West
 Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
 Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
+Amagi_Breach__Fishy_Secrets__Center_Column <--> Amagi_Breach__Fishy_Secrets__Middle_West
+Amagi_Breach__Fishy_Secrets__Shaft_Bottom --> Amagi_Breach__Fishy_Secrets__Center_Column
+Amagi_Breach__Fishy_Secrets__Shaft_Bottom --> Amagi_Breach__Fishy_Secrets__Middle_West
+Amagi_Breach__Fishy_Secrets__West <--> Amagi_Breach__Split_One_Way__East
 Amagi_Breach__Lakebed__Bottom --> Amagi_Breach__Lakebed__Lower_East_Ledge
 Amagi_Breach__Lakebed__Save_Point --> Amagi_Breach__Lakebed__Big_Rock_West
 Amagi_Breach__Lower_Hallway__Cache <--> Amagi_Breach__Lower_Hallway__Empty_Plinth
 Amagi_Breach__Lower_Hallway__Cache <--> Amagi_Breach__Lower_Hallway__West_Ledge
-Amagi_Breach__Lower_Hallway__East --> Amagi_Breach__Split_One_Way__West_20
+Amagi_Breach__Lower_Hallway__East <--> Amagi_Breach__Split_One_Way__West_20
 Amagi_Breach__Lower_Hallway__East_Ledge --> Amagi_Breach__Lower_Hallway__Empty_Plinth
 Amagi_Breach__Lower_Hallway__Empty_Plinth --> Amagi_Breach__Lower_Hallway__West
 Amagi_Breach__Lower_Hallway__Middle_Bubbles --> Amagi_Breach__Lower_Hallway__Empty_Plinth
@@ -4041,6 +4092,14 @@ Amagi_Breach__Lower_Hallway__West --> Amagi_Breach__Lower_Hallway__Middle_Bubble
 Amagi_Breach__Lower_Hallway__West --> Amagi_Breach__Lower_Hallway__West_Ledge
 Amagi_Breach__Lower_Hallway__West <--> Amagi_Breach__Twisty_Passages__East
 Amagi_Breach__Lower_Hallway__West_Ledge --> Amagi_Breach__Lower_Hallway__Middle_Bubbles
+Amagi_Breach__Split_One_Way__Button <--> Amagi_Breach__Split_One_Way__Gate_West
+Amagi_Breach__Split_One_Way__Column --> Amagi_Breach__Split_One_Way__West_19
+Amagi_Breach__Split_One_Way__East_Ledge --> Amagi_Breach__Split_One_Way__Column
+Amagi_Breach__Split_One_Way__Gate_West --> Amagi_Breach__Split_One_Way__Lower_Ledge
+Amagi_Breach__Split_One_Way__Lower_Ledge --> Amagi_Breach__Split_One_Way__East_Ledge
+Amagi_Breach__Split_One_Way__Upper_Middle --> Amagi_Breach__Split_One_Way__Column
+Amagi_Breach__Split_One_Way__West_19 <--> Amagi_Breach__Upper_Hallway__East
+Amagi_Breach__Split_One_Way__West_20 --> Amagi_Breach__Split_One_Way__Lower_Ledge
 Amagi_Breach__Twisty_Passages__East <--> Amagi_Breach__Twisty_Passages__East_Ledge
 Amagi_Breach__Twisty_Passages__East_Bottom --> Amagi_Breach__Twisty_Passages__East
 Amagi_Breach__Twisty_Passages__East_Bottom --> Amagi_Breach__Twisty_Passages__East_Ledge
@@ -4049,7 +4108,6 @@ Amagi_Breach__Twisty_Passages__North --> Amagi_Breach__Center_Ruins__South
 Amagi_Breach__Twisty_Passages__West_Flora --> Amagi_Breach__Twisty_Passages__East_Bottom
 Amagi_Breach__Upper_Hallway__Column_East --> Amagi_Breach__Upper_Hallway__West_Hook_Point
 Amagi_Breach__Upper_Hallway__Column_West --> Amagi_Breach__Split_One_Way__Upper_Middle
-Amagi_Breach__Upper_Hallway__East --> Amagi_Breach__Split_One_Way__West_19
 Amagi_Breach__Upper_Hallway__East --> Amagi_Breach__Upper_Hallway__Column_East
 Amagi_Breach__Upper_Hallway__West --> Amagi_Breach__Center_Ruins__East_19
 Amagi_Breach__Upper_Hallway__West_Hook_Point --> Amagi_Breach__Upper_Hallway__Column_West
@@ -4195,7 +4253,7 @@ Amagi__Liru_Room__East_Platform_1_Right --> Amagi__Liru_Room__East_Platform_2_Ri
 Amagi__Liru_Room__East_Platform_1_Right --> Amagi__Liru_Room__Hidden_Exit
 Amagi__Liru_Room__East_Platform_2_Right --> Amagi__Liru_Room__Hidden_Exit
 Amagi__Liru_Room__East_Platform_3_Left --> Amagi__Liru_Room__Hidden_Exit
-Amagi__Liru_Room__Hidden_Exit --> Amagi__Secret_Chamber__West
+Amagi__Liru_Room__Hidden_Exit <--> Amagi__Secret_Chamber__West
 Amagi__Liru_Room__Platform_4_Left <--> Amagi__Liru_Room__West_20
 Amagi__Liru_Room__Platform_4_Right --> Amagi__Liru_Room__East_Passage
 Amagi__Liru_Room__West_20 --> Amagi__Liru_Room__Platform_4_Right
@@ -4225,6 +4283,11 @@ Amagi__Main_Area__West_18_Hook_Point --> Amagi__West_Lake__Tentacle_Gap
 Amagi__Main_Area__West_18_Hook_Point --> Amagi__West_Lake__West_Platform
 Amagi__Main_Area__West_19 <--> Amagi__West_Lake__East_19
 Amagi__Main_Area__West_Side --> Amagi__Main_Area__Carving
+Amagi__Secret_Chamber__Column --> Amagi__Secret_Chamber__Upper_Ledge
+Amagi__Secret_Chamber__Column <--> Amagi__Secret_Chamber__West
+Amagi__Secret_Chamber__East_Dur_Esla --> Amagi__Secret_Chamber__West
+Amagi__Secret_Chamber__Middle_Ledge --> Amagi__Secret_Chamber__Upper_Ledge
+Amagi__Secret_Chamber__West_Dur_Esla --> Amagi__Secret_Chamber__West
 Amagi__West_Lake__Cavern_Front_Pillar --> Amagi__West_Lake__Cavern_Rear_Pillar
 Amagi__West_Lake__Cavern_Middle_Pillar --> Amagi__West_Lake__Cavern_Rear_Pillar
 Amagi__West_Lake__Cavern_Refill_Station <--> Amagi__West_Lake__Cavern_Tear_Duct
@@ -6229,6 +6292,7 @@ Menu__Breach_Map__IB_West --> Irikar_Breach__Corridor__Save_Point
 Menu__Breach_Map__LAB_Center --> Amagi_Breach__East_Ruins__Save_Point
 Menu__Breach_Map__LAB_East --> Amagi_Breach__East_Entrance__Save_Point
 Menu__Breach_Map__LAB_Enclosed --> Amagi_Breach__Upper_Lake__Save_Point
+Menu__Breach_Map__LAB_Southeast --> Amagi_Breach__Divided__Save_Point
 Menu__Breach_Map__MEB_Drone --> Ebih_Breach__Portals_101__Save_Point
 Menu__Breach_Map__MEB_Peak --> Ebih_Breach__Peak__Save_Point
 Menu__Breach_Map__MEB_Southeast --> Ebih_Breach__In_n_Out__Save_Point

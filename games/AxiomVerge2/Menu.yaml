@@ -642,6 +642,12 @@ areas:
       coord: [28, 21]
     - name: Amagi Wiggly Room Portal
       coord: [29, 21]
+    - name: Amagi Isolation Portal
+      coord: [35, 21]
+    - name: Amagi Secret Chamber Health
+      coord: [35, 19]
+    - name: Amagi Secret Chamber Flask
+      coord: [35, 20]
 
     - name: Annuna Mirror Match Flask
       coord: [33, 26]
@@ -1178,6 +1184,11 @@ areas:
           tags: [warp]
     - name: LAB Southeast
       coord: [35, 21]
+      exits:
+        - to: Amagi Breach > Divided > Save Point
+          req: ^map__amagi_breach__divided__save
+          time: 12
+          tags: [warp]
     - name: LAB Southwest
       coord: [30, 23]
 

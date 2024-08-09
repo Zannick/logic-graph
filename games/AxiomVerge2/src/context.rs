@@ -108,6 +108,7 @@ pub enum Expectation {
     MapAmagiBreachEastEntranceSave(bool),
     MapAmagiBreachEastRuinsSave(bool),
     MapAmagiBreachUpperLakeSave(bool),
+    MapAmagiBreachDividedSave(bool),
     MapAmagiMainAreaSave(bool),
     MapAmagiEastLakeSave(bool),
     MapAnnunaBreachDoubleCorridorSave(bool),
@@ -164,6 +165,8 @@ pub enum Expectation {
     MapUhrumEmergenceSaveSave(bool),
     GlacierCtxHammondsDoors(bool),
     AmagiMainAreaCtxCombo(bool),
+    AmagiSecretChamberCtxWestDurEsla(bool),
+    AmagiSecretChamberCtxEastDurEsla(bool),
     AmagiGatedCommunityCtxDurEsla(bool),
     AnnunaInvisibleEnemiesCtxDoorOpened(bool),
     AnnunaInvisibleEnemiesCtxNwUtu(bool),
@@ -208,6 +211,7 @@ pub enum Expectation {
     // items
     Aansur(bool),
     AmagiBreachLowerHallwayGate(bool),
+    AmagiBreachSplitGate(bool),
     AmagiBreachWestRuinsGate(bool),
     AmagiDragonEyePassage(bool),
     AmagiGatedCommunityGate(bool),
@@ -428,6 +432,12 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Amagi_Breach__Center_Ruins__West => enums::Realm::Breach,
         SpotId::Amagi_Breach__Corner__East => enums::Realm::Breach,
         SpotId::Amagi_Breach__Corner__North => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Divided__Empty_Plinth => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Divided__North => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Divided__Portal_Hole => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Divided__Save_Point => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Divided__South => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Divided__Wall_East => enums::Realm::Breach,
         SpotId::Amagi_Breach__East_Column__East => enums::Realm::Breach,
         SpotId::Amagi_Breach__East_Column__Lower => enums::Realm::Breach,
         SpotId::Amagi_Breach__East_Column__Lower_Side => enums::Realm::Breach,
@@ -471,7 +481,16 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Amagi_Breach__East_Ruins__West => enums::Realm::Breach,
         SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar => enums::Realm::Breach,
         SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__Center_Column => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__East_Corner => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__East_Pentomino => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__Middle_West => enums::Realm::Breach,
         SpotId::Amagi_Breach__Fishy_Secrets__North => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__Northeast_Corner => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__Northwest_Ledge => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__South => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Fishy_Secrets__West => enums::Realm::Breach,
         SpotId::Amagi_Breach__Lakebed__Big_Rock_West => enums::Realm::Breach,
         SpotId::Amagi_Breach__Lakebed__Bottom => enums::Realm::Breach,
         SpotId::Amagi_Breach__Lakebed__East_Rock_Middle => enums::Realm::Breach,
@@ -485,7 +504,12 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Amagi_Breach__Lower_Hallway__Middle_Bubbles => enums::Realm::Breach,
         SpotId::Amagi_Breach__Lower_Hallway__West => enums::Realm::Breach,
         SpotId::Amagi_Breach__Lower_Hallway__West_Ledge => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Split_One_Way__Button => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Split_One_Way__Column => enums::Realm::Breach,
         SpotId::Amagi_Breach__Split_One_Way__East => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Split_One_Way__East_Ledge => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Split_One_Way__Gate_West => enums::Realm::Breach,
+        SpotId::Amagi_Breach__Split_One_Way__Lower_Ledge => enums::Realm::Breach,
         SpotId::Amagi_Breach__Split_One_Way__Upper_Middle => enums::Realm::Breach,
         SpotId::Amagi_Breach__Split_One_Way__West_19 => enums::Realm::Breach,
         SpotId::Amagi_Breach__Split_One_Way__West_20 => enums::Realm::Breach,
@@ -527,6 +551,8 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Annuna_Breach__Ambushes__West_19 => enums::Realm::Breach,
         SpotId::Annuna_Breach__Bottom__North => enums::Realm::Breach,
         SpotId::Annuna_Breach__Bottom__Save_Point => enums::Realm::Breach,
+        SpotId::Annuna_Breach__Bridge__East => enums::Realm::Breach,
+        SpotId::Annuna_Breach__Bridge__North => enums::Realm::Breach,
         SpotId::Annuna_Breach__Center_Hallway__South => enums::Realm::Breach,
         SpotId::Annuna_Breach__Center_Hallway__West => enums::Realm::Breach,
         SpotId::Annuna_Breach__Corner__East => enums::Realm::Breach,
@@ -548,6 +574,7 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Annuna_Breach__Factory_Foyer__West => enums::Realm::Breach,
         SpotId::Annuna_Breach__Factory_Foyer__West_Flower => enums::Realm::Breach,
         SpotId::Annuna_Breach__Factory_Gate__East => enums::Realm::Breach,
+        SpotId::Annuna_Breach__Factory_Gate__West => enums::Realm::Breach,
         SpotId::Annuna_Breach__Gate_and_Floor__Button => enums::Realm::Breach,
         SpotId::Annuna_Breach__Gate_and_Floor__East_18 => enums::Realm::Breach,
         SpotId::Annuna_Breach__Gate_and_Floor__East_19 => enums::Realm::Breach,
@@ -1323,10 +1350,13 @@ pub fn realm(spot_id: SpotId) -> enums::Realm {
         SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Button => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Isolation => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Isolation_Portal => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Main_Area => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Flask => enums::Realm::Map,
+        SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Health => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Wiggly_Room_Gate => enums::Realm::Map,
         SpotId::Menu__Kiengir_Map__Amagi_Wiggly_Room_Portal => enums::Realm::Map,
@@ -1660,6 +1690,12 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi_Breach__Center_Ruins__West => true,
         SpotId::Amagi_Breach__Corner__East => true,
         SpotId::Amagi_Breach__Corner__North => true,
+        SpotId::Amagi_Breach__Divided__Empty_Plinth => true,
+        SpotId::Amagi_Breach__Divided__North => true,
+        SpotId::Amagi_Breach__Divided__Portal_Hole => true,
+        SpotId::Amagi_Breach__Divided__Save_Point => true,
+        SpotId::Amagi_Breach__Divided__South => true,
+        SpotId::Amagi_Breach__Divided__Wall_East => true,
         SpotId::Amagi_Breach__East_Column__East => true,
         SpotId::Amagi_Breach__East_Column__Lower => true,
         SpotId::Amagi_Breach__East_Column__Lower_Side => true,
@@ -1703,7 +1739,16 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi_Breach__East_Ruins__West => true,
         SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar => true,
         SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__Center_Column => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__East_Corner => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__East_Pentomino => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__Middle_West => true,
         SpotId::Amagi_Breach__Fishy_Secrets__North => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__Northeast_Corner => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__Northwest_Ledge => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__South => true,
+        SpotId::Amagi_Breach__Fishy_Secrets__West => true,
         SpotId::Amagi_Breach__Lakebed__Big_Rock_West => true,
         SpotId::Amagi_Breach__Lakebed__Bottom => true,
         SpotId::Amagi_Breach__Lakebed__East_Rock_Middle => true,
@@ -1717,7 +1762,12 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi_Breach__Lower_Hallway__Middle_Bubbles => true,
         SpotId::Amagi_Breach__Lower_Hallway__West => true,
         SpotId::Amagi_Breach__Lower_Hallway__West_Ledge => true,
+        SpotId::Amagi_Breach__Split_One_Way__Button => true,
+        SpotId::Amagi_Breach__Split_One_Way__Column => true,
         SpotId::Amagi_Breach__Split_One_Way__East => true,
+        SpotId::Amagi_Breach__Split_One_Way__East_Ledge => true,
+        SpotId::Amagi_Breach__Split_One_Way__Gate_West => true,
+        SpotId::Amagi_Breach__Split_One_Way__Lower_Ledge => true,
         SpotId::Amagi_Breach__Split_One_Way__Upper_Middle => true,
         SpotId::Amagi_Breach__Split_One_Way__West_19 => true,
         SpotId::Amagi_Breach__Split_One_Way__West_20 => true,
@@ -1828,6 +1878,10 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi__Grid_31_19__Center => true,
         SpotId::Amagi__Grid_31_19__East => true,
         SpotId::Amagi__Grid_31_19__West => true,
+        SpotId::Amagi__Isolation__Empty_Plinth => true,
+        SpotId::Amagi__Isolation__Midway => true,
+        SpotId::Amagi__Isolation__Portal_Hole => true,
+        SpotId::Amagi__Isolation__Save_Point => true,
         SpotId::Amagi__Liru_Room__Bottom => true,
         SpotId::Amagi__Liru_Room__East_Passage => true,
         SpotId::Amagi__Liru_Room__East_Platform_1_Left => true,
@@ -1888,7 +1942,15 @@ pub fn water(spot_id: SpotId) -> bool {
         SpotId::Amagi__Main_Area__West_Mini_Hill => true,
         SpotId::Amagi__Main_Area__West_Shelf => true,
         SpotId::Amagi__Main_Area__West_Side => true,
+        SpotId::Amagi__Secret_Chamber__Column => true,
+        SpotId::Amagi__Secret_Chamber__East_Dur_Esla => true,
+        SpotId::Amagi__Secret_Chamber__Enclosed_Cache => true,
+        SpotId::Amagi__Secret_Chamber__Middle_Ledge => true,
+        SpotId::Amagi__Secret_Chamber__Portal_Wall => true,
+        SpotId::Amagi__Secret_Chamber__Upper_Cache => true,
+        SpotId::Amagi__Secret_Chamber__Upper_Ledge => true,
         SpotId::Amagi__Secret_Chamber__West => true,
+        SpotId::Amagi__Secret_Chamber__West_Dur_Esla => true,
         SpotId::Amagi__West_Lake__Cavern_Back_Teeth => true,
         SpotId::Amagi__West_Lake__Cavern_Chin => true,
         SpotId::Amagi__West_Lake__Cavern_Eye => true,
@@ -2030,6 +2092,9 @@ pub fn water(spot_id: SpotId) -> bool {
 pub fn flipside(spot_id: SpotId) -> SpotId {
     match spot_id {
         SpotId::Amagi_Breach__Corner__North => SpotId::Uhrum__Tulip_Tower__North,
+        SpotId::Amagi_Breach__Divided__Empty_Plinth => SpotId::Amagi__Isolation__Save_Point,
+        SpotId::Amagi_Breach__Divided__Save_Point => SpotId::Amagi__Isolation__Empty_Plinth,
+        SpotId::Amagi_Breach__Divided__Wall_East => SpotId::Amagi__Isolation__Midway,
         SpotId::Amagi_Breach__East_Connector__Center_Left => SpotId::Glacier__Vertical_Room__Middle_Gatestone_Left,
         SpotId::Amagi_Breach__East_Connector__Center_Right => SpotId::Glacier__Vertical_Room__Middle_Gatestone,
         SpotId::Amagi_Breach__East_Connector__Outcrop => SpotId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone,
@@ -2044,6 +2109,11 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Amagi_Breach__East_Ruins__Small_Column_West => SpotId::Amagi__East_Lake__Southwest_Column_West,
         SpotId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall => SpotId::Amagi__East_Lake__Southeast_Column,
         SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar => SpotId::Amagi__Gated_Community__Platform_1_West,
+        SpotId::Amagi_Breach__Fishy_Secrets__Center_Column => SpotId::Amagi__Secret_Chamber__Column,
+        SpotId::Amagi_Breach__Fishy_Secrets__East_Corner => SpotId::Amagi__Secret_Chamber__Enclosed_Cache,
+        SpotId::Amagi_Breach__Fishy_Secrets__East_Pentomino => SpotId::Amagi__Secret_Chamber__Middle_Ledge,
+        SpotId::Amagi_Breach__Fishy_Secrets__Northeast_Corner => SpotId::Amagi__Secret_Chamber__Upper_Cache,
+        SpotId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom => SpotId::Amagi__Secret_Chamber__East_Dur_Esla,
         SpotId::Amagi_Breach__Lakebed__Big_Rock_West => SpotId::Annuna__Invisible_Enemies__Corner_Cache,
         SpotId::Amagi_Breach__Lakebed__Bottom => SpotId::Annuna__Invisible_Enemies__Switch_East,
         SpotId::Amagi_Breach__Lakebed__East_Rock_Middle => SpotId::Annuna__Invisible_Enemies__Shock_Distance,
@@ -2087,6 +2157,14 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
         SpotId::Amagi__East_Lake__Southwest_Column_West => SpotId::Amagi_Breach__East_Ruins__Small_Column_West,
         SpotId::Amagi__Gated_Community__Platform_1_West => SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
         SpotId::Amagi__Grid_31_19__Center => SpotId::Amagi_Breach__Upper_Hallway__West_Hook_Point,
+        SpotId::Amagi__Isolation__Empty_Plinth => SpotId::Amagi_Breach__Divided__Save_Point,
+        SpotId::Amagi__Isolation__Midway => SpotId::Amagi_Breach__Divided__Wall_East,
+        SpotId::Amagi__Isolation__Save_Point => SpotId::Amagi_Breach__Divided__Empty_Plinth,
+        SpotId::Amagi__Secret_Chamber__Column => SpotId::Amagi_Breach__Fishy_Secrets__Center_Column,
+        SpotId::Amagi__Secret_Chamber__East_Dur_Esla => SpotId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom,
+        SpotId::Amagi__Secret_Chamber__Enclosed_Cache => SpotId::Amagi_Breach__Fishy_Secrets__East_Corner,
+        SpotId::Amagi__Secret_Chamber__Middle_Ledge => SpotId::Amagi_Breach__Fishy_Secrets__East_Pentomino,
+        SpotId::Amagi__Secret_Chamber__Upper_Cache => SpotId::Amagi_Breach__Fishy_Secrets__Northeast_Corner,
         SpotId::Amagi__West_Lake__East_Platform => SpotId::Amagi_Breach__West_Ruins__Center_Platform,
         SpotId::Amagi__West_Lake__Mid_water_Above_Gap => SpotId::None,
         SpotId::Amagi__Wiggly_Room__East_Bottom => SpotId::Amagi_Breach__Twisty_Passages__East_Bottom,
@@ -2476,6 +2554,12 @@ pub fn flipside(spot_id: SpotId) -> SpotId {
 }
 pub fn portal_start(spot_id: SpotId) -> SpotId {
     match spot_id {
+        SpotId::Amagi_Breach__Divided__Empty_Plinth => SpotId::Amagi_Breach__Divided__Portal_Hole,
+        SpotId::Amagi_Breach__Divided__North => SpotId::Amagi_Breach__Divided__Portal_Hole,
+        SpotId::Amagi_Breach__Divided__Portal_Hole => SpotId::Amagi_Breach__Divided__Portal_Hole,
+        SpotId::Amagi_Breach__Divided__Save_Point => SpotId::Amagi_Breach__Divided__Portal_Hole,
+        SpotId::Amagi_Breach__Divided__South => SpotId::Amagi_Breach__Divided__Portal_Hole,
+        SpotId::Amagi_Breach__Divided__Wall_East => SpotId::Amagi_Breach__Divided__Portal_Hole,
         SpotId::Amagi_Breach__Upper_Lake__Center_of_Platform => SpotId::Amagi_Breach__Upper_Lake__Portal_Stand,
         SpotId::Amagi_Breach__Upper_Lake__Column => SpotId::Amagi_Breach__Upper_Lake__Portal_Stand,
         SpotId::Amagi_Breach__Upper_Lake__Middle => SpotId::Amagi_Breach__Upper_Lake__Portal_Stand,
@@ -2533,6 +2617,19 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
         SpotId::Amagi__East_Lake__West_Platform_3 => SpotId::Amagi__East_Lake__Portal_Stand,
         SpotId::Amagi__East_Lake__West_Platform_3_Hook => SpotId::Amagi__East_Lake__Portal_Stand,
         SpotId::Amagi__East_Lake__West_Water_Surface => SpotId::Amagi__East_Lake__Portal_Stand,
+        SpotId::Amagi__Isolation__Empty_Plinth => SpotId::Amagi__Isolation__Portal_Hole,
+        SpotId::Amagi__Isolation__Midway => SpotId::Amagi__Isolation__Portal_Hole,
+        SpotId::Amagi__Isolation__Portal_Hole => SpotId::Amagi__Isolation__Portal_Hole,
+        SpotId::Amagi__Isolation__Save_Point => SpotId::Amagi__Isolation__Portal_Hole,
+        SpotId::Amagi__Secret_Chamber__Column => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__East_Dur_Esla => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__Enclosed_Cache => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__Middle_Ledge => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__Portal_Wall => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__Upper_Cache => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__Upper_Ledge => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__West => SpotId::Amagi__Secret_Chamber__Portal_Wall,
+        SpotId::Amagi__Secret_Chamber__West_Dur_Esla => SpotId::Amagi__Secret_Chamber__Portal_Wall,
         SpotId::Amagi__Wiggly_Room__Below_West_Cache => SpotId::Amagi__Wiggly_Room__Portal_Hole,
         SpotId::Amagi__Wiggly_Room__Button => SpotId::Amagi__Wiggly_Room__Portal_Hole,
         SpotId::Amagi__Wiggly_Room__Cache => SpotId::Amagi__Wiggly_Room__Portal_Hole,
@@ -3140,6 +3237,15 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
 }
 pub fn portal_hidden(spot_id: SpotId) -> bool {
     match spot_id {
+        SpotId::Amagi__Secret_Chamber__Column => true,
+        SpotId::Amagi__Secret_Chamber__East_Dur_Esla => true,
+        SpotId::Amagi__Secret_Chamber__Enclosed_Cache => true,
+        SpotId::Amagi__Secret_Chamber__Middle_Ledge => true,
+        SpotId::Amagi__Secret_Chamber__Portal_Wall => true,
+        SpotId::Amagi__Secret_Chamber__Upper_Cache => true,
+        SpotId::Amagi__Secret_Chamber__Upper_Ledge => true,
+        SpotId::Amagi__Secret_Chamber__West => true,
+        SpotId::Amagi__Secret_Chamber__West_Dur_Esla => true,
         SpotId::Annuna__Hidden_Portal__East => true,
         SpotId::Annuna__Hidden_Portal__Plinth_Left => true,
         SpotId::Annuna__Hidden_Portal__Plinth_Right => true,
@@ -3378,6 +3484,12 @@ pub fn portal_hidden(spot_id: SpotId) -> bool {
 }
 pub fn save_point(spot_id: SpotId) -> SpotId {
     match spot_id {
+        SpotId::Amagi_Breach__Divided__Empty_Plinth => SpotId::Amagi_Breach__Divided__Save_Point,
+        SpotId::Amagi_Breach__Divided__North => SpotId::Amagi_Breach__Divided__Save_Point,
+        SpotId::Amagi_Breach__Divided__Portal_Hole => SpotId::Amagi_Breach__Divided__Save_Point,
+        SpotId::Amagi_Breach__Divided__Save_Point => SpotId::Amagi_Breach__Divided__Save_Point,
+        SpotId::Amagi_Breach__Divided__South => SpotId::Amagi_Breach__Divided__Save_Point,
+        SpotId::Amagi_Breach__Divided__Wall_East => SpotId::Amagi_Breach__Divided__Save_Point,
         SpotId::Amagi_Breach__East_Entrance__East => SpotId::Amagi_Breach__East_Entrance__Save_Point,
         SpotId::Amagi_Breach__East_Entrance__Grate_Left => SpotId::Amagi_Breach__East_Entrance__Save_Point,
         SpotId::Amagi_Breach__East_Entrance__Grate_Right => SpotId::Amagi_Breach__East_Entrance__Save_Point,
@@ -3462,6 +3574,10 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Amagi__East_Lake__West_Platform_3 => SpotId::Amagi__East_Lake__Save_Point,
         SpotId::Amagi__East_Lake__West_Platform_3_Hook => SpotId::Amagi__East_Lake__Save_Point,
         SpotId::Amagi__East_Lake__West_Water_Surface => SpotId::Amagi__East_Lake__Save_Point,
+        SpotId::Amagi__Isolation__Empty_Plinth => SpotId::Amagi__Isolation__Save_Point,
+        SpotId::Amagi__Isolation__Midway => SpotId::Amagi__Isolation__Save_Point,
+        SpotId::Amagi__Isolation__Portal_Hole => SpotId::Amagi__Isolation__Save_Point,
+        SpotId::Amagi__Isolation__Save_Point => SpotId::Amagi__Isolation__Save_Point,
         SpotId::Amagi__Main_Area__Broken_Catwalk_Far_Side => SpotId::Amagi__Main_Area__Save_Point,
         SpotId::Amagi__Main_Area__Broken_Wall => SpotId::Amagi__Main_Area__Save_Point,
         SpotId::Amagi__Main_Area__Cache => SpotId::Amagi__Main_Area__Save_Point,
@@ -4130,6 +4246,10 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
 }
 pub fn map_spot(spot_id: SpotId) -> SpotId {
     match spot_id {
+        SpotId::Amagi_Breach__Divided__Portal_Hole => SpotId::Menu__Breach_Map__LAB_Southeast,
+        SpotId::Amagi_Breach__Divided__Save_Point => SpotId::Menu__Breach_Map__LAB_Southeast,
+        SpotId::Amagi_Breach__Divided__South => SpotId::Menu__Breach_Map__LAB_Southeast,
+        SpotId::Amagi_Breach__Divided__Wall_East => SpotId::Menu__Breach_Map__LAB_Southeast,
         SpotId::Amagi_Breach__East_Entrance__East => SpotId::Menu__Breach_Map__LAB_East_Health,
         SpotId::Amagi_Breach__East_Entrance__Grate_Left => SpotId::Menu__Breach_Map__LAB_East_Health,
         SpotId::Amagi_Breach__East_Entrance__Grate_Right => SpotId::Menu__Breach_Map__LAB_East_Health,
@@ -4190,6 +4310,10 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Amagi__Gated_Community__Upper_East_Ledge => SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Flask,
         SpotId::Amagi__Gated_Community__Upper_Gate_East => SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Flask,
         SpotId::Amagi__Gated_Community__Upper_Gate_East_Mid_air => SpotId::Menu__Kiengir_Map__Amagi_Gated_Community_Flask,
+        SpotId::Amagi__Isolation__Empty_Plinth => SpotId::Menu__Kiengir_Map__Amagi_Isolation_Portal,
+        SpotId::Amagi__Isolation__Midway => SpotId::Menu__Kiengir_Map__Amagi_Isolation_Portal,
+        SpotId::Amagi__Isolation__Portal_Hole => SpotId::Menu__Kiengir_Map__Amagi_Isolation_Portal,
+        SpotId::Amagi__Isolation__Save_Point => SpotId::Menu__Kiengir_Map__Amagi_Isolation,
         SpotId::Amagi__Liru_Room__Bottom => SpotId::Menu__Kiengir_Map__Water_Movement,
         SpotId::Amagi__Liru_Room__Shrine => SpotId::Menu__Kiengir_Map__Water_Movement,
         SpotId::Amagi__Main_Area__Cache => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask,
@@ -4203,6 +4327,11 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Amagi__Main_Area__Secret_Outcropping => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance,
         SpotId::Amagi__Main_Area__Way_Off_To_The_Side => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Flask,
         SpotId::Amagi__Main_Area__West_15 => SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Cave_Entrance,
+        SpotId::Amagi__Secret_Chamber__Enclosed_Cache => SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Flask,
+        SpotId::Amagi__Secret_Chamber__Middle_Ledge => SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Health,
+        SpotId::Amagi__Secret_Chamber__Portal_Wall => SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Health,
+        SpotId::Amagi__Secret_Chamber__Upper_Cache => SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Health,
+        SpotId::Amagi__Secret_Chamber__Upper_Ledge => SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Health,
         SpotId::Amagi__West_Lake__Cavern_Eye => SpotId::Menu__Kiengir_Map__Amagi_Dragon_Eye_Flask,
         SpotId::Amagi__West_Lake__Cavern_Front_Pillar => SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station,
         SpotId::Amagi__West_Lake__Cavern_Middle_Pillar => SpotId::Menu__Kiengir_Map__Amagi_West_Lake_Refill_Station,
@@ -5242,702 +5371,710 @@ bitflags!{
         const MAP__AMAGI_BREACH__EAST_ENTRANCE__SAVE = 0x1;
         const MAP__AMAGI_BREACH__EAST_RUINS__SAVE = 0x2;
         const MAP__AMAGI_BREACH__UPPER_LAKE__SAVE = 0x4;
-        const MAP__AMAGI__MAIN_AREA__SAVE = 0x8;
-        const MAP__AMAGI__EAST_LAKE__SAVE = 0x10;
-        const MAP__ANNUNA_BREACH__DOUBLE_CORRIDOR__SAVE = 0x20;
-        const MAP__ANNUNA_BREACH__REAR_ENTRANCE__SAVE = 0x40;
-        const MAP__ANNUNA_BREACH__NORTH_HALLWAY__SAVE = 0x80;
-        const MAP__ANNUNA_BREACH__BOTTOM__SAVE = 0x100;
-        const MAP__ANNUNA_BREACH__ENCLOSED__SAVE = 0x200;
-        const MAP__ANNUNA__MIRROR_MATCH__SAVE = 0x400;
-        const MAP__ANNUNA__VERTICAL_ROOM__SAVE = 0x800;
-        const MAP__ANNUNA__FACTORY_ENTRANCE__SAVE = 0x1000;
-        const MAP__ANNUNA__UPPER_SAVE__SAVE = 0x2000;
-        const MAP__ANNUNA__CENTER_SAVE__SAVE = 0x4000;
-        const MAP__EBIH_BREACH__PORTALS_101__SAVE = 0x8000;
-        const MAP__EBIH_BREACH__IN_N_OUT__SAVE = 0x10000;
-        const MAP__EBIH_BREACH__ROCK_BLOCK__SAVE = 0x20000;
-        const MAP__EBIH_BREACH__PEAK__SAVE = 0x40000;
-        const MAP__EBIH__BASE_CAMP__SAVE = 0x80000;
-        const MAP__EBIH__EBIH_WEST__MID_SAVE = 0x100000;
-        const MAP__EBIH__EBIH_WEST__UPPER_SAVE = 0x200000;
-        const MAP__EBIH__EBIH_WEST__LOWER_SAVE = 0x400000;
-        const MAP__EBIH__HIDDEN_PORTAL__SAVE = 0x800000;
-        const MAP__EMERGENCE__CAMP_EXTERIOR__SAVE = 0x1000000;
-        const MAP__GIGUNA_BREACH__PEAK__SAVE = 0x2000000;
-        const MAP__GIGUNA_BREACH__SW_SAVE__SAVE = 0x4000000;
-        const MAP__GIGUNA_BREACH__LABYRINTH__SAVE = 0x8000000;
-        const MAP__GIGUNA_BREACH__EAST__SAVE = 0x10000000;
-        const MAP__GIGUNA_BREACH__SOUTH__SAVE = 0x20000000;
-        const MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE = 0x40000000;
-        const MAP__GIGUNA__GIGUNA_BASE__SAVE = 0x80000000;
-        const MAP__GIGUNA__RUINS_WEST__SAVE = 0x100000000;
-        const MAP__GIGUNA__RUINS_TOP__SAVE = 0x200000000;
-        const MAP__GIGUNA__LABYRINTH__SAVE = 0x400000000;
-        const MAP__GIGUNA__SEPARATOR__SAVE = 0x800000000;
-        const MAP__GLACIER_BREACH__SOUTH_SAVE__SAVE = 0x1000000000;
-        const MAP__GLACIER_BREACH__WEST_SAVE__SAVE = 0x2000000000;
-        const MAP__GLACIER_BREACH__GUARDED_CORRIDOR__SAVE = 0x4000000000;
-        const MAP__GLACIER_BREACH__SAVE_AND_EXIT__SAVE = 0x8000000000;
-        const MAP__GLACIER_BREACH__HAMMONDS_BREACH__SAVE = 0x10000000000;
-        const MAP__GLACIER__REVIVAL__SAVE = 0x20000000000;
-        const MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE = 0x40000000000;
-        const MAP__IRIKAR_BREACH__GAUNTLET__SAVE = 0x80000000000;
-        const MAP__IRIKAR_BREACH__BASEMENT_SAVE__SAVE = 0x100000000000;
-        const MAP__IRIKAR_BREACH__CORRIDOR__SAVE = 0x200000000000;
-        const MAP__IRIKAR__HUB__SAVE = 0x400000000000;
-        const MAP__IRIKAR__MIDWEST__SAVE = 0x800000000000;
-        const MAP__IRIKAR__BEACH_SAVE__SAVE = 0x1000000000000;
-        const MAP__UHRUM_BREACH__SAVE_AND_GO__SAVE = 0x2000000000000;
-        const MAP__UHRUM_BREACH__EAST_GLITCH__SAVE = 0x4000000000000;
-        const MAP__UHRUM_BREACH__ANNUNA_GATE__SAVE = 0x8000000000000;
-        const MAP__UHRUM_BREACH__LOCKED_DOWN__SAVE = 0x10000000000000;
-        const MAP__UHRUM__WEST_ENTRANCE__SAVE = 0x20000000000000;
-        const MAP__UHRUM__SAVE_ROOM__SAVE = 0x40000000000000;
-        const MAP__UHRUM__ANNUNA_CORRIDOR__SAVE = 0x80000000000000;
-        const MAP__UHRUM__EMERGENCE_SAVE__SAVE = 0x100000000000000;
-        const GLACIER__CTX__HAMMONDS_DOORS = 0x200000000000000;
-        const AMAGI__MAIN_AREA__CTX__COMBO = 0x400000000000000;
-        const AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA = 0x800000000000000;
-        const ANNUNA__INVISIBLE_ENEMIES__CTX__DOOR_OPENED = 0x1000000000000000;
-        const ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU = 0x2000000000000000;
-        const ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED = 0x4000000000000000;
-        const ANNUNA__EAST_BRIDGE__CTX__COMBO = 0x8000000000000000;
+        const MAP__AMAGI_BREACH__DIVIDED__SAVE = 0x8;
+        const MAP__AMAGI__MAIN_AREA__SAVE = 0x10;
+        const MAP__AMAGI__EAST_LAKE__SAVE = 0x20;
+        const MAP__ANNUNA_BREACH__DOUBLE_CORRIDOR__SAVE = 0x40;
+        const MAP__ANNUNA_BREACH__REAR_ENTRANCE__SAVE = 0x80;
+        const MAP__ANNUNA_BREACH__NORTH_HALLWAY__SAVE = 0x100;
+        const MAP__ANNUNA_BREACH__BOTTOM__SAVE = 0x200;
+        const MAP__ANNUNA_BREACH__ENCLOSED__SAVE = 0x400;
+        const MAP__ANNUNA__MIRROR_MATCH__SAVE = 0x800;
+        const MAP__ANNUNA__VERTICAL_ROOM__SAVE = 0x1000;
+        const MAP__ANNUNA__FACTORY_ENTRANCE__SAVE = 0x2000;
+        const MAP__ANNUNA__UPPER_SAVE__SAVE = 0x4000;
+        const MAP__ANNUNA__CENTER_SAVE__SAVE = 0x8000;
+        const MAP__EBIH_BREACH__PORTALS_101__SAVE = 0x10000;
+        const MAP__EBIH_BREACH__IN_N_OUT__SAVE = 0x20000;
+        const MAP__EBIH_BREACH__ROCK_BLOCK__SAVE = 0x40000;
+        const MAP__EBIH_BREACH__PEAK__SAVE = 0x80000;
+        const MAP__EBIH__BASE_CAMP__SAVE = 0x100000;
+        const MAP__EBIH__EBIH_WEST__MID_SAVE = 0x200000;
+        const MAP__EBIH__EBIH_WEST__UPPER_SAVE = 0x400000;
+        const MAP__EBIH__EBIH_WEST__LOWER_SAVE = 0x800000;
+        const MAP__EBIH__HIDDEN_PORTAL__SAVE = 0x1000000;
+        const MAP__EMERGENCE__CAMP_EXTERIOR__SAVE = 0x2000000;
+        const MAP__GIGUNA_BREACH__PEAK__SAVE = 0x4000000;
+        const MAP__GIGUNA_BREACH__SW_SAVE__SAVE = 0x8000000;
+        const MAP__GIGUNA_BREACH__LABYRINTH__SAVE = 0x10000000;
+        const MAP__GIGUNA_BREACH__EAST__SAVE = 0x20000000;
+        const MAP__GIGUNA_BREACH__SOUTH__SAVE = 0x40000000;
+        const MAP__GIGUNA__GIGUNA_NORTHEAST__SAVE = 0x80000000;
+        const MAP__GIGUNA__GIGUNA_BASE__SAVE = 0x100000000;
+        const MAP__GIGUNA__RUINS_WEST__SAVE = 0x200000000;
+        const MAP__GIGUNA__RUINS_TOP__SAVE = 0x400000000;
+        const MAP__GIGUNA__LABYRINTH__SAVE = 0x800000000;
+        const MAP__GIGUNA__SEPARATOR__SAVE = 0x1000000000;
+        const MAP__GLACIER_BREACH__SOUTH_SAVE__SAVE = 0x2000000000;
+        const MAP__GLACIER_BREACH__WEST_SAVE__SAVE = 0x4000000000;
+        const MAP__GLACIER_BREACH__GUARDED_CORRIDOR__SAVE = 0x8000000000;
+        const MAP__GLACIER_BREACH__SAVE_AND_EXIT__SAVE = 0x10000000000;
+        const MAP__GLACIER_BREACH__HAMMONDS_BREACH__SAVE = 0x20000000000;
+        const MAP__GLACIER__REVIVAL__SAVE = 0x40000000000;
+        const MAP__IRIKAR_BREACH__SAVE_ROOM__SAVE = 0x80000000000;
+        const MAP__IRIKAR_BREACH__GAUNTLET__SAVE = 0x100000000000;
+        const MAP__IRIKAR_BREACH__BASEMENT_SAVE__SAVE = 0x200000000000;
+        const MAP__IRIKAR_BREACH__CORRIDOR__SAVE = 0x400000000000;
+        const MAP__IRIKAR__HUB__SAVE = 0x800000000000;
+        const MAP__IRIKAR__MIDWEST__SAVE = 0x1000000000000;
+        const MAP__IRIKAR__BEACH_SAVE__SAVE = 0x2000000000000;
+        const MAP__UHRUM_BREACH__SAVE_AND_GO__SAVE = 0x4000000000000;
+        const MAP__UHRUM_BREACH__EAST_GLITCH__SAVE = 0x8000000000000;
+        const MAP__UHRUM_BREACH__ANNUNA_GATE__SAVE = 0x10000000000000;
+        const MAP__UHRUM_BREACH__LOCKED_DOWN__SAVE = 0x20000000000000;
+        const MAP__UHRUM__WEST_ENTRANCE__SAVE = 0x40000000000000;
+        const MAP__UHRUM__SAVE_ROOM__SAVE = 0x80000000000000;
+        const MAP__UHRUM__ANNUNA_CORRIDOR__SAVE = 0x100000000000000;
+        const MAP__UHRUM__EMERGENCE_SAVE__SAVE = 0x200000000000000;
+        const GLACIER__CTX__HAMMONDS_DOORS = 0x400000000000000;
+        const AMAGI__MAIN_AREA__CTX__COMBO = 0x800000000000000;
+        const AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA = 0x1000000000000000;
+        const AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA = 0x2000000000000000;
+        const AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA = 0x4000000000000000;
+        const ANNUNA__INVISIBLE_ENEMIES__CTX__DOOR_OPENED = 0x8000000000000000;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits2: u64 {
-        const ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED = 0x1;
-        const ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED = 0x2;
-        const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 0x4;
-        const EBIH__TRUCK_GATE__CTX__DOOR_OPEN = 0x8;
-        const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 0x10;
-        const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 0x20;
-        const EBIH__WATERFALL__CTX__EAST_DOOR_OPEN = 0x40;
-        const EBIH__EBIH_WEST__CTX__DOOR_OPEN = 0x80;
-        const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 0x100;
-        const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 0x200;
-        const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 0x400;
-        const EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN = 0x800;
-        const EMERGENCE__STORAGE__CTX__DOOR_OPEN = 0x1000;
-        const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 0x2000;
-        const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 0x4000;
-        const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 0x8000;
-        const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 0x10000;
-        const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 0x20000;
-        const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 0x40000;
-        const GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN = 0x80000;
-        const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 0x100000;
-        const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 0x200000;
-        const GIGUNA__CLOUDS__CTX__PLATFORM = 0x400000;
-        const GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED = 0x800000;
-        const GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED = 0x1000000;
-        const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 0x2000000;
-        const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 0x4000000;
-        const GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR = 0x8000000;
-        const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 0x10000000;
-        const GIGUNA__LABYRINTH__CTX__DOOR = 0x20000000;
-        const GLACIER__THE_BIG_DROP__CTX__BRIDGE_OPEN = 0x40000000;
-        const GLACIER__VERTICAL_ROOM__CTX__UPPER_GATESTONE = 0x80000000;
-        const GLACIER__VERTICAL_ROOM__CTX__LOWER_GATESTONES = 0x100000000;
-        const IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED = 0x200000000;
-        const IRIKAR__MIDWEST__CTX__LEFT_PLATFORM = 0x400000000;
-        const IRIKAR__MIDWEST__CTX__RIGHT_PLATFORM = 0x800000000;
-        const AANSUR = 0x1000000000;
-        const AMAGI_BREACH_LOWER_HALLWAY_GATE = 0x2000000000;
-        const AMAGI_BREACH_WEST_RUINS_GATE = 0x4000000000;
-        const AMAGI_DRAGON_EYE_PASSAGE = 0x8000000000;
-        const AMAGI_GATED_COMMUNITY_GATE = 0x10000000000;
-        const AMAGI_STRONGHOLD_BOULDER_1 = 0x20000000000;
-        const AMAGI_STRONGHOLD_BOULDER_2 = 0x40000000000;
-        const AMAGI_STRONGHOLD_LEFT_WALL = 0x80000000000;
-        const AMAGI_STRONGHOLD_WALL_1 = 0x100000000000;
-        const AMAGI_STRONGHOLD_WALL_2 = 0x200000000000;
-        const AMAGI_WEST_LAKE_GATE = 0x400000000000;
-        const AMAGI_WEST_LAKE_SURFACE_WALL = 0x800000000000;
-        const AMAGI_WIGGLY_ROOM_GATE = 0x1000000000000;
-        const AMASHILAMA = 0x2000000000000;
-        const ANNUNA_BREACH_UPPER_GATE = 0x4000000000000;
-        const ANNUNA_EAST_BRIDGE_GATE = 0x8000000000000;
-        const ANNUNA_LOWER_GATE = 0x10000000000000;
-        const ANNUNA_MIRROR_MATCH_SWITCH = 0x20000000000000;
-        const ANNUNA_REMOTE_TRAINING_GATE = 0x40000000000000;
-        const ANNUNA_VERTICAL_ROOM_GATE = 0x80000000000000;
-        const ANUMAN = 0x100000000000000;
-        const APOCALYPSE_BOMB = 0x200000000000000;
-        const APOCALYPSE_SEALS_WALL = 0x400000000000000;
-        const BECOMING_AN_ARM = 0x800000000000000;
-        const BEWARE_THE_PATTERNMIND = 0x1000000000000000;
-        const BOOMERANG = 0x2000000000000000;
-        const BOOMERANG_UPGRADE = 0x4000000000000000;
-        const BOUNTY_LIST = 0x8000000000000000;
+        const ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU = 0x1;
+        const ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED = 0x2;
+        const ANNUNA__EAST_BRIDGE__CTX__COMBO = 0x4;
+        const ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED = 0x8;
+        const ANNUNA__WEST_CLIMB__CTX__DOOR_OPENED = 0x10;
+        const EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED = 0x20;
+        const EBIH__TRUCK_GATE__CTX__DOOR_OPEN = 0x40;
+        const EBIH__GRID_25_10_12__CTX__DOOR_OPEN = 0x80;
+        const EBIH__WATERFALL__CTX__WEST_DOOR_OPEN = 0x100;
+        const EBIH__WATERFALL__CTX__EAST_DOOR_OPEN = 0x200;
+        const EBIH__EBIH_WEST__CTX__DOOR_OPEN = 0x400;
+        const EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED = 0x800;
+        const EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED = 0x1000;
+        const EBIH__DRONE_ROOM__CTX__PLATFORM_MOVED = 0x2000;
+        const EBIH__VERTICAL_INTERCHANGE__CTX__DOOR_OPEN = 0x4000;
+        const EMERGENCE__STORAGE__CTX__DOOR_OPEN = 0x8000;
+        const GIGUNA_BREACH__SW_SAVE__CTX__DOOR_OPENED = 0x10000;
+        const GIGUNA__GIGUNA_NORTHEAST__CTX__DOOR_OPENED = 0x20000;
+        const GIGUNA__CARNELIAN__CTX__DOOR_OPENED = 0x40000;
+        const GIGUNA__CARNELIAN__CTX__UPPER_SUSAR = 0x80000;
+        const GIGUNA__CARNELIAN__CTX__LOWER_SUSAR = 0x100000;
+        const GIGUNA__WEST_CAVERNS__CTX__EAST_SUSAR = 0x200000;
+        const GIGUNA__GIGUNA_BASE__CTX__DOOR_OPEN = 0x400000;
+        const GIGUNA__RUINS_WEST__CTX__KISHIB_HANDLED = 0x800000;
+        const GIGUNA__RUINS_TOP__CTX__DOORS_OPEN = 0x1000000;
+        const GIGUNA__CLOUDS__CTX__PLATFORM = 0x2000000;
+        const GIGUNA__EAST_CAVERNS__CTX__DOOR_OPENED = 0x4000000;
+        const GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED = 0x8000000;
+        const GIGUNA__EAST_CAVERNS__CTX__UPPER_SUSAR = 0x10000000;
+        const GIGUNA__EAST_CAVERNS__CTX__MID_SUSAR = 0x20000000;
+        const GIGUNA__EAST_CAVERNS__CTX__LOWER_SUSAR = 0x40000000;
+        const GIGUNA__GATEWAY__CTX__DOOR_OPENED = 0x80000000;
+        const GIGUNA__LABYRINTH__CTX__DOOR = 0x100000000;
+        const GLACIER__THE_BIG_DROP__CTX__BRIDGE_OPEN = 0x200000000;
+        const GLACIER__VERTICAL_ROOM__CTX__UPPER_GATESTONE = 0x400000000;
+        const GLACIER__VERTICAL_ROOM__CTX__LOWER_GATESTONES = 0x800000000;
+        const IRIKAR__BASEMENT_PORTAL__CTX__PLATFORM_MOVED = 0x1000000000;
+        const IRIKAR__MIDWEST__CTX__LEFT_PLATFORM = 0x2000000000;
+        const IRIKAR__MIDWEST__CTX__RIGHT_PLATFORM = 0x4000000000;
+        const AANSUR = 0x8000000000;
+        const AMAGI_BREACH_LOWER_HALLWAY_GATE = 0x10000000000;
+        const AMAGI_BREACH_SPLIT_GATE = 0x20000000000;
+        const AMAGI_BREACH_WEST_RUINS_GATE = 0x40000000000;
+        const AMAGI_DRAGON_EYE_PASSAGE = 0x80000000000;
+        const AMAGI_GATED_COMMUNITY_GATE = 0x100000000000;
+        const AMAGI_STRONGHOLD_BOULDER_1 = 0x200000000000;
+        const AMAGI_STRONGHOLD_BOULDER_2 = 0x400000000000;
+        const AMAGI_STRONGHOLD_LEFT_WALL = 0x800000000000;
+        const AMAGI_STRONGHOLD_WALL_1 = 0x1000000000000;
+        const AMAGI_STRONGHOLD_WALL_2 = 0x2000000000000;
+        const AMAGI_WEST_LAKE_GATE = 0x4000000000000;
+        const AMAGI_WEST_LAKE_SURFACE_WALL = 0x8000000000000;
+        const AMAGI_WIGGLY_ROOM_GATE = 0x10000000000000;
+        const AMASHILAMA = 0x20000000000000;
+        const ANNUNA_BREACH_UPPER_GATE = 0x40000000000000;
+        const ANNUNA_EAST_BRIDGE_GATE = 0x80000000000000;
+        const ANNUNA_LOWER_GATE = 0x100000000000000;
+        const ANNUNA_MIRROR_MATCH_SWITCH = 0x200000000000000;
+        const ANNUNA_REMOTE_TRAINING_GATE = 0x400000000000000;
+        const ANNUNA_VERTICAL_ROOM_GATE = 0x800000000000000;
+        const ANUMAN = 0x1000000000000000;
+        const APOCALYPSE_BOMB = 0x2000000000000000;
+        const APOCALYPSE_SEALS_WALL = 0x4000000000000000;
+        const BECOMING_AN_ARM = 0x8000000000000000;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits3: u64 {
-        const BREACH_ATTRACTOR = 0x1;
-        const BREACH_SIGHT = 0x2;
-        const BRONZE_AXE = 0x4;
-        const BUILDING_OF_THE_SCHOOL = 0x8;
-        const CARNELIAN_RING = 0x10;
-        const COMMEMORATIVE_SPEECH = 0x20;
-        const COMPANIES_LAYOFF = 0x40;
-        const COMPASS = 0x80;
-        const DANGEROUS_IDEAS = 0x100;
-        const DEAR_ERNEST = 0x200;
-        const DEFEAT_INDRA = 0x400;
-        const DEFEAT_MUS_A_M20 = 0x800;
-        const DESTRUCTION_POGROM = 0x1000;
-        const DIVINERS_GEM = 0x2000;
-        const DOUBLE_AXE = 0x4000;
-        const DR_GLORIA = 0x8000;
-        const DRONE_HOVER = 0x10000;
-        const DRONE_MELEE_CHARGE = 0x20000;
-        const DRONE_MELEE_DAMAGE = 0x40000;
-        const DRONE_MELEE_DAMAGE_2 = 0x80000;
-        const DRONE_MELEE_DAMAGE_3 = 0x100000;
-        const DRONE_MELEE_SPEED = 0x200000;
-        const DRONE_MELEE_SPEED_2 = 0x400000;
-        const DRONE_MELEE_SPEED_3 = 0x800000;
-        const EBIH_ALU = 0x1000000;
-        const EBIH_BREACH_DOUBLE_GATE_GATE = 0x2000000;
-        const EBIH_BREACH_IN_N_OUT_GATE = 0x4000000;
-        const EBIH_BREACH_LAKE_GATE = 0x8000000;
-        const EBIH_BREACH_ROCK_BLOCK_ROCK = 0x10000000;
-        const EBIH_BREACH_SPIDER_GUARDS_GATE = 0x20000000;
-        const EBIH_EAST_WALL = 0x40000000;
-        const EBIH_GEM_ROOM_GATE = 0x80000000;
-        const EBIH_HIDDEN_PORTAL_GATE = 0x100000000;
-        const EBIH_INTERCHANGE_BLOCK = 0x200000000;
-        const EBIH_INTERCHANGE_GATE = 0x400000000;
-        const EBIH_WALLED_OFF_WALL = 0x800000000;
-        const EBIH_WATERFALL_BLOCK_LEFT = 0x1000000000;
-        const EBIH_WATERFALL_BLOCK_RIGHT = 0x2000000000;
-        const EBIH_WATERFALL_WALL = 0x4000000000;
-        const EBIH_WEST_BLOCK = 0x8000000000;
-        const ELLAG = 0x10000000000;
-        const EMERGENCE_DROPOFF_WALL = 0x20000000000;
-        const EMERGENCE_ROCKS_FALL_ROCK_1 = 0x40000000000;
-        const EMERGENCE_ROCKS_FALL_ROCK_2 = 0x80000000000;
-        const EMERGENCE_ROCKS_FALL_ROCK_3 = 0x100000000000;
-        const EMERGENCE_ROCKS_FALL_ROCK_4 = 0x200000000000;
-        const EMERGENCE_STORAGE_ROCK = 0x400000000000;
-        const EMERGENCE_STORAGE_TUNNEL = 0x800000000000;
-        const ENSIS_BRACELET = 0x1000000000000;
-        const ESCAPE = 0x2000000000000;
-        const EXIT_BREACH = 0x4000000000000;
-        const EYE_RING = 0x8000000000000;
-        const FAMILY_TRAGEDY = 0x10000000000000;
-        const FAST_TRAVEL = 0x20000000000000;
-        const FORBIDDEN_KNOWLEDGE = 0x40000000000000;
-        const FREEDOM_FROM_AANSUR = 0x80000000000000;
-        const GIGUNA_BOULDER = 0x100000000000000;
-        const GIGUNA_BREACH_CRAB_RAVE_GATE = 0x200000000000000;
-        const GIGUNA_BREACH_GATE_AND_WALL_GATE = 0x400000000000000;
-        const GIGUNA_BREACH_LOWER_MACHINERY_GATE = 0x800000000000000;
-        const GIGUNA_BREACH_PINKNESS_ROCK = 0x1000000000000000;
-        const GIGUNA_DUAL_PATH_SWITCH = 0x2000000000000000;
-        const GIGUNA_DUAL_PATH_WALL = 0x4000000000000000;
-        const GIGUNA_GATEWAY_BLOCK = 0x8000000000000000;
+        const BEWARE_THE_PATTERNMIND = 0x1;
+        const BOOMERANG = 0x2;
+        const BOOMERANG_UPGRADE = 0x4;
+        const BOUNTY_LIST = 0x8;
+        const BREACH_ATTRACTOR = 0x10;
+        const BREACH_SIGHT = 0x20;
+        const BRONZE_AXE = 0x40;
+        const BUILDING_OF_THE_SCHOOL = 0x80;
+        const CARNELIAN_RING = 0x100;
+        const COMMEMORATIVE_SPEECH = 0x200;
+        const COMPANIES_LAYOFF = 0x400;
+        const COMPASS = 0x800;
+        const DANGEROUS_IDEAS = 0x1000;
+        const DEAR_ERNEST = 0x2000;
+        const DEFEAT_INDRA = 0x4000;
+        const DEFEAT_MUS_A_M20 = 0x8000;
+        const DESTRUCTION_POGROM = 0x10000;
+        const DIVINERS_GEM = 0x20000;
+        const DOUBLE_AXE = 0x40000;
+        const DR_GLORIA = 0x80000;
+        const DRONE_HOVER = 0x100000;
+        const DRONE_MELEE_CHARGE = 0x200000;
+        const DRONE_MELEE_DAMAGE = 0x400000;
+        const DRONE_MELEE_DAMAGE_2 = 0x800000;
+        const DRONE_MELEE_DAMAGE_3 = 0x1000000;
+        const DRONE_MELEE_SPEED = 0x2000000;
+        const DRONE_MELEE_SPEED_2 = 0x4000000;
+        const DRONE_MELEE_SPEED_3 = 0x8000000;
+        const EBIH_ALU = 0x10000000;
+        const EBIH_BREACH_DOUBLE_GATE_GATE = 0x20000000;
+        const EBIH_BREACH_IN_N_OUT_GATE = 0x40000000;
+        const EBIH_BREACH_LAKE_GATE = 0x80000000;
+        const EBIH_BREACH_ROCK_BLOCK_ROCK = 0x100000000;
+        const EBIH_BREACH_SPIDER_GUARDS_GATE = 0x200000000;
+        const EBIH_EAST_WALL = 0x400000000;
+        const EBIH_GEM_ROOM_GATE = 0x800000000;
+        const EBIH_HIDDEN_PORTAL_GATE = 0x1000000000;
+        const EBIH_INTERCHANGE_BLOCK = 0x2000000000;
+        const EBIH_INTERCHANGE_GATE = 0x4000000000;
+        const EBIH_WALLED_OFF_WALL = 0x8000000000;
+        const EBIH_WATERFALL_BLOCK_LEFT = 0x10000000000;
+        const EBIH_WATERFALL_BLOCK_RIGHT = 0x20000000000;
+        const EBIH_WATERFALL_WALL = 0x40000000000;
+        const EBIH_WEST_BLOCK = 0x80000000000;
+        const ELLAG = 0x100000000000;
+        const EMERGENCE_DROPOFF_WALL = 0x200000000000;
+        const EMERGENCE_ROCKS_FALL_ROCK_1 = 0x400000000000;
+        const EMERGENCE_ROCKS_FALL_ROCK_2 = 0x800000000000;
+        const EMERGENCE_ROCKS_FALL_ROCK_3 = 0x1000000000000;
+        const EMERGENCE_ROCKS_FALL_ROCK_4 = 0x2000000000000;
+        const EMERGENCE_STORAGE_ROCK = 0x4000000000000;
+        const EMERGENCE_STORAGE_TUNNEL = 0x8000000000000;
+        const ENSIS_BRACELET = 0x10000000000000;
+        const ESCAPE = 0x20000000000000;
+        const EXIT_BREACH = 0x40000000000000;
+        const EYE_RING = 0x80000000000000;
+        const FAMILY_TRAGEDY = 0x100000000000000;
+        const FAST_TRAVEL = 0x200000000000000;
+        const FORBIDDEN_KNOWLEDGE = 0x400000000000000;
+        const FREEDOM_FROM_AANSUR = 0x800000000000000;
+        const GIGUNA_BOULDER = 0x1000000000000000;
+        const GIGUNA_BREACH_CRAB_RAVE_GATE = 0x2000000000000000;
+        const GIGUNA_BREACH_GATE_AND_WALL_GATE = 0x4000000000000000;
+        const GIGUNA_BREACH_LOWER_MACHINERY_GATE = 0x8000000000000000;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits4: u64 {
-        const GIGUNA_GATEWAY_GATE = 0x1;
-        const GIGUNA_GUBI = 0x2;
-        const GIGUNA_LABYRINTH_GATE = 0x4;
-        const GIGUNA_NORTHEAST_GATE = 0x8;
-        const GIGUNA_SEPARATOR_BRICKS = 0x10;
-        const GIGUNA_VERTICAL_INTERCHANGE_GATE = 0x20;
-        const GIGUNA_VERTICAL_INTERCHANGE_ROCK = 0x40;
-        const GIGUNA_WASTELAND_DOOR = 0x80;
-        const GIGUNA_WASTELAND_PASSAGE_H = 0x100;
-        const GLACIER_BIG_DROP_ROCK = 0x200;
-        const GLACIER_BREACH_SPIDERY_CONNECTOR_GATE = 0x400;
-        const GLACIER_FORTRESS_GATE = 0x800;
-        const GLACIER_SEA_BURIAL_ROCK = 0x1000;
-        const GOODBYE = 0x2000;
-        const HALUSAN = 0x4000;
-        const HAMMOND_AUTH = 0x8000;
-        const HEALTH_UPGRADE = 0x10000;
-        const HEALTH_UPGRADE_2 = 0x20000;
-        const HEALTH_UPGRADE_3 = 0x40000;
-        const HEALTH_UPGRADE_4 = 0x80000;
-        const HERETICS_GRANDDAUGHTER = 0x100000;
-        const HERETICS_TABLET = 0x200000;
-        const ICE_AXE = 0x400000;
-        const INFECT = 0x800000;
-        const INFECT_L1 = 0x1000000;
-        const INFECT_L2 = 0x2000000;
-        const INFECT_L3 = 0x4000000;
-        const INFECTION_RANGE = 0x8000000;
-        const INFECTION_RANGE_2 = 0x10000000;
-        const INFECTION_RANGE_3 = 0x20000000;
-        const INFECTION_SPEED = 0x40000000;
-        const IRIKAR_BREACH_BURIED_TREASURE_PILLAR = 0x80000000;
-        const IRIKAR_BREACH_UHRUM_CONNECTOR_WALL = 0x100000000;
-        const IRIKAR_GUDAM = 0x200000000;
-        const IRIKAR_ROYAL_STORAGE_WALL = 0x400000000;
-        const JOURNAL_2049_10_29 = 0x800000000;
-        const KAZAKH_ASSAULT = 0x1000000000;
-        const LAMENT_FOR_FOOLS = 0x2000000000;
-        const LEDGE_GRAB = 0x4000000000;
-        const LETTER_FROM_TRACE = 0x8000000000;
-        const MELEE_CHARGE = 0x10000000000;
-        const MELEE_DAMAGE = 0x20000000000;
-        const MELEE_DAMAGE_2 = 0x40000000000;
-        const MELEE_SPEED = 0x80000000000;
-        const MELEE_SPEED_2 = 0x100000000000;
-        const MIST_UPGRADE = 0x200000000000;
-        const NANITE_MIST = 0x400000000000;
-        const NANO_LATTICE_1 = 0x800000000000;
-        const NANO_LATTICE_2 = 0x1000000000000;
-        const NANO_LATTICE_3 = 0x2000000000000;
-        const NANO_POINTS = 0x4000000000000;
-        const NANO_POINTS_2 = 0x8000000000000;
-        const NANO_POINTS_3 = 0x10000000000000;
-        const NOTES_2053_02_27 = 0x20000000000000;
-        const PLAGUE_OF_THOUGHTS = 0x40000000000000;
-        const RANGED_DAMAGE = 0x80000000000000;
-        const RANGED_DAMAGE_2 = 0x100000000000000;
-        const RANGED_SPEED = 0x200000000000000;
-        const RANGED_SPEED_2 = 0x400000000000000;
-        const RE_DOES_TECHNOLOGY = 0x800000000000000;
-        const RECORD_LOSSES = 0x1000000000000000;
-        const REMOTE_BOOMERANG = 0x2000000000000000;
-        const REMOTE_DRONE = 0x4000000000000000;
-        const RESEARCHERS_MISSING = 0x8000000000000000;
+        const GIGUNA_BREACH_PINKNESS_ROCK = 0x1;
+        const GIGUNA_DUAL_PATH_SWITCH = 0x2;
+        const GIGUNA_DUAL_PATH_WALL = 0x4;
+        const GIGUNA_GATEWAY_BLOCK = 0x8;
+        const GIGUNA_GATEWAY_GATE = 0x10;
+        const GIGUNA_GUBI = 0x20;
+        const GIGUNA_LABYRINTH_GATE = 0x40;
+        const GIGUNA_NORTHEAST_GATE = 0x80;
+        const GIGUNA_SEPARATOR_BRICKS = 0x100;
+        const GIGUNA_VERTICAL_INTERCHANGE_GATE = 0x200;
+        const GIGUNA_VERTICAL_INTERCHANGE_ROCK = 0x400;
+        const GIGUNA_WASTELAND_DOOR = 0x800;
+        const GIGUNA_WASTELAND_PASSAGE_H = 0x1000;
+        const GLACIER_BIG_DROP_ROCK = 0x2000;
+        const GLACIER_BREACH_SPIDERY_CONNECTOR_GATE = 0x4000;
+        const GLACIER_FORTRESS_GATE = 0x8000;
+        const GLACIER_SEA_BURIAL_ROCK = 0x10000;
+        const GOODBYE = 0x20000;
+        const HALUSAN = 0x40000;
+        const HAMMOND_AUTH = 0x80000;
+        const HEALTH_UPGRADE = 0x100000;
+        const HEALTH_UPGRADE_2 = 0x200000;
+        const HEALTH_UPGRADE_3 = 0x400000;
+        const HEALTH_UPGRADE_4 = 0x800000;
+        const HERETICS_GRANDDAUGHTER = 0x1000000;
+        const HERETICS_TABLET = 0x2000000;
+        const ICE_AXE = 0x4000000;
+        const INFECT = 0x8000000;
+        const INFECT_L1 = 0x10000000;
+        const INFECT_L2 = 0x20000000;
+        const INFECT_L3 = 0x40000000;
+        const INFECTION_RANGE = 0x80000000;
+        const INFECTION_RANGE_2 = 0x100000000;
+        const INFECTION_RANGE_3 = 0x200000000;
+        const INFECTION_SPEED = 0x400000000;
+        const IRIKAR_BREACH_BURIED_TREASURE_PILLAR = 0x800000000;
+        const IRIKAR_BREACH_UHRUM_CONNECTOR_WALL = 0x1000000000;
+        const IRIKAR_GUDAM = 0x2000000000;
+        const IRIKAR_ROYAL_STORAGE_WALL = 0x4000000000;
+        const JOURNAL_2049_10_29 = 0x8000000000;
+        const KAZAKH_ASSAULT = 0x10000000000;
+        const LAMENT_FOR_FOOLS = 0x20000000000;
+        const LEDGE_GRAB = 0x40000000000;
+        const LETTER_FROM_TRACE = 0x80000000000;
+        const MELEE_CHARGE = 0x100000000000;
+        const MELEE_DAMAGE = 0x200000000000;
+        const MELEE_DAMAGE_2 = 0x400000000000;
+        const MELEE_SPEED = 0x800000000000;
+        const MELEE_SPEED_2 = 0x1000000000000;
+        const MIST_UPGRADE = 0x2000000000000;
+        const NANITE_MIST = 0x4000000000000;
+        const NANO_LATTICE_1 = 0x8000000000000;
+        const NANO_LATTICE_2 = 0x10000000000000;
+        const NANO_LATTICE_3 = 0x20000000000000;
+        const NANO_POINTS = 0x40000000000000;
+        const NANO_POINTS_2 = 0x80000000000000;
+        const NANO_POINTS_3 = 0x100000000000000;
+        const NOTES_2053_02_27 = 0x200000000000000;
+        const PLAGUE_OF_THOUGHTS = 0x400000000000000;
+        const RANGED_DAMAGE = 0x800000000000000;
+        const RANGED_DAMAGE_2 = 0x1000000000000000;
+        const RANGED_SPEED = 0x2000000000000000;
+        const RANGED_SPEED_2 = 0x4000000000000000;
+        const RE_DOES_TECHNOLOGY = 0x8000000000000000;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits5: u64 {
-        const ROBOPEDE = 0x1;
-        const ROYAL_DAGGER = 0x2;
-        const ROYAL_RING = 0x4;
-        const SAGIGA_ON_THE_WORLDSTREAM = 0x8;
-        const SEPARATION = 0x10;
-        const SHOCKWAVE = 0x20;
-        const SICKLE_SWORD = 0x40;
-        const SIUNA_STORAGE_WALL = 0x80;
-        const SLINGSHOT_CHARGE = 0x100;
-        const SLINGSHOT_HOOK = 0x200;
-        const SLINGSHOT_WEAPON = 0x400;
-        const SNIPER_VALLEY_ROCK_1 = 0x800;
-        const SNIPER_VALLEY_ROCK_2 = 0x1000;
-        const STATION_POWER = 0x2000;
-        const STORM_BOMB = 0x4000;
-        const SUBMARINE_PROGRESS = 0x8000;
-        const SUSPENSION_BRIDGE = 0x10000;
-        const SWITCH_36_11 = 0x20000;
-        const SWITCH_40_12 = 0x40000;
-        const TERMINAL_BREAKTHROUGH_1 = 0x80000;
-        const TERMINAL_BREAKTHROUGH_2 = 0x100000;
-        const THE_ETERNAL_ARM = 0x200000;
-        const THE_IDEAL_KIENGIR = 0x400000;
-        const THE_STUDENT = 0x800000;
-        const UDUSAN = 0x1000000;
-        const UHRUM_ANNUNA_CORRIDOR_BLOCK = 0x2000000;
-        const UHRUM_BREACH_ANNUNA_GATE_GATE = 0x4000000;
-        const UHRUM_BREACH_LOCKED_DOWN_GATE = 0x8000000;
-        const UHRUM_BREACH_OVERGROWN_RUINS_WALL = 0x10000000;
-        const UHRUM_BREACH_ROCK_AND_GATE_GATE = 0x20000000;
-        const UHRUM_BREACH_ROCK_AND_GATE_ROCK = 0x40000000;
-        const UHRUM_CAVERN_WALL = 0x80000000;
-        const UHRUM_EAST_GLITCH = 0x100000000;
-        const UHRUM_EAST_LAKE_BLOCK = 0x200000000;
-        const UHRUM_EMERGENCE_WALL = 0x400000000;
-        const UHRUM_GLITCHY_CORRIDOR_ROCK = 0x800000000;
-        const UHRUM_ROCKY_GATE_ROCK = 0x1000000000;
-        const UHRUM_WATERFALL_WALL = 0x2000000000;
-        const UHRUM_WATERFALLS_BLOCK = 0x4000000000;
-        const UHRUM_WEST_ENTRANCE_GATE = 0x8000000000;
-        const UHRUM_WEST_ENTRANCE_LOWER_WALL = 0x10000000000;
-        const UHRUM_WEST_ENTRANCE_UPPER_WALL = 0x20000000000;
-        const UHRUM_WEST_GLITCH = 0x40000000000;
-        const UNDER_SIEGE = 0x80000000000;
-        const UNDERWATER_MOVEMENT = 0x100000000000;
-        const URGENT_MESSAGE = 0x200000000000;
-        const WALL_CLIMB = 0x400000000000;
-        const VISITED_AMAGI_BREACH_TWISTY_PASSAGES_FLASK = 0x800000000000;
-        const VISITED_AMAGI_BREACH_WEST_RUINS_FLASK = 0x1000000000000;
-        const VISITED_AMAGI_DRAGON_EYE_FLASK = 0x2000000000000;
-        const VISITED_AMAGI_GATED_COMMUNITY_FLASK = 0x4000000000000;
-        const VISITED_AMAGI_MAIN_AREA_WATER_FLASK = 0x8000000000000;
-        const VISITED_AMAGI_STRONGHOLD_BOULDER_2 = 0x10000000000000;
-        const VISITED_AMAGI_STRONGHOLD_LEFT_WALL = 0x20000000000000;
-        const VISITED_AMAGI_STRONGHOLD_WALL_1 = 0x40000000000000;
-        const VISITED_AMAGI_STRONGHOLD_WALL_2 = 0x80000000000000;
-        const VISITED_AMAGI_WEST_LAKE_GATE = 0x100000000000000;
-        const VISITED_AMAGI_WEST_LAKE_SURFACE_WALL = 0x200000000000000;
-        const VISITED_ANNUNA_BREACH_FACTORY_FOYER_FLASK = 0x400000000000000;
-        const VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK = 0x800000000000000;
-        const VISITED_ANNUNA_EAST_BRIDGE_GATE = 0x1000000000000000;
-        const VISITED_ANNUNA_EAST_HIDEOUT_FLASK = 0x2000000000000000;
-        const VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK = 0x4000000000000000;
-        const VISITED_ANNUNA_MIRROR_MATCH_FLASK = 0x8000000000000000;
-        const ALL_VISIT_FLAGS = 0xffff800000000000;
+        const RECORD_LOSSES = 0x1;
+        const REMOTE_BOOMERANG = 0x2;
+        const REMOTE_DRONE = 0x4;
+        const RESEARCHERS_MISSING = 0x8;
+        const ROBOPEDE = 0x10;
+        const ROYAL_DAGGER = 0x20;
+        const ROYAL_RING = 0x40;
+        const SAGIGA_ON_THE_WORLDSTREAM = 0x80;
+        const SEPARATION = 0x100;
+        const SHOCKWAVE = 0x200;
+        const SICKLE_SWORD = 0x400;
+        const SIUNA_STORAGE_WALL = 0x800;
+        const SLINGSHOT_CHARGE = 0x1000;
+        const SLINGSHOT_HOOK = 0x2000;
+        const SLINGSHOT_WEAPON = 0x4000;
+        const SNIPER_VALLEY_ROCK_1 = 0x8000;
+        const SNIPER_VALLEY_ROCK_2 = 0x10000;
+        const STATION_POWER = 0x20000;
+        const STORM_BOMB = 0x40000;
+        const SUBMARINE_PROGRESS = 0x80000;
+        const SUSPENSION_BRIDGE = 0x100000;
+        const SWITCH_36_11 = 0x200000;
+        const SWITCH_40_12 = 0x400000;
+        const TERMINAL_BREAKTHROUGH_1 = 0x800000;
+        const TERMINAL_BREAKTHROUGH_2 = 0x1000000;
+        const THE_ETERNAL_ARM = 0x2000000;
+        const THE_IDEAL_KIENGIR = 0x4000000;
+        const THE_STUDENT = 0x8000000;
+        const UDUSAN = 0x10000000;
+        const UHRUM_ANNUNA_CORRIDOR_BLOCK = 0x20000000;
+        const UHRUM_BREACH_ANNUNA_GATE_GATE = 0x40000000;
+        const UHRUM_BREACH_LOCKED_DOWN_GATE = 0x80000000;
+        const UHRUM_BREACH_OVERGROWN_RUINS_WALL = 0x100000000;
+        const UHRUM_BREACH_ROCK_AND_GATE_GATE = 0x200000000;
+        const UHRUM_BREACH_ROCK_AND_GATE_ROCK = 0x400000000;
+        const UHRUM_CAVERN_WALL = 0x800000000;
+        const UHRUM_EAST_GLITCH = 0x1000000000;
+        const UHRUM_EAST_LAKE_BLOCK = 0x2000000000;
+        const UHRUM_EMERGENCE_WALL = 0x4000000000;
+        const UHRUM_GLITCHY_CORRIDOR_ROCK = 0x8000000000;
+        const UHRUM_ROCKY_GATE_ROCK = 0x10000000000;
+        const UHRUM_WATERFALL_WALL = 0x20000000000;
+        const UHRUM_WATERFALLS_BLOCK = 0x40000000000;
+        const UHRUM_WEST_ENTRANCE_GATE = 0x80000000000;
+        const UHRUM_WEST_ENTRANCE_LOWER_WALL = 0x100000000000;
+        const UHRUM_WEST_ENTRANCE_UPPER_WALL = 0x200000000000;
+        const UHRUM_WEST_GLITCH = 0x400000000000;
+        const UNDER_SIEGE = 0x800000000000;
+        const UNDERWATER_MOVEMENT = 0x1000000000000;
+        const URGENT_MESSAGE = 0x2000000000000;
+        const WALL_CLIMB = 0x4000000000000;
+        const VISITED_AMAGI_BREACH_TWISTY_PASSAGES_FLASK = 0x8000000000000;
+        const VISITED_AMAGI_BREACH_WEST_RUINS_FLASK = 0x10000000000000;
+        const VISITED_AMAGI_DRAGON_EYE_FLASK = 0x20000000000000;
+        const VISITED_AMAGI_GATED_COMMUNITY_FLASK = 0x40000000000000;
+        const VISITED_AMAGI_MAIN_AREA_WATER_FLASK = 0x80000000000000;
+        const VISITED_AMAGI_SECRET_CHAMBER_FLASK = 0x100000000000000;
+        const VISITED_AMAGI_STRONGHOLD_BOULDER_2 = 0x200000000000000;
+        const VISITED_AMAGI_STRONGHOLD_LEFT_WALL = 0x400000000000000;
+        const VISITED_AMAGI_STRONGHOLD_WALL_1 = 0x800000000000000;
+        const VISITED_AMAGI_STRONGHOLD_WALL_2 = 0x1000000000000000;
+        const VISITED_AMAGI_WEST_LAKE_GATE = 0x2000000000000000;
+        const VISITED_AMAGI_WEST_LAKE_SURFACE_WALL = 0x4000000000000000;
+        const VISITED_ANNUNA_BREACH_FACTORY_FOYER_FLASK = 0x8000000000000000;
+        const ALL_VISIT_FLAGS = 0xfff8000000000000;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits6: u64 {
-        const VISITED_ANNUNA_REMOTE_TRAINING_GATE = 0x1;
-        const VISITED_ANNUNA_SECRET_PASSAGE_FLASK = 0x2;
-        const VISITED_ANNUNA_SNIPER_VALLEY_FLASK = 0x4;
-        const VISITED_ANUMAN = 0x8;
-        const VISITED_APOCALYPSE_BOMB = 0x10;
-        const VISITED_APOCALYPSE_SEALS_WALL = 0x20;
-        const VISITED_BREACH_SIGHT = 0x40;
-        const VISITED_DRONE_MELEE_CHARGE = 0x80;
-        const VISITED_EBIH_ALU = 0x100;
-        const VISITED_EBIH_BASE_CAMP_FRAGMENT = 0x200;
-        const VISITED_EBIH_BREACH_DOUBLE_GATE_GATE = 0x400;
-        const VISITED_EBIH_BREACH_LAKE_GATE = 0x800;
-        const VISITED_EBIH_BREACH_ROCK_BLOCK_FLASK = 0x1000;
-        const VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK = 0x2000;
-        const VISITED_EBIH_BREACH_ROCKY_CAGES_FLASK = 0x4000;
-        const VISITED_EBIH_BREACH_SNOWY_ROCKS_FLASK = 0x8000;
-        const VISITED_EBIH_BREACH_SPIDER_GUARDS_FLASK = 0x10000;
-        const VISITED_EBIH_BREACH_VERTICAL_ROOM_FLASK = 0x20000;
-        const VISITED_EBIH_BUSH_FLASK = 0x40000;
-        const VISITED_EBIH_DRONE_PIT_FLASK = 0x80000;
-        const VISITED_EBIH_EAST_WALL = 0x100000;
-        const VISITED_EBIH_GEM_ROOM_FLASK = 0x200000;
-        const VISITED_EBIH_GEM_ROOM_GATE = 0x400000;
-        const VISITED_EBIH_HIDDEN_PORTAL_GATE = 0x800000;
-        const VISITED_EBIH_HIGH_FLASK = 0x1000000;
-        const VISITED_EBIH_OBSERVATORY_FLASK = 0x2000000;
-        const VISITED_EBIH_PARTY_CENTRAL_FLASK = 0x4000000;
-        const VISITED_EBIH_WALLED_OFF_WALL = 0x8000000;
-        const VISITED_EBIH_WATERFALL_BLOCK_LEFT = 0x10000000;
-        const VISITED_EBIH_WATERFALL_BLOCK_RIGHT = 0x20000000;
-        const VISITED_EBIH_WATERFALL_WALL = 0x40000000;
-        const VISITED_EBIH_WEST_BLOCK = 0x80000000;
-        const VISITED_EBIH_WEST_FACE_FLASK = 0x100000000;
-        const VISITED_EBIH_WEST_FLASK = 0x200000000;
-        const VISITED_EGG_ROOM_FLASK = 0x400000000;
-        const VISITED_EMERGENCE_AUDIENCE_CHAMBER_FLASK = 0x800000000;
-        const VISITED_EMERGENCE_BREACH_FLASK = 0x1000000000;
-        const VISITED_EMERGENCE_DROPOFF_FLASK = 0x2000000000;
-        const VISITED_EMERGENCE_DROPOFF_WALL = 0x4000000000;
-        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_1 = 0x8000000000;
-        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_2 = 0x10000000000;
-        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_3 = 0x20000000000;
-        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_4 = 0x40000000000;
-        const VISITED_EMERGENCE_STORAGE_ROCK = 0x80000000000;
-        const VISITED_EMERGENCE_STORAGE_TUNNEL = 0x100000000000;
-        const VISITED_ESCAPE = 0x200000000000;
-        const VISITED_EXIT_BREACH = 0x400000000000;
-        const VISITED_FAST_TRAVEL = 0x800000000000;
-        const VISITED_FILTER_TELEPORTER_FLASK = 0x1000000000000;
-        const VISITED_GIGUNA_BOULDER = 0x2000000000000;
-        const VISITED_GIGUNA_BREACH_CRAB_RAVE_FLASK = 0x4000000000000;
-        const VISITED_GIGUNA_BREACH_GATE_AND_WALL_GATE = 0x8000000000000;
-        const VISITED_GIGUNA_BREACH_LOWER_MACHINERY_FLASK = 0x10000000000000;
-        const VISITED_GIGUNA_BREACH_PINKNESS_ROCK = 0x20000000000000;
-        const VISITED_GIGUNA_BREACHABLE_WALL_FLASK = 0x40000000000000;
-        const VISITED_GIGUNA_CLOUDS_FLASK = 0x80000000000000;
-        const VISITED_GIGUNA_DUAL_PATH_SWITCH = 0x100000000000000;
-        const VISITED_GIGUNA_DUAL_PATH_WALL = 0x200000000000000;
-        const VISITED_GIGUNA_EAST_RUINS_FLASK = 0x400000000000000;
-        const VISITED_GIGUNA_GATEWAY_BLOCK = 0x800000000000000;
-        const VISITED_GIGUNA_GATEWAY_FLASK = 0x1000000000000000;
-        const VISITED_GIGUNA_GUBI = 0x2000000000000000;
-        const VISITED_GIGUNA_GUBI_FLASK = 0x4000000000000000;
-        const VISITED_GIGUNA_HIGHEST_FLASK = 0x8000000000000000;
+        const VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK = 0x1;
+        const VISITED_ANNUNA_EAST_BRIDGE_GATE = 0x2;
+        const VISITED_ANNUNA_EAST_HIDEOUT_FLASK = 0x4;
+        const VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK = 0x8;
+        const VISITED_ANNUNA_MIRROR_MATCH_FLASK = 0x10;
+        const VISITED_ANNUNA_REMOTE_TRAINING_GATE = 0x20;
+        const VISITED_ANNUNA_SECRET_PASSAGE_FLASK = 0x40;
+        const VISITED_ANNUNA_SNIPER_VALLEY_FLASK = 0x80;
+        const VISITED_ANUMAN = 0x100;
+        const VISITED_APOCALYPSE_BOMB = 0x200;
+        const VISITED_APOCALYPSE_SEALS_WALL = 0x400;
+        const VISITED_BREACH_SIGHT = 0x800;
+        const VISITED_DRONE_MELEE_CHARGE = 0x1000;
+        const VISITED_EBIH_ALU = 0x2000;
+        const VISITED_EBIH_BASE_CAMP_FRAGMENT = 0x4000;
+        const VISITED_EBIH_BREACH_DOUBLE_GATE_GATE = 0x8000;
+        const VISITED_EBIH_BREACH_LAKE_GATE = 0x10000;
+        const VISITED_EBIH_BREACH_ROCK_BLOCK_FLASK = 0x20000;
+        const VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK = 0x40000;
+        const VISITED_EBIH_BREACH_ROCKY_CAGES_FLASK = 0x80000;
+        const VISITED_EBIH_BREACH_SNOWY_ROCKS_FLASK = 0x100000;
+        const VISITED_EBIH_BREACH_SPIDER_GUARDS_FLASK = 0x200000;
+        const VISITED_EBIH_BREACH_VERTICAL_ROOM_FLASK = 0x400000;
+        const VISITED_EBIH_BUSH_FLASK = 0x800000;
+        const VISITED_EBIH_DRONE_PIT_FLASK = 0x1000000;
+        const VISITED_EBIH_EAST_WALL = 0x2000000;
+        const VISITED_EBIH_GEM_ROOM_FLASK = 0x4000000;
+        const VISITED_EBIH_GEM_ROOM_GATE = 0x8000000;
+        const VISITED_EBIH_HIDDEN_PORTAL_GATE = 0x10000000;
+        const VISITED_EBIH_HIGH_FLASK = 0x20000000;
+        const VISITED_EBIH_OBSERVATORY_FLASK = 0x40000000;
+        const VISITED_EBIH_PARTY_CENTRAL_FLASK = 0x80000000;
+        const VISITED_EBIH_WALLED_OFF_WALL = 0x100000000;
+        const VISITED_EBIH_WATERFALL_BLOCK_LEFT = 0x200000000;
+        const VISITED_EBIH_WATERFALL_BLOCK_RIGHT = 0x400000000;
+        const VISITED_EBIH_WATERFALL_WALL = 0x800000000;
+        const VISITED_EBIH_WEST_BLOCK = 0x1000000000;
+        const VISITED_EBIH_WEST_FACE_FLASK = 0x2000000000;
+        const VISITED_EBIH_WEST_FLASK = 0x4000000000;
+        const VISITED_EGG_ROOM_FLASK = 0x8000000000;
+        const VISITED_EMERGENCE_AUDIENCE_CHAMBER_FLASK = 0x10000000000;
+        const VISITED_EMERGENCE_BREACH_FLASK = 0x20000000000;
+        const VISITED_EMERGENCE_DROPOFF_FLASK = 0x40000000000;
+        const VISITED_EMERGENCE_DROPOFF_WALL = 0x80000000000;
+        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_1 = 0x100000000000;
+        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_2 = 0x200000000000;
+        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_3 = 0x400000000000;
+        const VISITED_EMERGENCE_ROCKS_FALL_ROCK_4 = 0x800000000000;
+        const VISITED_EMERGENCE_STORAGE_ROCK = 0x1000000000000;
+        const VISITED_EMERGENCE_STORAGE_TUNNEL = 0x2000000000000;
+        const VISITED_ESCAPE = 0x4000000000000;
+        const VISITED_EXIT_BREACH = 0x8000000000000;
+        const VISITED_FAST_TRAVEL = 0x10000000000000;
+        const VISITED_FILTER_TELEPORTER_FLASK = 0x20000000000000;
+        const VISITED_GIGUNA_BOULDER = 0x40000000000000;
+        const VISITED_GIGUNA_BREACH_CRAB_RAVE_FLASK = 0x80000000000000;
+        const VISITED_GIGUNA_BREACH_GATE_AND_WALL_GATE = 0x100000000000000;
+        const VISITED_GIGUNA_BREACH_LOWER_MACHINERY_FLASK = 0x200000000000000;
+        const VISITED_GIGUNA_BREACH_PINKNESS_ROCK = 0x400000000000000;
+        const VISITED_GIGUNA_BREACHABLE_WALL_FLASK = 0x800000000000000;
+        const VISITED_GIGUNA_CLOUDS_FLASK = 0x1000000000000000;
+        const VISITED_GIGUNA_DUAL_PATH_SWITCH = 0x2000000000000000;
+        const VISITED_GIGUNA_DUAL_PATH_WALL = 0x4000000000000000;
+        const VISITED_GIGUNA_EAST_RUINS_FLASK = 0x8000000000000000;
         const ALL_VISIT_FLAGS = 0xffffffffffffffff;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits7: u64 {
-        const VISITED_GIGUNA_LABYRINTH_FLASK = 0x1;
-        const VISITED_GIGUNA_LAMASSU_FLASK = 0x2;
-        const VISITED_GIGUNA_MURAL_FLASK = 0x4;
-        const VISITED_GIGUNA_NORTHEAST_FLASK = 0x8;
-        const VISITED_GIGUNA_NORTHEAST_GATE = 0x10;
-        const VISITED_GIGUNA_SECRECY_FLASK = 0x20;
-        const VISITED_GIGUNA_SEPARATOR_BRICKS = 0x40;
-        const VISITED_GIGUNA_TOP_FLASK = 0x80;
-        const VISITED_GIGUNA_VERTICAL_INTERCHANGE_FLASK = 0x100;
-        const VISITED_GIGUNA_VERTICAL_INTERCHANGE_GATE = 0x200;
-        const VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK = 0x400;
-        const VISITED_GIGUNA_WASTELAND_FLASK = 0x800;
-        const VISITED_GIGUNA_WASTELAND_PASSAGE_H = 0x1000;
-        const VISITED_GIGUNA_WASTELAND_SWITCH = 0x2000;
-        const VISITED_GLACIER_40_8_FLASK = 0x4000;
-        const VISITED_GLACIER_BIG_DROP_ROCK = 0x8000;
-        const VISITED_GLACIER_BREACH_FLOATERS_FLASK = 0x10000;
-        const VISITED_GLACIER_BREACH_GRATE_WORK_FLASK = 0x20000;
-        const VISITED_GLACIER_BREACH_SPIDERY_CONNECTOR_FLASK = 0x40000;
-        const VISITED_GLACIER_DOCK_FLASK = 0x80000;
-        const VISITED_GLACIER_FORTRESS_FLASK = 0x100000;
-        const VISITED_GLACIER_LAKE_MAIN_ENTRANCE_FLASK = 0x200000;
-        const VISITED_GLACIER_SEA_BURIAL_ROCK = 0x400000;
-        const VISITED_GLACIER_VERTICAL_ROOM_FLASK = 0x800000;
-        const VISITED_HAMMONDS_NOTE = 0x1000000;
-        const VISITED_IB_GAUNTLET_FLASK = 0x2000000;
-        const VISITED_INFECT = 0x4000000;
-        const VISITED_IRIKAR_AIRY_FLASK = 0x8000000;
-        const VISITED_IRIKAR_BREACH_BEACH_FLASK = 0x10000000;
-        const VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR = 0x20000000;
-        const VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_FLASK = 0x40000000;
-        const VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL = 0x80000000;
-        const VISITED_IRIKAR_GUDAM = 0x100000000;
-        const VISITED_IRIKAR_GUDAM_FLASK = 0x200000000;
-        const VISITED_IRIKAR_MIDWEST_FLASK = 0x400000000;
-        const VISITED_IRIKAR_ROYAL_STORAGE_FLASK = 0x800000000;
-        const VISITED_IRIKAR_ROYAL_STORAGE_WALL = 0x1000000000;
-        const VISITED_IRIKAR_WELL_FLASK = 0x2000000000;
-        const VISITED_LAB_EAST_RUINS_FLASK = 0x4000000000;
-        const VISITED_LEDGE_GRAB = 0x8000000000;
-        const VISITED_LOC_AMAGI_BREACH__EAST_ENTRANCE__UPPER_SLOPE__ITEM = 0x10000000000;
-        const VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__HIT_BUTTON = 0x20000000000;
-        const VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__ITEM = 0x40000000000;
-        const VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH = 0x80000000000;
-        const VISITED_LOC_AMAGI_BREACH__WEST_RUINS__BUTTON__HIT_BUTTON = 0x100000000000;
-        const VISITED_LOC_AMAGI_BREACH__WEST_RUINS__EAST_PLATFORM__HEALTH = 0x200000000000;
-        const VISITED_LOC_AMAGI__EAST_LAKE__FOOT__TABLET = 0x400000000000;
-        const VISITED_LOC_AMAGI__GATED_COMMUNITY__BUTTON__HIT_BUTTON = 0x800000000000;
-        const VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM = 0x1000000000000;
-        const VISITED_LOC_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM = 0x2000000000000;
-        const VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REAR_PILLAR__BOSS_REWARD = 0x4000000000000;
-        const VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL = 0x8000000000000;
-        const VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__DEFEAT_MUS_A_M20 = 0x10000000000000;
-        const VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER = 0x20000000000000;
-        const VISITED_LOC_AMAGI__WIGGLY_ROOM__BUTTON__HIT_BUTTON = 0x40000000000000;
-        const VISITED_LOC_AMAGI__WIGGLY_ROOM__CACHE__TABLET = 0x80000000000000;
-        const VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON = 0x100000000000000;
-        const VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM = 0x200000000000000;
-        const VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON = 0x400000000000000;
-        const VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH = 0x800000000000000;
-        const VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL = 0x1000000000000000;
-        const VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET = 0x2000000000000000;
-        const VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM = 0x4000000000000000;
-        const VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET = 0x8000000000000000;
+        const VISITED_GIGUNA_GATEWAY_BLOCK = 0x1;
+        const VISITED_GIGUNA_GATEWAY_FLASK = 0x2;
+        const VISITED_GIGUNA_GUBI = 0x4;
+        const VISITED_GIGUNA_GUBI_FLASK = 0x8;
+        const VISITED_GIGUNA_HIGHEST_FLASK = 0x10;
+        const VISITED_GIGUNA_LABYRINTH_FLASK = 0x20;
+        const VISITED_GIGUNA_LAMASSU_FLASK = 0x40;
+        const VISITED_GIGUNA_MURAL_FLASK = 0x80;
+        const VISITED_GIGUNA_NORTHEAST_FLASK = 0x100;
+        const VISITED_GIGUNA_NORTHEAST_GATE = 0x200;
+        const VISITED_GIGUNA_SECRECY_FLASK = 0x400;
+        const VISITED_GIGUNA_SEPARATOR_BRICKS = 0x800;
+        const VISITED_GIGUNA_TOP_FLASK = 0x1000;
+        const VISITED_GIGUNA_VERTICAL_INTERCHANGE_FLASK = 0x2000;
+        const VISITED_GIGUNA_VERTICAL_INTERCHANGE_GATE = 0x4000;
+        const VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK = 0x8000;
+        const VISITED_GIGUNA_WASTELAND_FLASK = 0x10000;
+        const VISITED_GIGUNA_WASTELAND_PASSAGE_H = 0x20000;
+        const VISITED_GIGUNA_WASTELAND_SWITCH = 0x40000;
+        const VISITED_GLACIER_40_8_FLASK = 0x80000;
+        const VISITED_GLACIER_BIG_DROP_ROCK = 0x100000;
+        const VISITED_GLACIER_BREACH_FLOATERS_FLASK = 0x200000;
+        const VISITED_GLACIER_BREACH_GRATE_WORK_FLASK = 0x400000;
+        const VISITED_GLACIER_BREACH_SPIDERY_CONNECTOR_FLASK = 0x800000;
+        const VISITED_GLACIER_DOCK_FLASK = 0x1000000;
+        const VISITED_GLACIER_FORTRESS_FLASK = 0x2000000;
+        const VISITED_GLACIER_LAKE_MAIN_ENTRANCE_FLASK = 0x4000000;
+        const VISITED_GLACIER_SEA_BURIAL_ROCK = 0x8000000;
+        const VISITED_GLACIER_VERTICAL_ROOM_FLASK = 0x10000000;
+        const VISITED_HAMMONDS_NOTE = 0x20000000;
+        const VISITED_IB_GAUNTLET_FLASK = 0x40000000;
+        const VISITED_INFECT = 0x80000000;
+        const VISITED_IRIKAR_AIRY_FLASK = 0x100000000;
+        const VISITED_IRIKAR_BREACH_BEACH_FLASK = 0x200000000;
+        const VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR = 0x400000000;
+        const VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_FLASK = 0x800000000;
+        const VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL = 0x1000000000;
+        const VISITED_IRIKAR_GUDAM = 0x2000000000;
+        const VISITED_IRIKAR_GUDAM_FLASK = 0x4000000000;
+        const VISITED_IRIKAR_MIDWEST_FLASK = 0x8000000000;
+        const VISITED_IRIKAR_ROYAL_STORAGE_FLASK = 0x10000000000;
+        const VISITED_IRIKAR_ROYAL_STORAGE_WALL = 0x20000000000;
+        const VISITED_IRIKAR_WELL_FLASK = 0x40000000000;
+        const VISITED_LAB_EAST_RUINS_FLASK = 0x80000000000;
+        const VISITED_LEDGE_GRAB = 0x100000000000;
+        const VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH = 0x200000000000;
+        const VISITED_LOC_AMAGI_BREACH__EAST_ENTRANCE__UPPER_SLOPE__ITEM = 0x400000000000;
+        const VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__HIT_BUTTON = 0x800000000000;
+        const VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__ITEM = 0x1000000000000;
+        const VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON = 0x2000000000000;
+        const VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH = 0x4000000000000;
+        const VISITED_LOC_AMAGI_BREACH__WEST_RUINS__BUTTON__HIT_BUTTON = 0x8000000000000;
+        const VISITED_LOC_AMAGI_BREACH__WEST_RUINS__EAST_PLATFORM__HEALTH = 0x10000000000000;
+        const VISITED_LOC_AMAGI__EAST_LAKE__FOOT__TABLET = 0x20000000000000;
+        const VISITED_LOC_AMAGI__GATED_COMMUNITY__BUTTON__HIT_BUTTON = 0x40000000000000;
+        const VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM = 0x80000000000000;
+        const VISITED_LOC_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM = 0x100000000000000;
+        const VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH = 0x200000000000000;
+        const VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REAR_PILLAR__BOSS_REWARD = 0x400000000000000;
+        const VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL = 0x800000000000000;
+        const VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__DEFEAT_MUS_A_M20 = 0x1000000000000000;
+        const VISITED_LOC_AMAGI__WEST_LAKE__STRONGHOLD_CEILING_LEFT__KNOCK_DOWN_LEFT_BOULDER = 0x2000000000000000;
+        const VISITED_LOC_AMAGI__WIGGLY_ROOM__BUTTON__HIT_BUTTON = 0x4000000000000000;
+        const VISITED_LOC_AMAGI__WIGGLY_ROOM__CACHE__TABLET = 0x8000000000000000;
         const ALL_VISIT_FLAGS = 0xffffffffffffffff;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits8: u64 {
-        const VISITED_LOC_ANNUNA__MIRROR_MATCH__BELOW_SWITCH__HIT_SWITCH = 0x1;
-        const VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT = 0x2;
-        const VISITED_LOC_ANNUNA__REMOTE_TRAINING__PLINTH__ITEM = 0x4;
-        const VISITED_LOC_ANNUNA__SECRET_PASSAGE__WALL_WEST__REFILL = 0x8;
-        const VISITED_LOC_ANNUNA__SNIPER_VALLEY__BRIDGE_END__HEALTH_PICKUP = 0x10;
-        const VISITED_LOC_ANNUNA__SNIPER_VALLEY__TABLE__ITEM = 0x20;
-        const VISITED_LOC_ANNUNA__SPIDER_ROOM__HEALTHY_CORNER__HEALTH_REFILL = 0x40;
-        const VISITED_LOC_ANNUNA__TWISTY_PASSAGES__NORTHWEST_ALCOVE__REFILL = 0x80;
-        const VISITED_LOC_ANNUNA__TWISTY_PASSAGES__TOP__TABLET = 0x100;
-        const VISITED_LOC_ANNUNA__UPPER_HALLWAY__BEHIND_PEDESTAL__HEALTH_PICKUP = 0x200;
-        const VISITED_LOC_ANNUNA__VERTICAL_ROOM__GATE_BUTTON__HIT_BUTTON = 0x400;
-        const VISITED_LOC_ANNUNA__VERTICAL_ROOM__PLINTH__ITEM = 0x800;
-        const VISITED_LOC_ANNUNA__VERTICAL_ROOM__UPPER_CACHE__TABLET = 0x1000;
-        const VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM = 0x2000;
-        const VISITED_LOC_ANNUNA__WEST_CLIMB__CACHE__ITEM = 0x4000;
-        const VISITED_LOC_ANTARCTICA__POWER_ROOM__SWITCH__FLIP = 0x8000;
-        const VISITED_LOC_ANTARCTICA__SHED__INTERIOR__SHELF = 0x10000;
-        const VISITED_LOC_EBIH_BREACH__IN_N_OUT__BUTTON__HIT_BUTTON = 0x20000;
-        const VISITED_LOC_EBIH_BREACH__IN_N_OUT__GATE_EAST__ITEM = 0x40000;
-        const VISITED_LOC_EBIH_BREACH__SPIDER_GUARDS__BUTTON__OPEN_GATE = 0x80000;
-        const VISITED_LOC_EBIH__BOSS_ROOM__BOSS__BOSS_REWARD = 0x100000;
-        const VISITED_LOC_EBIH__BOSS_ROOM__EAST_LEDGE__ITEM = 0x200000;
-        const VISITED_LOC_EBIH__BY_GARAGE__CRAWLSPACE__FRAGMENT = 0x400000;
-        const VISITED_LOC_EBIH__EBIH_EAST__DISPENSER__VEND = 0x800000;
-        const VISITED_LOC_EBIH__EBIH_EAST__EAST_LEDGE__NOTE = 0x1000000;
-        const VISITED_LOC_EBIH__EBIH_WEST__ALCOVE__TABLET = 0x2000000;
-        const VISITED_LOC_EBIH__GEM_ROOM__BETWEEN_GATES__GEM = 0x4000000;
-        const VISITED_LOC_EBIH__GRID_26_10_11__LEDGE__NOTE = 0x8000000;
-        const VISITED_LOC_EBIH__GUARDED_HEALTH__FAR_WEST__REFILL = 0x10000000;
-        const VISITED_LOC_EBIH__GUARDED_HEALTH__WEST_BASIN__HEALTH = 0x20000000;
-        const VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK = 0x40000000;
-        const VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__SWITCH__ACTIVATE_SWITCH = 0x80000000;
-        const VISITED_LOC_EBIH__WATERFALL__ALCOVE__PEDESTAL = 0x100000000;
-        const VISITED_LOC_EBIH__WATERFALL__WATERFALL_CENTER_CENTER__BOTH_BLOCKS = 0x200000000;
-        const VISITED_LOC_FILTER__CORE__TERMINAL_EAST__AUTHORIZE_HAMMOND = 0x400000000;
-        const VISITED_LOC_GIGUNA_BREACH__CHIMNEY__CACHE__FLASK = 0x800000000;
-        const VISITED_LOC_GIGUNA_BREACH__CRAB_RAVE__BUTTON__HIT_BUTTON = 0x1000000000;
-        const VISITED_LOC_GIGUNA_BREACH__CUBBY__ROCKS__HEALTH = 0x2000000000;
-        const VISITED_LOC_GIGUNA_BREACH__GATE_AND_WALL__WALLED_OFF__HEALTH = 0x4000000000;
-        const VISITED_LOC_GIGUNA_BREACH__LABYRINTH__BUTTON__OPEN_GATE = 0x8000000000;
-        const VISITED_LOC_GIGUNA_BREACH__LOWER_MACHINERY__BUTTON__HIT_BUTTON = 0x10000000000;
-        const VISITED_LOC_GIGUNA_BREACH__ROBOPEDE__CENTER__BOSS_REWARD = 0x20000000000;
-        const VISITED_LOC_GIGUNA_BREACH__SLINGSHOT__RAVINE__URN = 0x40000000000;
-        const VISITED_LOC_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET = 0x80000000000;
-        const VISITED_LOC_GIGUNA__CACHE__PIT__ITEM = 0x100000000000;
-        const VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM = 0x200000000000;
-        const VISITED_LOC_GIGUNA__DUAL_PATH__WALL_SECRET__HEALTH = 0x400000000000;
-        const VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM = 0x800000000000;
-        const VISITED_LOC_GIGUNA__GATEWAY__BUTTON__HIT_SWITCH = 0x1000000000000;
-        const VISITED_LOC_GIGUNA__GIGUNA_BASE__RUIN__ITEM = 0x2000000000000;
-        const VISITED_LOC_GIGUNA__GIGUNA_BASE__TABLE__NEWS = 0x4000000000000;
-        const VISITED_LOC_GIGUNA__GUBI_LAIR__PEDESTAL__AXE = 0x8000000000000;
-        const VISITED_LOC_GIGUNA__HARD_ROCK__ROCK_CENTER__TABLET = 0x10000000000000;
-        const VISITED_LOC_GIGUNA__HELIPAD__TABLET_LEDGE__TABLET = 0x20000000000000;
-        const VISITED_LOC_GIGUNA__LABYRINTH__DOOR_LEDGE__ITEM = 0x40000000000000;
-        const VISITED_LOC_GIGUNA__MURAL__NW_CACHE__NOTE = 0x80000000000000;
-        const VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM = 0x100000000000000;
-        const VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM = 0x200000000000000;
-        const VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION = 0x400000000000000;
-        const VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH = 0x800000000000000;
-        const VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM = 0x1000000000000000;
-        const VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM = 0x2000000000000000;
-        const VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET = 0x4000000000000000;
-        const VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD = 0x8000000000000000;
+        const VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON = 0x1;
+        const VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM = 0x2;
+        const VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON = 0x4;
+        const VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH = 0x8;
+        const VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL = 0x10;
+        const VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET = 0x20;
+        const VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM = 0x40;
+        const VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET = 0x80;
+        const VISITED_LOC_ANNUNA__MIRROR_MATCH__BELOW_SWITCH__HIT_SWITCH = 0x100;
+        const VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT = 0x200;
+        const VISITED_LOC_ANNUNA__REMOTE_TRAINING__PLINTH__ITEM = 0x400;
+        const VISITED_LOC_ANNUNA__SECRET_PASSAGE__WALL_WEST__REFILL = 0x800;
+        const VISITED_LOC_ANNUNA__SNIPER_VALLEY__BRIDGE_END__HEALTH_PICKUP = 0x1000;
+        const VISITED_LOC_ANNUNA__SNIPER_VALLEY__TABLE__ITEM = 0x2000;
+        const VISITED_LOC_ANNUNA__SPIDER_ROOM__HEALTHY_CORNER__HEALTH_REFILL = 0x4000;
+        const VISITED_LOC_ANNUNA__TWISTY_PASSAGES__NORTHWEST_ALCOVE__REFILL = 0x8000;
+        const VISITED_LOC_ANNUNA__TWISTY_PASSAGES__TOP__TABLET = 0x10000;
+        const VISITED_LOC_ANNUNA__UPPER_HALLWAY__BEHIND_PEDESTAL__HEALTH_PICKUP = 0x20000;
+        const VISITED_LOC_ANNUNA__VERTICAL_ROOM__GATE_BUTTON__HIT_BUTTON = 0x40000;
+        const VISITED_LOC_ANNUNA__VERTICAL_ROOM__PLINTH__ITEM = 0x80000;
+        const VISITED_LOC_ANNUNA__VERTICAL_ROOM__UPPER_CACHE__TABLET = 0x100000;
+        const VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM = 0x200000;
+        const VISITED_LOC_ANNUNA__WEST_CLIMB__CACHE__ITEM = 0x400000;
+        const VISITED_LOC_ANTARCTICA__POWER_ROOM__SWITCH__FLIP = 0x800000;
+        const VISITED_LOC_ANTARCTICA__SHED__INTERIOR__SHELF = 0x1000000;
+        const VISITED_LOC_EBIH_BREACH__IN_N_OUT__BUTTON__HIT_BUTTON = 0x2000000;
+        const VISITED_LOC_EBIH_BREACH__IN_N_OUT__GATE_EAST__ITEM = 0x4000000;
+        const VISITED_LOC_EBIH_BREACH__SPIDER_GUARDS__BUTTON__OPEN_GATE = 0x8000000;
+        const VISITED_LOC_EBIH__BOSS_ROOM__BOSS__BOSS_REWARD = 0x10000000;
+        const VISITED_LOC_EBIH__BOSS_ROOM__EAST_LEDGE__ITEM = 0x20000000;
+        const VISITED_LOC_EBIH__BY_GARAGE__CRAWLSPACE__FRAGMENT = 0x40000000;
+        const VISITED_LOC_EBIH__EBIH_EAST__DISPENSER__VEND = 0x80000000;
+        const VISITED_LOC_EBIH__EBIH_EAST__EAST_LEDGE__NOTE = 0x100000000;
+        const VISITED_LOC_EBIH__EBIH_WEST__ALCOVE__TABLET = 0x200000000;
+        const VISITED_LOC_EBIH__GEM_ROOM__BETWEEN_GATES__GEM = 0x400000000;
+        const VISITED_LOC_EBIH__GRID_26_10_11__LEDGE__NOTE = 0x800000000;
+        const VISITED_LOC_EBIH__GUARDED_HEALTH__FAR_WEST__REFILL = 0x1000000000;
+        const VISITED_LOC_EBIH__GUARDED_HEALTH__WEST_BASIN__HEALTH = 0x2000000000;
+        const VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__BLOCK_CUBBY__SHOCKWAVE_BLOCK = 0x4000000000;
+        const VISITED_LOC_EBIH__VERTICAL_INTERCHANGE__SWITCH__ACTIVATE_SWITCH = 0x8000000000;
+        const VISITED_LOC_EBIH__WATERFALL__ALCOVE__PEDESTAL = 0x10000000000;
+        const VISITED_LOC_EBIH__WATERFALL__WATERFALL_CENTER_CENTER__BOTH_BLOCKS = 0x20000000000;
+        const VISITED_LOC_FILTER__CORE__TERMINAL_EAST__AUTHORIZE_HAMMOND = 0x40000000000;
+        const VISITED_LOC_GIGUNA_BREACH__CHIMNEY__CACHE__FLASK = 0x80000000000;
+        const VISITED_LOC_GIGUNA_BREACH__CRAB_RAVE__BUTTON__HIT_BUTTON = 0x100000000000;
+        const VISITED_LOC_GIGUNA_BREACH__CUBBY__ROCKS__HEALTH = 0x200000000000;
+        const VISITED_LOC_GIGUNA_BREACH__GATE_AND_WALL__WALLED_OFF__HEALTH = 0x400000000000;
+        const VISITED_LOC_GIGUNA_BREACH__LABYRINTH__BUTTON__OPEN_GATE = 0x800000000000;
+        const VISITED_LOC_GIGUNA_BREACH__LOWER_MACHINERY__BUTTON__HIT_BUTTON = 0x1000000000000;
+        const VISITED_LOC_GIGUNA_BREACH__ROBOPEDE__CENTER__BOSS_REWARD = 0x2000000000000;
+        const VISITED_LOC_GIGUNA_BREACH__SLINGSHOT__RAVINE__URN = 0x4000000000000;
+        const VISITED_LOC_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET = 0x8000000000000;
+        const VISITED_LOC_GIGUNA__CACHE__PIT__ITEM = 0x10000000000000;
+        const VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM = 0x20000000000000;
+        const VISITED_LOC_GIGUNA__DUAL_PATH__WALL_SECRET__HEALTH = 0x40000000000000;
+        const VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM = 0x80000000000000;
+        const VISITED_LOC_GIGUNA__GATEWAY__BUTTON__HIT_SWITCH = 0x100000000000000;
+        const VISITED_LOC_GIGUNA__GIGUNA_BASE__RUIN__ITEM = 0x200000000000000;
+        const VISITED_LOC_GIGUNA__GIGUNA_BASE__TABLE__NEWS = 0x400000000000000;
+        const VISITED_LOC_GIGUNA__GUBI_LAIR__PEDESTAL__AXE = 0x800000000000000;
+        const VISITED_LOC_GIGUNA__HARD_ROCK__ROCK_CENTER__TABLET = 0x1000000000000000;
+        const VISITED_LOC_GIGUNA__HELIPAD__TABLET_LEDGE__TABLET = 0x2000000000000000;
+        const VISITED_LOC_GIGUNA__LABYRINTH__DOOR_LEDGE__ITEM = 0x4000000000000000;
+        const VISITED_LOC_GIGUNA__MURAL__NW_CACHE__NOTE = 0x8000000000000000;
         const ALL_VISIT_FLAGS = 0xffffffffffffffff;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits9: u64 {
-        const VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_WEST_PLATFORM__DEFEAT_ELLAG = 0x1;
-        const VISITED_LOC_GLACIER_BREACH__SPIDERY_CONNECTOR__BUTTON__HIT_BUTTON = 0x2;
-        const VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__ITEM = 0x4;
-        const VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__SWITCH = 0x8;
-        const VISITED_LOC_GLACIER__COMPASS_ROOM__CENTER__TABLE = 0x10;
-        const VISITED_LOC_GLACIER__CRYSTALS__LOWER_CORNER__ITEM = 0x20;
-        const VISITED_LOC_GLACIER__CRYSTALS__TOP_CORNER__TABLET = 0x40;
-        const VISITED_LOC_GLACIER__FORTRESS__BUTTON__HIT_BUTTON = 0x80;
-        const VISITED_LOC_GLACIER__FORTRESS__INNER_CENTER__HEALTH = 0x100;
-        const VISITED_LOC_GLACIER__FORTRESS__PARAPET_CENTER_EAST__BOMBERANG = 0x200;
-        const VISITED_LOC_GLACIER__HAMMONDS_END__BETWEEN_CENTER_DOORS__HEALTH = 0x400;
-        const VISITED_LOC_GLACIER__INNER_CAVERNS__NORTHWEST_DRONE__ITEM = 0x800;
-        const VISITED_LOC_GLACIER__PEAK__BIRDS_EYE__ITEM = 0x1000;
-        const VISITED_LOC_GLACIER__SEA_BURIAL__COLLAPSING_CEILING__DROWN = 0x2000;
-        const VISITED_LOC_GLACIER__SEA_BURIAL__DEEP_CACHE__HEALTH = 0x4000;
-        const VISITED_LOC_GLACIER__SEA_BURIAL__INSIDE_THE_GRATE__NOTES = 0x8000;
-        const VISITED_LOC_GLACIER__SLICED_CAVERN__CACHE__NOTE = 0x10000;
-        const VISITED_LOC_GLACIER__SLICED_CAVERN__UPPER_MIDDLE__HEALTH = 0x20000;
-        const VISITED_LOC_GLACIER__VERTICAL_ROOM__UNDER_SWITCH__SWITCH = 0x40000;
-        const VISITED_LOC_INTERIOR__BUNKER_INTERIOR__DESK__NOTE = 0x80000;
-        const VISITED_LOC_INTERIOR__EBIH_CAVE__ENTRY__HEALTH = 0x100000;
-        const VISITED_LOC_INTERIOR__GARAGE__BOXES__UNDER_BOXES = 0x200000;
-        const VISITED_LOC_INTERIOR__OBSERVATORY__EAST_DESK__NOTES = 0x400000;
-        const VISITED_LOC_INTERIOR__OUTPOST_INTERIOR__BOOKSHELF__NOTE = 0x800000;
-        const VISITED_LOC_INTERIOR__TENT_INTERIOR__DESK__NOTE = 0x1000000;
-        const VISITED_LOC_IRIKAR_BREACH__BURIED_TREASURE__PILLAR_BOTTOM__HEALTH = 0x2000000;
-        const VISITED_LOC_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM = 0x4000000;
-        const VISITED_LOC_IRIKAR_BREACH__ROCKY_DUNES__DITCH__HEALTH = 0x8000000;
-        const VISITED_LOC_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM = 0x10000000;
-        const VISITED_LOC_IRIKAR__ABANDONED_ROOM__CORNER_CORE__CORE = 0x20000000;
-        const VISITED_LOC_IRIKAR__BASEMENT_PIPES__HIGH_PIPE__TABLET = 0x40000000;
-        const VISITED_LOC_IRIKAR__BASEMENT_PIPES__LEFT_VERTICAL_PIPE__HEALTH_PICKUP = 0x80000000;
-        const VISITED_LOC_IRIKAR__BEACH__CACHE__ITEM = 0x100000000;
-        const VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH = 0x200000000;
-        const VISITED_LOC_IRIKAR__EAST_ROOFTOPS__TOP_ROOFTOP__TABLET = 0x400000000;
-        const VISITED_LOC_IRIKAR__HUB__DAGGER_ALTAR__WEAPON = 0x800000000;
-        const VISITED_LOC_IRIKAR__HUB__SW_BUILDING_TOP_PLATFORM__POWER_CORE = 0x1000000000;
-        const VISITED_LOC_IRIKAR__HUB__SAT_TOWER_TOP_LEDGE__TABLET = 0x2000000000;
-        const VISITED_LOC_IRIKAR__LAMASSU__DESK__ITEM = 0x4000000000;
-        const VISITED_LOC_IRIKAR__MIDWEST__TABLET_PLATFORM__TABLET = 0x8000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_DAMAGE_1 = 0x10000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_DAMAGE_2 = 0x20000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_DAMAGE_3 = 0x40000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_1 = 0x80000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_2 = 0x100000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_3 = 0x200000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_1 = 0x400000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2 = 0x800000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_3 = 0x1000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_1 = 0x2000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_2 = 0x4000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3 = 0x8000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_1 = 0x10000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_2 = 0x20000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_3 = 0x40000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_1 = 0x80000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2 = 0x100000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3 = 0x200000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1 = 0x400000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2 = 0x800000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3 = 0x1000000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1 = 0x2000000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2 = 0x4000000000000000;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3 = 0x8000000000000000;
+        const VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM = 0x1;
+        const VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM = 0x2;
+        const VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION = 0x4;
+        const VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH = 0x8;
+        const VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM = 0x10;
+        const VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM = 0x20;
+        const VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET = 0x40;
+        const VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD = 0x80;
+        const VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_WEST_PLATFORM__DEFEAT_ELLAG = 0x100;
+        const VISITED_LOC_GLACIER_BREACH__SPIDERY_CONNECTOR__BUTTON__HIT_BUTTON = 0x200;
+        const VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__ITEM = 0x400;
+        const VISITED_LOC_GLACIER__BOOMERANG_ROOM__PEDESTAL__SWITCH = 0x800;
+        const VISITED_LOC_GLACIER__COMPASS_ROOM__CENTER__TABLE = 0x1000;
+        const VISITED_LOC_GLACIER__CRYSTALS__LOWER_CORNER__ITEM = 0x2000;
+        const VISITED_LOC_GLACIER__CRYSTALS__TOP_CORNER__TABLET = 0x4000;
+        const VISITED_LOC_GLACIER__FORTRESS__BUTTON__HIT_BUTTON = 0x8000;
+        const VISITED_LOC_GLACIER__FORTRESS__INNER_CENTER__HEALTH = 0x10000;
+        const VISITED_LOC_GLACIER__FORTRESS__PARAPET_CENTER_EAST__BOMBERANG = 0x20000;
+        const VISITED_LOC_GLACIER__HAMMONDS_END__BETWEEN_CENTER_DOORS__HEALTH = 0x40000;
+        const VISITED_LOC_GLACIER__INNER_CAVERNS__NORTHWEST_DRONE__ITEM = 0x80000;
+        const VISITED_LOC_GLACIER__PEAK__BIRDS_EYE__ITEM = 0x100000;
+        const VISITED_LOC_GLACIER__SEA_BURIAL__COLLAPSING_CEILING__DROWN = 0x200000;
+        const VISITED_LOC_GLACIER__SEA_BURIAL__DEEP_CACHE__HEALTH = 0x400000;
+        const VISITED_LOC_GLACIER__SEA_BURIAL__INSIDE_THE_GRATE__NOTES = 0x800000;
+        const VISITED_LOC_GLACIER__SLICED_CAVERN__CACHE__NOTE = 0x1000000;
+        const VISITED_LOC_GLACIER__SLICED_CAVERN__UPPER_MIDDLE__HEALTH = 0x2000000;
+        const VISITED_LOC_GLACIER__VERTICAL_ROOM__UNDER_SWITCH__SWITCH = 0x4000000;
+        const VISITED_LOC_INTERIOR__BUNKER_INTERIOR__DESK__NOTE = 0x8000000;
+        const VISITED_LOC_INTERIOR__EBIH_CAVE__ENTRY__HEALTH = 0x10000000;
+        const VISITED_LOC_INTERIOR__GARAGE__BOXES__UNDER_BOXES = 0x20000000;
+        const VISITED_LOC_INTERIOR__OBSERVATORY__EAST_DESK__NOTES = 0x40000000;
+        const VISITED_LOC_INTERIOR__OUTPOST_INTERIOR__BOOKSHELF__NOTE = 0x80000000;
+        const VISITED_LOC_INTERIOR__TENT_INTERIOR__DESK__NOTE = 0x100000000;
+        const VISITED_LOC_IRIKAR_BREACH__BURIED_TREASURE__PILLAR_BOTTOM__HEALTH = 0x200000000;
+        const VISITED_LOC_IRIKAR_BREACH__HOVER_ROOM__BOTTOM__ITEM = 0x400000000;
+        const VISITED_LOC_IRIKAR_BREACH__ROCKY_DUNES__DITCH__HEALTH = 0x800000000;
+        const VISITED_LOC_IRIKAR_BREACH__WORM_RAVE__CORNER__ITEM = 0x1000000000;
+        const VISITED_LOC_IRIKAR__ABANDONED_ROOM__CORNER_CORE__CORE = 0x2000000000;
+        const VISITED_LOC_IRIKAR__BASEMENT_PIPES__HIGH_PIPE__TABLET = 0x4000000000;
+        const VISITED_LOC_IRIKAR__BASEMENT_PIPES__LEFT_VERTICAL_PIPE__HEALTH_PICKUP = 0x8000000000;
+        const VISITED_LOC_IRIKAR__BEACH__CACHE__ITEM = 0x10000000000;
+        const VISITED_LOC_IRIKAR__BOSS_ROOM__HEALTHY_ROOFTOP__HEALTH = 0x20000000000;
+        const VISITED_LOC_IRIKAR__EAST_ROOFTOPS__TOP_ROOFTOP__TABLET = 0x40000000000;
+        const VISITED_LOC_IRIKAR__HUB__DAGGER_ALTAR__WEAPON = 0x80000000000;
+        const VISITED_LOC_IRIKAR__HUB__SW_BUILDING_TOP_PLATFORM__POWER_CORE = 0x100000000000;
+        const VISITED_LOC_IRIKAR__HUB__SAT_TOWER_TOP_LEDGE__TABLET = 0x200000000000;
+        const VISITED_LOC_IRIKAR__LAMASSU__DESK__ITEM = 0x400000000000;
+        const VISITED_LOC_IRIKAR__MIDWEST__TABLET_PLATFORM__TABLET = 0x800000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_DAMAGE_1 = 0x1000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_DAMAGE_2 = 0x2000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_DAMAGE_3 = 0x4000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_1 = 0x8000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_2 = 0x10000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__MELEE_SPEED_3 = 0x20000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_1 = 0x40000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_2 = 0x80000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_DAMAGE_3 = 0x100000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_1 = 0x200000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_2 = 0x400000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3 = 0x800000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_1 = 0x1000000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_2 = 0x2000000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_3 = 0x4000000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_1 = 0x8000000000000000;
         const ALL_VISIT_FLAGS = 0xffffffffffffffff;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
     pub struct ContextBits10: u64 {
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_1 = 0x1;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_2 = 0x2;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_1 = 0x4;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_2 = 0x8;
-        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_3 = 0x10;
-        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_1 = 0x20;
-        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2 = 0x40;
-        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3 = 0x80;
-        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_4 = 0x100;
-        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_5 = 0x200;
-        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__MIST_UPGRADE = 0x400;
-        const VISITED_LOC_UHRUM_BREACH__ANNUNA_GATE__BUTTON__HIT_BUTTON = 0x800;
-        const VISITED_LOC_UHRUM_BREACH__EAST_GLITCH__NORTHEAST_FLOWER__HEALTH = 0x1000;
-        const VISITED_LOC_UHRUM_BREACH__LOCKED_DOWN__BUTTON__HIT_BUTTON = 0x2000;
-        const VISITED_LOC_UHRUM__ANNUNA_CORRIDOR__EAST_CUBBY__TABLET = 0x4000;
-        const VISITED_LOC_UHRUM__ANNUNA_CORRIDOR__STATUE__ITEM = 0x8000;
-        const VISITED_LOC_UHRUM__ARTILLERY_PRACTICE__TUNNEL_ENTRANCE__TABLET = 0x10000;
-        const VISITED_LOC_UHRUM__CAVERN__PEDESTAL__ITEM = 0x20000;
-        const VISITED_LOC_UHRUM__GLEN__CENTER__ITEM = 0x40000;
-        const VISITED_LOC_UHRUM__ROCKY_GATE__EAST_LEDGE__NOTE = 0x80000;
-        const VISITED_LOC_UHRUM__SIEGE_CORRIDOR__CENTER_BOX__BOX = 0x100000;
-        const VISITED_LOC_UHRUM__SIEGE_CORRIDOR__POND__ITEM = 0x200000;
-        const VISITED_LOC_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE = 0x400000;
-        const VISITED_LOC_UHRUM__SPRING__CENTER__HEALTH = 0x800000;
-        const VISITED_LOC_UHRUM__TULIP_TOWER__MIDDLE_PLATEAU__REFILL = 0x1000000;
-        const VISITED_LOC_UHRUM__WATERFALLS__WEST_WATER_NOOK__TABLET = 0x2000000;
-        const VISITED_LOC_UHRUM__WEST_ENTRANCE__GATE_SWITCH__OPEN_GATE = 0x4000000;
-        const VISITED_LOC_UHRUM__WEST_ENTRANCE__INNER_DAIS__ITEM = 0x8000000;
-        const VISITED_LOC_UHRUM__WEST_ENTRANCE__SAND__REFILL = 0x10000000;
-        const VISITED_MELEE_CHARGE = 0x20000000;
-        const VISITED_NANITE_MIST = 0x40000000;
-        const VISITED_NOTES_2053_02_27 = 0x80000000;
-        const VISITED_REMOTE_DRONE = 0x100000000;
-        const VISITED_REVIVAL_HEALTH_NODE = 0x200000000;
-        const VISITED_ROBOPEDE = 0x400000000;
-        const VISITED_SHOCKWAVE = 0x800000000;
-        const VISITED_SIUNA_STORAGE_WALL = 0x1000000000;
-        const VISITED_SLINGSHOT_CHARGE = 0x2000000000;
-        const VISITED_SLINGSHOT_WEAPON = 0x4000000000;
-        const VISITED_SNIPER_VALLEY_ROCK_1 = 0x8000000000;
-        const VISITED_SNIPER_VALLEY_ROCK_2 = 0x10000000000;
-        const VISITED_SYNC_FLASK = 0x20000000000;
-        const VISITED_UHRUM_ANNUNA_CORRIDOR_BLOCK = 0x40000000000;
-        const VISITED_UHRUM_BREACH_EAST_COPSE_FLASK = 0x80000000000;
-        const VISITED_UHRUM_BREACH_LOCKED_DOWN_FLASK = 0x100000000000;
-        const VISITED_UHRUM_BREACH_OVERGROWN_RUINS_FLASK = 0x200000000000;
-        const VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL = 0x400000000000;
-        const VISITED_UHRUM_BREACH_ROCK_AND_GATE_GATE = 0x800000000000;
-        const VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK = 0x1000000000000;
-        const VISITED_UHRUM_CAVERN_WALL = 0x2000000000000;
-        const VISITED_UHRUM_EAST_GLITCH = 0x4000000000000;
-        const VISITED_UHRUM_EAST_LAKE_BLOCK = 0x8000000000000;
-        const VISITED_UHRUM_EMERGENCE_FLASK = 0x10000000000000;
-        const VISITED_UHRUM_EMERGENCE_WALL = 0x20000000000000;
-        const VISITED_UHRUM_GLITCHY_CORRIDOR_FLASK = 0x40000000000000;
-        const VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK = 0x80000000000000;
-        const VISITED_UHRUM_ROCKY_GATE_ROCK = 0x100000000000000;
-        const VISITED_UHRUM_ROCKY_GUARDPOST_FLASK = 0x200000000000000;
-        const VISITED_UHRUM_SECLUSION_FLASK = 0x400000000000000;
-        const VISITED_UHRUM_WATERFALL_CAVE_FLASK = 0x800000000000000;
-        const VISITED_UHRUM_WATERFALL_WALL = 0x1000000000000000;
-        const VISITED_UHRUM_WATERFALLS_BLOCK = 0x2000000000000000;
-        const VISITED_UHRUM_WATERFALLS_FLASK = 0x4000000000000000;
-        const VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL = 0x8000000000000000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2 = 0x1;
+        const VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3 = 0x2;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1 = 0x4;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2 = 0x8;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3 = 0x10;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1 = 0x20;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2 = 0x40;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3 = 0x80;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_1 = 0x100;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_2 = 0x200;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_1 = 0x400;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_2 = 0x800;
+        const VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_3 = 0x1000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_1 = 0x2000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_2 = 0x4000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_3 = 0x8000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_4 = 0x10000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__HEALTH_UPGRADE_5 = 0x20000;
+        const VISITED_LOC_MENU__UPGRADE_MENU__PHYSIOLOGY__MIST_UPGRADE = 0x40000;
+        const VISITED_LOC_UHRUM_BREACH__ANNUNA_GATE__BUTTON__HIT_BUTTON = 0x80000;
+        const VISITED_LOC_UHRUM_BREACH__EAST_GLITCH__NORTHEAST_FLOWER__HEALTH = 0x100000;
+        const VISITED_LOC_UHRUM_BREACH__LOCKED_DOWN__BUTTON__HIT_BUTTON = 0x200000;
+        const VISITED_LOC_UHRUM__ANNUNA_CORRIDOR__EAST_CUBBY__TABLET = 0x400000;
+        const VISITED_LOC_UHRUM__ANNUNA_CORRIDOR__STATUE__ITEM = 0x800000;
+        const VISITED_LOC_UHRUM__ARTILLERY_PRACTICE__TUNNEL_ENTRANCE__TABLET = 0x1000000;
+        const VISITED_LOC_UHRUM__CAVERN__PEDESTAL__ITEM = 0x2000000;
+        const VISITED_LOC_UHRUM__GLEN__CENTER__ITEM = 0x4000000;
+        const VISITED_LOC_UHRUM__ROCKY_GATE__EAST_LEDGE__NOTE = 0x8000000;
+        const VISITED_LOC_UHRUM__SIEGE_CORRIDOR__CENTER_BOX__BOX = 0x10000000;
+        const VISITED_LOC_UHRUM__SIEGE_CORRIDOR__POND__ITEM = 0x20000000;
+        const VISITED_LOC_UHRUM__SIEGE_CORRIDOR__WESTERN_CACHE__CORE = 0x40000000;
+        const VISITED_LOC_UHRUM__SPRING__CENTER__HEALTH = 0x80000000;
+        const VISITED_LOC_UHRUM__TULIP_TOWER__MIDDLE_PLATEAU__REFILL = 0x100000000;
+        const VISITED_LOC_UHRUM__WATERFALLS__WEST_WATER_NOOK__TABLET = 0x200000000;
+        const VISITED_LOC_UHRUM__WEST_ENTRANCE__GATE_SWITCH__OPEN_GATE = 0x400000000;
+        const VISITED_LOC_UHRUM__WEST_ENTRANCE__INNER_DAIS__ITEM = 0x800000000;
+        const VISITED_LOC_UHRUM__WEST_ENTRANCE__SAND__REFILL = 0x1000000000;
+        const VISITED_MELEE_CHARGE = 0x2000000000;
+        const VISITED_NANITE_MIST = 0x4000000000;
+        const VISITED_NOTES_2053_02_27 = 0x8000000000;
+        const VISITED_REMOTE_DRONE = 0x10000000000;
+        const VISITED_REVIVAL_HEALTH_NODE = 0x20000000000;
+        const VISITED_ROBOPEDE = 0x40000000000;
+        const VISITED_SHOCKWAVE = 0x80000000000;
+        const VISITED_SIUNA_STORAGE_WALL = 0x100000000000;
+        const VISITED_SLINGSHOT_CHARGE = 0x200000000000;
+        const VISITED_SLINGSHOT_WEAPON = 0x400000000000;
+        const VISITED_SNIPER_VALLEY_ROCK_1 = 0x800000000000;
+        const VISITED_SNIPER_VALLEY_ROCK_2 = 0x1000000000000;
+        const VISITED_SYNC_FLASK = 0x2000000000000;
+        const VISITED_UHRUM_ANNUNA_CORRIDOR_BLOCK = 0x4000000000000;
+        const VISITED_UHRUM_BREACH_EAST_COPSE_FLASK = 0x8000000000000;
+        const VISITED_UHRUM_BREACH_LOCKED_DOWN_FLASK = 0x10000000000000;
+        const VISITED_UHRUM_BREACH_OVERGROWN_RUINS_FLASK = 0x20000000000000;
+        const VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL = 0x40000000000000;
+        const VISITED_UHRUM_BREACH_ROCK_AND_GATE_GATE = 0x80000000000000;
+        const VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK = 0x100000000000000;
+        const VISITED_UHRUM_CAVERN_WALL = 0x200000000000000;
+        const VISITED_UHRUM_EAST_GLITCH = 0x400000000000000;
+        const VISITED_UHRUM_EAST_LAKE_BLOCK = 0x800000000000000;
+        const VISITED_UHRUM_EMERGENCE_FLASK = 0x1000000000000000;
+        const VISITED_UHRUM_EMERGENCE_WALL = 0x2000000000000000;
+        const VISITED_UHRUM_GLITCHY_CORRIDOR_FLASK = 0x4000000000000000;
+        const VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK = 0x8000000000000000;
         const ALL_VISIT_FLAGS = 0xffffffffffffffff;
     }
 }
 bitflags!{
     #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
-    pub struct ContextBits11: u8 {
-        const VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL = 0x1;
-        const VISITED_UHRUM_WEST_GLITCH = 0x2;
-        const ALL_VISIT_FLAGS = 0x3;
+    pub struct ContextBits11: u16 {
+        const VISITED_UHRUM_ROCKY_GATE_ROCK = 0x1;
+        const VISITED_UHRUM_ROCKY_GUARDPOST_FLASK = 0x2;
+        const VISITED_UHRUM_SECLUSION_FLASK = 0x4;
+        const VISITED_UHRUM_WATERFALL_CAVE_FLASK = 0x8;
+        const VISITED_UHRUM_WATERFALL_WALL = 0x10;
+        const VISITED_UHRUM_WATERFALLS_BLOCK = 0x20;
+        const VISITED_UHRUM_WATERFALLS_FLASK = 0x40;
+        const VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL = 0x80;
+        const VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL = 0x100;
+        const VISITED_UHRUM_WEST_GLITCH = 0x200;
+        const ALL_VISIT_FLAGS = 0x3ff;
     }
 }
 }
@@ -6034,13 +6171,14 @@ impl context::Ctx for Context {
     type MovementState = movements::MovementState;
     type Observer = FullObservation;
     type Expectation = Expectation;
-    const NUM_ITEMS: u32 = 208;
+    const NUM_ITEMS: u32 = 209;
 
 
     fn has(&self, item: Item) -> bool {
         match item {
             Item::Aansur => self.cbits2.contains(flags::ContextBits2::AANSUR),
             Item::Amagi_Breach_Lower_Hallway_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_LOWER_HALLWAY_GATE),
+            Item::Amagi_Breach_Split_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_SPLIT_GATE),
             Item::Amagi_Breach_West_Ruins_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_WEST_RUINS_GATE),
             Item::Amagi_Dragon_Eye_Passage => self.cbits2.contains(flags::ContextBits2::AMAGI_DRAGON_EYE_PASSAGE),
             Item::Amagi_Gated_Community_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_GATED_COMMUNITY_GATE),
@@ -6063,11 +6201,11 @@ impl context::Ctx for Context {
             Item::Apocalypse_Bomb => self.cbits2.contains(flags::ContextBits2::APOCALYPSE_BOMB),
             Item::Apocalypse_Seals_Wall => self.cbits2.contains(flags::ContextBits2::APOCALYPSE_SEALS_WALL),
             Item::Becoming_An_Arm => self.cbits2.contains(flags::ContextBits2::BECOMING_AN_ARM),
-            Item::Beware_the_Patternmind => self.cbits2.contains(flags::ContextBits2::BEWARE_THE_PATTERNMIND),
+            Item::Beware_the_Patternmind => self.cbits3.contains(flags::ContextBits3::BEWARE_THE_PATTERNMIND),
             Item::Big_Flask => self.big_flask >= 1,
-            Item::Boomerang => self.cbits2.contains(flags::ContextBits2::BOOMERANG),
-            Item::Boomerang_Upgrade => self.cbits2.contains(flags::ContextBits2::BOOMERANG_UPGRADE),
-            Item::Bounty_List => self.cbits2.contains(flags::ContextBits2::BOUNTY_LIST),
+            Item::Boomerang => self.cbits3.contains(flags::ContextBits3::BOOMERANG),
+            Item::Boomerang_Upgrade => self.cbits3.contains(flags::ContextBits3::BOOMERANG_UPGRADE),
+            Item::Bounty_List => self.cbits3.contains(flags::ContextBits3::BOUNTY_LIST),
             Item::Breach_Attractor => self.cbits3.contains(flags::ContextBits3::BREACH_ATTRACTOR),
             Item::Breach_Sight => self.cbits3.contains(flags::ContextBits3::BREACH_SIGHT),
             Item::Bronze_Axe => self.cbits3.contains(flags::ContextBits3::BRONZE_AXE),
@@ -6129,10 +6267,10 @@ impl context::Ctx for Context {
             Item::Giguna_Breach_Crab_Rave_Gate => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_CRAB_RAVE_GATE),
             Item::Giguna_Breach_Gate_and_Wall_Gate => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_GATE_AND_WALL_GATE),
             Item::Giguna_Breach_Lower_Machinery_Gate => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_LOWER_MACHINERY_GATE),
-            Item::Giguna_Breach_Pinkness_Rock => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK),
-            Item::Giguna_Dual_Path_Switch => self.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH),
-            Item::Giguna_Dual_Path_Wall => self.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_WALL),
-            Item::Giguna_Gateway_Block => self.cbits3.contains(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK),
+            Item::Giguna_Breach_Pinkness_Rock => self.cbits4.contains(flags::ContextBits4::GIGUNA_BREACH_PINKNESS_ROCK),
+            Item::Giguna_Dual_Path_Switch => self.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_SWITCH),
+            Item::Giguna_Dual_Path_Wall => self.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_WALL),
+            Item::Giguna_Gateway_Block => self.cbits4.contains(flags::ContextBits4::GIGUNA_GATEWAY_BLOCK),
             Item::Giguna_Gateway_Gate => self.cbits4.contains(flags::ContextBits4::GIGUNA_GATEWAY_GATE),
             Item::Giguna_Gubi => self.cbits4.contains(flags::ContextBits4::GIGUNA_GUBI),
             Item::Giguna_Labyrinth_Gate => self.cbits4.contains(flags::ContextBits4::GIGUNA_LABYRINTH_GATE),
@@ -6196,10 +6334,10 @@ impl context::Ctx for Context {
             Item::Ranged_Speed => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED),
             Item::Ranged_Speed_2 => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED_2),
             Item::Re_Does_Technology => self.cbits4.contains(flags::ContextBits4::RE_DOES_TECHNOLOGY),
-            Item::Record_Losses => self.cbits4.contains(flags::ContextBits4::RECORD_LOSSES),
-            Item::Remote_Boomerang => self.cbits4.contains(flags::ContextBits4::REMOTE_BOOMERANG),
-            Item::Remote_Drone => self.cbits4.contains(flags::ContextBits4::REMOTE_DRONE),
-            Item::Researchers_Missing => self.cbits4.contains(flags::ContextBits4::RESEARCHERS_MISSING),
+            Item::Record_Losses => self.cbits5.contains(flags::ContextBits5::RECORD_LOSSES),
+            Item::Remote_Boomerang => self.cbits5.contains(flags::ContextBits5::REMOTE_BOOMERANG),
+            Item::Remote_Drone => self.cbits5.contains(flags::ContextBits5::REMOTE_DRONE),
+            Item::Researchers_Missing => self.cbits5.contains(flags::ContextBits5::RESEARCHERS_MISSING),
             Item::Robopede => self.cbits5.contains(flags::ContextBits5::ROBOPEDE),
             Item::Royal_Dagger => self.cbits5.contains(flags::ContextBits5::ROYAL_DAGGER),
             Item::Royal_Ring => self.cbits5.contains(flags::ContextBits5::ROYAL_RING),
@@ -6254,6 +6392,7 @@ impl context::Ctx for Context {
         match item {
             Item::Aansur => self.cbits2.contains(flags::ContextBits2::AANSUR).into(),
             Item::Amagi_Breach_Lower_Hallway_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_LOWER_HALLWAY_GATE).into(),
+            Item::Amagi_Breach_Split_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_SPLIT_GATE).into(),
             Item::Amagi_Breach_West_Ruins_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_WEST_RUINS_GATE).into(),
             Item::Amagi_Dragon_Eye_Passage => self.cbits2.contains(flags::ContextBits2::AMAGI_DRAGON_EYE_PASSAGE).into(),
             Item::Amagi_Gated_Community_Gate => self.cbits2.contains(flags::ContextBits2::AMAGI_GATED_COMMUNITY_GATE).into(),
@@ -6276,11 +6415,11 @@ impl context::Ctx for Context {
             Item::Apocalypse_Bomb => self.cbits2.contains(flags::ContextBits2::APOCALYPSE_BOMB).into(),
             Item::Apocalypse_Seals_Wall => self.cbits2.contains(flags::ContextBits2::APOCALYPSE_SEALS_WALL).into(),
             Item::Becoming_An_Arm => self.cbits2.contains(flags::ContextBits2::BECOMING_AN_ARM).into(),
-            Item::Beware_the_Patternmind => self.cbits2.contains(flags::ContextBits2::BEWARE_THE_PATTERNMIND).into(),
+            Item::Beware_the_Patternmind => self.cbits3.contains(flags::ContextBits3::BEWARE_THE_PATTERNMIND).into(),
             Item::Big_Flask => self.big_flask.into(),
-            Item::Boomerang => self.cbits2.contains(flags::ContextBits2::BOOMERANG).into(),
-            Item::Boomerang_Upgrade => self.cbits2.contains(flags::ContextBits2::BOOMERANG_UPGRADE).into(),
-            Item::Bounty_List => self.cbits2.contains(flags::ContextBits2::BOUNTY_LIST).into(),
+            Item::Boomerang => self.cbits3.contains(flags::ContextBits3::BOOMERANG).into(),
+            Item::Boomerang_Upgrade => self.cbits3.contains(flags::ContextBits3::BOOMERANG_UPGRADE).into(),
+            Item::Bounty_List => self.cbits3.contains(flags::ContextBits3::BOUNTY_LIST).into(),
             Item::Breach_Attractor => self.cbits3.contains(flags::ContextBits3::BREACH_ATTRACTOR).into(),
             Item::Breach_Sight => self.cbits3.contains(flags::ContextBits3::BREACH_SIGHT).into(),
             Item::Bronze_Axe => self.cbits3.contains(flags::ContextBits3::BRONZE_AXE).into(),
@@ -6342,10 +6481,10 @@ impl context::Ctx for Context {
             Item::Giguna_Breach_Crab_Rave_Gate => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_CRAB_RAVE_GATE).into(),
             Item::Giguna_Breach_Gate_and_Wall_Gate => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_GATE_AND_WALL_GATE).into(),
             Item::Giguna_Breach_Lower_Machinery_Gate => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_LOWER_MACHINERY_GATE).into(),
-            Item::Giguna_Breach_Pinkness_Rock => self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK).into(),
-            Item::Giguna_Dual_Path_Switch => self.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH).into(),
-            Item::Giguna_Dual_Path_Wall => self.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_WALL).into(),
-            Item::Giguna_Gateway_Block => self.cbits3.contains(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK).into(),
+            Item::Giguna_Breach_Pinkness_Rock => self.cbits4.contains(flags::ContextBits4::GIGUNA_BREACH_PINKNESS_ROCK).into(),
+            Item::Giguna_Dual_Path_Switch => self.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_SWITCH).into(),
+            Item::Giguna_Dual_Path_Wall => self.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_WALL).into(),
+            Item::Giguna_Gateway_Block => self.cbits4.contains(flags::ContextBits4::GIGUNA_GATEWAY_BLOCK).into(),
             Item::Giguna_Gateway_Gate => self.cbits4.contains(flags::ContextBits4::GIGUNA_GATEWAY_GATE).into(),
             Item::Giguna_Gubi => self.cbits4.contains(flags::ContextBits4::GIGUNA_GUBI).into(),
             Item::Giguna_Labyrinth_Gate => self.cbits4.contains(flags::ContextBits4::GIGUNA_LABYRINTH_GATE).into(),
@@ -6409,10 +6548,10 @@ impl context::Ctx for Context {
             Item::Ranged_Speed => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED).into(),
             Item::Ranged_Speed_2 => self.cbits4.contains(flags::ContextBits4::RANGED_SPEED_2).into(),
             Item::Re_Does_Technology => self.cbits4.contains(flags::ContextBits4::RE_DOES_TECHNOLOGY).into(),
-            Item::Record_Losses => self.cbits4.contains(flags::ContextBits4::RECORD_LOSSES).into(),
-            Item::Remote_Boomerang => self.cbits4.contains(flags::ContextBits4::REMOTE_BOOMERANG).into(),
-            Item::Remote_Drone => self.cbits4.contains(flags::ContextBits4::REMOTE_DRONE).into(),
-            Item::Researchers_Missing => self.cbits4.contains(flags::ContextBits4::RESEARCHERS_MISSING).into(),
+            Item::Record_Losses => self.cbits5.contains(flags::ContextBits5::RECORD_LOSSES).into(),
+            Item::Remote_Boomerang => self.cbits5.contains(flags::ContextBits5::REMOTE_BOOMERANG).into(),
+            Item::Remote_Drone => self.cbits5.contains(flags::ContextBits5::REMOTE_DRONE).into(),
+            Item::Researchers_Missing => self.cbits5.contains(flags::ContextBits5::RESEARCHERS_MISSING).into(),
             Item::Robopede => self.cbits5.contains(flags::ContextBits5::ROBOPEDE).into(),
             Item::Royal_Dagger => self.cbits5.contains(flags::ContextBits5::ROYAL_DAGGER).into(),
             Item::Royal_Ring => self.cbits5.contains(flags::ContextBits5::ROYAL_RING).into(),
@@ -6470,6 +6609,9 @@ impl context::Ctx for Context {
             }
             Item::Amagi_Breach_Lower_Hallway_Gate => {
                 self.cbits2.insert(flags::ContextBits2::AMAGI_BREACH_LOWER_HALLWAY_GATE);
+            }
+            Item::Amagi_Breach_Split_Gate => {
+                self.cbits2.insert(flags::ContextBits2::AMAGI_BREACH_SPLIT_GATE);
             }
             Item::Amagi_Breach_West_Ruins_Gate => {
                 self.cbits2.insert(flags::ContextBits2::AMAGI_BREACH_WEST_RUINS_GATE);
@@ -6540,20 +6682,20 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::BECOMING_AN_ARM);
             }
             Item::Beware_the_Patternmind => {
-                self.cbits2.insert(flags::ContextBits2::BEWARE_THE_PATTERNMIND);
+                self.cbits3.insert(flags::ContextBits3::BEWARE_THE_PATTERNMIND);
             }
             Item::Big_Flask => {
                 self.big_flask += 1;
                 rules::action_flasks_incr_2(self, world);
             }
             Item::Boomerang => {
-                self.cbits2.insert(flags::ContextBits2::BOOMERANG);
+                self.cbits3.insert(flags::ContextBits3::BOOMERANG);
             }
             Item::Boomerang_Upgrade => {
-                self.cbits2.insert(flags::ContextBits2::BOOMERANG_UPGRADE);
+                self.cbits3.insert(flags::ContextBits3::BOOMERANG_UPGRADE);
             }
             Item::Bounty_List => {
-                self.cbits2.insert(flags::ContextBits2::BOUNTY_LIST);
+                self.cbits3.insert(flags::ContextBits3::BOUNTY_LIST);
             }
             Item::Breach_Attractor => {
                 self.cbits3.insert(flags::ContextBits3::BREACH_ATTRACTOR);
@@ -6741,16 +6883,16 @@ impl context::Ctx for Context {
                 self.cbits3.insert(flags::ContextBits3::GIGUNA_BREACH_LOWER_MACHINERY_GATE);
             }
             Item::Giguna_Breach_Pinkness_Rock => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_BREACH_PINKNESS_ROCK);
             }
             Item::Giguna_Dual_Path_Switch => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_DUAL_PATH_SWITCH);
             }
             Item::Giguna_Dual_Path_Wall => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_DUAL_PATH_WALL);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_DUAL_PATH_WALL);
             }
             Item::Giguna_Gateway_Block => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_GATEWAY_BLOCK);
             }
             Item::Giguna_Gateway_Gate => {
                 self.cbits4.insert(flags::ContextBits4::GIGUNA_GATEWAY_GATE);
@@ -6945,16 +7087,16 @@ impl context::Ctx for Context {
                 self.cbits4.insert(flags::ContextBits4::RE_DOES_TECHNOLOGY);
             }
             Item::Record_Losses => {
-                self.cbits4.insert(flags::ContextBits4::RECORD_LOSSES);
+                self.cbits5.insert(flags::ContextBits5::RECORD_LOSSES);
             }
             Item::Remote_Boomerang => {
-                self.cbits4.insert(flags::ContextBits4::REMOTE_BOOMERANG);
+                self.cbits5.insert(flags::ContextBits5::REMOTE_BOOMERANG);
             }
             Item::Remote_Drone => {
-                self.cbits4.insert(flags::ContextBits4::REMOTE_DRONE);
+                self.cbits5.insert(flags::ContextBits5::REMOTE_DRONE);
             }
             Item::Researchers_Missing => {
-                self.cbits4.insert(flags::ContextBits4::RESEARCHERS_MISSING);
+                self.cbits5.insert(flags::ContextBits5::RESEARCHERS_MISSING);
             }
             Item::Robopede => {
                 self.cbits5.insert(flags::ContextBits5::ROBOPEDE);
@@ -7117,6 +7259,9 @@ impl context::Ctx for Context {
             Item::Amagi_Breach_Lower_Hallway_Gate => {
                 self.cbits2.insert(flags::ContextBits2::AMAGI_BREACH_LOWER_HALLWAY_GATE);
             }
+            Item::Amagi_Breach_Split_Gate => {
+                self.cbits2.insert(flags::ContextBits2::AMAGI_BREACH_SPLIT_GATE);
+            }
             Item::Amagi_Breach_West_Ruins_Gate => {
                 self.cbits2.insert(flags::ContextBits2::AMAGI_BREACH_WEST_RUINS_GATE);
             }
@@ -7184,19 +7329,19 @@ impl context::Ctx for Context {
                 self.cbits2.insert(flags::ContextBits2::BECOMING_AN_ARM);
             }
             Item::Beware_the_Patternmind => {
-                self.cbits2.insert(flags::ContextBits2::BEWARE_THE_PATTERNMIND);
+                self.cbits3.insert(flags::ContextBits3::BEWARE_THE_PATTERNMIND);
             }
             Item::Big_Flask => {
                 self.big_flask += 1;
             }
             Item::Boomerang => {
-                self.cbits2.insert(flags::ContextBits2::BOOMERANG);
+                self.cbits3.insert(flags::ContextBits3::BOOMERANG);
             }
             Item::Boomerang_Upgrade => {
-                self.cbits2.insert(flags::ContextBits2::BOOMERANG_UPGRADE);
+                self.cbits3.insert(flags::ContextBits3::BOOMERANG_UPGRADE);
             }
             Item::Bounty_List => {
-                self.cbits2.insert(flags::ContextBits2::BOUNTY_LIST);
+                self.cbits3.insert(flags::ContextBits3::BOUNTY_LIST);
             }
             Item::Breach_Attractor => {
                 self.cbits3.insert(flags::ContextBits3::BREACH_ATTRACTOR);
@@ -7382,16 +7527,16 @@ impl context::Ctx for Context {
                 self.cbits3.insert(flags::ContextBits3::GIGUNA_BREACH_LOWER_MACHINERY_GATE);
             }
             Item::Giguna_Breach_Pinkness_Rock => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_BREACH_PINKNESS_ROCK);
             }
             Item::Giguna_Dual_Path_Switch => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_DUAL_PATH_SWITCH);
             }
             Item::Giguna_Dual_Path_Wall => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_DUAL_PATH_WALL);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_DUAL_PATH_WALL);
             }
             Item::Giguna_Gateway_Block => {
-                self.cbits3.insert(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK);
+                self.cbits4.insert(flags::ContextBits4::GIGUNA_GATEWAY_BLOCK);
             }
             Item::Giguna_Gateway_Gate => {
                 self.cbits4.insert(flags::ContextBits4::GIGUNA_GATEWAY_GATE);
@@ -7583,16 +7728,16 @@ impl context::Ctx for Context {
                 self.cbits4.insert(flags::ContextBits4::RE_DOES_TECHNOLOGY);
             }
             Item::Record_Losses => {
-                self.cbits4.insert(flags::ContextBits4::RECORD_LOSSES);
+                self.cbits5.insert(flags::ContextBits5::RECORD_LOSSES);
             }
             Item::Remote_Boomerang => {
-                self.cbits4.insert(flags::ContextBits4::REMOTE_BOOMERANG);
+                self.cbits5.insert(flags::ContextBits5::REMOTE_BOOMERANG);
             }
             Item::Remote_Drone => {
-                self.cbits4.insert(flags::ContextBits4::REMOTE_DRONE);
+                self.cbits5.insert(flags::ContextBits5::REMOTE_DRONE);
             }
             Item::Researchers_Missing => {
-                self.cbits4.insert(flags::ContextBits4::RESEARCHERS_MISSING);
+                self.cbits5.insert(flags::ContextBits5::RESEARCHERS_MISSING);
             }
             Item::Robopede => {
                 self.cbits5.insert(flags::ContextBits5::ROBOPEDE);
@@ -7772,6 +7917,8 @@ impl context::Ctx for Context {
             ("map__amagi_breach__east_ruins__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi_breach__upper_lake__save", Yaml::Boolean(b)) => self.set_map__amagi_breach__upper_lake__save(*b),
             ("map__amagi_breach__upper_lake__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("map__amagi_breach__divided__save", Yaml::Boolean(b)) => self.set_map__amagi_breach__divided__save(*b),
+            ("map__amagi_breach__divided__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__main_area__save", Yaml::Boolean(b)) => self.set_map__amagi__main_area__save(*b),
             ("map__amagi__main_area__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__east_lake__save", Yaml::Boolean(b)) => self.set_map__amagi__east_lake__save(*b),
@@ -7884,6 +8031,10 @@ impl context::Ctx for Context {
             ("glacier__ctx__hammonds_doors", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => self.set_amagi__main_area__ctx__combo(*b),
             ("amagi__main_area__ctx__combo", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("amagi__secret_chamber__ctx__west_dur_esla", Yaml::Boolean(b)) => self.set_amagi__secret_chamber__ctx__west_dur_esla(*b),
+            ("amagi__secret_chamber__ctx__west_dur_esla", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("amagi__secret_chamber__ctx__east_dur_esla", Yaml::Boolean(b)) => self.set_amagi__secret_chamber__ctx__east_dur_esla(*b),
+            ("amagi__secret_chamber__ctx__east_dur_esla", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__gated_community__ctx__dur_esla", Yaml::Boolean(b)) => self.set_amagi__gated_community__ctx__dur_esla(*b),
             ("amagi__gated_community__ctx__dur_esla", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("annuna__invisible_enemies__ctx__door_opened", Yaml::Boolean(b)) => self.set_annuna__invisible_enemies__ctx__door_opened(*b),
@@ -8003,6 +8154,8 @@ impl context::Ctx for Context {
             ("map__amagi_breach__east_ruins__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi_breach__upper_lake__save", Yaml::Boolean(b)) => Expectation::MapAmagiBreachUpperLakeSave(*b),
             ("map__amagi_breach__upper_lake__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("map__amagi_breach__divided__save", Yaml::Boolean(b)) => Expectation::MapAmagiBreachDividedSave(*b),
+            ("map__amagi_breach__divided__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__main_area__save", Yaml::Boolean(b)) => Expectation::MapAmagiMainAreaSave(*b),
             ("map__amagi__main_area__save", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("map__amagi__east_lake__save", Yaml::Boolean(b)) => Expectation::MapAmagiEastLakeSave(*b),
@@ -8115,6 +8268,10 @@ impl context::Ctx for Context {
             ("glacier__ctx__hammonds_doors", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__main_area__ctx__combo", Yaml::Boolean(b)) => Expectation::AmagiMainAreaCtxCombo(*b),
             ("amagi__main_area__ctx__combo", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("amagi__secret_chamber__ctx__west_dur_esla", Yaml::Boolean(b)) => Expectation::AmagiSecretChamberCtxWestDurEsla(*b),
+            ("amagi__secret_chamber__ctx__west_dur_esla", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("amagi__secret_chamber__ctx__east_dur_esla", Yaml::Boolean(b)) => Expectation::AmagiSecretChamberCtxEastDurEsla(*b),
+            ("amagi__secret_chamber__ctx__east_dur_esla", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("amagi__gated_community__ctx__dur_esla", Yaml::Boolean(b)) => Expectation::AmagiGatedCommunityCtxDurEsla(*b),
             ("amagi__gated_community__ctx__dur_esla", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("annuna__invisible_enemies__ctx__door_opened", Yaml::Boolean(b)) => Expectation::AnnunaInvisibleEnemiesCtxDoorOpened(*b),
@@ -8203,6 +8360,9 @@ impl context::Ctx for Context {
             ("Amagi_Breach_Lower_Hallway_Gate", Yaml::Boolean(b)) => Expectation::AmagiBreachLowerHallwayGate(*b),
             ("Amagi_Breach_Lower_Hallway_Gate", Yaml::Integer(i)) => Expectation::AmagiBreachLowerHallwayGate(*i > 0),
             ("Amagi_Breach_Lower_Hallway_Gate", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
+            ("Amagi_Breach_Split_Gate", Yaml::Boolean(b)) => Expectation::AmagiBreachSplitGate(*b),
+            ("Amagi_Breach_Split_Gate", Yaml::Integer(i)) => Expectation::AmagiBreachSplitGate(*i > 0),
+            ("Amagi_Breach_Split_Gate", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
             ("Amagi_Breach_West_Ruins_Gate", Yaml::Boolean(b)) => Expectation::AmagiBreachWestRuinsGate(*b),
             ("Amagi_Breach_West_Ruins_Gate", Yaml::Integer(i)) => Expectation::AmagiBreachWestRuinsGate(*i > 0),
             ("Amagi_Breach_West_Ruins_Gate", _) => { return Err(format!("Key {:?} has value of disallowed type: {:?}", ckey, cval)); },
@@ -8914,6 +9074,12 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "map__amagi_breach__upper_lake__save", e, v));
                     }
                 }
+                Expectation::MapAmagiBreachDividedSave(e) => {
+                    let v = self.map__amagi_breach__divided__save();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "map__amagi_breach__divided__save", e, v));
+                    }
+                }
                 Expectation::MapAmagiMainAreaSave(e) => {
                     let v = self.map__amagi__main_area__save();
                     if v != *e {
@@ -9250,6 +9416,18 @@ impl context::Ctx for Context {
                         errs.push(format!("Expected {} = {}, got: {}", "amagi__main_area__ctx__combo", e, v));
                     }
                 }
+                Expectation::AmagiSecretChamberCtxWestDurEsla(e) => {
+                    let v = self.amagi__secret_chamber__ctx__west_dur_esla();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "amagi__secret_chamber__ctx__west_dur_esla", e, v));
+                    }
+                }
+                Expectation::AmagiSecretChamberCtxEastDurEsla(e) => {
+                    let v = self.amagi__secret_chamber__ctx__east_dur_esla();
+                    if v != *e {
+                        errs.push(format!("Expected {} = {}, got: {}", "amagi__secret_chamber__ctx__east_dur_esla", e, v));
+                    }
+                }
                 Expectation::AmagiGatedCommunityCtxDurEsla(e) => {
                     let v = self.amagi__gated_community__ctx__dur_esla();
                     if v != *e {
@@ -9506,6 +9684,12 @@ impl context::Ctx for Context {
                 let v = self.has(Item::Amagi_Breach_Lower_Hallway_Gate);
                 if v != *e {
                     errs.push(format!("Expected {} = {}, got: {}", "Amagi_Breach_Lower_Hallway_Gate", e, v));
+                }
+            }
+            Expectation::AmagiBreachSplitGate(e) => {
+                let v = self.has(Item::Amagi_Breach_Split_Gate);
+                if v != *e {
+                    errs.push(format!("Expected {} = {}, got: {}", "Amagi_Breach_Split_Gate", e, v));
                 }
             }
             Expectation::AmagiBreachWestRuinsGate(e) => {
@@ -10789,6 +10973,11 @@ impl context::Ctx for Context {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
                 }
             }
+            AreaId::Amagi__Isolation => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
             AreaId::Amagi__Liru_Room => {
                 if get_area(self.position) != area {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
@@ -10820,6 +11009,11 @@ impl context::Ctx for Context {
                 }
             }
             AreaId::Amagi_Breach__Corner => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
+                }
+            }
+            AreaId::Amagi_Breach__Divided => {
                 if get_area(self.position) != area {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
                 }
@@ -11066,6 +11260,11 @@ impl context::Ctx for Context {
                 if get_area(self.position) != area {
                     rules::action_invoke_reset_old_area__newpos(self, world, pos);
                     self.cbits1.insert(flags::ContextBits1::MAP__ANNUNA_BREACH__BOTTOM__SAVE);
+                }
+            }
+            AreaId::Annuna_Breach__Bridge => {
+                if get_area(self.position) != area {
+                    rules::action_invoke_reset_old_area__newpos(self, world, pos);
                 }
             }
             AreaId::Annuna_Breach__Center_Hallway => {
@@ -12385,6 +12584,18 @@ impl context::Ctx for Context {
                 SpotId::Amagi__Gated_Community__Upper_Gate_East_Mid_air => {
 
                 }
+                SpotId::Amagi__Isolation__Empty_Plinth => {
+
+                }
+                SpotId::Amagi__Isolation__Midway => {
+
+                }
+                SpotId::Amagi__Isolation__Portal_Hole => {
+
+                }
+                SpotId::Amagi__Isolation__Save_Point => {
+
+                }
                 SpotId::Amagi__Liru_Room__Bottom => {
 
                 }
@@ -12424,6 +12635,21 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Amagi__Main_Area__West_15 => {
+
+                }
+                SpotId::Amagi__Secret_Chamber__Enclosed_Cache => {
+
+                }
+                SpotId::Amagi__Secret_Chamber__Middle_Ledge => {
+
+                }
+                SpotId::Amagi__Secret_Chamber__Portal_Wall => {
+
+                }
+                SpotId::Amagi__Secret_Chamber__Upper_Cache => {
+
+                }
+                SpotId::Amagi__Secret_Chamber__Upper_Ledge => {
 
                 }
                 SpotId::Amagi__West_Lake__Cavern_Eye => {
@@ -12502,6 +12728,22 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Amagi__Wiggly_Room__West_Platform => {
+
+                }
+                SpotId::Amagi_Breach__Divided__Portal_Hole => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE);
+
+                }
+                SpotId::Amagi_Breach__Divided__Save_Point => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE);
+
+                }
+                SpotId::Amagi_Breach__Divided__South => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE);
+
+                }
+                SpotId::Amagi_Breach__Divided__Wall_East => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE);
 
                 }
                 SpotId::Amagi_Breach__East_Entrance__East => {
@@ -15603,13 +15845,15 @@ impl context::Ctx for Context {
     fn reload_game(&mut self, world: &World) {
         self.reset_all(world);
         self.cbits1.remove(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO);
-        self.cbits1.remove(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
+        self.cbits2.remove(flags::ContextBits2::ANNUNA__EAST_BRIDGE__CTX__COMBO);
         self.cbits2.remove(flags::ContextBits2::GIGUNA__EAST_CAVERNS__CTX__COMBO_ENTERED);
     }
 
     fn reset_all(&mut self, world: &World) {
+        self.cbits1.remove(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA);
+        self.cbits1.remove(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA);
         self.cbits1.remove(flags::ContextBits1::AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA);
-        self.cbits1.remove(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
+        self.cbits2.remove(flags::ContextBits2::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
         self.cbits2.remove(flags::ContextBits2::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
         self.cbits2.remove(flags::ContextBits2::EBIH__EBIH_EAST__CTX__PLATFORM1_MOVED);
         self.cbits2.remove(flags::ContextBits2::EBIH__EBIH_EAST__CTX__PLATFORM2_MOVED);
@@ -15631,11 +15875,15 @@ impl context::Ctx for Context {
     }
     fn reset_area(&mut self, area_id: AreaId, world: &World) {
         match area_id {
+            AreaId::Amagi__Secret_Chamber => {
+                self.cbits1.remove(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA);
+                self.cbits1.remove(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA);
+            }
             AreaId::Amagi__Gated_Community => {
                 self.cbits1.remove(flags::ContextBits1::AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA);
             }
             AreaId::Annuna__Invisible_Enemies => {
-                self.cbits1.remove(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
+                self.cbits2.remove(flags::ContextBits2::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
             }
             AreaId::Ebih__Base_Camp => {
                 self.cbits2.remove(flags::ContextBits2::EBIH__BASE_CAMP__CTX__LEFT_PLATFORM_MOVED);
@@ -15736,6 +15984,9 @@ impl context::Ctx for Context {
             LocationId::Amagi_Breach__Upper_Lake__Column__Health => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH);
             }
+            LocationId::Amagi_Breach__Divided__Wall_East__Health => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH);
+            }
             LocationId::Amagi_Breach__West_Ruins__Center_Platform__Flask => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_AMAGI_BREACH_WEST_RUINS_FLASK);
             }
@@ -15766,6 +16017,9 @@ impl context::Ctx for Context {
             LocationId::Amagi_Breach__Lower_Hallway__Cache__Hit_Button => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__HIT_BUTTON);
             }
+            LocationId::Amagi_Breach__Split_One_Way__Button__Hit_Button => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON);
+            }
             LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_AMAGI_MAIN_AREA_WATER_FLASK);
             }
@@ -15786,6 +16040,21 @@ impl context::Ctx for Context {
             }
             LocationId::Amagi__Liru_Room__Shrine__Item => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM);
+            }
+            LocationId::Amagi__Secret_Chamber__Upper_Ledge__Steer_Boomerang => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
+            }
+            LocationId::Amagi__Secret_Chamber__Upper_Cache__Health => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH);
+            }
+            LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
+            }
+            LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Collection_Skip => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
+            }
+            LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Fast_Travel => {
+                self.cbits5.insert(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL);
@@ -15893,25 +16162,25 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_LOC_AMAGI__WIGGLY_ROOM__BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna_Breach__Smiley__Drool__Health => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
             }
             LocationId::Annuna_Breach__Gate_and_Floor__Middle_Floor__Item => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
             }
             LocationId::Annuna_Breach__Gate_and_Floor__Button__Hit_Button => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
             }
             LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Collection_Skip => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
             }
             LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
             }
             LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask => {
                 self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_BREACH_FACTORY_FOYER_FLASK);
@@ -15929,49 +16198,49 @@ impl context::Ctx for Context {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__MIRROR_MATCH__BELOW_SWITCH__HIT_SWITCH);
             }
             LocationId::Annuna__Mirror_Match__Plinth__Item => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Spin_into_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__Shock_Distance__Shockwave_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__West_Corner__Spin_from_Underneath => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Secret_Passage__Wall_West__Shockwave_Flask => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_SECRET_PASSAGE_FLASK);
@@ -16001,19 +16270,19 @@ impl context::Ctx for Context {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
             }
             LocationId::Annuna__East_Bridge__Gate_Button__Switch => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_GATE);
             }
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_GATE);
             }
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
             }
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
             }
             LocationId::Annuna__East_Bridge__Lower_Gate_East__Refill => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
             }
             LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__SNIPER_VALLEY__BRIDGE_END__HEALTH_PICKUP);
@@ -16076,25 +16345,25 @@ impl context::Ctx for Context {
                 self.cbits6.insert(flags::ContextBits6::VISITED_FILTER_TELEPORTER_FLASK);
             }
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
+                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
             }
             LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__SPIDER_ROOM__HEALTHY_CORNER__HEALTH_REFILL);
             }
             LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
             }
             LocationId::Annuna__East_Hideout__Bottom__Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
             }
             LocationId::Annuna__East_Hideout__Bottom__Flask_Collection_Skip => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
             }
             LocationId::Annuna__East_Hideout__Bottom__Flask_Fast_Travel => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
             }
             LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask => {
-                self.cbits5.insert(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+                self.cbits6.insert(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
             }
             LocationId::Annuna__Twisty_Passages__Top__Tablet => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__TWISTY_PASSAGES__TOP__TABLET);
@@ -16958,13 +17227,13 @@ impl context::Ctx for Context {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM);
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
             }
             LocationId::Giguna__West_Caverns__Bush__Item => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
             }
             LocationId::Giguna__Wasteland__Door_Right__Health => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
             }
             LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
@@ -17009,19 +17278,19 @@ impl context::Ctx for Context {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__GIGUNA_BASE__TABLE__NEWS);
             }
             LocationId::Giguna__Ruins_East__Way_Up_High__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
             }
             LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Collection_Skip => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
             }
             LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Fast_Travel => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
             }
             LocationId::Giguna__Ruins_East__Way_Up_High__Shockwave_Flask => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
             }
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_TOP_FLASK);
@@ -17030,7 +17299,7 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_TOP_FLASK);
             }
             LocationId::Giguna__West_Tower__Top__Tablet => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
             }
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM);
@@ -17117,22 +17386,22 @@ impl context::Ctx for Context {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_EAST_RUINS_FLASK);
             }
             LocationId::Giguna__Gateway__Block_Left__Shockwave => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_BLOCK);
             }
             LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_BLOCK);
             }
             LocationId::Giguna__Gateway__One_Jump__Shockwave_Flask => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
             }
             LocationId::Giguna__Gateway__Flask_Ledge__Item => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
             }
             LocationId::Giguna__Gateway__Flask_Ledge__Flask_Collection_Skip => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
             }
             LocationId::Giguna__Gateway__Flask_Ledge__Flask_Fast_Travel => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
             }
             LocationId::Giguna__Gateway__Button__Hit_Switch => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__GATEWAY__BUTTON__HIT_SWITCH);
@@ -17228,16 +17497,16 @@ impl context::Ctx for Context {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__ANTECHAMBER__STATUE_HEAD__TABLET);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GUBI);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GUBI);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GUBI);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GUBI);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GUBI_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GUBI_FLASK);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_GUBI_FLASK);
+                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_GUBI_FLASK);
             }
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__GUBI_LAIR__PEDESTAL__AXE);
@@ -17258,7 +17527,7 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_MURAL_FLASK);
             }
             LocationId::Giguna__Mural__Pedestal__Item => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
             }
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_GIGUNA_BREACHABLE_WALL_FLASK);
@@ -17276,7 +17545,7 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
             }
             LocationId::Giguna__Separator__Switch__Separation => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
             }
             LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
@@ -17327,7 +17596,7 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_BREACH_FLOATERS_FLASK);
             }
             LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => {
-                self.cbits8.insert(flags::ContextBits8::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
+                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
             }
             LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_WEST_PLATFORM__DEFEAT_ELLAG);
@@ -17582,16 +17851,16 @@ impl context::Ctx for Context {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_INTERIOR__OUTPOST_INTERIOR__BOOKSHELF__NOTE);
             }
             LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Shockwave_Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
             }
             LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Remote_Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
             }
             LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
             }
             LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask_Collection_Skip => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
             }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IB_GAUNTLET_FLASK);
@@ -17855,13 +18124,13 @@ impl context::Ctx for Context {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
                 self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_1);
@@ -17879,13 +18148,13 @@ impl context::Ctx for Context {
                 self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_1);
@@ -17900,10 +18169,10 @@ impl context::Ctx for Context {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_1);
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                self.cbits9.insert(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
+                self.cbits10.insert(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
             }
             LocationId::Uhrum_Breach__Rock_and_Gate__Button__Hit_Button => {
                 self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_BREACH_ROCK_AND_GATE_GATE);
@@ -18035,28 +18304,28 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Sand__Refill => {
                 self.cbits10.insert(flags::ContextBits10::VISITED_LOC_UHRUM__WEST_ENTRANCE__SAND__REFILL);
@@ -18113,46 +18382,46 @@ impl context::Ctx for Context {
                 self.cbits10.insert(flags::ContextBits10::VISITED_LOC_UHRUM__SPRING__CENTER__HEALTH);
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Collection_Skip => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Fast_Travel => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
             }
             LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK);
             }
             LocationId::Uhrum__Waterfalls__Above_Block__Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK);
             }
             LocationId::Uhrum__Waterfalls__East_26__Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK);
             }
             LocationId::Uhrum__Waterfalls__West_Water_Nook__Tablet => {
                 self.cbits10.insert(flags::ContextBits10::VISITED_LOC_UHRUM__WATERFALLS__WEST_WATER_NOOK__TABLET);
@@ -18230,10 +18499,10 @@ impl context::Ctx for Context {
                 self.cbits10.insert(flags::ContextBits10::VISITED_LOC_UHRUM__ARTILLERY_PRACTICE__TUNNEL_ENTRANCE__TABLET);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall => {
                 self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_WALL);
@@ -18242,10 +18511,10 @@ impl context::Ctx for Context {
                 self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_WALL);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall => {
                 self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_WALL);
@@ -18314,34 +18583,34 @@ impl context::Ctx for Context {
                 self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_WALL);
             }
             LocationId::Uhrum__Rocky_Guardpost__Under_The_Ledge__Shockwave_Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
             }
             LocationId::Uhrum__Rocky_Guardpost__Lower_Step__Shockwave_Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
             }
             LocationId::Uhrum__Rocky_Guardpost__Middle_Step__Shockwave_Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
             }
             LocationId::Uhrum__Rocky_Guardpost__Upper_Step__Shockwave_Block => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
             }
             LocationId::Uhrum__Seclusion__Boome_Range__Remote_Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
             LocationId::Uhrum__Seclusion__Boome_Range__Remote_Flask_Fast_Travel => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
             LocationId::Uhrum__Seclusion__Shock_Range__Shockwave_Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
             LocationId::Uhrum__Seclusion__Close_Range__Flask => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
             LocationId::Uhrum__Seclusion__Close_Range__Flask_Collection_Skip => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
             LocationId::Uhrum__Seclusion__Close_Range__Flask_Fast_Travel => {
-                self.cbits10.insert(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
         }
     }
@@ -18361,6 +18630,9 @@ impl context::Ctx for Context {
             }
             LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask | LocationId::Amagi__Main_Area__Cache_Jump__Shockwave_Flask | LocationId::Amagi__Main_Area__Cache__Item | LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip | LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel => {
                 self.cbits5.remove(flags::ContextBits5::VISITED_AMAGI_MAIN_AREA_WATER_FLASK);
+            }
+            LocationId::Amagi__Secret_Chamber__Upper_Ledge__Steer_Boomerang | LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask | LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Collection_Skip | LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Fast_Travel => {
+                self.cbits5.remove(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
             }
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask | LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
                 self.cbits5.remove(flags::ContextBits5::VISITED_AMAGI_DRAGON_EYE_FLASK);
@@ -18390,22 +18662,22 @@ impl context::Ctx for Context {
                 self.cbits5.remove(flags::ContextBits5::VISITED_AMAGI_GATED_COMMUNITY_FLASK);
             }
             LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask | LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Collection_Skip | LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Fast_Travel => {
-                self.cbits5.remove(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
+                self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
             }
             LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask | LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Collection_Skip | LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Fast_Travel => {
                 self.cbits5.remove(flags::ContextBits5::VISITED_ANNUNA_BREACH_FACTORY_FOYER_FLASK);
             }
             LocationId::Annuna__Mirror_Match__Plinth__Item | LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip | LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel | LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask | LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Spin_into_Flask | LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask | LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
-                self.cbits5.remove(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+                self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
             }
             LocationId::Annuna__Invisible_Enemies__Shock_Distance__Shockwave_Flask | LocationId::Annuna__Invisible_Enemies__West_Corner__Spin_from_Underneath | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask => {
-                self.cbits5.remove(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+                self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
             }
             LocationId::Annuna__Secret_Passage__Wall_West__Shockwave_Flask | LocationId::Annuna__Secret_Passage__Wall_East__Flask | LocationId::Annuna__Secret_Passage__Wall_East__Flask_Collection_Skip | LocationId::Annuna__Secret_Passage__Wall_East__Flask_Fast_Travel | LocationId::Annuna__Secret_Passage__In_Shock_Range__Shockwave_Flask | LocationId::Annuna__Secret_Passage__In_Boome_Range__Remote_Flask | LocationId::Annuna__Secret_Passage__In_Boome_Range__Boomerang_Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_SECRET_PASSAGE_FLASK);
             }
             LocationId::Annuna__East_Bridge__Gate_Button__Switch | LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                self.cbits5.remove(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE);
+                self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_GATE);
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
                 self.cbits10.remove(flags::ContextBits10::VISITED_SNIPER_VALLEY_ROCK_1);
@@ -18420,7 +18692,7 @@ impl context::Ctx for Context {
                 self.cbits6.remove(flags::ContextBits6::VISITED_FILTER_TELEPORTER_FLASK);
             }
             LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down | LocationId::Annuna__East_Hideout__Bottom__Flask | LocationId::Annuna__East_Hideout__Bottom__Flask_Collection_Skip | LocationId::Annuna__East_Hideout__Bottom__Flask_Fast_Travel | LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask => {
-                self.cbits5.remove(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+                self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
             }
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask | LocationId::Annuna__Egg_Room__Cache__Flask | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside | LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EGG_ROOM_FLASK);
@@ -18597,7 +18869,7 @@ impl context::Ctx for Context {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_SWITCH);
             }
             LocationId::Giguna__Ruins_East__Way_Up_High__Item | LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Collection_Skip | LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Fast_Travel | LocationId::Giguna__Ruins_East__Way_Up_High__Shockwave_Flask => {
-                self.cbits6.remove(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
+                self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
             }
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask | LocationId::Giguna__Ruins_Top__Flask__Flask => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_TOP_FLASK);
@@ -18621,10 +18893,10 @@ impl context::Ctx for Context {
                 self.cbits6.remove(flags::ContextBits6::VISITED_GIGUNA_EAST_RUINS_FLASK);
             }
             LocationId::Giguna__Gateway__Block_Left__Shockwave | LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                self.cbits6.remove(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK);
+                self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_BLOCK);
             }
             LocationId::Giguna__Gateway__One_Jump__Shockwave_Flask | LocationId::Giguna__Gateway__Flask_Ledge__Item | LocationId::Giguna__Gateway__Flask_Ledge__Flask_Collection_Skip | LocationId::Giguna__Gateway__Flask_Ledge__Flask_Fast_Travel => {
-                self.cbits6.remove(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
+                self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
             }
             LocationId::Giguna__Vertical_Interchange__Gate__Jump_Boomerang_Flask | LocationId::Giguna__Vertical_Interchange__Dead_end_Ledge__Shockwave_Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_FLASK);
@@ -18636,10 +18908,10 @@ impl context::Ctx for Context {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
-                self.cbits6.remove(flags::ContextBits6::VISITED_GIGUNA_GUBI);
+                self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_GUBI);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => {
-                self.cbits6.remove(flags::ContextBits6::VISITED_GIGUNA_GUBI_FLASK);
+                self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_GUBI_FLASK);
             }
             LocationId::Giguna__Mural__Shocking_Distance__Shockwave_Flask | LocationId::Giguna__Mural__Enclosed_Cache__Flask | LocationId::Giguna__Mural__Enclosed_Cache__Flask_Collection_Skip | LocationId::Giguna__Mural__Enclosed_Cache__Flask_Fast_Travel => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_MURAL_FLASK);
@@ -18705,7 +18977,7 @@ impl context::Ctx for Context {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_OBSERVATORY_FLASK);
             }
             LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Shockwave_Flask | LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Remote_Flask | LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask | LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask_Collection_Skip => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
             }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Collection_Skip | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Fast_Travel => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IB_GAUNTLET_FLASK);
@@ -18777,7 +19049,7 @@ impl context::Ctx for Context {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Shockwave_Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Collection_Skip | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Fast_Travel => {
                 self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_GLITCHY_CORRIDOR_FLASK);
@@ -18786,13 +19058,13 @@ impl context::Ctx for Context {
                 self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK);
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Collection_Skip | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Fast_Travel => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
             }
             LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block | LocationId::Uhrum__Waterfalls__Above_Block__Block | LocationId::Uhrum__Waterfalls__East_26__Block => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK);
             }
             LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block | LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block => {
                 self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_EAST_LAKE_BLOCK);
@@ -18807,7 +19079,7 @@ impl context::Ctx for Context {
                 self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_ANNUNA_CORRIDOR_BLOCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
                 self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_WALL);
@@ -18816,16 +19088,19 @@ impl context::Ctx for Context {
                 self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_FLASK);
             }
             LocationId::Uhrum__Rocky_Guardpost__Under_The_Ledge__Shockwave_Block | LocationId::Uhrum__Rocky_Guardpost__Lower_Step__Shockwave_Block | LocationId::Uhrum__Rocky_Guardpost__Middle_Step__Shockwave_Block | LocationId::Uhrum__Rocky_Guardpost__Upper_Step__Shockwave_Block => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
             }
             LocationId::Uhrum__Seclusion__Boome_Range__Remote_Flask | LocationId::Uhrum__Seclusion__Boome_Range__Remote_Flask_Fast_Travel | LocationId::Uhrum__Seclusion__Shock_Range__Shockwave_Flask | LocationId::Uhrum__Seclusion__Close_Range__Flask | LocationId::Uhrum__Seclusion__Close_Range__Flask_Collection_Skip | LocationId::Uhrum__Seclusion__Close_Range__Flask_Fast_Travel => {
-                self.cbits10.remove(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+                self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
             }
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__EAST_ENTRANCE__UPPER_SLOPE__ITEM);
             }
             LocationId::Amagi_Breach__Upper_Lake__Column__Health => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH);
+            }
+            LocationId::Amagi_Breach__Divided__Wall_East__Health => {
+                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH);
             }
             LocationId::Amagi_Breach__West_Ruins__Button__Hit_Button => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__WEST_RUINS__BUTTON__HIT_BUTTON);
@@ -18839,11 +19114,17 @@ impl context::Ctx for Context {
             LocationId::Amagi_Breach__Lower_Hallway__Cache__Hit_Button => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__HIT_BUTTON);
             }
+            LocationId::Amagi_Breach__Split_One_Way__Button__Hit_Button => {
+                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON);
+            }
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM);
             }
             LocationId::Amagi__Liru_Room__Shrine__Item => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM);
+            }
+            LocationId::Amagi__Secret_Chamber__Upper_Cache__Health => {
+                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH);
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL);
@@ -18870,16 +19151,16 @@ impl context::Ctx for Context {
                 self.cbits7.remove(flags::ContextBits7::VISITED_LOC_AMAGI__WIGGLY_ROOM__BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna_Breach__Smiley__Drool__Health => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
             }
             LocationId::Annuna_Breach__Gate_and_Floor__Middle_Floor__Item => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
             }
             LocationId::Annuna_Breach__Gate_and_Floor__Button__Hit_Button => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
             }
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT);
@@ -18894,13 +19175,13 @@ impl context::Ctx for Context {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM);
             }
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
             }
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
             }
             LocationId::Annuna__East_Bridge__Lower_Gate_East__Refill => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
             }
             LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__SNIPER_VALLEY__BRIDGE_END__HEALTH_PICKUP);
@@ -18921,7 +19202,7 @@ impl context::Ctx for Context {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__UPPER_HALLWAY__BEHIND_PEDESTAL__HEALTH_PICKUP);
             }
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => {
-                self.cbits7.remove(flags::ContextBits7::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
+                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
             }
             LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_ANNUNA__SPIDER_ROOM__HEALTHY_CORNER__HEALTH_REFILL);
@@ -19026,13 +19307,13 @@ impl context::Ctx for Context {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM);
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
             }
             LocationId::Giguna__West_Caverns__Bush__Item => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
             }
             LocationId::Giguna__Wasteland__Door_Right__Health => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
             }
             LocationId::Giguna__Giguna_Base__Ruin__Item => {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__GIGUNA_BASE__RUIN__ITEM);
@@ -19041,10 +19322,10 @@ impl context::Ctx for Context {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__GIGUNA_BASE__TABLE__NEWS);
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
             }
             LocationId::Giguna__West_Tower__Top__Tablet => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
             }
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM);
@@ -19077,13 +19358,13 @@ impl context::Ctx for Context {
                 self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__NW_CACHE__NOTE);
             }
             LocationId::Giguna__Mural__Pedestal__Item => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
             }
             LocationId::Giguna__Separator__Switch__Separation => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
             }
             LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => {
-                self.cbits8.remove(flags::ContextBits8::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
+                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
             }
             LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => {
                 self.cbits9.remove(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_WEST_PLATFORM__DEFEAT_ELLAG);
@@ -19260,13 +19541,13 @@ impl context::Ctx for Context {
                 self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
                 self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_1);
@@ -19284,13 +19565,13 @@ impl context::Ctx for Context {
                 self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
                 self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_1);
@@ -19305,10 +19586,10 @@ impl context::Ctx for Context {
                 self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_1);
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                self.cbits9.remove(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
+                self.cbits10.remove(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
             }
             LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health => {
                 self.cbits10.remove(flags::ContextBits10::VISITED_LOC_UHRUM_BREACH__EAST_GLITCH__NORTHEAST_FLOWER__HEALTH);
@@ -19384,6 +19665,9 @@ impl context::Ctx for Context {
             LocationId::Amagi__Main_Area__Cache_Jump__Nearby_Flask | LocationId::Amagi__Main_Area__Cache_Jump__Shockwave_Flask | LocationId::Amagi__Main_Area__Cache__Item | LocationId::Amagi__Main_Area__Cache__Item_Collection_Skip | LocationId::Amagi__Main_Area__Cache__Item_Fast_Travel => {
                 self.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_MAIN_AREA_WATER_FLASK)
             }
+            LocationId::Amagi__Secret_Chamber__Upper_Ledge__Steer_Boomerang | LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask | LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Collection_Skip | LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Fast_Travel => {
+                self.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK)
+            }
             LocationId::Amagi__West_Lake__Cavern_Tear_Duct__Remote_Flask | LocationId::Amagi__West_Lake__Cavern_Eye__Item => {
                 self.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_DRAGON_EYE_FLASK)
             }
@@ -19412,22 +19696,22 @@ impl context::Ctx for Context {
                 self.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_GATED_COMMUNITY_FLASK)
             }
             LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask | LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Collection_Skip | LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Fast_Travel => {
-                self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK)
+                self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK)
             }
             LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask | LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Collection_Skip | LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Fast_Travel => {
                 self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_BREACH_FACTORY_FOYER_FLASK)
             }
             LocationId::Annuna__Mirror_Match__Plinth__Item | LocationId::Annuna__Mirror_Match__Plinth__Flask_Collection_Skip | LocationId::Annuna__Mirror_Match__Plinth__Flask_Fast_Travel | LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask | LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Spin_into_Flask | LocationId::Annuna__Mirror_Match__Waving_Distance__Shockwave_Flask | LocationId::Annuna__Mirror_Match__East_26_Lower__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask | LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
-                self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK)
+                self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK)
             }
             LocationId::Annuna__Invisible_Enemies__Shock_Distance__Shockwave_Flask | LocationId::Annuna__Invisible_Enemies__West_Corner__Spin_from_Underneath | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel | LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask => {
-                self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK)
+                self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK)
             }
             LocationId::Annuna__Secret_Passage__Wall_West__Shockwave_Flask | LocationId::Annuna__Secret_Passage__Wall_East__Flask | LocationId::Annuna__Secret_Passage__Wall_East__Flask_Collection_Skip | LocationId::Annuna__Secret_Passage__Wall_East__Flask_Fast_Travel | LocationId::Annuna__Secret_Passage__In_Shock_Range__Shockwave_Flask | LocationId::Annuna__Secret_Passage__In_Boome_Range__Remote_Flask | LocationId::Annuna__Secret_Passage__In_Boome_Range__Boomerang_Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_SECRET_PASSAGE_FLASK)
             }
             LocationId::Annuna__East_Bridge__Gate_Button__Switch | LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => {
-                self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE)
+                self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_GATE)
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
                 self.cbits10.contains(flags::ContextBits10::VISITED_SNIPER_VALLEY_ROCK_1)
@@ -19442,7 +19726,7 @@ impl context::Ctx for Context {
                 self.cbits6.contains(flags::ContextBits6::VISITED_FILTER_TELEPORTER_FLASK)
             }
             LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down | LocationId::Annuna__East_Hideout__Bottom__Flask | LocationId::Annuna__East_Hideout__Bottom__Flask_Collection_Skip | LocationId::Annuna__East_Hideout__Bottom__Flask_Fast_Travel | LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask => {
-                self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK)
+                self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK)
             }
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask | LocationId::Annuna__Egg_Room__Cache__Flask | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside | LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EGG_ROOM_FLASK)
@@ -19619,7 +19903,7 @@ impl context::Ctx for Context {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_SWITCH)
             }
             LocationId::Giguna__Ruins_East__Way_Up_High__Item | LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Collection_Skip | LocationId::Giguna__Ruins_East__Way_Up_High__Flask_Fast_Travel | LocationId::Giguna__Ruins_East__Way_Up_High__Shockwave_Flask => {
-                self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK)
+                self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK)
             }
             LocationId::Giguna__Ruins_Top__Small_Ledge__Shockwave_Flask | LocationId::Giguna__Ruins_Top__Flask__Flask => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_TOP_FLASK)
@@ -19643,10 +19927,10 @@ impl context::Ctx for Context {
                 self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_EAST_RUINS_FLASK)
             }
             LocationId::Giguna__Gateway__Block_Left__Shockwave | LocationId::Giguna__Gateway__Block_Right__Shockwave => {
-                self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK)
+                self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_BLOCK)
             }
             LocationId::Giguna__Gateway__One_Jump__Shockwave_Flask | LocationId::Giguna__Gateway__Flask_Ledge__Item | LocationId::Giguna__Gateway__Flask_Ledge__Flask_Collection_Skip | LocationId::Giguna__Gateway__Flask_Ledge__Flask_Fast_Travel => {
-                self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK)
+                self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK)
             }
             LocationId::Giguna__Vertical_Interchange__Gate__Jump_Boomerang_Flask | LocationId::Giguna__Vertical_Interchange__Dead_end_Ledge__Shockwave_Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_FLASK)
@@ -19658,10 +19942,10 @@ impl context::Ctx for Context {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK)
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
-                self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GUBI)
+                self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GUBI)
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => {
-                self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GUBI_FLASK)
+                self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GUBI_FLASK)
             }
             LocationId::Giguna__Mural__Shocking_Distance__Shockwave_Flask | LocationId::Giguna__Mural__Enclosed_Cache__Flask | LocationId::Giguna__Mural__Enclosed_Cache__Flask_Collection_Skip | LocationId::Giguna__Mural__Enclosed_Cache__Flask_Fast_Travel => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_MURAL_FLASK)
@@ -19727,7 +20011,7 @@ impl context::Ctx for Context {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_OBSERVATORY_FLASK)
             }
             LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Shockwave_Flask | LocationId::Interior__Uhrum_Waterfall_Cave__Slope__Remote_Flask | LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask | LocationId::Interior__Uhrum_Waterfall_Cave__Cache__Flask_Collection_Skip => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK)
             }
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Collection_Skip | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Fast_Travel => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IB_GAUNTLET_FLASK)
@@ -19799,7 +20083,7 @@ impl context::Ctx for Context {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL)
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL)
             }
             LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Shockwave_Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Collection_Skip | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Fast_Travel => {
                 self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_GLITCHY_CORRIDOR_FLASK)
@@ -19808,13 +20092,13 @@ impl context::Ctx for Context {
                 self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK)
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Collection_Skip | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Fast_Travel => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK)
             }
             LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL)
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block | LocationId::Uhrum__Waterfalls__Above_Block__Block | LocationId::Uhrum__Waterfalls__East_26__Block => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK)
             }
             LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block | LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block => {
                 self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_EAST_LAKE_BLOCK)
@@ -19829,7 +20113,7 @@ impl context::Ctx for Context {
                 self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ANNUNA_CORRIDOR_BLOCK)
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK)
             }
             LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
                 self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_WALL)
@@ -19838,16 +20122,19 @@ impl context::Ctx for Context {
                 self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_EMERGENCE_FLASK)
             }
             LocationId::Uhrum__Rocky_Guardpost__Under_The_Ledge__Shockwave_Block | LocationId::Uhrum__Rocky_Guardpost__Lower_Step__Shockwave_Block | LocationId::Uhrum__Rocky_Guardpost__Middle_Step__Shockwave_Block | LocationId::Uhrum__Rocky_Guardpost__Upper_Step__Shockwave_Block => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK)
             }
             LocationId::Uhrum__Seclusion__Boome_Range__Remote_Flask | LocationId::Uhrum__Seclusion__Boome_Range__Remote_Flask_Fast_Travel | LocationId::Uhrum__Seclusion__Shock_Range__Shockwave_Flask | LocationId::Uhrum__Seclusion__Close_Range__Flask | LocationId::Uhrum__Seclusion__Close_Range__Flask_Collection_Skip | LocationId::Uhrum__Seclusion__Close_Range__Flask_Fast_Travel => {
-                self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK)
+                self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK)
             }
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__EAST_ENTRANCE__UPPER_SLOPE__ITEM)
             }
             LocationId::Amagi_Breach__Upper_Lake__Column__Health => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH)
+            }
+            LocationId::Amagi_Breach__Divided__Wall_East__Health => {
+                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH)
             }
             LocationId::Amagi_Breach__West_Ruins__Button__Hit_Button => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__WEST_RUINS__BUTTON__HIT_BUTTON)
@@ -19861,11 +20148,17 @@ impl context::Ctx for Context {
             LocationId::Amagi_Breach__Lower_Hallway__Cache__Hit_Button => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__HIT_BUTTON)
             }
+            LocationId::Amagi_Breach__Split_One_Way__Button__Hit_Button => {
+                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON)
+            }
             LocationId::Amagi__Main_Area__Way_Off_To_The_Side__Item => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM)
             }
             LocationId::Amagi__Liru_Room__Shrine__Item => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__LIRU_ROOM__SHRINE__ITEM)
+            }
+            LocationId::Amagi__Secret_Chamber__Upper_Cache__Health => {
+                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH)
             }
             LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REFILL_STATION__BREAK_WALL)
@@ -19892,16 +20185,16 @@ impl context::Ctx for Context {
                 self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__WIGGLY_ROOM__BUTTON__HIT_BUTTON)
             }
             LocationId::Annuna_Breach__Smiley__Drool__Health => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH)
             }
             LocationId::Annuna_Breach__Gate_and_Floor__Middle_Floor__Item => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM)
             }
             LocationId::Annuna_Breach__Gate_and_Floor__Button__Hit_Button => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON)
             }
             LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON)
             }
             LocationId::Annuna__Mirror_Match__Save_Point__Fight => {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__MIRROR_MATCH__SAVE_POINT__FIGHT)
@@ -19916,13 +20209,13 @@ impl context::Ctx for Context {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__WEST_BRIDGE__PLINTH__ITEM)
             }
             LocationId::Annuna__East_Bridge__Tower_Gate__Tablet => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET)
             }
             LocationId::Annuna__East_Bridge__Tower_Secret__Item => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM)
             }
             LocationId::Annuna__East_Bridge__Lower_Gate_East__Refill => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL)
             }
             LocationId::Annuna__Sniper_Valley__Bridge_End__Health_Pickup => {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__SNIPER_VALLEY__BRIDGE_END__HEALTH_PICKUP)
@@ -19943,7 +20236,7 @@ impl context::Ctx for Context {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__UPPER_HALLWAY__BEHIND_PEDESTAL__HEALTH_PICKUP)
             }
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => {
-                self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET)
+                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET)
             }
             LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__SPIDER_ROOM__HEALTHY_CORNER__HEALTH_REFILL)
@@ -20048,13 +20341,13 @@ impl context::Ctx for Context {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__CARNELIAN__VAULT__ITEM)
             }
             LocationId::Giguna__West_Caverns__Cache__Item => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM)
             }
             LocationId::Giguna__West_Caverns__Bush__Item => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM)
             }
             LocationId::Giguna__Wasteland__Door_Right__Health => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH)
             }
             LocationId::Giguna__Giguna_Base__Ruin__Item => {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__GIGUNA_BASE__RUIN__ITEM)
@@ -20063,10 +20356,10 @@ impl context::Ctx for Context {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__GIGUNA_BASE__TABLE__NEWS)
             }
             LocationId::Giguna__Ruins_Center__Tablet__Item => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM)
             }
             LocationId::Giguna__West_Tower__Top__Tablet => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET)
             }
             LocationId::Giguna__Far_Corner__Grass__Obscured_Item => {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__FAR_CORNER__GRASS__OBSCURED_ITEM)
@@ -20099,13 +20392,13 @@ impl context::Ctx for Context {
                 self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__NW_CACHE__NOTE)
             }
             LocationId::Giguna__Mural__Pedestal__Item => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM)
             }
             LocationId::Giguna__Separator__Switch__Separation => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION)
             }
             LocationId::Glacier_Breach__Electric_Arena__Lower_East_Platform__Reward => {
-                self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD)
+                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD)
             }
             LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => {
                 self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_WEST_PLATFORM__DEFEAT_ELLAG)
@@ -20282,13 +20575,13 @@ impl context::Ctx for Context {
                 self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__COMBAT__RANGED_SPEED_3)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_1 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_2 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Level_3 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Nano_Points_1 => {
                 self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__NANO_POINTS_1)
@@ -20306,13 +20599,13 @@ impl context::Ctx for Context {
                 self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_SPEED_2)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_1 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_2 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2)
             }
             LocationId::Menu__Upgrade_Menu__Infection__Infection_Range_3 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Damage_1 => {
                 self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_DAMAGE_1)
@@ -20327,10 +20620,10 @@ impl context::Ctx for Context {
                 self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_1)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_2 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2)
             }
             LocationId::Menu__Upgrade_Menu__Drone__Drone_Melee_Speed_3 => {
-                self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3)
+                self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3)
             }
             LocationId::Uhrum_Breach__East_Glitch__Northeast_Flower__Health => {
                 self.cbits10.contains(flags::ContextBits10::VISITED_LOC_UHRUM_BREACH__EAST_GLITCH__NORTHEAST_FLOWER__HEALTH)
@@ -20497,6 +20790,11 @@ impl context::Ctx for Context {
         let p = old.cbits1.contains(flags::ContextBits1::MAP__AMAGI_BREACH__UPPER_LAKE__SAVE);
         if n != p {
             list.push(format!("{}MAP__AMAGI_BREACH__UPPER_LAKE__SAVE", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE);
+        let p = old.cbits1.contains(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE);
+        if n != p {
+            list.push(format!("{}MAP__AMAGI_BREACH__DIVIDED__SAVE", if n { "+" } else { "-" }));
         }
         let n = self.cbits1.contains(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
         let p = old.cbits1.contains(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE);
@@ -20778,6 +21076,16 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}AMAGI__MAIN_AREA__CTX__COMBO", if n { "+" } else { "-" }));
         }
+        let n = self.cbits1.contains(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA);
+        let p = old.cbits1.contains(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA);
+        if n != p {
+            list.push(format!("{}AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits1.contains(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA);
+        let p = old.cbits1.contains(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA);
+        if n != p {
+            list.push(format!("{}AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA", if n { "+" } else { "-" }));
+        }
         let n = self.cbits1.contains(flags::ContextBits1::AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA);
         let p = old.cbits1.contains(flags::ContextBits1::AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA);
         if n != p {
@@ -20788,18 +21096,18 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}ANNUNA__INVISIBLE_ENEMIES__CTX__DOOR_OPENED", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
-        let p = old.cbits1.contains(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
+        let n = self.cbits2.contains(flags::ContextBits2::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
+        let p = old.cbits2.contains(flags::ContextBits2::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU);
         if n != p {
             list.push(format!("{}ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
-        let p = old.cbits1.contains(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
+        let n = self.cbits2.contains(flags::ContextBits2::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
+        let p = old.cbits2.contains(flags::ContextBits2::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED);
         if n != p {
             list.push(format!("{}ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED", if n { "+" } else { "-" }));
         }
-        let n = self.cbits1.contains(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
-        let p = old.cbits1.contains(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO);
+        let n = self.cbits2.contains(flags::ContextBits2::ANNUNA__EAST_BRIDGE__CTX__COMBO);
+        let p = old.cbits2.contains(flags::ContextBits2::ANNUNA__EAST_BRIDGE__CTX__COMBO);
         if n != p {
             list.push(format!("{}ANNUNA__EAST_BRIDGE__CTX__COMBO", if n { "+" } else { "-" }));
         }
@@ -20993,6 +21301,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}AMAGI_BREACH_LOWER_HALLWAY_GATE", if n { "+" } else { "-" }));
         }
+        let n = self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_SPLIT_GATE);
+        let p = old.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_SPLIT_GATE);
+        if n != p {
+            list.push(format!("{}AMAGI_BREACH_SPLIT_GATE", if n { "+" } else { "-" }));
+        }
         let n = self.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_WEST_RUINS_GATE);
         let p = old.cbits2.contains(flags::ContextBits2::AMAGI_BREACH_WEST_RUINS_GATE);
         if n != p {
@@ -21103,23 +21416,23 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}BECOMING_AN_ARM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::BEWARE_THE_PATTERNMIND);
-        let p = old.cbits2.contains(flags::ContextBits2::BEWARE_THE_PATTERNMIND);
+        let n = self.cbits3.contains(flags::ContextBits3::BEWARE_THE_PATTERNMIND);
+        let p = old.cbits3.contains(flags::ContextBits3::BEWARE_THE_PATTERNMIND);
         if n != p {
             list.push(format!("{}BEWARE_THE_PATTERNMIND", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::BOOMERANG);
-        let p = old.cbits2.contains(flags::ContextBits2::BOOMERANG);
+        let n = self.cbits3.contains(flags::ContextBits3::BOOMERANG);
+        let p = old.cbits3.contains(flags::ContextBits3::BOOMERANG);
         if n != p {
             list.push(format!("{}BOOMERANG", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::BOOMERANG_UPGRADE);
-        let p = old.cbits2.contains(flags::ContextBits2::BOOMERANG_UPGRADE);
+        let n = self.cbits3.contains(flags::ContextBits3::BOOMERANG_UPGRADE);
+        let p = old.cbits3.contains(flags::ContextBits3::BOOMERANG_UPGRADE);
         if n != p {
             list.push(format!("{}BOOMERANG_UPGRADE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits2.contains(flags::ContextBits2::BOUNTY_LIST);
-        let p = old.cbits2.contains(flags::ContextBits2::BOUNTY_LIST);
+        let n = self.cbits3.contains(flags::ContextBits3::BOUNTY_LIST);
+        let p = old.cbits3.contains(flags::ContextBits3::BOUNTY_LIST);
         if n != p {
             list.push(format!("{}BOUNTY_LIST", if n { "+" } else { "-" }));
         }
@@ -21423,23 +21736,23 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}GIGUNA_BREACH_LOWER_MACHINERY_GATE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK);
-        let p = old.cbits3.contains(flags::ContextBits3::GIGUNA_BREACH_PINKNESS_ROCK);
+        let n = self.cbits4.contains(flags::ContextBits4::GIGUNA_BREACH_PINKNESS_ROCK);
+        let p = old.cbits4.contains(flags::ContextBits4::GIGUNA_BREACH_PINKNESS_ROCK);
         if n != p {
             list.push(format!("{}GIGUNA_BREACH_PINKNESS_ROCK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH);
-        let p = old.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_SWITCH);
+        let n = self.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_SWITCH);
+        let p = old.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_SWITCH);
         if n != p {
             list.push(format!("{}GIGUNA_DUAL_PATH_SWITCH", if n { "+" } else { "-" }));
         }
-        let n = self.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_WALL);
-        let p = old.cbits3.contains(flags::ContextBits3::GIGUNA_DUAL_PATH_WALL);
+        let n = self.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_WALL);
+        let p = old.cbits4.contains(flags::ContextBits4::GIGUNA_DUAL_PATH_WALL);
         if n != p {
             list.push(format!("{}GIGUNA_DUAL_PATH_WALL", if n { "+" } else { "-" }));
         }
-        let n = self.cbits3.contains(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK);
-        let p = old.cbits3.contains(flags::ContextBits3::GIGUNA_GATEWAY_BLOCK);
+        let n = self.cbits4.contains(flags::ContextBits4::GIGUNA_GATEWAY_BLOCK);
+        let p = old.cbits4.contains(flags::ContextBits4::GIGUNA_GATEWAY_BLOCK);
         if n != p {
             list.push(format!("{}GIGUNA_GATEWAY_BLOCK", if n { "+" } else { "-" }));
         }
@@ -21743,23 +22056,23 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}RE_DOES_TECHNOLOGY", if n { "+" } else { "-" }));
         }
-        let n = self.cbits4.contains(flags::ContextBits4::RECORD_LOSSES);
-        let p = old.cbits4.contains(flags::ContextBits4::RECORD_LOSSES);
+        let n = self.cbits5.contains(flags::ContextBits5::RECORD_LOSSES);
+        let p = old.cbits5.contains(flags::ContextBits5::RECORD_LOSSES);
         if n != p {
             list.push(format!("{}RECORD_LOSSES", if n { "+" } else { "-" }));
         }
-        let n = self.cbits4.contains(flags::ContextBits4::REMOTE_BOOMERANG);
-        let p = old.cbits4.contains(flags::ContextBits4::REMOTE_BOOMERANG);
+        let n = self.cbits5.contains(flags::ContextBits5::REMOTE_BOOMERANG);
+        let p = old.cbits5.contains(flags::ContextBits5::REMOTE_BOOMERANG);
         if n != p {
             list.push(format!("{}REMOTE_BOOMERANG", if n { "+" } else { "-" }));
         }
-        let n = self.cbits4.contains(flags::ContextBits4::REMOTE_DRONE);
-        let p = old.cbits4.contains(flags::ContextBits4::REMOTE_DRONE);
+        let n = self.cbits5.contains(flags::ContextBits5::REMOTE_DRONE);
+        let p = old.cbits5.contains(flags::ContextBits5::REMOTE_DRONE);
         if n != p {
             list.push(format!("{}REMOTE_DRONE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits4.contains(flags::ContextBits4::RESEARCHERS_MISSING);
-        let p = old.cbits4.contains(flags::ContextBits4::RESEARCHERS_MISSING);
+        let n = self.cbits5.contains(flags::ContextBits5::RESEARCHERS_MISSING);
+        let p = old.cbits5.contains(flags::ContextBits5::RESEARCHERS_MISSING);
         if n != p {
             list.push(format!("{}RESEARCHERS_MISSING", if n { "+" } else { "-" }));
         }
@@ -22023,6 +22336,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_AMAGI_MAIN_AREA_WATER_FLASK", if n { "+" } else { "-" }));
         }
+        let n = self.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
+        let p = old.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_SECRET_CHAMBER_FLASK);
+        if n != p {
+            list.push(format!("{}VISITED_AMAGI_SECRET_CHAMBER_FLASK", if n { "+" } else { "-" }));
+        }
         let n = self.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_STRONGHOLD_BOULDER_2);
         let p = old.cbits5.contains(flags::ContextBits5::VISITED_AMAGI_STRONGHOLD_BOULDER_2);
         if n != p {
@@ -22058,28 +22376,28 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_ANNUNA_BREACH_FACTORY_FOYER_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
-        let p = old.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
+        let n = self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
+        let p = old.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK);
         if n != p {
             list.push(format!("{}VISITED_ANNUNA_BREACH_LOWER_GATE_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE);
-        let p = old.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_EAST_BRIDGE_GATE);
+        let n = self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_GATE);
+        let p = old.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_GATE);
         if n != p {
             list.push(format!("{}VISITED_ANNUNA_EAST_BRIDGE_GATE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
-        let p = old.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+        let n = self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
+        let p = old.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_HIDEOUT_FLASK);
         if n != p {
             list.push(format!("{}VISITED_ANNUNA_EAST_HIDEOUT_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
-        let p = old.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+        let n = self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
+        let p = old.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK);
         if n != p {
             list.push(format!("{}VISITED_ANNUNA_INVISIBLE_ENEMIES_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
-        let p = old.cbits5.contains(flags::ContextBits5::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+        let n = self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
+        let p = old.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_MIRROR_MATCH_FLASK);
         if n != p {
             list.push(format!("{}VISITED_ANNUNA_MIRROR_MATCH_FLASK", if n { "+" } else { "-" }));
         }
@@ -22378,28 +22696,28 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_GIGUNA_EAST_RUINS_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK);
-        let p = old.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_BLOCK);
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_BLOCK);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_BLOCK);
         if n != p {
             list.push(format!("{}VISITED_GIGUNA_GATEWAY_BLOCK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
-        let p = old.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GATEWAY_FLASK);
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GATEWAY_FLASK);
         if n != p {
             list.push(format!("{}VISITED_GIGUNA_GATEWAY_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GUBI);
-        let p = old.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GUBI);
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GUBI);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GUBI);
         if n != p {
             list.push(format!("{}VISITED_GIGUNA_GUBI", if n { "+" } else { "-" }));
         }
-        let n = self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GUBI_FLASK);
-        let p = old.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_GUBI_FLASK);
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GUBI_FLASK);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_GUBI_FLASK);
         if n != p {
             list.push(format!("{}VISITED_GIGUNA_GUBI_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
-        let p = old.cbits6.contains(flags::ContextBits6::VISITED_GIGUNA_HIGHEST_FLASK);
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_HIGHEST_FLASK);
         if n != p {
             list.push(format!("{}VISITED_GIGUNA_HIGHEST_FLASK", if n { "+" } else { "-" }));
         }
@@ -22603,6 +22921,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_LEDGE_GRAB", if n { "+" } else { "-" }));
         }
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH);
+        if n != p {
+            list.push(format!("{}VISITED_LOC_AMAGI_BREACH__DIVIDED__WALL_EAST__HEALTH", if n { "+" } else { "-" }));
+        }
         let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__EAST_ENTRANCE__UPPER_SLOPE__ITEM);
         let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__EAST_ENTRANCE__UPPER_SLOPE__ITEM);
         if n != p {
@@ -22617,6 +22940,11 @@ impl context::Ctx for Context {
         let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_AMAGI_BREACH__LOWER_HALLWAY__CACHE__ITEM", if n { "+" } else { "-" }));
+        }
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON);
+        if n != p {
+            list.push(format!("{}VISITED_LOC_AMAGI_BREACH__SPLIT_ONE_WAY__BUTTON__HIT_BUTTON", if n { "+" } else { "-" }));
         }
         let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH);
         let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI_BREACH__UPPER_LAKE__COLUMN__HEALTH);
@@ -22653,6 +22981,11 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_LOC_AMAGI__MAIN_AREA__WAY_OFF_TO_THE_SIDE__ITEM", if n { "+" } else { "-" }));
         }
+        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH);
+        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH);
+        if n != p {
+            list.push(format!("{}VISITED_LOC_AMAGI__SECRET_CHAMBER__UPPER_CACHE__HEALTH", if n { "+" } else { "-" }));
+        }
         let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REAR_PILLAR__BOSS_REWARD);
         let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_AMAGI__WEST_LAKE__CAVERN_REAR_PILLAR__BOSS_REWARD);
         if n != p {
@@ -22683,43 +23016,43 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_LOC_AMAGI__WIGGLY_ROOM__CACHE__TABLET", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__BUTTON__HIT_BUTTON", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA_BREACH__GATE_AND_FLOOR__MIDDLE_FLOOR__ITEM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA_BREACH__LOWER_GATE__BUTTON__HIT_BUTTON", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA_BREACH__SMILEY__DROOL__HEALTH", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA__EAST_BRIDGE__LOWER_GATE_EAST__REFILL", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_GATE__TABLET", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA__EAST_BRIDGE__TOWER_SECRET__ITEM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
-        let p = old.cbits7.contains(flags::ContextBits7::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
+        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
+        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET);
         if n != p {
             list.push(format!("{}VISITED_LOC_ANNUNA__FILTER_TELEPORTER__NORTHEAST_CUBBY__TABLET", if n { "+" } else { "-" }));
         }
@@ -23003,43 +23336,43 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__MURAL__NW_CACHE__NOTE", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__MURAL__PEDESTAL__ITEM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__RUINS_CENTER__TABLET__ITEM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__WASTELAND__DOOR_RIGHT__HEALTH", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__WEST_CAVERNS__BUSH__ITEM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__WEST_CAVERNS__CACHE__ITEM", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET);
         if n != p {
             list.push(format!("{}VISITED_LOC_GIGUNA__WEST_TOWER__TOP__TABLET", if n { "+" } else { "-" }));
         }
-        let n = self.cbits8.contains(flags::ContextBits8::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
-        let p = old.cbits8.contains(flags::ContextBits8::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
+        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
+        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD);
         if n != p {
             list.push(format!("{}VISITED_LOC_GLACIER_BREACH__ELECTRIC_ARENA__LOWER_EAST_PLATFORM__REWARD", if n { "+" } else { "-" }));
         }
@@ -23323,43 +23656,43 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_1", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_2", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__DRONE__DRONE_MELEE_SPEED_3", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_1", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_2", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_LEVEL_3", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_1", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_2", if n { "+" } else { "-" }));
         }
-        let n = self.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
-        let p = old.cbits9.contains(flags::ContextBits9::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
+        let n = self.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
+        let p = old.cbits10.contains(flags::ContextBits10::VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3);
         if n != p {
             list.push(format!("{}VISITED_LOC_MENU__UPGRADE_MENU__INFECTION__INFECTION_RANGE_3", if n { "+" } else { "-" }));
         }
@@ -23643,43 +23976,43 @@ impl context::Ctx for Context {
         if n != p {
             list.push(format!("{}VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ROCKY_GATE_ROCK);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_ROCKY_GATE_ROCK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GUARDPOST_FLASK);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_ROCKY_GUARDPOST_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_SECLUSION_FLASK);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_SECLUSION_FLASK);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_SECLUSION_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_CAVE_FLASK);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_WATERFALL_CAVE_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALL_WALL);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_WATERFALL_WALL", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_BLOCK);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_BLOCK);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_WATERFALLS_BLOCK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WATERFALLS_FLASK);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_WATERFALLS_FLASK", if n { "+" } else { "-" }));
         }
-        let n = self.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
-        let p = old.cbits10.contains(flags::ContextBits10::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+        let n = self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
+        let p = old.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
         if n != p {
             list.push(format!("{}VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL", if n { "+" } else { "-" }));
         }
@@ -23788,6 +24121,12 @@ impl Context {
     }
     pub fn set_map__amagi_breach__upper_lake__save(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::MAP__AMAGI_BREACH__UPPER_LAKE__SAVE, val);
+    }
+    pub fn map__amagi_breach__divided__save(&self) -> bool {
+        self.cbits1.contains(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE)
+    }
+    pub fn set_map__amagi_breach__divided__save(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::MAP__AMAGI_BREACH__DIVIDED__SAVE, val);
     }
     pub fn map__amagi__main_area__save(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::MAP__AMAGI__MAIN_AREA__SAVE)
@@ -24125,6 +24464,18 @@ impl Context {
     pub fn set_amagi__main_area__ctx__combo(&mut self, val: bool) {
         self.cbits1.set(flags::ContextBits1::AMAGI__MAIN_AREA__CTX__COMBO, val);
     }
+    pub fn amagi__secret_chamber__ctx__west_dur_esla(&self) -> bool {
+        self.cbits1.contains(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA)
+    }
+    pub fn set_amagi__secret_chamber__ctx__west_dur_esla(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__WEST_DUR_ESLA, val);
+    }
+    pub fn amagi__secret_chamber__ctx__east_dur_esla(&self) -> bool {
+        self.cbits1.contains(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA)
+    }
+    pub fn set_amagi__secret_chamber__ctx__east_dur_esla(&mut self, val: bool) {
+        self.cbits1.set(flags::ContextBits1::AMAGI__SECRET_CHAMBER__CTX__EAST_DUR_ESLA, val);
+    }
     pub fn amagi__gated_community__ctx__dur_esla(&self) -> bool {
         self.cbits1.contains(flags::ContextBits1::AMAGI__GATED_COMMUNITY__CTX__DUR_ESLA)
     }
@@ -24138,22 +24489,22 @@ impl Context {
         self.cbits1.set(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__DOOR_OPENED, val);
     }
     pub fn annuna__invisible_enemies__ctx__nw_utu(&self) -> bool {
-        self.cbits1.contains(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU)
+        self.cbits2.contains(flags::ContextBits2::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU)
     }
     pub fn set_annuna__invisible_enemies__ctx__nw_utu(&mut self, val: bool) {
-        self.cbits1.set(flags::ContextBits1::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU, val);
+        self.cbits2.set(flags::ContextBits2::ANNUNA__INVISIBLE_ENEMIES__CTX__NW_UTU, val);
     }
     pub fn annuna__west_bridge__ctx__doors_opened(&self) -> bool {
-        self.cbits1.contains(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED)
+        self.cbits2.contains(flags::ContextBits2::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED)
     }
     pub fn set_annuna__west_bridge__ctx__doors_opened(&mut self, val: bool) {
-        self.cbits1.set(flags::ContextBits1::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED, val);
+        self.cbits2.set(flags::ContextBits2::ANNUNA__WEST_BRIDGE__CTX__DOORS_OPENED, val);
     }
     pub fn annuna__east_bridge__ctx__combo(&self) -> bool {
-        self.cbits1.contains(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO)
+        self.cbits2.contains(flags::ContextBits2::ANNUNA__EAST_BRIDGE__CTX__COMBO)
     }
     pub fn set_annuna__east_bridge__ctx__combo(&mut self, val: bool) {
-        self.cbits1.set(flags::ContextBits1::ANNUNA__EAST_BRIDGE__CTX__COMBO, val);
+        self.cbits2.set(flags::ContextBits2::ANNUNA__EAST_BRIDGE__CTX__COMBO, val);
     }
     pub fn annuna__vertical_room__ctx__door_opened(&self) -> bool {
         self.cbits2.contains(flags::ContextBits2::ANNUNA__VERTICAL_ROOM__CTX__DOOR_OPENED)

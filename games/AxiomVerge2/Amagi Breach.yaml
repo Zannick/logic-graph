@@ -593,6 +593,176 @@ areas:
   spots:
     - name: North
       coord: [35.5, 18.2]
+      local:
+        - to: Northeast Corner
+        - to: Northwest Ledge
+      exits:
+        - to: East Column > South
+          tags: [ydoor]
+    - name: Northeast Corner
+      coord: [35.7, 18.5]
+      data:
+        flipside: Amagi > Secret Chamber > Upper Cache
+      local:
+        - to: North
+          jumps: 1
+          jump_mvmt: water
+        - to: Northwest Ledge
+    - name: Northwest Ledge
+      coord: [34.4, 18.5]
+      local:
+        - to: North
+          jumps: 1
+          jump_mvmt: water
+        - to: Northeast Corner
+        - to: Middle West
+    - name: Middle West
+      coord: [34.45, 18.9]
+      local:
+        - to: South
+          thru: [[34.65, 19.0], [34.65, 19.6]]
+      exits:
+        - to: Center Column
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+        - to: Center Column
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+    - name: Center Column
+      coord: [34.9, 18.9]
+      data:
+        flipside: Amagi > Secret Chamber > Column
+      local:
+        - to: South
+        - to: East Pentomino
+      exits:
+        - to: Middle West
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+        - to: Middle West
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+    - name: East Pentomino
+      coord: [35.3, 18.9]
+      data:
+        flipside: Amagi > Secret Chamber > Middle Ledge
+      local:
+        - to: Center Column
+        - to: East Corner
+    - name: East Corner
+      coord: [35.7, 19.1]
+      data:
+        flipside: Amagi > Secret Chamber > Enclosed Cache
+      local:
+        - to: East Pentomino
+          jumps: 1
+    - name: Shaft Bottom
+      coord: [34.75, 19.75]
+      data:
+        flipside: Amagi > Secret Chamber > East Dur-Esla
+      local:
+        - to: Middle West
+          jumps: 3
+          jump_mvmt: water
+        - to: Center Column
+          jumps: 3
+          jump_mvmt: water
+      exits:
+        - to: Center Column
+          req: $mist2
+          movement: mist2
+        - to: Center Column
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Column
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+        - to: Middle West
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+    - name: South
+      coord: [34.5, 19.8]
+      local:
+        - to: Shaft Bottom
+          jumps: 1
+        - to: West
+          jumps: 1
+      exits:
+        - to: Divided > North
+          tags: [ydoor]
+    - name: West
+      coord: [34.1, 19.75]
+      local:
+        - to: South
+      exits:
+        - to: Split One-Way > East
+          tags: [xdoor]
+
+- name: Divided  # MARK: Divided
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+    portal_start: Portal Hole
+  map:
+    save: [35, 20, 36, 21]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > LAB Southeast
+  spots:
+    - name: Portal Hole
+      coord: [35.0, 20.3]
+    - name: North
+      coord: [34.5, 20.2]
+      local:
+        - to: Empty Plinth
+      exits:
+        - to: Fishy Secrets > South
+          tags: [ydoor]
+    - name: Empty Plinth
+      coord: [34.5, 20.7]
+      data:
+        flipside: Amagi > Isolation > Save Point
+      local:
+        - to: North
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: North
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Wall East
+      coord: [35.125, 20.75]
+      data:
+        flipside: Amagi > Isolation > Midway
+      local:
+        - to: South
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: South
+      coord: [35.5, 20.8]
+      local:
+        - to: Wall East
+          jumps: 1
+        - to: Save Point
+          jumps: 1
+      exits:
+        - to: Annuna Breach > Bridge > North
+          tags: [ydoor]
+    - name: Save Point
+      coord: [35.625, 20.7]
+      data:
+        flipside: Amagi > Isolation > Empty Plinth
+      local:
+        - to: South
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
 
 - name: West Entrance  # MARK: West Entrance
   on_entry: $reset_old_area(^newpos)
@@ -1150,14 +1320,128 @@ areas:
 - name: Split One-Way  # MARK: Split One-Way
   on_entry: $reset_old_area(^newpos)
   spots:
-    - name: West 20
-      coord: [33.1, 19.75]
     - name: West 19
       coord: [33.1, 18.65]
+      local:
+        - to: Upper Middle
+          jumps: 1
+      exits:
+        - to: Upper Hallway > East
+          tags: [xdoor]
     - name: Upper Middle
       coord: [33.45, 18.6]
+      local:
+        - to: West 19
+      exits:
+        - to: Column
+          req: Underwater_Movement and Drone_Hover
+          movement: water
+          jumps: 2
+        - to: Column
+          req: $mist2
+          movement: mist2
+        - to: Column
+          req: Nanite_Mist
+          movement: mist1
+    - name: Column
+      coord: [33.6, 18.5]
+      local:
+        - to: East Ledge
+        - to: Lower Ledge
+          thru: [33.7, 19.1]
+      exits:
+        - to: West 19
+          req: Underwater_Movement and Drone_Hover
+          movement: water
+        - to: West 19
+          req: Drone_Hover
+          movement: base
+    - name: East Ledge
+      coord: [33.8, 19.0]
+      local:
+        - to: Lower Ledge
+      exits:
+        - to: Column
+          req: Underwater_Movement and Drone_Hover
+          movement: water
+          jumps: 3
+        - to: Column
+          req: $mist2
+          movement: mist2
+        - to: Column
+          req: Nanite_Mist
+          movement: mist1
+    - name: Lower Ledge
+      coord: [33.35, 19.35]
+      local:
+        - to: West 20
+        - to: Gate West
+        - to: East Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: West 20
+      coord: [33.1, 19.75]
+      local:
+        - to: Gate West
+        - to: Lower Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Lower Hallway > East
+          tags: [xdoor]
+        - to: Lower Ledge
+          req: $mist2
+          movement: mist2
+        - to: Lower Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Gate West
+      coord: [33.4, 19.75]
+      local:
+        - to: West 20
+        - to: Lower Ledge
+          jumps: 1
+          jump_mvmt: water
+      exits:
+        - to: Lower Ledge
+          req: $mist2
+          movement: mist2
+        - to: Lower Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Button
+          req: Underwater_Movement and Amagi_Breach_Split_Gate
+          movement: water
+        - to: Button
+          req: Amagi_Breach_Split_Gate
+          movement: base
+    - name: Button
+      coord: [33.675, 19.75]
+      local:
+        - to: East
+      locations:
+        - name: Hit Button
+          item: Amagi_Breach_Split_Gate
+          tags: [button]
+      exits:
+        - to: Gate West
+          req: Underwater_Movement and Amagi_Breach_Split_Gate
+          movement: water
+        - to: Gate West
+          req: Amagi_Breach_Split_Gate
+          movement: base
     - name: East
       coord: [33.9, 19.75]
+      local:
+        - to: Button
+      exits:
+        - to: Fishy Secrets > West
+          tags: [xdoor]
 
 - name: Corner  # MARK: Corner
   on_entry: $reset_old_area(^newpos)

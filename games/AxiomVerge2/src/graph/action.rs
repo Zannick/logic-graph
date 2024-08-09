@@ -32,7 +32,9 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => true,
-            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::access_invoke_melee(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::access_amagi__gated_community__dur_esla__kill_dur_esla__req(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::access_amagi__gated_community__dur_esla__shockwave_dur_esla__req(ctx, world),
+            ActionId::Amagi__Isolation__Save_Point__Save => true,
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_amagi__main_area__carving__key_combo__req(ctx, world),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
@@ -41,6 +43,11 @@ impl world::Accessible for Action {
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => true,
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::access_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::access_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::access_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::access_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(ctx, world),
+            ActionId::Amagi_Breach__Divided__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => true,
             ActionId::Amagi_Breach__Lakebed__Save_Point__Save => true,
@@ -240,7 +247,8 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
-            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::observe_access_invoke_melee(ctx, world, full_obs),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::observe_access_amagi__gated_community__dur_esla__kill_dur_esla__req(ctx, world, full_obs),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_amagi__gated_community__dur_esla__shockwave_dur_esla__req(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_amagi__main_area__carving__key_combo__req(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
@@ -248,6 +256,10 @@ impl world::Accessible for Action {
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::observe_access_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::observe_access_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world, full_obs),
@@ -461,7 +473,16 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_invoke_melee(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_amagi__gated_community__dur_esla__kill_dur_esla__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => {
+                let (ret, mut tags) = rules::explain_amagi__gated_community__dur_esla__shockwave_dur_esla__req(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -528,6 +549,42 @@ impl world::Accessible for Action {
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "West 18 Hook Point"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => {
+                let (ret, mut tags) = rules::explain_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => {
+                let (ret, mut tags) = rules::explain_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => {
+                let (ret, mut tags) = rules::explain_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => {
+                let (ret, mut tags) = rules::explain_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -1739,6 +1796,7 @@ impl world::Action for Action {
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Amagi_Breach__Divided__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__Lakebed__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
@@ -1748,6 +1806,10 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::action_amagi__secret_chamber__west_dur_esla__kill_dur_esla__do(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__do(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::action_amagi__secret_chamber__east_dur_esla__kill_dur_esla__do(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__do(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
@@ -1755,6 +1817,8 @@ impl world::Action for Action {
             ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__gated_community__dur_esla__shockwave_dur_esla__do(ctx, world),
+            ActionId::Amagi__Isolation__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -2053,6 +2117,9 @@ impl world::Action for Action {
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Amagi_Breach__Divided__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Amagi_Breach__Lakebed__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2080,6 +2147,18 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => {
+                rules::observe_action_amagi__secret_chamber__west_dur_esla__kill_dur_esla__do(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => {
+                rules::observe_action_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__do(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => {
+                rules::observe_action_amagi__secret_chamber__east_dur_esla__kill_dur_esla__do(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => {
+                rules::observe_action_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__do(ctx, world, full_obs);
+            }
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world, full_obs);
             }
@@ -2100,6 +2179,12 @@ impl world::Action for Action {
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
                 rules::observe_action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => {
+                rules::observe_action_amagi__gated_community__dur_esla__shockwave_dur_esla__do(ctx, world, full_obs);
+            }
+            ActionId::Amagi__Isolation__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2642,7 +2727,12 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 204] = [
+static ACT_DEFS: [Action; 211] = [
+    Action {
+        id: ActionId::Amagi_Breach__Divided__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
     Action {
         id: ActionId::Amagi_Breach__East_Entrance__Save_Point__Save,
         time: 1300,
@@ -2699,6 +2789,16 @@ static ACT_DEFS: [Action; 204] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla,
+        time: 3500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Amagi__Isolation__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West,
         time: 3062,
         price: Currency::Free,
@@ -2737,6 +2837,26 @@ static ACT_DEFS: [Action; 204] = [
         id: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West,
         time: 2999,
         price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla,
+        time: 3500,
+        price: Currency::Energy(100),
+    },
+    Action {
+        id: ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla,
+        time: 1000,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla,
+        time: 3500,
+        price: Currency::Energy(100),
     },
     Action {
         id: ActionId::Annuna_Breach__Bottom__Save_Point__Save,
@@ -3679,6 +3799,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => SpotId::Amagi_Breach__East_Entrance__Save_Point,
         ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => SpotId::Amagi_Breach__East_Ruins__Save_Point,
         ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => SpotId::Amagi_Breach__Upper_Lake__Save_Point,
+        ActionId::Amagi_Breach__Divided__Save_Point__Save => SpotId::Amagi_Breach__Divided__Save_Point,
         ActionId::Amagi_Breach__Lakebed__Save_Point__Save => SpotId::Amagi_Breach__Lakebed__Save_Point,
         ActionId::Amagi__Main_Area__Carving__Key_Combo => SpotId::Amagi__Main_Area__Carving,
         ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East | ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => SpotId::Amagi__Main_Area__Platform_3,
@@ -3686,13 +3807,16 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Amagi__Main_Area__Save_Point__Save => SpotId::Amagi__Main_Area__Save_Point,
         ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => SpotId::Amagi__Main_Area__Broken_Wall,
         ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => SpotId::Amagi__Main_Area__Wall_Stuck_Spot,
+        ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla | ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => SpotId::Amagi__Secret_Chamber__West_Dur_Esla,
+        ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla | ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => SpotId::Amagi__Secret_Chamber__East_Dur_Esla,
         ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Flat,
         ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower,
         ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Upper_Hover,
         ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => SpotId::Amagi__East_Lake__East_15_Lower_Hover,
         ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => SpotId::Amagi__East_Lake__Center_Upper_Platform,
         ActionId::Amagi__East_Lake__Save_Point__Save => SpotId::Amagi__East_Lake__Save_Point,
-        ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => SpotId::Amagi__Gated_Community__Dur_Esla,
+        ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla | ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => SpotId::Amagi__Gated_Community__Dur_Esla,
+        ActionId::Amagi__Isolation__Save_Point__Save => SpotId::Amagi__Isolation__Save_Point,
         ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => SpotId::Annuna_Breach__Double_Corridor__Save_Point,
         ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => SpotId::Annuna_Breach__Rear_Entrance__Save_Point,
         ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => SpotId::Annuna_Breach__North_Hallway__Save_Point,

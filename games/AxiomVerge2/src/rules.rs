@@ -152,6 +152,20 @@ pub fn access_amagi__gated_community__dur_esla__ex__upper_east_ledge_1__req(
     // $mist2 and ^_dur_esla
     (helper__mist2!(ctx, world) && ctx.amagi__gated_community__ctx__dur_esla())
 }
+pub fn access_amagi__gated_community__dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $melee and not ^_dur_esla
+    (helper__melee!(ctx, world) && !ctx.amagi__gated_community__ctx__dur_esla())
+}
+pub fn access_amagi__gated_community__dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $shockwave and not ^_dur_esla
+    (helper__shockwave!(ctx, world) && !ctx.amagi__gated_community__ctx__dur_esla())
+}
 pub fn access_amagi__gated_community__lower_gate_west__ex__east_lake__southwest_brick_1__req(
     ctx: &Context,
     world: &World,
@@ -189,6 +203,78 @@ pub fn access_amagi__main_area__carving__key_combo__req(ctx: &Context, world: &W
     // not ^_combo
     !ctx.amagi__main_area__ctx__combo()
 }
+pub fn access_amagi__secret_chamber__east_dur_esla__ex__west_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_west_dur_esla and Underwater_Movement and $hookhover
+    ((ctx.amagi__secret_chamber__ctx__west_dur_esla() && ctx.has(Item::Underwater_Movement))
+        && helper__hookhover!(ctx, world))
+}
+pub fn access_amagi__secret_chamber__east_dur_esla__ex__west_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_west_dur_esla and $mist2
+    (ctx.amagi__secret_chamber__ctx__west_dur_esla() && helper__mist2!(ctx, world))
+}
+pub fn access_amagi__secret_chamber__east_dur_esla__ex__west_3__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_west_dur_esla and Nanite_Mist
+    (ctx.amagi__secret_chamber__ctx__west_dur_esla() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $melee and not ^_east_dur_esla
+    (helper__melee!(ctx, world) && !ctx.amagi__secret_chamber__ctx__east_dur_esla())
+}
+pub fn access_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $shockwave and not ^_east_dur_esla
+    (helper__shockwave!(ctx, world) && !ctx.amagi__secret_chamber__ctx__east_dur_esla())
+}
+pub fn access_amagi__secret_chamber__west_dur_esla__ex__west_1__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_west_dur_esla and Underwater_Movement and $hookhover
+    ((ctx.amagi__secret_chamber__ctx__west_dur_esla() && ctx.has(Item::Underwater_Movement))
+        && helper__hookhover!(ctx, world))
+}
+pub fn access_amagi__secret_chamber__west_dur_esla__ex__west_2__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_west_dur_esla and $mist2
+    (ctx.amagi__secret_chamber__ctx__west_dur_esla() && helper__mist2!(ctx, world))
+}
+pub fn access_amagi__secret_chamber__west_dur_esla__ex__west_3__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_west_dur_esla and Nanite_Mist
+    (ctx.amagi__secret_chamber__ctx__west_dur_esla() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $melee and not ^_west_dur_esla
+    (helper__melee!(ctx, world) && !ctx.amagi__secret_chamber__ctx__west_dur_esla())
+}
+pub fn access_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $shockwave and not ^_west_dur_esla
+    (helper__shockwave!(ctx, world) && !ctx.amagi__secret_chamber__ctx__west_dur_esla())
+}
 pub fn access_amagi_breach_lower_hallway_gate(ctx: &Context, world: &World) -> bool {
     // Amagi_Breach_Lower_Hallway_Gate
     ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate)
@@ -201,6 +287,10 @@ pub fn access_amagi_breach_lower_hallway_gate_and_underwater_movement_and_slings
     (((ctx.has(Item::Amagi_Breach_Lower_Hallway_Gate) && ctx.has(Item::Underwater_Movement))
         && ctx.has(Item::Slingshot_Hook))
         && ctx.has(Item::Drone_Hover))
+}
+pub fn access_amagi_breach_split_gate(ctx: &Context, world: &World) -> bool {
+    // Amagi_Breach_Split_Gate
+    ctx.has(Item::Amagi_Breach_Split_Gate)
 }
 pub fn access_amagi_breach_west_ruins_gate(ctx: &Context, world: &World) -> bool {
     // Amagi_Breach_West_Ruins_Gate
@@ -3007,6 +3097,10 @@ pub fn access_map__amagi__main_area__save(ctx: &Context, world: &World) -> bool 
     // ^map__amagi__main_area__save
     ctx.map__amagi__main_area__save()
 }
+pub fn access_map__amagi_breach__divided__save(ctx: &Context, world: &World) -> bool {
+    // ^map__amagi_breach__divided__save
+    ctx.map__amagi_breach__divided__save()
+}
 pub fn access_map__amagi_breach__east_entrance__save(ctx: &Context, world: &World) -> bool {
     // ^map__amagi_breach__east_entrance__save
     ctx.map__amagi_breach__east_entrance__save()
@@ -3887,6 +3981,13 @@ pub fn access_underwater_movement_and_amagi_breach_lower_hallway_gate_and_slings
         && ctx.has(Item::Slingshot_Hook))
         && ctx.has(Item::Drone_Hover))
 }
+pub fn access_underwater_movement_and_amagi_breach_split_gate(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Split_Gate
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Breach_Split_Gate))
+}
 pub fn access_underwater_movement_and_amagi_wiggly_room_gate(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and Amagi_Wiggly_Room_Gate
     (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Wiggly_Room_Gate))
@@ -3977,9 +4078,44 @@ pub fn action_amagi__gated_community__dur_esla__kill_dur_esla__do(
     // ^_dur_esla = true
     ctx.set_amagi__gated_community__ctx__dur_esla(true);
 }
+pub fn action_amagi__gated_community__dur_esla__shockwave_dur_esla__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_dur_esla = true
+    ctx.set_amagi__gated_community__ctx__dur_esla(true);
+}
 pub fn action_amagi__main_area__carving__key_combo__do(ctx: &mut Context, world: &World) {
     // ^_combo = true
     ctx.set_amagi__main_area__ctx__combo(true);
+}
+pub fn action_amagi__secret_chamber__east_dur_esla__kill_dur_esla__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_east_dur_esla = true
+    ctx.set_amagi__secret_chamber__ctx__east_dur_esla(true);
+}
+pub fn action_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_east_dur_esla = true
+    ctx.set_amagi__secret_chamber__ctx__east_dur_esla(true);
+}
+pub fn action_amagi__secret_chamber__west_dur_esla__kill_dur_esla__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_west_dur_esla = true
+    ctx.set_amagi__secret_chamber__ctx__west_dur_esla(true);
+}
+pub fn action_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__do(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^_east_dur_esla = true
+    ctx.set_amagi__secret_chamber__ctx__east_dur_esla(true);
 }
 pub fn action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     ctx: &mut Context,
@@ -5417,6 +5553,64 @@ pub fn explain_amagi__gated_community__dur_esla__ex__upper_east_ledge_1__req(
         }
     }
 }
+pub fn explain_amagi__gated_community__dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee and not ^_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__melee!(ctx, world, edict);
+            edict.insert("$melee", format!("{:?}", res));
+            refs.push("$melee");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.amagi__gated_community__ctx__dur_esla();
+                    edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
+                    (r, vec!["^amagi__gated_community__ctx__dur_esla"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__gated_community__dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $shockwave and not ^_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+            edict.insert("$shockwave", format!("{:?}", res));
+            refs.push("$shockwave");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.amagi__gated_community__ctx__dur_esla();
+                    edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
+                    (r, vec!["^amagi__gated_community__ctx__dur_esla"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_amagi__gated_community__lower_gate_west__ex__east_lake__southwest_brick_1__req(
     ctx: &Context,
     world: &World,
@@ -5602,6 +5796,332 @@ pub fn explain_amagi__main_area__carving__key_combo__req(
         (!val.0, val.1)
     }
 }
+pub fn explain_amagi__secret_chamber__east_dur_esla__ex__west_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_west_dur_esla and Underwater_Movement and $hookhover
+    {
+        let mut left = {
+            let mut left = {
+                let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+                edict.insert(
+                    "^amagi__secret_chamber__ctx__west_dur_esla",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__east_dur_esla__ex__west_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_west_dur_esla and $mist2
+    {
+        let mut left = {
+            let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+            edict.insert(
+                "^amagi__secret_chamber__ctx__west_dur_esla",
+                format!("{:?}", r),
+            );
+            (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__east_dur_esla__ex__west_3__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_west_dur_esla and Nanite_Mist
+    {
+        let mut left = {
+            let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+            edict.insert(
+                "^amagi__secret_chamber__ctx__west_dur_esla",
+                format!("{:?}", r),
+            );
+            (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee and not ^_east_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__melee!(ctx, world, edict);
+            edict.insert("$melee", format!("{:?}", res));
+            refs.push("$melee");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.amagi__secret_chamber__ctx__east_dur_esla();
+                    edict.insert(
+                        "^amagi__secret_chamber__ctx__east_dur_esla",
+                        format!("{:?}", r),
+                    );
+                    (r, vec!["^amagi__secret_chamber__ctx__east_dur_esla"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $shockwave and not ^_east_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+            edict.insert("$shockwave", format!("{:?}", res));
+            refs.push("$shockwave");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.amagi__secret_chamber__ctx__east_dur_esla();
+                    edict.insert(
+                        "^amagi__secret_chamber__ctx__east_dur_esla",
+                        format!("{:?}", r),
+                    );
+                    (r, vec!["^amagi__secret_chamber__ctx__east_dur_esla"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__west_dur_esla__ex__west_1__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_west_dur_esla and Underwater_Movement and $hookhover
+    {
+        let mut left = {
+            let mut left = {
+                let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+                edict.insert(
+                    "^amagi__secret_chamber__ctx__west_dur_esla",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__west_dur_esla__ex__west_2__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_west_dur_esla and $mist2
+    {
+        let mut left = {
+            let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+            edict.insert(
+                "^amagi__secret_chamber__ctx__west_dur_esla",
+                format!("{:?}", r),
+            );
+            (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__west_dur_esla__ex__west_3__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_west_dur_esla and Nanite_Mist
+    {
+        let mut left = {
+            let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+            edict.insert(
+                "^amagi__secret_chamber__ctx__west_dur_esla",
+                format!("{:?}", r),
+            );
+            (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $melee and not ^_west_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__melee!(ctx, world, edict);
+            edict.insert("$melee", format!("{:?}", res));
+            refs.push("$melee");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+                    edict.insert(
+                        "^amagi__secret_chamber__ctx__west_dur_esla",
+                        format!("{:?}", r),
+                    );
+                    (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $shockwave and not ^_west_dur_esla
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+            edict.insert("$shockwave", format!("{:?}", res));
+            refs.push("$shockwave");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
+                    edict.insert(
+                        "^amagi__secret_chamber__ctx__west_dur_esla",
+                        format!("{:?}", r),
+                    );
+                    (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_amagi_breach_lower_hallway_gate(
     ctx: &Context,
     world: &World,
@@ -5663,6 +6183,18 @@ pub fn explain_amagi_breach_lower_hallway_gate_and_underwater_movement_and_sling
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
+    }
+}
+pub fn explain_amagi_breach_split_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amagi_Breach_Split_Gate
+    {
+        let h = ctx.has(Item::Amagi_Breach_Split_Gate);
+        edict.insert("Amagi_Breach_Split_Gate", format!("{}", h));
+        (h, vec!["Amagi_Breach_Split_Gate"])
     }
 }
 pub fn explain_amagi_breach_west_ruins_gate(
@@ -16866,6 +17398,18 @@ pub fn explain_map__amagi__main_area__save(
         (r, vec!["^map__amagi__main_area__save"])
     }
 }
+pub fn explain_map__amagi_breach__divided__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__amagi_breach__divided__save
+    {
+        let r = ctx.map__amagi_breach__divided__save();
+        edict.insert("^map__amagi_breach__divided__save", format!("{:?}", r));
+        (r, vec!["^map__amagi_breach__divided__save"])
+    }
+}
 pub fn explain_map__amagi_breach__east_entrance__save(
     ctx: &Context,
     world: &World,
@@ -20780,6 +21324,31 @@ pub fn explain_underwater_movement_and_amagi_breach_lower_hallway_gate_and_sling
         }
     }
 }
+pub fn explain_underwater_movement_and_amagi_breach_split_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Amagi_Breach_Split_Gate
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Amagi_Breach_Split_Gate);
+                edict.insert("Amagi_Breach_Split_Gate", format!("{}", h));
+                (h, vec!["Amagi_Breach_Split_Gate"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_amagi_wiggly_room_gate(
     ctx: &Context,
     world: &World,
@@ -21472,6 +22041,30 @@ pub fn observe_access_amagi__gated_community__dur_esla__ex__upper_east_ledge_1__
             ctx.amagi__gated_community__ctx__dur_esla()
         }))
 }
+pub fn observe_access_amagi__gated_community__dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee and not ^_dur_esla
+    (hobserve__melee!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_amagi__gated_community__ctx__dur_esla();
+            ctx.amagi__gated_community__ctx__dur_esla()
+        })))
+}
+pub fn observe_access_amagi__gated_community__dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $shockwave and not ^_dur_esla
+    (hobserve__shockwave!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_amagi__gated_community__ctx__dur_esla();
+            ctx.amagi__gated_community__ctx__dur_esla()
+        })))
+}
 pub fn observe_access_amagi__gated_community__lower_gate_west__ex__east_lake__southwest_brick_1__req(
     ctx: &Context,
     world: &World,
@@ -21545,6 +22138,132 @@ pub fn observe_access_amagi__main_area__carving__key_combo__req(
         ctx.amagi__main_area__ctx__combo()
     })
 }
+pub fn observe_access_amagi__secret_chamber__east_dur_esla__ex__west_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_west_dur_esla and Underwater_Movement and $hookhover
+    (({
+        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+        ctx.amagi__secret_chamber__ctx__west_dur_esla()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })) && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_amagi__secret_chamber__east_dur_esla__ex__west_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_west_dur_esla and $mist2
+    ({
+        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+        ctx.amagi__secret_chamber__ctx__west_dur_esla()
+    } && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_amagi__secret_chamber__east_dur_esla__ex__west_3__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_west_dur_esla and Nanite_Mist
+    ({
+        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+        ctx.amagi__secret_chamber__ctx__west_dur_esla()
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee and not ^_east_dur_esla
+    (hobserve__melee!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_amagi__secret_chamber__ctx__east_dur_esla();
+            ctx.amagi__secret_chamber__ctx__east_dur_esla()
+        })))
+}
+pub fn observe_access_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $shockwave and not ^_east_dur_esla
+    (hobserve__shockwave!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_amagi__secret_chamber__ctx__east_dur_esla();
+            ctx.amagi__secret_chamber__ctx__east_dur_esla()
+        })))
+}
+pub fn observe_access_amagi__secret_chamber__west_dur_esla__ex__west_1__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_west_dur_esla and Underwater_Movement and $hookhover
+    (({
+        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+        ctx.amagi__secret_chamber__ctx__west_dur_esla()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })) && (hobserve__hookhover!(ctx, world, full_obs)))
+}
+pub fn observe_access_amagi__secret_chamber__west_dur_esla__ex__west_2__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_west_dur_esla and $mist2
+    ({
+        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+        ctx.amagi__secret_chamber__ctx__west_dur_esla()
+    } && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_amagi__secret_chamber__west_dur_esla__ex__west_3__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_west_dur_esla and Nanite_Mist
+    ({
+        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+        ctx.amagi__secret_chamber__ctx__west_dur_esla()
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $melee and not ^_west_dur_esla
+    (hobserve__melee!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+            ctx.amagi__secret_chamber__ctx__west_dur_esla()
+        })))
+}
+pub fn observe_access_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $shockwave and not ^_west_dur_esla
+    (hobserve__shockwave!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
+            ctx.amagi__secret_chamber__ctx__west_dur_esla()
+        })))
+}
 pub fn observe_access_amagi_breach_lower_hallway_gate(
     ctx: &Context,
     world: &World,
@@ -21575,6 +22294,17 @@ pub fn observe_access_amagi_breach_lower_hallway_gate_and_underwater_movement_an
         full_obs.observe_drone_hover();
         ctx.has(Item::Drone_Hover)
     }))
+}
+pub fn observe_access_amagi_breach_split_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amagi_Breach_Split_Gate
+    {
+        full_obs.observe_amagi_breach_split_gate();
+        ctx.has(Item::Amagi_Breach_Split_Gate)
+    }
 }
 pub fn observe_access_amagi_breach_west_ruins_gate(
     ctx: &Context,
@@ -27276,6 +28006,17 @@ pub fn observe_access_map__amagi__main_area__save(
         ctx.map__amagi__main_area__save()
     }
 }
+pub fn observe_access_map__amagi_breach__divided__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__amagi_breach__divided__save
+    {
+        full_obs.observe_map__amagi_breach__divided__save();
+        ctx.map__amagi_breach__divided__save()
+    }
+}
 pub fn observe_access_map__amagi_breach__east_entrance__save(
     ctx: &Context,
     world: &World,
@@ -29597,6 +30338,20 @@ pub fn observe_access_underwater_movement_and_amagi_breach_lower_hallway_gate_an
         ctx.has(Item::Drone_Hover)
     }))
 }
+pub fn observe_access_underwater_movement_and_amagi_breach_split_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Split_Gate
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_amagi_breach_split_gate();
+        ctx.has(Item::Amagi_Breach_Split_Gate)
+    }))
+}
 pub fn observe_access_underwater_movement_and_amagi_wiggly_room_gate(
     ctx: &Context,
     world: &World,
@@ -29809,12 +30564,47 @@ pub fn observe_action_amagi__gated_community__dur_esla__kill_dur_esla__do(
 ) {
     // ^_dur_esla = true
 }
+pub fn observe_action_amagi__gated_community__dur_esla__shockwave_dur_esla__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_dur_esla = true
+}
 pub fn observe_action_amagi__main_area__carving__key_combo__do(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+}
+pub fn observe_action_amagi__secret_chamber__east_dur_esla__kill_dur_esla__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_dur_esla = true
+}
+pub fn observe_action_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_dur_esla = true
+}
+pub fn observe_action_amagi__secret_chamber__west_dur_esla__kill_dur_esla__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_west_dur_esla = true
+}
+pub fn observe_action_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__do(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_east_dur_esla = true
 }
 pub fn observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(
     ctx: &Context,

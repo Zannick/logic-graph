@@ -805,9 +805,177 @@ areas:
 
 - name: Secret Chamber  # MARK: Secret Chamber
   on_entry: $reset_old_area(^newpos)
+  reset:
+    _west_dur_esla: false
+    _east_dur_esla: false
+  data:
+    portal_start: Portal Wall
+    portal_hidden: true
+  map:
+    health: [35, 18, 36, 19]
+    flask: [35, 19, 36, 20]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Amagi Secret Chamber Health
+      flask: Menu > Kiengir Map > Amagi Secret Chamber Flask
   spots:
     - name: West
       coord: [34.05, 18.8]
+      local:
+        - to: West Dur-Esla
+      exits:
+        - to: Column
+          req: Underwater_Movement and $hover
+          movement: water
+        - to: Liru Room > Hidden Exit
+          tags: [xshift]
+    - name: West Dur-Esla
+      coord: [34.3, 19.75]
+      local:
+        - to: East Dur-Esla
+      exits:
+        - to: West
+      exits:
+        - to: West
+          req: ^_west_dur_esla and Underwater_Movement and $hookhover
+          movement: water
+          jumps: 4
+        - to: West
+          req: ^_west_dur_esla and $mist2
+          movement: mist2
+        - to: West
+          req: ^_west_dur_esla and Nanite_Mist
+          movement: mist1
+      actions:
+        - name: Kill Dur-Esla
+          req: $melee and not ^_west_dur_esla
+          do: ^_west_dur_esla = true
+          time: 1
+        - name: Shockwave Dur-Esla
+          req: $shockwave and not ^_west_dur_esla
+          price: 100
+          do: ^_east_dur_esla = true
+          tags: [shockwave]
+    - name: East Dur-Esla
+      coord: [34.75, 19.75]
+      data:
+        flipside: Amagi Breach > Fishy Secrets > Shaft Bottom
+      local:
+        - to: West Dur-Esla
+      exits:
+        - to: West
+          req: ^_west_dur_esla and Underwater_Movement and $hookhover
+          movement: water
+          jumps: 4
+        - to: West
+          req: ^_west_dur_esla and $mist2
+          movement: mist2
+        - to: West
+          req: ^_west_dur_esla and Nanite_Mist
+          movement: mist1
+      actions:
+        - name: Kill Dur-Esla
+          req: $melee and not ^_east_dur_esla
+          do: ^_east_dur_esla = true
+          time: 1
+        - name: Shockwave Dur-Esla
+          req: $shockwave and not ^_east_dur_esla
+          price: 100
+          do: ^_east_dur_esla = true
+          tags: [shockwave]
+    - name: Column
+      coord: [34.9, 18.9]
+      data:
+        flipside: Amagi Breach > Fishy Secrets > Center Column
+      local:
+        - to: Middle Ledge
+        - to: East Dur-Esla
+      exits:
+        - to: West
+          req: Underwater_Movement and $hover
+          movement: water
+          jumps: 1
+        - to: Upper Ledge
+          req: Underwater_Movement and ($hook or $hover)
+          movement: water
+          jumps: 1
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Middle Ledge
+      coord: [35.3, 18.9]
+      data:
+        flipside: Amagi Breach > Fishy Secrets > East Pentomino
+      local:
+        - to: Column
+      exits:
+        - to: Upper Ledge
+          req: Underwater_Movement
+          movement: water
+          jumps: 1
+        - to: Upper Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Upper Ledge
+          req: $mist2
+          movement: mist2
+        - to: Upper Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Upper Ledge
+      coord: [35.35, 18.5]
+      local:
+        - to: Upper Cache
+        - to: Middle Ledge
+        - to: Column
+      locations:
+        - name: Steer Boomerang
+          canon: Amagi_Secret_Chamber_Flask
+          item: Flask
+          req: $boomerang
+          to: Middle Ledge
+          time: 8  # ?
+    - name: Upper Cache
+      coord: [35.7, 18.5]
+      data:
+        flipside: Amagi Breach > Fishy Secrets > Northeast Corner
+      local:
+        - to: Upper Ledge
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: Portal Wall
+      coord: [35.85, 18.7]
+    - name: Enclosed Cache
+      coord: [35.7, 19.1]
+      data:
+        flipside: Amagi Breach > Fishy Secrets > East Corner
+      locations:
+        - name: Flask
+          canon: Amagi_Secret_Chamber_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Amagi_Secret_Chamber_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Amagi_Secret_Chamber_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
 
 - name: West Lake  # MARK: West Lake
   on_entry: $reset_old_area(^newpos)
@@ -2322,9 +2490,14 @@ areas:
           movement: mist2
       actions:
         - name: Kill Dur-Esla
-          req: $melee
+          req: $melee and not ^_dur_esla
           do: ^_dur_esla = true
           time: 1
+        - name: Shockwave Dur-Esla
+          req: $shockwave and not ^_dur_esla
+          price: 100
+          do: ^_dur_esla = true
+          tags: [shockwave]
 
     - name: Lower Gate East
       coord: [32.1, 17.55]
@@ -2978,3 +3151,44 @@ areas:
         - to: Liru Room > West 20
           movement: base
           penalty_tags: [xshift, -slow.1]
+
+- name: Isolation  # MARK: Isolation
+  on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+    portal_start: Portal Hole
+  map:
+    save: [34, 20, 35, 21]
+    portal: [35, 20, 36, 21]
+  datamap:
+    map_spot:
+      save: Menu > Kiengir Map > Amagi Isolation
+      portal: Menu > Kiengir Map > Amagi Isolation Portal
+  spots:
+    - name: Portal Hole
+      coord: [35.9, 20.25]
+    - name: Empty Plinth
+      coord: [35.625, 20.7]
+      data:
+        flipside: Amagi Breach > Divided > Save Point
+      local:
+        - to: Midway
+    - name: Midway
+      coord: [35.125, 20.75]
+      data:
+        flipside: Amagi Breach > Divided > Wall East
+      local:
+        - to: Empty Plinth
+          jumps: 1
+        - to: Save Point
+          jumps: 1
+    - name: Save Point
+      coord: [34.5, 20.7]
+      data:
+        flipside: Amagi Breach > Divided > Empty Plinth
+      local:
+        - to: Midway
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]

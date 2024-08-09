@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3353] = [
+static SPOT_DEFS: [SpotDef; 3391] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -59,6 +59,42 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         id: SpotId::Amagi_Breach__Corner__North,
         loc_range: None,
         exit_range: Some((ExitId::Amagi_Breach__Corner__North__ex__Twisty_Passages__South_1, ExitId::Amagi_Breach__Corner__North__ex__Twisty_Passages__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Divided__Empty_Plinth,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Divided__Empty_Plinth__ex__North_1, ExitId::Amagi_Breach__Divided__Empty_Plinth__ex__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Divided__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Divided__North__ex__Fishy_Secrets__South_1, ExitId::Amagi_Breach__Divided__North__ex__Fishy_Secrets__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Divided__Portal_Hole,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Divided__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Amagi_Breach__Divided__Save_Point__Save, ActionId::Amagi_Breach__Divided__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Divided__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Divided__South__ex__Annuna_Breach__Bridge__North_1, ExitId::Amagi_Breach__Divided__South__ex__Annuna_Breach__Bridge__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Divided__Wall_East,
+        loc_range: Some((LocationId::Amagi_Breach__Divided__Wall_East__Health, LocationId::Amagi_Breach__Divided__Wall_East__Health)),
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -320,9 +356,63 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Amagi_Breach__Fishy_Secrets__North,
+        id: SpotId::Amagi_Breach__Fishy_Secrets__Center_Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_1, ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__East_Corner,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__East_Pentomino,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__Middle_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Fishy_Secrets__Middle_West__ex__Center_Column_1, ExitId::Amagi_Breach__Fishy_Secrets__Middle_West__ex__Center_Column_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__North,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Fishy_Secrets__North__ex__East_Column__South_1, ExitId::Amagi_Breach__Fishy_Secrets__North__ex__East_Column__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__Northeast_Corner,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__Northwest_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom__ex__Center_Column_1, ExitId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom__ex__Middle_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__South,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Fishy_Secrets__South__ex__Divided__North_1, ExitId::Amagi_Breach__Fishy_Secrets__South__ex__Divided__North_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Fishy_Secrets__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Fishy_Secrets__West__ex__Split_One_Way__East_1, ExitId::Amagi_Breach__Fishy_Secrets__West__ex__Split_One_Way__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -404,27 +494,57 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Amagi_Breach__Split_One_Way__Button,
+        loc_range: Some((LocationId::Amagi_Breach__Split_One_Way__Button__Hit_Button, LocationId::Amagi_Breach__Split_One_Way__Button__Hit_Button)),
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__Button__ex__Gate_West_1, ExitId::Amagi_Breach__Split_One_Way__Button__ex__Gate_West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Split_One_Way__Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__Column__ex__West_19_1, ExitId::Amagi_Breach__Split_One_Way__Column__ex__West_19_2)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Amagi_Breach__Split_One_Way__East,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__East__ex__Fishy_Secrets__West_1, ExitId::Amagi_Breach__Split_One_Way__East__ex__Fishy_Secrets__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Split_One_Way__East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__East_Ledge__ex__Column_1, ExitId::Amagi_Breach__Split_One_Way__East_Ledge__ex__Column_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Split_One_Way__Gate_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__Gate_West__ex__Button_1, ExitId::Amagi_Breach__Split_One_Way__Gate_West__ex__Lower_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi_Breach__Split_One_Way__Lower_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__Lower_Ledge__ex__East_Ledge_1, ExitId::Amagi_Breach__Split_One_Way__Lower_Ledge__ex__East_Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Amagi_Breach__Split_One_Way__Upper_Middle,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__Upper_Middle__ex__Column_1, ExitId::Amagi_Breach__Split_One_Way__Upper_Middle__ex__Column_3)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Amagi_Breach__Split_One_Way__West_19,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__West_19__ex__Upper_Hallway__East_1, ExitId::Amagi_Breach__Split_One_Way__West_19__ex__Upper_Hallway__East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Amagi_Breach__Split_One_Way__West_20,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi_Breach__Split_One_Way__West_20__ex__Lower_Hallway__East_1, ExitId::Amagi_Breach__Split_One_Way__West_20__ex__Lower_Ledge_2)),
         action_range: None,
     },
     SpotDef {
@@ -935,7 +1055,7 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         id: SpotId::Amagi__Gated_Community__Dur_Esla,
         loc_range: None,
         exit_range: Some((ExitId::Amagi__Gated_Community__Dur_Esla__ex__Upper_East_Ledge_1, ExitId::Amagi__Gated_Community__Dur_Esla__ex__Upper_East_Ledge_1)),
-        action_range: Some((ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla, ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla)),
+        action_range: Some((ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla, ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla)),
     },
     SpotDef {
         id: SpotId::Amagi__Gated_Community__East_17,
@@ -1068,6 +1188,30 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         loc_range: None,
         exit_range: Some((ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1, ExitId::Amagi__Grid_31_19__West__ex__Main_Area__East_19_1)),
         action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Isolation__Empty_Plinth,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Isolation__Midway,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Isolation__Portal_Hole,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Isolation__Save_Point,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Amagi__Isolation__Save_Point__Save, ActionId::Amagi__Isolation__Save_Point__Save)),
     },
     SpotDef {
         id: SpotId::Amagi__Liru_Room__Bottom,
@@ -1430,10 +1574,58 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Amagi__Secret_Chamber__West,
+        id: SpotId::Amagi__Secret_Chamber__Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Secret_Chamber__Column__ex__Upper_Ledge_1, ExitId::Amagi__Secret_Chamber__Column__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__East_Dur_Esla,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__West_1, ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__West_3)),
+        action_range: Some((ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla, ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla)),
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__Enclosed_Cache,
+        loc_range: Some((LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask, LocationId::Amagi__Secret_Chamber__Enclosed_Cache__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__Middle_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Secret_Chamber__Middle_Ledge__ex__Upper_Ledge_1, ExitId::Amagi__Secret_Chamber__Middle_Ledge__ex__Upper_Ledge_4)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__Portal_Wall,
         loc_range: None,
         exit_range: None,
         action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__Upper_Cache,
+        loc_range: Some((LocationId::Amagi__Secret_Chamber__Upper_Cache__Health, LocationId::Amagi__Secret_Chamber__Upper_Cache__Health)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__Upper_Ledge,
+        loc_range: Some((LocationId::Amagi__Secret_Chamber__Upper_Ledge__Steer_Boomerang, LocationId::Amagi__Secret_Chamber__Upper_Ledge__Steer_Boomerang)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Secret_Chamber__West__ex__Column_1, ExitId::Amagi__Secret_Chamber__West__ex__Liru_Room__Hidden_Exit_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Amagi__Secret_Chamber__West_Dur_Esla,
+        loc_range: None,
+        exit_range: Some((ExitId::Amagi__Secret_Chamber__West_Dur_Esla__ex__West_1, ExitId::Amagi__Secret_Chamber__West_Dur_Esla__ex__West_3)),
+        action_range: Some((ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla, ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla)),
     },
     SpotDef {
         id: SpotId::Amagi__West_Lake__Cavern_Back_Teeth,
@@ -1892,6 +2084,18 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         action_range: Some((ActionId::Annuna_Breach__Bottom__Save_Point__Save, ActionId::Annuna_Breach__Bottom__Save_Point__Save)),
     },
     SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__North,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna_Breach__Center_Hallway__South,
         loc_range: None,
         exit_range: Some((ExitId::Annuna_Breach__Center_Hallway__South__ex__South_Hallway__North_1, ExitId::Annuna_Breach__Center_Hallway__South__ex__South_Hallway__North_1)),
@@ -2013,6 +2217,12 @@ static SPOT_DEFS: [SpotDef; 3353] = [
     },
     SpotDef {
         id: SpotId::Annuna_Breach__Factory_Gate__East,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Gate__West,
         loc_range: None,
         exit_range: None,
         action_range: None,
@@ -16384,7 +16594,7 @@ static SPOT_DEFS: [SpotDef; 3353] = [
     SpotDef {
         id: SpotId::Menu__Breach_Map__LAB_Southeast,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__LAB_Southeast__ex__Amagi_Breach__Divided__Save_Point_1, ExitId::Menu__Breach_Map__LAB_Southeast__ex__Amagi_Breach__Divided__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -16676,6 +16886,12 @@ static SPOT_DEFS: [SpotDef; 3353] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Amagi_Isolation_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Kiengir_Map__Amagi_Main_Area,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1, ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1)),
@@ -16695,6 +16911,18 @@ static SPOT_DEFS: [SpotDef; 3353] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Amagi_Main_Area_Water_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Amagi_Secret_Chamber_Health,
         loc_range: None,
         exit_range: None,
         action_range: None,

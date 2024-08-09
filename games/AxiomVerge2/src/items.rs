@@ -24,6 +24,7 @@ pub enum Item {
     None,
     Aansur,
     Amagi_Breach_Lower_Hallway_Gate,
+    Amagi_Breach_Split_Gate,
     Amagi_Breach_West_Ruins_Gate,
     Amagi_Dragon_Eye_Passage,
     Amagi_Gated_Community_Gate,
@@ -250,6 +251,7 @@ impl fmt::Display for Item {
             Item::Amagi_Breach_Lower_Hallway_Gate => {
                 write!(f, "{}", "Amagi_Breach_Lower_Hallway_Gate")
             }
+            Item::Amagi_Breach_Split_Gate => write!(f, "{}", "Amagi_Breach_Split_Gate"),
             Item::Amagi_Breach_West_Ruins_Gate => write!(f, "{}", "Amagi_Breach_West_Ruins_Gate"),
             Item::Amagi_Dragon_Eye_Passage => write!(f, "{}", "Amagi_Dragon_Eye_Passage"),
             Item::Amagi_Gated_Community_Gate => write!(f, "{}", "Amagi_Gated_Community_Gate"),
@@ -508,6 +510,7 @@ impl std::str::FromStr for Item {
         match s {
             "Aansur" => Ok(Item::Aansur),
             "Amagi_Breach_Lower_Hallway_Gate" => Ok(Item::Amagi_Breach_Lower_Hallway_Gate),
+            "Amagi_Breach_Split_Gate" => Ok(Item::Amagi_Breach_Split_Gate),
             "Amagi_Breach_West_Ruins_Gate" => Ok(Item::Amagi_Breach_West_Ruins_Gate),
             "Amagi_Dragon_Eye_Passage" => Ok(Item::Amagi_Dragon_Eye_Passage),
             "Amagi_Gated_Community_Gate" => Ok(Item::Amagi_Gated_Community_Gate),
