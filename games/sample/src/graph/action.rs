@@ -26,7 +26,7 @@ impl world::Accessible for Action {
     type Currency = Currency;
     fn can_access(&self, ctx: &Context, world: &World) -> bool {
         ctx.can_afford(&self.price) && match self.id {
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::access_deku_tree__compass_room__entry__light_torch__req(ctx, world),
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::access_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(ctx, world),
             ActionId::Global__Change_Time => true,
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => true,
         }
@@ -34,7 +34,7 @@ impl world::Accessible for Action {
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
         ctx.observe_afford(&self.price, full_obs);
         match self.id {
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::observe_access_deku_tree__compass_room__entry__light_torch__req(ctx, world, full_obs),
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::observe_access_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(ctx, world, full_obs),
             _ => true,
         }
     }
@@ -50,7 +50,7 @@ impl world::Accessible for Action {
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                let (ret, mut tags) = rules::explain_deku_tree__compass_room__entry__light_torch__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -69,7 +69,7 @@ impl world::Action for Action {
     fn perform(&self, ctx: &mut Context, world: &World) {
         match self.id {
             ActionId::Global__Change_Time => rules::action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(ctx, world),
-            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::action_deku_tree__compass_room__entry__light_torch__do(ctx, world),
+            ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::action_deku_tree__compass_room__ctx__torch_set_true(ctx, world),
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => rules::action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world),
         };
         let dest = self.dest(ctx, world);
@@ -91,7 +91,7 @@ impl world::Action for Action {
                 rules::observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(ctx, world, full_obs);
             }
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
-                rules::observe_action_deku_tree__compass_room__entry__light_torch__do(ctx, world, full_obs);
+                rules::observe_action_deku_tree__compass_room__ctx__torch_set_true(ctx, world, full_obs);
             }
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
                 rules::observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world, full_obs);

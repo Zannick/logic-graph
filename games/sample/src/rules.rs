@@ -90,20 +90,9 @@ pub fn access_deku_slingshot_scrub(ctx: &Context, world: &World) -> bool {
     // Deku_Slingshot_Scrub
     ctx.has(Item::Deku_Slingshot_Scrub)
 }
-pub fn access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
-    ctx: &Context,
-    world: &World,
-) -> bool {
+pub fn access_deku_tree__compass_room__ctx__torch(ctx: &Context, world: &World) -> bool {
     // ^_torch
     ctx.deku_tree__compass_room__ctx__torch()
-}
-pub fn access_deku_tree__compass_room__entry__light_torch__req(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // $is_child and $Sticks and not ^_torch
-    ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world))
-        && !ctx.deku_tree__compass_room__ctx__torch())
 }
 pub fn access_false(ctx: &Context, world: &World) -> bool {
     // False
@@ -197,6 +186,14 @@ pub fn access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
     // $is_child and $Sticks and $Nuts
     ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world)) && helper__Nuts!(ctx, world))
 }
+pub fn access_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $is_child and $Sticks and not ^_torch
+    ((helper__is_child!(ctx, world) && helper__Sticks!(ctx, world))
+        && !ctx.deku_tree__compass_room__ctx__torch())
+}
 pub fn access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
     ctx: &Context,
     world: &World,
@@ -221,7 +218,7 @@ pub fn access_invoke_objective(ctx: &Context, world: &World) -> bool {
     // $objective
     rule__objective!(ctx, world)
 }
-pub fn action_deku_tree__compass_room__entry__light_torch__do(ctx: &mut Context, world: &World) {
+pub fn action_deku_tree__compass_room__ctx__torch_set_true(ctx: &mut Context, world: &World) {
     // ^_torch = True
     ctx.set_deku_tree__compass_room__ctx__torch(true);
 }
@@ -589,7 +586,7 @@ pub fn explain_deku_slingshot_scrub(
         (h, vec!["Deku_Slingshot_Scrub"])
     }
 }
-pub fn explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
+pub fn explain_deku_tree__compass_room__ctx__torch(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
@@ -599,49 +596,6 @@ pub fn explain_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
         let r = ctx.deku_tree__compass_room__ctx__torch();
         edict.insert("^deku_tree__compass_room__ctx__torch", format!("{:?}", r));
         (r, vec!["^deku_tree__compass_room__ctx__torch"])
-    }
-}
-pub fn explain_deku_tree__compass_room__entry__light_torch__req(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $is_child and $Sticks and not ^_torch
-    {
-        let mut left = {
-            let mut left = {
-                let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
-                edict.insert("$is_child", format!("{:?}", res));
-                refs.push("$is_child");
-                (res, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
-                    edict.insert("$Sticks", format!("{:?}", res));
-                    refs.push("$Sticks");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let val = {
-                    let r = ctx.deku_tree__compass_room__ctx__torch();
-                    edict.insert("^deku_tree__compass_room__ctx__torch", format!("{:?}", r));
-                    (r, vec!["^deku_tree__compass_room__ctx__torch"])
-                };
-                (!val.0, val.1)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_false(
@@ -1089,6 +1043,49 @@ pub fn explain_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
         }
     }
 }
+pub fn explain_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $is_child and $Sticks and not ^_torch
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__is_child!(ctx, world, edict);
+                edict.insert("$is_child", format!("{:?}", res));
+                refs.push("$is_child");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__Sticks!(ctx, world, edict);
+                    edict.insert("$Sticks", format!("{:?}", res));
+                    refs.push("$Sticks");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.deku_tree__compass_room__ctx__torch();
+                    edict.insert("^deku_tree__compass_room__ctx__torch", format!("{:?}", r));
+                    (r, vec!["^deku_tree__compass_room__ctx__torch"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
     ctx: &Context,
     world: &World,
@@ -1377,7 +1374,7 @@ pub fn observe_access_deku_slingshot_scrub(
         ctx.has(Item::Deku_Slingshot_Scrub)
     }
 }
-pub fn observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
+pub fn observe_access_deku_tree__compass_room__ctx__torch(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
@@ -1387,18 +1384,6 @@ pub fn observe_access_deku_tree__compass_room__entry__ex__floor_3__door_1__req(
         full_obs.observe_deku_tree__compass_room__ctx__torch();
         ctx.deku_tree__compass_room__ctx__torch()
     }
-}
-pub fn observe_access_deku_tree__compass_room__entry__light_torch__req(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $is_child and $Sticks and not ^_torch
-    ((hobserve__is_child!(ctx, world, full_obs) && (hobserve__Sticks!(ctx, world, full_obs)))
-        && (!({
-            full_obs.observe_deku_tree__compass_room__ctx__torch();
-            ctx.deku_tree__compass_room__ctx__torch()
-        })))
 }
 pub fn observe_access_false(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
     // False
@@ -1570,6 +1555,18 @@ pub fn observe_access_invoke_is_child_and_invoke_sticks_and_invoke_nuts(
     ((hobserve__is_child!(ctx, world, full_obs) && (hobserve__Sticks!(ctx, world, full_obs)))
         && (hobserve__Nuts!(ctx, world, full_obs)))
 }
+pub fn observe_access_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $is_child and $Sticks and not ^_torch
+    ((hobserve__is_child!(ctx, world, full_obs) && (hobserve__Sticks!(ctx, world, full_obs)))
+        && (!({
+            full_obs.observe_deku_tree__compass_room__ctx__torch();
+            ctx.deku_tree__compass_room__ctx__torch()
+        })))
+}
 pub fn observe_access_invoke_is_child_and_kokiri_sword_and_invoke_deku_shield(
     ctx: &Context,
     world: &World,
@@ -1607,7 +1604,7 @@ pub fn observe_access_invoke_objective(
     // $objective
     robserve__objective!(ctx, world, full_obs)
 }
-pub fn observe_action_deku_tree__compass_room__entry__light_torch__do(
+pub fn observe_action_deku_tree__compass_room__ctx__torch_set_true(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,

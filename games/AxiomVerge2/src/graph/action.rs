@@ -32,21 +32,21 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => true,
-            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::access_amagi__gated_community__dur_esla__kill_dur_esla__req(ctx, world),
-            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::access_amagi__gated_community__dur_esla__shockwave_dur_esla__req(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::access_invoke_melee_and_not_amagi__gated_community__ctx__dur_esla(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::access_invoke_shockwave_and_not_amagi__gated_community__ctx__dur_esla(ctx, world),
             ActionId::Amagi__Isolation__Save_Point__Save => true,
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_amagi__main_area__carving__key_combo__req(ctx, world),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::access_not_amagi__main_area__ctx__combo(ctx, world),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Amagi__Main_Area__Save_Point__Save => true,
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
-            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::access_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(ctx, world),
-            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::access_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(ctx, world),
-            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::access_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(ctx, world),
-            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::access_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::access_invoke_melee_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::access_invoke_shockwave_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::access_invoke_melee_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::access_invoke_shockwave_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world),
             ActionId::Amagi_Breach__Divided__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => true,
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => true,
@@ -55,10 +55,10 @@ impl world::Accessible for Action {
             ActionId::Annuna__Center_Save__Save_Point__Save => true,
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::access_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::access_not_annuna__east_bridge__ctx__combo(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::access_annuna__east_bridge__tower_secret__enter_combo__req(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::access_annuna__east_bridge__tower_west_ledge__enter_combo__req(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::access_not_annuna__east_bridge__ctx__combo(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::access_not_annuna__east_bridge__ctx__combo(ctx, world),
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => true,
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => rules::access_invoke_can_deploy_and_slingshot_hook(ctx, world),
             ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
@@ -72,24 +72,24 @@ impl world::Accessible for Action {
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Annuna__Vertical_Room__Save_Point__Save => true,
             ActionId::Annuna__West_Bridge__Save_Point__Save => true,
-            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::access_annuna__west_climb__switch_ledge__open_door__req(ctx, world),
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::access_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(ctx, world),
             ActionId::Annuna_Breach__Bottom__Save_Point__Save => true,
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => true,
             ActionId::Annuna_Breach__Enclosed__Save_Point__Save => true,
             ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => true,
             ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => true,
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::access_ebih__base_camp__left_platform__move_left_platform__req(ctx, world),
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::access_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world),
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::access_invoke_activate_and_not_ebih__base_camp__ctx__left_platform_moved(ctx, world),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::access_invoke_activate_and_ebih__base_camp__ctx__left_platform_moved(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => true,
             ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::access_ebih__drone_room__pit_left__activate_lift__req(ctx, world),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(ctx, world),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::access_ebih__drone_room__portal_exit__activate_platform__req(ctx, world),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::access_ebih__ebih_east__dispenser__activate_lift__req(ctx, world),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::access_ebih__ebih_east__lower_moving_platform__activate_lift__req(ctx, world),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::access_ebih__ebih_east__lower_moving_platform__activate_ride__req(ctx, world),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::access_ebih__ebih_east__moving_platform__activate_ride__req(ctx, world),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::access_infect_and_ebih__drone_room__ctx__platform_moved(ctx, world),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::access_infect_and_ebih__drone_room__ctx__platform_moved(ctx, world),
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::access_infect_and_not_ebih__drone_room__ctx__platform_moved(ctx, world),
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::access_infect_and_ebih__ebih_east__ctx__platform2_moved_and___invoke_grab_or_invoke_hook(ctx, world),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::access_infect_and_invoke_grab_and_not_ebih__ebih_east__ctx__platform2_moved(ctx, world),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::access_infect_and_not_ebih__ebih_east__ctx__platform2_moved(ctx, world),
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::access_infect_and_invoke_grab_and_not_ebih__ebih_east__ctx__platform1_moved(ctx, world),
             ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::access_infect(ctx, world),
             ActionId::Ebih__Ebih_West__Lower_Save__Save => true,
@@ -101,10 +101,10 @@ impl world::Accessible for Action {
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Hidden_Portal__Save_Point__Save => true,
-            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::access_ebih__truck_gate__portal_stand__open_door__req(ctx, world),
-            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::access_ebih__truck_gate__switch__open_door__req(ctx, world),
-            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::access_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(ctx, world),
-            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::access_ebih__vertical_interchange__west_13__open_door__req(ctx, world),
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::access_not_ebih__truck_gate__ctx__door_open_and_invoke_open_and_invoke_range1(ctx, world),
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::access_not_ebih__truck_gate__ctx__door_open_and_invoke_open(ctx, world),
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::access_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open_and_invoke_range2(ctx, world),
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::access_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open(ctx, world),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
@@ -118,33 +118,33 @@ impl world::Accessible for Action {
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => true,
             ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => true,
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => true,
-            ActionId::Emergence__Storage__At_Door__Open_Door => rules::access_emergence__storage__at_door__open_door__req(ctx, world),
-            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::access_emergence__storage__portal_stand__open_door__req(ctx, world),
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::access_giguna__carnelian__lower_susar__caught__req(ctx, world),
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::access_giguna__carnelian__lower_susar__hack__req(ctx, world),
-            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::access_giguna__carnelian__switch__open_door__req(ctx, world),
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::access_giguna__carnelian__upper_susar__caught__req(ctx, world),
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::access_giguna__carnelian__upper_susar__hack__req(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::access_giguna__clouds__platform_early__continue_to_early_portal__req(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::access_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::access_giguna__east_caverns__arc_passage__enter_combo__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::access_giguna__east_caverns__carving__enter_combo__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::access_giguna__east_caverns__lower_susar__caught__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::access_giguna__east_caverns__lower_susar__hack__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::access_giguna__east_caverns__mid_susar__caught__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::access_giguna__east_caverns__mid_susar__hack__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::access_giguna__east_caverns__statues_ledge__enter_combo__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::access_giguna__east_caverns__statues_ledge__open_door__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::access_giguna__east_caverns__switch__open_door__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::access_giguna__east_caverns__upper_susar__caught__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::access_giguna__east_caverns__upper_susar_jump_from_east__caught__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::access_giguna__east_caverns__upper_susar_jump_from_east__hack__req(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::access_giguna__east_caverns__upper_susar_mid_jump__hack__req(ctx, world),
-            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::access_giguna__east_caverns__west_14__enter_combo__req(ctx, world),
-            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::access_giguna__east_caverns__west_16__open_door__req(ctx, world),
+            ActionId::Emergence__Storage__At_Door__Open_Door => rules::access_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__door_open(ctx, world),
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::access_invoke_unlock4_and_not_emergence__storage__ctx__door_open(ctx, world),
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::access_not_giguna__carnelian__ctx__lower_susar(ctx, world),
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::access_not_giguna__carnelian__ctx__lower_susar_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::access_invoke_unlock3_and_not_giguna__carnelian__ctx__door_opened(ctx, world),
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::access_not_giguna__carnelian__ctx__upper_susar(ctx, world),
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::access_not_giguna__carnelian__ctx__upper_susar_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::access_giguna__clouds__ctx__platform_and_invoke_attract_and_breach_sight_and_remote_drone(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::access_giguna__clouds__ctx__platform_and_invoke_attract_and_invoke_can_deploy_and_breach_sight(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::access_not_giguna__clouds__ctx__platform_and_invoke_activate(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::access_not_giguna__clouds__ctx__platform_and_invoke_activate_and_invoke_attract_and_breach_sight_and_remote_drone(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::access_not_giguna__clouds__ctx__platform_and_invoke_activate_and_invoke_can_deploy_and_invoke_attract_and_breach_sight(ctx, world),
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::access_not_giguna__east_caverns__ctx__combo_entered(ctx, world),
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::access_not_giguna__east_caverns__ctx__combo_entered(ctx, world),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::access_not_giguna__east_caverns__ctx__lower_susar(ctx, world),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::access_not_giguna__east_caverns__ctx__lower_susar_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::access_not_giguna__east_caverns__ctx__mid_susar(ctx, world),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::access_not_giguna__east_caverns__ctx__mid_susar_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::access_not_giguna__east_caverns__ctx__combo_entered(ctx, world),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::access_not_giguna__east_caverns__ctx__door_opened_and_invoke_unlock2_and_invoke_range1(ctx, world),
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::access_not_giguna__east_caverns__ctx__door_opened_and_invoke_unlock2(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::access_not_giguna__east_caverns__ctx__upper_susar(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::access_not_giguna__east_caverns__ctx__upper_susar(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::access_not_giguna__east_caverns__ctx__upper_susar_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::access_not_giguna__east_caverns__ctx__upper_susar_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::access_not_giguna__east_caverns__ctx__combo_entered(ctx, world),
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::access_not_giguna__east_caverns__ctx__door_opened_and_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Giguna__Giguna_Base__Save_Point__Save => true,
@@ -154,23 +154,23 @@ impl world::Accessible for Action {
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::access_invoke_open_and_invoke_range3(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::access_invoke_can_deploy_and_slingshot_hook(ctx, world),
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::access_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world),
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::access_invoke_unlock3_and_invoke_range2_and_not_giguna__giguna_northeast__ctx__door_opened(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => true,
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::access_giguna__giguna_northeast__switch__open_door__req(ctx, world),
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::access_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened(ctx, world),
             ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Giguna__Labyrinth__Save_Point__Save => true,
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::access_invoke_grab_and_invoke_can_deploy(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::access_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_shockwave(ctx, world),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_allegiance1(ctx, world),
             ActionId::Giguna__Ruins_West__Save_Point__Save => true,
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world),
             ActionId::Giguna__Separator__Save_Point__Save => true,
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::access_invoke_can_deploy_and_slingshot_hook(ctx, world),
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::access_giguna__west_caverns__east_susar__caught__req(ctx, world),
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::access_giguna__west_caverns__east_susar__hack__req(ctx, world),
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::access_not_giguna__west_caverns__ctx__east_susar(ctx, world),
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::access_not_giguna__west_caverns__ctx__east_susar_and_invoke_allegiance1(ctx, world),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Giguna_Breach__East__Save_Point__Save => true,
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => true,
@@ -178,7 +178,7 @@ impl world::Accessible for Action {
             ActionId::Giguna_Breach__Peak__Save_Point__Save => true,
             ActionId::Giguna_Breach__South__Save_Point__Save => true,
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => true,
-            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_giguna_breach__sw_save__west_11__open_door__req(ctx, world),
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::access_not_giguna_breach__sw_save__ctx__door_opened(ctx, world),
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world),
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
@@ -223,8 +223,8 @@ impl world::Accessible for Action {
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
-            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world),
-            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world),
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::access_not_irikar__midwest__ctx__left_platform_and_invoke_activate(ctx, world),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::access_not_irikar__midwest__ctx__right_platform_and_invoke_activate(ctx, world),
             ActionId::Irikar__Midwest__Save_Point__Save => true,
             ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => true,
             ActionId::Irikar_Breach__Corridor__Save_Point__Save => true,
@@ -247,25 +247,25 @@ impl world::Accessible for Action {
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
-            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::observe_access_amagi__gated_community__dur_esla__kill_dur_esla__req(ctx, world, full_obs),
-            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_amagi__gated_community__dur_esla__shockwave_dur_esla__req(ctx, world, full_obs),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::observe_access_invoke_melee_and_not_amagi__gated_community__ctx__dur_esla(ctx, world, full_obs),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_invoke_shockwave_and_not_amagi__gated_community__ctx__dur_esla(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_amagi__main_area__carving__key_combo__req(ctx, world, full_obs),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::observe_access_not_amagi__main_area__ctx__combo(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
-            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::observe_access_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(ctx, world, full_obs),
-            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(ctx, world, full_obs),
-            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::observe_access_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(ctx, world, full_obs),
-            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::observe_access_invoke_melee_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_invoke_shockwave_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::observe_access_invoke_melee_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world, full_obs),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_invoke_shockwave_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world, full_obs),
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::observe_access_not_annuna__east_bridge__ctx__combo(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::observe_access_invoke_climb_and_invoke_can_deploy_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
-            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_secret__enter_combo__req(ctx, world, full_obs),
-            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::observe_access_annuna__east_bridge__tower_west_ledge__enter_combo__req(ctx, world, full_obs),
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::observe_access_not_annuna__east_bridge__ctx__combo(ctx, world, full_obs),
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::observe_access_not_annuna__east_bridge__ctx__combo(ctx, world, full_obs),
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => rules::observe_access_invoke_allegiance4(ctx, world, full_obs),
@@ -274,18 +274,18 @@ impl world::Accessible for Action {
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::observe_access_defeat_indra(ctx, world, full_obs),
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
-            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::observe_access_annuna__west_climb__switch_ledge__open_door__req(ctx, world, full_obs),
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::observe_access_ebih__base_camp__left_platform__move_left_platform__req(ctx, world, full_obs),
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::observe_access_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world, full_obs),
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::observe_access_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(ctx, world, full_obs),
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::observe_access_invoke_activate_and_not_ebih__base_camp__ctx__left_platform_moved(ctx, world, full_obs),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::observe_access_invoke_activate_and_ebih__base_camp__ctx__left_platform_moved(ctx, world, full_obs),
             ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::observe_access_ebih__drone_room__pit_left__activate_lift__req(ctx, world, full_obs),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::observe_access_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(ctx, world, full_obs),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::observe_access_ebih__drone_room__portal_exit__activate_platform__req(ctx, world, full_obs),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::observe_access_ebih__ebih_east__dispenser__activate_lift__req(ctx, world, full_obs),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::observe_access_ebih__ebih_east__lower_moving_platform__activate_lift__req(ctx, world, full_obs),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::observe_access_ebih__ebih_east__lower_moving_platform__activate_ride__req(ctx, world, full_obs),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::observe_access_ebih__ebih_east__moving_platform__activate_ride__req(ctx, world, full_obs),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::observe_access_infect_and_ebih__drone_room__ctx__platform_moved(ctx, world, full_obs),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::observe_access_infect_and_ebih__drone_room__ctx__platform_moved(ctx, world, full_obs),
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::observe_access_infect_and_not_ebih__drone_room__ctx__platform_moved(ctx, world, full_obs),
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::observe_access_infect_and_ebih__ebih_east__ctx__platform2_moved_and___invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::observe_access_infect_and_invoke_grab_and_not_ebih__ebih_east__ctx__platform2_moved(ctx, world, full_obs),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::observe_access_infect_and_not_ebih__ebih_east__ctx__platform2_moved(ctx, world, full_obs),
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::observe_access_infect_and_invoke_grab_and_not_ebih__ebih_east__ctx__platform1_moved(ctx, world, full_obs),
             ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::observe_access_infect(ctx, world, full_obs),
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
@@ -293,10 +293,10 @@ impl world::Accessible for Action {
             ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => rules::observe_access_invoke_can_deploy_and_drone_hover_and_ebih_walled_off_wall(ctx, world, full_obs),
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
-            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::observe_access_ebih__truck_gate__portal_stand__open_door__req(ctx, world, full_obs),
-            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::observe_access_ebih__truck_gate__switch__open_door__req(ctx, world, full_obs),
-            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::observe_access_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(ctx, world, full_obs),
-            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::observe_access_ebih__vertical_interchange__west_13__open_door__req(ctx, world, full_obs),
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::observe_access_not_ebih__truck_gate__ctx__door_open_and_invoke_open_and_invoke_range1(ctx, world, full_obs),
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::observe_access_not_ebih__truck_gate__ctx__door_open_and_invoke_open(ctx, world, full_obs),
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::observe_access_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open_and_invoke_range2(ctx, world, full_obs),
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::observe_access_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
@@ -305,33 +305,33 @@ impl world::Accessible for Action {
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Ebih__Waterfall__West_8__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
-            ActionId::Emergence__Storage__At_Door__Open_Door => rules::observe_access_emergence__storage__at_door__open_door__req(ctx, world, full_obs),
-            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::observe_access_emergence__storage__portal_stand__open_door__req(ctx, world, full_obs),
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::observe_access_giguna__carnelian__lower_susar__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::observe_access_giguna__carnelian__lower_susar__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::observe_access_giguna__carnelian__switch__open_door__req(ctx, world, full_obs),
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::observe_access_giguna__carnelian__upper_susar__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::observe_access_giguna__carnelian__upper_susar__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::observe_access_giguna__clouds__platform_early__continue_to_early_portal__req(ctx, world, full_obs),
-            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::observe_access_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(ctx, world, full_obs),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::observe_access_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world, full_obs),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::observe_access_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world, full_obs),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::observe_access_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::observe_access_giguna__east_caverns__arc_passage__enter_combo__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::observe_access_giguna__east_caverns__carving__enter_combo__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::observe_access_giguna__east_caverns__lower_susar__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::observe_access_giguna__east_caverns__lower_susar__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::observe_access_giguna__east_caverns__mid_susar__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::observe_access_giguna__east_caverns__mid_susar__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::observe_access_giguna__east_caverns__statues_ledge__enter_combo__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::observe_access_giguna__east_caverns__statues_ledge__open_door__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::observe_access_giguna__east_caverns__switch__open_door__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::observe_access_giguna__east_caverns__upper_susar__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::observe_access_giguna__east_caverns__upper_susar_jump_from_east__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::observe_access_giguna__east_caverns__upper_susar_jump_from_east__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::observe_access_giguna__east_caverns__upper_susar_mid_jump__hack__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::observe_access_giguna__east_caverns__west_14__enter_combo__req(ctx, world, full_obs),
-            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::observe_access_giguna__east_caverns__west_16__open_door__req(ctx, world, full_obs),
+            ActionId::Emergence__Storage__At_Door__Open_Door => rules::observe_access_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__door_open(ctx, world, full_obs),
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::observe_access_invoke_unlock4_and_not_emergence__storage__ctx__door_open(ctx, world, full_obs),
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::observe_access_not_giguna__carnelian__ctx__lower_susar(ctx, world, full_obs),
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::observe_access_not_giguna__carnelian__ctx__lower_susar_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::observe_access_invoke_unlock3_and_not_giguna__carnelian__ctx__door_opened(ctx, world, full_obs),
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::observe_access_not_giguna__carnelian__ctx__upper_susar(ctx, world, full_obs),
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::observe_access_not_giguna__carnelian__ctx__upper_susar_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::observe_access_giguna__clouds__ctx__platform_and_invoke_attract_and_breach_sight_and_remote_drone(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::observe_access_giguna__clouds__ctx__platform_and_invoke_attract_and_invoke_can_deploy_and_breach_sight(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::observe_access_not_giguna__clouds__ctx__platform_and_invoke_activate(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::observe_access_not_giguna__clouds__ctx__platform_and_invoke_activate_and_invoke_attract_and_breach_sight_and_remote_drone(ctx, world, full_obs),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::observe_access_not_giguna__clouds__ctx__platform_and_invoke_activate_and_invoke_can_deploy_and_invoke_attract_and_breach_sight(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::observe_access_not_giguna__east_caverns__ctx__combo_entered(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::observe_access_not_giguna__east_caverns__ctx__combo_entered(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::observe_access_not_giguna__east_caverns__ctx__lower_susar(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::observe_access_not_giguna__east_caverns__ctx__lower_susar_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::observe_access_not_giguna__east_caverns__ctx__mid_susar(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::observe_access_not_giguna__east_caverns__ctx__mid_susar_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::observe_access_not_giguna__east_caverns__ctx__combo_entered(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::observe_access_not_giguna__east_caverns__ctx__door_opened_and_invoke_unlock2_and_invoke_range1(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::observe_access_not_giguna__east_caverns__ctx__door_opened_and_invoke_unlock2(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::observe_access_not_giguna__east_caverns__ctx__upper_susar(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::observe_access_not_giguna__east_caverns__ctx__upper_susar(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::observe_access_not_giguna__east_caverns__ctx__upper_susar_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::observe_access_not_giguna__east_caverns__ctx__upper_susar_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::observe_access_not_giguna__east_caverns__ctx__combo_entered(ctx, world, full_obs),
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::observe_access_not_giguna__east_caverns__ctx__door_opened_and_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
@@ -340,20 +340,20 @@ impl world::Accessible for Action {
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::observe_access_invoke_open_and_invoke_range3(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::observe_access_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world, full_obs),
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::observe_access_giguna__giguna_northeast__switch__open_door__req(ctx, world, full_obs),
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::observe_access_invoke_unlock3_and_invoke_range2_and_not_giguna__giguna_northeast__ctx__door_opened(ctx, world, full_obs),
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::observe_access_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened(ctx, world, full_obs),
             ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_invoke_grab_and_invoke_can_deploy(ctx, world, full_obs),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::observe_access_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world, full_obs),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::observe_access_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world, full_obs),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::observe_access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_shockwave(ctx, world, full_obs),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::observe_access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_allegiance1(ctx, world, full_obs),
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::observe_access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::observe_access_giguna__west_caverns__east_susar__caught__req(ctx, world, full_obs),
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::observe_access_giguna__west_caverns__east_susar__hack__req(ctx, world, full_obs),
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::observe_access_not_giguna__west_caverns__ctx__east_susar(ctx, world, full_obs),
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::observe_access_not_giguna__west_caverns__ctx__east_susar_and_invoke_allegiance1(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
-            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::observe_access_giguna_breach__sw_save__west_11__open_door__req(ctx, world, full_obs),
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::observe_access_not_giguna_breach__sw_save__ctx__door_opened(ctx, world, full_obs),
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::observe_access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
@@ -387,8 +387,8 @@ impl world::Accessible for Action {
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
-            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::observe_access_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world, full_obs),
-            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::observe_access_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world, full_obs),
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::observe_access_not_irikar__midwest__ctx__left_platform_and_invoke_activate(ctx, world, full_obs),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::observe_access_not_irikar__midwest__ctx__right_platform_and_invoke_activate(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
@@ -473,7 +473,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_amagi__gated_community__dur_esla__kill_dur_esla__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_melee_and_not_amagi__gated_community__ctx__dur_esla(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -482,7 +482,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_amagi__gated_community__dur_esla__shockwave_dur_esla__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_shockwave_and_not_amagi__gated_community__ctx__dur_esla(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -500,7 +500,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
-                let (ret, mut tags) = rules::explain_amagi__main_area__carving__key_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_amagi__main_area__ctx__combo(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -554,7 +554,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_amagi__secret_chamber__east_dur_esla__kill_dur_esla__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_melee_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -563,7 +563,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_shockwave_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -572,7 +572,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_amagi__secret_chamber__west_dur_esla__kill_dur_esla__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_melee_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -581,7 +581,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => {
-                let (ret, mut tags) = rules::explain_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_shockwave_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -608,7 +608,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_annuna__east_bridge__tower_east_ledge__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_annuna__east_bridge__ctx__combo(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -626,7 +626,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_annuna__east_bridge__tower_secret__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_annuna__east_bridge__ctx__combo(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -635,7 +635,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_annuna__east_bridge__tower_west_ledge__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_annuna__east_bridge__ctx__combo(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -716,7 +716,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
-                let (ret, mut tags) = rules::explain_annuna__west_climb__switch_ledge__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -725,7 +725,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
-                let (ret, mut tags) = rules::explain_ebih__base_camp__left_platform__move_left_platform__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_activate_and_not_ebih__base_camp__ctx__left_platform_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Base Camp > Left Platform Moved"));
@@ -734,7 +734,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
-                let (ret, mut tags) = rules::explain_ebih__base_camp__left_platform_moved__reset_left_platform__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_activate_and_ebih__base_camp__ctx__left_platform_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Base Camp > Left Platform"));
@@ -761,7 +761,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
-                let (ret, mut tags) = rules::explain_ebih__drone_room__pit_left__activate_lift__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_ebih__drone_room__ctx__platform_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Drone Room > Moving Platform"));
@@ -770,7 +770,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
-                let (ret, mut tags) = rules::explain_ebih__drone_room__pit_left__activate_lift_but_get_off_early__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_ebih__drone_room__ctx__platform_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Drone Room > West 6"));
@@ -779,7 +779,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
-                let (ret, mut tags) = rules::explain_ebih__drone_room__portal_exit__activate_platform__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_not_ebih__drone_room__ctx__platform_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -788,7 +788,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
-                let (ret, mut tags) = rules::explain_ebih__ebih_east__dispenser__activate_lift__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_ebih__ebih_east__ctx__platform2_moved_and___invoke_grab_or_invoke_hook(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Ebih East > Ledge End"));
@@ -797,7 +797,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
-                let (ret, mut tags) = rules::explain_ebih__ebih_east__lower_moving_platform__activate_lift__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_invoke_grab_and_not_ebih__ebih_east__ctx__platform2_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Ebih East > Ledge End"));
@@ -806,7 +806,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
-                let (ret, mut tags) = rules::explain_ebih__ebih_east__lower_moving_platform__activate_ride__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_not_ebih__ebih_east__ctx__platform2_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Ebih East > Dispenser"));
@@ -815,7 +815,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
-                let (ret, mut tags) = rules::explain_ebih__ebih_east__moving_platform__activate_ride__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_infect_and_invoke_grab_and_not_ebih__ebih_east__ctx__platform1_moved(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Ebih > Ebih East > Middle Platform"));
@@ -887,7 +887,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
-                let (ret, mut tags) = rules::explain_ebih__truck_gate__portal_stand__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_ebih__truck_gate__ctx__door_open_and_invoke_open_and_invoke_range1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -896,7 +896,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
-                let (ret, mut tags) = rules::explain_ebih__truck_gate__switch__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_ebih__truck_gate__ctx__door_open_and_invoke_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -905,7 +905,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => {
-                let (ret, mut tags) = rules::explain_ebih__vertical_interchange__under_switch__unlock_door_from_below__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open_and_invoke_range2(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -914,7 +914,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
-                let (ret, mut tags) = rules::explain_ebih__vertical_interchange__west_13__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -995,7 +995,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Emergence__Storage__At_Door__Open_Door => {
-                let (ret, mut tags) = rules::explain_emergence__storage__at_door__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__door_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1004,7 +1004,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Emergence__Storage__Portal_Stand__Open_Door => {
-                let (ret, mut tags) = rules::explain_emergence__storage__portal_stand__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_not_emergence__storage__ctx__door_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1013,7 +1013,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__carnelian__lower_susar__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__carnelian__ctx__lower_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1022,7 +1022,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__carnelian__lower_susar__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__carnelian__ctx__lower_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1031,7 +1031,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Carnelian__Switch__Open_Door => {
-                let (ret, mut tags) = rules::explain_giguna__carnelian__switch__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_unlock3_and_not_giguna__carnelian__ctx__door_opened(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1040,7 +1040,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__carnelian__upper_susar__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__carnelian__ctx__upper_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1049,7 +1049,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__carnelian__upper_susar__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__carnelian__ctx__upper_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1058,7 +1058,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => {
-                let (ret, mut tags) = rules::explain_giguna__clouds__platform_early__continue_to_early_portal__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_giguna__clouds__ctx__platform_and_invoke_attract_and_breach_sight_and_remote_drone(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Platform Early Portal"));
@@ -1067,7 +1067,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => {
-                let (ret, mut tags) = rules::explain_giguna__clouds__platform_early__deploy_and_continue_to_early_portal__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_giguna__clouds__ctx__platform_and_invoke_attract_and_invoke_can_deploy_and_breach_sight(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Platform Early Portal"));
@@ -1076,7 +1076,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => {
-                let (ret, mut tags) = rules::explain_giguna__clouds__platform_start__hack_and_maybe_get_off_early__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__clouds__ctx__platform_and_invoke_activate(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Platform Early"));
@@ -1085,7 +1085,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
-                let (ret, mut tags) = rules::explain_giguna__clouds__platform_start__hack_and_ride_to_portal__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__clouds__ctx__platform_and_invoke_activate_and_invoke_attract_and_breach_sight_and_remote_drone(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Platform Stop"));
@@ -1094,7 +1094,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
-                let (ret, mut tags) = rules::explain_giguna__clouds__platform_start__hack_deploy_ride_to_portal__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__clouds__ctx__platform_and_invoke_activate_and_invoke_can_deploy_and_invoke_attract_and_breach_sight(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Platform Stop"));
@@ -1103,7 +1103,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__arc_passage__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__combo_entered(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1112,7 +1112,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Carving__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__carving__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__combo_entered(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1121,7 +1121,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__lower_susar__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__lower_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1130,7 +1130,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__lower_susar__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__lower_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1139,7 +1139,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__mid_susar__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__mid_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1148,7 +1148,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__mid_susar__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__mid_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1157,7 +1157,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__statues_ledge__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__combo_entered(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1166,7 +1166,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__statues_ledge__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__door_opened_and_invoke_unlock2_and_invoke_range1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1175,7 +1175,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Switch__Open_Door => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__switch__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__door_opened_and_invoke_unlock2(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1184,7 +1184,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__upper_susar__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__upper_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1193,7 +1193,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__upper_susar_jump_from_east__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__upper_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1202,7 +1202,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__upper_susar_jump_from_east__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__upper_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1211,7 +1211,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__upper_susar_mid_jump__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__upper_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1220,7 +1220,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__west_14__enter_combo__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__combo_entered(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1229,7 +1229,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__East_Caverns__West_16__Open_Door => {
-                let (ret, mut tags) = rules::explain_giguna__east_caverns__west_16__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__east_caverns__ctx__door_opened_and_invoke_open_and_invoke_range2(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1310,7 +1310,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
-                let (ret, mut tags) = rules::explain_giguna__giguna_northeast__right_column__open_door_from_afar__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_unlock3_and_invoke_range2_and_not_giguna__giguna_northeast__ctx__door_opened(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1319,7 +1319,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
-                let (ret, mut tags) = rules::explain_giguna__giguna_northeast__switch__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1364,7 +1364,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
-                let (ret, mut tags) = rules::explain_giguna__ruins_west__lower_ledge__destroy_kishib__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_shockwave(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1373,7 +1373,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
-                let (ret, mut tags) = rules::explain_giguna__ruins_west__lower_ledge__hack_kishib__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1400,7 +1400,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__West_Caverns__East_Susar__Caught => {
-                let (ret, mut tags) = rules::explain_giguna__west_caverns__east_susar__caught__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__west_caverns__ctx__east_susar(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1409,7 +1409,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__West_Caverns__East_Susar__Hack => {
-                let (ret, mut tags) = rules::explain_giguna__west_caverns__east_susar__hack__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna__west_caverns__ctx__east_susar_and_invoke_allegiance1(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1427,7 +1427,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
-                let (ret, mut tags) = rules::explain_giguna_breach__sw_save__west_11__open_door__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_giguna_breach__sw_save__ctx__door_opened(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1733,7 +1733,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
-                let (ret, mut tags) = rules::explain_irikar__midwest__left_platform_start__hack_and_ride__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_irikar__midwest__ctx__left_platform_and_invoke_activate(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Left Platform Dest"));
@@ -1742,7 +1742,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
-                let (ret, mut tags) = rules::explain_irikar__midwest__right_platform_start__hack_and_ride_platform__req(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_not_irikar__midwest__ctx__right_platform_and_invoke_activate(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Right Platform Dest"));
@@ -1798,7 +1798,7 @@ impl world::Action for Action {
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__Divided__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi_Breach__Lakebed__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__carving__key_combo__do(ctx, world),
+            ActionId::Amagi__Main_Area__Carving__Key_Combo => rules::action_amagi__main_area__ctx__combo_set_true(ctx, world),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
@@ -1806,18 +1806,18 @@ impl world::Action for Action {
             ActionId::Amagi__Main_Area__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::action_amagi__secret_chamber__west_dur_esla__kill_dur_esla__do(ctx, world),
-            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__do(ctx, world),
-            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::action_amagi__secret_chamber__east_dur_esla__kill_dur_esla__do(ctx, world),
-            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__do(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::action_amagi__secret_chamber__ctx__west_dur_esla_set_true(ctx, world),
+            ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => rules::action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world),
+            ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => rules::action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world),
             ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Amagi__East_Lake__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world),
-            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__gated_community__dur_esla__shockwave_dur_esla__do(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => rules::action_amagi__gated_community__ctx__dur_esla_set_true(ctx, world),
+            ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => rules::action_amagi__gated_community__ctx__dur_esla_set_true(ctx, world),
             ActionId::Amagi__Isolation__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1825,70 +1825,70 @@ impl world::Action for Action {
             ActionId::Annuna_Breach__Bottom__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Enclosed__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::action_annuna__invisible_enemies__switch_west__open_door__do(ctx, world),
-            ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => rules::action_annuna__invisible_enemies__switch_above__open_door__do(ctx, world),
-            ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => rules::action_annuna__invisible_enemies__switch_east__open_door__do(ctx, world),
-            ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => rules::action_annuna__invisible_enemies__corner_cache__charm_utu__do(ctx, world),
+            ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world),
+            ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => rules::action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world),
+            ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => rules::action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world),
+            ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => rules::action_annuna__invisible_enemies__ctx__nw_utu_set_true(ctx, world),
             ActionId::Annuna__West_Bridge__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::action_annuna__east_bridge__tower_west_ledge__enter_combo__do(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::action_annuna__east_bridge__tower_east_ledge__enter_combo__do(ctx, world),
-            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::action_annuna__east_bridge__tower_secret__enter_combo__do(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => rules::action_annuna__east_bridge__ctx__combo_set_true(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::action_annuna__east_bridge__ctx__combo_set_true(ctx, world),
+            ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => rules::action_annuna__east_bridge__ctx__combo_set_true(ctx, world),
             ActionId::Annuna__Vertical_Room__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::action_annuna__vertical_room__door_switch__open_door__do(ctx, world),
+            ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::action_annuna__vertical_room__ctx__door_opened_set_true(ctx, world),
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__Upper_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Center_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::action_annuna__west_climb__switch_ledge__open_door__do(ctx, world),
+            ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::action_annuna__west_climb__ctx__door_opened_set_true(ctx, world),
             ActionId::Annuna__Final_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__Peak__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Base_Camp__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world),
-            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world),
+            ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::action_ebih__base_camp__ctx__left_platform_moved_set_true(ctx, world),
+            ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::action_ebih__base_camp__ctx__left_platform_moved_set_false(ctx, world),
             ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => rules::action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(ctx, world),
-            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::action_ebih__truck_gate__switch__open_door__do(ctx, world),
-            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::action_ebih__truck_gate__portal_stand__open_door__do(ctx, world),
+            ActionId::Ebih__Truck_Gate__Switch__Open_Door => rules::action_ebih__truck_gate__ctx__door_open_set_true(ctx, world),
+            ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => rules::action_ebih__truck_gate__ctx__door_open_set_true(ctx, world),
             ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::action_ebih__grid_25_10_12__door_left__open_door__do(ctx, world),
-            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::action_ebih__grid_25_10_12__east_11__open_door__do(ctx, world),
+            ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => rules::action_ebih__grid_25_10_12__ctx__door_open_set_true(ctx, world),
+            ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => rules::action_ebih__grid_25_10_12__ctx__door_open_set_true(ctx, world),
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::action_ebih__waterfall__below_left_switch__open_door__do(ctx, world),
-            ActionId::Ebih__Waterfall__West_8__Open_Door => rules::action_ebih__waterfall__west_8__open_door__do(ctx, world),
-            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::action_ebih__waterfall__east_door_right__open_door__do(ctx, world),
-            ActionId::Ebih__Waterfall__East_Switch__Open_Door => rules::action_ebih__waterfall__east_switch__open_door__do(ctx, world),
-            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::action_ebih__waterfall__platform_by_east_door__open_door__do(ctx, world),
-            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::action_ebih__waterfall__east_horizontal_door__open_door__do(ctx, world),
-            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => rules::action_ebih__waterfall__ledge_below_east_door__open_door__do(ctx, world),
+            ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => rules::action_ebih__waterfall__ctx__west_door_open_set_true(ctx, world),
+            ActionId::Ebih__Waterfall__West_8__Open_Door => rules::action_ebih__waterfall__ctx__west_door_open_set_true(ctx, world),
+            ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => rules::action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world),
+            ActionId::Ebih__Waterfall__East_Switch__Open_Door => rules::action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world),
+            ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => rules::action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world),
+            ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => rules::action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world),
+            ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => rules::action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world),
             ActionId::Ebih__Ebih_West__Mid_Save__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Ebih_West__Upper_Save__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => rules::action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(ctx, world),
-            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::action_ebih__ebih_west__below_door__open_door__do(ctx, world),
-            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::action_ebih__ebih_west__left_of_switch__open_door__do(ctx, world),
+            ActionId::Ebih__Ebih_West__Below_Door__Open_Door => rules::action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(ctx, world),
+            ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => rules::action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(ctx, world),
             ActionId::Ebih__Ebih_West__Lower_Save__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__moving_platform__activate_ride__do(ctx, world),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx, world),
-            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx, world),
-            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__dispenser__activate_lift__do(ctx, world),
+            ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__ctx__platform1_moved_set_true(ctx, world),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => rules::action_ebih__ebih_east__ctx__platform2_moved_set_true(ctx, world),
+            ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => rules::action_ebih__ebih_east__ctx__platform2_moved_set_true(ctx, world),
+            ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => rules::action_ebih__ebih_east__ctx__platform2_moved_set_false(ctx, world),
             ActionId::Ebih__Hidden_Portal__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__pit_left__activate_lift__do(ctx, world),
-            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx, world),
-            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__portal_exit__activate_platform__do(ctx, world),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => rules::action_ebih__drone_room__ctx__platform_moved_set_false(ctx, world),
+            ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => rules::action_ebih__drone_room__ctx__platform_moved_set_false(ctx, world),
+            ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => rules::action_ebih__drone_room__ctx__platform_moved_set_true(ctx, world),
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => rules::action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world),
-            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__west_13__open_door__do(ctx, world),
-            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::action_ebih__vertical_interchange__under_switch__unlock_door_from_below__do(ctx, world),
+            ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => rules::action_ebih__vertical_interchange__ctx__door_open_set_true(ctx, world),
+            ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => rules::action_ebih__vertical_interchange__ctx__door_open_set_true(ctx, world),
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Emergence__Storage__At_Door__Open_Door => rules::action_emergence__storage__at_door__open_door__do(ctx, world),
-            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::action_emergence__storage__portal_stand__open_door__do(ctx, world),
+            ActionId::Emergence__Storage__At_Door__Open_Door => rules::action_emergence__storage__ctx__door_open_set_true(ctx, world),
+            ActionId::Emergence__Storage__Portal_Stand__Open_Door => rules::action_emergence__storage__ctx__door_open_set_true(ctx, world),
             ActionId::Giguna_Breach__Peak__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__west_11__open_door__do(ctx, world),
+            ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => rules::action_giguna_breach__sw_save__ctx__door_opened_set_true(ctx, world),
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna_Breach__East__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1896,53 +1896,53 @@ impl world::Action for Action {
             ActionId::Giguna_Breach__South__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx, world),
-            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::action_giguna__giguna_northeast__switch__open_door__do(ctx, world),
-            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::action_giguna__carnelian__upper_susar__caught__do(ctx, world),
-            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::action_giguna__carnelian__upper_susar__hack__do(ctx, world),
-            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::action_giguna__carnelian__switch__open_door__do(ctx, world),
-            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::action_giguna__carnelian__lower_susar__caught__do(ctx, world),
-            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::action_giguna__carnelian__lower_susar__hack__do(ctx, world),
+            ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => rules::action_giguna__giguna_northeast__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => rules::action_giguna__giguna_northeast__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__Carnelian__Upper_Susar__Caught => rules::action_giguna__carnelian__ctx__upper_susar_set_true(ctx, world),
+            ActionId::Giguna__Carnelian__Upper_Susar__Hack => rules::action_giguna__carnelian__ctx__upper_susar_set_true(ctx, world),
+            ActionId::Giguna__Carnelian__Switch__Open_Door => rules::action_giguna__carnelian__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__Carnelian__Lower_Susar__Caught => rules::action_giguna__carnelian__ctx__lower_susar_set_true(ctx, world),
+            ActionId::Giguna__Carnelian__Lower_Susar__Hack => rules::action_giguna__carnelian__ctx__lower_susar_set_true(ctx, world),
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::action_giguna__west_caverns__east_susar__caught__do(ctx, world),
-            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::action_giguna__west_caverns__east_susar__hack__do(ctx, world),
+            ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world),
+            ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world),
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(ctx, world),
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(ctx, world),
             ActionId::Giguna__Giguna_Base__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::action_giguna__giguna_base__switch_distance_1__open_door__do(ctx, world),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::action_giguna__giguna_base__switch_distance_2__open_door__do(ctx, world),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::action_giguna__giguna_base__switch_distance_3__open_door__do(ctx, world),
-            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::action_giguna__giguna_base__switch_distance_4__open_door__do(ctx, world),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
+            ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
             ActionId::Giguna__Ruins_West__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx, world),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::action_giguna__ruins_top__switch__open_doors__do(ctx, world),
+            ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::action_giguna__ruins_top__ctx__doors_open_set_true(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::action_giguna__clouds__platform_start__hack_and_maybe_get_off_early__do(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => rules::action_giguna__clouds__ctx__platform_set_true_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_stop__portal_set_giguna_gt_clouds_gt_platform_stop(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__ctx__platform_set_true_portal_set_giguna_gt_clouds_gt_platform_stop_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::action_giguna__clouds__ctx__platform_set_true(ctx, world),
             ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(ctx, world),
             ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world),
-            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::action_giguna__east_caverns__west_14__enter_combo__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::action_giguna__east_caverns__upper_susar__caught__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::action_giguna__east_caverns__carving__enter_combo__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::action_giguna__east_caverns__mid_susar__hack__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::action_giguna__east_caverns__mid_susar__caught__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::action_giguna__east_caverns__statues_ledge__open_door__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::action_giguna__east_caverns__statues_ledge__enter_combo__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::action_giguna__east_caverns__switch__open_door__do(ctx, world),
-            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::action_giguna__east_caverns__west_16__open_door__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::action_giguna__east_caverns__arc_passage__enter_combo__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::action_giguna__east_caverns__lower_susar__hack__do(ctx, world),
-            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::action_giguna__east_caverns__lower_susar__caught__do(ctx, world),
-            ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__one_jump__open_door__do(ctx, world),
-            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__flask_ledge__open_door__do(ctx, world),
-            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::action_giguna__labyrinth__door_ledge__open_door__do(ctx, world),
-            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::action_giguna__labyrinth__switch_ledge__open_door__do(ctx, world),
+            ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => rules::action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => rules::action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Carving__Enter_Combo => rules::action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Hack => rules::action_giguna__east_caverns__ctx__mid_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Mid_Susar__Caught => rules::action_giguna__east_caverns__ctx__mid_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => rules::action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => rules::action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Switch__Open_Door => rules::action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__West_16__Open_Door => rules::action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => rules::action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Hack => rules::action_giguna__east_caverns__ctx__lower_susar_set_true(ctx, world),
+            ActionId::Giguna__East_Caverns__Lower_Susar__Caught => rules::action_giguna__east_caverns__ctx__lower_susar_set_true(ctx, world),
+            ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::action_giguna__gateway__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::action_giguna__gateway__ctx__door_opened_set_true(ctx, world),
+            ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::action_giguna__labyrinth__ctx__door_set_true(ctx, world),
+            ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::action_giguna__labyrinth__ctx__door_set_true(ctx, world),
             ActionId::Giguna__Labyrinth__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Giguna__Separator__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1957,17 +1957,17 @@ impl world::Action for Action {
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => rules::action_glacier__the_big_drop__solid_rock__careful_break__do(ctx, world),
-            ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world),
-            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(ctx, world),
+            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => rules::action_glacier__the_big_drop__ctx__bridge_open_set_true(ctx, world),
+            ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__ctx__upper_gatestone_set_true(ctx, world),
+            ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::action_glacier__vertical_room__ctx__lower_gatestones_set_true(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => rules::action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => rules::action_portal_set_glacier_gt_hammonds_end_gt_corner(ctx, world),
-            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::action_glacier__hammonds_end__switch_from_ledge__open_doors__do(ctx, world),
-            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__hammonds_end__switch_near__open_doors__do(ctx, world),
-            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__hammonds_end__west_11__open_doors__do(ctx, world),
+            ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => rules::action_glacier__ctx__hammonds_doors_set_true(ctx, world),
+            ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__ctx__hammonds_doors_set_true(ctx, world),
+            ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__ctx__hammonds_doors_set_true(ctx, world),
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::action_mode_set_drone(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
@@ -1984,9 +1984,9 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world),
-            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::action_irikar__midwest__left_platform_start__hack_and_ride__do(ctx, world),
-            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(ctx, world),
+            ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::action_irikar__basement_portal__ctx__platform_moved_set_true(ctx, world),
+            ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => rules::action_irikar__midwest__ctx__left_platform_set_true(ctx, world),
+            ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => rules::action_irikar__midwest__ctx__right_platform_set_true(ctx, world),
             ActionId::Irikar__Midwest__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Irikar__Beach_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -2124,7 +2124,7 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
-                rules::observe_action_amagi__main_area__carving__key_combo__do(ctx, world, full_obs);
+                rules::observe_action_amagi__main_area__ctx__combo_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
@@ -2148,16 +2148,16 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => {
-                rules::observe_action_amagi__secret_chamber__west_dur_esla__kill_dur_esla__do(ctx, world, full_obs);
+                rules::observe_action_amagi__secret_chamber__ctx__west_dur_esla_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => {
-                rules::observe_action_amagi__secret_chamber__west_dur_esla__shockwave_dur_esla__do(ctx, world, full_obs);
+                rules::observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => {
-                rules::observe_action_amagi__secret_chamber__east_dur_esla__kill_dur_esla__do(ctx, world, full_obs);
+                rules::observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => {
-                rules::observe_action_amagi__secret_chamber__east_dur_esla__shockwave_dur_esla__do(ctx, world, full_obs);
+                rules::observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world, full_obs);
@@ -2178,10 +2178,10 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
-                rules::observe_action_amagi__gated_community__dur_esla__kill_dur_esla__do(ctx, world, full_obs);
+                rules::observe_action_amagi__gated_community__ctx__dur_esla_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => {
-                rules::observe_action_amagi__gated_community__dur_esla__shockwave_dur_esla__do(ctx, world, full_obs);
+                rules::observe_action_amagi__gated_community__ctx__dur_esla_set_true(ctx, world, full_obs);
             }
             ActionId::Amagi__Isolation__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2205,16 +2205,16 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => {
-                rules::observe_action_annuna__invisible_enemies__switch_west__open_door__do(ctx, world, full_obs);
+                rules::observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => {
-                rules::observe_action_annuna__invisible_enemies__switch_above__open_door__do(ctx, world, full_obs);
+                rules::observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => {
-                rules::observe_action_annuna__invisible_enemies__switch_east__open_door__do(ctx, world, full_obs);
+                rules::observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => {
-                rules::observe_action_annuna__invisible_enemies__corner_cache__charm_utu__do(ctx, world, full_obs);
+                rules::observe_action_annuna__invisible_enemies__ctx__nw_utu_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__West_Bridge__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2229,19 +2229,19 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(ctx, world, full_obs);
             }
             ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
-                rules::observe_action_annuna__east_bridge__tower_west_ledge__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_annuna__east_bridge__ctx__combo_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
-                rules::observe_action_annuna__east_bridge__tower_east_ledge__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_annuna__east_bridge__ctx__combo_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
-                rules::observe_action_annuna__east_bridge__tower_secret__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_annuna__east_bridge__ctx__combo_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Vertical_Room__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => {
-                rules::observe_action_annuna__vertical_room__door_switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_annuna__vertical_room__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2259,7 +2259,7 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
-                rules::observe_action_annuna__west_climb__switch_ledge__open_door__do(ctx, world, full_obs);
+                rules::observe_action_annuna__west_climb__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Final_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2280,19 +2280,19 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
-                rules::observe_action_ebih__base_camp__left_platform__move_left_platform__do(ctx, world, full_obs);
+                rules::observe_action_ebih__base_camp__ctx__left_platform_moved_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
-                rules::observe_action_ebih__base_camp__left_platform_moved__reset_left_platform__do(ctx, world, full_obs);
+                rules::observe_action_ebih__base_camp__ctx__left_platform_moved_set_false(ctx, world, full_obs);
             }
             ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => {
                 rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(ctx, world, full_obs);
             }
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
-                rules::observe_action_ebih__truck_gate__switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__truck_gate__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
-                rules::observe_action_ebih__truck_gate__portal_stand__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__truck_gate__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
@@ -2301,34 +2301,34 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
-                rules::observe_action_ebih__grid_25_10_12__door_left__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__grid_25_10_12__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
-                rules::observe_action_ebih__grid_25_10_12__east_11__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__grid_25_10_12__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
-                rules::observe_action_ebih__waterfall__below_left_switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__west_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__West_8__Open_Door => {
-                rules::observe_action_ebih__waterfall__west_8__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__west_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => {
-                rules::observe_action_ebih__waterfall__east_door_right__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__East_Switch__Open_Door => {
-                rules::observe_action_ebih__waterfall__east_switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => {
-                rules::observe_action_ebih__waterfall__platform_by_east_door__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => {
-                rules::observe_action_ebih__waterfall__east_horizontal_door__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => {
-                rules::observe_action_ebih__waterfall__ledge_below_east_door__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_West__Mid_Save__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2340,61 +2340,61 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
-                rules::observe_action_ebih__ebih_west__below_door__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
-                rules::observe_action_ebih__ebih_west__left_of_switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_West__Lower_Save__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
-                rules::observe_action_ebih__ebih_east__moving_platform__activate_ride__do(ctx, world, full_obs);
+                rules::observe_action_ebih__ebih_east__ctx__platform1_moved_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
-                rules::observe_action_ebih__ebih_east__lower_moving_platform__activate_ride__do(ctx, world, full_obs);
+                rules::observe_action_ebih__ebih_east__ctx__platform2_moved_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
-                rules::observe_action_ebih__ebih_east__lower_moving_platform__activate_lift__do(ctx, world, full_obs);
+                rules::observe_action_ebih__ebih_east__ctx__platform2_moved_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
-                rules::observe_action_ebih__ebih_east__dispenser__activate_lift__do(ctx, world, full_obs);
+                rules::observe_action_ebih__ebih_east__ctx__platform2_moved_set_false(ctx, world, full_obs);
             }
             ActionId::Ebih__Hidden_Portal__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
-                rules::observe_action_ebih__drone_room__pit_left__activate_lift__do(ctx, world, full_obs);
+                rules::observe_action_ebih__drone_room__ctx__platform_moved_set_false(ctx, world, full_obs);
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
-                rules::observe_action_ebih__drone_room__pit_left__activate_lift_but_get_off_early__do(ctx, world, full_obs);
+                rules::observe_action_ebih__drone_room__ctx__platform_moved_set_false(ctx, world, full_obs);
             }
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
-                rules::observe_action_ebih__drone_room__portal_exit__activate_platform__do(ctx, world, full_obs);
+                rules::observe_action_ebih__drone_room__ctx__platform_moved_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world, full_obs);
             }
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
-                rules::observe_action_ebih__vertical_interchange__west_13__open_door__do(ctx, world, full_obs);
+                rules::observe_action_ebih__vertical_interchange__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => {
-                rules::observe_action_ebih__vertical_interchange__under_switch__unlock_door_from_below__do(ctx, world, full_obs);
+                rules::observe_action_ebih__vertical_interchange__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Emergence__Storage__At_Door__Open_Door => {
-                rules::observe_action_emergence__storage__at_door__open_door__do(ctx, world, full_obs);
+                rules::observe_action_emergence__storage__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Emergence__Storage__Portal_Stand__Open_Door => {
-                rules::observe_action_emergence__storage__portal_stand__open_door__do(ctx, world, full_obs);
+                rules::observe_action_emergence__storage__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
-                rules::observe_action_giguna_breach__sw_save__west_11__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna_breach__sw_save__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2418,34 +2418,34 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
-                rules::observe_action_giguna__giguna_northeast__right_column__open_door_from_afar__do(ctx, world, full_obs);
+                rules::observe_action_giguna__giguna_northeast__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
-                rules::observe_action_giguna__giguna_northeast__switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__giguna_northeast__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
-                rules::observe_action_giguna__carnelian__upper_susar__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__carnelian__ctx__upper_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
-                rules::observe_action_giguna__carnelian__upper_susar__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__carnelian__ctx__upper_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Carnelian__Switch__Open_Door => {
-                rules::observe_action_giguna__carnelian__switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__carnelian__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
-                rules::observe_action_giguna__carnelian__lower_susar__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__carnelian__ctx__lower_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
-                rules::observe_action_giguna__carnelian__lower_susar__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__carnelian__ctx__lower_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Giguna__West_Caverns__East_Susar__Caught => {
-                rules::observe_action_giguna__west_caverns__east_susar__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__West_Caverns__East_Susar__Hack => {
-                rules::observe_action_giguna__west_caverns__east_susar__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(ctx, world, full_obs);
@@ -2457,43 +2457,43 @@ impl world::Action for Action {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
-                rules::observe_action_giguna__giguna_base__switch_distance_1__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
-                rules::observe_action_giguna__giguna_base__switch_distance_2__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
-                rules::observe_action_giguna__giguna_base__switch_distance_3__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
-                rules::observe_action_giguna__giguna_base__switch_distance_4__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_West__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
-                rules::observe_action_giguna__ruins_west__lower_ledge__hack_kishib__do(ctx, world, full_obs);
+                rules::observe_action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
-                rules::observe_action_giguna__ruins_west__lower_ledge__destroy_kishib__do(ctx, world, full_obs);
+                rules::observe_action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
-                rules::observe_action_giguna__ruins_top__switch__open_doors__do(ctx, world, full_obs);
+                rules::observe_action_giguna__ruins_top__ctx__doors_open_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world, full_obs);
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
-                rules::observe_action_giguna__clouds__platform_start__hack_and_ride_to_portal__do(ctx, world, full_obs);
+                rules::observe_action_giguna__clouds__ctx__platform_set_true_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_stop__portal_set_giguna_gt_clouds_gt_platform_stop(ctx, world, full_obs);
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
-                rules::observe_action_giguna__clouds__platform_start__hack_deploy_ride_to_portal__do(ctx, world, full_obs);
+                rules::observe_action_giguna__clouds__ctx__platform_set_true_portal_set_giguna_gt_clouds_gt_platform_stop_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(ctx, world, full_obs);
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => {
-                rules::observe_action_giguna__clouds__platform_start__hack_and_maybe_get_off_early__do(ctx, world, full_obs);
+                rules::observe_action_giguna__clouds__ctx__platform_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => {
                 rules::observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
@@ -2502,61 +2502,61 @@ impl world::Action for Action {
                 rules::observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
-                rules::observe_action_giguna__east_caverns__west_14__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
-                rules::observe_action_giguna__east_caverns__upper_susar__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
-                rules::observe_action_giguna__east_caverns__upper_susar_mid_jump__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
-                rules::observe_action_giguna__east_caverns__upper_susar_jump_from_east__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
-                rules::observe_action_giguna__east_caverns__upper_susar_jump_from_east__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Carving__Enter_Combo => {
-                rules::observe_action_giguna__east_caverns__carving__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
-                rules::observe_action_giguna__east_caverns__mid_susar__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__mid_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
-                rules::observe_action_giguna__east_caverns__mid_susar__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__mid_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
-                rules::observe_action_giguna__east_caverns__statues_ledge__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => {
-                rules::observe_action_giguna__east_caverns__statues_ledge__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Switch__Open_Door => {
-                rules::observe_action_giguna__east_caverns__switch__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__West_16__Open_Door => {
-                rules::observe_action_giguna__east_caverns__west_16__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => {
-                rules::observe_action_giguna__east_caverns__arc_passage__enter_combo__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
-                rules::observe_action_giguna__east_caverns__lower_susar__hack__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__lower_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
-                rules::observe_action_giguna__east_caverns__lower_susar__caught__do(ctx, world, full_obs);
+                rules::observe_action_giguna__east_caverns__ctx__lower_susar_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Gateway__One_Jump__Open_Door => {
-                rules::observe_action_giguna__gateway__one_jump__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__gateway__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
-                rules::observe_action_giguna__gateway__flask_ledge__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__gateway__ctx__door_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => {
-                rules::observe_action_giguna__labyrinth__door_ledge__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__labyrinth__ctx__door_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => {
-                rules::observe_action_giguna__labyrinth__switch_ledge__open_door__do(ctx, world, full_obs);
+                rules::observe_action_giguna__labyrinth__ctx__door_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Labyrinth__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2601,13 +2601,13 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
-                rules::observe_action_glacier__the_big_drop__solid_rock__careful_break__do(ctx, world, full_obs);
+                rules::observe_action_glacier__the_big_drop__ctx__bridge_open_set_true(ctx, world, full_obs);
             }
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
-                rules::observe_action_glacier__vertical_room__upper_switch__open_gate__do(ctx, world, full_obs);
+                rules::observe_action_glacier__vertical_room__ctx__upper_gatestone_set_true(ctx, world, full_obs);
             }
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => {
-                rules::observe_action_glacier__vertical_room__lower_switch__open_lower_gatestones__do(ctx, world, full_obs);
+                rules::observe_action_glacier__vertical_room__ctx__lower_gatestones_set_true(ctx, world, full_obs);
             }
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world, full_obs);
@@ -2625,13 +2625,13 @@ impl world::Action for Action {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(ctx, world, full_obs);
             }
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => {
-                rules::observe_action_glacier__hammonds_end__switch_from_ledge__open_doors__do(ctx, world, full_obs);
+                rules::observe_action_glacier__ctx__hammonds_doors_set_true(ctx, world, full_obs);
             }
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => {
-                rules::observe_action_glacier__hammonds_end__switch_near__open_doors__do(ctx, world, full_obs);
+                rules::observe_action_glacier__ctx__hammonds_doors_set_true(ctx, world, full_obs);
             }
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
-                rules::observe_action_glacier__hammonds_end__west_11__open_doors__do(ctx, world, full_obs);
+                rules::observe_action_glacier__ctx__hammonds_doors_set_true(ctx, world, full_obs);
             }
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
                 rules::observe_action_portal_set_position(ctx, world, full_obs);
@@ -2682,13 +2682,13 @@ impl world::Action for Action {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
-                rules::observe_action_irikar__basement_portal__moving_platform_start__activate_platform__do(ctx, world, full_obs);
+                rules::observe_action_irikar__basement_portal__ctx__platform_moved_set_true(ctx, world, full_obs);
             }
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
-                rules::observe_action_irikar__midwest__left_platform_start__hack_and_ride__do(ctx, world, full_obs);
+                rules::observe_action_irikar__midwest__ctx__left_platform_set_true(ctx, world, full_obs);
             }
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
-                rules::observe_action_irikar__midwest__right_platform_start__hack_and_ride_platform__do(ctx, world, full_obs);
+                rules::observe_action_irikar__midwest__ctx__right_platform_set_true(ctx, world, full_obs);
             }
             ActionId::Irikar__Midwest__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);

@@ -55,7 +55,8 @@ rules:
     default: Victory
 """
 
-typed_name = re.compile(r'(?P<name>\$?[^:()]+)(?::(?P<type>\w+))?')
+LOCAL_REFERENCE_RE = re.compile(r'\^(_[a-zA-Z_0-9.]+)')
+TYPED_NAME_RE = re.compile(r'(?P<name>\$?[^:()]+)(?::(?P<type>\w+))?')
 TypedVar = namedtuple('TypedVar', ['name', 'type'])
 TypedRule = namedtuple('TypedRule', ['rule', 'args', 'variants'])
 
@@ -92,25 +93,25 @@ def load_game_yaml(game_dir: str):
 
 def _parseExpression(logic: str, name: str, category: str, sep:str=':', rule:str='boolExpr') -> ParseResult:
     # TODO: turn the whole thing into a regex
-    if m := typed_name.match(name):
+    if m := TYPED_NAME_RE.match(name):
         rule = m.group('type') or rule
         name = m.group('name')
     return parseRule(rule, logic, name=f'{category}{sep}{name}')
 
 
 def get_func_rule(helper_key:str, default='boolExpr') -> str:
-    if m := typed_name.match(helper_key):
+    if m := TYPED_NAME_RE.match(helper_key):
         return m.group('type') or default
     return default
 
 
 def get_func_name(helper_key: str) -> str:
-    if m := typed_name.match(helper_key):
+    if m := TYPED_NAME_RE.match(helper_key):
         return m.group('name')
     return helper_key
 
 def get_arg_with_type(arg: str) -> str:
-    if m := typed_name.match(arg):
+    if m := TYPED_NAME_RE.match(arg):
         return TypedVar(m.group('name'), m.group('type'))
     return TypedVar(arg, '')
 
@@ -1233,21 +1234,23 @@ class GameLogic(object):
     def make_funcid_from(self, info, pr, field:str='req', extra_fields=None, **kwargs):
         ruletype = pr.parser.ruleNames[pr.tree.getRuleIndex()]
         d = self.action_funcs if ruletype == 'actions' else self.num_funcs if ruletype == 'num' else self.access_funcs
-        if '^_' in str(pr.text):
-            id = construct_id(info['id'].lower(), field)
-            assert id not in d, f'trying to generate multiple functions named {id}: {info}'
-            d[id] = {ruletype: pr, 'region': info['region'], **kwargs}
-            if 'area' in info:
-                d[id]['area'] = info['area']
-            if extra_fields:
-                d[id]['args'] = extra_fields
-            return id
+        text = str(pr.text)
+        local = False
+        if '^_' in text:
+            def replace(m):
+                return '^' + self.lookup_local_context(m.group(1), info['region'], info.get('area'))
+            text = LOCAL_REFERENCE_RE.sub(replace, text)
+            local = True
 
-        id = construct_id(str(pr.name) if '^_' in str(pr.text) else escape_ops(str(pr.text))).lower()
+        id = construct_id(escape_ops(text)).lower()
         if id not in d:
             d[id] = {ruletype: pr, **kwargs}
             if extra_fields:
                 d[id]['args'] = extra_fields
+            if local:
+                d[id]['region'] = info['region']
+                if 'area' in info:
+                    d[id]['area'] = info['area']
             return id
 
         if ruletype not in d[id]:
@@ -1602,6 +1605,13 @@ class GameLogic(object):
             item = places[0]['item']
             d[item] += 1
         return d
+
+    def lookup_local_context(self, cname, region_name, area_name):
+        if area_name:
+            area = self.id_lookup[construct_id(region_name, area_name)]
+            if cname in area.get('start', ()) or any(cname in area.get(field, ()) for field in TRIGGER_RULES):
+                return construct_id(region_name, area_name, 'ctx', cname[1:]).lower()
+        return construct_id(region_name, 'ctx', cname[1:]).lower()
 
     def process_context(self):
         def _check_types(v1, v2, ctx, category, *names, local=False):
