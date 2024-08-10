@@ -1116,11 +1116,23 @@ subgraph Ebih_Breach
     end
     subgraph Ebih_Breach__Rocky_Cages[Rocky Cages]
         Ebih_Breach__Rocky_Cages__East(East);
+        Ebih_Breach__Rocky_Cages__Hill_East(Hill East);
+        Ebih_Breach__Rocky_Cages__Platform_2(Platform 2);
         Ebih_Breach__Rocky_Cages__Northeast(Northeast);
+        Ebih_Breach__Rocky_Cages__Upper_Slope(Upper Slope);
+        Ebih_Breach__Rocky_Cages__Middle_Floating_Rock(Middle Floating Rock);
+        Ebih_Breach__Rocky_Cages__Lower_Floating_Rock(Lower Floating Rock);
+        Ebih_Breach__Rocky_Cages__Lower_Cage_East(Lower Cage East);
+        Ebih_Breach__Rocky_Cages__Center_East(Center East);
+        Ebih_Breach__Rocky_Cages__Center_West(Center West);
+        Ebih_Breach__Rocky_Cages__West_Ledge(West Ledge);
+        Ebih_Breach__Rocky_Cages__West_10(West 10);
+        Ebih_Breach__Rocky_Cages__West_Rock(West Rock);
+        Ebih_Breach__Rocky_Cages__Button(Button);
+        Ebih_Breach__Rocky_Cages__Gate_East(Gate East);
+        Ebih_Breach__Rocky_Cages__West_11(West 11);
         Ebih_Breach__Rocky_Cages__Cage_North(Cage North);
         Ebih_Breach__Rocky_Cages__Cage_Bottom(Cage Bottom);
-        Ebih_Breach__Rocky_Cages__West_10(West 10);
-        Ebih_Breach__Rocky_Cages__West_11(West 11);
     end
     subgraph Ebih_Breach__Connector[Connector]
         Ebih_Breach__Connector__West(West);
@@ -2369,6 +2381,8 @@ subgraph Giguna
         Giguna__Mural__Rock_Upper_Ledge(Rock Upper Ledge);
         Giguna__Mural__Platform_Below_Ledge(Platform Below Ledge);
         Giguna__Mural__Lower_Middle_Column(Lower Middle Column);
+        Giguna__Mural__Southwest_Ledge(Southwest Ledge);
+        Giguna__Mural__Southwest_Cache(Southwest Cache);
     end
     subgraph Giguna__Breachable_Wall[Breachable Wall]
         Giguna__Breachable_Wall__West_Mid_air(West Mid-air);
@@ -2959,7 +2973,17 @@ subgraph Irikar_Breach
         Irikar_Breach__Gauntlet__Hidden_Path_Reward(Hidden Path Reward);
         Irikar_Breach__Gauntlet__Hidden_Path_Bottom(Hidden Path Bottom);
         Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry(Hidden Path Lower Entry);
+        Irikar_Breach__Gauntlet__Hidden_Fork(Hidden Fork);
         Irikar_Breach__Gauntlet__West_26(West 26);
+        Irikar_Breach__Gauntlet__Lower_West_Ledge(Lower West Ledge);
+        Irikar_Breach__Gauntlet__Lower_West_Floor(Lower West Floor);
+        Irikar_Breach__Gauntlet__Lower_Middle(Lower Middle);
+        Irikar_Breach__Gauntlet__East_Climb_Lower(East Climb Lower);
+        Irikar_Breach__Gauntlet__East_Climb_Upper(East Climb Upper);
+        Irikar_Breach__Gauntlet__Pillar_East(Pillar East);
+        Irikar_Breach__Gauntlet__Pillar_West(Pillar West);
+        Irikar_Breach__Gauntlet__Down_Arrow(Down Arrow);
+        Irikar_Breach__Gauntlet__Tank_Ledge(Tank Ledge);
     end
     subgraph Irikar_Breach__Hover_Room[Hover Room]
         Irikar_Breach__Hover_Room__West(West);
@@ -4753,7 +4777,7 @@ Ebih_Breach__Connector__West <--> Giguna_Breach__Gate_and_Wall__East_9
 Ebih_Breach__Corner__South <--> Ebih_Breach__Corridor__Northeast
 Ebih_Breach__Corridor__East_Tree --> Ebih_Breach__Corridor__Northeast
 Ebih_Breach__Corridor__South <--> Ebih_Breach__In_n_Out__Northwest
-Ebih_Breach__Corridor__West --> Ebih_Breach__Rocky_Cages__East
+Ebih_Breach__Corridor__West <--> Ebih_Breach__Rocky_Cages__East
 Ebih_Breach__Double_Gate__Below_Gate <--> Ebih_Breach__Double_Gate__Button_Right
 Ebih_Breach__Double_Gate__Grate_East <--> Ebih_Breach__Double_Gate__Grate_West
 Ebih_Breach__Double_Gate__Grate_West --> Ebih_Breach__The_Vault__Northwest_Mid_air
@@ -4762,7 +4786,7 @@ Ebih_Breach__Double_Gate__North <--> Ebih_Breach__Spider_Guards__South
 Ebih_Breach__Double_Gate__Portal_Stand --> Ebih_Breach__Double_Gate__North
 Ebih_Breach__Double_Gate__Portal_Stand --> Ebih_Breach__Double_Gate__Upper_Right_Corner
 Ebih_Breach__Double_Gate__South --> Ebih_Breach__Double_Gate__Below_Gate
-Ebih_Breach__Double_Gate__South --> Ebih_Breach__Rocky_Cages__Northeast
+Ebih_Breach__Double_Gate__South <--> Ebih_Breach__Rocky_Cages__Northeast
 Ebih_Breach__Double_Gate__Upper_Right_Corner --> Ebih_Breach__Double_Gate__Below_Gate
 Ebih_Breach__Double_Gate__West <--> Ebih_Breach__The_Vault__East
 Ebih_Breach__Drone_Tutorial__Above_Rocks --> Ebih_Breach__Drone_Tutorial__Upper_Mid_way
@@ -4819,7 +4843,7 @@ Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_Eas
 Ebih_Breach__Portals_101__West_Nook --> Ebih_Breach__Portals_101__Middle_Gap_West
 Ebih_Breach__Portals_101__West_Slope --> Ebih_Breach__Portals_101__West_4
 Ebih_Breach__Rock_Block__Bottom_Middle --> Ebih_Breach__Rock_Block__Rock_East
-Ebih_Breach__Rock_Block__East_11 --> Ebih_Breach__Rocky_Cages__West_11
+Ebih_Breach__Rock_Block__East_11 <--> Ebih_Breach__Rocky_Cages__West_11
 Ebih_Breach__Rock_Block__East_Shaft_Bottom --> Ebih_Breach__Rock_Block__East_Shaft_Top
 Ebih_Breach__Rock_Block__Rock_East <--> Ebih_Breach__Rock_Block__Rock_Southwest
 Ebih_Breach__Rock_Block__Rock_East <--> Ebih_Breach__Rock_Block__Rock_Top
@@ -4833,8 +4857,25 @@ Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill --> Ebih_Breach__Rock_Block__West
 Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill --> Ebih_Breach__Rock_Block__West_Shaft_West_Ledge
 Ebih_Breach__Rock_Block__West_Shaft_West_Ledge --> Ebih_Breach__Rock_Block__Northwest_Ledge
 Ebih_Breach__Rock_Block__West_Shaft_West_Ledge --> Ebih_Breach__Rock_Block__West_Shaft_East_Ledge
+Ebih_Breach__Rocky_Cages__Button <--> Ebih_Breach__Rocky_Cages__West_Rock
 Ebih_Breach__Rocky_Cages__Cage_Bottom --> Ebih_Breach__Rocky_Cages__Cage_North
 Ebih_Breach__Rocky_Cages__Cage_North <--> Ebih_Breach__The_Vault__South
+Ebih_Breach__Rocky_Cages__Center_East --> Ebih_Breach__Rocky_Cages__Middle_Floating_Rock
+Ebih_Breach__Rocky_Cages__Center_West --> Ebih_Breach__Rocky_Cages__West_Ledge
+Ebih_Breach__Rocky_Cages__Center_West --> Ebih_Breach__Rocky_Cages__West_Rock
+Ebih_Breach__Rocky_Cages__Gate_East --> Ebih_Breach__Rocky_Cages__Button
+Ebih_Breach__Rocky_Cages__Gate_East <--> Ebih_Breach__Rocky_Cages__West_11
+Ebih_Breach__Rocky_Cages__Lower_Cage_East --> Ebih_Breach__Rocky_Cages__Center_West
+Ebih_Breach__Rocky_Cages__Lower_Cage_East --> Ebih_Breach__Rocky_Cages__Middle_Floating_Rock
+Ebih_Breach__Rocky_Cages__Lower_Floating_Rock --> Ebih_Breach__Rocky_Cages__Center_West
+Ebih_Breach__Rocky_Cages__Lower_Floating_Rock --> Ebih_Breach__Rocky_Cages__Middle_Floating_Rock
+Ebih_Breach__Rocky_Cages__Middle_Floating_Rock --> Ebih_Breach__Rocky_Cages__East
+Ebih_Breach__Rocky_Cages__Platform_2 --> Ebih_Breach__Rocky_Cages__Middle_Floating_Rock
+Ebih_Breach__Rocky_Cages__Platform_2 --> Ebih_Breach__Rocky_Cages__Northeast
+Ebih_Breach__Rocky_Cages__Upper_Slope --> Ebih_Breach__Rocky_Cages__Northeast
+Ebih_Breach__Rocky_Cages__West_10 <--> Ebih_Breach__Switchback__East
+Ebih_Breach__Rocky_Cages__West_Rock --> Ebih_Breach__Rocky_Cages__Center_East
+Ebih_Breach__Rocky_Cages__West_Rock --> Ebih_Breach__Rocky_Cages__West_Ledge
 Ebih_Breach__Snowy_Rocks__Cache --> Ebih_Breach__Snowy_Rocks__Column_East
 Ebih_Breach__Snowy_Rocks__Cache --> Ebih_Breach__Snowy_Rocks__Lower_East_Ledge
 Ebih_Breach__Snowy_Rocks__Column_East --> Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East
@@ -4865,7 +4906,6 @@ Ebih_Breach__Spider_Guards__East_Sand_Pit_East --> Ebih_Breach__Spider_Guards__E
 Ebih_Breach__Spider_Guards__East_Sand_Pit_Mid_air --> Ebih_Breach__Spider_Guards__Center_Hover_End
 Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform --> Ebih_Breach__Spider_Guards__Center_Hover_End
 Ebih_Breach__Spider_Guards__Northwest --> Ebih_Breach__Snowy_Rocks__South
-Ebih_Breach__Switchback__East --> Ebih_Breach__Rocky_Cages__West_10
 Ebih_Breach__Switchback__East --> Ebih_Breach__Switchback__West_Turn
 Ebih_Breach__Switchback__East_Turn --> Ebih_Breach__Switchback__West
 Ebih_Breach__Switchback__West_Turn --> Ebih_Breach__Switchback__East_Turn
@@ -5568,6 +5608,8 @@ Giguna__Mural__NE_Ledge <--> Giguna__Mural__Pedestal_Ledge
 Giguna__Mural__Pedestal --> Giguna__Mural__East_Platform
 Giguna__Mural__Platform_Below_Ledge --> Giguna__Mural__Rock_Upper_Ledge
 Giguna__Mural__Rock_Upper_Ledge --> Giguna__Mural__Grass_Gap
+Giguna__Mural__Southwest_Cache --> Giguna__Mural__Southwest_Ledge
+Giguna__Mural__Southwest_Ledge --> Giguna__Mural__Lower_Middle_Column
 Giguna__Ruins_Center__East_8 <--> Giguna__Ruins_East__West_8
 Giguna__Ruins_Center__East_9 <--> Giguna__Ruins_East__West_9
 Giguna__Ruins_Center__Wall_Bottom --> Giguna__Ruins_Center__Wall_Top
@@ -6087,7 +6129,7 @@ Irikar_Breach__Buried_Treasure__Pillar_Left --> Irikar_Breach__Buried_Treasure__
 Irikar_Breach__Buried_Treasure__Pillar_Right --> Irikar_Breach__Buried_Treasure__Pillar_Middle
 Irikar_Breach__Buried_Treasure__West <--> Irikar_Breach__Rocky_Dunes__East_28
 Irikar_Breach__Corridor__Center --> Irikar_Breach__Corridor__Passage_West
-Irikar_Breach__Corridor__East --> Irikar_Breach__Gauntlet__West_26
+Irikar_Breach__Corridor__East <--> Irikar_Breach__Gauntlet__West_26
 Irikar_Breach__Exit_Corridor__East <--> Irikar_Breach__Uhrum_Connector__West
 Irikar_Breach__Exit_Corridor__North_12 --> Irikar_Breach__Exit_Corridor__Pillar
 Irikar_Breach__Exit_Corridor__North_12 <--> Irikar_Breach__Worm_Rave__South
@@ -6108,8 +6150,20 @@ Irikar_Breach__Four_way__North --> Irikar_Breach__Four_way__West
 Irikar_Breach__Four_way__South --> Irikar_Breach__Four_way__Ledge
 Irikar_Breach__Four_way__West <--> Irikar_Breach__Worm_Rave__East
 Irikar_Breach__Gauntlet__East_22 <--> Irikar_Breach__Hover_Room__West
+Irikar_Breach__Gauntlet__East_Climb_Lower --> Irikar_Breach__Gauntlet__East_Climb_Upper
+Irikar_Breach__Gauntlet__East_Climb_Upper --> Irikar_Breach__Gauntlet__Pillar_East
+Irikar_Breach__Gauntlet__Hidden_Fork --> Irikar_Breach__Gauntlet__Down_Arrow
+Irikar_Breach__Gauntlet__Hidden_Fork --> Irikar_Breach__Gauntlet__Pillar_West
+Irikar_Breach__Gauntlet__Hidden_Fork --> Irikar_Breach__Gauntlet__Tank_Ledge
+Irikar_Breach__Gauntlet__Hidden_Path_Bottom --> Irikar_Breach__Gauntlet__Hidden_Path_Reward
+Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry --> Irikar_Breach__Gauntlet__Hidden_Fork
 Irikar_Breach__Gauntlet__Hidden_Path_Reward --> Irikar_Breach__Gauntlet__Hidden_Path_Top_Ledge
+Irikar_Breach__Gauntlet__Lower_Middle --> Irikar_Breach__Gauntlet__East_Climb_Lower
+Irikar_Breach__Gauntlet__Lower_West_Floor --> Irikar_Breach__Gauntlet__Lower_Middle
+Irikar_Breach__Gauntlet__Lower_West_Floor <--> Irikar_Breach__Gauntlet__Lower_West_Ledge
 Irikar_Breach__Gauntlet__Save_Point --> Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry
+Irikar_Breach__Gauntlet__Tank_Ledge --> Irikar_Breach__Gauntlet__Save_Point
+Irikar_Breach__Gauntlet__West_26 --> Irikar_Breach__Gauntlet__Lower_West_Ledge
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__East
 Irikar_Breach__Hover_Room__Bottom --> Irikar_Breach__Hover_Room__West
 Irikar_Breach__Hover_Room__East <--> Irikar_Breach__Hover_Room__West

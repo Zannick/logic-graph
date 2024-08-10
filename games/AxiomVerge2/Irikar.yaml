@@ -621,6 +621,8 @@ areas:
           jumps_down: 1
     - name: SW Building Hallway West
       coord: [10.2, 25.4]
+      data:
+        flipside: Irikar Breach > Gauntlet > Lower West Ledge
       local:
         - to: SW Building Lower Platform
           jumps: 2

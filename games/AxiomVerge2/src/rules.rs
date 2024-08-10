@@ -571,6 +571,17 @@ pub fn access_ebih_breach_rock_block_rock(ctx: &Context, world: &World) -> bool 
     // Ebih_Breach_Rock_Block_Rock
     ctx.has(Item::Ebih_Breach_Rock_Block_Rock)
 }
+pub fn access_ebih_breach_rocky_cages_gate(ctx: &Context, world: &World) -> bool {
+    // Ebih_Breach_Rocky_Cages_Gate
+    ctx.has(Item::Ebih_Breach_Rocky_Cages_Gate)
+}
+pub fn access_ebih_breach_rocky_cages_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Ebih_Breach_Rocky_Cages_Gate and Slingshot_Hook
+    (ctx.has(Item::Ebih_Breach_Rocky_Cages_Gate) && ctx.has(Item::Slingshot_Hook))
+}
 pub fn access_ebih_breach_spider_guards_gate(ctx: &Context, world: &World) -> bool {
     // Ebih_Breach_Spider_Guards_Gate
     ctx.has(Item::Ebih_Breach_Spider_Guards_Gate)
@@ -2740,6 +2751,15 @@ pub fn access_siuna_storage_wall(ctx: &Context, world: &World) -> bool {
 pub fn access_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // Slingshot_Hook
     ctx.has(Item::Slingshot_Hook)
+}
+pub fn access_slingshot_hook_and___not_slingshot_weapon_or_invoke_visited__irikar_breach_gt_gauntlet_gt_hidden_path_reward_gt_item(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Slingshot_Hook and (not Slingshot_Weapon or $visited(`Irikar Breach > Gauntlet > Hidden Path Reward > Item`))
+    (ctx.has(Item::Slingshot_Hook)
+        && (!ctx.has(Item::Slingshot_Weapon)
+            || ctx.visited(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)))
 }
 pub fn access_slingshot_hook_and___slingshot_weapon_or_drone_hover(
     ctx: &Context,
@@ -6207,6 +6227,43 @@ pub fn explain_ebih_breach_rock_block_rock(
         let h = ctx.has(Item::Ebih_Breach_Rock_Block_Rock);
         edict.insert("Ebih_Breach_Rock_Block_Rock", format!("{}", h));
         (h, vec!["Ebih_Breach_Rock_Block_Rock"])
+    }
+}
+pub fn explain_ebih_breach_rocky_cages_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Rocky_Cages_Gate
+    {
+        let h = ctx.has(Item::Ebih_Breach_Rocky_Cages_Gate);
+        edict.insert("Ebih_Breach_Rocky_Cages_Gate", format!("{}", h));
+        (h, vec!["Ebih_Breach_Rocky_Cages_Gate"])
+    }
+}
+pub fn explain_ebih_breach_rocky_cages_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Ebih_Breach_Rocky_Cages_Gate and Slingshot_Hook
+    {
+        let mut left = {
+            let h = ctx.has(Item::Ebih_Breach_Rocky_Cages_Gate);
+            edict.insert("Ebih_Breach_Rocky_Cages_Gate", format!("{}", h));
+            (h, vec!["Ebih_Breach_Rocky_Cages_Gate"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Slingshot_Hook);
+                edict.insert("Slingshot_Hook", format!("{}", h));
+                (h, vec!["Slingshot_Hook"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_ebih_breach_spider_guards_gate(
@@ -16367,6 +16424,53 @@ pub fn explain_slingshot_hook(
         (h, vec!["Slingshot_Hook"])
     }
 }
+pub fn explain_slingshot_hook_and___not_slingshot_weapon_or_invoke_visited__irikar_breach_gt_gauntlet_gt_hidden_path_reward_gt_item(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Slingshot_Hook and (not Slingshot_Weapon or $visited(`Irikar Breach > Gauntlet > Hidden Path Reward > Item`))
+    {
+        let mut left = {
+            let h = ctx.has(Item::Slingshot_Hook);
+            edict.insert("Slingshot_Hook", format!("{}", h));
+            (h, vec!["Slingshot_Hook"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Slingshot_Weapon);
+                    edict.insert("Slingshot_Weapon", format!("{}", h));
+                    (!h, vec!["Slingshot_Weapon"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let res = ctx
+                            .visited(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item);
+                        edict.insert(
+                            "$visited(`Irikar Breach > Gauntlet > Hidden Path Reward > Item`)",
+                            format!("{:?}", res),
+                        );
+                        (
+                            res,
+                            vec![
+                                "$visited(`Irikar Breach > Gauntlet > Hidden Path Reward > Item`)",
+                            ],
+                        )
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_slingshot_hook_and___slingshot_weapon_or_drone_hover(
     ctx: &Context,
     world: &World,
@@ -19786,6 +19890,31 @@ pub fn observe_access_ebih_breach_rock_block_rock(
         full_obs.observe_ebih_breach_rock_block_rock();
         ctx.has(Item::Ebih_Breach_Rock_Block_Rock)
     }
+}
+pub fn observe_access_ebih_breach_rocky_cages_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Rocky_Cages_Gate
+    {
+        full_obs.observe_ebih_breach_rocky_cages_gate();
+        ctx.has(Item::Ebih_Breach_Rocky_Cages_Gate)
+    }
+}
+pub fn observe_access_ebih_breach_rocky_cages_gate_and_slingshot_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Ebih_Breach_Rocky_Cages_Gate and Slingshot_Hook
+    ({
+        full_obs.observe_ebih_breach_rocky_cages_gate();
+        ctx.has(Item::Ebih_Breach_Rocky_Cages_Gate)
+    } && ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    }))
 }
 pub fn observe_access_ebih_breach_spider_guards_gate(
     ctx: &Context,
@@ -24801,6 +24930,20 @@ pub fn observe_access_slingshot_hook(
         full_obs.observe_slingshot_hook();
         ctx.has(Item::Slingshot_Hook)
     }
+}
+pub fn observe_access_slingshot_hook_and___not_slingshot_weapon_or_invoke_visited__irikar_breach_gt_gauntlet_gt_hidden_path_reward_gt_item(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Slingshot_Hook and (not Slingshot_Weapon or $visited(`Irikar Breach > Gauntlet > Hidden Path Reward > Item`))
+    ({
+        full_obs.observe_slingshot_hook();
+        ctx.has(Item::Slingshot_Hook)
+    } && ({
+        full_obs.observe_slingshot_weapon();
+        !ctx.has(Item::Slingshot_Weapon)
+    } || ctx.visited(LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item)))
 }
 pub fn observe_access_slingshot_hook_and___slingshot_weapon_or_drone_hover(
     ctx: &Context,

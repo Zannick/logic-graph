@@ -690,6 +690,8 @@ areas:
         - to: Alcove Right
     - name: Alcove Right
       coord: [23.35, 10.75]
+      data:
+        flipside: Ebih Breach > Rocky Cages > Lower Cage East
       local:
         - to: Waterfall Right
           jumps: 1

@@ -83,6 +83,7 @@ pub enum Item {
     Ebih_Breach_In_n_Out_Gate,
     Ebih_Breach_Lake_Gate,
     Ebih_Breach_Rock_Block_Rock,
+    Ebih_Breach_Rocky_Cages_Gate,
     Ebih_Breach_Spider_Guards_Gate,
     Ebih_East_Wall,
     Ebih_Gem_Room_Gate,
@@ -314,6 +315,7 @@ impl fmt::Display for Item {
             Item::Ebih_Breach_In_n_Out_Gate => write!(f, "{}", "Ebih_Breach_In_n_Out_Gate"),
             Item::Ebih_Breach_Lake_Gate => write!(f, "{}", "Ebih_Breach_Lake_Gate"),
             Item::Ebih_Breach_Rock_Block_Rock => write!(f, "{}", "Ebih_Breach_Rock_Block_Rock"),
+            Item::Ebih_Breach_Rocky_Cages_Gate => write!(f, "{}", "Ebih_Breach_Rocky_Cages_Gate"),
             Item::Ebih_Breach_Spider_Guards_Gate => {
                 write!(f, "{}", "Ebih_Breach_Spider_Guards_Gate")
             }
@@ -569,6 +571,7 @@ impl std::str::FromStr for Item {
             "Ebih_Breach_In_n_Out_Gate" => Ok(Item::Ebih_Breach_In_n_Out_Gate),
             "Ebih_Breach_Lake_Gate" => Ok(Item::Ebih_Breach_Lake_Gate),
             "Ebih_Breach_Rock_Block_Rock" => Ok(Item::Ebih_Breach_Rock_Block_Rock),
+            "Ebih_Breach_Rocky_Cages_Gate" => Ok(Item::Ebih_Breach_Rocky_Cages_Gate),
             "Ebih_Breach_Spider_Guards_Gate" => Ok(Item::Ebih_Breach_Spider_Guards_Gate),
             "Ebih_East_Wall" => Ok(Item::Ebih_East_Wall),
             "Ebih_Gem_Room_Gate" => Ok(Item::Ebih_Gem_Room_Gate),

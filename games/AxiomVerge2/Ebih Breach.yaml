@@ -1385,8 +1385,211 @@ areas:
   spots:
     - name: East
       coord: [24.9, 10.7]
+      local:
+        - to: Hill East
+          jumps: 3
+      exits:
+        - to: Corridor > West
+          tags: [xdoor]
+    - name: Hill East
+      coord: [24.3, 10.25]
+      local:
+        - to: East
+        - to: Middle Floating Rock
+          jumps: 4
+        - to: Platform 2
+          jumps: 3
+    - name: Platform 2
+      coord: [24.1, 9.75]
+      local:
+        - to: East
+        - to: Hill East
+        - to: Middle Floating Rock
+        - to: Lower Cage East
+          jumps: 3
+      exits:
+        - to: Northeast
+          req: Drone_Hover
+          jumps: 4
+        - to: Middle Floating Rock
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
     - name: Northeast
       coord: [23.5, 9.2]
+      local:
+        - to: Upper Slope
+        - to: Middle Floating Rock
+        - to: Platform 2
+      exits:
+        - to: Double Gate > South
+          tags: [ydoor]
+    - name: Upper Slope
+      coord: [23.425, 9.75]
+      local:
+        - to: Middle Floating Rock
+      exits:
+        - to: Northeast
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+        - to: Northeast
+          req: Drone_Hover
+          movement: base
+          jumps: 4
+    - name: Middle Floating Rock
+      coord: [23.5, 10.15]
+      local:
+        - to: Center East
+        - to: Platform 2
+          jumps: 2
+        - to: Hill East
+          jumps: 2
+        - to: Lower Floating Rock
+        - to: Lower Cage East
+      exits:
+        - to: East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Lower Floating Rock
+      coord: [23.45, 10.45]
+      local:
+        - to: Center East
+          jumps: 1
+      exits:
+        - to: Center West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: Middle Floating Rock
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+    - name: Lower Cage East
+      coord: [23.35, 10.75]
+      data:
+        flipside: Ebih > Waterfall > Alcove Right
+      local:
+        - to: Hill East
+          jumps: 6
+      exits:
+        - to: Center West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Middle Floating Rock
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Center East
+      coord: [23.3, 10.3]
+      local:
+        - to: Center West
+        - to: Lower Cage East
+        - to: Middle Floating Rock
+          jumps: 1
+      exits:
+        - to: Middle Floating Rock
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Center West
+      coord: [22.5, 10.45]
+      local:
+        - to: Center East
+          jumps: 3
+        - to: West Rock
+          jumps: 2
+      exits:
+        - to: West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: West Rock
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: West Ledge
+          req: $mist2
+          movement: mist2
+        - to: West Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: West Ledge
+      coord: [22.1, 9.95]
+      local:
+        - to: West Rock
+        - to: Center West
+        - to: West 10
+          jumps: 3
+    - name: West 10
+      coord: [21.1, 9.7]
+      local:
+        - to: West Ledge
+      exits:
+        - to: Switchback > East
+          tags: [xdoor]
+    - name: West Rock
+      coord: [22.05, 10.35]
+      local:
+        - to: Center West
+      exits:
+        - to: Button
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 2
+        - to: Button
+          req: $mist2
+          movement: mist2
+        - to: Button
+          req: Nanite_Mist
+          movement: mist1
+        - to: West Ledge
+          req: $mist2
+          movement: mist2
+        - to: West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center East
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+    - name: Button
+      coord: [21.55, 10.1]
+      local:
+        - to: West Rock
+          jumps: 3
+        - to: Gate East
+      locations:
+        - name: Hit Button
+          item: Ebih_Breach_Rocky_Cages_Gate
+          tags: [button]
+      exits:
+        - to: West Rock
+          req: Slingshot_Hook
+          movement: fast_hover
+    - name: Gate East
+      coord: [21.35, 10.7]
+      exits:
+        - to: Button
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: West 11
+          req: Ebih_Breach_Rocky_Cages_Gate
+          movement: base
+    - name: West 11
+      coord: [21.1, 10.75]
+      exits:
+        - to: Rock Block > East 11
+          tags: [xdoor]
+        - to: Gate East
+          req: Ebih_Breach_Rocky_Cages_Gate and Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Gate East
+          req: Ebih_Breach_Rocky_Cages_Gate
+          movement: base
+          jumps: 1
+
     - name: Cage North
       coord: [22.5, 9.2]
       local:
@@ -1418,10 +1621,6 @@ areas:
           req: Slingshot_Hook
           jumps: 2
 
-    - name: West 10
-      coord: [21.1, 9.7]
-    - name: West 11
-      coord: [21.1, 10.75]
 
 - name: Connector  # MARK: Connector
   on_entry: $reset_old_area(^newpos)

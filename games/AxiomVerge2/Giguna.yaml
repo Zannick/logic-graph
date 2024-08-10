@@ -5430,7 +5430,6 @@ areas:
           req: $mist2
           movement: mist2
 
-    # TODO: Lower half
     - name: Platform Below Ledge
       coord: [20.65, 21.7]
       data:
@@ -5448,6 +5447,36 @@ areas:
         flipside: Giguna Breach > Lower Machinery > Center Pillar West
       local:
         - to: Platform Below Ledge
+          jumps: 2
+      local:
+        - to: Southwest Ledge
+    - name: Southwest Ledge
+      coord: [20.3, 22.35]
+      local:
+        - to: Southwest Cache
+      exits:
+        - to: Lower Middle Column
+          req: $grab
+          movement: base
+          jumps: 5
+        - to: Lower Middle Column
+          req: $hook
+          movement: base
+          jumps: 3
+    - name: Southwest Cache
+      coord: [20.35, 22.8]
+      local:
+        - to: Southwest Ledge
+          jumps: 3
+      locations:
+        - name: Refill
+          item: Power_Core
+          req: $more_refills
+          tags: [standing]
+      exits:
+        - to: Southwest Ledge
+          req: $hook
+          movement: base
           jumps: 2
 
 - name: Breachable Wall  # MARK: Breachable Wall

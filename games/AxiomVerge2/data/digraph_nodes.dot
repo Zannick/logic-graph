@@ -1118,11 +1118,23 @@
         }
         {
             Ebih_Breach__Rocky_Cages__East [label = "", pos = "74.7,-67.833333!"];
+            Ebih_Breach__Rocky_Cages__Hill_East [label = "", pos = "72.9,-67.083333!"];
+            Ebih_Breach__Rocky_Cages__Platform_2 [label = "", pos = "72.3,-66.25!"];
             Ebih_Breach__Rocky_Cages__Northeast [label = "", pos = "70.5,-65.333333!"];
+            Ebih_Breach__Rocky_Cages__Upper_Slope [label = "", pos = "70.275,-66.25!"];
+            Ebih_Breach__Rocky_Cages__Middle_Floating_Rock [label = "", pos = "70.5,-66.916667!"];
+            Ebih_Breach__Rocky_Cages__Lower_Floating_Rock [label = "", pos = "70.35,-67.416667!"];
+            Ebih_Breach__Rocky_Cages__Lower_Cage_East [label = "", pos = "70.05,-67.916667!"];
+            Ebih_Breach__Rocky_Cages__Center_East [label = "", pos = "69.9,-67.166667!"];
+            Ebih_Breach__Rocky_Cages__Center_West [label = "", pos = "67.5,-67.416667!"];
+            Ebih_Breach__Rocky_Cages__West_Ledge [label = "", pos = "66.3,-66.583333!"];
+            Ebih_Breach__Rocky_Cages__West_10 [label = "", pos = "63.3,-66.166667!"];
+            Ebih_Breach__Rocky_Cages__West_Rock [label = "", pos = "66.15,-67.25!"];
+            Ebih_Breach__Rocky_Cages__Button [label = "", pos = "64.65,-66.833333!"];
+            Ebih_Breach__Rocky_Cages__Gate_East [label = "", pos = "64.05,-67.833333!"];
+            Ebih_Breach__Rocky_Cages__West_11 [label = "", pos = "63.3,-67.916667!"];
             Ebih_Breach__Rocky_Cages__Cage_North [label = "", pos = "67.5,-65.333333!"];
             Ebih_Breach__Rocky_Cages__Cage_Bottom [label = "", pos = "67.275,-66.25!"];
-            Ebih_Breach__Rocky_Cages__West_10 [label = "", pos = "63.3,-66.166667!"];
-            Ebih_Breach__Rocky_Cages__West_11 [label = "", pos = "63.3,-67.916667!"];
         }
         {
             Ebih_Breach__Snowy_Rocks__East_4 [label = "", pos = "71.7,-56.25!"];
@@ -2233,6 +2245,8 @@
             Giguna__Mural__Rock_Upper_Ledge [label = "", pos = "61.8,-35.5!"];
             Giguna__Mural__Platform_Below_Ledge [label = "", pos = "61.95,-36.166667!"];
             Giguna__Mural__Lower_Middle_Column [label = "", pos = "59.4,-36.333333!"];
+            Giguna__Mural__Southwest_Ledge [label = "", pos = "60.9,-37.25!"];
+            Giguna__Mural__Southwest_Cache [label = "", pos = "61.05,-38.0!"];
         }
         {
             Giguna__Ruins_Center__East_8 [label = "", pos = "47.85,-12.5!"];
@@ -3035,7 +3049,17 @@
             Irikar_Breach__Gauntlet__Hidden_Path_Reward [label = "", pos = "30.15,-87.0!"];
             Irikar_Breach__Gauntlet__Hidden_Path_Bottom [label = "", pos = "30.45,-90.916667!"];
             Irikar_Breach__Gauntlet__Hidden_Path_Lower_Entry [label = "", pos = "30.75,-90.916667!"];
+            Irikar_Breach__Gauntlet__Hidden_Fork [label = "", pos = "31.5,-89.916667!"];
             Irikar_Breach__Gauntlet__West_26 [label = "", pos = "30.3,-92.916667!"];
+            Irikar_Breach__Gauntlet__Lower_West_Ledge [label = "", pos = "30.6,-92.333333!"];
+            Irikar_Breach__Gauntlet__Lower_West_Floor [label = "", pos = "31.8,-92.25!"];
+            Irikar_Breach__Gauntlet__Lower_Middle [label = "", pos = "33.15,-91.5!"];
+            Irikar_Breach__Gauntlet__East_Climb_Lower [label = "", pos = "34.35,-91.0!"];
+            Irikar_Breach__Gauntlet__East_Climb_Upper [label = "", pos = "34.05,-89.333333!"];
+            Irikar_Breach__Gauntlet__Pillar_East [label = "", pos = "33.3,-88.25!"];
+            Irikar_Breach__Gauntlet__Pillar_West [label = "", pos = "32.55,-88.25!"];
+            Irikar_Breach__Gauntlet__Down_Arrow [label = "", pos = "31.5,-88.25!"];
+            Irikar_Breach__Gauntlet__Tank_Ledge [label = "", pos = "31.05,-86.916667!"];
         }
         {
             Irikar_Breach__Hover_Room__West [label = "", pos = "36.3,-86.333333!"];
