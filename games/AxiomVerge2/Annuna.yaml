@@ -4678,6 +4678,7 @@ areas:
       coord: [41.9, 15.6]
       exits:
         - to: Final Cache > West
+          req: ^mode == 'drone'
           movement: base
           penalty_tags: [xshift, -base.1]
         - to: Breakable Rock
@@ -4742,9 +4743,84 @@ areas:
 
 - name: Final Cache  # MARK: Final Cache
   on_entry: $reset_old_area(^newpos)
+  data:
+    map_spot: Menu > Kiengir Map > Annuna Final Cache
   spots:
     - name: West
       coord: [42.1, 15.6]
+      local:
+        - to: Ledge
+          jumps: 2
+      locations:
+        - name: Spin into Flask
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          req: $spin
+          to: Cache
+          movement: fast_hover
+          penalty_tags: [flask]
+        - name: Remote Flask
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          req: Anuman and $boomerang
+          tags: [remote_flask]
+        - name: Remote Flask Fast Travel
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          req: $boomerang and Fast_Travel
+          to: ^map_spot
+          tags: [throw]
+          penalties:
+            - add: 1  # positioning
+      exits:
+        - to: Cache
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Seals > Inner Wall
+          req: ^mode == 'drone'
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Ledge
+      coord: [42.35, 15.55]
+      local:
+        - to: Cache
+      locations:
+        - name: Shockwave Flask
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+      exits:
+        - to: West
+          req: ^mode == 'drone'
+          movement: base
+        - to: West
+          req: $hook
+          movement: fast_hover
+    - name: Cache
+      coord: [42.5, 15.55]
+      local:
+        - to: Ledge
+      locations:
+        - name: Flask
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Final_Cache_Flask
+          item: Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
+
 
 - name: Final Save  # MARK: Final Save
   on_entry: $reset_old_area(^newpos)

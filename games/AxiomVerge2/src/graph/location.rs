@@ -121,6 +121,13 @@ impl world::Accessible for Location {
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => true,
             LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => true,
+            LocationId::Annuna__Final_Cache__Cache__Flask => true,
+            LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
+            LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
+            LocationId::Annuna__Final_Cache__West__Remote_Flask => rules::access_anuman_and_invoke_boomerang(ctx, world),
+            LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel => rules::access_invoke_boomerang_and_fast_travel(ctx, world),
+            LocationId::Annuna__Final_Cache__West__Spin_into_Flask => rules::access_invoke_spin(ctx, world),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask => true,
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip => rules::access_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip(ctx, world),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel => rules::access_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip_and_fast_travel(ctx, world),
@@ -976,6 +983,12 @@ impl world::Accessible for Location {
             LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => rules::observe_access_invoke_remote_boomerang(ctx, world, full_obs),
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
+            LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Final_Cache__West__Remote_Flask => rules::observe_access_anuman_and_invoke_boomerang(ctx, world, full_obs),
+            LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel => rules::observe_access_invoke_boomerang_and_fast_travel(ctx, world, full_obs),
+            LocationId::Annuna__Final_Cache__West__Spin_into_Flask => rules::observe_access_invoke_spin(ctx, world, full_obs),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip => rules::observe_access_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip(ctx, world, full_obs),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel => rules::observe_access_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
@@ -1554,6 +1567,13 @@ impl world::Accessible for Location {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
+                LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel => {
+                    if true {
+                        1000
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
                     if true {
                         350
@@ -1758,6 +1778,12 @@ impl world::Accessible for Location {
             LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask => rules::explain_invoke_remote_boomerang(ctx, world, edict),
             LocationId::Annuna__Filter_Teleporter__Door_Ledge__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
+            LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Final_Cache__West__Remote_Flask => rules::explain_anuman_and_invoke_boomerang(ctx, world, edict),
+            LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel => rules::explain_invoke_boomerang_and_fast_travel(ctx, world, edict),
+            LocationId::Annuna__Final_Cache__West__Spin_into_Flask => rules::explain_invoke_spin(ctx, world, edict),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Collection_Skip => rules::explain_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip(ctx, world, edict),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Flask_Fast_Travel => rules::explain_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Annuna__Invisible_Enemies__Corner_Cache__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -2352,7 +2378,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 884] = [
+static LOC_DEFS: [Location; 891] = [
     Location {
         id: LocationId::Amagi_Breach__Divided__Wall_East__Health,
         canonical: CanonId::Loc_Amagi_Breach__Divided__Wall_East__Health,
@@ -3224,6 +3250,69 @@ static LOC_DEFS: [Location; 884] = [
         price: Currency::Free,
         time: 5500,
         dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__Cache__Flask,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Kiengir,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Kiengir_Map__Annuna_Final_Cache,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Energy(100),
+        time: 3500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__West__Remote_Flask,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 6500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 500,
+        dest: SpotId::Menu__Kiengir_Map__Annuna_Final_Cache,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Final_Cache__West__Spin_into_Flask,
+        canonical: CanonId::Annuna_Final_Cache_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 6500,
+        dest: SpotId::Annuna__Final_Cache__Cache,
         skippable: false,
     },
     Location {
@@ -10429,6 +10518,9 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Annuna__Remote_Training__Button__Hit_Button => SpotId::Annuna__Remote_Training__Button,
         LocationId::Annuna__Remote_Training__Upper_Gate_East__Remote_Button => SpotId::Annuna__Remote_Training__Upper_Gate_East,
         LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => SpotId::Annuna__Seals__Breakable_Rock,
+        LocationId::Annuna__Final_Cache__West__Remote_Flask | LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel | LocationId::Annuna__Final_Cache__West__Spin_into_Flask => SpotId::Annuna__Final_Cache__West,
+        LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask => SpotId::Annuna__Final_Cache__Ledge,
+        LocationId::Annuna__Final_Cache__Cache__Flask | LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip | LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel => SpotId::Annuna__Final_Cache__Cache,
         LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight | LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => SpotId::Annuna__Apocalypse__Center_Scaffold_West,
         LocationId::Antarctica__Shed__Interior__Shelf => SpotId::Antarctica__Shed__Interior,
         LocationId::Antarctica__Building_2__Behind_Boxes__Note => SpotId::Antarctica__Building_2__Behind_Boxes,

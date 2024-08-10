@@ -371,7 +371,7 @@ helpers:  # MARK: helpers
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
   $all_flasks:itemList: >
-    [Flask{53}, Big_Flask{30}]
+    [Flask{54}, Big_Flask{30}]
   $all_health:itemList: >
     [Health_Node{5}, Health_Fragment{24}]
   $all_weapons:itemList: >

@@ -699,6 +699,8 @@ areas:
       coord: [40, 28]
     - name: Annuna East Hideout Flask
       coord: [44, 23]
+    - name: Annuna Final Cache
+      coord: [42, 16]
 
     - name: Ebih Base Camp West
       coord: [28, 13]

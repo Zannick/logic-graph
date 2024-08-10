@@ -3157,6 +3157,7 @@ areas:
   data:
     save_point: Save Point
     portal_start: Portal Hole
+    water: false
   map:
     save: [34, 20, 35, 21]
     portal: [35, 20, 36, 21]

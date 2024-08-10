@@ -636,6 +636,10 @@ digraph AxiomVerge2 {
     Annuna__Filter_Teleporter__East_Platform_4 -> Annuna__Filter_Teleporter__Northeast_Ministair;
     Annuna__Filter_Teleporter__East_Platform_4 -> Annuna__Filter_Teleporter__Northeast_Ministair;
     Annuna__Filter_Teleporter__Northeast_Ministair -> Annuna__Filter_Teleporter__Northeast_Cubby;
+    Annuna__Final_Cache__West -> Annuna__Final_Cache__Cache;
+    Annuna__Final_Cache__West -> Annuna__Seals__Inner_Wall;
+    Annuna__Final_Cache__Ledge -> Annuna__Final_Cache__West;
+    Annuna__Final_Cache__Ledge -> Annuna__Final_Cache__West;
     Annuna__Final_Save__Upper_West -> Annuna__Apocalypse__Northwest_Mid_air;
     Annuna__Final_Save__Upper_West -> Annuna__Seals__East_17_Upper;
     Annuna__Final_Save__Lower_West -> Annuna__Final_Save__Pillar;
@@ -5476,6 +5480,9 @@ digraph AxiomVerge2 {
     Annuna__Seals__Lower_Seal -> Annuna__Seals__Lower_Ledge;
     Annuna__Seals__Lower_Ledge -> Annuna__Seals__Lower_Seal;
     Annuna__Seals__Lower_Ledge -> Annuna__Seals__East_17_Lower;
+    Annuna__Final_Cache__West -> Annuna__Final_Cache__Ledge;
+    Annuna__Final_Cache__Ledge -> Annuna__Final_Cache__Cache;
+    Annuna__Final_Cache__Cache -> Annuna__Final_Cache__Ledge;
     Annuna__Final_Save__Pillar -> Annuna__Final_Save__Lower_West;
     Annuna__Final_Save__Pillar -> Annuna__Final_Save__Save_Point;
     Annuna__Final_Save__Save_Point -> Annuna__Final_Save__East;

@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3391] = [
+static SPOT_DEFS: [SpotDef; 3394] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -3284,9 +3284,21 @@ static SPOT_DEFS: [SpotDef; 3391] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Annuna__Final_Cache__West,
-        loc_range: None,
+        id: SpotId::Annuna__Final_Cache__Cache,
+        loc_range: Some((LocationId::Annuna__Final_Cache__Cache__Flask, LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel)),
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Final_Cache__Ledge,
+        loc_range: Some((LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask, LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask)),
+        exit_range: Some((ExitId::Annuna__Final_Cache__Ledge__ex__West_1, ExitId::Annuna__Final_Cache__Ledge__ex__West_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__Final_Cache__West,
+        loc_range: Some((LocationId::Annuna__Final_Cache__West__Remote_Flask, LocationId::Annuna__Final_Cache__West__Spin_into_Flask)),
+        exit_range: Some((ExitId::Annuna__Final_Cache__West__ex__Cache_1, ExitId::Annuna__Final_Cache__West__ex__Seals__Inner_Wall_1)),
         action_range: None,
     },
     SpotDef {
@@ -16979,6 +16991,12 @@ static SPOT_DEFS: [SpotDef; 3391] = [
         id: SpotId::Menu__Kiengir_Map__Annuna_Factory_Entrance,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1, ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_Final_Cache,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {

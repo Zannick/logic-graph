@@ -667,6 +667,8 @@
         }
         {
             Annuna__Final_Cache__West [label = "", pos = "126.3,-26.0!"];
+            Annuna__Final_Cache__Ledge [label = "", pos = "127.05,-25.916667!"];
+            Annuna__Final_Cache__Cache [label = "", pos = "127.5,-25.916667!"];
         }
         {
             Annuna__Final_Save__Upper_West [label = "", pos = "126.15,-27.333333!"];
@@ -3520,6 +3522,7 @@
             Menu__Kiengir_Map__Annuna_Secret_Passage_Flask [label = "", pos = "96.0,-36.666667!"];
             Menu__Kiengir_Map__Remote_Boomerang [label = "", pos = "120.0,-46.666667!"];
             Menu__Kiengir_Map__Annuna_East_Hideout_Flask [label = "", pos = "132.0,-38.333333!"];
+            Menu__Kiengir_Map__Annuna_Final_Cache [label = "", pos = "126.0,-26.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_West [label = "", pos = "84.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_East [label = "", pos = "90.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_Health [label = "", pos = "87.0,-18.333333!"];

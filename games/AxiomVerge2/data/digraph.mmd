@@ -920,6 +920,8 @@ subgraph Annuna
     end
     subgraph Annuna__Final_Cache[Final Cache]
         Annuna__Final_Cache__West(West);
+        Annuna__Final_Cache__Ledge(Ledge);
+        Annuna__Final_Cache__Cache(Cache);
     end
     subgraph Annuna__Final_Save[Final Save]
         Annuna__Final_Save__Upper_West(Upper West);
@@ -3409,6 +3411,7 @@ subgraph Menu
         Menu__Kiengir_Map__Annuna_Secret_Passage_Flask(Annuna Secret Passage Flask);
         Menu__Kiengir_Map__Remote_Boomerang(Remote Boomerang);
         Menu__Kiengir_Map__Annuna_East_Hideout_Flask(Annuna East Hideout Flask);
+        Menu__Kiengir_Map__Annuna_Final_Cache(Annuna Final Cache);
         Menu__Kiengir_Map__Ebih_Base_Camp_West(Ebih Base Camp West);
         Menu__Kiengir_Map__Ebih_Base_Camp_East(Ebih Base Camp East);
         Menu__Kiengir_Map__Ebih_Base_Camp_Health(Ebih Base Camp Health);
@@ -4523,6 +4526,9 @@ Annuna__Filter_Teleporter__Stair_Top --> Annuna__Filter_Teleporter__Egg
 Annuna__Filter_Teleporter__West_19 <--> Annuna__Spider_Room__East
 Annuna__Filter_Teleporter__West_19_Mid_flight --> Annuna__Spider_Room__Southwest
 Annuna__Filter_Teleporter__West_21 <--> Annuna__Middle_Hallway__East
+Annuna__Final_Cache__Ledge --> Annuna__Final_Cache__West
+Annuna__Final_Cache__West --> Annuna__Final_Cache__Cache
+Annuna__Final_Cache__West <--> Annuna__Seals__Inner_Wall
 Annuna__Final_Save__East --> Annuna__Final_Save__Upper_West
 Annuna__Final_Save__Lower_West --> Annuna__Final_Save__Pillar
 Annuna__Final_Save__Lower_West <--> Annuna__Seals__East_17_Lower
@@ -4608,7 +4614,6 @@ Annuna__Remote_Training__Upper_Gate_East --> Annuna__Remote_Training__West_26
 Annuna__Seals__Breakable_Rock <--> Annuna__Seals__Inner_Wall
 Annuna__Seals__East_17_Lower --> Annuna__Seals__Lower_Ledge
 Annuna__Seals__East_17_Upper <--> Annuna__Seals__Lower_Ledge
-Annuna__Seals__Inner_Wall --> Annuna__Final_Cache__West
 Annuna__Seals__Lower_Seal --> Annuna__Seals__East_17_Upper
 Annuna__Seals__Lower_Seal <--> Annuna__Seals__Middle_Ledge
 Annuna__Seals__Lower_Seal <--> Annuna__Seals__Upper_Seal

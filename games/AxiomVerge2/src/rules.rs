@@ -389,6 +389,10 @@ pub fn access_anuman(ctx: &Context, world: &World) -> bool {
     // Anuman
     ctx.has(Item::Anuman)
 }
+pub fn access_anuman_and_invoke_boomerang(ctx: &Context, world: &World) -> bool {
+    // Anuman and $boomerang
+    (ctx.has(Item::Anuman) && helper__boomerang!(ctx, world))
+}
 pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
@@ -5391,6 +5395,32 @@ pub fn explain_anuman(
         let h = ctx.has(Item::Anuman);
         edict.insert("Anuman", format!("{}", h));
         (h, vec!["Anuman"])
+    }
+}
+pub fn explain_anuman_and_invoke_boomerang(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Anuman and $boomerang
+    {
+        let mut left = {
+            let h = ctx.has(Item::Anuman);
+            edict.insert("Anuman", format!("{}", h));
+            (h, vec!["Anuman"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
+                edict.insert("$boomerang", format!("{:?}", res));
+                refs.push("$boomerang");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_anuman_and_invoke_grab(
@@ -19276,6 +19306,17 @@ pub fn observe_access_anuman(ctx: &Context, world: &World, full_obs: &mut FullOb
         full_obs.observe_anuman();
         ctx.has(Item::Anuman)
     }
+}
+pub fn observe_access_anuman_and_invoke_boomerang(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Anuman and $boomerang
+    ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } && (hobserve__boomerang!(ctx, world, full_obs)))
 }
 pub fn observe_access_anuman_and_invoke_grab(
     ctx: &Context,
