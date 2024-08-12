@@ -1795,6 +1795,8 @@ areas:
     #region Tower
     - name: Tower Gate
       coord: [38.3, 23.4]
+      data:
+        flipside: Annuna Breach > Factory Gate > Button
       local:
         - to: Tower Core
         - to: Center Gap East

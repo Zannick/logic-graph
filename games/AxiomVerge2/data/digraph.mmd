@@ -486,6 +486,10 @@ subgraph Annuna_Breach
     end
     subgraph Annuna_Breach__Factory_Gate[Factory Gate]
         Annuna_Breach__Factory_Gate__East(East);
+        Annuna_Breach__Factory_Gate__Button(Button);
+        Annuna_Breach__Factory_Gate__Gate_West(Gate West);
+        Annuna_Breach__Factory_Gate__Column_East(Column East);
+        Annuna_Breach__Factory_Gate__Column_West(Column West);
         Annuna_Breach__Factory_Gate__West(West);
     end
     subgraph Annuna_Breach__Bridge[Bridge]
@@ -4392,7 +4396,7 @@ Annuna_Breach__Ambushes__Below_Ledge --> Annuna_Breach__Ambushes__Upper_Ledge
 Annuna_Breach__Ambushes__West_18 <--> Annuna_Breach__Gate_and_Floor__East_18
 Annuna_Breach__Ambushes__West_19 <--> Annuna_Breach__Gate_and_Floor__East_19
 Annuna_Breach__Bottom__Save_Point --> Annuna_Breach__Depths__South
-Annuna_Breach__Bridge__East --> Annuna_Breach__Factory_Gate__West
+Annuna_Breach__Bridge__East <--> Annuna_Breach__Factory_Gate__West
 Annuna_Breach__Bridge__Northwest_Platform --> Annuna_Breach__Bridge__Northwest_Plinth
 Annuna_Breach__Bridge__Northwest_Platform <--> Annuna_Breach__Bridge__Top_Platform_West
 Annuna_Breach__Bridge__Northwest_Platform <--> Annuna_Breach__Bridge__Tower_Peak_West
@@ -4426,7 +4430,12 @@ Annuna_Breach__Double_Corridor__Save_Point --> Annuna_Breach__Double_Corridor__C
 Annuna_Breach__Double_Corridor__South <--> Annuna_Breach__Underbelly__North
 Annuna_Breach__Factory_Foyer__East <--> Annuna_Breach__Lower_Gate__West
 Annuna_Breach__Factory_Foyer__East_Ledge --> Annuna_Breach__Factory_Foyer__West_Flower
-Annuna_Breach__Factory_Foyer__West --> Annuna_Breach__Factory_Gate__East
+Annuna_Breach__Factory_Foyer__West <--> Annuna_Breach__Factory_Gate__East
+Annuna_Breach__Factory_Gate__Button <--> Annuna_Breach__Factory_Gate__Gate_West
+Annuna_Breach__Factory_Gate__Column_East <--> Annuna_Breach__Factory_Gate__West
+Annuna_Breach__Factory_Gate__Column_West --> Annuna_Breach__Factory_Gate__Gate_West
+Annuna_Breach__Factory_Gate__East --> Annuna_Breach__Factory_Gate__Button
+Annuna_Breach__Factory_Gate__Gate_West --> Annuna_Breach__Factory_Gate__Column_East
 Annuna_Breach__Gate_and_Floor__Button <--> Annuna_Breach__Gate_and_Floor__East_20
 Annuna_Breach__Gate_and_Floor__Button <--> Annuna_Breach__Gate_and_Floor__Long_Ledge
 Annuna_Breach__Gate_and_Floor__East_18 --> Annuna_Breach__Gate_and_Floor__Northwest

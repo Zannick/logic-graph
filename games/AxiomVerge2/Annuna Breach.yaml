@@ -801,8 +801,68 @@ areas:
   spots:
     - name: East
       coord: [38.9, 23.55]
+      local:
+        - to: Button
+          jumps: 2
+      exits:
+        - to: Factory Foyer > West
+          tags: [xdoor]
+        - to: Button
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: Button
+      coord: [38.3, 23.4]
+      data:
+        flipside: Annuna > East Bridge > Tower Gate
+      local:
+        - to: East
+      locations:
+        - name: Hit Button
+          item: Annuna_Breach_Factory_Gate
+          tags: [button]
+      exits:
+        - to: Gate West
+          req: Annuna_Breach_Factory_Gate
+          movement: base
+    - name: Gate West
+      coord: [37.95, 23.8]
+      exits:
+        - to: Column East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Button
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Column East
+      coord: [37.15, 23.6]
+      local:
+        - to: Gate West
+        - to: Column West
+      exits:
+        - to: West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+    - name: Column West
+      coord: [36.75, 23.6]
+      local:
+        - to: West
+        - to: Column East
+      exits:
+        - to: Gate West
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
     - name: West
       coord: [36.1, 23.8]
+      exits:
+        - to: Column East
+          req: Slingshot_Hook
+          movement: base
+          jumps: 1
+        - to: Bridge > East
+          tags: [xdoor]
 
 - name: Bridge  # MARK: Bridge
   on_entry: $reset_old_area(^newpos)

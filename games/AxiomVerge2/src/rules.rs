@@ -374,6 +374,10 @@ pub fn access_annuna__west_climb__ctx__door_opened(ctx: &Context, world: &World)
     // ^_door_opened
     ctx.annuna__west_climb__ctx__door_opened()
 }
+pub fn access_annuna_breach_factory_gate(ctx: &Context, world: &World) -> bool {
+    // Annuna_Breach_Factory_Gate
+    ctx.has(Item::Annuna_Breach_Factory_Gate)
+}
 pub fn access_annuna_breach_upper_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_Breach_Upper_Gate
     ctx.has(Item::Annuna_Breach_Upper_Gate)
@@ -5441,6 +5445,18 @@ pub fn explain_annuna__west_climb__ctx__door_opened(
         let r = ctx.annuna__west_climb__ctx__door_opened();
         edict.insert("^annuna__west_climb__ctx__door_opened", format!("{:?}", r));
         (r, vec!["^annuna__west_climb__ctx__door_opened"])
+    }
+}
+pub fn explain_annuna_breach_factory_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Breach_Factory_Gate
+    {
+        let h = ctx.has(Item::Annuna_Breach_Factory_Gate);
+        edict.insert("Annuna_Breach_Factory_Gate", format!("{}", h));
+        (h, vec!["Annuna_Breach_Factory_Gate"])
     }
 }
 pub fn explain_annuna_breach_upper_gate(
@@ -19749,6 +19765,17 @@ pub fn observe_access_annuna__west_climb__ctx__door_opened(
     {
         full_obs.observe_annuna__west_climb__ctx__door_opened();
         ctx.annuna__west_climb__ctx__door_opened()
+    }
+}
+pub fn observe_access_annuna_breach_factory_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Breach_Factory_Gate
+    {
+        full_obs.observe_annuna_breach_factory_gate();
+        ctx.has(Item::Annuna_Breach_Factory_Gate)
     }
 }
 pub fn observe_access_annuna_breach_upper_gate(

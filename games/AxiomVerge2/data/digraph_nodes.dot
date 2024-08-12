@@ -459,6 +459,10 @@
         }
         {
             Annuna_Breach__Factory_Gate__East [label = "", pos = "116.7,-89.25!"];
+            Annuna_Breach__Factory_Gate__Button [label = "", pos = "114.9,-89.0!"];
+            Annuna_Breach__Factory_Gate__Gate_West [label = "", pos = "113.85,-89.666667!"];
+            Annuna_Breach__Factory_Gate__Column_East [label = "", pos = "111.45,-89.333333!"];
+            Annuna_Breach__Factory_Gate__Column_West [label = "", pos = "110.25,-89.333333!"];
             Annuna_Breach__Factory_Gate__West [label = "", pos = "108.3,-89.666667!"];
         }
         {

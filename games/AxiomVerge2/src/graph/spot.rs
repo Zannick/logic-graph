@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3455] = [
+static SPOT_DEFS: [SpotDef; 3459] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -2282,15 +2282,39 @@ static SPOT_DEFS: [SpotDef; 3455] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Gate__Button,
+        loc_range: Some((LocationId::Annuna_Breach__Factory_Gate__Button__Hit_Button, LocationId::Annuna_Breach__Factory_Gate__Button__Hit_Button)),
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Gate__Button__ex__Gate_West_1, ExitId::Annuna_Breach__Factory_Gate__Button__ex__Gate_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Gate__Column_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Gate__Column_East__ex__West_1, ExitId::Annuna_Breach__Factory_Gate__Column_East__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Gate__Column_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Gate__Column_West__ex__Gate_West_1, ExitId::Annuna_Breach__Factory_Gate__Column_West__ex__Gate_West_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna_Breach__Factory_Gate__East,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Gate__East__ex__Button_1, ExitId::Annuna_Breach__Factory_Gate__East__ex__Factory_Foyer__West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Factory_Gate__Gate_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Gate__Gate_West__ex__Button_1, ExitId::Annuna_Breach__Factory_Gate__Gate_West__ex__Column_East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Annuna_Breach__Factory_Gate__West,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Factory_Gate__West__ex__Bridge__East_1, ExitId::Annuna_Breach__Factory_Gate__West__ex__Column_East_1)),
         action_range: None,
     },
     SpotDef {

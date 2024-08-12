@@ -1133,6 +1133,15 @@ digraph AxiomVerge2 {
     Annuna_Breach__Factory_Foyer__East -> Annuna_Breach__Lower_Gate__West;
     Annuna_Breach__Factory_Foyer__East_Ledge -> Annuna_Breach__Factory_Foyer__West_Flower;
     Annuna_Breach__Factory_Foyer__West -> Annuna_Breach__Factory_Gate__East;
+    Annuna_Breach__Factory_Gate__East -> Annuna_Breach__Factory_Gate__Button;
+    Annuna_Breach__Factory_Gate__East -> Annuna_Breach__Factory_Foyer__West;
+    Annuna_Breach__Factory_Gate__Button -> Annuna_Breach__Factory_Gate__Gate_West;
+    Annuna_Breach__Factory_Gate__Gate_West -> Annuna_Breach__Factory_Gate__Button;
+    Annuna_Breach__Factory_Gate__Gate_West -> Annuna_Breach__Factory_Gate__Column_East;
+    Annuna_Breach__Factory_Gate__Column_East -> Annuna_Breach__Factory_Gate__West;
+    Annuna_Breach__Factory_Gate__Column_West -> Annuna_Breach__Factory_Gate__Gate_West;
+    Annuna_Breach__Factory_Gate__West -> Annuna_Breach__Bridge__East;
+    Annuna_Breach__Factory_Gate__West -> Annuna_Breach__Factory_Gate__Column_East;
     Annuna_Breach__Gate_and_Floor__East_18 -> Annuna_Breach__Ambushes__West_18;
     Annuna_Breach__Gate_and_Floor__East_18 -> Annuna_Breach__Gate_and_Floor__Northwest;
     Annuna_Breach__Gate_and_Floor__East_19 -> Annuna_Breach__Ambushes__West_19;
@@ -5111,6 +5120,12 @@ digraph AxiomVerge2 {
     Annuna_Breach__Factory_Foyer__West_Flower -> Annuna_Breach__Factory_Foyer__East_Ledge;
     Annuna_Breach__Factory_Foyer__West_Flower -> Annuna_Breach__Factory_Foyer__West;
     Annuna_Breach__Factory_Foyer__West -> Annuna_Breach__Factory_Foyer__West_Flower;
+    Annuna_Breach__Factory_Gate__East -> Annuna_Breach__Factory_Gate__Button;
+    Annuna_Breach__Factory_Gate__Button -> Annuna_Breach__Factory_Gate__East;
+    Annuna_Breach__Factory_Gate__Column_East -> Annuna_Breach__Factory_Gate__Gate_West;
+    Annuna_Breach__Factory_Gate__Column_East -> Annuna_Breach__Factory_Gate__Column_West;
+    Annuna_Breach__Factory_Gate__Column_West -> Annuna_Breach__Factory_Gate__Column_East;
+    Annuna_Breach__Factory_Gate__Column_West -> Annuna_Breach__Factory_Gate__West;
     Annuna_Breach__Bridge__East -> Annuna_Breach__Bridge__Portal_Stand;
     Annuna_Breach__Bridge__Portal_Stand -> Annuna_Breach__Bridge__East;
     Annuna_Breach__Bridge__Portal_Stand -> Annuna_Breach__Bridge__Tower_Base_West;

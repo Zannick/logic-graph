@@ -209,6 +209,7 @@ impl world::Accessible for Location {
             LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask => true,
             LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Collection_Skip => true,
             LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Annuna_Breach__Factory_Gate__Button__Hit_Button => true,
             LocationId::Annuna_Breach__Gate_and_Floor__Button__Hit_Button => true,
             LocationId::Annuna_Breach__Gate_and_Floor__Middle_Floor__Item => true,
             LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button => true,
@@ -2400,7 +2401,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 901] = [
+static LOC_DEFS: [Location; 902] = [
     Location {
         id: LocationId::Amagi_Breach__Divided__Wall_East__Health,
         canonical: CanonId::Loc_Amagi_Breach__Divided__Wall_East__Health,
@@ -3056,6 +3057,15 @@ static LOC_DEFS: [Location; 901] = [
         price: Currency::Free,
         time: 200,
         dest: SpotId::Menu__Breach_Map__AGB_Factory_Foyer_Flask,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna_Breach__Factory_Gate__Button__Hit_Button,
+        canonical: CanonId::Loc_Annuna_Breach__Factory_Gate__Button__Hit_Button,
+        item: Item::Annuna_Breach_Factory_Gate,
+        price: Currency::Free,
+        time: 100,
+        dest: SpotId::None,
         skippable: false,
     },
     Location {
@@ -10574,6 +10584,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Annuna_Breach__Lower_Gate__Button__Hit_Button => SpotId::Annuna_Breach__Lower_Gate__Button,
         LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask | LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Collection_Skip | LocationId::Annuna_Breach__Lower_Gate__Flower_Cache__Flask_Fast_Travel => SpotId::Annuna_Breach__Lower_Gate__Flower_Cache,
         LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask | LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Collection_Skip | LocationId::Annuna_Breach__Factory_Foyer__West_Flower__Flask_Fast_Travel => SpotId::Annuna_Breach__Factory_Foyer__West_Flower,
+        LocationId::Annuna_Breach__Factory_Gate__Button__Hit_Button => SpotId::Annuna_Breach__Factory_Gate__Button,
         LocationId::Annuna_Breach__Bridge__Tower_Upper_Interior__Flask | LocationId::Annuna_Breach__Bridge__Tower_Upper_Interior__Flask_Collection_Skip | LocationId::Annuna_Breach__Bridge__Tower_Upper_Interior__Flask_Fast_Travel => SpotId::Annuna_Breach__Bridge__Tower_Upper_Interior,
         LocationId::Annuna__Mirror_Match__Save_Point__Fight => SpotId::Annuna__Mirror_Match__Save_Point,
         LocationId::Annuna__Mirror_Match__Below_Switch__Hit_Switch => SpotId::Annuna__Mirror_Match__Below_Switch,
