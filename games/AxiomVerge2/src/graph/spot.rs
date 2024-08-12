@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3418] = [
+static SPOT_DEFS: [SpotDef; 3455] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__East_18,
@@ -2086,13 +2086,79 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna_Breach__Bridge__East,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__East__ex__Factory_Gate__West_1, ExitId::Annuna_Breach__Bridge__East__ex__Factory_Gate__West_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Annuna_Breach__Bridge__North,
         loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__North__ex__Amagi_Breach__Divided__South_1, ExitId::Annuna_Breach__Bridge__North__ex__Amagi_Breach__Divided__South_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Northwest_Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Northwest_Platform__ex__Northwest_Plinth_1, ExitId::Annuna_Breach__Bridge__Northwest_Platform__ex__Tower_Peak_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Northwest_Plinth,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Northwest_Plinth__ex__Top_Platform_West_1, ExitId::Annuna_Breach__Bridge__Northwest_Plinth__ex__Top_Platform_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Portal_Stand,
+        loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Save_Point,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Save_Point__ex__Northwest_Platform_1, ExitId::Annuna_Breach__Bridge__Save_Point__ex__Tower_Upper_West_Ledge_2)),
+        action_range: Some((ActionId::Annuna_Breach__Bridge__Save_Point__Save, ActionId::Annuna_Breach__Bridge__Save_Point__Save)),
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Top_Platform_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Top_Platform_West__ex__Northwest_Platform_1, ExitId::Annuna_Breach__Bridge__Top_Platform_West__ex__Northwest_Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Tower_Base_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Tower_Base_West__ex__Tower_Lower_West_Ledge_1, ExitId::Annuna_Breach__Bridge__Tower_Base_West__ex__Tower_Lower_West_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Tower_Lower_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Tower_Lower_West_Ledge__ex__Northwest_Platform_1, ExitId::Annuna_Breach__Bridge__Tower_Lower_West_Ledge__ex__Tower_Upper_West_Ledge_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Tower_Peak,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Tower_Peak__ex__Northwest_Platform_1, ExitId::Annuna_Breach__Bridge__Tower_Peak__ex__Top_Platform_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Tower_Peak_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Tower_Peak_West__ex__Northwest_Platform_1, ExitId::Annuna_Breach__Bridge__Tower_Peak_West__ex__Tower_Peak_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Tower_Upper_Interior,
+        loc_range: Some((LocationId::Annuna_Breach__Bridge__Tower_Upper_Interior__Flask, LocationId::Annuna_Breach__Bridge__Tower_Upper_Interior__Flask_Fast_Travel)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna_Breach__Bridge__Tower_Upper_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna_Breach__Bridge__Tower_Upper_West_Ledge__ex__Northwest_Platform_1, ExitId::Annuna_Breach__Bridge__Tower_Upper_West_Ledge__ex__Tower_Peak_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -2662,7 +2728,13 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__East_Bridge__Below_Cavern,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__East_Bridge__Below_Cavern__ex__Below_Cavern_West_1, ExitId::Annuna__East_Bridge__Below_Cavern__ex__Tower_West_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__East_Bridge__Below_Cavern_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__East_Bridge__Below_Cavern_West__ex__Below_Cavern_1, ExitId::Annuna__East_Bridge__Below_Cavern_West__ex__West_Bridge__Tower_Upper_East_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -2679,13 +2751,13 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     },
     SpotDef {
         id: SpotId::Annuna__East_Bridge__Cavern_Cache,
-        loc_range: None,
+        loc_range: Some((LocationId::Annuna__East_Bridge__Cavern_Cache__Flask, LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel)),
         exit_range: None,
         action_range: None,
     },
     SpotDef {
         id: SpotId::Annuna__East_Bridge__Cavern_Foyer,
-        loc_range: None,
+        loc_range: Some((LocationId::Annuna__East_Bridge__Cavern_Foyer__Shockwave_Flask, LocationId::Annuna__East_Bridge__Cavern_Foyer__Shockwave_Flask)),
         exit_range: None,
         action_range: None,
     },
@@ -2902,7 +2974,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__East_Bridge__Upper_West_Gap,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_24_1, ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_24_2)),
+        exit_range: Some((ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_24_1, ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_Bridge__Tower_Lower_East_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -2930,12 +3002,6 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Annuna__East_Bridge__West_22,
-        loc_range: None,
-        exit_range: None,
-        action_range: None,
-    },
-    SpotDef {
         id: SpotId::Annuna__East_Bridge__West_24,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__East_Bridge__West_24__ex__West_Bridge__East_24_1, ExitId::Annuna__East_Bridge__West_24__ex__West_Bridge__East_24_1)),
@@ -2945,12 +3011,6 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         id: SpotId::Annuna__East_Bridge__West_25_Lower,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1, ExitId::Annuna__East_Bridge__West_25_Lower__ex__West_Bridge__East_25_Upper_1)),
-        action_range: None,
-    },
-    SpotDef {
-        id: SpotId::Annuna__East_Bridge__West_25_Upper,
-        loc_range: None,
-        exit_range: Some((ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1, ExitId::Annuna__East_Bridge__West_25_Upper__ex__West_Bridge__East_25_Upper_1)),
         action_range: None,
     },
     SpotDef {
@@ -2998,7 +3058,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__East_Bridge__West_Under_Gap,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1, ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_East_1)),
+        exit_range: Some((ExitId::Annuna__East_Bridge__West_Under_Gap__ex__Upper_West_Gap_1, ExitId::Annuna__East_Bridge__West_Under_Gap__ex__West_Bridge__East_25_Upper_1)),
         action_range: None,
     },
     SpotDef {
@@ -3610,7 +3670,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__Mirror_Match__East_24,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__Mirror_Match__East_24__ex__West_Bridge__West_24_1, ExitId::Annuna__Mirror_Match__East_24__ex__West_Bridge__West_24_1)),
+        exit_range: Some((ExitId::Annuna__Mirror_Match__East_24__ex__Middle_Rock_East_1, ExitId::Annuna__Mirror_Match__East_24__ex__West_Bridge__West_24_1)),
         action_range: None,
     },
     SpotDef {
@@ -3646,7 +3706,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__Mirror_Match__Middle_Rock_East,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__Mirror_Match__Middle_Rock_East__ex__Upper_Rock_East_1, ExitId::Annuna__Mirror_Match__Middle_Rock_East__ex__Upper_Rock_East_1)),
+        exit_range: Some((ExitId::Annuna__Mirror_Match__Middle_Rock_East__ex__Upper_Rock_East_1, ExitId::Annuna__Mirror_Match__Middle_Rock_East__ex__West_Bridge__Tower_Middle_West_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -3688,7 +3748,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__Mirror_Match__Upper_Floor_East,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__Mirror_Match__Upper_Floor_East__ex__East_24_1, ExitId::Annuna__Mirror_Match__Upper_Floor_East__ex__East_24_2)),
+        exit_range: Some((ExitId::Annuna__Mirror_Match__Upper_Floor_East__ex__East_24_1, ExitId::Annuna__Mirror_Match__Upper_Floor_East__ex__West_Bridge__Bridge_Top_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -4256,6 +4316,12 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Annuna__Upper_Hallway__Wall,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__Upper_Hallway__West,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__Upper_Hallway__West__ex__Vertical_Room__East_20_1, ExitId::Annuna__Upper_Hallway__West__ex__Vertical_Room__East_20_1)),
@@ -4474,7 +4540,19 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__West_Bridge__Below_Tunnel,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Below_Tunnel__ex__East_Bridge__Below_Cavern_West_1, ExitId::Annuna__West_Bridge__Below_Tunnel__ex__East_Bridge__Below_Cavern_West_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Bridge_Top_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Bridge_Top_East__ex__East_Bridge__Tower_Gate_1, ExitId::Annuna__West_Bridge__Bridge_Top_East__ex__East_Bridge__West_Staircase_Upper_West_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Bridge_Top_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Bridge_Top_West__ex__Mirror_Match__Upper_Floor_West_1, ExitId::Annuna__West_Bridge__Bridge_Top_West__ex__Tower_Gap_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -4484,15 +4562,9 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Annuna__West_Bridge__East_22,
-        loc_range: None,
-        exit_range: None,
-        action_range: None,
-    },
-    SpotDef {
         id: SpotId::Annuna__West_Bridge__East_24,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__East_24__ex__East_Bridge__West_24_1, ExitId::Annuna__West_Bridge__East_24__ex__Mid_Tunnel_2)),
         action_range: None,
     },
     SpotDef {
@@ -4504,7 +4576,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__West_Bridge__East_25_Upper,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__East_25_Upper__ex__East_Bridge__West_Under_Gap_1, ExitId::Annuna__West_Bridge__East_25_Upper__ex__Upper_Tier_Middle_1)),
         action_range: None,
     },
     SpotDef {
@@ -4529,6 +4601,12 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         id: SpotId::Annuna__West_Bridge__East_Almost,
         loc_range: None,
         exit_range: Some((ExitId::Annuna__West_Bridge__East_Almost__ex__East_26_1, ExitId::Annuna__West_Bridge__East_Almost__ex__East_26_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Far_Below_Tunnel_Wall,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Far_Below_Tunnel_Wall__ex__East_Bridge__Below_Cavern_West_1, ExitId::Annuna__West_Bridge__Far_Below_Tunnel_Wall__ex__Mid_Tunnel_2)),
         action_range: None,
     },
     SpotDef {
@@ -4576,7 +4654,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__West_Bridge__Mid_Tunnel,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1, ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_22_1)),
+        exit_range: Some((ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_Bridge__Below_Cavern_West_1, ExitId::Annuna__West_Bridge__Mid_Tunnel__ex__East_Bridge__Upper_West_Gap_1)),
         action_range: None,
     },
     SpotDef {
@@ -4604,9 +4682,129 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         action_range: Some((ActionId::Annuna__West_Bridge__Save_Point__Save, ActionId::Annuna__West_Bridge__Save_Point__Save)),
     },
     SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Base_Center,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Base_Center__ex__Bridge_Top_East_1, ExitId::Annuna__West_Bridge__Tower_Base_Center__ex__Tower_Level_1_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Base_Door_Column,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Base_Door_Column__ex__Tower_Lower_East_Ledge_1, ExitId::Annuna__West_Bridge__Tower_Base_Door_Column__ex__Tower_Lower_East_Ledge_4)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Base_East,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Base_East__ex__Far_Below_Tunnel_Wall_1, ExitId::Annuna__West_Bridge__Tower_Base_East__ex__Tower_Base_Door_Column_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Base_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Base_West__ex__Tower_Base_Center_1, ExitId::Annuna__West_Bridge__Tower_Base_West__ex__West_25_Upper_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_East_Peak,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_East_Peak__ex__Mirror_Match__Middle_Rock_East_1, ExitId::Annuna__West_Bridge__Tower_East_Peak__ex__Mirror_Match__Middle_Rock_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Gap_West,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Gap_West__ex__Bridge_Top_West_1, ExitId::Annuna__West_Bridge__Tower_Gap_West__ex__Tower_Middle_West_Ledge_5)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Level_1,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Level_1__ex__Tower_Base_West_1, ExitId::Annuna__West_Bridge__Tower_Level_1__ex__Tower_Level_3_3)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Level_3,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Level_3__ex__Tower_Level_4_1, ExitId::Annuna__West_Bridge__Tower_Level_3__ex__Tower_Level_4_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Level_4,
+        loc_range: None,
+        exit_range: None,
+        action_range: Some((ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors, ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors)),
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Lower_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Lower_East_Ledge__ex__Far_Below_Tunnel_Wall_1, ExitId::Annuna__West_Bridge__Tower_Lower_East_Ledge__ex__Tower_Upper_East_Ledge_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Middle_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Middle_West_Ledge__ex__Tower_Upper_West_Ledge_1, ExitId::Annuna__West_Bridge__Tower_Middle_West_Ledge__ex__Tower_Upper_West_Ledge_4)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Peak,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Upper_East_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Upper_East_Ledge__ex__Far_Below_Tunnel_Wall_1, ExitId::Annuna__West_Bridge__Tower_Upper_East_Ledge__ex__Tower_Peak_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Upper_Middle,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Upper_Middle__ex__Tower_Peak_1, ExitId::Annuna__West_Bridge__Tower_Upper_Middle__ex__Tower_West_Peak_1)),
+        action_range: Some((ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors, ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors)),
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Upper_Shaft,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Upper_Shaft__ex__Tower_Upper_East_Ledge_1, ExitId::Annuna__West_Bridge__Tower_Upper_Shaft__ex__Tower_Upper_Middle_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_Upper_West_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_Upper_West_Ledge__ex__Tower_West_Peak_1, ExitId::Annuna__West_Bridge__Tower_Upper_West_Ledge__ex__Tower_West_Peak_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_West_Mid_air,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_West_Mid_air__ex__Mirror_Match__Upper_Rock_East_1, ExitId::Annuna__West_Bridge__Tower_West_Mid_air__ex__Mirror_Match__Upper_Rock_East_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Tower_West_Peak,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tower_West_Peak__ex__East_Bridge__Tower_West_Ledge_1, ExitId::Annuna__West_Bridge__Tower_West_Peak__ex__Far_Below_Tunnel_Wall_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Annuna__West_Bridge__Tunnel_Wall,
         loc_range: None,
-        exit_range: Some((ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1, ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1)),
+        exit_range: Some((ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Mid_Tunnel_1, ExitId::Annuna__West_Bridge__Tunnel_Wall__ex__Tower_Upper_East_Ledge_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Upper_Tier_Below_Gap,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Upper_Tier_Below_Gap__ex__Plinth_1, ExitId::Annuna__West_Bridge__Upper_Tier_Below_Gap__ex__West_25_Upper_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Annuna__West_Bridge__Upper_Tier_Middle,
+        loc_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Upper_Tier_Middle__ex__East_25_Upper_1, ExitId::Annuna__West_Bridge__Upper_Tier_Middle__ex__West_Outcropping_1)),
         action_range: None,
     },
     SpotDef {
@@ -4624,13 +4822,13 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__West_Bridge__West_22,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__West_22__ex__Secret_Passage__East_1, ExitId::Annuna__West_Bridge__West_22__ex__Secret_Passage__East_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Annuna__West_Bridge__West_24,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__West_24__ex__Mirror_Match__East_24_1, ExitId::Annuna__West_Bridge__West_24__ex__Mirror_Match__East_24_1)),
         action_range: None,
     },
     SpotDef {
@@ -4642,7 +4840,7 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     SpotDef {
         id: SpotId::Annuna__West_Bridge__West_25_Upper,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__West_25_Upper__ex__Mirror_Match__East_25_Upper_1, ExitId::Annuna__West_Bridge__West_25_Upper__ex__Upper_Tier_Below_Gap_1)),
         action_range: None,
     },
     SpotDef {
@@ -16430,15 +16628,33 @@ static SPOT_DEFS: [SpotDef; 3418] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Menu__Breach_Map__AGB_Bridge_Flask,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Menu__Breach_Map__AGB_Bridge_Lower,
         loc_range: None,
         exit_range: Some((ExitId::Menu__Breach_Map__AGB_Bridge_Lower__ex__Annuna_Breach__Double_Corridor__Save_Point_1, ExitId::Menu__Breach_Map__AGB_Bridge_Lower__ex__Annuna_Breach__Double_Corridor__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Menu__Breach_Map__AGB_Bridge_Upper,
+        id: SpotId::Menu__Breach_Map__AGB_Bridge_Northwest,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__AGB_Bridge_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Breach_Map__AGB_Bridge_Upper,
+        loc_range: None,
+        exit_range: Some((ExitId::Menu__Breach_Map__AGB_Bridge_Upper__ex__Annuna_Breach__Bridge__Save_Point_1, ExitId::Menu__Breach_Map__AGB_Bridge_Upper__ex__Annuna_Breach__Bridge__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -17235,6 +17451,12 @@ static SPOT_DEFS: [SpotDef; 3418] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Annuna_West_Bridge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Annuna_West_Bridge_Upper,
         loc_range: None,
         exit_range: None,
         action_range: None,

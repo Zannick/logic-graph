@@ -52,6 +52,9 @@ fn read_key_value(
         Some("block_fast_travel") => {
             world.block_fast_travel = parse_bool(key, val)?;
         }
+        Some("bridge_hover") => {
+            world.bridge_hover = parse_bool(key, val)?;
+        }
         _ => {
             return Err(format!("Unrecognized or unparseable key: '{:?}'", key));
         }

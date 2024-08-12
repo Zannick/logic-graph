@@ -19,6 +19,13 @@ pub fn access_default(_ctx: &Context, _world: &World) -> bool {
     true
 }
 
+pub fn access___bridge_hover_or_slingshot_charge_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // (bridge_hover or Slingshot_Charge) and $hookhover
+    ((world.bridge_hover || ctx.has(Item::Slingshot_Charge)) && helper__hookhover!(ctx, world))
+}
 pub fn access___escape_apocalypse_bomb_invoke_objective(ctx: &Context, world: &World) -> bool {
     // [Escape, Apocalypse_Bomb, $objective]
     ctx.has(Item::Escape) && ctx.has(Item::Apocalypse_Bomb) && rule__objective!(ctx, world)
@@ -338,6 +345,31 @@ pub fn access_annuna__vertical_room__ctx__door_opened(ctx: &Context, world: &Wor
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
 }
+pub fn access_annuna__west_bridge__ctx__doors_opened(ctx: &Context, world: &World) -> bool {
+    // ^_doors_opened
+    ctx.annuna__west_bridge__ctx__doors_opened()
+}
+pub fn access_annuna__west_bridge__ctx__doors_opened_and_invoke_grab(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_doors_opened and $grab
+    (ctx.annuna__west_bridge__ctx__doors_opened() && helper__grab!(ctx, world))
+}
+pub fn access_annuna__west_bridge__ctx__doors_opened_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_doors_opened and $hook
+    (ctx.annuna__west_bridge__ctx__doors_opened() && helper__hook!(ctx, world))
+}
+pub fn access_annuna__west_bridge__ctx__doors_opened_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_doors_opened and $hookhover
+    (ctx.annuna__west_bridge__ctx__doors_opened() && helper__hookhover!(ctx, world))
+}
 pub fn access_annuna__west_climb__ctx__door_opened(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.annuna__west_climb__ctx__door_opened()
@@ -392,6 +424,10 @@ pub fn access_anuman(ctx: &Context, world: &World) -> bool {
 pub fn access_anuman_and_invoke_boomerang(ctx: &Context, world: &World) -> bool {
     // Anuman and $boomerang
     (ctx.has(Item::Anuman) && helper__boomerang!(ctx, world))
+}
+pub fn access_anuman_and_invoke_climb(ctx: &Context, world: &World) -> bool {
+    // Anuman and $climb
+    (ctx.has(Item::Anuman) && helper__climb!(ctx, world))
 }
 pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Anuman and $grab
@@ -1521,6 +1557,14 @@ pub fn access_invoke_hook_and_underwater_movement(ctx: &Context, world: &World) 
     // $hook and Underwater_Movement
     (helper__hook!(ctx, world) && ctx.has(Item::Underwater_Movement))
 }
+pub fn access_invoke_hook_or___anuman_and___invoke_grab_or_invoke_climb(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $hook or (Anuman and ($grab or $climb))
+    (helper__hook!(ctx, world)
+        || (ctx.has(Item::Anuman) && (helper__grab!(ctx, world) || helper__climb!(ctx, world))))
+}
 pub fn access_invoke_hook_or___anuman_and_invoke_climb(ctx: &Context, world: &World) -> bool {
     // $hook or (Anuman and $climb)
     (helper__hook!(ctx, world) || (ctx.has(Item::Anuman) && helper__climb!(ctx, world)))
@@ -1561,6 +1605,10 @@ pub fn access_invoke_hookhover_and_amagi_gated_community_gate_and_underwater_mov
     (((helper__hookhover!(ctx, world) && ctx.has(Item::Amagi_Gated_Community_Gate))
         && ctx.has(Item::Underwater_Movement))
         && ctx.amagi__gated_community__ctx__dur_esla())
+}
+pub fn access_invoke_hookhover_and_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
+    // $hookhover and Annuna_East_Bridge_Gate
+    (helper__hookhover!(ctx, world) && ctx.has(Item::Annuna_East_Bridge_Gate))
 }
 pub fn access_invoke_hookhover_and_giguna__gateway__ctx__door_opened(
     ctx: &Context,
@@ -1779,9 +1827,24 @@ pub fn access_invoke_open_and_invoke_range2(ctx: &Context, world: &World) -> boo
     // $open and $range2
     (helper__open!(ctx, world) && helper__range2!(ctx, world))
 }
+pub fn access_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $open and $range2 and not ^_doors_opened
+    ((helper__open!(ctx, world) && helper__range2!(ctx, world))
+        && !ctx.annuna__west_bridge__ctx__doors_opened())
+}
 pub fn access_invoke_open_and_invoke_range3(ctx: &Context, world: &World) -> bool {
     // $open and $range3
     (helper__open!(ctx, world) && helper__range3!(ctx, world))
+}
+pub fn access_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $open and not ^_doors_opened
+    (helper__open!(ctx, world) && !ctx.annuna__west_bridge__ctx__doors_opened())
 }
 pub fn access_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open(
     ctx: &Context,
@@ -1996,6 +2059,10 @@ pub fn access_map__annuna__vertical_room__save(ctx: &Context, world: &World) -> 
 pub fn access_map__annuna_breach__bottom__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna_breach__bottom__save
     ctx.map__annuna_breach__bottom__save()
+}
+pub fn access_map__annuna_breach__bridge__save(ctx: &Context, world: &World) -> bool {
+    // ^map__annuna_breach__bridge__save
+    ctx.map__annuna_breach__bridge__save()
 }
 pub fn access_map__annuna_breach__double_corridor__save(ctx: &Context, world: &World) -> bool {
     // ^map__annuna_breach__double_corridor__save
@@ -3253,6 +3320,10 @@ pub fn action_annuna__vertical_room__ctx__door_opened_set_true(ctx: &mut Context
     // ^_door_opened = true
     ctx.set_annuna__vertical_room__ctx__door_opened(true);
 }
+pub fn action_annuna__west_bridge__ctx__doors_opened_set_true(ctx: &mut Context, world: &World) {
+    // ^_doors_opened = true
+    ctx.set_annuna__west_bridge__ctx__doors_opened(true);
+}
 pub fn action_annuna__west_climb__ctx__door_opened_set_true(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
     ctx.set_annuna__west_climb__ctx__door_opened(true);
@@ -3723,6 +3794,45 @@ pub fn action_save_set_glacier_gt_revival_gt_save_point(ctx: &mut Context, world
 pub fn action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx: &mut Context, world: &World) {
     // ^save = `Uhrum > Emergence Save > Save Point`
     ctx.set_save(SpotId::Uhrum__Emergence_Save__Save_Point);
+}
+pub fn explain___bridge_hover_or_slingshot_charge_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // (bridge_hover or Slingshot_Charge) and $hookhover
+    {
+        let mut left = ({
+            let mut left = {
+                let s = world.bridge_hover;
+                edict.insert("bridge_hover", format!("{}", s));
+                (s, vec!["bridge_hover"])
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Slingshot_Charge);
+                    edict.insert("Slingshot_Charge", format!("{}", h));
+                    (h, vec!["Slingshot_Charge"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
 }
 pub fn explain___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
@@ -5219,6 +5329,108 @@ pub fn explain_annuna__vertical_room__ctx__door_opened(
         (r, vec!["^annuna__vertical_room__ctx__door_opened"])
     }
 }
+pub fn explain_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_doors_opened
+    {
+        let r = ctx.annuna__west_bridge__ctx__doors_opened();
+        edict.insert(
+            "^annuna__west_bridge__ctx__doors_opened",
+            format!("{:?}", r),
+        );
+        (r, vec!["^annuna__west_bridge__ctx__doors_opened"])
+    }
+}
+pub fn explain_annuna__west_bridge__ctx__doors_opened_and_invoke_grab(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_doors_opened and $grab
+    {
+        let mut left = {
+            let r = ctx.annuna__west_bridge__ctx__doors_opened();
+            edict.insert(
+                "^annuna__west_bridge__ctx__doors_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__west_bridge__ctx__doors_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__west_bridge__ctx__doors_opened_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_doors_opened and $hook
+    {
+        let mut left = {
+            let r = ctx.annuna__west_bridge__ctx__doors_opened();
+            edict.insert(
+                "^annuna__west_bridge__ctx__doors_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__west_bridge__ctx__doors_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna__west_bridge__ctx__doors_opened_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_doors_opened and $hookhover
+    {
+        let mut left = {
+            let r = ctx.annuna__west_bridge__ctx__doors_opened();
+            edict.insert(
+                "^annuna__west_bridge__ctx__doors_opened",
+                format!("{:?}", r),
+            );
+            (r, vec!["^annuna__west_bridge__ctx__doors_opened"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_annuna__west_climb__ctx__door_opened(
     ctx: &Context,
     world: &World,
@@ -5436,6 +5648,32 @@ pub fn explain_anuman_and_invoke_boomerang(
                 let (res, mut refs) = hexplain__boomerang!(ctx, world, edict);
                 edict.insert("$boomerang", format!("{:?}", res));
                 refs.push("$boomerang");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_anuman_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Anuman and $climb
+    {
+        let mut left = {
+            let h = ctx.has(Item::Anuman);
+            edict.insert("Anuman", format!("{}", h));
+            (h, vec!["Anuman"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                edict.insert("$climb", format!("{:?}", res));
+                refs.push("$climb");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -10604,6 +10842,60 @@ pub fn explain_invoke_hook_and_underwater_movement(
         }
     }
 }
+pub fn explain_invoke_hook_or___anuman_and___invoke_grab_or_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hook or (Anuman and ($grab or $climb))
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+            edict.insert("$hook", format!("{:?}", res));
+            refs.push("$hook");
+            (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Anuman);
+                    edict.insert("Anuman", format!("{}", h));
+                    (h, vec!["Anuman"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = ({
+                        let mut left = {
+                            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                            edict.insert("$grab", format!("{:?}", res));
+                            refs.push("$grab");
+                            (res, refs)
+                        };
+                        if left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                                edict.insert("$climb", format!("{:?}", res));
+                                refs.push("$climb");
+                                (res, refs)
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
+                    });
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_hook_or___anuman_and_invoke_climb(
     ctx: &Context,
     world: &World,
@@ -10875,6 +11167,32 @@ pub fn explain_invoke_hookhover_and_amagi_gated_community_gate_and_underwater_mo
                 let r = ctx.amagi__gated_community__ctx__dur_esla();
                 edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
                 (r, vec!["^amagi__gated_community__ctx__dur_esla"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_hookhover_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $hookhover and Annuna_East_Bridge_Gate
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+            edict.insert("$hookhover", format!("{:?}", res));
+            refs.push("$hookhover");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Annuna_East_Bridge_Gate);
+                edict.insert("Annuna_East_Bridge_Gate", format!("{}", h));
+                (h, vec!["Annuna_East_Bridge_Gate"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12057,6 +12375,52 @@ pub fn explain_invoke_open_and_invoke_range2(
         }
     }
 }
+pub fn explain_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open and $range2 and not ^_doors_opened
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__open!(ctx, world, edict);
+                edict.insert("$open", format!("{:?}", res));
+                refs.push("$open");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                    edict.insert("$range2", format!("{:?}", res));
+                    refs.push("$range2");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.annuna__west_bridge__ctx__doors_opened();
+                    edict.insert(
+                        "^annuna__west_bridge__ctx__doors_opened",
+                        format!("{:?}", r),
+                    );
+                    (r, vec!["^annuna__west_bridge__ctx__doors_opened"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_open_and_invoke_range3(
     ctx: &Context,
     world: &World,
@@ -12078,6 +12442,38 @@ pub fn explain_invoke_open_and_invoke_range3(
                 edict.insert("$range3", format!("{:?}", res));
                 refs.push("$range3");
                 (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $open and not ^_doors_opened
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__open!(ctx, world, edict);
+            edict.insert("$open", format!("{:?}", res));
+            refs.push("$open");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.annuna__west_bridge__ctx__doors_opened();
+                    edict.insert(
+                        "^annuna__west_bridge__ctx__doors_opened",
+                        format!("{:?}", r),
+                    );
+                    (r, vec!["^annuna__west_bridge__ctx__doors_opened"])
+                };
+                (!val.0, val.1)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12995,6 +13391,18 @@ pub fn explain_map__annuna_breach__bottom__save(
         let r = ctx.map__annuna_breach__bottom__save();
         edict.insert("^map__annuna_breach__bottom__save", format!("{:?}", r));
         (r, vec!["^map__annuna_breach__bottom__save"])
+    }
+}
+pub fn explain_map__annuna_breach__bridge__save(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^map__annuna_breach__bridge__save
+    {
+        let r = ctx.map__annuna_breach__bridge__save();
+        edict.insert("^map__annuna_breach__bridge__save", format!("{:?}", r));
+        (r, vec!["^map__annuna_breach__bridge__save"])
     }
 }
 pub fn explain_map__annuna_breach__double_corridor__save(
@@ -18624,6 +19032,17 @@ pub fn explain_within_menu_gt_upgrade_menu(
         )
     }
 }
+pub fn observe_access___bridge_hover_or_slingshot_charge_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // (bridge_hover or Slingshot_Charge) and $hookhover
+    ((world.bridge_hover || {
+        full_obs.observe_slingshot_charge();
+        ctx.has(Item::Slingshot_Charge)
+    }) && (hobserve__hookhover!(ctx, world, full_obs)))
+}
 pub fn observe_access___escape_apocalypse_bomb_invoke_objective(
     ctx: &Context,
     world: &World,
@@ -19277,6 +19696,50 @@ pub fn observe_access_annuna__vertical_room__ctx__door_opened(
         ctx.annuna__vertical_room__ctx__door_opened()
     }
 }
+pub fn observe_access_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_doors_opened
+    {
+        full_obs.observe_annuna__west_bridge__ctx__doors_opened();
+        ctx.annuna__west_bridge__ctx__doors_opened()
+    }
+}
+pub fn observe_access_annuna__west_bridge__ctx__doors_opened_and_invoke_grab(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_doors_opened and $grab
+    ({
+        full_obs.observe_annuna__west_bridge__ctx__doors_opened();
+        ctx.annuna__west_bridge__ctx__doors_opened()
+    } && (hobserve__grab!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna__west_bridge__ctx__doors_opened_and_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_doors_opened and $hook
+    ({
+        full_obs.observe_annuna__west_bridge__ctx__doors_opened();
+        ctx.annuna__west_bridge__ctx__doors_opened()
+    } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna__west_bridge__ctx__doors_opened_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_doors_opened and $hookhover
+    ({
+        full_obs.observe_annuna__west_bridge__ctx__doors_opened();
+        ctx.annuna__west_bridge__ctx__doors_opened()
+    } && (hobserve__hookhover!(ctx, world, full_obs)))
+}
 pub fn observe_access_annuna__west_climb__ctx__door_opened(
     ctx: &Context,
     world: &World,
@@ -19421,6 +19884,17 @@ pub fn observe_access_anuman_and_invoke_boomerang(
         full_obs.observe_anuman();
         ctx.has(Item::Anuman)
     } && (hobserve__boomerang!(ctx, world, full_obs)))
+}
+pub fn observe_access_anuman_and_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Anuman and $climb
+    ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } && (hobserve__climb!(ctx, world, full_obs)))
 }
 pub fn observe_access_anuman_and_invoke_grab(
     ctx: &Context,
@@ -22030,6 +22504,18 @@ pub fn observe_access_invoke_hook_and_underwater_movement(
             ctx.has(Item::Underwater_Movement)
         }))
 }
+pub fn observe_access_invoke_hook_or___anuman_and___invoke_grab_or_invoke_climb(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hook or (Anuman and ($grab or $climb))
+    (hobserve__hook!(ctx, world, full_obs)
+        || ({
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        } && (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))))
+}
 pub fn observe_access_invoke_hook_or___anuman_and_invoke_climb(
     ctx: &Context,
     world: &World,
@@ -22128,6 +22614,18 @@ pub fn observe_access_invoke_hookhover_and_amagi_gated_community_gate_and_underw
         && ({
             full_obs.observe_amagi__gated_community__ctx__dur_esla();
             ctx.amagi__gated_community__ctx__dur_esla()
+        }))
+}
+pub fn observe_access_invoke_hookhover_and_annuna_east_bridge_gate(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $hookhover and Annuna_East_Bridge_Gate
+    (hobserve__hookhover!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_annuna_east_bridge_gate();
+            ctx.has(Item::Annuna_East_Bridge_Gate)
         }))
 }
 pub fn observe_access_invoke_hookhover_and_giguna__gateway__ctx__door_opened(
@@ -22596,6 +23094,18 @@ pub fn observe_access_invoke_open_and_invoke_range2(
     // $open and $range2
     (hobserve__open!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
 }
+pub fn observe_access_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open and $range2 and not ^_doors_opened
+    ((hobserve__open!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
+        && (!({
+            full_obs.observe_annuna__west_bridge__ctx__doors_opened();
+            ctx.annuna__west_bridge__ctx__doors_opened()
+        })))
+}
 pub fn observe_access_invoke_open_and_invoke_range3(
     ctx: &Context,
     world: &World,
@@ -22603,6 +23113,18 @@ pub fn observe_access_invoke_open_and_invoke_range3(
 ) -> bool {
     // $open and $range3
     (hobserve__open!(ctx, world, full_obs) && (hobserve__range3!(ctx, world, full_obs)))
+}
+pub fn observe_access_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $open and not ^_doors_opened
+    (hobserve__open!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_annuna__west_bridge__ctx__doors_opened();
+            ctx.annuna__west_bridge__ctx__doors_opened()
+        })))
 }
 pub fn observe_access_invoke_open_and_not_ebih__vertical_interchange__ctx__door_open(
     ctx: &Context,
@@ -23044,6 +23566,17 @@ pub fn observe_access_map__annuna_breach__bottom__save(
     {
         full_obs.observe_map__annuna_breach__bottom__save();
         ctx.map__annuna_breach__bottom__save()
+    }
+}
+pub fn observe_access_map__annuna_breach__bridge__save(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^map__annuna_breach__bridge__save
+    {
+        full_obs.observe_map__annuna_breach__bridge__save();
+        ctx.map__annuna_breach__bridge__save()
     }
 }
 pub fn observe_access_map__annuna_breach__double_corridor__save(
@@ -26094,6 +26627,13 @@ pub fn observe_action_annuna__vertical_room__ctx__door_opened_set_true(
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+}
+pub fn observe_action_annuna__west_bridge__ctx__doors_opened_set_true(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_doors_opened = true
 }
 pub fn observe_action_annuna__west_climb__ctx__door_opened_set_true(
     ctx: &Context,

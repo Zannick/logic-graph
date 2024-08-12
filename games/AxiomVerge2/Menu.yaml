@@ -699,6 +699,8 @@ areas:
       coord: [40, 28]
     - name: Annuna East Hideout Flask
       coord: [44, 23]
+    - name: Annuna West Bridge Upper
+      coord: [35, 23]
     - name: Annuna Final Cache
       coord: [42, 16]
 
@@ -1035,6 +1037,11 @@ areas:
           tags: [warp]
     - name: AGB Bridge Upper
       coord: [34, 24]
+      exits:
+        - to: Annuna Breach > Bridge > Save Point
+          req: ^map__annuna_breach__bridge__save
+          time: 12
+          tags: [warp]
     - name: AGB East
       coord: [42, 20]
       exits:
@@ -1254,6 +1261,12 @@ areas:
     #endregion
 
     #region Breach other entry points
+    - name: AGB Bridge Flask
+      coord: [35, 23]
+    - name: AGB Bridge Northwest
+      coord: [34, 22]
+    - name: AGB Bridge Portal
+      coord: [35, 24]
     - name: AGB Factory Foyer Flask
       coord: [39, 24]
     - name: AGB Lower Gate Flask

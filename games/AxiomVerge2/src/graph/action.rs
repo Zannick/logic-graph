@@ -72,8 +72,11 @@ impl world::Accessible for Action {
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Annuna__Vertical_Room__Save_Point__Save => true,
             ActionId::Annuna__West_Bridge__Save_Point__Save => true,
+            ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => rules::access_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world),
+            ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => rules::access_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world),
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::access_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(ctx, world),
             ActionId::Annuna_Breach__Bottom__Save_Point__Save => true,
+            ActionId::Annuna_Breach__Bridge__Save_Point__Save => true,
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => true,
             ActionId::Annuna_Breach__Enclosed__Save_Point__Save => true,
             ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => true,
@@ -274,6 +277,8 @@ impl world::Accessible for Action {
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::observe_access_defeat_indra(ctx, world, full_obs),
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => rules::observe_access_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world, full_obs),
+            ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => rules::observe_access_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world, full_obs),
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::observe_access_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(ctx, world, full_obs),
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => rules::observe_access_invoke_activate_and_not_ebih__base_camp__ctx__left_platform_moved(ctx, world, full_obs),
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => rules::observe_access_invoke_activate_and_ebih__base_camp__ctx__left_platform_moved(ctx, world, full_obs),
@@ -708,6 +713,24 @@ impl world::Accessible for Action {
             }
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => {
                 let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => {
+                let (ret, mut tags) = rules::explain_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => {
+                let (ret, mut tags) = rules::explain_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1822,6 +1845,7 @@ impl world::Action for Action {
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna_Breach__Bridge__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Bottom__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna_Breach__Enclosed__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -1830,6 +1854,8 @@ impl world::Action for Action {
             ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => rules::action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => rules::action_annuna__invisible_enemies__ctx__nw_utu_set_true(ctx, world),
             ActionId::Annuna__West_Bridge__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => rules::action_annuna__west_bridge__ctx__doors_opened_set_true(ctx, world),
+            ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => rules::action_annuna__west_bridge__ctx__doors_opened_set_true(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => rules::action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(ctx, world),
@@ -2195,6 +2221,9 @@ impl world::Action for Action {
             ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Annuna_Breach__Bridge__Save_Point__Save => {
+                rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
             ActionId::Annuna_Breach__Bottom__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
@@ -2218,6 +2247,12 @@ impl world::Action for Action {
             }
             ActionId::Annuna__West_Bridge__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+            }
+            ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => {
+                rules::observe_action_annuna__west_bridge__ctx__doors_opened_set_true(ctx, world, full_obs);
+            }
+            ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => {
+                rules::observe_action_annuna__west_bridge__ctx__doors_opened_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                 rules::observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world, full_obs);
@@ -2727,7 +2762,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 211] = [
+static ACT_DEFS: [Action; 214] = [
     Action {
         id: ActionId::Amagi_Breach__Divided__Save_Point__Save,
         time: 1300,
@@ -2864,6 +2899,11 @@ static ACT_DEFS: [Action; 211] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Annuna_Breach__Bridge__Save_Point__Save,
+        time: 1300,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
@@ -2981,6 +3021,16 @@ static ACT_DEFS: [Action; 211] = [
     Action {
         id: ActionId::Annuna__West_Bridge__Save_Point__Save,
         time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors,
+        time: 500,
         price: Currency::Free,
     },
     Action {
@@ -3820,6 +3870,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => SpotId::Annuna_Breach__Double_Corridor__Save_Point,
         ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => SpotId::Annuna_Breach__Rear_Entrance__Save_Point,
         ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => SpotId::Annuna_Breach__North_Hallway__Save_Point,
+        ActionId::Annuna_Breach__Bridge__Save_Point__Save => SpotId::Annuna_Breach__Bridge__Save_Point,
         ActionId::Annuna_Breach__Bottom__Save_Point__Save => SpotId::Annuna_Breach__Bottom__Save_Point,
         ActionId::Annuna_Breach__Enclosed__Save_Point__Save => SpotId::Annuna_Breach__Enclosed__Save_Point,
         ActionId::Annuna__Mirror_Match__Save_Point__Save => SpotId::Annuna__Mirror_Match__Save_Point,
@@ -3828,6 +3879,8 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => SpotId::Annuna__Invisible_Enemies__Switch_East,
         ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => SpotId::Annuna__Invisible_Enemies__Corner_Cache,
         ActionId::Annuna__West_Bridge__Save_Point__Save => SpotId::Annuna__West_Bridge__Save_Point,
+        ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => SpotId::Annuna__West_Bridge__Tower_Level_4,
+        ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => SpotId::Annuna__West_Bridge__Tower_Upper_Middle,
         ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_West,
         ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => SpotId::Annuna__East_Bridge__Center_Gap_East,
         ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => SpotId::Annuna__East_Bridge__Tower_Opening,

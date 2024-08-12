@@ -304,6 +304,8 @@ areas:
           tags: [save]
     - name: Center Platform East
       coord: [35.3, 24.3]
+      data:
+        flipside: Annuna > West Bridge > Upper Tier Middle
       local:
         - to: Center Platform West
         - to: Save Point
@@ -566,6 +568,8 @@ areas:
           tags: [xdoor]
     - name: Save Point
       coord: [42.525, 19.7]
+      data:
+        flipside: Annuna > Upper Hallway > Portal Stand
       local:
         - to: West
           jumps: 3
@@ -802,11 +806,249 @@ areas:
 
 - name: Bridge  # MARK: Bridge
   on_entry: $reset_old_area(^newpos)
+  data:
+    save_point: Save Point
+    portal_start: Portal Stand
+  map:
+    save: [34, 23, 35, 24]
+    flask: [35, 22, 36, 23]
+    portal: [35, 23, 36, 24]
+    nw: [34, 21, 35, 22]
+  datamap:
+    map_spot:
+      save: Menu > Breach Map > AGB Bridge Upper
+      flask: Menu > Breach Map > AGB Bridge Flask
+      portal: Menu > Breach Map > AGB Bridge Portal
+      nw: Menu > Breach Map > AGB Bridge Northwest
   spots:
     - name: East
       coord: [35.9, 23.8]
+      local:
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Factory Gate > West
+          tags: [xdoor]
+    - name: Portal Stand
+      coord: [35.475, 23.7]
+      local:
+        - to: Tower Base West
+        - to: East
+    - name: Tower Base West
+      coord: [35.0, 23.8]
+      data:
+        flipside: Annuna > West Bridge > Tower Base West
+      local:
+        - to: Save Point
+          jumps: 1
+        - to: Portal Stand
+          jumps: 1
+      exits:
+        - to: Tower Lower West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Tower Lower West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Lower West Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Save Point
+      coord: [34.525, 23.7]
+      local:
+        - to: Tower Base West
+          jumps: 1
+      exits:
+        - to: Tower Base West
+          req: Slingshot_Hook
+          movement: fast_hover
+        - to: Tower Lower West Ledge
+          req: Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 2
+        - to: Tower Lower West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Northwest Platform
+          req: $mist2
+          movement: mist2
+        - to: Northwest Platform
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tower Upper West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Upper West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tower Peak West
+          req: $mist2
+          movement: mist2
+        - to: Tower Peak West
+          req: Nanite_Mist
+          movement: mist1
+      actions:
+        - name: Save
+          do: $save
+          tags: [save]
+    - name: Tower Lower West Ledge
+      coord: [35.0, 23.2]
+      local:
+        - to: Save Point
+        - to: Tower Base West
+      exits:
+        - to: Tower Upper West Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 3
+        - to: Northwest Platform
+          req: $mist2
+          movement: mist2
+        - to: Northwest Platform
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tower Upper West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Upper West Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tower Peak West
+          req: $mist2
+          movement: mist2
+        - to: Tower Peak West
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Upper West Ledge
+      coord: [35.225, 22.4]
+      data:
+        flipside: Annuna > West Bridge > Tower Upper West Ledge
+      local:
+        - to: Tower Lower West Ledge
+        - to: Save Point
+      exits:
+        - to: Tower Peak West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Northwest Platform
+          req: $mist2
+          movement: mist2
+        - to: Northwest Platform
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Peak West
+      coord: [35.3, 21.95]
+      data:
+        flipside: Annuna > West Bridge > Tower West Mid-air
+      local:
+        - to: Tower Peak
+          jumps: 2
+        - to: Tower Upper West Ledge
+        - to: Tower Lower West Ledge
+        - to: Save Point
+      exits:
+        - to: Tower Peak
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Top Platform West
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+        - to: Northwest Platform
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Tower Peak
+      coord: [35.475, 21.7]
+      data:
+        flipside: Annuna > West Bridge > Tower Peak
+      local:
+        - to: Tower Peak West
+      exits:
+        - to: Top Platform West
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: Northwest Platform
+          req: Drone_Hover
+          movement: base
+          jumps: 1
+    - name: Top Platform West
+      coord: [35.35, 21.4]
+      local:
+        - to: North
+          jumps: 1
+        - to: Tower Peak
+        - to: Tower Peak West
+        - to: Tower Lower West Ledge
+        - to: Save Point
+      exits:
+        - to: Northwest Platform
+          req: Drone_Hover
+          movement: base
     - name: North
       coord: [35.5, 21.2]
+      local:
+        - to: Top Platform West
+      exits:
+        - to: Amagi Breach > Divided > South
+          tags: [ydoor]
+    - name: Northwest Platform
+      coord: [34.75, 21.85]
+      local:
+        - to: Northwest Plinth
+          jumps: 2
+        - to: Save Point
+        - to: Tower Upper West Ledge
+        - to: Tower Lower West Ledge
+      exits:
+        - to: Northwest Plinth
+          req: Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+        - to: Tower Peak West
+          req: Drone_Hover
+          movement: base
+        - to: Top Platform West
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+    - name: Northwest Plinth
+      coord: [34.475, 21.55]
+      data:
+        flipside: Annuna > West Bridge > Cavern Plinth
+      local:
+        - to: Northwest Platform
+      exits:
+        - to: Top Platform West
+          req: Slingshot_Hook and Drone_Hover
+          movement: base
+          jumps: 2
+
+    - name: Tower Upper Interior
+      coord: [35.4, 22.2]
+      data:
+        flipside: Annuna > West Bridge > Tower Upper Middle
+      locations:
+        - name: Flask
+          canon: Annuna_Breach_Bridge_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_Breach_Bridge_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_Breach_Bridge_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
 
 - name: Depths  # MARK: Depths
   on_entry: $reset_old_area(^newpos)

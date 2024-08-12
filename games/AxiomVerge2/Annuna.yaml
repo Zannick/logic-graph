@@ -280,6 +280,13 @@ areas:
         - to: Upper Rock East
           req: $hover
           movement: base
+        - to: West Bridge > Bridge Top West
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: West Bridge > Tower Middle West Ledge
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: Upper Floor West
       coord: [32.25, 23.8]
       local:
@@ -300,14 +307,16 @@ areas:
           jumps: 1
       exits:
         - to: East 24
-          req: Slingshot_Hook
+          req: $hook
           movement: fast_hover
           jumps: 1
         - to: East 24
-          req: Drone_Hover
+          req: $hover
           movement: base
           jumps: 2
-        # TODO: fast movements into the bridge area
+        - to: West Bridge > Bridge Top West
+          req: $hookhover
+          movement: fast_hover
     - name: East 24
       coord: [33.95, 23.55]
       local:
@@ -315,6 +324,9 @@ areas:
       exits:
         - to: West Bridge > West 24
           tags: [xshift]
+        - to: Middle Rock East
+          req: $mist2
+          movement: mist2
     #endregion
 
 - name: Invisible Enemies  # MARK: Invisible Enemies
@@ -600,7 +612,7 @@ areas:
         - to: Secret Passage > West
           tags: [xshift]
 
-- name: Secret Passage
+- name: Secret Passage  # MARK: Secret Passage
   on_entry: $reset_old_area(^newpos)
   map:
     flask: [32, 21, 33, 22]
@@ -685,7 +697,7 @@ areas:
           to: ^map_spot
           tags: [throw]
     - name: East
-      coord: [32.95, 21.65]
+      coord: [33.95, 21.65]
       local:
         - to: In Boome Range
       exits:
@@ -703,10 +715,12 @@ areas:
     save: [36, 26, 37, 27]
     lattice: [35, 24, 36, 25]
     water: [34, 26.45, 37, 28]
+    upper: [35, 22, 36, 23]
   datamap:
     map_spot:
       save: Menu > Kiengir Map > Annuna West Bridge
       lattice: Menu > Kiengir Map > Nano Lattice 2
+      upper: Menu > Kiengir Map > Annuna West Bridge Upper
     water:
       water: true
   spots:
@@ -723,6 +737,14 @@ areas:
 
     - name: West 25 Upper
       coord: [34.05, 24.3]
+      local:
+        - to: West Outcropping
+      exits:
+        - to: Mirror Match > East 25 Upper
+          tags: [xshift]
+        - to: Upper Tier Below Gap
+          req: ^_doors_opened
+          movement: base
     - name: West Outcropping
       coord: [34.35, 24.8]
       data:
@@ -750,8 +772,63 @@ areas:
       exits:
         - to: East Bridge > West 25 Lower
           tags: [xshift]
+
+    - name: Upper Tier Below Gap
+      coord: [34.9, 24.3]
+      local:
+        - to: Upper Tier Middle
+      exits:
+        - to: Plinth
+          req: ^_doors_opened
+          movement: base
+        - to: West 25 Upper
+          req: ^_doors_opened
+          movement: base
+        - to: West 25 Lower
+          req: ^_doors_opened
+          movement: base
+        - to: Tower Gap West
+          req: $hook or (Anuman and $climb)
+          movement: base
+          jumps: 2
+        - to: Tower Base West
+          req: $hook or (Anuman and $climb)
+          movement: base
+          jumps: 2
+        - to: Tower Gap West
+          req: $mist2
+          movement: mist2
+        - to: Tower Gap West
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tower Base West
+          req: $mist2
+          movement: mist2
+        - to: Tower Base West
+          req: Nanite_Mist
+          movement: mist1
+    - name: Upper Tier Middle
+      coord: [35.3, 24.3]
+      data:
+        flipside: Annuna Breach > Double Corridor > Center Platform East
+      local:
+        - to: Upper Tier Below Gap
+      exits:
+        - to: West Outcropping
+          req: ^_doors_opened
+          movement: base
+        - to: East 25 Upper
+          req: ^_doors_opened
+          movement: base
     - name: East 25 Upper
       coord: [36.95, 24.3]
+      exits:
+        - to: Upper Tier Middle
+          req: ^_doors_opened
+          movement: base
+        - to: East Bridge > West Under Gap
+          movement: base
+          penalty_tags: [xshift, -base.1]
     #endregion
 
     #region Underneath
@@ -966,33 +1043,508 @@ areas:
     #region Tower
     - name: West 24
       coord: [34.05, 23.55]
+      local:
+        - to: Bridge Top West
+      exits:
+        - to: Mirror Match > East 24
+          tags: [xshift]
+    - name: Bridge Top West
+      coord: [34.4, 23.8]
+      local:
+        - to: West 24
+          jumps: 1
+        - to: Tower Gap West
+      exits:
+        - to: Mirror Match > Upper Floor West
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: Tower Gap West
+          req: $hook
+          movement: fast_hover
+        - to: Tower Base Center
+          req: ^_doors_opened and $hookhover
+          movement: fast_hover
+    - name: Tower Gap West
+      coord: [34.85, 23.8]
+      local:
+        - to: Bridge Top West
+        - to: Tower Base West
+        - to: Upper Tier Below Gap
+        - to: Upper Tier Middle
+      exits:
+        - to: Bridge Top West
+          req: $hook
+          movement: fast_hover
+        - to: Tower Middle West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Tower Middle West Ledge
+          req: Anuman
+          movement: base
+          jumps: 3
+        - to: Tower Middle West Ledge
+          req: $grab
+          movement: base
+          jumps: 6
+        - to: Tower Middle West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Middle West Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Base West
+      coord: [35.0, 23.8]
+      data:
+        flipside: Annuna Breach > Bridge > Tower Base West
+      local:
+        - to: Tower Gap West
+        - to: Upper Tier Below Gap
+      exits:
+        - to: West 25 Upper
+          req: ^_doors_opened
+          movement: base
+        - to: Tower Base Center
+          req: ^_doors_opened
+          movement: base
+        - to: Tower Base Center
+          req: ^_doors_opened and $hook
+          movement: fast_hover
+        - to: Tower Level 1
+          req: ^_doors_opened and $hook
+          movement: fast_hover
+          jumps: 2
+        - to: Tower Level 1
+          req: ^_doors_opened and $grab
+          movement: base
+          jumps: 4
+        - to: Tower Middle West Ledge
+          req: $hook
+          movement: base
+          jumps: 2
+        - to: Tower Middle West Ledge
+          req: Anuman
+          movement: base
+          jumps: 3
+        - to: Tower Middle West Ledge
+          req: $grab
+          movement: base
+          jumps: 6
+        - to: Tower Middle West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Middle West Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Base Center
+      coord: [35.6, 23.8]
+      local:
+        - to: Tower Base Door Column
+          jumps: 1
+      exits:
+        - to: Tower Base West
+          req: ^_doors_opened
+          movement: base
+        - to: Tower Base West
+          req: ^_doors_opened and $hookhover
+          movement: fast_hover
+        - to: Tower Level 1
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 2
+        - to: Tower Level 1
+          req: $grab
+          movement: base
+          jumps: 3
+        - to: Tower Base Door Column
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Bridge Top East
+          req: $hookhover
+          movement: fast_hover
+    - name: Tower Base Door Column
+      coord: [35.95, 23.55]
+      local:
+        - to: Tower Base Center
+        - to: Tower Base East
+      exits:
+        - to: Tower Lower East Ledge
+          req: $hook
+          movement: base
+          jumps: 1
+        - to: Tower Lower East Ledge
+          req: $grab
+          movement: base
+          jumps: 2
+        - to: Tower Lower East Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Lower East Ledge
+          req: Nanite_Mist
+          movement: mist1 
+    - name: Tower Base East
+      coord: [36.2, 23.8]
+      local:
+        - to: Bridge Top East
+        - to: Tower Base Door Column
+          jumps: 1
+      exits:
+        - to: Tower Base Door Column
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Tower Base Center
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Far Below Tunnel Wall
+          req: $mist2
+          movement: mist2
+        - to: Far Below Tunnel Wall
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Lower East Ledge
+      coord: [35.9, 23.2]
+      local:
+        - to: Bridge Top East
+        - to: Tower Base Center
+          thru: [35.8, 23.6]
+        - to: Tower Level 1
+      exits:
+        - to: Tower Level 3
+          req: $hook or Anuman
+          movement: base
+          jumps: 2
+        - to: Tower Level 3
+          req: $grab or $climb
+          movement: base
+          jumps: 3
+        - to: Tower Upper East Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Upper East Ledge
+          req: Nanite_Mist
+          movement: mist1
+        - to: Far Below Tunnel Wall
+          req: $mist2
+          movement: mist2
+        - to: Far Below Tunnel Wall
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Middle West Ledge
+      coord: [35.1, 22.9]
+      local:
+        - to: Bridge Top West
+        - to: Tower Gap West
+        - to: Tower Base West
+      exits:
+        - to: Tower Upper West Ledge
+          req: $hook or Anuman
+          movement: base
+          jumps: 2
+        - to: Tower Upper West Ledge
+          req: $grab
+          movement: base
+          jumps: 4
+        - to: Tower Upper West Ledge
+          req: $mist2
+          movement: mist2
+        - to: Tower Upper West Ledge
+          req: Nanite_Mist
+          movement: mist1
+    - name: Tower Upper West Ledge
+      coord: [35.225, 22.4]
+      data:
+        flipside: Annuna Breach > Bridge > Tower Upper West Ledge
+      local:
+        - to: Bridge Top West
+        - to: Tower Middle West Ledge
+        - to: Tower Upper Middle
+          jumps: 1
+      exits:
+        - to: Tower West Peak
+          req: $hookhover
+          movement: base
+          jumps: 3
+    - name: Tower Level 1
+      coord: [35.55, 23.4]
+      local:
+        - to: Tower Base Center
+        - to: Tower Lower East Ledge
+          jumps: 1
+      exits:
+        - to: Tower Base West
+          req: ^_doors_opened
+          movement: base
+        - to: Tower Level 3
+          req: $hook
+          movement: base
+          jumps: 1.5
+        - to: Tower Level 3
+          req: Anuman
+          movement: base
+          jumps: 2
+        - to: Tower Level 3
+          req: $grab or $climb
+          movement: base
+          jumps: 3
+    - name: Tower Level 3
+      coord: [35.6, 22.9]
+      local:
+        - to: Tower Level 1
+        - to: Tower Lower East Ledge
+      exits:
+        - to: Tower Level 4
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Tower Level 4
+          req: $grab or $climb
+          movement: base
+          jumps: 2
+    - name: Tower Level 4
+      coord: [35.4, 22.6]
+      local:
+        - to: Tower Level 3
+        - to: Tower Upper Shaft
+          jumps: 1
+      actions:
+        - name: Open Doors
+          req: $open and $range2 and not ^_doors_opened
+          do: ^_doors_opened = true
+          tags: [hack]
+    - name: Tower Upper Shaft
+      coord: [35.55, 22.5]
+      local:
+        - to: Tower Level 4
+      exits:
+        - to: Tower Upper Middle
+          req: $hook or (Anuman and ($grab or $climb))
+          movement: base
+          jumps: 1
+        - to: Tower Upper Middle
+          req: $grab and $climb
+          movement: base
+          jumps: 2
+        - to: Tower Upper East Ledge
+          req: $hook or (Anuman and ($grab or $climb))
+          movement: base
+          jumps: 1
+        - to: Tower Upper East Ledge
+          req: $grab and $climb
+          movement: base
+          jumps: 2
+    - name: Tower Upper Middle
+      coord: [35.4, 22.2]
+      data:
+        flipside: Annuna Breach > Bridge > Tower Upper Interior
+      local:
+        - to: Tower Upper Shaft
+        - to: Tower Upper East Ledge
+        - to: Tower Upper West Ledge
+        - to: Bridge Top West
+      exits:
+        - to: Tower West Peak
+          req: $hookhover
+          movement: base
+          jumps: 2
+        - to: Tower Peak
+          req: $hook or Anuman
+          movement: base
+          jumps: 2
+        - to: Tower Peak
+          req: $grab
+          movement: base
+          jumps: 3
+      actions:
+        - name: Open Doors
+          req: $open and not ^_doors_opened
+          do: ^_doors_opened = true
+          tags: [hack]
+    - name: Tower Upper East Ledge
+      coord: [35.7, 22.2]
+      local:
+        - to: Tower Upper Middle
+        - to: Tower Upper Shaft
+        - to: Bridge Top East
+      exits:
+        - to: Far Below Tunnel Wall
+          req: $hover
+          movement: base
+        - to: Far Below Tunnel Wall
+          req: $mist2
+          movement: mist2
+        - to: Far Below Tunnel Wall
+          req: Nanite_Mist
+          movement: mist1
+        - to: Tower East Peak
+          req: $hookhover
+          movement: base
+          jumps: 2
+        - to: Tower Peak
+          req: $hook or Anuman
+          movement: base
+          jumps: 2
+        - to: Tower Peak
+          req: $grab
+          movement: base
+          jumps: 3
+    - name: Tower West Mid-air
+      coord: [35.3, 21.95]
+      data:
+        flipside: SpotId::None
+      local:
+        - to: Tower Upper Middle
+        - to: Tower Middle West Ledge
+        - to: Bridge Top West
+      exits:
+        - to: Mirror Match > Upper Rock East
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Tower West Peak
+      coord: [35.35, 21.75]
+      exits:
+        - to: Far Below Tunnel Wall
+          req: $hookhover
+          movement: fast_hover
+        - to: East Bridge > West Staircase Upper West
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: East Bridge > Upper West Partway East
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: East Bridge > Tower West Ledge
+          req: (bridge_hover or Slingshot_Charge) and $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+    - name: Tower Peak
+      coord: [35.475, 21.7]
+      data:
+        flipside: Annuna Breach > Bridge > Tower Peak
+      local:
+        - to: Tower West Peak
+        - to: Tower East Peak
+        - to: Tower Upper Middle
+        - to: Tower Upper East Ledge
+        - to: Tower Upper West Ledge
+        - to: Tower West Mid-air
+    - name: Tower East Peak
+      coord: [35.6, 21.75]
+      exits:
+        - to: Mirror Match > Middle Rock East
+          req: $hookhover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
     #endregion
 
     #region Upper Right
     - name: East 24
       coord: [36.95, 23.55]
+      local:
+        - to: Bridge Top East
+      exits:
+        - to: East Bridge > West 24
+          tags: [xshift]
+        - to: Mid Tunnel
+          req: $mist2
+          movement: mist2
+        - to: Mid Tunnel
+          req: Nanite_Mist
+          movement: mist1
+    - name: Bridge Top East
+      coord: [36.6, 23.8]
+      local:
+        - to: Tower Base East
+        - to: East 24
+          jumps: 1
+      exits:
+        - to: East Bridge > Upper West Gap
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: East Bridge > West Staircase Upper West
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: East Bridge > Upper West Partway East
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: East Bridge > Tower Gate
+          req: $hookhover and Annuna_East_Bridge_Gate
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
 
-    - name: East 22
-      coord: [36.95, 21.9]
-    - name: Below Tunnel
-      coord: [36.75, 21.9]
-    - name: Tunnel Wall
-      coord: [36.55, 21.8]
+    - name: Far Below Tunnel Wall
+      coord: [36.5, 22.3]
       exits:
         - to: Mid Tunnel
-          req: $climb
+          req: $mist2
+          movement: mist2
+        - to: Mid Tunnel
+          req: Nanite_Mist
+          movement: mist1
+        - to: East Bridge > Below Cavern West
+          req: $mist2
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+        - to: East Bridge > Below Cavern West
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [xshift, -base.2]
+    - name: Below Tunnel
+      coord: [36.75, 21.9]
+      exits:
+        - to: East Bridge > Below Cavern West
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: East Bridge > Below Cavern West
+          req: $mist2
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+        - to: East Bridge > Below Cavern West
+          req: Nanite_Mist
+          movement: mist1
+          penalty_tags: [xshift, -base.2]
+    - name: Tunnel Wall
+      coord: [36.55, 21.8]
+      local:
+        - to: Tower Base Door Column
+      exits:
+        - to: Mid Tunnel
+          req: Anuman and $climb
           movement: base
           jumps: 1
+        - to: Tower Lower East Ledge
+          req: $hook
+          movement: base
+        - to: Tower Upper East Ledge
+          req: $hover
+          movement: base
     - name: Mid Tunnel
       coord: [36.55, 21.5]
       local:
-        - to: East 24
         - to: North
           jumps: 1.5
+        - to: Below Tunnel
       exits:
-        - to: East 22
+        - to: East Bridge > Below Cavern West
           req: $hover
           movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: East Bridge > Upper West Gap
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: North
       coord: [36.5, 21.2]
       local:
@@ -1004,9 +1556,19 @@ areas:
 
     #region NW Cavern
     - name: West 22
-      coord: [33.05, 21.65]
+      coord: [34.05, 21.65]
+      local:
+        - to: Cavern Plinth
+          jumps: 1
+      exits:
+        - to: Secret Passage > East
+          tags: [xshift]
     - name: Cavern Plinth
-      coord: [33.475, 21.55]
+      coord: [34.475, 21.55]
+      data:
+        flipside: Annuna Breach > Bridge > Northwest Plinth
+      local:
+        - to: West 22
     #endregion
 
 - name: East Bridge  # MARK: East Bridge
@@ -1035,17 +1597,9 @@ areas:
       exits:
         - to: West Bridge > East 25 Upper
           tags: [xshift]
-    - name: West 25 Upper
-      coord: [37.05, 24.3]
-      local:
-        - to: West Under Gap
-      exits:
-        - to: West Bridge > East 25 Upper
-          tags: [xshift]
     - name: West Under Gap
       coord: [37.25, 24.3]
       local:
-        - to: West 25 Upper
         - to: West Staircase Upper West
       exits:
         - to: Upper West Gap
@@ -1056,6 +1610,9 @@ areas:
           req: $hook
           movement: base
           jumps: 2
+        - to: West Bridge > East 25 Upper
+          movement: base
+          penalty_tags: [xshift, -base.1]
     - name: West Staircase Lower West
       coord: [37.5, 24.7]
       local:
@@ -1249,7 +1806,6 @@ areas:
         - to: Upper West Gap East
           req: Annuna_East_Bridge_Gate
           movement: base
-        # TODO: jump to Tower top with Anuman+hover?
         - to: Tower West Ledge
           req: $infinite_climb and Annuna_East_Bridge_Gate
           time: 7  # 1s faster than starting from the west?
@@ -1454,6 +2010,16 @@ areas:
           req: $grab
           movement: base
           jumps: 2
+        - to: West Bridge > Tower Base Door Column
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
+        - to: West Bridge > Tower Lower East Ledge
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
+          penalty_tags: [xshift, -fast_hover.1]
     - name: Upper West Gap East
       coord: [37.5, 23.8]
       local:
@@ -1517,19 +2083,90 @@ areas:
           movement: fling
         - to: West Staircase Upper West
           movement: fling
-    - name: West 22
-      coord: [37.05, 21.9]
     #endregion
 
     #region North Cavern
-    - name: Cavern Foyer
-      coord: [37.45, 21.4]
-    - name: Cavern Right
-      coord: [37.85, 21.5]
-    - name: Cavern Cache
-      coord: [37.75, 21.3]
     - name: Below Cavern
       coord: [37.45, 21.9]
+      exits:
+        - to: Cavern Foyer
+          req: $mist2
+          movement: mist2
+        - to: Cavern Foyer
+          req: Nanite_Mist
+          movement: mist1
+        - to: Below Cavern West
+          req: $hover
+          movement: base
+        - to: Tower West Ledge
+          req: $hover
+          movement: base
+    - name: Below Cavern West
+      coord: [37.3, 21.9]
+      exits:
+        - to: Cavern Foyer
+          req: $mist2
+          movement: mist2
+        - to: Cavern Foyer
+          req: Nanite_Mist
+          movement: mist1
+        - to: Below Cavern
+          req: $hover
+          movement: base
+        - to: West Bridge > Tower Base East
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: West Bridge > Below Tunnel
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: West Bridge > Tower Upper East Ledge
+          req: $hookhover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+    - name: Cavern Foyer
+      coord: [37.45, 21.4]
+      local:
+        - to: Upper West Gap
+        - to: Upper West Gap East
+        - to: Cavern Right
+        - to: Below Cavern
+        - to: Below Cavern West
+      locations:
+        - name: Shockwave Flask
+          canon: Annuna_East_Bridge_Flask
+          item: Big_Flask
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
+    - name: Cavern Right
+      coord: [37.85, 21.5]
+      local:
+        - to: Cavern Foyer
+          jumps: 2
+        - to: Cavern Cache
+          jumps: 2
+    - name: Cavern Cache
+      coord: [37.7, 21.3]
+      local:
+        - to: Cavern Right
+      locations:
+        - name: Flask
+          canon: Annuna_East_Bridge_Flask
+          item: Big_Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Annuna_East_Bridge_Flask
+          item: Big_Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Annuna_East_Bridge_Flask
+          item: Big_Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
     #endregion
 
     #region Upper East
@@ -2481,6 +3118,9 @@ areas:
 
 - name: Upper Hallway  # MARK: Upper Hallway
   on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Wall
+    portal_hidden: true
   map:
     portal: [42, 19, 43, 20]
   datamap:
@@ -2496,7 +3136,9 @@ areas:
         - to: Vertical Room > East 20
           tags: [xshift]
     - name: Portal Stand
-      coord: [42.5, 19.7]
+      coord: [42.525, 19.7]
+      data:
+        flipside: Annuna Breach > North Hallway > Save Point
       local:
         - to: West
           jumps: 1
@@ -2511,6 +3153,8 @@ areas:
           item: Power_Core
           req: $more_refills
           tags: [standing]
+    - name: Wall
+      coord: [42.925, 19.6]
 
 - name: Middle Hallway  # MARK: Middle Hallway
   on_entry: $reset_old_area(^newpos)
@@ -4820,7 +5464,6 @@ areas:
           req: $melee_cskip and Fast_Travel
           to: ^map_spot
           tags: [cskip]
-
 
 - name: Final Save  # MARK: Final Save
   on_entry: $reset_old_area(^newpos)

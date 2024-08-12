@@ -412,7 +412,18 @@
         }
         {
             Annuna_Breach__Bridge__East [label = "", pos = "107.7,-89.666667!"];
+            Annuna_Breach__Bridge__Portal_Stand [label = "", pos = "106.425,-89.5!"];
+            Annuna_Breach__Bridge__Tower_Base_West [label = "", pos = "105.0,-89.666667!"];
+            Annuna_Breach__Bridge__Save_Point [label = "", pos = "103.575,-89.5!"];
+            Annuna_Breach__Bridge__Tower_Lower_West_Ledge [label = "", pos = "105.0,-88.666667!"];
+            Annuna_Breach__Bridge__Tower_Upper_West_Ledge [label = "", pos = "105.675,-87.333333!"];
+            Annuna_Breach__Bridge__Tower_Peak_West [label = "", pos = "105.9,-86.583333!"];
+            Annuna_Breach__Bridge__Tower_Peak [label = "", pos = "106.425,-86.166667!"];
+            Annuna_Breach__Bridge__Top_Platform_West [label = "", pos = "106.05,-85.666667!"];
             Annuna_Breach__Bridge__North [label = "", pos = "106.5,-85.333333!"];
+            Annuna_Breach__Bridge__Northwest_Platform [label = "", pos = "104.25,-86.416667!"];
+            Annuna_Breach__Bridge__Northwest_Plinth [label = "", pos = "103.425,-85.916667!"];
+            Annuna_Breach__Bridge__Tower_Upper_Interior [label = "", pos = "106.2,-87.0!"];
         }
         {
             Annuna_Breach__Center_Hallway__West [label = "", pos = "123.3,-84.583333!"];
@@ -548,7 +559,6 @@
         }
         {
             Annuna__East_Bridge__West_25_Lower [label = "", pos = "111.15,-41.333333!"];
-            Annuna__East_Bridge__West_25_Upper [label = "", pos = "111.15,-40.5!"];
             Annuna__East_Bridge__West_Under_Gap [label = "", pos = "111.75,-40.5!"];
             Annuna__East_Bridge__West_Staircase_Lower_West [label = "", pos = "112.5,-41.166667!"];
             Annuna__East_Bridge__West_Staircase_Lower_East [label = "", pos = "113.1,-41.166667!"];
@@ -583,11 +593,11 @@
             Annuna__East_Bridge__Upper_West_Partway_East [label = "", pos = "114.15,-39.666667!"];
             Annuna__East_Bridge__West_24 [label = "", pos = "111.15,-39.25!"];
             Annuna__East_Bridge__Flung_West [label = "", pos = "113.7,-36.416667!"];
-            Annuna__East_Bridge__West_22 [label = "", pos = "111.15,-36.5!"];
+            Annuna__East_Bridge__Below_Cavern [label = "", pos = "112.35,-36.5!"];
+            Annuna__East_Bridge__Below_Cavern_West [label = "", pos = "111.9,-36.5!"];
             Annuna__East_Bridge__Cavern_Foyer [label = "", pos = "112.35,-35.666667!"];
             Annuna__East_Bridge__Cavern_Right [label = "", pos = "113.55,-35.833333!"];
-            Annuna__East_Bridge__Cavern_Cache [label = "", pos = "113.25,-35.5!"];
-            Annuna__East_Bridge__Below_Cavern [label = "", pos = "112.35,-36.5!"];
+            Annuna__East_Bridge__Cavern_Cache [label = "", pos = "113.1,-35.5!"];
             Annuna__East_Bridge__Upper_East_Ledge [label = "", pos = "119.1,-36.416667!"];
             Annuna__East_Bridge__East_22 [label = "", pos = "119.7,-36.25!"];
             Annuna__East_Bridge__East_23 [label = "", pos = "119.85,-37.25!"];
@@ -785,7 +795,7 @@
             Annuna__Secret_Passage__Wall_East [label = "", pos = "97.2,-36.333333!"];
             Annuna__Secret_Passage__In_Shock_Range [label = "", pos = "97.8,-36.25!"];
             Annuna__Secret_Passage__In_Boome_Range [label = "", pos = "98.25,-36.25!"];
-            Annuna__Secret_Passage__East [label = "", pos = "98.85,-36.083333!"];
+            Annuna__Secret_Passage__East [label = "", pos = "101.85,-36.083333!"];
         }
         {
             Annuna__Siuna_Storage__West [label = "", pos = "117.15,-26.333333!"];
@@ -861,8 +871,9 @@
         }
         {
             Annuna__Upper_Hallway__West [label = "", pos = "123.15,-32.666667!"];
-            Annuna__Upper_Hallway__Portal_Stand [label = "", pos = "127.5,-32.833333!"];
+            Annuna__Upper_Hallway__Portal_Stand [label = "", pos = "127.575,-32.833333!"];
             Annuna__Upper_Hallway__Behind_Pedestal [label = "", pos = "128.1,-33.0!"];
+            Annuna__Upper_Hallway__Wall [label = "", pos = "128.775,-32.666667!"];
         }
         {
             Annuna__Upper_Save__East [label = "", pos = "119.85,-27.916667!"];
@@ -910,6 +921,8 @@
             Annuna__West_Bridge__West_Outcropping [label = "", pos = "103.05,-41.333333!"];
             Annuna__West_Bridge__Plinth [label = "", pos = "106.425,-41.166667!"];
             Annuna__West_Bridge__East_25_Lower [label = "", pos = "110.85,-41.333333!"];
+            Annuna__West_Bridge__Upper_Tier_Below_Gap [label = "", pos = "104.7,-40.5!"];
+            Annuna__West_Bridge__Upper_Tier_Middle [label = "", pos = "105.9,-40.5!"];
             Annuna__West_Bridge__East_25_Upper [label = "", pos = "110.85,-40.5!"];
             Annuna__West_Bridge__West_26_Lower [label = "", pos = "102.15,-43.0!"];
             Annuna__West_Bridge__West_26_Upper [label = "", pos = "102.15,-42.5!"];
@@ -928,14 +941,34 @@
             Annuna__West_Bridge__Water_Below_Ledge [label = "", pos = "109.05,-46.0!"];
             Annuna__West_Bridge__East_28_Lower [label = "", pos = "110.85,-46.25!"];
             Annuna__West_Bridge__West_24 [label = "", pos = "102.15,-39.25!"];
+            Annuna__West_Bridge__Bridge_Top_West [label = "", pos = "103.2,-39.666667!"];
+            Annuna__West_Bridge__Tower_Gap_West [label = "", pos = "104.55,-39.666667!"];
+            Annuna__West_Bridge__Tower_Base_West [label = "", pos = "105.0,-39.666667!"];
+            Annuna__West_Bridge__Tower_Base_Center [label = "", pos = "106.8,-39.666667!"];
+            Annuna__West_Bridge__Tower_Base_Door_Column [label = "", pos = "107.85,-39.25!"];
+            Annuna__West_Bridge__Tower_Base_East [label = "", pos = "108.6,-39.666667!"];
+            Annuna__West_Bridge__Tower_Lower_East_Ledge [label = "", pos = "107.7,-38.666667!"];
+            Annuna__West_Bridge__Tower_Middle_West_Ledge [label = "", pos = "105.3,-38.166667!"];
+            Annuna__West_Bridge__Tower_Upper_West_Ledge [label = "", pos = "105.675,-37.333333!"];
+            Annuna__West_Bridge__Tower_Level_1 [label = "", pos = "106.65,-39.0!"];
+            Annuna__West_Bridge__Tower_Level_3 [label = "", pos = "106.8,-38.166667!"];
+            Annuna__West_Bridge__Tower_Level_4 [label = "", pos = "106.2,-37.666667!"];
+            Annuna__West_Bridge__Tower_Upper_Shaft [label = "", pos = "106.65,-37.5!"];
+            Annuna__West_Bridge__Tower_Upper_Middle [label = "", pos = "106.2,-37.0!"];
+            Annuna__West_Bridge__Tower_Upper_East_Ledge [label = "", pos = "107.1,-37.0!"];
+            Annuna__West_Bridge__Tower_West_Mid_air [label = "", pos = "105.9,-36.583333!"];
+            Annuna__West_Bridge__Tower_West_Peak [label = "", pos = "106.05,-36.25!"];
+            Annuna__West_Bridge__Tower_Peak [label = "", pos = "106.425,-36.166667!"];
+            Annuna__West_Bridge__Tower_East_Peak [label = "", pos = "106.8,-36.25!"];
             Annuna__West_Bridge__East_24 [label = "", pos = "110.85,-39.25!"];
-            Annuna__West_Bridge__East_22 [label = "", pos = "110.85,-36.5!"];
+            Annuna__West_Bridge__Bridge_Top_East [label = "", pos = "109.8,-39.666667!"];
+            Annuna__West_Bridge__Far_Below_Tunnel_Wall [label = "", pos = "109.5,-37.166667!"];
             Annuna__West_Bridge__Below_Tunnel [label = "", pos = "110.25,-36.5!"];
             Annuna__West_Bridge__Tunnel_Wall [label = "", pos = "109.65,-36.333333!"];
             Annuna__West_Bridge__Mid_Tunnel [label = "", pos = "109.65,-35.833333!"];
             Annuna__West_Bridge__North [label = "", pos = "109.5,-35.333333!"];
-            Annuna__West_Bridge__West_22 [label = "", pos = "99.15,-36.083333!"];
-            Annuna__West_Bridge__Cavern_Plinth [label = "", pos = "100.425,-35.916667!"];
+            Annuna__West_Bridge__West_22 [label = "", pos = "102.15,-36.083333!"];
+            Annuna__West_Bridge__Cavern_Plinth [label = "", pos = "103.425,-35.916667!"];
         }
         {
             Annuna__West_Climb__East_20 [label = "", pos = "110.85,-33.166667!"];
@@ -3375,6 +3408,9 @@
             Menu__Breach_Map__UVB_Dead_end [label = "", pos = "93.0,-93.333333!"];
             Menu__Breach_Map__UVB_East [label = "", pos = "93.0,-95.0!"];
             Menu__Breach_Map__UVB_West [label = "", pos = "57.0,-93.333333!"];
+            Menu__Breach_Map__AGB_Bridge_Flask [label = "", pos = "105.0,-88.333333!"];
+            Menu__Breach_Map__AGB_Bridge_Northwest [label = "", pos = "102.0,-86.666667!"];
+            Menu__Breach_Map__AGB_Bridge_Portal [label = "", pos = "105.0,-90.0!"];
             Menu__Breach_Map__AGB_Factory_Foyer_Flask [label = "", pos = "117.0,-90.0!"];
             Menu__Breach_Map__AGB_Lower_Gate_Flask [label = "", pos = "126.0,-88.333333!"];
             Menu__Breach_Map__AGB_Smiley_Health [label = "", pos = "99.0,-96.666667!"];
@@ -3546,6 +3582,7 @@
             Menu__Kiengir_Map__Annuna_Secret_Passage_Flask [label = "", pos = "96.0,-36.666667!"];
             Menu__Kiengir_Map__Remote_Boomerang [label = "", pos = "120.0,-46.666667!"];
             Menu__Kiengir_Map__Annuna_East_Hideout_Flask [label = "", pos = "132.0,-38.333333!"];
+            Menu__Kiengir_Map__Annuna_West_Bridge_Upper [label = "", pos = "105.0,-38.333333!"];
             Menu__Kiengir_Map__Annuna_Final_Cache [label = "", pos = "126.0,-26.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_West [label = "", pos = "84.0,-21.666667!"];
             Menu__Kiengir_Map__Ebih_Base_Camp_East [label = "", pos = "90.0,-21.666667!"];
