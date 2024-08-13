@@ -1507,8 +1507,13 @@ areas:
           canon: Irikar_Gudam
           req: $shockwave
           price: 200
-          time: 10
-          tags: [shockwave]
+          time: 1
+          penalty_tags: [shockwave, shockwave]
+        - name: Quick Gudam as Indra
+          canon: Irikar_Gudam
+          item: Irikar_Gudam
+          req: $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
+          time: 7
         - name: Boss Reward
           item: Big_Flask
           canon: Irikar_Gudam_Flask

@@ -1062,6 +1062,24 @@ pub fn access_glacier__ctx__hammonds_doors_and_invoke_hookhover(
     // ^_hammonds_doors and $hookhover
     (ctx.glacier__ctx__hammonds_doors() && helper__hookhover!(ctx, world))
 }
+pub fn access_glacier__lonely_bull__ctx__door(ctx: &Context, world: &World) -> bool {
+    // ^_door
+    ctx.glacier__lonely_bull__ctx__door()
+}
+pub fn access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_bridge_open and $mist2
+    (ctx.glacier__the_big_drop__ctx__bridge_open() && helper__mist2!(ctx, world))
+}
+pub fn access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_bridge_open and Nanite_Mist
+    (ctx.glacier__the_big_drop__ctx__bridge_open() && ctx.has(Item::Nanite_Mist))
+}
 pub fn access_glacier__vertical_room__ctx__lower_gatestones(ctx: &Context, world: &World) -> bool {
     // ^_lower_gatestones
     ctx.glacier__vertical_room__ctx__lower_gatestones()
@@ -1118,6 +1136,14 @@ pub fn access_glacier_fortress_gate_and___invoke_hook_or_anuman(
 ) -> bool {
     // Glacier_Fortress_Gate and ($hook or Anuman)
     (ctx.has(Item::Glacier_Fortress_Gate) && (helper__hook!(ctx, world) || ctx.has(Item::Anuman)))
+}
+pub fn access_glacier_gudam(ctx: &Context, world: &World) -> bool {
+    // Glacier_Gudam
+    ctx.has(Item::Glacier_Gudam)
+}
+pub fn access_glacier_gudam_and_invoke_shockwave(ctx: &Context, world: &World) -> bool {
+    // Glacier_Gudam and $shockwave
+    (ctx.has(Item::Glacier_Gudam) && helper__shockwave!(ctx, world))
 }
 pub fn access_glacier_sea_burial_rock(ctx: &Context, world: &World) -> bool {
     // Glacier_Sea_Burial_Rock
@@ -1298,6 +1324,16 @@ pub fn access_invoke_boomerang(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_boomerang2(ctx: &Context, world: &World) -> bool {
     // $boomerang2
     helper__boomerang2!(ctx, world)
+}
+pub fn access_invoke_boomerang2_and_ranged_damage_3_and_invoke_weapon_and_melee_damage_3_and_melee_speed_3(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
+    ((((helper__boomerang2!(ctx, world) && ctx.has(Item::Ranged_Damage_3))
+        && helper__weapon!(ctx, world))
+        && ctx.has(Item::Melee_Damage_3))
+        && ctx.has(Item::Melee_Speed_3))
 }
 pub fn access_invoke_boomerang_and_fast_travel(ctx: &Context, world: &World) -> bool {
     // $boomerang and Fast_Travel
@@ -2011,6 +2047,13 @@ pub fn access_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened(
     // $unlock3 and not ^_door_opened
     (helper__unlock3!(ctx, world) && !ctx.giguna__giguna_northeast__ctx__door_opened())
 }
+pub fn access_invoke_unlock3_and_not_glacier__lonely_bull__ctx__door(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $unlock3 and not ^_door
+    (helper__unlock3!(ctx, world) && !ctx.glacier__lonely_bull__ctx__door())
+}
 pub fn access_invoke_unlock4_and_invoke_range2(ctx: &Context, world: &World) -> bool {
     // $unlock4 and $range2
     (helper__unlock4!(ctx, world) && helper__range2!(ctx, world))
@@ -2705,6 +2748,20 @@ pub fn access_not_giguna__west_caverns__ctx__east_susar_and_invoke_allegiance1(
 pub fn access_not_giguna_breach__sw_save__ctx__door_opened(ctx: &Context, world: &World) -> bool {
     // not ^_door_opened
     !ctx.giguna_breach__sw_save__ctx__door_opened()
+}
+pub fn access_not_glacier__lonely_bull__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_door and $mist2
+    (!ctx.glacier__lonely_bull__ctx__door() && helper__mist2!(ctx, world))
+}
+pub fn access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_door and Nanite_Mist
+    (!ctx.glacier__lonely_bull__ctx__door() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_not_hammond_auth(ctx: &Context, world: &World) -> bool {
     // not Hammond_Auth
@@ -3616,9 +3673,9 @@ pub fn action_glacier__ctx__hammonds_doors_set_true(ctx: &mut Context, world: &W
     // ^_hammonds_doors = true
     ctx.set_glacier__ctx__hammonds_doors(true);
 }
-pub fn action_glacier__the_big_drop__ctx__bridge_open_set_true(ctx: &mut Context, world: &World) {
-    // ^_bridge_open = true
-    ctx.set_glacier__the_big_drop__ctx__bridge_open(true);
+pub fn action_glacier__lonely_bull__ctx__door_set_true(ctx: &mut Context, world: &World) {
+    // ^_door = true
+    ctx.set_glacier__lonely_bull__ctx__door(true);
 }
 pub fn action_glacier__vertical_room__ctx__lower_gatestones_set_true(
     ctx: &mut Context,
@@ -8494,6 +8551,75 @@ pub fn explain_glacier__ctx__hammonds_doors_and_invoke_hookhover(
         }
     }
 }
+pub fn explain_glacier__lonely_bull__ctx__door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door
+    {
+        let r = ctx.glacier__lonely_bull__ctx__door();
+        edict.insert("^glacier__lonely_bull__ctx__door", format!("{:?}", r));
+        (r, vec!["^glacier__lonely_bull__ctx__door"])
+    }
+}
+pub fn explain_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_bridge_open and $mist2
+    {
+        let mut left = {
+            let r = ctx.glacier__the_big_drop__ctx__bridge_open();
+            edict.insert(
+                "^glacier__the_big_drop__ctx__bridge_open",
+                format!("{:?}", r),
+            );
+            (r, vec!["^glacier__the_big_drop__ctx__bridge_open"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_bridge_open and Nanite_Mist
+    {
+        let mut left = {
+            let r = ctx.glacier__the_big_drop__ctx__bridge_open();
+            edict.insert(
+                "^glacier__the_big_drop__ctx__bridge_open",
+                format!("{:?}", r),
+            );
+            (r, vec!["^glacier__the_big_drop__ctx__bridge_open"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_glacier__vertical_room__ctx__lower_gatestones(
     ctx: &Context,
     world: &World,
@@ -8725,6 +8851,44 @@ pub fn explain_glacier_fortress_gate_and___invoke_hook_or_anuman(
                     (right.0, left.1)
                 }
             });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_glacier_gudam(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Gudam
+    {
+        let h = ctx.has(Item::Glacier_Gudam);
+        edict.insert("Glacier_Gudam", format!("{}", h));
+        (h, vec!["Glacier_Gudam"])
+    }
+}
+pub fn explain_glacier_gudam_and_invoke_shockwave(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Glacier_Gudam and $shockwave
+    {
+        let mut left = {
+            let h = ctx.has(Item::Glacier_Gudam);
+            edict.insert("Glacier_Gudam", format!("{}", h));
+            (h, vec!["Glacier_Gudam"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                edict.insert("$shockwave", format!("{:?}", res));
+                refs.push("$shockwave");
+                (res, refs)
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -9509,6 +9673,72 @@ pub fn explain_invoke_boomerang2(
         edict.insert("$boomerang2", format!("{:?}", res));
         refs.push("$boomerang2");
         (res, refs)
+    }
+}
+pub fn explain_invoke_boomerang2_and_ranged_damage_3_and_invoke_weapon_and_melee_damage_3_and_melee_speed_3(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
+    {
+        let mut left = {
+            let mut left = {
+                let mut left = {
+                    let mut left = {
+                        let (res, mut refs) = hexplain__boomerang2!(ctx, world, edict);
+                        edict.insert("$boomerang2", format!("{:?}", res));
+                        refs.push("$boomerang2");
+                        (res, refs)
+                    };
+                    if !left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = ctx.has(Item::Ranged_Damage_3);
+                            edict.insert("Ranged_Damage_3", format!("{}", h));
+                            (h, vec!["Ranged_Damage_3"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let (res, mut refs) = hexplain__weapon!(ctx, world, edict);
+                        edict.insert("$weapon", format!("{:?}", res));
+                        refs.push("$weapon");
+                        (res, refs)
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Melee_Damage_3);
+                    edict.insert("Melee_Damage_3", format!("{}", h));
+                    (h, vec!["Melee_Damage_3"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Melee_Speed_3);
+                edict.insert("Melee_Speed_3", format!("{}", h));
+                (h, vec!["Melee_Speed_3"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_invoke_boomerang_and_fast_travel(
@@ -13418,6 +13648,35 @@ pub fn explain_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened
         }
     }
 }
+pub fn explain_invoke_unlock3_and_not_glacier__lonely_bull__ctx__door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $unlock3 and not ^_door
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock3!(ctx, world, edict);
+            edict.insert("$unlock3", format!("{:?}", res));
+            refs.push("$unlock3");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.glacier__lonely_bull__ctx__door();
+                    edict.insert("^glacier__lonely_bull__ctx__door", format!("{:?}", r));
+                    (r, vec!["^glacier__lonely_bull__ctx__door"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_unlock4_and_invoke_range2(
     ctx: &Context,
     world: &World,
@@ -16471,6 +16730,63 @@ pub fn explain_not_giguna_breach__sw_save__ctx__door_opened(
             (r, vec!["^giguna_breach__sw_save__ctx__door_opened"])
         };
         (!val.0, val.1)
+    }
+}
+pub fn explain_not_glacier__lonely_bull__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.glacier__lonely_bull__ctx__door();
+                edict.insert("^glacier__lonely_bull__ctx__door", format!("{:?}", r));
+                (r, vec!["^glacier__lonely_bull__ctx__door"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_not_glacier__lonely_bull__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.glacier__lonely_bull__ctx__door();
+                edict.insert("^glacier__lonely_bull__ctx__door", format!("{:?}", r));
+                (r, vec!["^glacier__lonely_bull__ctx__door"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_not_hammond_auth(
@@ -22049,6 +22365,42 @@ pub fn observe_access_glacier__ctx__hammonds_doors_and_invoke_hookhover(
         ctx.glacier__ctx__hammonds_doors()
     } && (hobserve__hookhover!(ctx, world, full_obs)))
 }
+pub fn observe_access_glacier__lonely_bull__ctx__door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door
+    {
+        full_obs.observe_glacier__lonely_bull__ctx__door();
+        ctx.glacier__lonely_bull__ctx__door()
+    }
+}
+pub fn observe_access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_bridge_open and $mist2
+    ({
+        full_obs.observe_glacier__the_big_drop__ctx__bridge_open();
+        ctx.glacier__the_big_drop__ctx__bridge_open()
+    } && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_bridge_open and Nanite_Mist
+    ({
+        full_obs.observe_glacier__the_big_drop__ctx__bridge_open();
+        ctx.glacier__the_big_drop__ctx__bridge_open()
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
 pub fn observe_access_glacier__vertical_room__ctx__lower_gatestones(
     ctx: &Context,
     world: &World,
@@ -22173,6 +22525,28 @@ pub fn observe_access_glacier_fortress_gate_and___invoke_hook_or_anuman(
         full_obs.observe_anuman();
         ctx.has(Item::Anuman)
     }))
+}
+pub fn observe_access_glacier_gudam(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Gudam
+    {
+        full_obs.observe_glacier_gudam();
+        ctx.has(Item::Glacier_Gudam)
+    }
+}
+pub fn observe_access_glacier_gudam_and_invoke_shockwave(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Glacier_Gudam and $shockwave
+    ({
+        full_obs.observe_glacier_gudam();
+        ctx.has(Item::Glacier_Gudam)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
 }
 pub fn observe_access_glacier_sea_burial_rock(
     ctx: &Context,
@@ -22571,6 +22945,27 @@ pub fn observe_access_invoke_boomerang2(
 ) -> bool {
     // $boomerang2
     hobserve__boomerang2!(ctx, world, full_obs)
+}
+pub fn observe_access_invoke_boomerang2_and_ranged_damage_3_and_invoke_weapon_and_melee_damage_3_and_melee_speed_3(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
+    ((((hobserve__boomerang2!(ctx, world, full_obs)
+        && ({
+            full_obs.observe_ranged_damage_3();
+            ctx.has(Item::Ranged_Damage_3)
+        }))
+        && (hobserve__weapon!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_melee_damage_3();
+            ctx.has(Item::Melee_Damage_3)
+        }))
+        && ({
+            full_obs.observe_melee_speed_3();
+            ctx.has(Item::Melee_Speed_3)
+        }))
 }
 pub fn observe_access_invoke_boomerang_and_fast_travel(
     ctx: &Context,
@@ -24081,6 +24476,18 @@ pub fn observe_access_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door
         && (!({
             full_obs.observe_giguna__giguna_northeast__ctx__door_opened();
             ctx.giguna__giguna_northeast__ctx__door_opened()
+        })))
+}
+pub fn observe_access_invoke_unlock3_and_not_glacier__lonely_bull__ctx__door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $unlock3 and not ^_door
+    (hobserve__unlock3!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_glacier__lonely_bull__ctx__door();
+            ctx.glacier__lonely_bull__ctx__door()
         })))
 }
 pub fn observe_access_invoke_unlock4_and_invoke_range2(
@@ -25835,6 +26242,31 @@ pub fn observe_access_not_giguna_breach__sw_save__ctx__door_opened(
         full_obs.observe_giguna_breach__sw_save__ctx__door_opened();
         ctx.giguna_breach__sw_save__ctx__door_opened()
     })
+}
+pub fn observe_access_not_glacier__lonely_bull__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door and $mist2
+    (!({
+        full_obs.observe_glacier__lonely_bull__ctx__door();
+        ctx.glacier__lonely_bull__ctx__door()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door and Nanite_Mist
+    (!({
+        full_obs.observe_glacier__lonely_bull__ctx__door();
+        ctx.glacier__lonely_bull__ctx__door()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
 }
 pub fn observe_access_not_hammond_auth(
     ctx: &Context,
@@ -27776,12 +28208,12 @@ pub fn observe_action_glacier__ctx__hammonds_doors_set_true(
 ) {
     // ^_hammonds_doors = true
 }
-pub fn observe_action_glacier__the_big_drop__ctx__bridge_open_set_true(
+pub fn observe_action_glacier__lonely_bull__ctx__door_set_true(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
-    // ^_bridge_open = true
+    // ^_door = true
 }
 pub fn observe_action_glacier__vertical_room__ctx__lower_gatestones_set_true(
     ctx: &Context,

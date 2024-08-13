@@ -811,6 +811,8 @@ areas:
       coord: [38, 8]
     - name: Glacier Fortress Flask Left
       coord: [37, 7]
+    - name: Glacier Gudam
+      coord: [43, 12]
 
     - name: Carnelian Ring
       coord: [16, 11]

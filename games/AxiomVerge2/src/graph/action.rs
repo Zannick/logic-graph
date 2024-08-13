@@ -197,9 +197,9 @@ impl world::Accessible for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::access_breach_attractor_and_anuman(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::access_breach_attractor_and_anuman(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::access_invoke_open(ctx, world),
+            ActionId::Glacier__Lonely_Bull__West__Open_Door => rules::access_invoke_unlock3_and_not_glacier__lonely_bull__ctx__door(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => true,
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
-            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => true,
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::access_invoke_open(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::access_invoke_open(ctx, world),
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => rules::access_breach_attractor(ctx, world),
@@ -378,6 +378,7 @@ impl world::Accessible for Action {
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => rules::observe_access_breach_attractor_and_anuman(ctx, world, full_obs),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
+            ActionId::Glacier__Lonely_Bull__West__Open_Door => rules::observe_access_invoke_unlock3_and_not_glacier__lonely_bull__ctx__door(ctx, world, full_obs),
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::observe_access_invoke_open(ctx, world, full_obs),
@@ -1601,6 +1602,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Glacier__Lonely_Bull__West__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_unlock3_and_not_glacier__lonely_bull__ctx__door(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -2031,7 +2041,6 @@ impl world::Action for Action {
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
-            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => rules::action_glacier__the_big_drop__ctx__bridge_open_set_true(ctx, world),
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => rules::action_glacier__vertical_room__ctx__upper_gatestone_set_true(ctx, world),
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => rules::action_glacier__vertical_room__ctx__lower_gatestones_set_true(ctx, world),
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => rules::action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world),
@@ -2043,6 +2052,7 @@ impl world::Action for Action {
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => rules::action_glacier__ctx__hammonds_doors_set_true(ctx, world),
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => rules::action_glacier__ctx__hammonds_doors_set_true(ctx, world),
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => rules::action_portal_set_position(ctx, world),
+            ActionId::Glacier__Lonely_Bull__West__Open_Door => rules::action_glacier__lonely_bull__ctx__door_set_true(ctx, world),
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => rules::action_mode_set_drone(ctx, world),
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => rules::action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world),
@@ -2696,9 +2706,6 @@ impl world::Action for Action {
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
             }
-            ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => {
-                rules::observe_action_glacier__the_big_drop__ctx__bridge_open_set_true(ctx, world, full_obs);
-            }
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 rules::observe_action_glacier__vertical_room__ctx__upper_gatestone_set_true(ctx, world, full_obs);
             }
@@ -2731,6 +2738,9 @@ impl world::Action for Action {
             }
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
                 rules::observe_action_portal_set_position(ctx, world, full_obs);
+            }
+            ActionId::Glacier__Lonely_Bull__West__Open_Door => {
+                rules::observe_action_glacier__lonely_bull__ctx__door_set_true(ctx, world, full_obs);
             }
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => {
                 rules::observe_action_mode_set_drone(ctx, world, full_obs);
@@ -3715,6 +3725,11 @@ static ACT_DEFS: [Action; 218] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Glacier__Lonely_Bull__West__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Glacier__Revival__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
@@ -3722,11 +3737,6 @@ static ACT_DEFS: [Action; 218] = [
     Action {
         id: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West,
         time: 750,
-        price: Currency::Free,
-    },
-    Action {
-        id: ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break,
-        time: 1000,
         price: Currency::Free,
     },
     Action {
@@ -4077,7 +4087,6 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => SpotId::Glacier__Dock_Outside__Lower_Platforms,
         ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => SpotId::Glacier__Dock_Outside__Ruins_Platform,
         ActionId::Glacier__Revival__Save_Point__Save | ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => SpotId::Glacier__Revival__Save_Point,
-        ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break => SpotId::Glacier__The_Big_Drop__Solid_Rock,
         ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => SpotId::Glacier__Vertical_Room__Upper_Switch,
         ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => SpotId::Glacier__Vertical_Room__Lower_Switch,
         ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West | ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => SpotId::Glacier__Hammonds_End__Upper_Floor,
@@ -4087,6 +4096,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => SpotId::Glacier__Hammonds_End__Switch_Near,
         ActionId::Glacier__Hammonds_End__West_11__Open_Doors => SpotId::Glacier__Hammonds_End__West_11,
         ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => SpotId::Glacier__Angry_Guards__Corner,
+        ActionId::Glacier__Lonely_Bull__West__Open_Door => SpotId::Glacier__Lonely_Bull__West,
         ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => SpotId::Interior__Observatory__East_Staircase_Top,
         ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => SpotId::Interior__Cave_Behind_Waterfall__Middle,
         ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => SpotId::Interior__Facility_Interior__Freight_Elevator,

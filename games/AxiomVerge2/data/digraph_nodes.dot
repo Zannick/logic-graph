@@ -2863,6 +2863,16 @@
             Glacier__Ledge_Grab_Room__West_9 [label = "", pos = "99.15,-14.166667!"];
         }
         {
+            Glacier__Lonely_Bull__West [label = "", pos = "126.3,-21.333333!"];
+            Glacier__Lonely_Bull__Air_Duct [label = "", pos = "126.6,-21.0!"];
+            Glacier__Lonely_Bull__West_Water_Surface [label = "", pos = "127.5,-21.666667!"];
+            Glacier__Lonely_Bull__East_Water_Surface [label = "", pos = "130.05,-21.666667!"];
+            Glacier__Lonely_Bull__Far_Ledge [label = "", pos = "130.8,-21.25!"];
+            Glacier__Lonely_Bull__Stone_Ledge [label = "", pos = "130.35,-20.666667!"];
+            Glacier__Lonely_Bull__Platform [label = "", pos = "127.35,-20.333333!"];
+            Glacier__Lonely_Bull__Arena [label = "", pos = "129.9,-20.0!"];
+        }
+        {
             Glacier__Peak__East_8 [label = "", pos = "107.85,-12.916667!"];
             Glacier__Peak__Top_Platform_East [label = "", pos = "105.3,-10.083333!"];
             Glacier__Peak__Top_Rock [label = "", pos = "103.8,-9.833333!"];
@@ -2926,8 +2936,10 @@
             Glacier__The_Big_Drop__East [label = "", pos = "125.85,-17.916667!"];
             Glacier__The_Big_Drop__Solid_Rock [label = "", pos = "125.55,-17.916667!"];
             Glacier__The_Big_Drop__Unstable_Footing [label = "", pos = "125.25,-17.916667!"];
-            Glacier__The_Big_Drop__Small_Path [label = "", pos = "125.85,-21.333333!"];
+            Glacier__The_Big_Drop__Small_Path [label = "", pos = "125.625,-21.333333!"];
+            Glacier__The_Big_Drop__East_Underwater [label = "", pos = "124.5,-21.833333!"];
             Glacier__The_Big_Drop__Water_Surface [label = "", pos = "123.15,-21.5!"];
+            Glacier__The_Big_Drop__Water_Surface_Right [label = "", pos = "125.1,-21.5!"];
             Glacier__The_Big_Drop__West_14 [label = "", pos = "123.15,-22.833333!"];
             Glacier__The_Big_Drop__Breakable_Rock_Right [label = "", pos = "123.6,-22.833333!"];
             Glacier__The_Big_Drop__West_11_Door [label = "", pos = "123.45,-17.583333!"];
@@ -3680,6 +3692,7 @@
             Menu__Kiengir_Map__Glacier_Fortress_Health [label = "", pos = "114.0,-11.666667!"];
             Menu__Kiengir_Map__Glacier_Fortress_Portal [label = "", pos = "114.0,-13.333333!"];
             Menu__Kiengir_Map__Glacier_Fortress_Flask_Left [label = "", pos = "111.0,-11.666667!"];
+            Menu__Kiengir_Map__Glacier_Gudam [label = "", pos = "129.0,-20.0!"];
             Menu__Kiengir_Map__Carnelian_Ring [label = "", pos = "48.0,-18.333333!"];
             Menu__Kiengir_Map__Giguna_Northeast_Gate [label = "", pos = "54.0,-16.666667!"];
             Menu__Kiengir_Map__Giguna_Northeast_Flask [label = "", pos = "51.0,-18.333333!"];

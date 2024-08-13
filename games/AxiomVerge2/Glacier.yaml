@@ -488,7 +488,7 @@ areas:
 - name: The Big Drop  # MARK: The Big Drop
   on_entry: $reset_old_area(^newpos)
   map:
-    bottom: [41, 13, 42, 14]
+    bottom: [41, 12.9, 42, 14]
   datamap:
     water:
       bottom: true
@@ -507,10 +507,6 @@ areas:
       local:
         - to: East
         - to: Unstable Footing
-      actions:
-        - name: Careful Break
-          do: ^_bridge_open = true
-          time: 1
     - name: Unstable Footing
       coord: [41.75, 10.75]
       enter:
@@ -518,15 +514,32 @@ areas:
       local:
         - to: Small Path
         - to: Water Surface
+        - to: Solid Rock
     - name: Small Path
-      coord: [41.95, 12.8]
+      coord: [41.875, 12.8]
+      local:
+        - to: East Underwater
+        - to: Water Surface Right
       exits:
-        - to: East
-          req: Nanite_Mist
-          movement: mist1
-        - to: East
-          req: $mist2
+        - to: Lonely Bull > West
+          req: ^mode == 'drone'
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Unstable Footing
+          req: ^_bridge_open and $mist2
           movement: mist2
+        - to: Unstable Footing
+          req: ^_bridge_open and Nanite_Mist
+          movement: mist1
+    - name: East Underwater
+      coord: [41.5, 13.1]
+      local:
+        - to: Breakable Rock Right
+      exits:
+        - to: Small Path
+          req: Underwater_Movement and $hover
+          movement: base
+          jumps: 2
     - name: Water Surface
       coord: [41.05, 12.9]
       exits:
@@ -534,6 +547,10 @@ areas:
           req: NOT Amashilama
           tags: [xshift]
       # other access is dependent on Amashilama, so leave isolated for now.
+    - name: Water Surface Right
+      coord: [41.7, 12.9]
+      local:
+        - to: Breakable Rock Right
 
     - name: West 14
       coord: [41.05, 13.7]
@@ -570,11 +587,6 @@ areas:
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
           time: 2
-      exits:
-        - to: West 14
-          req: Glacier_Big_Drop_Rock
-          movement: base
-      hybrid:
         - name: Mist Through
           to: West 14
           req: Nanite_Mist
@@ -587,6 +599,16 @@ areas:
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
           movement: mist2
+      exits:
+        - to: West 14
+          req: Glacier_Big_Drop_Rock
+          movement: base
+        - to: Unstable Footing
+          req: ^_bridge_open and $mist2
+          movement: mist2
+        - to: Unstable Footing
+          req: ^_bridge_open and Nanite_Mist
+          movement: mist1
 
     - name: West 11 Door
       coord: [41.15, 10.55]
@@ -3817,3 +3839,131 @@ areas:
         - to: Grid 39-40,7-9 > Fortress Ledge
           movement: base
           penalty_tags: [xshift, -base.1]
+
+- name: Lonely Bull  # MARK: Lonely Bull
+  on_entry: $reset_old_area(^newpos)
+  start:
+    _door: false
+  map:
+    water: [42, 12.9, 44, 14]
+    boss: [43, 11, 44, 12]
+  datamap:
+    map_spot:
+      boss: Menu > Kiengir Map > Glacier Gudam
+    water:
+      water: true
+  spots:
+    - name: West
+      coord: [42.1, 12.8]
+      local:
+        - to: Air Duct
+          jumps: 1
+      exits:
+        - to: West Water Surface
+          req: ^_door
+          movement: base
+        - to: The Big Drop > Small Path
+          req: ^mode == 'drone'
+          movement: base
+          penalty_tags: [xshift, -base.1]
+      actions:
+        - name: Open Door
+          req: $unlock3 and not ^_door
+          do: ^_door = true
+          tags: [hack]
+    - name: Air Duct
+      coord: [42.2, 12.6]
+      local:
+        - to: West
+      exits:
+        - to: Platform
+          req: not ^_door and $mist2
+          movement: mist2
+        - to: Platform
+          req: not ^_door and Nanite_Mist
+          movement: mist1
+    - name: West Water Surface
+      coord: [42.5, 13.0]
+      local:
+        - to: Far Ledge
+          jumps: 3
+          jump_mvmt: water
+      exits:
+        - to: West
+          req: ^_door
+          movement: water
+          jumps: 1
+    - name: East Water Surface
+      coord: [43.35, 13.0]
+      local:
+        - to: West Water Surface
+    - name: Far Ledge
+      coord: [43.6, 12.75]
+      local:
+        - to: West Water Surface
+        - to: Stone Ledge
+          jumps: 2
+    - name: Stone Ledge
+      coord: [43.45, 12.4]
+      local:
+        - to: Platform
+          jumps: 2
+      exits:
+        - to: Platform
+          req: $hookhover
+          movement: fast_hover
+          jumps: 2
+    - name: Platform
+      coord: [42.45, 12.2]
+      local:
+        - to: Stone Ledge
+          jumps_down: 1
+        - to: Arena
+          jumps: 1
+      exits:
+        - to: Air Duct
+          req: not ^_door and $mist2
+          movement: mist2
+        - to: Air Duct
+          req: not ^_door and Nanite_Mist
+          movement: mist1
+    - name: Arena
+      coord: [43.3, 12.0]
+      local:
+        - to: Platform
+      locations:
+        # should be same as Irikar Gudam
+        - name: Shockwave Gudam
+          canon: Glacier_Gudam
+          item: Glacier_Gudam
+          req: $shockwave
+          price: 200
+          time: 1
+          penalty_tags: [shockwave, shockwave]
+        - name: Quick Gudam
+          canon: Glacier_Gudam
+          item: Glacier_Gudam
+          req: $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
+          time: 7
+        - name: Defeat Gudam
+          item: Glacier_Gudam
+          canon: Glacier_Gudam
+          req: $can_damage
+          time: 20  # including 3s explode animation
+        - name: Defeat Gudam With Strong Drone
+          item: Glacier_Gudam
+          canon: Glacier_Gudam
+          req: ^mode == 'drone' and Drone_Melee_Damage_3 and Drone_Melee_Speed_2 and Infect
+          price: 100
+          time: 10
+        - name: Boss Reward
+          canon: Glacier_Gudam_Flask
+          item: Big_Flask
+          req: Glacier_Gudam
+          tags: [flask]
+        - name: Shockwave Boss Reward
+          canon: Glacier_Gudam_Flask
+          item: Big_Flask
+          req: Glacier_Gudam and $shockwave
+          price: 100
+          tags: [shockwave]

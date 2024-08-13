@@ -2685,7 +2685,9 @@ subgraph Glacier
         Glacier__The_Big_Drop__Solid_Rock(Solid Rock);
         Glacier__The_Big_Drop__Unstable_Footing(Unstable Footing);
         Glacier__The_Big_Drop__Small_Path(Small Path);
+        Glacier__The_Big_Drop__East_Underwater(East Underwater);
         Glacier__The_Big_Drop__Water_Surface(Water Surface);
+        Glacier__The_Big_Drop__Water_Surface_Right(Water Surface Right);
         Glacier__The_Big_Drop__West_14(West 14);
         Glacier__The_Big_Drop__Breakable_Rock_Right(Breakable Rock Right);
         Glacier__The_Big_Drop__West_11_Door(West 11 Door);
@@ -2954,6 +2956,16 @@ subgraph Glacier
         Glacier__Fortress__Parapet_East_Hook_Point(Parapet East Hook Point);
         Glacier__Fortress__Parapet_East_Ledge(Parapet East Ledge);
         Glacier__Fortress__Gate_East(Gate East);
+    end
+    subgraph Glacier__Lonely_Bull[Lonely Bull]
+        Glacier__Lonely_Bull__West(West);
+        Glacier__Lonely_Bull__Air_Duct(Air Duct);
+        Glacier__Lonely_Bull__West_Water_Surface(West Water Surface);
+        Glacier__Lonely_Bull__East_Water_Surface(East Water Surface);
+        Glacier__Lonely_Bull__Far_Ledge(Far Ledge);
+        Glacier__Lonely_Bull__Stone_Ledge(Stone Ledge);
+        Glacier__Lonely_Bull__Platform(Platform);
+        Glacier__Lonely_Bull__Arena(Arena);
     end
 end
 subgraph Interior
@@ -3565,6 +3577,7 @@ subgraph Menu
         Menu__Kiengir_Map__Glacier_Fortress_Health(Glacier Fortress Health);
         Menu__Kiengir_Map__Glacier_Fortress_Portal(Glacier Fortress Portal);
         Menu__Kiengir_Map__Glacier_Fortress_Flask_Left(Glacier Fortress Flask Left);
+        Menu__Kiengir_Map__Glacier_Gudam(Glacier Gudam);
         Menu__Kiengir_Map__Carnelian_Ring(Carnelian Ring);
         Menu__Kiengir_Map__Giguna_Northeast_Gate(Giguna Northeast Gate);
         Menu__Kiengir_Map__Giguna_Northeast_Flask(Giguna Northeast Flask);
@@ -6208,6 +6221,10 @@ Glacier__Ledge_Grab_Room__Upper_Mid_air --> Glacier__Ledge_Grab_Room__North
 Glacier__Ledge_Grab_Room__Upper_Path --> Glacier__Ledge_Grab_Room__Northwest_Ledge
 Glacier__Ledge_Grab_Room__Upper_Platform --> Glacier__Ledge_Grab_Room__Fork
 Glacier__Ledge_Grab_Room__Upper_at_Wall --> Glacier__Ledge_Grab_Room__Northwest_Ledge
+Glacier__Lonely_Bull__Air_Duct <--> Glacier__Lonely_Bull__Platform
+Glacier__Lonely_Bull__Stone_Ledge --> Glacier__Lonely_Bull__Platform
+Glacier__Lonely_Bull__West <--> Glacier__Lonely_Bull__West_Water_Surface
+Glacier__Lonely_Bull__West <--> Glacier__The_Big_Drop__Small_Path
 Glacier__Peak__East_8 --> Glacier__Peak__Top_Platform_East
 Glacier__Peak__East_8 <--> Glacier__Vertical_Room__West_8
 Glacier__Peak__Top_Platform_East --> Glacier__Peak__Highest_Platform
@@ -6234,8 +6251,10 @@ Glacier__Secret_Chamber__Door_East <--> Glacier__Secret_Chamber__West_11
 Glacier__Secret_Chamber__East_11 --> Glacier__Secret_Chamber__Grate_West
 Glacier__Secret_Chamber__Upper_East_Ledge --> Glacier__Hammonds_End__Upper_Portal_Stand
 Glacier__Secret_Chamber__West_11 <--> Glacier__Vertical_Room__East_11
+Glacier__The_Big_Drop__Breakable_Rock_Right --> Glacier__The_Big_Drop__Unstable_Footing
 Glacier__The_Big_Drop__Breakable_Rock_Right <--> Glacier__The_Big_Drop__West_14
-Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__East
+Glacier__The_Big_Drop__East_Underwater --> Glacier__The_Big_Drop__Small_Path
+Glacier__The_Big_Drop__Small_Path --> Glacier__The_Big_Drop__Unstable_Footing
 Glacier__The_Big_Drop__Water_Surface --> Glacier__Sea_Burial__Collapsing_Ceiling
 Glacier__The_Big_Drop__West_11_Door --> Glacier__The_Big_Drop__East
 Glacier__Vertical_Room__Above_Switch <--> Glacier__Vertical_Room__Upper_Gatestone

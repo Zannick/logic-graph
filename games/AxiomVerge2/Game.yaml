@@ -373,7 +373,7 @@ helpers:  # MARK: helpers
   # TODO: have a single location collect two items, in a way that we can count it as required. That's not possible
   # currently for an item alias, so Two_Big_Flasks is required here.
   $all_flasks:itemList: >
-    [Flask{56}, Big_Flask{31}, Two_Big_Flasks]
+    [Flask{56}, Big_Flask{32}, Two_Big_Flasks]
   $all_health:itemList: >
     [Health_Node{5}, Health_Fragment{25}]
   $all_weapons:itemList: >

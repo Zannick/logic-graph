@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3494] = [
+static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Cache,
@@ -14168,6 +14168,54 @@ static SPOT_DEFS: [SpotDef; 3494] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__Air_Duct,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1, ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__Arena,
+        loc_range: Some((LocationId::Glacier__Lonely_Bull__Arena__Boss_Reward, LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__East_Water_Surface,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__Far_Ledge,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__Platform,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_1, ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_2)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__Stone_Ledge,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1, ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__West,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Lonely_Bull__West__ex__The_Big_Drop__Small_Path_1, ExitId::Glacier__Lonely_Bull__West__ex__West_Water_Surface_1)),
+        action_range: Some((ActionId::Glacier__Lonely_Bull__West__Open_Door, ActionId::Glacier__Lonely_Bull__West__Open_Door)),
+    },
+    SpotDef {
+        id: SpotId::Glacier__Lonely_Bull__West_Water_Surface,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__Lonely_Bull__West_Water_Surface__ex__West_1, ExitId::Glacier__Lonely_Bull__West_Water_Surface__ex__West_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__Peak__Birds_Eye,
         loc_range: Some((LocationId::Glacier__Peak__Birds_Eye__Item, LocationId::Glacier__Peak__Birds_Eye__Item)),
         exit_range: None,
@@ -14470,7 +14518,7 @@ static SPOT_DEFS: [SpotDef; 3494] = [
     SpotDef {
         id: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         loc_range: Some((LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock, LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster)),
-        exit_range: Some((ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1, ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1)),
+        exit_range: Some((ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1, ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1)),
         action_range: None,
     },
     SpotDef {
@@ -14480,16 +14528,22 @@ static SPOT_DEFS: [SpotDef; 3494] = [
         action_range: None,
     },
     SpotDef {
+        id: SpotId::Glacier__The_Big_Drop__East_Underwater,
+        loc_range: None,
+        exit_range: Some((ExitId::Glacier__The_Big_Drop__East_Underwater__ex__Small_Path_1, ExitId::Glacier__The_Big_Drop__East_Underwater__ex__Small_Path_1)),
+        action_range: None,
+    },
+    SpotDef {
         id: SpotId::Glacier__The_Big_Drop__Small_Path,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_1, ExitId::Glacier__The_Big_Drop__Small_Path__ex__East_2)),
+        exit_range: Some((ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1, ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__The_Big_Drop__Solid_Rock,
         loc_range: None,
         exit_range: None,
-        action_range: Some((ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break, ActionId::Glacier__The_Big_Drop__Solid_Rock__Careful_Break)),
+        action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__The_Big_Drop__Unstable_Footing,
@@ -14501,6 +14555,12 @@ static SPOT_DEFS: [SpotDef; 3494] = [
         id: SpotId::Glacier__The_Big_Drop__Water_Surface,
         loc_range: None,
         exit_range: Some((ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1, ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Glacier__The_Big_Drop__Water_Surface_Right,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -18327,6 +18387,12 @@ static SPOT_DEFS: [SpotDef; 3494] = [
     },
     SpotDef {
         id: SpotId::Menu__Kiengir_Map__Glacier_Fortress_Portal,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Menu__Kiengir_Map__Glacier_Gudam,
         loc_range: None,
         exit_range: None,
         action_range: None,

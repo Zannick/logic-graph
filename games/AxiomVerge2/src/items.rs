@@ -137,6 +137,7 @@ pub enum Item {
     Glacier_Breach_Spidery_Connector_Gate,
     Glacier_Fortress_Bomberang,
     Glacier_Fortress_Gate,
+    Glacier_Gudam,
     Glacier_Sea_Burial_Rock,
     Goodbye,
     Halusan,
@@ -387,6 +388,7 @@ impl fmt::Display for Item {
             }
             Item::Glacier_Fortress_Bomberang => write!(f, "{}", "Glacier_Fortress_Bomberang"),
             Item::Glacier_Fortress_Gate => write!(f, "{}", "Glacier_Fortress_Gate"),
+            Item::Glacier_Gudam => write!(f, "{}", "Glacier_Gudam"),
             Item::Glacier_Sea_Burial_Rock => write!(f, "{}", "Glacier_Sea_Burial_Rock"),
             Item::Goodbye => write!(f, "{}", "Goodbye"),
             Item::Halusan => write!(f, "{}", "Halusan"),
@@ -637,6 +639,7 @@ impl std::str::FromStr for Item {
             }
             "Glacier_Fortress_Bomberang" => Ok(Item::Glacier_Fortress_Bomberang),
             "Glacier_Fortress_Gate" => Ok(Item::Glacier_Fortress_Gate),
+            "Glacier_Gudam" => Ok(Item::Glacier_Gudam),
             "Glacier_Sea_Burial_Rock" => Ok(Item::Glacier_Sea_Burial_Rock),
             "Goodbye" => Ok(Item::Goodbye),
             "Halusan" => Ok(Item::Halusan),
@@ -757,11 +760,6 @@ impl std::str::FromStr for Item {
 pub fn unused_item(id: Item) -> bool {
     matches!(
         id,
-        Item::None
-            | Item::Health_Upgrade_5
-            | Item::Infection_Speed_2
-            | Item::Melee_Speed_3
-            | Item::Ranged_Damage_3
-            | Item::Ranged_Speed_3
+        Item::None | Item::Health_Upgrade_5 | Item::Infection_Speed_2 | Item::Ranged_Speed_3
     )
 }
