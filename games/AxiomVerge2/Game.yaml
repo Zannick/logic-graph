@@ -370,10 +370,12 @@ helpers:  # MARK: helpers
      Researchers_Missing, Sagiga_on_the_Worldstream, Storm_Bomb, Submarine_Progress, Suspension_Bridge, Terminal_Breakthrough_1,
      Terminal_Breakthrough_2, The_Eternal_Arm, The_Ideal_Kiengir, The_Student, Under_Siege, Urgent_Message]
   # TODO: can we check canon visits rather than reserve an i8 for counting items?
+  # TODO: have a single location collect two items, in a way that we can count it as required. That's not possible
+  # currently for an item alias, so Two_Big_Flasks is required here.
   $all_flasks:itemList: >
-    [Flask{55}, Big_Flask{31}]
+    [Flask{56}, Big_Flask{31}, Two_Big_Flasks]
   $all_health:itemList: >
-    [Health_Node{5}, Health_Fragment{24}]
+    [Health_Node{5}, Health_Fragment{25}]
   $all_weapons:itemList: >
     [Boomerang, Boomerang_Upgrade, Bronze_Axe, Double_Axe, Ice_Axe, Royal_Dagger, Sickle_Sword]
   $other_items:itemList: >
@@ -462,6 +464,7 @@ collect:  # MARK: collect
   Anuman: ^indra = $default
   Flask: ^flasks += 1
   Big_Flask: ^flasks += 2
+  Two_Big_Flasks: ^flasks += 4
   Infect: $refill_energy
   Health_Fragment: $refill_energy
   Health_Node: $refill_energy

@@ -500,15 +500,238 @@ areas:
 
 - name: Center Ruins  # MARK: Center Ruins
   on_entry: $reset_old_area(^newpos)
+  map:
+    flask: [28, 18, 29, 19]
+  datamap:
+    map_spot:
+      flask: Menu > Breach Map > LAB Center Ruins Flask
   spots:
-    - name: East 18
-      coord: [30.9, 17.75]
-    - name: East 19
-      coord: [30.9, 18.65]
-    - name: South
-      coord: [30.5, 18.8]
     - name: West
       coord: [28.1, 17.75]
+      exits:
+        - to: West Ruins > East
+          tags: [xdoor]
+        - to: West Pillar
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+        - to: West Pillar
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+        - to: West Pillar
+          req: Underwater_Movement and Drone_Hover
+          movement: water
+          jumps: 3
+    - name: West Pillar
+      coord: [28.35, 17.35]
+      exits:
+        - to: West
+          req: Underwater_Movement
+          movement: water
+        - to: West
+          req: Drone_Hover
+          movement: base
+        - to: Center Shaft Top
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+        - to: Center Shaft Top
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+          jumps: 2
+        - to: Center Shaft Top
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 2
+    - name: Center Shaft Top
+      coord: [29.5, 17.2]
+      local:
+        - to: Center Shaft Bottom
+        - to: East Ledge
+      exits:
+        - to: West Pillar
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+        - to: West Pillar
+          req: Underwater_Movement and (Slingshot_Hook or Drone_Hover)
+          movement: water
+        - to: West Pillar
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+    - name: Center Shaft Top East
+      coord: [29.6, 17.5]
+      local:
+        - to: East Ledge
+        - to: Center Shaft Bottom
+    - name: East Ledge
+      coord: [29.85, 17.5]
+      local:
+        - to: Center Shaft Top
+          jumps: 1
+          jump_mvmt: water
+        - to: Upper East Left
+        - to: Center Shaft Top East
+      exits:
+        - to: Center Shaft Top
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 2
+        - to: Center Shaft Top East
+          req: Underwater_Movement and Slingshot_Hook
+          movement: fast_hover
+        - to: Center Shaft Top
+          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          movement: fast_hover
+          jumps: 1
+    - name: Upper East Left
+      coord: [30.05, 17.95]
+      local:
+        - to: Upper East Right
+      exits:
+        - to: East Ledge
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 2
+        - to: East Ledge
+          req: Slingshot_Hook
+          movement: base
+          jumps: 2
+    - name: Upper East Right
+      coord: [30.6, 17.95]
+      local:
+        - to: Upper East Left
+        - to: East 18
+          jumps: 1
+      exits:
+        - to: East 18
+          req: Underwater_Movement and Slingshot_Hook
+          movement: fast_hover
+          jumps: 1
+    - name: East 18
+      coord: [30.9, 17.75]
+      local:
+        - to: Upper East Right
+      exits:
+        - to: East Ruins > West
+          tags: [xdoor]
+    - name: Center Shaft Bottom
+      coord: [29.6, 18.3]
+      local:
+        - to: East 19
+        - to: South
+          thru: [30.45, 18.6]
+        - to: Passage Entrance
+          thru: [30.45, 18.6]
+      exits:
+        - to: Center Shaft Top
+          req: $mist2
+          movement: mist2
+        - to: Center Shaft Top
+          req: Nanite_Mist
+          movement: mist1
+        - to: Center Shaft Top East
+          req: $mist2
+          movement: mist2
+        - to: Center Shaft Top East
+          req: Nanite_Mist
+          movement: mist1
+    - name: East 19
+      coord: [30.9, 18.65]
+      local:
+        - to: South
+        - to: Passage Entrance
+        - to: Center Shaft Bottom
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: Upper Hallway > West
+          tags: [xdoor]
+    - name: South
+      coord: [30.5, 18.8]
+      local:
+        - to: Passage Entrance
+          jumps: 1
+        - to: East 19
+          jumps: 1
+        - to: Center Shaft Bottom
+          jumps: 2
+          jump_mvmt: water
+      exits:
+        - to: Twisty Passages > North
+          tags: [ydoor]
+    - name: Passage Entrance
+      coord: [30.4, 18.75]
+      local:
+        - to: South
+        - to: East 19
+          jumps: 1
+        - to: Center Shaft Bottom
+          thru: [30.45, 18.6]
+          jumps: [1, 2]
+          jump_mvmt: water
+      locations:
+        - name: Mist Through Passage
+          canon: Amagi_Breach_Center_Ruins_Blocks
+          item: Amagi_Breach_Center_Ruins_Blocks
+          req: $mist2
+          to: Passage Exit
+          movement: mist2
+          penalties:
+            - add: 1.5  # twists and turns
+      exits:
+        - to: Passage Exit
+          req: Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
+          movement: water
+          jumps: 2
+          penalties:
+            - add: 1.5  # twists and turns
+    - name: Passage Exit
+      coord: [28.5, 18.65]
+      locations:
+        - name: Mist Through Passage
+          canon: Amagi_Breach_Center_Ruins_Blocks
+          item: Amagi_Breach_Center_Ruins_Blocks
+          req: $mist2
+          to: Passage Entrance
+          movement: mist2
+          penalties:
+            - add: 1.5  # twists and turns
+      exits:
+        - to: Passage Entrance
+          req: Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
+          movement: water
+          jumps: 1
+          penalties:
+            - add: 1.5  # twists and turns
+        - to: Cache
+          req: $mist2
+          movement: mist2
+        - to: Cache
+          req: Underwater_Movement and Slingshot_Hook
+          movement: water
+          jumps: 3
+    - name: Cache
+      coord: [28.55, 18.0]
+      local:
+        - to: Passage Exit
+          thru: [28.6, 18.1]
+      locations:
+        - name: Flask
+          canon: Amagi_Breach_Center_Ruins_Flask
+          item: Flask
+          tags: [flask]
+        - name: Flask Collection Skip
+          canon: Amagi_Breach_Center_Ruins_Flask
+          item: Flask
+          to: Menu > Warp Only > Breach
+          tags: [cskip]
+        - name: Flask Fast Travel
+          canon: Amagi_Breach_Center_Ruins_Flask
+          item: Flask
+          req: Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
 
 - name: Upper Lake  # MARK: Upper Lake
   on_entry: $reset_old_area(^newpos)

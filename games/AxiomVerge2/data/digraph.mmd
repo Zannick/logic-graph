@@ -54,10 +54,20 @@ subgraph Amagi_Breach
         Amagi_Breach__East_Ruins__Southeast_Rock_Wall(Southeast Rock Wall);
     end
     subgraph Amagi_Breach__Center_Ruins[Center Ruins]
+        Amagi_Breach__Center_Ruins__West(West);
+        Amagi_Breach__Center_Ruins__West_Pillar(West Pillar);
+        Amagi_Breach__Center_Ruins__Center_Shaft_Top(Center Shaft Top);
+        Amagi_Breach__Center_Ruins__Center_Shaft_Top_East(Center Shaft Top East);
+        Amagi_Breach__Center_Ruins__East_Ledge(East Ledge);
+        Amagi_Breach__Center_Ruins__Upper_East_Left(Upper East Left);
+        Amagi_Breach__Center_Ruins__Upper_East_Right(Upper East Right);
         Amagi_Breach__Center_Ruins__East_18(East 18);
+        Amagi_Breach__Center_Ruins__Center_Shaft_Bottom(Center Shaft Bottom);
         Amagi_Breach__Center_Ruins__East_19(East 19);
         Amagi_Breach__Center_Ruins__South(South);
-        Amagi_Breach__Center_Ruins__West(West);
+        Amagi_Breach__Center_Ruins__Passage_Entrance(Passage Entrance);
+        Amagi_Breach__Center_Ruins__Passage_Exit(Passage Exit);
+        Amagi_Breach__Center_Ruins__Cache(Cache);
     end
     subgraph Amagi_Breach__Upper_Lake[Upper Lake]
         Amagi_Breach__Upper_Lake__Save_Point(Save Point);
@@ -840,6 +850,21 @@ subgraph Annuna
     end
     subgraph Annuna__Udug_Gate[Udug Gate]
         Annuna__Udug_Gate__East(East);
+        Annuna__Udug_Gate__Switch(Switch);
+        Annuna__Udug_Gate__Door(Door);
+        Annuna__Udug_Gate__Door_West(Door West);
+        Annuna__Udug_Gate__Grate_East(Grate East);
+        Annuna__Udug_Gate__Grate_West(Grate West);
+        Annuna__Udug_Gate__West(West);
+    end
+    subgraph Annuna__Udug_Lair[Udug Lair]
+        Annuna__Udug_Lair__East(East);
+        Annuna__Udug_Lair__Portal_Stand(Portal Stand);
+        Annuna__Udug_Lair__Mideast_Ledge(Mideast Ledge);
+        Annuna__Udug_Lair__Center(Center);
+        Annuna__Udug_Lair__West_Ditch(West Ditch);
+        Annuna__Udug_Lair__Overhang_Top(Overhang Top);
+        Annuna__Udug_Lair__Covered_Bottom(Covered Bottom);
     end
     subgraph Annuna__East_Hideout[East Hideout]
         Annuna__East_Hideout__West(West);
@@ -935,6 +960,19 @@ subgraph Annuna
         Annuna__Remote_Training__Shaft_Top(Shaft Top);
         Annuna__Remote_Training__Upper_Gate_East(Upper Gate East);
         Annuna__Remote_Training__West_26(West 26);
+    end
+    subgraph Annuna__Boss_Gate[Boss Gate]
+        Annuna__Boss_Gate__North_Mid_air(North Mid-air);
+        Annuna__Boss_Gate__Portal_Stand(Portal Stand);
+        Annuna__Boss_Gate__Switch(Switch);
+        Annuna__Boss_Gate__Grate_West(Grate West);
+        Annuna__Boss_Gate__Grate_East(Grate East);
+        Annuna__Boss_Gate__Door_East(Door East);
+        Annuna__Boss_Gate__East(East);
+    end
+    subgraph Annuna__Double_Trouble[Double Trouble]
+        Annuna__Double_Trouble__West(West);
+        Annuna__Double_Trouble__East_Side_Lower(East Side Lower);
     end
     subgraph Annuna__Apocalypse_Hallway[Apocalypse Hallway]
         Annuna__Apocalypse_Hallway__Lower_East(Lower East);
@@ -3473,6 +3511,8 @@ subgraph Menu
         Menu__Kiengir_Map__Remote_Boomerang(Remote Boomerang);
         Menu__Kiengir_Map__Annuna_East_Hideout_Flask(Annuna East Hideout Flask);
         Menu__Kiengir_Map__Annuna_West_Bridge_Upper(Annuna West Bridge Upper);
+        Menu__Kiengir_Map__Annuna_Udug_Lair_Health(Annuna Udug Lair Health);
+        Menu__Kiengir_Map__Annuna_Double_Trouble_Bosses(Annuna Double Trouble Bosses);
         Menu__Kiengir_Map__Annuna_Final_Cache(Annuna Final Cache);
         Menu__Kiengir_Map__Ebih_Base_Camp_West(Ebih Base Camp West);
         Menu__Kiengir_Map__Ebih_Base_Camp_East(Ebih Base Camp East);
@@ -3669,6 +3709,7 @@ subgraph Menu
         Menu__Breach_Map__IB_Rocky_Dunes_Health(IB Rocky Dunes Health);
         Menu__Breach_Map__IB_Beach_Flask(IB Beach Flask);
         Menu__Breach_Map__IB_Uhrum_Connector_Flask(IB Uhrum Connector Flask);
+        Menu__Breach_Map__LAB_Center_Ruins_Flask(LAB Center Ruins Flask);
         Menu__Breach_Map__LAB_East_Health(LAB East Health);
         Menu__Breach_Map__LAB_East_Ruins_Flask(LAB East Ruins Flask);
         Menu__Breach_Map__Exit_Breach(Exit Breach);
@@ -4119,6 +4160,20 @@ subgraph Uhrum
         Uhrum__Seclusion__Close_Range(Close Range);
     end
 end
+Amagi_Breach__Center_Ruins__Center_Shaft_Bottom --> Amagi_Breach__Center_Ruins__Center_Shaft_Top
+Amagi_Breach__Center_Ruins__Center_Shaft_Bottom --> Amagi_Breach__Center_Ruins__Center_Shaft_Top_East
+Amagi_Breach__Center_Ruins__Center_Shaft_Top <--> Amagi_Breach__Center_Ruins__West_Pillar
+Amagi_Breach__Center_Ruins__East_18 <--> Amagi_Breach__East_Ruins__West
+Amagi_Breach__Center_Ruins__East_19 <--> Amagi_Breach__Upper_Hallway__West
+Amagi_Breach__Center_Ruins__East_Ledge --> Amagi_Breach__Center_Ruins__Center_Shaft_Top
+Amagi_Breach__Center_Ruins__East_Ledge --> Amagi_Breach__Center_Ruins__Center_Shaft_Top_East
+Amagi_Breach__Center_Ruins__Passage_Entrance <--> Amagi_Breach__Center_Ruins__Passage_Exit
+Amagi_Breach__Center_Ruins__Passage_Exit --> Amagi_Breach__Center_Ruins__Cache
+Amagi_Breach__Center_Ruins__South <--> Amagi_Breach__Twisty_Passages__North
+Amagi_Breach__Center_Ruins__Upper_East_Left --> Amagi_Breach__Center_Ruins__East_Ledge
+Amagi_Breach__Center_Ruins__Upper_East_Right --> Amagi_Breach__Center_Ruins__East_18
+Amagi_Breach__Center_Ruins__West <--> Amagi_Breach__Center_Ruins__West_Pillar
+Amagi_Breach__Center_Ruins__West --> Amagi_Breach__West_Ruins__East
 Amagi_Breach__Corner__East <--> Amagi_Breach__Lakebed__West
 Amagi_Breach__Corner__North <--> Amagi_Breach__Twisty_Passages__South
 Amagi_Breach__Divided__Empty_Plinth --> Amagi_Breach__Divided__North
@@ -4142,7 +4197,6 @@ Amagi_Breach__East_Ruins__Small_Column_West --> Amagi_Breach__East_Ruins__Center
 Amagi_Breach__East_Ruins__South <--> Amagi_Breach__Upper_Hallway__North
 Amagi_Breach__East_Ruins__Southeast_Rock_Wall --> Amagi_Breach__East_Ruins__Arch_East
 Amagi_Breach__East_Ruins__Under_the_Rock --> Amagi_Breach__East_Ruins__Small_Column_West
-Amagi_Breach__East_Ruins__West --> Amagi_Breach__Center_Ruins__East_18
 Amagi_Breach__East_Ruins__West_Bubbly_Platform --> Amagi_Breach__East_Ruins__West_Bubbly_Pillar
 Amagi_Breach__Fishy_Secrets__Center_Column <--> Amagi_Breach__Fishy_Secrets__Middle_West
 Amagi_Breach__Fishy_Secrets__Shaft_Bottom --> Amagi_Breach__Fishy_Secrets__Center_Column
@@ -4172,12 +4226,10 @@ Amagi_Breach__Twisty_Passages__East <--> Amagi_Breach__Twisty_Passages__East_Led
 Amagi_Breach__Twisty_Passages__East_Bottom --> Amagi_Breach__Twisty_Passages__East
 Amagi_Breach__Twisty_Passages__East_Bottom --> Amagi_Breach__Twisty_Passages__East_Ledge
 Amagi_Breach__Twisty_Passages__East_Ledge --> Amagi_Breach__Twisty_Passages__North
-Amagi_Breach__Twisty_Passages__North --> Amagi_Breach__Center_Ruins__South
 Amagi_Breach__Twisty_Passages__West_Flora --> Amagi_Breach__Twisty_Passages__East_Bottom
 Amagi_Breach__Upper_Hallway__Column_East --> Amagi_Breach__Upper_Hallway__West_Hook_Point
 Amagi_Breach__Upper_Hallway__Column_West --> Amagi_Breach__Split_One_Way__Upper_Middle
 Amagi_Breach__Upper_Hallway__East --> Amagi_Breach__Upper_Hallway__Column_East
-Amagi_Breach__Upper_Hallway__West --> Amagi_Breach__Center_Ruins__East_19
 Amagi_Breach__Upper_Hallway__West_Hook_Point --> Amagi_Breach__Upper_Hallway__Column_West
 Amagi_Breach__Upper_Lake__Near_Column --> Amagi_Breach__Upper_Lake__Column
 Amagi_Breach__Upper_Lake__Portal_Stand --> Amagi_Breach__Upper_Lake__Near_Column
@@ -4485,6 +4537,11 @@ Annuna__Apocalypse_Hallway__West --> Glacier__Apocalypse_Entry__Lowest_Stair
 Annuna__Apocalypse__Northwest_Mid_air --> Annuna__Apocalypse__Northwest_Scaffold_2_West
 Annuna__Apocalypse__Southwest_Capsule --> Annuna__Apocalypse__West
 Annuna__Apocalypse__West <--> Annuna__Final_Save__East
+Annuna__Boss_Gate__Door_East <--> Annuna__Boss_Gate__East
+Annuna__Boss_Gate__Door_East <--> Annuna__Boss_Gate__Switch
+Annuna__Boss_Gate__East <--> Annuna__Boss_Gate__Grate_East
+Annuna__Boss_Gate__East <--> Annuna__Double_Trouble__West
+Annuna__Boss_Gate__Grate_East <--> Annuna__Boss_Gate__Grate_West
 Annuna__Center_Climb__East --> Annuna__Center_Climb__Lower_Platform
 Annuna__Center_Climb__East --> Annuna__Center_Climb__Middle_Platform
 Annuna__Center_Climb__East <--> Annuna__Vertical_Room__West_20
@@ -4588,7 +4645,7 @@ Annuna__East_Climb__Platform_4_Left --> Annuna__East_Climb__Upper_Ledge
 Annuna__East_Climb__West_24 <--> Annuna__Factory_Access__East_24
 Annuna__East_Climb__West_25 <--> Annuna__Factory_Entrance__East
 Annuna__East_Climb__West_26 --> Annuna__East_Climb__Platform_1_Left
-Annuna__East_Climb__West_26 --> Annuna__Udug_Gate__East
+Annuna__East_Climb__West_26 <--> Annuna__Udug_Gate__East
 Annuna__East_Hideout__Bottom --> Annuna__East_Hideout__Ladder_Middle
 Annuna__East_Hideout__Ladder_Middle --> Annuna__East_Hideout__West_Ledge
 Annuna__East_Hideout__West <--> Annuna__Factory_Access__East_22
@@ -4761,6 +4818,17 @@ Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Dip
 Annuna__Twisty_Passages__Southwest_C --> Annuna__Twisty_Passages__West_Ledge
 Annuna__Twisty_Passages__West <--> Annuna__West_Climb__East_20
 Annuna__Twisty_Passages__West_Hill_Left --> Annuna__Twisty_Passages__Northwest_Alcove
+Annuna__Udug_Gate__Door <--> Annuna__Udug_Gate__Door_West
+Annuna__Udug_Gate__Door <--> Annuna__Udug_Gate__Switch
+Annuna__Udug_Gate__Grate_East <--> Annuna__Udug_Gate__Grate_West
+Annuna__Udug_Gate__West <--> Annuna__Udug_Lair__East
+Annuna__Udug_Lair__Center --> Annuna__Udug_Lair__Mideast_Ledge
+Annuna__Udug_Lair__Covered_Bottom --> Annuna__Udug_Lair__Center
+Annuna__Udug_Lair__East --> Annuna__Udug_Lair__Portal_Stand
+Annuna__Udug_Lair__Mideast_Ledge --> Annuna__Udug_Lair__East
+Annuna__Udug_Lair__Mideast_Ledge <--> Annuna__Udug_Lair__Portal_Stand
+Annuna__Udug_Lair__Overhang_Top --> Annuna__Udug_Lair__Center
+Annuna__Udug_Lair__Portal_Stand --> Annuna__Udug_Lair__Overhang_Top
 Annuna__Upper_Hallway__West <--> Annuna__Vertical_Room__East_20
 Annuna__Upper_Save__East <--> Annuna__Vertical_Room__West_17
 Annuna__Vertical_Room__Above_Plinth --> Annuna__Vertical_Room__Save_Point_Right

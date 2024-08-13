@@ -701,6 +701,10 @@ areas:
       coord: [44, 23]
     - name: Annuna West Bridge Upper
       coord: [35, 23]
+    - name: Annuna Udug Lair Health
+      coord: [41, 27]
+    - name: Annuna Double Trouble Bosses
+      coord: [44, 28]
     - name: Annuna Final Cache
       coord: [42, 16]
 
@@ -1327,6 +1331,8 @@ areas:
     - name: IB Uhrum Connector Flask
       coord: [17, 27]
 
+    - name: LAB Center Ruins Flask
+      coord: [28, 19]
     - name: LAB East Health
       coord: [37, 15]
     - name: LAB East Ruins Flask

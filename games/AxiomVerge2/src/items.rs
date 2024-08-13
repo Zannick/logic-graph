@@ -23,6 +23,7 @@ pub enum Item {
     #[default]
     None,
     Aansur,
+    Amagi_Breach_Center_Ruins_Blocks,
     Amagi_Breach_Lower_Hallway_Gate,
     Amagi_Breach_Split_Gate,
     Amagi_Breach_West_Ruins_Gate,
@@ -41,6 +42,7 @@ pub enum Item {
     Amashilama,
     Annuna_Breach_Factory_Gate,
     Annuna_Breach_Upper_Gate,
+    Annuna_Double_Trouble_Bosses,
     Annuna_East_Bridge_Gate,
     Annuna_Lower_Gate,
     Annuna_Mirror_Match_Switch,
@@ -221,6 +223,7 @@ pub enum Item {
     The_Eternal_Arm,
     The_Ideal_Kiengir,
     The_Student,
+    Two_Big_Flasks,
     Udusan,
     Uhrum_Annuna_Corridor_Block,
     Uhrum_Breach_Annuna_Gate_Gate,
@@ -250,6 +253,9 @@ impl fmt::Display for Item {
         match self {
             Item::None => write!(f, "{}", "None"),
             Item::Aansur => write!(f, "{}", "Aansur"),
+            Item::Amagi_Breach_Center_Ruins_Blocks => {
+                write!(f, "{}", "Amagi_Breach_Center_Ruins_Blocks")
+            }
             Item::Amagi_Breach_Lower_Hallway_Gate => {
                 write!(f, "{}", "Amagi_Breach_Lower_Hallway_Gate")
             }
@@ -274,6 +280,7 @@ impl fmt::Display for Item {
             Item::Amashilama => write!(f, "{}", "Amashilama"),
             Item::Annuna_Breach_Factory_Gate => write!(f, "{}", "Annuna_Breach_Factory_Gate"),
             Item::Annuna_Breach_Upper_Gate => write!(f, "{}", "Annuna_Breach_Upper_Gate"),
+            Item::Annuna_Double_Trouble_Bosses => write!(f, "{}", "Annuna_Double_Trouble_Bosses"),
             Item::Annuna_East_Bridge_Gate => write!(f, "{}", "Annuna_East_Bridge_Gate"),
             Item::Annuna_Lower_Gate => write!(f, "{}", "Annuna_Lower_Gate"),
             Item::Annuna_Mirror_Match_Switch => write!(f, "{}", "Annuna_Mirror_Match_Switch"),
@@ -470,6 +477,7 @@ impl fmt::Display for Item {
             Item::The_Eternal_Arm => write!(f, "{}", "The_Eternal_Arm"),
             Item::The_Ideal_Kiengir => write!(f, "{}", "The_Ideal_Kiengir"),
             Item::The_Student => write!(f, "{}", "The_Student"),
+            Item::Two_Big_Flasks => write!(f, "{}", "Two_Big_Flasks"),
             Item::Udusan => write!(f, "{}", "Udusan"),
             Item::Uhrum_Annuna_Corridor_Block => write!(f, "{}", "Uhrum_Annuna_Corridor_Block"),
             Item::Uhrum_Breach_Annuna_Gate_Gate => write!(f, "{}", "Uhrum_Breach_Annuna_Gate_Gate"),
@@ -513,6 +521,7 @@ impl std::str::FromStr for Item {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "Aansur" => Ok(Item::Aansur),
+            "Amagi_Breach_Center_Ruins_Blocks" => Ok(Item::Amagi_Breach_Center_Ruins_Blocks),
             "Amagi_Breach_Lower_Hallway_Gate" => Ok(Item::Amagi_Breach_Lower_Hallway_Gate),
             "Amagi_Breach_Split_Gate" => Ok(Item::Amagi_Breach_Split_Gate),
             "Amagi_Breach_West_Ruins_Gate" => Ok(Item::Amagi_Breach_West_Ruins_Gate),
@@ -531,6 +540,7 @@ impl std::str::FromStr for Item {
             "Amashilama" => Ok(Item::Amashilama),
             "Annuna_Breach_Factory_Gate" => Ok(Item::Annuna_Breach_Factory_Gate),
             "Annuna_Breach_Upper_Gate" => Ok(Item::Annuna_Breach_Upper_Gate),
+            "Annuna_Double_Trouble_Bosses" => Ok(Item::Annuna_Double_Trouble_Bosses),
             "Annuna_East_Bridge_Gate" => Ok(Item::Annuna_East_Bridge_Gate),
             "Annuna_Lower_Gate" => Ok(Item::Annuna_Lower_Gate),
             "Annuna_Mirror_Match_Switch" => Ok(Item::Annuna_Mirror_Match_Switch),
@@ -715,6 +725,7 @@ impl std::str::FromStr for Item {
             "The_Eternal_Arm" => Ok(Item::The_Eternal_Arm),
             "The_Ideal_Kiengir" => Ok(Item::The_Ideal_Kiengir),
             "The_Student" => Ok(Item::The_Student),
+            "Two_Big_Flasks" => Ok(Item::Two_Big_Flasks),
             "Udusan" => Ok(Item::Udusan),
             "Uhrum_Annuna_Corridor_Block" => Ok(Item::Uhrum_Annuna_Corridor_Block),
             "Uhrum_Breach_Annuna_Gate_Gate" => Ok(Item::Uhrum_Breach_Annuna_Gate_Gate),
@@ -749,7 +760,6 @@ pub fn unused_item(id: Item) -> bool {
         Item::None
             | Item::Health_Upgrade_5
             | Item::Infection_Speed_2
-            | Item::Melee_Damage_3
             | Item::Melee_Speed_3
             | Item::Ranged_Damage_3
             | Item::Ranged_Speed_3

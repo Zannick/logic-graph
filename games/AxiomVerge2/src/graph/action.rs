@@ -52,6 +52,8 @@ impl world::Accessible for Action {
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => true,
             ActionId::Amagi_Breach__Lakebed__Save_Point__Save => true,
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => true,
+            ActionId::Annuna__Boss_Gate__Door_East__Open_Door => rules::access_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(ctx, world),
+            ActionId::Annuna__Boss_Gate__Switch__Open_Door => rules::access_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(ctx, world),
             ActionId::Annuna__Center_Save__Save_Point__Save => true,
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world),
@@ -68,6 +70,8 @@ impl world::Accessible for Action {
             ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::access_defeat_indra(ctx, world),
+            ActionId::Annuna__Udug_Gate__Door_West__Open_Door => rules::access_invoke_unlock4_and_invoke_range2(ctx, world),
+            ActionId::Annuna__Udug_Gate__Switch__Open_Door => rules::access_invoke_unlock4_and_not_annuna__udug_gate__ctx__door(ctx, world),
             ActionId::Annuna__Upper_Save__Save_Point__Save => true,
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Annuna__Vertical_Room__Save_Point__Save => true,
@@ -263,6 +267,8 @@ impl world::Accessible for Action {
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_invoke_shockwave_and_not_amagi__secret_chamber__ctx__east_dur_esla(ctx, world, full_obs),
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => rules::observe_access_invoke_melee_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world, full_obs),
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => rules::observe_access_invoke_shockwave_and_not_amagi__secret_chamber__ctx__west_dur_esla(ctx, world, full_obs),
+            ActionId::Annuna__Boss_Gate__Door_East__Open_Door => rules::observe_access_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(ctx, world, full_obs),
+            ActionId::Annuna__Boss_Gate__Switch__Open_Door => rules::observe_access_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => rules::observe_access_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => rules::observe_access_not_annuna__east_bridge__ctx__combo(ctx, world, full_obs),
@@ -276,6 +282,8 @@ impl world::Accessible for Action {
             ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Annuna__Mirror_Match__Save_Point__Save => rules::observe_access_defeat_indra(ctx, world, full_obs),
+            ActionId::Annuna__Udug_Gate__Door_West__Open_Door => rules::observe_access_invoke_unlock4_and_invoke_range2(ctx, world, full_obs),
+            ActionId::Annuna__Udug_Gate__Switch__Open_Door => rules::observe_access_invoke_unlock4_and_not_annuna__udug_gate__ctx__door(ctx, world, full_obs),
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => rules::observe_access_invoke_open_and_invoke_range2_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world, full_obs),
             ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => rules::observe_access_invoke_open_and_not_annuna__west_bridge__ctx__doors_opened(ctx, world, full_obs),
@@ -594,6 +602,24 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Annuna__Boss_Gate__Door_East__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Boss_Gate__Switch__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_slingshot_hook_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -704,6 +730,24 @@ impl world::Accessible for Action {
             }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 let (ret, mut tags) = rules::explain_defeat_indra(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, ""));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Udug_Gate__Door_West__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_invoke_range2(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Door"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Annuna__Udug_Gate__Switch__Open_Door => {
+                let (ret, mut tags) = rules::explain_invoke_unlock4_and_not_annuna__udug_gate__ctx__door(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -1868,8 +1912,12 @@ impl world::Action for Action {
             ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Annuna__Upper_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
+            ActionId::Annuna__Udug_Gate__Switch__Open_Door => rules::action_annuna__udug_gate__ctx__door_set_true(ctx, world),
+            ActionId::Annuna__Udug_Gate__Door_West__Open_Door => rules::action_annuna__udug_gate__ctx__door_set_true(ctx, world),
             ActionId::Annuna__Center_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => rules::action_annuna__west_climb__ctx__door_opened_set_true(ctx, world),
+            ActionId::Annuna__Boss_Gate__Switch__Open_Door => rules::action_annuna__boss_gate__ctx__door_set_true(ctx, world),
+            ActionId::Annuna__Boss_Gate__Door_East__Open_Door => rules::action_annuna__boss_gate__ctx__door_set_true(ctx, world),
             ActionId::Annuna__Final_Save__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => rules::action_invoke_save(ctx, world),
@@ -2058,6 +2106,7 @@ impl world::Action for Action {
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => SpotId::Annuna__East_Bridge__Tower_East_Ledge,
             ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => SpotId::Annuna__Filter_Teleporter__West_19_Mid_flight,
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
+            ActionId::Annuna__Udug_Gate__Door_West__Open_Door => SpotId::Annuna__Udug_Gate__Door,
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform_Moved,
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => SpotId::Ebih__Base_Camp__Left_Platform,
             ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => SpotId::Glacier__Grid_31_9_12__Midair,
@@ -2290,11 +2339,23 @@ impl world::Action for Action {
             ActionId::Annuna__Upper_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
+            ActionId::Annuna__Udug_Gate__Switch__Open_Door => {
+                rules::observe_action_annuna__udug_gate__ctx__door_set_true(ctx, world, full_obs);
+            }
+            ActionId::Annuna__Udug_Gate__Door_West__Open_Door => {
+                rules::observe_action_annuna__udug_gate__ctx__door_set_true(ctx, world, full_obs);
+            }
             ActionId::Annuna__Center_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
                 rules::observe_action_annuna__west_climb__ctx__door_opened_set_true(ctx, world, full_obs);
+            }
+            ActionId::Annuna__Boss_Gate__Switch__Open_Door => {
+                rules::observe_action_annuna__boss_gate__ctx__door_set_true(ctx, world, full_obs);
+            }
+            ActionId::Annuna__Boss_Gate__Door_East__Open_Door => {
+                rules::observe_action_annuna__boss_gate__ctx__door_set_true(ctx, world, full_obs);
             }
             ActionId::Annuna__Final_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
@@ -2762,7 +2823,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 214] = [
+static ACT_DEFS: [Action; 218] = [
     Action {
         id: ActionId::Amagi_Breach__Divided__Save_Point__Save,
         time: 1300,
@@ -2924,6 +2985,16 @@ static ACT_DEFS: [Action; 214] = [
         price: Currency::Free,
     },
     Action {
+        id: ActionId::Annuna__Boss_Gate__Door_East__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Boss_Gate__Switch__Open_Door,
+        time: 500,
+        price: Currency::Free,
+    },
+    Action {
         id: ActionId::Annuna__Center_Save__Save_Point__Save,
         time: 1300,
         price: Currency::Free,
@@ -3001,6 +3072,16 @@ static ACT_DEFS: [Action; 214] = [
     Action {
         id: ActionId::Annuna__Mirror_Match__Save_Point__Save,
         time: 1300,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Udug_Gate__Door_West__Open_Door,
+        time: 850,
+        price: Currency::Free,
+    },
+    Action {
+        id: ActionId::Annuna__Udug_Gate__Switch__Open_Door,
+        time: 500,
         price: Currency::Free,
     },
     Action {
@@ -3893,8 +3974,12 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => SpotId::Annuna__Filter_Teleporter__Shaft_Top,
         ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => SpotId::Annuna__Filter_Teleporter__Northeast_Ministair,
         ActionId::Annuna__Upper_Save__Save_Point__Save => SpotId::Annuna__Upper_Save__Save_Point,
+        ActionId::Annuna__Udug_Gate__Switch__Open_Door => SpotId::Annuna__Udug_Gate__Switch,
+        ActionId::Annuna__Udug_Gate__Door_West__Open_Door => SpotId::Annuna__Udug_Gate__Door_West,
         ActionId::Annuna__Center_Save__Save_Point__Save => SpotId::Annuna__Center_Save__Save_Point,
         ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => SpotId::Annuna__West_Climb__Switch_Ledge,
+        ActionId::Annuna__Boss_Gate__Switch__Open_Door => SpotId::Annuna__Boss_Gate__Switch,
+        ActionId::Annuna__Boss_Gate__Door_East__Open_Door => SpotId::Annuna__Boss_Gate__Door_East,
         ActionId::Annuna__Final_Save__Save_Point__Save => SpotId::Annuna__Final_Save__Save_Point,
         ActionId::Ebih_Breach__Portals_101__Save_Point__Save => SpotId::Ebih_Breach__Portals_101__Save_Point,
         ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => SpotId::Ebih_Breach__In_n_Out__Save_Point,

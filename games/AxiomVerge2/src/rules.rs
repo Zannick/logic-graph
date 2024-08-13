@@ -293,6 +293,10 @@ pub fn access_amagi_wiggly_room_gate(ctx: &Context, world: &World) -> bool {
     // Amagi_Wiggly_Room_Gate
     ctx.has(Item::Amagi_Wiggly_Room_Gate)
 }
+pub fn access_annuna__boss_gate__ctx__door(ctx: &Context, world: &World) -> bool {
+    // ^_door
+    ctx.annuna__boss_gate__ctx__door()
+}
 pub fn access_annuna__east_bridge__ctx__combo(ctx: &Context, world: &World) -> bool {
     // ^_combo
     ctx.annuna__east_bridge__ctx__combo()
@@ -341,6 +345,10 @@ pub fn access_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip_and_
     ((ctx.annuna__invisible_enemies__ctx__nw_utu() && helper__melee_cskip!(ctx, world))
         && ctx.has(Item::Fast_Travel))
 }
+pub fn access_annuna__udug_gate__ctx__door(ctx: &Context, world: &World) -> bool {
+    // ^_door
+    ctx.annuna__udug_gate__ctx__door()
+}
 pub fn access_annuna__vertical_room__ctx__door_opened(ctx: &Context, world: &World) -> bool {
     // ^_door_opened
     ctx.annuna__vertical_room__ctx__door_opened()
@@ -385,6 +393,30 @@ pub fn access_annuna_breach_upper_gate(ctx: &Context, world: &World) -> bool {
 pub fn access_annuna_breach_upper_gate_and_slingshot_hook(ctx: &Context, world: &World) -> bool {
     // Annuna_Breach_Upper_Gate and Slingshot_Hook
     (ctx.has(Item::Annuna_Breach_Upper_Gate) && ctx.has(Item::Slingshot_Hook))
+}
+pub fn access_annuna_double_trouble_bosses_and_invoke_can_damage(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Annuna_Double_Trouble_Bosses and $can_damage
+    (ctx.has(Item::Annuna_Double_Trouble_Bosses) && helper__can_damage!(ctx, world))
+}
+pub fn access_annuna_double_trouble_bosses_and_invoke_shockwave_and___boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Annuna_Double_Trouble_Bosses and $shockwave and (Boomerang or Boomerang_Upgrade)
+    ((ctx.has(Item::Annuna_Double_Trouble_Bosses) && helper__shockwave!(ctx, world))
+        && (ctx.has(Item::Boomerang) || ctx.has(Item::Boomerang_Upgrade)))
+}
+pub fn access_annuna_double_trouble_bosses_and_invoke_shockwave_and___invoke_weapon_or_anuman_or_boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Annuna_Double_Trouble_Bosses and $shockwave and ($weapon or Anuman or Boomerang or Boomerang_Upgrade)
+    ((ctx.has(Item::Annuna_Double_Trouble_Bosses) && helper__shockwave!(ctx, world))
+        && (((helper__weapon!(ctx, world) || ctx.has(Item::Anuman)) || ctx.has(Item::Boomerang))
+            || ctx.has(Item::Boomerang_Upgrade)))
 }
 pub fn access_annuna_east_bridge_gate(ctx: &Context, world: &World) -> bool {
     // Annuna_East_Bridge_Gate
@@ -436,6 +468,10 @@ pub fn access_anuman_and_invoke_climb(ctx: &Context, world: &World) -> bool {
 pub fn access_anuman_and_invoke_grab(ctx: &Context, world: &World) -> bool {
     // Anuman and $grab
     (ctx.has(Item::Anuman) && helper__grab!(ctx, world))
+}
+pub fn access_anuman_and_invoke_shockwave(ctx: &Context, world: &World) -> bool {
+    // Anuman and $shockwave
+    (ctx.has(Item::Anuman) && helper__shockwave!(ctx, world))
 }
 pub fn access_anuman_and_mode_eq_indra_and___ledge_grab_or_slingshot_hook(
     ctx: &Context,
@@ -1106,6 +1142,18 @@ pub fn access_health_upgrade_3(ctx: &Context, world: &World) -> bool {
 pub fn access_health_upgrade_4(ctx: &Context, world: &World) -> bool {
     // Health_Upgrade_4
     ctx.has(Item::Health_Upgrade_4)
+}
+pub fn access_if___mode_eq_drone____drone_melee_damage_3_and_drone_hover__else____invoke_weapon_and_melee_damage_3_and___boomerang_or_boomerang_upgrade_(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // IF (^mode == 'drone') { Drone_Melee_Damage_3 and Drone_Hover } ELSE { $weapon and Melee_Damage_3 and (Boomerang or Boomerang_Upgrade) }
+    if ctx.mode() == enums::Mode::Drone {
+        (ctx.has(Item::Drone_Melee_Damage_3) && ctx.has(Item::Drone_Hover))
+    } else {
+        ((helper__weapon!(ctx, world) && ctx.has(Item::Melee_Damage_3))
+            && (ctx.has(Item::Boomerang) || ctx.has(Item::Boomerang_Upgrade)))
+    }
 }
 pub fn access_infect(ctx: &Context, world: &World) -> bool {
     // Infect
@@ -1963,6 +2011,10 @@ pub fn access_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened(
     // $unlock3 and not ^_door_opened
     (helper__unlock3!(ctx, world) && !ctx.giguna__giguna_northeast__ctx__door_opened())
 }
+pub fn access_invoke_unlock4_and_invoke_range2(ctx: &Context, world: &World) -> bool {
+    // $unlock4 and $range2
+    (helper__unlock4!(ctx, world) && helper__range2!(ctx, world))
+}
 pub fn access_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__door_open(
     ctx: &Context,
     world: &World,
@@ -1970,6 +2022,20 @@ pub fn access_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__
     // $unlock4 and $range2 and not ^_door_open
     ((helper__unlock4!(ctx, world) && helper__range2!(ctx, world))
         && !ctx.emergence__storage__ctx__door_open())
+}
+pub fn access_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $unlock4 and not ^_door
+    (helper__unlock4!(ctx, world) && !ctx.annuna__boss_gate__ctx__door())
+}
+pub fn access_invoke_unlock4_and_not_annuna__udug_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // $unlock4 and not ^_door
+    (helper__unlock4!(ctx, world) && !ctx.annuna__udug_gate__ctx__door())
 }
 pub fn access_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(
     ctx: &Context,
@@ -2412,9 +2478,37 @@ pub fn access_not_amashilama(ctx: &Context, world: &World) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
 }
+pub fn access_not_annuna__boss_gate__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_door and $mist2
+    (!ctx.annuna__boss_gate__ctx__door() && helper__mist2!(ctx, world))
+}
+pub fn access_not_annuna__boss_gate__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_door and Nanite_Mist
+    (!ctx.annuna__boss_gate__ctx__door() && ctx.has(Item::Nanite_Mist))
+}
 pub fn access_not_annuna__east_bridge__ctx__combo(ctx: &Context, world: &World) -> bool {
     // not ^_combo
     !ctx.annuna__east_bridge__ctx__combo()
+}
+pub fn access_not_annuna__udug_gate__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_door and $mist2
+    (!ctx.annuna__udug_gate__ctx__door() && helper__mist2!(ctx, world))
+}
+pub fn access_not_annuna__udug_gate__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // not ^_door and Nanite_Mist
+    (!ctx.annuna__udug_gate__ctx__door() && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_not_apocalypse_bomb(ctx: &Context, world: &World) -> bool {
     // not Apocalypse_Bomb
@@ -3160,6 +3254,13 @@ pub fn access_underwater_movement_and___slingshot_hook_or_drone_hover(
     (ctx.has(Item::Underwater_Movement)
         && (ctx.has(Item::Slingshot_Hook) || ctx.has(Item::Drone_Hover)))
 }
+pub fn access_underwater_movement_and_amagi_breach_center_ruins_blocks(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
+    (ctx.has(Item::Underwater_Movement) && ctx.has(Item::Amagi_Breach_Center_Ruins_Blocks))
+}
 pub fn access_underwater_movement_and_amagi_breach_lower_hallway_gate(
     ctx: &Context,
     world: &World,
@@ -3305,6 +3406,10 @@ pub fn action_amagi__secret_chamber__ctx__west_dur_esla_set_true(ctx: &mut Conte
     // ^_west_dur_esla = true
     ctx.set_amagi__secret_chamber__ctx__west_dur_esla(true);
 }
+pub fn action_annuna__boss_gate__ctx__door_set_true(ctx: &mut Context, world: &World) {
+    // ^_door = true
+    ctx.set_annuna__boss_gate__ctx__door(true);
+}
 pub fn action_annuna__east_bridge__ctx__combo_set_true(ctx: &mut Context, world: &World) {
     // ^_combo = true
     ctx.set_annuna__east_bridge__ctx__combo(true);
@@ -3319,6 +3424,10 @@ pub fn action_annuna__invisible_enemies__ctx__door_opened_set_true(
 pub fn action_annuna__invisible_enemies__ctx__nw_utu_set_true(ctx: &mut Context, world: &World) {
     // ^_nw_utu = true
     ctx.set_annuna__invisible_enemies__ctx__nw_utu(true);
+}
+pub fn action_annuna__udug_gate__ctx__door_set_true(ctx: &mut Context, world: &World) {
+    // ^_door = true
+    ctx.set_annuna__udug_gate__ctx__door(true);
 }
 pub fn action_annuna__vertical_room__ctx__door_opened_set_true(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
@@ -3407,6 +3516,10 @@ pub fn action_flasks_incr_1(ctx: &mut Context, world: &World) {
 pub fn action_flasks_incr_2(ctx: &mut Context, world: &World) {
     // ^flasks += 2
     ctx.flasks += 2;
+}
+pub fn action_flasks_incr_4(ctx: &mut Context, world: &World) {
+    // ^flasks += 4
+    ctx.flasks += 4;
 }
 pub fn action_giguna__carnelian__ctx__door_opened_set_true(ctx: &mut Context, world: &World) {
     // ^_door_opened = true
@@ -5124,6 +5237,18 @@ pub fn explain_amagi_wiggly_room_gate(
         (h, vec!["Amagi_Wiggly_Room_Gate"])
     }
 }
+pub fn explain_annuna__boss_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door
+    {
+        let r = ctx.annuna__boss_gate__ctx__door();
+        edict.insert("^annuna__boss_gate__ctx__door", format!("{:?}", r));
+        (r, vec!["^annuna__boss_gate__ctx__door"])
+    }
+}
 pub fn explain_annuna__east_bridge__ctx__combo(
     ctx: &Context,
     world: &World,
@@ -5318,6 +5443,18 @@ pub fn explain_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cskip_and
         }
     }
 }
+pub fn explain_annuna__udug_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_door
+    {
+        let r = ctx.annuna__udug_gate__ctx__door();
+        edict.insert("^annuna__udug_gate__ctx__door", format!("{:?}", r));
+        (r, vec!["^annuna__udug_gate__ctx__door"])
+    }
+}
 pub fn explain_annuna__vertical_room__ctx__door_opened(
     ctx: &Context,
     world: &World,
@@ -5491,6 +5628,163 @@ pub fn explain_annuna_breach_upper_gate_and_slingshot_hook(
                 edict.insert("Slingshot_Hook", format!("{}", h));
                 (h, vec!["Slingshot_Hook"])
             };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna_double_trouble_bosses_and_invoke_can_damage(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Double_Trouble_Bosses and $can_damage
+    {
+        let mut left = {
+            let h = ctx.has(Item::Annuna_Double_Trouble_Bosses);
+            edict.insert("Annuna_Double_Trouble_Bosses", format!("{}", h));
+            (h, vec!["Annuna_Double_Trouble_Bosses"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_damage!(ctx, world, edict);
+                edict.insert("$can_damage", format!("{:?}", res));
+                refs.push("$can_damage");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna_double_trouble_bosses_and_invoke_shockwave_and___boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Double_Trouble_Bosses and $shockwave and (Boomerang or Boomerang_Upgrade)
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Annuna_Double_Trouble_Bosses);
+                edict.insert("Annuna_Double_Trouble_Bosses", format!("{}", h));
+                (h, vec!["Annuna_Double_Trouble_Bosses"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                    edict.insert("$shockwave", format!("{:?}", res));
+                    refs.push("$shockwave");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let h = ctx.has(Item::Boomerang);
+                    edict.insert("Boomerang", format!("{}", h));
+                    (h, vec!["Boomerang"])
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Boomerang_Upgrade);
+                        edict.insert("Boomerang_Upgrade", format!("{}", h));
+                        (h, vec!["Boomerang_Upgrade"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_annuna_double_trouble_bosses_and_invoke_shockwave_and___invoke_weapon_or_anuman_or_boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Annuna_Double_Trouble_Bosses and $shockwave and ($weapon or Anuman or Boomerang or Boomerang_Upgrade)
+    {
+        let mut left = {
+            let mut left = {
+                let h = ctx.has(Item::Annuna_Double_Trouble_Bosses);
+                edict.insert("Annuna_Double_Trouble_Bosses", format!("{}", h));
+                (h, vec!["Annuna_Double_Trouble_Bosses"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                    edict.insert("$shockwave", format!("{:?}", res));
+                    refs.push("$shockwave");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = ({
+                let mut left = {
+                    let mut left = {
+                        let mut left = {
+                            let (res, mut refs) = hexplain__weapon!(ctx, world, edict);
+                            edict.insert("$weapon", format!("{:?}", res));
+                            refs.push("$weapon");
+                            (res, refs)
+                        };
+                        if left.0 {
+                            left
+                        } else {
+                            let mut right = {
+                                let h = ctx.has(Item::Anuman);
+                                edict.insert("Anuman", format!("{}", h));
+                                (h, vec!["Anuman"])
+                            };
+                            left.1.append(&mut right.1);
+                            (right.0, left.1)
+                        }
+                    };
+                    if left.0 {
+                        left
+                    } else {
+                        let mut right = {
+                            let h = ctx.has(Item::Boomerang);
+                            edict.insert("Boomerang", format!("{}", h));
+                            (h, vec!["Boomerang"])
+                        };
+                        left.1.append(&mut right.1);
+                        (right.0, left.1)
+                    }
+                };
+                if left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Boomerang_Upgrade);
+                        edict.insert("Boomerang_Upgrade", format!("{}", h));
+                        (h, vec!["Boomerang_Upgrade"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            });
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -5716,6 +6010,32 @@ pub fn explain_anuman_and_invoke_grab(
                 let (res, mut refs) = hexplain__grab!(ctx, world, edict);
                 edict.insert("$grab", format!("{:?}", res));
                 refs.push("$grab");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_anuman_and_invoke_shockwave(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Anuman and $shockwave
+    {
+        let mut left = {
+            let h = ctx.has(Item::Anuman);
+            edict.insert("Anuman", format!("{}", h));
+            (h, vec!["Anuman"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__shockwave!(ctx, world, edict);
+                edict.insert("$shockwave", format!("{:?}", res));
+                refs.push("$shockwave");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -8480,6 +8800,72 @@ pub fn explain_health_upgrade_4(
         let h = ctx.has(Item::Health_Upgrade_4);
         edict.insert("Health_Upgrade_4", format!("{}", h));
         (h, vec!["Health_Upgrade_4"])
+    }
+}
+pub fn explain_if___mode_eq_drone____drone_melee_damage_3_and_drone_hover__else____invoke_weapon_and_melee_damage_3_and___boomerang_or_boomerang_upgrade_(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // IF (^mode == 'drone') { Drone_Melee_Damage_3 and Drone_Hover } ELSE { $weapon and Melee_Damage_3 and (Boomerang or Boomerang_Upgrade) }
+    {
+        let mut refs = Vec::new();
+        let mut cond = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        refs.append(&mut cond.1);
+        if cond.0 {
+            let mut then = {
+                let mut left = {
+                    let h = ctx.has(Item::Drone_Melee_Damage_3);
+                    edict.insert("Drone_Melee_Damage_3", format!("{}", h));
+                    (h, vec!["Drone_Melee_Damage_3"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Drone_Hover);
+                        edict.insert("Drone_Hover", format!("{}", h));
+                        (h, vec!["Drone_Hover"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            refs.append(&mut then.1);
+            (then.0, refs)
+        } else {
+            let mut then = {
+                let mut left = {
+                    let h = ctx.has(Item::Drone_Melee_Damage_3);
+                    edict.insert("Drone_Melee_Damage_3", format!("{}", h));
+                    (h, vec!["Drone_Melee_Damage_3"])
+                };
+                if !left.0 {
+                    left
+                } else {
+                    let mut right = {
+                        let h = ctx.has(Item::Drone_Hover);
+                        edict.insert("Drone_Hover", format!("{}", h));
+                        (h, vec!["Drone_Hover"])
+                    };
+                    left.1.append(&mut right.1);
+                    (right.0, left.1)
+                }
+            };
+            refs.append(&mut then.1);
+            (then.0, refs)
+        }
     }
 }
 pub fn explain_infect(
@@ -13032,6 +13418,33 @@ pub fn explain_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door_opened
         }
     }
 }
+pub fn explain_invoke_unlock4_and_invoke_range2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $unlock4 and $range2
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock4!(ctx, world, edict);
+            edict.insert("$unlock4", format!("{:?}", res));
+            refs.push("$unlock4");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__range2!(ctx, world, edict);
+                edict.insert("$range2", format!("{:?}", res));
+                refs.push("$range2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__door_open(
     ctx: &Context,
     world: &World,
@@ -13067,6 +13480,64 @@ pub fn explain_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx_
                     let r = ctx.emergence__storage__ctx__door_open();
                     edict.insert("^emergence__storage__ctx__door_open", format!("{:?}", r));
                     (r, vec!["^emergence__storage__ctx__door_open"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $unlock4 and not ^_door
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock4!(ctx, world, edict);
+            edict.insert("$unlock4", format!("{:?}", res));
+            refs.push("$unlock4");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.annuna__boss_gate__ctx__door();
+                    edict.insert("^annuna__boss_gate__ctx__door", format!("{:?}", r));
+                    (r, vec!["^annuna__boss_gate__ctx__door"])
+                };
+                (!val.0, val.1)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_unlock4_and_not_annuna__udug_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $unlock4 and not ^_door
+    {
+        let mut left = {
+            let (res, mut refs) = hexplain__unlock4!(ctx, world, edict);
+            edict.insert("$unlock4", format!("{:?}", res));
+            refs.push("$unlock4");
+            (res, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let val = {
+                    let r = ctx.annuna__udug_gate__ctx__door();
+                    edict.insert("^annuna__udug_gate__ctx__door", format!("{:?}", r));
+                    (r, vec!["^annuna__udug_gate__ctx__door"])
                 };
                 (!val.0, val.1)
             };
@@ -14963,6 +15434,63 @@ pub fn explain_not_amashilama(
         (!h, vec!["Amashilama"])
     }
 }
+pub fn explain_not_annuna__boss_gate__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.annuna__boss_gate__ctx__door();
+                edict.insert("^annuna__boss_gate__ctx__door", format!("{:?}", r));
+                (r, vec!["^annuna__boss_gate__ctx__door"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_not_annuna__boss_gate__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.annuna__boss_gate__ctx__door();
+                edict.insert("^annuna__boss_gate__ctx__door", format!("{:?}", r));
+                (r, vec!["^annuna__boss_gate__ctx__door"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_not_annuna__east_bridge__ctx__combo(
     ctx: &Context,
     world: &World,
@@ -14976,6 +15504,63 @@ pub fn explain_not_annuna__east_bridge__ctx__combo(
             (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         (!val.0, val.1)
+    }
+}
+pub fn explain_not_annuna__udug_gate__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door and $mist2
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.annuna__udug_gate__ctx__door();
+                edict.insert("^annuna__udug_gate__ctx__door", format!("{:?}", r));
+                (r, vec!["^annuna__udug_gate__ctx__door"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_not_annuna__udug_gate__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not ^_door and Nanite_Mist
+    {
+        let mut left = {
+            let val = {
+                let r = ctx.annuna__udug_gate__ctx__door();
+                edict.insert("^annuna__udug_gate__ctx__door", format!("{:?}", r));
+                (r, vec!["^annuna__udug_gate__ctx__door"])
+            };
+            (!val.0, val.1)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_not_apocalypse_bomb(
@@ -18384,6 +18969,31 @@ pub fn explain_underwater_movement_and___slingshot_hook_or_drone_hover(
         }
     }
 }
+pub fn explain_underwater_movement_and_amagi_breach_center_ruins_blocks(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
+    {
+        let mut left = {
+            let h = ctx.has(Item::Underwater_Movement);
+            edict.insert("Underwater_Movement", format!("{}", h));
+            (h, vec!["Underwater_Movement"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Amagi_Breach_Center_Ruins_Blocks);
+                edict.insert("Amagi_Breach_Center_Ruins_Blocks", format!("{}", h));
+                (h, vec!["Amagi_Breach_Center_Ruins_Blocks"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
 pub fn explain_underwater_movement_and_amagi_breach_lower_hallway_gate(
     ctx: &Context,
     world: &World,
@@ -19609,6 +20219,17 @@ pub fn observe_access_amagi_wiggly_room_gate(
         ctx.has(Item::Amagi_Wiggly_Room_Gate)
     }
 }
+pub fn observe_access_annuna__boss_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door
+    {
+        full_obs.observe_annuna__boss_gate__ctx__door();
+        ctx.annuna__boss_gate__ctx__door()
+    }
+}
 pub fn observe_access_annuna__east_bridge__ctx__combo(
     ctx: &Context,
     world: &World,
@@ -19700,6 +20321,17 @@ pub fn observe_access_annuna__invisible_enemies__ctx__nw_utu_and_invoke_melee_cs
             full_obs.observe_fast_travel();
             ctx.has(Item::Fast_Travel)
         }))
+}
+pub fn observe_access_annuna__udug_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_door
+    {
+        full_obs.observe_annuna__udug_gate__ctx__door();
+        ctx.annuna__udug_gate__ctx__door()
+    }
 }
 pub fn observe_access_annuna__vertical_room__ctx__door_opened(
     ctx: &Context,
@@ -19802,6 +20434,56 @@ pub fn observe_access_annuna_breach_upper_gate_and_slingshot_hook(
         full_obs.observe_slingshot_hook();
         ctx.has(Item::Slingshot_Hook)
     }))
+}
+pub fn observe_access_annuna_double_trouble_bosses_and_invoke_can_damage(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Double_Trouble_Bosses and $can_damage
+    ({
+        full_obs.observe_annuna_double_trouble_bosses();
+        ctx.has(Item::Annuna_Double_Trouble_Bosses)
+    } && (hobserve__can_damage!(ctx, world, full_obs)))
+}
+pub fn observe_access_annuna_double_trouble_bosses_and_invoke_shockwave_and___boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Double_Trouble_Bosses and $shockwave and (Boomerang or Boomerang_Upgrade)
+    (({
+        full_obs.observe_annuna_double_trouble_bosses();
+        ctx.has(Item::Annuna_Double_Trouble_Bosses)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_boomerang();
+            ctx.has(Item::Boomerang)
+        } || {
+            full_obs.observe_boomerang_upgrade();
+            ctx.has(Item::Boomerang_Upgrade)
+        }))
+}
+pub fn observe_access_annuna_double_trouble_bosses_and_invoke_shockwave_and___invoke_weapon_or_anuman_or_boomerang_or_boomerang_upgrade(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Annuna_Double_Trouble_Bosses and $shockwave and ($weapon or Anuman or Boomerang or Boomerang_Upgrade)
+    (({
+        full_obs.observe_annuna_double_trouble_bosses();
+        ctx.has(Item::Annuna_Double_Trouble_Bosses)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
+        && (((hobserve__weapon!(ctx, world, full_obs) || {
+            full_obs.observe_anuman();
+            ctx.has(Item::Anuman)
+        }) || {
+            full_obs.observe_boomerang();
+            ctx.has(Item::Boomerang)
+        }) || {
+            full_obs.observe_boomerang_upgrade();
+            ctx.has(Item::Boomerang_Upgrade)
+        }))
 }
 pub fn observe_access_annuna_east_bridge_gate(
     ctx: &Context,
@@ -19933,6 +20615,17 @@ pub fn observe_access_anuman_and_invoke_grab(
         full_obs.observe_anuman();
         ctx.has(Item::Anuman)
     } && (hobserve__grab!(ctx, world, full_obs)))
+}
+pub fn observe_access_anuman_and_invoke_shockwave(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Anuman and $shockwave
+    ({
+        full_obs.observe_anuman();
+        ctx.has(Item::Anuman)
+    } && (hobserve__shockwave!(ctx, world, full_obs)))
 }
 pub fn observe_access_anuman_and_mode_eq_indra_and___ledge_grab_or_slingshot_hook(
     ctx: &Context,
@@ -21545,6 +22238,41 @@ pub fn observe_access_health_upgrade_4(
     {
         full_obs.observe_health_upgrade_4();
         ctx.has(Item::Health_Upgrade_4)
+    }
+}
+pub fn observe_access_if___mode_eq_drone____drone_melee_damage_3_and_drone_hover__else____invoke_weapon_and_melee_damage_3_and___boomerang_or_boomerang_upgrade_(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // IF (^mode == 'drone') { Drone_Melee_Damage_3 and Drone_Hover } ELSE { $weapon and Melee_Damage_3 and (Boomerang or Boomerang_Upgrade) }
+    if {
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } {
+        ({
+            full_obs.observe_drone_melee_damage_3();
+            ctx.has(Item::Drone_Melee_Damage_3)
+        } && ({
+            full_obs.observe_drone_hover();
+            ctx.has(Item::Drone_Hover)
+        }))
+    } else {
+        ((hobserve__weapon!(ctx, world, full_obs)
+            && ({
+                full_obs.observe_melee_damage_3();
+                ctx.has(Item::Melee_Damage_3)
+            }))
+            && ({
+                full_obs.observe_boomerang();
+                ctx.has(Item::Boomerang)
+            } || {
+                full_obs.observe_boomerang_upgrade();
+                ctx.has(Item::Boomerang_Upgrade)
+            }))
     }
 }
 pub fn observe_access_infect(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
@@ -23355,6 +24083,14 @@ pub fn observe_access_invoke_unlock3_and_not_giguna__giguna_northeast__ctx__door
             ctx.giguna__giguna_northeast__ctx__door_opened()
         })))
 }
+pub fn observe_access_invoke_unlock4_and_invoke_range2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $unlock4 and $range2
+    (hobserve__unlock4!(ctx, world, full_obs) && (hobserve__range2!(ctx, world, full_obs)))
+}
 pub fn observe_access_invoke_unlock4_and_invoke_range2_and_not_emergence__storage__ctx__door_open(
     ctx: &Context,
     world: &World,
@@ -23365,6 +24101,30 @@ pub fn observe_access_invoke_unlock4_and_invoke_range2_and_not_emergence__storag
         && (!({
             full_obs.observe_emergence__storage__ctx__door_open();
             ctx.emergence__storage__ctx__door_open()
+        })))
+}
+pub fn observe_access_invoke_unlock4_and_not_annuna__boss_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $unlock4 and not ^_door
+    (hobserve__unlock4!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_annuna__boss_gate__ctx__door();
+            ctx.annuna__boss_gate__ctx__door()
+        })))
+}
+pub fn observe_access_invoke_unlock4_and_not_annuna__udug_gate__ctx__door(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $unlock4 and not ^_door
+    (hobserve__unlock4!(ctx, world, full_obs)
+        && (!({
+            full_obs.observe_annuna__udug_gate__ctx__door();
+            ctx.annuna__udug_gate__ctx__door()
         })))
 }
 pub fn observe_access_invoke_unlock4_and_not_annuna__west_climb__ctx__door_opened(
@@ -24620,6 +25380,31 @@ pub fn observe_access_not_amashilama(
         !ctx.has(Item::Amashilama)
     }
 }
+pub fn observe_access_not_annuna__boss_gate__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door and $mist2
+    (!({
+        full_obs.observe_annuna__boss_gate__ctx__door();
+        ctx.annuna__boss_gate__ctx__door()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_not_annuna__boss_gate__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door and Nanite_Mist
+    (!({
+        full_obs.observe_annuna__boss_gate__ctx__door();
+        ctx.annuna__boss_gate__ctx__door()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
 pub fn observe_access_not_annuna__east_bridge__ctx__combo(
     ctx: &Context,
     world: &World,
@@ -24630,6 +25415,31 @@ pub fn observe_access_not_annuna__east_bridge__ctx__combo(
         full_obs.observe_annuna__east_bridge__ctx__combo();
         ctx.annuna__east_bridge__ctx__combo()
     })
+}
+pub fn observe_access_not_annuna__udug_gate__ctx__door_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door and $mist2
+    (!({
+        full_obs.observe_annuna__udug_gate__ctx__door();
+        ctx.annuna__udug_gate__ctx__door()
+    }) && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_not_annuna__udug_gate__ctx__door_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not ^_door and Nanite_Mist
+    (!({
+        full_obs.observe_annuna__udug_gate__ctx__door();
+        ctx.annuna__udug_gate__ctx__door()
+    }) && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
 }
 pub fn observe_access_not_apocalypse_bomb(
     ctx: &Context,
@@ -26300,6 +27110,20 @@ pub fn observe_access_underwater_movement_and___slingshot_hook_or_drone_hover(
         ctx.has(Item::Drone_Hover)
     }))
 }
+pub fn observe_access_underwater_movement_and_amagi_breach_center_ruins_blocks(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
+    ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    } && ({
+        full_obs.observe_amagi_breach_center_ruins_blocks();
+        ctx.has(Item::Amagi_Breach_Center_Ruins_Blocks)
+    }))
+}
 pub fn observe_access_underwater_movement_and_amagi_breach_lower_hallway_gate(
     ctx: &Context,
     world: &World,
@@ -26627,6 +27451,13 @@ pub fn observe_action_amagi__secret_chamber__ctx__west_dur_esla_set_true(
 ) {
     // ^_west_dur_esla = true
 }
+pub fn observe_action_annuna__boss_gate__ctx__door_set_true(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door = true
+}
 pub fn observe_action_annuna__east_bridge__ctx__combo_set_true(
     ctx: &Context,
     world: &World,
@@ -26647,6 +27478,13 @@ pub fn observe_action_annuna__invisible_enemies__ctx__nw_utu_set_true(
     full_obs: &mut FullObservation,
 ) {
     // ^_nw_utu = true
+}
+pub fn observe_action_annuna__udug_gate__ctx__door_set_true(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^_door = true
 }
 pub fn observe_action_annuna__vertical_room__ctx__door_opened_set_true(
     ctx: &Context,
@@ -26780,6 +27618,9 @@ pub fn observe_action_flasks_incr_1(ctx: &Context, world: &World, full_obs: &mut
 }
 pub fn observe_action_flasks_incr_2(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
     // ^flasks += 2
+}
+pub fn observe_action_flasks_incr_4(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    // ^flasks += 4
 }
 pub fn observe_action_giguna__carnelian__ctx__door_opened_set_true(
     ctx: &Context,

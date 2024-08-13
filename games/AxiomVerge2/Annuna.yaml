@@ -4037,9 +4037,201 @@ areas:
 
 - name: Udug Gate  # MARK: Udug Gate
   on_entry: $reset_old_area(^newpos)
+  start:
+    _door: false
   spots:
     - name: East
       coord: [43.9, 25.65]
+      local:
+        - to: Switch
+        - to: Grate East
+          jumps: 1
+      exits:
+        - to: East Climb > West 26
+          tags: [xdoor]
+    - name: Switch
+      coord: [43.6, 25.7]
+      local:
+        - to: East
+          jumps: 1
+        - to: Grate East
+          jumps: 1
+      exits:
+        - to: Door
+          req: ^_door
+          movement: base
+      actions:
+        - name: Open Door
+          req: $unlock4 and not ^_door
+          do: ^_door = true
+          tags: [hack]
+    - name: Door
+      coord: [43.5, 25.75]
+      exits:
+        - to: Door West
+          req: ^_door
+          movement: base
+        - to: Switch
+          req: ^_door
+          movement: base
+          jumps: 1
+    - name: Door West
+      coord: [43.4, 25.75]
+      local:
+        - to: West
+        - to: Grate West
+          jumps: 1
+      exits:
+        - to: Door
+          req: ^_door
+          movement: base
+      actions:
+        - name: Open Door
+          req: $unlock4 and $range2
+          do: ^_door = true
+          to: Door
+          movement: base
+          penalty_tags: [hack]
+    - name: Grate East
+      coord: [43.6, 25.45]
+      local:
+        - to: Switch
+        - to: East
+      exits:
+        - to: Grate West
+          req: not ^_door and $mist2
+          movement: mist2
+        - to: Grate West
+          req: not ^_door and Nanite_Mist
+          movement: mist1
+    - name: Grate West
+      coord: [43.4, 25.45]
+      local:
+        - to: West
+        - to: Door West
+      exits:
+        - to: Grate East
+          req: not ^_door and $mist2
+          movement: mist2
+        - to: Grate East
+          req: not ^_door and Nanite_Mist
+          movement: mist1
+    - name: West
+      coord: [43.1, 25.75]
+      local:
+        - to: Door West
+        - to: Grate West
+          jumps: 1
+      exits:
+        - to: Udug Lair > East
+          tags: [xdoor]
+
+- name: Udug Lair  # MARK: Udug Lair
+  on_entry: $reset_old_area(^newpos)
+  data:
+    portal_start: Portal_Stand
+  map:
+    health: [41, 26, 42, 27]
+  datamap:
+    map_spot:
+      health: Menu > Kiengir Map > Annuna Udug Lair Health
+  spots:
+    - name: East
+      coord: [42.9, 25.75]
+      local:
+        - to: Portal Stand
+          jumps: 2
+        - to: Mideast Ledge
+          jumps: 2
+      exits:
+        - to: Portal Stand
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+        - to: Udug Gate > West
+          tags: [xdoor]
+    - name: Portal Stand
+      coord: [42.625, 25.5]
+      data:
+        flipside: Annuna Breach > Enclosed > Save Point
+      local:
+        - to: East
+        - to: Mideast Ledge
+      exits:
+        - to: Mideast Ledge
+          req: $hook
+          movement: fast_hover
+        - to: Overhang Top
+          req: $hookhover
+          movement: fast_hover
+    - name: Mideast Ledge
+      coord: [42.25, 25.85]
+      local:
+        - to: Center
+      exits:
+        - to: Portal Stand
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 2
+        - to: East
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 2
+    - name: Center
+      coord: [42.0, 26.3]
+      local:
+        - to: Overhang Top
+        - to: Covered Bottom
+      exits:
+        - to: Mideast Ledge
+          req: $hook or (Anuman and $grab)
+          movement: base
+          jumps: 2
+    - name: West Ditch
+      coord: [41.325, 26.65]
+      local:
+        - to: Overhang Top
+          jumps: 1
+      locations:
+        - name: Health
+          item: Health_Fragment
+          tags: [standing]
+    - name: Overhang Top
+      coord: [41.5, 26.5]
+      data:
+        flipside: Annuna Breach > Depths > South Overhang
+      local:
+        - to: Covered Bottom
+          thru: [42.55, 26.7]
+      exits:
+        - to: Center
+          req: $hook or Anuman
+          movement: base
+          jumps: 1
+        - to: Center
+          req: $grab
+          movement: base
+          jumps: 2
+    - name: Covered Bottom
+      coord: [41.5, 26.75]
+      data:
+        flipside: Annuna Breach > Depths > South
+      local:
+        - to: Overhang Top
+          jumps: 2
+      exits:
+        - to: Center
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+        - to: Center
+          req: Anuman
+          movement: base
+          jumps: 2
+        - to: Center
+          req: $grab
+          movement: base
+          jumps: 3
 
 - name: East Hideout  # MARK: East Hideout
   on_entry: $reset_old_area(^newpos)
@@ -5182,6 +5374,164 @@ areas:
           movement: base
           penalty_tags: [xshift, -base.1]
 
+- name: Boss Gate  # MARK: Boss Gate
+  on_entry: $reset_old_area(^newpos)
+  start:
+    _door: false
+  data:
+    portal_start: Portal Stand
+  spots:
+    - name: North Mid-air
+      coord: [41.5, 27.2]
+      data:
+        flipside: SpotId::None 
+      local:
+        - to: Portal Stand
+        - to: Switch
+        - to: Grate West
+    - name: Portal Stand
+      coord: [41.475, 27.55]
+      data:
+        flipside: Annuna Breach > Bottom > Save Point
+      local:
+        - to: Switch
+        - to: Grate West
+          jumps: 1
+    - name: Switch
+      coord: [41.9, 27.7]
+      local:
+        - to: Portal Stand
+          jumps: 2
+      exits:
+        - to: Door East
+          req: ^_door
+          movement: base
+      actions:
+        - name: Open Door
+          req: $unlock4 and not ^_door
+          do: ^_door = true
+          tags: [hack]
+    - name: Grate West
+      coord: [41.9, 27.45]
+      local:
+        - to: Portal Stand
+      exits:
+        - to: Grate East
+          req: not ^_door and $mist2
+          movement: mist2
+        - to: Grate East
+          req: not ^_door and Nanite_Mist
+          movement: mist1
+    - name: Grate East
+      coord: [42.2, 27.45]
+      exits:
+        - to: Grate West
+          req: not ^_door and $mist2
+          movement: mist2
+        - to: Grate West
+          req: not ^_door and Nanite_Mist
+          movement: mist1
+        - to: East
+          req: $hover
+          movement: base
+        - to: East
+          req: $mist2
+          movement: mist2
+        - to: East
+          req: Nanite_Mist
+          movement: mist1
+        - to: East
+          req: $allegiance4
+          price: 150
+          movement: base
+          penalties:
+            - add: 6  # extra time to deal with spiders
+    - name: Door East
+      coord: [42.1, 27.7]
+      exits:
+        - to: Switch
+          req: ^_door
+          movement: base
+        - to: East
+          req: $allegiance4
+          price: 150
+          movement: base
+          penalties:
+            - add: 6  # extra time to deal with spiders
+      actions:
+        - name: Open Door
+          req: $unlock4 and not ^_door
+          do: ^_door = true
+          tags: [hack]
+    - name: East
+      coord: [42.9, 27.8]
+      exits:
+        - to: Grate East
+          req: $mist2
+          movement: mist2
+        - to: Door East
+          req: $allegiance4
+          price: 150
+          movement: base
+          jumps: 1
+          penalties:
+            - add: 10  # spiders in your face!!
+        - to: Double Trouble > West
+          tags: [xdoor]
+
+- name: Double Trouble  # MARK: Double Trouble
+  on_entry: $reset_old_area(^newpos)
+  map:
+    bosses: [44, 27, 45, 28]
+  datamap:
+    map_spot:
+      bosses: Menu > Kiengir Map > Annuna Double Trouble Bosses
+  spots:
+    - name: West
+      coord: [43.1, 27.8]
+      local:
+        - to: East Side Lower
+          jumps: 2
+      exits:
+        - to: Boss Gate > East
+          tags: [xdoor]
+    - name: East Side Lower
+      coord: [44.5, 27.7]
+      local:
+        - to: West
+      locations:
+        - name: Bosses Quick Kill
+          canon: Annuna_Double_Trouble_Bosses
+          item: Annuna_Double_Trouble_Bosses
+          req: Anuman and $shockwave
+          price: 200
+          time: 1
+          penalty_tags: [shockwave, shockwave]
+        - name: Bosses Slow Kill
+          canon: Annuna_Double_Trouble_Bosses
+          item: Annuna_Double_Trouble_Bosses
+          req: IF (^mode == 'drone') { Drone_Melee_Damage_3 and Drone_Hover } ELSE { $weapon and Melee_Damage_3 and (Boomerang or Boomerang_Upgrade) }
+          time: 20  # ? Probably needs to account for health/defense as well
+        - name: Fast Flasks
+          canon: Annuna_Double_Trouble_Rewards
+          item: Two_Big_Flasks
+          req: Annuna_Double_Trouble_Bosses and $shockwave and ($weapon or Anuman or Boomerang or Boomerang_Upgrade)
+          price: 100
+          tags: [flask]  # takes as long as a single flask if you shockwave one then hit the other during the time stop
+        - name: Fast Flasks Travel
+          canon: Annuna_Double_Trouble_Rewards
+          item: Two_Big_Flasks
+          req: Annuna_Double_Trouble_Bosses and $shockwave and (Boomerang or Boomerang_Upgrade)
+          price: 100
+          to: ^map_spot
+          time: 1
+          penalty_tags: [shockwave, throw]  # Shockwave one, then throw toward the other and fast travel
+        - name: Two Flasks
+          canon: Annuna_Double_Trouble_Rewards
+          item: Two_Big_Flasks
+          req: Annuna_Double_Trouble_Bosses and $can_damage
+          time: 1  # approximate a time between them
+          penalty_tags: [flask, flask]
 
 #region Apocalypse
 - name: Apocalypse Hallway  # MARK: Apocalypse Hallway

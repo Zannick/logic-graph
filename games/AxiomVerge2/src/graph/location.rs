@@ -81,6 +81,11 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => rules::access_invoke_mist2(ctx, world),
             LocationId::Amagi__Wiggly_Room__Button__Hit_Button => rules::access_invoke_can_damage(ctx, world),
             LocationId::Amagi__Wiggly_Room__Cache__Tablet => true,
+            LocationId::Amagi_Breach__Center_Ruins__Cache__Flask => true,
+            LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Collection_Skip => true,
+            LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::access_invoke_mist2(ctx, world),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::access_invoke_mist2(ctx, world),
             LocationId::Amagi_Breach__Divided__Wall_East__Health => true,
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => true,
             LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item => true,
@@ -103,6 +108,11 @@ impl world::Accessible for Location {
             LocationId::Amagi_Breach__West_Ruins__East_Platform__Health => true,
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::access_infect_and_anuman_and_invoke_objective(ctx, world),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::access_infect_and_not_anuman_and_invoke_objective(ctx, world),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Quick_Kill => rules::access_anuman_and_invoke_shockwave(ctx, world),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Slow_Kill => rules::access_if___mode_eq_drone____drone_melee_damage_3_and_drone_hover__else____invoke_weapon_and_melee_damage_3_and___boomerang_or_boomerang_upgrade_(ctx, world),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks => rules::access_annuna_double_trouble_bosses_and_invoke_shockwave_and___invoke_weapon_or_anuman_or_boomerang_or_boomerang_upgrade(ctx, world),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel => rules::access_annuna_double_trouble_bosses_and_invoke_shockwave_and___boomerang_or_boomerang_upgrade(ctx, world),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks => rules::access_annuna_double_trouble_bosses_and_invoke_can_damage(ctx, world),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::access_invoke_boomerang(ctx, world),
             LocationId::Annuna__East_Bridge__Cavern_Cache__Flask => true,
             LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
@@ -197,6 +207,7 @@ impl world::Accessible for Location {
             LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => rules::access_invoke_more_refills(ctx, world),
             LocationId::Annuna__Twisty_Passages__Northwest_Alcove__Refill => rules::access_invoke_more_refills(ctx, world),
             LocationId::Annuna__Twisty_Passages__Top__Tablet => true,
+            LocationId::Annuna__Udug_Lair__West_Ditch__Health => true,
             LocationId::Annuna__Upper_Hallway__Behind_Pedestal__Health_Pickup => rules::access_invoke_more_refills(ctx, world),
             LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button => rules::access_invoke_can_damage(ctx, world),
             LocationId::Annuna__Vertical_Room__Plinth__Item => true,
@@ -978,10 +989,18 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Amagi__Wiggly_Room__Button__Hit_Button => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
+            LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::observe_access_infect_and_not_anuman_and_invoke_objective(ctx, world, full_obs),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Quick_Kill => rules::observe_access_anuman_and_invoke_shockwave(ctx, world, full_obs),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Slow_Kill => rules::observe_access_if___mode_eq_drone____drone_melee_damage_3_and_drone_hover__else____invoke_weapon_and_melee_damage_3_and___boomerang_or_boomerang_upgrade_(ctx, world, full_obs),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks => rules::observe_access_annuna_double_trouble_bosses_and_invoke_shockwave_and___invoke_weapon_or_anuman_or_boomerang_or_boomerang_upgrade(ctx, world, full_obs),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel => rules::observe_access_annuna_double_trouble_bosses_and_invoke_shockwave_and___boomerang_or_boomerang_upgrade(ctx, world, full_obs),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks => rules::observe_access_annuna_double_trouble_bosses_and_invoke_can_damage(ctx, world, full_obs),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
             LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
@@ -1584,6 +1603,20 @@ impl world::Accessible for Location {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
+                LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => {
+                    if true {
+                        1500
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => {
+                    if true {
+                        1500
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel => {
                     if true {
                         1000
@@ -1779,10 +1812,18 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Amagi__Wiggly_Room__Button__Hit_Button => rules::explain_invoke_can_damage(ctx, world, edict),
+            LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Fill_It_Up => rules::explain_infect_and_not_anuman_and_invoke_objective(ctx, world, edict),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Quick_Kill => rules::explain_anuman_and_invoke_shockwave(ctx, world, edict),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Slow_Kill => rules::explain_if___mode_eq_drone____drone_melee_damage_3_and_drone_hover__else____invoke_weapon_and_melee_damage_3_and___boomerang_or_boomerang_upgrade_(ctx, world, edict),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks => rules::explain_annuna_double_trouble_bosses_and_invoke_shockwave_and___invoke_weapon_or_anuman_or_boomerang_or_boomerang_upgrade(ctx, world, edict),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel => rules::explain_annuna_double_trouble_bosses_and_invoke_shockwave_and___boomerang_or_boomerang_upgrade(ctx, world, edict),
+            LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks => rules::explain_annuna_double_trouble_bosses_and_invoke_can_damage(ctx, world, edict),
             LocationId::Annuna__East_Bridge__Below_Gate_Button__Switch_from_Below => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
             LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
@@ -2401,7 +2442,52 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 902] = [
+static LOC_DEFS: [Location; 913] = [
+    Location {
+        id: LocationId::Amagi_Breach__Center_Ruins__Cache__Flask,
+        canonical: CanonId::Amagi_Breach_Center_Ruins_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Collection_Skip,
+        canonical: CanonId::Amagi_Breach_Center_Ruins_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Breach,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel,
+        canonical: CanonId::Amagi_Breach_Center_Ruins_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Breach_Map__LAB_Center_Ruins_Flask,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage,
+        canonical: CanonId::Amagi_Breach_Center_Ruins_Blocks,
+        item: Item::Amagi_Breach_Center_Ruins_Blocks,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Amagi_Breach__Center_Ruins__Passage_Exit,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage,
+        canonical: CanonId::Amagi_Breach_Center_Ruins_Blocks,
+        item: Item::Amagi_Breach_Center_Ruins_Blocks,
+        price: Currency::Free,
+        time: 1000,
+        dest: SpotId::Amagi_Breach__Center_Ruins__Passage_Entrance,
+        skippable: false,
+    },
     Location {
         id: LocationId::Amagi_Breach__Divided__Wall_East__Health,
         canonical: CanonId::Loc_Amagi_Breach__Divided__Wall_East__Health,
@@ -3147,6 +3233,51 @@ static LOC_DEFS: [Location; 902] = [
         price: Currency::Free,
         time: 15000,
         dest: SpotId::Annuna__Apocalypse__Bomb_East,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Quick_Kill,
+        canonical: CanonId::Annuna_Double_Trouble_Bosses,
+        item: Item::Annuna_Double_Trouble_Bosses,
+        price: Currency::Energy(200),
+        time: 8000,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Slow_Kill,
+        canonical: CanonId::Annuna_Double_Trouble_Bosses,
+        item: Item::Annuna_Double_Trouble_Bosses,
+        price: Currency::Free,
+        time: 20000,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks,
+        canonical: CanonId::Annuna_Double_Trouble_Rewards,
+        item: Item::Two_Big_Flasks,
+        price: Currency::Energy(100),
+        time: 5500,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel,
+        canonical: CanonId::Annuna_Double_Trouble_Rewards,
+        item: Item::Two_Big_Flasks,
+        price: Currency::Energy(100),
+        time: 5000,
+        dest: SpotId::Menu__Kiengir_Map__Annuna_Double_Trouble_Bosses,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks,
+        canonical: CanonId::Annuna_Double_Trouble_Rewards,
+        item: Item::Two_Big_Flasks,
+        price: Currency::Free,
+        time: 12000,
+        dest: SpotId::None,
         skippable: false,
     },
     Location {
@@ -3990,6 +4121,15 @@ static LOC_DEFS: [Location; 902] = [
         id: LocationId::Annuna__Twisty_Passages__Top__Tablet,
         canonical: CanonId::Loc_Annuna__Twisty_Passages__Top__Tablet,
         item: Item::Destruction_Pogrom,
+        price: Currency::Free,
+        time: 0,
+        dest: SpotId::None,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Annuna__Udug_Lair__West_Ditch__Health,
+        canonical: CanonId::Loc_Annuna__Udug_Lair__West_Ditch__Health,
+        item: Item::Health_Fragment,
         price: Currency::Free,
         time: 0,
         dest: SpotId::None,
@@ -10538,6 +10678,9 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Collection_Skip | LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => SpotId::Amagi_Breach__East_Ruins__Northeast_Corner,
         LocationId::Amagi_Breach__East_Ruins__Plinth__Urn => SpotId::Amagi_Breach__East_Ruins__Plinth,
         LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip | LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => SpotId::Amagi_Breach__East_Ruins__Plinth,
+        LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => SpotId::Amagi_Breach__Center_Ruins__Passage_Entrance,
+        LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => SpotId::Amagi_Breach__Center_Ruins__Passage_Exit,
+        LocationId::Amagi_Breach__Center_Ruins__Cache__Flask | LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Collection_Skip | LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => SpotId::Amagi_Breach__Center_Ruins__Cache,
         LocationId::Amagi_Breach__Upper_Lake__Column__Health => SpotId::Amagi_Breach__Upper_Lake__Column,
         LocationId::Amagi_Breach__Divided__Wall_East__Health => SpotId::Amagi_Breach__Divided__Wall_East,
         LocationId::Amagi_Breach__West_Ruins__Center_Platform__Flask | LocationId::Amagi_Breach__West_Ruins__Center_Platform__Flask_Collection_Skip | LocationId::Amagi_Breach__West_Ruins__Center_Platform__Flask_Fast_Travel => SpotId::Amagi_Breach__West_Ruins__Center_Platform,
@@ -10623,6 +10766,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Annuna__Filter_Teleporter__Shaft_Bottom__Flask => SpotId::Annuna__Filter_Teleporter__Shaft_Bottom,
         LocationId::Annuna__Filter_Teleporter__Northeast_Cubby__Tablet => SpotId::Annuna__Filter_Teleporter__Northeast_Cubby,
         LocationId::Annuna__Spider_Room__Healthy_Corner__Health_Refill => SpotId::Annuna__Spider_Room__Healthy_Corner,
+        LocationId::Annuna__Udug_Lair__West_Ditch__Health => SpotId::Annuna__Udug_Lair__West_Ditch,
         LocationId::Annuna__East_Hideout__Ladder_Middle__Throw_Down => SpotId::Annuna__East_Hideout__Ladder_Middle,
         LocationId::Annuna__East_Hideout__Bottom__Flask | LocationId::Annuna__East_Hideout__Bottom__Flask_Collection_Skip | LocationId::Annuna__East_Hideout__Bottom__Flask_Fast_Travel => SpotId::Annuna__East_Hideout__Bottom,
         LocationId::Annuna__East_Hideout__Left_Mid_air__Shockwave_Flask => SpotId::Annuna__East_Hideout__Left_Mid_air,
@@ -10643,6 +10787,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Annuna__Remote_Training__Upper_Climb__Remote_Button => SpotId::Annuna__Remote_Training__Upper_Climb,
         LocationId::Annuna__Remote_Training__Button__Hit_Button => SpotId::Annuna__Remote_Training__Button,
         LocationId::Annuna__Remote_Training__Upper_Gate_East__Remote_Button => SpotId::Annuna__Remote_Training__Upper_Gate_East,
+        LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Quick_Kill | LocationId::Annuna__Double_Trouble__East_Side_Lower__Bosses_Slow_Kill | LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks | LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel | LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks => SpotId::Annuna__Double_Trouble__East_Side_Lower,
         LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => SpotId::Annuna__Seals__Breakable_Rock,
         LocationId::Annuna__Final_Cache__West__Remote_Flask | LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel | LocationId::Annuna__Final_Cache__West__Spin_into_Flask => SpotId::Annuna__Final_Cache__West,
         LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask => SpotId::Annuna__Final_Cache__Ledge,

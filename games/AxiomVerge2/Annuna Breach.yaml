@@ -1134,6 +1134,8 @@ areas:
           jumps: 3
     - name: South Overhang
       coord: [41.5, 26.5]
+      data:
+        flipside: Annuna > Udug Lair > Overhang Top
       local:
         - to: South
           thru: [41.575, 26.6]
@@ -1144,6 +1146,8 @@ areas:
           jumps: 3
     - name: South
       coord: [41.5, 26.75]
+      data:
+        flipside: Annuna > Udug Lair > Covered Bottom
       local:
         - to: South Overhang
           jumps: 2
@@ -1159,10 +1163,14 @@ areas:
   spots:
     - name: North
       coord: [41.5, 27.2]
+      data:
+        flipside: Annuna > Boss Gate > North Mid-air
       local:
         - to: Save Point
     - name: Save Point
       coord: [41.475, 27.55]
+      data:
+        flipside: Annuna > Boss Gate > Portal Stand
       exits:
         - to: Depths > South
           req: $mist2
@@ -1185,6 +1193,8 @@ areas:
   spots:
     - name: Save Point
       coord: [42.625, 25.5]
+      data:
+        flipside: Annuna > Udug Lair > Portal Stand
       actions:
         - name: Save
           do: $save
