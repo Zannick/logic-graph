@@ -1642,7 +1642,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi__Secret_Chamber__East_Dur_Esla,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__West_1, ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__West_3)),
+        exit_range: Some((ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__Column_1, ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__Column_3)),
         action_range: Some((ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla, ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla)),
     },
     SpotDef {

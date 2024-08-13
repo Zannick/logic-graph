@@ -575,3 +575,78 @@
 * Collect Big_Flask from Annuna Breach > Lower Gate > Flower Cache > Flask
 * Collect Big_Flask from Annuna Breach > Factory Foyer > West Flower > Flask
   Move... to Annuna Breach > Depths > South Overhang
+  ExitBreachWarp
+* Collect Health_Fragment from Annuna > Udug Lair > West Ditch > Health
+  Move... to Annuna > Udug Lair > Covered Bottom
+! Do Move Portal Here
+  Portalwarp
+  Move... to Annuna Breach > Bottom > North
+  ExitBreachWarp
+  Move... to Annuna > Double Trouble > East Side Lower
+! Do Become Indra
+* Collect Annuna_Double_Trouble_Bosses from Annuna > Double Trouble > East Side Lower > Bosses Quick Kill
+* Collect Two_Big_Flasks from Annuna > Double Trouble > East Side Lower > Fast Flasks
+! Do Become Drone
+
+# Section "Annuna Tower Nonsense"
+  Move... to Annuna > East Bridge > Cavern Foyer
+! Do Become Indra
+* Collect Big_Flask from Annuna > East Bridge > Cavern Foyer > Shockwave Flask
+! Do Become Drone
+  Move... to Annuna > West Bridge > Tower Upper Middle
+! Do Move Portal Here
+  Portalwarp
+* Collect Flask from Annuna Breach > Bridge > Tower Upper Interior > Flask
+  ExitBreachWarp
+  Move... to Annuna > West Bridge > Tower Peak
+! Do Move Portal Here
+  Portalwarp
+
+# Section "Lake Amagi Breach"
+* Collect Health_Fragment from Amagi Breach > Divided > Wall East > Health
+  ExitBreachWarp
+  Move... to Amagi > Isolation > Save Point
+! Do Move Portal Here
+  Portalwarp
+  Move... to Amagi Breach > Fishy Secrets > Shaft Bottom
+  ExitBreachWarp
+! Do Amagi > Secret Chamber > East Dur-Esla > Kill Dur-Esla
+* Collect Health_Fragment from Amagi > Secret Chamber > Upper Cache > Health
+  Move... to Amagi > Secret Chamber > Middle Ledge
+! Do Move Portal Here
+  Portalwarp
+  Move... to Amagi Breach > Fishy Secrets > East Corner
+  ExitBreachWarp
+* Collect Flask from Amagi > Secret Chamber > Enclosed Cache > Flask
+! Do Move Portal Here
+  Portalwarp
+* Collect Amagi_Breach_Split_Gate from Amagi Breach > Split One-Way > Button > Hit Button
+  Move... to Amagi Breach > Lower Hallway > Empty Plinth
+  ExitBreachWarp
+  Move... to Amagi > Divided Room > Portal Stand
+  Portalwarp
+* Collect Halusan from Amagi Breach > Lower Hallway > Cache > Item
+* Collect Amagi_Breach_Lower_Hallway_Gate from Amagi Breach > Lower Hallway > Cache > Hit Button
+* Collect Amagi_Breach_Center_Ruins_Blocks from Amagi Breach > Center Ruins > Passage Entrance > Mist Through Passage
+* Collect Flask from Amagi Breach > Center Ruins > Cache > Flask Fast Travel
+
+# Section "Glacier Gudam"
+  Move... to Glacier Breach > Save and Exit > Save Point
+  ExitBreachWarp
+! Do Glacier > Hammond's End > Switch from Ledge > Open Doors
+* Collect Health_Fragment from Glacier > Hammond's End > Between Center Doors > Health
+  Move... to Glacier > The Big Drop > West Unstable Footing
+  Move... to Glacier > Lonely Bull > Arena
+! Do Become Indra
+* Collect Glacier_Gudam from Glacier > Lonely Bull > Arena > Quick Gudam
+* Collect Big_Flask from Glacier > Lonely Bull > Arena > Shockwave Boss Reward
+! Do Become Drone
+
+# Section "Amashilama"
+* Collect Glacier_Big_Drop_Rock from Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster
+* Collect Glacier_Sea_Burial_Rock from Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster
+* Collect Health_Fragment from Glacier > Sea Burial > Deep Cache > Health
+* Collect Apocalypse_Seals_Wall from Annuna > Seals > Breakable Rock > Faster Mist Through Wall
+* Collect Flask from Annuna > Final Cache > West > Spin into Flask
+* Collect Apocalypse_Bomb from Annuna > Apocalypse > Center Scaffold West > Boss Fight
+* Collect Escape from Glacier > Apocalypse Entry > Grate Ledge > Escape

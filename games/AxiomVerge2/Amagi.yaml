@@ -863,15 +863,15 @@ areas:
       local:
         - to: West Dur-Esla
       exits:
-        - to: West
-          req: ^_west_dur_esla and Underwater_Movement and $hookhover
+        - to: Column
+          req: ^_east_dur_esla and Underwater_Movement and $hookhover
           movement: water
           jumps: 4
-        - to: West
-          req: ^_west_dur_esla and $mist2
+        - to: Column
+          req: ^_east_dur_esla and $mist2
           movement: mist2
-        - to: West
-          req: ^_west_dur_esla and Nanite_Mist
+        - to: Column
+          req: ^_east_dur_esla and Nanite_Mist
           movement: mist1
       actions:
         - name: Kill Dur-Esla

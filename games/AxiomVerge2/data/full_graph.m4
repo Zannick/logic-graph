@@ -219,9 +219,9 @@ digraph AxiomVerge2 {
     Amagi__Secret_Chamber__West_Dur_Esla -> Amagi__Secret_Chamber__West;
     Amagi__Secret_Chamber__West_Dur_Esla -> Amagi__Secret_Chamber__West;
     Amagi__Secret_Chamber__West_Dur_Esla -> Amagi__Secret_Chamber__West;
-    Amagi__Secret_Chamber__East_Dur_Esla -> Amagi__Secret_Chamber__West;
-    Amagi__Secret_Chamber__East_Dur_Esla -> Amagi__Secret_Chamber__West;
-    Amagi__Secret_Chamber__East_Dur_Esla -> Amagi__Secret_Chamber__West;
+    Amagi__Secret_Chamber__East_Dur_Esla -> Amagi__Secret_Chamber__Column;
+    Amagi__Secret_Chamber__East_Dur_Esla -> Amagi__Secret_Chamber__Column;
+    Amagi__Secret_Chamber__East_Dur_Esla -> Amagi__Secret_Chamber__Column;
     Amagi__Secret_Chamber__Column -> Amagi__Secret_Chamber__Upper_Ledge;
     Amagi__Secret_Chamber__Column -> Amagi__Secret_Chamber__Upper_Ledge;
     Amagi__Secret_Chamber__Column -> Amagi__Secret_Chamber__Upper_Ledge;
@@ -5755,6 +5755,7 @@ digraph AxiomVerge2 {
     Annuna__Udug_Lair__Center -> Annuna__Udug_Lair__Overhang_Top;
     Annuna__Udug_Lair__Center -> Annuna__Udug_Lair__Covered_Bottom;
     Annuna__Udug_Lair__West_Ditch -> Annuna__Udug_Lair__Overhang_Top;
+    Annuna__Udug_Lair__Overhang_Top -> Annuna__Udug_Lair__West_Ditch;
     Annuna__Udug_Lair__Overhang_Top -> Annuna__Udug_Lair__Covered_Bottom;
     Annuna__Udug_Lair__Covered_Bottom -> Annuna__Udug_Lair__Overhang_Top;
     Annuna__East_Hideout__West -> Annuna__East_Hideout__West_Ledge;

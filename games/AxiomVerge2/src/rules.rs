@@ -164,6 +164,28 @@ pub fn access_amagi__main_area__ctx__combo_and_invoke_hook(ctx: &Context, world:
     // ^_combo and $hook
     (ctx.amagi__main_area__ctx__combo() && helper__hook!(ctx, world))
 }
+pub fn access_amagi__secret_chamber__ctx__east_dur_esla_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_dur_esla and $mist2
+    (ctx.amagi__secret_chamber__ctx__east_dur_esla() && helper__mist2!(ctx, world))
+}
+pub fn access_amagi__secret_chamber__ctx__east_dur_esla_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_dur_esla and Nanite_Mist
+    (ctx.amagi__secret_chamber__ctx__east_dur_esla() && ctx.has(Item::Nanite_Mist))
+}
+pub fn access_amagi__secret_chamber__ctx__east_dur_esla_and_underwater_movement_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^_east_dur_esla and Underwater_Movement and $hookhover
+    ((ctx.amagi__secret_chamber__ctx__east_dur_esla() && ctx.has(Item::Underwater_Movement))
+        && helper__hookhover!(ctx, world))
+}
 pub fn access_amagi__secret_chamber__ctx__west_dur_esla_and_invoke_mist2(
     ctx: &Context,
     world: &World,
@@ -4751,6 +4773,105 @@ pub fn explain_amagi__main_area__ctx__combo_and_invoke_hook(
                 let (res, mut refs) = hexplain__hook!(ctx, world, edict);
                 edict.insert("$hook", format!("{:?}", res));
                 refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__ctx__east_dur_esla_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_dur_esla and $mist2
+    {
+        let mut left = {
+            let r = ctx.amagi__secret_chamber__ctx__east_dur_esla();
+            edict.insert(
+                "^amagi__secret_chamber__ctx__east_dur_esla",
+                format!("{:?}", r),
+            );
+            (r, vec!["^amagi__secret_chamber__ctx__east_dur_esla"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
+                edict.insert("$mist2", format!("{:?}", res));
+                refs.push("$mist2");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__ctx__east_dur_esla_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_dur_esla and Nanite_Mist
+    {
+        let mut left = {
+            let r = ctx.amagi__secret_chamber__ctx__east_dur_esla();
+            edict.insert(
+                "^amagi__secret_chamber__ctx__east_dur_esla",
+                format!("{:?}", r),
+            );
+            (r, vec!["^amagi__secret_chamber__ctx__east_dur_esla"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_amagi__secret_chamber__ctx__east_dur_esla_and_underwater_movement_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^_east_dur_esla and Underwater_Movement and $hookhover
+    {
+        let mut left = {
+            let mut left = {
+                let r = ctx.amagi__secret_chamber__ctx__east_dur_esla();
+                edict.insert(
+                    "^amagi__secret_chamber__ctx__east_dur_esla",
+                    format!("{:?}", r),
+                );
+                (r, vec!["^amagi__secret_chamber__ctx__east_dur_esla"])
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let h = ctx.has(Item::Underwater_Movement);
+                    edict.insert("Underwater_Movement", format!("{}", h));
+                    (h, vec!["Underwater_Movement"])
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
+                edict.insert("$hookhover", format!("{:?}", res));
+                refs.push("$hookhover");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -20231,6 +20352,45 @@ pub fn observe_access_amagi__main_area__ctx__combo_and_invoke_hook(
         full_obs.observe_amagi__main_area__ctx__combo();
         ctx.amagi__main_area__ctx__combo()
     } && (hobserve__hook!(ctx, world, full_obs)))
+}
+pub fn observe_access_amagi__secret_chamber__ctx__east_dur_esla_and_invoke_mist2(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_dur_esla and $mist2
+    ({
+        full_obs.observe_amagi__secret_chamber__ctx__east_dur_esla();
+        ctx.amagi__secret_chamber__ctx__east_dur_esla()
+    } && (hobserve__mist2!(ctx, world, full_obs)))
+}
+pub fn observe_access_amagi__secret_chamber__ctx__east_dur_esla_and_nanite_mist(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_dur_esla and Nanite_Mist
+    ({
+        full_obs.observe_amagi__secret_chamber__ctx__east_dur_esla();
+        ctx.amagi__secret_chamber__ctx__east_dur_esla()
+    } && ({
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    }))
+}
+pub fn observe_access_amagi__secret_chamber__ctx__east_dur_esla_and_underwater_movement_and_invoke_hookhover(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^_east_dur_esla and Underwater_Movement and $hookhover
+    (({
+        full_obs.observe_amagi__secret_chamber__ctx__east_dur_esla();
+        ctx.amagi__secret_chamber__ctx__east_dur_esla()
+    } && ({
+        full_obs.observe_underwater_movement();
+        ctx.has(Item::Underwater_Movement)
+    })) && (hobserve__hookhover!(ctx, world, full_obs)))
 }
 pub fn observe_access_amagi__secret_chamber__ctx__west_dur_esla_and_invoke_mist2(
     ctx: &Context,
