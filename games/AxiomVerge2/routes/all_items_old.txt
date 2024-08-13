@@ -10,7 +10,10 @@
 * Collect Flask from Glacier > Vertical Room > Peak > Flask
 ! Do Ebih > Base Camp > Save Point > Save
 * Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
-! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
+! Do Ebih > Ebih East > Lower Moving Platform > Activate Ride
+* Collect Health_Fragment from Ebih > Ebih East > Dispenser > Vend
+! Do Ebih > Ebih East > Dispenser > Activate Lift
+
 ! Do Ebih > Ebih East > Moving Platform > Activate Ride
 * Collect Under_Siege from Ebih > Ebih East > East Ledge > Note
 ! Do Ebih > Drone Room > Portal Exit > Activate Platform
@@ -177,6 +180,7 @@
 ! Do Annuna > Filter Teleporter > Shaft Top > Throw Drone
 * Collect Beware_the_Patternmind from Annuna > Vertical Room > Upper Cache > Tablet
 ! Do Glacier > Vertical Room > Lower Switch > Open Lower Gatestones
+* Collect Bounty_List from Glacier > Crystals > Top Corner > Tablet
 * Collect Breach_Attractor from Glacier > Crystals > Lower Corner > Item
 * Collect Dr_Gloria from Glacier > Sea Burial > Inside the Grate > Notes
 
