@@ -518,11 +518,11 @@ class GameLogic(object):
 
     def process_exit_movements(self):
         for spot in self.spots():
-            points = [('exit', e) for e in spot.get('exits', ())] + [('hybrid loc', h) for h in spot.get('hybrid', ())] + [('action', a) for a in spot.get('actions', ())]
+            points = [('exit', e) for e in spot.get('exits', ())] + [('hybrid loc', h) for h in spot.get('hybrid', []) + spot.get('locations', [])] + [('action', a) for a in spot.get('actions', ())]
             for (ptype, exit) in points:
                 if 'time' not in exit and 'movement' in exit:
                     if 'to' not in exit:
-                        # check_all will add an error for this, if it's not an action that doesn't need a dest
+                        # check_all will add an error for this, if it's not an action/loc that doesn't need a dest
                         continue
                     target = get_exit_target(exit)
                     if target not in self.id_lookup:

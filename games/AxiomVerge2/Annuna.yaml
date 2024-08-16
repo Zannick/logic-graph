@@ -5755,6 +5755,7 @@ areas:
           req: $spin
           to: Cache
           movement: fast_hover
+          jumps: 1
           penalty_tags: [flask]
         - name: Remote Flask
           canon: Annuna_Final_Cache_Flask

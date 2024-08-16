@@ -2424,6 +2424,7 @@ areas:
           req: Slingshot_Hook and Slingshot_Charge
           to: Rock Top
           movement: fling
+          jumps: 1
           penalty_tags: [charge_time]
           tags: [event]
         - name: Spin Up
@@ -2432,6 +2433,7 @@ areas:
           req: Slingshot_Hook and Slingshot_Weapon
           to: Rock Top
           movement: base
+          jumps: 1
           tags: [event]
       exits:
         - to: Rock Top

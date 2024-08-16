@@ -3809,6 +3809,7 @@ areas:
           req: $charge
           to: Wall West Mid-air
           movement: base
+          jumps: 1
           penalty_tags: [charge_time, charge_time]  # can't get it in one
         - name: Spin Through Wall
           canon: Uhrum_Emergence_Wall
@@ -3816,6 +3817,7 @@ areas:
           req: $spin
           to: Wall West Mid-air
           movement: base  # slower than fling/fast hover would be
+          jumps: 1
           # re-time?
     - name: East
       coord: [26.95, 21.8]

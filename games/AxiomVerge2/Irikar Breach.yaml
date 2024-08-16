@@ -1304,6 +1304,7 @@ areas:
           req: Slingshot_Hook and Slingshot_Charge
           to: Rock West Ledge
           movement: fling
+          jumps: 1
           penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Irikar_Breach_Uhrum_Connector_Wall
@@ -1311,6 +1312,7 @@ areas:
           req: Slingshot_Hook and Slingshot_Weapon
           to: Rock West Ledge
           movement: fast_hover
+          jumps: 1
           tags: [event]
         - name: Spin Through Wall and Hover
           canon: Irikar_Breach_Uhrum_Connector_Wall
@@ -1318,6 +1320,7 @@ areas:
           req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
           to: V Rock West
           movement: fast_hover
+          jumps: 1
           tags: [event]
         - name: Charge Through Wall and Hover
           canon: Irikar_Breach_Uhrum_Connector_Wall
@@ -1325,6 +1328,7 @@ areas:
           req: Slingshot_Hook and Slingshot_Charge and Drone_Hover
           to: V Rock West
           movement: fast_hover  # technically fling for an initial part, plus the charge time
+          jumps: 1
           tags: [event]
     - name: Sand Swarm
       coord: [17.95, 26.8]
