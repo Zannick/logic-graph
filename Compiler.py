@@ -501,8 +501,8 @@ class GameLogic(object):
                 pen['cpr'] = _parseExpression(
                     pen['calc'], f'{infoname} ({penaltyname})', category, ': ', rule='num')
                 pen['calc_id'] = self.make_funcid_from(info, pen['cpr'], field='calc', ret='f32')
-            elif 'add' not in pen:
-                self._errors.append(f'{infoname} {penaltyname} requires add or calc')
+            elif 'add' not in pen and 'movement' not in pen:
+                self._errors.append(f'{infoname} {penaltyname} requires add, movement, or calc')
 
 
     def process_canon(self):
@@ -549,7 +549,7 @@ class GameLogic(object):
                         exit['time'] = self.movement_time([m], None if mvmt.get('ignore_base') else base,
                                                           abs(tx - sx), ty - sy, jumps, jumps_down)
                         if 'price' not in exit and 'price_per_sec' in mvmt:
-                            exit['price'] = int(math.ceil(mvmt['price_per_sec'] * exit['time'] + mvmt.get('base_price', 0)))
+                            # Price is handled in rust now, just validate here
                             if costs := mvmt.get('costs'):
                                 if 'costs' in exit and exit['costs'] != costs:
                                     logging.warning(f'field "costs" in {ptype} {exit["fullname"]} overridden by movement {m!r}: {costs}')
@@ -560,8 +560,14 @@ class GameLogic(object):
                     else:
                         self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]}: {m!r}')
                         continue
+                    for pen in exit.get('penalties', ()):
+                        if m := pen.get('movement'):
+                            if m != 'base' and m not in self.all_movements:
+                                self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]} penalty: {m!r}')
                     if exit['time'] is None:
                         self._errors.append(f'Unable to determine movement time for {ptype} {exit["fullname"]} with movement {m!r}: missing jumps?')
+                if 'movement' not in exit and any('movement' in p for p in exit.get('penalties', ())):
+                    self._errors.append(f'movement must be defined in {ptype} {exit["fullname"]} to use movement in penalties')
 
 
     def process_times(self):

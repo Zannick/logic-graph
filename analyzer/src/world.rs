@@ -31,9 +31,10 @@ pub trait Accessible: Sync {
     fn base_time(&self) -> u32;
     /// Actual access time. Must be at least base_time.
     fn time(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> u32;
-    fn price(&self) -> &Self::Currency;
+    fn base_price(&self) -> &Self::Currency;
+    fn price(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::Currency;
     fn is_free(&self) -> bool {
-        *self.price() == Self::Currency::default()
+        *self.base_price() == Self::Currency::default()
     }
 
     fn explain_rule(
@@ -48,11 +49,11 @@ pub trait Accessible: Sync {
     {
         let mut edict = FxHashMap::default();
         let mut explains = Vec::new();
-        if !ctx.can_afford(self.price()) {
+        if !ctx.can_afford(self.base_price()) {
             explains.push(format!(
                 "Can't afford {}: have {}",
-                self.price(),
-                ctx.amount_could_afford(self.price())
+                self.base_price(),
+                ctx.amount_could_afford(self.base_price())
             ));
         }
         let (_, named) = self.explain_rule(ctx, world, &mut edict);

@@ -2561,18 +2561,15 @@ areas:
       local:
         - to: High Ledge
       locations:
-        - name: Break Outer Wall
+        - name: Mist Through Outer Wall
           to: Cavern Outer Rock East
           item: Sniper_Valley_Rock_1
           canon: Sniper_Valley_Rock_1
           req: Nanite_Mist
-          movement: mist1
-        - name: Upgraded Mist Through Outer Wall
-          to: Cavern Outer Rock East
-          item: Sniper_Valley_Rock_1
-          canon: Sniper_Valley_Rock_1
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Cavern Outer Rock East
           req: Sniper_Valley_Rock_1

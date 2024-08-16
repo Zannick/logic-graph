@@ -58,7 +58,8 @@ impl world::Accessible for Exit {
             _ => 0,
         }
     }
-    fn price(&self) -> &Currency { &self.price }
+    fn base_price(&self) -> &Currency { &self.price }
+    fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }
     
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
@@ -109,7 +110,7 @@ static EXIT_DEFS: [Exit; {{ num_exits }}] = [
         id: ExitId::{{ ex.id }},
         time: {{ (ex.time * 1000)|int }},
         dest: SpotId::{{ ex|get_exit_target }},
-        {{ price(ex.price, ex.costs or default_price_type) }}
+        price: {{ price(ex.price, ex.costs or default_price_type) }},
     },
 %% endfor
 ];

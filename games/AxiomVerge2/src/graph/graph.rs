@@ -5571,7 +5571,7 @@ impl world::World for World {
             Item::Lament_for_Fools => vec![LocationId::Annuna__East_Bridge__Tower_Gate__Tablet],
             Item::Royal_Ring => vec![LocationId::Annuna__East_Bridge__Tower_Secret__Item],
             Item::Family_Tragedy => vec![LocationId::Annuna__Sniper_Valley__Table__Item],
-            Item::Sniper_Valley_Rock_1 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall],
+            Item::Sniper_Valley_Rock_1 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall],
             Item::Sniper_Valley_Rock_2 => vec![LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall],
             Item::Boomerang_Upgrade => vec![LocationId::Annuna__Vertical_Room__Plinth__Item],
             Item::Annuna_Vertical_Room_Gate => vec![LocationId::Annuna__Vertical_Room__Gate_Button__Hit_Button],

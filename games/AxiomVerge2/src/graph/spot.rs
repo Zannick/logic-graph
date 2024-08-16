@@ -4239,7 +4239,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     },
     SpotDef {
         id: SpotId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West,
-        loc_range: Some((LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall)),
+        loc_range: Some((LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall, LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall)),
         exit_range: Some((ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1, ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__ex__Cavern_Outer_Rock_East_1)),
         action_range: None,
     },

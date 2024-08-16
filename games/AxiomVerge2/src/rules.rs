@@ -2861,6 +2861,10 @@ pub fn access_not_irikar_royal_storage_wall_and_nanite_mist(ctx: &Context, world
     // not Irikar_Royal_Storage_Wall and Nanite_Mist
     (!ctx.has(Item::Irikar_Royal_Storage_Wall) && ctx.has(Item::Nanite_Mist))
 }
+pub fn access_not_mist_upgrade(ctx: &Context, world: &World) -> bool {
+    // not Mist_Upgrade
+    !ctx.has(Item::Mist_Upgrade)
+}
 pub fn access_not_separation_or_defeat_indra(ctx: &Context, world: &World) -> bool {
     // NOT Separation or Defeat_Indra
     (!ctx.has(Item::Separation) || ctx.has(Item::Defeat_Indra))
@@ -17235,6 +17239,18 @@ pub fn explain_not_irikar_royal_storage_wall_and_nanite_mist(
         }
     }
 }
+pub fn explain_not_mist_upgrade(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not Mist_Upgrade
+    {
+        let h = ctx.has(Item::Mist_Upgrade);
+        edict.insert("Mist_Upgrade", format!("{}", h));
+        (!h, vec!["Mist_Upgrade"])
+    }
+}
 pub fn explain_not_separation_or_defeat_indra(
     ctx: &Context,
     world: &World,
@@ -26569,6 +26585,17 @@ pub fn observe_access_not_irikar_royal_storage_wall_and_nanite_mist(
         full_obs.observe_nanite_mist();
         ctx.has(Item::Nanite_Mist)
     }))
+}
+pub fn observe_access_not_mist_upgrade(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not Mist_Upgrade
+    {
+        full_obs.observe_mist_upgrade();
+        !ctx.has(Item::Mist_Upgrade)
+    }
 }
 pub fn observe_access_not_separation_or_defeat_indra(
     ctx: &Context,

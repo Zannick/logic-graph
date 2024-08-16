@@ -16927,10 +16927,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__Sniper_Valley__Table__Item => {
                 self.cbits8.insert(flags::ContextBits8::VISITED_LOC_ANNUNA__SNIPER_VALLEY__TABLE__ITEM);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
@@ -19397,7 +19394,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__East_Bridge__Cavern_Foyer__Shockwave_Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_FLASK);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall => {
@@ -20470,7 +20467,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__East_Bridge__Cavern_Foyer__Shockwave_Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_FLASK)
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Upgraded_Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1)
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall => {

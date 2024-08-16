@@ -534,7 +534,7 @@ impl<T: Ctx> ContextWrapper<T> {
         let dur = loc.time(&self.ctx, world);
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item(), world);
-        self.ctx.spend(loc.price());
+        self.ctx.spend(loc.base_price());
         if loc.dest() != Default::default() {
             self.ctx.set_position(loc.dest(), world);
             self.append_history(History::V(loc.item(), loc.id(), loc.dest()), dur);
@@ -554,7 +554,7 @@ impl<T: Ctx> ContextWrapper<T> {
         let dur = exit.time(&self.ctx, world);
         self.ctx.set_position(exit.dest(), world);
         self.elapse(dur);
-        self.ctx.spend(exit.price());
+        self.ctx.spend(exit.base_price());
         self.append_history(History::E(exit.id()), dur);
     }
 
@@ -606,7 +606,7 @@ impl<T: Ctx> ContextWrapper<T> {
         );
         self.ctx.set_position(dest, world);
         self.elapse(dur);
-        self.ctx.spend(warp.price());
+        self.ctx.spend(warp.base_price());
         warp.postwarp(&mut self.ctx, world);
         if warp.should_reload() {
             self.ctx.reload_game(world);
@@ -623,7 +623,7 @@ impl<T: Ctx> ContextWrapper<T> {
         let dur = action.time(&self.ctx, world);
         action.perform(&mut self.ctx, world);
         self.elapse(dur);
-        self.ctx.spend(action.price());
+        self.ctx.spend(action.base_price());
         self.append_history(History::A(action.id()), dur);
     }
 
