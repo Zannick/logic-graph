@@ -39,10 +39,14 @@ The common attributes include:
 *   **time**: The base time it takes to access or traverse the component, as an integer or float amount in seconds. Not used for local connections or Exits that use movement to determine it.
 *   **tags**: A list of string tags for the component, which may be used to set a default access/traversal time (by listing the tag with a value in the `Game.yaml` `time` section), or to mark certain groups of components. If multiple tags have times associated with them, the largest is chosen by default. Warps may have tags but do not use them to set a default time. Local connections do not have tags.
 *   **penalty_tags**: A list of string tags for the component, each of which must appear in the `Game.yaml` `time` section. The sum of the times associated with each tag in this list is added to the base time. Tags in this list may be preceded by a `-` to subtract that time constant instead of adding it, but the total penalty cannot drop below 0. Can be used anywhere **tags** are used in a similar way, except that it's mainly useful for Exits that calculate the base time based on movement and need to add transition penalties.
-*   **penalties**: A list of specialized time adjustments on top of the base time. Usable as a shorter version of redefining additional alternative versions of the entire component with minor adjustments. Each adjustment will have further attributes:
+*   **penalties**: A list of specialized time adjustments on top of the base time. Each penalty adds a fixed amount of time based on the attributes below, plus **calc** which will add an amount calculated at runtime. Usable as a shorter version of redefining additional alternative versions of the entire component with minor adjustments. Each adjustment will have further attributes:
     *   **when**: A logic rule detailing when the penalty applies, which must evaluate to true or false. If omitted, is considered true.
     *   **add**: The time to add on top of the base time when the `when` rule is true.
     *   **calc**: A logic rule returning the time to add as a float number of seconds. (The engine will round this number up to the next millisecond.)
+    *   **movement**: If the component has a movement, you can change which movement is used to calculate time when this penalty applies (preferably a slower movement). Note that this doesn't apply to other penalties that apply simultaneously, so it's advised that you ensure movement-related penalties are mutually exclusive. The penalty added is based on a newly calculated movement time, minus the base time.
+        * This may also affect price based on the movement prices, but the movement in the penalty must have the same **costs** type as the base component.
+    *   **jumps**: If the component has a movement, you can make it take additional jumps. This might not add any additional time. 
+    *   **jumps_down**: If the component has a movement, you can make it take additional jumps down. This adds a fixed amount of time based on the movement's `jumps_down` time.
 
 See the full list of attributes for each component in its own section.
 
