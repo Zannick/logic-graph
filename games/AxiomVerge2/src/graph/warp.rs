@@ -76,6 +76,7 @@ impl world::Accessible for Warp {
         }
     }
     fn base_price(&self) -> &Currency { &self.price }
+    fn price_per_sec(&self) -> &Currency { &Currency::Free }
     fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }
 
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {

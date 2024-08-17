@@ -22,6 +22,7 @@ pub struct Exit {
     time: u32,
     dest: SpotId,
     price: Currency,
+    price_per_sec: Currency,
 }
 
 impl world::Accessible for Exit {
@@ -59,7 +60,26 @@ impl world::Accessible for Exit {
         }
     }
     fn base_price(&self) -> &Currency { &self.price }
-    fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }
+    fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
+    fn price(&self, ctx: &Context, world: &World) -> Currency {
+        if self.price_per_sec == Currency::Free {
+            self.price
+        } else {
+            match self.id {
+%% for ex in gl.exits()|selectattr('movement')|selectattr('penalties')|sort(attribute='id')
+%% for pen in ex.penalties|selectattr('movement')
+%% set mv = gl.exit_movements[pen.movement]
+%% if mv
+                ExitId::{{ ex.id }}{% if pen.access_id %} if rules::access_{{ pen.access_id }}(ctx, world){% endif %} => {
+                    {{ price(mv.base_price, mv.costs or default_price_type) }} + ({{ price(mv.price_per_sec, mv.costs or default_price_type) }} * (self.time(ctx, world) as f32 / 1000.0))
+                }
+%% endif
+%% endfor
+%% endfor
+                _ => self.price + (self.price_per_sec * (self.time(ctx, world) as f32 / 1000.0))
+            }
+        }
+    }
     
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
@@ -110,7 +130,14 @@ static EXIT_DEFS: [Exit; {{ num_exits }}] = [
         id: ExitId::{{ ex.id }},
         time: {{ (ex.time * 1000)|int }},
         dest: SpotId::{{ ex|get_exit_target }},
+%% if ex.movement and ex.movement is in gl.exit_movements and gl.exit_movements[ex.movement].price_per_sec
+%% set mv = gl.exit_movements[ex.movement]
+        price: {{ price((ex.price or 0) + (mv.base_price or 0), mv.costs or default_price_type) }},
+        price_per_sec: {{ price(mv.price_per_sec, mv.costs or default_price_type) }},
+%% else
         price: {{ price(ex.price, ex.costs or default_price_type) }},
+        price_per_sec: Currency::Free,
+%% endif
     },
 %% endfor
 ];

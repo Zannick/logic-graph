@@ -67,6 +67,7 @@ impl world::Accessible for Location {
         }
     }
     fn base_price(&self) -> &Currency { &self.price }
+    fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {
         if self.price_per_sec == Currency::Free {
             self.price
