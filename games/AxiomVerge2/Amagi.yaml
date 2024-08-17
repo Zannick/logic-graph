@@ -293,11 +293,11 @@ areas:
           jumps: 2
           penalty_tags: [xshift, -base.1]
         - to: Cache Ledge
-          req: Underwater_Movement and $mist2
-          movement: mist2
-        - to: Cache Ledge
           req: Underwater_Movement and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Southeast Ledge
       coord: [30.8, 17.8]
       local:
@@ -307,11 +307,11 @@ areas:
           thru: [30.75, 18.2]
       exits:
         - to: Cache Ledge
-          req: Underwater_Movement and $mist2
-          movement: mist2
-        - to: Cache Ledge
           req: Underwater_Movement and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 18
       coord: [30.95, 17.8]
       local:
@@ -320,11 +320,11 @@ areas:
         - to: Gated Community > West 18
           tags: [xshift]
         - to: Cache Ledge
-          req: Underwater_Movement and $mist2
-          movement: mist2
-        - to: Cache Ledge
           req: Underwater_Movement and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Northeast Ledge
       coord: [30.8, 16.0]
@@ -841,11 +841,11 @@ areas:
           movement: water
           jumps: 4
         - to: West
-          req: ^_west_dur_esla and $mist2
-          movement: mist2
-        - to: West
           req: ^_west_dur_esla and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Kill Dur-Esla
           req: $melee and not ^_west_dur_esla
@@ -868,11 +868,11 @@ areas:
           movement: water
           jumps: 4
         - to: Column
-          req: ^_east_dur_esla and $mist2
-          movement: mist2
-        - to: Column
           req: ^_east_dur_esla and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Kill Dur-Esla
           req: $melee and not ^_east_dur_esla
@@ -904,11 +904,11 @@ areas:
           movement: base
           jumps: 2
         - to: Upper Ledge
-          req: $mist2
-          movement: mist2
-        - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle Ledge
       coord: [35.3, 18.9]
       data:
@@ -925,11 +925,11 @@ areas:
           movement: base
           jumps: 2
         - to: Upper Ledge
-          req: $mist2
-          movement: mist2
-        - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Ledge
       coord: [35.35, 18.5]
       local:
@@ -1314,14 +1314,10 @@ areas:
           item: Amagi_Stronghold_Left_Wall
           req: Nanite_Mist
           to: West Stronghold Wall
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Amagi Stronghold Left Wall
-          item: Amagi_Stronghold_Left_Wall
-          req: $mist2
-          to: West Stronghold Wall
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: West Stronghold Wall
@@ -1334,10 +1330,10 @@ areas:
           jumps: 1
         - to: Stronghold Top
           req: Nanite_Mist
-          movement: mist1
-        - to: Stronghold Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Stronghold Middle Column
       coord: [23.7, 19.7]
       locations:
@@ -1614,14 +1610,10 @@ areas:
           item: Amagi_Stronghold_Left_Wall
           req: Nanite_Mist
           to: Stronghold Rear Wall
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Amagi Stronghold Left Wall
-          item: Amagi_Stronghold_Left_Wall
-          req: $mist2
-          to: Stronghold Rear Wall
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Stronghold Rear Wall
@@ -1779,22 +1771,22 @@ areas:
       exits:
         - to: East Hill
           req: Nanite_Mist
-          movement: mist1
-        - to: East Hill
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center Northeast Platform
           req: Nanite_Mist
-          movement: mist1
-        - to: Center Northeast Platform
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center Lower Platform East
           req: Nanite_Mist
-          movement: mist1
-        - to: Center Lower Platform East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: East Water Surface
       coord: [35.5, 15.0]
@@ -2411,16 +2403,16 @@ areas:
       exits:
         - to: Upper East Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper East Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Upper Gate East
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Gate East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper East Ledge
       coord: [32.55, 15.6]
       local:
@@ -2486,8 +2478,11 @@ areas:
           jumps: 2
       exits:
         - to: Upper East Ledge
-          req: $mist2 and ^_dur_esla
+          req: Nanite_Mist and ^_dur_esla
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Kill Dur-Esla
           req: $melee and not ^_dur_esla
@@ -2534,8 +2529,11 @@ areas:
           req: Amagi_Gated_Community_Gate and Underwater_Movement
           movement: water
         - to: Platform 3 East
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Upper Gate East
       coord: [32.1, 15.8]
@@ -2693,10 +2691,10 @@ areas:
           jumps: 2
         - to: Upper West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Platform 3 East
       coord: [31.65, 16.5]
       local:
@@ -2713,16 +2711,16 @@ areas:
           jumps: 2
         - to: Upper West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Upper Gate West
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Gate West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper West Ledge
       coord: [31.3, 15.95]
       local:
@@ -2788,10 +2786,12 @@ areas:
           jump_mvmt: water
       exits:
         - to: Below West Cache
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalties:
             - add: 1  # kill Dur-Esla first
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Platform
       coord: [27.65, 19.95]
       local:
@@ -2811,8 +2811,11 @@ areas:
         - to: West Platform
       exits:
         - to: Cache
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Cache
           req: Slingshot_Hook
           movement: base
@@ -2840,8 +2843,11 @@ areas:
           movement: water
           jumps: 2
         - to: Cache
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Cache
           req: $hookhover
           movement: base

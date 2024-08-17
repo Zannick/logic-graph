@@ -899,11 +899,11 @@ areas:
           jump_mvmt: water
       exits:
         - to: Center Column
-          req: $mist2
-          movement: mist2
-        - to: Center Column
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center Column
           req: Underwater_Movement and Slingshot_Hook
           movement: water
@@ -1014,8 +1014,11 @@ areas:
         - to: West Ruins > North
           tags: [ydoor]
         - to: North
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: West Ruins  # MARK: West Ruins
   on_entry: $reset_old_area(^newpos)
@@ -1051,8 +1054,11 @@ areas:
           req: Slingshot_Hook or Drone_Hover
           movement: base
         - to: North
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Platform Hook Point
       coord: [25.65, 16.8]
       exits:
@@ -1283,17 +1289,17 @@ areas:
           movement: water
           jumps: 2
         - to: East Ledge
-          req: $mist2
-          movement: mist2
-        - to: East Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Ledge
       coord: [30.5, 20.0]
       local:
@@ -1312,11 +1318,11 @@ areas:
           movement: water
           jumps: 3
         - to: North
-          req: $mist2
-          movement: mist2
-        - to: North
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: North
       coord: [30.5, 19.2]
       local:
@@ -1568,11 +1574,11 @@ areas:
           movement: water
           jumps: 2
         - to: Column
-          req: $mist2
-          movement: mist2
-        - to: Column
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Column
       coord: [33.6, 18.5]
       local:
@@ -1596,11 +1602,11 @@ areas:
           movement: water
           jumps: 3
         - to: Column
-          req: $mist2
-          movement: mist2
-        - to: Column
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Ledge
       coord: [33.35, 19.35]
       local:
@@ -1625,11 +1631,11 @@ areas:
         - to: Lower Hallway > East
           tags: [xdoor]
         - to: Lower Ledge
-          req: $mist2
-          movement: mist2
-        - to: Lower Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Gate West
       coord: [33.4, 19.75]
       local:
@@ -1639,11 +1645,11 @@ areas:
           jump_mvmt: water
       exits:
         - to: Lower Ledge
-          req: $mist2
-          movement: mist2
-        - to: Lower Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Button
           req: Underwater_Movement and Amagi_Breach_Split_Gate
           movement: water

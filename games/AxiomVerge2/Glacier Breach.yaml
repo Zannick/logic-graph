@@ -111,10 +111,10 @@ areas:
       exits:
         - to: Grate Interior
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Interior
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Grate Interior
       coord: [39.55, 12.9]
       locations:
@@ -136,28 +136,28 @@ areas:
       exits:
         - to: Grate West
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Grate Corner
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Corner
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Grate Southeast
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Southeast
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Grate East
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Below Grate
       coord: [39.5, 13.65]
       data:
@@ -174,10 +174,10 @@ areas:
       exits:
         - to: Grate Interior
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Interior
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East Hill
           req: $hook or $hover
           movement: base
@@ -194,10 +194,10 @@ areas:
           jumps: 1
         - to: Grate Interior
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Interior
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Grate East
       coord: [39.7, 12.9]
       exits:
@@ -206,10 +206,10 @@ areas:
           movement: base
         - to: Grate Interior
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Interior
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: East Hill
       coord: [40.2, 13.0]
@@ -675,11 +675,11 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
         - to: North
-          req: $mist2
-          movement: mist2
-        - to: North
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Ledge
       coord: [38.8, 9.75]
       data:
@@ -692,11 +692,11 @@ areas:
           movement: base
           jumps: 1
         - to: North
-          req: $mist2
-          movement: mist2
-        - to: North
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East
       coord: [38.9, 9.75]
       local:
@@ -708,11 +708,11 @@ areas:
       coord: [38.35, 9.5]
       exits:
         - to: North
-          req: $mist2
-          movement: mist2
-        - to: North
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower East Platform
       coord: [38.25, 10.2]
       locations:
@@ -775,13 +775,13 @@ areas:
           req: Drone_Hover
           movement: base
         - to: Stacked Enemies > South
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [ydoor, -mist2.2]
-        - to: Stacked Enemies > South
-          req: Nanite_Mist
-          movement: mist1
-          penalty_tags: [ydoor, -mist1.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.2, -mist1.2]
 
 - name: Save and Exit  # MARK: Save and Exit
   on_entry: $reset_old_area(^newpos)
@@ -945,8 +945,11 @@ areas:
         - to: Mideast
       exits:
         - to: Northwest
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Northwest
           req: Slingshot_Hook
           movement: fast_hover
@@ -957,11 +960,14 @@ areas:
         - to: South
       exits:
         - to: Fortress > Southeast
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [ydoor, -mist2.2]
           penalties:
             - add: 0.5  # evading enemies
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.2, -mist1.2]
     - name: South
       coord: [38.45, 8.8]
       local:
@@ -983,8 +989,11 @@ areas:
       coord: [38.5, 8.5]
       exits:
         - to: Fortress > Southeast
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Northeast
       coord: [38.45, 8.2]
       local:
@@ -1099,11 +1108,11 @@ areas:
         - to: Stacked Enemies > Northeast
           tags: [ydoor]
         - to: East Ledge
-          req: $mist2
-          movement: mist2
-        - to: East Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Empty Space  # MARK: Empty Space
   on_entry: $reset_old_area(^newpos)
@@ -1234,10 +1243,10 @@ areas:
       exits:
         - to: East Mid-air Upper
           req: Nanite_Mist
-          movement: mist1
-        - to: East Mid-air Upper
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Mid-air Upper
       coord: [30.6, 10.3]
       exits:
@@ -1249,10 +1258,10 @@ areas:
       exits:
         - to: West Mid-air Upper
           req: Nanite_Mist
-          movement: mist1
-        - to: West Mid-air Upper
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Mid-air Upper
       coord: [30.1, 10.3]
       exits:

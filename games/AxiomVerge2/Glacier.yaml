@@ -912,11 +912,11 @@ areas:
           movement: base
           jumps: 1
         - to: Fortress Ledge
-          req: $mist2
-          movement: mist2
-        - to: Fortress Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       hybrid:
         - name: Flask Collection Skip
           to: Menu > Warp Only > Kiengir
@@ -983,11 +983,11 @@ areas:
         - to: Grid 37-38,9 > East
           tags: [xshift]
         - to: Fortress Ledge
-          req: $mist2
-          movement: mist2
-        - to: Fortress Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     # Southeast
     - name: Under Scaffolding
@@ -1101,11 +1101,11 @@ areas:
           movement: base
           jumps: 2
         - to: Fortress Ledge
-          req: $mist2
-          movement: mist2
-        - to: Fortress Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 9
       coord: [36.05, 8.75]
       local:
@@ -1257,11 +1257,11 @@ areas:
           movement: base
           jumps: 2
         - to: Fortress Ledge
-          req: $mist2
-          movement: mist2
-        - to: Fortress Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 8
       coord: [36.05, 7.75]
       local:
@@ -1908,14 +1908,18 @@ areas:
           time: 3.1
         - to: West 11
           req: Nanite_Mist
-          movement: mist1
-        - to: West 11
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Angry Guards > Gate
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [base.1, -base.2]
     - name: West 11
       coord: [33.05, 10.85]
       exits:
@@ -1923,10 +1927,10 @@ areas:
           tags: [xshift]
         - to: Gate
           req: Nanite_Mist
-          movement: mist1
-        - to: Gate
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: West End
       coord: [33.3, 9.8]
@@ -2000,16 +2004,16 @@ areas:
       exits:
         - to: Upper Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: North
           req: Nanite_Mist
-          movement: mist1
-        - to: North
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Grate Left
       coord: [34.65, 8.5]
       local:
@@ -2018,10 +2022,10 @@ areas:
       exits:
         - to: Upper Grate Right
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Grate Right
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: North
       coord: [34.5, 8.2]
       local:
@@ -2044,10 +2048,10 @@ areas:
       exits:
         - to: North
           req: Nanite_Mist
-          movement: mist1
-        - to: North
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Hill
       coord: [34.45, 8.55]
       local:
@@ -2274,10 +2278,10 @@ areas:
       exits:
         - to: East 9
           req: Nanite_Mist
-          movement: mist1
-        - to: East 9
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Grate Left Upper
       coord: [32.8, 8.3]
       local:
@@ -2285,19 +2289,19 @@ areas:
       exits:
         - to: East 9
           req: Nanite_Mist
-          movement: mist1
-        - to: East 9
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 9
       coord: [32.95, 8.5]
       exits:
         - to: Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Ledge Grab Room > West 9
           tags: [xshift]
 
@@ -2354,8 +2358,11 @@ areas:
         - to: Ebih > Base Camp > East 11
           tags: [xshift]
         - to: East 10
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Lake Main Entrance  # MARK: Lake Main Entrance
   on_entry: $reset_old_area(^newpos)
@@ -2561,10 +2568,10 @@ areas:
       exits:
         - to: Below Grate
           req: Nanite_Mist
-          movement: mist1
-        - to: Below Grate
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Below Grate
       coord: [44.55, 10.5]
       local:
@@ -2712,10 +2719,10 @@ areas:
           jumps: 1
         - to: Portal Cage
           req: Nanite_Mist
-          movement: mist1
-        - to: Portal Cage
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Lower Slope
       coord: [37.8, 15.3]
@@ -2729,10 +2736,10 @@ areas:
           jumps: 2
         - to: Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Corner
       coord: [37.7, 15.6]
       local:
@@ -2778,10 +2785,10 @@ areas:
       exits:
         - to: Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Hammond's End  # MARK: Hammond's End
   on_entry: $reset_old_area(^newpos)
@@ -2813,10 +2820,10 @@ areas:
       exits:
         - to: Upper Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Floor
       coord: [40.25, 9.8]
       local:
@@ -2984,10 +2991,10 @@ areas:
           jumps: 3
         - to: Lower Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Lower Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Lower Grate Left
       coord: [39.5, 10.3]
@@ -2996,10 +3003,10 @@ areas:
       exits:
         - to: Lower Grate Right
           req: Nanite_Mist
-          movement: mist1
-        - to: Lower Grate Right
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Switch from Ledge
       coord: [39.3, 10.4]
@@ -3113,11 +3120,11 @@ areas:
         - to: Hammond's End > West 11
           tags: [xshift]
         - to: Grate West
-          req: $mist2
-          movement: mist2
-        - to: Grate West
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Grate West
       coord: [38.8, 10.7]
       local:
@@ -3171,24 +3178,29 @@ areas:
           tags: [xshift]
         - to: Gate
           req: Nanite_Mist
-          movement: mist1
-        - to: Gate
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Gate
       coord: [32.85, 10.85]
       local:
         - to: Middle
       exits:
         - to: Ledge Grab Room > Gate
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [base.1, -base.2]
         - to: East 11
           req: Nanite_Mist
-          movement: mist1
-        - to: East 11
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle
       coord: [32.7, 11.1]
       local:
@@ -3503,11 +3515,11 @@ areas:
         - to: Button
       exits:
         - to: Inner East Ledge
-          req: $mist2
-          movement: mist2
-        - to: Inner East Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Inner East Ledge
       coord: [38.4, 7.0]
       data:
@@ -3849,11 +3861,11 @@ areas:
         - to: West
       exits:
         - to: Platform
-          req: not ^_door and $mist2
-          movement: mist2
-        - to: Platform
           req: not ^_door and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Water Surface
       coord: [42.5, 13.0]
       local:
@@ -3894,11 +3906,11 @@ areas:
           jumps: 1
       exits:
         - to: Air Duct
-          req: not ^_door and $mist2
-          movement: mist2
-        - to: Air Duct
           req: not ^_door and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Arena
       coord: [43.3, 12.0]
       local:

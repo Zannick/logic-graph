@@ -530,10 +530,6 @@ areas:
           req: $hover and Nanite_Mist
           price: 24
           movement: base
-        - to: Pillar
-          req: $hover and $mist2
-          price: 20
-          movement: base
     - name: Passage
       coord: [13.9, 26.8]
       local:
@@ -671,14 +667,10 @@ areas:
           item: Irikar_Breach_Buried_Treasure_Pillar
           req: Nanite_Mist
           to: Pillar Middle
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Into Pillar
-          canon: Irikar_Breach_Buried_Treasure_Pillar
-          item: Irikar_Breach_Buried_Treasure_Pillar
-          req: $mist2
-          to: Pillar Middle
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Pillar Middle
@@ -692,8 +684,11 @@ areas:
         - to: Pillar Bottom
       exits:
         - to: Pillar Bottom
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Pillar Left
       coord: [10.4, 27.5]
       local:
@@ -711,14 +706,10 @@ areas:
           item: Irikar_Breach_Buried_Treasure_Pillar
           req: Nanite_Mist
           to: Pillar Middle
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Into Pillar
-          canon: Irikar_Breach_Buried_Treasure_Pillar
-          item: Irikar_Breach_Buried_Treasure_Pillar
-          req: $mist2
-          to: Pillar Middle
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Pillar Middle
@@ -733,10 +724,10 @@ areas:
       exits:
         - to: Pillar Middle
           req: Nanite_Mist
-          movement: mist1
-        - to: Pillar Middle
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Pillar Middle
           req: Drone_Hover
           movement: base
@@ -813,10 +804,10 @@ areas:
           jumps: 2
         - to: Upper East Passage
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper East Passage
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Tank
       coord: [8.9, 27.4]
       local:
@@ -828,10 +819,10 @@ areas:
           jumps: 2
         - to: Upper East Passage
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper East Passage
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Sandtrap
       coord: [9.1, 27.6]
       local:
@@ -921,10 +912,10 @@ areas:
           jumps: 2
         - to: West Rock West
           req: Nanite_Mist
-          movement: mist1
-        - to: West Rock West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Sand
       coord: [6.35, 27.55]
       local:
@@ -968,16 +959,16 @@ areas:
       exits:
         - to: Center Rock East
           req: Nanite_Mist
-          movement: mist1
-        - to: Center Rock East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: East Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Crescent Rock Top
       coord: [5.4, 26.7]
       local:
@@ -986,16 +977,16 @@ areas:
       exits:
         - to: Center Rock East
           req: Nanite_Mist
-          movement: mist1
-        - to: Center Rock East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: East Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Crescent Rock West
       coord: [5.05, 26.95]
       local:
@@ -1255,14 +1246,10 @@ areas:
           item: Irikar_Breach_Uhrum_Connector_Wall
           req: Nanite_Mist
           to: Rock East
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Rock
-          canon: Irikar_Breach_Uhrum_Connector_Wall
-          item: Irikar_Breach_Uhrum_Connector_Wall
-          req: $mist2
-          to: Rock East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: V Rock East
@@ -1282,14 +1269,10 @@ areas:
           item: Irikar_Breach_Uhrum_Connector_Wall
           req: Nanite_Mist
           to: Rock West
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Rock
-          canon: Irikar_Breach_Uhrum_Connector_Wall
-          item: Irikar_Breach_Uhrum_Connector_Wall
-          req: $mist2
-          to: Rock West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: V Rock West

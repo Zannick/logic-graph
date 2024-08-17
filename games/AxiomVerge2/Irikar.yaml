@@ -59,10 +59,10 @@ areas:
           movement: base
         - to: East Rim
           req: Nanite_Mist
-          movement: mist1
-        - to: East Rim
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Throw Drone Far East High
           req: $can_deploy and Drone_Hover
@@ -108,10 +108,10 @@ areas:
           jumps: 1
         - to: West Rim
           req: Nanite_Mist
-          movement: mist1
-        - to: West Rim
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Throw Drone Far East High
           req: $can_deploy and Drone_Hover
@@ -414,14 +414,10 @@ areas:
           item: Irikar_Royal_Storage_Wall
           canon: Irikar_Royal_Storage_Wall
           req: not Irikar_Royal_Storage_Wall and Nanite_Mist
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist into Wall
-          to: Royal Storage in Wall
-          item: Irikar_Royal_Storage_Wall
-          canon: Irikar_Royal_Storage_Wall
-          req: not Irikar_Royal_Storage_Wall and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       actions:
         # collects two items with two different canons at the same time?
@@ -580,10 +576,10 @@ areas:
           jumps: 2
         - to: NW Middle Building Left Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: NW Middle Building Left Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: SW Building Top Platform
       coord: [10.95, 24.35]
       local:
@@ -659,10 +655,10 @@ areas:
           jumps: 1
         - to: NW Middle Building Left Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: NW Middle Building Left Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Exposed Passage Center
       coord: [12.1, 24.6]
       local:
@@ -678,10 +674,10 @@ areas:
           jumps: 2
         - to: Exposed Passage Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Exposed Passage Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Exposed Passage Upper Ledge
       coord: [12.25, 24.2]
       local:
@@ -705,16 +701,16 @@ areas:
           jumps: 2
         - to: Ruined Hallway Gap Left
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Ruined Hallway Gap Right
           req: Nanite_Mist
-          movement: mist1
-        - to: Ruined Hallway Gap Left
-          req: $mist2
           movement: mist2
-        - to: Ruined Hallway Gap Right
-          req: $mist2
-          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Collapsed Column
       coord: [11.925, 25.625]
@@ -888,16 +884,16 @@ areas:
           jumps: 1
         - to: NW Middle Building West Entry
           req: Nanite_Mist
-          movement: mist1
-        - to: NW Middle Building West Entry
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: NW Middle Building Corner
           req: Nanite_Mist
-          movement: mist1
-        - to: NW Middle Building Corner
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 23
       coord: [10.05, 22.8]
       exits:
@@ -959,19 +955,19 @@ areas:
       exits:
         - to: Cavern Mouth
           req: Nanite_Mist
-          movement: mist1
-        - to: Cavern Mouth
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Right Hover Throw End
       coord: [15.05, 21.1]
       exits:
         - to: Cavern Mouth
           req: Nanite_Mist
-          movement: mist1
-        - to: Cavern Mouth
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East Rooftops > Top Rooftop
           movement: base
           penalty_tags: [yshift, -fall.2]
@@ -1000,10 +996,10 @@ areas:
       exits:
         - to: Cavern Cache
           req: Nanite_Mist
-          movement: mist1
-        - to: Cavern Cache
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East Rooftops > Top Rooftop
           movement: base
           penalty_tags: [yshift, -fall.2]
@@ -1196,8 +1192,11 @@ areas:
           movement: base
           jumps: 1
         - to: East Platform
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Moving Platform Start
       coord: [12.3, 27.2]
       local:
@@ -1305,10 +1304,10 @@ areas:
       exits:
         - to: Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 28
       coord: [13.95, 27.7]
       local:
@@ -1318,8 +1317,11 @@ areas:
         - to: Empty Foyer > West
           tags: [xshift]
         - to: Ledge
-          req: $hover and $hook and $mist2
+          req: $hover and $hook and Nanite_Mist
           time: 4.8  # ?
+          penalties:
+            - when: not Mist_Upgrade
+              add: 0.75  # ?
 
 - name: Basement Pipes  # MARK: Basement Pipes
   on_entry: $reset_old_area(^newpos)
@@ -1550,7 +1552,7 @@ areas:
         - to: Sat Tower Roof West
       exits:
         - to: East Rooftops > Off the Edge
-          req: $hover or $mist2
+          req: $hover or Nanite_Mist
           tags: [yshift]
     - name: Healthy Rooftop
       coord: [15.85, 26.05]
@@ -1650,10 +1652,10 @@ areas:
           jumps: 2
         - to: Top Rooftop
           req: Nanite_Mist
-          movement: mist1
-        - to: Top Rooftop
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Boss Room > Upper Rooftops
           tags: [yshift]
     - name: East Mid-air
@@ -1722,10 +1724,12 @@ areas:
           req: $hover
           movement: base
           jumps: 1
-        # Mist1 movement not possible: cost = 480
         - to: Right Platform Start
-          req: not ^_right_platform and $mist2
+          req: not ^_right_platform and Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: NE Ledge
       coord: [9.25, 23.85]
       local:
@@ -1750,10 +1754,10 @@ areas:
       exits:
         - to: Right Platform Start
           req: Nanite_Mist and not ^_right_platform
-          movement: mist1
-        - to: Right Platform Start
-          req: $mist2 and not ^_right_platform
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Hack and Ride
           req: not ^_left_platform and $activate
@@ -1838,10 +1842,10 @@ areas:
           jumps: 3
         - to: NE Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: NE Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Save
           do: $save
@@ -1868,10 +1872,10 @@ areas:
       exits:
         - to: Left Platform Start
           req: not ^_left_platform and Nanite_Mist
-          movement: mist1
-        - to: Left Platform Start
-          req: not ^_left_platform and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Center Rock 1 West
       coord: [8.45, 24.55]
       local:
@@ -1880,10 +1884,10 @@ areas:
       exits:
         - to: Right Platform Start
           req: not ^_right_platform and Nanite_Mist
-          movement: mist1
-        - to: Right Platform Start
-          req: not ^_right_platform and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Center Rock 2 East
       coord: [8.3, 24.75]
       local:
@@ -1895,10 +1899,10 @@ areas:
       exits:
         - to: Right Platform Start
           req: not ^_right_platform and Nanite_Mist
-          movement: mist1
-        - to: Right Platform Start
-          req: not ^_right_platform and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Save Point
           req: $hook and $hover
           movement: fast_hover
@@ -1912,10 +1916,10 @@ areas:
       exits:
         - to: Right Platform Start
           req: not ^_right_platform and Nanite_Mist
-          movement: mist1
-        - to: Right Platform Start
-          req: not ^_right_platform and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Center Rock 3 West
       coord: [8.45, 25.05]
       local:
@@ -1944,10 +1948,10 @@ areas:
       exits:
         - to: Save Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Save Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Tablet Platform
       coord: [7.65, 25.3]
       local:
@@ -1963,10 +1967,10 @@ areas:
         # This is made slightly harder due to enemy aggro, maybe add extra?
         - to: Right Platform Start
           req: not ^_right_platform and Nanite_Mist
-          movement: mist1  # this might cost too much?
-        - to: Right Platform Start
-          req: not ^_right_platform and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Beach Save > Partway Up
           req: $hover
           movement: base
@@ -2026,10 +2030,10 @@ areas:
       exits:
         - to: Save Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Save Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Rock 2
       coord: [9.55, 25.55]
       local:
@@ -2316,10 +2320,10 @@ areas:
           tags: [xshift]
         - to: Top Platform
           req: Nanite_Mist
-          movement: mist1
-        - to: Top Platform
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 28 Ground
       coord: [6.95, 27.3]
       local:

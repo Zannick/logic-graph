@@ -325,8 +325,6 @@ helpers:  # MARK: helpers
   $unlock3: Infect_L2
   $unlock4: Infect_L3
 
-  $mist2: Nanite_Mist and Mist_Upgrade
-
   $ft_main: Fast_Travel and ^realm == 'main'
   $ft_breach: Fast_Travel and ^realm == 'breach'
 

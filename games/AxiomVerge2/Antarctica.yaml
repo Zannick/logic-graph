@@ -99,10 +99,10 @@ areas:
           tags: [interior]
         - to: Building 2 Upper  # unrealistic, but possible with mist
           req: Nanite_Mist
-          movement: mist1
-        - to: Building 2 Upper  # unrealistic, but possible with mist
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Save Point
       coord: [42, 1.8]
       local:
@@ -119,10 +119,10 @@ areas:
           tags: [interior]
         - to: Building 2 Upper  # unrealistic, but possible with mist
           req: Nanite_Mist
-          movement: mist1
-        - to: Building 2 Upper  # unrealistic, but possible with mist
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Building 2 Upper
       coord: [41.3, 0.7]
       local:

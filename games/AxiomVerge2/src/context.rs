@@ -16693,9 +16693,6 @@ impl context::Ctx for Context {
             LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
             }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Upgraded_Mist_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
-            }
             LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_WALL_1);
             }
@@ -16727,9 +16724,6 @@ impl context::Ctx for Context {
                 self.cbits6.insert(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
             }
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
-            }
-            LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
             }
             LocationId::Amagi__East_Lake__Foot__Tablet => {
@@ -16924,22 +16918,13 @@ impl context::Ctx for Context {
             LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Mist_Through_Outer_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Mist_Through_Inner_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_2);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_2);
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_2);
-            }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Mist_Through_Inner_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_2);
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item => {
@@ -17029,9 +17014,6 @@ impl context::Ctx for Context {
             LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
             }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
-            }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
             }
@@ -17042,9 +17024,6 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
-            }
-            LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
@@ -17099,9 +17078,6 @@ impl context::Ctx for Context {
                 self.cbits6.insert(flags::ContextBits6::VISITED_APOCALYPSE_SEALS_WALL);
             }
             LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_APOCALYPSE_SEALS_WALL);
-            }
-            LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_APOCALYPSE_SEALS_WALL);
             }
             LocationId::Annuna__Final_Cache__West__Spin_into_Flask => {
@@ -17203,9 +17179,6 @@ impl context::Ctx for Context {
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
@@ -17215,13 +17188,7 @@ impl context::Ctx for Context {
             LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
-            LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => {
@@ -17284,19 +17251,13 @@ impl context::Ctx for Context {
             LocationId::Ebih__Waterfall__Wall_Right__Break_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
             }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
-            }
-            LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall => {
+            LocationId::Ebih__Waterfall__Wall_Right__Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
             }
             LocationId::Ebih__Waterfall__Wall_Left__Break_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
             }
-            LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
-            }
-            LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall => {
+            LocationId::Ebih__Waterfall__Wall_Left__Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
             }
             LocationId::Ebih__Ebih_West__Alcove__Tablet => {
@@ -17335,16 +17296,10 @@ impl context::Ctx for Context {
             LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
             }
-            LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
-            }
             LocationId::Ebih__Ebih_East__Wall_West__Break_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
             }
             LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
-            }
-            LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
             }
             LocationId::Ebih__Ebih_East__East_Ledge__Note => {
@@ -17440,16 +17395,10 @@ impl context::Ctx for Context {
             LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL);
             }
-            LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL);
-            }
             LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL);
             }
             LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL);
-            }
-            LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL);
             }
             LocationId::Ebih__Guarded_Health__West_Basin__Health => {
@@ -17506,19 +17455,10 @@ impl context::Ctx for Context {
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
             }
-            LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
-            }
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
             }
-            LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Upwards_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
-            }
             LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
-            }
-            LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_On_Through => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
             }
             LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall => {
@@ -17528,9 +17468,6 @@ impl context::Ctx for Context {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
             }
             LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
-            }
-            LocationId::Emergence__Drop_off__Wall_Right__Upgraded_Mist_Through_Wall => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
             }
             LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask => {
@@ -17599,13 +17536,7 @@ impl context::Ctx for Context {
             LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK);
             }
-            LocationId::Emergence__Storage__Wall_Right__Upgraded_Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK);
-            }
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK);
-            }
-            LocationId::Emergence__Storage__Wall_Left__Upgraded_Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK);
             }
             LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => {
@@ -17623,37 +17554,19 @@ impl context::Ctx for Context {
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
-            LocationId::Emergence__Storage__Tunnel_Entrance__Upgraded_Mist_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
-            }
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
-            }
-            LocationId::Emergence__Storage__Behind_Facade__Upgraded_Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Upgraded_Mist_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
-            }
             LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
-            }
-            LocationId::Emergence__Rocks_Fall__Wall_1_East__Upgraded_Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
             LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
-            }
             LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
-            }
-            LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Upward_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
             LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall => {
@@ -17663,9 +17576,6 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
-            }
-            LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Upgraded_Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
             }
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => {
@@ -17680,13 +17590,7 @@ impl context::Ctx for Context {
             LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
-            }
             LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
-            }
-            LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Upward_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
             }
             LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => {
@@ -17698,19 +17602,10 @@ impl context::Ctx for Context {
             LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Upgraded_Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
-            }
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
-            }
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
-            }
-            LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Upwards_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
             }
             LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
@@ -17731,13 +17626,7 @@ impl context::Ctx for Context {
             LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_4_West__Upgraded_Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
-            }
             LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
-            }
-            LocationId::Emergence__Rocks_Fall__Wall_4_East__Upgraded_Mist_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
             LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
@@ -17851,9 +17740,6 @@ impl context::Ctx for Context {
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
             }
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
-            }
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
             }
@@ -17861,9 +17747,6 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
             }
             LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
-            }
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
             }
             LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => {
@@ -17911,16 +17794,10 @@ impl context::Ctx for Context {
             LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
             }
-            LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
-            }
             LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
             }
             LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
-            }
-            LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
             }
             LocationId::Giguna__Wasteland__Upper_Cache__Flask => {
@@ -18013,9 +17890,6 @@ impl context::Ctx for Context {
             LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_DUAL_PATH_WALL);
             }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_DUAL_PATH_WALL);
-            }
             LocationId::Giguna__Dual_Path__Wall_Secret__Health => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__DUAL_PATH__WALL_SECRET__HEALTH);
             }
@@ -18031,9 +17905,6 @@ impl context::Ctx for Context {
             LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BOULDER);
             }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BOULDER);
-            }
             LocationId::Giguna__Hard_Rock__Rock_Center__Tablet => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__HARD_ROCK__ROCK_CENTER__TABLET);
             }
@@ -18041,9 +17912,6 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BOULDER);
             }
             LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BOULDER);
-            }
-            LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_BOULDER);
             }
             LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask => {
@@ -18112,9 +17980,6 @@ impl context::Ctx for Context {
             LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Upgraded_Mist_Downwards => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
-            }
             LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
@@ -18124,9 +17989,6 @@ impl context::Ctx for Context {
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Into_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
-            }
             LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
@@ -18134,9 +17996,6 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
-            }
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Upwards_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
             LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock => {
@@ -18154,13 +18013,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Into_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
-            }
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
-            }
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Upwards_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => {
@@ -18214,16 +18067,10 @@ impl context::Ctx for Context {
             LocationId::Giguna__Separator__Upper_Brick__Break_Bricks => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
             }
-            LocationId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
-            }
             LocationId::Giguna__Separator__Switch__Separation => {
                 self.cbits9.insert(flags::ContextBits9::VISITED_LOC_GIGUNA__SEPARATOR__SWITCH__SEPARATION);
             }
             LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
-            }
-            LocationId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
             }
             LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask => {
@@ -18565,16 +18412,10 @@ impl context::Ctx for Context {
             LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
             }
-            LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Upgraded_Mist_Into_Pillar => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
-            }
             LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
             }
             LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
-            }
-            LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Upgraded_Mist_Into_Pillar => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
             }
             LocationId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__Health => {
@@ -18607,13 +18448,7 @@ impl context::Ctx for Context {
             LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL);
             }
-            LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Upgraded_Mist_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL);
-            }
             LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL);
-            }
-            LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Upgraded_Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL);
             }
             LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall => {
@@ -18647,9 +18482,6 @@ impl context::Ctx for Context {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_ROYAL_STORAGE_WALL);
             }
             LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_ROYAL_STORAGE_WALL);
-            }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_ROYAL_STORAGE_WALL);
             }
             LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item => {
@@ -18880,13 +18712,7 @@ impl context::Ctx for Context {
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Mist_Through_Rock => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK);
             }
-            LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Upgraded_Mist_Through_Rock => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK);
-            }
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK);
-            }
-            LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Upgraded_Mist_Through_Rock => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK);
             }
             LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Charge_Through_Rock => {
@@ -18943,16 +18769,10 @@ impl context::Ctx for Context {
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Upgraded_Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
-            }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
-            }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Upgraded_Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask => {
@@ -18973,9 +18793,6 @@ impl context::Ctx for Context {
             LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
-            }
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
@@ -18983,9 +18800,6 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
-            }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall => {
@@ -18997,9 +18811,6 @@ impl context::Ctx for Context {
             LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
-            }
             LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
@@ -19007,9 +18818,6 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
-            }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__West_Entrance__Sand__Refill => {
@@ -19048,13 +18856,7 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK);
             }
-            LocationId::Uhrum__Glitchy_Corridor__Wall_West__Upgraded_Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK);
-            }
             LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK);
-            }
-            LocationId::Uhrum__Glitchy_Corridor__Wall_East__Upgraded_Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK);
             }
             LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall => {
@@ -19084,9 +18886,6 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
-            }
             LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
@@ -19094,9 +18893,6 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
-            }
-            LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block => {
@@ -19120,9 +18916,6 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
-            LocationId::Uhrum__Cavern__Wall_Left__Upgraded_Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
-            }
             LocationId::Uhrum__Cavern__Wall_Left__Charge_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
@@ -19133,9 +18926,6 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
-            }
-            LocationId::Uhrum__Cavern__Wall_Right__Upgraded_Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall => {
@@ -19186,9 +18976,6 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
-            LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
-            }
             LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
             }
@@ -19196,9 +18983,6 @@ impl context::Ctx for Context {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
-            }
-            LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
             LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall => {
@@ -19246,19 +19030,10 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
             }
-            LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
-            }
             LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
             }
-            LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
-            }
             LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
-            }
-            LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist_Upgrade => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
             }
             LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall => {
@@ -19334,7 +19109,7 @@ impl context::Ctx for Context {
             LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall | LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_WALL_1);
             }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall | LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Mist_Through_Wall | LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Upgraded_Mist_Through_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Break_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => {
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall | LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Mist_Through_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Break_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL);
             }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
@@ -19376,10 +19151,10 @@ impl context::Ctx for Context {
             LocationId::Annuna__East_Bridge__Cavern_Foyer__Shockwave_Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_FLASK);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Mist_Through_Outer_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1);
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Mist_Through_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Mist_Through_Inner_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_2);
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item | LocationId::Annuna__Sniper_Valley__Cavern_Cache__Flask_Collection_Skip | LocationId::Annuna__Sniper_Valley__Cavern_Cache__Flask_Fast_Travel | LocationId::Annuna__Sniper_Valley__Cavern_Cache__Shockwave_Flask => {
@@ -19394,7 +19169,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask | LocationId::Annuna__Egg_Room__Cache__Flask | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside | LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EGG_ROOM_FLASK);
             }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => {
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL);
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel | LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn | LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel | LocationId::Annuna__Siuna_Storage__Cache__Urn | LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
@@ -19409,7 +19184,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks | LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel | LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_ANNUNA_DOUBLE_TROUBLE_REWARDS);
             }
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_APOCALYPSE_SEALS_WALL);
             }
             LocationId::Annuna__Final_Cache__West__Spin_into_Flask | LocationId::Annuna__Final_Cache__West__Remote_Flask | LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel | LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask | LocationId::Annuna__Final_Cache__Cache__Flask | LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip | LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel => {
@@ -19439,7 +19214,7 @@ impl context::Ctx for Context {
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Collection_Skip | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_BREACH_ROCKY_CAGES_FLASK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => {
@@ -19460,7 +19235,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Waterfall__Alcove_Left__Block_Left | LocationId::Ebih__Waterfall__Alcove__Block_Left => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_WATERFALL_BLOCK_LEFT);
             }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall | LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall | LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall | LocationId::Ebih__Waterfall__Wall_Left__Break_Wall | LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall | LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall => {
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall | LocationId::Ebih__Waterfall__Wall_Right__Mist_Through_Wall | LocationId::Ebih__Waterfall__Wall_Left__Break_Wall | LocationId::Ebih__Waterfall__Wall_Left__Mist_Through_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL);
             }
             LocationId::Ebih__Ebih_West__Block_Left__Break_Block | LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
@@ -19472,7 +19247,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn | LocationId::Ebih__Ebih_East__Corner__Urn => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_INFECT);
             }
-            LocationId::Ebih__Ebih_East__Wall_East__Break_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster | LocationId::Ebih__Ebih_East__Wall_West__Break_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster => {
+            LocationId::Ebih__Ebih_East__Wall_East__Break_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_EAST_WALL);
             }
             LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button | LocationId::Ebih__Hidden_Portal__Button__Hit_Button | LocationId::Ebih__Hidden_Portal__Gate_Ledge_East__Remote_Button => {
@@ -19493,7 +19268,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Drone_Pit__Highest_Point__Flask | LocationId::Ebih__Drone_Pit__Highest_Point__Shockwave_Flask | LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Collection_Skip | LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_HIGH_FLASK);
             }
-            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster | LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => {
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL);
             }
             LocationId::Ebih__Gem_Room__Button_Corner__Remote_Button | LocationId::Ebih__Gem_Room__Button_Nearby__Hit_Button => {
@@ -19505,7 +19280,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask | LocationId::Ebih__Party_Central__East_Trough__Flask | LocationId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip | LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_PARTY_CENTRAL_FLASK);
             }
-            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Upgraded_Mist_Through_Wall => {
+            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL);
             }
             LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask | LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask | LocationId::Emergence__Drop_off__Basin__Flask | LocationId::Emergence__Drop_off__Basin__Flask_Collection_Skip | LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel | LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask | LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask => {
@@ -19517,22 +19292,22 @@ impl context::Ctx for Context {
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn | LocationId::Emergence__Storage__Dais_Right__Remote_Urn | LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel | LocationId::Emergence__Storage__Dais_Middle__Urn | LocationId::Emergence__Storage__Dais_Middle__Urn_Collection_Skip | LocationId::Emergence__Storage__Dais_Middle__Urn_Fast_Travel | LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_SLINGSHOT_CHARGE);
             }
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Upgraded_Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Upgraded_Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => {
+            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK);
             }
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Tunnel_Entrance__Upgraded_Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Upgraded_Mist_Through_Rock => {
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Upgraded_Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Upgraded_Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {
+            LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => {
+            LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => {
+            LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => {
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
             LocationId::Giguna_Breach__Robopede__West__Strong_Attacks | LocationId::Giguna_Breach__Robopede__West__Medium | LocationId::Giguna_Breach__Robopede__West__Bad | LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks | LocationId::Giguna_Breach__Robopede__Center__Medium | LocationId::Giguna_Breach__Robopede__Center__Bad => {
@@ -19556,7 +19331,7 @@ impl context::Ctx for Context {
             LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel | LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EMERGENCE_BREACH_FLASK);
             }
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK);
             }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate | LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
@@ -19565,7 +19340,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask | LocationId::Giguna__Giguna_Northeast__Vault__Item | LocationId::Giguna__Giguna_Northeast__Vault__Flask_Collection_Skip | LocationId::Giguna__Giguna_Northeast__Vault__Flask_Fast_Travel | LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_NORTHEAST_FLASK);
             }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => {
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H);
             }
             LocationId::Giguna__Wasteland__Upper_Cache__Flask | LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask | LocationId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip | LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => {
@@ -19589,10 +19364,10 @@ impl context::Ctx for Context {
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch | LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_DUAL_PATH_SWITCH);
             }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => {
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_DUAL_PATH_WALL);
             }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist => {
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_BOULDER);
             }
             LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask | LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Flask_Collection_Skip | LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Flask_Fast_Travel => {
@@ -19610,7 +19385,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button | LocationId::Giguna__Vertical_Interchange__Switch__Button => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_GATE);
             }
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Upgraded_Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Upwards_Through_Rock => {
+            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK);
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
@@ -19625,7 +19400,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_BREACHABLE_WALL_FLASK);
             }
-            LocationId::Giguna__Separator__Upper_Brick__Break_Bricks | LocationId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster => {
+            LocationId::Giguna__Separator__Upper_Brick__Break_Bricks | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS);
             }
             LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask | LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask_Fast_Travel | LocationId::Giguna__Secrecy__Near_East_Column__Shockwave_Flask | LocationId::Giguna__Secrecy__East_Column__Flask | LocationId::Giguna__Secrecy__East_Column__Flask_Collection_Skip | LocationId::Giguna__Secrecy__East_Column__Flask_Fast_Travel => {
@@ -19694,19 +19469,19 @@ impl context::Ctx for Context {
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Collection_Skip | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Fast_Travel | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom__Spin_into_Flask => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IB_GAUNTLET_FLASK);
             }
-            LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Upgraded_Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Upgraded_Mist_Into_Pillar => {
+            LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR);
             }
             LocationId::Irikar_Breach__Beach__Cache__Flask | LocationId::Irikar_Breach__Beach__Cache__Flask_Collection_Skip | LocationId::Irikar_Breach__Beach__Cache__Flask_Fast_Travel => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IRIKAR_BREACH_BEACH_FLASK);
             }
-            LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Upgraded_Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Upgraded_Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall_and_Hover => {
+            LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall_and_Hover => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL);
             }
             LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask | LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask_Collection_Skip | LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask_Fast_Travel => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_FLASK);
             }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Just_The_Wall | LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall | LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall => {
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Just_The_Wall | LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IRIKAR_ROYAL_STORAGE_WALL);
             }
             LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item | LocationId::Irikar__Hub__Royal_Storage_in_Wall__Flask_Collection_Skip | LocationId::Irikar__Hub__Royal_Storage_in_Wall__Flask_Fast_Travel | LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item => {
@@ -19736,7 +19511,7 @@ impl context::Ctx for Context {
             LocationId::Uhrum_Breach__Rock_and_Gate__Button__Hit_Button | LocationId::Uhrum_Breach__Rock_and_Gate__Gate_West__Hit_Button => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_GATE);
             }
-            LocationId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock_and_Hover | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Upgraded_Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Upgraded_Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Spin_Through_Rock => {
+            LocationId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock_and_Hover | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Spin_Through_Rock => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK);
             }
             LocationId::Uhrum_Breach__West_Glitch__Narrow_Glitch__Break_Through_Glitch | LocationId::Uhrum_Breach__West_Glitch__Past_Glitch__Break_Through_Glitch => {
@@ -19751,28 +19526,28 @@ impl context::Ctx for Context {
             LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Collection_Skip | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Fast_Travel => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_LOCKED_DOWN_FLASK);
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Upgraded_Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Upgraded_Mist_Through_Wall => {
+            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Collection_Skip | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Fast_Travel => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_FLASK);
             }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => {
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL);
             }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL);
             }
             LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Shockwave_Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Collection_Skip | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Fast_Travel => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_FLASK);
             }
-            LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_West__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_East__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall_and_Hover => {
+            LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall_and_Hover => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK);
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Collection_Skip | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Fast_Travel => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK);
             }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => {
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL);
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block | LocationId::Uhrum__Waterfalls__Above_Block__Block | LocationId::Uhrum__Waterfalls__East_26__Block => {
@@ -19781,7 +19556,7 @@ impl context::Ctx for Context {
             LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block | LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_EAST_LAKE_BLOCK);
             }
-            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
+            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
@@ -19790,10 +19565,10 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block | LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_ANNUNA_CORRIDOR_BLOCK);
             }
-            LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall => {
+            LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK);
             }
-            LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
+            LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL);
             }
             LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Remote_Flask | LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Go_Left | LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Go_Right | LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Fast_Travel | LocationId::Uhrum__Emergence_Facility__Balcony__Flask | LocationId::Uhrum__Emergence_Facility__Balcony__Flask_Collection_Skip | LocationId::Uhrum__Emergence_Facility__Balcony__Flask_Fast_Travel | LocationId::Uhrum__Emergence_Facility__Roof_Middle__Flask_from_Below => {
@@ -20407,7 +20182,7 @@ impl context::Ctx for Context {
             LocationId::Amagi__West_Lake__Stronghold_Item__Break_Wall | LocationId::Amagi__West_Lake__Stronghold_Middle_Column__Break_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_WALL_1)
             }
-            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall | LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Mist_Through_Wall | LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Upgraded_Mist_Through_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Break_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => {
+            LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Break_Left_Wall | LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Mist_Through_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Break_Wall | LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_AMAGI_STRONGHOLD_LEFT_WALL)
             }
             LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder => {
@@ -20449,10 +20224,10 @@ impl context::Ctx for Context {
             LocationId::Annuna__East_Bridge__Cavern_Foyer__Shockwave_Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Collection_Skip | LocationId::Annuna__East_Bridge__Cavern_Cache__Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_EAST_BRIDGE_FLASK)
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Break_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Upgraded_Mist_Through_Outer_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Mist_Through_Outer_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_1)
             }
-            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Upgraded_Mist_Through_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Break_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Upgraded_Mist_Through_Inner_Wall => {
+            LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Mist_Through_Inner_Wall | LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Mist_Through_Inner_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_SNIPER_VALLEY_ROCK_2)
             }
             LocationId::Annuna__Sniper_Valley__Cavern_Cache__Item | LocationId::Annuna__Sniper_Valley__Cavern_Cache__Flask_Collection_Skip | LocationId::Annuna__Sniper_Valley__Cavern_Cache__Flask_Fast_Travel | LocationId::Annuna__Sniper_Valley__Cavern_Cache__Shockwave_Flask => {
@@ -20467,7 +20242,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__Egg_Room__Second_Egg__Remote_Boomerang_Flask | LocationId::Annuna__Egg_Room__Cache__Flask | LocationId::Annuna__Egg_Room__Cache__Shockwave_Flask | LocationId::Annuna__Egg_Room__Corner_Platform__Shockwave_from_Outside | LocationId::Annuna__Egg_Room__Corner_Platform__Remote_Boomerang_Flask => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EGG_ROOM_FLASK)
             }
-            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist_2 | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist_2 => {
+            LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Wall_as_Indra | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_as_Drone | LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_SIUNA_STORAGE_WALL)
             }
             LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn | LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel | LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn | LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel | LocationId::Annuna__Siuna_Storage__Cache__Urn | LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip | LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
@@ -20482,7 +20257,7 @@ impl context::Ctx for Context {
             LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks | LocationId::Annuna__Double_Trouble__East_Side_Lower__Fast_Flasks_Travel | LocationId::Annuna__Double_Trouble__East_Side_Lower__Two_Flasks => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_ANNUNA_DOUBLE_TROUBLE_REWARDS)
             }
-            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Faster_Mist_Through_Wall => {
+            LocationId::Annuna__Seals__Breakable_Rock__Break_Through_Wall | LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_APOCALYPSE_SEALS_WALL)
             }
             LocationId::Annuna__Final_Cache__West__Spin_into_Flask | LocationId::Annuna__Final_Cache__West__Remote_Flask | LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel | LocationId::Annuna__Final_Cache__Ledge__Shockwave_Flask | LocationId::Annuna__Final_Cache__Cache__Flask | LocationId::Annuna__Final_Cache__Cache__Flask_Collection_Skip | LocationId::Annuna__Final_Cache__Cache__Flask_Fast_Travel => {
@@ -20512,7 +20287,7 @@ impl context::Ctx for Context {
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Collection_Skip | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_BREACH_ROCKY_CAGES_FLASK)
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Upgraded_Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Upgraded_Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Upgraded_Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK)
             }
             LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => {
@@ -20533,7 +20308,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Waterfall__Alcove_Left__Block_Left | LocationId::Ebih__Waterfall__Alcove__Block_Left => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_WATERFALL_BLOCK_LEFT)
             }
-            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall | LocationId::Ebih__Waterfall__Wall_Right__Break_Through_Wall | LocationId::Ebih__Waterfall__Wall_Right__Upgraded_Mist_Through_Wall | LocationId::Ebih__Waterfall__Wall_Left__Break_Wall | LocationId::Ebih__Waterfall__Wall_Left__Break_Through_Wall | LocationId::Ebih__Waterfall__Wall_Left__Upgraded_Mist_Through_Wall => {
+            LocationId::Ebih__Waterfall__Wall_Right__Break_Wall | LocationId::Ebih__Waterfall__Wall_Right__Mist_Through_Wall | LocationId::Ebih__Waterfall__Wall_Left__Break_Wall | LocationId::Ebih__Waterfall__Wall_Left__Mist_Through_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_WATERFALL_WALL)
             }
             LocationId::Ebih__Ebih_West__Block_Left__Break_Block | LocationId::Ebih__Ebih_West__Block_Right__Break_Block => {
@@ -20545,7 +20320,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Ebih_East__Lower_Moving_Platform__Remote_Urn | LocationId::Ebih__Ebih_East__Corner__Urn => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_INFECT)
             }
-            LocationId::Ebih__Ebih_East__Wall_East__Break_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall_Faster | LocationId::Ebih__Ebih_East__Wall_West__Break_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall_Faster => {
+            LocationId::Ebih__Ebih_East__Wall_East__Break_Wall | LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Wall | LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_EAST_WALL)
             }
             LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button | LocationId::Ebih__Hidden_Portal__Button__Hit_Button | LocationId::Ebih__Hidden_Portal__Gate_Ledge_East__Remote_Button => {
@@ -20566,7 +20341,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Drone_Pit__Highest_Point__Flask | LocationId::Ebih__Drone_Pit__Highest_Point__Shockwave_Flask | LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Collection_Skip | LocationId::Ebih__Drone_Pit__Highest_Point__Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_HIGH_FLASK)
             }
-            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall_Faster | LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall_Faster => {
+            LocationId::Ebih__Walled_Off__Wall_Right__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Wall | LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_WALLED_OFF_WALL)
             }
             LocationId::Ebih__Gem_Room__Button_Corner__Remote_Button | LocationId::Ebih__Gem_Room__Button_Nearby__Hit_Button => {
@@ -20578,7 +20353,7 @@ impl context::Ctx for Context {
             LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask | LocationId::Ebih__Party_Central__East_Trough__Flask | LocationId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip | LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_PARTY_CENTRAL_FLASK)
             }
-            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Left__Upgraded_Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Upgraded_Mist_Through_Wall => {
+            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EMERGENCE_DROPOFF_WALL)
             }
             LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask | LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask | LocationId::Emergence__Drop_off__Basin__Flask | LocationId::Emergence__Drop_off__Basin__Flask_Collection_Skip | LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel | LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask | LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask => {
@@ -20590,22 +20365,22 @@ impl context::Ctx for Context {
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn | LocationId::Emergence__Storage__Dais_Right__Remote_Urn | LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel | LocationId::Emergence__Storage__Dais_Middle__Urn | LocationId::Emergence__Storage__Dais_Middle__Urn_Collection_Skip | LocationId::Emergence__Storage__Dais_Middle__Urn_Fast_Travel | LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_SLINGSHOT_CHARGE)
             }
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Upgraded_Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Upgraded_Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => {
+            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK)
             }
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Tunnel_Entrance__Upgraded_Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Upgraded_Mist_Through_Rock => {
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL)
             }
-            LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Upgraded_Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Upgraded_Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Upgraded_Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {
+            LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_1)
             }
-            LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Upgraded_Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => {
+            LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_2)
             }
-            LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Upgraded_Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => {
+            LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3)
             }
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Upgraded_Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => {
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4)
             }
             LocationId::Giguna_Breach__Robopede__West__Strong_Attacks | LocationId::Giguna_Breach__Robopede__West__Medium | LocationId::Giguna_Breach__Robopede__West__Bad | LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks | LocationId::Giguna_Breach__Robopede__Center__Medium | LocationId::Giguna_Breach__Robopede__Center__Bad => {
@@ -20629,7 +20404,7 @@ impl context::Ctx for Context {
             LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel | LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EMERGENCE_BREACH_FLASK)
             }
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Upgraded_Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Upgraded_Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_BREACH_PINKNESS_ROCK)
             }
             LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate | LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => {
@@ -20638,7 +20413,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask | LocationId::Giguna__Giguna_Northeast__Vault__Item | LocationId::Giguna__Giguna_Northeast__Vault__Flask_Collection_Skip | LocationId::Giguna__Giguna_Northeast__Vault__Flask_Fast_Travel | LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_NORTHEAST_FLASK)
             }
-            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_East__Upgraded_Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Upgraded_Mist_through_Horizontal_Passage => {
+            LocationId::Giguna__Wasteland__Passage_East__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage | LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually | LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_WASTELAND_PASSAGE_H)
             }
             LocationId::Giguna__Wasteland__Upper_Cache__Flask | LocationId::Giguna__Wasteland__Upper_Cache__Shockwave_Flask | LocationId::Giguna__Wasteland__Upper_Cache__Flask_Collection_Skip | LocationId::Giguna__Wasteland__Upper_Cache__Flask_Fast_Travel => {
@@ -20662,10 +20437,10 @@ impl context::Ctx for Context {
             LocationId::Giguna__Dual_Path__Below_Left_Switch__Remote_Switch | LocationId::Giguna__Dual_Path__Left_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Right_Switch__Hit_Switch | LocationId::Giguna__Dual_Path__Below_Right_Switch__Remote_Switch => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_DUAL_PATH_SWITCH)
             }
-            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Upgraded_Mist_into_Wall => {
+            LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall | LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_DUAL_PATH_WALL)
             }
-            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Upgraded_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Upgraded_Mist => {
+            LocationId::Giguna__Hard_Rock__Rock_Right__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist | LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder | LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_BOULDER)
             }
             LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Hidden_Flask | LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Flask_Collection_Skip | LocationId::Giguna__East_Caverns__Hidden_Passage_Center__Flask_Fast_Travel => {
@@ -20683,7 +20458,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button | LocationId::Giguna__Vertical_Interchange__Switch__Button => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_GATE)
             }
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Upgraded_Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Upgraded_Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Upgraded_Mist_Upwards_Through_Rock => {
+            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_VERTICAL_INTERCHANGE_ROCK)
             }
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => {
@@ -20698,7 +20473,7 @@ impl context::Ctx for Context {
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask | LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_BREACHABLE_WALL_FLASK)
             }
-            LocationId::Giguna__Separator__Upper_Brick__Break_Bricks | LocationId::Giguna__Separator__Upper_Brick__Break_Bricks_Faster | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks_Faster => {
+            LocationId::Giguna__Separator__Upper_Brick__Break_Bricks | LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GIGUNA_SEPARATOR_BRICKS)
             }
             LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask | LocationId::Giguna__Secrecy__West_Column_East__Boomerang_Flask_Fast_Travel | LocationId::Giguna__Secrecy__Near_East_Column__Shockwave_Flask | LocationId::Giguna__Secrecy__East_Column__Flask | LocationId::Giguna__Secrecy__East_Column__Flask_Collection_Skip | LocationId::Giguna__Secrecy__East_Column__Flask_Fast_Travel => {
@@ -20767,19 +20542,19 @@ impl context::Ctx for Context {
             LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Item | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Collection_Skip | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__Flask_Fast_Travel | LocationId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom__Spin_into_Flask => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IB_GAUNTLET_FLASK)
             }
-            LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Upgraded_Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Upgraded_Mist_Into_Pillar => {
+            LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Break_Pillar | LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IRIKAR_BREACH_BURIED_TREASURE_PILLAR)
             }
             LocationId::Irikar_Breach__Beach__Cache__Flask | LocationId::Irikar_Breach__Beach__Cache__Flask_Collection_Skip | LocationId::Irikar_Breach__Beach__Cache__Flask_Fast_Travel => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IRIKAR_BREACH_BEACH_FLASK)
             }
-            LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Upgraded_Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Upgraded_Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall_and_Hover => {
+            LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Charge_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall_and_Hover | LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Charge_Through_Wall_and_Hover => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_WALL)
             }
             LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask | LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask_Collection_Skip | LocationId::Irikar_Breach__Uhrum_Connector__Sand_Swarm__Flask_Fast_Travel => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IRIKAR_BREACH_UHRUM_CONNECTOR_FLASK)
             }
-            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Just_The_Wall | LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall | LocationId::Irikar__Hub__Royal_Storage_By_Wall__Upgraded_Mist_into_Wall => {
+            LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Just_The_Wall | LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IRIKAR_ROYAL_STORAGE_WALL)
             }
             LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item | LocationId::Irikar__Hub__Royal_Storage_in_Wall__Flask_Collection_Skip | LocationId::Irikar__Hub__Royal_Storage_in_Wall__Flask_Fast_Travel | LocationId::Irikar__Hub__Collapsed_Column__Shockwave_to_Get_Item => {
@@ -20809,7 +20584,7 @@ impl context::Ctx for Context {
             LocationId::Uhrum_Breach__Rock_and_Gate__Button__Hit_Button | LocationId::Uhrum_Breach__Rock_and_Gate__Gate_West__Hit_Button => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_GATE)
             }
-            LocationId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock_and_Hover | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Upgraded_Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Upgraded_Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Spin_Through_Rock => {
+            LocationId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock_and_Hover | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Charge_Through_Rock | LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Spin_Through_Rock => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_ROCK_AND_GATE_ROCK)
             }
             LocationId::Uhrum_Breach__West_Glitch__Narrow_Glitch__Break_Through_Glitch | LocationId::Uhrum_Breach__West_Glitch__Past_Glitch__Break_Through_Glitch => {
@@ -20824,28 +20599,28 @@ impl context::Ctx for Context {
             LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Collection_Skip | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Fast_Travel => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_LOCKED_DOWN_FLASK)
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Upgraded_Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Upgraded_Mist_Through_Wall => {
+            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL)
             }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Collection_Skip | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Fast_Travel => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_FLASK)
             }
-            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Upgraded_Mist_through_Wall => {
+            LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_UPPER_WALL)
             }
-            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Upgraded_Mist_through_Wall => {
+            LocationId::Uhrum__West_Entrance__Lower_Wall_West__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Charge_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall | LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WEST_ENTRANCE_LOWER_WALL)
             }
             LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Shockwave_Flask | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Collection_Skip | LocationId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__Flask_Fast_Travel => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_FLASK)
             }
-            LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_West__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_East__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall_and_Hover => {
+            LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_Platform__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall | LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall_and_Hover => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_GLITCHY_CORRIDOR_ROCK)
             }
             LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Collection_Skip | LocationId::Uhrum__Waterfalls__Ceiling_Cache__Flask_Fast_Travel => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALLS_FLASK)
             }
-            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Upgraded_Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Upgraded_Mist_through_Wall => {
+            LocationId::Uhrum__Waterfalls__Barrier_West__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Charge_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall | LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_WATERFALL_WALL)
             }
             LocationId::Uhrum__Waterfalls__Below_Block__Shockwave_Block | LocationId::Uhrum__Waterfalls__Above_Block__Block | LocationId::Uhrum__Waterfalls__East_26__Block => {
@@ -20854,7 +20629,7 @@ impl context::Ctx for Context {
             LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block | LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_EAST_LAKE_BLOCK)
             }
-            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
+            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL)
             }
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
@@ -20863,10 +20638,10 @@ impl context::Ctx for Context {
             LocationId::Uhrum__Annuna_Corridor__Block_West__Dislodge_Block | LocationId::Uhrum__Annuna_Corridor__Block_East__Dislodge_Block => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ANNUNA_CORRIDOR_BLOCK)
             }
-            LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West__Upgraded_Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Upgraded_Mist_Through_Wall => {
+            LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_ROCKY_GATE_ROCK)
             }
-            LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist_Upgrade | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
+            LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Charge_Through_Wall | LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_EMERGENCE_WALL)
             }
             LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Remote_Flask | LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Go_Left | LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Go_Right | LocationId::Uhrum__Emergence_Facility__Middle_Level_Mid_air__Throw_Up_and_Fast_Travel | LocationId::Uhrum__Emergence_Facility__Balcony__Flask | LocationId::Uhrum__Emergence_Facility__Balcony__Flask_Collection_Skip | LocationId::Uhrum__Emergence_Facility__Balcony__Flask_Fast_Travel | LocationId::Uhrum__Emergence_Facility__Roof_Middle__Flask_from_Below => {

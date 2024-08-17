@@ -164,13 +164,6 @@ pub fn access_amagi__main_area__ctx__combo_and_invoke_hook(ctx: &Context, world:
     // ^_combo and $hook
     (ctx.amagi__main_area__ctx__combo() && helper__hook!(ctx, world))
 }
-pub fn access_amagi__secret_chamber__ctx__east_dur_esla_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // ^_east_dur_esla and $mist2
-    (ctx.amagi__secret_chamber__ctx__east_dur_esla() && helper__mist2!(ctx, world))
-}
 pub fn access_amagi__secret_chamber__ctx__east_dur_esla_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -185,13 +178,6 @@ pub fn access_amagi__secret_chamber__ctx__east_dur_esla_and_underwater_movement_
     // ^_east_dur_esla and Underwater_Movement and $hookhover
     ((ctx.amagi__secret_chamber__ctx__east_dur_esla() && ctx.has(Item::Underwater_Movement))
         && helper__hookhover!(ctx, world))
-}
-pub fn access_amagi__secret_chamber__ctx__west_dur_esla_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // ^_west_dur_esla and $mist2
-    (ctx.amagi__secret_chamber__ctx__west_dur_esla() && helper__mist2!(ctx, world))
 }
 pub fn access_amagi__secret_chamber__ctx__west_dur_esla_and_nanite_mist(
     ctx: &Context,
@@ -782,10 +768,6 @@ pub fn access_emergence_dropoff_wall_and_anuman(ctx: &Context, world: &World) ->
 pub fn access_emergence_dropoff_wall_and_invoke_hook(ctx: &Context, world: &World) -> bool {
     // Emergence_Dropoff_Wall and $hook
     (ctx.has(Item::Emergence_Dropoff_Wall) && helper__hook!(ctx, world))
-}
-pub fn access_emergence_dropoff_wall_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // Emergence_Dropoff_Wall and $mist2
-    (ctx.has(Item::Emergence_Dropoff_Wall) && helper__mist2!(ctx, world))
 }
 pub fn access_emergence_dropoff_wall_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // Emergence_Dropoff_Wall and Nanite_Mist
@@ -1768,9 +1750,9 @@ pub fn access_invoke_hover_and_invoke_hook_and_giguna__east_caverns__ctx__combo_
     ((helper__hover!(ctx, world) && helper__hook!(ctx, world))
         && ctx.giguna__east_caverns__ctx__combo_entered())
 }
-pub fn access_invoke_hover_and_invoke_hook_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // $hover and $hook and $mist2
-    ((helper__hover!(ctx, world) && helper__hook!(ctx, world)) && helper__mist2!(ctx, world))
+pub fn access_invoke_hover_and_invoke_hook_and_nanite_mist(ctx: &Context, world: &World) -> bool {
+    // $hover and $hook and Nanite_Mist
+    ((helper__hover!(ctx, world) && helper__hook!(ctx, world)) && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_platform(
     ctx: &Context,
@@ -1779,10 +1761,6 @@ pub fn access_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_pl
     // $hover and $hook and not ^_left_platform
     ((helper__hover!(ctx, world) && helper__hook!(ctx, world))
         && !ctx.irikar__midwest__ctx__left_platform())
-}
-pub fn access_invoke_hover_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // $hover and $mist2
-    (helper__hover!(ctx, world) && helper__mist2!(ctx, world))
 }
 pub fn access_invoke_hover_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // $hover and Nanite_Mist
@@ -1821,9 +1799,9 @@ pub fn access_invoke_hover_or_invoke_hook(ctx: &Context, world: &World) -> bool 
     // $hover or $hook
     (helper__hover!(ctx, world) || helper__hook!(ctx, world))
 }
-pub fn access_invoke_hover_or_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // $hover or $mist2
-    (helper__hover!(ctx, world) || helper__mist2!(ctx, world))
+pub fn access_invoke_hover_or_nanite_mist(ctx: &Context, world: &World) -> bool {
+    // $hover or Nanite_Mist
+    (helper__hover!(ctx, world) || ctx.has(Item::Nanite_Mist))
 }
 pub fn access_invoke_infinite_climb(ctx: &Context, world: &World) -> bool {
     // $infinite_climb
@@ -1887,28 +1865,6 @@ pub fn access_invoke_melee_cskip(ctx: &Context, world: &World) -> bool {
 pub fn access_invoke_melee_cskip_and_fast_travel(ctx: &Context, world: &World) -> bool {
     // $melee_cskip and Fast_Travel
     (helper__melee_cskip!(ctx, world) && ctx.has(Item::Fast_Travel))
-}
-pub fn access_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // $mist2
-    helper__mist2!(ctx, world)
-}
-pub fn access_invoke_mist2_and_amagi__gated_community__ctx__dur_esla(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // $mist2 and ^_dur_esla
-    (helper__mist2!(ctx, world) && ctx.amagi__gated_community__ctx__dur_esla())
-}
-pub fn access_invoke_mist2_and_mode_eq_drone(ctx: &Context, world: &World) -> bool {
-    // $mist2 and ^mode == 'drone'
-    (helper__mist2!(ctx, world) && ctx.mode() == enums::Mode::Drone)
-}
-pub fn access_invoke_mist2_and_not_irikar__midwest__ctx__right_platform(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // $mist2 and not ^_right_platform
-    (helper__mist2!(ctx, world) && !ctx.irikar__midwest__ctx__right_platform())
 }
 pub fn access_invoke_more_refills(ctx: &Context, world: &World) -> bool {
     // $more_refills
@@ -2443,18 +2399,6 @@ pub fn access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
     // ^mode == 'drone' and ^indra == `Giguna > Separator > Platform`
     (ctx.mode() == enums::Mode::Drone && ctx.indra() == SpotId::Giguna__Separator__Platform)
 }
-pub fn access_mode_eq_drone_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // ^mode == 'drone' and $mist2
-    (ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
-}
-pub fn access_mode_eq_drone_and_invoke_mist2_and_giguna__east_caverns__ctx__combo_entered(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // ^mode == 'drone' and $mist2 and ^_combo_entered
-    ((ctx.mode() == enums::Mode::Drone && helper__mist2!(ctx, world))
-        && ctx.giguna__east_caverns__ctx__combo_entered())
-}
 pub fn access_mode_eq_drone_and_mist_upgrade_and_giguna__east_caverns__ctx__combo_entered(
     ctx: &Context,
     world: &World,
@@ -2509,9 +2453,12 @@ pub fn access_nanite_mist(ctx: &Context, world: &World) -> bool {
     // Nanite_Mist
     ctx.has(Item::Nanite_Mist)
 }
-pub fn access_nanite_mist_and_mode_eq_drone(ctx: &Context, world: &World) -> bool {
-    // Nanite_Mist and ^mode == 'drone'
-    (ctx.has(Item::Nanite_Mist) && ctx.mode() == enums::Mode::Drone)
+pub fn access_nanite_mist_and_amagi__gated_community__ctx__dur_esla(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // Nanite_Mist and ^_dur_esla
+    (ctx.has(Item::Nanite_Mist) && ctx.amagi__gated_community__ctx__dur_esla())
 }
 pub fn access_nanite_mist_and_not_irikar__midwest__ctx__right_platform(
     ctx: &Context,
@@ -2536,13 +2483,6 @@ pub fn access_not_amashilama(ctx: &Context, world: &World) -> bool {
     // NOT Amashilama
     !ctx.has(Item::Amashilama)
 }
-pub fn access_not_annuna__boss_gate__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // not ^_door and $mist2
-    (!ctx.annuna__boss_gate__ctx__door() && helper__mist2!(ctx, world))
-}
 pub fn access_not_annuna__boss_gate__ctx__door_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -2553,13 +2493,6 @@ pub fn access_not_annuna__boss_gate__ctx__door_and_nanite_mist(
 pub fn access_not_annuna__east_bridge__ctx__combo(ctx: &Context, world: &World) -> bool {
     // not ^_combo
     !ctx.annuna__east_bridge__ctx__combo()
-}
-pub fn access_not_annuna__udug_gate__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // not ^_door and $mist2
-    (!ctx.annuna__udug_gate__ctx__door() && helper__mist2!(ctx, world))
 }
 pub fn access_not_annuna__udug_gate__ctx__door_and_nanite_mist(
     ctx: &Context,
@@ -2617,14 +2550,6 @@ pub fn access_not_ebih__truck_gate__ctx__door_open_and_invoke_open_and_invoke_ra
 pub fn access_not_ebih_interchange_block(ctx: &Context, world: &World) -> bool {
     // not Ebih_Interchange_Block
     !ctx.has(Item::Ebih_Interchange_Block)
-}
-pub fn access_not_ebih_waterfall_wall_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // not Ebih_Waterfall_Wall and $mist2
-    (!ctx.has(Item::Ebih_Waterfall_Wall) && helper__mist2!(ctx, world))
-}
-pub fn access_not_ebih_waterfall_wall_and_nanite_mist(ctx: &Context, world: &World) -> bool {
-    // not Ebih_Waterfall_Wall and Nanite_Mist
-    (!ctx.has(Item::Ebih_Waterfall_Wall) && ctx.has(Item::Nanite_Mist))
 }
 pub fn access_not_giguna__carnelian__ctx__lower_susar(ctx: &Context, world: &World) -> bool {
     // not ^_lower_susar
@@ -2764,13 +2689,6 @@ pub fn access_not_giguna_breach__sw_save__ctx__door_opened(ctx: &Context, world:
     // not ^_door_opened
     !ctx.giguna_breach__sw_save__ctx__door_opened()
 }
-pub fn access_not_glacier__lonely_bull__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // not ^_door and $mist2
-    (!ctx.glacier__lonely_bull__ctx__door() && helper__mist2!(ctx, world))
-}
 pub fn access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -2800,13 +2718,6 @@ pub fn access_not_irikar__midwest__ctx__left_platform_and_invoke_activate(
     // not ^_left_platform and $activate
     (!ctx.irikar__midwest__ctx__left_platform() && helper__activate!(ctx, world))
 }
-pub fn access_not_irikar__midwest__ctx__left_platform_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // not ^_left_platform and $mist2
-    (!ctx.irikar__midwest__ctx__left_platform() && helper__mist2!(ctx, world))
-}
 pub fn access_not_irikar__midwest__ctx__left_platform_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -2821,23 +2732,12 @@ pub fn access_not_irikar__midwest__ctx__right_platform_and_invoke_activate(
     // not ^_right_platform and $activate
     (!ctx.irikar__midwest__ctx__right_platform() && helper__activate!(ctx, world))
 }
-pub fn access_not_irikar__midwest__ctx__right_platform_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // not ^_right_platform and $mist2
-    (!ctx.irikar__midwest__ctx__right_platform() && helper__mist2!(ctx, world))
-}
 pub fn access_not_irikar__midwest__ctx__right_platform_and_nanite_mist(
     ctx: &Context,
     world: &World,
 ) -> bool {
     // not ^_right_platform and Nanite_Mist
     (!ctx.irikar__midwest__ctx__right_platform() && ctx.has(Item::Nanite_Mist))
-}
-pub fn access_not_irikar_royal_storage_wall_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // not Irikar_Royal_Storage_Wall and $mist2
-    (!ctx.has(Item::Irikar_Royal_Storage_Wall) && helper__mist2!(ctx, world))
 }
 pub fn access_not_irikar_royal_storage_wall_and_invoke_shockwave(
     ctx: &Context,
@@ -2974,13 +2874,6 @@ pub fn access_robopede(ctx: &Context, world: &World) -> bool {
 pub fn access_separation(ctx: &Context, world: &World) -> bool {
     // Separation
     ctx.has(Item::Separation)
-}
-pub fn access_separation_and_not_defeat_indra_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // Separation and NOT Defeat_Indra and $mist2
-    ((ctx.has(Item::Separation) && !ctx.has(Item::Defeat_Indra)) && helper__mist2!(ctx, world))
 }
 pub fn access_separation_and_not_defeat_indra_and_nanite_mist(
     ctx: &Context,
@@ -3438,10 +3331,6 @@ pub fn access_underwater_movement_and_invoke_hookhover(ctx: &Context, world: &Wo
 pub fn access_underwater_movement_and_invoke_hover(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and $hover
     (ctx.has(Item::Underwater_Movement) && helper__hover!(ctx, world))
-}
-pub fn access_underwater_movement_and_invoke_mist2(ctx: &Context, world: &World) -> bool {
-    // Underwater_Movement and $mist2
-    (ctx.has(Item::Underwater_Movement) && helper__mist2!(ctx, world))
 }
 pub fn access_underwater_movement_and_nanite_mist(ctx: &Context, world: &World) -> bool {
     // Underwater_Movement and Nanite_Mist
@@ -4781,35 +4670,6 @@ pub fn explain_amagi__main_area__ctx__combo_and_invoke_hook(
         }
     }
 }
-pub fn explain_amagi__secret_chamber__ctx__east_dur_esla_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^_east_dur_esla and $mist2
-    {
-        let mut left = {
-            let r = ctx.amagi__secret_chamber__ctx__east_dur_esla();
-            edict.insert(
-                "^amagi__secret_chamber__ctx__east_dur_esla",
-                format!("{:?}", r),
-            );
-            (r, vec!["^amagi__secret_chamber__ctx__east_dur_esla"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_amagi__secret_chamber__ctx__east_dur_esla_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -4873,35 +4733,6 @@ pub fn explain_amagi__secret_chamber__ctx__east_dur_esla_and_underwater_movement
                 let (res, mut refs) = hexplain__hookhover!(ctx, world, edict);
                 edict.insert("$hookhover", format!("{:?}", res));
                 refs.push("$hookhover");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_amagi__secret_chamber__ctx__west_dur_esla_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^_west_dur_esla and $mist2
-    {
-        let mut left = {
-            let r = ctx.amagi__secret_chamber__ctx__west_dur_esla();
-            edict.insert(
-                "^amagi__secret_chamber__ctx__west_dur_esla",
-                format!("{:?}", r),
-            );
-            (r, vec!["^amagi__secret_chamber__ctx__west_dur_esla"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -7427,32 +7258,6 @@ pub fn explain_emergence_dropoff_wall_and_invoke_hook(
                 let (res, mut refs) = hexplain__hook!(ctx, world, edict);
                 edict.insert("$hook", format!("{:?}", res));
                 refs.push("$hook");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_emergence_dropoff_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Emergence_Dropoff_Wall and $mist2
-    {
-        let mut left = {
-            let h = ctx.has(Item::Emergence_Dropoff_Wall);
-            edict.insert("Emergence_Dropoff_Wall", format!("{}", h));
-            (h, vec!["Emergence_Dropoff_Wall"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -12255,12 +12060,12 @@ pub fn explain_invoke_hover_and_invoke_hook_and_giguna__east_caverns__ctx__combo
         }
     }
 }
-pub fn explain_invoke_hover_and_invoke_hook_and_invoke_mist2(
+pub fn explain_invoke_hover_and_invoke_hook_and_nanite_mist(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $hover and $hook and $mist2
+    // $hover and $hook and Nanite_Mist
     {
         let mut left = {
             let mut left = {
@@ -12286,10 +12091,9 @@ pub fn explain_invoke_hover_and_invoke_hook_and_invoke_mist2(
             left
         } else {
             let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12333,33 +12137,6 @@ pub fn explain_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_p
                     (r, vec!["^irikar__midwest__ctx__left_platform"])
                 };
                 (!val.0, val.1)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_invoke_hover_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $hover and $mist2
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__hover!(ctx, world, edict);
-            edict.insert("$hover", format!("{:?}", res));
-            refs.push("$hover");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12604,12 +12381,12 @@ pub fn explain_invoke_hover_or_invoke_hook(
         }
     }
 }
-pub fn explain_invoke_hover_or_invoke_mist2(
+pub fn explain_invoke_hover_or_nanite_mist(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // $hover or $mist2
+    // $hover or Nanite_Mist
     {
         let mut left = {
             let (res, mut refs) = hexplain__hover!(ctx, world, edict);
@@ -12621,10 +12398,9 @@ pub fn explain_invoke_hover_or_invoke_mist2(
             left
         } else {
             let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
+                let h = ctx.has(Item::Nanite_Mist);
+                edict.insert("Nanite_Mist", format!("{}", h));
+                (h, vec!["Nanite_Mist"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -12900,107 +12676,6 @@ pub fn explain_invoke_melee_cskip_and_fast_travel(
                 let h = ctx.has(Item::Fast_Travel);
                 edict.insert("Fast_Travel", format!("{}", h));
                 (h, vec!["Fast_Travel"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2
-    {
-        let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-        edict.insert("$mist2", format!("{:?}", res));
-        refs.push("$mist2");
-        (res, refs)
-    }
-}
-pub fn explain_invoke_mist2_and_amagi__gated_community__ctx__dur_esla(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2 and ^_dur_esla
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-            edict.insert("$mist2", format!("{:?}", res));
-            refs.push("$mist2");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let r = ctx.amagi__gated_community__ctx__dur_esla();
-                edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
-                (r, vec!["^amagi__gated_community__ctx__dur_esla"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_invoke_mist2_and_mode_eq_drone(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2 and ^mode == 'drone'
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-            edict.insert("$mist2", format!("{:?}", res));
-            refs.push("$mist2");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let mut refs = vec!["^mode"];
-                let mut left = {
-                    let r = ctx.mode();
-                    edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
-                };
-                let right = enums::Mode::Drone;
-                edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_invoke_mist2_and_not_irikar__midwest__ctx__right_platform(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $mist2 and not ^_right_platform
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-            edict.insert("$mist2", format!("{:?}", res));
-            refs.push("$mist2");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let val = {
-                    let r = ctx.irikar__midwest__ctx__right_platform();
-                    edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
-                    (r, vec!["^irikar__midwest__ctx__right_platform"])
-                };
-                (!val.0, val.1)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -15204,88 +14879,6 @@ pub fn explain_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(
         }
     }
 }
-pub fn explain_mode_eq_drone_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^mode == 'drone' and $mist2
-    {
-        let mut left = {
-            let mut refs = vec!["^mode"];
-            let mut left = {
-                let r = ctx.mode();
-                edict.insert("^mode", format!("{:?}", r));
-                (r, vec!["^mode"])
-            };
-            let right = enums::Mode::Drone;
-            edict.insert("^mode", format!("{}", left.0));
-            refs.append(&mut left.1);
-            (left.0 == right, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_mode_eq_drone_and_invoke_mist2_and_giguna__east_caverns__ctx__combo_entered(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^mode == 'drone' and $mist2 and ^_combo_entered
-    {
-        let mut left = {
-            let mut left = {
-                let mut refs = vec!["^mode"];
-                let mut left = {
-                    let r = ctx.mode();
-                    edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
-                };
-                let right = enums::Mode::Drone;
-                edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                    edict.insert("$mist2", format!("{:?}", res));
-                    refs.push("$mist2");
-                    (res, refs)
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let r = ctx.giguna__east_caverns__ctx__combo_entered();
-                edict.insert(
-                    "^giguna__east_caverns__ctx__combo_entered",
-                    format!("{:?}", r),
-                );
-                (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_mode_eq_drone_and_mist_upgrade_and_giguna__east_caverns__ctx__combo_entered(
     ctx: &Context,
     world: &World,
@@ -15675,12 +15268,12 @@ pub fn explain_nanite_mist(
         (h, vec!["Nanite_Mist"])
     }
 }
-pub fn explain_nanite_mist_and_mode_eq_drone(
+pub fn explain_nanite_mist_and_amagi__gated_community__ctx__dur_esla(
     ctx: &Context,
     world: &World,
     edict: &mut FxHashMap<&'static str, String>,
 ) -> (bool, Vec<&'static str>) {
-    // Nanite_Mist and ^mode == 'drone'
+    // Nanite_Mist and ^_dur_esla
     {
         let mut left = {
             let h = ctx.has(Item::Nanite_Mist);
@@ -15691,16 +15284,9 @@ pub fn explain_nanite_mist_and_mode_eq_drone(
             left
         } else {
             let mut right = {
-                let mut refs = vec!["^mode"];
-                let mut left = {
-                    let r = ctx.mode();
-                    edict.insert("^mode", format!("{:?}", r));
-                    (r, vec!["^mode"])
-                };
-                let right = enums::Mode::Drone;
-                edict.insert("^mode", format!("{}", left.0));
-                refs.append(&mut left.1);
-                (left.0 == right, refs)
+                let r = ctx.amagi__gated_community__ctx__dur_esla();
+                edict.insert("^amagi__gated_community__ctx__dur_esla", format!("{:?}", r));
+                (r, vec!["^amagi__gated_community__ctx__dur_esla"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -15786,35 +15372,6 @@ pub fn explain_not_amashilama(
         (!h, vec!["Amashilama"])
     }
 }
-pub fn explain_not_annuna__boss_gate__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not ^_door and $mist2
-    {
-        let mut left = {
-            let val = {
-                let r = ctx.annuna__boss_gate__ctx__door();
-                edict.insert("^annuna__boss_gate__ctx__door", format!("{:?}", r));
-                (r, vec!["^annuna__boss_gate__ctx__door"])
-            };
-            (!val.0, val.1)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_not_annuna__boss_gate__ctx__door_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -15856,35 +15413,6 @@ pub fn explain_not_annuna__east_bridge__ctx__combo(
             (r, vec!["^annuna__east_bridge__ctx__combo"])
         };
         (!val.0, val.1)
-    }
-}
-pub fn explain_not_annuna__udug_gate__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not ^_door and $mist2
-    {
-        let mut left = {
-            let val = {
-                let r = ctx.annuna__udug_gate__ctx__door();
-                edict.insert("^annuna__udug_gate__ctx__door", format!("{:?}", r));
-                (r, vec!["^annuna__udug_gate__ctx__door"])
-            };
-            (!val.0, val.1)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_not_annuna__udug_gate__ctx__door_and_nanite_mist(
@@ -16104,57 +15632,6 @@ pub fn explain_not_ebih_interchange_block(
         let h = ctx.has(Item::Ebih_Interchange_Block);
         edict.insert("Ebih_Interchange_Block", format!("{}", h));
         (!h, vec!["Ebih_Interchange_Block"])
-    }
-}
-pub fn explain_not_ebih_waterfall_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not Ebih_Waterfall_Wall and $mist2
-    {
-        let mut left = {
-            let h = ctx.has(Item::Ebih_Waterfall_Wall);
-            edict.insert("Ebih_Waterfall_Wall", format!("{}", h));
-            (!h, vec!["Ebih_Waterfall_Wall"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_not_ebih_waterfall_wall_and_nanite_mist(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not Ebih_Waterfall_Wall and Nanite_Mist
-    {
-        let mut left = {
-            let h = ctx.has(Item::Ebih_Waterfall_Wall);
-            edict.insert("Ebih_Waterfall_Wall", format!("{}", h));
-            (!h, vec!["Ebih_Waterfall_Wall"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let h = ctx.has(Item::Nanite_Mist);
-                edict.insert("Nanite_Mist", format!("{}", h));
-                (h, vec!["Nanite_Mist"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_not_giguna__carnelian__ctx__lower_susar(
@@ -16825,35 +16302,6 @@ pub fn explain_not_giguna_breach__sw_save__ctx__door_opened(
         (!val.0, val.1)
     }
 }
-pub fn explain_not_glacier__lonely_bull__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not ^_door and $mist2
-    {
-        let mut left = {
-            let val = {
-                let r = ctx.glacier__lonely_bull__ctx__door();
-                edict.insert("^glacier__lonely_bull__ctx__door", format!("{:?}", r));
-                (r, vec!["^glacier__lonely_bull__ctx__door"])
-            };
-            (!val.0, val.1)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_not_glacier__lonely_bull__ctx__door_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -16954,35 +16402,6 @@ pub fn explain_not_irikar__midwest__ctx__left_platform_and_invoke_activate(
         }
     }
 }
-pub fn explain_not_irikar__midwest__ctx__left_platform_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not ^_left_platform and $mist2
-    {
-        let mut left = {
-            let val = {
-                let r = ctx.irikar__midwest__ctx__left_platform();
-                edict.insert("^irikar__midwest__ctx__left_platform", format!("{:?}", r));
-                (r, vec!["^irikar__midwest__ctx__left_platform"])
-            };
-            (!val.0, val.1)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_not_irikar__midwest__ctx__left_platform_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -17040,35 +16459,6 @@ pub fn explain_not_irikar__midwest__ctx__right_platform_and_invoke_activate(
         }
     }
 }
-pub fn explain_not_irikar__midwest__ctx__right_platform_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not ^_right_platform and $mist2
-    {
-        let mut left = {
-            let val = {
-                let r = ctx.irikar__midwest__ctx__right_platform();
-                edict.insert("^irikar__midwest__ctx__right_platform", format!("{:?}", r));
-                (r, vec!["^irikar__midwest__ctx__right_platform"])
-            };
-            (!val.0, val.1)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_not_irikar__midwest__ctx__right_platform_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -17091,32 +16481,6 @@ pub fn explain_not_irikar__midwest__ctx__right_platform_and_nanite_mist(
                 let h = ctx.has(Item::Nanite_Mist);
                 edict.insert("Nanite_Mist", format!("{}", h));
                 (h, vec!["Nanite_Mist"])
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
-pub fn explain_not_irikar_royal_storage_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // not Irikar_Royal_Storage_Wall and $mist2
-    {
-        let mut left = {
-            let h = ctx.has(Item::Irikar_Royal_Storage_Wall);
-            edict.insert("Irikar_Royal_Storage_Wall", format!("{}", h));
-            (!h, vec!["Irikar_Royal_Storage_Wall"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -17764,45 +17128,6 @@ pub fn explain_separation(
         let h = ctx.has(Item::Separation);
         edict.insert("Separation", format!("{}", h));
         (h, vec!["Separation"])
-    }
-}
-pub fn explain_separation_and_not_defeat_indra_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Separation and NOT Defeat_Indra and $mist2
-    {
-        let mut left = {
-            let mut left = {
-                let h = ctx.has(Item::Separation);
-                edict.insert("Separation", format!("{}", h));
-                (h, vec!["Separation"])
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let h = ctx.has(Item::Defeat_Indra);
-                    edict.insert("Defeat_Indra", format!("{}", h));
-                    (!h, vec!["Defeat_Indra"])
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_separation_and_not_defeat_indra_and_nanite_mist(
@@ -19935,32 +19260,6 @@ pub fn explain_underwater_movement_and_invoke_hover(
         }
     }
 }
-pub fn explain_underwater_movement_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // Underwater_Movement and $mist2
-    {
-        let mut left = {
-            let h = ctx.has(Item::Underwater_Movement);
-            edict.insert("Underwater_Movement", format!("{}", h));
-            (h, vec!["Underwater_Movement"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_underwater_movement_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -20350,17 +19649,6 @@ pub fn observe_access_amagi__main_area__ctx__combo_and_invoke_hook(
         ctx.amagi__main_area__ctx__combo()
     } && (hobserve__hook!(ctx, world, full_obs)))
 }
-pub fn observe_access_amagi__secret_chamber__ctx__east_dur_esla_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^_east_dur_esla and $mist2
-    ({
-        full_obs.observe_amagi__secret_chamber__ctx__east_dur_esla();
-        ctx.amagi__secret_chamber__ctx__east_dur_esla()
-    } && (hobserve__mist2!(ctx, world, full_obs)))
-}
 pub fn observe_access_amagi__secret_chamber__ctx__east_dur_esla_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -20388,17 +19676,6 @@ pub fn observe_access_amagi__secret_chamber__ctx__east_dur_esla_and_underwater_m
         full_obs.observe_underwater_movement();
         ctx.has(Item::Underwater_Movement)
     })) && (hobserve__hookhover!(ctx, world, full_obs)))
-}
-pub fn observe_access_amagi__secret_chamber__ctx__west_dur_esla_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^_west_dur_esla and $mist2
-    ({
-        full_obs.observe_amagi__secret_chamber__ctx__west_dur_esla();
-        ctx.amagi__secret_chamber__ctx__west_dur_esla()
-    } && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_amagi__secret_chamber__ctx__west_dur_esla_and_nanite_mist(
     ctx: &Context,
@@ -21819,17 +21096,6 @@ pub fn observe_access_emergence_dropoff_wall_and_invoke_hook(
         full_obs.observe_emergence_dropoff_wall();
         ctx.has(Item::Emergence_Dropoff_Wall)
     } && (hobserve__hook!(ctx, world, full_obs)))
-}
-pub fn observe_access_emergence_dropoff_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Emergence_Dropoff_Wall and $mist2
-    ({
-        full_obs.observe_emergence_dropoff_wall();
-        ctx.has(Item::Emergence_Dropoff_Wall)
-    } && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_emergence_dropoff_wall_and_nanite_mist(
     ctx: &Context,
@@ -24051,14 +23317,17 @@ pub fn observe_access_invoke_hover_and_invoke_hook_and_giguna__east_caverns__ctx
             ctx.giguna__east_caverns__ctx__combo_entered()
         }))
 }
-pub fn observe_access_invoke_hover_and_invoke_hook_and_invoke_mist2(
+pub fn observe_access_invoke_hover_and_invoke_hook_and_nanite_mist(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $hover and $hook and $mist2
+    // $hover and $hook and Nanite_Mist
     ((hobserve__hover!(ctx, world, full_obs) && (hobserve__hook!(ctx, world, full_obs)))
-        && (hobserve__mist2!(ctx, world, full_obs)))
+        && ({
+            full_obs.observe_nanite_mist();
+            ctx.has(Item::Nanite_Mist)
+        }))
 }
 pub fn observe_access_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_platform(
     ctx: &Context,
@@ -24071,14 +23340,6 @@ pub fn observe_access_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx_
             full_obs.observe_irikar__midwest__ctx__left_platform();
             ctx.irikar__midwest__ctx__left_platform()
         })))
-}
-pub fn observe_access_invoke_hover_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $hover and $mist2
-    (hobserve__hover!(ctx, world, full_obs) && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_invoke_hover_and_nanite_mist(
     ctx: &Context,
@@ -24171,13 +23432,16 @@ pub fn observe_access_invoke_hover_or_invoke_hook(
     // $hover or $hook
     (hobserve__hover!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
 }
-pub fn observe_access_invoke_hover_or_invoke_mist2(
+pub fn observe_access_invoke_hover_or_nanite_mist(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // $hover or $mist2
-    (hobserve__hover!(ctx, world, full_obs) || hobserve__mist2!(ctx, world, full_obs))
+    // $hover or Nanite_Mist
+    (hobserve__hover!(ctx, world, full_obs) || {
+        full_obs.observe_nanite_mist();
+        ctx.has(Item::Nanite_Mist)
+    })
 }
 pub fn observe_access_invoke_infinite_climb(
     ctx: &Context,
@@ -24302,53 +23566,6 @@ pub fn observe_access_invoke_melee_cskip_and_fast_travel(
             full_obs.observe_fast_travel();
             ctx.has(Item::Fast_Travel)
         }))
-}
-pub fn observe_access_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2
-    hobserve__mist2!(ctx, world, full_obs)
-}
-pub fn observe_access_invoke_mist2_and_amagi__gated_community__ctx__dur_esla(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2 and ^_dur_esla
-    (hobserve__mist2!(ctx, world, full_obs)
-        && ({
-            full_obs.observe_amagi__gated_community__ctx__dur_esla();
-            ctx.amagi__gated_community__ctx__dur_esla()
-        }))
-}
-pub fn observe_access_invoke_mist2_and_mode_eq_drone(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2 and ^mode == 'drone'
-    (hobserve__mist2!(ctx, world, full_obs)
-        && ({
-            let v = {
-                full_obs.observe_mode();
-                ctx.mode()
-            };
-            v == enums::Mode::Drone
-        }))
-}
-pub fn observe_access_invoke_mist2_and_not_irikar__midwest__ctx__right_platform(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $mist2 and not ^_right_platform
-    (hobserve__mist2!(ctx, world, full_obs)
-        && (!({
-            full_obs.observe_irikar__midwest__ctx__right_platform();
-            ctx.irikar__midwest__ctx__right_platform()
-        })))
 }
 pub fn observe_access_invoke_more_refills(
     ctx: &Context,
@@ -25645,38 +24862,6 @@ pub fn observe_access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform
         left == SpotId::Giguna__Separator__Platform
     }))
 }
-pub fn observe_access_mode_eq_drone_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^mode == 'drone' and $mist2
-    ({
-        let v = {
-            full_obs.observe_mode();
-            ctx.mode()
-        };
-        v == enums::Mode::Drone
-    } && (hobserve__mist2!(ctx, world, full_obs)))
-}
-pub fn observe_access_mode_eq_drone_and_invoke_mist2_and_giguna__east_caverns__ctx__combo_entered(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^mode == 'drone' and $mist2 and ^_combo_entered
-    (({
-        let v = {
-            full_obs.observe_mode();
-            ctx.mode()
-        };
-        v == enums::Mode::Drone
-    } && (hobserve__mist2!(ctx, world, full_obs)))
-        && ({
-            full_obs.observe_giguna__east_caverns__ctx__combo_entered();
-            ctx.giguna__east_caverns__ctx__combo_entered()
-        }))
-}
 pub fn observe_access_mode_eq_drone_and_mist_upgrade_and_giguna__east_caverns__ctx__combo_entered(
     ctx: &Context,
     world: &World,
@@ -25858,21 +25043,18 @@ pub fn observe_access_nanite_mist(
         ctx.has(Item::Nanite_Mist)
     }
 }
-pub fn observe_access_nanite_mist_and_mode_eq_drone(
+pub fn observe_access_nanite_mist_and_amagi__gated_community__ctx__dur_esla(
     ctx: &Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) -> bool {
-    // Nanite_Mist and ^mode == 'drone'
+    // Nanite_Mist and ^_dur_esla
     ({
         full_obs.observe_nanite_mist();
         ctx.has(Item::Nanite_Mist)
     } && ({
-        let v = {
-            full_obs.observe_mode();
-            ctx.mode()
-        };
-        v == enums::Mode::Drone
+        full_obs.observe_amagi__gated_community__ctx__dur_esla();
+        ctx.amagi__gated_community__ctx__dur_esla()
     }))
 }
 pub fn observe_access_nanite_mist_and_not_irikar__midwest__ctx__right_platform(
@@ -25933,17 +25115,6 @@ pub fn observe_access_not_amashilama(
         !ctx.has(Item::Amashilama)
     }
 }
-pub fn observe_access_not_annuna__boss_gate__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not ^_door and $mist2
-    (!({
-        full_obs.observe_annuna__boss_gate__ctx__door();
-        ctx.annuna__boss_gate__ctx__door()
-    }) && (hobserve__mist2!(ctx, world, full_obs)))
-}
 pub fn observe_access_not_annuna__boss_gate__ctx__door_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -25968,17 +25139,6 @@ pub fn observe_access_not_annuna__east_bridge__ctx__combo(
         full_obs.observe_annuna__east_bridge__ctx__combo();
         ctx.annuna__east_bridge__ctx__combo()
     })
-}
-pub fn observe_access_not_annuna__udug_gate__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not ^_door and $mist2
-    (!({
-        full_obs.observe_annuna__udug_gate__ctx__door();
-        ctx.annuna__udug_gate__ctx__door()
-    }) && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_not_annuna__udug_gate__ctx__door_and_nanite_mist(
     ctx: &Context,
@@ -26104,31 +25264,6 @@ pub fn observe_access_not_ebih_interchange_block(
         full_obs.observe_ebih_interchange_block();
         !ctx.has(Item::Ebih_Interchange_Block)
     }
-}
-pub fn observe_access_not_ebih_waterfall_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not Ebih_Waterfall_Wall and $mist2
-    ({
-        full_obs.observe_ebih_waterfall_wall();
-        !ctx.has(Item::Ebih_Waterfall_Wall)
-    } && (hobserve__mist2!(ctx, world, full_obs)))
-}
-pub fn observe_access_not_ebih_waterfall_wall_and_nanite_mist(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not Ebih_Waterfall_Wall and Nanite_Mist
-    ({
-        full_obs.observe_ebih_waterfall_wall();
-        !ctx.has(Item::Ebih_Waterfall_Wall)
-    } && ({
-        full_obs.observe_nanite_mist();
-        ctx.has(Item::Nanite_Mist)
-    }))
 }
 pub fn observe_access_not_giguna__carnelian__ctx__lower_susar(
     ctx: &Context,
@@ -26389,17 +25524,6 @@ pub fn observe_access_not_giguna_breach__sw_save__ctx__door_opened(
         ctx.giguna_breach__sw_save__ctx__door_opened()
     })
 }
-pub fn observe_access_not_glacier__lonely_bull__ctx__door_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not ^_door and $mist2
-    (!({
-        full_obs.observe_glacier__lonely_bull__ctx__door();
-        ctx.glacier__lonely_bull__ctx__door()
-    }) && (hobserve__mist2!(ctx, world, full_obs)))
-}
 pub fn observe_access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -26455,17 +25579,6 @@ pub fn observe_access_not_irikar__midwest__ctx__left_platform_and_invoke_activat
         ctx.irikar__midwest__ctx__left_platform()
     }) && (hobserve__activate!(ctx, world, full_obs)))
 }
-pub fn observe_access_not_irikar__midwest__ctx__left_platform_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not ^_left_platform and $mist2
-    (!({
-        full_obs.observe_irikar__midwest__ctx__left_platform();
-        ctx.irikar__midwest__ctx__left_platform()
-    }) && (hobserve__mist2!(ctx, world, full_obs)))
-}
 pub fn observe_access_not_irikar__midwest__ctx__left_platform_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -26491,17 +25604,6 @@ pub fn observe_access_not_irikar__midwest__ctx__right_platform_and_invoke_activa
         ctx.irikar__midwest__ctx__right_platform()
     }) && (hobserve__activate!(ctx, world, full_obs)))
 }
-pub fn observe_access_not_irikar__midwest__ctx__right_platform_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not ^_right_platform and $mist2
-    (!({
-        full_obs.observe_irikar__midwest__ctx__right_platform();
-        ctx.irikar__midwest__ctx__right_platform()
-    }) && (hobserve__mist2!(ctx, world, full_obs)))
-}
 pub fn observe_access_not_irikar__midwest__ctx__right_platform_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -26515,17 +25617,6 @@ pub fn observe_access_not_irikar__midwest__ctx__right_platform_and_nanite_mist(
         full_obs.observe_nanite_mist();
         ctx.has(Item::Nanite_Mist)
     }))
-}
-pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // not Irikar_Royal_Storage_Wall and $mist2
-    ({
-        full_obs.observe_irikar_royal_storage_wall();
-        !ctx.has(Item::Irikar_Royal_Storage_Wall)
-    } && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(
     ctx: &Context,
@@ -26844,20 +25935,6 @@ pub fn observe_access_separation(
         full_obs.observe_separation();
         ctx.has(Item::Separation)
     }
-}
-pub fn observe_access_separation_and_not_defeat_indra_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Separation and NOT Defeat_Indra and $mist2
-    (({
-        full_obs.observe_separation();
-        ctx.has(Item::Separation)
-    } && ({
-        full_obs.observe_defeat_indra();
-        !ctx.has(Item::Defeat_Indra)
-    })) && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_separation_and_not_defeat_indra_and_nanite_mist(
     ctx: &Context,
@@ -27938,17 +27015,6 @@ pub fn observe_access_underwater_movement_and_invoke_hover(
         full_obs.observe_underwater_movement();
         ctx.has(Item::Underwater_Movement)
     } && (hobserve__hover!(ctx, world, full_obs)))
-}
-pub fn observe_access_underwater_movement_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // Underwater_Movement and $mist2
-    ({
-        full_obs.observe_underwater_movement();
-        ctx.has(Item::Underwater_Movement)
-    } && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_underwater_movement_and_nanite_mist(
     ctx: &Context,

@@ -267,10 +267,10 @@ areas:
           jumps: 2
         - to: Upper East Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper East Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Large Floating Rock West
       coord: [23.2, 4.3]
       local:
@@ -300,10 +300,10 @@ areas:
           jumps: 3
         - to: Large Floating Rock East
           req: Nanite_Mist
-          movement: mist1
-        - to: Large Floating Rock East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Cache
       coord: [23.25, 5.5]
       local:
@@ -331,8 +331,11 @@ areas:
           movement: fast_hover
           jumps: 2
         - to: Column East
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Waterfall Ledge
       coord: [23.05, 5.1]
       local:
@@ -405,8 +408,11 @@ areas:
           movement: base
           jumps: 1
         - to: NW Floating Rock East
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Column West
       coord: [22.7, 3.95]
       local:
@@ -439,11 +445,17 @@ areas:
           movement: base
           jumps: 5
         - to: Column West
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: North Ledge
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: In 'n Out  # MARK: In 'n Out
   on_entry: $reset_old_area(^newpos)
@@ -1071,10 +1083,10 @@ areas:
       exits:
         - to: Center Re-hover Start
           req: Nanite_Mist
-          movement: mist1
-        - to: Center Re-hover Start
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Center Re-hover Start
       coord: [24.15, 6.3]
       exits:
@@ -1170,10 +1182,10 @@ areas:
       exits:
         - to: Grate West
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Grate West
       coord: [23.225, 7.8]
       local:
@@ -1191,10 +1203,10 @@ areas:
           penalty_tags: [xdoor, -fast_hover.2]
         - to: Grate East
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West
       coord: [23.1, 7.75]
       local:
@@ -1508,11 +1520,11 @@ areas:
           movement: fast_hover
           jumps: 1
         - to: West Ledge
-          req: $mist2
-          movement: mist2
-        - to: West Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Ledge
       coord: [22.1, 9.95]
       local:
@@ -1537,17 +1549,17 @@ areas:
           movement: fast_hover
           jumps: 2
         - to: Button
-          req: $mist2
-          movement: mist2
-        - to: Button
           req: Nanite_Mist
-          movement: mist1
-        - to: West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: West Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center East
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1796,14 +1808,10 @@ areas:
           item: Ebih_Breach_Rock_Block_Rock
           req: Nanite_Mist
           to: Rock Southwest
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Down
-          canon: Ebih_Breach_Rock_Block_Rock
-          item: Ebih_Breach_Rock_Block_Rock
-          req: $mist2
-          to: Rock Southwest
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge and Down
           canon: Ebih_Breach_Rock_Block_Rock
@@ -1845,14 +1853,10 @@ areas:
           item: Ebih_Breach_Rock_Block_Rock
           req: Nanite_Mist
           to: Rock Top
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Up
-          canon: Ebih_Breach_Rock_Block_Rock
-          item: Ebih_Breach_Rock_Block_Rock
-          req: $mist2
-          to: Rock Top
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Rock East
@@ -1873,14 +1877,10 @@ areas:
           item: Ebih_Breach_Rock_Block_Rock
           req: Nanite_Mist
           to: Rock Top
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Up
-          canon: Ebih_Breach_Rock_Block_Rock
-          item: Ebih_Breach_Rock_Block_Rock
-          req: $mist2
-          to: Rock Top
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge and Break All
           canon: Ebih_Breach_Rock_Block_Rock
@@ -1985,10 +1985,10 @@ areas:
       exits:
         - to: East Shaft Top
           req: Nanite_Mist
-          movement: mist1
-        - to: East Shaft Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Shaft Top
       coord: [20.65, 10.8]
       local:
@@ -2055,10 +2055,10 @@ areas:
       exits:
         - to: West Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: West Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: West Lower Step
           req: Slingshot_Hook
           movement: fast_hover
@@ -2085,10 +2085,10 @@ areas:
           jumps: 3
         - to: West Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: West Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Upper Ledge
       coord: [22.2, 1.75]
       local:
@@ -2135,20 +2135,20 @@ areas:
           jumps: 2
         - to: Highest Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Highest Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Upper Passage Ledge
           req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
         - to: Upper Passage Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Passage Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Peak > West
           tags: [xdoor]
     - name: Highest Ledge
@@ -2192,10 +2192,10 @@ areas:
           jumps: 2
         - to: Highest Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Highest Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Passage Exit
       coord: [21.15, 1.7]
       local:
@@ -2211,8 +2211,11 @@ areas:
           movement: base
           jumps: 3
         - to: Passage Middle
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Passage Middle
       coord: [21.125, 4.2]
       local:
@@ -2223,8 +2226,11 @@ areas:
           movement: base
           jumps: 7
         - to: Passage High
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Passage Low
       coord: [21.1, 5.6]
       local:
@@ -2235,10 +2241,12 @@ areas:
           movement: base
           jumps: 4
         - to: Passage Middle
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalties:
             - add: 0.5  # twisty
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Passage Bottom
       coord: [21.475, 5.7]
       data:
@@ -2256,22 +2264,22 @@ areas:
       exits:
         - to: Upper Passage Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Passage Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Highest Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Highest Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East 2
           req: Nanite_Mist
-          movement: mist1
-        - to: East 2
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Portal Ledge
       coord: [21.3, 2.8]
       local:
@@ -2295,8 +2303,11 @@ areas:
           movement: base
           jumps: 6
         - to: Portal Ledge
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 6
       coord: [21.9, 5.65]
       local:

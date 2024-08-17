@@ -143,13 +143,10 @@ areas:
           item: Uhrum_Breach_Rock_and_Gate_Rock
           req: Nanite_Mist
           to: Rock East
-          movement: mist1
-        - name: Upgraded Mist Through Rock
-          canon: Uhrum_Breach_Rock_and_Gate_Rock
-          item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: $mist2
-          to: Rock East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: North
           req: Slingshot_Hook
@@ -157,10 +154,10 @@ areas:
           jumps: 2
         - to: North
           req: Nanite_Mist
-          movement: mist1
-        - to: North
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center Area West
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -181,13 +178,10 @@ areas:
           item: Uhrum_Breach_Rock_and_Gate_Rock
           req: Nanite_Mist
           to: Rock West
-          movement: mist1
-        - name: Upgraded Mist Through Rock
-          canon: Uhrum_Breach_Rock_and_Gate_Rock
-          item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: $mist2
-          to: Rock West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Rock West
           req: Uhrum_Breach_Rock_and_Gate_Rock
@@ -1063,10 +1057,10 @@ areas:
           jumps: 2
         - to: Hidden Passage
           req: Nanite_Mist
-          movement: mist1
-        - to: Hidden Passage
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Hidden Passage
       coord: [29.0, 26.25]
       local:
@@ -1573,14 +1567,10 @@ areas:
           item: Uhrum_Breach_Overgrown_Ruins_Wall
           req: Nanite_Mist
           to: Wall West
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Breach_Overgrown_Ruins_Wall
-          item: Uhrum_Breach_Overgrown_Ruins_Wall
-          req: $mist2
-          to: Wall West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Wall West
@@ -1603,14 +1593,10 @@ areas:
           item: Uhrum_Breach_Overgrown_Ruins_Wall
           req: Nanite_Mist
           to: Wall East
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Breach_Overgrown_Ruins_Wall
-          item: Uhrum_Breach_Overgrown_Ruins_Wall
-          req: $mist2
-          to: Wall East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Wall East

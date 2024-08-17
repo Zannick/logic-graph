@@ -909,11 +909,11 @@ areas:
           movement: base
           jumps: 2
         - to: Tower Lower West Ledge
-          req: $mist2
-          movement: mist2
-        - to: Tower Lower West Ledge
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Save Point
       coord: [34.525, 23.7]
       local:
@@ -932,23 +932,23 @@ areas:
           movement: base
           jumps: 3
         - to: Northwest Platform
-          req: $mist2
-          movement: mist2
-        - to: Northwest Platform
           req: Nanite_Mist
-          movement: mist1
-        - to: Tower Upper West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Tower Upper West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Tower Peak West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Tower Peak West
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Save
           do: $save
@@ -964,23 +964,23 @@ areas:
           movement: base
           jumps: 3
         - to: Northwest Platform
-          req: $mist2
-          movement: mist2
-        - to: Northwest Platform
           req: Nanite_Mist
-          movement: mist1
-        - to: Tower Upper West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Tower Upper West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Tower Peak West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Tower Peak West
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Tower Upper West Ledge
       coord: [35.225, 22.4]
       data:
@@ -994,11 +994,11 @@ areas:
           movement: base
           jumps: 2
         - to: Northwest Platform
-          req: $mist2
-          movement: mist2
-        - to: Northwest Platform
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Tower Peak West
       coord: [35.3, 21.95]
       data:
@@ -1173,13 +1173,13 @@ areas:
         flipside: Annuna > Boss Gate > Portal Stand
       exits:
         - to: Depths > South
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [ydoor, -mist2.4]
-        - to: Depths > South
-          req: Nanite_Mist
-          movement: mist1
-          penalty_tags: [ydoor, -mist1.4]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.4, -mist1.4]
       actions:
         - name: Save
           do: $save

@@ -233,16 +233,16 @@ areas:
       exits:
         - to: West Staircase Top
           req: Nanite_Mist
-          movement: mist1
-        - to: West Staircase Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: East Staircase Top
           req: Nanite_Mist
-          movement: mist1
-        - to: East Staircase Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Tier East
       coord: [23.35, 2.2]
       local:
@@ -254,10 +254,10 @@ areas:
       exits:
         - to: East Staircase Top
           req: Nanite_Mist
-          movement: mist1
-        - to: East Staircase Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Tier West Mid-air
       coord: [22.95, 2.1]
       local:
@@ -269,10 +269,10 @@ areas:
       exits:
         - to: West Staircase Top
           req: Nanite_Mist
-          movement: mist1
-        - to: West Staircase Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Second Tier West
       coord: [22.8, 1.95]
       local:
@@ -303,10 +303,10 @@ areas:
       exits:
         - to: Atop Structure West
           req: Nanite_Mist
-          movement: mist1
-        - to: Atop Structure West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Atop Structure West
           req: $infinite_climb
           movement: base
@@ -323,20 +323,20 @@ areas:
       exits:
         - to: Catwalk
           req: Nanite_Mist
-          movement: mist1
-        - to: Catwalk
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Catwalk
           req: $infinite_climb
           movement: base
           jumps: 5
         - to: Atop Structure East
           req: Nanite_Mist
-          movement: mist1
-        - to: Atop Structure East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Atop Structure East
           req: $infinite_climb
           movement: base

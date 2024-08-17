@@ -293,13 +293,10 @@ areas:
           canon: Uhrum_West_Entrance_Upper_Wall
           req: Nanite_Mist
           to: Upper Wall East
-          movement: mist1
-        - name: Upgraded Mist through Wall
-          item: Uhrum_West_Entrance_Upper_Wall
-          canon: Uhrum_West_Entrance_Upper_Wall
-          req: $mist2
-          to: Upper Wall East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Wall East
       coord: [20.45, 25.3]
       local:
@@ -327,13 +324,10 @@ areas:
           canon: Uhrum_West_Entrance_Upper_Wall
           req: Nanite_Mist
           to: Upper Wall West
-          movement: mist1
-        - name: Upgraded Mist through Wall
-          item: Uhrum_West_Entrance_Upper_Wall
-          canon: Uhrum_West_Entrance_Upper_Wall
-          req: $mist2
-          to: Upper Wall West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Fork
       coord: [20.55, 25.6]
       local:
@@ -346,10 +340,10 @@ areas:
           jumps: 1
         - to: Upper Wall East
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Wall East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 26
       coord: [20.95, 25.8]
       local:
@@ -403,13 +397,10 @@ areas:
           canon: Uhrum_West_Entrance_Lower_Wall
           req: Nanite_Mist
           to: Lower Wall East
-          movement: mist1
-        - name: Upgraded Mist through Wall
-          item: Uhrum_West_Entrance_Lower_Wall
-          canon: Uhrum_West_Entrance_Lower_Wall
-          req: $mist2
-          to: Lower Wall East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Wall East
       coord: [20.1, 26.8]
       local:
@@ -437,13 +428,10 @@ areas:
           canon: Uhrum_West_Entrance_Lower_Wall
           req: Nanite_Mist
           to: Lower Wall West
-          movement: mist1
-        - name: Upgraded Mist through Wall
-          item: Uhrum_West_Entrance_Lower_Wall
-          canon: Uhrum_West_Entrance_Lower_Wall
-          req: $mist2
-          to: Lower Wall West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Path Rock
       coord: [20.3, 26.9]
       local:
@@ -558,10 +546,10 @@ areas:
           movement: base
         - to: Northwest Door
           req: Nanite_Mist
-          movement: mist1
-        - to: Northwest Door
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Western Rock
       coord: [21.3, 25.0]
       local:
@@ -589,8 +577,8 @@ areas:
           req: $hover
           movement: base
         - to: Giguna > Vertical Interchange > South
-          req: $mist2
-          movement: mist2
+          req: Nanite_Mist  # just uses the door, no movement tech necessary
+          price: 60
           tags: [ydoor]
     - name: Northwest Platform
       coord: [21.75, 24.7]
@@ -606,10 +594,10 @@ areas:
           jumps: 2
         - to: Northwest Door
           req: Nanite_Mist
-          movement: mist1
-        - to: Northwest Door
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Greenery
       coord: [22.2, 25.35]
       local:
@@ -812,10 +800,10 @@ areas:
           jumps: 1
         - to: Upper Rock East
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Rock East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 25
       coord: [25.95, 24.75]
       local:
@@ -1120,14 +1108,10 @@ areas:
           item: Uhrum_Glitchy_Corridor_Rock
           req: Nanite_Mist
           to: Wall East
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Glitchy_Corridor_Rock
-          item: Uhrum_Glitchy_Corridor_Rock
-          req: $mist2
-          to: Wall East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Wall East
@@ -1143,14 +1127,10 @@ areas:
           item: Uhrum_Glitchy_Corridor_Rock
           req: Nanite_Mist
           to: Wall West
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Glitchy_Corridor_Rock
-          item: Uhrum_Glitchy_Corridor_Rock
-          req: $mist2
-          to: Wall West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Wall West
@@ -1458,13 +1438,10 @@ areas:
           canon: Uhrum_Waterfall_Wall
           req: Nanite_Mist
           to: Barrier East
-          movement: mist1
-        - name: Upgraded Mist through Wall
-          item: Uhrum_Waterfall_Wall
-          canon: Uhrum_Waterfall_Wall
-          req: $mist2
-          to: Barrier East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Barrier East
       coord: [27.7, 23.4]
       local:
@@ -1496,13 +1473,10 @@ areas:
           canon: Uhrum_Waterfall_Wall
           req: Nanite_Mist
           to: Barrier West
-          movement: mist1
-        - name: Upgraded Mist through Wall
-          item: Uhrum_Waterfall_Wall
-          canon: Uhrum_Waterfall_Wall
-          req: $mist2
-          to: Barrier West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 24
       coord: [27.95, 23.8]
       local:
@@ -2244,14 +2218,10 @@ areas:
           item: Uhrum_Cavern_Wall
           req: Nanite_Mist
           to: Wall Right
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Cavern_Wall
-          item: Uhrum_Cavern_Wall
-          req: $mist2
-          to: Wall Right
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge Through Wall
           canon: Uhrum_Cavern_Wall
@@ -2296,14 +2266,10 @@ areas:
           item: Uhrum_Cavern_Wall
           req: Nanite_Mist
           to: Wall Left
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Cavern_Wall
-          item: Uhrum_Cavern_Wall
-          req: $mist2
-          to: Wall Left
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge Through Wall
           canon: Uhrum_Cavern_Wall
@@ -2472,10 +2438,10 @@ areas:
           jumps: 2
         - to: Upper Middle Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Middle Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Platform 2 East
       coord: [28.8, 22.5]
       local:
@@ -2492,10 +2458,10 @@ areas:
           jumps: 2
         - to: Upper Middle Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Middle Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Middle Plateau
           req: $hookhover
           movement: fast_hover
@@ -2531,10 +2497,10 @@ areas:
           jumps: 3
         - to: Upper Column West
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Column West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: NW Mid-air
       coord: [28.2, 21.65]
       exits:
@@ -2582,14 +2548,18 @@ areas:
           jumps: 2
         - to: Upper Column East
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Column East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Amagi > Wiggly Room > South
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [ydoor, -mist2.4]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.4, -mist1.4]
         
     - name: Upper Right Ledge
       coord: [28.8, 22.0]
@@ -2603,10 +2573,10 @@ areas:
       exits:
         - to: Upper Column East
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Column East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: North
       coord: [28.5, 21.2]
       data:
@@ -3150,13 +3120,10 @@ areas:
           item: Uhrum_Rocky_Gate_Rock
           req: Nanite_Mist
           to: Wall East
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Rocky_Gate_Rock
-          item: Uhrum_Rocky_Gate_Rock
-          req: $mist2
-          to: Wall East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall East
           req: Uhrum_Rocky_Gate_Rock
@@ -3213,13 +3180,10 @@ areas:
           item: Uhrum_Rocky_Gate_Rock
           req: Nanite_Mist
           to: Wall West
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Uhrum_Rocky_Gate_Rock
-          item: Uhrum_Rocky_Gate_Rock
-          req: $mist2
-          to: Wall West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall West
           req: Uhrum_Rocky_Gate_Rock
@@ -3725,13 +3689,10 @@ areas:
           item: Uhrum_Emergence_Wall
           req: Nanite_Mist
           to: Wall East Mid-air
-          movement: mist1
-        - name: Break Wall With Mist Upgrade
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $mist2
-          to: Wall East Mid-air
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall East Mid-air
           req: Uhrum_Emergence_Wall
@@ -3765,25 +3726,19 @@ areas:
           item: Uhrum_Emergence_Wall
           req: Nanite_Mist
           to: Wall West Mid-air
-          movement: mist1
-        - name: Break Wall With Mist Upgrade
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $mist2
-          to: Wall West Mid-air
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Break Wall Upward With Mist
           canon: Uhrum_Emergence_Wall
           item: Uhrum_Emergence_Wall
           req: Nanite_Mist
           to: Above Wall West
-          movement: mist1
-        - name: Break Wall Upward With Mist Upgrade
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $mist2
-          to: Above Wall West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall West Mid-air
           req: Uhrum_Emergence_Wall
@@ -3879,10 +3834,10 @@ areas:
           movement: base
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Mid-air
       coord: [27.3, 22.3]
       local:
@@ -3890,10 +3845,10 @@ areas:
       exits:
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: West 23
       coord: [27.05, 22.75]
@@ -3943,10 +3898,10 @@ areas:
           jumps: 1
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle Step
       coord: [27.6, 22.2]
       local:
@@ -3965,10 +3920,10 @@ areas:
       exits:
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Step
       coord: [27.7, 22.0]
       local:
@@ -3987,10 +3942,10 @@ areas:
       exits:
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 22
       coord: [27.95, 21.8]
       local:

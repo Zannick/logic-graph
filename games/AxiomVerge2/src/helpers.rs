@@ -1483,50 +1483,6 @@ macro_rules! hobserve__unlock4 {
     }};
 }
 
-/// $mist2 (  )
-/// Nanite_Mist and Mist_Upgrade
-#[macro_export]
-macro_rules! helper__mist2 {
-    ($ctx:expr, $world:expr) => {{
-        ($ctx.has(Item::Nanite_Mist) && $ctx.has(Item::Mist_Upgrade))
-    }};
-}
-#[macro_export]
-macro_rules! hexplain__mist2 {
-    ($ctx:expr, $world:expr, $edict:expr) => {{
-        {
-            let mut left = {
-                let h = $ctx.has(Item::Nanite_Mist);
-                $edict.insert("Nanite_Mist", format!("{}", h));
-                (h, vec!["Nanite_Mist"])
-            };
-            if !left.0 {
-                left
-            } else {
-                let mut right = {
-                    let h = $ctx.has(Item::Mist_Upgrade);
-                    $edict.insert("Mist_Upgrade", format!("{}", h));
-                    (h, vec!["Mist_Upgrade"])
-                };
-                left.1.append(&mut right.1);
-                (right.0, left.1)
-            }
-        }
-    }};
-}
-#[macro_export]
-macro_rules! hobserve__mist2 {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        ({
-            $full_obs.observe_nanite_mist();
-            $ctx.has(Item::Nanite_Mist)
-        } && ({
-            $full_obs.observe_mist_upgrade();
-            $ctx.has(Item::Mist_Upgrade)
-        }))
-    }};
-}
-
 /// $ft_main (  )
 /// Fast_Travel and ^realm == 'main'
 #[macro_export]

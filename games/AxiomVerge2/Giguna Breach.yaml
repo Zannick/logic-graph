@@ -1171,10 +1171,10 @@ areas:
           jumps: 2
         - to: East Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: East Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Upper Ledge
       coord: [18.3, 21.2]
       data:
@@ -1288,10 +1288,10 @@ areas:
           jumps: 2
         - to: West Piston Entrance
           req: Nanite_Mist
-          movement: mist1
-        - to: West Piston Entrance
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Piston Upper
       coord: [19.7, 22.1]
       local:
@@ -1360,10 +1360,10 @@ areas:
           jumps: 1
         - to: East Mid-air
           req: Nanite_Mist
-          movement: mist1
-        - to: East Mid-air
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Mid-air
       coord: [20.65, 21.7]
       data:
@@ -1376,10 +1376,10 @@ areas:
           movement: base
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Ledge
       coord: [20.75, 21.75]
       local:
@@ -1394,10 +1394,10 @@ areas:
           jumps: 2
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Ledge
       coord: [20.65, 21.35]
       local:
@@ -1873,14 +1873,12 @@ areas:
           tags: [xshift]
         - to: Upper Tunnel Entrance
           req: Nanite_Mist
-          movement: mist1
-          penalties:
-            - add: 0.7  # additional to navigate turns
-        - to: Upper Tunnel Entrance
-          req: $mist2
           movement: mist2
           penalties:
             - add: 0.35  # additional to navigate turns
+            - when: not Mist_Upgrade
+              movement: mist1
+              add: 0.35  # additional to navigate turns
         - to: Upper Tunnel Entrance
           req: Slingshot_Hook
           movement: base
@@ -1889,14 +1887,12 @@ areas:
             - add: 1  # additional to navigate turns and precision issues
         - to: Mid Tunnel
           req: Nanite_Mist
-          movement: mist1
-          penalties:
-            - add: 0.3  # additional to navigate turns
-        - to: Mid Tunnel
-          req: $mist2
           movement: mist2
           penalties:
             - add: 0.15  # additional to navigate turns
+            - when: not Mist_Upgrade
+              movement: mist1
+              add: 0.15
         - to: Mid Tunnel
           req: Slingshot_Hook
           movement: base
@@ -2168,8 +2164,11 @@ areas:
           movement: base
           jumps: 2
         - to: Upper Right Ledge
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lowest Platform
       coord: [11.65, 10.45]
       local:
@@ -2342,10 +2341,10 @@ areas:
           jumps: 2
         - to: Top Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Top Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle West Ledge
       coord: [19.55, 15.15]
       local:
@@ -2363,14 +2362,10 @@ areas:
           item: Giguna_Breach_Pinkness_Rock
           req: Nanite_Mist
           to: Rock Bottom
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Down
-          canon: Giguna_Breach_Pinkness_Rock
-          item: Giguna_Breach_Pinkness_Rock
-          req: $mist2
-          to: Rock Bottom
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge Down
           canon: Giguna_Breach_Pinkness_Rock
@@ -2409,14 +2404,10 @@ areas:
           item: Giguna_Breach_Pinkness_Rock
           req: Nanite_Mist
           to: Rock Top
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Up
-          canon: Giguna_Breach_Pinkness_Rock
-          item: Giguna_Breach_Pinkness_Rock
-          req: $mist2
-          to: Rock Top
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge Up
           canon: Giguna_Breach_Pinkness_Rock

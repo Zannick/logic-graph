@@ -91,37 +91,28 @@ areas:
           item: Emergence_Dropoff_Wall
           req: Nanite_Mist
           to: Wall Right
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Dropoff_Wall
-          item: Emergence_Dropoff_Wall
-          req: $mist2
-          to: Wall Right
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Mist Upwards Through Wall
           canon: Emergence_Dropoff_Wall
           item: Emergence_Dropoff_Wall
           req: Nanite_Mist
           to: Above Wall
-          movement: mist1
-        - name: Upgraded Mist Upwards Through Wall
-          canon: Emergence_Dropoff_Wall
-          item: Emergence_Dropoff_Wall
-          req: $mist2
-          to: Above Wall
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Mist On Through
           canon: Emergence_Dropoff_Wall
           item: Emergence_Dropoff_Wall
           req: Nanite_Mist
           to: Upper Right
-          movement: mist1
-        - name: Upgraded Mist On Through
-          canon: Emergence_Dropoff_Wall
-          item: Emergence_Dropoff_Wall
-          req: $mist2
-          to: Upper Right
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall Right
           req: Emergence_Dropoff_Wall
@@ -132,16 +123,16 @@ areas:
           jumps: 1
         - to: Above Wall
           req: Emergence_Dropoff_Wall and Nanite_Mist
-          movement: mist1
-        - to: Above Wall
-          req: Emergence_Dropoff_Wall and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Upper Right
           req: Emergence_Dropoff_Wall and Nanite_Mist
-          movement: mist1
-        - to: Upper Right
-          req: Emergence_Dropoff_Wall and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Upper Ledge
           req: Emergence_Dropoff_Wall and $hook
           movement: base
@@ -170,13 +161,10 @@ areas:
           item: Emergence_Dropoff_Wall
           req: Nanite_Mist
           to: Wall Left
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Dropoff_Wall
-          item: Emergence_Dropoff_Wall
-          req: $mist2
-          to: Wall Left
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Shockwave Flask
           canon: Emergence_Dropoff_Flask
           item: Big_Flask
@@ -458,16 +446,16 @@ areas:
           jumps: 2
         - to: West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Under the Lip
           req: Nanite_Mist
-          movement: mist1
-        - to: Under the Lip
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Hook Point
       coord: [9.2, 10.6]
       local:
@@ -495,16 +483,16 @@ areas:
           jumps: 1
         - to: West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Under the Lip
           req: Nanite_Mist
-          movement: mist1
-        - to: Under the Lip
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Mid-water
       coord: [9.6, 10.4]
       local:
@@ -513,10 +501,10 @@ areas:
       exits:
         - to: Under the Lip
           req: Nanite_Mist
-          movement: mist1
-        - to: Under the Lip
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Bottom Middle
       coord: [10.0, 10.8]
       local:
@@ -606,8 +594,11 @@ areas:
           jumps: 1
       exits:
         - to: North
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         # These are likely all unnecessary
         - to: Platform 4 Left
           req: $hook and $hover
@@ -642,20 +633,20 @@ areas:
           jumps: 2
         - to: North Catch
           req: Nanite_Mist
-          movement: mist1
-        - to: North Catch
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: West Ledge
           req: $hook and $hover
           movement: base
           jumps: 1
         - to: West Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: West Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Ledge
       coord: [9.25, 9.55]
       local:
@@ -675,10 +666,10 @@ areas:
       exits:
         - to: Under the Lip
           req: Nanite_Mist
-          movement: mist1
-        - to: Under the Lip
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 10
       coord: [9.1, 9.55]
       local:
@@ -718,10 +709,10 @@ areas:
           jumps: 2
         - to: Tunnel Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Tunnel Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Dais Right
       coord: [9.05, 8.55]
       local:
@@ -832,13 +823,10 @@ areas:
           item: Emergence_Storage_Rock
           req: Nanite_Mist
           to: Wall Left
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Storage_Rock
-          item: Emergence_Storage_Rock
-          req: $mist2
-          to: Wall Left
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall Left
           req: Emergence_Storage_Rock
@@ -853,13 +841,10 @@ areas:
           item: Emergence_Storage_Rock
           req: Nanite_Mist
           to: Wall Right
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Storage_Rock
-          item: Emergence_Storage_Rock
-          req: $mist2
-          to: Wall Right
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall Right
           req: Emergence_Storage_Rock
@@ -955,10 +940,10 @@ areas:
           jumps: 1
         - to: Tunnel Entrance
           req: Nanite_Mist
-          movement: mist1
-        - to: Tunnel Entrance
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Dais Right
           req: $hover
           movement: base
@@ -972,13 +957,10 @@ areas:
           item: Emergence_Storage_Tunnel
           req: Nanite_Mist
           to: Behind Facade
-          movement: mist1
-        - name: Upgraded Mist Through Rock
-          canon: Emergence_Storage_Tunnel
-          item: Emergence_Storage_Tunnel
-          req: $mist2
-          to: Behind Facade
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Behind Facade
           req: Emergence_Storage_Tunnel
@@ -993,13 +975,10 @@ areas:
           item: Emergence_Storage_Tunnel
           req: Nanite_Mist
           to: Tunnel Entrance
-          movement: mist1
-        - name: Upgraded Mist Through Rock
-          canon: Emergence_Storage_Tunnel
-          item: Emergence_Storage_Tunnel
-          req: $mist2
-          to: Tunnel Entrance
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Tunnel Entrance
           req: Emergence_Storage_Tunnel
@@ -1093,13 +1072,10 @@ areas:
           item: Emergence_Rocks_Fall_Rock_1
           req: Nanite_Mist
           to: Wall 1 West
-          movement: mist1
-        - name: Upgraded Mist Through Rock
-          canon: Emergence_Rocks_Fall_Rock_1
-          item: Emergence_Rocks_Fall_Rock_1
-          req: $mist2
-          to: Wall 1 West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall 1 West
           req: Emergence_Rocks_Fall_Rock_1
@@ -1110,10 +1086,10 @@ areas:
           jumps: 1
         - to: Northeast Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Northeast Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Wall 1 East
       coord: [7.7, 6.85]
       local:
@@ -1125,13 +1101,10 @@ areas:
           item: Emergence_Rocks_Fall_Rock_1
           req: Nanite_Mist
           to: Wall 1 West
-          movement: mist1
-        - name: Upgraded Mist Through Rock
-          canon: Emergence_Rocks_Fall_Rock_1
-          item: Emergence_Rocks_Fall_Rock_1
-          req: $mist2
-          to: Wall 1 West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall 1 West
           req: Emergence_Rocks_Fall_Rock_1
@@ -1154,25 +1127,19 @@ areas:
           item: Emergence_Rocks_Fall_Rock_1
           req: Nanite_Mist
           to: Wall 1 East
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_1
-          item: Emergence_Rocks_Fall_Rock_1
-          req: $mist2
-          to: Wall 1 East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Mist Upward Through Wall
           canon: Emergence_Rocks_Fall_Rock_1
           item: Emergence_Rocks_Fall_Rock_1
           req: Nanite_Mist
           to: Wall 1 Northeast
-          movement: mist1
-        - name: Upgraded Mist Upward Through Wall
-          canon: Emergence_Rocks_Fall_Rock_1
-          item: Emergence_Rocks_Fall_Rock_1
-          req: $mist2
-          to: Wall 1 Northeast
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Charge Through Wall
           canon: Emergence_Rocks_Fall_Rock_1
           item: Emergence_Rocks_Fall_Rock_1
@@ -1205,13 +1172,10 @@ areas:
           item: Emergence_Rocks_Fall_Rock_2
           req: Nanite_Mist
           to: Wall 2 East
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_2
-          item: Emergence_Rocks_Fall_Rock_2
-          req: $mist2
-          to: Wall 2 East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Spin Through Wall 2
           canon: Emergence_Rocks_Fall_Rock_2
           item: Emergence_Rocks_Fall_Rock_2
@@ -1227,10 +1191,10 @@ areas:
           jumps: 1
         - to: Wall 1 West
           req: Nanite_Mist
-          movement: mist1
-        - to: Wall 1 West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Wall 2 West
       coord: [7.35, 7.25]
       locations:
@@ -1265,25 +1229,19 @@ areas:
           item: Emergence_Rocks_Fall_Rock_2
           req: Nanite_Mist
           to: Wall 2 West
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_2
-          item: Emergence_Rocks_Fall_Rock_2
-          req: $mist2
-          to: Wall 2 West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Mist Upward Through Wall
           canon: Emergence_Rocks_Fall_Rock_2
           item: Emergence_Rocks_Fall_Rock_2
           req: Nanite_Mist
           to: Wall 2 Northwest
-          movement: mist1
-        - name: Upgraded Mist Upward Through Wall
-          canon: Emergence_Rocks_Fall_Rock_2
-          item: Emergence_Rocks_Fall_Rock_2
-          req: $mist2
-          to: Wall 2 Northwest
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall 2 Northwest
           req: Emergence_Rocks_Fall_Rock_2
@@ -1335,20 +1293,17 @@ areas:
           item: Emergence_Rocks_Fall_Rock_3
           req: Nanite_Mist
           to: Wall 3 West
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_3
-          item: Emergence_Rocks_Fall_Rock_3
-          req: $mist2
-          to: Wall 3 West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Middle Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Middle Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Wall 3 West
           req: Emergence_Rocks_Fall_Rock_3
           movement: base
@@ -1375,25 +1330,19 @@ areas:
           item: Emergence_Rocks_Fall_Rock_3
           req: Nanite_Mist
           to: Wall 3 East
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_3
-          item: Emergence_Rocks_Fall_Rock_3
-          req: $mist2
-          to: Wall 3 East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - name: Mist Upwards Through Wall
           canon: Emergence_Rocks_Fall_Rock_3
           item: Emergence_Rocks_Fall_Rock_3
           req: Nanite_Mist
           to: Wall 3 Northeast
-          movement: mist1
-        - name: Upgraded Mist Upwards Through Wall
-          canon: Emergence_Rocks_Fall_Rock_3
-          item: Emergence_Rocks_Fall_Rock_3
-          req: $mist2
-          to: Wall 3 Northeast
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall 3 East
           req: Emergence_Rocks_Fall_Rock_3
@@ -1471,13 +1420,10 @@ areas:
           item: Emergence_Rocks_Fall_Rock_4
           req: Nanite_Mist
           to: Wall 4 East
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
-          req: $mist2
-          to: Wall 4 East
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Lower Ledge
           req: $hook
@@ -1485,10 +1431,10 @@ areas:
           jumps: 2
         - to: Lower Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Lower Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Wall 4 East
           req: Emergence_Rocks_Fall_Rock_4
           movement: base
@@ -1503,13 +1449,10 @@ areas:
           item: Emergence_Rocks_Fall_Rock_4
           req: Nanite_Mist
           to: Wall 4 West
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          canon: Emergence_Rocks_Fall_Rock_4
-          item: Emergence_Rocks_Fall_Rock_4
-          req: $mist2
-          to: Wall 4 West
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Wall 4 East
           req: Emergence_Rocks_Fall_Rock_4

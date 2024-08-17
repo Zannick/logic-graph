@@ -201,8 +201,11 @@ areas:
           movement: base
           jumps: 7
         - to: Gate Right
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 11
       coord: [18.95, 10.75]
       local:
@@ -898,10 +901,10 @@ areas:
           jumps: 2
         - to: Left Platform East
           req: Nanite_Mist
-          movement: mist1
-        - to: Left Platform East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Center Plains
       coord: [17.4, 13.6]
       local:
@@ -942,13 +945,10 @@ areas:
           item: Giguna_Wasteland_Passage_H
           canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone' and Nanite_Mist
-          movement: mist1
-        - name: Upgraded Mist through Horizontal Passage
-          to: Passage Cache
-          item: Giguna_Wasteland_Passage_H
-          canon: Giguna_Wasteland_Passage_H
-          req: ^mode == 'drone' and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Passage Cache
       coord: [15.4, 13.6]
@@ -976,13 +976,10 @@ areas:
           item: Giguna_Wasteland_Passage_H
           canon: Giguna_Wasteland_Passage_H
           req: ^mode == 'drone' and Nanite_Mist
-          movement: mist1
-        - name: Upgraded Mist through Horizontal Passage
-          to: Passage East
-          item: Giguna_Wasteland_Passage_H
-          canon: Giguna_Wasteland_Passage_H
-          req: ^mode == 'drone' and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Westward Hill
       coord: [16.45, 13.4]
       local:
@@ -1066,10 +1063,10 @@ areas:
       exits:
         - to: Upper Mid-air Near Cache
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Mid-air Near Cache
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center Platform West  # If we don't go up, we go to the right
           req: $hook and $hover
           movement: base
@@ -1082,16 +1079,16 @@ areas:
       exits:
         - to: Cache Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Cache Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Upper Cache
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Cache
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Left Platform West
           req: $hook and $hover
           movement: base
@@ -1139,13 +1136,16 @@ areas:
           jumps: 3
         - to: Left Platform East
           req: Nanite_Mist
-          movement: mist1
-        - to: Left Platform East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Cache Ledge
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Center Platform West
       coord: [17.25, 11.7]
       local:
@@ -1439,19 +1439,19 @@ areas:
       exits:
         - to: West 15
           req: Nanite_Mist
-          movement: mist1
-        - to: West 15
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 15
       coord: [13.05, 14.75]
       exits:
         - to: West Grate
           req: Nanite_Mist
-          movement: mist1
-        - to: West Grate
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Helipad > East 15
           tags: [xshift]
     - name: Staircase Bottom
@@ -1669,10 +1669,10 @@ areas:
       exits:
         - to: Way Up High
           req: Nanite_Mist
-          movement: mist1
-        - to: Way Up High
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 7
       coord: [16.05, 6.8]
       exits:
@@ -2110,12 +2110,12 @@ areas:
           penalty_tags: [xshift, -base.1]
         - to: Ruins East > Way Up High
           req: Nanite_Mist
-          movement: mist1
-          penalty_tags: [xshift, -base.1]
-        - to: Ruins East > Way Up High
-          req: $mist2
           movement: mist2
           penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [base.1, -base.2]
     - name: Rooftop Gutter
       coord: [15.825, 5.55]
       local:
@@ -2269,10 +2269,10 @@ areas:
       exits:
         - to: Wall Top
           req: Nanite_Mist
-          movement: mist1
-        - to: Wall Top
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Wall Bottom
       coord: [11.9, 16.7]
       local:
@@ -2288,10 +2288,10 @@ areas:
           movement: base
         - to: Tablet Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Tablet Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Tablet Ledge
       coord: [11.5, 16.7]
       local:
@@ -2711,14 +2711,10 @@ areas:
           item: Giguna_Dual_Path_Wall
           canon: Giguna_Dual_Path_Wall
           req: ^mode == 'drone' and Nanite_Mist
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist into Wall
-          to: Wall Secret
-          item: Giguna_Dual_Path_Wall
-          canon: Giguna_Dual_Path_Wall
-          req: ^mode == 'drone' and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
     - name: Wall Secret
       coord: [17.95, 17.75]
@@ -2915,13 +2911,10 @@ areas:
           canon: Giguna_Boulder
           to: Rock Center
           req: Nanite_Mist
-          movement: mist1
-        - name: Enter Rock as Upgraded Mist
-          item: Giguna_Boulder
-          canon: Giguna_Boulder
-          to: Rock Center
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Rock Center
       coord: [15.55, 16.85]
       local:
@@ -2953,13 +2946,10 @@ areas:
           canon: Giguna_Boulder
           to: Rock Center
           req: Nanite_Mist
-          movement: mist1
-        - name: Enter Rock as Upgraded Mist
-          item: Giguna_Boulder
-          canon: Giguna_Boulder
-          to: Rock Center
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 17
       coord: [15.05, 16.6]
       local:
@@ -3310,12 +3300,10 @@ areas:
           time: 1.75  # ?
         - to: Hidden Passage West
           req: ^mode == 'drone' and Nanite_Mist and ^_combo_entered
-          price: 24
-          time: 1.75  # ?
-        - to: Hidden Passage West
-          req: ^mode == 'drone' and $mist2 and ^_combo_entered
-          price: 20
-          time: 1.5  # ?
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Statues Ledge
       coord: [19.5, 15.5]
@@ -3399,10 +3387,10 @@ areas:
           time: 1  # ?
         - to: Hidden Passage West
           req: ^mode == 'drone' and Nanite_Mist and ^_combo_entered
-          movement: mist1
-        - to: Hidden Passage West
-          req: ^mode == 'drone' and $mist2 and ^_combo_entered
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Arc Passage
       coord: [20.4, 15.6]
       local:
@@ -4184,10 +4172,10 @@ areas:
           jumps: 2
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Vertical Interchange  # MARK: Vertical Interchange
   on_entry: $reset_old_area(^newpos)
@@ -4272,9 +4260,13 @@ areas:
           movement: base
           jumps: 2
         - to: Ebih > Vertical Interchange > South
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [ydoor, -mist2.4]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.4, -mist1.4]
         - to: East Caverns > East Grass
           req: $hookhover
           movement: fast_hover
@@ -4369,10 +4361,10 @@ areas:
           jumps: 2
         - to: Top Passage Bottom
           req: Nanite_Mist
-          movement: mist1
-        - to: Top Passage Bottom
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle Plateau
       coord: [21.75, 19.6]
       local:
@@ -4495,10 +4487,10 @@ areas:
           jumps: 3
         - to: Dead-end Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Dead-end Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle Hill By Switch
       coord: [21.65, 20.7]
       local:
@@ -4587,13 +4579,10 @@ areas:
           item: Giguna_Vertical_Interchange_Rock
           req: Nanite_Mist
           to: Rock
-          movement: mist1
-        - name: Upgraded Mist Downwards
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $mist2
-          to: Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Rock
           req: Giguna_Vertical_Interchange_Rock
@@ -4608,10 +4597,10 @@ areas:
           jumps: 2
         - to: Ledge Above Rock
           req: Nanite_Mist
-          movement: mist1
-        - to: Ledge Above Rock
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Rock
       coord: [21.5, 21.45]
       exits:
@@ -4662,14 +4651,10 @@ areas:
           item: Giguna_Vertical_Interchange_Rock
           req: Nanite_Mist
           to: Rock
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Into Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          to: Rock
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Charge Upward Through Rock
           canon: Giguna_Vertical_Interchange_Rock
@@ -4692,14 +4677,10 @@ areas:
           item: Giguna_Vertical_Interchange_Rock
           req: Nanite_Mist
           to: Above Rock
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Upwards Through Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $mist2
-          to: Above Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
     - name: Rock West
       coord: [21.35, 21.6]
@@ -4744,28 +4725,20 @@ areas:
           item: Giguna_Vertical_Interchange_Rock
           req: Nanite_Mist
           to: Rock
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Into Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $mist2
-          to: Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
         - name: Mist Upwards Through Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
           req: Nanite_Mist
           to: Above Rock
-          movement: mist1
-          tags: [event]
-        - name: Upgraded Mist Upwards Through Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $mist2
-          to: Above Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
           tags: [event]
       exits:
         - to: Rock
@@ -4801,10 +4774,10 @@ areas:
           jumps: 2
         - to: Rock West
           req: Nanite_Mist
-          movement: mist1
-        - to: Rock West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Middle Corner
       coord: [21.25, 22.5]
       local:
@@ -4840,10 +4813,10 @@ areas:
           jumps: 1
         - to: Lower Ledge 2
           req: Nanite_Mist
-          movement: mist1
-        - to: Lower Ledge 2
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Lower Platform
       coord: [21.45, 23.4]
       local:
@@ -4880,10 +4853,10 @@ areas:
           jumps: 2
         - to: Lower Plateau Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Lower Plateau Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Uhrum > Siege Corridor > Northwest Door
           tags: [ydoor]
     #endregion
@@ -5337,16 +5310,16 @@ areas:
           jumps: 4
         - to: Pedestal Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Pedestal Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: NE Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: NE Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Platform
       coord: [20.75, 20.3]
       local:
@@ -5363,16 +5336,16 @@ areas:
           jumps: 3
         - to: NE Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: NE Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Pedestal Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Pedestal Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 21
       coord: [20.95, 20.65]
       local:
@@ -5425,10 +5398,10 @@ areas:
           jumps: 2
         - to: Grass Gap
           req: Nanite_Mist
-          movement: mist1
-        - to: Grass Gap
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Platform Below Ledge
       coord: [20.65, 21.7]
@@ -5525,10 +5498,10 @@ areas:
           movement: base
         - to: Cave Mouth West
           req: Nanite_Mist
-          movement: mist1
-        - to: Cave Mouth West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Above the Hole
       coord: [16.9, 23.3]
       data:
@@ -5570,9 +5543,10 @@ areas:
       exits:
         - to: Wall Interior
           req: Nanite_Mist
-          movement: mist1
-        - to: Wall Interior
-          req: $mist2
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Cave Mouth East
       coord: [16.85, 23.9]
       local:
@@ -5694,13 +5668,10 @@ areas:
           item: Giguna_Separator_Bricks
           canon: Giguna_Separator_Bricks
           to: Lower Brick
-          movement: mist1
-        - name: Break Bricks Faster
-          req: $mist2
-          item: Giguna_Separator_Bricks
-          canon: Giguna_Separator_Bricks
-          to: Lower Brick
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         # Might be possible with Slingshot_Charge but may be difficult
     - name: Switch
       coord: [18.75, 22.6]
@@ -5736,13 +5707,10 @@ areas:
           item: Giguna_Separator_Bricks
           canon: Giguna_Separator_Bricks
           to: Upper Brick
-          movement: mist1
-        - name: Break Bricks Faster
-          req: $mist2
-          item: Giguna_Separator_Bricks
-          canon: Giguna_Separator_Bricks
-          to: Upper Brick
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 24
       coord: [18.05, 23.55]
       local:
@@ -5801,10 +5769,10 @@ areas:
           jumps: 2
         - to: West Column West
           req: Nanite_Mist
-          movement: mist1
-        - to: West Column West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Column West
       coord: [19.5, 23.2]
       data:
@@ -5852,10 +5820,10 @@ areas:
           jumps: 1
         - to: East Column
           req: Nanite_Mist
-          movement: mist1
-        - to: East Column
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Column
       coord: [20.25, 23.2]
       local:

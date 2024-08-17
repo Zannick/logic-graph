@@ -64,10 +64,10 @@ areas:
       exits:
         - to: Top Platform
           req: Nanite_Mist
-          movement: mist1
-        - to: Top Platform
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Save
           do: $save
@@ -831,26 +831,23 @@ areas:
       exits:
         - to: Lower West Tree
           req: Nanite_Mist
-          movement: mist1
-        - to: Lower West Tree
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Wall Left
           req: Ebih_Waterfall_Wall
           movement: base
       hybrid:
-        - name: Break Through Wall
+        - name: Mist Through Wall
           to: Wall Left
-          req: not Ebih_Waterfall_Wall and Nanite_Mist
-          item: Ebih_Waterfall_Wall
-          canon: Ebih_Waterfall_Wall
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          to: Wall Left
-          req: not Ebih_Waterfall_Wall and $mist2
+          req: Nanite_Mist
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Wall Left
       coord: [21.2, 10.7]
       local:
@@ -867,18 +864,15 @@ areas:
           req: Ebih_Waterfall_Wall
           movement: base
       hybrid:
-        - name: Break Through Wall
+        - name: Mist Through Wall
           to: Wall Right
-          req: not Ebih_Waterfall_Wall and Nanite_Mist
-          item: Ebih_Waterfall_Wall
-          canon: Ebih_Waterfall_Wall
-          movement: mist1
-        - name: Upgraded Mist Through Wall
-          to: Wall Right
-          req: not Ebih_Waterfall_Wall and $mist2
+          req: Nanite_Mist
           item: Ebih_Waterfall_Wall
           canon: Ebih_Waterfall_Wall
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 11
       coord: [21.05, 10.75]
       local:
@@ -1419,9 +1413,13 @@ areas:
         - to: Above Alcove
       exits:
         - to: West Face > Lower Ledge
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [yshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.2, -mist1.2]
       actions:
         - name: Save
           do: $save
@@ -1437,9 +1435,13 @@ areas:
         - to: Above Alcove
       exits:
         - to: West Face > Lower Ledge
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
           penalty_tags: [yshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.2, -mist1.2]
       actions:
         - name: Throw Drone Long
           req: $can_deploy
@@ -1468,16 +1470,19 @@ areas:
           movement: base
           jumps: 1
         - to: Highest Platform
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: West Face > Lower Ledge
           req: Nanite_Mist
-          movement: mist1
-          penalty_tags: [yshift, -mist1.2]
-        - to: West Face > Lower Ledge
-          req: $mist2
           movement: mist2
           penalty_tags: [yshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.2, -mist1.2]
     - name: High Ledge
       coord: [20.55, 5.8]
       local:
@@ -1543,12 +1548,12 @@ areas:
           penalty_tags: [xshift, -base.1]
         - to: West Face > Lower Ledge
           req: Nanite_Mist
-          movement: mist1
-          penalty_tags: [yshift, -mist1.2]
-        - to: West Face > Lower Ledge
-          req: $mist2
           movement: mist2
           penalty_tags: [yshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              tags: [mist2.2, -mist1.2]
     - name: Mid-air near Flask
       coord: [19.9, 5.8]
       local:
@@ -1556,10 +1561,10 @@ areas:
       exits:
         - to: Highest Platform
           req: Nanite_Mist
-          movement: mist1
-        - to: Highest Platform
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Giguna > Giguna Northeast > Inner Wall
           req: $hover
           movement: base
@@ -1585,10 +1590,10 @@ areas:
           movement: base
         - to: High Above Flask
           req: Nanite_Mist
-          movement: mist1
-        - to: High Above Flask
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Middle North
       coord: [20.05, 5.1]
       local:
@@ -1955,13 +1960,10 @@ areas:
           item: Ebih_East_Wall
           to: Wall West
           req: Nanite_Mist
-          movement: mist1
-        - name: Break Through Wall Faster
-          canon: Ebih_East_Wall
-          item: Ebih_East_Wall
-          to: Wall West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Wall West
       coord: [25.225, 8.75]
       local:
@@ -1983,13 +1985,10 @@ areas:
           item: Ebih_East_Wall
           to: Wall East
           req: Nanite_Mist
-          movement: mist1
-        - name: Break Through Wall Faster
-          canon: Ebih_East_Wall
-          item: Ebih_East_Wall
-          to: Wall East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West 9
       coord: [25.05, 8.8]
       local:
@@ -2247,10 +2246,10 @@ areas:
           movement: base
         - to: High Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: High Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Save Point
       coord: [21.5, 2.7]
       data:
@@ -2263,10 +2262,10 @@ areas:
       exits:
         - to: High Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: High Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Save
           do: $save
@@ -2311,10 +2310,10 @@ areas:
           jumps: 2
         - to: High Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: High Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Peak > West 3
           tags: [xshift]
     - name: High Ledge
@@ -2399,10 +2398,10 @@ areas:
       exits:
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       hybrid:
         - name: Flask Collection Skip
           canon: Ebih_West_Face_Flask
@@ -3040,10 +3039,10 @@ areas:
       exits:
         - to: Highest Point
           req: Nanite_Mist
-          movement: mist1
-        - to: Highest Point
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Peak > East 3
           tags: [xshift]
     - name: Mid-air
@@ -3055,10 +3054,10 @@ areas:
       exits:
         - to: Highest Point
           req: Nanite_Mist
-          movement: mist1
-        - to: Highest Point
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Highest Point
       coord: [25.7, 1.2]
       local:
@@ -3560,13 +3559,10 @@ areas:
           canon: Ebih_Walled_Off_Wall
           to: Wall Left
           req: Nanite_Mist
-          movement: mist1
-        - name: Break Through Wall Faster
-          item: Ebih_Walled_Off_Wall
-          canon: Ebih_Walled_Off_Wall
-          to: Wall Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Wall Left
       coord: [24.65, 11.8]
       local:
@@ -3584,23 +3580,20 @@ areas:
           movement: base
         - to: West 12
           req: ^mode == 'drone' and Nanite_Mist
-          movement: mist1
-        - to: West 12
-          req: ^mode == 'drone' and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       hybrid:
         - name: Break Through Wall
           item: Ebih_Walled_Off_Wall
           canon: Ebih_Walled_Off_Wall
           to: Wall Right
           req: Nanite_Mist
-          movement: mist1
-        - name: Break Through Wall Faster
-          item: Ebih_Walled_Off_Wall
-          canon: Ebih_Walled_Off_Wall
-          to: Wall Right
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: Upper Slope
       coord: [24.5, 11.8]
@@ -3616,10 +3609,10 @@ areas:
           jumps: 2
         - to: West 12
           req: ^mode == 'drone' and Nanite_Mist
-          movement: mist1
-        - to: West 12
-          req: ^mode == 'drone' and $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Left Ledge
       coord: [24.25, 11.95]
       local:
@@ -3872,10 +3865,10 @@ areas:
           jumps: 2
         - to: Air Corner
           req: Nanite_Mist
-          movement: mist1
-        - to: Air Corner
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Side
       coord: [23.5, 13.7]
       local:
@@ -3895,10 +3888,10 @@ areas:
           jumps: 2
         - to: Air Corner
           req: Nanite_Mist
-          movement: mist1
-        - to: Air Corner
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Slope
       coord: [23.7, 13.7]
       local:
@@ -3907,10 +3900,10 @@ areas:
       exits:
         - to: Tunnel Entrance
           req: Nanite_Mist
-          movement: mist1
-        - to: Tunnel Entrance
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 14
       coord: [23.95, 13.8]
       local:
@@ -3921,10 +3914,10 @@ areas:
           tags: [xshift]
         - to: Tunnel Entrance
           req: Nanite_Mist
-          movement: mist1
-        - to: Tunnel Entrance
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: West Gate
       coord: [22.8, 13.1]
@@ -3947,10 +3940,10 @@ areas:
       exits:
         - to: Air Corner
           req: Nanite_Mist
-          movement: mist1
-        - to: Air Corner
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Between Gates
           req: Ebih_Gem_Room_Gate
           movement: base
@@ -3962,10 +3955,10 @@ areas:
       exits:
         - to: Tunnel Entrance
           req: Nanite_Mist
-          movement: mist1
-        - to: Tunnel Entrance
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Tunnel Entrance
       coord: [23.45, 12.5]
       local:
@@ -3987,10 +3980,10 @@ areas:
           movement: base
         - to: Upper Tunnel East
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Tunnel East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Tunnel East
       coord: [23.15, 12.15]
       local:
@@ -4028,10 +4021,10 @@ areas:
           jumps: 1
         - to: Upper Tunnel West
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Tunnel West
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Button Nearby
       coord: [23.0, 12.5]
       local:
@@ -4062,10 +4055,10 @@ areas:
           jumps: 1
         - to: Hidden Tunnel
           req: Nanite_Mist
-          movement: mist1
-        - to: Hidden Tunnel
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Hidden Tunnel
       coord: [23.0, 12.7]
       local:
