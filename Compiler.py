@@ -518,9 +518,6 @@ class GameLogic(object):
                 logging.warning(f'Unrecognized tag {tag!r} in {name}')
             else:
                 penalty += self.time[tag]
-        if penalty < 0:
-            self._errors.append(f'Total penalties must be positive: {name}: {tags} total {penalty}')
-            return 0
         return penalty
 
 
@@ -597,13 +594,18 @@ class GameLogic(object):
                             else:
                                 self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]} penalty {i+1}: {pm!r}')
                                 continue
+                            if tags := pen.get('tags'):
+                                t += self._calculate_penalty_tags(tags, f'{exit["fullname"]} penalty {i+1}')
                             if t < exit['time']:
                                 self._errors.append(f'Movement penalty is actually improvement (try swapping movements): {ptype} {exit["fullname"]} penalty {i+1}')
                             else:
                                 # allow also adding an additional constant
                                 pen['add'] += t - exit['time']
-                        if tags := pen.get('tags'):
+                        elif tags := pen.get('tags'):
                             pen['add'] += self._calculate_penalty_tags(tags, f'{exit["fullname"]} penalty {i+1}')
+                        if pen['add'] < 0:
+                            self._errors.append(f'Total penalties must be positive: {exit["fullname"]} penalty {i+1}: total {pen["add"]}')
+                            continue
                         if always_penalty(pen):
                             exit['time'] += pen['add']
                             pen['add'] = 0
@@ -621,7 +623,11 @@ class GameLogic(object):
             if point['time'] is None:
                 continue
             if tags := point.get('penalty_tags'):
-                point['time'] += self._calculate_penalty_tags(tags, f'{point["fullname"]} penalty_tags')
+                penalty = self._calculate_penalty_tags(tags, f'{point["fullname"]} penalty_tags')
+                if penalty < 0:
+                    self._errors.append(f'Total penalties must be positive: {point["fullname"]}: {tags} total {penalty}')
+                    continue
+                point['time'] += penalty
 
         for act in self.global_actions:
             if 'time' not in act:
@@ -629,8 +635,11 @@ class GameLogic(object):
                         (self.time[k] for k in act.get('tags', []) if k in self.time),
                         default=self.time['default'])
             if tags := act.get('penalty_tags'):
-                for tag in tags:
-                    act['time'] += self.time.get(tag, 0)
+                penalty = self._calculate_penalty_tags(tags, f'{act["fullname"]} penalty_tags')
+                if penalty < 0:
+                    self._errors.append(f'Total penalties must be positive: {act["fullname"]}: {tags} total {penalty}')
+                    continue
+                act['time'] += penalty
 
 
     def process_warps(self):
