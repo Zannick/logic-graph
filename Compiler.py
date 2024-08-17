@@ -41,6 +41,7 @@ TYPEHINT_FIELDS = {'type', 'max', 'opts', 'default'}
 MOVEMENT_DIMS = {'free', 'xy', 'x', 'y'}
 TRIGGER_RULES = ['enter', 'load', 'reset']
 GLOBAL_TRIGGER_RULES = ['load']
+PENALTY_SUBFIELDS = {'add', 'calc', 'jumps', 'jumps_down', 'movement', 'tags'}
 
 ON_ENTRY_ARGS = {'newpos': 'SpotId'}
 
@@ -501,8 +502,26 @@ class GameLogic(object):
                 pen['cpr'] = _parseExpression(
                     pen['calc'], f'{infoname} ({penaltyname})', category, ': ', rule='num')
                 pen['calc_id'] = self.make_funcid_from(info, pen['cpr'], field='calc', ret='f32')
-            elif 'add' not in pen and 'movement' not in pen:
-                self._errors.append(f'{infoname} {penaltyname} requires add, movement, or calc')
+            elif not PENALTY_SUBFIELDS.intersection(pen.keys()):
+                self._errors.append(f'{infoname} {penaltyname} requires one of: {", ".join(sorted(PENALTY_SUBFIELDS))}')
+
+
+    def _calculate_penalty_tags(self, tags, name):
+        penalty = 0
+        for tag in tags:
+            if tag[0] == '-':
+                if tag[1:] not in self.time:
+                    logging.warning(f'Unrecognized tag {tag[1:]!r} in {name}')
+                else:
+                    penalty -= self.time[tag[1:]]
+            elif tag not in self.time:
+                logging.warning(f'Unrecognized tag {tag!r} in {name}')
+            else:
+                penalty += self.time[tag]
+        if penalty < 0:
+            self._errors.append(f'Total penalties must be positive: {name}: {tags} total {penalty}')
+            return 0
+        return penalty
 
 
     def process_canon(self):
@@ -542,7 +561,7 @@ class GameLogic(object):
                     jumps = exit.get('jumps', 0)
                     jumps_down = exit.get('jumps_down', 0)
                     m = exit['movement']
-                    if exit['movement'] == 'base':
+                    if m == 'base':
                         exit['time'] = self.movement_time([], base, abs(tx - sx), ty - sy, jumps, jumps_down)
                     elif m in self.all_movements:
                         mvmt = self.all_movements[m]
@@ -560,10 +579,27 @@ class GameLogic(object):
                     else:
                         self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]}: {m!r}')
                         continue
-                    for pen in exit.get('penalties', ()):
-                        if m := pen.get('movement'):
-                            if m != 'base' and m not in self.all_movements:
-                                self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]} penalty: {m!r}')
+                    for i, pen in enumerate(exit.get('penalties', ())):
+                        if 'movement' in pen or 'jumps' in pen or 'jumps_down' in pen:
+                            pm = pen.get('movement', m)
+                            if pm == 'base':
+                                t = self.movement_time([], base, abs(tx - sx), ty - sy,
+                                                       jumps + pen.get('jumps', 0),
+                                                       jumps_down + pen.get('jumps_down', 0))
+                            elif mvmt := self.all_movements.get(pm):
+                                t = self.movement_time([pm], None if mvmt.get('ignore_base') else base, abs(tx - sx), ty - sy,
+                                                       jumps + pen.get('jumps', 0),
+                                                       jumps_down + pen.get('jumps_down', 0))
+                            else:
+                                self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]} penalty {i+1}: {pm!r}')
+                                continue
+                            if t < exit['time']:
+                                self._errors.append(f'Movement penalty is actually improvement (try swapping movements): {ptype} {exit["fullname"]} penalty {i+1}')
+                            else:
+                                # allow also adding an additional constant
+                                pen['add'] = t - exit['time'] + pen.get('add', 0)
+                        if tags := pen.get('tags'):
+                            pen['add'] = self._calculate_penalty_tags(tags, f'{exit["fullname"]} penalty {i+1}') + pen.get('add', 0)
                     if exit['time'] is None:
                         self._errors.append(f'Unable to determine movement time for {ptype} {exit["fullname"]} with movement {m!r}: missing jumps?')
                 if 'movement' not in exit and any('movement' in p for p in exit.get('penalties', ())):
@@ -580,21 +616,7 @@ class GameLogic(object):
             if point['time'] is None:
                 continue
             if tags := point.get('penalty_tags'):
-                penalty = 0
-                for tag in tags:
-                    if tag[0] == '-':
-                        if tag[1:] not in self.time:
-                            logging.warning(f'Unrecognized tag {tag[1:]!r} in {point["fullname"]}')
-                        else:
-                            penalty -= self.time[tag[1:]]
-                    elif tag not in self.time:
-                        logging.warning(f'Unrecognized tag {tag!r} in {point["fullname"]}')
-                    else:
-                        penalty += self.time[tag]
-                if penalty < 0:
-                    self._errors.append(f'Total penalties must be positive: {point["fullname"]} penalty tags: {tags} total {penalty}')
-                else:
-                    point['time'] += penalty
+                point['time'] += self._calculate_penalty_tags(tags, f'{point["fullname"]} penalty_tags')
 
         for act in self.global_actions:
             if 'time' not in act:

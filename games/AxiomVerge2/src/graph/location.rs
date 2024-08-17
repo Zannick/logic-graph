@@ -1695,7 +1695,7 @@ impl world::Accessible for Location {
                 }
                 LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
-                        0
+                        3684
                     } else {
                         0
                     }
