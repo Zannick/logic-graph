@@ -320,10 +320,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Wiggly_Room__South__ex__Uhrum__Tulip_Tower__North_1 => true,
             ExitId::Amagi__Wiggly_Room__West__ex__West_Lake__East_20_1 => true,
             ExitId::Amagi__Wiggly_Room__West_Platform__ex__Midwest_Rock_1 => rules::access_underwater_movement(ctx, world),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::access_invoke_mist2(ctx, world),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_2 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::access_invoke_mist2(ctx, world),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => rules::access_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_2 => rules::access_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_3 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
@@ -333,7 +331,7 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_2 => rules::access_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => rules::access_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world),
-            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::access_invoke_mist2(ctx, world),
+            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_2 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1 => rules::access_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__South__ex__Twisty_Passages__North_1 => true,
@@ -360,21 +358,16 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1 => true,
             ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => true,
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => true,
             ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 => rules::access_underwater_movement_and_drone_hover_and_slingshot_hook(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1 => true,
             ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => rules::access_underwater_movement(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1 => true,
             ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
@@ -386,7 +379,6 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1 => true,
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::access_underwater_movement(ctx, world),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::access_nanite_mist(ctx, world),
-            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::access_invoke_mist2(ctx, world),
             ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_1 => rules::access_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_2 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Fishy_Secrets__Middle_West__ex__Center_Column_1 => rules::access_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world),
@@ -2942,23 +2934,17 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__West__ex__Vertical_Room__East_14_1 => true,
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3 => rules::access_invoke_mist2(ctx, world),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => true,
@@ -3164,9 +3150,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
-            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -3184,16 +3168,12 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2 => rules::access_invoke_mist2(ctx, world),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
             ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => true,
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Upper_East_Ledge_1 => rules::access_invoke_hookhover(ctx, world),
@@ -3212,14 +3192,12 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Sliced_Cavern__East_14__ex__Inner_Caverns__West_14_1 => true,
             ExitId::Glacier__Sliced_Cavern__West_12__ex__Angry_Guards__East_12_1 => true,
             ExitId::Glacier__Sliced_Cavern__West_13__ex__Glacier__Lake_Main_Entrance__East_13_1 => true,
-            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(ctx, world),
-            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_2 => rules::access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world),
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => rules::access_glacier_big_drop_rock(ctx, world),
             ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => true,
             ExitId::Glacier__The_Big_Drop__East_Underwater__ex__Small_Path_1 => rules::access_underwater_movement_and_invoke_hover(ctx, world),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1 => rules::access_mode_eq_drone(ctx, world),
-            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => rules::access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(ctx, world),
-            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2 => rules::access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world),
+            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => rules::access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::access_not_amashilama(ctx, world),
             ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
@@ -4712,10 +4690,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Wiggly_Room__South__ex__Gate_East_1 => rules::observe_access_underwater_movement_and_amagi_wiggly_room_gate(ctx, world, full_obs),
             ExitId::Amagi__Wiggly_Room__South__ex__Gate_East_2 => rules::observe_access_amagi_wiggly_room_gate(ctx, world, full_obs),
             ExitId::Amagi__Wiggly_Room__West_Platform__ex__Midwest_Rock_1 => rules::observe_access_underwater_movement(ctx, world, full_obs),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => rules::observe_access_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_2 => rules::observe_access_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_3 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
@@ -4723,7 +4699,7 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_2 => rules::observe_access_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => rules::observe_access_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world, full_obs),
-            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_2 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1 => rules::observe_access_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Upper_East_Left__ex__East_Ledge_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
@@ -4739,19 +4715,14 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__West_Pillar__ex__West_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Divided__Empty_Plinth__ex__North_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 => rules::observe_access_underwater_movement_and_drone_hover_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => rules::observe_access_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
@@ -4759,7 +4730,6 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::observe_access_underwater_movement(ctx, world, full_obs),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_1 => rules::observe_access_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_2 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Fishy_Secrets__Middle_West__ex__Center_Column_1 => rules::observe_access_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world, full_obs),
@@ -6796,21 +6766,15 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::observe_access_invoke_hover_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::observe_access_glacier_fortress_gate(ctx, world, full_obs),
@@ -6975,9 +6939,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6989,14 +6951,10 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::observe_access_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Upper_East_Ledge_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
@@ -7007,13 +6965,11 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Hammonds_End__Upper_Portal_Stand_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__West_11__ex__Door_East_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
-            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(ctx, world, full_obs),
-            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_2 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => rules::observe_access_glacier_big_drop_rock(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__East_Underwater__ex__Small_Path_1 => rules::observe_access_underwater_movement_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
-            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(ctx, world, full_obs),
-            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, full_obs),
+            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::observe_access_not_amashilama(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
@@ -8025,6 +7981,20 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        2200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => {
                     if true {
                         1500
@@ -8032,9 +8002,58 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1 => {
                     if true {
                         1500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        3100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1400
                     } else {
                         0
                     }
@@ -8151,9 +8170,100 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        800
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Revival__Ledge__ex__West_9_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        5900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        4100
                     } else {
                         0
                     }
@@ -8385,6 +8495,57 @@ impl world::Accessible for Exit {
             self.price
         } else {
             match self.id {
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 _ => self.price + (self.price_per_sec * (self.time(ctx, world) as f32 / 1000.0))
             }
         }
@@ -8647,10 +8808,8 @@ impl world::Accessible for Exit {
             ExitId::Amagi__Wiggly_Room__South__ex__Gate_East_1 => rules::explain_underwater_movement_and_amagi_wiggly_room_gate(ctx, world, edict),
             ExitId::Amagi__Wiggly_Room__South__ex__Gate_East_2 => rules::explain_amagi_wiggly_room_gate(ctx, world, edict),
             ExitId::Amagi__Wiggly_Room__West_Platform__ex__Midwest_Rock_1 => rules::explain_underwater_movement(ctx, world, edict),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::explain_invoke_mist2(ctx, world, edict),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_2 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::explain_invoke_mist2(ctx, world, edict),
-            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => rules::explain_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_2 => rules::explain_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_3 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
@@ -8658,7 +8817,7 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_2 => rules::explain_underwater_movement_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => rules::explain_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world, edict),
-            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::explain_invoke_mist2(ctx, world, edict),
+            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_2 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1 => rules::explain_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Upper_East_Left__ex__East_Ledge_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
@@ -8674,19 +8833,14 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__West_Pillar__ex__West_2 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Divided__Empty_Plinth__ex__North_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 => rules::explain_underwater_movement_and_drone_hover_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => rules::explain_underwater_movement(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
@@ -8694,7 +8848,6 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => rules::explain_underwater_movement(ctx, world, edict),
             ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_1 => rules::explain_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_2 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Fishy_Secrets__Middle_West__ex__Center_Column_1 => rules::explain_underwater_movement_and___slingshot_hook_or_drone_hover(ctx, world, edict),
@@ -10731,21 +10884,15 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::explain_invoke_hover_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3 => rules::explain_invoke_mist2(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::explain_glacier_fortress_gate(ctx, world, edict),
@@ -10910,9 +11057,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -10924,14 +11069,10 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::explain_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2 => rules::explain_invoke_mist2(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Upper_East_Ledge_1 => rules::explain_invoke_hookhover(ctx, world, edict),
@@ -10942,13 +11083,11 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Hammonds_End__Upper_Portal_Stand_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__West_11__ex__Door_East_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
-            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(ctx, world, edict),
-            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_2 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 => rules::explain_glacier_big_drop_rock(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__East_Underwater__ex__Small_Path_1 => rules::explain_underwater_movement_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
-            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(ctx, world, edict),
-            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, edict),
+            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => rules::explain_not_amashilama(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__West_11_Door__ex__East_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
@@ -12836,8 +12975,17 @@ impl world::Exit for Exit {
     fn has_penalties(id: ExitId) -> bool {
         match id {
             ExitId::Amagi__Wiggly_Room__Dur_Esla__ex__Below_West_Cache_1 => true,
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => true,
+            ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => true,
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => true,
+            ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => true,
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1 => true,
+            ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => true,
+            ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => true,
+            ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => true,
+            ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => true,
             ExitId::Annuna__Boss_Gate__Door_East__ex__East_1 => true,
             ExitId::Annuna__Boss_Gate__East__ex__Door_East_1 => true,
             ExitId::Annuna__Boss_Gate__Grate_East__ex__East_4 => true,
@@ -12854,7 +13002,20 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_1 => true,
             ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_2 => true,
             ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_3 => true,
+            ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => true,
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => true,
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => true,
+            ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => true,
+            ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => true,
+            ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => true,
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => true,
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => true,
+            ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => true,
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => true,
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => true,
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => true,
+            ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => true,
+            ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => true,
             ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => true,
@@ -12892,7 +13053,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 4423] = [
+static EXIT_DEFS: [Exit; 4401] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -12901,22 +13062,8 @@ static EXIT_DEFS: [Exit; 4423] = [
         price_per_sec: Currency::Energy(33),
     },
     Exit {
-        id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_2,
-        time: 4400,
-        dest: SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Top,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1,
         time: 1600,
-        dest: SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Top_East,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_2,
-        time: 3200,
         dest: SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Top_East,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
@@ -13168,13 +13315,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1,
-        time: 702,
-        dest: SpotId::Amagi_Breach__East_Entrance__Grate_Right,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2,
         time: 351,
         dest: SpotId::Amagi_Breach__East_Entrance__Grate_Right,
         price: Currency::Energy(5),
@@ -13189,13 +13329,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1,
-        time: 702,
-        dest: SpotId::Amagi_Breach__East_Entrance__Grate_Left,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2,
         time: 351,
         dest: SpotId::Amagi_Breach__East_Entrance__Grate_Left,
         price: Currency::Energy(5),
@@ -13217,13 +13350,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1,
-        time: 6200,
-        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2,
         time: 3100,
         dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
         price: Currency::Energy(5),
@@ -13238,13 +13364,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2,
-        time: 3800,
-        dest: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3,
         time: 1900,
         dest: SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_East,
         price: Currency::Energy(5),
@@ -13266,13 +13385,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1,
-        time: 2807,
-        dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2,
         time: 1404,
         dest: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
         price: Currency::Energy(5),
@@ -13343,13 +13455,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3,
-        time: 2800,
-        dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4,
         time: 1400,
         dest: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Pillar,
         price: Currency::Energy(5),
@@ -34294,13 +34399,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2,
-        time: 3509,
-        dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3,
         time: 1754,
         dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
         price: Currency::Energy(5),
@@ -34308,13 +34406,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1,
-        time: 1200,
-        dest: SpotId::Glacier__Dock_Outside__Cave_Throat,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2,
         time: 702,
         dest: SpotId::Glacier__Dock_Outside__Cave_Throat,
         price: Currency::Free,
@@ -34336,13 +34427,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1,
-        time: 3600,
-        dest: SpotId::Glacier__Dock_Outside__Cave_Esophagus,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2,
         time: 1800,
         dest: SpotId::Glacier__Dock_Outside__Cave_Esophagus,
         price: Currency::Free,
@@ -34364,13 +34448,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1,
-        time: 1000,
-        dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2,
         time: 500,
         dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
         price: Currency::Energy(5),
@@ -34385,13 +34462,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1,
-        time: 1400,
-        dest: SpotId::Glacier__Dock_Outside__Upper_Ledge,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2,
         time: 700,
         dest: SpotId::Glacier__Dock_Outside__Upper_Ledge,
         price: Currency::Energy(5),
@@ -34406,13 +34476,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1,
-        time: 1600,
-        dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2,
         time: 800,
         dest: SpotId::Glacier__Dock_Outside__Cave_Mouth,
         price: Currency::Energy(5),
@@ -35854,21 +35917,7 @@ static EXIT_DEFS: [Exit; 4423] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1,
-        time: 2500,
-        dest: SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Revival__Ledge__ex__West_9_1,
-        time: 1200,
-        dest: SpotId::Glacier__Revival__West_9,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Revival__Ledge__ex__West_9_2,
         time: 877,
         dest: SpotId::Glacier__Revival__West_9,
         price: Currency::Free,
@@ -35988,13 +36037,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1,
-        time: 702,
-        dest: SpotId::Glacier__Sea_Burial__Grate_Right,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2,
         time: 351,
         dest: SpotId::Glacier__Sea_Burial__Grate_Right,
         price: Currency::Energy(5),
@@ -36002,13 +36044,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1,
-        time: 2000,
-        dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2,
         time: 1000,
         dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
         price: Currency::Free,
@@ -36016,13 +36051,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1,
-        time: 702,
-        dest: SpotId::Glacier__Sea_Burial__Grate_Left,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2,
         time: 351,
         dest: SpotId::Glacier__Sea_Burial__Grate_Left,
         price: Currency::Energy(5),
@@ -36051,13 +36079,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     },
     Exit {
         id: ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1,
-        time: 2000,
-        dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2,
         time: 1000,
         dest: SpotId::Glacier__Sea_Burial__Grate_Ledge,
         price: Currency::Free,
@@ -36197,13 +36218,6 @@ static EXIT_DEFS: [Exit; 4423] = [
         price_per_sec: Currency::Energy(33),
     },
     Exit {
-        id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_2,
-        time: 11800,
-        dest: SpotId::Glacier__The_Big_Drop__Unstable_Footing,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
         id: ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1,
         time: 676,
         dest: SpotId::Glacier__The_Big_Drop__West_14,
@@ -36234,13 +36248,6 @@ static EXIT_DEFS: [Exit; 4423] = [
     Exit {
         id: ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1,
         time: 4100,
-        dest: SpotId::Glacier__The_Big_Drop__Unstable_Footing,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-    },
-    Exit {
-        id: ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2,
-        time: 8200,
         dest: SpotId::Glacier__The_Big_Drop__Unstable_Footing,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
@@ -43868,23 +43875,23 @@ pub(super) fn build_exits(exits: &mut EnumMap<ExitId, Exit>) {
 pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
     match exit_id {
         ExitId::Amagi_Breach__East_Entrance__East__ex__Glacier_Breach__South_Save__West_1 => SpotId::Amagi_Breach__East_Entrance__East,
-        ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 | ExitId:: Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2 => SpotId::Amagi_Breach__East_Entrance__Grate_Right,
-        ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 | ExitId:: Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 | ExitId:: Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_2 => SpotId::Amagi_Breach__East_Entrance__Grate_Left,
+        ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => SpotId::Amagi_Breach__East_Entrance__Grate_Right,
+        ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Upper_Slope_1 | ExitId:: Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => SpotId::Amagi_Breach__East_Entrance__Grate_Left,
         ExitId::Amagi_Breach__East_Entrance__West__ex__East_Connector__East_1 => SpotId::Amagi_Breach__East_Entrance__West,
         ExitId::Amagi_Breach__East_Connector__East__ex__East_Entrance__West_1 => SpotId::Amagi_Breach__East_Connector__East,
         ExitId::Amagi_Breach__East_Connector__West__ex__East_Column__East_1 => SpotId::Amagi_Breach__East_Connector__West,
         ExitId::Amagi_Breach__East_Column__East__ex__East_Connector__West_1 => SpotId::Amagi_Breach__East_Column__East,
         ExitId::Amagi_Breach__East_Column__South__ex__Fishy_Secrets__North_1 => SpotId::Amagi_Breach__East_Column__South,
         ExitId::Amagi_Breach__East_Ruins__West__ex__Center_Ruins__East_18_1 => SpotId::Amagi_Breach__East_Ruins__West,
-        ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1 | ExitId:: Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 | ExitId:: Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 | ExitId:: Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4 => SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform,
+        ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1 | ExitId:: Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 | ExitId:: Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3 => SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform,
         ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1 | ExitId:: Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_2 => SpotId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West,
         ExitId::Amagi_Breach__East_Ruins__South__ex__Upper_Hallway__North_1 => SpotId::Amagi_Breach__East_Ruins__South,
-        ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 | ExitId:: Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 | ExitId:: Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3 => SpotId::Amagi_Breach__East_Ruins__Center_Rock_West,
+        ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1 | ExitId:: Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => SpotId::Amagi_Breach__East_Ruins__Center_Rock_West,
         ExitId::Amagi_Breach__East_Ruins__Under_the_Rock__ex__Small_Column_West_1 => SpotId::Amagi_Breach__East_Ruins__Under_the_Rock,
         ExitId::Amagi_Breach__East_Ruins__Small_Column_West__ex__Center_Rock_East_1 => SpotId::Amagi_Breach__East_Ruins__Small_Column_West,
-        ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 | ExitId:: Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2 => SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center,
+        ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center,
         ExitId::Amagi_Breach__East_Ruins__Northeast_Corner__ex__Northeast_Bubbles_Southeast_1 => SpotId::Amagi_Breach__East_Ruins__Northeast_Corner,
-        ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 | ExitId:: Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 | ExitId:: Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2 => SpotId::Amagi_Breach__East_Ruins__Arch_West,
+        ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1 | ExitId:: Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => SpotId::Amagi_Breach__East_Ruins__Arch_West,
         ExitId::Amagi_Breach__East_Ruins__Plinth__ex__Small_Column_East_1 | ExitId:: Amagi_Breach__East_Ruins__Plinth__ex__Southeast_Rock_Wall_1 => SpotId::Amagi_Breach__East_Ruins__Plinth,
         ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1 => SpotId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall,
         ExitId::Amagi_Breach__Center_Ruins__West__ex__West_Ruins__East_1 | ExitId:: Amagi_Breach__Center_Ruins__West__ex__West_Pillar_1 | ExitId:: Amagi_Breach__Center_Ruins__West__ex__West_Pillar_2 | ExitId:: Amagi_Breach__Center_Ruins__West__ex__West_Pillar_3 => SpotId::Amagi_Breach__Center_Ruins__West,
@@ -43894,7 +43901,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Amagi_Breach__Center_Ruins__Upper_East_Left__ex__East_Ledge_1 | ExitId:: Amagi_Breach__Center_Ruins__Upper_East_Left__ex__East_Ledge_2 => SpotId::Amagi_Breach__Center_Ruins__Upper_East_Left,
         ExitId::Amagi_Breach__Center_Ruins__Upper_East_Right__ex__East_18_1 => SpotId::Amagi_Breach__Center_Ruins__Upper_East_Right,
         ExitId::Amagi_Breach__Center_Ruins__East_18__ex__East_Ruins__West_1 => SpotId::Amagi_Breach__Center_Ruins__East_18,
-        ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 | ExitId:: Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_2 | ExitId:: Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 | ExitId:: Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_2 => SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom,
+        ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 | ExitId:: Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom,
         ExitId::Amagi_Breach__Center_Ruins__East_19__ex__Upper_Hallway__West_1 => SpotId::Amagi_Breach__Center_Ruins__East_19,
         ExitId::Amagi_Breach__Center_Ruins__South__ex__Twisty_Passages__North_1 => SpotId::Amagi_Breach__Center_Ruins__South,
         ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => SpotId::Amagi_Breach__Center_Ruins__Passage_Entrance,
@@ -45470,22 +45477,21 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => SpotId::Glacier__Dock_Outside__Entry,
         ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => SpotId::Glacier__Dock_Outside__Do_Not_Enter,
         ExitId::Glacier__Dock_Outside__Lower_Platforms__ex__Lower_Mid_air_1 => SpotId::Glacier__Dock_Outside__Lower_Platforms,
-        ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
+        ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
         ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => SpotId::Glacier__Dock_Outside__Ruins_Platform,
-        ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 | ExitId:: Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3 => SpotId::Glacier__Dock_Outside__Above_Ruins,
+        ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => SpotId::Glacier__Dock_Outside__Above_Ruins,
         ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 | ExitId:: Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => SpotId::Glacier__Dock_Outside__Upper_West_Hill,
-        ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2 => SpotId::Glacier__Dock_Outside__High_Toward_Cave,
-        ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
+        ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => SpotId::Glacier__Dock_Outside__High_Toward_Cave,
+        ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
         ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 | ExitId:: Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => SpotId::Glacier__Dock_Outside__Cave_Mouth,
-        ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 | ExitId:: Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2 => SpotId::Glacier__Dock_Outside__Cave_Gullet,
-        ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 | ExitId:: Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2 => SpotId::Glacier__Dock_Outside__Cave_Treasure,
+        ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => SpotId::Glacier__Dock_Outside__Cave_Gullet,
+        ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => SpotId::Glacier__Dock_Outside__Cave_Treasure,
         ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => SpotId::Glacier__Revival__East_9,
         ExitId::Glacier__Revival__Overhang__ex__West_9_1 => SpotId::Glacier__Revival__Overhang,
-        ExitId::Glacier__Revival__Ledge__ex__West_9_1 | ExitId:: Glacier__Revival__Ledge__ex__West_9_2 => SpotId::Glacier__Revival__Ledge,
+        ExitId::Glacier__Revival__Ledge__ex__West_9_1 => SpotId::Glacier__Revival__Ledge,
         ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => SpotId::Glacier__Revival__Lower_East,
         ExitId::Glacier__Revival__West_9__ex__Overhang_1 | ExitId:: Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => SpotId::Glacier__Revival__West_9,
         ExitId::Glacier__Revival__Save_Point__ex__Grid_39_40_7_9__First_Upper_Platform_1 | ExitId:: Glacier__Revival__Save_Point__ex__Pillar_1 => SpotId::Glacier__Revival__Save_Point,
-        ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1 => SpotId::Glacier__Revival__Just_Thrown,
         ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => SpotId::Glacier__Revival__West_8,
         ExitId::Glacier__Revival__Pillar__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar,
         ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => SpotId::Glacier__Revival__Pillar_Step,
@@ -45498,23 +45504,23 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => SpotId::Glacier__Compass_Room__East,
         ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => SpotId::Glacier__Compass_Room__West,
         ExitId::Glacier__The_Big_Drop__East__ex__Compass_Room__West_1 => SpotId::Glacier__The_Big_Drop__East,
-        ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1 | ExitId:: Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 | ExitId:: Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2 => SpotId::Glacier__The_Big_Drop__Small_Path,
+        ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1 | ExitId:: Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => SpotId::Glacier__The_Big_Drop__Small_Path,
         ExitId::Glacier__The_Big_Drop__East_Underwater__ex__Small_Path_1 => SpotId::Glacier__The_Big_Drop__East_Underwater,
         ExitId::Glacier__The_Big_Drop__Water_Surface__ex__Sea_Burial__Collapsing_Ceiling_1 => SpotId::Glacier__The_Big_Drop__Water_Surface,
         ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 | ExitId:: Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => SpotId::Glacier__The_Big_Drop__West_14,
-        ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 | ExitId:: Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 | ExitId:: Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_2 => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 | ExitId:: Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 | ExitId:: Glacier__The_Big_Drop__West_11_Door__ex__East_1 => SpotId::Glacier__The_Big_Drop__West_11_Door,
         ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => SpotId::Glacier__Sea_Burial__West_13,
         ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__Grate_Ledge,
-        ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_2 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2 => SpotId::Glacier__Sea_Burial__Grate_Right,
-        ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_2 | ExitId:: Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__West_Basin,
+        ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => SpotId::Glacier__Sea_Burial__Grate_Right,
+        ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__West_Basin,
         ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => SpotId::Glacier__Sea_Burial__Left_Center_Rock,
         ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => SpotId::Glacier__Sea_Burial__Deep_Cache,
         ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
         ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => SpotId::Glacier__Sea_Burial__East_14,
         ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => SpotId::Glacier__Sea_Burial__West_14,
-        ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 | ExitId:: Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2 => SpotId::Glacier__Sea_Burial__Grate_Left,
+        ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => SpotId::Glacier__Sea_Burial__Grate_Left,
         ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => SpotId::Glacier__Grid_39_40_7_9__Upper_East,
         ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
         ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,

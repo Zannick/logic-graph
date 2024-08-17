@@ -1626,7 +1626,7 @@ impl world::Accessible for Action {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
-                    edict.insert("dest", format!("{} ({})", dest, "Just Thrown"));
+                    edict.insert("dest", format!("{} ({})", dest, "Grid 39-40,7-9 > First Upper Platform"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -2157,7 +2157,7 @@ impl world::Action for Action {
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => SpotId::Glacier__Dock_Outside__Above_Ruins,
-            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => SpotId::Glacier__Revival__Just_Thrown,
+            ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => SpotId::Glacier__Grid_39_40_7_9__First_Upper_Platform,
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => SpotId::Glacier__Hammonds_End__Hammond,
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => SpotId::Glacier__Hammonds_End__Upper_Right_Mid_air,
@@ -3927,7 +3927,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Glacier__Revival__Save_Point__Throw_Drone_West,
-        time: 750,
+        time: 3000,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },

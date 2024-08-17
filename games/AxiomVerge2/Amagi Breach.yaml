@@ -34,10 +34,10 @@ areas:
       exits:
         - to: Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Grate Left
       coord: [37.75, 14.7]
       data:
@@ -52,10 +52,10 @@ areas:
           jumps: 1
         - to: Grate Right
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Right
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Slope
       coord: [37.3, 14.6]
       local:
@@ -232,10 +232,10 @@ areas:
           movement: water_bubbles
         - to: West Bubbly Pillar
           req: Nanite_Mist
-          movement: mist1
-        - to: West Bubbly Pillar
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Left Rocky Pillar West
       coord: [31.75, 16.1]
       local:
@@ -289,10 +289,10 @@ areas:
           jumps: 3
         - to: Left Rocky Pillar East
           req: Nanite_Mist
-          movement: mist1
-        - to: Left Rocky Pillar East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Save Point
       coord: [33.45, 16.3]
       data:
@@ -374,10 +374,10 @@ areas:
       exits:
         - to: Northeast Bubbles Corner Access
           req: Nanite_Mist
-          movement: mist1
-        - to: Northeast Bubbles Corner Access
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Northeast Bubbles Southeast
       coord: [34.7, 16.0]
       local:
@@ -431,10 +431,10 @@ areas:
           jumps: 2
         - to: Northeast Bubbles Corner Access
           req: Nanite_Mist
-          movement: mist1
-        - to: Northeast Bubbles Corner Access
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Arch East
       coord: [34.65, 16.8]
       data:
@@ -625,17 +625,17 @@ areas:
           thru: [30.45, 18.6]
       exits:
         - to: Center Shaft Top
-          req: $mist2
-          movement: mist2
-        - to: Center Shaft Top
           req: Nanite_Mist
-          movement: mist1
-        - to: Center Shaft Top East
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Center Shaft Top East
           req: Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East 19
       coord: [30.9, 18.65]
       local:
@@ -674,11 +674,13 @@ areas:
         - name: Mist Through Passage
           canon: Amagi_Breach_Center_Ruins_Blocks
           item: Amagi_Breach_Center_Ruins_Blocks
-          req: $mist2
+          req: Nanite_Mist
           to: Passage Exit
           movement: mist2
           penalties:
             - add: 1.5  # twists and turns
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Passage Exit
           req: Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
@@ -692,11 +694,13 @@ areas:
         - name: Mist Through Passage
           canon: Amagi_Breach_Center_Ruins_Blocks
           item: Amagi_Breach_Center_Ruins_Blocks
-          req: $mist2
+          req: Nanite_Mist
           to: Passage Entrance
           movement: mist2
           penalties:
             - add: 1.5  # twists and turns
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: Passage Entrance
           req: Underwater_Movement and Amagi_Breach_Center_Ruins_Blocks
@@ -705,8 +709,11 @@ areas:
           penalties:
             - add: 1.5  # twists and turns
         - to: Cache
-          req: $mist2
+          req: Nanite_Mist
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Cache
           req: Underwater_Movement and Slingshot_Hook
           movement: water

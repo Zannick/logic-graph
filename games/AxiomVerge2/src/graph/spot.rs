@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3505] = [
+static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Cache,
@@ -34,7 +34,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1, ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_2)),
+        exit_range: Some((ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1, ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1)),
         action_range: None,
     },
     SpotDef {
@@ -244,7 +244,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi_Breach__East_Entrance__Grate_Right,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1, ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_2)),
+        exit_range: Some((ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1, ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1)),
         action_range: None,
     },
     SpotDef {
@@ -274,7 +274,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi_Breach__East_Ruins__Arch_West,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1, ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_2)),
+        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1, ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1)),
         action_range: None,
     },
     SpotDef {
@@ -286,7 +286,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi_Breach__East_Ruins__Center_Rock_West,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1, ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_3)),
+        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_1, ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2)),
         action_range: None,
     },
     SpotDef {
@@ -334,7 +334,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1, ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2)),
+        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1, ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1)),
         action_range: None,
     },
     SpotDef {
@@ -412,7 +412,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Amagi_Breach__East_Ruins__West_Bubbly_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1, ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_4)),
+        exit_range: Some((ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1, ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_3)),
         action_range: None,
     },
     SpotDef {
@@ -13360,7 +13360,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__Dock_Outside__Above_Ruins,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1, ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3)),
+        exit_range: Some((ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1, ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2)),
         action_range: None,
     },
     SpotDef {
@@ -13372,7 +13372,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__Dock_Outside__Cave_Gullet,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1, ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_2)),
+        exit_range: Some((ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1, ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1)),
         action_range: None,
     },
     SpotDef {
@@ -13390,7 +13390,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__Dock_Outside__Cave_Treasure,
         loc_range: Some((LocationId::Glacier__Dock_Outside__Cave_Treasure__Flask_Collection_Skip, LocationId::Glacier__Dock_Outside__Cave_Treasure__Item)),
-        exit_range: Some((ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1, ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_2)),
+        exit_range: Some((ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1, ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1)),
         action_range: None,
     },
     SpotDef {
@@ -13408,13 +13408,13 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__Dock_Outside__High_Toward_Cave,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1, ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2)),
+        exit_range: Some((ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1, ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Dock_Outside__Lower_Mid_air,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1, ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2)),
+        exit_range: Some((ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1, ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -13426,7 +13426,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1, ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2)),
+        exit_range: Some((ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1, ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1)),
         action_range: None,
     },
     SpotDef {
@@ -14276,15 +14276,9 @@ static SPOT_DEFS: [SpotDef; 3505] = [
         action_range: None,
     },
     SpotDef {
-        id: SpotId::Glacier__Revival__Just_Thrown,
-        loc_range: None,
-        exit_range: Some((ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1, ExitId::Glacier__Revival__Just_Thrown__ex__Grid_39_40_7_9__First_Upper_Platform_1)),
-        action_range: None,
-    },
-    SpotDef {
         id: SpotId::Glacier__Revival__Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Revival__Ledge__ex__West_9_1, ExitId::Glacier__Revival__Ledge__ex__West_9_2)),
+        exit_range: Some((ExitId::Glacier__Revival__Ledge__ex__West_9_1, ExitId::Glacier__Revival__Ledge__ex__West_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -14337,13 +14331,13 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     },
     SpotDef {
         id: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
-        loc_range: Some((LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock, LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster)),
+        loc_range: Some((LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock, LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through)),
         exit_range: Some((ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1, ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
-        loc_range: Some((LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping, LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster)),
+        loc_range: Some((LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping, LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through)),
         exit_range: Some((ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1, ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1)),
         action_range: None,
     },
@@ -14374,13 +14368,13 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__Sea_Burial__Grate_Left,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1, ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_2)),
+        exit_range: Some((ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1, ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Sea_Burial__Grate_Right,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1, ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_2)),
+        exit_range: Some((ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1, ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1)),
         action_range: None,
     },
     SpotDef {
@@ -14517,7 +14511,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     },
     SpotDef {
         id: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
-        loc_range: Some((LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock, LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster)),
+        loc_range: Some((LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock, LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through)),
         exit_range: Some((ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1, ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1)),
         action_range: None,
     },
@@ -14536,7 +14530,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Glacier__The_Big_Drop__Small_Path,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1, ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_2)),
+        exit_range: Some((ExitId::Glacier__The_Big_Drop__Small_Path__ex__Lonely_Bull__West_1, ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1)),
         action_range: None,
     },
     SpotDef {
@@ -14571,7 +14565,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     },
     SpotDef {
         id: SpotId::Glacier__The_Big_Drop__West_14,
-        loc_range: Some((LocationId::Glacier__The_Big_Drop__West_14__Break_Rock, LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster)),
+        loc_range: Some((LocationId::Glacier__The_Big_Drop__West_14__Break_Rock, LocationId::Glacier__The_Big_Drop__West_14__Mist_Through)),
         exit_range: Some((ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1, ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1)),
         action_range: None,
     },

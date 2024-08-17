@@ -63,10 +63,10 @@ areas:
           req: $hover
         - to: Upper Ledge
           req: Nanite_Mist
-          movement: mist1
-        - to: Upper Ledge
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper Ledge
       coord: [43.0, 7.8]
       local:
@@ -121,10 +121,10 @@ areas:
           jumps: 1
         - to: Cave Mouth
           req: Nanite_Mist
-          movement: mist1
-        - to: Cave Mouth
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Upper West Hill
       coord: [42.1, 7.7]
       local:
@@ -153,10 +153,10 @@ areas:
       exits:
         - to: Cave Mouth
           req: Nanite_Mist
-          movement: mist1
-        - to: Cave Mouth
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Mid Toward Cave
       coord: [43.1, 7.6]
       local:
@@ -165,10 +165,10 @@ areas:
       exits:
         - to: Cave Mouth
           req: Nanite_Mist
-          movement: mist1
-        - to: Cave Mouth
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Cave Mouth
       coord: [43.3, 7.2]
       local:
@@ -194,13 +194,12 @@ areas:
         - to: Cave Esophagus
       exits:
         - to: Cave Throat
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Cave Throat
-          req: $hook
+          req: $grab or $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Cave Esophagus
       coord: [44.6, 7.6]
       local:
@@ -217,13 +216,12 @@ areas:
           tags: [flask]
       exits:
         - to: Cave Esophagus
-          req: $grab
-          movement: base
-          jumps: 6
-        - to: Cave Esophagus
-          req: $hook
+          req: $grab or $hook
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 3
       hybrid:
         - name: Flask Collection Skip
           to: Menu > Warp Only > Kiengir
@@ -276,13 +274,12 @@ areas:
           jumps_down: 3
       exits:
         - to: West 9
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: West 9
-          req: $hook
+          req: $grab or $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower East
       coord: [41.95, 9.7]
       local:
@@ -326,18 +323,9 @@ areas:
         - name: Throw Drone West
           req: $can_deploy and Drone_Hover
           do: $deploy_drone
-          to: Just Thrown
-          time: 0.75
-    # TODO: handle movement and penalty_tags in actions?
-    - name: Just Thrown
-      coord: [41.5, 7.3]
-      local:
-        - to: Save Point
-      exits:
-        - to: Grid 39-40,7-9 > First Upper Platform
-          req: $hover
+          to: Grid 39-40,7-9 > First Upper Platform
           movement: fast_hover
-          penalty_tags: [xshift, -base.1]
+          penalty_tags: [xshift, -base.1, throw]
     - name: West 8
       coord: [41.05, 7.95]
       local:
@@ -524,11 +512,11 @@ areas:
           movement: base
           penalty_tags: [xshift, -base.1]
         - to: Unstable Footing
-          req: ^_bridge_open and $mist2
-          movement: mist2
-        - to: Unstable Footing
           req: ^_bridge_open and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: East Underwater
       coord: [41.5, 13.1]
       local:
@@ -570,13 +558,10 @@ areas:
           req: Nanite_Mist
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
-          movement: mist1
-        - name: Mist Through Faster
-          to: Breakable Rock Right
-          req: $mist2
-          canon: Glacier_Big_Drop_Rock
-          item: Glacier_Big_Drop_Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Breakable Rock Right
       coord: [41.2, 13.7]
       locations:
@@ -590,23 +575,20 @@ areas:
           req: Nanite_Mist
           canon: Glacier_Big_Drop_Rock
           item: Glacier_Big_Drop_Rock
-          movement: mist1
-        - name: Mist Through Faster 
-          to: West 14
-          req: $mist2
-          canon: Glacier_Big_Drop_Rock
-          item: Glacier_Big_Drop_Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       exits:
         - to: West 14
           req: Glacier_Big_Drop_Rock
           movement: base
         - to: Unstable Footing
-          req: ^_bridge_open and $mist2
-          movement: mist2
-        - to: Unstable Footing
           req: ^_bridge_open and Nanite_Mist
-          movement: mist1
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
     - name: West 11 Door
       coord: [41.15, 10.55]
@@ -685,19 +667,18 @@ areas:
           jump_mvmt: water
       exits:
         - to: Grate Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Grate Ledge
-          req: $hook
+          req: $grab or $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Grate Left
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Left
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: West Basin
       coord: [39.8, 13.4]
       local:
@@ -710,13 +691,12 @@ areas:
           jump_mvmt: water
       exits:
         - to: Grate Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Grate Ledge
-          req: $hook
+          req: $grab or $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Left Center Rock
           req: $hook
           movement: base
@@ -778,13 +758,10 @@ areas:
           req: Nanite_Mist
           canon: Glacier_Sea_Burial_Rock
           item: Glacier_Sea_Burial_Rock
-          movement: mist1
-        - name: Mist Through Faster
-          to: Breakable Rock Right
-          req: $mist2
-          canon: Glacier_Sea_Burial_Rock
-          item: Glacier_Sea_Burial_Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Breakable Rock Right
       coord: [40.725, 13.4]
       local:
@@ -805,13 +782,10 @@ areas:
           req: Nanite_Mist
           canon: Glacier_Sea_Burial_Rock
           item: Glacier_Sea_Burial_Rock
-          movement: mist1
-        - name: Mist Through Faster
-          to: Breakable Rock Left
-          req: $mist2
-          canon: Glacier_Sea_Burial_Rock
-          item: Glacier_Sea_Burial_Rock
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Underwater Passage Center
       coord: [40.8, 13.55]
       local:
@@ -858,10 +832,10 @@ areas:
       exits:
         - to: Grate Right
           req: Nanite_Mist
-          movement: mist1
-        - to: Grate Right
-          req: $mist2
           movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Grid 39-40,7-9  # MARK: Grid 39-40,7-9
   on_entry: $reset_old_area(^newpos)

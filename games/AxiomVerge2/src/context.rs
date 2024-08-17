@@ -4217,7 +4217,6 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Glacier_Breach__West_Save__West_Ledge => SpotId::Glacier_Breach__West_Save__Save_Point,
         SpotId::Glacier_Breach__West_Save__West_Nub => SpotId::Glacier_Breach__West_Save__Save_Point,
         SpotId::Glacier__Revival__East_9 => SpotId::Glacier__Revival__Save_Point,
-        SpotId::Glacier__Revival__Just_Thrown => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__Ledge => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__Lower_East => SpotId::Glacier__Revival__Save_Point,
         SpotId::Glacier__Revival__Mid_air => SpotId::Glacier__Revival__Save_Point,
@@ -5332,7 +5331,6 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Glacier__Lonely_Bull__Arena => SpotId::Menu__Kiengir_Map__Glacier_Gudam,
         SpotId::Glacier__Peak__Birds_Eye => SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
         SpotId::Glacier__Peak__South => SpotId::Menu__Kiengir_Map__Glacier_Peak_Birds_Eye,
-        SpotId::Glacier__Revival__Just_Thrown => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Mid_air => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Pillar => SpotId::Menu__Kiengir_Map__Glacier_Revival,
         SpotId::Glacier__Revival__Pillar_Step => SpotId::Menu__Kiengir_Map__Glacier_Revival,
@@ -15492,10 +15490,6 @@ impl context::Ctx for Context {
                 SpotId::Glacier__Lonely_Bull__West_Water_Surface => {
 
                 }
-                SpotId::Glacier__Revival__Just_Thrown => {
-                    self.cbits1.insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
-
-                }
                 SpotId::Glacier__Revival__Mid_air => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GLACIER__REVIVAL__SAVE);
 
@@ -18322,16 +18316,10 @@ impl context::Ctx for Context {
             LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK);
             }
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK);
-            }
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK);
             }
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK);
-            }
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK);
             }
             LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => {
@@ -18346,16 +18334,10 @@ impl context::Ctx for Context {
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK);
             }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK);
-            }
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK);
             }
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK);
-            }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK);
             }
             LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => {
@@ -19667,10 +19649,10 @@ impl context::Ctx for Context {
             LocationId::Glacier__Revival__Pillar__Health | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_REVIVAL_HEALTH_NODE);
             }
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK);
             }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK);
             }
             LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress | LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => {
@@ -20740,10 +20722,10 @@ impl context::Ctx for Context {
             LocationId::Glacier__Revival__Pillar__Health | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_REVIVAL_HEALTH_NODE)
             }
-            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => {
+            LocationId::Glacier__The_Big_Drop__West_14__Break_Rock | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GLACIER_BIG_DROP_ROCK)
             }
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => {
+            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GLACIER_SEA_BURIAL_ROCK)
             }
             LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress | LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Collection_Skip | LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Flask_Fast_Travel => {

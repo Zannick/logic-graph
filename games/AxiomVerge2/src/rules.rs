@@ -1088,13 +1088,6 @@ pub fn access_glacier__lonely_bull__ctx__door(ctx: &Context, world: &World) -> b
     // ^_door
     ctx.glacier__lonely_bull__ctx__door()
 }
-pub fn access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-) -> bool {
-    // ^_bridge_open and $mist2
-    (ctx.glacier__the_big_drop__ctx__bridge_open() && helper__mist2!(ctx, world))
-}
 pub fn access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(
     ctx: &Context,
     world: &World,
@@ -8690,35 +8683,6 @@ pub fn explain_glacier__lonely_bull__ctx__door(
         let r = ctx.glacier__lonely_bull__ctx__door();
         edict.insert("^glacier__lonely_bull__ctx__door", format!("{:?}", r));
         (r, vec!["^glacier__lonely_bull__ctx__door"])
-    }
-}
-pub fn explain_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // ^_bridge_open and $mist2
-    {
-        let mut left = {
-            let r = ctx.glacier__the_big_drop__ctx__bridge_open();
-            edict.insert(
-                "^glacier__the_big_drop__ctx__bridge_open",
-                format!("{:?}", r),
-            );
-            (r, vec!["^glacier__the_big_drop__ctx__bridge_open"])
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__mist2!(ctx, world, edict);
-                edict.insert("$mist2", format!("{:?}", res));
-                refs.push("$mist2");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
     }
 }
 pub fn explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(
@@ -22568,17 +22532,6 @@ pub fn observe_access_glacier__lonely_bull__ctx__door(
         full_obs.observe_glacier__lonely_bull__ctx__door();
         ctx.glacier__lonely_bull__ctx__door()
     }
-}
-pub fn observe_access_glacier__the_big_drop__ctx__bridge_open_and_invoke_mist2(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // ^_bridge_open and $mist2
-    ({
-        full_obs.observe_glacier__the_big_drop__ctx__bridge_open();
-        ctx.glacier__the_big_drop__ctx__bridge_open()
-    } && (hobserve__mist2!(ctx, world, full_obs)))
 }
 pub fn observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(
     ctx: &Context,

@@ -85,8 +85,8 @@ impl world::Accessible for Location {
             LocationId::Amagi_Breach__Center_Ruins__Cache__Flask => true,
             LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Collection_Skip => true,
             LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
-            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::access_invoke_mist2(ctx, world),
-            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::access_invoke_mist2(ctx, world),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::access_nanite_mist(ctx, world),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::access_nanite_mist(ctx, world),
             LocationId::Amagi_Breach__Divided__Wall_East__Health => true,
             LocationId::Amagi_Breach__East_Entrance__Upper_Slope__Item => true,
             LocationId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access__Item => true,
@@ -648,10 +648,8 @@ impl world::Accessible for Location {
             LocationId::Glacier__Revival__Pillar__Health => true,
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => rules::access_invoke_melee(ctx, world),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::access_nanite_mist(ctx, world),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => rules::access_invoke_melee(ctx, world),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::access_nanite_mist(ctx, world),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
             LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::access_not_amashilama(ctx, world),
             LocationId::Glacier__Sea_Burial__Deep_Cache__Health => true,
             LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => true,
@@ -659,10 +657,8 @@ impl world::Accessible for Location {
             LocationId::Glacier__Sliced_Cavern__Upper_Middle__Health => true,
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => rules::access_invoke_melee(ctx, world),
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::access_nanite_mist(ctx, world),
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
             LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => rules::access_invoke_melee(ctx, world),
             LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::access_nanite_mist(ctx, world),
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::access_invoke_mist2(ctx, world),
             LocationId::Glacier__Vertical_Room__Peak__Flask => true,
             LocationId::Glacier__Vertical_Room__Peak__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
             LocationId::Glacier__Vertical_Room__Peak__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
@@ -997,8 +993,8 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Amagi__Wiggly_Room__Button__Hit_Button => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
-            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::observe_access_invoke_mist2(ctx, world, full_obs),
-            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::observe_access_invoke_mist2(ctx, world, full_obs),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::observe_access_infect_and_anuman_and_invoke_objective(ctx, world, full_obs),
@@ -1396,17 +1392,13 @@ impl world::Accessible for Location {
             LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => rules::observe_access_invoke_melee(ctx, world, full_obs),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => rules::observe_access_invoke_melee(ctx, world, full_obs),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::observe_access_not_amashilama(ctx, world, full_obs),
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => rules::observe_access_invoke_melee(ctx, world, full_obs),
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => rules::observe_access_invoke_melee(ctx, world, full_obs),
             LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             LocationId::Glacier__Vertical_Room__Peak__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
             LocationId::Glacier__Vertical_Room__Peak__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
@@ -1619,6 +1611,8 @@ impl world::Accessible for Location {
                 LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => {
                     if true {
                         1500
+} else if rules::access_not_mist_upgrade(ctx, world) {
+                        6667
                     } else {
                         0
                     }
@@ -1626,6 +1620,8 @@ impl world::Accessible for Location {
                 LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => {
                     if true {
                         1500
+} else if rules::access_not_mist_upgrade(ctx, world) {
+                        6667
                     } else {
                         0
                     }
@@ -1777,6 +1773,34 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        439
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        439
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        526
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => {
                     if rules::access_not_slingshot_weapon(ctx, world) {
                         2000
@@ -1798,7 +1822,25 @@ impl world::Accessible for Location {
             self.price
         } else {
             match self.id {
+                LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 _ => self.price + (self.price_per_sec * (self.time(ctx, world) as f32 / 1000.0))
@@ -1846,8 +1888,8 @@ impl world::Accessible for Location {
             LocationId::Amagi__West_Lake__West_Stronghold_Wall__Upgraded_Mist_Through_Wall => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Amagi__Wiggly_Room__Button__Hit_Button => rules::explain_invoke_can_damage(ctx, world, edict),
             LocationId::Amagi_Breach__Center_Ruins__Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
-            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::explain_invoke_mist2(ctx, world, edict),
-            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::explain_invoke_mist2(ctx, world, edict),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Amagi_Breach__East_Ruins__Northeast_Corner__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Annuna__Apocalypse__Center_Scaffold_West__Boss_Fight => rules::explain_infect_and_anuman_and_invoke_objective(ctx, world, edict),
@@ -2245,17 +2287,13 @@ impl world::Accessible for Location {
             LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => rules::explain_invoke_melee(ctx, world, edict),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => rules::explain_invoke_melee(ctx, world, edict),
             LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => rules::explain_not_amashilama(ctx, world, edict),
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock => rules::explain_invoke_melee(ctx, world, edict),
             LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => rules::explain_invoke_melee(ctx, world, edict),
             LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => rules::explain_invoke_mist2(ctx, world, edict),
             LocationId::Glacier__Vertical_Room__Peak__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
             LocationId::Glacier__Vertical_Room__Peak__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Glacier__Vertical_Room__Under_Switch__Switch => rules::explain_boomerang(ctx, world, edict),
@@ -2481,7 +2519,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 919] = [
+static LOC_DEFS: [Location; 915] = [
     Location {
         id: LocationId::Amagi_Breach__Center_Ruins__Cache__Flask,
         canonical: CanonId::Amagi_Breach_Center_Ruins_Flask,
@@ -8748,16 +8786,6 @@ static LOC_DEFS: [Location; 919] = [
         item: Item::Glacier_Sea_Burial_Rock,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
-        time: 877,
-        dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster,
-        canonical: CanonId::Glacier_Sea_Burial_Rock,
-        item: Item::Glacier_Sea_Burial_Rock,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
         time: 439,
         dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         skippable: false,
@@ -8774,16 +8802,6 @@ static LOC_DEFS: [Location; 919] = [
     },
     Location {
         id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through,
-        canonical: CanonId::Glacier_Sea_Burial_Rock,
-        item: Item::Glacier_Sea_Burial_Rock,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-        time: 877,
-        dest: SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster,
         canonical: CanonId::Glacier_Sea_Burial_Rock,
         item: Item::Glacier_Sea_Burial_Rock,
         price: Currency::Energy(5),
@@ -8858,16 +8876,6 @@ static LOC_DEFS: [Location; 919] = [
         item: Item::Glacier_Big_Drop_Rock,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
-        time: 1053,
-        dest: SpotId::Glacier__The_Big_Drop__West_14,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster,
-        canonical: CanonId::Glacier_Big_Drop_Rock,
-        item: Item::Glacier_Big_Drop_Rock,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
         time: 526,
         dest: SpotId::Glacier__The_Big_Drop__West_14,
         skippable: false,
@@ -8884,16 +8892,6 @@ static LOC_DEFS: [Location; 919] = [
     },
     Location {
         id: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through,
-        canonical: CanonId::Glacier_Big_Drop_Rock,
-        item: Item::Glacier_Big_Drop_Rock,
-        price: Currency::Energy(5),
-        price_per_sec: Currency::Energy(33),
-        time: 1053,
-        dest: SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster,
         canonical: CanonId::Glacier_Big_Drop_Rock,
         item: Item::Glacier_Big_Drop_Rock,
         price: Currency::Energy(5),
@@ -12022,14 +12020,14 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Glacier__Revival__Mid_air__Fly_to_the_Platform_and_Grab | LocationId::Glacier__Revival__Mid_air__Fly_to_the_Stairs_and_Grab => SpotId::Glacier__Revival__Mid_air,
         LocationId::Glacier__Compass_Room__Center__Table => SpotId::Glacier__Compass_Room__Center,
         LocationId::Glacier__The_Big_Drop__West_14__Break_Rock => SpotId::Glacier__The_Big_Drop__West_14,
-        LocationId::Glacier__The_Big_Drop__West_14__Mist_Through | LocationId::Glacier__The_Big_Drop__West_14__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__West_14,
-        LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
+        LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => SpotId::Glacier__The_Big_Drop__West_14,
+        LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Break_Rock | LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown => SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
         LocationId::Glacier__Sea_Burial__Deep_Cache__Health => SpotId::Glacier__Sea_Burial__Deep_Cache,
         LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Break_Rock => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
-        LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through_Faster => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => SpotId::Glacier__Sea_Burial__Breakable_Rock_Left,
         LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Break_Rock_while_Jumping => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
-        LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through | LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through_Faster => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
+        LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => SpotId::Glacier__Sea_Burial__Breakable_Rock_Right,
         LocationId::Glacier__Sea_Burial__Inside_the_Grate__Notes => SpotId::Glacier__Sea_Burial__Inside_the_Grate,
         LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Charged_Fly_by_Flask_Toward_Fortress | LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
         LocationId::Glacier__Grid_39_40_7_9__Floating_Rock__Item => SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
