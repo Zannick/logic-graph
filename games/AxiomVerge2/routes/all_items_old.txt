@@ -270,7 +270,7 @@
 * Collect Flask from Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
 ! Do Recall Drone
 ! Do Ebih > Grid 25,10-12 > Below Bush > Throw Drone and Hover
-* Collect Ebih_Walled_Off_Wall from Ebih > Walled Off > Wall Right > Break Through Wall Faster ==> Ebih > Walled Off > Wall Left
+* Collect Ebih_Walled_Off_Wall from Ebih > Walled Off > Wall Right > Break Through Wall ==> Ebih > Walled Off > Wall Left
 * Collect Health_Fragment from Ebih > Guarded Health > West Basin > Health
 ! Do Recall Drone
 ! Do Ebih > Grid 25,10-12 > Below Bush > Throw Drone and Hover Further
@@ -335,7 +335,7 @@
 * Collect Uhrum_East_Glitch from Uhrum Breach > East Glitch > Glitch West > Break Through Glitch ==> Uhrum Breach > East Glitch > Glitch East
   ExitBreachWarp
 * Collect Health_Node from Uhrum > Spring > Center > Health
-* Collect Uhrum_Glitchy_Corridor_Rock from Uhrum > Glitchy Corridor > Wall West > Upgraded Mist Through Wall ==> Uhrum Glitchy Corridor > Wall East
+* Collect Uhrum_Glitchy_Corridor_Rock from Uhrum > Glitchy Corridor > Wall West > Mist Through Wall ==> Uhrum Glitchy Corridor > Wall East
   Move... to Uhrum > Glitchy Corridor > Wall East Platform
 ! Do Move Portal Here
   Portalwarp
@@ -412,9 +412,9 @@
   ExitBreachWarp
 * Collect Flask from Giguna > Gateway > Flask Ledge > Item
 * Collect Giguna_Dual_Path_Switch from Giguna > Dual Path > Right Switch > Hit Switch
-* Collect Giguna_Dual_Path_Wall from Giguna > Dual Path > Base of Wall > Upgraded Mist into Wall ==> Giguna > Dual Path > Wall Secret
+* Collect Giguna_Dual_Path_Wall from Giguna > Dual Path > Base of Wall > Mist into Wall ==> Giguna > Dual Path > Wall Secret
 * Collect Health_Fragment from Giguna > Dual Path > Wall Secret > Health
-* Collect Giguna_Boulder from Giguna > Hard Rock > Rock Right > Enter Rock as Upgraded Mist ==> Giguna > Hard Rock > Rock Center
+* Collect Giguna_Boulder from Giguna > Hard Rock > Rock Right > Enter Rock as Mist ==> Giguna > Hard Rock > Rock Center
 * Collect Building_of_the_School from Giguna > Hard Rock > Rock Center > Tablet
 * Collect Flask from Giguna > Lamassu > Deposit > Flask Fast Travel ==> Menu > Kiengir Map > Giguna Lamassu Flask
   Move... to Ebih > Ebih West > Upper Save
@@ -471,20 +471,20 @@
 * Collect Flask from Uhrum > Rocky Guardpost > Middle Step > Shockwave Block
 ! Do Become Drone
 * Collect Re_Does_Technology from Uhrum > Rocky Gate > East Ledge > Note
-* Collect Uhrum_Emergence_Wall from Uhrum > Emergence Facility > Wall East Mid-air > Break Wall With Mist Upgrade ==> Uhrum > Emergence Facility > Wall West Mid-air
+* Collect Uhrum_Emergence_Wall from Uhrum > Emergence Facility > Wall East Mid-air > Break Wall With Mist ==> Uhrum > Emergence Facility > Wall West Mid-air
 * Collect Flask from Uhrum > Emergence Facility > Roof Middle > Flask from Below
 ! Do Interior > Facility Interior > Freight Elevator > Enter Emergence
 ! Do Emergence > Camp Exterior > Save Point > Save
 * Collect Emergence_Dropoff_Wall from Emergence > Drop-off > Wall Left > Spin Through Wall ==> Emergence > Drop-off > Wall Right
 * Collect Big_Flask from Emergence > Drop-off > Basin > Flask
-* Collect Emergence_Rocks_Fall_Rock_1 from Emergence > Rocks Fall > Wall 1 Northeast > Upgraded Mist Through Rock
-* Collect Emergence_Rocks_Fall_Rock_2 from Emergence > Rocks Fall > Wall 2 Northwest > Upgraded Mist Through Wall
-* Collect Emergence_Rocks_Fall_Rock_3 from Emergence > Rocks Fall > Wall 3 Northeast > Upgraded Mist Through Wall
-* Collect Emergence_Rocks_Fall_Rock_4 from Emergence > Rocks Fall > Wall 4 West > Upgraded Mist Through Wall
+* Collect Emergence_Rocks_Fall_Rock_1 from Emergence > Rocks Fall > Wall 1 Northeast > Mist Through Rock
+* Collect Emergence_Rocks_Fall_Rock_2 from Emergence > Rocks Fall > Wall 2 Northwest > Mist Through Wall
+* Collect Emergence_Rocks_Fall_Rock_3 from Emergence > Rocks Fall > Wall 3 Northeast > Mist Through Wall
+* Collect Emergence_Rocks_Fall_Rock_4 from Emergence > Rocks Fall > Wall 4 West > Mist Through Wall
 * Collect Emergence_Storage_Rock from Emergence > Storage > Wall Left Ledge > Spin Through Wall
 * Collect Slingshot_Charge from Emergence > Storage > Dais Middle > Urn
 * Collect Flask from Emergence > Audience Chamber > Cache > Flask
-* Collect Emergence_Storage_Tunnel from Emergence > Storage > Tunnel Entrance > Upgraded Mist Through Rock
+* Collect Emergence_Storage_Tunnel from Emergence > Storage > Tunnel Entrance > Mist Through Rock
   Move... to Emergence > Storage > Secret Corner
 ! Do Move Portal Here
   Portalwarp
@@ -529,7 +529,7 @@
   Move... to Giguna > Giguna Northeast > Gate Right
   Portalwarp
 * Collect Health_Node from Giguna Breach > Gate and Wall > Walled Off > Health
-* Collect Ebih_Breach_Rock_Block_Rock from Ebih Breach > Rock Block > Rock Top > Upgraded Mist Down
+* Collect Ebih_Breach_Rock_Block_Rock from Ebih Breach > Rock Block > Rock Top > Mist Down
 * Collect Flask from Ebih Breach > Rock Block > East Tunnel > Flask
 * Collect Flask from Giguna Breach > Crab Rave > A Crab's Treasure > Flask
   Move to Giguna Breach > Crab Rave > Gate East Mid-air
@@ -560,8 +560,8 @@
   ExitBreachWarp
 * Collect Big_Flask from Annuna > Mirror Match > Plinth Adjacent > Spin into Flask
 * Collect Remote_Boomerang from Annuna > Remote Training > Plinth > Item
-* Collect Sniper_Valley_Rock_1 from Annuna > Sniper Valley > Cavern Outer Rock West > Upgraded Mist Through Outer Wall
-* Collect Sniper_Valley_Rock_2 from Annuna > Sniper Valley > Cavern Inner Rock West > Upgraded Mist Through Inner Wall
+* Collect Sniper_Valley_Rock_1 from Annuna > Sniper Valley > Cavern Outer Rock West > Mist Through Outer Wall
+* Collect Sniper_Valley_Rock_2 from Annuna > Sniper Valley > Cavern Inner Rock West > Mist Through Inner Wall
 * Collect Big_Flask from Annuna > Sniper Valley > Cavern Cache > Item
 * Collect Family_Tragedy from Annuna > Sniper Valley > Table > Item
 * Collect Big_Flask from Annuna > East Hideout > Bottom > Flask Fast Travel
@@ -647,10 +647,10 @@
 ! Do Become Drone
 
 # Section "Amashilama"
-* Collect Glacier_Big_Drop_Rock from Glacier > The Big Drop > Breakable Rock Right > Mist Through Faster
-* Collect Glacier_Sea_Burial_Rock from Glacier > Sea Burial > Breakable Rock Right > Mist Through Faster
+* Collect Glacier_Big_Drop_Rock from Glacier > The Big Drop > Breakable Rock Right > Mist Through
+* Collect Glacier_Sea_Burial_Rock from Glacier > Sea Burial > Breakable Rock Right > Mist Through
 * Collect Health_Fragment from Glacier > Sea Burial > Deep Cache > Health
-* Collect Apocalypse_Seals_Wall from Annuna > Seals > Breakable Rock > Faster Mist Through Wall
+* Collect Apocalypse_Seals_Wall from Annuna > Seals > Breakable Rock > Mist Through Wall
 * Collect Flask from Annuna > Final Cache > West > Spin into Flask
 * Collect Apocalypse_Bomb from Annuna > Apocalypse > Center Scaffold West > Boss Fight
 * Collect Escape from Glacier > Apocalypse Entry > Grate Ledge > Escape
