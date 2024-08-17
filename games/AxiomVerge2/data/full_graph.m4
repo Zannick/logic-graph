@@ -2945,7 +2945,6 @@ digraph AxiomVerge2 {
     Glacier__Dock_Outside__Above_Ruins -> Glacier__Dock_Outside__Cave_Mouth;
     Glacier__Dock_Outside__Above_Ruins -> Glacier__Dock_Outside__Cave_Mouth;
     Glacier__Dock_Outside__Upper_West_Hill -> Glacier__Revival__Pillar;
-    Glacier__Dock_Outside__Upper_West_Hill -> Glacier__Revival__Pillar;
     Glacier__Dock_Outside__Upper_West_Hill -> Glacier__Revival__Pillar_Step;
     Glacier__Dock_Outside__High_Toward_Cave -> Glacier__Dock_Outside__Cave_Mouth;
     Glacier__Dock_Outside__High_Toward_Cave -> Glacier__Dock_Outside__Cave_Mouth;

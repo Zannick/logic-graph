@@ -133,15 +133,13 @@ areas:
           jumps: 1
       exits:
         - to: Revival > Pillar
-          req: $grab
-          movement: base
-          jumps: 2
-          penalty_tags: [xshift, -base.1]
-        - to: Revival > Pillar
-          req: $hook
+          req: $grab or $hook
           movement: base
           jumps: 1
           penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Revival > Pillar Step
           movement: base
           jumps: 1

@@ -2960,8 +2960,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => rules::access_invoke_mist2(ctx, world),
             ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => true,
             ExitId::Glacier__Fortress__Gate_East__ex__Grid_39_40_7_9__Fortress_Ledge_1 => true,
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::access_glacier_fortress_gate(ctx, world),
@@ -6813,8 +6812,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => rules::observe_access_invoke_mist2(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::observe_access_glacier_fortress_gate(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Upper_Tier_East_1 => rules::observe_access_glacier_fortress_gate(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1 => rules::observe_access_invoke_hook_or___anuman_and_invoke_climb(ctx, world, full_obs),
@@ -8149,6 +8147,13 @@ impl world::Accessible for Exit {
                 ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_3 => {
                     if true {
                         1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        147
                     } else {
                         0
                     }
@@ -10742,8 +10747,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => rules::explain_invoke_mist2(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::explain_glacier_fortress_gate(ctx, world, edict),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Upper_Tier_East_1 => rules::explain_glacier_fortress_gate(ctx, world, edict),
             ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1 => rules::explain_invoke_hook_or___anuman_and_invoke_climb(ctx, world, edict),
@@ -12850,6 +12854,7 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_1 => true,
             ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_2 => true,
             ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_3 => true,
+            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => true,
             ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => true,
@@ -12887,7 +12892,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 4424] = [
+static EXIT_DEFS: [Exit; 4423] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -34422,13 +34427,6 @@ static EXIT_DEFS: [Exit; 4424] = [
     },
     Exit {
         id: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1,
-        time: 2200,
-        dest: SpotId::Glacier__Revival__Pillar,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2,
         time: 2053,
         dest: SpotId::Glacier__Revival__Pillar,
         price: Currency::Free,
@@ -45475,7 +45473,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 | ExitId:: Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_2 => SpotId::Glacier__Dock_Outside__Lower_Mid_air,
         ExitId::Glacier__Dock_Outside__Ruins_Platform__ex__High_Toward_Cave_1 => SpotId::Glacier__Dock_Outside__Ruins_Platform,
         ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 | ExitId:: Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3 => SpotId::Glacier__Dock_Outside__Above_Ruins,
-        ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 | ExitId:: Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 | ExitId:: Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => SpotId::Glacier__Dock_Outside__Upper_West_Hill,
+        ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 | ExitId:: Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => SpotId::Glacier__Dock_Outside__Upper_West_Hill,
         ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2 => SpotId::Glacier__Dock_Outside__High_Toward_Cave,
         ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 | ExitId:: Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_2 => SpotId::Glacier__Dock_Outside__Mid_Toward_Cave,
         ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 | ExitId:: Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => SpotId::Glacier__Dock_Outside__Cave_Mouth,

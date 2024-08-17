@@ -2789,6 +2789,10 @@ pub fn access_not_hammond_auth(ctx: &Context, world: &World) -> bool {
     // not Hammond_Auth
     !ctx.has(Item::Hammond_Auth)
 }
+pub fn access_not_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // not $hook
+    !helper__hook!(ctx, world)
+}
 pub fn access_not_irikar__basement_portal__ctx__platform_moved(
     ctx: &Context,
     world: &World,
@@ -16926,6 +16930,19 @@ pub fn explain_not_hammond_auth(
         (!h, vec!["Hammond_Auth"])
     }
 }
+pub fn explain_not_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // not $hook
+    {
+        let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+        edict.insert("not$hook", format!("{:?}", res));
+        refs.push("not$hook");
+        (!res, refs)
+    }
+}
 pub fn explain_not_irikar__basement_portal__ctx__platform_moved(
     ctx: &Context,
     world: &World,
@@ -26454,6 +26471,14 @@ pub fn observe_access_not_hammond_auth(
         full_obs.observe_hammond_auth();
         !ctx.has(Item::Hammond_Auth)
     }
+}
+pub fn observe_access_not_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // not $hook
+    hobserve__hook!(ctx, world, full_obs)
 }
 pub fn observe_access_not_irikar__basement_portal__ctx__platform_moved(
     ctx: &Context,

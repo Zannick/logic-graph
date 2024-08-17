@@ -10463,7 +10463,6 @@ impl world::World for World {
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => true,
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_3 => true,
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => true,
-            ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_2 => true,
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => true,
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => true,
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_2 => true,
