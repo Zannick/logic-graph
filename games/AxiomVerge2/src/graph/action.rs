@@ -2931,7 +2931,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West,
-        time: 3062,
+        time: 3063,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -2943,7 +2943,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East,
-        time: 8974,
+        time: 8975,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -2955,7 +2955,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East,
-        time: 9724,
+        time: 9725,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -2973,7 +2973,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West,
-        time: 2999,
+        time: 3000,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -3147,7 +3147,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Annuna__Udug_Gate__Door_West__Open_Door,
-        time: 850,
+        time: 851,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -3333,13 +3333,13 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover,
-        time: 2599,
+        time: 2600,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Action {
         id: ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further,
-        time: 3349,
+        time: 3350,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -3543,7 +3543,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early,
-        time: 8695,
+        time: 8696,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -4047,7 +4047,7 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low,
-        time: 6599,
+        time: 6600,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },

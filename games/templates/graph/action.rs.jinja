@@ -163,7 +163,7 @@ static ACT_DEFS: [Action; {{ num_actions }}] = [
 %% for act in gl.actions()|sort(attribute='id', case_sensitive=True)
     Action {
         id: ActionId::{{ act.id }},
-        time: {{ (act.time * 1000)|int }},
+        time: {{ (act.time * 1000)|round|int }},
 %% if act.movement and act.movement is in gl.exit_movements and gl.exit_movements[act.movement].price_per_sec
 %% set mv = gl.exit_movements[act.movement]
         price: {{ price((act.price or 0) + (mv.base_price or 0), mv.costs or default_price_type) }},

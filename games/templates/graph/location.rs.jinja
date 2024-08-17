@@ -132,7 +132,7 @@ static LOC_DEFS: [Location; {{ num_locations }}] = [
         price: {{ price(loc.price, loc.costs or default_price_type) }},
         price_per_sec: Currency::Free,
 %% endif
-        time: {{ (loc.time * 1000)|int }},
+        time: {{ (loc.time * 1000)|round|int }},
         dest: SpotId::{% if loc.to is defined %}{{ loc|get_exit_target }}{% else %}None{% endif %},
         skippable: false,
     },

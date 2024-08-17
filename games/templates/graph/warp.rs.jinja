@@ -149,7 +149,7 @@ static WARP_DEFS: [Warp; {{ warps|count }}] = [
     Warp {
         id: WarpId::{{ w.id }},
         dest: SpotId::None,
-        time: {{ (w.time * 1000)|int }},
+        time: {{ (w.time * 1000)|round|int }},
         price: {{ price(w.price, w.costs or default_price_type) }},
     },
 %% endfor

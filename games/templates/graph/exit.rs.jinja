@@ -128,7 +128,7 @@ static EXIT_DEFS: [Exit; {{ num_exits }}] = [
 %% for ex in gl.exits()|sort(attribute='id', case_sensitive=True)
     Exit {
         id: ExitId::{{ ex.id }},
-        time: {{ (ex.time * 1000)|int }},
+        time: {{ (ex.time * 1000)|round|int }},
         dest: SpotId::{{ ex|get_exit_target }},
 %% if ex.movement and ex.movement is in gl.exit_movements and gl.exit_movements[ex.movement].price_per_sec
 %% set mv = gl.exit_movements[ex.movement]
