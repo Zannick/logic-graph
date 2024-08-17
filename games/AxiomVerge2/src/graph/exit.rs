@@ -7974,13 +7974,6 @@ impl world::Accessible for Exit {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
-                ExitId::Amagi__Wiggly_Room__Dur_Esla__ex__Below_West_Cache_1 => {
-                    if true {
-                        1000
-                    } else {
-                        0
-                    }
-                }
                 ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         2200
@@ -7995,23 +7988,9 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => {
-                    if true {
-                        1500
-                    } else {
-                        0
-                    }
-                }
                 ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1300
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1 => {
-                    if true {
-                        1500
                     } else {
                         0
                     }
@@ -8058,34 +8037,6 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Annuna__Boss_Gate__Door_East__ex__East_1 => {
-                    if true {
-                        6000
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Annuna__Boss_Gate__East__ex__Door_East_1 => {
-                    if true {
-                        10000
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Annuna__Boss_Gate__Grate_East__ex__East_4 => {
-                    if true {
-                        6000
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Annuna__Mirror_Match__Middle_Rock_West__ex__Middle_Rock_Tree_1 => {
-                    if true {
-                        1000
-                    } else {
-                        0
-                    }
-                }
                 ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => {
                     if rules::access_not_slingshot_hook(ctx, world) {
                         100
@@ -8103,69 +8054,6 @@ impl world::Accessible for Exit {
                 ExitId::Annuna_Breach__Smiley__Upper_Portal_Exit__ex__Northeast_Ledge_1 => {
                     if rules::access_not_slingshot_weapon(ctx, world) {
                         500
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Ebih_Breach__Spider_Guards__Center_Re_hover_Start__ex__South_1 => {
-                    if true {
-                        2000
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform__ex__Center_Hover_End_1 => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Ebih_Breach__Vertical_Room__Passage_Low__ex__Passage_Middle_2 => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_1 => {
-                    if true {
-                        300
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_2 => {
-                    if true {
-                        150
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_3 => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_1 => {
-                    if true {
-                        700
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_2 => {
-                    if true {
-                        350
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_3 => {
-                    if true {
-                        1000
                     } else {
                         0
                     }
@@ -8264,20 +8152,6 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         4100
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => {
-                    if true {
-                        500
                     } else {
                         0
                     }
@@ -8467,13 +8341,6 @@ impl world::Accessible for Exit {
                 ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => {
                     if rules::access_mode_ne_drone(ctx, world) {
                         2500
-                    } else {
-                        0
-                    }
-                }
-                ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2 => {
-                    if true {
-                        1000
                     } else {
                         0
                     }
@@ -13126,7 +12993,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1,
-        time: 6667,
+        time: 8167,
         dest: SpotId::Amagi_Breach__Center_Ruins__Passage_Exit,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -13147,7 +13014,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Passage_Entrance_1,
-        time: 6667,
+        time: 8167,
         dest: SpotId::Amagi_Breach__Center_Ruins__Passage_Entrance,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -16080,7 +15947,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Amagi__Wiggly_Room__Dur_Esla__ex__Below_West_Cache_1,
-        time: 2000,
+        time: 3000,
         dest: SpotId::Amagi__Wiggly_Room__Below_West_Cache,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
@@ -17235,7 +17102,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Annuna__Boss_Gate__Door_East__ex__East_1,
-        time: 2807,
+        time: 8807,
         dest: SpotId::Annuna__Boss_Gate__East,
         price: Currency::Energy(150),
         price_per_sec: Currency::Free,
@@ -17249,7 +17116,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Annuna__Boss_Gate__East__ex__Door_East_1,
-        time: 2807,
+        time: 12807,
         dest: SpotId::Annuna__Boss_Gate__Door_East,
         price: Currency::Energy(150),
         price_per_sec: Currency::Free,
@@ -17291,7 +17158,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Annuna__Boss_Gate__Grate_East__ex__East_4,
-        time: 2456,
+        time: 8456,
         dest: SpotId::Annuna__Boss_Gate__East,
         price: Currency::Energy(150),
         price_per_sec: Currency::Free,
@@ -19426,7 +19293,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Annuna__Mirror_Match__Middle_Rock_West__ex__Middle_Rock_Tree_1,
-        time: 1800,
+        time: 2800,
         dest: SpotId::Annuna__Mirror_Match__Middle_Rock_Tree,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -23304,7 +23171,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Ebih_Breach__Spider_Guards__Center_Re_hover_Start__ex__South_1,
-        time: 2281,
+        time: 4281,
         dest: SpotId::Ebih_Breach__Spider_Guards__South,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -23332,7 +23199,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_West_Platform__ex__Center_Hover_End_1,
-        time: 3509,
+        time: 4009,
         dest: SpotId::Ebih_Breach__Spider_Guards__Center_Hover_End,
         price: Currency::Energy(20),
         price_per_sec: Currency::Free,
@@ -23563,7 +23430,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Ebih_Breach__Vertical_Room__Passage_Low__ex__Passage_Middle_2,
-        time: 2800,
+        time: 3300,
         dest: SpotId::Ebih_Breach__Vertical_Room__Passage_Middle,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
@@ -27847,21 +27714,21 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_1,
-        time: 2000,
+        time: 2300,
         dest: SpotId::Giguna_Breach__East__Mid_Tunnel,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_2,
-        time: 1000,
+        time: 1150,
         dest: SpotId::Giguna_Breach__East__Mid_Tunnel,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_3,
-        time: 1200,
+        time: 1700,
         dest: SpotId::Giguna_Breach__East__Mid_Tunnel,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -27875,21 +27742,21 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_1,
-        time: 4200,
+        time: 4900,
         dest: SpotId::Giguna_Breach__East__Upper_Tunnel_Entrance,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_2,
-        time: 2100,
+        time: 2450,
         dest: SpotId::Giguna_Breach__East__Upper_Tunnel_Entrance,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_3,
-        time: 2400,
+        time: 3400,
         dest: SpotId::Giguna_Breach__East__Upper_Tunnel_Entrance,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -33811,7 +33678,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1,
-        time: 3100,
+        time: 3600,
         dest: SpotId::Glacier_Breach__Fortress__Southeast,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
@@ -33846,7 +33713,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1,
-        time: 1800,
+        time: 2300,
         dest: SpotId::Glacier_Breach__Stacked_Enemies__Mid_air_East,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -41665,7 +41532,7 @@ static EXIT_DEFS: [Exit; 4401] = [
     },
     Exit {
         id: ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2,
-        time: 1053,
+        time: 2053,
         dest: SpotId::Uhrum__East_Lake__East_Block,
         price: Currency::Free,
         price_per_sec: Currency::Free,

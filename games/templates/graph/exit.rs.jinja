@@ -49,12 +49,10 @@ impl world::Accessible for Exit {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
-%% for ex in gl.exits()|sort(attribute='id')
-%% if ex.penalties and not ex.item
+%% for ex in gl.exits()|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
                 ExitId::{{ ex.id }} => {
                     {{ penalties(ex.penalties) }}
                 }
-%% endif
 %% endfor
             _ => 0,
         }
@@ -66,7 +64,7 @@ impl world::Accessible for Exit {
             self.price
         } else {
             match self.id {
-%% for ex in gl.exits()|selectattr('movement')|selectattr('penalties')|sort(attribute='id')
+%% for ex in gl.exits()|selectattr('movement')|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
 %% for pen in ex.penalties|selectattr('movement')
 %% set mv = gl.exit_movements[pen.movement]
 %% if mv

@@ -47,12 +47,10 @@ impl world::Accessible for Action {
     fn time(&self, ctx: &Context, world: &World) -> u32 { 
         self.time
             + match self.id {
-%% for act in gl.actions()|sort(attribute='id')
-%% if act.penalties
+%% for act in gl.actions()|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
                 ActionId::{{ act.id }} => {
                     {{ penalties(act.penalties) }}
                 }
-%% endif
 %% endfor
             _ => 0,
         }
@@ -64,7 +62,7 @@ impl world::Accessible for Action {
             self.price
         } else {
             match self.id {
-%% for act in gl.actions()|selectattr('movement')|selectattr('penalties')|sort(attribute='id')
+%% for act in gl.actions()|selectattr('movement')|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
 %% for pen in act.penalties|selectattr('movement')
 %% set mv = gl.exit_movements[pen.movement]
 %% if mv

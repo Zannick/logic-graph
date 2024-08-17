@@ -579,6 +579,9 @@ class GameLogic(object):
                     else:
                         self._errors.append(f'Unrecognized movement type in {ptype} {exit["fullname"]}: {m!r}')
                         continue
+                    if exit['time'] is None:
+                        self._errors.append(f'Unable to determine movement time for {ptype} {exit["fullname"]} with movement {m!r}: missing jumps?')
+                        continue
                     for i, pen in enumerate(exit.get('penalties', ())):
                         pen['add'] = pen.get('add', 0)
                         if 'movement' in pen or 'jumps' in pen or 'jumps_down' in pen:
@@ -601,8 +604,9 @@ class GameLogic(object):
                                 pen['add'] += t - exit['time']
                         if tags := pen.get('tags'):
                             pen['add'] += self._calculate_penalty_tags(tags, f'{exit["fullname"]} penalty {i+1}')
-                    if exit['time'] is None:
-                        self._errors.append(f'Unable to determine movement time for {ptype} {exit["fullname"]} with movement {m!r}: missing jumps?')
+                        if always_penalty(pen):
+                            exit['time'] += pen['add']
+                            pen['add'] = 0
                 if 'movement' not in exit and any('movement' in p for p in exit.get('penalties', ())):
                     self._errors.append(f'movement must be defined in {ptype} {exit["fullname"]} to use movement in penalties')
 
@@ -2020,6 +2024,7 @@ class GameLogic(object):
             'prToRustObserve': self.prToRustObserve,
             'region_id_from_id': self.region_id_from_id,
             'spot_id_index': self.spot_id_index,
+            'split_filter_penalties': split_filter_penalties,
             'str_to_rusttype': str_to_rusttype,
             'target_id_from_id': self.target_id_from_id,
             'translate_ctx': self.translate_ctx,
@@ -2027,6 +2032,8 @@ class GameLogic(object):
             'trim_type_prefix': trim_type_prefix,
         })
         env.tests.update({
+            'always_penalty': always_penalty,
+            'interesting_penalties': interesting_penalties,
             'exclude_by_tag': self.exclude_by_tag,
             'exclude_local': self.exclude_local,
             'distinctpair': lambda x: x[0] != x[1],

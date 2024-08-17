@@ -58,7 +58,7 @@ impl world::Accessible for Location {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
-%% for loc in gl.locations()|selectattr('penalties')|sort(attribute='id')
+%% for loc in gl.locations()|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
                 LocationId::{{ loc.id }} => {
                     {{ penalties(loc.penalties) }}
                 }
@@ -73,7 +73,7 @@ impl world::Accessible for Location {
             self.price
         } else {
             match self.id {
-%% for loc in gl.locations()|selectattr('movement')|selectattr('penalties')|sort(attribute='id')
+%% for loc in gl.locations()|selectattr('movement')|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
 %% for pen in loc.penalties|selectattr('movement')
 %% set mv = gl.exit_movements[pen.movement]
 %% if mv

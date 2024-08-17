@@ -415,25 +415,16 @@ impl world::Accessible for Action {
         self.time
             + match self.id {
                 ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
-                    if true {
-                        (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
-                    } else {
-                        0
-                    }
+                    (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
+
                 }
                 ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
-                    if true {
-                        (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
-                    } else {
-                        0
-                    }
+                    (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
+
                 }
                 ActionId::Global__Move_Portal_Here => {
-                    if true {
-                        (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(ctx, world) * 1000.0).ceil() as u32
-                    } else {
-                        0
-                    }
+                    (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(ctx, world) * 1000.0).ceil() as u32
+
                 }
             _ => 0,
         }

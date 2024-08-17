@@ -48,12 +48,10 @@ impl world::Accessible for Warp {
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
-%% for w in warps.values()|sort(attribute='id')
-%% if w.penalties
+%% for w in warps.values()|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
                 WarpId::{{ w.id }} => {
                     {{ penalties(w.penalties) }}
                 }
-%% endif
 %% endfor
             _ => 0,
         }

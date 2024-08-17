@@ -1609,33 +1609,15 @@ impl world::Accessible for Location {
         self.time
             + match self.id {
                 LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => {
-                    if true {
-                        1500
-} else if rules::access_not_mist_upgrade(ctx, world) {
-                        6667
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        5167
                     } else {
                         0
                     }
                 }
                 LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => {
-                    if true {
-                        1500
-} else if rules::access_not_mist_upgrade(ctx, world) {
-                        6667
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Annuna__Final_Cache__West__Remote_Flask_Fast_Travel => {
-                    if true {
-                        1000
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Annuna__Mirror_Match__East_26_Upper__Remote_Flask_Fast_Travel => {
-                    if true {
-                        350
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        5167
                     } else {
                         0
                     }
@@ -1692,62 +1674,6 @@ impl world::Accessible for Location {
                 LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         3684
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => {
-                    if true {
-                        2000
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => {
-                    if true {
-                        2000
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => {
-                    if true {
-                        500
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => {
-                    if true {
-                        3000
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => {
-                    if true {
-                        1000
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => {
-                    if true {
-                        1000
                     } else {
                         0
                     }
@@ -2556,7 +2482,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Amagi_Breach_Center_Ruins_Blocks,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
-        time: 6667,
+        time: 8167,
         dest: SpotId::Amagi_Breach__Center_Ruins__Passage_Exit,
         skippable: false,
     },
@@ -2566,7 +2492,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Amagi_Breach_Center_Ruins_Blocks,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
-        time: 6667,
+        time: 8167,
         dest: SpotId::Amagi_Breach__Center_Ruins__Passage_Entrance,
         skippable: false,
     },
@@ -4576,7 +4502,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Ebih_Breach_Rock_Block_Rock,
         price: Currency::Free,
         price_per_sec: Currency::Free,
-        time: 1526,
+        time: 2026,
         dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
         skippable: false,
     },
@@ -4596,7 +4522,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Ebih_Breach_Rock_Block_Rock,
         price: Currency::Free,
         price_per_sec: Currency::Free,
-        time: 526,
+        time: 1026,
         dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
         skippable: false,
     },
@@ -4636,7 +4562,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Ebih_Breach_Rock_Block_Rock,
         price: Currency::Free,
         price_per_sec: Currency::Free,
-        time: 2200,
+        time: 4200,
         dest: SpotId::Ebih_Breach__Rock_Block__Rock_Southwest,
         skippable: false,
     },
@@ -6106,7 +6032,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Emergence_Rocks_Fall_Rock_2,
         price: Currency::Free,
         price_per_sec: Currency::Free,
-        time: 526,
+        time: 1026,
         dest: SpotId::Emergence__Rocks_Fall__Wall_2_East,
         skippable: false,
     },
@@ -6806,7 +6732,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Giguna_Breach_Pinkness_Rock,
         price: Currency::Free,
         price_per_sec: Currency::Free,
-        time: 1351,
+        time: 2351,
         dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
         skippable: false,
     },
@@ -6826,7 +6752,7 @@ static LOC_DEFS: [Location; 915] = [
         item: Item::Giguna_Breach_Pinkness_Rock,
         price: Currency::Free,
         price_per_sec: Currency::Free,
-        time: 351,
+        time: 1351,
         dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
         skippable: false,
     },

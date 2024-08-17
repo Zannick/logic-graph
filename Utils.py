@@ -170,3 +170,21 @@ def field_size(max_value: int):
 
 def bool_list_to_bitflags(boollist):
     return sum(b * 2 ** a for a, b in zip(range(len(boollist)), boollist))
+
+def always_penalty(pen):
+    return 'when' not in pen or pen['when'] is True or pen['when'] == 'true'
+
+def interesting_penalties(penalties):
+    return penalties and any('calc_id' in p or not always_penalty(p) for p in penalties)
+
+def split_filter_penalties(penalties):
+    always = []
+    cond = []
+    for p in penalties:
+        if always_penalty(p):
+            if 'calc_id' in p:
+                always.append(p)
+        else:
+            cond.append(p)
+    return always, cond
+
