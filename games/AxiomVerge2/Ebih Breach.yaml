@@ -226,20 +226,20 @@ areas:
       local:
         - to: Large Floating Rock West
         - to: Large Floating Rock East
-        - to: Column East
-          jumps: 2
       exits:
         - to: Column East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
-        - to: NW Floating Rock East
-          req: Slingshot_Hook and Drone_Hover
-          movement: fast_hover
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 2
         - to: NW Floating Rock East
           req: Slingshot_Hook
-          movement: base
+          movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              movement: base
         - to: North Ledge
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -250,17 +250,17 @@ areas:
         - to: Lower East Ledge
         - to: Cache
           thru: [23.625, 4.6]
-        - to: Large Floating Rock West
-          jumps: 1
       exits:
         - to: Upper East Ledge
           req: Slingshot_Hook and Drone_Hover
           movement: base
           jumps: 3
         - to: Large Floating Rock West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Column East
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -278,13 +278,13 @@ areas:
         - to: Waterfall Ledge
         - to: Cache
           thru: [23.15, 5.0]
-        - to: Column East
-          jumps: 2
       exits:
         - to: Column East
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Upper East Ledge
           req: Slingshot_Hook
           movement: base
@@ -340,16 +340,16 @@ areas:
       coord: [23.05, 5.1]
       local:
         - to: Cache
-        - to: Column East
-          jumps: 6
         - to: Large Floating Rock West
           thru: [22.9, 4.3]
           jumps: [4, 2]
       exits:
         - to: Column East
-          req: Slingshot_Hook
           movement: base
           jumps: 3
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 3
         - to: Large Floating Rock West
           req: Slingshot_Hook
           movement: base
@@ -378,8 +378,6 @@ areas:
     - name: NW Floating Rock East
       coord: [22.8, 3.55]
       local:
-        - to: North Ledge
-          jumps: 1
         - to: Column East
         - to: Upper East Ledge
           jumps: 2
@@ -389,9 +387,11 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
         - to: North Ledge
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Column East
       coord: [22.85, 3.95]
       local:
@@ -418,13 +418,13 @@ areas:
       local:
         - to: Column East
         - to: South
-        - to: North Ledge
-          jumps: 3
       exits:
         - to: North Ledge
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: West
       coord: [22.1, 5.65]
       local:
@@ -437,13 +437,13 @@ areas:
       local:
         - to: West
           jumps: 1
-        - to: Column West
-          jumps: 9
       exits:
         - to: Column West
-          req: Slingshot_Hook
           movement: base
           jumps: 5
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 4
         - to: Column West
           req: Nanite_Mist
           movement: mist2
@@ -538,27 +538,27 @@ areas:
     - name: South Plains
       coord: [26.6, 12.8]
       local:
-        - to: Mesa West
-          jumps: 2
         - to: Southeast Plains
       exits:
         - to: Mesa West
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: Southeast Plains
       coord: [27.15, 12.8]
       data:
         flipside: Ebih > By Garage > Garage Entry
       local:
         - to: South Plains
-        - to: Southeast Ledge
-          jumps: 3
       exits:
         - to: Southeast Ledge
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: Southeast Ledge
       coord: [27.5, 12.4]
       local:
@@ -598,9 +598,11 @@ areas:
         - to: Southeast Plains
       exits:
         - to: Center Rock East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Portal Stand
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -642,15 +644,15 @@ areas:
     - name: Center Rock Center
       coord: [26.9, 11.95]
       local:
-        - to: Portal Stand
-          jumps: 1
         - to: Center Rock Peak
           jumps: 3
       exits:
         - to: Portal Stand
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Gate East
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -667,21 +669,22 @@ areas:
     - name: Center Rock West
       coord: [26.5, 12.05]
       local:
-        - to: Portal Stand
-          jumps: 2
-        - to: Northwest Ledge
-          jumps: 1
         - to: Mesa East
         - to: South Plains
       exits:
         - to: Portal Stand
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Northwest Ledge
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Gate East
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -696,13 +699,15 @@ areas:
           jumps: 2
         - to: Mesa East
         - to: South Plains
-        - to: Gate East
-          jumps: 2
       exits:
         - to: Gate East
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
         - to: Gate West
           req: Slingshot_Hook and Drone_Hover and Ebih_Breach_In_n_Out_Gate
           movement: fast_hover
@@ -869,10 +874,10 @@ areas:
       exits:
         - to: Gate East
           req: Ebih_Breach_Lake_Gate
-          movement: base
-        - to: Gate East
-          req: Slingshot_Hook and Ebih_Breach_Lake_Gate
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Interior
       coord: [25.5, 13.75]
       data:
@@ -887,8 +892,11 @@ areas:
           tags: [button]
       exits:
         - to: Gate East
-          req: Slingshot_Hook and Ebih_Breach_Lake_Gate
+          req: Ebih_Breach_Lake_Gate
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: South
       coord: [25.5, 13.8]
       local:
@@ -905,36 +913,34 @@ areas:
   spots:
     - name: East 11
       coord: [27.9, 10.55]
-      local:
-        - to: Tree
-          jumps: 5
       exits:
         - to: Tree
-          req: Slingshot_Hook
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 3
         - to: Glacier Breach > Spidery Connector > West
           tags: [xdoor]
     - name: Tree
       coord: [27.6, 9.8]
       local:
         - to: East 11
-        - to: West 10
-          jumps: 2
-        - to: Lower Row Right
-          jumps: 2
       exits:
         - to: Lower Row Right
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: West 10
-          req: Slingshot_Hook
-          movement: base
-          jumps: 1
-        - to: West 10
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
+            - when: not Drone_Hover
+              movement: base
     - name: West 10
       coord: [27.1, 9.75]
       local:
@@ -1024,11 +1030,12 @@ areas:
       coord: [25.8, 6.75]
       local:
         - to: East Spider
-        - to: East Sand Pit
       exits:
         - to: East Sand Pit
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: East Sand Pit Mid-air
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1126,12 +1133,11 @@ areas:
       exits:
         - to: Northwest
           req: Ebih_Breach_Spider_Guards_Gate
-          movement: base
-          jumps: 3
-        - to: Northwest
-          req: Ebih_Breach_Spider_Guards_Gate and Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 3
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Northwest
       coord: [22.55, 6.2]
       exits:
@@ -1161,19 +1167,20 @@ areas:
       local:
         - to: Grate East
         - to: Button Left
-        - to: Upper Right Corner
-          jumps: 2
-        - to: North
-          jumps: 3
       exits:
         - to: North
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: Upper Right Corner
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
     - name: Grate East
       coord: [23.325, 7.8]
       local:
@@ -1364,14 +1371,13 @@ areas:
       coord: [21.2, 8.8]
       data:
         flipside: Ebih > Waterfall > West Grassy Plains
-      local:
-        - to: Dais Center
-          jumps: 1
       exits:
         - to: Dais Center
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
 
     - name: South
       coord: [22.5, 8.8]
@@ -1416,7 +1422,6 @@ areas:
       local:
         - to: East
         - to: Hill East
-        - to: Middle Floating Rock
         - to: Lower Cage East
           jumps: 3
       exits:
@@ -1424,8 +1429,10 @@ areas:
           req: Drone_Hover
           jumps: 4
         - to: Middle Floating Rock
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Northeast
       coord: [23.5, 9.2]
       local:
@@ -1441,13 +1448,12 @@ areas:
         - to: Middle Floating Rock
       exits:
         - to: Northeast
-          req: Slingshot_Hook and Drone_Hover
-          movement: base
-          jumps: 2
-        - to: Northeast
           req: Drone_Hover
           movement: base
-          jumps: 4
+          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: Middle Floating Rock
       coord: [23.5, 10.15]
       local:
@@ -1496,29 +1502,30 @@ areas:
       local:
         - to: Center West
         - to: Lower Cage East
-        - to: Middle Floating Rock
-          jumps: 1
       exits:
         - to: Middle Floating Rock
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Center West
       coord: [22.5, 10.45]
       local:
         - to: Center East
           jumps: 3
-        - to: West Rock
-          jumps: 2
       exits:
         - to: West Ledge
           req: Slingshot_Hook
           movement: base
           jumps: 3
         - to: West Rock
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
         - to: West Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1567,8 +1574,6 @@ areas:
     - name: Button
       coord: [21.55, 10.1]
       local:
-        - to: West Rock
-          jumps: 3
         - to: Gate East
       locations:
         - name: Hit Button
@@ -1576,8 +1581,11 @@ areas:
           tags: [button]
       exits:
         - to: West Rock
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 3
     - name: Gate East
       coord: [21.35, 10.7]
       exits:
@@ -1594,13 +1602,12 @@ areas:
         - to: Rock Block > East 11
           tags: [xdoor]
         - to: Gate East
-          req: Ebih_Breach_Rocky_Cages_Gate and Slingshot_Hook
+          req: Ebih_Breach_Rocky_Cages_Gate
           movement: fast_hover
           jumps: 1
-        - to: Gate East
-          req: Ebih_Breach_Rocky_Cages_Gate
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
 
     - name: Cage North
       coord: [22.5, 9.2]
@@ -1639,16 +1646,15 @@ areas:
   spots:
     - name: West
       coord: [19.1, 8.75]
-      local:
-        - to: Column
-          jumps: 2
       exits:
         - to: Giguna Breach > Gate and Wall > East 9
           tags: [xdoor]
         - to: Column
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: Column
       coord: [19.3, 8.4]
       data:
@@ -1679,19 +1685,17 @@ areas:
     - name: East Turn
       coord: [20.9, 8.9]
       local:
-        - to: West
-          jumps: 1
         - to: West Turn
       exits:
         - to: West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: West Turn
       coord: [20.25, 9.3]
       local:
-        - to: East Turn
-          jumps: 3
         - to: East
           jumps: 1
       exits:
@@ -1699,17 +1703,21 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
     - name: East
       coord: [20.9, 9.7]
       exits:
         - to: West Turn
           req: Slingshot_Hook
-          movement: base
-          jumps: 2
-        - to: West Turn
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Drone_Hover
+              movement: base
+              jumps: 1
         - to: Rocky Cages > West 10
           tags: [xdoor]
 
@@ -1782,21 +1790,19 @@ areas:
         - to: West Shaft Midway
       exits:
         - to: West Shaft West Ledge
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
         - to: West Shaft East Ledge
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: West Shaft East Ledge
-          req: Drone_Hover
-          movement: base
-          jumps: 4
-        - to: West Shaft West Ledge
-          req: Drone_Hover
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 3
     - name: Rock Top
       coord: [19.625, 12.15]
       local:
@@ -1918,17 +1924,17 @@ areas:
     - name: Bottom Middle
       coord: [20.0, 12.75]
       local:
-        - to: Rock East
-          jumps: 2
         - to: Save Point
           jumps: 1
         - to: East Tunnel
           jumps: 1
       exits:
         - to: Rock East
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: Save Point
       coord: [19.5, 12.6]
       local:
@@ -2029,12 +2035,13 @@ areas:
     - name: Column
       coord: [24.0, 2.15]
       local:
-        - to: Save Point
         - to: Ground Near Column
       exits:
         - to: Save Point
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Ground Near Column
       coord: [23.7, 2.55]
       local:
@@ -2096,12 +2103,13 @@ areas:
         - to: West Lower Step
         - to: South
         - to: Ground Near Door
-        - to: Ground Near Column
-          jumps: 1
       exits:
         - to: Ground Near Column
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
     - name: West
       coord: [22.1, 1.75]
       local:
@@ -2206,11 +2214,11 @@ areas:
       local:
         - to: Passage Middle
       exits:
-        - to: Passage Middle
+        - to: Passage Exit
           req: Slingshot_Hook
           movement: base
           jumps: 3
-        - to: Passage Middle
+        - to: Passage Exit
           req: Nanite_Mist
           movement: mist2
           penalties:
@@ -2283,25 +2291,25 @@ areas:
     - name: Portal Ledge
       coord: [21.3, 2.8]
       local:
-        - to: Portal Stand
-          jumps: 1
         - to: Middle Building Ledge
       exits:
         - to: Portal Stand
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Middle Building Ledge
       coord: [21.4, 4.4]
       local:
-        - to: Portal Ledge
-          jumps: 9
         - to: East 6
       exits:
         - to: Portal Ledge
-          req: Slingshot_Hook
           movement: base
           jumps: 6
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 3
         - to: Portal Ledge
           req: Nanite_Mist
           movement: mist2
@@ -2310,13 +2318,12 @@ areas:
               movement: mist1
     - name: East 6
       coord: [21.9, 5.65]
-      local:
-        - to: Middle Building Ledge
-          jumps: 8
       exits:
         - to: Middle Building Ledge
-          req: Slingshot_Hook
           movement: base
           jumps: 5
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 3
         - to: Snowy Rocks > West
           tags: [xdoor]

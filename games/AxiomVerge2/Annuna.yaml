@@ -115,6 +115,7 @@ areas:
           movement: base
         - to: Below Switch
           req: $hover and $hook
+          movement: base
     #endregion
 
     #region Below the Stairs
@@ -169,13 +170,13 @@ areas:
           penalty_tags: [flask]
       exits:
         - to: East 26 Upper
-          req: $hover
-          movement: base
-          jumps: 3
         - to: East 26 Upper
-          req: Anuman
+          req: Anuman or $hover
           movement: base
           jumps: 1
+          penalties:
+            - when: not Anuman
+              jumps: 2
     - name: Waving Distance
       coord: [33.7, 25.6]
       local:
@@ -293,13 +294,12 @@ areas:
         - to: Upper Floor East
       exits:
         - to: Middle Rock West
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
-        - to: Middle Rock West
-          req: $grab and $climb
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Upper Floor East
       coord: [33.7, 23.8]
       local:
@@ -307,13 +307,13 @@ areas:
           jumps: 1
       exits:
         - to: East 24
-          req: $hook
+          req: $hook or $hover
           movement: fast_hover
           jumps: 1
-        - to: East 24
-          req: $hover
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: West Bridge > Bridge Top West
           req: $hookhover
           movement: fast_hover
@@ -905,15 +905,14 @@ areas:
           req: $hookhover
           movement: fast_hover
         - to: Lower Grassy Column West
-          req: $hook
+          req: $hook or $hover or ($grab and $climb)
           movement: fast_hover
-        - to: Lower Grassy Column West
-          req: $hover
-          movement: base
-        - to: Lower Grassy Column West
-          req: $grab and $climb
-          movement: base
-          jumps: 3
+          penalties:
+            - when: ^mode != 'drone'
+              movement: base
+              jumps: 3
+            - when: not Slingshot_Hook
+              movement: base
     - name: Lower Grassy Column West
       coord: [35.9, 25.75]
       local:
@@ -930,15 +929,14 @@ areas:
           req: $hookhover
           movement: fast_hover
         - to: Lower Brick Column East
-          req: $hook
+          req: $hook or $hover or ($grab and $climb)
           movement: fast_hover
-        - to: Lower Brick Column East
-          req: $hover
-          movement: base
-        - to: Lower Brick Column East
-          req: $grab and $climb
-          movement: base
-          jumps: 3
+          penalties:
+            - when: ^mode != 'drone'
+              movement: base
+              jumps: 3
+            - when: not Slingshot_Hook
+              movement: base
     - name: Lower Grassy Column East
       coord: [36.1, 25.75]
       local:
@@ -958,13 +956,12 @@ areas:
         - to: Save Point
       exits:
         - to: Lower Grassy Column East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Lower Grassy Column East
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East 26
           req: Nanite_Mist
           movement: mist2
@@ -1080,17 +1077,14 @@ areas:
           req: $hook
           movement: fast_hover
         - to: Tower Middle West Ledge
-          req: $hook
+          req: $hook or $grab or Anuman
           movement: base
           jumps: 2
-        - to: Tower Middle West Ledge
-          req: Anuman
-          movement: base
-          jumps: 3
-        - to: Tower Middle West Ledge
-          req: $grab
-          movement: base
-          jumps: 6
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 4
+            - when: not $hook
+              jumps: 1
         - to: Tower Middle West Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1110,30 +1104,27 @@ areas:
           movement: base
         - to: Tower Base Center
           req: ^_doors_opened
-          movement: base
-        - to: Tower Base Center
-          req: ^_doors_opened and $hook
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Tower Level 1
-          req: ^_doors_opened and $hook
+          req: ^_doors_opened and ($hook or $grab)
           movement: fast_hover
           jumps: 2
-        - to: Tower Level 1
-          req: ^_doors_opened and $grab
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 2
         - to: Tower Middle West Ledge
-          req: $hook
+          req: $hook or $grab or Anuman
           movement: base
           jumps: 2
-        - to: Tower Middle West Ledge
-          req: Anuman
-          movement: base
-          jumps: 3
-        - to: Tower Middle West Ledge
-          req: $grab
-          movement: base
-          jumps: 6
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 4
+            - when: not $hook
+              jumps: 1
         - to: Tower Middle West Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1148,18 +1139,17 @@ areas:
       exits:
         - to: Tower Base West
           req: ^_doors_opened
-          movement: base
-        - to: Tower Base West
-          req: ^_doors_opened and $hookhover
           movement: fast_hover
+          penalties:
+            - when: not $hookhover
+              movement: base
         - to: Tower Level 1
-          req: $hook or (Anuman and $grab)
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Tower Level 1
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
         - to: Tower Base Door Column
           req: $hook
           movement: fast_hover
@@ -1174,13 +1164,12 @@ areas:
         - to: Tower Base East
       exits:
         - to: Tower Lower East Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Tower Lower East Ledge
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Tower Lower East Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1217,13 +1206,12 @@ areas:
         - to: Tower Level 1
       exits:
         - to: Tower Level 3
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab or $climb
           movement: base
           jumps: 2
-        - to: Tower Level 3
-          req: $grab or $climb
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
         - to: Tower Upper East Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1244,13 +1232,12 @@ areas:
         - to: Tower Base West
       exits:
         - to: Tower Upper West Ledge
-          req: $hook or Anuman
+          req: $hook or $grab or Anuman
           movement: base
           jumps: 2
-        - to: Tower Upper West Ledge
-          req: $grab
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 2
         - to: Tower Upper West Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1282,17 +1269,14 @@ areas:
           req: ^_doors_opened
           movement: base
         - to: Tower Level 3
-          req: $hook
+          req: $hook or Anuman or $grab or $climb
           movement: base
           jumps: 1.5
-        - to: Tower Level 3
-          req: Anuman
-          movement: base
-          jumps: 2
-        - to: Tower Level 3
-          req: $grab or $climb
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1.5
+            - when: not $hook
+              jumps: 0.5
     - name: Tower Level 3
       coord: [35.6, 22.9]
       local:
@@ -1300,13 +1284,12 @@ areas:
         - to: Tower Lower East Ledge
       exits:
         - to: Tower Level 4
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab or $climb
           movement: base
           jumps: 1
-        - to: Tower Level 4
-          req: $grab or $climb
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: Tower Level 4
       coord: [35.4, 22.6]
       local:
@@ -1324,21 +1307,19 @@ areas:
         - to: Tower Level 4
       exits:
         - to: Tower Upper Middle
-          req: $hook or (Anuman and ($grab or $climb))
+          req: $hook or (Anuman and ($grab or $climb)) or ($grab and $climb)
           movement: base
           jumps: 1
-        - to: Tower Upper Middle
-          req: $grab and $climb
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
         - to: Tower Upper East Ledge
-          req: $hook or (Anuman and ($grab or $climb))
+          req: $hook or (Anuman and ($grab or $climb)) or ($grab and $climb)
           movement: base
           jumps: 1
-        - to: Tower Upper East Ledge
-          req: $grab and $climb
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: Tower Upper Middle
       coord: [35.4, 22.2]
       data:
@@ -1354,13 +1335,12 @@ areas:
           movement: base
           jumps: 2
         - to: Tower Peak
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 2
-        - to: Tower Peak
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
       actions:
         - name: Open Doors
           req: $open and not ^_doors_opened
@@ -1387,13 +1367,12 @@ areas:
           movement: base
           jumps: 2
         - to: Tower Peak
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 2
-        - to: Tower Peak
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: Tower West Mid-air
       coord: [35.3, 21.95]
       data:
@@ -1693,21 +1672,19 @@ areas:
       coord: [38.35, 25.35]
       exits:
         - to: Center Drop-off
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Center Corridor
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 3
-        - to: Center Drop-off
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: Center Corridor
-          req: $grab and $climb
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Remote Training > West 26
           movement: base
           penalty_tags: [xshift, -base.1]
@@ -1815,8 +1792,11 @@ areas:
           req: $infinite_climb and Annuna_East_Bridge_Gate
           time: 7  # 1s faster than starting from the west?
         - to: Tower West Ledge
-          req: $infinite_climb and Annuna_East_Bridge_Gate
-          time: 5  # 1s faster than starting from the west?
+          req: Annuna_East_Bridge_Gate and Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Tower Core
       coord: [38.5, 23.5]
       local:
@@ -1866,13 +1846,12 @@ areas:
         - to: Gate Button Gap
       exits:
         - to: East 24
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: East 24
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
 
     - name: Tower West Ledge
       coord: [38.25, 22.2]
@@ -1939,13 +1918,12 @@ areas:
           movement: base
           jumps: 2
         - to: Tower Peak
-          req: ^_combo and $grab
-          movement: base
-          jumps: 4
-        - to: Tower Peak
-          req: ^_combo and $hook
+          req: ^_combo and ($hook or $grab)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
       actions:
         - name: Enter Combo
           req: not ^_combo
@@ -2008,13 +1986,12 @@ areas:
         - to: West Staircase Upper West
       exits:
         - to: West 24
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: West 24
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: West Bridge > Tower Base Door Column
           req: $hookhover
           movement: fast_hover
@@ -2044,19 +2021,18 @@ areas:
         - to: Tower Base West
       exits:
         - to: Tower Gate
-          req: $hook and Annuna_East_Bridge_Gate
+          req: Annuna_East_Bridge_Gate and ($hook or $grab)
           movement: base
           jumps: 1
-        - to: Tower Gate
-          req: $grab and Annuna_East_Bridge_Gate
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Tower West Ledge
           req: $infinite_climb and not Annuna_East_Bridge_Gate
-          time: 8
-        - to: Tower West Ledge
-          req: $infinite_climb and Slingshot_Hook and not Annuna_East_Bridge_Gate
           time: 6
+          penalties:
+            - when: not Slingshot_Hook
+              add: 2
     - name: West 24
       coord: [37.05, 23.55]
       local:
@@ -2269,33 +2245,33 @@ areas:
         - to: Water Corner
       exits:
         - to: Lower Gate West
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Lower West Tree Ledge
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 3
-        - to: Lower Gate West
-          req: $grab and $climb
-          movement: base
-          jumps: 4
-        - to: Lower West Tree Ledge
-          req: $grab and $climb
-          movement: base
-          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Water Corner
       coord: [37.625, 27.3]
       local:
         - to: West 28 Upper
-        - to: West Water Ledge
-          jumps: 3
-          jump_mvmt: water
       exits:
         - to: West Water Ledge
-          req: $hook
-          movement: base
+          req: Underwater_Movement or $hook
+          movement: water
           jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+            - when: not $hook
+              jumps: 1
     - name: West 28 Upper
       coord: [37.05, 27.4]
       local:
@@ -2318,46 +2294,46 @@ areas:
       local:
         - to: West 28 Lower
           jumps: 2
-        - to: East Water Ledge
-          jumps: 4
-        - to: East Water Ledge
-          jumps: 3
-          jump_mvmt: water
       exits:
         - to: Middle Water Ledge
-          req: Underwater_Movement and $hook
+          req: $hook
           movement: water
           jumps: 1
-        - to: Middle Water Ledge
-          req: $hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
         - to: East Water Ledge
-          req: Underwater_Movement and $hover
-          movement: base
+          movement: water
           jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 2
+            - when: not $hover
+              jumps: 1
     - name: Middle Water Ledge
       coord: [38.75, 26.7]
       local:
         - to: West 28 Lower
-        - to: East Water Ledge
-          jumps: 4
-        - to: East Water Ledge
-          jumps: 3
-          jump_mvmt: water
-        - to: Lower East Tree Ledge
-          jumps: 2
-        - to: Lower East Tree Ledge
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: East Water Ledge
-          req: Underwater_Movement and $hover
-          movement: base
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 4
+            - when: not $hover
+              jumps: 3
         - to: Lower East Tree Ledge
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
+            - when: not $hook
+              movement: water
     - name: Lower East Tree Ledge
       coord: [38.6, 26.35]
       local:
@@ -2393,21 +2369,19 @@ areas:
           jumps: 3
       exits:
         - to: Middle Water Ledge
-          req: Underwater_Movement and $hover
+          req: $hover
           movement: water
           jumps: 1
-        - to: Middle Water Ledge
-          req: $hover
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Lower East Ledge
-          req: Underwater_Movement and $hook
+          req: Underwater_Movement and ($hook or ($grab and $climb))
           movement: water
           jumps: 2
-        - to: Lower East Ledge
-          req: Underwater_Movement and $grab and $climb
-          movement: water
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower East Ledge
       coord: [39.85, 26.2]
       local:
@@ -2540,13 +2514,12 @@ areas:
         - to: Bridge Upper Ledge
       exits:
         - to: West 24
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: West 24
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Bridge Upper Ledge
       coord: [40.9, 23.8]
       local:
@@ -2706,11 +2679,7 @@ areas:
           movement: base
           jumps: 2
         - to: Lower Ledge
-          req: $hook
-          movement: base
-          jumps: 2
-        - to: Lower Ledge
-          req: $grab and Anuman
+          req: $hook or (Anuman and $grab)
           movement: base
           jumps: 2
     - name: Lower Mid
@@ -2753,13 +2722,12 @@ areas:
           jumps: [1, 1]
       exits:
         - to: Lower Platform 2 Right
-          req: $grab
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Lower Platform 2 Right
-          req: $hook
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower Ledge
       coord: [40.15, 21.35]
       local:
@@ -2774,13 +2742,12 @@ areas:
         - to: Lower Platform 2 Right
       exits:
         - to: Gate Ledge
-          req: $hook
+          req: $hook or (Anuman and $grab)
           movement: base
           jumps: 1
-        - to: Gate Ledge
-          req: $grab and Anuman
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Lower Ministair
           req: $climb
           movement: base
@@ -2793,13 +2760,12 @@ areas:
         - to: Lower Mid
       exits:
         - to: Gate Ledge
-          req: $hook
+          req: $hook or (Anuman and $grab)
           movement: base
           jumps: 1
-        - to: Gate Ledge
-          req: $grab and Anuman
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Lower Ministair
           req: $climb
           movement: base
@@ -3274,13 +3240,12 @@ areas:
         - to: West 26
       exits:
         - to: West 25
-          req: $climb and $grab and Anuman
-          movement: base
-          jumps: 3
-        - to: West 25
-          req: $infinite_climb and Slingshot_Hook
+          req: ($infinite_climb and Slingshot_Hook) or ($climb and $grab and Anuman)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $infinite_climb or not Slingshot_Hook
+              jumps: 1
     - name: Platform 2 Left
       coord: [44.55, 25.0]
       local:
@@ -3372,13 +3337,12 @@ areas:
           thru: [43.6, 23.3]
       exits:
         - to: Upper Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Upper Ledge
-          req: $grab
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: West 22
           req: $hook and $hover
           movement: base
@@ -3392,12 +3356,8 @@ areas:
           thru: [[43.425, 22.2], [43.6, 23.3]]
       exits:
         - to: West 22
-          req: $hook
-          movement: base  # TODO: this is faster than just hover
-          jumps: 1
-        - to: West 22
-          req: $hover
-          movement: base
+          req: $hook or $hover
+          movement: base  # TODO: hook is faster than just hover
           jumps: 1
     - name: Staircase Top
       coord: [43.65, 21.75]
@@ -3448,17 +3408,14 @@ areas:
           jumps: 3
       exits:
         - to: Door Ledge
-          req: Anuman
-          movement: base
-          jumps: 1
-        - to: Door Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Door Ledge
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 0.5
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1.5
+            - when: not $hook
+              jumps: 0.5
         - to: Egg
           req: $hook
           movement: base
@@ -3512,26 +3469,24 @@ areas:
           req: Hammond_Auth
           movement: base
         - to: Shaft Upper Platform
-          req: $grab or $climb
-          movement: base
-          jumps: 6
-        - to: Shaft Upper Platform
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 3
     - name: Shaft Upper Platform
       coord: [43.25, 19.15]
       local:
         - to: Shaft Bottom
       exits:
         - to: Shaft Top
-          req: $grab or $climb
-          movement: base
-          jumps: 2
-        - to: Shaft Top
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: West 19 Mid-flight
           req: $charge
           tags: [charge_time]
@@ -3573,13 +3528,12 @@ areas:
           jumps: 2
       exits:
         - to: East Platform 4
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: East Platform 4
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: East Platform 4
       coord: [44.6, 19.15]
       local:
@@ -3587,13 +3541,12 @@ areas:
         - to: East Platform 3
       exits:
         - to: Northeast Ministair
-          req: $hover
+          req: $hover or $climb
           movement: base
           jumps: 1
-        - to: Northeast Ministair
-          req: $climb
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hover
+              jumps: 1
     - name: Northeast Ministair
       coord: [44.85, 18.8]
       local:
@@ -3789,13 +3742,12 @@ areas:
         - to: Bottom Hill East
       exits:
         - to: Bottom Middle Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Bottom Middle Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Bottom Middle Ledge
       coord: [38.5, 16.2]
       local:
@@ -3804,17 +3756,15 @@ areas:
         - to: Bottom Hill East
       exits:
         - to: Bottom West Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Bottom West Ledge
-          req: $hook and $hover
+          req: $hook or $grab
           movement: fast_hover
           jumps: 1
-        - to: Bottom West Ledge
-          req: $hook
-          movement: base
-          jumps: 1
+          penalties:
+            - when: ^mode != 'drone'
+              movement: base
+              jumps: 1
+            - when: not $hover
+              movement: base
     - name: Bottom West Ledge
       coord: [38.2, 16.0]
       local:
@@ -3833,13 +3783,12 @@ areas:
         - to: Bottom West Ledge
       exits:
         - to: Ledge By Grate
-          req: $climb
-          movement: base
-          jumps: 2
-        - to: Ledge By Grate
-          req: $hook
+          req: $hook or $climb
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East 16
           req: Nanite_Mist
           movement: mist2
@@ -3898,25 +3847,24 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
         - to: Lower Brick Ledge
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Lower Brick Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
 
     - name: Lower Brick Ledge
       coord: [38.65, 14.9]
       local:
         - to: Ledge By Grate
-        - to: Portal Stand
-          jumps: 2
       exits:
         - to: Portal Stand
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Brick Ledge
           req: $hook
           movement: base
@@ -3950,13 +3898,12 @@ areas:
         - to: Ledge By Grate
       exits:
         - to: East 14
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: East 14
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: East 14
       coord: [38.9, 13.65]
       data:
@@ -4130,15 +4077,15 @@ areas:
     - name: East
       coord: [42.9, 25.75]
       local:
-        - to: Portal Stand
-          jumps: 2
         - to: Mideast Ledge
           jumps: 2
       exits:
         - to: Portal Stand
-          req: $hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Udug Gate > West
           tags: [xdoor]
     - name: Portal Stand
@@ -4147,11 +4094,12 @@ areas:
         flipside: Annuna Breach > Enclosed > Save Point
       local:
         - to: East
-        - to: Mideast Ledge
       exits:
         - to: Mideast Ledge
-          req: $hook
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Overhang Top
           req: $hookhover
           movement: fast_hover
@@ -4197,13 +4145,12 @@ areas:
           thru: [42.55, 26.7]
       exits:
         - to: Center
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
-        - to: Center
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: Covered Bottom
       coord: [41.5, 26.75]
       data:
@@ -4213,17 +4160,15 @@ areas:
           jumps: 2
       exits:
         - to: Center
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: fast_hover
           jumps: 2
-        - to: Center
-          req: Anuman
-          movement: base
-          jumps: 2
-        - to: Center
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              movement: base
+              jumps: 1
+            - when: not $hook
+              movement: base
 
 - name: East Hideout  # MARK: East Hideout
   on_entry: $reset_old_area(^newpos)
@@ -4260,17 +4205,15 @@ areas:
           tags: [throw]
       exits:
         - to: West Ledge
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: fast_hover
           jumps: 1
-        - to: West Ledge
-          req: Anuman
-          movement: base
-          jumps: 1
-        - to: West Ledge
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              movement: base
+              jumps: 1
+            - when: not $hook
+              movement: base
     - name: Bottom
       coord: [44.525, 22.55]
       locations:
@@ -4292,17 +4235,16 @@ areas:
           tags: [cskip]
       exits:
         - to: Ladder Middle
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
-        - to: Ladder Middle
-          req: Anuman
-          movement: base
-          jumps: 2
-        - to: Ladder Middle
-          req: $grab
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook and not Anuman
+              movement: base
+              jumps: 2
+            - when: not $hook
+              movement: base
+              jumps: 1
     - name: Left Mid-air
       coord: [44.35, 22.45]
       local:
@@ -4399,17 +4341,15 @@ areas:
         - to: Bottom Middle
           jumps_down: 1
         - to: East Shaft
-        - to: Northeast C
-          jumps: 3
       exits:
         - to: Northeast C
-          req: $hook
           movement: base
           jumps: 2
-        - to: Northeast C
-          req: $grab
-          movement: base
-          jumps: 2.5
+          penalties:
+            - when: not $hook and not $grab
+              jumps: 1
+            - when: not $hook
+              jumps: 0.5
     - name: Bottom Middle
       coord: [38.2, 20.6]
       local:
@@ -4451,8 +4391,6 @@ areas:
           jumps_down: 2
         - to: West Hill Right
           jumps: 2
-        - to: Northeast D
-          jumps: 2
       exits:
         - to: West Hill Right
           req: $hook and $hover
@@ -4462,9 +4400,11 @@ areas:
           req: $hook and $hover
           movement: fast_hover
         - to: Northeast D
-          req: $hook
           movement: base
           jumps: 0.5
+          penalties:
+            - when: not $hook
+              jumps: 1.5
     - name: Northeast D
       coord: [38.4, 19.5]
       local:
@@ -4628,17 +4568,14 @@ areas:
           jumps: 2
       exits:
         - to: Switch Ledge
-          req: $hook
+          req: $hook or $climb or ($grab and Anuman)
           movement: base
           jumps: 1
-        - to: Switch Ledge
-          req: $climb
-          movement: base
-          jumps: 3
-        - to: Switch Ledge
-          req: $grab and Anuman
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and (not $grab or not Anuman)
+              jumps: 2
+            - when: not $hook
+              jumps: 1
     - name: Switch Ledge
       coord: [36.45, 19.75]
       local:
@@ -4757,13 +4694,12 @@ areas:
           time: 10  # ~4 + 5.5
       exits:
         - to: Third Egg
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: Third Egg
-          req: $hook
+          req: $hook or $hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hookhover
+              movement: base
     - name: Third Egg
       coord: [38.6, 18.0]
       local:
@@ -5120,14 +5056,14 @@ areas:
       coord: [32.2, 26.85]
       data:
         flipside: Annuna Breach > Smiley > West Ground
-      local:
-        - to: Upper Portal Stand
-          jumps: 2
       exits:
         - to: Upper Portal Stand
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 1
     - name: Upper Portal Stand
       coord: [32.475, 26.6]
       data:
@@ -5182,27 +5118,26 @@ areas:
         - to: Bottom
       exits:
         - to: East Column East
-          req: $grab and $climb
-          movement: base
-          jumps: 4
-        - to: East Column East
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Bottom
       coord: [33.05, 27.75]
       data:
         flipside: Annuna Breach > Smiley > Drool
       local:
-        - to: Shaft Middle
-          jumps: 4
         - to: Lower Portal Stand
           jumps: 3
       exits:
         - to: Shaft Middle
-          req: $hook
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower Portal Stand
       coord: [32.475, 27.5]
       data:
@@ -5268,26 +5203,24 @@ areas:
           jumps: 1
       exits:
         - to: Middle Climb
-          req: $hook
+          req: $hook or (Anuman and $grab)
           movement: base
           jumps: 3
-        - to: Middle Climb
-          req: $grab and Anuman
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Middle Climb
       coord: [40.6, 26.95]
       local:
         - to: Lower Gate East
       exits:
         - to: Upper Climb
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 4
-        - to: Upper Climb
-          req: $grab
-          movement: base
-          jumps: 7
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 3
     - name: Upper Climb
       coord: [40.75, 25.9]
       local:
@@ -5295,8 +5228,6 @@ areas:
         - to: Button
           jumps: 1
         - to: Shaft Top
-        - to: Upper Gate East
-          jumps: 1
       locations:
         - name: Remote Button
           canon: Annuna_Remote_Training_Gate
@@ -5305,9 +5236,11 @@ areas:
           tags: [throw]
       exits:
         - to: Upper Gate East
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
     - name: Button
       coord: [40.8, 25.7]
       local:
@@ -5345,20 +5278,19 @@ areas:
           req: Annuna_Remote_Training_Gate and $hookhover
           movement: fast_hover
           jumps: 2
-        - to: West 26
-          req: Annuna_Remote_Training_Gate
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hookhover
+              movement: base
     - name: West 26
       coord: [40.05, 25.35]
       exits:
         - to: East Bridge > Basement Corridor
-          req: $hookhover
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
-        - to: East Bridge > Basement Corridor
-          movement: base
-          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not $hookhover
+              movement: base
+              tags: [fast_hover.1, -base.1]
 
 - name: Boss Gate  # MARK: Boss Gate
   on_entry: $reset_old_area(^newpos)
@@ -5597,13 +5529,12 @@ areas:
         - to: Upper Seal
       exits:
         - to: East 15
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: East 15
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Upper Seal
       coord: [41.5, 15.2]
       local:
@@ -5625,13 +5556,12 @@ areas:
           req: not Apocalypse_Bomb
           movement: base
         - to: Upper Seal
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Upper Seal
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Breakable Rock
       coord: [41.8, 15.6]
       local:
@@ -5672,13 +5602,12 @@ areas:
         - to: Lower Ledge
       exits:
         - to: Middle Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Middle Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Seal
           req: $hook
           movement: base
@@ -5703,25 +5632,23 @@ areas:
           tags: [xshift]
         - to: Lower Ledge
           req: $hover
-          movement: base
-          jumps: 2
-        - to: Lower Ledge
-          req: $hook and $hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: East 17 Lower
       coord: [41.95, 16.75]
       exits:
         - to: Final Save > Lower West
           tags: [xshift]
         - to: Lower Ledge
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Lower Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
 
 - name: Final Cache  # MARK: Final Cache
   on_entry: $reset_old_area(^newpos)
@@ -5778,10 +5705,10 @@ areas:
       exits:
         - to: West
           req: ^mode == 'drone'
-          movement: base
-        - to: West
-          req: $hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Cache
       coord: [42.5, 15.55]
       local:
@@ -5827,13 +5754,12 @@ areas:
         - to: Seals > East 17 Lower
           tags: [xshift]
         - to: Pillar
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Pillar
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Pillar
       coord: [42.35, 16.35]
       local:
@@ -5849,13 +5775,12 @@ areas:
         - to: East
       exits:
         - to: Pillar
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Pillar
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Apocalypse > Northwest Mid-air
           req: $hover
           movement: base
@@ -5934,13 +5859,12 @@ areas:
       coord: [43.3, 17.35]
       exits:
         - to: West
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: West
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
 
     - name: Southwest Corner
       coord: [43.125, 17.8]

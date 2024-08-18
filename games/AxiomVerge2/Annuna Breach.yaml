@@ -72,13 +72,12 @@ areas:
         - to: Upper Portal Exit
       exits:
         - to: Northeast Ledge
-          req: Drone_Hover
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: Northeast Ledge
-          req: Slingshot_Hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              jumps: 1
         - to: Upper Portal Exit
           req: Slingshot_Hook and Drone_Hover and Slingshot_Weapon
           movement: fast_hover
@@ -96,12 +95,11 @@ areas:
           jumps: 1
       exits:
         - to: Column East
-          req: Drone_Hover
+          req: Slingshot_Hook or Drone_Hover
           movement: base
-        - to: Column East
-          req: Slingshot_Hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              jumps: 2
     - name: Northeast Corner
       coord: [33.525, 26.35]
       data:
@@ -249,13 +247,12 @@ areas:
           movement: base
           jumps: 2
         - to: West Block
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 2
-        - to: West Block
-          req: Drone_Hover
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: West Ledge
       coord: [34.2, 25.8]
       data:
@@ -924,13 +921,13 @@ areas:
           req: Slingshot_Hook
           movement: fast_hover
         - to: Tower Lower West Ledge
-          req: Slingshot_Hook and Drone_Hover
+          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
-        - to: Tower Lower West Ledge
-          req: Slingshot_Hook
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not Drone_Hover
+              movement: base
+              jumps: 1
         - to: Northwest Platform
           req: Nanite_Mist
           movement: mist2

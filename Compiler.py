@@ -597,7 +597,7 @@ class GameLogic(object):
                             if tags := pen.get('tags'):
                                 t += self._calculate_penalty_tags(tags, f'{exit["fullname"]} penalty {i+1}')
                             if t < exit['time']:
-                                self._errors.append(f'Movement penalty is actually improvement (try swapping movements): {ptype} {exit["fullname"]} penalty {i+1}')
+                                self._errors.append(f'Movement penalty is actually improvement (try swapping movements): {ptype} {exit["fullname"]} penalty {i+1}: {t - exit["time"]}')
                             else:
                                 # allow also adding an additional constant
                                 pen['add'] += t - exit['time']

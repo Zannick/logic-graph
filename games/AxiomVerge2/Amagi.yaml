@@ -79,11 +79,12 @@ areas:
         - to: West Shelf
       exits:
         - to: Carving
-          req: Underwater_Movement and ($grab or $climb)
-          time: 2.4
-        - to: Carving
-          req: Underwater_Movement and $hook
-          time: 2.3
+          req: Underwater_Movement and ($hook or $grab or $climb)
+          movement: water
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
       keep: true
     - name: Platform 2
       coord: [28.05, 16.15]
@@ -101,6 +102,7 @@ areas:
       exits:
         - to: West Shelf
           req: $grab or $climb or $hook
+          # ???
       keep: true
     - name: East Ledge
       coord: [28.25, 16.3]
@@ -125,11 +127,12 @@ areas:
           tags: [combo]
       exits:
         - to: Secret Outcropping
-          req: ^_combo and ($grab or $climb)
-          time: 1.75
-        - to: Secret Outcropping
-          req: ^_combo and $hook
-          time: 1.6
+          req: ^_combo and ($hook or $grab or $climb)
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West 15
       coord: [27.05, 14.85]
       data:
@@ -167,11 +170,11 @@ areas:
         - to: Flat Ruin
       exits:
         - to: West 18 Hook Point
-          req: Underwater_Movement and $hover
-          movement: water
-        - to: West 18 Hook Point
           req: $hover
-          movement: base
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
       actions:
         - name: Throw Drone West
           do: $deploy_drone
@@ -201,11 +204,11 @@ areas:
           movement: water
           jumps: 2
         - to: West 18 Hook Point
-          req: Underwater_Movement and $hover
-          movement: water
-        - to: West 18 Hook Point
           req: $hover
-          movement: base
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
       actions:
         - name: Throw Drone West
           do: $deploy_drone
@@ -336,31 +339,31 @@ areas:
           thru: [30.75, 16.3]
         - to: East 19
           thru: [[30.75, 16.3], [30.75, 18.2]]
-        - to: Cache Ledge
-          jumps: 1
       exits:
         - to: Cache Ledge
-          req: $hook
-          movement: base
+          req: Underwater_Movement or $hook or $grab
+          movement: water
           jumps: 1
-        - to: Cache Ledge
-          req: $grab
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not Underwater_Movement and not $hook
+              movement: base
+              jumps: 1
+            - when: not Underwater_Movement
+              movement: base
+            - when: not $hook
+              jumps: 1
     - name: East 16
       coord: [30.95, 16.0]
       exits:
         - to: Gated Community > West 16
           tags: [xshift]
-      exits:
-        - to: Cache Ledge
-          req: Underwater_Movement and $hook
-          movement: water
-          jumps: 1
         - to: Cache Ledge
           req: $hook
-          movement: base
+          movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Cache Ledge
       coord: [30.7, 15.7]
       local:
@@ -717,21 +720,19 @@ areas:
         - to: East Passage
       exits:
         - to: Hidden Exit
-          req: $hook and Underwater_Movement
+          req: Underwater_Movement or ($hook or $grab or $climb)
           movement: water
           jumps: 1
-        - to: Hidden Exit
-          req: ($grab or $climb) and Underwater_Movement
-          movement: water
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East Platform 2 Right
-          req: $grab and Underwater_Movement
-          movement: water
-          jumps: 2
-        - to: East Platform 2 Right
-          req: $hook and Underwater_Movement
+          req: Underwater_Movement or ($hook or $grab)
           movement: water
           jumps: 1.5
+          penalties:
+            - when: not $hook
+              jumps: 0.5
         - to: East Platform 3 Left
           req: $hook and Underwater_Movement
           movement: water
@@ -742,7 +743,7 @@ areas:
         - to: East Platform 1 Left
       exits:
         - to: Hidden Exit
-          req: ($grab or $climb or $hook) and Underwater_Movement
+          req: Underwater_Movement and ($hook or $grab or $climb)
           movement: water
           jumps: 2
         - to: East Platform 2 Right
@@ -767,10 +768,10 @@ areas:
       exits:
         - to: Hidden Exit
           req: $hover
-          movement: base
-        - to: Hidden Exit
-          req: $hover and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
       
     - name: East Platform 3 Left
       coord: [33.45, 18.5]
@@ -835,8 +836,6 @@ areas:
         - to: East Dur-Esla
       exits:
         - to: West
-      exits:
-        - to: West
           req: ^_west_dur_esla and Underwater_Movement and $hookhover
           movement: water
           jumps: 4
@@ -896,13 +895,13 @@ areas:
           movement: water
           jumps: 1
         - to: Upper Ledge
-          req: Underwater_Movement and ($hook or $hover)
+          req: $hook or (Underwater_Movement and $hover)
           movement: water
           jumps: 1
-        - to: Upper Ledge
-          req: $hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
         - to: Upper Ledge
           req: Nanite_Mist
           movement: mist2
@@ -917,13 +916,13 @@ areas:
         - to: Column
       exits:
         - to: Upper Ledge
-          req: Underwater_Movement
+          req: Underwater_Movement or $hook
           movement: water
           jumps: 1
-        - to: Upper Ledge
-          req: $hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
         - to: Upper Ledge
           req: Nanite_Mist
           movement: mist2
@@ -1322,12 +1321,11 @@ areas:
       exits:
         - to: West Stronghold Wall
           req: Amagi_Stronghold_Left_Wall
-          movement: base
-          jumps: 1
-        - to: West Stronghold Wall
-          req: Amagi_Stronghold_Left_Wall
           movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Stronghold Top
           req: Nanite_Mist
           movement: mist2
@@ -1346,8 +1344,14 @@ areas:
       exits:
         - to: Stronghold Item
           req: Amagi_Stronghold_Wall_1
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Stronghold Ceiling Left
-          req: Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($grab or $climb)
+          req: Amagi_Stronghold_Boulder_1 and Underwater_Movement and ($hook or $grab or $climb)
+          movement: water
+          jumps: 2
     - name: Stronghold Ceiling Left
       coord: [23.9, 19.1]
       local:
@@ -1486,13 +1490,17 @@ areas:
           jumps: 1
           jump_movement: water
         - to: West Cliff
-        - to: West Shore
-          jumps: 2
-          jump_movement: water
       exits:
         - to: West Shore
-          req: $grab or $climb
-          time: 3
+          req: Underwater_Movement or $hook or $grab or $climb
+          movement: water
+          jumps: 2
+          penalties:
+            - when: not Underwater_Movement and not $hook
+              movement: base
+              jumps: 2
+            - when: not Underwater_Movement
+              movement: base
     - name: Water Surface
       coord: [25.05, 15.0]
       data:
@@ -1590,12 +1598,11 @@ areas:
       exits:
         - to: West Stronghold Wall
           req: Amagi_West_Lake_Gate
-          movement: base
-          jumps: 1
-        - to: West Stronghold Wall
-          req: Amagi_West_Lake_Gate and Underwater_Movement
           movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: West Stronghold Wall
       coord: [22.85, 19.55]
       locations:
@@ -1618,16 +1625,16 @@ areas:
       exits:
         - to: Stronghold Rear Wall
           req: Amagi_Stronghold_Left_Wall
-          movement: base
-        - to: Stronghold Rear Wall
-          req: Amagi_Stronghold_Left_Wall and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: West Stronghold Gate
           req: Amagi_West_Lake_Gate
-          movement: base
-        - to: West Stronghold Gate
-          req: Amagi_West_Lake_Gate and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
 
 # MUS A M20 : 56s
 # TODO: try defeating MUS without grabbing the flask in between
@@ -1800,16 +1807,16 @@ areas:
       exits:
         - to: Arch East
           req: $hover
-          movement: base
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Arch West
           req: $hover
-          movement: base
-        - to: Arch East
-          req: $hover and Underwater_Movement
           movement: water
-        - to: Arch West
-          req: $hover and Underwater_Movement
-          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Center East Water Surface Fast
       coord: [34.9, 15.0]
       data:
@@ -1975,8 +1982,10 @@ areas:
       exits:
         - to: West Water Surface
           req: $hover
+          movement: base
         - to: Center West Platform
           req: $hover
+          movement: base
 
     - name: West Water Surface
       coord: [33.8, 15.0]
@@ -2073,17 +2082,15 @@ areas:
           jump_mvmt: water
       exits:
         - to: West Platform 1 West
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: West Platform 1 West
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: West Platform 1 West
-          req: $hook and Underwater_Movement
+          req: $hook or $grab
           movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement and not $hook
+              movement: base
+              jumps: 1
+            - when: not Underwater_Movement
+              movement: base
     - name: West Platform 2 East
       coord: [33.65, 15.45]
       local:
@@ -2105,17 +2112,15 @@ areas:
           thru: [33.7, 15.7]
       exits:
         - to: West Platform 1 West
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: West Platform 1 West
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: West Platform 1 West
-          req: $hook and Underwater_Movement
+          req: $hook or $grab
           movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement and not $hook
+              movement: base
+              jumps: 1
+            - when: not Underwater_Movement
+              movement: base
     - name: West Platform 3
       coord: [33.7, 15.95]
       local:
@@ -2158,17 +2163,15 @@ areas:
           jump_mvmt: water
       exits:
         - to: West Platform 3
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: West Platform 3
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: West Platform 3
-          req: $hook and Underwater_Movement
+          req: $hook or $grab
           movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement and not $hook
+              movement: base
+              jumps: 1
+            - when: not Underwater_Movement
+              movement: base
         - to: West 17
           req: $hook and $hover and Underwater_Movement
           movement: fast_hover
@@ -2194,10 +2197,10 @@ areas:
       exits:
         - to: Arch West
           req: $hover
-          movement: base
-        - to: Arch West
-          req: $hover and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Portal Stand
           req: $hook and $hover and Underwater_Movement
           movement: fast_hover
@@ -2217,21 +2220,19 @@ areas:
         flipside: Amagi Breach > East Ruins > Plinth
       exits:
         - to: Southwest Column East
-          req: $climb and Underwater_Movement
-          movement: water
-          jumps: 3
-        - to: Southwest Column East
-          req: $hook and Underwater_Movement
+          req: Underwater_Movement and ($hook or $climb)
           movement: water
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Southeast Column
-          req: $climb and Underwater_Movement
-          movement: water
-          jumps: 3
-        - to: Southeast Column
-          req: $hook and Underwater_Movement
+          req: Underwater_Movement and ($hook or $climb)
           movement: water
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
       actions:
         - name: Save
           do: $save
@@ -2328,13 +2329,12 @@ areas:
         - to: Southwest Brick
       exits:
         - to: Southwest Column West
-          req: $climb and Underwater_Movement
-          movement: water
-          jumps: 3
-        - to: Southwest Column West
-          req: $hook and Underwater_Movement
+          req: Underwater_Movement and ($hook or $climb)
           movement: water
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Southwest Brick
       coord: [33.15, 17.75]
       local:
@@ -2445,11 +2445,11 @@ areas:
           tags: [cskip]
       exits:
         - to: Upper Gate East
-          req: $hover and Underwater_Movement
-          movement: water
-        - to: Upper Gate East
           req: $hover
-          movement: base
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: East 18
       coord: [32.95, 17.7]
       local:
@@ -2505,10 +2505,10 @@ areas:
           jumps: 2
         - to: Lower Gate West
           req: Amagi_Gated_Community_Gate
-          movement: base
-        - to: Lower Gate West
-          req: Amagi_Gated_Community_Gate and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Lower Gate West
       coord: [31.95, 17.55]
       local:
@@ -2524,10 +2524,10 @@ areas:
           penalty_tags: [xshift, -fast_hover.1]
         - to: Lower Gate East
           req: Amagi_Gated_Community_Gate
-          movement: base
-        - to: Lower Gate East
-          req: Amagi_Gated_Community_Gate and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Platform 3 East
           req: Nanite_Mist
           movement: mist2
@@ -2547,10 +2547,10 @@ areas:
           jumps: 1
         - to: Upper Gate West
           req: Amagi_Gated_Community_Gate
-          movement: base
-        - to: Upper Gate West
-          req: Amagi_Gated_Community_Gate and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Upper West Hook Point
           req: $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
           movement: fast_hover
@@ -2592,10 +2592,10 @@ areas:
       exits:
         - to: Upper Gate East
           req: Amagi_Gated_Community_Gate
-          movement: base
-        - to: Upper Gate East
-          req: Amagi_Gated_Community_Gate and Underwater_Movement
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Upper East Ledge
           req: $hookhover and Amagi_Gated_Community_Gate and Underwater_Movement
           movement: fast_hover
@@ -2662,12 +2662,12 @@ areas:
           movement: water
           penalty_tags: [xshift, -base.1]
         - to: Main Area > Southeast Ledge
-          movement: base
-          penalty_tags: [xshift, -slow.1]
-        - to: Main Area > Southeast Ledge
-          req: Underwater_Movement
           movement: water
           penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              tags: [base.1, -slow.1]
     - name: Platform 2 East
       coord: [31.3, 16.7]
       local:
@@ -2890,13 +2890,12 @@ areas:
         - to: Uhrum > Tulip Tower > North
           tags: [ydoor]
         - to: Gate East
-          req: Underwater_Movement and Amagi_Wiggly_Room_Gate
+          req: Amagi_Wiggly_Room_Gate
           movement: water
           jumps: 1
-        - to: Gate East
-          req: Amagi_Wiggly_Room_Gate
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Gate East
       coord: [28.7, 20.7]
       data:
@@ -2906,17 +2905,17 @@ areas:
           jumps: 1
       exits:
         - to: Button
-          req: Underwater_Movement and Amagi_Wiggly_Room_Gate
-          movement: water
-        - to: Button
           req: Amagi_Wiggly_Room_Gate
-          movement: base
-        - to: South
-          req: Underwater_Movement and Amagi_Wiggly_Room_Gate
           movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: South
           req: Amagi_Wiggly_Room_Gate
-          movement: base
+          movement: water
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Portal Rock West
           req: Underwater_Movement and $hookhover
           movement: fast_hover
@@ -3041,17 +3040,15 @@ areas:
         - to: Liru Room > West 20
           tags: [xshift]
         - to: Column East
-          req: Underwater_Movement and $grab
-          movement: water
-          jumps: 2
-        - to: Column East
-          req: Underwater_Movement and $hook
+          req: $hook or (Underwater_Movement and $grab)
           movement: water
           jumps: 1
-        - to: Column East
-          req: $hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
+            - when: not $hook
+              jumps: 1
     - name: Column East
       coord: [31.6, 19.8]
       local:
@@ -3139,24 +3136,23 @@ areas:
         flipside: Amagi Breach > Lower Hallway > West
       exits:
         - to: Wiggly Room > East
-          req: Underwater_Movement
           movement: water
           penalty_tags: [xshift, -base.1]
-        - to: Wiggly Room > East
-          movement: base
-          penalty_tags: [xshift, -slow.1]
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Upper Right Corner
       coord: [31.9, 19.7]
       data:
         flipside: Amagi Breach > Lower Hallway > Middle Bubbles
       exits:
         - to: Liru Room > West 20
-          req: Underwater_Movement
           movement: water
           penalty_tags: [xshift, -base.1]
-        - to: Liru Room > West 20
-          movement: base
-          penalty_tags: [xshift, -slow.1]
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              tags: [base.1, -slow.1]
 
 - name: Isolation  # MARK: Isolation
   on_entry: $reset_old_area(^newpos)
