@@ -24,16 +24,15 @@ areas:
   spots:
     - name: West
       coord: [5.05, 18.8]
-      local:
-        - to: East
-          jumps: 1
       exits:
         - to: Entrance > East
           tags: [xshift]
         - to: East
-          req: $hook and $hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hookhover
+              movement: base
     - name: East
       coord: [5.95, 18.75]
       local:

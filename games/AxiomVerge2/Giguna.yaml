@@ -47,15 +47,13 @@ areas:
           movement: fast_hover
           jumps: 1
         - to: Ebih > Ebih West > Giguna Pillar
-          req: $grab or $climb
+          req: $hook or $grab or $climb
           movement: base
           jumps: 3
           penalty_tags: [xshift, -base.1]
-        - to: Ebih > Ebih West > Giguna Pillar
-          req: $hook
-          movement: base
-          jumps: 2
-          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Inner Wall
       coord: [18.65, 8.95]
       local:
@@ -88,6 +86,7 @@ areas:
       exits:
         - to: Gate Vent
           req: $hover
+          time: 1  # ?
     - name: Save Point
       coord: [17.5, 9.5]
       local:
@@ -109,11 +108,12 @@ areas:
         - to: Save Point
       exits:
         - to: West 9
-          req: $climb or $hook
-          time: 1.7
-        - to: West 9
-          req: $grab
-          time: 1.9
+          req: $hook or $grab or $climb
+          movement: base
+          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Gate Vent
           req: $hover
           time: 2.3
@@ -193,13 +193,12 @@ areas:
           jumps: 1
       exits:
         - to: Gate Right
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 4
-        - to: Gate Right
-          req: $grab
-          movement: base
-          jumps: 7
+          penalties:
+            - when: not $hook
+              jumps: 3
         - to: Gate Right
           req: Nanite_Mist
           movement: mist2
@@ -227,10 +226,10 @@ areas:
       exits:
         - to: Door
           req: ^_door_opened
-          movement: base
-        - to: Door
-          req: ^_door_opened and $hook
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Vault
           req: ^_door_opened and $hookhover
           movement: fast_hover
@@ -372,11 +371,19 @@ areas:
         - to: Switch
       exits:
         - to: Upper Susar
-          req: $climb
-          time: 1.75  # TODO: better than a guess
+          req: $hook or $climb
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East Cliff
-          req: $grab
-          time: 1.5
+          req: $hook or $grab
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Switch
       coord: [16.2, 10.7]
       local:
@@ -422,10 +429,12 @@ areas:
       coord: [15.6, 10.5]
       exits:
         - to: West Ledge
-          req: ^_lower_susar and $grab
-          time: 1.25
-        - to: West Ledge
-          req: ^_lower_susar and $hook
+          req: ^_lower_susar and ($hook or $grab)
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Rock
           req: ^_lower_susar
           movement: base
@@ -451,11 +460,12 @@ areas:
         - to: Lower Susar
       exits:
         - to: West 10
-          req: $grab
-        - to: West 10
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Path
           req: $hook
           movement: base
@@ -624,12 +634,12 @@ areas:
         - to: Tunnel Fork
       exits:
         - to: Tunnel Entrance
-          req: $grab
-          time: 2.25
-        - to: Tunnel Entrance
-          req: $hook
+          req: $hook or $grab
           movement: base
-          jumps: 4
+          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Tunnel Fork
       coord: [14.7, 11.7]
       local:
@@ -752,8 +762,12 @@ areas:
         - to: Lower Path Left
       exits:
         - to: Lower Cliff
-          req: $climb
-          time: 1.5
+          req: $grab or $climb
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not $climb
+              jumps: 1
     - name: Lower Path Left
       coord: [15.4, 13.3]
       local:
@@ -767,10 +781,9 @@ areas:
         - to: Westward Hill
       exits:
         - to: Middle Cliff
-          req: $climb
-        - to: Middle Cliff
-          req: $grab
-          time: 0.85
+          req: $hook or $climb
+          movement: base
+          jumps: 2
     - name: West 14
       coord: [15.05, 13.7]
       local:
@@ -831,12 +844,12 @@ areas:
         - to: Tiny Hill
       exits:
         - to: East 12
-          req: $grab or $climb
+          req: $hook or $grab or $climb
           movement: base
-          jumps: 3
-        - to: East 12
-          req: $hook
-          time: 1  # ?
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Door Left
       coord: [18.5, 13.2]
       local:
@@ -869,12 +882,12 @@ areas:
           jumps: 2
       exits:
         - to: Door Left
-          req: $grab and $climb
+          req: $hook or ($grab and $climb)
           movement: base
-          jumps: 3
-        - to: Door Left
-          req: $hook
-          time: 1  # ?
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Tiny Hill
       coord: [18.0, 13.5]
       local:
@@ -957,13 +970,12 @@ areas:
           req: ^mode == 'drone' and Giguna_Wasteland_Passage_H
           movement: base
         - to: Lower Path Left
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Lower Path Left
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
       hybrid:
         - name: Clear Horizontal Passage Manually
           to: Passage East
@@ -1041,13 +1053,12 @@ areas:
         - to: Passage East
       exits:
         - to: Upper Cache
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Upper Cache
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Center Plains
           req: $hover
           movement: base
@@ -1244,13 +1255,12 @@ areas:
           req: $hover
           movement: base
         - to: Right Platform East
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Right Platform East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Switch Ledge
       coord: [18.05, 11.6]
       local:
@@ -1320,11 +1330,12 @@ areas:
           thru: [14.35, 14.1]
       exits:
         - to: Upper Cliff
-          req: $climb
-          time: 1.5
-        - to: Upper Cliff
-          req: $hook
-          time: 1
+          req: $hook or ($grab and $climb)
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
       actions:
         - name: Throw Drone
           req: $can_deploy
@@ -1377,11 +1388,12 @@ areas:
         - to: Building Entry
       exits:
         - to: Stone Knob
-          req: $grab
-          time: 2.35
-        - to: Stone Knob
-          req: $hook
-          time: 1.5
+          req: $hook or $grab
+          movement: base
+          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Staircase Top
           req: $hover
           time: 4.2
@@ -1427,11 +1439,12 @@ areas:
         - to: West Grate
       exits:
         - to: Left Pillar
-          req: $grab
-          time: 4
-        - to: Left Pillar
-          req: $hook
-          time: 3.5
+          req: $hook or $grab
+          movement: base
+          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: West Grate
       coord: [13.15, 14.75]
       local:
@@ -1518,31 +1531,31 @@ areas:
         - to: Switch Distance 4
       exits:
         - to: Below Gate
-          req: $grab
+          req: $hook or $grab
           movement: base
-          jumps: 3
-        - to: Below Gate
-          req: $hook
-          time: 0.8  # ?
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Below Gate
       coord: [14.55, 16.05]
       local:
         - to: Lower Fork
       exits:
         - to: Kari
-          req: ^_door_open and $grab and $climb
+          req: ^_door_open and ($hook or ($grab and $climb))
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 4
+        - to: Middle Platform
+          req: ^_door_open and ($hook or ($grab and $climb))
           movement: base
           jumps: 6
-        - to: Kari
-          req: ^_door_open and $hook
-          time: 1  # ?
-        - to: Middle Platform
-          req: ^_door_open and $grab and $climb
-          movement: base
-          jumps: 12
-        - to: Middle Platform
-          req: ^_door_open and $hook
-          time: 3  # ?
+          penalties:
+            - when: not $hook
+              jumps: 6
     - name: Switch Distance 1
       coord: [14.05, 16.65]
       local:
@@ -1629,10 +1642,11 @@ areas:
           thru: [16.2, 7.7]
       exits:
         - to: Ledge
-          req: $climb
-        - to: Ledge
-          req: $hook
-          time: 0.8
+          movement: base
+          jumps: 0.5
+          penalties:
+            - when: not $hook
+              jumps: 0.5
     - name: Ledge
       coord: [16.55, 7.4]
       local:
@@ -1850,16 +1864,14 @@ areas:
           req: $grab and ^_kishib_handled
           time: 4
       actions:
-        - name: Hack Kishib
-          req: not ^_kishib_handled and $allegiance1
+        - name: Hack/Destroy Kishib
+          req: not ^_kishib_handled and ($allegiance1 or $shockwave)
           price: 100
           do: ^_kishib_handled = true
           tags: [hack]
-        - name: Destroy Kishib
-          req: not ^_kishib_handled and $shockwave
-          price: 100
-          do: ^_kishib_handled = true
-          tags: [shockwave, event]
+          penalties:
+            - when: not $allegiance1
+              tags: [shockwave, -hack]
     - name: Upper Ledge
       coord: [13.6, 6.35]
       data:
@@ -2038,14 +2050,13 @@ areas:
       coord: [14.8, 5.8]
       data:
         flipside: Giguna Breach > Peak > Portal
-      local:
-        - to: Switch
-          jumps: 1
       exits:
         - to: Switch
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
       actions:
         - name: Save
           do: $save
@@ -2062,21 +2073,19 @@ areas:
           tags: [hack]
       exits:
         - to: Rooftop West
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Rooftop West
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Turret Balcony East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Turret Balcony East
-          req: $grab
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Rooftop West
       coord: [15.1, 5.2]
       local:
@@ -2631,12 +2640,11 @@ areas:
         - to: Below Left Switch
       exits:
         - to: West Gate
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: West Gate
-          req: $hook
-          time: 1  # ?
+          req: $hook or $grab
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Lamassu > East 18
           tags: [xshift]
     - name: Below Left Switch
@@ -2677,12 +2685,11 @@ areas:
         - to: Base of Wall
       exits:
         - to: Wall Top
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: Wall Top
-          req: $hook
-          time: 1  # ?
+          req: $hook or ($grab and $climb)
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Base of Wall
       coord: [17.85, 17.75]
       locations:
@@ -2696,12 +2703,11 @@ areas:
         - to: In the Grass
       exits:
         - to: Wall Top
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: Wall Top
-          req: $hook
-          time: 1  # ?
+          req: $hook or ($grab and $climb)
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Wall Secret
           req: ^mode == 'drone' and Giguna_Dual_Path_Wall
           movement: base
@@ -2769,12 +2775,12 @@ areas:
           jumps_down: 1
       exits:
         - to: East Gate NW
-          req: Giguna_Dual_Path_Switch and ($grab or $climb)
+          req: Giguna_Dual_Path_Switch and ($hook or $grab or $climb)
           movement: base
-          jumps: 3
-        - to: East Gate NW
-          req: Giguna_Dual_Path_Switch and $hook
-          time: 1  # ?
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: East 18
       coord: [18.95, 17.65]
       local:
@@ -2794,19 +2800,19 @@ areas:
         - to: Below Left Switch
       exits:
         - to: West Gate NW
-          req: Giguna_Dual_Path_Switch and $climb
+          req: Giguna_Dual_Path_Switch and ($hook or $climb)
           movement: base
-          jumps: 3
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: West Gate NE
-          req: Giguna_Dual_Path_Switch and $climb
+          req: Giguna_Dual_Path_Switch and ($hook or $climb)
           movement: base
-          jumps: 2
-        - to: West Gate NW
-          req: Giguna_Dual_Path_Switch and $hook
-          time: 1  # ?
-        - to: West Gate NE
-          req: Giguna_Dual_Path_Switch and $hook
-          time: 1  # ?
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West Gate NW
       coord: [16.2, 16.85]
       local:
@@ -2840,12 +2846,12 @@ areas:
           jumps: 1
       exits:
         - to: Midway Plateau
-          req: $grab or $climb
+          req: $hook or $grab or $climb
           movement: base
-          jumps: 2
-        - to: Midway Plateau
-          req: $hook
-          time: 1  # ?
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Midway Plateau
       coord: [17.55, 16.5]
       local:
@@ -3120,12 +3126,11 @@ areas:
         - to: East Shaft
       exits:
         - to: Top Ledge
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: Top Ledge
-          req: $hook
-          time: 1  # ?
+          req: $hook or ($grab and $climb)
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Passage West
           req: ^mode == 'drone'
           movement: base
@@ -3139,12 +3144,13 @@ areas:
       coord: [20.7, 14.7]
       local:
         - to: Carving
-        - to: East Shaft
-          jumps: 3
       exits:
         - to: East Shaft
-          req: $hook
-          time: 2  # ?
+          movement: base
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Middle Rock
           req: $hook
           time: 1.5  # ?
@@ -3154,20 +3160,19 @@ areas:
         - to: Arc Passage
       exits:
         - to: Middle Rock
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: Middle Rock
-          req: $hook
-          time: 1  # ?
-        - to: East Side
-          req: $grab
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East Side
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Hidden Passage East
           req: ^mode == 'drone' and ^_combo_entered
           movement: base
@@ -3187,23 +3192,21 @@ areas:
           req: $hook
           time: 0.5  # ?
         - to: Upper Floor Ledge
-          req: $hook
-          time: 1  # ?
-        - to: Upper Floor Ledge
-          req: $grab
-          movement: base
-          jumps: 2
+          req: $hook or $grab
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Mid Susar
       coord: [20.1, 14.4]
       exits:
         - to: Middle Ledge
-          req: $grab and ^_mid_susar
-          movement: base
-          jumps: 2
-        - to: Middle Ledge
-          req: $hook and ^_mid_susar
+          req: ^_mid_susar and ($hook or $grab)
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Middle Rock
           req: ^_mid_susar
           movement: base
@@ -3276,11 +3279,8 @@ areas:
           req: ^mode == 'drone'
           movement: base
         - to: Statues Ledge
-          req: $hover
+          req: $hook or $hover
           movement: base
-        - to: Statues Ledge
-          req: $hook
-          time: 1  # ?
     - name: Midwest Ledge
       coord: [19.65, 14.9]
       local:
@@ -3312,26 +3312,21 @@ areas:
         - to: Lower Ledge
       exits:
         - to: Midwest Ledge
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Midwest Ledge
-          req: $hook
-          time: 1.5  # ?
+          req: $hook or $grab
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Hidden Passage West
           req: $hover and $hook and ^_combo_entered
           movement: base
           jumps: 1
         - to: Hidden Passage West
           req: ^mode == 'drone' and Nanite_Mist and ^_combo_entered
-          price: 24
-          time: 1.4  # ?
           movement: mist2
-        - to: Hidden Passage West
-          req: ^mode == 'drone' and Mist_Upgrade and ^_combo_entered
-          price: 20
-          time: 1.2  # ?
-          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Open Door
           req: not ^_door_opened and $unlock2 and $range1
@@ -3402,10 +3397,10 @@ areas:
         - to: Hidden Passage West
           req: ^mode == 'drone' and ^_combo_entered
           movement: base
-          jumps: 3
-        - to: Hidden Passage West
-          req: $hook and ^_combo_entered
-          time: 1.2  # ?
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
       actions:
         - name: Enter Combo
           req: not ^_combo_entered
@@ -3420,12 +3415,12 @@ areas:
           thru: [19.5, 16.5]
       exits:
         - to: Arc Ledge
-          req: $grab
+          req: $hook or $grab
           movement: base
-          jumps: 4
-        - to: Arc Ledge
-          req: $hook
-          time: 1.2  # ?
+          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
 
     - name: West 17
       coord: [19.05, 16.85]
@@ -3620,13 +3615,12 @@ areas:
           jumps: 1
       exits:
         - to: Flask Ledge
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
-        - to: Flask Ledge
-          req: $grab and $climb
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Right Platform
           req: $hook
           movement: base
@@ -3688,19 +3682,19 @@ areas:
         - to: Button
       exits:
         - to: Block Left
-          req: $grab and Giguna_Gateway_Block
+          req: Giguna_Gateway_Block and ($hook or $grab)
           movement: base
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Block Right
-          req: $grab and Giguna_Gateway_Block
+          req: Giguna_Gateway_Block and ($hook or $grab)
           movement: base
-          jumps: 2
-        - to: Block Left
-          req: $hook and Giguna_Gateway_Block
-          time: 0.5  # ?
-        - to: Block Right
-          req: $hook and Giguna_Gateway_Block
-          time: 0.5  # ?
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West 19
       coord: [19.05, 18.75]
       local:
@@ -3815,21 +3809,19 @@ areas:
         - to: Lower West
       exits:
         - to: Middle Tree
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Middle Tree
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Middle Drop
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Middle Drop
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Lower West
       coord: [18.05, 20.1]
       local:
@@ -3878,13 +3870,14 @@ areas:
           movement: base
           jumps: 4
         - to: Rooftop East
-          req: $hook
-          movement: base
-          jumps: 3
-        - to: Rooftop East
-          req: $hook and $hover
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
+            - when: not Drone_Hover
+              jumps: 1
     - name: Rooftop East
       coord: [17.3, 18.5]
       local:
@@ -3922,13 +3915,12 @@ areas:
         - to: Second Tier Upper
       exits:
         - to: Upper Level Ledge
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Upper Level Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Second Tier Upper
       coord: [16.85, 19.1]
       data:
@@ -3979,13 +3971,13 @@ areas:
         flipside: Giguna Breach > Labyrinth > Middle Brick
       local:
         - to: Portal Stand
-        - to: Lower Tier West
-          jumps: 3
       exits:
         - to: Lower Tier West
-          req: $hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Door
           req: ^_door
           movement: base
@@ -3995,13 +3987,12 @@ areas:
         flipside: Giguna Breach > Labyrinth > Save Point
       exits:
         - to: Middle Brick
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Middle Brick
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Lower Tier West
           req: $hook
           movement: base
@@ -4058,16 +4049,16 @@ areas:
     - name: Rocky Stair
       coord: [17.05, 21.4]
       local:
-        - to: Door Ledge
-          jumps: 3
         - to: Save Point
         - to: Save Ledge
         - to: East 23
       exits:
         - to: Door Ledge
-          req: $hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Switch Ledge
           req: $hook
           movement: base
@@ -4208,25 +4199,24 @@ areas:
         - to: Top Middle Ledge
       exits:
         - to: Top Right Ledge
-          req: $hook
+          req: $hook or $hover
           movement: fast_hover
-        - to: Top Right Ledge
-          req: $hover
-          movement: base
+          penalties:
+            - when: not $hook
+              movement: base
     - name: Top Right Ledge
       coord: [21.45, 16.45]
       local:
         - to: Top Middle Ledge
       exits:
         - to: North
-          req: $hover
-          jumps: 3
-        - to: North
-          req: Anuman and ^mode != 'drone'
+          req: $hover or Anuman or $climb
           jumps: 1
-        - to: North
-          req: $climb
-          jumps: 2
+          penalties:
+            - when: $climb and not Anuman
+              jumps: 1
+            - when: $hover
+              jumps: 2
         - to: Top Left Ledge
           req: $hook
           movement: fast_hover
@@ -4240,21 +4230,19 @@ areas:
         - to: Top Rocky Ledge
       exits:
         - to: Top Left Ledge
-          req: $hook or Anuman
+          req: $hook or Anuman or $hover
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 2
         - to: Top Right Ledge
-          req: $hook or Anuman
+          req: $hook or Anuman or $hover
           movement: base
           jumps: 1
-        - to: Top Left Ledge
-          req: $hover
-          movement: base
-          jumps: 3
-        - to: Top Right Ledge
-          req: $hover
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 2
         - to: North
           req: $hookhover
           movement: base
@@ -4278,17 +4266,16 @@ areas:
         - to: Top Rocky Outcrop
       exits:
         - to: Top Middle Ledge
-          req: $hook
+          req: $hook or ($grab and Anuman)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Top Left Ledge
           req: $hook
           movement: base
           jumps: 3
-        - to: Top Middle Ledge
-          req: $grab and Anuman
-          movement: base
-          jumps: 4
     - name: Top Rocky Outcrop
       coord: [21.4, 18.0]
       local:
@@ -4301,17 +4288,17 @@ areas:
     - name: Top Passage Bottom
       coord: [21.35, 18.25]
       local:
-        - to: Top Rocky Outcrop
-          jumps: 2
         - to: West 19
           thru: [21.375, 18.5]
         - to: Middle Below Top
         - to: Middle Plateau
       exits:
         - to: Top Rocky Outcrop
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Ledge 19
           req: $hover
           movement: base
@@ -4368,8 +4355,6 @@ areas:
     - name: Middle Plateau
       coord: [21.75, 19.6]
       local:
-        - to: Middle Below Top
-          jumps: 3
         - to: East 20
           jumps_down: 1
       exits:
@@ -4377,9 +4362,11 @@ areas:
           req: Giguna_Vertical_Interchange_Gate
           movement: base
         - to: Middle Below Top
-          req: $hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Ledge 19
           req: $hookhover
           movement: fast_hover
@@ -4474,13 +4461,12 @@ areas:
         - to: Above Rock
       exits:
         - to: Gate
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Gate
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Dead-end Ledge
           req: $hook
           movement: base
@@ -4536,13 +4522,12 @@ areas:
           jumps: 2
       exits:
         - to: West 21
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
-        - to: West 21
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: West 21
       coord: [21.05, 20.65]
       local:
@@ -4561,19 +4546,15 @@ areas:
         - to: Middle Hill By Switch
           jumps: 4
       locations:
-        - name: Charge Downwards
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $charge
-          to: Rock
-          time: 2
-          penalty_tags: [charge_time]
         - name: Spin Downwards
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
-          req: $spin
+          req: $spin or $charge
           to: Rock
           time: 2
+          penalties:
+            - when: not $spin
+              tags: [charge_time]
         - name: Mist Downwards
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
@@ -4605,21 +4586,19 @@ areas:
       coord: [21.5, 21.45]
       exits:
         - to: Ledge Above Rock
-          req: Giguna_Vertical_Interchange_Rock and $hook
+          req: Giguna_Vertical_Interchange_Rock and ($hook and $grab)
           movement: base
           jumps: 2
-        - to: Ledge Above Rock
-          req: Giguna_Vertical_Interchange_Rock and $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Middle Hill By Switch
-          req: Giguna_Vertical_Interchange_Rock and $hook
+          req: Giguna_Vertical_Interchange_Rock and ($hook and $grab)
           movement: fast_hover
           jumps: 2.5
-        - to: Middle Hill By Switch
-          req: Giguna_Vertical_Interchange_Rock and $grab
-          movement: base
-          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 2.5
         - to: Rock East
           req: Giguna_Vertical_Interchange_Rock
           movement: base
@@ -4631,21 +4610,17 @@ areas:
       local:
         - to: East 22
       locations:
-        - name: Charge Through Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $charge
-          to: Rock West
-          movement: fling
-          tags: [event]
-          penalty_tags: [charge_time]
         - name: Spin Through Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
-          req: $spin
+          req: $spin or $charge
           to: Rock West
           movement: fast_hover
           tags: [event]
+          penalties:
+            - when: not $spin
+              movement: fling
+              tags: [charge_time]
         - name: Mist Into Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
@@ -4656,22 +4631,18 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge Upward Through Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $charge
-          to: Above Rock
-          movement: fling
-          jumps: 1
-          tags: [event]
         - name: Spin Upward Through Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
-          req: $spin
+          req: $spin or $charge
           to: Above Rock
           movement: fast_hover
           jumps: 1
           tags: [event]
+          penalties:
+            - when: not $spin
+              movement: fling
+              tags: [charge_time]
         - name: Mist Upwards Through Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
@@ -4690,36 +4661,28 @@ areas:
         - to: Lower Ledge 2
           thru: [[21.325, 21.8], [21.55, 22.2]]
       locations:
-        - name: Charge Through Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $charge
-          to: Rock East
-          movement: fling
-          tags: [event]
-          penalty_tags: [charge_time]
-        - name: Charge All The Way Through Rock
-          canon: Giguna_Vertical_Interchange_Rock
-          item: Giguna_Vertical_Interchange_Rock
-          req: $charge
-          to: East 22
-          movement: fling
-          tags: [event]
-          penalty_tags: [charge_time]
         - name: Spin Through Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
-          req: $spin
+          req: $spin or $charge
           to: Rock East
           movement: fast_hover
           tags: [event]
-        - name: Spin Through Rock and Hover
+          penalties:
+            - when: not $spin
+              movement: fling
+              tags: [charge_time]
+        - name: Spin Far Through Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
-          req: $spinhover
+          req: $spinhover or $charge
           to: East 22
           movement: fast_hover
           tags: [event]
+          penalties:
+            - when: not $spinhover
+              movement: fling
+              tags: [charge_time]
         - name: Mist Into Rock
           canon: Giguna_Vertical_Interchange_Rock
           item: Giguna_Vertical_Interchange_Rock
@@ -4765,13 +4728,12 @@ areas:
           thru: [21.55, 22.2]
       exits:
         - to: Rock West
-          req: $hook
+          req: $hook or ($grab and Anuman)
           movement: base
           jumps: 1
-        - to: Rock West
-          req: $grab and Anuman
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Rock West
           req: Nanite_Mist
           movement: mist2
@@ -4787,14 +4749,15 @@ areas:
     - name: Lower Ledge 1
       coord: [21.6, 22.7]
       local:
-        - to: Lower Middle Corner
-          jumps: 2
         - to: Lower Ledge 2
       exits:
         - to: Lower Middle Corner
-          req: $hookhover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hookhover
+              movement: base
+              jumps: 1
     - name: Lower Ledge 2
       coord: [21.65, 22.9]
       local:
@@ -4830,13 +4793,12 @@ areas:
         - to: South
       exits:
         - to: Lower Platform
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
-        - to: Lower Platform
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: South
       coord: [21.5, 23.8]
       local:
@@ -4889,14 +4851,13 @@ areas:
           jumps: 2
     - name: Bottom
       coord: [18.5, 15.85]
-      local:
-        - to: Left Wall Lower
-          jumps: 2
       exits:
         - to: Left Wall Lower
-          req: $hook
           movement: base
-          jumps: 2
+          jumps: 1.5
+          penalties:
+            - when: not $hook
+              jumps: 0.5
     - name: Small Bricks
       coord: [18.55, 15.15]
       local:
@@ -4922,11 +4883,11 @@ areas:
           tags: [standing]
       exits:
         - to: Middle Bricks Right
-          req: $hover
-          movement: base
-        - to: Middle Bricks Right
-          req: $hook
+          req: $hook or $hover
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
     - name: Middle Bricks Right
       coord: [18.45, 14.75]
       local:
@@ -4936,48 +4897,47 @@ areas:
         - to: Statues Ledge
       exits:
         - to: Statue Head
-          req: $hover
-          movement: base
-        - to: Statue Head
-          req: $hook
+          req: $hook or $hover
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
       # TODO: Throw Drone and mist
     - name: Middle Bricks Left
       coord: [18.3, 14.6]
       local:
         - to: Middle Bricks Right
-        - to: West 15
-          jumps: 1
       exits:
         - to: West 15
-          req: $hook
-          time: .75  # ?
+          movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 1
     - name: Left Wall Lower
       coord: [18.175, 15.5]
       local:
         - to: Bottom
       exits:
         - to: Left Wall Mid
-          req: $grab and $climb
-          movement: base
-          jumps: 3
-        - to: Left Wall Mid
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Left Wall Mid
       coord: [18.15, 15.15]
       local:
         - to: Bottom
       exits:
         - to: West 15
-          req: $grab and $climb
-          movement: base
-          jumps: 4
-        - to: West 15
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: West 15
       coord: [18.05, 14.6]
       local:
@@ -5016,12 +4976,12 @@ areas:
         - to: Rightmost Platform
       exits:
         - to: East 15
-          req: $grab
+          req: $hook or $grab
           movement: base
-          jumps: 2
-        - to: East 15
-          req: $hook
-          time: .7  # ?
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Center Platform
           req: $hover
           movement: base
@@ -5078,15 +5038,11 @@ areas:
         - name: Boss Reward
           canon: Giguna_Gubi_Flask
           item: Big_Flask
-          req: Giguna_Gubi and $boomerang
-          tags: [flask]
-        - name: Fetch Boss Reward
-          canon: Giguna_Gubi_Flask
-          item: Big_Flask
-          req: Giguna_Gubi and $hover
+          req: Giguna_Gubi and ($boomerang or $hover)
           tags: [flask]
           penalties:
-            - add: 3.0  # estimated penalty to get close enough
+            - when: not $boomerang
+              add: 3.0  # estimated penalty to get close enough
     - name: Leftmost Platform
       coord: [16.55, 15.25]
       local:
@@ -5101,10 +5057,12 @@ areas:
           jumps: 1
       exits:
         - to: Center-West Sapling
-          req: $grab and $climb
+          req: $hook or ($grab and $climb)
           movement: base
-          jumps: 3
-        - to: Center-West Sapling
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West Brickwork
       coord: [15.75, 15.8]
       local:
@@ -5117,15 +5075,14 @@ areas:
         - to: West Brickwork
       exits:
         - to: Pedestal
-          req: $hover and $hook
-          time: 2.75
-        - to: Pedestal
-          req: $hook
-          time: 4  # ?
-        - to: Pedestal
-          req: $grab and $climb
+          req: $hook or ($grab and $climb)
           movement: base
-          jumps: 11
+          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 6
+            - when: not Drone_Hover
+              jumps: 3
     - name: Pedestal
       coord: [15.4, 14.4]
       local:
@@ -5429,18 +5386,14 @@ areas:
         - to: Southwest Cache
       exits:
         - to: Lower Middle Column
-          req: $grab
-          movement: base
-          jumps: 5
-        - to: Lower Middle Column
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Southwest Cache
       coord: [20.35, 22.8]
-      local:
-        - to: Southwest Ledge
-          jumps: 3
       locations:
         - name: Refill
           item: Power_Core
@@ -5448,9 +5401,11 @@ areas:
           tags: [standing]
       exits:
         - to: Southwest Ledge
-          req: $hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
 
 - name: Breachable Wall  # MARK: Breachable Wall
   on_entry: $reset_old_area(^newpos)
@@ -5576,12 +5531,12 @@ areas:
           jumps: 1
           penalty_tags: [xshift, -fast_hover.1]
         - to: Separator > Save Point
-          movement: base
-          penalty_tags: [xshift, -base.1]
-        - to: Separator > Save Point
-          req: $hook and $hover
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
+          penalties:
+            - when: not $hookhover
+              movement: base
+              tags: [fast_hover.1, -base.1]
     - name: Portal Entry
       coord: [17.5, 23.75]
       data:
@@ -5600,21 +5555,19 @@ areas:
         - to: Separator > West 25
           tags: [xshift]
         - to: Portal Entry
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Portal Entry
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East Ledge
-          req: $grab
-          movement: base
-          jumps: 5
-        - to: East Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
 
 - name: Separator  # MARK: Separator
   on_entry: $reset_old_area(^newpos)
@@ -5696,11 +5649,10 @@ areas:
         - to: Upper Brick
           req: Giguna_Separator_Bricks
           movement: base
-          jumps: 3
-        - to: Upper Brick
-          req: Giguna_Separator_Bricks and $hook
-          movement: base
           jumps: 1.5
+          penalties:
+            - when: not $hook
+              jumps: 1.5
       hybrid:
         - name: Break Bricks
           req: Nanite_Mist

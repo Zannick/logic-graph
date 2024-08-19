@@ -171,8 +171,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::access_invoke_grab_and_invoke_can_deploy(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_shockwave(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_allegiance1(ctx, world),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => rules::access_not_giguna__ruins_west__ctx__kishib_handled_and___invoke_allegiance1_or_invoke_shockwave(ctx, world),
             ActionId::Giguna__Ruins_West__Save_Point__Save => true,
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world),
             ActionId::Giguna__Separator__Save_Point__Save => true,
@@ -360,8 +359,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_invoke_grab_and_invoke_can_deploy(ctx, world, full_obs),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::observe_access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_shockwave(ctx, world, full_obs),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::observe_access_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_allegiance1(ctx, world, full_obs),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => rules::observe_access_not_giguna__ruins_west__ctx__kishib_handled_and___invoke_allegiance1_or_invoke_shockwave(ctx, world, full_obs),
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::observe_access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::observe_access_not_giguna__west_caverns__ctx__east_susar(ctx, world, full_obs),
@@ -417,6 +415,13 @@ impl world::Accessible for Action {
                 ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
                     (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
 
+                }
+                ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => {
+                    if rules::access_not_invoke_allegiance1(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
                 }
                 ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
                     (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
@@ -1433,17 +1438,8 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
-                let (ret, mut tags) = rules::explain_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_shockwave(ctx, world, edict);
-                let dest = world::Action::dest(self, ctx, world);
-                if dest != SpotId::None {
-                    edict.insert("dest", format!("{} ({})", dest, ""));
-                    tags.push("dest");
-                }
-                (ret, tags)
-            }
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
-                let (ret, mut tags) = rules::explain_not_giguna__ruins_west__ctx__kishib_handled_and_invoke_allegiance1(ctx, world, edict);
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => {
+                let (ret, mut tags) = rules::explain_not_giguna__ruins_west__ctx__kishib_handled_and___invoke_allegiance1_or_invoke_shockwave(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, ""));
@@ -2000,8 +1996,7 @@ impl world::Action for Action {
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
             ActionId::Giguna__Ruins_West__Save_Point__Save => rules::action_invoke_save(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => rules::action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world),
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => rules::action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world),
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => rules::action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::action_giguna__ruins_top__ctx__doors_open_set_true(ctx, world),
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world),
@@ -2579,10 +2574,7 @@ impl world::Action for Action {
             ActionId::Giguna__Ruins_West__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
             }
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => {
-                rules::observe_action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world, full_obs);
-            }
-            ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib => {
+            ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => {
                 rules::observe_action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world, full_obs);
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => {
@@ -2835,7 +2827,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 218] = [
+static ACT_DEFS: [Action; 217] = [
     Action {
         id: ActionId::Amagi_Breach__Divided__Save_Point__Save,
         time: 1300,
@@ -3216,13 +3208,13 @@ static ACT_DEFS: [Action; 218] = [
     },
     Action {
         id: ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform,
-        time: 1000,
+        time: 5072,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Action {
         id: ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform,
-        time: 1000,
+        time: 5072,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -3743,13 +3735,7 @@ static ACT_DEFS: [Action; 218] = [
         price_per_sec: Currency::Free,
     },
     Action {
-        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib,
-        time: 3500,
-        price: Currency::Energy(100),
-        price_per_sec: Currency::Free,
-    },
-    Action {
-        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib,
+        id: ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib,
         time: 500,
         price: Currency::Energy(100),
         price_per_sec: Currency::Free,
@@ -4274,7 +4260,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_3,
         ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_4,
         ActionId::Giguna__Ruins_West__Save_Point__Save => SpotId::Giguna__Ruins_West__Save_Point,
-        ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib | ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib => SpotId::Giguna__Ruins_West__Lower_Ledge,
+        ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => SpotId::Giguna__Ruins_West__Lower_Ledge,
         ActionId::Giguna__Ruins_Top__Save_Point__Save => SpotId::Giguna__Ruins_Top__Save_Point,
         ActionId::Giguna__Ruins_Top__Switch__Open_Doors => SpotId::Giguna__Ruins_Top__Switch,
         ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => SpotId::Giguna__Ruins_Top__Turret_Balcony_West,

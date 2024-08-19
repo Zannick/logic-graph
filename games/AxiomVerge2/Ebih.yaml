@@ -136,12 +136,13 @@ areas:
       coord: [28.05, 10.6]
       local:
         - to: West Midair
-        - to: Left Platform
       exits:
         - to: Left Platform
-          req: $platform and $hook and not ^_left_platform_moved
-        - to: Left Platform
-          req: $hover and not ^_left_platform_moved
+          req: not ^_left_platform_moved and (($platform and $hook) or $hover)
+          movement: base
+          penalties:
+            - when: not $hover
+              tags: [hack]
         - to: Observation Tower Room > East 11
           tags: [xshift]
     - name: West Midair
@@ -150,7 +151,6 @@ areas:
         - to: West 12
         - to: Building Entry
         - to: Tent Entry
-    # TODO: times needed
     - name: West 12
       coord: [28.05, 11.5]
       exits:
@@ -160,32 +160,36 @@ areas:
       coord: [28.7, 10.8]
       exits:
         - to: Top Platform
-          req: $hover and $hook
+          req: $hookhover
+          movement: fast_hover
+          jumps: 1
       actions:
         - name: Move Left Platform
           req: $activate and not ^_left_platform_moved
           do: ^_left_platform_moved = true
           to: Ebih > Base Camp > Left Platform Moved
+          movement: platform
     - name: Left Platform Moved
       coord: [29.4, 10.8]
       locations:
         - name: Item From The Side
           item: Health_Fragment
           canon: Ebih_Base_Camp_Fragment
+          time: 1  # ?
       exits:
         - to: Top Platform
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Top Platform
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
       actions:
         - name: Reset Left Platform
           req: $activate and ^_left_platform_moved
           do: ^_left_platform_moved = false
           to: Ebih > Base Camp > Left Platform
+          movement: platform
     - name: Top Platform
       coord: [29.5, 10.5]
       local:
@@ -202,8 +206,10 @@ areas:
       exits:
         - to: Left Platform
           req: $hover and not ^_left_platform_moved
+          movement: base
         - to: Left Platform Moved
           req: ^_left_platform_moved
+          movement: base
       actions:
         - name: Throw Drone and Drop
           req: $can_deploy and Drone_Hover
@@ -241,19 +247,19 @@ areas:
         - to: East 13
       exits:
         - to: Crawlspace Opening
-          req: $grab
-          time: 0.75
-        - to: Crawlspace Opening
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Outcropping
-          req: $grab
-          time: 1.3
-        - to: Outcropping
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Crawlspace Opening
       coord: [27.4, 11.9]
       data:
@@ -299,19 +305,19 @@ areas:
         - to: East 13
       exits:
         - to: East Bush
-          req: $grab or $climb
-          time: 1.3
-        - to: East Bush
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: West Bush
-          req: $grab or $climb
-          time: 1.8
-        - to: West Bush
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West Bush
       coord: [26.35, 11.95]
       data:
@@ -367,6 +373,13 @@ areas:
       coord: [27.95, 11.5]
       local:
         - to: East Platform
+      exits:
+        - to: Crawlspace Opening
+          req: $hover
+          movement: base
+        - to: Outcropping
+          req: $hover
+          movement: base
 
 - name: Truck Gate  # MARK: Truck Gate
   on_entry: $reset_old_area(^newpos)
@@ -460,13 +473,12 @@ areas:
         - to: Below Bush
       exits:
         - to: Mid-Ledge
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Mid-Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West 12
       coord: [25.05, 11.8]
       local:
@@ -480,13 +492,12 @@ areas:
         - to: West 12
       exits:
         - to: Bush
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Bush
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
       actions:
         - name: Throw Drone and Hover
           req: $can_deploy and Drone_Hover
@@ -503,23 +514,23 @@ areas:
     - name: Mid-Ledge
       coord: [25.3, 11.1]
       local:
-        - to: Door Left
-          jumps: 2
         - to: Bush
         - to: Below Bush
       exits:
         - to: West 11
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: West 11
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Door Left
           req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Door Left
       coord: [25.6, 10.75]
       local:
@@ -606,21 +617,32 @@ areas:
           tags: [xshift]
     - name: Hidden Bush
       coord: [25.85, 9.95]
-      local:
-        - to: East 10
-          jumps: 2
       locations:
         - name: Behind Bush
           item: Flask
           canon: Ebih Bush Flask
           tags: [flask]
+        - name: Flask Collection Skip
+          item: Flask
+          canon: Ebih Bush Flask
+          req: $melee_cskip
+          to: Menu > Warp Only > Kiengir
+          tags: [cskip]
+        - name: Flask Fast Travel
+          item: Flask
+          canon: Ebih Bush Flask
+          req: $melee_cskip and Fast_Travel
+          to: ^map_spot
+          tags: [cskip]
       exits:
         - to: East 10
-          req: $grab
-          time: 1
-        - to: East 10
-          req: $hook
-          time: 0.9
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not $hook and not $grab
+              jumps: 2
+            - when: not $hook
+              jumps: 1
 
 - name: Waterfall  # MARK: Waterfall
   on_entry: $reset_old_area(^newpos)
@@ -704,12 +726,12 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Alcove
-          req: ^mode == 'drone' and Ebih_Waterfall_Block_Right
+          req: ^mode == 'drone' and (Ebih_Waterfall_Block_Right or $block_clip)
           movement: base
           jumps: 1
-        - to: Alcove
-          req: $block_clip and not Ebih_Waterfall_Block_Right
-          time: 2
+          penalties:
+            - when: not Ebih_Waterfall_Block_Right
+              add: 0.75  # ~2s total
         - to: Waterfall Center Right  # you can't do this with ledge grab thanks to the enemy
           req: $hook
           movement: base
@@ -757,19 +779,19 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Waterfall Center Left
-          req: $grab
-          time: 1.25
-        - to: Waterfall Center Left
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Alcove
-          req: ^mode == 'drone' and Ebih_Waterfall_Block_Left
+          req: ^mode == 'drone' and (Ebih_Waterfall_Block_Left or $block_clip)
           movement: base
           jumps: 1
-        - to: Alcove
-          req: $block_clip and not Ebih_Waterfall_Block_Left
-          time: 2
+          penalties:
+            - when: not Ebih_Waterfall_Block_Left
+              add: 0.5  # ~2s total
     - name: Alcove
       coord: [22.975, 10.7]
       locations:
@@ -790,17 +812,17 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Alcove Left
-          req: ^mode == 'drone' and Ebih_Waterfall_Block_Left
+          req: ^mode == 'drone' and (Ebih_Waterfall_Block_Left or $hook)
           movement: base
+          penalties:
+            - when: not Ebih_Waterfall_Block_Left
+              add: 3.5  # ~5s total time, extra difficult
         - to: Alcove Right
-          req: ^mode == 'drone' and Ebih_Waterfall_Block_Right
+          req: ^mode == 'drone' and (Ebih_Waterfall_Block_Right or $hook)
           movement: base
-        - to: Alcove Right
-          req: $hook and not Ebih_Waterfall_Block_Right
-          time: 1.5
-        - to: Alcove Left
-          req: $hook and not Ebih_Waterfall_Block_Left
-          time: 5  # extra difficult
+          penalties:
+            - when: not Ebih_Waterfall_Block_Right
+              add: 0.25  # ~1.5s total time
     - name: Under Waterfall
       coord: [22.3, 10.8]
       exits:
@@ -945,23 +967,26 @@ areas:
     - name: West Climb
       coord: [21.7, 8.8]
       local:
-        - to: West Climb
+        - to: West Grassy Plains
       exits:
         - to: Ledge Below Hole
-          req: $grab
-          time: 2
+          req: $hook or $grab
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Ledge Below Hole
       coord: [21.65, 8.35]
       local:
         - to: West Climb
       exits:
         - to: Middle West Tree
-          req: $grab
-          time: 1
-        - to: Middle West Tree
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Below Left Switch
           req: ^mode == 'drone'
           movement: base
@@ -1043,12 +1068,12 @@ areas:
           jumps: 1
       exits:
         - to: West Main Path
-          req: $grab
-          time: 1
-        - to: West Main Path
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
 
     - name: West Main Path
       coord: [21.9, 7.8]
@@ -1096,12 +1121,12 @@ areas:
           jumps_down: 1
       exits:
         - to: Big Tree
-          req: $grab
-          time: 1.2
-        - to: Big Tree
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Passage Exit
           req: ^mode == 'drone'
           movement: base
@@ -1118,8 +1143,13 @@ areas:
           jumps_down: 3
       exits:
         - to: Big Tree
-          req: $grab
-          time: 1.5
+          req: $hook or $grab
+          movement: fast_hover
+          jumps: 2
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 1
     - name: East 8
       coord: [24.95, 7.75]
       local:
@@ -1263,11 +1293,10 @@ areas:
         - to: East Horizontal Door
           req: ^_east_door_open
           movement: base
-          jumps: 2
-        - to: East Horizontal Door
-          req: ^_east_door_open and $hook
-          movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
       actions:
         - name: Open Door
           req: $open and $range3
@@ -1324,12 +1353,12 @@ areas:
         - to: Block Left
       exits:
         - to: Above Alcove
-          req: $grab
-          time: 1
-        - to: Above Alcove
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Alcove
       coord: [19.175, 9.75]
       local:
@@ -1363,19 +1392,19 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Mid Save
-          req: $grab
-          time: 2
-        - to: Mid Save
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Alcove Entrance
-          req: $grab
-          time: 2.3
-        - to: Alcove Entrance
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Block Right
           req: Ebih_West_Block
           movement: base
@@ -1458,13 +1487,12 @@ areas:
           jumps_down: 1
       exits:
         - to: High Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: High Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Mid-air near Flask
           req: $hover
           movement: base
@@ -1618,19 +1646,19 @@ areas:
         - to: Middle Cliff
       exits:
         - to: East 7
-          req: $grab or $climb
-          time: 3.5
-        - to: East 7
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
-          jumps: 4
+          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Above Chute
-          req: $grab or $climb
-          time: 3.5
-        - to: Above Chute
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
-          jumps: 4
+          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Middle Cliff
       coord: [20.05, 8.0]
       local:
@@ -1768,9 +1796,12 @@ areas:
         - to: West 13
       exits:
         - to: Lower Cliff
-          req: $grab
+          req: $hook or $grab
           movement: base
-          jumps: 6  # ?
+          jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 2  # ?
     - name: Lower Save
       coord: [19.5, 12.65]
       local:
@@ -1800,6 +1831,8 @@ areas:
       coord: [19.05, 10.75]
       local:
         - to: West Fork
+        - to: West 12
+          thru: [19.2, 11.0]
       exits:
         - to: Giguna > Giguna Northeast > East 11
           tags: [xshift]
@@ -1807,9 +1840,12 @@ areas:
       coord: [19.05, 11.8]
       exits:
         - to: West Fork
-          req: $climb
+          req: $hook or $climb
           movement: base
-          jumps: 8  # ?
+          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 3  # ?
         - to: Giguna > Wasteland > East 12
           tags: [xshift]
     - name: West 13
@@ -1878,9 +1914,12 @@ areas:
         - to: Corner
       exits:
         - to: East Ledge
-          req: $hook
+          req: $hook or (Anuman and $climb)
           movement: base
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower Moving Platform
       coord: [26.15, 8.7]
       local:
@@ -1926,13 +1965,12 @@ areas:
           time: 3.5
       exits:
         - to: Lower Center Pillar
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
-        - to: Lower Center Pillar
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
       actions:
         - name: Activate Lift
           req: Infect and ^_platform2_moved and ($grab or $hook)
@@ -2065,8 +2103,11 @@ areas:
       coord: [26.95, 8.3]
       exits:
         - to: East Hill
-          req: $grab or $climb
-          time: 2
+          req: $hook or $grab or $climb
+          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Observation Tower Room > West 9
           tags: [xshift]
     - name: East Mid-air
@@ -2152,13 +2193,12 @@ areas:
           movement: base
           jumps: 3
         - to: Gate Ledge West
-          req: $grab and Ebih_Hidden_Portal_Gate
-          movement: base
-          jumps: 4
-        - to: Gate Ledge West
-          req: $hook and Ebih_Hidden_Portal_Gate
+          req: Ebih_Hidden_Portal_Gate and ($hook or $grab)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
 
     - name: East 5
       coord: [21.95, 4.3]
@@ -2220,16 +2260,16 @@ areas:
         - to: Gate Ledge West
         - to: Gate Ledge East
         - to: Button
-        - to: Save Ledge
-          jumps: 6
       exits:
         - to: Stair Below Gate
           req: Ebih_Hidden_Portal_Gate
           movement: base
         - to: Save Ledge
-          req: $hook
           movement: base
           jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Save Ledge
       coord: [21.35, 2.8]
       local:
@@ -2485,12 +2525,12 @@ areas:
           jumps: 4
       exits:
         - to: Lower Ledge
-          req: $grab
-          time: 1
-        - to: Lower Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower Ledge
       coord: [23.7, 5.0]
       local:
@@ -2601,19 +2641,14 @@ areas:
         - to: Portal
       exits:
         - to: West 6
-          req: $climb
-          movement: base
-          jumps: 2
-        - to: West 6
-          req: $hook
+          req: $hook or $climb
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Middle Platform
-          req: $climb
-          movement: base
-          jumps: 2
-        - to: Middle Platform
-          req: $hook
+          req: $hook or $climb
           movement: base
           jumps: 2
       actions:
@@ -2701,14 +2736,13 @@ areas:
           # if the drone is retrieving it for indra, would probably involve more waiting
           time: 4
       exits:
-        # double-activate the platform to get on top of it?
         - to: Moving Platform
-          req: Infect and not ^_platform_moved
-          time: 5
-        - to: Moving Platform
-          req: $hook and not ^_platform_moved
+          req: not ^_platform_moved and ($hook or Infect)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook  # Infect = double-activate the platform to get on top of it?
+              add: 3.75
         # It might be possible to get to the East 4 spot as drone with mist float
     - name: Moving Platform
       coord: [24.5, 4.0]
@@ -2798,13 +2832,12 @@ areas:
         - to: Interior > Observatory > East
           tags: [interior]
         - to: Middle Ledge
-          req: $hook
+          req: $hook or $climb or ($grab and Anuman)
           movement: base
           jumps: 1
-        - to: Middle Ledge
-          req: $climb or ($grab and Anuman)
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Middle Ledge
       coord: [23.95, 2.15]
       local:
@@ -2827,9 +2860,6 @@ areas:
     - name: Tunnel Entrance
       coord: [24.175, 2.85]
       local:
-        - to: Tunnel Ledge
-          thru: [24.25, 2.7]
-          jumps: [1, 1]
         - to: Portal Stand
           thru: [24.25, 2.7]
           jumps: [1, 1]
@@ -2839,39 +2869,35 @@ areas:
           movement: base
           jumps: 1
           penalty_tags: [xshift, -base.1]
-        - to: Tunnel Ledge
-          req: $hook
-          movement: base
-          jumps: 2
         - to: Portal Stand
           req: $hook
           movement: fast_hover
           jumps: 2
         - to: Tunnel Ledge
-          req: $climb or ($grab and Anuman)
           movement: base
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: not $hook and not $climb and (not $grab or not Anuman)
+              jumps: 1
+            - when: not $hook
+              jumps: 1
     - name: Portal Stand
       coord: [24.525, 2.6]
       data:
         flipside: Ebih Breach > Peak > Save Point
       local:
         - to: Tunnel Ledge
-          thru: [24.25, 2.7]
-          jumps: [0, 1]
+          jumps: 1
         - to: Tunnel Entrance
           thru: [24.25, 2.7]
-        - to: East Slope
-          jumps: 2
       exits:
-        - to: Tunnel Ledge
-          req: $hover
-          movement: base
-          jumps: 1
         - to: East Slope
           req: $hover
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hover
+              jumps: 1
         - to: East 3
           req: $hook and $hover
           movement: base
@@ -2882,11 +2908,7 @@ areas:
         - to: Portal Stand
       exits:
         - to: East 3
-          req: $hook
-          movement: base
-          jumps: 2
-        - to: East 3
-          req: $climb or ($grab and Anuman)
+          req: $hook or $climb or ($grab and Anuman)
           movement: base
           jumps: 2
     - name: East 3
@@ -3000,26 +3022,28 @@ areas:
         - to: Second Rocks
           thru: [25.6, 4.8]
           jumps_down: [0, 4]
-        - to: Upper Mid-way
-          jumps: 2
       exits:
         - to: Upper Mid-way
-          req: Slingshot_Hook
+          req: $hook
           movement: base
           jumps: 1.25
+          penalties:
+            - when: not $hook
+              jumps: 0.75
     - name: Upper Mid-way
       coord: [25.4, 4.425]
       data:
         flipside: Ebih Breach > Drone Tutorial > Upper Mid-way
       local:
         - to: Above Rocks
-        - to: Top
-          jumps: 4
       exits:
         - to: Top
-          req: Slingshot_Hook
+          req: $hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Top
       coord: [25.3, 3.75]
       data:
@@ -3134,16 +3158,24 @@ areas:
       exits:
         - to: Middle Platform
           req: $hover
+          movement: base
+          jumps: 3
+        - to: Ledge
+          req: $hook
+          movement: fast_hover
+          jumps: 1
     - name: Under Ledge
       coord: [26.6, 10.6]
       local:
         - to: Middle Bottom
       exits:
         - to: Ledge
-          req: $grab
-        - to: Ledge
-          req: $hook
-          time: 0.8
+          req: $hook or $grab
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Ledge
       coord: [26.7, 10.35]
       local:
@@ -3167,12 +3199,12 @@ areas:
           jumps: 2
       exits:
         - to: West 10
-          req: $grab
-          time: 2.8
-        - to: West 10
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Upper Platform
       coord: [26.45, 10.1]
       local:
@@ -3180,19 +3212,19 @@ areas:
         - to: Ledge
       exits:
         - to: West 10
-          req: $grab
-          time: 2
-        - to: West 10
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Cliff
-          req: $grab
-          time: 1.15
-        - to: Cliff
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West 10
       coord: [26.05, 9.7]
       local:
@@ -3241,12 +3273,11 @@ areas:
         - to: East 11
       exits:
         - to: West 9
-          req: $grab or $climb
-          time: 3
-        - to: West 9
-          req: $hover
-          movement: base
+          req: $hook or $hover or $grab or $climb
           jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Tower Bottom
       coord: [27.5, 9.9]
       local:
@@ -3275,12 +3306,12 @@ areas:
       coord: [27.95, 10.6]
       exits:
         - to: Cliff
-          req: $grab or $climb
-          time: 2  # ?
-        - to: Cliff
-          req: $hook
+          req: $hook or $grab or $climb
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Base Camp > West 11
           tags: [xshift]
 
@@ -3310,9 +3341,12 @@ areas:
           jumps: 1
       exits:
         - to: Door West
-          req: $grab or $climb
+          req: $hook or $grab or $climb
           movement: base
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Passage East
           req: ^mode == 'drone'
           movement: base
@@ -3368,13 +3402,19 @@ areas:
         - to: Middle Drop
       exits:
         - to: Passage East
-          req: $grab or $climb
+          req: $hook or $grab or $climb
           movement: base
-          jumps: 5  # ?
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 3  # ?
         - to: East 13
           req: $grab or $climb
           movement: base
-          jumps: 5  # ?
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 3  # ?
     - name: Middle Drop
       coord: [21.2, 13.4]
       local:
@@ -3485,19 +3525,19 @@ areas:
         - to: South
       exits:
         - to: Refill Station
-          req: Ebih_Interchange_Gate and not Ebih_Interchange_Block and $grab
+          req: Ebih_Interchange_Gate and not Ebih_Interchange_Block and ($hook or $grab)
           movement: base
-          jumps: 3
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Blocked Refill Station
-          req: Ebih_Interchange_Gate and Ebih_Interchange_Block and $grab
+          req: Ebih_Interchange_Gate and Ebih_Interchange_Block and ($hook or $grab)
           movement: base
-          jumps: 4
-        - to: Refill Station
-          req: Ebih_Interchange_Gate and not Ebih_Interchange_Block and $hook
-          time: 1  # ?
-        - to: Blocked Refill Station
-          req: Ebih_Interchange_Gate and Ebih_Interchange_Block and $hook
-          time: 1  # ?
+          jumps: 2  # ?
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Lower West Cliff
       coord: [21.4, 15.4]
       local:
@@ -3517,7 +3557,8 @@ areas:
       exits:
         - to: Below Door
           req: $hook
-          time: 1  # ?
+          movement: base
+          jumps: 3  # ?
     - name: South
       coord: [21.5, 15.8]
       local:
@@ -3526,7 +3567,8 @@ areas:
       exits:
         - to: Below Door
           req: $hook
-          time: 1  # ?
+          movement: base
+          jumps: 3
 
 - name: Walled Off  # MARK: Walled Off
   on_entry: $reset_old_area(^newpos)
@@ -3621,17 +3663,14 @@ areas:
         - to: Middle Ledge
       exits:
         - to: West 12
-          req: $infinite_climb
-          movement: base
-          jumps: 6
-        - to: West 12
-          req: $infinite_climb and Slingshot_Hook
-          movement: base
-          jumps: 4
-        - to: West 12
-          req: $hook and $hover
+          req: ($hook and $hover) or $infinite_climb
           movement: base
           jumps: 3
+          penalties:
+            - when: not Slingshot_Hook  # infinite_climb
+              jumps: 3
+            - when: not $hover  # infinite_climb with hover
+              jumps: 1
     - name: West 12
       coord: [24.05, 11.2]
       local:
@@ -3653,21 +3692,19 @@ areas:
           thru: [[24.55, 12.7], [24.45, 13.2]]
       exits:
         - to: Upper Left Ledge
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Upper Slope
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Upper Left Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Slope
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Platform 5
       coord: [24.6, 12.9]
       local:
@@ -3676,13 +3713,12 @@ areas:
         - to: Platform 3
       exits:
         - to: Middle Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Middle Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Platform 4
       coord: [24.45, 13.05]
       local:
@@ -3697,13 +3733,12 @@ areas:
         - to: West 14
       exits:
         - to: Platform 4
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Platform 4
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West 14
       coord: [24.05, 13.8]
       local:
@@ -3756,15 +3791,16 @@ areas:
     - name: Small Pond
       coord: [22.5, 11.65]
       local:
-        - to: East Ruins
-          jumps: 4
         - to: West Hill
           jumps: 2
       exits:
         - to: East Ruins
-          req: $hook and $hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hookhover
+              movement: base
+              jumps: 3
     - name: West Hill
       coord: [22.05, 11.35]
       local:
@@ -3834,21 +3870,21 @@ areas:
         - to: West Mid-air
           jumps: 1
         - to: East Side
-        - to: Below East Gate
-          jumps: 1
       exits:
         - to: West 13
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 4
-        - to: West 13
-          req: $grab
-          movement: base
-          jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Below East Gate
           req: $hook and $hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hookhover
+              movement: base
         - to: East 14
           req: $hook and $hover
           movement: fast_hover
@@ -4012,13 +4048,12 @@ areas:
           tags: [shockwave]
       exits:
         - to: Upper Tunnel West
-          req: $climb
-          movement: base
-          jumps: 2
-        - to: Upper Tunnel West
-          req: $hook
+          req: $hook or $climb
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Tunnel West
           req: Nanite_Mist
           movement: mist2

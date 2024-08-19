@@ -26,7 +26,7 @@
 * Collect Drone_Melee_Damage from Menu > Upgrade Menu > Drone > Drone Melee Damage 1
 
 * Collect Health_Node from Ebih > Boss Room > East Ledge > Item
-* Collect Ebih_Alu from Ebih > Boss Room > Boss > Fight Alu
+* Collect Ebih_Alu from Ebih > Boss Room > Boss > Hack Alu
 * Collect Flask from Ebih > Boss Room > Boss > Boss Reward
 
 * Collect Dear_Ernest from Interior > Bunker Interior > Desk > Note
@@ -491,7 +491,7 @@
 * Collect Flask from Giguna Breach > Emergence > Corner > Flask
 
   Move... to Giguna Breach > Robopede > West
-* Collect Robopede from Giguna Breach > Robopede > West > Strong Attacks
+* Collect Robopede from Giguna Breach > Robopede > West > Defeat Robopede
 * Collect Flask from Giguna Breach > Robopede > Center > Boss Reward
 
 # Section "Glacier Breach/Peak"

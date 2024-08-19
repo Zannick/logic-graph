@@ -270,6 +270,8 @@ impl world::Accessible for Location {
             LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::access_invoke_bs(ctx, world),
             LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => true,
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             LocationId::Ebih__Grid_26_10_11__Ledge__Note => true,
             LocationId::Ebih__Guarded_Health__Far_West__Refill => rules::access_invoke_more_refills(ctx, world),
             LocationId::Ebih__Guarded_Health__West_Basin__Health => true,
@@ -343,20 +345,16 @@ impl world::Accessible for Location {
             LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask => rules::access_invoke_boomerang(ctx, world),
-            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall => rules::access_nanite_mist(ctx, world),
-            LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
-            LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
+            LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
-            LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
+            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
+            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
@@ -367,17 +365,14 @@ impl world::Accessible for Location {
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => rules::access_invoke_spin(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => rules::access_invoke_spin(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover => rules::access_invoke_spinhover(ctx, world),
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn => rules::access_invoke_shockwave(ctx, world),
@@ -388,14 +383,11 @@ impl world::Accessible for Location {
             LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel => rules::access_invoke_boomerang_and_fast_travel(ctx, world),
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => rules::access_invoke_shockwave(ctx, world),
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => rules::access_nanite_mist(ctx, world),
-            LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
-            LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall => rules::access_invoke_charge(ctx, world),
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => rules::access_invoke_spin(ctx, world),
+            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::access_invoke_activate(ctx, world),
             LocationId::Giguna__Antechamber__Statue_Head__Tablet => true,
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
@@ -434,8 +426,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__Giguna_Northeast__Vault__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             LocationId::Giguna__Giguna_Northeast__Vault__Item => true,
             LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::access_giguna_gubi_and_invoke_boomerang(ctx, world),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => rules::access_giguna_gubi_and_invoke_hover(ctx, world),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::access_giguna_gubi_and___invoke_boomerang_or_invoke_hover(ctx, world),
             LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi => true,
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => rules::access_invoke_overheat(ctx, world),
             LocationId::Giguna__Gubi_Lair__Pedestal__Axe => true,
@@ -473,27 +464,22 @@ impl world::Accessible for Location {
             LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => rules::access_nanite_mist(ctx, world),
             LocationId::Giguna__Separator__Switch__Separation => rules::access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(ctx, world),
             LocationId::Giguna__Separator__Upper_Brick__Break_Bricks => rules::access_nanite_mist(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards => rules::access_invoke_charge(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards => rules::access_nanite_mist(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => rules::access_invoke_spin(ctx, world),
+            LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask => true,
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip => rules::access_invoke_melee_cskip(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => rules::access_invoke_melee_cskip_and_fast_travel(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Dead_end_Ledge__Shockwave_Flask => rules::access_invoke_shockwave(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Gate__Jump_Boomerang_Flask => rules::access_invoke_boomerang(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button => rules::access_invoke_boomerang(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock => rules::access_invoke_charge(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock => rules::access_invoke_charge(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock => rules::access_nanite_mist(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock => rules::access_nanite_mist(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => rules::access_invoke_spin(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => rules::access_invoke_spin(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock => rules::access_invoke_charge(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock => rules::access_invoke_charge(ctx, world),
+            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => rules::access_invoke_spin_or_invoke_charge(ctx, world),
+            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock => rules::access_nanite_mist(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => rules::access_nanite_mist(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => rules::access_invoke_spin(ctx, world),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover => rules::access_invoke_spinhover(ctx, world),
+            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock => rules::access_invoke_spinhover_or_invoke_charge(ctx, world),
+            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Giguna__Vertical_Interchange__Switch__Button => rules::access_invoke_can_damage(ctx, world),
             LocationId::Giguna__Wasteland__Door_Right__Health => true,
             LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::access_mode_eq_drone(ctx, world),
@@ -534,19 +520,13 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Collection_Skip => true,
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => rules::access_fast_travel(ctx, world),
             LocationId::Giguna_Breach__Lower_Machinery__Button__Hit_Button => true,
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => rules::access_slingshot_hook_and_slingshot_charge(ctx, world),
             LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => rules::access_nanite_mist(ctx, world),
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => rules::access_slingshot_hook_and_slingshot_charge(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::access_slingshot_hook_and___slingshot_weapon_or_slingshot_charge(ctx, world),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::access_nanite_mist(ctx, world),
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
-            LocationId::Giguna_Breach__Robopede__Center__Bad => rules::access_slingshot_hook(ctx, world),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::access_slingshot_hook_and___slingshot_weapon_or_slingshot_charge(ctx, world),
             LocationId::Giguna_Breach__Robopede__Center__Boss_Reward => rules::access_robopede(ctx, world),
-            LocationId::Giguna_Breach__Robopede__Center__Medium => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
-            LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => rules::access_slingshot_hook_and_drone_melee_damage_3(ctx, world),
-            LocationId::Giguna_Breach__Robopede__West__Bad => rules::access_slingshot_hook(ctx, world),
-            LocationId::Giguna_Breach__Robopede__West__Medium => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
-            LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => rules::access_slingshot_hook_and_drone_melee_damage_3(ctx, world),
+            LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => rules::access_slingshot_hook(ctx, world),
+            LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede => rules::access_slingshot_hook(ctx, world),
             LocationId::Giguna_Breach__Slingshot__Ravine__Urn => true,
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::access_apocalypse_bomb(ctx, world),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
@@ -1034,6 +1014,8 @@ impl world::Accessible for Location {
             LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask => rules::observe_access_invoke_bs(ctx, world, full_obs),
             LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::observe_access_invoke_bs(ctx, world, full_obs),
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Ebih__Guarded_Health__Far_West__Refill => rules::observe_access_invoke_more_refills(ctx, world, full_obs),
             LocationId::Ebih__Hidden_Portal__Button__Hit_Button => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
@@ -1080,20 +1062,16 @@ impl world::Accessible for Location {
             LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
-            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
-            LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
+            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
+            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
@@ -1104,17 +1082,14 @@ impl world::Accessible for Location {
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => rules::observe_access_invoke_spin(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover => rules::observe_access_invoke_spinhover(ctx, world, full_obs),
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
@@ -1124,14 +1099,11 @@ impl world::Accessible for Location {
             LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel => rules::observe_access_invoke_boomerang_and_fast_travel(ctx, world, full_obs),
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::observe_access_invoke_activate(ctx, world, full_obs),
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
@@ -1158,8 +1130,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__Giguna_Northeast__Vault__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
             LocationId::Giguna__Giguna_Northeast__Vault__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::observe_access_giguna_gubi_and_invoke_boomerang(ctx, world, full_obs),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => rules::observe_access_giguna_gubi_and_invoke_hover(ctx, world, full_obs),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::observe_access_giguna_gubi_and___invoke_boomerang_or_invoke_hover(ctx, world, full_obs),
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => rules::observe_access_invoke_overheat(ctx, world, full_obs),
             LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
@@ -1183,26 +1154,21 @@ impl world::Accessible for Location {
             LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Separator__Switch__Separation => rules::observe_access_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(ctx, world, full_obs),
             LocationId::Giguna__Separator__Upper_Brick__Break_Bricks => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards => rules::observe_access_invoke_charge(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => rules::observe_access_invoke_spin(ctx, world, full_obs),
+            LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => rules::observe_access_invoke_melee_cskip_and_fast_travel(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Dead_end_Ledge__Shockwave_Flask => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Gate__Jump_Boomerang_Flask => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button => rules::observe_access_invoke_boomerang(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock => rules::observe_access_invoke_charge(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock => rules::observe_access_invoke_charge(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock => rules::observe_access_invoke_charge(ctx, world, full_obs),
+            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
+            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover => rules::observe_access_invoke_spinhover(ctx, world, full_obs),
+            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock => rules::observe_access_invoke_spinhover_or_invoke_charge(ctx, world, full_obs),
+            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Giguna__Vertical_Interchange__Switch__Button => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::observe_access_mode_eq_drone_and_nanite_mist(ctx, world, full_obs),
@@ -1218,19 +1184,13 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => rules::observe_access_fast_travel(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => rules::observe_access_slingshot_hook_and_slingshot_charge(ctx, world, full_obs),
             LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => rules::observe_access_slingshot_hook_and_slingshot_charge(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::observe_access_slingshot_hook_and___slingshot_weapon_or_slingshot_charge(ctx, world, full_obs),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Robopede__Center__Bad => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::observe_access_slingshot_hook_and___slingshot_weapon_or_slingshot_charge(ctx, world, full_obs),
             LocationId::Giguna_Breach__Robopede__Center__Boss_Reward => rules::observe_access_robopede(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Robopede__Center__Medium => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => rules::observe_access_slingshot_hook_and_drone_melee_damage_3(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Robopede__West__Bad => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Robopede__West__Medium => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
-            LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => rules::observe_access_slingshot_hook_and_drone_melee_damage_3(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::observe_access_boomerang(ctx, world, full_obs),
@@ -1668,9 +1628,37 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        767
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        767
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        975
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        850
                     } else {
                         0
                     }
@@ -1724,6 +1712,13 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        592
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         702
@@ -1752,9 +1747,23 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        975
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        592
                     } else {
                         0
                     }
@@ -1773,9 +1782,23 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        533
                     } else {
                         0
                     }
@@ -1787,9 +1810,23 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        417
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
+                    if rules::access_not_invoke_boomerang(ctx, world) {
+                        3000
                     } else {
                         0
                     }
@@ -1829,6 +1866,13 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         526
@@ -1843,6 +1887,20 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        650
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         526
@@ -1853,6 +1911,20 @@ impl world::Accessible for Location {
                 LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         600
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock => {
+                    if rules::access_not_invoke_spinhover(ctx, world) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => {
+                    if rules::access_not_invoke_spin(ctx, world) {
+                        650
                     } else {
                         0
                     }
@@ -1878,6 +1950,13 @@ impl world::Accessible for Location {
                         0
                     }
                 }
+                LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
+                    if rules::access_not_slingshot_weapon(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
                 LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         400
@@ -1885,22 +1964,34 @@ impl world::Accessible for Location {
                         0
                     }
                 }
-                LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => {
-                    if rules::access_not_drone_hover(ctx, world) {
+                LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => {
+                    if rules::access_not_slingshot_weapon(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => {
+                    if rules::access_slingshot_weapon_and_drone_hover_and_not_drone_melee_damage_3(ctx, world) {
+                        12000
+} else if rules::access_slingshot_weapon_and_not_drone_melee_damage_3(ctx, world) {
+                        18000
+} else if rules::access_not_drone_melee_damage_3(ctx, world) {
+                        28000
+} else if rules::access_not_drone_hover(ctx, world) {
                         6000
                     } else {
                         0
                     }
                 }
-                LocationId::Giguna_Breach__Robopede__West__Medium => {
-                    if rules::access_not_drone_hover(ctx, world) {
-                        6000
-                    } else {
-                        0
-                    }
-                }
-                LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => {
-                    if rules::access_not_drone_hover(ctx, world) {
+                LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede => {
+                    if rules::access_slingshot_weapon_and_drone_hover_and_not_drone_melee_damage_3(ctx, world) {
+                        12000
+} else if rules::access_slingshot_weapon_and_not_drone_melee_damage_3(ctx, world) {
+                        18000
+} else if rules::access_not_drone_melee_damage_3(ctx, world) {
+                        28000
+} else if rules::access_not_drone_hover(ctx, world) {
                         6000
                     } else {
                         0
@@ -2192,8 +2283,20 @@ impl world::Accessible for Location {
                 LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
@@ -2216,6 +2319,9 @@ impl world::Accessible for Location {
                 LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
@@ -2228,8 +2334,14 @@ impl world::Accessible for Location {
                 LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
@@ -2237,11 +2349,20 @@ impl world::Accessible for Location {
                 LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
@@ -2267,11 +2388,23 @@ impl world::Accessible for Location {
                 LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock if rules::access_not_invoke_spinhover(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock if rules::access_not_invoke_spin(ctx, world) => {
+                    Currency::Free + (Currency::Free * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
@@ -2530,6 +2663,8 @@ impl world::Accessible for Location {
             LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Boomerang_Flask => rules::explain_invoke_bs(ctx, world, edict),
             LocationId::Ebih__Gem_Room__Hidden_Tunnel_Corner__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => rules::explain_invoke_bs(ctx, world, edict),
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
+            LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Ebih__Guarded_Health__Far_West__Refill => rules::explain_invoke_more_refills(ctx, world, edict),
             LocationId::Ebih__Hidden_Portal__Button__Hit_Button => rules::explain_invoke_can_damage(ctx, world, edict),
             LocationId::Ebih__Hidden_Portal__East_5__Boomerang_Button => rules::explain_invoke_boomerang(ctx, world, edict),
@@ -2576,20 +2711,16 @@ impl world::Accessible for Location {
             LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
-            LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
-            LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
+            LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
+            LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
@@ -2600,17 +2731,14 @@ impl world::Accessible for Location {
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => rules::explain_invoke_spin(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover => rules::explain_invoke_spinhover(ctx, world, edict),
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -2620,14 +2748,11 @@ impl world::Accessible for Location {
             LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel => rules::explain_invoke_boomerang_and_fast_travel(ctx, world, edict),
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Filter__Core__Terminal_East__Authorize_Hammond => rules::explain_invoke_activate(ctx, world, edict),
             LocationId::Giguna__Breachable_Wall__Above_the_Hole__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -2654,8 +2779,7 @@ impl world::Accessible for Location {
             LocationId::Giguna__Giguna_Northeast__Vault__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
             LocationId::Giguna__Giguna_Northeast__Vault__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Giguna__Giguna_Northeast__Vault_East__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::explain_giguna_gubi_and_invoke_boomerang(ctx, world, edict),
-            LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward => rules::explain_giguna_gubi_and_invoke_hover(ctx, world, edict),
+            LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => rules::explain_giguna_gubi_and___invoke_boomerang_or_invoke_hover(ctx, world, edict),
             LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => rules::explain_invoke_overheat(ctx, world, edict),
             LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Hard_Rock__Rock_Left__Shockwave_Boulder => rules::explain_invoke_shockwave(ctx, world, edict),
@@ -2679,26 +2803,21 @@ impl world::Accessible for Location {
             LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Separator__Switch__Separation => rules::explain_mode_eq_drone_and_indra_eq_giguna_gt_separator_gt_platform(ctx, world, edict),
             LocationId::Giguna__Separator__Upper_Brick__Break_Bricks => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards => rules::explain_invoke_charge(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => rules::explain_invoke_spin(ctx, world, edict),
+            LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip => rules::explain_invoke_melee_cskip(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => rules::explain_invoke_melee_cskip_and_fast_travel(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Dead_end_Ledge__Shockwave_Flask => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Gate__Jump_Boomerang_Flask => rules::explain_invoke_boomerang(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button => rules::explain_invoke_boomerang(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock => rules::explain_invoke_charge(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock => rules::explain_invoke_charge(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock => rules::explain_invoke_charge(ctx, world, edict),
+            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
+            LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => rules::explain_invoke_spin(ctx, world, edict),
-            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover => rules::explain_invoke_spinhover(ctx, world, edict),
+            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock => rules::explain_invoke_spinhover_or_invoke_charge(ctx, world, edict),
+            LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Giguna__Vertical_Interchange__Switch__Button => rules::explain_invoke_can_damage(ctx, world, edict),
             LocationId::Giguna__Wasteland__Passage_Cache__Clear_Horizontal_Passage_Manually => rules::explain_mode_eq_drone(ctx, world, edict),
             LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => rules::explain_mode_eq_drone_and_nanite_mist(ctx, world, edict),
@@ -2714,19 +2833,13 @@ impl world::Accessible for Location {
             LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Labyrinth__Plinth__Urn_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
             LocationId::Giguna_Breach__Lower_Machinery__Bottom__Flask_Fast_Travel => rules::explain_fast_travel(ctx, world, edict),
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up => rules::explain_slingshot_hook_and_slingshot_charge(ctx, world, edict),
             LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down => rules::explain_slingshot_hook_and_slingshot_charge(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => rules::explain_slingshot_hook_and___slingshot_weapon_or_slingshot_charge(ctx, world, edict),
             LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => rules::explain_nanite_mist(ctx, world, edict),
-            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
-            LocationId::Giguna_Breach__Robopede__Center__Bad => rules::explain_slingshot_hook(ctx, world, edict),
+            LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => rules::explain_slingshot_hook_and___slingshot_weapon_or_slingshot_charge(ctx, world, edict),
             LocationId::Giguna_Breach__Robopede__Center__Boss_Reward => rules::explain_robopede(ctx, world, edict),
-            LocationId::Giguna_Breach__Robopede__Center__Medium => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
-            LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => rules::explain_slingshot_hook_and_drone_melee_damage_3(ctx, world, edict),
-            LocationId::Giguna_Breach__Robopede__West__Bad => rules::explain_slingshot_hook(ctx, world, edict),
-            LocationId::Giguna_Breach__Robopede__West__Medium => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
-            LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => rules::explain_slingshot_hook_and_drone_melee_damage_3(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => rules::explain_slingshot_hook(ctx, world, edict),
+            LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede => rules::explain_slingshot_hook(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => rules::explain_apocalypse_bomb(ctx, world, edict),
             LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Hook_Escape => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             LocationId::Glacier__Boomerang_Room__Pedestal__Switch => rules::explain_boomerang(ctx, world, edict),
@@ -2970,7 +3083,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 840] = [
+static LOC_DEFS: [Location; 820] = [
     Location {
         id: LocationId::Amagi_Breach__Center_Ruins__Cache__Flask,
         canonical: CanonId::Amagi_Breach_Center_Ruins_Flask,
@@ -5652,6 +5765,26 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Collection_Skip,
+        canonical: CanonId::Ebih_Bush_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Warp_Only__Kiengir,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Fast_Travel,
+        canonical: CanonId::Ebih_Bush_Flask,
+        item: Item::Flask,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+        time: 200,
+        dest: SpotId::Menu__Kiengir_Map__Ebih_East_Waterfall_Flask,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Ebih__Grid_26_10_11__Ledge__Note,
         canonical: CanonId::Loc_Ebih__Grid_26_10_11__Ledge__Note,
         item: Item::Terminal_Breakthrough_1,
@@ -6052,16 +6185,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Dropoff_Wall,
-        item: Item::Emergence_Dropoff_Wall,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1267,
-        dest: SpotId::Emergence__Drop_off__Wall_Right,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through,
         canonical: CanonId::Emergence_Dropoff_Wall,
         item: Item::Emergence_Dropoff_Wall,
@@ -6099,16 +6222,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Free,
         time: 500,
         dest: SpotId::Emergence__Drop_off__Wall_Right,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Dropoff_Wall,
-        item: Item::Emergence_Dropoff_Wall,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1267,
-        dest: SpotId::Emergence__Drop_off__Wall_Left,
         skippable: false,
     },
     Location {
@@ -6152,16 +6265,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_3,
-        item: Item::Emergence_Rocks_Fall_Rock_3,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 600,
-        dest: SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall,
         canonical: CanonId::Emergence_Rocks_Fall_Rock_3,
         item: Item::Emergence_Rocks_Fall_Rock_3,
@@ -6169,16 +6272,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Free,
         time: 625,
         dest: SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_2,
-        item: Item::Emergence_Rocks_Fall_Rock_2,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1600,
-        dest: SpotId::Emergence__Rocks_Fall__Wall_2_Northwest,
         skippable: false,
     },
     Location {
@@ -6292,16 +6385,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_2,
-        item: Item::Emergence_Rocks_Fall_Rock_2,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1467,
-        dest: SpotId::Emergence__Rocks_Fall__Middle_Ledge,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall,
         canonical: CanonId::Emergence_Rocks_Fall_Rock_2,
         item: Item::Emergence_Rocks_Fall_Rock_2,
@@ -6342,16 +6425,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 600,
-        dest: SpotId::Emergence__Rocks_Fall__Wall_4_West,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall,
         canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
         item: Item::Emergence_Rocks_Fall_Rock_4,
@@ -6369,16 +6442,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Energy(33),
         time: 702,
         dest: SpotId::Emergence__Rocks_Fall__Wall_4_West,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Rocks_Fall_Rock_4,
-        item: Item::Emergence_Rocks_Fall_Rock_4,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1600,
-        dest: SpotId::Emergence__Rocks_Fall__Fling_Point,
         skippable: false,
     },
     Location {
@@ -6502,16 +6565,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel,
-        canonical: CanonId::Emergence_Storage_Tunnel,
-        item: Item::Emergence_Storage_Tunnel,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1600,
-        dest: SpotId::Emergence__Storage__Behind_Facade,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel,
         canonical: CanonId::Emergence_Storage_Tunnel,
         item: Item::Emergence_Storage_Tunnel,
@@ -6519,16 +6572,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Free,
         time: 600,
         dest: SpotId::Emergence__Storage__Behind_Facade,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Storage_Rock,
-        item: Item::Emergence_Storage_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1533,
-        dest: SpotId::Emergence__Storage__Dais_Left,
         skippable: false,
     },
     Location {
@@ -6549,16 +6592,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Energy(33),
         time: 702,
         dest: SpotId::Emergence__Storage__Wall_Right,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall,
-        canonical: CanonId::Emergence_Storage_Rock,
-        item: Item::Emergence_Storage_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1667,
-        dest: SpotId::Emergence__Storage__West_Hook_Point,
         skippable: false,
     },
     Location {
@@ -6842,16 +6875,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up,
-        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
-        item: Item::Giguna_Breach_Pinkness_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1600,
-        dest: SpotId::Giguna_Breach__Pinkness__Rock_Top,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up,
         canonical: CanonId::Giguna_Breach_Pinkness_Rock,
         item: Item::Giguna_Breach_Pinkness_Rock,
@@ -6869,16 +6892,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Free,
         time: 600,
         dest: SpotId::Giguna_Breach__Pinkness__Rock_Top,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down,
-        canonical: CanonId::Giguna_Breach_Pinkness_Rock,
-        item: Item::Giguna_Breach_Pinkness_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 2351,
-        dest: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
         skippable: false,
     },
     Location {
@@ -6902,16 +6915,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna_Breach__Robopede__Center__Bad,
-        canonical: CanonId::Robopede,
-        item: Item::Robopede,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 43000,
-        dest: SpotId::None,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Giguna_Breach__Robopede__Center__Boss_Reward,
         canonical: CanonId::Loc_Giguna_Breach__Robopede__Center__Boss_Reward,
         item: Item::Flask,
@@ -6922,17 +6925,7 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna_Breach__Robopede__Center__Medium,
-        canonical: CanonId::Robopede,
-        item: Item::Robopede,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 27000,
-        dest: SpotId::None,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks,
+        id: LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede,
         canonical: CanonId::Robopede,
         item: Item::Robopede,
         price: Currency::Free,
@@ -6942,27 +6935,7 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna_Breach__Robopede__West__Bad,
-        canonical: CanonId::Robopede,
-        item: Item::Robopede,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 40000,
-        dest: SpotId::None,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna_Breach__Robopede__West__Medium,
-        canonical: CanonId::Robopede,
-        item: Item::Robopede,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 24000,
-        dest: SpotId::Giguna_Breach__Robopede__Center,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna_Breach__Robopede__West__Strong_Attacks,
+        id: LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede,
         canonical: CanonId::Robopede,
         item: Item::Robopede,
         price: Currency::Free,
@@ -7362,16 +7335,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward,
-        canonical: CanonId::Giguna_Gubi_Flask,
-        item: Item::Big_Flask,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 5500,
-        dest: SpotId::None,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi,
         canonical: CanonId::Giguna_Gubi,
         item: Item::Giguna_Gubi,
@@ -7742,16 +7705,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards,
-        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
-        item: Item::Giguna_Vertical_Interchange_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 3000,
-        dest: SpotId::Giguna__Vertical_Interchange__Rock,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards,
         canonical: CanonId::Giguna_Vertical_Interchange_Rock,
         item: Item::Giguna_Vertical_Interchange_Rock,
@@ -7832,26 +7785,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock,
-        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
-        item: Item::Giguna_Vertical_Interchange_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1400,
-        dest: SpotId::Giguna__Vertical_Interchange__Rock_West,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock,
-        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
-        item: Item::Giguna_Vertical_Interchange_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 600,
-        dest: SpotId::Giguna__Vertical_Interchange__Above_Rock,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock,
         canonical: CanonId::Giguna_Vertical_Interchange_Rock,
         item: Item::Giguna_Vertical_Interchange_Rock,
@@ -7892,26 +7825,6 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
-        id: LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock,
-        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
-        item: Item::Giguna_Vertical_Interchange_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1800,
-        dest: SpotId::Giguna__Vertical_Interchange__East_22,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock,
-        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
-        item: Item::Giguna_Vertical_Interchange_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1400,
-        dest: SpotId::Giguna__Vertical_Interchange__Rock_East,
-        skippable: false,
-    },
-    Location {
         id: LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock,
         canonical: CanonId::Giguna_Vertical_Interchange_Rock,
         item: Item::Giguna_Vertical_Interchange_Rock,
@@ -7932,6 +7845,16 @@ static LOC_DEFS: [Location; 840] = [
         skippable: false,
     },
     Location {
+        id: LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock,
+        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
+        item: Item::Giguna_Vertical_Interchange_Rock,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+        time: 1500,
+        dest: SpotId::Giguna__Vertical_Interchange__East_22,
+        skippable: false,
+    },
+    Location {
         id: LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock,
         canonical: CanonId::Giguna_Vertical_Interchange_Rock,
         item: Item::Giguna_Vertical_Interchange_Rock,
@@ -7939,16 +7862,6 @@ static LOC_DEFS: [Location; 840] = [
         price_per_sec: Currency::Free,
         time: 750,
         dest: SpotId::Giguna__Vertical_Interchange__Rock_East,
-        skippable: false,
-    },
-    Location {
-        id: LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover,
-        canonical: CanonId::Giguna_Vertical_Interchange_Rock,
-        item: Item::Giguna_Vertical_Interchange_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-        time: 1500,
-        dest: SpotId::Giguna__Vertical_Interchange__East_22,
         skippable: false,
     },
     Location {
@@ -11528,7 +11441,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Ebih__Base_Camp__Top_Platform__Item => SpotId::Ebih__Base_Camp__Top_Platform,
         LocationId::Ebih__By_Garage__Crawlspace__Fragment => SpotId::Ebih__By_Garage__Crawlspace,
         LocationId::Ebih__Grid_25_10_12__East_10__Remote_Bush => SpotId::Ebih__Grid_25_10_12__East_10,
-        LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush => SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
+        LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush | LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Collection_Skip | LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Fast_Travel => SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
         LocationId::Ebih__Waterfall__Alcove_Right__Block_Right => SpotId::Ebih__Waterfall__Alcove_Right,
         LocationId::Ebih__Waterfall__Waterfall_Center_Center__Both_Blocks => SpotId::Ebih__Waterfall__Waterfall_Center_Center,
         LocationId::Ebih__Waterfall__Alcove_Left__Block_Left => SpotId::Ebih__Waterfall__Alcove_Left,
@@ -11581,8 +11494,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Collection_Skip | LocationId::Ebih__Gem_Room__Hidden_Cache__Flask_Fast_Travel => SpotId::Ebih__Gem_Room__Hidden_Cache,
         LocationId::Ebih__Party_Central__Bottom_East__Shockwave_Flask => SpotId::Ebih__Party_Central__Bottom_East,
         LocationId::Ebih__Party_Central__East_Trough__Flask | LocationId::Ebih__Party_Central__East_Trough__Flask_Collection_Skip | LocationId::Ebih__Party_Central__East_Trough__Flask_Fast_Travel => SpotId::Ebih__Party_Central__East_Trough,
-        LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => SpotId::Emergence__Drop_off__Wall_Left,
-        LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask | LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask | LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => SpotId::Emergence__Drop_off__Wall_Right,
+        LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through | LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall | LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => SpotId::Emergence__Drop_off__Wall_Left,
+        LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Drop_off__Wall_Right__Remote_Flask | LocationId::Emergence__Drop_off__Wall_Right__Shockwave_Flask | LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => SpotId::Emergence__Drop_off__Wall_Right,
         LocationId::Emergence__Drop_off__Basin__Flask | LocationId::Emergence__Drop_off__Basin__Flask_Collection_Skip | LocationId::Emergence__Drop_off__Basin__Flask_Fast_Travel => SpotId::Emergence__Drop_off__Basin,
         LocationId::Emergence__Drop_off__Upper_Ledge__Nearby_Flask => SpotId::Emergence__Drop_off__Upper_Ledge,
         LocationId::Emergence__Drop_off__Upper_Right__Nearby_Flask => SpotId::Emergence__Drop_off__Upper_Right,
@@ -11591,32 +11504,32 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Emergence__Storage__Dais_Right__Remote_Urn | LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel | LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => SpotId::Emergence__Storage__Dais_Right,
         LocationId::Emergence__Storage__Dais_Middle__Urn | LocationId::Emergence__Storage__Dais_Middle__Urn_Collection_Skip | LocationId::Emergence__Storage__Dais_Middle__Urn_Fast_Travel => SpotId::Emergence__Storage__Dais_Middle,
         LocationId::Emergence__Storage__Dais_Left__Shockwave_Urn => SpotId::Emergence__Storage__Dais_Left,
-        LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall | LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => SpotId::Emergence__Storage__Wall_Right_Ledge,
+        LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => SpotId::Emergence__Storage__Wall_Right_Ledge,
         LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall => SpotId::Emergence__Storage__Wall_Right,
         LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => SpotId::Emergence__Storage__Wall_Left,
-        LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => SpotId::Emergence__Storage__Wall_Left_Ledge,
-        LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => SpotId::Emergence__Storage__Tunnel_Ledge,
+        LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => SpotId::Emergence__Storage__Wall_Left_Ledge,
+        LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => SpotId::Emergence__Storage__Tunnel_Ledge,
         LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => SpotId::Emergence__Storage__Tunnel_Entrance,
         LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => SpotId::Emergence__Storage__Behind_Facade,
         LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => SpotId::Emergence__Rocks_Fall__Wall_1_Northeast,
         LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => SpotId::Emergence__Rocks_Fall__Wall_1_East,
         LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_1_West,
         LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_2 => SpotId::Emergence__Rocks_Fall__Wall_2_Northwest,
-        LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_2_West,
+        LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_2_West,
         LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_2_East,
-        LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2 | LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => SpotId::Emergence__Rocks_Fall__Middle_Ledge,
+        LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => SpotId::Emergence__Rocks_Fall__Middle_Ledge,
         LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_3_Northeast,
         LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_3_West,
-        LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => SpotId::Emergence__Rocks_Fall__Lower_Ledge,
-        LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover => SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge,
+        LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => SpotId::Emergence__Rocks_Fall__Lower_Ledge,
+        LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover => SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge,
         LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_4_West,
         LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_4_East,
-        LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
+        LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
         LocationId::Filter__Core__Terminal_East__Authorize_Hammond => SpotId::Filter__Core__Terminal_East,
         LocationId::Giguna_Breach__Chimney__Cache__Flask => SpotId::Giguna_Breach__Chimney__Cache,
         LocationId::Giguna_Breach__Cubby__Rocks__Health => SpotId::Giguna_Breach__Cubby__Rocks,
-        LocationId::Giguna_Breach__Robopede__West__Bad | LocationId::Giguna_Breach__Robopede__West__Medium | LocationId::Giguna_Breach__Robopede__West__Strong_Attacks => SpotId::Giguna_Breach__Robopede__West,
-        LocationId::Giguna_Breach__Robopede__Center__Bad | LocationId::Giguna_Breach__Robopede__Center__Boss_Reward | LocationId::Giguna_Breach__Robopede__Center__Medium | LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks => SpotId::Giguna_Breach__Robopede__Center,
+        LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede => SpotId::Giguna_Breach__Robopede__West,
+        LocationId::Giguna_Breach__Robopede__Center__Boss_Reward | LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => SpotId::Giguna_Breach__Robopede__Center,
         LocationId::Giguna_Breach__Slingshot__Ravine__Urn => SpotId::Giguna_Breach__Slingshot__Ravine,
         LocationId::Giguna_Breach__Labyrinth__Button__Open_Gate => SpotId::Giguna_Breach__Labyrinth__Button,
         LocationId::Giguna_Breach__Labyrinth__Pipe_Cache__Flask => SpotId::Giguna_Breach__Labyrinth__Pipe_Cache,
@@ -11633,8 +11546,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask | LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Collection_Skip | LocationId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure__Flask_Fast_Travel => SpotId::Giguna_Breach__Crab_Rave__A_Crabs_Treasure,
         LocationId::Giguna_Breach__Emergence__Corner__Flask | LocationId::Giguna_Breach__Emergence__Corner__Flask_Collection_Skip | LocationId::Giguna_Breach__Emergence__Corner__Flask_Fast_Travel => SpotId::Giguna_Breach__Emergence__Corner,
         LocationId::Giguna_Breach__Emergence__Left_Side__Flask_from_Below => SpotId::Giguna_Breach__Emergence__Left_Side,
-        LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => SpotId::Giguna_Breach__Pinkness__Rock_Top,
-        LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
+        LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down | LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => SpotId::Giguna_Breach__Pinkness__Rock_Top,
+        LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up | LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
         LocationId::Giguna__Giguna_Northeast__Gate_Button__Open_Gate => SpotId::Giguna__Giguna_Northeast__Gate_Button,
         LocationId::Giguna__Giguna_Northeast__Gate_Right__Remote_Button => SpotId::Giguna__Giguna_Northeast__Gate_Right,
         LocationId::Giguna__Giguna_Northeast__Door__Remote_Flask => SpotId::Giguna__Giguna_Northeast__Door,
@@ -11687,11 +11600,11 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Giguna__Vertical_Interchange__Dead_end__Flask | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Collection_Skip | LocationId::Giguna__Vertical_Interchange__Dead_end__Flask_Fast_Travel => SpotId::Giguna__Vertical_Interchange__Dead_end,
         LocationId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch__Remote_Button => SpotId::Giguna__Vertical_Interchange__Middle_Hill_By_Switch,
         LocationId::Giguna__Vertical_Interchange__Switch__Button => SpotId::Giguna__Vertical_Interchange__Switch,
-        LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => SpotId::Giguna__Vertical_Interchange__Above_Rock,
-        LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Upward_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => SpotId::Giguna__Vertical_Interchange__Rock_East,
-        LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover => SpotId::Giguna__Vertical_Interchange__Rock_West,
+        LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards | LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => SpotId::Giguna__Vertical_Interchange__Above_Rock,
+        LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => SpotId::Giguna__Vertical_Interchange__Rock_East,
+        LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock | LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => SpotId::Giguna__Vertical_Interchange__Rock_West,
         LocationId::Giguna__Antechamber__Statue_Head__Tablet => SpotId::Giguna__Antechamber__Statue_Head,
-        LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fetch_Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => SpotId::Giguna__Gubi_Lair__Center_Platform,
+        LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward | LocationId::Giguna__Gubi_Lair__Center_Platform__Fight_Gubi | LocationId::Giguna__Gubi_Lair__Center_Platform__Hack_Gubi => SpotId::Giguna__Gubi_Lair__Center_Platform,
         LocationId::Giguna__Gubi_Lair__Pedestal__Axe => SpotId::Giguna__Gubi_Lair__Pedestal,
         LocationId::Giguna__Mural__NW_Cache__Note => SpotId::Giguna__Mural__NW_Cache,
         LocationId::Giguna__Mural__Shocking_Distance__Shockwave_Flask => SpotId::Giguna__Mural__Shocking_Distance,

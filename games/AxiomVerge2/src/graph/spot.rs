@@ -6322,7 +6322,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Base_Camp__Left_Platform_Moved,
         loc_range: Some((LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side, LocationId::Ebih__Base_Camp__Left_Platform_Moved__Item_From_The_Side)),
-        exit_range: Some((ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1, ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_2)),
+        exit_range: Some((ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1, ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1)),
         action_range: Some((ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform, ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform)),
     },
     SpotDef {
@@ -6412,7 +6412,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Boss_Room__Lower_Tree,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1, ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_2)),
+        exit_range: Some((ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1, ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -6454,7 +6454,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__By_Garage__East_12,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Ebih__By_Garage__East_12__ex__Crawlspace_Opening_1, ExitId::Ebih__By_Garage__East_12__ex__Outcropping_1)),
         action_range: None,
     },
     SpotDef {
@@ -6478,7 +6478,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__By_Garage__East_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1, ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_2)),
+        exit_range: Some((ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1, ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1)),
         action_range: None,
     },
     SpotDef {
@@ -6490,7 +6490,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__By_Garage__Lower_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1, ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_2)),
+        exit_range: Some((ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1, ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1)),
         action_range: None,
     },
     SpotDef {
@@ -6628,7 +6628,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Drone_Room__Pit_Left,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1, ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_2)),
+        exit_range: Some((ExitId::Ebih__Drone_Room__Pit_Left__ex__Middle_Platform_1, ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1)),
         action_range: Some((ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift, ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early)),
     },
     SpotDef {
@@ -6640,7 +6640,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Drone_Room__Portal_Exit,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1, ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_2)),
+        exit_range: Some((ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1, ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1)),
         action_range: Some((ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform, ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform)),
     },
     SpotDef {
@@ -6670,7 +6670,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_East__Dispenser,
         loc_range: Some((LocationId::Ebih__Ebih_East__Dispenser__Vend, LocationId::Ebih__Ebih_East__Dispenser__Vend)),
-        exit_range: Some((ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_1, ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_2)),
+        exit_range: Some((ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_1, ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_1)),
         action_range: Some((ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift, ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift)),
     },
     SpotDef {
@@ -6802,7 +6802,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__Alcove_Entrance,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1, ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_2)),
+        exit_range: Some((ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1, ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1)),
         action_range: None,
     },
     SpotDef {
@@ -6814,7 +6814,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__Block_Left,
         loc_range: Some((LocationId::Ebih__Ebih_West__Block_Left__Break_Block, LocationId::Ebih__Ebih_West__Block_Left__Break_Block)),
-        exit_range: Some((ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1, ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_2)),
+        exit_range: Some((ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1, ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1)),
         action_range: None,
     },
     SpotDef {
@@ -6958,7 +6958,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__Middle_Middle,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1, ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_2)),
+        exit_range: Some((ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1, ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_1)),
         action_range: None,
     },
     SpotDef {
@@ -7036,7 +7036,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Gem_Room__Button_Corner,
         loc_range: Some((LocationId::Ebih__Gem_Room__Button_Corner__Remote_Button, LocationId::Ebih__Gem_Room__Button_Corner__Shockwave_Secret_Flask)),
-        exit_range: Some((ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_1, ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_3)),
+        exit_range: Some((ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_1, ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_2)),
         action_range: None,
     },
     SpotDef {
@@ -7132,19 +7132,19 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Gem_Room__West_Side,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Gem_Room__West_Side__ex__Below_East_Gate_1, ExitId::Ebih__Gem_Room__West_Side__ex__West_13_2)),
+        exit_range: Some((ExitId::Ebih__Gem_Room__West_Side__ex__Below_East_Gate_1, ExitId::Ebih__Gem_Room__West_Side__ex__West_13_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Below_Bush,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1, ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_2)),
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1, ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1)),
         action_range: Some((ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover, ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further)),
     },
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Bush,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1, ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_2)),
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1, ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -7179,14 +7179,14 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Hidden_Bush,
-        loc_range: Some((LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush, LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush)),
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1, ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_2)),
+        loc_range: Some((LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Behind_Bush, LocationId::Ebih__Grid_25_10_12__Hidden_Bush__Flask_Fast_Travel)),
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1, ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Grid_25_10_12__Mid_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__Door_Left_1, ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_2)),
+        exit_range: Some((ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__Door_Left_1, ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1)),
         action_range: None,
     },
     SpotDef {
@@ -7234,25 +7234,25 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Grid_26_10_11__Middle_Bottom,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1, ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1)),
+        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Ledge_1, ExitId::Ebih__Grid_26_10_11__Middle_Bottom__ex__Middle_Platform_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Grid_26_10_11__Middle_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1, ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_2)),
+        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1, ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Grid_26_10_11__Under_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1, ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_2)),
+        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1, ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Grid_26_10_11__Upper_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1, ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_2)),
+        exit_range: Some((ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1, ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1)),
         action_range: None,
     },
     SpotDef {
@@ -7384,7 +7384,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Hidden_Portal__Stair_Below_Gate,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Hidden_Portal__Stair_Below_Gate__ex__Gate_Ledge_East_1, ExitId::Ebih__Hidden_Portal__Stair_Below_Gate__ex__Gate_Ledge_West_2)),
+        exit_range: Some((ExitId::Ebih__Hidden_Portal__Stair_Below_Gate__ex__Gate_Ledge_East_1, ExitId::Ebih__Hidden_Portal__Stair_Below_Gate__ex__Gate_Ledge_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -7420,7 +7420,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Observation_Tower_Room__East_11,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1, ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_2)),
+        exit_range: Some((ExitId::Ebih__Observation_Tower_Room__East_11__ex__Base_Camp__West_11_1, ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1)),
         action_range: None,
     },
     SpotDef {
@@ -7432,7 +7432,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Observation_Tower_Room__Tower_Top,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1, ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_2)),
+        exit_range: Some((ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1, ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -7534,7 +7534,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Peak__East_Slope,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Peak__East_Slope__ex__East_3_1, ExitId::Ebih__Peak__East_Slope__ex__East_3_2)),
+        exit_range: Some((ExitId::Ebih__Peak__East_Slope__ex__East_3_1, ExitId::Ebih__Peak__East_Slope__ex__East_3_1)),
         action_range: None,
     },
     SpotDef {
@@ -7546,7 +7546,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Peak__Observatory_East,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Peak__Observatory_East__ex__Interior__Observatory__East_1, ExitId::Ebih__Peak__Observatory_East__ex__Middle_Ledge_2)),
+        exit_range: Some((ExitId::Ebih__Peak__Observatory_East__ex__Interior__Observatory__East_1, ExitId::Ebih__Peak__Observatory_East__ex__Middle_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -7558,13 +7558,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Peak__Portal_Stand,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Peak__Portal_Stand__ex__East_3_1, ExitId::Ebih__Peak__Portal_Stand__ex__Tunnel_Ledge_1)),
+        exit_range: Some((ExitId::Ebih__Peak__Portal_Stand__ex__East_3_1, ExitId::Ebih__Peak__Portal_Stand__ex__East_Slope_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Peak__Tunnel_Entrance,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Peak__Tunnel_Entrance__ex__Hidden_Portal__Tunnel_Entrance_1, ExitId::Ebih__Peak__Tunnel_Entrance__ex__Tunnel_Ledge_2)),
+        exit_range: Some((ExitId::Ebih__Peak__Tunnel_Entrance__ex__Hidden_Portal__Tunnel_Entrance_1, ExitId::Ebih__Peak__Tunnel_Entrance__ex__Tunnel_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -7606,7 +7606,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Vertical_Interchange__Below_Door,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1, ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_2)),
+        exit_range: Some((ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1, ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1)),
         action_range: None,
     },
     SpotDef {
@@ -7738,13 +7738,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Walled_Off__Middle_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1, ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_2)),
+        exit_range: Some((ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1, ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Walled_Off__Platform_3,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1, ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_2)),
+        exit_range: Some((ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1, ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1)),
         action_range: None,
     },
     SpotDef {
@@ -7756,13 +7756,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Walled_Off__Platform_5,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1, ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_2)),
+        exit_range: Some((ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1, ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Walled_Off__Upper_Left_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1, ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_3)),
+        exit_range: Some((ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1, ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1)),
         action_range: None,
     },
     SpotDef {
@@ -7798,13 +7798,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Waterfall__Alcove,
         loc_range: Some((LocationId::Ebih__Waterfall__Alcove__Block_Left, LocationId::Ebih__Waterfall__Alcove__Pedestal)),
-        exit_range: Some((ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1, ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_2)),
+        exit_range: Some((ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1, ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Ebih__Waterfall__Alcove_Left,
         loc_range: Some((LocationId::Ebih__Waterfall__Alcove_Left__Block_Left, LocationId::Ebih__Waterfall__Alcove_Left__Block_Left)),
-        exit_range: Some((ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1, ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_2)),
+        exit_range: Some((ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1, ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1)),
         action_range: None,
     },
     SpotDef {
@@ -7906,7 +7906,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Waterfall__Ledge_Below_East_Door,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_1, ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_2)),
+        exit_range: Some((ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_1, ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_1)),
         action_range: Some((ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door, ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door)),
     },
     SpotDef {
@@ -7924,7 +7924,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Ebih__Waterfall__Middle_West_Tree,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1, ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_2)),
+        exit_range: Some((ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1, ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1)),
         action_range: None,
     },
     SpotDef {
@@ -8146,7 +8146,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Emergence__Aquarium__North_Catch,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Aquarium__North_Catch__ex__North_1, ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_3)),
+        exit_range: Some((ExitId::Emergence__Aquarium__North_Catch__ex__North_1, ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1)),
         action_range: None,
     },
     SpotDef {
@@ -8170,7 +8170,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Emergence__Aquarium__Platform_4_Left,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1, ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_3)),
+        exit_range: Some((ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1, ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1)),
         action_range: None,
     },
     SpotDef {
@@ -8218,7 +8218,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Emergence__Audience_Chamber__Bottom_Middle,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1, ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_2)),
+        exit_range: Some((ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1, ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1)),
         action_range: None,
     },
     SpotDef {
@@ -8236,7 +8236,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Emergence__Audience_Chamber__East_11,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1, ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_2)),
+        exit_range: Some((ExitId::Emergence__Audience_Chamber__East_11__ex__Aquarium__West_11_1, ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1)),
         action_range: None,
     },
     SpotDef {
@@ -8260,7 +8260,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Emergence__Audience_Chamber__Right_Column,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1, ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_2)),
+        exit_range: Some((ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1, ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1)),
         action_range: None,
     },
     SpotDef {
@@ -8331,20 +8331,20 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Drop_off__Wall_Left,
-        loc_range: Some((LocationId::Emergence__Drop_off__Wall_Left__Charge_Through_Wall, LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through, LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_1, ExitId::Emergence__Drop_off__Wall_Left__ex__Wall_Right_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Emergence__Drop_off__Wall_Right,
-        loc_range: Some((LocationId::Emergence__Drop_off__Wall_Right__Charge_Through_Wall, LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall, LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Drop_off__Wall_Right__ex__Upper_Ledge_1, ExitId::Emergence__Drop_off__Wall_Right__ex__Wall_Left_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Emergence__Drop_off__West,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1, ExitId::Emergence__Drop_off__West__ex__Wall_Left_2)),
+        exit_range: Some((ExitId::Emergence__Drop_off__West__ex__Camp_Exterior__East_1, ExitId::Emergence__Drop_off__West__ex__Wall_Left_1)),
         action_range: None,
     },
     SpotDef {
@@ -8361,13 +8361,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Lower_Ledge,
-        loc_range: Some((LocationId::Emergence__Rocks_Fall__Lower_Ledge__Charge_Through_Wall, LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall, LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1, ExitId::Emergence__Rocks_Fall__Lower_Ledge__ex__Wall_3_Northeast_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Middle_Ledge,
-        loc_range: Some((LocationId::Emergence__Rocks_Fall__Middle_Ledge__Charge_Through_Wall_2, LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2)),
+        loc_range: Some((LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2, LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2)),
         exit_range: Some((ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1, ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1)),
         action_range: None,
     },
@@ -8380,7 +8380,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Topmost_Hook_Point,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1, ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_2)),
+        exit_range: Some((ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1, ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -8415,7 +8415,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Wall_2_West,
-        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_2_West__Charge_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_1_West_1, ExitId::Emergence__Rocks_Fall__Wall_2_West__ex__Wall_2_East_1)),
         action_range: None,
     },
@@ -8445,7 +8445,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Wall_4_East_Ledge,
-        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Charge_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1, ExitId::Emergence__Rocks_Fall__Wall_4_East_Ledge__ex__Wall_4_West_1)),
         action_range: None,
     },
@@ -8457,7 +8457,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge,
-        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover)),
+        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover)),
         exit_range: Some((ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1, ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1)),
         action_range: None,
     },
@@ -8523,7 +8523,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Storage__Tunnel_Ledge,
-        loc_range: Some((LocationId::Emergence__Storage__Tunnel_Ledge__Charge_Into_Tunnel, LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel)),
+        loc_range: Some((LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel, LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel)),
         exit_range: Some((ExitId::Emergence__Storage__Tunnel_Ledge__ex__Behind_Facade_1, ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2)),
         action_range: None,
     },
@@ -8535,7 +8535,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Storage__Wall_Left_Ledge,
-        loc_range: Some((LocationId::Emergence__Storage__Wall_Left_Ledge__Charge_Through_Wall, LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall, LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1, ExitId::Emergence__Storage__Wall_Left_Ledge__ex__Dais_Left_1)),
         action_range: None,
     },
@@ -8547,14 +8547,14 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Storage__Wall_Right_Ledge,
-        loc_range: Some((LocationId::Emergence__Storage__Wall_Right_Ledge__Charge_Through_Wall, LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall)),
+        loc_range: Some((LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall, LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall)),
         exit_range: Some((ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1, ExitId::Emergence__Storage__Wall_Right_Ledge__ex__West_Hook_Point_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Emergence__Storage__West,
         loc_range: None,
-        exit_range: Some((ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1, ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_2)),
+        exit_range: Some((ExitId::Emergence__Storage__West__ex__Rocks_Fall__East_1, ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -9016,7 +9016,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna_Breach__East__Save_Point,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna_Breach__East__Save_Point__ex__North_1, ExitId::Giguna_Breach__East__Save_Point__ex__North_2)),
+        exit_range: Some((ExitId::Giguna_Breach__East__Save_Point__ex__North_1, ExitId::Giguna_Breach__East__Save_Point__ex__North_1)),
         action_range: Some((ActionId::Giguna_Breach__East__Save_Point__Save, ActionId::Giguna_Breach__East__Save_Point__Save)),
     },
     SpotDef {
@@ -9214,7 +9214,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna_Breach__Gate_and_Wall__Portal_Stand,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna_Breach__Gate_and_Wall__Portal_Stand__ex__Brick_Column_1, ExitId::Giguna_Breach__Gate_and_Wall__Portal_Stand__ex__Button_Right_2)),
+        exit_range: Some((ExitId::Giguna_Breach__Gate_and_Wall__Portal_Stand__ex__Brick_Column_1, ExitId::Giguna_Breach__Gate_and_Wall__Portal_Stand__ex__Button_Right_1)),
         action_range: None,
     },
     SpotDef {
@@ -9232,7 +9232,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna_Breach__Gate_and_Wall__West_Rock_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna_Breach__Gate_and_Wall__West_Rock_Ledge__ex__Gate_West_1, ExitId::Giguna_Breach__Gate_and_Wall__West_Rock_Ledge__ex__Gate_West_2)),
+        exit_range: Some((ExitId::Giguna_Breach__Gate_and_Wall__West_Rock_Ledge__ex__Gate_West_1, ExitId::Giguna_Breach__Gate_and_Wall__West_Rock_Ledge__ex__Gate_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -9609,13 +9609,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Pinkness__Rock_Bottom,
-        loc_range: Some((LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Charge_Up, LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up)),
+        loc_range: Some((LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up, LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up)),
         exit_range: Some((ExitId::Giguna_Breach__Pinkness__Rock_Bottom__ex__Rock_Top_1, ExitId::Giguna_Breach__Pinkness__Rock_Bottom__ex__Rock_Top_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Pinkness__Rock_Top,
-        loc_range: Some((LocationId::Giguna_Breach__Pinkness__Rock_Top__Charge_Down, LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down)),
+        loc_range: Some((LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down, LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down)),
         exit_range: Some((ExitId::Giguna_Breach__Pinkness__Rock_Top__ex__Middle_West_Ledge_1, ExitId::Giguna_Breach__Pinkness__Rock_Top__ex__Rock_Bottom_1)),
         action_range: None,
     },
@@ -9628,7 +9628,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna_Breach__Pinkness__Top_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_1, ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_2)),
+        exit_range: Some((ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_1, ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_1)),
         action_range: None,
     },
     SpotDef {
@@ -9675,7 +9675,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Robopede__Center,
-        loc_range: Some((LocationId::Giguna_Breach__Robopede__Center__Bad, LocationId::Giguna_Breach__Robopede__Center__Strong_Attacks)),
+        loc_range: Some((LocationId::Giguna_Breach__Robopede__Center__Boss_Reward, LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede)),
         exit_range: None,
         action_range: None,
     },
@@ -9687,7 +9687,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Giguna_Breach__Robopede__West,
-        loc_range: Some((LocationId::Giguna_Breach__Robopede__West__Bad, LocationId::Giguna_Breach__Robopede__West__Strong_Attacks)),
+        loc_range: Some((LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede, LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede)),
         exit_range: Some((ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1, ExitId::Giguna_Breach__Robopede__West__ex__SW_Save__East_12_1)),
         action_range: None,
     },
@@ -9898,13 +9898,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Antechamber__Left_Wall_Lower,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1, ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_2)),
+        exit_range: Some((ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1, ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Antechamber__Left_Wall_Mid,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1, ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_2)),
+        exit_range: Some((ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1, ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1)),
         action_range: None,
     },
     SpotDef {
@@ -9916,7 +9916,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Antechamber__Middle_Bricks_Right,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1, ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_2)),
+        exit_range: Some((ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1, ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1)),
         action_range: None,
     },
     SpotDef {
@@ -9928,7 +9928,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Antechamber__Statue_Head,
         loc_range: Some((LocationId::Giguna__Antechamber__Statue_Head__Tablet, LocationId::Giguna__Antechamber__Statue_Head__Tablet)),
-        exit_range: Some((ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1, ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_2)),
+        exit_range: Some((ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1, ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1)),
         action_range: None,
     },
     SpotDef {
@@ -9988,7 +9988,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Breachable_Wall__East_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Lower_Brick_1, ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Save_Point_2)),
+        exit_range: Some((ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Lower_Brick_1, ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Save_Point_1)),
         action_range: None,
     },
     SpotDef {
@@ -10054,7 +10054,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Carnelian__Lower_Susar,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Carnelian__Lower_Susar__ex__Rock_1, ExitId::Giguna__Carnelian__Lower_Susar__ex__West_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__Carnelian__Lower_Susar__ex__Rock_1, ExitId::Giguna__Carnelian__Lower_Susar__ex__West_Ledge_1)),
         action_range: Some((ActionId::Giguna__Carnelian__Lower_Susar__Caught, ActionId::Giguna__Carnelian__Lower_Susar__Hack)),
     },
     SpotDef {
@@ -10102,7 +10102,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Carnelian__West_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1, ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_2)),
+        exit_range: Some((ExitId::Giguna__Carnelian__West_Ledge__ex__Upper_Path_1, ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1)),
         action_range: None,
     },
     SpotDef {
@@ -10186,7 +10186,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Dual_Path__Base_of_Wall,
         loc_range: Some((LocationId::Giguna__Dual_Path__Base_of_Wall__Break_Wall, LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall)),
-        exit_range: Some((ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1, ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_2)),
+        exit_range: Some((ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Secret_1, ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1)),
         action_range: None,
     },
     SpotDef {
@@ -10216,7 +10216,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Dual_Path__East_Gate,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1, ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_2)),
+        exit_range: Some((ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1, ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1)),
         action_range: None,
     },
     SpotDef {
@@ -10234,7 +10234,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Dual_Path__In_the_Grass,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1, ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_2)),
+        exit_range: Some((ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1, ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1)),
         action_range: None,
     },
     SpotDef {
@@ -10246,7 +10246,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Dual_Path__Midway,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1, ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_2)),
+        exit_range: Some((ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1, ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1)),
         action_range: None,
     },
     SpotDef {
@@ -10282,13 +10282,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Dual_Path__West_18,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1, ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_2)),
+        exit_range: Some((ExitId::Giguna__Dual_Path__West_18__ex__Lamassu__East_18_1, ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Dual_Path__West_Gate,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1, ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_2)),
+        exit_range: Some((ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1, ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_1)),
         action_range: None,
     },
     SpotDef {
@@ -10318,13 +10318,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__East_Caverns__Arc_Passage,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1, ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_2)),
+        exit_range: Some((ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1, ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1)),
         action_range: Some((ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo, ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo)),
     },
     SpotDef {
         id: SpotId::Giguna__East_Caverns__Carving,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1, ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_2)),
+        exit_range: Some((ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1, ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_1)),
         action_range: Some((ActionId::Giguna__East_Caverns__Carving__Enter_Combo, ActionId::Giguna__East_Caverns__Carving__Enter_Combo)),
     },
     SpotDef {
@@ -10372,13 +10372,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__East_Caverns__Hidden_Passage_West,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1, ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Hidden_Passage_Center_1, ExitId::Giguna__East_Caverns__Hidden_Passage_West__ex__Statues_Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__East_Caverns__Lower_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1, ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1, ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -10414,7 +10414,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__East_Caverns__Statues_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1, ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_1, ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1)),
         action_range: Some((ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo, ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door)),
     },
     SpotDef {
@@ -10546,7 +10546,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Gateway__Block_Lowered,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1, ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_2)),
+        exit_range: Some((ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1, ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1)),
         action_range: None,
     },
     SpotDef {
@@ -10642,7 +10642,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Below_Gate,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1, ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_2)),
+        exit_range: Some((ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1, ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1)),
         action_range: None,
     },
     SpotDef {
@@ -10678,13 +10678,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Lower_Fork,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1, ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_2)),
+        exit_range: Some((ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1, ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Middle_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1, ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_2)),
+        exit_range: Some((ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1, ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1)),
         action_range: None,
     },
     SpotDef {
@@ -10714,13 +10714,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Staircase_Top,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1, ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_2)),
+        exit_range: Some((ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1, ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Stone_Knob,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1, ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_2)),
+        exit_range: Some((ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1, ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1)),
         action_range: Some((ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone, ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone)),
     },
     SpotDef {
@@ -10858,13 +10858,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Northeast__Shaft_Bottom,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_1, ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_3)),
+        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_1, ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_2)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Giguna_Northeast__Step,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Step__ex__Gate_Vent_1, ExitId::Giguna__Giguna_Northeast__Step__ex__West_9_2)),
+        exit_range: Some((ExitId::Giguna__Giguna_Northeast__Step__ex__Gate_Vent_1, ExitId::Giguna__Giguna_Northeast__Step__ex__West_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -10930,13 +10930,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Gubi_Lair__East_Tree,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Gubi_Lair__East_Tree__ex__Center_Platform_1, ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_2)),
+        exit_range: Some((ExitId::Giguna__Gubi_Lair__East_Tree__ex__Center_Platform_1, ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Gubi_Lair__Grass_by_Wall,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1, ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_2)),
+        exit_range: Some((ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1, ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1)),
         action_range: None,
     },
     SpotDef {
@@ -10966,7 +10966,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Gubi_Lair__Shaft_Bottom,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1, ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_3)),
+        exit_range: Some((ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1, ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1)),
         action_range: None,
     },
     SpotDef {
@@ -11122,7 +11122,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Labyrinth_East__Lower_Middle,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1, ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_2)),
+        exit_range: Some((ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1, ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1)),
         action_range: None,
     },
     SpotDef {
@@ -11194,13 +11194,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Labyrinth__Empty_Plinth,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_1, ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_1, ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Labyrinth__First_Pillar,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1, ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_3)),
+        exit_range: Some((ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1, ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_2)),
         action_range: None,
     },
     SpotDef {
@@ -11236,7 +11236,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Labyrinth__Portal_Stand,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Labyrinth__Portal_Stand__ex__Door_1, ExitId::Giguna__Labyrinth__Portal_Stand__ex__Middle_Brick_2)),
+        exit_range: Some((ExitId::Giguna__Labyrinth__Portal_Stand__ex__Door_1, ExitId::Giguna__Labyrinth__Portal_Stand__ex__Middle_Brick_1)),
         action_range: None,
     },
     SpotDef {
@@ -11512,7 +11512,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Mural__Southwest_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Mural__Southwest_Ledge__ex__Lower_Middle_Column_1, ExitId::Giguna__Mural__Southwest_Ledge__ex__Lower_Middle_Column_2)),
+        exit_range: Some((ExitId::Giguna__Mural__Southwest_Ledge__ex__Lower_Middle_Column_1, ExitId::Giguna__Mural__Southwest_Ledge__ex__Lower_Middle_Column_1)),
         action_range: None,
     },
     SpotDef {
@@ -11584,7 +11584,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Ruins_East__Cliff,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1, ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_2)),
+        exit_range: Some((ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1, ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -11710,7 +11710,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Ruins_Top__Switch,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1, ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2)),
+        exit_range: Some((ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1, ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1)),
         action_range: Some((ActionId::Giguna__Ruins_Top__Switch__Open_Doors, ActionId::Giguna__Ruins_Top__Switch__Open_Doors)),
     },
     SpotDef {
@@ -11765,7 +11765,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
         id: SpotId::Giguna__Ruins_West__Lower_Ledge,
         loc_range: None,
         exit_range: Some((ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1, ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1)),
-        action_range: Some((ActionId::Giguna__Ruins_West__Lower_Ledge__Destroy_Kishib, ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Kishib)),
+        action_range: Some((ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib, ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib)),
     },
     SpotDef {
         id: SpotId::Giguna__Ruins_West__Nook,
@@ -11848,7 +11848,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Separator__Lower_Brick,
         loc_range: Some((LocationId::Giguna__Separator__Lower_Brick__Break_Bricks, LocationId::Giguna__Separator__Lower_Brick__Break_Bricks)),
-        exit_range: Some((ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_1, ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_2)),
+        exit_range: Some((ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_1, ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_1)),
         action_range: None,
     },
     SpotDef {
@@ -11895,7 +11895,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Above_Rock,
-        loc_range: Some((LocationId::Giguna__Vertical_Interchange__Above_Rock__Charge_Downwards, LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards)),
+        loc_range: Some((LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards, LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards)),
         exit_range: Some((ExitId::Giguna__Vertical_Interchange__Above_Rock__ex__Ledge_Above_Rock_1, ExitId::Giguna__Vertical_Interchange__Above_Rock__ex__Rock_1)),
         action_range: None,
     },
@@ -11938,7 +11938,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Ledge_Above_Rock,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Ledge_Above_Rock__ex__West_21_1, ExitId::Giguna__Vertical_Interchange__Ledge_Above_Rock__ex__West_21_2)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Ledge_Above_Rock__ex__West_21_1, ExitId::Giguna__Vertical_Interchange__Ledge_Above_Rock__ex__West_21_1)),
         action_range: None,
     },
     SpotDef {
@@ -11974,7 +11974,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Lower_West_Slope,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Lower_West_Slope__ex__Rock_West_1, ExitId::Giguna__Vertical_Interchange__Lower_West_Slope__ex__Rock_West_3)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Lower_West_Slope__ex__Rock_West_1, ExitId::Giguna__Vertical_Interchange__Lower_West_Slope__ex__Rock_West_2)),
         action_range: None,
     },
     SpotDef {
@@ -11992,7 +11992,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate__ex__Dead_end_Ledge_1, ExitId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate__ex__Gate_2)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate__ex__Dead_end_Ledge_1, ExitId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate__ex__Gate_1)),
         action_range: None,
     },
     SpotDef {
@@ -12015,13 +12015,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Rock_East,
-        loc_range: Some((LocationId::Giguna__Vertical_Interchange__Rock_East__Charge_Through_Rock, LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock)),
+        loc_range: Some((LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock, LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock)),
         exit_range: None,
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Rock_West,
-        loc_range: Some((LocationId::Giguna__Vertical_Interchange__Rock_West__Charge_All_The_Way_Through_Rock, LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock_and_Hover)),
+        loc_range: Some((LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock, LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock)),
         exit_range: Some((ExitId::Giguna__Vertical_Interchange__Rock_West__ex__East_22_1, ExitId::Giguna__Vertical_Interchange__Rock_West__ex__Rock_1)),
         action_range: None,
     },
@@ -12034,7 +12034,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Southeast_Corner,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Southeast_Corner__ex__Lower_Platform_1, ExitId::Giguna__Vertical_Interchange__Southeast_Corner__ex__Lower_Platform_2)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Southeast_Corner__ex__Lower_Platform_1, ExitId::Giguna__Vertical_Interchange__Southeast_Corner__ex__Lower_Platform_1)),
         action_range: None,
     },
     SpotDef {
@@ -12046,13 +12046,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Top_Left_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Top_Left_Ledge__ex__Top_Right_Ledge_1, ExitId::Giguna__Vertical_Interchange__Top_Left_Ledge__ex__Top_Right_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Top_Left_Ledge__ex__Top_Right_Ledge_1, ExitId::Giguna__Vertical_Interchange__Top_Left_Ledge__ex__Top_Right_Ledge_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Top_Middle_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__East_Caverns__East_Grass_1, ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__Top_Right_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__East_Caverns__East_Grass_1, ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__Top_Right_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -12070,7 +12070,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Vertical_Interchange__Top_Rocky_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Top_Rocky_Ledge__ex__Top_Left_Ledge_1, ExitId::Giguna__Vertical_Interchange__Top_Rocky_Ledge__ex__Top_Middle_Ledge_2)),
+        exit_range: Some((ExitId::Giguna__Vertical_Interchange__Top_Rocky_Ledge__ex__Top_Left_Ledge_1, ExitId::Giguna__Vertical_Interchange__Top_Rocky_Ledge__ex__Top_Middle_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -12106,13 +12106,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Wasteland__Bluff_by_Door,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1, ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_2)),
+        exit_range: Some((ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1, ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Wasteland__Cache_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Wasteland__Cache_Ledge__ex__Center_Plains_1, ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_2)),
+        exit_range: Some((ExitId::Giguna__Wasteland__Cache_Ledge__ex__Center_Plains_1, ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1)),
         action_range: None,
     },
     SpotDef {
@@ -12172,13 +12172,13 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Wasteland__East_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1, ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_2)),
+        exit_range: Some((ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1, ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Giguna__Wasteland__Ladder_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Wasteland__Ladder_Ledge__ex__Door_Left_1, ExitId::Giguna__Wasteland__Ladder_Ledge__ex__Right_Platform_East_2)),
+        exit_range: Some((ExitId::Giguna__Wasteland__Ladder_Ledge__ex__Door_Left_1, ExitId::Giguna__Wasteland__Ladder_Ledge__ex__Right_Platform_East_1)),
         action_range: None,
     },
     SpotDef {
@@ -12196,7 +12196,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Wasteland__Lower_Cliff,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1, ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_2)),
+        exit_range: Some((ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1, ExitId::Giguna__Wasteland__Lower_Cliff__ex__Middle_Cliff_1)),
         action_range: None,
     },
     SpotDef {
@@ -12448,7 +12448,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__West_Caverns__Tunnel_Bottom,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1, ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_2)),
+        exit_range: Some((ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1, ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1)),
         action_range: None,
     },
     SpotDef {

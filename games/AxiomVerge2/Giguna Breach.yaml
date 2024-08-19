@@ -44,13 +44,12 @@ areas:
           tags: [xdoor]
     - name: East 6
       coord: [15.9, 5.55]
-      local:
-        - to: Upper East
-          jumps: 2
       exits:
         - to: Upper East
-          req: Slingshot_Hook
-          time: 0.7
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: Ascent > West 6
           tags: [xdoor]
     - name: Upper East
@@ -67,13 +66,12 @@ areas:
       coord: [14.8, 5.8]
       data:
         flipside: Giguna > Ruins Top > Save Point
-      local:
-        - to: Upper West
-          jumps: 3
       exits:
         - to: Upper West
-          req: Slingshot_Hook
-          time: 1  # ?
+          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
 
 - name: Chimney  # MARK: Chimney
   on_entry: $reset_old_area(^newpos)
@@ -251,7 +249,8 @@ areas:
       exits:
         - to: Side Door
           req: Slingshot_Hook
-          time: 1  # ?
+          movement: base
+          jumps: 2
     - name: Side Door
       coord: [12.35, 10.75]
       local:
@@ -282,7 +281,8 @@ areas:
       exits:
         - to: Lower Platform
           req: Slingshot_Hook
-          time: 1  # ?
+          movement: base
+          jumps: 2
       actions:
         - name: Save
           do: $save
@@ -294,7 +294,8 @@ areas:
       exits:
         - to: Lower Platform
           req: Slingshot_Hook
-          time: 1  # ?
+          movement: base
+          jumps: 1
         - to: Robopede > West
           tags: [xdoor]
 
@@ -314,29 +315,21 @@ areas:
         # These are actually based on entering the room in a fresh state from the West
         # but this is one of the most unreliable boss fights due to its movements so
         # I'm not going to be worried about precision
-        - name: Strong Attacks  # and damage boosting?
-          canon: Robopede
-          item: Robopede
-          req: Slingshot_Hook and Drone_Melee_Damage_3
-          to: Center
-          time: 12
-          penalties:
-            - when: not Drone_Hover
-              add: 6  # ?
-        - name: Medium
-          canon: Robopede
-          item: Robopede
-          req: Slingshot_Hook and Slingshot_Weapon
-          to: Center
-          time: 24  # ?
-          penalties:
-            - when: not Drone_Hover
-              add: 6  # ?
-        - name: Bad
+        - name: Defeat Robopede
           canon: Robopede
           item: Robopede
           req: Slingshot_Hook
-          time: 40  # ?
+          to: Center
+          time: 12
+          penalties:
+            - when: Slingshot_Weapon and Drone_Hover and not Drone_Melee_Damage_3  # Medium
+              add: 12  # ?
+            - when: Slingshot_Weapon and not Drone_Melee_Damage_3  # Medium minus hover
+              add: 18  # ?
+            - when: not Drone_Melee_Damage_3  # Bad
+              add: 28  # ?
+            - when: not Drone_Hover  # Strong minus hover
+              add: 6  # ?
       exits:
         - to: SW Save > East 12
           tags: [xdoor]
@@ -347,24 +340,20 @@ areas:
         - to: North
           jumps: 2
       locations:
-        - name: Strong Attacks  # and damage boosting?
-          canon: Robopede
-          item: Robopede
-          req: Slingshot_Hook and Drone_Melee_Damage_3
-          time: 15 # ?
-          penalties:
-            - when: not Drone_Hover
-              add: 6
-        - name: Medium
-          canon: Robopede
-          item: Robopede
-          req: Slingshot_Hook and Slingshot_Weapon
-          time: 27  # ?
-        - name: Bad
+        - name: Defeat Robopede
           canon: Robopede
           item: Robopede
           req: Slingshot_Hook
-          time: 43  # ?
+          time: 15 # ?
+          penalties:
+            - when: Slingshot_Weapon and Drone_Hover and not Drone_Melee_Damage_3  # Medium
+              add: 12  # ?
+            - when: Slingshot_Weapon and not Drone_Melee_Damage_3  # Medium minus hover
+              add: 18  # ?
+            - when: not Drone_Melee_Damage_3  # Bad
+              add: 28  # ?
+            - when: not Drone_Hover  # Strong minus hover
+              add: 6  # ?
         - name: Boss Reward
           item: Flask
           req: Robopede
@@ -453,14 +442,15 @@ areas:
     - name: South
       coord: [16.5, 10.8]
       local:
-        - to: Cuesta
-          jumps: 2
         - to: East 11
           jumps: 1
       exits:
         - to: Cuesta
-          req: Slingshot_Hook
-          time: 1.5
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: Antechamber > North
           tags: [ydoor]
     - name: East 11
@@ -535,8 +525,6 @@ areas:
       local:
         - to: Northeast Upper Ledge
           jumps: 1
-        - to: Highest Fire East
-          jumps: 1
         - to: First Fire
         - to: South
           thru: [16.1, 10.1]
@@ -546,9 +534,11 @@ areas:
           movement: fast_hover
           jumps: 1
         - to: Highest Fire East
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: West 10
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -764,14 +754,13 @@ areas:
       coord: [12.5, 18.7]
       data:
         flipside: Giguna > Clouds > Platform Stop
-      local:
-        - to: Corner
-          jumps: 3
       exits:
         - to: Corner
-          req: Drone_Hover
           movement: base
           jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              jumps: 1
     - name: Quick Entry
       coord: [12.5, 18.85]
       data:
@@ -996,13 +985,15 @@ areas:
         - to: Middle Tier Ledge East
         - to: Lower Tier East
         - to: Pipe Entrance
-        - to: Middle Tier Middle
-          jumps: 4
       exits:
         - to: Middle Tier Middle
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 2
     - name: Middle Tier Ledge East
       coord: [18.6, 19.7]
       data:
@@ -1025,13 +1016,14 @@ areas:
       coord: [17.35, 19.4]
       local:
         - to: Middle Tier Ledge
-        - to: Middle Tier Upper
-          jumps: 3
       exits:
         - to: Middle Tier Upper
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Plinth Approach
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1102,20 +1094,23 @@ areas:
       coord: [16.85, 18.35]
       local:
         - to: Upper Tier West
-        - to: Rooftop East
       exits:
         - to: Rooftop East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Rooftop East
       coord: [17.35, 18.35]
       local:
-        - to: Rooftop West
         - to: Upper Column 1
       exits:
         - to: Rooftop West
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Upper Column 1
       coord: [17.55, 18.75]
       local:
@@ -1202,7 +1197,6 @@ areas:
         - to: East Upper Ledge
         - to: Portal Dais
           thru: [17.45, 21.3]
-        - to: East Upper Ledge
       exits:
         - to: Labyrinth > South
           tags: [ydoor]
@@ -1239,8 +1233,6 @@ areas:
       coord: [19.35, 22.8]
       local:
         - to: South
-        - to: Button
-          jumps: 4
       locations:
         - name: Flask
           canon: Giguna_Breach_Lower_Machinery_Flask
@@ -1259,9 +1251,11 @@ areas:
           tags: [cskip]
       exits:
         - to: Button
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: Button
       coord: [19.3, 22.3]
       local:
@@ -1326,12 +1320,11 @@ areas:
       exits:
         - to: East Ledge
           req: Drone_Hover
-          movement: base
-          jumps: 1
-        - to: East Ledge
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: East Mid-air
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1568,14 +1561,14 @@ areas:
       data:
         flipside: Giguna > Gateway > Far Ledge
       local:
-        - to: Top Scaffold
-          jumps: 1
         - to: South
       exits:
         - to: Top Scaffold
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: South
       coord: [20.5, 18.75]
       data:
@@ -1652,19 +1645,18 @@ areas:
         - to: Button Left
       exits:
         - to: Brick Column
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: fast_hover
           jumps: 1
-        - to: Brick Column
-          req: Drone_Hover
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Button Right
-          req: Drone_Hover
-          movement: base
-        - to: Button Right
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Brick Column
       coord: [18.15, 8.5]
       data:
@@ -1678,12 +1670,13 @@ areas:
           movement: base
     - name: Gate West
       coord: [17.9, 8.75]
-      local:
-        - to: West Rock Ledge
       exits:
         - to: West Rock Ledge
           req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Brick Column
           req: Slingshot_Hook and Giguna_Breach_Gate_and_Wall_Gate
           movement: base
@@ -1697,20 +1690,18 @@ areas:
           req: Slingshot_Hook
           movement: base
           jumps: 3
-        - to: Gate West
-          req: Slingshot_Hook and Drone_Hover
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              jumps: 1
     - name: West 10
       coord: [17.1, 9.75]
-      local:
-        - to: West Rock Ledge
-          jumps: 2
       exits:
         - to: West Rock Ledge
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: Fire Room > East 10
           tags: [xdoor]
 
@@ -1737,14 +1728,15 @@ areas:
   spots:
     - name: East
       coord: [17.9, 12.75]
-      local:
-        - to: Button
-          jumps: 2
       exits:
         - to: Button
           req: Slingshot_Hook and Slingshot_Weapon
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Slingshot_Weapon
+              movement: base
+              jumps: 1
         - to: Fork > West 13
           tags: [xdoor]
     - name: Button
@@ -1928,13 +1920,12 @@ areas:
           jumps: 2
       exits:
         - to: North
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 2
-        - to: North
-          req: Drone_Hover
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
       actions:
         - name: Save
           do: $save
@@ -1982,14 +1973,14 @@ areas:
     - name: East
       coord: [21.9, 20.8]
       local:
-        - to: Narrow Point
-          jumps: 1
         - to: Button Obverse
       exits:
         - to: Narrow Point
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Uhrum Breach > Blob > West Side
           movement: base
           penalty_tags: [xdoor, -base.2]
@@ -2136,8 +2127,6 @@ areas:
     - name: Middle Left Ledge
       coord: [11.25, 9.75]
       local:
-        - to: Middle Platform
-          jumps: 1
         - to: Lowest Platform
       exits:
         - to: Upper Right Ledge
@@ -2145,9 +2134,11 @@ areas:
           movement: base
           jumps: 3
         - to: Middle Platform
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Lower Right Ledge
       coord: [11.8, 10.0]
       local:
@@ -2272,11 +2263,10 @@ areas:
         - to: Center Ledge Upper
           req: Slingshot_Hook
           movement: base
-          jumps: 3
-        - to: Center Ledge Upper
-          req: Slingshot_Hook and Drone_Hover
-          movement: base
           jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              jumps: 1
 
     - name: West 13
       coord: [18.1, 12.75]
@@ -2291,16 +2281,15 @@ areas:
           jumps: 1
     - name: East 14
       coord: [18.9, 13.55]
-      local:
-        - to: Center Ledge Lower
-          jumps: 2
       exits:
         - to: Pinkness > West
           tags: [xdoor]
         - to: Center Ledge Lower
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
 
 - name: Pinkness  # MARK: Pinkness
   on_entry: $reset_old_area(^newpos)
@@ -2321,13 +2310,12 @@ areas:
         - to: Middle West Ledge
       exits:
         - to: West
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 2
-        - to: West
-          req: Drone_Hover
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: Upper East Ledge
       coord: [19.8, 14.5]
       local:
@@ -2367,24 +2355,16 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge Down
-          canon: Giguna_Breach_Pinkness_Rock
-          item: Giguna_Breach_Pinkness_Rock
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock Bottom
-          movement: base
-          penalty_tags: [charge_time]
-          penalties:
-            - add: 1  # airtime
-          tags: [event]
         - name: Spin Down
           canon: Giguna_Breach_Pinkness_Rock
           item: Giguna_Breach_Pinkness_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock Bottom
           movement: base
           penalties:
             - add: 1  # airtime
+            - when: not Slingshot_Weapon
+              tags: [charge_time]
           tags: [event]
       exits:
         - to: Rock Bottom
@@ -2409,22 +2389,16 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge Up
-          canon: Giguna_Breach_Pinkness_Rock
-          item: Giguna_Breach_Pinkness_Rock
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock Top
-          movement: fling
-          jumps: 1
-          penalty_tags: [charge_time]
-          tags: [event]
         - name: Spin Up
           canon: Giguna_Breach_Pinkness_Rock
           item: Giguna_Breach_Pinkness_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock Top
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time]
           tags: [event]
       exits:
         - to: Rock Top
