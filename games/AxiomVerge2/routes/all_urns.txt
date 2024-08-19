@@ -27,7 +27,7 @@ MainSavewarp to Ebih > Ebih West > Upper Save
 ! Do Recall Drone
   MainSavewarp to Giguna > Giguna Northeast > Save Point
 
-! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
+! Do Giguna > Ruins West > Lower Ledge > Hack/Destroy Kishib
   Move... to Giguna > Ruins Top > Portal Left
 ! Do Deploy Drone
   Move... to Giguna > Ruins Top > Portal

@@ -68,7 +68,7 @@
 * Collect Researchers_Missing from Giguna > Giguna Base > Table > News
 
   MainSavewarp to Giguna > Giguna Northeast > Save Point
-! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
+! Do Giguna > Ruins West > Lower Ledge > Hack/Destroy Kishib
 * Collect Flask from Giguna > Ruins Top > Small Ledge > Shockwave Flask
   Move... to Giguna > Ruins Top > Portal Left
 ! Do Deploy Drone

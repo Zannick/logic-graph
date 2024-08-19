@@ -93,7 +93,7 @@
 * Collect Letter_from_Trace from Interior > Outpost Interior > Bookshelf > Note
 
   MainSavewarp to Giguna > Giguna Northeast > Save Point
-! Do Giguna > Ruins West > Lower Ledge > Hack Kishib
+! Do Giguna > Ruins West > Lower Ledge > Hack/Destroy Kishib
 * Collect Flask from Giguna > Ruins Top > Small Ledge > Shockwave Flask
   Move... to Giguna > Ruins Top > Portal Left
 ! Do Deploy Drone
