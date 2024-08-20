@@ -42,12 +42,12 @@ areas:
           movement: base
           jumps: 3
         - to: Portal Stand
-          req: $grab and $climb
+          req: $hook or ($grab and $climb)
           movement: base
-          jumps: 3
-        - to: Portal Stand
-          req: $hook
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
 
     - name: Hidden Passage West
       coord: [19.05, 25.2]
@@ -102,9 +102,12 @@ areas:
           movement: base
           jumps: 7
         - to: Portal Stand
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 3
 
     - name: Southwest Tree
       coord: [19.2, 27.05]
@@ -145,13 +148,12 @@ areas:
           movement: base
           jumps: 2
         - to: Lower Wall West
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Lower Wall West
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
       actions:
         - name: Save
           do: $save
@@ -170,13 +172,12 @@ areas:
           movement: base
           jumps: 1
         - to: Gate West Ledge
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Gate West Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Clear Passage
       coord: [19.95, 25.75]
       local:
@@ -185,13 +186,12 @@ areas:
         - to: East 26
       exits:
         - to: Portal Stand
-          req: $grab and $climb
-          movement: base
-          jumps: 4
-        - to: Portal Stand
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
 
     - name: Gate West
       coord: [19.75, 24.9]
@@ -202,12 +202,12 @@ areas:
       exits:
         - to: Inner Dais
           req: Uhrum_West_Entrance_Gate
-          movement: base
-          jumps: 2
-        - to: Inner Dais
-          req: Uhrum_West_Entrance_Gate and $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 1
     - name: Gate West Ledge
       coord: [19.6, 25.1]
       data:
@@ -218,13 +218,12 @@ areas:
           jumps: 1
       exits:
         - to: Top West Ledge
-          req: $hover
+          req: $hook or $hover
           movement: base
           jumps: 1
-        - to: Top West Ledge
-          req: $hook  # possible?
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hover
+              jumps: 1
         - to: Inner Dais
           req: Uhrum_West_Entrance_Gate
           movement: base
@@ -277,13 +276,12 @@ areas:
           jumps: 2
       exits:
         - to: Portal Exit
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Portal Exit
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Upper Wall East
           req: Uhrum_West_Entrance_Upper_Wall
           movement: base
@@ -307,18 +305,15 @@ areas:
           movement: base
           jumps: 1
       hybrid:
-        - name: Charge through Wall
-          item: Uhrum_West_Entrance_Upper_Wall
-          canon: Uhrum_West_Entrance_Upper_Wall
-          req: $charge
-          to: Upper Wall West
-          time: 1  # ?
         - name: Spin through Wall
           item: Uhrum_West_Entrance_Upper_Wall
           canon: Uhrum_West_Entrance_Upper_Wall
-          req: $spin
+          req: $spin or $charge
           to: Upper Wall West
           time: 0.3
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.7  # ?
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Upper_Wall
           canon: Uhrum_West_Entrance_Upper_Wall
@@ -364,34 +359,26 @@ areas:
         - to: Save Point
       exits:
         - to: South Platform
-          req: $hover
+          req: $hook or $hover or $grab
           movement: base
           jumps: 1
-        - to: South Platform
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: South Platform
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 1
         - to: Lower Wall East
           req: Uhrum_West_Entrance_Lower_Wall
           movement: base
           jumps: 1
       hybrid:
-        - name: Charge through Wall
-          item: Uhrum_West_Entrance_Lower_Wall
-          canon: Uhrum_West_Entrance_Lower_Wall
-          req: $charge
-          to: Lower Wall East
-          time: 1.2  # ?
         - name: Spin through Wall
           item: Uhrum_West_Entrance_Lower_Wall
           canon: Uhrum_West_Entrance_Lower_Wall
-          req: $spin
+          req: $spin or $charge
           to: Lower Wall East
           time: 0.5  # ?
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.7  # ?
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Lower_Wall
           canon: Uhrum_West_Entrance_Lower_Wall
@@ -411,18 +398,15 @@ areas:
           req: Uhrum_West_Entrance_Lower_Wall
           movement: base
       hybrid:
-        - name: Charge through Wall
-          item: Uhrum_West_Entrance_Lower_Wall
-          canon: Uhrum_West_Entrance_Lower_Wall
-          req: $charge
-          to: Lower Wall West
-          time: 1.2  # ?
         - name: Spin through Wall
           item: Uhrum_West_Entrance_Lower_Wall
           canon: Uhrum_West_Entrance_Lower_Wall
-          req: $spin
+          req: $spin or $charge
           to: Lower Wall West
           time: 0.5  # ?
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.7
         - name: Mist through Wall
           item: Uhrum_West_Entrance_Lower_Wall
           canon: Uhrum_West_Entrance_Lower_Wall
@@ -471,13 +455,12 @@ areas:
           movement: base
           jumps: 2
         - to: Lower Path Tree Ledge
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 2
-        - to: Lower Path Tree Ledge
-          req: $grab and $climb
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower Path Tree Ledge
       coord: [20.55, 27.3]
       data:
@@ -499,13 +482,12 @@ areas:
       coord: [20.95, 27.7]
       exits:
         - to: Lower Path Tree Ledge
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: Lower Path Tree Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Glitchy Corridor > West 28
           tags: [xshift]
 
@@ -699,13 +681,12 @@ areas:
           jumps: 2
       exits:
         - to: Center East
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Center East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Mideast Hill
       coord: [24.5, 24.9]
       local:
@@ -774,13 +755,12 @@ areas:
           tags: [standing]
       exits:
         - to: East Hill
-          req: $climb
-          movement: base
-          jumps: 5
-        - to: East Hill
-          req: $hover
+          req: $hover or $climb
           movement: base
           jumps: 4
+          penalties:
+            - when: not $hover
+              jumps: 1
     - name: East Hill
       coord: [25.7, 24.7]
       local:
@@ -791,11 +771,7 @@ areas:
           req: $hover
           movement: base
         - to: Upper Rock East
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: Upper Rock East
-          req: Anuman and $grab
+          req: $hook or (Anuman and $grab)
           movement: base
           jumps: 1
         - to: Upper Rock East
@@ -838,13 +814,12 @@ areas:
         - to: West Entrance > East 28
           tags: [xshift]
         - to: West Glitch Ledge
-          req: $hook or Anuman
+          req: $hook or Anuman or $hover or $grab
           movement: base
           jumps: 2
-        - to: West Glitch Ledge
-          req: $hover or $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: West Glitch West
       coord: [21.45, 27.55]
       data:
@@ -856,13 +831,12 @@ areas:
           req: ^mode == 'drone' and Uhrum_West_Glitch
           movement: base
         - to: West Glitch Ledge
-          req: $hook or Anuman
+          req: $hook or Anuman or $hover or $grab
           movement: base
           jumps: 2
-        - to: West Glitch Ledge
-          req: $hover or $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: West Entrance > Lower Path Tree Ledge
           req: $hover
           movement: base
@@ -905,8 +879,6 @@ areas:
       local:
         - to: West 28
         - to: West Glitch West
-        - to: West Pillar West
-          jumps: 3
       exits:
         - to: West Entrance > Lower Path Tree Ledge
           req: $hover
@@ -914,9 +886,11 @@ areas:
           jumps: 1
           penalty_tags: [xshift, -base.1]
         - to: West Pillar West
-          req: $hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Northwest Platform
       coord: [21.3, 26.7]
       local:
@@ -1020,13 +994,13 @@ areas:
       local:
         - to: Portal Stand
           jumps: 3
-        - to: East Ledge
-          jumps: 2
       exits:
         - to: East Ledge
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: East Ledge
       coord: [23.75, 27.1]
       local:
@@ -1035,13 +1009,13 @@ areas:
         - to: Center Platform East
           jumps: 1
         - to: East Glitch West
-        - to: East Platform
-          jumps: 1
       exits:
         - to: East Platform
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
     - name: East Platform
       coord: [24.1, 26.9]
       local:
@@ -1072,13 +1046,12 @@ areas:
           req: $hover
           movement: base
         - to: Wall West Platform
-          req: $hook or Anuman
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
-        - to: Wall West Platform
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
     - name: Wall West Platform
       coord: [24.3, 26.6]
       data:
@@ -1328,14 +1301,13 @@ areas:
     #region Upper Tiers
     - name: Ledge Above Palm
       coord: [27.5, 24.15]
-      local:
-        - to: High Platform
-          jumps: 2
       exits:
         - to: High Platform
-          req: $hover
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hover
+              jumps: 1
         - to: Northeast Ledge
           req: $hook
           movement: base
@@ -1347,13 +1319,12 @@ areas:
           jumps: 3
       exits:
         - to: Northeast Ledge
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Northeast Ledge
-          req: $hover or $hook
+          req: $hook or $hover or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 1
     - name: Ceiling Opening
       coord: [27.15, 23.25]
       local:
@@ -1420,19 +1391,15 @@ areas:
           req: Uhrum_Waterfall_Wall
           movement: base
       hybrid:
-        - name: Charge through Wall
-          item: Uhrum_Waterfall_Wall
-          canon: Uhrum_Waterfall_Wall
-          req: $charge
-          to: Barrier East
-          movement: base
-          penalty_tags: [charge_time, charge_time]  # will take two or more times
         - name: Spin through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
-          req: $spin
+          req: $spin or $charge
           to: Barrier East
           time: 1  # ?
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # will take two or more times
         - name: Mist through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
@@ -1455,19 +1422,15 @@ areas:
           movement: base
           penalty_tags: [xshift, -base.1]
       hybrid:
-        - name: Charge through Wall
-          item: Uhrum_Waterfall_Wall
-          canon: Uhrum_Waterfall_Wall
-          req: $charge
-          to: Barrier West
-          movement: base
-          penalty_tags: [charge_time, charge_time]
         - name: Spin through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
-          req: $spin
+          req: $spin or $charge
           to: Barrier West
           time: 1  # ?
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # will take two or more times
         - name: Mist through Wall
           item: Uhrum_Waterfall_Wall
           canon: Uhrum_Waterfall_Wall
@@ -1499,13 +1462,12 @@ areas:
         - to: Island Water West
       exits:
         - to: West 25
-          req: $grab and $climb
-          movement: base
-          jumps: 7
-        - to: West 25
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 5
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: West Platform
       coord: [26.5, 25.8]
       local:
@@ -1515,13 +1477,12 @@ areas:
         - to: Center Island East
       exits:
         - to: Green Middle Ledge
-          req: $grab
-          movement: base
-          jumps: 5
-        - to: Green Middle Ledge
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Sloped Rock
           req: $hook
           movement: base
@@ -1532,24 +1493,23 @@ areas:
         flipside: Uhrum Breach > Overgrown Ruins > Cache
       local:
         - to: West Platform
-        - to: West 25
-          jumps: 5
         - to: East Palm Tree
           thru: [26.5, 25.0]
           jumps: [3, 3]
       exits:
         - to: West 25
-          req: $hook
           movement: base
           jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Green Middle Ledge
           req: $hook
-          movement: base
-          jumps: 3
-        - to: Green Middle Ledge
-          req: $hookhover
           movement: base
           jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              jumps: 1
     - name: Large Rock
       coord: [26.55, 26.4]
       local:
@@ -1626,21 +1586,19 @@ areas:
           req: $hover
           movement: base
         - to: Above Block
-          req: Uhrum_Waterfalls_Block and $grab
-          movement: base
-          jumps: 2
-        - to: East 26
-          req: Uhrum_Waterfalls_Block and $grab
-          movement: base
-          jumps: 2
-        - to: Above Block
-          req: Uhrum_Waterfalls_Block and $hook
+          req: Uhrum_Waterfalls_Block and ($hook or $grab)
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East 26
-          req: Uhrum_Waterfalls_Block and $hook
+          req: Uhrum_Waterfalls_Block and ($hook or $grab)
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Above Block
       coord: [27.65, 25.8]
       data:
@@ -1704,13 +1662,12 @@ areas:
         - to: West 25
       exits:
         - to: Ledge Above Palm
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Ledge Above Palm
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 2
     #endregion
 
     #region Water and Surface
@@ -1730,21 +1687,22 @@ areas:
     - name: West Shallow End
       coord: [26.4, 27.3]
       local:
-        - to: West Water Surface
-          jumps: 2
-        - to: West Water Surface
-          jumps: 1
-          jump_mvmt: water
         - to: West Water Ledge
       exits:
+        - to: West Water Surface
+          movement: water
+          jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
         - to: Center Island West
-          req: $grab and Underwater_Movement
-          movement: base
-          jumps: 2
-        - to: Center Island West
-          req: $hook and Underwater_Movement
+          req: Underwater_Movement and ($hook or $grab)
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Center Island West
       coord: [26.7, 26.9]
       data:
@@ -1792,15 +1750,18 @@ areas:
       data:
         flipside: Uhrum Breach > West Copse > Lower West Ledge
       local:
-        - to: West Water's Edge
-          jumps: 3
-        - to: West Water's Edge
-          jumps: 2
-          jump_mvmt: water
         - to: West Water Nook
           thru: [26.65, 27.6]
         - to: West Shallow End
           jumps: 1
+      exits:
+        - to: West Water's Edge
+          movement: water
+          jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
     - name: West Water Nook
       coord: [26.15, 27.75]
       data:
@@ -1814,13 +1775,12 @@ areas:
           tags: [standing]
       exits:
         - to: West Water Ledge
-          req: Underwater_Movement and $grab
-          movement: base
-          jumps: 3
-        - to: West Water Ledge
-          req: Underwater_Movement and $hook
-          movement: base
+          req: Underwater_Movement and ($hook or $grab)
+          movement: water
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Water Slope
       coord: [26.9, 27.7]
       local:
@@ -1839,25 +1799,27 @@ areas:
         - to: West Water Nook
         - to: Water Slope
         - to: East 28
-        - to: Center Island East
-          jumps: 1
-          jump_mvmt: water
         - to: East Water's Edge
           jumps: 1
           jump_mvmt: water
       exits:
         - to: Center Island East
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Center Island East
-          req: $hook
-          movement: base
+          req: Underwater_Movement or $hook or $grab
+          movement: water
           jumps: 1
+          penalties:
+            - when: not $hook and not Underwater_Movement
+              movement: base
+              jumps: 1
+            - when: not Underwater_Movement
+              movement: base
         - to: East Water's Edge
-          req: $hook
-          movement: base
+          req: Underwater_Movement or $hook
+          movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: East Water Surface
       coord: [27.4, 27.0]
       local:
@@ -2005,13 +1967,12 @@ areas:
         - to: West Underwater Hill
       exits:
         - to: West Block
-          req: $grab and $climb
-          movement: base
-          jumps: 2
-        - to: West Block
-          req: $hook
+          req: $hook or ($grab and $climb)
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West Block
       coord: [28.7, 26.7]
       local:
@@ -2027,17 +1988,15 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: East Block
-          req: Uhrum_East_Lake_Block
+          req: Uhrum_East_Lake_Block or ($block_clip and Slingshot_Hook)
           movement: base
+          penalties:
+            - when: not Uhrum_East_Lake_Block  # block_clip
+              add: 1  # ?
         - to: East Ledge
           req: Uhrum_East_Lake_Block and $hookhover
           movement: fast_hover
           jumps: 1
-        - to: East Block
-          req: $block_clip and Slingshot_Hook and not Uhrum_East_Lake_Block
-          movement: base
-          penalties:
-            - add: 1  # ?
     - name: East Block
       coord: [29.0, 26.7]
       data:
@@ -2073,13 +2032,12 @@ areas:
         - to: Island East
       exits:
         - to: East Block
-          req: $hook or $hover
+          req: $hook or $hover or $grab
           movement: base
           jumps: 1
-        - to: East Block
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 1
     - name: Island East
       coord: [29.55, 26.9]
       data:
@@ -2110,17 +2068,14 @@ areas:
           jumps: 1
       exits:
         - to: East Ledge
-          req: $hook
-          movement: base
-          jumps: 1
-        - to: East Ledge
-          req: $hook and Underwater_Movement
+          req: $hook or (Underwater_Movement and $grab)
           movement: water
           jumps: 1
-        - to: East Ledge
-          req: $grab and Underwater_Movement
-          movement: water
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
+            - when: not Underwater_Movement
+              movement: base
     - name: East Ledge
       coord: [29.85, 26.75]
       local:
@@ -2191,21 +2146,17 @@ areas:
       local:
         - to: West Slope
           jumps: 3
-        - to: Wall Left
-          jumps: 6
       exits:
         - to: Wall Left
-          req: $hook
           movement: base
           jumps: 3
-        - to: Wall Left
-          req: $hover
-          movement: base
-          jumps: 4
-        - to: Wall Left
-          req: $grab
-          movement: base
-          jumps: 5
+          penalties:
+            - when: not $hook and not $hover and not $grab
+              jumps: 3
+            - when: ^mode != 'drone'  # grab
+              jumps: 2
+            - when: not Slingshot_Hook  # hover
+              jumps: 1
     - name: Wall Left
       coord: [31.15, 26.8]
       data:
@@ -2223,22 +2174,17 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge Through Wall
-          canon: Uhrum_Cavern_Wall
-          item: Uhrum_Cavern_Wall
-          req: $charge
-          to: Pedestal
-          movement: fling
-          jumps: 1
-          tags: [event]
-          penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
-          req: $spin
+          req: $spin or $charge
           to: Wall Right
           movement: fast_hover
           tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              movement: fling
+              tags: [charge_time]
         - name: Spin Through Wall and Hover
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
@@ -2271,29 +2217,25 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge Through Wall
-          canon: Uhrum_Cavern_Wall
-          item: Uhrum_Cavern_Wall
-          req: $charge
-          to: Bottom
-          movement: fling
-          tags: [event]
-          penalty_tags: [charge_time]
         - name: Charge Through Wall and Hover
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
           req: $chargehover
           to: West Ledge
-          movement: fling
+          movement: fast_hover
           tags: [event]
           penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
-          req: $spin
+          req: $spin or $charge
           to: Wall Left
           movement: fast_hover
           tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              movement: fling
+              tags: [charge_time]
         - name: Spin Through Wall and Hover
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
@@ -2332,19 +2274,18 @@ areas:
         - to: Waterfalls > East 24
           tags: [xshift]
         - to: Lower Column
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 2
+            - when: not $hook
+              jumps: 1
         - to: Platform 1 West
           req: $hookhover
           movement: fast_hover
           jumps: 3
-        - to: Lower Column
-          req: $grab
-          jumps: 3
-        - to: Lower Column
-          req: Anuman
-          jumps: 2
     - name: Lower Column
       coord: [28.25, 23.4]
       local:
@@ -2392,26 +2333,26 @@ areas:
         - to: Platform 1 West
       exits:
         - to: East 23
-          req: $hook
+          req: $hook or $grab
           movement: fast_hover
           jumps: 1
-        - to: East 23
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 2
     - name: Middle Ledge
       coord: [28.35, 22.7]
       local:
         - to: Middle Plateau
         - to: Platform 1 West
-        - to: Platform 2 West
-          jumps: 1
         - to: Lower Column
       exits:
         - to: Platform 2 West
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
     - name: Middle Plateau
       coord: [28.25, 22.7]
       local:
@@ -2488,13 +2429,12 @@ areas:
         - to: Rocky Guardpost > East 22
           tags: [xshift]
         - to: Upper Column West
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Upper Column West
-          req: $grab
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Upper Column West
           req: Nanite_Mist
           movement: mist2
@@ -2520,16 +2460,16 @@ areas:
       local:
         - to: Upper Column West
           jumps: 1
-        - to: North
-          jumps: 2
         - to: Upper Middle Ledge
         - to: West 22
           jumps: 1
       exits:
         - to: North
-          req: Anuman
           movement: base
           jumps: 1
+          penalties:
+            - when: not Anuman
+              jumps: 1
     - name: Upper Middle Ledge
       coord: [28.65, 21.8]
       local:
@@ -2539,13 +2479,12 @@ areas:
         - to: East 23
       exits:
         - to: Upper Column East
-          req: $hover
-          movement: base
-          jumps: 4
-        - to: Upper Column East
-          req: $climb
+          req: $climb or $hover
           movement: base
           jumps: 2
+          penalties:
+            - when: not $climb
+              jumps: 2
         - to: Upper Column East
           req: Nanite_Mist
           movement: mist2
@@ -2683,11 +2622,11 @@ areas:
           tags: [shockwave, event]
       exits:
         - to: Block East
-          req: Uhrum_Annuna_Corridor_Block
+          req: Uhrum_Annuna_Corridor_Block or $block_clip_escape
           movement: base
-        - to: Block East
-          req: $block_clip_escape and not Uhrum_Annuna_Corridor_Block
-          time: 2  # ?
+          penalties:
+            - when: not Uhrum_Annuna_Corridor_Block
+              add: 2  # ?
     - name: Block East
       coord: [29.1, 25.6]
       data:
@@ -2724,12 +2663,12 @@ areas:
           jumps: 2
       exits:
         - to: Lower Platform
-          req: Anuman
+          req: Anuman or $hover
           movement: base
           jumps: 1
-        - to: Lower Platform
-          req: $hover
-          time: 2  # ?
+          penalties:
+            - when: not Anuman
+              jumps: 2  # ?
       actions:
         - name: Throw Drone Up
           req: $can_deploy and Drone_Hover
@@ -2747,12 +2686,12 @@ areas:
         - to: Block East
       exits:
         - to: Middle Platform
-          req: $hover
-          time: 1
-        - to: Middle Platform
-          req: Anuman
+          req: Anuman or $hover
           movement: base
           jumps: 1
+          penalties:
+            - when: not Anuman
+              jumps: 1  # ?
     - name: Wall Remnant
       coord: [31.25, 25.5]
       data:
@@ -2769,12 +2708,12 @@ areas:
           movement: base
           jumps: 1
         - to: Upper Platform
-          req: Anuman
+          req: Anuman or $hover
           movement: base
           jumps: 1
-        - to: Upper Platform
-          req: $hover
-          time: 1
+          penalties:
+            - when: not Anuman
+              jumps: 1
         # TODO: Hover to statue from here?
     - name: Upper Platform
       coord: [30.95, 24.95]
@@ -2869,17 +2808,14 @@ areas:
         - to: East Trees
       exits:
         - to: East Outcrop West
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 0.5
-        - to: East Outcrop West
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: East Outcrop West
-          req: Anuman
-          movement: base
-          jumps: 1
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1.5
+            - when: not $hook
+              jumps: 0.5
         - to: East Lower Platform West
           req: $hook and $hover
           movement: base
@@ -3154,20 +3090,16 @@ areas:
         - to: Wall West
           jumps: 2
       locations:
-        - name: Charge Through Wall
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $charge
-          to: East Ledge
-          movement: base
-          penalty_tags: [charge_time, charge_time]  # can't get it in one
         - name: Spin Through Wall
           canon: Uhrum_Emergence_Wall
           item: Uhrum_Emergence_Wall
-          req: $spin
+          req: $spin or $charge
           to: East Ledge
           movement: base  # slower than fling/fast hover would be
           # re-time?
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # can't get it in one
     - name: Wall East
       coord: [26.575, 22.35]
       local:
@@ -3204,20 +3136,16 @@ areas:
           jumps: 2
         - to: East Ledge
       locations:
-        - name: Charge Through Wall
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $charge
-          to: Wall West Ledge
-          movement: base
-          penalty_tags: [charge_time, charge_time]  # can't get it in one
         - name: Spin Through Wall
           canon: Uhrum_Emergence_Wall
           item: Uhrum_Emergence_Wall
-          req: $spin
+          req: $spin or $charge
           to: Wall West Ledge
           movement: base  # slower than fling/fast hover would be
           # re-time?
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # can't get it in one
     - name: East Ledge
       coord: [26.7, 22.6]
       local:
@@ -3241,14 +3169,14 @@ areas:
           penalty_tags: [xshift, -base.1]
     - name: East
       coord: [26.95, 22.75]
-      local:
-        - to: East Ledge
-          jumps: 1
       exits:
         - to: East Ledge
-          req: $hook
           movement: fast_hover
           jumps: 0.5
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 0.5
         - to: Rocky Guardpost > West 23
           tags: [xshift]
 
@@ -3257,16 +3185,15 @@ areas:
   spots:
     - name: East 23
       coord: [22.95, 22.75]
-      local:
-        - to: Small Column East
-          jumps: 1
       exits:
         - to: Artillery Practice > West 23
           tags: [xshift]
         - to: Small Column East
-          req: $hook
           movement: base
           jumps: 0.5
+          penalties:
+            - when: not $hook
+              jumps: 0.5
     - name: Small Column East
       coord: [22.7, 22.55]
       local:
@@ -3287,15 +3214,15 @@ areas:
     - name: Center Platform East
       coord: [22.6, 22.2]
       local:
-        - to: West Ledge
-          jumps: 1
         - to: East 23
         - to: Small Column East
       exits:
         - to: West Ledge
-          req: $hook
-          movement: base
+          movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
     - name: West Ledge
       coord: [22.4, 22.0]
       local:
@@ -3310,14 +3237,15 @@ areas:
     - name: West 22
       coord: [22.05, 21.8]
       local:
-        - to: East Ledge
-          jumps: 4
         - to: West Ledge
       exits:
         - to: East Ledge
-          req: $hook
           movement: fast_hover
           jumps: 3
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 1
         - to: Emergence Save > Save Point
           req: $hook and $hover
           movement: fast_hover
@@ -3331,20 +3259,21 @@ areas:
         - to: East 22
         - to: East 23
           thru: [21.85, 22.1]
-        - to: West 22
-          jumps: 3
         - to: Small Column East
       exits:
         - to: West 22
-          req: $hook and $hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not $hookhover
+              movement: base
+              jumps: 1
         - to: West Ledge
           req: $hover
-          movement: base
-        - to: West Ledge
-          req: $hook and $hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Emergence Save > Save Point
           req: $hook and $hover
           movement: fast_hover
@@ -3453,13 +3382,12 @@ areas:
         - to: East Approach
       exits:
         - to: Upper Level Middle
-          req: $hover
-          movement: base
-          jumps: 7
-        - to: Upper Level Middle
-          req: Anuman
+          req: Anuman or $hover
           movement: base
           jumps: 5
+          penalties:
+            - when: not Anuman
+              jumps: 2
     - name: East Approach
       coord: [25.1, 21.8]
       local:
@@ -3473,13 +3401,12 @@ areas:
         - to: Bush
       exits:
         - to: Upper Level Middle
-          req: $hover
-          movement: base
-          jumps: 7
-        - to: Upper Level Middle
-          req: Anuman
+          req: Anuman or $hover
           movement: base
           jumps: 5
+          penalties:
+            - when: not Anuman
+              jumps: 2
     - name: Door
       coord: [24.925, 21.15]
       local:
@@ -3491,13 +3418,12 @@ areas:
           jumps_down: 1
       exits:
         - to: Upper Level Middle
-          req: $hover
-          movement: base
-          jumps: 3
-        - to: Upper Level Middle
           req: Anuman
           movement: base
           jumps: 1
+          penalties:
+            - when: not Anuman
+              jumps: 2
         - to: Interior > Facility Interior > Door
           tags: [interior]
     - name: Middle Level Mid-air
@@ -3579,13 +3505,12 @@ areas:
           jumps_down: 1
       exits:
         - to: Roof Middle
-          req: $hover
-          movement: base
-          jumps: 3
-        - to: Roof Middle
           req: Anuman
           movement: base
           jumps: 1
+          penalties:
+            - when: not Anuman
+              jumps: 2
     - name: East Stair Roof
       coord: [25.6, 20.5]
       local:
@@ -3659,20 +3584,16 @@ areas:
         - to: Wall West Mid-air
           jumps: 2
       locations:
-        - name: Charge Through Wall
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $charge
-          to: Wall East Ledge
-          movement: base
-          penalty_tags: [charge_time, charge_time]  # can't get it in one
         - name: Spin Through Wall
           canon: Uhrum_Emergence_Wall
           item: Uhrum_Emergence_Wall
-          req: $spin
+          req: $spin or $charge
           to: Wall East Ledge
           movement: base  # slower than fling/fast hover would be
           # re-time?
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # can't get it in one
       exits:
         - to: Wall East Mid-air
           req: Uhrum_Emergence_Wall
@@ -3758,22 +3679,17 @@ areas:
           jumps: 1
         - to: East
       locations:
-        - name: Charge Through Wall
-          canon: Uhrum_Emergence_Wall
-          item: Uhrum_Emergence_Wall
-          req: $charge
-          to: Wall West Mid-air
-          movement: base
-          jumps: 1
-          penalty_tags: [charge_time, charge_time]  # can't get it in one
         - name: Spin Through Wall
           canon: Uhrum_Emergence_Wall
           item: Uhrum_Emergence_Wall
-          req: $spin
+          req: $spin or $charge
           to: Wall West Mid-air
           movement: base  # slower than fling/fast hover would be
           jumps: 1
           # re-time?
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # can't get it in one
     - name: East
       coord: [26.95, 21.8]
       local:
@@ -3858,13 +3774,12 @@ areas:
         - to: Rocky Gate > East
           tags: [xshift]
         - to: Lower Step
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Lower Step
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Under The Ledge
       coord: [27.525, 22.75]
       local:
@@ -3977,14 +3892,13 @@ areas:
       coord: [22.3, 20.8]
       data:
         flipside: Uhrum Breach > Blob > West Side
-      local:
-        - to: Portal Stand
-          jumps: 1
       exits:
         - to: Portal Stand
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Boome Range
           req: $hookhover
           movement: fast_hover
@@ -4002,14 +3916,13 @@ areas:
       coord: [22.7, 20.8]
       data:
         flipside: Uhrum Breach > Blob > East Side
-      local:
-        - to: Portal Stand
-          jumps: 1
       exits:
         - to: Portal Stand
-          req: $hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not $hook
+              movement: base
     - name: Boome Range
       coord: [23.3, 20.8]
       local:

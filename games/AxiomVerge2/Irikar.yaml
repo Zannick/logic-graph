@@ -314,9 +314,12 @@ areas:
           movement: base
           jumps: 3
         - to: NW Bowl Edifice
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Portal Stand
       coord: [11.3, 21.7]
       data:
@@ -341,13 +344,12 @@ areas:
         - to: NW Middle Building West Hook Point
       exits:
         - to: NW Middle Building Corner
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: NW Middle Building Corner
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: NW Middle Building West Hook Point
       coord: [10.9, 23.0]
       exits:
@@ -468,34 +470,31 @@ areas:
           req: $hover
           movement: base
         - to: NW Middle Building West Entry
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: NW Middle Building West Entry
-          req: $hook
+          req: $hook or Anuman or $grab
           movement: base
           jumps: 1
-        - to: NW Middle Building West Entry
-          req: Anuman
-          movement: base
-          jumps: 1.1
+          penalties:
+            - when: not $hook and not Anuman
+              jumps: 1
+            - when: not $hook
+              jumps: 0.1
     - name: NW Middle Building Lower Ledge
       coord: [11.35, 23.7]
       local:
         - to: SW Building NE Roof
         - to: SW Building Broken Wall
         - to: Lower Well
-        - to: NW Middle Building East Entry
-          jumps: 2
       exits:
         - to: NW Middle Building Left Ledge
           req: $hook
           movement: base
           jumps: 1
         - to: NW Middle Building East Entry
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: NW Middle Building East Entry
       coord: [11.6, 23.3]
       local:
@@ -635,13 +634,12 @@ areas:
           jumps: 3
       exits:
         - to: Exposed Passage West
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
-        - to: Exposed Passage West
-          req: $grab
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Exposed Passage West
       coord: [11.6, 24.8]
       local:
@@ -665,13 +663,12 @@ areas:
         - to: Exposed Passage West
       exits:
         - to: Exposed Passage Upper Ledge
-          req: $hook
+          req: $hook or (Anuman and $grab)
           movement: base
           jumps: 1
-        - to: Exposed Passage Upper Ledge
-          req: $grab and Anuman
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Exposed Passage Upper Ledge
           req: Nanite_Mist
           movement: mist2
@@ -684,21 +681,19 @@ areas:
         - to: Exposed Passage Center
       exits:
         - to: Ruined Hallway Gap Left
-          req: $climb
-          movement: base
-          jumps: 3
-        - to: Ruined Hallway Gap Right
-          req: $climb
-          movement: base
-          jumps: 3
-        - to: Ruined Hallway Gap Left
-          req: $hook
+          req: $hook or $climb
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 2
         - to: Ruined Hallway Gap Right
-          req: $hook
+          req: $hook or $climb
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Ruined Hallway Gap Left
           req: Nanite_Mist
           movement: mist2
@@ -748,14 +743,14 @@ areas:
       local:
         - to: Collapsed Column
           jumps: 1
-        - to: Lower Well
-          jumps: 2
         - to: Lower Hallway West
       exits:
         - to: Lower Well
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
       actions:
         - name: Throw Drone and Hover
           req: $can_deploy and Drone_Hover
@@ -767,19 +762,19 @@ areas:
       local:
         - to: Collapsed Column Debris
           jumps: 2
-        - to: West 26
-          jumps: 2
-        - to: SW Building Hallway West
-          jumps: 2
       exits:
         - to: West 26
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: SW Building Hallway West
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: West 26
       coord: [10.05, 25.35]
       local:
@@ -1352,12 +1347,12 @@ areas:
         - to: Lower Pipe Right
       exits:
         - to: Brick Ledge
-          req: $hook
-          time: 1  # ?
-        - to: Brick Ledge
-          req: $climb
+          req: $hook or $climb
           movement: base
-          jumps: 3
+          jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Brick Ledge
       coord: [11.2, 26.95]
       local:
@@ -1369,13 +1364,12 @@ areas:
         - to: Brick Ledge
       exits:
         - to: Double Pipe Right
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Double Pipe Right
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Double Pipe Right
       coord: [11.5, 26.6]
       local:
@@ -1400,11 +1394,10 @@ areas:
         - to: Double Pipe Left
           req: $grab
           movement: base
-          jumps: 4
-        - to: Double Pipe Left
-          req: $grab and $climb
-          movement: base
           jumps: 3
+          penalties:
+            - when: not Wall_Climb
+              jumps: 1
         - to: Double Pipe Left
           req: $hook
           time: 1  # ?
@@ -1829,13 +1822,12 @@ areas:
         - to: Save Ledge
       exits:
         - to: East 25
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: East 25
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 2
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: NE Ledge
           req: $hook and $hover
           movement: base
@@ -1931,13 +1923,12 @@ areas:
           movement: base
           jumps: 1
         - to: Center Rock 2 East
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Center Rock 2 East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Center Rock 3 East
       coord: [8.9, 25.3]
       local:
@@ -2066,13 +2057,12 @@ areas:
         - to: SE Rock West
       exits:
         - to: The Long Rock East
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: The Long Rock East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: East Rock 3
           req: $hook
           movement: base
@@ -2146,13 +2136,12 @@ areas:
           jumps_down: 1
       exits:
         - to: Lower Rock East
-          req: $grab
-          movement: base
-          jumps: 2
-        - to: Lower Rock East
-          req: $hook
+          req: $hook or $grab
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Lower Rock East
       coord: [8.4, 26.55]
       local:

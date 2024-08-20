@@ -63,9 +63,6 @@ areas:
       local:
         - to: Gate East
         - to: South
-        - to: North
-          jumps: 3
-        - to: Rock West
       locations:
         - name: Charge Through Rock
           canon: Uhrum_Breach_Rock_and_Gate_Rock
@@ -76,12 +73,16 @@ areas:
           penalty_tags: [charge_time]
       exits:
         - to: North
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: Rock West
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: North
       coord: [20.5, 26.2]
       local:
@@ -93,50 +94,45 @@ areas:
           tags: [ydoor]
     - name: South
       coord: [20.5, 26.8]
-      local:
-        - to: Rock West
-          jumps: 1
-        - to: Center Area West
-          jumps: 2
       locations:
-        - name: Charge Through Rock
-          canon: Uhrum_Breach_Rock_and_Gate_Rock
-          item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock East
-          movement: fling
-          penalty_tags: [charge_time]
-          jumps: 1
         - name: Spin Through Rock
           canon: Uhrum_Breach_Rock_and_Gate_Rock
           item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock East
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Weapon
+              movement: fling
+              tags: [charge_time]
         - name: Spin Through Rock and Hover
           canon: Uhrum_Breach_Rock_and_Gate_Rock
           item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
           to: East
           movement: fast_hover
           jumps: 1
       exits:
         - to: Center Area West
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Rock West
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: West Glitch > North
           tags: [ydoor]
     - name: Rock West
       coord: [20.6, 26.6]
       local:
         - to: South
-        - to: Center Area West
       locations:
         - name: Mist Through Rock
           canon: Uhrum_Breach_Rock_and_Gate_Rock
@@ -159,14 +155,16 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
         - to: Center Area West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Rock East
           req: Uhrum_Breach_Rock_and_Gate_Rock
-          movement: base
-        - to: Rock East
-          req: Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Rock East
       coord: [20.8, 26.6]
       local:
@@ -185,53 +183,49 @@ areas:
       exits:
         - to: Rock West
           req: Uhrum_Breach_Rock_and_Gate_Rock
-          movement: base
-        - to: Rock West
-          req: Uhrum_Breach_Rock_and_Gate_Rock and Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Rock East Ledge
       coord: [20.95, 26.8]
-      local:
-        - to: Rock East
-          jumps: 1
-        - to: East Ledge
-          jumps: 1
       locations:
-        - name: Charge Through Rock
-          canon: Uhrum_Breach_Rock_and_Gate_Rock
-          item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock East
-          movement: fling
-          penalty_tags: [charge_time]
-          jumps: 1
         - name: Spin Through Rock
           canon: Uhrum_Breach_Rock_and_Gate_Rock
           item: Uhrum_Breach_Rock_and_Gate_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock East
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Weapon
+              movement: fling
+              tags: [charge_time]
       exits:
         - to: Rock East
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: East Ledge
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: East Ledge
       coord: [21.65, 26.75]
       local:
-        - to: Rock East Ledge
-          jumps: 1
         - to: East
           jumps: 1
       exits:
         - to: Rock East Ledge
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
         - to: East Glitch > Save Point
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -281,13 +275,13 @@ areas:
       coord: [20.5, 25.5]
       local:
         - to: South
-        - to: Mild Slope
-          jumps: 1
       exits:
         - to: Mild Slope
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Mild Slope
       coord: [20.3, 25.2]
       data:
@@ -423,18 +417,17 @@ areas:
           movement: base
     - name: Middle
       coord: [21.0, 27.65]
-      local:
-        - to: Narrow Glitch
-          jumps: 1
       exits:
         - to: Pillar East
           req: Slingshot_Hook
           movement: base
           jumps: 1
         - to: Narrow Glitch
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Narrow Glitch
       coord: [21.45, 27.55]
       data:
@@ -601,9 +594,6 @@ areas:
       coord: [24.4, 27.4]
       data:
         flipside: Uhrum > Glitchy Corridor > East Glitch West
-      local:
-        - to: East Flower East
-          jumps: 2  # if you don't clear all the glitch
       locations:
         - name: Break Through Glitch
           canon: Uhrum_East_Glitch
@@ -616,9 +606,11 @@ areas:
           req: Uhrum_East_Glitch
           movement: base
         - to: East Flower East
-          req: Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1  # if you don't clear all the glitch
     - name: Glitch East
       coord: [24.7, 27.7]
       data:
@@ -688,13 +680,12 @@ areas:
         - to: East 27
       exits:
         - to: Northeast Flower
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 2
-        - to: Northeast Flower
-          req: Drone_Hover
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: East Hookable
       coord: [24.775, 26.8]
       data:
@@ -796,17 +787,16 @@ areas:
       coord: [22.3, 20.8]
       data:
         flipside: Uhrum > Seclusion > Portal West
-      local:
-        - to: Plinth
-          jumps: 1
       exits:
         - to: Giguna Breach > Secret Tunnel > East
           movement: base
           penalty_tags: [xdoor, -base.2]
         - to: Plinth
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Plinth
       coord: [22.525, 20.7]
       data:
@@ -818,14 +808,13 @@ areas:
       coord: [22.7, 20.8]
       data:
         flipside: Uhrum > Seclusion > Portal East
-      local:
-        - to: Plinth
-          jumps: 1
       exits:
         - to: Plinth
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Giguna Breach > Secret Tunnel > Narrow Point
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -880,13 +869,13 @@ areas:
         - to: Lower West Ledge
           jumps: 1
         - to: Bottom West
-        - to: Center Pillar
-          jumps: 3
       exits:
         - to: Center Pillar
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: Bottom West
       coord: [26.65, 27.8]
       local:
@@ -948,21 +937,19 @@ areas:
         - to: Small Flower
       exits:
         - to: Center East
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: Center East
-          req: Drone_Hover
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: East Ledge
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: East Ledge
-          req: Drone_Hover
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: East Ledge
       coord: [27.45, 26.9]
       data:
@@ -1028,8 +1015,6 @@ areas:
       coord: [28.6, 26.8]
       local:
         - to: Lower West Ledge
-        - to: Center East
-          jumps: 2
       exits:
         - to: West
           req: Drone_Hover
@@ -1039,6 +1024,10 @@ areas:
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
         - to: Platform East
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1157,12 +1146,11 @@ areas:
       exits:
         - to: Structure
           req: Uhrum_Breach_Annuna_Gate_Gate
-          movement: base
-          jumps: 1
-        - to: Structure
-          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Upper Ledge
           req: Slingshot_Hook
           movement: base
@@ -1234,18 +1222,17 @@ areas:
       exits:
         - to: Building Roof Ledge
           req: Uhrum_Breach_Annuna_Gate_Gate
-          movement: base
+          movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Upper Ledge
           req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook
-          movement: base
-          jumps: 2
-        - to: Building Roof Ledge
-          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
-          movement: fast_hover
-        - to: Upper Ledge
-          req: Uhrum_Breach_Annuna_Gate_Gate and Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Drone_Hover
+              movement: base
         - to: Save Point
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1256,24 +1243,23 @@ areas:
           jumps: 2
     - name: Button
       coord: [31.35, 26.95]
-      local:
-        - to: Structure
-          jumps: 1
-        - to: Save Point
-          jumps: 1
       locations:
         - name: Hit Button
           item: Uhrum_Breach_Annuna_Gate_Gate
           tags: [button]
       exits:
         - to: Structure
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Save Point
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Annuna Breach > Smiley > Upper Portal Exit
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1319,13 +1305,12 @@ areas:
           jumps: 2
       exits:
         - to: Center Right Pillar
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: Center Right Pillar
-          req: Drone_Hover
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
         - to: Annuna Gate > North
           tags: [ydoor]
     - name: Center Right Pillar
@@ -1338,20 +1323,20 @@ areas:
       coord: [30.85, 25.75]
       data:
         flipside: Uhrum > Annuna Corridor > Between Two Flowers
-      local:
-        - to: Center Right Pillar
-          jumps: 2
-        - to: Gate Left
-          jumps: 1
       exits:
         - to: Center Right Pillar
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Gate Left
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Gate Left
       coord: [31.05, 25.55]
       local:
@@ -1359,12 +1344,11 @@ areas:
       exits:
         - to: Item Behind Gate
           req: Uhrum_Breach_Locked_Down_Gate
-          movement: base
-          jumps: 1
-        - to: Item Behind Gate
-          req: Uhrum_Breach_Locked_Down_Gate and Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Save Point
           req: Fast_Travel
           tags: [ft_room]
@@ -1398,20 +1382,19 @@ areas:
           movement: base
     - name: Save Point
       coord: [31.475, 25.7]
-      local:
-        - to: Item Behind Gate
-          jumps: 1
-        - to: East Stone
-          jumps: 1
       exits:
         - to: Item Behind Gate
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: East Stone
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: East Stone
       coord: [31.6, 25.5]
       local:
@@ -1441,7 +1424,6 @@ areas:
       data:
         flipside: Uhrum > Annuna Corridor > Open Pillar
       local:
-        - to: South
         - to: West Stone East
       exits:
         - to: East Enemy
@@ -1449,19 +1431,22 @@ areas:
           movement: fast_hover
           jumps: 1
         - to: South
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: West Stone East
       coord: [29.4, 25.6]
       local:
         - to: West Path
           jumps: 2
-        - to: West
-          jumps: 1
       exits:
         - to: West
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Overgrown Ruins > East Corner
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1470,12 +1455,12 @@ areas:
       coord: [29.1, 25.6]
       data:
         flipside: Uhrum > Annuna Corridor > Block East
-      local:
-        - to: West Stone East
       exits:
         - to: West Stone East
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Overgrown Ruins > East
           tags: [xdoor]
 
@@ -1503,15 +1488,15 @@ areas:
     - name: East Corner
       coord: [28.7, 25.9]
       local:
-        - to: Portal Stand
-          jumps: 1
         - to: East
           jumps: 1
       exits:
         - to: Portal Stand
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Portal Stand
       coord: [28.5, 25.7]
       data:
@@ -1530,20 +1515,19 @@ areas:
       coord: [27.65, 25.8]
       data:
         flipside: Uhrum > Waterfalls > Above Block
-      local:
-        - to: Branches
-          jumps: 1
-        - to: Wall East
-          jumps: 1
       exits:
         - to: Wall East
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Branches
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Wall East
       coord: [27.35, 25.6]
       local:

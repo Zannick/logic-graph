@@ -56,12 +56,12 @@ areas:
         - to: Tank Ledge
       exits:
         - to: Hidden Path Upper Entry
-          req: $hover
+          req: Slingshot_Hook or Drone_Hover
           movement: base
-          jumps: 1
-        - to: Hidden Path Upper Entry
-          req: $hook
-          time: .85
+          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: East 22
       coord: [11.9, 21.8]
       local:
@@ -178,21 +178,22 @@ areas:
         flipside: Irikar > Hub > SW Building Hallway West
       local:
         - to: West 26
-        - to: Lower West Floor
-          jumps: 2
       exits:
         - to: Lower West Floor
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
     - name: Lower West Floor
       coord: [10.6, 25.35]
-      local:
-        - to: Lower West Ledge
       exits:
         - to: Lower West Ledge
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: Lower Middle
           req: Slingshot_Hook
           movement: base
@@ -457,13 +458,13 @@ areas:
           tags: [xdoor]
     - name: South
       coord: [12.5, 25.8]
-      local:
-        - to: Corner
-          jumps: 1
       exits:
         - to: Corner
-          req: $hook
-          time: 0.8  # ?
+          movement: fast_hover
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: East
           req: $hook
           time: 1.2  # ?
@@ -569,17 +570,15 @@ areas:
         - to: West Basin
     - name: West Basin
       coord: [10.6, 26.8]
-      local:
-        - to: Center
-          jumps: 1
       exits:
         - to: West
           req: $hook
           movement: base
           jumps: 1
         - to: Center
-          req: $hook
-          time: 1  # ?
+          req: Slingshot_Hook or Drone_Hover
+          movement: base
+          jumps: 1
     - name: West
       coord: [10.1, 26.35]
       local:
@@ -613,13 +612,14 @@ areas:
       local:
         - to: Save Point
           jumps: 1
-        - to: West
-          jumps: 3
       exits:
         - to: West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook and not Drone_Hover
+              movement: base
+              jumps: 2
         - to: Buried Treasure > Pillar Right
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -729,12 +729,11 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
         - to: Pillar Middle
-          req: Drone_Hover
-          movement: base
-          jumps: 3
-        - to: Pillar Middle
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: West
       coord: [10.1, 27.6]
       local:
@@ -827,13 +826,13 @@ areas:
       coord: [9.1, 27.6]
       local:
         - to: East 28
-        - to: East Tank
-          jumps: 1
       exits:
         - to: East Tank
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: East 28
       coord: [9.9, 27.6]
       local:
@@ -857,8 +856,6 @@ areas:
       data:
         flipside: Irikar > Midwest > Lower Rock West
       local:
-        - to: Center Rock East
-          jumps: 3
         - to: West Rock East
       exits:
         - to: West Rock West
@@ -866,9 +863,12 @@ areas:
           movement: base
           jumps: 1
         - to: Center Rock East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 2
     - name: West Rock East
       coord: [7.3, 26.9]
       local:
@@ -876,13 +876,12 @@ areas:
           jumps: 2
       exits:
         - to: Center Rock West
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: Center Rock West
-          req: Drone_Hover
-          movement: base
-          jumps: 3
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: West Rock West
       coord: [6.6, 26.55]
       local:
@@ -894,10 +893,10 @@ areas:
       exits:
         - to: Center Rock West
           req: Drone_Hover
-          movement: base
-        - to: Center Rock West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: West Ledge
       coord: [6.4, 27.0]
       local:
@@ -1115,11 +1114,13 @@ areas:
       local:
         - to: West Rock Peak
           jumps: 3
-        - to: Passage West
       exits:
         - to: Passage West
           req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Passage West
       coord: [8.65, 25.7]
       local:
@@ -1174,10 +1175,10 @@ areas:
       exits:
         - to: West
           req: Slingshot_Hook or Drone_Hover
-          movement: base
-        - to: West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Exit Corridor > Portal Stand
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1186,51 +1187,45 @@ areas:
       coord: [15.9, 26.3]
       local:
         - to: V Rock West
-        - to: Rock West Ledge
       exits:
+        - to: Rock West Ledge
+          movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: Rock West
           req: Drone_Hover
-          movement: base
-        - to: Rock West Ledge
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
-        - to: Rock West
-          req: Slingshot_Hook and Drone_Hover
-          movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Rock West Ledge
       coord: [16.4, 26.4]
       local:
         - to: Rock West
           jumps: 1
       locations:
-        - name: Charge Through Wall
-          canon: Irikar_Breach_Uhrum_Connector_Wall
-          item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock East Ledge
-          movement: fling
-          penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Irikar_Breach_Uhrum_Connector_Wall
           item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock East Ledge
           movement: fast_hover
           tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              movement: fling
+              tags: [charge_time]
         - name: Spin Through Wall and Hover
           canon: Irikar_Breach_Uhrum_Connector_Wall
           item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge) and Drone_Hover
           to: Sand Swarm
           movement: fast_hover
           tags: [event]
-        - name: Charge Through Wall and Hover
-          canon: Irikar_Breach_Uhrum_Connector_Wall
-          item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Charge and Drone_Hover
-          to: Sand Swarm
-          movement: fast_hover  # technically fling for an initial part, plus the charge time
-          tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.5  # technically fling for an initial part, plus the charge time. estimate at half the charge time
       exits:
         - to: V Rock East
           req: Drone_Hover
@@ -1281,38 +1276,29 @@ areas:
     - name: Rock East Ledge
       coord: [16.8, 26.5]
       locations:
-        - name: Charge Through Wall
-          canon: Irikar_Breach_Uhrum_Connector_Wall
-          item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock West Ledge
-          movement: fling
-          jumps: 1
-          penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Irikar_Breach_Uhrum_Connector_Wall
           item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock West Ledge
           movement: fast_hover
           jumps: 1
           tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              movement: fling
+              tags: [charge_time]
         - name: Spin Through Wall and Hover
           canon: Irikar_Breach_Uhrum_Connector_Wall
           item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge) and Drone_Hover
           to: V Rock West
           movement: fast_hover
           jumps: 1
           tags: [event]
-        - name: Charge Through Wall and Hover
-          canon: Irikar_Breach_Uhrum_Connector_Wall
-          item: Irikar_Breach_Uhrum_Connector_Wall
-          req: Slingshot_Hook and Slingshot_Charge and Drone_Hover
-          to: V Rock West
-          movement: fast_hover  # technically fling for an initial part, plus the charge time
-          jumps: 1
-          tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              add: 0.5  # technically fling for an initial part, plus the charge time. estimate at half the charge time
     - name: Sand Swarm
       coord: [17.95, 26.8]
       local:

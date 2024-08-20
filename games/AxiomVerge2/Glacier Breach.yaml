@@ -224,13 +224,12 @@ areas:
           movement: base
           jumps: 1
         - to: East
-          req: $hover
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: East
-          req: $hook
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: East
       coord: [40.9, 12.8]
       local:
@@ -241,16 +240,15 @@ areas:
           tags: [xdoor]
     - name: Southeast
       coord: [40.5, 13.8]
-      local:
-        - to: East Hill
-          jumps: 5
       exits:
         - to: Angry Lions > North
           tags: [ydoor]
         - to: East Hill
-          req: $hook
           movement: base
           jumps: 3
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
         - to: East
           req: $hook
           movement: base
@@ -471,14 +469,13 @@ areas:
           jumps: 3
     - name: West Ledge
       coord: [32.4, 11.0]
-      local:
-        - to: West 11
-          jumps: 2
       exits:
         - to: West 11
-          req: $hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
         - to: East 11
           req: $hook or $hover
           movement: base
@@ -745,6 +742,7 @@ areas:
           price: 70
           time: 18  # estimate from actual run
           penalties:
+            # TODO: these were written as though not exclusive
             - when: not Slingshot_Weapon
               add: 2  # ?
             - when: not Drone_Melee_Speed_3
@@ -977,14 +975,13 @@ areas:
         - to: Electric Arena > North
           tags: [ydoor]
         - to: Mid-air East
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: (Slingshot_Hook and Slingshot_Weapon) or Drone_Melee_Damage
           movement: base
           jumps: 3
           penalties:
             - add: 0.5  # positioning to fake out the enemies and spin through them
-        - to: Mid-air East
-          req: Drone_Melee_Damage  # kill the enemies then jump
-          time: 5  # estimate
+            - when: not Slingshot_Hook or not Slingshot_Weapon  # kill the enemies then jump
+              add: 5  # estimate
     - name: Mid-air East
       coord: [38.5, 8.5]
       exits:
@@ -1005,16 +1002,15 @@ areas:
   spots:
     - name: Southwest
       coord: [37.55, 7.8]
-      local:
-        - to: Southwest Stair
-          jumps: 2
       exits:
         - to: Stacked Enemies > Northwest
           tags: [ydoor]
         - to: Southwest Stair
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Southwest Stair
       coord: [37.85, 7.45]
       data:
@@ -1023,13 +1019,13 @@ areas:
         - to: Southwest
       exits:
         - to: Mid Tier West
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: fast_hover
           jumps: 2
-        - to: Mid Tier West
-          req: Drone_Hover
-          movement: base
-          jumps: 4
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 2
     - name: Mid Tier West
       coord: [37.55, 7.0]
       data:
@@ -1038,24 +1034,25 @@ areas:
         - to: Southwest Stair
       exits:
         - to: Upper Tier West
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: Upper Tier West
-          req: Drone_Hover
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: Upper Tier West
       coord: [37.55, 6.75]
       data:
         flipside: Glacier > Fortress > Inner Upper Tier West
       local:
         - to: Mid Tier West
-        - to: Upper Tier Middle
       exits:
         - to: Upper Tier Middle
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Upper Tier Middle
       coord: [38.075, 6.75]
       data:
@@ -1068,12 +1065,14 @@ areas:
       data:
         flipside: Glacier > Fortress > Inner Upper Tier East
       local:
-        - to: Upper Tier Middle
         - to: Mid Tier East
       exits:
         - to: Upper Tier Middle
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Mid Tier East
       coord: [38.7, 7.0]
       data:
@@ -1082,13 +1081,12 @@ areas:
         - to: East Ledge
       exits:
         - to: Upper Tier East
-          req: Slingshot_Hook
+          req: Slingshot_Hook or Drone_Hover
           movement: base
           jumps: 1
-        - to: Upper Tier East
-          req: Drone_Hover
-          movement: base
-          jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: East Ledge
       coord: [38.4, 7.0]
       data:
@@ -1220,12 +1218,11 @@ areas:
       exits:
         - to: East Gate
           req: Glacier_Breach_Spidery_Connector_Gate
-          movement: base
-          jumps: 1
-        - to: East Gate
-          req: Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: East Mid-air Lower
           req: Glacier_Breach_Spidery_Connector_Gate and Slingshot_Hook and Drone_Hover
           movement: fast_hover

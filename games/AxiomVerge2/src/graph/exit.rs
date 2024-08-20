@@ -2408,14 +2408,12 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Angry_Guards__Portal_Stand__ex__Middle_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::access_apocalypse_bomb(ctx, world),
-            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::access_apocalypse_bomb_and_invoke_hook(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => rules::access_not_apocalypse_bomb(ctx, world),
-            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => true,
-            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 => true,
@@ -2436,22 +2434,23 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => true,
             ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1 => true,
             ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 => rules::access_underwater_movement_and_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::access_underwater_movement_or_invoke_hover(ctx, world),
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => true,
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::access_invoke_hover_or_invoke_hook(ctx, world),
             ExitId::Glacier__Crystals__West__ex__Vertical_Room__East_14_1 => true,
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => rules::access_nanite_mist(ctx, world),
@@ -2466,41 +2465,33 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::access_glacier_fortress_gate(ctx, world),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Upper_Tier_East_1 => rules::access_glacier_fortress_gate(ctx, world),
             ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1 => rules::access_invoke_hook_or___anuman_and_invoke_climb(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => rules::access_glacier_fortress_gate_and___invoke_hook_or_anuman(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_2 => rules::access_glacier_fortress_gate_and___invoke_grab_or_invoke_hover(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => rules::access_invoke_hook_or_anuman(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_2 => rules::access_invoke_grab_or_invoke_hover(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => rules::access_invoke_hook_or_anuman(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_2 => rules::access_invoke_grab_or_invoke_hover(ctx, world),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => rules::access_glacier_fortress_gate_and___invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world),
             ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Gate_East_1 => rules::access_glacier_fortress_gate(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => true,
+            ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => true,
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__East_9_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Floating_Rock_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Upper_East_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => true,
             ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Grid_39_40_7_9__Fortress_Ledge_1 => true,
-            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_2 => rules::access_anuman(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => true,
             ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Peak_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => true,
             ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Vertical_Room__Flying_West_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_2 => rules::access_anuman(ctx, world),
+            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => true,
             ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Vertical_Room__Fortress_Ledge_1 => true,
             ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_2 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_3 => rules::access_anuman(ctx, world),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_4 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world),
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__East_10_1 => rules::access_nanite_mist(ctx, world),
@@ -2511,10 +2502,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__East_9__ex__Ledge_Grab_Room__West_9_1 => true,
             ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
-            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
-            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Column_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grate_Left_Upper_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => true,
@@ -2528,12 +2517,9 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Floating_Rock_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Gate_East_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Parapet_East_Ledge_1 => true,
-            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => rules::access_invoke_infinite_climb_and_slingshot_hook(ctx, world),
-            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_2 => rules::access_invoke_infinite_climb(ctx, world),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::access_anuman_and_invoke_grab(ctx, world),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => rules::access_invoke_infinite_climb(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::access_invoke_hook_or___anuman_and_invoke_grab(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Fortress_Wall_1 => rules::access_invoke_hover_and_anuman_and_wall_climb(ctx, world),
@@ -2562,19 +2548,16 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Hammonds_End__Upper_Grate_Left__ex__Upper_Portal_Stand_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
-            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => true,
             ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 => true,
-            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Inner_Caverns__Center_Bottom__ex__West_Shaft_Hook_Point_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Inner_Caverns__Northwest_Stone__ex__Sliced_Cavern__Upper_Middle_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Sliced_Cavern__Cache_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Southwest_Ledge_1 => rules::access_invoke_hook_or___anuman_and_invoke_grab(ctx, world),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__West_Shaft_Hook_Point_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_Hook_Point_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Inner_Caverns__West_12__ex__Sliced_Cavern__East_12_1 => true,
             ExitId::Glacier__Inner_Caverns__West_13__ex__Sliced_Cavern__East_13_1 => true,
@@ -2588,40 +2571,29 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Lake_Main_Entrance__East_13__ex__Sliced_Cavern__West_13_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => true,
             ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => true,
-            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::access_invoke_climb_and_invoke_grab(ctx, world),
-            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => true,
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => rules::access_invoke_offset(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => true,
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2 => rules::access_invoke_hover_or_invoke_hook(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::access_invoke_hover_or_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1 => rules::access_invoke_climb(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__North__ex__Peak__South_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::access_nanite_mist(ctx, world),
@@ -2633,7 +2605,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Ledge_Grab_Room__West_9__ex__Grid_32_7_10__East_9_1 => true,
             ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1 => rules::access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(ctx, world),
             ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_1 => rules::access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(ctx, world),
-            ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => true,
             ExitId::Glacier__Lonely_Bull__West__ex__The_Big_Drop__Small_Path_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Glacier__Lonely_Bull__West__ex__West_Water_Surface_1 => rules::access_glacier__lonely_bull__ctx__door(ctx, world),
             ExitId::Glacier__Lonely_Bull__West_Water_Surface__ex__West_1 => rules::access_glacier__lonely_bull__ctx__door(ctx, world),
@@ -2643,11 +2615,10 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Peak__Top_Platform_East__ex__Vertical_Room__Hovering_East_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
             ExitId::Glacier__Revival__East_9__ex__Dock_Outside__Do_Not_Enter_1 => true,
-            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Revival__Lower_East__ex__Grid_42_10__West_1 => true,
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -2661,25 +2632,25 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::access_glacier_sea_burial_rock(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::access_glacier_sea_burial_rock(ctx, world),
-            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::access_underwater_movement(ctx, world),
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => true,
             ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
             ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => true,
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::access_underwater_movement_or_invoke_hook(ctx, world),
+            ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => true,
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Upper_East_Ledge_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__West_11_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
             ExitId::Glacier__Secret_Chamber__East_10__ex__Hammonds_End__West_10_1 => true,
             ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Secret_Chamber__East_11__ex__Hammonds_End__West_11_1 => true,
-            ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => true,
+            ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => true,
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Hammonds_End__Upper_Portal_Stand_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Secret_Chamber__West_11__ex__Door_East_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
             ExitId::Glacier__Secret_Chamber__West_11__ex__Vertical_Room__East_11_1 => true,
@@ -2701,8 +2672,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 => true,
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => rules::access_invoke_hook_and_invoke_hover_and_glacier__vertical_room__ctx__upper_gatestone(ctx, world),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Chamber__West_11_1 => true,
             ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Door_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
@@ -2711,54 +2681,47 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 => true,
             ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => true,
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => rules::access_underwater_movement(ctx, world),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => true,
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => true,
-            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Glacier__Vertical_Room__Flying_West__ex__Peak__Top_Platform_East_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_2 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => rules::access_invoke_infinite_climb_and_slingshot_hook(ctx, world),
-            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_2 => rules::access_invoke_infinite_climb(ctx, world),
+            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => rules::access_invoke_infinite_climb(ctx, world),
             ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Hook_Point_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => rules::access_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => rules::access_underwater_movement_and_invoke_hook_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
-            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => true,
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
-            ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_2 => rules::access_glacier__ctx__hammonds_doors_and_invoke_hook(ctx, world),
-            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => rules::access_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => rules::access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => rules::access_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 => rules::access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => rules::access_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => rules::access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => rules::access_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 => rules::access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world),
             ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => rules::access_underwater_movement_and_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::access_switch_36_11(ctx, world),
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Wall_1 => rules::access_invoke_hover_and_anuman_and_wall_climb(ctx, world),
-            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
-            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => rules::access_glacier__ctx__hammonds_doors_and_invoke_hookhover(ctx, world),
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_2 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
             ExitId::Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1 => true,
             ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1 => rules::access_underwater_movement_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
-            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => true,
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::access_switch_36_11(ctx, world),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__West_9_1 => true,
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Above_Switch_1 => rules::access_glacier__vertical_room__ctx__upper_gatestone(ctx, world),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Below_Upper_Switch_1 => rules::access_glacier__vertical_room__ctx__upper_gatestone(ctx, world),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Upper_Switch_1 => rules::access_glacier__vertical_room__ctx__upper_gatestone(ctx, world),
@@ -2801,22 +2764,18 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Floaters__East__ex__Crystals__West_1 => true,
             ExitId::Glacier_Breach__Floaters__Hidden__ex__West_Save__Hidden_1 => true,
             ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => true,
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_2 => rules::access_drone_hover(ctx, world),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_2 => rules::access_drone_hover(ctx, world),
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier_Breach__Fortress__Southeast__ex__Stacked_Enemies__Northeast_1 => true,
-            ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => true,
             ExitId::Glacier_Breach__Fortress__Southwest__ex__Stacked_Enemies__Northwest_1 => true,
-            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_2 => rules::access_drone_hover(ctx, world),
+            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => true,
-            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
@@ -2831,7 +2790,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
             ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::access_invoke_hook(ctx, world),
@@ -2857,7 +2816,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier_Breach__South_Save__West__ex__Amagi_Breach__East_Entrance__East_1 => true,
             ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 => rules::access_glacier_breach_spidery_connector_gate(ctx, world),
-            ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_2 => rules::access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Mid_air_Lower_1 => rules::access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Glacier_Breach__Spidery_Connector__East__ex__West_Save__West_11_1 => true,
             ExitId::Glacier_Breach__Spidery_Connector__East_Gate__ex__West_Mid_air_Lower_1 => rules::access_drone_hover(ctx, world),
@@ -2878,8 +2836,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_2 => rules::access_slingshot_hook(ctx, world),
             ExitId::Glacier_Breach__Stacked_Enemies__Northwest__ex__Fortress__Southwest_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Electric_Arena__North_1 => true,
-            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
-            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_2 => rules::access_drone_melee_damage(ctx, world),
+            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => rules::access___slingshot_hook_and_slingshot_weapon_or_drone_melee_damage(ctx, world),
             ExitId::Glacier_Breach__Stacked_Enemies__West__ex__Northwest_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Glacier_Breach__Stacked_Enemies__West__ex__Piano_Roll__East_9_1 => true,
             ExitId::Glacier_Breach__West_Save__East_11__ex__Guarded_Corridor__West_1 => true,
@@ -2889,7 +2846,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => true,
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__Spidery_Connector__Button_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => true,
             ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 => true,
@@ -2914,10 +2871,9 @@ impl world::Accessible for Exit {
             ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1 => true,
             ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1 => true,
-            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => rules::access_invoke_spin(ctx, world),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => true,
+            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => true,
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => true,
             ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => rules::access_invoke_spin(ctx, world),
             ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => true,
             ExitId::Interior__Observatory__East__ex__Ebih__Peak__Observatory_East_1 => true,
@@ -2930,17 +2886,16 @@ impl world::Accessible for Exit {
             ExitId::Interior__Observatory__Lower_Tier_Center__ex__West_Staircase_Top_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Interior__Observatory__Lower_Tier_East__ex__East_Staircase_Top_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Interior__Observatory__Lower_Tier_West_Mid_air__ex__West_Staircase_Top_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => true,
             ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_West_Mid_air_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Second_Tier_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => true,
             ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_West_Mid_air_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Second_Tier_West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Interior__Observatory__West__ex__Ebih__Peak__Observatory_West_1 => true,
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_2 => rules::access_invoke_infinite_climb(ctx, world),
-            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
-            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => true,
             ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => true,
             ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => true,
             ExitId::Interior__Uhrum_Waterfall_Cave__Entrance__ex__Uhrum__East_Lake__Waterfall_1 => true,
@@ -2958,15 +2913,12 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__East_Rooftops__Top_Rooftop_1 => true,
             ExitId::Irikar__Airy__South_Center__ex__East_Rooftops__Top_Rooftop_1 => true,
             ExitId::Irikar__Airy__South_Sight__ex__Sight_Room__Above_Room_North_1 => true,
-            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::access_invoke_hover_and_invoke_hook(ctx, world),
             ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => true,
-            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => rules::access_invoke_climb(ctx, world),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::access_invoke_hook_or_invoke_climb(ctx, world),
             ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => true,
             ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => true,
             ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => rules::access_nanite_mist(ctx, world),
@@ -3014,42 +2966,35 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => true,
             ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => true,
             ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::access_invoke_grab_and_anuman(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => rules::access_invoke_climb(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => rules::access_invoke_climb(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::access_invoke_hook_or___anuman_and_invoke_grab(ctx, world),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => rules::access_invoke_hook_or_invoke_climb(ctx, world),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => rules::access_invoke_hook_or_invoke_climb(ctx, world),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => true,
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => true,
+            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3 => rules::access_anuman(ctx, world),
-            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab(ctx, world),
+            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => true,
             ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => rules::access_irikar_royal_storage_wall(ctx, world),
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1 => rules::access_invoke_hook(ctx, world),
@@ -3092,8 +3037,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => rules::access_not_irikar__midwest__ctx__right_platform_and_nanite_mist(ctx, world),
             ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Midwest__East_24_on_Building__ex__Hub__West_24_Rooftop_1 => true,
@@ -3108,14 +3052,11 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => rules::access_nanite_mist_and_not_irikar__midwest__ctx__right_platform(ctx, world),
-            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => rules::access_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_platform(ctx, world),
-            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => rules::access_invoke_hover(ctx, world),
@@ -3132,7 +3073,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
             ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__Pillar_Right_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__West_1 => rules::access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(ctx, world),
-            ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => true,
             ExitId::Irikar_Breach__Basement_Save__West__ex__Buried_Treasure__East_1 => true,
             ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__East_26_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__West_Outcropping_1 => rules::access_drone_hover(ctx, world),
@@ -3151,8 +3092,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Crescent_Rock_West_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Irikar_Breach__Buried_Treasure__East__ex__Basement_Save__West_1 => true,
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => rules::access_drone_hover(ctx, world),
-            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_3 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Left__ex__Pillar_Middle_1 => rules::access_irikar_breach_buried_treasure_pillar(ctx, world),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Right__ex__Pillar_Middle_1 => rules::access_irikar_breach_buried_treasure_pillar(ctx, world),
@@ -3193,10 +3133,9 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar_Breach__Gauntlet__Lower_Middle__ex__East_Climb_Lower_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_Middle_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Gauntlet__Tank_Ledge__ex__Save_Point_1 => rules::access_slingshot_hook_and_slingshot_weapon_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Gauntlet__West_26__ex__Corridor__East_1 => true,
             ExitId::Irikar_Breach__Gauntlet__West_26__ex__Lower_West_Ledge_1 => rules::access_slingshot_hook(ctx, world),
@@ -3208,16 +3147,16 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1 => true,
             ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1 => true,
             ExitId::Irikar_Breach__Neon_Corridor__West__ex__Rocky_Dunes__East_27_1 => true,
-            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_East__ex__Upper_East_Passage_1 => rules::access_drone_hover(ctx, world),
-            ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__West_Rock_West_1 => rules::access_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__East_27__ex__Neon_Corridor__West_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_28__ex__Buried_Treasure__West_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Center_Rock_East_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__East_Rock_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__Upper_East_Passage_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__Center_Rock_East_1 => rules::access_drone_hover(ctx, world),
@@ -3225,10 +3164,8 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Rocky_Dunes__West_28__ex__Beach__East_28_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => rules::access_nanite_mist(ctx, world),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_2 => rules::access_drone_hover(ctx, world),
+            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => rules::access_drone_hover(ctx, world),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_2 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Sand__ex__West_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => true,
             ExitId::Irikar_Breach__Uhrum_Connector__East__ex__Uhrum_Breach__Rock_and_Gate__West_1 => true,
@@ -3238,15 +3175,13 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__ex__V_Rock_East_1 => rules::access_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Uhrum_Connector__Sand_East__ex__Uhrum_Breach__Rock_and_Gate__Button_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => rules::access_drone_hover(ctx, world),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_2 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => true,
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__Exit_Corridor__Portal_Stand_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_2 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Uhrum_Connector__West__ex__Exit_Corridor__East_1 => true,
             ExitId::Irikar_Breach__Uhrum_Connector__West__ex__V_Rock_West_1 => rules::access_drone_hover(ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1 => true,
-            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => true,
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
             ExitId::Menu__Breach_Map__AGB_Bridge_Lower__ex__Annuna_Breach__Double_Corridor__Save_Point_1 => rules::access_map__annuna_breach__double_corridor__save(ctx, world),
@@ -3320,17 +3255,13 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Combat_1 => true,
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::access_remote_drone(ctx, world),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::access_infect(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::access_anuman(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::access_anuman_or_invoke_hover(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => rules::access_uhrum_annuna_corridor_block(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::access_uhrum_annuna_corridor_block(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => rules::access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(ctx, world),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::access_uhrum_annuna_corridor_block_or_invoke_block_clip_escape(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => true,
-            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::access_anuman_or_invoke_hover(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::access_anuman(ctx, world),
-            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::access_anuman_or_invoke_hover(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::access_invoke_hover(ctx, world),
@@ -3345,9 +3276,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 => true,
             ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
@@ -3360,9 +3289,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
             ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_2 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_3 => rules::access_invoke_grab(ctx, world),
+            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => true,
             ExitId::Uhrum__Cavern__Wall_Left__ex__Pedestal_1 => rules::access_uhrum_cavern_wall_and_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Cavern__Wall_Left__ex__Wall_Right_1 => rules::access_uhrum_cavern_wall(ctx, world),
             ExitId::Uhrum__Cavern__Wall_Right__ex__Wall_Left_1 => rules::access_uhrum_cavern_wall(ctx, world),
@@ -3377,35 +3304,27 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__East_Lake__East_Block__ex__West_Block_1 => rules::access_uhrum_east_lake_block(ctx, world),
             ExitId::Uhrum__East_Lake__East_Ledge__ex__Cavern__Wall_Left_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__East_Lake__East_Ledge__ex__Island_East_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_2 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_3 => rules::access_invoke_grab_and_underwater_movement(ctx, world),
+            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => rules::access_invoke_hook_or___underwater_movement_and_invoke_grab(ctx, world),
             ExitId::Uhrum__East_Lake__Island_East__ex__East_Block_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__East_Lake__Island_East__ex__East_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
-            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => rules::access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__East_Lake__Island_West_Hook_Point__ex__East_Ledge_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__East_Lake__Waterfall__ex__Interior__Uhrum_Waterfall_Cave__Entrance_1 => true,
             ExitId::Uhrum__East_Lake__West_27__ex__Waterfall_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__East_Lake__West_27__ex__Waterfalls__East_27_1 => true,
             ExitId::Uhrum__East_Lake__West_28__ex__Waterfalls__East_28_1 => true,
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => rules::access_uhrum_east_lake_block(ctx, world),
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2 => rules::access_invoke_block_clip_and_slingshot_hook_and_not_uhrum_east_lake_block(ctx, world),
+            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => rules::access_uhrum_east_lake_block_or___invoke_block_clip_and_slingshot_hook(ctx, world),
             ExitId::Uhrum__East_Lake__West_Block__ex__East_Ledge_1 => rules::access_uhrum_east_lake_block_and_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__Waterfall_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__West_Block_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1 => true,
-            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::access_anuman(ctx, world),
             ExitId::Uhrum__Emergence_Facility__East__ex__Rocky_Guardpost__West_22_1 => true,
-            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => rules::access_anuman(ctx, world),
-            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::access_anuman_or_invoke_hover(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::access_anuman(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => rules::access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 => rules::access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
@@ -3413,8 +3332,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => rules::access_uhrum_emergence_wall_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 => rules::access_uhrum_emergence_wall(ctx, world),
             ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1 => true,
-            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::access_anuman_or_invoke_hover(ctx, world),
             ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => true,
             ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => true,
             ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::access_mode_eq_drone(ctx, world),
@@ -3430,11 +3348,10 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => rules::access_invoke_hook_or_anuman(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_2 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Rock_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Pillar_West_1 => rules::access_invoke_hover(ctx, world),
@@ -3447,37 +3364,34 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => rules::access_uhrum_glitchy_corridor_rock_and_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Entrance__East_28_1 => true,
-            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::access_invoke_hook_or_anuman(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_2 => rules::access_invoke_hover_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::access_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 => rules::access_mode_eq_drone_and_uhrum_west_glitch(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => rules::access_invoke_hook_or_anuman(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_2 => rules::access_invoke_hover_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => rules::access_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Rock_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Glitch_West_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Center_Platform_West_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Northwest_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Portal_Stand_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_22__ex__Emergence_Save__West_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Artillery_Practice__West_23_1 => true,
-            ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__Center_Platform_East_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__East_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__West_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__West_22__ex__Emergence_Save__Save_Point_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Uhrum__Grassy_Guardpost__West_22__ex__Giguna__Vertical_Interchange__East_22_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
-            ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Gate__East__ex__Rocky_Guardpost__West_23_1 => true,
             ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Mid_air_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Step_1 => rules::access_invoke_hover(ctx, world),
@@ -3504,31 +3418,27 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__East_22_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Emergence_Facility__East_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Tulip_Tower__NW_Mid_air_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Rocky_Gate__East_1 => true,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
-            ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => true,
             ExitId::Uhrum__Seclusion__Portal_West__ex__Boome_Range_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => true,
             ExitId::Uhrum__Seclusion__Portal_West__ex__Shock_Range_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
             ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::access_anuman_and_invoke_grab(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => rules::access_nanite_mist(ctx, world),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::access_invoke_hook_or___anuman_and_invoke_grab(ctx, world),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::access_invoke_climb(ctx, world),
-            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::access_invoke_hover_or_invoke_climb(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
@@ -3543,11 +3453,10 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Tulip_Tower__East_23__ex__Platform_2_East_1 => rules::access_invoke_hook_or_anuman(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Platform_1_West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Waterfalls__Barrier_East_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => true,
             ExitId::Uhrum__Tulip_Tower__North__ex__Amagi__Wiggly_Room__South_1 => true,
             ExitId::Uhrum__Tulip_Tower__NW_Mid_air__ex__Upper_Column_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_2 => rules::access_invoke_grab(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Middle_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Platform_2_West_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Upper_Right_Ledge_1 => rules::access_invoke_hookhover(ctx, world),
@@ -3560,19 +3469,15 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Right_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__Barrier_East_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__East_24_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => true,
             ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => rules::access_nanite_mist(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => rules::access_invoke_climb(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 => rules::access_nanite_mist(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => rules::access_invoke_climb_or_invoke_hover(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum__Tulip_Tower__West_22__ex__Rocky_Guardpost__East_22_1 => true,
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 => rules::access_nanite_mist(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_2 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_3 => rules::access_anuman(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => rules::access_invoke_hook_or_anuman_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Tulip_Tower__West_24__ex__Platform_1_West_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Tulip_Tower__West_24__ex__Waterfalls__East_24_1 => true,
             ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => rules::access_uhrum_waterfalls_block(ctx, world),
@@ -3581,10 +3486,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Barrier_East__ex__Tulip_Tower__Lower_Column_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => rules::access_uhrum_waterfall_wall(ctx, world),
             ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::access_uhrum_waterfalls_block_and_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => rules::access_uhrum_waterfalls_block_and_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::access_uhrum_waterfalls_block_and_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => rules::access_uhrum_waterfalls_block_and_invoke_hook(ctx, world),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::access_uhrum_waterfalls_block_and___invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::access_uhrum_waterfalls_block_and___invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => rules::access_invoke_hover(ctx, world),
@@ -3599,14 +3502,12 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => rules::access_uhrum_waterfalls_block(ctx, world),
             ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => true,
             ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => true,
-            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => rules::access_invoke_hover_or_invoke_hook(ctx, world),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
             ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => rules::access_invoke_hover_and_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => true,
             ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => rules::access_invoke_climb(ctx, world),
             ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => rules::access_invoke_hover(ctx, world),
@@ -3615,11 +3516,9 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_2 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => true,
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::access_underwater_movement_or_invoke_hook(ctx, world),
             ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => true,
             ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => rules::access_invoke_hover(ctx, world),
@@ -3627,26 +3526,20 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => true,
-            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Sloped_Rock_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::access_invoke_grab_and_underwater_movement(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => rules::access_invoke_hook_and_underwater_movement(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::access_underwater_movement_and_invoke_grab(ctx, world),
-            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => rules::access_underwater_movement_and_invoke_hook(ctx, world),
-            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::access_underwater_movement_and___invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::access_underwater_movement_and___invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
             ExitId::Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => true,
-            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => rules::access_uhrum_west_entrance_gate(ctx, world),
-            ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_2 => rules::access_uhrum_west_entrance_gate_and_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Inner_Dais_1 => rules::access_uhrum_west_entrance_gate(ctx, world),
-            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => true,
             ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Gate_West_1 => rules::access_uhrum_west_entrance_gate(ctx, world),
             ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => rules::access_uhrum_west_entrance_gate_and_invoke_hover(ctx, world),
@@ -3657,19 +3550,14 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_West_1 => true,
             ExitId::Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1 => rules::access_uhrum_west_entrance_lower_wall(ctx, world),
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::access_uhrum_west_entrance_lower_wall(ctx, world),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3 => rules::access_invoke_grab(ctx, world),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => rules::access_invoke_hover(ctx, world),
@@ -3680,32 +3568,27 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => rules::access_uhrum_west_entrance_upper_wall(ctx, world),
-            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::access_invoke_grab(ctx, world),
-            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => rules::access_uhrum_west_entrance_upper_wall(ctx, world),
             ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => true,
             ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 => true,
-            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
-            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => true,
             ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge__ex__Upper_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 => rules::access_uhrum_breach_annuna_gate_gate(ctx, world),
-            ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_2 => rules::access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Upper_Ledge_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => true,
             ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Button_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Structure_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__North__ex__Locked_Down__South_1 => true,
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 => rules::access_uhrum_breach_annuna_gate_gate(ctx, world),
-            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_2 => rules::access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Save_Point_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 => rules::access_uhrum_breach_annuna_gate_gate_and_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_2 => rules::access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Building_Roof_Ledge_1 => rules::access_uhrum_breach_annuna_gate_gate(ctx, world),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Button_1 => rules::access_slingshot_hook_and_slingshot_weapon(ctx, world),
@@ -3716,9 +3599,9 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__Annuna_Gate__West__ex__East_Copse__East_1 => true,
             ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Button_Obverse_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Narrow_Point_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => true,
             ExitId::Uhrum_Breach__Blob__West_Side__ex__Giguna_Breach__Secret_Tunnel__East_1 => true,
-            ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => true,
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
@@ -3745,76 +3628,71 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__North_Slime__East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__Northeast_Flower_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Glitch_East__ex__Glitch_West_1 => rules::access_uhrum_east_glitch(ctx, world),
-            ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => true,
             ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__Glitch_East_1 => rules::access_uhrum_east_glitch(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__East_Flower_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__Wall_West_Platform_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__Save_Point_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Save_Point__ex__West_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_2 => rules::access_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__East_Glitch__West__ex__Rock_and_Gate__East_1 => true,
             ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__Button__ex__East_Stone_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__Button__ex__Save_Point_1 => rules::access_fast_travel(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => true,
             ExitId::Uhrum_Breach__Locked_Down__East_Stone__ex__Item_Behind_Gate_1 => rules::access_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 => rules::access_uhrum_breach_locked_down_gate(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_2 => rules::access_uhrum_breach_locked_down_gate_and_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Save_Point_1 => rules::access_fast_travel(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__East_Stone_1 => rules::access_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__Gate_Left_1 => rules::access_uhrum_breach_locked_down_gate(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => true,
             ExitId::Uhrum_Breach__Locked_Down__South__ex__Annuna_Gate__North_1 => true,
-            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_2 => rules::access_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Locked_Down__West__ex__Overgrown_Ruins__East_1 => true,
-            ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => true,
             ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__East_Enemy_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => true,
             ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__Overgrown_Ruins__East_Corner_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => true,
             ExitId::Uhrum_Breach__North_Slime__East__ex__West_Copse__West_27_1 => true,
             ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1 => true,
             ExitId::Uhrum_Breach__Overgrown_Ruins__Cache__ex__Wall_West_1 => rules::access_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Overgrown_Ruins__East__ex__Locked_Down__West_1 => true,
-            ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => true,
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1 => rules::access_uhrum_breach_overgrown_ruins_wall(ctx, world),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Cache_1 => rules::access_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Wall_East_1 => rules::access_uhrum_breach_overgrown_ruins_wall(ctx, world),
             ExitId::Uhrum_Breach__Overgrown_Ruins__West_Floor__ex__Cache_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__Button__ex__Irikar_Breach__Uhrum_Connector__Sand_Swarm_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__East__ex__East_Glitch__West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Above_West_Flower_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Save_Point_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__West_Flower_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_East__ex__Button_1 => rules::access_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_West__ex__Center_Area_West_1 => rules::access_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_West__ex__Gate_East_1 => rules::access_uhrum_breach_rock_and_gate_gate(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__North__ex__Save_and_Go__South_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => rules::access_uhrum_breach_rock_and_gate_rock(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_2 => rules::access_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => rules::access_uhrum_breach_rock_and_gate_rock(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_2 => rules::access_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__West_Glitch__North_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__West__ex__Irikar_Breach__Uhrum_Connector__East_1 => true,
-            ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => true,
             ExitId::Uhrum_Breach__Save_and_Go__North__ex__Giguna_Breach__South__South_1 => true,
             ExitId::Uhrum_Breach__Save_and_Go__Save_Point__ex__West_Rock_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__Save_and_Go__Save_Point__ex__West_Stone_Ledge_1 => rules::access_slingshot_hook(ctx, world),
@@ -3831,22 +3709,20 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__South_Slime__West__ex__East_Glitch__East_28_1 => true,
             ExitId::Uhrum_Breach__West_Copse__Bottom_West__ex__Lower_West_Ledge_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__Center_East__ex__West_27_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_2 => rules::access_drone_hover(ctx, world),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_2 => rules::access_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__Center_West__ex__East_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__Center_West__ex__West_27_1 => rules::access_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__East__ex__East_Copse__West_1 => true,
             ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Center_West_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Lower_West_Ledge_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__Lower_West_Ledge__ex__Center_West_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => rules::access_slingshot_hook(ctx, world),
+            ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => true,
             ExitId::Uhrum_Breach__West_Copse__West_27__ex__Center_West_1 => rules::access_drone_hover(ctx, world),
             ExitId::Uhrum_Breach__West_Copse__West_27__ex__North_Slime__East_1 => true,
             ExitId::Uhrum_Breach__West_Copse__West_28__ex__South_Slime__East_1 => true,
             ExitId::Uhrum_Breach__West_Copse__West_Slope__ex__Center_West_1 => rules::access_slingshot_hook(ctx, world),
-            ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => rules::access_slingshot_hook_and_drone_hover(ctx, world),
+            ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => true,
             ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Pillar_East_1 => rules::access_slingshot_hook(ctx, world),
             ExitId::Uhrum_Breach__West_Glitch__Narrow_Glitch__ex__Past_Glitch_1 => rules::access_uhrum_west_glitch(ctx, world),
             ExitId::Uhrum_Breach__West_Glitch__Narrow_Glitch__ex__Pillar_East_1 => rules::access_drone_hover(ctx, world),
@@ -5595,12 +5471,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Angry_Guards__Portal_Stand__ex__Middle_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::observe_access_apocalypse_bomb(ctx, world, full_obs),
-            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::observe_access_apocalypse_bomb_and_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => rules::observe_access_not_apocalypse_bomb(ctx, world, full_obs),
-            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::observe_access_invoke_offset(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::observe_access_switch_40_12(ctx, world, full_obs),
             ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1 => rules::observe_access_invoke_grab_and_switch_40_12(ctx, world, full_obs),
@@ -5616,16 +5488,15 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::observe_access_underwater_movement_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::observe_access_invoke_hover_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -5636,59 +5507,32 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::observe_access_glacier_fortress_gate(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Upper_Tier_East_1 => rules::observe_access_glacier_fortress_gate(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1 => rules::observe_access_invoke_hook_or___anuman_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => rules::observe_access_glacier_fortress_gate_and___invoke_hook_or_anuman(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_2 => rules::observe_access_glacier_fortress_gate_and___invoke_grab_or_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_2 => rules::observe_access_invoke_grab_or_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_2 => rules::observe_access_invoke_grab_or_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => rules::observe_access_glacier_fortress_gate_and___invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Gate_East_1 => rules::observe_access_glacier_fortress_gate(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__East_9_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Floating_Rock_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Upper_East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_2 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Peak_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Vertical_Room__Flying_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_2 => rules::observe_access_anuman(ctx, world, full_obs),
             ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_2 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_3 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_4 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Grid_31_9_12__Midair__ex__East_10_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
-            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
-            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Column_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grate_Left_Upper_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Floating_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => rules::observe_access_invoke_infinite_climb_and_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_2 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::observe_access_anuman_and_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::observe_access_invoke_hook_or___anuman_and_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Fortress_Wall_1 => rules::observe_access_invoke_hover_and_anuman_and_wall_climb(ctx, world, full_obs),
@@ -5710,17 +5554,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Hammonds_End__Upper_Grate_Left__ex__Upper_Portal_Stand_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
-            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__Center_Bottom__ex__West_Shaft_Hook_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__Northwest_Stone__ex__Sliced_Cavern__Upper_Middle_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Sliced_Cavern__Cache_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Southwest_Ledge_1 => rules::observe_access_invoke_hook_or___anuman_and_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__West_Shaft_Hook_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_Hook_Point_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Bottom_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Hook_Point_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -5728,37 +5569,26 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Inner_Caverns__West_Shaft_Bottom__ex__Southwest_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__Southwest_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__West_Shaft_Bottom_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::observe_access_invoke_climb_and_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => rules::observe_access_invoke_offset(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2 => rules::observe_access_invoke_hover_or_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::observe_access_invoke_hover_or_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__North__ex__Peak__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -5768,7 +5598,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Gate_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1 => rules::observe_access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_1 => rules::observe_access_not_glacier__lonely_bull__ctx__door_and_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Lonely_Bull__West__ex__The_Big_Drop__Small_Path_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Glacier__Lonely_Bull__West__ex__West_Water_Surface_1 => rules::observe_access_glacier__lonely_bull__ctx__door(ctx, world, full_obs),
             ExitId::Glacier__Lonely_Bull__West_Water_Surface__ex__West_1 => rules::observe_access_glacier__lonely_bull__ctx__door(ctx, world, full_obs),
@@ -5776,9 +5605,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Top_Platform_East__ex__Vertical_Room__Hovering_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -5787,20 +5615,16 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::observe_access_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::observe_access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::observe_access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::observe_access_underwater_movement_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Upper_East_Ledge_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__West_11_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Hammonds_End__Upper_Portal_Stand_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Secret_Chamber__West_11__ex__Door_East_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::observe_access_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, full_obs),
@@ -5814,55 +5638,40 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_big_drop_rock(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_glacier__vertical_room__ctx__upper_gatestone(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => rules::observe_access_underwater_movement(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::observe_access_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Flying_West__ex__Peak__Top_Platform_East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_2 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => rules::observe_access_invoke_infinite_climb_and_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_2 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Hook_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_2 => rules::observe_access_glacier__ctx__hammonds_doors_and_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => rules::observe_access_underwater_movement_and_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::observe_access_switch_36_11(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Wall_1 => rules::observe_access_invoke_hover_and_anuman_and_wall_climb(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => rules::observe_access_glacier__ctx__hammonds_doors_and_invoke_hookhover(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1 => rules::observe_access_underwater_movement_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
-            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::observe_access_switch_36_11(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Above_Switch_1 => rules::observe_access_glacier__vertical_room__ctx__upper_gatestone(ctx, world, full_obs),
@@ -5893,19 +5702,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__Upper_East_Platform_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Empty_Space__Lower__ex__West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
@@ -5919,7 +5723,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -5933,7 +5736,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 => rules::observe_access_glacier_breach_spidery_connector_gate(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_2 => rules::observe_access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Mid_air_Lower_1 => rules::observe_access_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Spidery_Connector__East_Gate__ex__West_Mid_air_Lower_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -5948,13 +5750,11 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_2 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
-            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_2 => rules::observe_access_drone_melee_damage(ctx, world, full_obs),
+            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => rules::observe_access___slingshot_hook_and_slingshot_weapon_or_drone_melee_damage(ctx, world, full_obs),
             ExitId::Glacier_Breach__Stacked_Enemies__West__ex__Northwest_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__Spidery_Connector__Button_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1 => rules::observe_access_invoke_sync(ctx, world, full_obs),
@@ -5967,10 +5767,6 @@ impl world::Accessible for Exit {
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => rules::observe_access_invoke_spin(ctx, world, full_obs),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => rules::observe_access_invoke_spin(ctx, world, full_obs),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_2 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
@@ -5981,29 +5777,22 @@ impl world::Accessible for Exit {
             ExitId::Interior__Observatory__Lower_Tier_Center__ex__West_Staircase_Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Interior__Observatory__Lower_Tier_East__ex__East_Staircase_Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Interior__Observatory__Lower_Tier_West_Mid_air__ex__West_Staircase_Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_West_Mid_air_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Second_Tier_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_West_Mid_air_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Second_Tier_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_2 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
-            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
-            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::observe_access_invoke_hover_and_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => rules::observe_access_invoke_climb(ctx, world, full_obs),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_climb(ctx, world, full_obs),
             ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => rules::observe_access_invoke_hover_and_invoke_hook_and_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -6031,41 +5820,30 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::observe_access_invoke_grab_and_anuman(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::observe_access_invoke_hook_or___anuman_and_invoke_grab(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => rules::observe_access_invoke_hook_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => rules::observe_access_invoke_hook_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => rules::observe_access_irikar_royal_storage_wall(ctx, world, full_obs),
             ExitId::Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6094,8 +5872,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => rules::observe_access_not_irikar__midwest__ctx__right_platform_and_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6104,14 +5881,11 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => rules::observe_access_nanite_mist_and_not_irikar__midwest__ctx__right_platform(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => rules::observe_access_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_platform(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6124,7 +5898,6 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__Pillar_Right_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__West_1 => rules::observe_access_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__East_26_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__West_Outcropping_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Beach__Center_Rock_West__ex__West_Outcropping_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
@@ -6139,8 +5912,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Center_Rock_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Crescent_Rock_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_3 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Left__ex__Pillar_Middle_1 => rules::observe_access_irikar_breach_buried_treasure_pillar(ctx, world, full_obs),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Right__ex__Pillar_Middle_1 => rules::observe_access_irikar_breach_buried_treasure_pillar(ctx, world, full_obs),
@@ -6167,34 +5939,27 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Gauntlet__Lower_Middle__ex__East_Climb_Lower_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_Middle_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Gauntlet__Tank_Ledge__ex__Save_Point_1 => rules::observe_access_slingshot_hook_and_slingshot_weapon_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Gauntlet__West_26__ex__Lower_West_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Hover_Room__Bottom__ex__East_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Hover_Room__Bottom__ex__West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Hover_Room__East__ex__West_1 => rules::observe_access_invoke_hover_or_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Hover_Room__West__ex__East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_East__ex__Upper_East_Passage_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__West_Rock_West_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Center_Rock_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__East_Rock_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__Upper_East_Passage_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__Center_Rock_East_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__East_Hilltop_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
+            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_2 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Sand__ex__West_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_East__ex__V_Rock_West_1 => rules::observe_access_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_West__ex__Sand_Swarm_1 => rules::observe_access_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
@@ -6202,13 +5967,9 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__ex__V_Rock_East_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__Sand_East__ex__Uhrum_Breach__Rock_and_Gate__Button_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_2 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__Exit_Corridor__Portal_Stand_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_2 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Irikar_Breach__Uhrum_Connector__West__ex__V_Rock_West_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__AGB_Bridge_Lower__ex__Annuna_Breach__Double_Corridor__Save_Point_1 => rules::observe_access_map__annuna_breach__double_corridor__save(ctx, world, full_obs),
             ExitId::Menu__Breach_Map__AGB_Bridge_Upper__ex__Annuna_Breach__Bridge__Save_Point_1 => rules::observe_access_map__annuna_breach__bridge__save(ctx, world, full_obs),
@@ -6275,16 +6036,12 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => rules::observe_access_remote_drone(ctx, world, full_obs),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::observe_access_remote_drone(ctx, world, full_obs),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::observe_access_infect(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::observe_access_anuman_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => rules::observe_access_uhrum_annuna_corridor_block(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::observe_access_uhrum_annuna_corridor_block(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => rules::observe_access_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::observe_access_uhrum_annuna_corridor_block_or_invoke_block_clip_escape(ctx, world, full_obs),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::observe_access_anuman_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::observe_access_anuman_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6295,9 +6052,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
@@ -6309,9 +6064,6 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_2 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_3 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Cavern__Wall_Left__ex__Pedestal_1 => rules::observe_access_uhrum_cavern_wall_and_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Cavern__Wall_Left__ex__Wall_Right_1 => rules::observe_access_uhrum_cavern_wall(ctx, world, full_obs),
             ExitId::Uhrum__Cavern__Wall_Right__ex__Wall_Left_1 => rules::observe_access_uhrum_cavern_wall(ctx, world, full_obs),
@@ -6324,38 +6076,29 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__East_Lake__East_Block__ex__West_Block_1 => rules::observe_access_uhrum_east_lake_block(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__East_Ledge__ex__Cavern__Wall_Left_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__East_Ledge__ex__Island_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_2 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_3 => rules::observe_access_invoke_grab_and_underwater_movement(ctx, world, full_obs),
+            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => rules::observe_access_invoke_hook_or___underwater_movement_and_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__Island_East__ex__East_Block_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__Island_East__ex__East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => rules::observe_access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__Island_West_Hook_Point__ex__East_Ledge_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__West_27__ex__Waterfall_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => rules::observe_access_uhrum_east_lake_block(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2 => rules::observe_access_invoke_block_clip_and_slingshot_hook_and_not_uhrum_east_lake_block(ctx, world, full_obs),
+            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => rules::observe_access_uhrum_east_lake_block_or___invoke_block_clip_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__West_Block__ex__East_Ledge_1 => rules::observe_access_uhrum_east_lake_block_and_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__Waterfall_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__West_Block_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::observe_access_anuman_or_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::observe_access_anuman(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => rules::observe_access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 => rules::observe_access_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => rules::observe_access_uhrum_emergence_wall_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 => rules::observe_access_uhrum_emergence_wall(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::observe_access_anuman_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__ex__West_Glitch_West_1 => rules::observe_access_mode_eq_drone_and_uhrum_west_glitch(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Center_Platform_East__ex__Portal_Stand_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
@@ -6368,11 +6111,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Pillar_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Portal_Stand__ex__Center_Platform_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6383,34 +6123,25 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1 => rules::observe_access_uhrum_glitchy_corridor_rock(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => rules::observe_access_uhrum_glitchy_corridor_rock_and_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::observe_access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_2 => rules::observe_access_invoke_hover_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 => rules::observe_access_mode_eq_drone_and_uhrum_west_glitch(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_2 => rules::observe_access_invoke_hover_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Rock_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Glitch_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Center_Platform_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Northwest_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Portal_Stand_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__Center_Platform_East_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__East_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__West_22__ex__Emergence_Save__Save_Point_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Mid_air_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Step_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Rocky_Gate__Wall_East__ex__Artillery_Practice__Column_East_1 => rules::observe_access_uhrum_rocky_gate_rock_and_invoke_hookhover(ctx, world, full_obs),
@@ -6433,27 +6164,21 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__East_22_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Tulip_Tower__NW_Mid_air_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Seclusion__Portal_West__ex__Boome_Range_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Seclusion__Portal_West__ex__Shock_Range_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::observe_access_anuman_and_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::observe_access_invoke_hook_or___anuman_and_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::observe_access_invoke_hover_or_invoke_climb(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6465,10 +6190,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Tulip_Tower__East_23__ex__Platform_2_East_1 => rules::observe_access_invoke_hook_or_anuman(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Platform_1_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Waterfalls__Barrier_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__NW_Mid_air__ex__Upper_Column_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Middle_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Platform_2_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Upper_Right_Ledge_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
@@ -6481,18 +6204,13 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Right_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__Barrier_East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__East_24_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => rules::observe_access_anuman(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => rules::observe_access_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => rules::observe_access_invoke_climb_or_invoke_hover(ctx, world, full_obs),
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 => rules::observe_access_nanite_mist(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_2 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_3 => rules::observe_access_anuman(ctx, world, full_obs),
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Tulip_Tower__West_24__ex__Platform_1_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => rules::observe_access_uhrum_waterfalls_block(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6500,10 +6218,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Barrier_East__ex__Tulip_Tower__Lower_Column_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => rules::observe_access_uhrum_waterfall_wall(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::observe_access_uhrum_waterfalls_block_and_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => rules::observe_access_uhrum_waterfalls_block_and_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::observe_access_uhrum_waterfalls_block_and_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => rules::observe_access_uhrum_waterfalls_block_and_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::observe_access_uhrum_waterfalls_block_and___invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::observe_access_uhrum_waterfalls_block_and___invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6513,14 +6229,11 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => rules::observe_access_uhrum_waterfalls_block(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => rules::observe_access_invoke_hover_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => rules::observe_access_invoke_hover_and_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6529,33 +6242,22 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_2 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::observe_access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::observe_access_underwater_movement_or_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Sloped_Rock_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::observe_access_invoke_grab_and_underwater_movement(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => rules::observe_access_invoke_hook_and_underwater_movement(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::observe_access_underwater_movement_and_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => rules::observe_access_underwater_movement_and_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::observe_access_underwater_movement_and___invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::observe_access_underwater_movement_and___invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => rules::observe_access_uhrum_west_entrance_gate(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_2 => rules::observe_access_uhrum_west_entrance_gate_and_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Inner_Dais_1 => rules::observe_access_uhrum_west_entrance_gate(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Gate_West_1 => rules::observe_access_uhrum_west_entrance_gate(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => rules::observe_access_uhrum_west_entrance_gate_and_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -6564,19 +6266,14 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1 => rules::observe_access_uhrum_west_entrance_lower_wall(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::observe_access_uhrum_west_entrance_lower_wall(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::observe_access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6587,28 +6284,21 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => rules::observe_access_uhrum_west_entrance_upper_wall(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => rules::observe_access_uhrum_west_entrance_upper_wall(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
-            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge__ex__Upper_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 => rules::observe_access_uhrum_breach_annuna_gate_gate(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_2 => rules::observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Upper_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Button_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Structure_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 => rules::observe_access_uhrum_breach_annuna_gate_gate(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_2 => rules::observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Save_Point_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 => rules::observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_2 => rules::observe_access_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Building_Roof_Ledge_1 => rules::observe_access_uhrum_breach_annuna_gate_gate(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Button_1 => rules::observe_access_slingshot_hook_and_slingshot_weapon(ctx, world, full_obs),
@@ -6618,8 +6308,6 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__Annuna_Gate__West__ex__Building_Roof_Ledge_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Button_Obverse_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Narrow_Point_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
@@ -6642,66 +6330,41 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__North_Slime__East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__Northeast_Flower_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Glitch_East__ex__Glitch_West_1 => rules::observe_access_uhrum_east_glitch(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__Glitch_East_1 => rules::observe_access_uhrum_east_glitch(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__East_Flower_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__Wall_West_Platform_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__Save_Point_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Save_Point__ex__West_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
+            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__Button__ex__East_Stone_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__Button__ex__Save_Point_1 => rules::observe_access_fast_travel(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__East_Stone__ex__Item_Behind_Gate_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 => rules::observe_access_uhrum_breach_locked_down_gate(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_2 => rules::observe_access_uhrum_breach_locked_down_gate_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Save_Point_1 => rules::observe_access_fast_travel(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__East_Stone_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__Gate_Left_1 => rules::observe_access_uhrum_breach_locked_down_gate(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
+            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__East_Enemy_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__Overgrown_Ruins__East_Corner_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Cache__ex__Wall_West_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1 => rules::observe_access_uhrum_breach_overgrown_ruins_wall(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Cache_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Wall_East_1 => rules::observe_access_uhrum_breach_overgrown_ruins_wall(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Overgrown_Ruins__West_Floor__ex__Cache_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Button__ex__Irikar_Breach__Uhrum_Connector__Sand_Swarm_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Above_West_Flower_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Save_Point_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__West_Flower_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_East__ex__Button_1 => rules::observe_access_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_West__ex__Center_Area_West_1 => rules::observe_access_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_West__ex__Gate_East_1 => rules::observe_access_uhrum_breach_rock_and_gate_gate(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => rules::observe_access_uhrum_breach_rock_and_gate_rock(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_2 => rules::observe_access_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => rules::observe_access_uhrum_breach_rock_and_gate_rock(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_2 => rules::observe_access_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Save_and_Go__Save_Point__ex__West_Rock_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Save_and_Go__Save_Point__ex__West_Stone_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__Save_and_Go__South__ex__Lower_East_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
@@ -6714,19 +6377,15 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__South_Slime__Center__ex__East_Glitch__Glitch_East_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__Bottom_West__ex__Lower_West_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__Center_East__ex__West_27_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_2 => rules::observe_access_drone_hover(ctx, world, full_obs),
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__Center_West__ex__East_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__Center_West__ex__West_27_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Center_West_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Lower_West_Ledge_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__Lower_West_Ledge__ex__Center_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__West_27__ex__Center_West_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Copse__West_Slope__ex__Center_West_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
-            ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => rules::observe_access_slingshot_hook_and_drone_hover(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Pillar_East_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Glitch__Narrow_Glitch__ex__Past_Glitch_1 => rules::observe_access_uhrum_west_glitch(ctx, world, full_obs),
             ExitId::Uhrum_Breach__West_Glitch__Narrow_Glitch__ex__Pillar_East_1 => rules::observe_access_drone_hover(ctx, world, full_obs),
@@ -10989,9 +10648,44 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        575
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        9000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        1000
                     } else {
                         0
                     }
@@ -11006,6 +10700,20 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        324
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        303
                     } else {
                         0
                     }
@@ -11059,9 +10767,143 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        630
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        305
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        450
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        450
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => {
+                    if rules::access_mode_eq_drone_and_not_anuman_and_not_slingshot_hook(ctx, world) {
+                        1200
+} else if rules::access_mode_ne_drone_and_not_anuman(ctx, world) {
+                        600
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        0
                     } else {
                         0
                     }
@@ -11094,9 +10936,44 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
                     } else {
                         0
                     }
@@ -11129,6 +11006,76 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         703
@@ -11139,6 +11086,34 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_hover(ctx, world) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
                     } else {
                         0
                     }
@@ -11192,9 +11167,30 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        1009
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Revival__Ledge__ex__West_9_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        1000
                     } else {
                         0
                     }
@@ -11207,8 +11203,10 @@ impl world::Accessible for Exit {
                     }
                 }
                 ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => {
-                    if rules::access_not_invoke_hook(ctx, world) {
+                    if rules::access_not_underwater_movement_and_not_invoke_hook(ctx, world) {
                         1000
+} else if rules::access_not_underwater_movement(ctx, world) {
+                        0
                     } else {
                         0
                     }
@@ -11221,8 +11219,24 @@ impl world::Accessible for Exit {
                     }
                 }
                 ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => {
-                    if rules::access_not_invoke_hook(ctx, world) {
+                    if rules::access_not_underwater_movement_and_not_invoke_hook(ctx, world) {
                         1000
+} else if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        1513
                     } else {
                         0
                     }
@@ -11230,6 +11244,20 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        1513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => {
+                    if rules::access_not_invoke_hook_or_not_invoke_hover(ctx, world) {
+                        1513
                     } else {
                         0
                     }
@@ -11248,6 +11276,27 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        601
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        398
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         4000
@@ -11255,9 +11304,147 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        470
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab(ctx, world) {
+                        5400
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        4200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab(ctx, world) {
+                        4800
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        3600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         2900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab(ctx, world) {
+                        3600
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_2 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab(ctx, world) {
+                        3000
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => {
+                    if rules::access_not_invoke_hookhover(ctx, world) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab(ctx, world) {
+                        3600
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Under_Switch__ex__West_9_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab(ctx, world) {
+                        3000
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        1800
                     } else {
                         0
                     }
@@ -11290,9 +11477,58 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        630
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
                     } else {
                         0
                     }
@@ -11353,6 +11589,20 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        605
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         400
@@ -11384,6 +11634,43 @@ impl world::Accessible for Exit {
                 ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => {
+                    if rules::access_not_slingshot_hook_or_not_slingshot_weapon(ctx, world) {
+                        5000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+} else if rules::access_not_slingshot_weapon(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        202
                     } else {
                         0
                     }
@@ -11430,9 +11717,32 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        147
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_grab_and_not_invoke_climb(ctx, world) {
+                        1100
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        600
                     } else {
                         0
                     }
@@ -11454,6 +11764,27 @@ impl world::Accessible for Exit {
                 ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         2281
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => {
+                    if rules::access_not_wall_climb(ctx, world) {
+                        600
                     } else {
                         0
                     }
@@ -11493,6 +11824,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        323
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         2105
@@ -11500,21 +11838,42 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => {
+                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         800
                     } else {
                         0
                     }
                 }
-                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 => {
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1000
                     } else {
                         0
                     }
                 }
-                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => {
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1000
                     } else {
@@ -11524,6 +11883,57 @@ impl world::Accessible for Exit {
                 ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         3000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        323
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
                     } else {
                         0
                     }
@@ -11591,6 +12001,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1200
@@ -11601,6 +12018,27 @@ impl world::Accessible for Exit {
                 ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         3684
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        221
                     } else {
                         0
                     }
@@ -11622,6 +12060,13 @@ impl world::Accessible for Exit {
                 ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         5800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => {
+                    if rules::access_not_slingshot_hook_and_not_drone_hover(ctx, world) {
+                        1311
                     } else {
                         0
                     }
@@ -11661,6 +12106,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         600
@@ -11668,9 +12120,51 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Irikar_Breach__Corridor__Center__ex__Passage_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        757
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        102
                     } else {
                         0
                     }
@@ -11685,6 +12179,48 @@ impl world::Accessible for Exit {
                 ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1009
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        303
                     } else {
                         0
                     }
@@ -11878,6 +12414,196 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => {
+                    if rules::access_not_uhrum_annuna_corridor_block(ctx, world) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        849
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        249
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => {
+                    if rules::access_not_invoke_hook_and_not_invoke_hover_and_not_invoke_grab(ctx, world) {
+                        1670
+} else if rules::access_mode_ne_drone(ctx, world) {
+                        1070
+} else if rules::access_not_slingshot_hook(ctx, world) {
+                        470
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1000
+} else if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => {
+                    if rules::access_not_uhrum_east_lake_block(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        660
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => {
+                    if rules::access_not_invoke_hookhover(ctx, world) {
+                        807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        252
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum__Rocky_Guardpost__Lower_Mid_air__ex__Upper_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1300
@@ -11913,7 +12639,35 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => {
+                ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        14
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        189
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         600
                     } else {
@@ -11927,9 +12681,30 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => {
+                    if rules::access_not_invoke_hover(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1050
                     } else {
                         0
                     }
@@ -11948,6 +12723,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => {
+                    if rules::access_not_anuman(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1200
@@ -11955,7 +12737,14 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 => {
+                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => {
+                    if rules::access_not_invoke_climb(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         700
                     } else {
@@ -11969,9 +12758,195 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 => {
+                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1053
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => {
+                    if rules::access_not_invoke_hook_and_not_anuman(ctx, world) {
+                        1098
+} else if rules::access_not_invoke_hook(ctx, world) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => {
+                    if rules::access_not_invoke_hover(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => {
+                    if rules::access_not_drone_hover(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => {
+                    if rules::access_not_invoke_hook_and_not_underwater_movement(ctx, world) {
+                        1000
+} else if rules::access_not_underwater_movement(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        349
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1144
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1649
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1 => {
+                    if rules::access_not_underwater_movement(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        909
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => {
+                    if rules::access_not_invoke_hover(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        1172
                     } else {
                         0
                     }
@@ -11983,9 +12958,79 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        411
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        133
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 => {
+                    if rules::access_not_drone_hover(ctx, world) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        14
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        189
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        404
                     } else {
                         0
                     }
@@ -11997,9 +13042,212 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        189
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        706
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        706
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        404
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        450
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => {
+                    if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
+                        454
                     } else {
                         0
                     }
@@ -12848,13 +14096,13 @@ impl world::Accessible for Exit {
                 ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -12944,7 +14192,7 @@ impl world::Accessible for Exit {
                 ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -12962,13 +14210,13 @@ impl world::Accessible for Exit {
                 ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -14724,12 +15972,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Angry_Guards__Portal_Stand__ex__Middle_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => rules::explain_apocalypse_bomb(ctx, world, edict),
-            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => rules::explain_apocalypse_bomb_and_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => rules::explain_not_apocalypse_bomb(ctx, world, edict),
-            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_14_1 => rules::explain_invoke_offset(ctx, world, edict),
             ExitId::Glacier__Boomerang_Antechamber__Upper_East__ex__Boomerang_Room__Upper_West_1 => rules::explain_switch_40_12(ctx, world, edict),
             ExitId::Glacier__Boomerang_Room__Center_ish__ex__Center_Ledge_1 => rules::explain_invoke_grab_and_switch_40_12(ctx, world, edict),
@@ -14745,16 +15989,15 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => rules::explain_underwater_movement_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Crystals__Upper_Ledge__ex__West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Crystals__West__ex__Upper_Ledge_1 => rules::explain_invoke_hover_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Above_Ruins_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Cave_Mouth__ex__Ruins_Stairs_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Lower_Platforms_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -14765,59 +16008,32 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 => rules::explain_glacier_fortress_gate(ctx, world, edict),
             ExitId::Glacier__Fortress__Gate_East__ex__Inner_Upper_Tier_East_1 => rules::explain_glacier_fortress_gate(ctx, world, edict),
             ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1 => rules::explain_invoke_hook_or___anuman_and_invoke_climb(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => rules::explain_glacier_fortress_gate_and___invoke_hook_or_anuman(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_2 => rules::explain_glacier_fortress_gate_and___invoke_grab_or_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_2 => rules::explain_invoke_grab_or_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_2 => rules::explain_invoke_grab_or_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => rules::explain_glacier_fortress_gate_and___invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Gate_East_1 => rules::explain_glacier_fortress_gate(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__East_9_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Floating_Rock_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Upper_East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_2 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Peak_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Vertical_Room__Flying_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_2 => rules::explain_anuman(ctx, world, edict),
             ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_2 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_3 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_4 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Grid_31_9_12__Midair__ex__East_10_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
-            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
-            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Column_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grate_Left_Upper_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Floating_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => rules::explain_invoke_infinite_climb_and_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_2 => rules::explain_invoke_infinite_climb(ctx, world, edict),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::explain_anuman_and_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => rules::explain_invoke_infinite_climb(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => rules::explain_invoke_hook_or___anuman_and_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Fortress_Wall_1 => rules::explain_invoke_hover_and_anuman_and_wall_climb(ctx, world, edict),
@@ -14839,17 +16055,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Hammonds_End__Upper_Grate_Left__ex__Upper_Portal_Stand_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
-            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__Center_Bottom__ex__West_Shaft_Hook_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__Northwest_Stone__ex__Sliced_Cavern__Upper_Middle_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Sliced_Cavern__Cache_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Southwest_Ledge_1 => rules::explain_invoke_hook_or___anuman_and_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__West_Shaft_Hook_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_Hook_Point_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Bottom_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Hook_Point_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -14857,37 +16070,26 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Inner_Caverns__West_Shaft_Bottom__ex__Southwest_Ledge_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__Southwest_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__West_Shaft_Bottom_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::explain_invoke_climb_and_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => rules::explain_invoke_offset(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2 => rules::explain_invoke_hover_or_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => rules::explain_invoke_hover_or_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1 => rules::explain_invoke_climb(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__North__ex__Peak__South_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -14897,7 +16099,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Gate_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1 => rules::explain_not_glacier__lonely_bull__ctx__door_and_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_1 => rules::explain_not_glacier__lonely_bull__ctx__door_and_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Lonely_Bull__West__ex__The_Big_Drop__Small_Path_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Glacier__Lonely_Bull__West__ex__West_Water_Surface_1 => rules::explain_glacier__lonely_bull__ctx__door(ctx, world, edict),
             ExitId::Glacier__Lonely_Bull__West_Water_Surface__ex__West_1 => rules::explain_glacier__lonely_bull__ctx__door(ctx, world, edict),
@@ -14905,9 +16106,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Top_Platform_East__ex__Vertical_Room__Hovering_East_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Revival__Ledge__ex__West_9_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Revival__Overhang__ex__West_9_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -14916,20 +16116,16 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => rules::explain_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::explain_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Left_Center_Rock__ex__Grate_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => rules::explain_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => rules::explain_underwater_movement_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__Upper_East_Ledge_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__Door_East__ex__West_11_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Hammonds_End__Upper_Portal_Stand_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Secret_Chamber__West_11__ex__Door_East_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => rules::explain_glacier__the_big_drop__ctx__bridge_open_and_nanite_mist(ctx, world, edict),
@@ -14943,55 +16139,40 @@ impl world::Accessible for Exit {
             ExitId::Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => rules::explain_glacier_big_drop_rock(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => rules::explain_invoke_hook_and_invoke_hover_and_glacier__vertical_room__ctx__upper_gatestone(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => rules::explain_underwater_movement(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::explain_invoke_hook_and_invoke_hover_and_underwater_movement(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Flying_West__ex__Peak__Top_Platform_East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_2 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => rules::explain_invoke_infinite_climb_and_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_2 => rules::explain_invoke_infinite_climb(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => rules::explain_invoke_infinite_climb(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Hook_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => rules::explain_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => rules::explain_underwater_movement_and_invoke_hook_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_2 => rules::explain_glacier__ctx__hammonds_doors_and_invoke_hook(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => rules::explain_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => rules::explain_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => rules::explain_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 => rules::explain_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => rules::explain_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => rules::explain_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => rules::explain_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 => rules::explain_glacier__vertical_room__ctx__lower_gatestones_and_underwater_movement(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => rules::explain_underwater_movement_and_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 => rules::explain_switch_36_11(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Wall_1 => rules::explain_invoke_hover_and_anuman_and_wall_climb(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => rules::explain_glacier__ctx__hammonds_doors_and_invoke_hookhover(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1 => rules::explain_underwater_movement_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
-            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 => rules::explain_switch_36_11(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Upper_Gatestone__ex__Above_Switch_1 => rules::explain_glacier__vertical_room__ctx__upper_gatestone(ctx, world, edict),
@@ -15022,19 +16203,14 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__East_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Electric_Arena__West_Platforms__ex__Upper_East_Platform_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Empty_Space__Lower__ex__West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_2 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_2 => rules::explain_drone_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_2 => rules::explain_drone_hover(ctx, world, edict),
+            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Below_Grate__ex__West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
@@ -15048,7 +16224,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__Grate_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Grate_Work__West_Ledge__ex__West_13_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -15062,7 +16237,6 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__South_Save__Brick_Ledge__ex__East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__South_Save__Save_Point__ex__Brick_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 => rules::explain_glacier_breach_spidery_connector_gate(ctx, world, edict),
-            ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_2 => rules::explain_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Mid_air_Lower_1 => rules::explain_glacier_breach_spidery_connector_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Spidery_Connector__East_Gate__ex__West_Mid_air_Lower_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -15077,13 +16251,11 @@ impl world::Accessible for Exit {
             ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_2 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
-            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_2 => rules::explain_drone_melee_damage(ctx, world, edict),
+            ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => rules::explain___slingshot_hook_and_slingshot_weapon_or_drone_melee_damage(ctx, world, edict),
             ExitId::Glacier_Breach__Stacked_Enemies__West__ex__Northwest_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Glacier_Breach__West_Save__East_11__ex__West_Ledge_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__East_11_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Glacier_Breach__West_Save__West_Ledge__ex__Spidery_Connector__Button_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__West_Save__West_Nub__ex__East_11_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Glacier_Breach__West_Save__West_Nub__ex__West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier_Breach__Zappers__East__ex__Hill_East_1 => rules::explain_invoke_sync(ctx, world, edict),
@@ -15096,10 +16268,6 @@ impl world::Accessible for Exit {
             ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => rules::explain_invoke_spin(ctx, world, edict),
-            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => rules::explain_invoke_spin(ctx, world, edict),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_2 => rules::explain_invoke_infinite_climb(ctx, world, edict),
@@ -15110,29 +16278,22 @@ impl world::Accessible for Exit {
             ExitId::Interior__Observatory__Lower_Tier_Center__ex__West_Staircase_Top_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Interior__Observatory__Lower_Tier_East__ex__East_Staircase_Top_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Interior__Observatory__Lower_Tier_West_Mid_air__ex__West_Staircase_Top_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_West_Mid_air_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Second_Tier_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_West_Mid_air_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Second_Tier_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_2 => rules::explain_invoke_infinite_climb(ctx, world, edict),
-            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
-            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Airy__Cavern_Mouth__ex__Giguna__Breachable_Wall__West_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Airy__Lower_Throw_End__ex__South_Sight_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => rules::explain_invoke_hover_and_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => rules::explain_invoke_climb(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => rules::explain_invoke_hook_or_invoke_climb(ctx, world, edict),
             ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => rules::explain_invoke_hover_and_invoke_hook_and_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => rules::explain_nanite_mist(ctx, world, edict),
@@ -15160,41 +16321,30 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Hub__Bowl_Platform_3__ex__Bowl_Middle_Platform_Center_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__Bowl_Top_Platform__ex__West_Rim_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__East_Rim__ex__Airy__Right_Hover_Throw_End_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__East_Rim__ex__Sat_Tower_Roof_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::explain_invoke_grab_and_anuman(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => rules::explain_invoke_climb(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => rules::explain_invoke_climb(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => rules::explain_invoke_hook_or___anuman_and_invoke_grab(ctx, world, edict),
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => rules::explain_invoke_hook_or_invoke_climb(ctx, world, edict),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => rules::explain_invoke_hook_or_invoke_climb(ctx, world, edict),
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => rules::explain_irikar_royal_storage_wall(ctx, world, edict),
             ExitId::Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Hub__Sat_Tower_Floating_Platform__ex__Sat_Tower_Top_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -15223,8 +16373,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => rules::explain_not_irikar__midwest__ctx__right_platform_and_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -15233,14 +16382,11 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => rules::explain_nanite_mist_and_not_irikar__midwest__ctx__right_platform(ctx, world, edict),
-            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => rules::explain_invoke_hover_and_invoke_hook_and_not_irikar__midwest__ctx__left_platform(ctx, world, edict),
-            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Irikar__Midwest__Save_Point__ex__East_25_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar__Midwest__Small_Rooftop__ex__Left_Platform_Start_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -15253,7 +16399,6 @@ impl world::Accessible for Exit {
             ExitId::Irikar__Sight_Room__Northwest__ex__Above_Room_East_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__Pillar_Right_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Basement_Save__Save_West__ex__Buried_Treasure__West_1 => rules::explain_slingshot_hook_and_drone_hover_and_not_irikar_breach_buried_treasure_pillar(ctx, world, edict),
-            ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__East_26_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Beach__Center_Rock_East__ex__West_Outcropping_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Beach__Center_Rock_West__ex__West_Outcropping_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
@@ -15268,8 +16413,7 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Center_Rock_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Beach__Sand_Trap__ex__Crescent_Rock_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_3 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Left__ex__Pillar_Middle_1 => rules::explain_irikar_breach_buried_treasure_pillar(ctx, world, edict),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Right__ex__Pillar_Middle_1 => rules::explain_irikar_breach_buried_treasure_pillar(ctx, world, edict),
@@ -15296,34 +16440,27 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Gauntlet__Lower_Middle__ex__East_Climb_Lower_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_Middle_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Gauntlet__Tank_Ledge__ex__Save_Point_1 => rules::explain_slingshot_hook_and_slingshot_weapon_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Gauntlet__West_26__ex__Lower_West_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Hover_Room__Bottom__ex__East_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Hover_Room__Bottom__ex__West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Hover_Room__East__ex__West_1 => rules::explain_invoke_hover_or_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Hover_Room__West__ex__East_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_East__ex__Upper_East_Passage_1 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__West_Rock_West_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Center_Rock_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__East_Rock_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__Upper_East_Passage_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__Center_Rock_East_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__East_Hilltop_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_2 => rules::explain_drone_hover(ctx, world, edict),
+            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_2 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Rocky_Dunes__West_Sand__ex__West_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_East__ex__V_Rock_West_1 => rules::explain_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_West__ex__Sand_Swarm_1 => rules::explain_irikar_breach_uhrum_connector_wall_and_slingshot_hook_and_drone_hover(ctx, world, edict),
@@ -15331,13 +16468,9 @@ impl world::Accessible for Exit {
             ExitId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__ex__V_Rock_East_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__Sand_East__ex__Uhrum_Breach__Rock_and_Gate__Button_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_2 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__Exit_Corridor__Portal_Stand_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_2 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Irikar_Breach__Uhrum_Connector__West__ex__V_Rock_West_1 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Irikar_Breach__Worm_Rave__South__ex__East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Menu__Breach_Map__AGB_Bridge_Lower__ex__Annuna_Breach__Double_Corridor__Save_Point_1 => rules::explain_map__annuna_breach__double_corridor__save(ctx, world, edict),
             ExitId::Menu__Breach_Map__AGB_Bridge_Upper__ex__Annuna_Breach__Bridge__Save_Point_1 => rules::explain_map__annuna_breach__bridge__save(ctx, world, edict),
@@ -15404,16 +16537,12 @@ impl world::Accessible for Exit {
             ExitId::Menu__Upgrade_Menu__Infection__ex__Drone_1 => rules::explain_remote_drone(ctx, world, edict),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Drone_1 => rules::explain_remote_drone(ctx, world, edict),
             ExitId::Menu__Upgrade_Menu__Physiology__ex__Infection_1 => rules::explain_infect(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => rules::explain_anuman_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => rules::explain_uhrum_annuna_corridor_block(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::explain_uhrum_annuna_corridor_block(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => rules::explain_invoke_block_clip_escape_and_not_uhrum_annuna_corridor_block(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => rules::explain_uhrum_annuna_corridor_block_or_invoke_block_clip_escape(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => rules::explain_anuman_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => rules::explain_anuman_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -15424,9 +16553,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__Column_West__ex__West_Top_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
@@ -15438,9 +16565,6 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Artillery_Practice__West_Right_Ledge__ex__West_Middle_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__West_Right_Platform__ex__Column_West_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Artillery_Practice__West_Top_Platform__ex__Column_West_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_2 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_3 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Cavern__Wall_Left__ex__Pedestal_1 => rules::explain_uhrum_cavern_wall_and_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Cavern__Wall_Left__ex__Wall_Right_1 => rules::explain_uhrum_cavern_wall(ctx, world, edict),
             ExitId::Uhrum__Cavern__Wall_Right__ex__Wall_Left_1 => rules::explain_uhrum_cavern_wall(ctx, world, edict),
@@ -15453,38 +16577,29 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__East_Lake__East_Block__ex__West_Block_1 => rules::explain_uhrum_east_lake_block(ctx, world, edict),
             ExitId::Uhrum__East_Lake__East_Ledge__ex__Cavern__Wall_Left_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__East_Lake__East_Ledge__ex__Island_East_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_2 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_3 => rules::explain_invoke_grab_and_underwater_movement(ctx, world, edict),
+            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => rules::explain_invoke_hook_or___underwater_movement_and_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__East_Lake__Island_East__ex__East_Block_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__East_Lake__Island_East__ex__East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => rules::explain_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__East_Lake__Island_West_Hook_Point__ex__East_Ledge_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__East_Lake__West_27__ex__Waterfall_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => rules::explain_uhrum_east_lake_block(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2 => rules::explain_invoke_block_clip_and_slingshot_hook_and_not_uhrum_east_lake_block(ctx, world, edict),
+            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => rules::explain_uhrum_east_lake_block_or___invoke_block_clip_and_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum__East_Lake__West_Block__ex__East_Ledge_1 => rules::explain_uhrum_east_lake_block_and_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__Waterfall_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__West_Block_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => rules::explain_anuman(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => rules::explain_anuman_or_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => rules::explain_anuman(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Approach_1 => rules::explain_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__East_Stair_Right_1 => rules::explain_uhrum_emergence_wall_and_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Wall_East_Mid_air__ex__Wall_West_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => rules::explain_uhrum_emergence_wall_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 => rules::explain_uhrum_emergence_wall(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => rules::explain_anuman_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__ex__West_Glitch_West_1 => rules::explain_mode_eq_drone_and_uhrum_west_glitch(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Center_Platform_East__ex__Portal_Stand_1 => rules::explain_invoke_hookhover(ctx, world, edict),
@@ -15497,11 +16612,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Pillar_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Portal_Stand__ex__Center_Platform_West_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -15512,34 +16624,25 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1 => rules::explain_uhrum_glitchy_corridor_rock(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => rules::explain_uhrum_glitchy_corridor_rock_and_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::explain_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_2 => rules::explain_invoke_hover_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::explain_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 => rules::explain_mode_eq_drone_and_uhrum_west_glitch(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_2 => rules::explain_invoke_hover_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => rules::explain_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Rock_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_East__ex__West_Glitch_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Center_Platform_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Northwest_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Pillar_West__ex__Portal_Stand_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__Center_Platform_East_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__East_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__Small_Column_East__ex__West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__West_22__ex__Emergence_Save__Save_Point_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Mid_air_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Rocky_Gate__East_Ledge__ex__Rocky_Guardpost__Lower_Step_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Rocky_Gate__Wall_East__ex__Artillery_Practice__Column_East_1 => rules::explain_uhrum_rocky_gate_rock_and_invoke_hookhover(ctx, world, edict),
@@ -15562,27 +16665,21 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__East_22_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Rocky_Guardpost__West_22__ex__Tulip_Tower__NW_Mid_air_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Seclusion__Portal_West__ex__Boome_Range_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Seclusion__Portal_West__ex__Shock_Range_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::explain_anuman_and_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 => rules::explain_invoke_hook_or___anuman_and_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Giguna__Vertical_Interchange__South_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Northwest_Door__ex__Western_Cache_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::explain_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => rules::explain_invoke_hover_or_invoke_climb(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -15594,10 +16691,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Tulip_Tower__East_23__ex__Platform_2_East_1 => rules::explain_invoke_hook_or_anuman(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Platform_1_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Waterfalls__Barrier_East_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__NW_Mid_air__ex__Upper_Column_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_2 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Middle_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Platform_2_West_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Upper_Right_Ledge_1 => rules::explain_invoke_hookhover(ctx, world, edict),
@@ -15610,18 +16705,13 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Right_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__Barrier_East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__East_24_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => rules::explain_anuman(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => rules::explain_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => rules::explain_invoke_climb_or_invoke_hover(ctx, world, edict),
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 => rules::explain_nanite_mist(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_2 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_3 => rules::explain_anuman(ctx, world, edict),
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => rules::explain_invoke_hook_or_anuman_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Tulip_Tower__West_24__ex__Platform_1_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 => rules::explain_uhrum_waterfalls_block(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Above_Block__ex__East_25_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -15629,10 +16719,8 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Barrier_East__ex__Tulip_Tower__Lower_Column_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => rules::explain_uhrum_waterfall_wall(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::explain_uhrum_waterfalls_block_and_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 => rules::explain_uhrum_waterfalls_block_and_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::explain_uhrum_waterfalls_block_and_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2 => rules::explain_uhrum_waterfalls_block_and_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => rules::explain_uhrum_waterfalls_block_and___invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => rules::explain_uhrum_waterfalls_block_and___invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -15642,14 +16730,11 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 => rules::explain_uhrum_waterfalls_block(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => rules::explain_invoke_hover_or_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => rules::explain_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => rules::explain_invoke_hover_and_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => rules::explain_invoke_climb(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -15658,33 +16743,22 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_2 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => rules::explain_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => rules::explain_underwater_movement_or_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__West_25__ex__Below_Block_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Waterfalls__West_Platform__ex__Sloped_Rock_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::explain_invoke_grab_and_underwater_movement(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => rules::explain_invoke_hook_and_underwater_movement(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::explain_underwater_movement_and_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => rules::explain_underwater_movement_and_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => rules::explain_underwater_movement_and___invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => rules::explain_underwater_movement_and___invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => rules::explain_uhrum_west_entrance_gate(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_2 => rules::explain_uhrum_west_entrance_gate_and_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Inner_Dais_1 => rules::explain_uhrum_west_entrance_gate(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Gate_West_1 => rules::explain_uhrum_west_entrance_gate(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => rules::explain_uhrum_west_entrance_gate_and_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -15693,19 +16767,14 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1 => rules::explain_uhrum_west_entrance_lower_wall(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::explain_uhrum_west_entrance_lower_wall(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::explain_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__South_Platform__ex__West_27_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -15716,28 +16785,21 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => rules::explain_uhrum_west_entrance_upper_wall(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::explain_invoke_grab(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => rules::explain_uhrum_west_entrance_upper_wall(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
-            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__West_27__ex__South_Platform_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge__ex__Upper_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 => rules::explain_uhrum_breach_annuna_gate_gate(ctx, world, edict),
-            ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_2 => rules::explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Upper_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Button_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Structure_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 => rules::explain_uhrum_breach_annuna_gate_gate(ctx, world, edict),
-            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_2 => rules::explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Save_Point_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 => rules::explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_2 => rules::explain_uhrum_breach_annuna_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Building_Roof_Ledge_1 => rules::explain_uhrum_breach_annuna_gate_gate(ctx, world, edict),
             ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Button_1 => rules::explain_slingshot_hook_and_slingshot_weapon(ctx, world, edict),
@@ -15747,8 +16809,6 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__Annuna_Gate__West__ex__Building_Roof_Ledge_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Button_Obverse_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Blob__East_Side__ex__Giguna_Breach__Secret_Tunnel__Narrow_Point_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
@@ -15771,66 +16831,41 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__North_Slime__East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__Northeast_Flower_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Glitch_East__ex__Glitch_West_1 => rules::explain_uhrum_east_glitch(ctx, world, edict),
-            ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__Glitch_East_1 => rules::explain_uhrum_east_glitch(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__East_Flower_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Ledge__ex__Wall_West_Platform_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__Save_Point_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Middle_Platform_East__ex__West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Save_Point__ex__West_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_2 => rules::explain_drone_hover(ctx, world, edict),
+            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__East_Glitch__West_Flower__ex__Middle_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__Button__ex__East_Stone_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__Button__ex__Save_Point_1 => rules::explain_fast_travel(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__East_Stone__ex__Item_Behind_Gate_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 => rules::explain_uhrum_breach_locked_down_gate(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_2 => rules::explain_uhrum_breach_locked_down_gate_and_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Save_Point_1 => rules::explain_fast_travel(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__East_Stone_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__Gate_Left_1 => rules::explain_uhrum_breach_locked_down_gate(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_2 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
+            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__East_Enemy_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__Overgrown_Ruins__East_Corner_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Cache__ex__Wall_West_1 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1 => rules::explain_uhrum_breach_overgrown_ruins_wall(ctx, world, edict),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Cache_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_West__ex__Wall_East_1 => rules::explain_uhrum_breach_overgrown_ruins_wall(ctx, world, edict),
             ExitId::Uhrum_Breach__Overgrown_Ruins__West_Floor__ex__Cache_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Button__ex__Irikar_Breach__Uhrum_Connector__Sand_Swarm_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Above_West_Flower_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Save_Point_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__West_Flower_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_East__ex__Button_1 => rules::explain_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_West__ex__Center_Area_West_1 => rules::explain_uhrum_breach_rock_and_gate_gate_and_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Gate_West__ex__Gate_East_1 => rules::explain_uhrum_breach_rock_and_gate_gate(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => rules::explain_uhrum_breach_rock_and_gate_rock(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_2 => rules::explain_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => rules::explain_uhrum_breach_rock_and_gate_rock(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_2 => rules::explain_uhrum_breach_rock_and_gate_rock_and_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Save_and_Go__Save_Point__ex__West_Rock_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__Save_and_Go__Save_Point__ex__West_Stone_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__Save_and_Go__South__ex__Lower_East_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
@@ -15843,19 +16878,15 @@ impl world::Accessible for Exit {
             ExitId::Uhrum_Breach__South_Slime__Center__ex__East_Glitch__Glitch_East_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__Bottom_West__ex__Lower_West_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__Center_East__ex__West_27_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_2 => rules::explain_drone_hover(ctx, world, edict),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_2 => rules::explain_drone_hover(ctx, world, edict),
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__Center_West__ex__East_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__Center_West__ex__West_27_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Center_West_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Lower_West_Ledge_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__Lower_West_Ledge__ex__Center_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__West_27__ex__Center_West_1 => rules::explain_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Copse__West_Slope__ex__Center_West_1 => rules::explain_slingshot_hook(ctx, world, edict),
-            ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => rules::explain_slingshot_hook_and_drone_hover(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Pillar_East_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Glitch__Narrow_Glitch__ex__Past_Glitch_1 => rules::explain_uhrum_west_glitch(ctx, world, edict),
             ExitId::Uhrum_Breach__West_Glitch__Narrow_Glitch__ex__Pillar_East_1 => rules::explain_drone_hover(ctx, world, edict),
@@ -16518,8 +17549,10 @@ impl world::Exit for Exit {
             ExitId::Giguna_Breach__Upper_Machinery__West__ex__Labyrinth__East_19_1 => true,
             ExitId::Glacier__Angry_Guards__East_11__ex__Ledge_Grab_Room__West_11_1 => true,
             ExitId::Glacier__Angry_Guards__East_12__ex__Sliced_Cavern__West_12_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => true,
             ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_12__ex__Boomerang_Room__West_1 => true,
             ExitId::Glacier__Boomerang_Antechamber__East_13__ex__Sea_Burial__West_13_1 => true,
@@ -16530,12 +17563,28 @@ impl world::Exit for Exit {
             ExitId::Glacier__Compass_Room__East__ex__Grid_43_10_11__Lower_1 => true,
             ExitId::Glacier__Compass_Room__West__ex__The_Big_Drop__East_1 => true,
             ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => true,
+            ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1 => true,
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => true,
             ExitId::Glacier__Crystals__West__ex__Vertical_Room__East_14_1 => true,
             ExitId::Glacier__Dock_Outside__Do_Not_Enter__ex__Revival__East_9_1 => true,
             ExitId::Glacier__Dock_Outside__Entry__ex__Interior__Dock_Interior__Entry_1 => true,
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_Step_1 => true,
             ExitId::Glacier__Fortress__Gate_East__ex__Grid_39_40_7_9__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => true,
+            ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => true,
             ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Grid_39_40_7_9__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => true,
             ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Vertical_Room__Fortress_Ledge_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_10__ex__Grid_32_7_10__West_10_1 => true,
             ExitId::Glacier__Grid_31_9_12__East_9__ex__Grid_32_7_10__West_9_1 => true,
@@ -16570,6 +17619,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Angry_Guards__East_11_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__West_9__ex__Grid_32_7_10__East_9_1 => true,
+            ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => true,
             ExitId::Glacier__Peak__East_8__ex__Vertical_Room__West_8_1 => true,
             ExitId::Glacier__Peak__South__ex__Ledge_Grab_Room__North_1 => true,
             ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => true,
@@ -16579,11 +17629,15 @@ impl world::Exit for Exit {
             ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => true,
             ExitId::Glacier__Revival__West_8__ex__Grid_39_40_7_9__Upper_East_1 => true,
             ExitId::Glacier__Revival__West_9__ex__Grid_39_40_7_9__East_9_1 => true,
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => true,
             ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
             ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
             ExitId::Glacier__Sea_Burial__West_14__ex__Annuna__Lamassu__East_14_1 => true,
+            ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => true,
             ExitId::Glacier__Secret_Chamber__East_10__ex__Hammonds_End__West_10_1 => true,
             ExitId::Glacier__Secret_Chamber__East_11__ex__Hammonds_End__West_11_1 => true,
+            ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => true,
+            ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => true,
             ExitId::Glacier__Secret_Chamber__West_11__ex__Vertical_Room__East_11_1 => true,
             ExitId::Glacier__Sliced_Cavern__East_12__ex__Inner_Caverns__West_12_1 => true,
             ExitId::Glacier__Sliced_Cavern__East_13__ex__Inner_Caverns__West_13_1 => true,
@@ -16596,9 +17650,16 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__East_13__ex__Boomerang_Antechamber__West_13_1 => true,
             ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 => true,
             ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => true,
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => true,
             ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => true,
             ExitId::Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_2 => true,
             ExitId::Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1 => true,
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__West_9_1 => true,
             ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => true,
             ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => true,
             ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 => true,
@@ -16614,9 +17675,11 @@ impl world::Exit for Exit {
             ExitId::Glacier_Breach__Floaters__Hidden__ex__West_Save__Hidden_1 => true,
             ExitId::Glacier_Breach__Floaters__West__ex__West_Save__East_12_1 => true,
             ExitId::Glacier_Breach__Fortress__Southeast__ex__Stacked_Enemies__Northeast_1 => true,
+            ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => true,
             ExitId::Glacier_Breach__Fortress__Southwest__ex__Stacked_Enemies__Northwest_1 => true,
             ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_13__ex__Zappers__East_1 => true,
             ExitId::Glacier_Breach__Grate_Work__West_14__ex__South_Save__East_1 => true,
             ExitId::Glacier_Breach__Guarded_Corridor__East__ex__Piano_Roll__West_1 => true,
@@ -16640,6 +17703,7 @@ impl world::Exit for Exit {
             ExitId::Glacier_Breach__West_Save__East_12__ex__Floaters__West_1 => true,
             ExitId::Glacier_Breach__West_Save__Hidden__ex__Floaters__Hidden_1 => true,
             ExitId::Glacier_Breach__West_Save__West_11__ex__Spidery_Connector__East_1 => true,
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => true,
             ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 => true,
             ExitId::Glacier_Breach__Zappers__West__ex__Control__East_1 => true,
             ExitId::Interior__Building_Interior__Entry__ex__Ebih__Base_Camp__Building_Entry_1 => true,
@@ -16652,9 +17716,15 @@ impl world::Exit for Exit {
             ExitId::Interior__Ebih_Cave__Entry__ex__Ebih__Waterfall__Cave_Entrance_1 => true,
             ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1 => true,
             ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1 => true,
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => true,
+            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => true,
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => true,
             ExitId::Interior__Garage__Entry__ex__Ebih__By_Garage__Garage_Entry_1 => true,
             ExitId::Interior__Observatory__East__ex__Ebih__Peak__Observatory_East_1 => true,
+            ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => true,
+            ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => true,
             ExitId::Interior__Observatory__West__ex__Ebih__Peak__Observatory_West_1 => true,
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => true,
             ExitId::Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => true,
             ExitId::Interior__Tent_Interior__Entry__ex__Ebih__Base_Camp__Tent_Entry_1 => true,
             ExitId::Interior__Uhrum_Waterfall_Cave__Entrance__ex__Uhrum__East_Lake__Waterfall_1 => true,
@@ -16688,7 +17758,11 @@ impl world::Exit for Exit {
             ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Boss_Room__Upper_Rooftops_1 => true,
             ExitId::Irikar__Empty_Foyer__East__ex__Boss_Room__West_28_1 => true,
             ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => true,
+            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => true,
             ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1 => true,
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => true,
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => true,
+            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => true,
             ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => true,
             ExitId::Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1 => true,
@@ -16713,6 +17787,7 @@ impl world::Exit for Exit {
             ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => true,
             ExitId::Irikar__Sight_Room__Above_Room_East__ex__East_Rooftops__Upper_West_1 => true,
             ExitId::Irikar__Sight_Room__West_24__ex__Hub__Sat_Tower_East_24_1 => true,
+            ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => true,
             ExitId::Irikar_Breach__Basement_Save__West__ex__Buried_Treasure__East_1 => true,
             ExitId::Irikar_Breach__Beach__East_26__ex__Corridor__West_1 => true,
             ExitId::Irikar_Breach__Beach__East_28__ex__Rocky_Dunes__West_28_1 => true,
@@ -16731,18 +17806,24 @@ impl world::Exit for Exit {
             ExitId::Irikar_Breach__Four_way__South__ex__Exit_Corridor__North_13_1 => true,
             ExitId::Irikar_Breach__Four_way__West__ex__Worm_Rave__East_1 => true,
             ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => true,
             ExitId::Irikar_Breach__Gauntlet__West_26__ex__Corridor__East_1 => true,
             ExitId::Irikar_Breach__Hover_Room__East__ex__Flappy_Drone__West_Door_1 => true,
             ExitId::Irikar_Breach__Hover_Room__West__ex__Gauntlet__East_22_1 => true,
             ExitId::Irikar_Breach__Neon_Corridor__East__ex__Exit_Corridor__West_1 => true,
             ExitId::Irikar_Breach__Neon_Corridor__West__ex__Rocky_Dunes__East_27_1 => true,
+            ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_27__ex__Neon_Corridor__West_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_28__ex__Buried_Treasure__West_1 => true,
+            ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__West_28__ex__Beach__East_28_1 => true,
             ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => true,
             ExitId::Irikar_Breach__Uhrum_Connector__East__ex__Uhrum_Breach__Rock_and_Gate__West_1 => true,
+            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => true,
             ExitId::Irikar_Breach__Uhrum_Connector__West__ex__Exit_Corridor__East_1 => true,
             ExitId::Irikar_Breach__Worm_Rave__East__ex__Four_way__West_1 => true,
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => true,
             ExitId::Irikar_Breach__Worm_Rave__South__ex__Exit_Corridor__North_12_1 => true,
             ExitId::Menu__Upgrade_Menu__Combat__ex__Physiology_1 => true,
             ExitId::Menu__Upgrade_Menu__Drone__ex__Combat_1 => true,
@@ -16756,6 +17837,7 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Artillery_Practice__East_23__ex__Rocky_Gate__West_1 => true,
             ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 => true,
             ExitId::Uhrum__Artillery_Practice__West_23__ex__Grassy_Guardpost__East_23_1 => true,
+            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => true,
             ExitId::Uhrum__Cavern__West__ex__East_Lake__East_1 => true,
             ExitId::Uhrum__East_Lake__East__ex__Cavern__West_1 => true,
             ExitId::Uhrum__East_Lake__Waterfall__ex__Interior__Uhrum_Waterfall_Cave__Entrance_1 => true,
@@ -16767,11 +17849,19 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => true,
             ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Entrance__East_28_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_22__ex__Emergence_Save__West_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Artillery_Practice__West_23_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Grassy_Guardpost__West_22__ex__Giguna__Vertical_Interchange__East_22_1 => true,
+            ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Gate__East__ex__Rocky_Guardpost__West_23_1 => true,
             ExitId::Uhrum__Rocky_Gate__West__ex__Artillery_Practice__East_23_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__East_22__ex__Tulip_Tower__West_22_1 => true,
@@ -16779,11 +17869,15 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Rocky_Gate__East_1 => true,
             ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => true,
             ExitId::Uhrum__Save_Room__West__ex__Glitchy_Corridor__East_27_1 => true,
+            ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => true,
             ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => true,
             ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => true,
             ExitId::Uhrum__Spring__West__ex__Glitchy_Corridor__East_28_1 => true,
             ExitId::Uhrum__Tulip_Tower__East_23__ex__Annuna__Invisible_Enemies__West_23_1 => true,
+            ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => true,
             ExitId::Uhrum__Tulip_Tower__North__ex__Amagi__Wiggly_Room__South_1 => true,
+            ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => true,
             ExitId::Uhrum__Tulip_Tower__West_22__ex__Rocky_Guardpost__East_22_1 => true,
             ExitId::Uhrum__Tulip_Tower__West_24__ex__Waterfalls__East_24_1 => true,
             ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => true,
@@ -16791,9 +17885,13 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => true,
             ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => true,
             ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => true,
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => true,
+            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => true,
             ExitId::Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => true,
             ExitId::Uhrum__Waterfalls__West_25__ex__Siege_Corridor__East_25_1 => true,
             ExitId::Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1 => true,
             ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => true,
             ExitId::Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => true,
             ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => true,
@@ -16801,30 +17899,56 @@ impl world::Exit for Exit {
             ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => true,
             ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 => true,
             ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => true,
             ExitId::Uhrum_Breach__Annuna_Gate__North__ex__Locked_Down__South_1 => true,
             ExitId::Uhrum_Breach__Annuna_Gate__West__ex__East_Copse__East_1 => true,
+            ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => true,
             ExitId::Uhrum_Breach__Blob__West_Side__ex__Giguna_Breach__Secret_Tunnel__East_1 => true,
+            ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => true,
             ExitId::Uhrum_Breach__East_Copse__East__ex__Annuna_Gate__West_1 => true,
             ExitId::Uhrum_Breach__East_Copse__West__ex__West_Copse__East_1 => true,
             ExitId::Uhrum_Breach__East_Glitch__East_27__ex__North_Slime__West_1 => true,
             ExitId::Uhrum_Breach__East_Glitch__East_28__ex__South_Slime__West_1 => true,
+            ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => true,
             ExitId::Uhrum_Breach__East_Glitch__West__ex__Rock_and_Gate__East_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => true,
             ExitId::Uhrum_Breach__Locked_Down__South__ex__Annuna_Gate__North_1 => true,
             ExitId::Uhrum_Breach__Locked_Down__West__ex__Overgrown_Ruins__East_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => true,
             ExitId::Uhrum_Breach__North_Slime__East__ex__West_Copse__West_27_1 => true,
             ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1 => true,
             ExitId::Uhrum_Breach__Overgrown_Ruins__East__ex__Locked_Down__West_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__East__ex__East_Glitch__West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__North__ex__Save_and_Go__South_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__West_Glitch__North_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__West__ex__Irikar_Breach__Uhrum_Connector__East_1 => true,
+            ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => true,
             ExitId::Uhrum_Breach__Save_and_Go__North__ex__Giguna_Breach__South__South_1 => true,
             ExitId::Uhrum_Breach__Save_and_Go__South__ex__Rock_and_Gate__North_1 => true,
             ExitId::Uhrum_Breach__South_Slime__East__ex__West_Copse__West_28_1 => true,
             ExitId::Uhrum_Breach__South_Slime__West__ex__East_Glitch__East_28_1 => true,
             ExitId::Uhrum_Breach__West_Copse__East__ex__East_Copse__West_1 => true,
+            ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => true,
             ExitId::Uhrum_Breach__West_Copse__West_27__ex__North_Slime__East_1 => true,
             ExitId::Uhrum_Breach__West_Copse__West_28__ex__South_Slime__East_1 => true,
+            ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => true,
             ExitId::Uhrum_Breach__West_Glitch__North__ex__Rock_and_Gate__South_1 => true,
             _ => false,
         }
@@ -17437,9 +18561,16 @@ impl world::Exit for Exit {
             ExitId::Glacier__Angry_Guards__Gate__ex__East_11_1 => true,
             ExitId::Glacier__Angry_Guards__Gate__ex__Ledge_Grab_Room__Gate_1 => true,
             ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => true,
+            ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => true,
             ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => true,
+            ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1 => true,
             ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => true,
             ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => true,
+            ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => true,
+            ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => true,
             ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => true,
             ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => true,
             ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => true,
@@ -17447,18 +18578,55 @@ impl world::Exit for Exit {
             ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => true,
             ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => true,
             ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => true,
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => true,
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => true,
+            ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => true,
+            ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => true,
+            ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => true,
+            ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => true,
+            ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => true,
             ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => true,
+            ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => true,
             ExitId::Glacier__Grid_31_9_12__Midair__ex__East_10_1 => true,
             ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1 => true,
             ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => true,
             ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => true,
+            ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => true,
+            ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => true,
+            ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => true,
             ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => true,
             ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => true,
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => true,
+            ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => true,
+            ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => true,
+            ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => true,
+            ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => true,
+            ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => true,
+            ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => true,
+            ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => true,
             ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 => true,
@@ -17466,21 +18634,56 @@ impl world::Exit for Exit {
             ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Gate_1 => true,
             ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1 => true,
             ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_1 => true,
+            ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => true,
+            ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => true,
             ExitId::Glacier__Revival__Ledge__ex__West_9_1 => true,
+            ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => true,
             ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => true,
+            ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => true,
+            ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => true,
             ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1 => true,
+            ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => true,
+            ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => true,
             ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => true,
             ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => true,
+            ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => true,
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => true,
+            ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => true,
             ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => true,
+            ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => true,
+            ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => true,
+            ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => true,
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => true,
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => true,
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => true,
+            ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => true,
             ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_2 => true,
+            ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => true,
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => true,
+            ExitId::Glacier__Vertical_Room__Under_Switch__ex__West_9_1 => true,
             ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__North_1 => true,
             ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__North_1 => true,
             ExitId::Glacier_Breach__Electric_Arena__North__ex__Stacked_Enemies__South_1 => true,
             ExitId::Glacier_Breach__Electric_Arena__Upper_East_Platform__ex__North_1 => true,
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => true,
+            ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => true,
             ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => true,
+            ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => true,
+            ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => true,
+            ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => true,
+            ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => true,
@@ -17489,32 +18692,55 @@ impl world::Exit for Exit {
             ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 => true,
             ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => true,
+            ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => true,
+            ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 => true,
             ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1 => true,
             ExitId::Glacier_Breach__Spidery_Connector__West_Mid_air_Lower__ex__West_Mid_air_Upper_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__Mid_air_East__ex__Fortress__Southeast_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1 => true,
             ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => true,
+            ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => true,
+            ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => true,
+            ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => true,
+            ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => true,
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => true,
             ExitId::Interior__Observatory__East_Staircase_Top__ex__Catwalk_1 => true,
             ExitId::Interior__Observatory__Lower_Tier_Center__ex__East_Staircase_Top_1 => true,
             ExitId::Interior__Observatory__Lower_Tier_Center__ex__West_Staircase_Top_1 => true,
             ExitId::Interior__Observatory__Lower_Tier_East__ex__East_Staircase_Top_1 => true,
             ExitId::Interior__Observatory__Lower_Tier_West_Mid_air__ex__West_Staircase_Top_1 => true,
+            ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => true,
+            ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => true,
             ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_1 => true,
+            ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => true,
             ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => true,
             ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => true,
             ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => true,
+            ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => true,
+            ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => true,
+            ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => true,
             ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => true,
             ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => true,
             ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => true,
             ExitId::Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_1 => true,
             ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => true,
+            ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => true,
             ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 => true,
-            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => true,
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 => true,
-            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => true,
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => true,
+            ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => true,
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => true,
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => true,
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => true,
+            ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => true,
             ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => true,
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => true,
+            ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => true,
+            ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => true,
+            ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => true,
+            ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => true,
+            ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => true,
+            ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => true,
             ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_1 => true,
             ExitId::Irikar__Hub__West_Rim__ex__East_Rim_2 => true,
             ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => true,
@@ -17524,20 +18750,38 @@ impl world::Exit for Exit {
             ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => true,
             ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => true,
             ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => true,
+            ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => true,
             ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => true,
             ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => true,
+            ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => true,
+            ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => true,
             ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => true,
             ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => true,
             ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => true,
+            ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => true,
             ExitId::Irikar_Breach__Beach__Crescent_Rock_East__ex__Center_Rock_East_1 => true,
             ExitId::Irikar_Breach__Beach__Crescent_Rock_East__ex__East_Ledge_1 => true,
             ExitId::Irikar_Breach__Beach__Crescent_Rock_Top__ex__Center_Rock_East_1 => true,
             ExitId::Irikar_Breach__Beach__Crescent_Rock_Top__ex__East_Ledge_1 => true,
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 => true,
+            ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => true,
             ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => true,
+            ExitId::Irikar_Breach__Corridor__Center__ex__Passage_West_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => true,
+            ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => true,
+            ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_1 => true,
+            ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__Upper_East_Passage_1 => true,
             ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => true,
+            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => true,
+            ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => true,
+            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => true,
+            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => true,
+            ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 => true,
+            ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => true,
             ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => true,
@@ -17565,32 +18809,131 @@ impl world::Exit for Exit {
             ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Uhrum_Emergence__ex__Uhrum__Emergence_Save__Save_Point_1 => true,
             ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => true,
-            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2 => true,
+            ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => true,
+            ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => true,
+            ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => true,
+            ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => true,
+            ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => true,
+            ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => true,
+            ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => true,
+            ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => true,
+            ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => true,
+            ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => true,
+            ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => true,
+            ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 => true,
+            ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => true,
+            ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__Lower_Mid_air__ex__Upper_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__Lower_Step__ex__Upper_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__Mid_air__ex__Upper_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__Middle_Step__ex__Upper_Ledge_1 => true,
             ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1 => true,
-            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => true,
+            ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => true,
+            ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => true,
+            ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => true,
             ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => true,
+            ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => true,
             ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => true,
+            ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => true,
+            ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => true,
             ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Middle_Ledge_2 => true,
             ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Middle_Ledge_2 => true,
+            ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => true,
             ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => true,
-            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 => true,
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => true,
+            ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => true,
             ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 => true,
-            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 => true,
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => true,
+            ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => true,
+            ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => true,
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => true,
+            ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => true,
+            ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => true,
+            ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => true,
+            ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => true,
+            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => true,
+            ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => true,
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => true,
+            ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1 => true,
+            ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => true,
+            ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => true,
+            ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => true,
+            ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => true,
+            ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => true,
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => true,
+            ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => true,
+            ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => true,
+            ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => true,
             ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => true,
+            ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => true,
+            ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 => true,
+            ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 => true,
+            ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => true,
+            ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => true,
             ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_2 => true,
+            ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1 => true,
             ExitId::Uhrum_Breach__East_Copse__Lower_West_Ledge__ex__Center_West_1 => true,
+            ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => true,
+            ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => true,
+            ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => true,
+            ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => true,
             ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => true,
+            ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => true,
+            ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => true,
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => true,
+            ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => true,
+            ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => true,
+            ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => true,
             _ => false,
 
         }
     }
 }
 
-static EXIT_DEFS: [Exit; 3824] = [
+static EXIT_DEFS: [Exit; 3700] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -34385,22 +35728,8 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_2,
-        time: 1200,
-        dest: SpotId::Glacier_Breach__Fortress__Upper_Tier_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1,
         time: 600,
-        dest: SpotId::Glacier_Breach__Fortress__Upper_Tier_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_2,
-        time: 1200,
         dest: SpotId::Glacier_Breach__Fortress__Upper_Tier_West,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -34422,13 +35751,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1,
         time: 1200,
-        dest: SpotId::Glacier_Breach__Fortress__Mid_Tier_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_2,
-        time: 2400,
         dest: SpotId::Glacier_Breach__Fortress__Mid_Tier_West,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -34470,13 +35792,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1,
-        time: 2456,
-        dest: SpotId::Glacier_Breach__Grate_Work__East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_2,
         time: 2456,
         dest: SpotId::Glacier_Breach__Grate_Work__East,
         price: Currency::Free,
@@ -34764,13 +36079,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1,
-        time: 2105,
-        dest: SpotId::Glacier_Breach__Spidery_Connector__East_Gate,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_2,
         time: 1500,
         dest: SpotId::Glacier_Breach__Spidery_Connector__East_Gate,
         price: Currency::Free,
@@ -34919,13 +36227,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1,
         time: 2300,
-        dest: SpotId::Glacier_Breach__Stacked_Enemies__Mid_air_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_2,
-        time: 5000,
         dest: SpotId::Glacier_Breach__Stacked_Enemies__Mid_air_East,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -35149,13 +36450,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1,
-        time: 1200,
-        dest: SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2,
         time: 600,
         dest: SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
         price: Currency::Free,
@@ -35177,13 +36471,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1,
-        time: 15000,
-        dest: SpotId::Glacier__Apocalypse_Entry__Below_Grate,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2,
         time: 6000,
         dest: SpotId::Glacier__Apocalypse_Entry__Below_Grate,
         price: Currency::Free,
@@ -35351,6 +36638,13 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Energy(33),
     },
     Exit {
+        id: ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1,
+        time: 1000,
+        dest: SpotId::Glacier__Crystals__Lower_Slope,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1,
         time: 1200,
         dest: SpotId::Glacier__Crystals__Grate_Left,
@@ -35387,7 +36681,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1,
-        time: 1464,
+        time: 1140,
         dest: SpotId::Glacier__Crystals__Lower_Slope,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -35568,13 +36862,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_2,
-        time: 1200,
-        dest: SpotId::Glacier__Fortress__Gate_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1,
         time: 600,
         dest: SpotId::Glacier__Fortress__Inner_Upper_Tier_East,
@@ -35582,22 +36869,8 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_2,
-        time: 1200,
-        dest: SpotId::Glacier__Fortress__Inner_Upper_Tier_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1,
         time: 600,
-        dest: SpotId::Glacier__Fortress__Inner_Upper_Tier_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_2,
-        time: 1200,
         dest: SpotId::Glacier__Fortress__Inner_Upper_Tier_West,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -35701,13 +36974,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_2,
-        time: 1053,
-        dest: SpotId::Glacier__Fortress__Parapet_East_Hook_Point,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1,
         time: 1500,
         dest: SpotId::Glacier__Fortress__Parapet_East_Hook_Point,
@@ -35757,13 +37023,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_2,
-        time: 1053,
-        dest: SpotId::Glacier__Fortress__Parapet_West_Hook_Point,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Vertical_Room__Fortress_Ledge_1,
         time: 1526,
         dest: SpotId::Glacier__Vertical_Room__Fortress_Ledge,
@@ -35780,27 +37039,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1,
         time: 1200,
-        dest: SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_2,
-        time: 2400,
-        dest: SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_3,
-        time: 1200,
-        dest: SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_4,
-        time: 1800,
         dest: SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -35877,13 +37115,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1,
-        time: 1400,
-        dest: SpotId::Glacier__Grid_32_7_10__Column,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_2,
         time: 1053,
         dest: SpotId::Glacier__Grid_32_7_10__Column,
         price: Currency::Free,
@@ -35891,13 +37122,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1,
-        time: 1600,
-        dest: SpotId::Glacier__Grid_32_7_10__Left_Rock,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2,
         time: 1200,
         dest: SpotId::Glacier__Grid_32_7_10__Left_Rock,
         price: Currency::Free,
@@ -36002,21 +37226,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_2,
-        time: 4200,
-        dest: SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1,
-        time: 1200,
-        dest: SpotId::Glacier__Grid_39_40_7_9__East_9,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2,
         time: 1053,
         dest: SpotId::Glacier__Grid_39_40_7_9__East_9,
         price: Currency::Free,
@@ -36024,13 +37234,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1,
-        time: 1228,
-        dest: SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2,
         time: 1228,
         dest: SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
         price: Currency::Free,
@@ -36240,13 +37443,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2,
-        time: 1800,
-        dest: SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1,
         time: 1350,
         dest: SpotId::Glacier__Secret_Chamber__East_10,
@@ -36263,13 +37459,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1,
         time: 877,
-        dest: SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2,
-        time: 1200,
         dest: SpotId::Glacier__Hammonds_End__Switch_from_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -36312,13 +37501,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1,
         time: 1200,
-        dest: SpotId::Glacier__Inner_Caverns__West_13,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_2,
-        time: 1800,
         dest: SpotId::Glacier__Inner_Caverns__West_13,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -36416,13 +37598,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1,
-        time: 2000,
-        dest: SpotId::Glacier__Lake_Main_Entrance__Upper,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2,
         time: 1200,
         dest: SpotId::Glacier__Lake_Main_Entrance__Upper,
         price: Currency::Free,
@@ -36430,13 +37605,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1,
-        time: 1000,
-        dest: SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2,
         time: 600,
         dest: SpotId::Glacier__Lake_Main_Entrance__Ledge,
         price: Currency::Free,
@@ -36444,13 +37612,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1,
-        time: 1850,
-        dest: SpotId::Glacier__Lake_Main_Entrance__Upper,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2,
         time: 1200,
         dest: SpotId::Glacier__Lake_Main_Entrance__Upper,
         price: Currency::Free,
@@ -36458,13 +37619,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1,
-        time: 1200,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2,
         time: 600,
         dest: SpotId::Glacier__Ledge_Grab_Room__Cliff,
         price: Currency::Free,
@@ -36493,13 +37647,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1,
-        time: 2000,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Column,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_2,
         time: 1930,
         dest: SpotId::Glacier__Ledge_Grab_Room__Column,
         price: Currency::Free,
@@ -36521,13 +37668,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1,
-        time: 2400,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Column,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_2,
         time: 1800,
         dest: SpotId::Glacier__Ledge_Grab_Room__Column,
         price: Currency::Free,
@@ -36535,13 +37675,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1,
-        time: 2400,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2,
         time: 1200,
         dest: SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
         price: Currency::Free,
@@ -36549,13 +37682,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1,
-        time: 2000,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Column,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2,
         time: 1053,
         dest: SpotId::Glacier__Ledge_Grab_Room__Column,
         price: Currency::Free,
@@ -36584,13 +37710,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1,
-        time: 2000,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2,
         time: 1800,
         dest: SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
         price: Currency::Free,
@@ -36605,13 +37724,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1,
-        time: 1000,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2,
         time: 600,
         dest: SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
         price: Currency::Free,
@@ -36682,13 +37794,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1,
-        time: 1200,
-        dest: SpotId::Glacier__Ledge_Grab_Room__Northwest_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2,
         time: 600,
         dest: SpotId::Glacier__Ledge_Grab_Room__Northwest_Ledge,
         price: Currency::Free,
@@ -36801,13 +37906,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1,
-        time: 2000,
-        dest: SpotId::Glacier__Peak__West_Cliff,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2,
         time: 1800,
         dest: SpotId::Glacier__Peak__West_Cliff,
         price: Currency::Free,
@@ -36997,7 +38095,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1,
-        time: 2000,
+        time: 1000,
         dest: SpotId::Glacier__Sea_Burial__Left_Center_Rock,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -37207,13 +38305,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1,
-        time: 1200,
-        dest: SpotId::Glacier__Vertical_Room__East_14,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2,
         time: 1053,
         dest: SpotId::Glacier__Vertical_Room__East_14,
         price: Currency::Free,
@@ -37284,14 +38375,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1,
-        time: 1000,
-        dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2,
-        time: 1802,
+        time: 1404,
         dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -37312,13 +38396,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1,
-        time: 2400,
-        dest: SpotId::Glacier__Vertical_Room__Peak,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__East_9__ex__Peak_2,
         time: 1930,
         dest: SpotId::Glacier__Vertical_Room__Peak,
         price: Currency::Free,
@@ -37326,7 +38403,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1,
-        time: 1200,
+        time: 600,
         dest: SpotId::Glacier__Vertical_Room__East_12,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -37353,13 +38430,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_2,
-        time: 2800,
-        dest: SpotId::Glacier__Fortress__Parapet_West_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1,
         time: 3158,
         dest: SpotId::Glacier__Vertical_Room__West_8,
@@ -37369,13 +38439,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1,
         time: 3600,
-        dest: SpotId::Glacier__Vertical_Room__Fortress_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_2,
-        time: 4800,
         dest: SpotId::Glacier__Vertical_Room__Fortress_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -37417,34 +38480,27 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1,
-        time: 10000,
+        time: 6000,
         dest: SpotId::Glacier__Vertical_Room__Mid_9,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1,
-        time: 3600,
-        dest: SpotId::Glacier__Vertical_Room__Secret_Door,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_2,
         time: 1800,
         dest: SpotId::Glacier__Vertical_Room__Secret_Door,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1,
-        time: 2000,
-        dest: SpotId::Glacier__Vertical_Room__Peak,
+        id: ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1,
+        time: 6600,
+        dest: SpotId::Glacier__Vertical_Room__West_9,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_2,
+        id: ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1,
         time: 1200,
         dest: SpotId::Glacier__Vertical_Room__Peak,
         price: Currency::Free,
@@ -37465,21 +38521,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2,
-        time: 1250,
-        dest: SpotId::Glacier__Vertical_Room__Lower_Gatestone,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1,
-        time: 750,
-        dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2,
         time: 750,
         dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
         price: Currency::Free,
@@ -37493,21 +38535,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2,
-        time: 1250,
-        dest: SpotId::Glacier__Vertical_Room__Lower_Gatestone,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1,
-        time: 750,
-        dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2,
         time: 750,
         dest: SpotId::Glacier__Vertical_Room__Lower_Switch,
         price: Currency::Free,
@@ -37550,13 +38578,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1,
-        time: 2000,
-        dest: SpotId::Glacier__Vertical_Room__West_8,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Glacier__Vertical_Room__Peak__ex__West_8_2,
         time: 1228,
         dest: SpotId::Glacier__Vertical_Room__West_8,
         price: Currency::Free,
@@ -37566,6 +38587,20 @@ static EXIT_DEFS: [Exit; 3824] = [
         id: ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1,
         time: 526,
         dest: SpotId::Glacier__Vertical_Room__East_11,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1,
+        time: 5400,
+        dest: SpotId::Glacier__Vertical_Room__Mid_9,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_2,
+        time: 6000,
+        dest: SpotId::Glacier__Vertical_Room__Mid_9,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -37592,7 +38627,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1,
-        time: 7500,
+        time: 4800,
         dest: SpotId::Glacier__Vertical_Room__Mid_9,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -37608,6 +38643,13 @@ static EXIT_DEFS: [Exit; 3824] = [
         id: ExitId::Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1,
         time: 2281,
         dest: SpotId::Glacier__Vertical_Room__Secret_Door,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Glacier__Vertical_Room__Under_Switch__ex__West_9_1,
+        time: 5400,
+        dest: SpotId::Glacier__Vertical_Room__West_9,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -37788,13 +38830,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1,
-        time: 1200,
-        dest: SpotId::Interior__Facility_Interior__Top_Right,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2,
         time: 600,
         dest: SpotId::Interior__Facility_Interior__Top_Right,
         price: Currency::Free,
@@ -37963,14 +38998,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1,
-        time: 1350,
-        dest: SpotId::Interior__Outpost_Interior__Bookshelf,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_2,
-        time: 1000,
+        time: 1200,
         dest: SpotId::Interior__Outpost_Interior__Bookshelf,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -38145,13 +39173,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2,
-        time: 1800,
-        dest: SpotId::Irikar_Breach__Buried_Treasure__Pillar_Middle,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_3,
         time: 1000,
         dest: SpotId::Irikar_Breach__Buried_Treasure__Pillar_Middle,
         price: Currency::Free,
@@ -38453,14 +39474,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1,
-        time: 1053,
-        dest: SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2,
-        time: 850,
+        time: 1200,
         dest: SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Upper_Entry,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -38537,7 +39551,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar_Breach__Neon_Corridor__West_Basin__ex__Center_1,
-        time: 1000,
+        time: 1404,
         dest: SpotId::Irikar_Breach__Neon_Corridor__Center,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -38669,21 +39683,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_2,
-        time: 1800,
-        dest: SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1,
-        time: 3509,
-        dest: SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_2,
         time: 2500,
         dest: SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_West,
         price: Currency::Free,
@@ -38747,13 +39747,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1,
-        time: 2105,
-        dest: SpotId::Irikar_Breach__Uhrum_Connector__Rock_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_2,
         time: 1500,
         dest: SpotId::Irikar_Breach__Uhrum_Connector__Rock_West,
         price: Currency::Free,
@@ -38775,13 +39768,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1,
-        time: 2281,
-        dest: SpotId::Irikar_Breach__Uhrum_Connector__West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_2,
         time: 1625,
         dest: SpotId::Irikar_Breach__Uhrum_Connector__West,
         price: Currency::Free,
@@ -38810,7 +39796,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1,
-        time: 800,
+        time: 750,
         dest: SpotId::Irikar_Breach__Worm_Rave__Corner,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -38929,13 +39915,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1,
-        time: 1200,
-        dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2,
         time: 600,
         dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Right,
         price: Currency::Free,
@@ -38957,34 +39936,20 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1,
-        time: 1000,
-        dest: SpotId::Irikar__Basement_Pipes__Brick_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2,
-        time: 1800,
+        time: 1200,
         dest: SpotId::Irikar__Basement_Pipes__Brick_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1,
-        time: 2400,
-        dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2,
         time: 1800,
         dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3,
+        id: ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2,
         time: 1000,
         dest: SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
         price: Currency::Free,
@@ -39370,13 +40335,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2,
-        time: 1200,
-        dest: SpotId::Irikar__Hub__Exposed_Passage_Upper_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3,
         time: 800,
         dest: SpotId::Irikar__Hub__Exposed_Passage_Upper_Ledge,
         price: Currency::Energy(5),
@@ -39384,20 +40342,13 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1,
-        time: 1800,
-        dest: SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2,
         time: 600,
         dest: SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3,
+        id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2,
         time: 1000,
         dest: SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left,
         price: Currency::Energy(5),
@@ -39405,20 +40356,13 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1,
-        time: 1800,
-        dest: SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2,
         time: 1200,
         dest: SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3,
+        id: ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2,
         time: 1000,
         dest: SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right,
         price: Currency::Energy(5),
@@ -39460,21 +40404,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2,
-        time: 1200,
-        dest: SpotId::Irikar__Hub__Exposed_Passage_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1,
-        time: 1200,
-        dest: SpotId::Irikar__Hub__NW_Middle_Building_Corner,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2,
         time: 600,
         dest: SpotId::Irikar__Hub__NW_Middle_Building_Corner,
         price: Currency::Free,
@@ -39503,20 +40433,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1,
-        time: 1200,
-        dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2,
-        time: 877,
-        dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3,
         time: 877,
         dest: SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
         price: Currency::Free,
@@ -39867,13 +40783,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1,
-        time: 1200,
-        dest: SpotId::Irikar__Midwest__Center_Rock_2_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2,
         time: 600,
         dest: SpotId::Irikar__Midwest__Center_Rock_2_East,
         price: Currency::Free,
@@ -39979,13 +40888,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1,
-        time: 1200,
-        dest: SpotId::Irikar__Midwest__Lower_Rock_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2,
         time: 702,
         dest: SpotId::Irikar__Midwest__Lower_Rock_East,
         price: Currency::Free,
@@ -40000,13 +40902,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1,
-        time: 1200,
-        dest: SpotId::Irikar__Midwest__The_Long_Rock_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2,
         time: 702,
         dest: SpotId::Irikar__Midwest__The_Long_Rock_East,
         price: Currency::Free,
@@ -40028,13 +40923,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Irikar__Midwest__Save_Point__ex__East_25_1,
-        time: 1800,
-        dest: SpotId::Irikar__Midwest__East_25,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Irikar__Midwest__Save_Point__ex__East_25_2,
         time: 1579,
         dest: SpotId::Irikar__Midwest__East_25,
         price: Currency::Free,
@@ -40637,13 +41525,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1,
-        time: 2281,
-        dest: SpotId::Uhrum_Breach__Annuna_Gate__Structure,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_2,
         time: 1625,
         dest: SpotId::Uhrum_Breach__Annuna_Gate__Structure,
         price: Currency::Free,
@@ -40742,13 +41623,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1,
-        time: 2281,
-        dest: SpotId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_2,
         time: 1625,
         dest: SpotId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge,
         price: Currency::Free,
@@ -40763,13 +41637,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1,
-        time: 2281,
-        dest: SpotId::Uhrum_Breach__Annuna_Gate__Upper_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_2,
         time: 1625,
         dest: SpotId::Uhrum_Breach__Annuna_Gate__Upper_Ledge,
         price: Currency::Free,
@@ -41070,13 +41937,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_2,
-        time: 1800,
-        dest: SpotId::Uhrum_Breach__East_Glitch__Northeast_Flower,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1,
         time: 1750,
         dest: SpotId::Uhrum_Breach__East_Glitch__Middle_Platform_East,
@@ -41134,13 +41994,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1,
-        time: 702,
-        dest: SpotId::Uhrum_Breach__Locked_Down__Item_Behind_Gate,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_2,
         time: 600,
         dest: SpotId::Uhrum_Breach__Locked_Down__Item_Behind_Gate,
         price: Currency::Free,
@@ -41191,13 +42044,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1,
         time: 600,
-        dest: SpotId::Uhrum_Breach__Locked_Down__Center_Right_Pillar,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_2,
-        time: 1800,
         dest: SpotId::Uhrum_Breach__Locked_Down__Center_Right_Pillar,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -41421,13 +42267,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1,
-        time: 702,
-        dest: SpotId::Uhrum_Breach__Rock_and_Gate__Rock_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_2,
         time: 500,
         dest: SpotId::Uhrum_Breach__Rock_and_Gate__Rock_West,
         price: Currency::Free,
@@ -41456,13 +42295,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1,
-        time: 702,
-        dest: SpotId::Uhrum_Breach__Rock_and_Gate__Rock_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_2,
         time: 500,
         dest: SpotId::Uhrum_Breach__Rock_and_Gate__Rock_East,
         price: Currency::Free,
@@ -41623,21 +42455,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_2,
-        time: 1200,
-        dest: SpotId::Uhrum_Breach__West_Copse__Center_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1,
-        time: 1228,
-        dest: SpotId::Uhrum_Breach__West_Copse__East_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_2,
         time: 1228,
         dest: SpotId::Uhrum_Breach__West_Copse__East_Ledge,
         price: Currency::Free,
@@ -41777,13 +42595,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2,
-        time: 2000,
-        dest: SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1,
         time: 702,
         dest: SpotId::Uhrum__Annuna_Corridor__Block_West,
@@ -41798,13 +42609,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2,
-        time: 2000,
-        dest: SpotId::Uhrum__Annuna_Corridor__Block_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1,
         time: 1350,
         dest: SpotId::Annuna__Mirror_Match__West_25,
@@ -41813,13 +42617,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1,
-        time: 1000,
-        dest: SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2,
         time: 600,
         dest: SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
         price: Currency::Free,
@@ -41835,13 +42632,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1,
         time: 600,
-        dest: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2,
-        time: 1000,
         dest: SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -41952,20 +42742,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2,
-        time: 1200,
-        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3,
-        time: 600,
-        dest: SpotId::Uhrum__Artillery_Practice__East_Outcrop_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1,
         time: 2982,
         dest: SpotId::Uhrum__Artillery_Practice__Column_West,
@@ -42052,20 +42828,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1,
         time: 1930,
-        dest: SpotId::Uhrum__Cavern__Wall_Left,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_2,
-        time: 2400,
-        dest: SpotId::Uhrum__Cavern__Wall_Left,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_3,
-        time: 3000,
         dest: SpotId::Uhrum__Cavern__Wall_Left,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -42169,20 +42931,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_2,
-        time: 1000,
-        dest: SpotId::Uhrum__East_Lake__East_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_3,
-        time: 2000,
-        dest: SpotId::Uhrum__East_Lake__East_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__East_Lake__East__ex__Cavern__West_1,
         time: 1350,
         dest: SpotId::Uhrum__Cavern__West,
@@ -42213,13 +42961,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1,
         time: 877,
-        dest: SpotId::Uhrum__East_Lake__East_Block,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_2,
-        time: 1200,
         dest: SpotId::Uhrum__East_Lake__East_Block,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -42260,13 +43001,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_2,
-        time: 2053,
-        dest: SpotId::Uhrum__East_Lake__East_Block,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__East_Lake__West_Block__ex__East_Ledge_1,
         time: 2875,
         dest: SpotId::Uhrum__East_Lake__East_Ledge,
@@ -42275,13 +43009,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1,
-        time: 1200,
-        dest: SpotId::Uhrum__East_Lake__West_Block,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_2,
         time: 600,
         dest: SpotId::Uhrum__East_Lake__West_Block,
         price: Currency::Free,
@@ -42324,13 +43051,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1,
-        time: 1800,
-        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2,
         time: 1140,
         dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
         price: Currency::Free,
@@ -42338,13 +43058,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1,
-        time: 4200,
-        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2,
         time: 3000,
         dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
         price: Currency::Free,
@@ -42359,13 +43072,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1,
-        time: 1800,
-        dest: SpotId::Uhrum__Emergence_Facility__Roof_Middle,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2,
         time: 600,
         dest: SpotId::Uhrum__Emergence_Facility__Roof_Middle,
         price: Currency::Free,
@@ -42415,13 +43121,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1,
-        time: 4200,
-        dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2,
         time: 3000,
         dest: SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
         price: Currency::Free,
@@ -42561,13 +43260,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_2,
-        time: 1200,
-        dest: SpotId::Uhrum__Glitchy_Corridor__Wall_West_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1,
         time: 600,
         dest: SpotId::Uhrum__Glitchy_Corridor__East_Ledge,
@@ -42666,13 +43358,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_2,
-        time: 1800,
-        dest: SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1,
         time: 4158,
         dest: SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
@@ -42703,13 +43388,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1,
         time: 1200,
-        dest: SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_2,
-        time: 1800,
         dest: SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -42758,7 +43436,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1,
-        time: 702,
+        time: 600,
         dest: SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -42807,13 +43485,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1,
-        time: 1579,
-        dest: SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2,
         time: 1125,
         dest: SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
         price: Currency::Free,
@@ -43065,13 +43736,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_2,
-        time: 1579,
-        dest: SpotId::Uhrum__Rocky_Guardpost__Lower_Step,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Rocky_Gate__East_1,
         time: 1350,
         dest: SpotId::Uhrum__Rocky_Gate__East,
@@ -43129,13 +43793,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1,
-        time: 1200,
-        dest: SpotId::Uhrum__Siege_Corridor__Center_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2,
         time: 600,
         dest: SpotId::Uhrum__Siege_Corridor__Center_East,
         price: Currency::Free,
@@ -43164,13 +43821,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2,
-        time: 600,
-        dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3,
         time: 600,
         dest: SpotId::Uhrum__Siege_Corridor__Upper_Rock_East,
         price: Currency::Energy(5),
@@ -43220,13 +43870,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1,
-        time: 3000,
-        dest: SpotId::Uhrum__Siege_Corridor__East_Hill,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_2,
         time: 2400,
         dest: SpotId::Uhrum__Siege_Corridor__East_Hill,
         price: Currency::Free,
@@ -43359,13 +44002,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_2,
-        time: 1800,
-        dest: SpotId::Uhrum__Tulip_Tower__East_23,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Middle_Ledge_1,
         time: 600,
         dest: SpotId::Uhrum__Tulip_Tower__Middle_Ledge,
@@ -43465,20 +44101,13 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1,
-        time: 2400,
-        dest: SpotId::Uhrum__Tulip_Tower__Upper_Column_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2,
         time: 1200,
         dest: SpotId::Uhrum__Tulip_Tower__Upper_Column_East,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3,
+        id: ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2,
         time: 700,
         dest: SpotId::Uhrum__Tulip_Tower__Upper_Column_East,
         price: Currency::Energy(5),
@@ -43507,13 +44136,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2,
-        time: 1800,
-        dest: SpotId::Uhrum__Tulip_Tower__Upper_Column_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3,
         time: 1053,
         dest: SpotId::Uhrum__Tulip_Tower__Upper_Column_West,
         price: Currency::Energy(5),
@@ -43522,20 +44144,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     Exit {
         id: ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1,
         time: 702,
-        dest: SpotId::Uhrum__Tulip_Tower__Lower_Column,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_2,
-        time: 1000,
-        dest: SpotId::Uhrum__Tulip_Tower__Lower_Column,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_3,
-        time: 1000,
         dest: SpotId::Uhrum__Tulip_Tower__Lower_Column,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -43598,13 +44206,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1,
-        time: 1200,
-        dest: SpotId::Uhrum__Waterfalls__Above_Block,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_2,
         time: 600,
         dest: SpotId::Uhrum__Waterfalls__Above_Block,
         price: Currency::Free,
@@ -43612,13 +44213,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1,
-        time: 1228,
-        dest: SpotId::Uhrum__Waterfalls__East_26,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_2,
         time: 1228,
         dest: SpotId::Uhrum__Waterfalls__East_26,
         price: Currency::Free,
@@ -43724,13 +44318,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1,
-        time: 2400,
-        dest: SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2,
         time: 1200,
         dest: SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
         price: Currency::Free,
@@ -43745,13 +44332,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1,
-        time: 1200,
-        dest: SpotId::Uhrum__Waterfalls__Northeast_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2,
         time: 1053,
         dest: SpotId::Uhrum__Waterfalls__Northeast_Ledge,
         price: Currency::Free,
@@ -43835,13 +44415,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_2,
-        time: 2807,
-        dest: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1,
         time: 1800,
         dest: SpotId::Uhrum__Waterfalls__West_25,
@@ -43850,13 +44423,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1,
-        time: 2000,
-        dest: SpotId::Uhrum__Waterfalls__Center_Island_East,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2,
         time: 1000,
         dest: SpotId::Uhrum__Waterfalls__Center_Island_East,
         price: Currency::Free,
@@ -43864,7 +44430,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1,
-        time: 1577,
+        time: 1228,
         dest: SpotId::Uhrum__Waterfalls__East_Waters_Edge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -43920,13 +44486,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1,
-        time: 3000,
-        dest: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2,
         time: 2456,
         dest: SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
         price: Currency::Free,
@@ -43941,55 +44500,41 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1,
-        time: 2000,
-        dest: SpotId::Uhrum__Waterfalls__Center_Island_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2,
         time: 1351,
         dest: SpotId::Uhrum__Waterfalls__Center_Island_West,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1,
+        time: 1000,
+        dest: SpotId::Uhrum__Waterfalls__West_Water_Surface,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1,
-        time: 4200,
+        time: 3000,
         dest: SpotId::Uhrum__Waterfalls__West_25,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_2,
-        time: 3000,
-        dest: SpotId::Uhrum__Waterfalls__West_25,
+        id: ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1,
+        time: 2000,
+        dest: SpotId::Uhrum__Waterfalls__West_Waters_Edge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1,
-        time: 3000,
-        dest: SpotId::Uhrum__Waterfalls__West_Water_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2,
-        time: 2252,
+        time: 2000,
         dest: SpotId::Uhrum__Waterfalls__West_Water_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1,
-        time: 2400,
-        dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2,
         time: 1491,
         dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
         price: Currency::Free,
@@ -44011,13 +44556,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1,
-        time: 1800,
-        dest: SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2,
         time: 1404,
         dest: SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
         price: Currency::Free,
@@ -44038,21 +44576,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_2,
-        time: 1404,
-        dest: SpotId::Uhrum__West_Entrance__Top_West_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1,
-        time: 1200,
-        dest: SpotId::Uhrum__West_Entrance__Inner_Dais,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_2,
         time: 600,
         dest: SpotId::Uhrum__West_Entrance__Inner_Dais,
         price: Currency::Free,
@@ -44136,20 +44660,6 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2,
-        time: 1404,
-        dest: SpotId::Uhrum__West_Entrance__South_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3,
-        time: 1404,
-        dest: SpotId::Uhrum__West_Entrance__South_Platform,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1,
         time: 4200,
         dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
@@ -44165,13 +44675,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1,
-        time: 1800,
-        dest: SpotId::Uhrum__West_Entrance__Gate_West_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_2,
         time: 1200,
         dest: SpotId::Uhrum__West_Entrance__Gate_West_Ledge,
         price: Currency::Free,
@@ -44199,21 +44702,7 @@ static EXIT_DEFS: [Exit; 3824] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2,
-        time: 1930,
-        dest: SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
         id: ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1,
-        time: 2400,
-        dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2,
         time: 1228,
         dest: SpotId::Uhrum__West_Entrance__Lower_Wall_West,
         price: Currency::Free,
@@ -44291,13 +44780,6 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1,
-        time: 1200,
-        dest: SpotId::Uhrum__West_Entrance__Portal_Exit,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2,
         time: 789,
         dest: SpotId::Uhrum__West_Entrance__Portal_Exit,
         price: Currency::Free,
@@ -44333,14 +44815,7 @@ static EXIT_DEFS: [Exit; 3824] = [
     },
     Exit {
         id: ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1,
-        time: 1800,
-        dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
-        price: Currency::Free,
-        price_per_sec: Currency::Free,
-    },
-    Exit {
-        id: ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_2,
-        time: 1000,
+        time: 1667,
         dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -45903,7 +46378,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_Southeast__ex__East_Hill_1 => SpotId::Glacier_Breach__Grate_Work__Grate_Southeast,
         ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_West_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => SpotId::Glacier_Breach__Grate_Work__Grate_West,
         ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__East_Hill_1 | ExitId:: Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => SpotId::Glacier_Breach__Grate_Work__Grate_East,
-        ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 | ExitId:: Glacier_Breach__Grate_Work__East_Hill__ex__East_1 | ExitId:: Glacier_Breach__Grate_Work__East_Hill__ex__East_2 => SpotId::Glacier_Breach__Grate_Work__East_Hill,
+        ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__Grate_East_1 | ExitId:: Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => SpotId::Glacier_Breach__Grate_Work__East_Hill,
         ExitId::Glacier_Breach__Grate_Work__East__ex__Empty_Space__West_1 => SpotId::Glacier_Breach__Grate_Work__East,
         ExitId::Glacier_Breach__Grate_Work__Southeast__ex__Angry_Lions__North_1 | ExitId:: Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 | ExitId:: Glacier_Breach__Grate_Work__Southeast__ex__East_1 => SpotId::Glacier_Breach__Grate_Work__Southeast,
         ExitId::Glacier_Breach__Zappers__East__ex__Grate_Work__West_13_1 | ExitId:: Glacier_Breach__Zappers__East__ex__Hill_East_1 => SpotId::Glacier_Breach__Zappers__East,
@@ -45949,14 +46424,14 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier_Breach__Stacked_Enemies__Northwest__ex__Fortress__Southwest_1 => SpotId::Glacier_Breach__Stacked_Enemies__Northwest,
         ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1 | ExitId:: Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_2 => SpotId::Glacier_Breach__Stacked_Enemies__Midwest,
         ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => SpotId::Glacier_Breach__Stacked_Enemies__Mideast,
-        ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Electric_Arena__North_1 | ExitId:: Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 | ExitId:: Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_2 => SpotId::Glacier_Breach__Stacked_Enemies__South,
+        ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Electric_Arena__North_1 | ExitId:: Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => SpotId::Glacier_Breach__Stacked_Enemies__South,
         ExitId::Glacier_Breach__Stacked_Enemies__Mid_air_East__ex__Fortress__Southeast_1 => SpotId::Glacier_Breach__Stacked_Enemies__Mid_air_East,
         ExitId::Glacier_Breach__Fortress__Southwest__ex__Stacked_Enemies__Northwest_1 | ExitId:: Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => SpotId::Glacier_Breach__Fortress__Southwest,
-        ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 | ExitId:: Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_2 => SpotId::Glacier_Breach__Fortress__Southwest_Stair,
-        ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 | ExitId:: Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_2 => SpotId::Glacier_Breach__Fortress__Mid_Tier_West,
+        ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => SpotId::Glacier_Breach__Fortress__Southwest_Stair,
+        ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => SpotId::Glacier_Breach__Fortress__Mid_Tier_West,
         ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => SpotId::Glacier_Breach__Fortress__Upper_Tier_West,
         ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => SpotId::Glacier_Breach__Fortress__Upper_Tier_East,
-        ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 | ExitId:: Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_2 => SpotId::Glacier_Breach__Fortress__Mid_Tier_East,
+        ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => SpotId::Glacier_Breach__Fortress__Mid_Tier_East,
         ExitId::Glacier_Breach__Fortress__Southeast__ex__Stacked_Enemies__Northeast_1 | ExitId:: Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => SpotId::Glacier_Breach__Fortress__Southeast,
         ExitId::Glacier_Breach__Empty_Space__West__ex__Grate_Work__East_1 => SpotId::Glacier_Breach__Empty_Space__West,
         ExitId::Glacier_Breach__Empty_Space__Lower__ex__West_1 => SpotId::Glacier_Breach__Empty_Space__Lower,
@@ -45964,7 +46439,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier_Breach__Angry_Lions__Second_Platform__ex__Top_Platform_1 => SpotId::Glacier_Breach__Angry_Lions__Second_Platform,
         ExitId::Glacier_Breach__Angry_Lions__Portal_Stand__ex__Top_Platform_1 => SpotId::Glacier_Breach__Angry_Lions__Portal_Stand,
         ExitId::Glacier_Breach__Spidery_Connector__East__ex__West_Save__West_11_1 => SpotId::Glacier_Breach__Spidery_Connector__East,
-        ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 | ExitId:: Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_2 | ExitId:: Glacier_Breach__Spidery_Connector__Button__ex__East_Mid_air_Lower_1 => SpotId::Glacier_Breach__Spidery_Connector__Button,
+        ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 | ExitId:: Glacier_Breach__Spidery_Connector__Button__ex__East_Mid_air_Lower_1 => SpotId::Glacier_Breach__Spidery_Connector__Button,
         ExitId::Glacier_Breach__Spidery_Connector__East_Gate__ex__West_Mid_air_Lower_1 => SpotId::Glacier_Breach__Spidery_Connector__East_Gate,
         ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1 => SpotId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower,
         ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Upper__ex__Midway_1 => SpotId::Glacier_Breach__Spidery_Connector__East_Mid_air_Upper,
@@ -46025,23 +46500,23 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Third_Upper_Platform,
         ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_1 | ExitId:: Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => SpotId::Glacier__Grid_39_40_7_9__Floating_Rock,
         ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Floating_Rock_1 | ExitId:: Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Gate_East_1 | ExitId:: Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Parapet_East_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
-        ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 | ExitId:: Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_2 => SpotId::Glacier__Grid_39_40_7_9__Fortress_Wall,
+        ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Fortress_Wall,
         ExitId::Glacier__Grid_39_40_7_9__Upper_Scaffolding__ex__Fortress_Wall_1 => SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding,
         ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 | ExitId:: Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__West,
         ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 | ExitId:: Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Fortress_Wall_1 => SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
-        ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_2 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_2 => SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
+        ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
         ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 | ExitId:: Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => SpotId::Glacier__Grid_39_40_7_9__East_9,
         ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => SpotId::Glacier__Grid_37_38_9__East,
         ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => SpotId::Glacier__Grid_37_38_9__West,
-        ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Peak_2 | ExitId:: Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => SpotId::Glacier__Vertical_Room__East_9,
+        ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => SpotId::Glacier__Vertical_Room__East_9,
         ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 | ExitId:: Glacier__Vertical_Room__West_9__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__West_9,
-        ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__Mid_9__ex__Peak_2 | ExitId:: Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Mid_9,
-        ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__Secret_Door_2 => SpotId::Glacier__Vertical_Room__Mid_11,
-        ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Under_Switch,
+        ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Mid_9,
+        ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__West_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Mid_11,
+        ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__West_9_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Under_Switch,
         ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 | ExitId:: Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => SpotId::Glacier__Vertical_Room__Past_Gate,
-        ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => SpotId::Glacier__Vertical_Room__Secret_Door,
+        ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__Mid_9_2 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__East_11_1 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => SpotId::Glacier__Vertical_Room__Secret_Door,
         ExitId::Glacier__Vertical_Room__East_11__ex__Secret_Door_1 | ExitId:: Glacier__Vertical_Room__East_11__ex__Secret_Chamber__West_11_1 => SpotId::Glacier__Vertical_Room__East_11,
-        ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 | ExitId:: Glacier__Vertical_Room__Peak__ex__West_8_2 | ExitId:: Glacier__Vertical_Room__Peak__ex__Fortress_Wall_1 | ExitId:: Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => SpotId::Glacier__Vertical_Room__Peak,
+        ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 | ExitId:: Glacier__Vertical_Room__Peak__ex__Fortress_Wall_1 | ExitId:: Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => SpotId::Glacier__Vertical_Room__Peak,
         ExitId::Glacier__Vertical_Room__West_8__ex__Peak__East_8_1 | ExitId:: Glacier__Vertical_Room__West_8__ex__Fortress_Wall_1 => SpotId::Glacier__Vertical_Room__West_8,
         ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => SpotId::Glacier__Vertical_Room__East_Corner,
         ExitId::Glacier__Vertical_Room__East_12__ex__Boomerang_Antechamber__West_12_1 => SpotId::Glacier__Vertical_Room__East_12,
@@ -46050,21 +46525,21 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Vertical_Room__Above_Switch__ex__Upper_Gatestone_1 => SpotId::Glacier__Vertical_Room__Above_Switch,
         ExitId::Glacier__Vertical_Room__East_14__ex__Crystals__West_1 | ExitId:: Glacier__Vertical_Room__East_14__ex__Above_Switch_1 => SpotId::Glacier__Vertical_Room__East_14,
         ExitId::Glacier__Vertical_Room__Upper_Switch__ex__Above_Switch_1 => SpotId::Glacier__Vertical_Room__Upper_Switch,
-        ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_2 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
+        ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__Upper_Switch_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 | ExitId:: Glacier__Vertical_Room__Below_Upper_Switch__ex__Amagi__East_Lake__East_15_Upper_Hover_1 => SpotId::Glacier__Vertical_Room__Below_Upper_Switch,
         ExitId::Glacier__Vertical_Room__Flat_Platform__ex__Below_Upper_Switch_1 => SpotId::Glacier__Vertical_Room__Flat_Platform,
         ExitId::Glacier__Vertical_Room__West_15_Flat__ex__Amagi__East_Lake__East_15_Flat_1 => SpotId::Glacier__Vertical_Room__West_15_Flat,
         ExitId::Glacier__Vertical_Room__West_15_Lower__ex__Amagi__East_Lake__East_15_Lower_1 => SpotId::Glacier__Vertical_Room__West_15_Lower,
         ExitId::Glacier__Vertical_Room__Waters_Ledge__ex__Amagi__East_Lake__East_15_Lower_Hover_1 => SpotId::Glacier__Vertical_Room__Waters_Ledge,
-        ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_2 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_2 => SpotId::Glacier__Vertical_Room__Middle_Gatestone,
-        ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_2 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_2 => SpotId::Glacier__Vertical_Room__Middle_Gatestone_Left,
+        ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => SpotId::Glacier__Vertical_Room__Middle_Gatestone_Left,
         ExitId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone__ex__Waters_Ledge_1 => SpotId::Glacier__Vertical_Room__Outcrop_by_Middle_Gatestone,
         ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => SpotId::Glacier__Vertical_Room__Lower_Switch,
         ExitId::Glacier__Vertical_Room__East_17__ex__Annuna__Hidden_Portal__West_1 => SpotId::Glacier__Vertical_Room__East_17,
-        ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_2 | ExitId:: Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => SpotId::Glacier__Vertical_Room__East_17_while_hovering,
+        ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => SpotId::Glacier__Vertical_Room__East_17_while_hovering,
         ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 | ExitId:: Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => SpotId::Glacier__Vertical_Room__Lower_Gatestone,
         ExitId::Glacier__Vertical_Room__South__ex__Lower_Gatestone_1 | ExitId:: Glacier__Vertical_Room__South__ex__Annuna__West_Climb__North_1 => SpotId::Glacier__Vertical_Room__South,
-        ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 | ExitId:: Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_2 => SpotId::Glacier__Vertical_Room__Fortress_Wall,
-        ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1 | ExitId:: Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 | ExitId:: Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_2 => SpotId::Glacier__Vertical_Room__Fortress_Ledge,
+        ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => SpotId::Glacier__Vertical_Room__Fortress_Wall,
+        ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__West_8_1 | ExitId:: Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => SpotId::Glacier__Vertical_Room__Fortress_Ledge,
         ExitId::Glacier__Vertical_Room__Flying_West__ex__Peak__Top_Platform_East_1 => SpotId::Glacier__Vertical_Room__Flying_West,
         ExitId::Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Ledge_1 | ExitId:: Glacier__Vertical_Room__Hovering_East__ex__Fortress__Parapet_West_Hook_Point_1 => SpotId::Glacier__Vertical_Room__Hovering_East,
         ExitId::Glacier__Boomerang_Antechamber__West_13__ex__Vertical_Room__East_13_1 => SpotId::Glacier__Boomerang_Antechamber__West_13,
@@ -46079,37 +46554,37 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Boomerang_Room__Upper_Gate_East__ex__Center_Ledge_1 => SpotId::Glacier__Boomerang_Room__Upper_Gate_East,
         ExitId::Glacier__Boomerang_Room__Center_Ledge__ex__Upper_Gate_East_1 => SpotId::Glacier__Boomerang_Room__Center_Ledge,
         ExitId::Glacier__Boomerang_Room__Upper_West__ex__Platform_1 | ExitId:: Glacier__Boomerang_Room__Upper_West__ex__Boomerang_Antechamber__Upper_East_1 => SpotId::Glacier__Boomerang_Room__Upper_West,
-        ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 | ExitId:: Glacier__Ledge_Grab_Room__East_9__ex__Column_1 | ExitId:: Glacier__Ledge_Grab_Room__East_9__ex__Column_2 | ExitId:: Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => SpotId::Glacier__Ledge_Grab_Room__East_9,
+        ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__West_9_1 | ExitId:: Glacier__Ledge_Grab_Room__East_9__ex__Column_1 | ExitId:: Glacier__Ledge_Grab_Room__East_9__ex__Vertical_Room__Past_Gate_1 => SpotId::Glacier__Ledge_Grab_Room__East_9,
         ExitId::Glacier__Ledge_Grab_Room__Column__ex__Ledge_Grab_Room__Mid_35_1 => SpotId::Glacier__Ledge_Grab_Room__Column,
-        ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 | ExitId:: Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_2 => SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
+        ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => SpotId::Glacier__Ledge_Grab_Room__Gate_Ledge,
         ExitId::Glacier__Ledge_Grab_Room__East_11__ex__Vertical_Room__Past_Gate_1 => SpotId::Glacier__Ledge_Grab_Room__East_11,
         ExitId::Glacier__Ledge_Grab_Room__Mid_35__ex__Fork_1 => SpotId::Glacier__Ledge_Grab_Room__Mid_35,
-        ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 | ExitId:: Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_2 => SpotId::Glacier__Ledge_Grab_Room__Mid_34,
+        ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => SpotId::Glacier__Ledge_Grab_Room__Mid_34,
         ExitId::Glacier__Ledge_Grab_Room__Cliff__ex__Lower_Platform_1 => SpotId::Glacier__Ledge_Grab_Room__Cliff,
-        ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 | ExitId:: Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_2 => SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
+        ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => SpotId::Glacier__Ledge_Grab_Room__Cliff_Bottom,
         ExitId::Glacier__Ledge_Grab_Room__Pedestal__ex__West_End_1 => SpotId::Glacier__Ledge_Grab_Room__Pedestal,
         ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_End_1 | ExitId:: Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 | ExitId:: Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => SpotId::Glacier__Ledge_Grab_Room__Gate,
         ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Angry_Guards__East_11_1 | ExitId:: Glacier__Ledge_Grab_Room__West_11__ex__Gate_1 => SpotId::Glacier__Ledge_Grab_Room__West_11,
-        ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 | ExitId:: Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_2 | ExitId:: Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1 => SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
+        ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 | ExitId:: Glacier__Ledge_Grab_Room__Lower_Platform__ex__West_End_1 => SpotId::Glacier__Ledge_Grab_Room__Lower_Platform,
         ExitId::Glacier__Ledge_Grab_Room__Upper_Platform__ex__Fork_1 => SpotId::Glacier__Ledge_Grab_Room__Upper_Platform,
-        ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 | ExitId:: Glacier__Ledge_Grab_Room__Fork__ex__Column_2 | ExitId:: Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 | ExitId:: Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_2 => SpotId::Glacier__Ledge_Grab_Room__Fork,
+        ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 | ExitId:: Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => SpotId::Glacier__Ledge_Grab_Room__Fork,
         ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 | ExitId:: Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => SpotId::Glacier__Ledge_Grab_Room__Upper_Grate_Right,
         ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => SpotId::Glacier__Ledge_Grab_Room__Upper_Grate_Left,
         ExitId::Glacier__Ledge_Grab_Room__North__ex__Peak__South_1 => SpotId::Glacier__Ledge_Grab_Room__North,
         ExitId::Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_1 => SpotId::Glacier__Ledge_Grab_Room__Upper_Mid_air,
         ExitId::Glacier__Ledge_Grab_Room__Upper_Path__ex__Northwest_Ledge_1 => SpotId::Glacier__Ledge_Grab_Room__Upper_Path,
-        ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 | ExitId:: Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_2 => SpotId::Glacier__Ledge_Grab_Room__Upper_at_Wall,
+        ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => SpotId::Glacier__Ledge_Grab_Room__Upper_at_Wall,
         ExitId::Glacier__Ledge_Grab_Room__West_9__ex__Grid_32_7_10__East_9_1 => SpotId::Glacier__Ledge_Grab_Room__West_9,
         ExitId::Glacier__Peak__East_8__ex__Vertical_Room__West_8_1 | ExitId:: Glacier__Peak__East_8__ex__Top_Platform_East_1 => SpotId::Glacier__Peak__East_8,
         ExitId::Glacier__Peak__Top_Platform_East__ex__Highest_Platform_1 | ExitId:: Glacier__Peak__Top_Platform_East__ex__Vertical_Room__Hovering_East_1 => SpotId::Glacier__Peak__Top_Platform_East,
         ExitId::Glacier__Peak__Top_Rock__ex__Highest_Platform_1 => SpotId::Glacier__Peak__Top_Rock,
-        ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 | ExitId:: Glacier__Peak__Under_West_Cliff__ex__West_Cliff_2 => SpotId::Glacier__Peak__Under_West_Cliff,
+        ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => SpotId::Glacier__Peak__Under_West_Cliff,
         ExitId::Glacier__Peak__West_8__ex__Grid_32_7_10__East_8_1 => SpotId::Glacier__Peak__West_8,
         ExitId::Glacier__Peak__South__ex__Ledge_Grab_Room__North_1 => SpotId::Glacier__Peak__South,
         ExitId::Glacier__Grid_32_7_10__East_8__ex__Peak__West_8_1 => SpotId::Glacier__Grid_32_7_10__East_8,
-        ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 | ExitId:: Glacier__Grid_32_7_10__Left_Rock__ex__Column_2 => SpotId::Glacier__Grid_32_7_10__Left_Rock,
+        ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => SpotId::Glacier__Grid_32_7_10__Left_Rock,
         ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 | ExitId:: Glacier__Grid_32_7_10__West_9__ex__Column_1 | ExitId:: Glacier__Grid_32_7_10__West_9__ex__Grate_Left_Upper_1 => SpotId::Glacier__Grid_32_7_10__West_9,
-        ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 | ExitId:: Glacier__Grid_32_7_10__West_10__ex__Left_Rock_2 => SpotId::Glacier__Grid_32_7_10__West_10,
+        ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => SpotId::Glacier__Grid_32_7_10__West_10,
         ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => SpotId::Glacier__Grid_32_7_10__Grate_Left,
         ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => SpotId::Glacier__Grid_32_7_10__Grate_Left_Upper,
         ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1 | ExitId:: Glacier__Grid_32_7_10__East_9__ex__Ledge_Grab_Room__West_9_1 => SpotId::Glacier__Grid_32_7_10__East_9,
@@ -46118,16 +46593,16 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Grid_31_9_12__West_12__ex__Ebih__Base_Camp__East_12_1 => SpotId::Glacier__Grid_31_9_12__West_12,
         ExitId::Glacier__Grid_31_9_12__Midair__ex__Ebih__Base_Camp__East_11_1 | ExitId:: Glacier__Grid_31_9_12__Midair__ex__East_10_1 => SpotId::Glacier__Grid_31_9_12__Midair,
         ExitId::Glacier__Lake_Main_Entrance__Ebih_Access__ex__Ebih__Base_Camp__Lake_Access_1 => SpotId::Glacier__Lake_Main_Entrance__Ebih_Access,
-        ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 | ExitId:: Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_2 => SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
-        ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 | ExitId:: Glacier__Lake_Main_Entrance__Ledge__ex__Upper_2 => SpotId::Glacier__Lake_Main_Entrance__Ledge,
-        ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 | ExitId:: Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_2 => SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
+        ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => SpotId::Glacier__Lake_Main_Entrance__Upper_Platform,
+        ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => SpotId::Glacier__Lake_Main_Entrance__Ledge,
+        ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => SpotId::Glacier__Lake_Main_Entrance__Lower_Platform,
         ExitId::Glacier__Lake_Main_Entrance__Lake_Access__ex__Amagi__Main_Area__East_15_1 => SpotId::Glacier__Lake_Main_Entrance__Lake_Access,
         ExitId::Glacier__Lake_Main_Entrance__East_13__ex__Sliced_Cavern__West_13_1 => SpotId::Glacier__Lake_Main_Entrance__East_13,
         ExitId::Glacier__Apocalypse_Entry__West_10__ex__Grid_43_10_11__East_1 => SpotId::Glacier__Apocalypse_Entry__West_10,
         ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1 => SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
         ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => SpotId::Glacier__Apocalypse_Entry__Above_Grate,
-        ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 | ExitId:: Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_2 => SpotId::Glacier__Apocalypse_Entry__Below_Grate,
-        ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 | ExitId:: Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_2 => SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
+        ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => SpotId::Glacier__Apocalypse_Entry__Below_Grate,
+        ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => SpotId::Glacier__Apocalypse_Entry__Shaft_Bottom,
         ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
         ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Annuna__Apocalypse_Hallway__Lower_East_1 | ExitId:: Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Lower,
         ExitId::Glacier__Apocalypse_Entry__West_15_Upper__ex__Annuna__Apocalypse_Hallway__Upper_East_1 => SpotId::Glacier__Apocalypse_Entry__West_15_Upper,
@@ -46136,6 +46611,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Crystals__Midwest_Slope__ex__West_1 | ExitId:: Glacier__Crystals__Midwest_Slope__ex__Upper_Ledge_1 => SpotId::Glacier__Crystals__Midwest_Slope,
         ExitId::Glacier__Crystals__Grate_Left__ex__Middle_Ledge_1 | ExitId:: Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => SpotId::Glacier__Crystals__Grate_Left,
         ExitId::Glacier__Crystals__Lower_Slope__ex__Middle_Ledge_1 | ExitId:: Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => SpotId::Glacier__Crystals__Lower_Slope,
+        ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1 => SpotId::Glacier__Crystals__Lower_Corner,
         ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => SpotId::Glacier__Crystals__Portal_Stand,
         ExitId::Glacier__Crystals__East__ex__Annuna__Lamassu__West_15_1 => SpotId::Glacier__Crystals__East,
         ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => SpotId::Glacier__Crystals__Portal_Cage,
@@ -46145,11 +46621,11 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Hammonds_End__East_11_Door__ex__The_Big_Drop__West_11_Door_1 => SpotId::Glacier__Hammonds_End__East_11_Door,
         ExitId::Glacier__Hammonds_End__Upper_Portal_Stand__ex__Between_Center_Doors_1 => SpotId::Glacier__Hammonds_End__Upper_Portal_Stand,
         ExitId::Glacier__Hammonds_End__West_10__ex__Secret_Chamber__East_10_1 => SpotId::Glacier__Hammonds_End__West_10,
-        ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 | ExitId:: Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_2 => SpotId::Glacier__Hammonds_End__Upper_Stair,
+        ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => SpotId::Glacier__Hammonds_End__Upper_Stair,
         ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Portal_Stand_1 | ExitId:: Glacier__Hammonds_End__Lower_Grate_Right__ex__Upper_Stair_1 | ExitId:: Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => SpotId::Glacier__Hammonds_End__Lower_Grate_Right,
         ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => SpotId::Glacier__Hammonds_End__Lower_Grate_Left,
         ExitId::Glacier__Hammonds_End__Switch_Near__ex__Switch_from_Ledge_1 => SpotId::Glacier__Hammonds_End__Switch_Near,
-        ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 | ExitId:: Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 | ExitId:: Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_2 => SpotId::Glacier__Hammonds_End__West_11,
+        ExitId::Glacier__Hammonds_End__West_11__ex__Secret_Chamber__East_11_1 | ExitId:: Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => SpotId::Glacier__Hammonds_End__West_11,
         ExitId::Glacier__Hammonds_End__Center_Door_Left__ex__Upper_Stair_1 | ExitId:: Glacier__Hammonds_End__Center_Door_Left__ex__Between_Center_Doors_1 => SpotId::Glacier__Hammonds_End__Center_Door_Left,
         ExitId::Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Left_1 | ExitId:: Glacier__Hammonds_End__Between_Center_Doors__ex__Center_Door_Right_1 => SpotId::Glacier__Hammonds_End__Between_Center_Doors,
         ExitId::Glacier__Hammonds_End__Center_Door_Right__ex__Between_Center_Doors_1 => SpotId::Glacier__Hammonds_End__Center_Door_Right,
@@ -46174,25 +46650,25 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Inner_Caverns__Northwest_Stone__ex__Sliced_Cavern__Upper_Middle_1 => SpotId::Glacier__Inner_Caverns__Northwest_Stone,
         ExitId::Glacier__Inner_Caverns__West_Shaft_Bottom__ex__Northwest_Stone_1 | ExitId:: Glacier__Inner_Caverns__West_Shaft_Bottom__ex__Southwest_Ledge_1 => SpotId::Glacier__Inner_Caverns__West_Shaft_Bottom,
         ExitId::Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__Southwest_Ledge_1 | ExitId:: Glacier__Inner_Caverns__West_Shaft_Hook_Point__ex__West_Shaft_Bottom_1 => SpotId::Glacier__Inner_Caverns__West_Shaft_Hook_Point,
-        ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 | ExitId:: Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_Hook_Point_1 | ExitId:: Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_2 => SpotId::Glacier__Inner_Caverns__Southwest_Ledge,
+        ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 | ExitId:: Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_Hook_Point_1 => SpotId::Glacier__Inner_Caverns__Southwest_Ledge,
         ExitId::Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Hook_Point_1 | ExitId:: Glacier__Inner_Caverns__West_13_Hook_Point__ex__West_Shaft_Bottom_1 => SpotId::Glacier__Inner_Caverns__West_13_Hook_Point,
         ExitId::Glacier__Inner_Caverns__West_13__ex__Sliced_Cavern__East_13_1 => SpotId::Glacier__Inner_Caverns__West_13,
         ExitId::Glacier__Inner_Caverns__Southwest_Hill__ex__Sliced_Cavern__Cache_1 | ExitId:: Glacier__Inner_Caverns__Southwest_Hill__ex__Southwest_Ledge_1 | ExitId:: Glacier__Inner_Caverns__Southwest_Hill__ex__West_Shaft_Hook_Point_1 => SpotId::Glacier__Inner_Caverns__Southwest_Hill,
         ExitId::Glacier__Inner_Caverns__West_14__ex__Sliced_Cavern__East_14_1 => SpotId::Glacier__Inner_Caverns__West_14,
         ExitId::Glacier__Inner_Caverns__Center_Bottom__ex__West_Shaft_Hook_Point_1 => SpotId::Glacier__Inner_Caverns__Center_Bottom,
         ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => SpotId::Glacier__Fortress__Portal_Stand,
-        ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 | ExitId:: Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_2 | ExitId:: Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 | ExitId:: Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_2 => SpotId::Glacier__Fortress__Inner_Mid_Tier_East,
+        ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 | ExitId:: Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => SpotId::Glacier__Fortress__Inner_Mid_Tier_East,
         ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 | ExitId:: Glacier__Fortress__Inner_Upper_Tier_East__ex__Gate_East_1 => SpotId::Glacier__Fortress__Inner_Upper_Tier_East,
         ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => SpotId::Glacier__Fortress__Inner_Upper_Tier_West,
-        ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 | ExitId:: Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_2 => SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
-        ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 | ExitId:: Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_2 | ExitId:: Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_3 | ExitId:: Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_4 => SpotId::Glacier__Fortress__West_Staircase,
-        ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Vertical_Room__Fortress_Ledge_1 | ExitId:: Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 | ExitId:: Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_2 => SpotId::Glacier__Fortress__Parapet_West_Ledge,
+        ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => SpotId::Glacier__Fortress__Inner_Mid_Tier_West,
+        ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => SpotId::Glacier__Fortress__West_Staircase,
+        ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Vertical_Room__Fortress_Ledge_1 | ExitId:: Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => SpotId::Glacier__Fortress__Parapet_West_Ledge,
         ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Vertical_Room__Flying_West_1 | ExitId:: Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 | ExitId:: Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Peak_1 | ExitId:: Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => SpotId::Glacier__Fortress__Parapet_West_Hook_Point,
         ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 | ExitId:: Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => SpotId::Glacier__Fortress__Parapet_Crenelle_2,
         ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 | ExitId:: Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => SpotId::Glacier__Fortress__Parapet_Peak,
         ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 | ExitId:: Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => SpotId::Glacier__Fortress__Parapet_Center_East,
         ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 | ExitId:: Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 | ExitId:: Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Floating_Rock_1 | ExitId:: Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__Upper_East_1 | ExitId:: Glacier__Fortress__Parapet_East_Hook_Point__ex__Grid_39_40_7_9__East_9_1 => SpotId::Glacier__Fortress__Parapet_East_Hook_Point,
-        ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 | ExitId:: Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_2 | ExitId:: Glacier__Fortress__Parapet_East_Ledge__ex__Grid_39_40_7_9__Fortress_Ledge_1 => SpotId::Glacier__Fortress__Parapet_East_Ledge,
+        ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 | ExitId:: Glacier__Fortress__Parapet_East_Ledge__ex__Grid_39_40_7_9__Fortress_Ledge_1 => SpotId::Glacier__Fortress__Parapet_East_Ledge,
         ExitId::Glacier__Fortress__Gate_East__ex__Parapet_East_Ledge_1 | ExitId:: Glacier__Fortress__Gate_East__ex__Inner_Upper_Tier_East_1 | ExitId:: Glacier__Fortress__Gate_East__ex__Inner_Mid_Tier_East_1 | ExitId:: Glacier__Fortress__Gate_East__ex__Grid_39_40_7_9__Fortress_Ledge_1 => SpotId::Glacier__Fortress__Gate_East,
         ExitId::Glacier__Lonely_Bull__West__ex__West_Water_Surface_1 | ExitId:: Glacier__Lonely_Bull__West__ex__The_Big_Drop__Small_Path_1 => SpotId::Glacier__Lonely_Bull__West,
         ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1 => SpotId::Glacier__Lonely_Bull__Air_Duct,
@@ -46219,16 +46695,16 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Interior__Cave_Behind_Waterfall__Bottom__ex__Amagi__Main_Area__Secret_Outcropping_1 | ExitId:: Interior__Cave_Behind_Waterfall__Bottom__ex__Middle_1 | ExitId:: Interior__Cave_Behind_Waterfall__Bottom__ex__Top_1 => SpotId::Interior__Cave_Behind_Waterfall__Bottom,
         ExitId::Interior__Cave_Behind_Waterfall__Middle__ex__Top_1 => SpotId::Interior__Cave_Behind_Waterfall__Middle,
         ExitId::Interior__Cave_Behind_Waterfall__Top__ex__Amagi__Main_Area__Secret_Waterfall_1 => SpotId::Interior__Cave_Behind_Waterfall__Top,
-        ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 | ExitId:: Interior__Outpost_Interior__Entry__ex__Bookshelf_2 | ExitId:: Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => SpotId::Interior__Outpost_Interior__Entry,
+        ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 | ExitId:: Interior__Outpost_Interior__Entry__ex__Giguna__Giguna_Base__Building_Entry_1 => SpotId::Interior__Outpost_Interior__Entry,
         ExitId::Interior__Facility_Interior__Door__ex__Uhrum__Emergence_Facility__Door_1 => SpotId::Interior__Facility_Interior__Door,
         ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 | ExitId:: Interior__Facility_Interior__West_Stairs__ex__Top_Right_1 => SpotId::Interior__Facility_Interior__West_Stairs,
-        ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 | ExitId:: Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_2 => SpotId::Interior__Facility_Interior__Middle_Tier_Left,
+        ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => SpotId::Interior__Facility_Interior__Middle_Tier_Left,
         ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => SpotId::Interior__Facility_Interior__Middle_Tier_Right,
         ExitId::Interior__Facility_Interior__Bottom_Middle__ex__Middle_Tier_Left_1 => SpotId::Interior__Facility_Interior__Bottom_Middle,
         ExitId::Interior__Uhrum_Waterfall_Cave__Entrance__ex__Uhrum__East_Lake__Waterfall_1 => SpotId::Interior__Uhrum_Waterfall_Cave__Entrance,
         ExitId::Interior__Emergence_Hangar__Door__ex__Emergence__Camp_Exterior__Door_1 => SpotId::Interior__Emergence_Hangar__Door,
         ExitId::Irikar_Breach__Save_Room__West__ex__Four_way__East_1 => SpotId::Irikar_Breach__Save_Room__West,
-        ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 | ExitId:: Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_2 => SpotId::Irikar_Breach__Gauntlet__Save_Point,
+        ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => SpotId::Irikar_Breach__Gauntlet__Save_Point,
         ExitId::Irikar_Breach__Gauntlet__East_22__ex__Hover_Room__West_1 => SpotId::Irikar_Breach__Gauntlet__East_22,
         ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Reward__ex__Hidden_Path_Top_Ledge_1 => SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Reward,
         ExitId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom__ex__Hidden_Path_Reward_1 => SpotId::Irikar_Breach__Gauntlet__Hidden_Path_Bottom,
@@ -46271,7 +46747,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Irikar_Breach__Buried_Treasure__Pillar_Right__ex__Pillar_Middle_1 => SpotId::Irikar_Breach__Buried_Treasure__Pillar_Right,
         ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => SpotId::Irikar_Breach__Buried_Treasure__Pillar_Middle,
         ExitId::Irikar_Breach__Buried_Treasure__Pillar_Left__ex__Pillar_Middle_1 => SpotId::Irikar_Breach__Buried_Treasure__Pillar_Left,
-        ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 | ExitId:: Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 | ExitId:: Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_3 => SpotId::Irikar_Breach__Buried_Treasure__Pillar_Bottom,
+        ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 | ExitId:: Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => SpotId::Irikar_Breach__Buried_Treasure__Pillar_Bottom,
         ExitId::Irikar_Breach__Buried_Treasure__West__ex__Rocky_Dunes__East_28_1 => SpotId::Irikar_Breach__Buried_Treasure__West,
         ExitId::Irikar_Breach__Rocky_Dunes__East_27__ex__Neon_Corridor__West_1 => SpotId::Irikar_Breach__Rocky_Dunes__East_27,
         ExitId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__East_Hilltop_1 | ExitId:: Irikar_Breach__Rocky_Dunes__Upper_East_Passage__ex__Center_Rock_East_1 => SpotId::Irikar_Breach__Rocky_Dunes__Upper_East_Passage,
@@ -46281,8 +46757,8 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Irikar_Breach__Rocky_Dunes__East_28__ex__Buried_Treasure__West_1 => SpotId::Irikar_Breach__Rocky_Dunes__East_28,
         ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_East__ex__Upper_East_Passage_1 => SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_East,
         ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__West_Rock_West_1 | ExitId:: Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => SpotId::Irikar_Breach__Rocky_Dunes__Center_Rock_West,
-        ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 | ExitId:: Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_2 => SpotId::Irikar_Breach__Rocky_Dunes__West_Rock_East,
-        ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 | ExitId:: Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_2 => SpotId::Irikar_Breach__Rocky_Dunes__West_Rock_West,
+        ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => SpotId::Irikar_Breach__Rocky_Dunes__West_Rock_East,
+        ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => SpotId::Irikar_Breach__Rocky_Dunes__West_Rock_West,
         ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_1 | ExitId:: Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => SpotId::Irikar_Breach__Rocky_Dunes__West_Ledge,
         ExitId::Irikar_Breach__Rocky_Dunes__West_Sand__ex__West_Ledge_1 => SpotId::Irikar_Breach__Rocky_Dunes__West_Sand,
         ExitId::Irikar_Breach__Rocky_Dunes__West_28__ex__Beach__East_28_1 => SpotId::Irikar_Breach__Rocky_Dunes__West_28,
@@ -46299,8 +46775,8 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Irikar_Breach__Corridor__Center__ex__Passage_West_1 => SpotId::Irikar_Breach__Corridor__Center,
         ExitId::Irikar_Breach__Corridor__East__ex__Gauntlet__West_26_1 => SpotId::Irikar_Breach__Corridor__East,
         ExitId::Irikar_Breach__Uhrum_Connector__West__ex__Exit_Corridor__East_1 | ExitId:: Irikar_Breach__Uhrum_Connector__West__ex__V_Rock_West_1 => SpotId::Irikar_Breach__Uhrum_Connector__West,
-        ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 | ExitId:: Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_2 | ExitId:: Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__Exit_Corridor__Portal_Stand_1 => SpotId::Irikar_Breach__Uhrum_Connector__V_Rock_West,
-        ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 | ExitId:: Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 | ExitId:: Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_2 => SpotId::Irikar_Breach__Uhrum_Connector__V_Rock_East,
+        ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 | ExitId:: Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__Exit_Corridor__Portal_Stand_1 => SpotId::Irikar_Breach__Uhrum_Connector__V_Rock_West,
+        ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 | ExitId:: Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => SpotId::Irikar_Breach__Uhrum_Connector__V_Rock_East,
         ExitId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__ex__V_Rock_East_1 => SpotId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge,
         ExitId::Irikar_Breach__Uhrum_Connector__Rock_West__ex__V_Rock_East_1 | ExitId:: Irikar_Breach__Uhrum_Connector__Rock_West__ex__Sand_Swarm_1 => SpotId::Irikar_Breach__Uhrum_Connector__Rock_West,
         ExitId::Irikar_Breach__Uhrum_Connector__Rock_East__ex__V_Rock_West_1 => SpotId::Irikar_Breach__Uhrum_Connector__Rock_East,
@@ -46320,21 +46796,21 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Irikar__Hub__Sat_Tower_East_24__ex__Sight_Room__West_24_1 => SpotId::Irikar__Hub__Sat_Tower_East_24,
         ExitId::Irikar__Hub__Sat_Tower_Lower_Exterior__ex__Sight_Room__Northwest_1 => SpotId::Irikar__Hub__Sat_Tower_Lower_Exterior,
         ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 | ExitId:: Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2 => SpotId::Irikar__Hub__NW_Staircase_Upper,
-        ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 | ExitId:: Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_2 => SpotId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop,
+        ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => SpotId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop,
         ExitId::Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_By_Well_1 | ExitId:: Irikar__Hub__NW_Middle_Building_West_Hook_Point__ex__Ruined_Hallway_Gap_Left_1 => SpotId::Irikar__Hub__NW_Middle_Building_West_Hook_Point,
         ExitId::Irikar__Hub__NW_Middle_Building_West_Entry__ex__NW_Middle_Building_East_Entry_1 => SpotId::Irikar__Hub__NW_Middle_Building_West_Entry,
         ExitId::Irikar__Hub__Royal_Storage_South__ex__Basement_Portal__North_1 => SpotId::Irikar__Hub__Royal_Storage_South,
         ExitId::Irikar__Hub__Royal_Storage_By_Wall__ex__Royal_Storage_in_Wall_1 => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
-        ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1 | ExitId:: Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 | ExitId:: Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_2 | ExitId:: Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_3 => SpotId::Irikar__Hub__NW_Middle_Building_Left_Ledge,
+        ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_East_Entry_1 | ExitId:: Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => SpotId::Irikar__Hub__NW_Middle_Building_Left_Ledge,
         ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_Left_Ledge_1 | ExitId:: Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => SpotId::Irikar__Hub__NW_Middle_Building_Lower_Ledge,
         ExitId::Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_West_Entry_1 | ExitId:: Irikar__Hub__NW_Middle_Building_East_Entry__ex__NW_Middle_Building_Left_Ledge_1 => SpotId::Irikar__Hub__NW_Middle_Building_East_Entry,
         ExitId::Irikar__Hub__Ruined_Hallway_Gap_Left__ex__NW_Middle_Building_East_Entry_1 => SpotId::Irikar__Hub__Ruined_Hallway_Gap_Left,
         ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_West_1 | ExitId:: Irikar__Hub__SW_Building_Broken_Wall__ex__Exposed_Passage_Center_1 | ExitId:: Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_1 => SpotId::Irikar__Hub__SW_Building_Broken_Wall,
         ExitId::Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_West_1 | ExitId:: Irikar__Hub__SW_Building_Platform_2__ex__Exposed_Passage_Center_1 => SpotId::Irikar__Hub__SW_Building_Platform_2,
-        ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 | ExitId:: Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_2 => SpotId::Irikar__Hub__Lower_Well,
+        ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => SpotId::Irikar__Hub__Lower_Well,
         ExitId::Irikar__Hub__Exposed_Passage_West__ex__SW_Building_Broken_Wall_1 | ExitId:: Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => SpotId::Irikar__Hub__Exposed_Passage_West,
-        ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 | ExitId:: Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 | ExitId:: Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_3 => SpotId::Irikar__Hub__Exposed_Passage_Center,
-        ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_3 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_3 => SpotId::Irikar__Hub__Exposed_Passage_Upper_Ledge,
+        ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 | ExitId:: Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => SpotId::Irikar__Hub__Exposed_Passage_Center,
+        ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 | ExitId:: Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => SpotId::Irikar__Hub__Exposed_Passage_Upper_Ledge,
         ExitId::Irikar__Hub__Collapsed_Column__ex__Lower_Well_1 => SpotId::Irikar__Hub__Collapsed_Column,
         ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => SpotId::Irikar__Hub__Collapsed_Column_Debris,
         ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 | ExitId:: Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => SpotId::Irikar__Hub__Lower_Hallway_West,
@@ -46367,10 +46843,10 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => SpotId::Irikar__Basement_Portal__Bottom_Middle,
         ExitId::Irikar__Basement_Portal__East_28__ex__Empty_Foyer__West_1 | ExitId:: Irikar__Basement_Portal__East_28__ex__Ledge_1 => SpotId::Irikar__Basement_Portal__East_28,
         ExitId::Irikar__Basement_Pipes__East_28__ex__Basement_Portal__West_28_1 => SpotId::Irikar__Basement_Pipes__East_28,
-        ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 | ExitId:: Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_2 => SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
-        ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 | ExitId:: Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_2 => SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
+        ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => SpotId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge,
+        ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => SpotId::Irikar__Basement_Pipes__Bricks_Under_Pipes,
         ExitId::Irikar__Basement_Pipes__Double_Pipe_Left__ex__High_Pipe_1 => SpotId::Irikar__Basement_Pipes__Double_Pipe_Left,
-        ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 | ExitId:: Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 | ExitId:: Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_3 => SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
+        ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 | ExitId:: Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2 => SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
         ExitId::Irikar__Basement_Pipes__West_28__ex__Midwest__East_28_1 => SpotId::Irikar__Basement_Pipes__West_28,
         ExitId::Irikar__Basement_Pipes__West_27__ex__Midwest__East_27_1 => SpotId::Irikar__Basement_Pipes__West_27,
         ExitId::Irikar__Empty_Foyer__West__ex__Basement_Portal__East_28_1 => SpotId::Irikar__Empty_Foyer__West,
@@ -46390,24 +46866,24 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Irikar__Midwest__NE_Ledge__ex__Left_Platform_Start_1 => SpotId::Irikar__Midwest__NE_Ledge,
         ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => SpotId::Irikar__Midwest__Left_Platform_Start,
         ExitId::Irikar__Midwest__East_25__ex__Hub__West_25_1 => SpotId::Irikar__Midwest__East_25,
-        ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 | ExitId:: Irikar__Midwest__Save_Point__ex__East_25_2 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_1 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => SpotId::Irikar__Midwest__Save_Point,
+        ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_1 | ExitId:: Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => SpotId::Irikar__Midwest__Save_Point,
         ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => SpotId::Irikar__Midwest__Center_Rock_1_East,
         ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => SpotId::Irikar__Midwest__Center_Rock_1_West,
         ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Center_Rock_2_East__ex__Save_Point_1 => SpotId::Irikar__Midwest__Center_Rock_2_East,
         ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => SpotId::Irikar__Midwest__Center_Rock_2_West,
-        ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 | ExitId:: Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 | ExitId:: Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_2 => SpotId::Irikar__Midwest__Center_Rock_3_West,
+        ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Save_Ledge_1 | ExitId:: Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => SpotId::Irikar__Midwest__Center_Rock_3_West,
         ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => SpotId::Irikar__Midwest__Center_Rock_3_East,
         ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 | ExitId:: Irikar__Midwest__Tablet_Platform__ex__Beach_Save__Partway_Up_1 => SpotId::Irikar__Midwest__Tablet_Platform,
         ExitId::Irikar__Midwest__Center_Small_Rock__ex__Center_Rock_2_East_1 => SpotId::Irikar__Midwest__Center_Small_Rock,
         ExitId::Irikar__Midwest__The_Long_Rock_East__ex__East_Rock_2_1 => SpotId::Irikar__Midwest__The_Long_Rock_East,
         ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => SpotId::Irikar__Midwest__East_Rock_1,
         ExitId::Irikar__Midwest__East_Rock_3__ex__East_Rock_1_1 | ExitId:: Irikar__Midwest__East_Rock_3__ex__East_Rock_2_1 => SpotId::Irikar__Midwest__East_Rock_3,
-        ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 | ExitId:: Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_2 | ExitId:: Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => SpotId::Irikar__Midwest__Lower_East_Platform,
+        ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 | ExitId:: Irikar__Midwest__Lower_East_Platform__ex__East_Rock_3_1 => SpotId::Irikar__Midwest__Lower_East_Platform,
         ExitId::Irikar__Midwest__East_26__ex__Hub__West_26_1 => SpotId::Irikar__Midwest__East_26,
         ExitId::Irikar__Midwest__East_27__ex__East_Rock_3_1 | ExitId:: Irikar__Midwest__East_27__ex__Basement_Pipes__West_27_1 => SpotId::Irikar__Midwest__East_27,
         ExitId::Irikar__Midwest__East_28__ex__Basement_Pipes__West_28_1 => SpotId::Irikar__Midwest__East_28,
         ExitId::Irikar__Midwest__Ground_Center__ex__SE_Rock_West_1 => SpotId::Irikar__Midwest__Ground_Center,
-        ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 | ExitId:: Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_2 => SpotId::Irikar__Midwest__Lower_Center_Platform,
+        ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => SpotId::Irikar__Midwest__Lower_Center_Platform,
         ExitId::Irikar__Midwest__West_Platform__ex__The_Long_Rock_West_1 => SpotId::Irikar__Midwest__West_Platform,
         ExitId::Irikar__Midwest__SW_Platform__ex__Lower_Rock_West_1 => SpotId::Irikar__Midwest__SW_Platform,
         ExitId::Irikar__Midwest__West_28_Platform__ex__Beach_Save__East_28_Platform_1 => SpotId::Irikar__Midwest__West_28_Platform,
@@ -46496,8 +46972,8 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => SpotId::Uhrum_Breach__Rock_and_Gate__Center_Area_West,
         ExitId::Uhrum_Breach__Rock_and_Gate__North__ex__Save_and_Go__South_1 => SpotId::Uhrum_Breach__Rock_and_Gate__North,
         ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__South__ex__West_Glitch__North_1 => SpotId::Uhrum_Breach__Rock_and_Gate__South,
-        ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_2 => SpotId::Uhrum_Breach__Rock_and_Gate__Rock_West,
-        ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_2 => SpotId::Uhrum_Breach__Rock_and_Gate__Rock_East,
+        ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => SpotId::Uhrum_Breach__Rock_and_Gate__Rock_West,
+        ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => SpotId::Uhrum_Breach__Rock_and_Gate__Rock_East,
         ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => SpotId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge,
         ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Save_Point_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__West_Flower_1 | ExitId:: Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__East_Glitch__Above_West_Flower_1 => SpotId::Uhrum_Breach__Rock_and_Gate__East_Ledge,
         ExitId::Uhrum_Breach__Rock_and_Gate__East__ex__East_Glitch__West_1 => SpotId::Uhrum_Breach__Rock_and_Gate__East,
@@ -46526,7 +47002,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum_Breach__East_Glitch__Glitch_East__ex__Glitch_West_1 => SpotId::Uhrum_Breach__East_Glitch__Glitch_East,
         ExitId::Uhrum_Breach__East_Glitch__East_28__ex__South_Slime__West_1 => SpotId::Uhrum_Breach__East_Glitch__East_28,
         ExitId::Uhrum_Breach__East_Glitch__Wall_West_Platform__ex__Middle_Platform_East_1 => SpotId::Uhrum_Breach__East_Glitch__Wall_West_Platform,
-        ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 | ExitId:: Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_2 => SpotId::Uhrum_Breach__East_Glitch__Wall_East_Platform,
+        ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => SpotId::Uhrum_Breach__East_Glitch__Wall_East_Platform,
         ExitId::Uhrum_Breach__East_Glitch__East_Hookable__ex__Northeast_Flower_1 | ExitId:: Uhrum_Breach__East_Glitch__East_Hookable__ex__North_Slime__East_1 => SpotId::Uhrum_Breach__East_Glitch__East_Hookable,
         ExitId::Uhrum_Breach__East_Glitch__East_27__ex__Northeast_Flower_1 | ExitId:: Uhrum_Breach__East_Glitch__East_27__ex__North_Slime__West_1 => SpotId::Uhrum_Breach__East_Glitch__East_27,
         ExitId::Uhrum_Breach__North_Slime__West__ex__East_Glitch__East_27_1 => SpotId::Uhrum_Breach__North_Slime__West,
@@ -46544,7 +47020,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum_Breach__West_Copse__West_28__ex__South_Slime__East_1 => SpotId::Uhrum_Breach__West_Copse__West_28,
         ExitId::Uhrum_Breach__West_Copse__Center_West__ex__West_27_1 | ExitId:: Uhrum_Breach__West_Copse__Center_West__ex__East_Ledge_1 => SpotId::Uhrum_Breach__West_Copse__Center_West,
         ExitId::Uhrum_Breach__West_Copse__Center_East__ex__West_27_1 => SpotId::Uhrum_Breach__West_Copse__Center_East,
-        ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 | ExitId:: Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_2 | ExitId:: Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 | ExitId:: Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_2 => SpotId::Uhrum_Breach__West_Copse__Center_Pillar,
+        ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 | ExitId:: Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => SpotId::Uhrum_Breach__West_Copse__Center_Pillar,
         ExitId::Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Center_West_1 | ExitId:: Uhrum_Breach__West_Copse__East_Ledge__ex__East_Copse__Lower_West_Ledge_1 => SpotId::Uhrum_Breach__West_Copse__East_Ledge,
         ExitId::Uhrum_Breach__West_Copse__East__ex__East_Copse__West_1 => SpotId::Uhrum_Breach__West_Copse__East,
         ExitId::Uhrum_Breach__East_Copse__West__ex__West_Copse__East_1 | ExitId:: Uhrum_Breach__East_Copse__West__ex__Center_West_1 => SpotId::Uhrum_Breach__East_Copse__West,
@@ -46555,17 +47031,17 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum_Breach__East_Copse__Platform_East__ex__Annuna_Gate__Building_Roof_Ledge_1 | ExitId:: Uhrum_Breach__East_Copse__Platform_East__ex__Annuna_Gate__Building_Corner_Ledge_1 => SpotId::Uhrum_Breach__East_Copse__Platform_East,
         ExitId::Uhrum_Breach__East_Copse__East__ex__Annuna_Gate__West_1 => SpotId::Uhrum_Breach__East_Copse__East,
         ExitId::Uhrum_Breach__Annuna_Gate__West__ex__East_Copse__East_1 | ExitId:: Uhrum_Breach__Annuna_Gate__West__ex__Building_Roof_Ledge_1 => SpotId::Uhrum_Breach__Annuna_Gate__West,
-        ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_2 | ExitId:: Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Upper_Ledge_1 => SpotId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge,
+        ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Upper_Ledge_1 => SpotId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge,
         ExitId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge__ex__Upper_Ledge_1 => SpotId::Uhrum_Breach__Annuna_Gate__Building_Corner_Ledge,
         ExitId::Uhrum_Breach__Annuna_Gate__Upper_Ledge__ex__Structure_1 => SpotId::Uhrum_Breach__Annuna_Gate__Upper_Ledge,
         ExitId::Uhrum_Breach__Annuna_Gate__North__ex__Locked_Down__South_1 => SpotId::Uhrum_Breach__Annuna_Gate__North,
         ExitId::Uhrum_Breach__Annuna_Gate__Structure_West__ex__Save_Point_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure_West__ex__Building_Roof_Ledge_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure_West__ex__Upper_Ledge_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure_West__ex__Button_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure_West__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => SpotId::Uhrum_Breach__Annuna_Gate__Structure_West,
-        ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_2 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_2 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Save_Point_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => SpotId::Uhrum_Breach__Annuna_Gate__Structure,
+        ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Save_Point_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Structure__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => SpotId::Uhrum_Breach__Annuna_Gate__Structure,
         ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 | ExitId:: Uhrum_Breach__Annuna_Gate__Button__ex__Annuna_Breach__Smiley__Upper_Portal_Exit_1 => SpotId::Uhrum_Breach__Annuna_Gate__Button,
         ExitId::Uhrum_Breach__Annuna_Gate__East__ex__Structure_1 | ExitId:: Uhrum_Breach__Annuna_Gate__East__ex__Button_1 => SpotId::Uhrum_Breach__Annuna_Gate__East,
-        ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 | ExitId:: Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_2 | ExitId:: Uhrum_Breach__Locked_Down__South__ex__Annuna_Gate__North_1 => SpotId::Uhrum_Breach__Locked_Down__South,
+        ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 | ExitId:: Uhrum_Breach__Locked_Down__South__ex__Annuna_Gate__North_1 => SpotId::Uhrum_Breach__Locked_Down__South,
         ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 | ExitId:: Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => SpotId::Uhrum_Breach__Locked_Down__East_Enemy,
-        ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 | ExitId:: Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_2 | ExitId:: Uhrum_Breach__Locked_Down__Gate_Left__ex__Save_Point_1 => SpotId::Uhrum_Breach__Locked_Down__Gate_Left,
+        ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 | ExitId:: Uhrum_Breach__Locked_Down__Gate_Left__ex__Save_Point_1 => SpotId::Uhrum_Breach__Locked_Down__Gate_Left,
         ExitId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__East_Stone_1 | ExitId:: Uhrum_Breach__Locked_Down__Item_Behind_Gate__ex__Gate_Left_1 => SpotId::Uhrum_Breach__Locked_Down__Item_Behind_Gate,
         ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 | ExitId:: Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => SpotId::Uhrum_Breach__Locked_Down__Save_Point,
         ExitId::Uhrum_Breach__Locked_Down__East_Stone__ex__Item_Behind_Gate_1 => SpotId::Uhrum_Breach__Locked_Down__East_Stone,
@@ -46581,30 +47057,30 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum_Breach__Overgrown_Ruins__West_Floor__ex__Cache_1 => SpotId::Uhrum_Breach__Overgrown_Ruins__West_Floor,
         ExitId::Uhrum_Breach__Overgrown_Ruins__Cache__ex__Wall_West_1 => SpotId::Uhrum_Breach__Overgrown_Ruins__Cache,
         ExitId::Uhrum__West_Entrance__West_27__ex__Irikar__Lamassu__East_27_1 | ExitId:: Uhrum__West_Entrance__West_27__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__West_27,
-        ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__West_26,
+        ExitId::Uhrum__West_Entrance__West_26__ex__Irikar__Lamassu__East_26_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => SpotId::Uhrum__West_Entrance__West_26,
         ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
         ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => SpotId::Uhrum__West_Entrance__West_25,
         ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__Top_West_Ledge__ex__Gate_West_1 | ExitId:: Uhrum__West_Entrance__Top_West_Ledge__ex__Gate_West_Ledge_1 => SpotId::Uhrum__West_Entrance__Top_West_Ledge,
         ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
         ExitId::Uhrum__West_Entrance__Southwest_Tree__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__Southwest_Tree,
         ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__South_Platform__ex__West_27_1 => SpotId::Uhrum__West_Entrance__South_Platform,
-        ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 | ExitId:: Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 | ExitId:: Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_2 => SpotId::Uhrum__West_Entrance__Save_Point,
-        ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_2 => SpotId::Uhrum__West_Entrance__Portal_Stand,
-        ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_2 => SpotId::Uhrum__West_Entrance__Clear_Passage,
-        ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 | ExitId:: Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_2 => SpotId::Uhrum__West_Entrance__Gate_West,
-        ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_2 | ExitId:: Uhrum__West_Entrance__Gate_West_Ledge__ex__Inner_Dais_1 => SpotId::Uhrum__West_Entrance__Gate_West_Ledge,
+        ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 | ExitId:: Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => SpotId::Uhrum__West_Entrance__Save_Point,
+        ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => SpotId::Uhrum__West_Entrance__Portal_Stand,
+        ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => SpotId::Uhrum__West_Entrance__Clear_Passage,
+        ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => SpotId::Uhrum__West_Entrance__Gate_West,
+        ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__Gate_West_Ledge__ex__Inner_Dais_1 => SpotId::Uhrum__West_Entrance__Gate_West_Ledge,
         ExitId::Uhrum__West_Entrance__Inner_Dais__ex__Gate_West_1 | ExitId:: Uhrum__West_Entrance__Inner_Dais__ex__Top_West_Ledge_1 => SpotId::Uhrum__West_Entrance__Inner_Dais,
-        ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 | ExitId:: Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_2 | ExitId:: Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => SpotId::Uhrum__West_Entrance__Upper_Wall_West,
+        ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 | ExitId:: Uhrum__West_Entrance__Upper_Wall_West__ex__Upper_Wall_East_1 => SpotId::Uhrum__West_Entrance__Upper_Wall_West,
         ExitId::Uhrum__West_Entrance__Upper_Wall_East__ex__Upper_Wall_West_1 => SpotId::Uhrum__West_Entrance__Upper_Wall_East,
         ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_1 | ExitId:: Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => SpotId::Uhrum__West_Entrance__Upper_Fork,
         ExitId::Uhrum__West_Entrance__East_26__ex__Siege_Corridor__West_26_1 => SpotId::Uhrum__West_Entrance__East_26,
-        ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 | ExitId:: Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_2 | ExitId:: Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_3 | ExitId:: Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => SpotId::Uhrum__West_Entrance__Lower_Wall_West,
+        ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 | ExitId:: Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => SpotId::Uhrum__West_Entrance__Lower_Wall_West,
         ExitId::Uhrum__West_Entrance__Lower_Wall_East__ex__Lower_Wall_West_1 => SpotId::Uhrum__West_Entrance__Lower_Wall_East,
         ExitId::Uhrum__West_Entrance__Lower_Path_Rock__ex__Glitchy_Corridor__Northwest_Platform_1 => SpotId::Uhrum__West_Entrance__Lower_Path_Rock,
         ExitId::Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Wall_West_1 | ExitId:: Uhrum__West_Entrance__Lower_Path_Gap__ex__Lower_Path_Tree_Ledge_1 => SpotId::Uhrum__West_Entrance__Lower_Path_Gap,
-        ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 | ExitId:: Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_2 => SpotId::Uhrum__West_Entrance__Sand,
+        ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 | ExitId:: Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => SpotId::Uhrum__West_Entrance__Sand,
         ExitId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_West_1 | ExitId:: Uhrum__West_Entrance__Lower_Path_Tree_Ledge__ex__Glitchy_Corridor__West_Glitch_Ledge_1 => SpotId::Uhrum__West_Entrance__Lower_Path_Tree_Ledge,
-        ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_2 | ExitId:: Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => SpotId::Uhrum__West_Entrance__East_28,
+        ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__West_Entrance__East_28__ex__Glitchy_Corridor__West_28_1 => SpotId::Uhrum__West_Entrance__East_28,
         ExitId::Uhrum__Siege_Corridor__West_26__ex__West_Entrance__East_26_1 => SpotId::Uhrum__Siege_Corridor__West_26,
         ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Platform_1 | ExitId:: Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => SpotId::Uhrum__Siege_Corridor__Western_Cache,
         ExitId::Uhrum__Siege_Corridor__Western_Rock__ex__Northwest_Platform_1 => SpotId::Uhrum__Siege_Corridor__Western_Rock,
@@ -46612,15 +47088,15 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Western_Cache_1 | ExitId:: Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => SpotId::Uhrum__Siege_Corridor__Northwest_Platform,
         ExitId::Uhrum__Siege_Corridor__West_Greenery__ex__West_Grassy_Ledge_1 => SpotId::Uhrum__Siege_Corridor__West_Greenery,
         ExitId::Uhrum__Siege_Corridor__Center_Platform_3__ex__Upper_Rock_West_1 => SpotId::Uhrum__Siege_Corridor__Center_Platform_3,
-        ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 | ExitId:: Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_2 => SpotId::Uhrum__Siege_Corridor__Center_Valley,
+        ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => SpotId::Uhrum__Siege_Corridor__Center_Valley,
         ExitId::Uhrum__Siege_Corridor__Mideast_Tree__ex__Upper_Rock_West_1 | ExitId:: Uhrum__Siege_Corridor__Mideast_Tree__ex__East_Hill_1 => SpotId::Uhrum__Siege_Corridor__Mideast_Tree,
         ExitId::Uhrum__Siege_Corridor__Upper_Rock_West__ex__Upper_Rock_Item_1 => SpotId::Uhrum__Siege_Corridor__Upper_Rock_West,
         ExitId::Uhrum__Siege_Corridor__Upper_Rock_Item__ex__Upper_Rock_West_1 => SpotId::Uhrum__Siege_Corridor__Upper_Rock_Item,
-        ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 | ExitId:: Uhrum__Siege_Corridor__Pond__ex__East_Hill_2 => SpotId::Uhrum__Siege_Corridor__Pond,
-        ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_3 => SpotId::Uhrum__Siege_Corridor__East_Hill,
+        ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => SpotId::Uhrum__Siege_Corridor__Pond,
+        ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Mideast_Tree_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_1 | ExitId:: Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => SpotId::Uhrum__Siege_Corridor__East_Hill,
         ExitId::Uhrum__Siege_Corridor__East_25__ex__Waterfalls__West_25_1 => SpotId::Uhrum__Siege_Corridor__East_25,
-        ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Entrance__East_28_1 | ExitId:: Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 | ExitId:: Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_2 => SpotId::Uhrum__Glitchy_Corridor__West_28,
-        ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 | ExitId:: Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 | ExitId:: Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_2 | ExitId:: Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => SpotId::Uhrum__Glitchy_Corridor__West_Glitch_West,
+        ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Entrance__East_28_1 | ExitId:: Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => SpotId::Uhrum__Glitchy_Corridor__West_28,
+        ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 | ExitId:: Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 | ExitId:: Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => SpotId::Uhrum__Glitchy_Corridor__West_Glitch_West,
         ExitId::Uhrum__Glitchy_Corridor__Behind_West_Glitch__ex__West_Glitch_West_1 => SpotId::Uhrum__Glitchy_Corridor__Behind_West_Glitch,
         ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => SpotId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge,
         ExitId::Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Rock_1 | ExitId:: Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Entrance__Lower_Path_Tree_Ledge_1 | ExitId:: Uhrum__Glitchy_Corridor__Northwest_Platform__ex__West_Pillar_West_1 => SpotId::Uhrum__Glitchy_Corridor__Northwest_Platform,
@@ -46631,7 +47107,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Glitchy_Corridor__Center_Platform_East__ex__Portal_Stand_1 | ExitId:: Uhrum__Glitchy_Corridor__Center_Platform_East__ex__West_Pillar_East_1 => SpotId::Uhrum__Glitchy_Corridor__Center_Platform_East,
         ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => SpotId::Uhrum__Glitchy_Corridor__Middle_Lower,
         ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => SpotId::Uhrum__Glitchy_Corridor__East_Ledge,
-        ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_2 => SpotId::Uhrum__Glitchy_Corridor__East_Platform,
+        ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => SpotId::Uhrum__Glitchy_Corridor__East_Platform,
         ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_West_Platform,
         ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_West,
         ExitId::Uhrum__Glitchy_Corridor__Wall_East__ex__Wall_West_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_East,
@@ -46646,30 +47122,31 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Waterfalls__West_24__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__West_24__ex__Artillery_Practice__East_24_1 => SpotId::Uhrum__Waterfalls__West_24,
         ExitId::Uhrum__Waterfalls__West_27__ex__Large_Rock_1 | ExitId:: Uhrum__Waterfalls__West_27__ex__Center_Island_West_1 | ExitId:: Uhrum__Waterfalls__West_27__ex__Save_Room__East_1 => SpotId::Uhrum__Waterfalls__West_27,
         ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 | ExitId:: Uhrum__Waterfalls__Ledge_Above_Palm__ex__Northeast_Ledge_1 => SpotId::Uhrum__Waterfalls__Ledge_Above_Palm,
-        ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 | ExitId:: Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_2 => SpotId::Uhrum__Waterfalls__High_Platform,
+        ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => SpotId::Uhrum__Waterfalls__High_Platform,
         ExitId::Uhrum__Waterfalls__Ceiling_Opening__ex__Ceiling_Cache_1 | ExitId:: Uhrum__Waterfalls__Ceiling_Opening__ex__West_24_1 | ExitId:: Uhrum__Waterfalls__Ceiling_Opening__ex__Barrier_West_1 => SpotId::Uhrum__Waterfalls__Ceiling_Opening,
         ExitId::Uhrum__Waterfalls__Ceiling_Cache__ex__Ceiling_Opening_1 => SpotId::Uhrum__Waterfalls__Ceiling_Cache,
         ExitId::Uhrum__Waterfalls__Northeast_Ledge__ex__Ceiling_Opening_1 => SpotId::Uhrum__Waterfalls__Northeast_Ledge,
         ExitId::Uhrum__Waterfalls__Barrier_West__ex__Ceiling_Opening_1 | ExitId:: Uhrum__Waterfalls__Barrier_West__ex__Barrier_East_1 => SpotId::Uhrum__Waterfalls__Barrier_West,
         ExitId::Uhrum__Waterfalls__Barrier_East__ex__Barrier_West_1 | ExitId:: Uhrum__Waterfalls__Barrier_East__ex__Tulip_Tower__Lower_Column_1 => SpotId::Uhrum__Waterfalls__Barrier_East,
         ExitId::Uhrum__Waterfalls__East_24__ex__Tulip_Tower__West_24_1 => SpotId::Uhrum__Waterfalls__East_24,
-        ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 | ExitId:: Uhrum__Waterfalls__West_Wall__ex__West_25_2 => SpotId::Uhrum__Waterfalls__West_Wall,
-        ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 | ExitId:: Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_2 | ExitId:: Uhrum__Waterfalls__West_Platform__ex__Sloped_Rock_1 => SpotId::Uhrum__Waterfalls__West_Platform,
-        ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 | ExitId:: Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 | ExitId:: Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_2 => SpotId::Uhrum__Waterfalls__Sloped_Rock,
+        ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => SpotId::Uhrum__Waterfalls__West_Wall,
+        ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 | ExitId:: Uhrum__Waterfalls__West_Platform__ex__Sloped_Rock_1 => SpotId::Uhrum__Waterfalls__West_Platform,
+        ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 | ExitId:: Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => SpotId::Uhrum__Waterfalls__Sloped_Rock,
         ExitId::Uhrum__Waterfalls__Large_Rock__ex__Medium_Rock_1 | ExitId:: Uhrum__Waterfalls__Large_Rock__ex__West_Wall_1 => SpotId::Uhrum__Waterfalls__Large_Rock,
         ExitId::Uhrum__Waterfalls__Medium_Rock__ex__West_Wall_1 | ExitId:: Uhrum__Waterfalls__Medium_Rock__ex__West_Platform_1 | ExitId:: Uhrum__Waterfalls__Medium_Rock__ex__Green_Middle_Ledge_1 => SpotId::Uhrum__Waterfalls__Medium_Rock,
         ExitId::Uhrum__Waterfalls__Lower_East_Platform__ex__Small_Rock_1 | ExitId:: Uhrum__Waterfalls__Lower_East_Platform__ex__Below_Block_1 => SpotId::Uhrum__Waterfalls__Lower_East_Platform,
-        ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__East_26_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__Above_Block_2 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__East_26_2 => SpotId::Uhrum__Waterfalls__Below_Block,
+        ExitId::Uhrum__Waterfalls__Below_Block__ex__Small_Rock_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 | ExitId:: Uhrum__Waterfalls__Below_Block__ex__East_26_1 => SpotId::Uhrum__Waterfalls__Below_Block,
         ExitId::Uhrum__Waterfalls__Above_Block__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__Above_Block__ex__East_25_1 => SpotId::Uhrum__Waterfalls__Above_Block,
         ExitId::Uhrum__Waterfalls__East_26__ex__Below_Block_1 | ExitId:: Uhrum__Waterfalls__East_26__ex__Annuna_Corridor__West_26_1 => SpotId::Uhrum__Waterfalls__East_26,
         ExitId::Uhrum__Waterfalls__East_25__ex__Annuna_Corridor__West_25_1 => SpotId::Uhrum__Waterfalls__East_25,
         ExitId::Uhrum__Waterfalls__Green_Middle_Ledge__ex__Below_Block_1 => SpotId::Uhrum__Waterfalls__Green_Middle_Ledge,
-        ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 | ExitId:: Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_2 => SpotId::Uhrum__Waterfalls__East_Palm_Tree,
-        ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 | ExitId:: Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_2 => SpotId::Uhrum__Waterfalls__West_Shallow_End,
+        ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => SpotId::Uhrum__Waterfalls__East_Palm_Tree,
+        ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1 | ExitId:: Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => SpotId::Uhrum__Waterfalls__West_Shallow_End,
         ExitId::Uhrum__Waterfalls__Center_Island_West__ex__West_27_1 => SpotId::Uhrum__Waterfalls__Center_Island_West,
         ExitId::Uhrum__Waterfalls__Center_Island_East__ex__Lower_East_Platform_1 | ExitId:: Uhrum__Waterfalls__Center_Island_East__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Center_Island_East,
-        ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 | ExitId:: Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_2 => SpotId::Uhrum__Waterfalls__West_Water_Nook,
-        ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_2 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Water_Pillar,
+        ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__West_Water_Ledge,
+        ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => SpotId::Uhrum__Waterfalls__West_Water_Nook,
+        ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 | ExitId:: Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => SpotId::Uhrum__Waterfalls__Water_Pillar,
         ExitId::Uhrum__Waterfalls__East_28__ex__East_Lake__West_28_1 => SpotId::Uhrum__Waterfalls__East_28,
         ExitId::Uhrum__Waterfalls__East_27__ex__East_Lake__West_27_1 => SpotId::Uhrum__Waterfalls__East_27,
         ExitId::Uhrum__Save_Room__East__ex__Waterfalls__West_27_1 => SpotId::Uhrum__Save_Room__East,
@@ -46678,50 +47155,50 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__East_Lake__West_Waters_Edge__ex__Waterfall_1 | ExitId:: Uhrum__East_Lake__West_Waters_Edge__ex__West_Block_1 => SpotId::Uhrum__East_Lake__West_Waters_Edge,
         ExitId::Uhrum__East_Lake__Waterfall__ex__Interior__Uhrum_Waterfall_Cave__Entrance_1 => SpotId::Uhrum__East_Lake__Waterfall,
         ExitId::Uhrum__East_Lake__West_28__ex__Waterfalls__East_28_1 => SpotId::Uhrum__East_Lake__West_28,
-        ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 | ExitId:: Uhrum__East_Lake__West_Wall__ex__West_Block_2 => SpotId::Uhrum__East_Lake__West_Wall,
-        ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 | ExitId:: Uhrum__East_Lake__West_Block__ex__East_Ledge_1 | ExitId:: Uhrum__East_Lake__West_Block__ex__East_Block_2 => SpotId::Uhrum__East_Lake__West_Block,
+        ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => SpotId::Uhrum__East_Lake__West_Wall,
+        ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 | ExitId:: Uhrum__East_Lake__West_Block__ex__East_Ledge_1 => SpotId::Uhrum__East_Lake__West_Block,
         ExitId::Uhrum__East_Lake__East_Block__ex__West_Block_1 | ExitId:: Uhrum__East_Lake__East_Block__ex__Waterfall_1 | ExitId:: Uhrum__East_Lake__East_Block__ex__Waterfalls__East_Waters_Edge_1 => SpotId::Uhrum__East_Lake__East_Block,
-        ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 | ExitId:: Uhrum__East_Lake__Island_West__ex__East_Block_2 => SpotId::Uhrum__East_Lake__Island_West,
+        ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => SpotId::Uhrum__East_Lake__Island_West,
         ExitId::Uhrum__East_Lake__Island_East__ex__East_Ledge_1 | ExitId:: Uhrum__East_Lake__Island_East__ex__East_Block_1 => SpotId::Uhrum__East_Lake__Island_East,
         ExitId::Uhrum__East_Lake__Island_West_Hook_Point__ex__East_Ledge_1 => SpotId::Uhrum__East_Lake__Island_West_Hook_Point,
-        ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 | ExitId:: Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_2 | ExitId:: Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_3 => SpotId::Uhrum__East_Lake__East_Underwater_Ledge,
+        ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => SpotId::Uhrum__East_Lake__East_Underwater_Ledge,
         ExitId::Uhrum__East_Lake__East_Ledge__ex__Island_East_1 | ExitId:: Uhrum__East_Lake__East_Ledge__ex__Cavern__Wall_Left_1 => SpotId::Uhrum__East_Lake__East_Ledge,
         ExitId::Uhrum__East_Lake__East__ex__Cavern__West_1 => SpotId::Uhrum__East_Lake__East,
         ExitId::Uhrum__Cavern__West__ex__East_Lake__East_1 => SpotId::Uhrum__Cavern__West,
         ExitId::Uhrum__Cavern__West_Ledge__ex__East_Lake__East_Block_1 | ExitId:: Uhrum__Cavern__West_Ledge__ex__Wall_Left_1 => SpotId::Uhrum__Cavern__West_Ledge,
         ExitId::Uhrum__Cavern__West_Slope__ex__Wall_Left_1 => SpotId::Uhrum__Cavern__West_Slope,
-        ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 | ExitId:: Uhrum__Cavern__Bottom__ex__Wall_Left_2 | ExitId:: Uhrum__Cavern__Bottom__ex__Wall_Left_3 => SpotId::Uhrum__Cavern__Bottom,
+        ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => SpotId::Uhrum__Cavern__Bottom,
         ExitId::Uhrum__Cavern__Wall_Left__ex__Wall_Right_1 | ExitId:: Uhrum__Cavern__Wall_Left__ex__Pedestal_1 => SpotId::Uhrum__Cavern__Wall_Left,
         ExitId::Uhrum__Cavern__Wall_Right__ex__Wall_Left_1 | ExitId:: Uhrum__Cavern__Wall_Right__ex__West_Ledge_1 => SpotId::Uhrum__Cavern__Wall_Right,
-        ExitId::Uhrum__Tulip_Tower__West_24__ex__Waterfalls__East_24_1 | ExitId:: Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 | ExitId:: Uhrum__Tulip_Tower__West_24__ex__Platform_1_West_1 | ExitId:: Uhrum__Tulip_Tower__West_24__ex__Lower_Column_2 | ExitId:: Uhrum__Tulip_Tower__West_24__ex__Lower_Column_3 => SpotId::Uhrum__Tulip_Tower__West_24,
+        ExitId::Uhrum__Tulip_Tower__West_24__ex__Waterfalls__East_24_1 | ExitId:: Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 | ExitId:: Uhrum__Tulip_Tower__West_24__ex__Platform_1_West_1 => SpotId::Uhrum__Tulip_Tower__West_24,
         ExitId::Uhrum__Tulip_Tower__Lower_Column__ex__Waterfalls__Barrier_East_1 | ExitId:: Uhrum__Tulip_Tower__Lower_Column__ex__Platform_1_West_1 => SpotId::Uhrum__Tulip_Tower__Lower_Column,
         ExitId::Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__Barrier_East_1 | ExitId:: Uhrum__Tulip_Tower__Still_Hovering__ex__Waterfalls__East_24_1 => SpotId::Uhrum__Tulip_Tower__Still_Hovering,
         ExitId::Uhrum__Tulip_Tower__Platform_1_West__ex__Middle_Ledge_1 | ExitId:: Uhrum__Tulip_Tower__Platform_1_West__ex__Platform_2_West_1 | ExitId:: Uhrum__Tulip_Tower__Platform_1_West__ex__Upper_Right_Ledge_1 => SpotId::Uhrum__Tulip_Tower__Platform_1_West,
-        ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 | ExitId:: Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_2 => SpotId::Uhrum__Tulip_Tower__Platform_1_East,
+        ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => SpotId::Uhrum__Tulip_Tower__Platform_1_East,
         ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => SpotId::Uhrum__Tulip_Tower__Middle_Ledge,
         ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Middle_Ledge_1 | ExitId:: Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Right_Ledge_1 | ExitId:: Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Middle_Ledge_2 => SpotId::Uhrum__Tulip_Tower__Platform_2_West,
         ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Middle_Ledge_1 | ExitId:: Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Right_Ledge_1 | ExitId:: Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Middle_Ledge_2 | ExitId:: Uhrum__Tulip_Tower__Platform_2_East__ex__Middle_Plateau_1 => SpotId::Uhrum__Tulip_Tower__Platform_2_East,
         ExitId::Uhrum__Tulip_Tower__East_23__ex__Annuna__Invisible_Enemies__West_23_1 | ExitId:: Uhrum__Tulip_Tower__East_23__ex__Platform_1_East_1 | ExitId:: Uhrum__Tulip_Tower__East_23__ex__Platform_2_East_1 => SpotId::Uhrum__Tulip_Tower__East_23,
-        ExitId::Uhrum__Tulip_Tower__West_22__ex__Rocky_Guardpost__East_22_1 | ExitId:: Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 | ExitId:: Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 | ExitId:: Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_3 => SpotId::Uhrum__Tulip_Tower__West_22,
+        ExitId::Uhrum__Tulip_Tower__West_22__ex__Rocky_Guardpost__East_22_1 | ExitId:: Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 | ExitId:: Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => SpotId::Uhrum__Tulip_Tower__West_22,
         ExitId::Uhrum__Tulip_Tower__NW_Mid_air__ex__Upper_Column_West_1 => SpotId::Uhrum__Tulip_Tower__NW_Mid_air,
         ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => SpotId::Uhrum__Tulip_Tower__Upper_Column_East,
-        ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 | ExitId:: Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 | ExitId:: Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_3 | ExitId:: Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => SpotId::Uhrum__Tulip_Tower__Upper_Middle_Ledge,
+        ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 | ExitId:: Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 | ExitId:: Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => SpotId::Uhrum__Tulip_Tower__Upper_Middle_Ledge,
         ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 => SpotId::Uhrum__Tulip_Tower__Upper_Right_Ledge,
         ExitId::Uhrum__Tulip_Tower__North__ex__Amagi__Wiggly_Room__South_1 => SpotId::Uhrum__Tulip_Tower__North,
         ExitId::Uhrum__Annuna_Corridor__West_25__ex__Waterfalls__East_25_1 => SpotId::Uhrum__Annuna_Corridor__West_25,
         ExitId::Uhrum__Annuna_Corridor__West_26__ex__Waterfalls__East_26_1 => SpotId::Uhrum__Annuna_Corridor__West_26,
-        ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 | ExitId:: Uhrum__Annuna_Corridor__Block_West__ex__Block_East_2 => SpotId::Uhrum__Annuna_Corridor__Block_West,
+        ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => SpotId::Uhrum__Annuna_Corridor__Block_West,
         ExitId::Uhrum__Annuna_Corridor__Block_East__ex__Block_West_1 => SpotId::Uhrum__Annuna_Corridor__Block_East,
-        ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 | ExitId:: Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_2 => SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
-        ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 | ExitId:: Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_2 => SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
-        ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 | ExitId:: Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 | ExitId:: Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_2 => SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
+        ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Between_Two_Flowers,
+        ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Lower_Platform,
+        ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Ledge_1 | ExitId:: Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Middle_Platform,
         ExitId::Uhrum__Annuna_Corridor__Upper_Platform__ex__Upper_Ledge_1 | ExitId:: Uhrum__Annuna_Corridor__Upper_Platform__ex__Statue_1 => SpotId::Uhrum__Annuna_Corridor__Upper_Platform,
         ExitId::Uhrum__Annuna_Corridor__Upper_Ledge__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Upper_Ledge,
         ExitId::Uhrum__Annuna_Corridor__Statue__ex__Upper_Platform_1 => SpotId::Uhrum__Annuna_Corridor__Statue,
         ExitId::Uhrum__Annuna_Corridor__East_25__ex__Annuna__Mirror_Match__West_25_1 => SpotId::Uhrum__Annuna_Corridor__East_25,
         ExitId::Uhrum__Artillery_Practice__East_24__ex__Waterfalls__West_24_1 | ExitId:: Uhrum__Artillery_Practice__East_24__ex__East_Outcrop_East_1 => SpotId::Uhrum__Artillery_Practice__East_24,
         ExitId::Uhrum__Artillery_Practice__East_Trees__ex__East_Outcrop_East_1 | ExitId:: Uhrum__Artillery_Practice__East_Trees__ex__East_Lower_Platform_East_1 => SpotId::Uhrum__Artillery_Practice__East_Trees,
-        ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_2 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_3 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => SpotId::Uhrum__Artillery_Practice__East_Hill,
+        ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 | ExitId:: Uhrum__Artillery_Practice__East_Hill__ex__East_Lower_Platform_West_1 => SpotId::Uhrum__Artillery_Practice__East_Hill,
         ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_West__ex__Column_West_1 => SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_West,
         ExitId::Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__East_Knob_1 | ExitId:: Uhrum__Artillery_Practice__East_Lower_Platform_East__ex__Column_West_1 => SpotId::Uhrum__Artillery_Practice__East_Lower_Platform_East,
         ExitId::Uhrum__Artillery_Practice__Column_East__ex__West_Left_Ledge_1 => SpotId::Uhrum__Artillery_Practice__Column_East,
@@ -46743,16 +47220,16 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => SpotId::Uhrum__Grassy_Guardpost__Center_Platform_East,
         ExitId::Uhrum__Grassy_Guardpost__West_Ledge__ex__East_Ledge_1 => SpotId::Uhrum__Grassy_Guardpost__West_Ledge,
         ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 | ExitId:: Uhrum__Grassy_Guardpost__West_22__ex__Emergence_Save__Save_Point_1 | ExitId:: Uhrum__Grassy_Guardpost__West_22__ex__Giguna__Vertical_Interchange__East_22_1 => SpotId::Uhrum__Grassy_Guardpost__West_22,
-        ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_2 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1 => SpotId::Uhrum__Grassy_Guardpost__East_Ledge,
+        ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Save__Save_Point_1 | ExitId:: Uhrum__Grassy_Guardpost__East_Ledge__ex__Emergence_Facility__West_Approach_1 => SpotId::Uhrum__Grassy_Guardpost__East_Ledge,
         ExitId::Uhrum__Grassy_Guardpost__East_22__ex__Emergence_Save__West_1 => SpotId::Uhrum__Grassy_Guardpost__East_22,
         ExitId::Uhrum__Glen__East__ex__Artillery_Practice__Tunnel_Entrance_1 => SpotId::Uhrum__Glen__East,
         ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => SpotId::Uhrum__Emergence_Save__West,
         ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => SpotId::Uhrum__Emergence_Save__East,
         ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1 => SpotId::Uhrum__Emergence_Facility__West,
-        ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_2 => SpotId::Uhrum__Emergence_Facility__West_Approach,
-        ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_2 => SpotId::Uhrum__Emergence_Facility__East_Approach,
-        ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_2 | ExitId:: Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1 => SpotId::Uhrum__Emergence_Facility__Door,
-        ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 | ExitId:: Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_2 => SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
+        ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => SpotId::Uhrum__Emergence_Facility__West_Approach,
+        ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => SpotId::Uhrum__Emergence_Facility__East_Approach,
+        ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 | ExitId:: Uhrum__Emergence_Facility__Door__ex__Interior__Facility_Interior__Door_1 => SpotId::Uhrum__Emergence_Facility__Door,
+        ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => SpotId::Uhrum__Emergence_Facility__Upper_Level_Middle,
         ExitId::Uhrum__Emergence_Facility__Wall_West_Ledge__ex__Wall_East_Mid_air_1 => SpotId::Uhrum__Emergence_Facility__Wall_West_Ledge,
         ExitId::Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__Wall_East_Mid_air_1 | ExitId:: Uhrum__Emergence_Facility__Wall_West_Mid_air__ex__East_Stair_Right_1 => SpotId::Uhrum__Emergence_Facility__Wall_West_Mid_air,
         ExitId::Uhrum__Emergence_Facility__Above_Wall_West__ex__Wall_East_Mid_air_1 | ExitId:: Uhrum__Emergence_Facility__Above_Wall_West__ex__East_Stair_Right_1 => SpotId::Uhrum__Emergence_Facility__Above_Wall_West,
@@ -46762,7 +47239,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Rocky_Guardpost__Upper_Ledge__ex__East_22_1 => SpotId::Uhrum__Rocky_Guardpost__Upper_Ledge,
         ExitId::Uhrum__Rocky_Guardpost__Mid_air__ex__Upper_Step_1 | ExitId:: Uhrum__Rocky_Guardpost__Mid_air__ex__Middle_Step_1 | ExitId:: Uhrum__Rocky_Guardpost__Mid_air__ex__Upper_Ledge_1 => SpotId::Uhrum__Rocky_Guardpost__Mid_air,
         ExitId::Uhrum__Rocky_Guardpost__Lower_Mid_air__ex__Upper_Ledge_1 => SpotId::Uhrum__Rocky_Guardpost__Lower_Mid_air,
-        ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Rocky_Gate__East_1 | ExitId:: Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 | ExitId:: Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_2 => SpotId::Uhrum__Rocky_Guardpost__West_23,
+        ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Rocky_Gate__East_1 | ExitId:: Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => SpotId::Uhrum__Rocky_Guardpost__West_23,
         ExitId::Uhrum__Rocky_Guardpost__Lower_Step__ex__Upper_Step_1 | ExitId:: Uhrum__Rocky_Guardpost__Lower_Step__ex__Upper_Ledge_1 => SpotId::Uhrum__Rocky_Guardpost__Lower_Step,
         ExitId::Uhrum__Rocky_Guardpost__Middle_Step__ex__Upper_Ledge_1 => SpotId::Uhrum__Rocky_Guardpost__Middle_Step,
         ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1 => SpotId::Uhrum__Rocky_Guardpost__Upper_Step,
