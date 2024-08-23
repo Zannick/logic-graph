@@ -2168,660 +2168,1528 @@ impl world::Action for Action {
             _ => SpotId::None,
         }
     }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_effects(&self, ctx: &mut Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
             ActionId::Global__Recall_Drone => {
                 rules::observe_action_mode_set_indra(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
                 rules::observe_action_indra_set_invoke_default(ctx, world, full_obs);
             }
             ActionId::Global__Recall_Fast_Travel => {
                 rules::observe_action_mode_set_indra_last_set_indra(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
                 rules::observe_action_indra_set_invoke_default(ctx, world, full_obs);
             }
             ActionId::Global__Deploy_Drone => {
                 rules::observe_action_mode_set_drone_indra_set_position(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Global__Become_Drone => {
                 rules::observe_action_mode_set_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Global__Become_Indra => {
                 rules::observe_action_mode_set_indra(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Global__Move_Portal_Here => {
                 rules::observe_action_portal_set_position(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi_Breach__East_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi_Breach__East_Ruins__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi_Breach__Upper_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi_Breach__Divided__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi_Breach__Lakebed__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Carving__Key_Combo => {
                 rules::observe_action_amagi__main_area__ctx__combo_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Platform_3__Throw_Drone_East => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Catwalk_Center__Throw_Drone_East => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Broken_Wall__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Main_Area__Wall_Stuck_Spot__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Kill_Dur_Esla => {
                 rules::observe_action_amagi__secret_chamber__ctx__west_dur_esla_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Secret_Chamber__West_Dur_Esla__Shockwave_Dur_Esla => {
                 rules::observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Kill_Dur_Esla => {
                 rules::observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Secret_Chamber__East_Dur_Esla__Shockwave_Dur_Esla => {
                 rules::observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__East_Lake__East_15_Lower__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__East_Lake__East_15_Upper_Hover__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__East_Lake__East_15_Lower_Hover__Attract_Portal_to_Arch => {
                 rules::observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
                 rules::observe_action_portal_set_position(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__East_Lake__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Kill_Dur_Esla => {
                 rules::observe_action_amagi__gated_community__ctx__dur_esla_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Gated_Community__Dur_Esla__Shockwave_Dur_Esla => {
                 rules::observe_action_amagi__gated_community__ctx__dur_esla_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Amagi__Isolation__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna_Breach__Double_Corridor__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna_Breach__Rear_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna_Breach__North_Hallway__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna_Breach__Bridge__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna_Breach__Bottom__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna_Breach__Enclosed__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Mirror_Match__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Invisible_Enemies__Switch_West__Open_Door => {
                 rules::observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Invisible_Enemies__Switch_Above__Open_Door => {
                 rules::observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Invisible_Enemies__Switch_East__Open_Door => {
                 rules::observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Invisible_Enemies__Corner_Cache__Charm_Utu => {
                 rules::observe_action_annuna__invisible_enemies__ctx__nw_utu_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__West_Bridge__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__West_Bridge__Tower_Level_4__Open_Doors => {
                 rules::observe_action_annuna__west_bridge__ctx__doors_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__West_Bridge__Tower_Upper_Middle__Open_Doors => {
                 rules::observe_action_annuna__west_bridge__ctx__doors_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__East_Bridge__Center_Gap_West__Throw_Drone_into_Tower => {
                 rules::observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__East_Bridge__Center_Gap_East__Throw_Drone_into_Tower => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__East_Bridge__Tower_Opening__Climb_and_Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__East_Bridge__Tower_West_Ledge__Enter_Combo => {
                 rules::observe_action_annuna__east_bridge__ctx__combo_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__East_Bridge__Tower_East_Ledge__Enter_Combo => {
                 rules::observe_action_annuna__east_bridge__ctx__combo_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__East_Bridge__Tower_Secret__Enter_Combo => {
                 rules::observe_action_annuna__east_bridge__ctx__combo_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Vertical_Room__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Vertical_Room__Door_Switch__Open_Door => {
                 rules::observe_action_annuna__vertical_room__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Factory_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Filter_Teleporter__Shaft_Top__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Filter_Teleporter__Northeast_Ministair__Throw_Drone_Up => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Upper_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Udug_Gate__Switch__Open_Door => {
                 rules::observe_action_annuna__udug_gate__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Udug_Gate__Door_West__Open_Door => {
                 rules::observe_action_annuna__udug_gate__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Center_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__West_Climb__Switch_Ledge__Open_Door => {
                 rules::observe_action_annuna__west_climb__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Boss_Gate__Switch__Open_Door => {
                 rules::observe_action_annuna__boss_gate__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Boss_Gate__Door_East__Open_Door => {
                 rules::observe_action_annuna__boss_gate__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Annuna__Final_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih_Breach__Portals_101__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih_Breach__In_n_Out__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih_Breach__Rock_Block__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih_Breach__Peak__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Base_Camp__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Base_Camp__Left_Platform__Move_Left_Platform => {
                 rules::observe_action_ebih__base_camp__ctx__left_platform_moved_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Base_Camp__Left_Platform_Moved__Reset_Left_Platform => {
                 rules::observe_action_ebih__base_camp__ctx__left_platform_moved_set_false(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Base_Camp__Top_Platform__Throw_Drone_and_Drop => {
                 rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Truck_Gate__Switch__Open_Door => {
                 rules::observe_action_ebih__truck_gate__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Truck_Gate__Portal_Stand__Open_Door => {
                 rules::observe_action_ebih__truck_gate__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Grid_25_10_12__Below_Bush__Throw_Drone_and_Hover_Further => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Grid_25_10_12__Door_Left__Open_Door => {
                 rules::observe_action_ebih__grid_25_10_12__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Grid_25_10_12__East_11__Open_Door => {
                 rules::observe_action_ebih__grid_25_10_12__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__Ledge_Below_Hole__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__Below_Left_Switch__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__west_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__West_8__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__west_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__East_Door_Right__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__East_Switch__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__Platform_by_East_Door__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__East_Horizontal_Door__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Waterfall__Ledge_Below_East_Door__Open_Door => {
                 rules::observe_action_ebih__waterfall__ctx__east_door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_West__Mid_Save__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_West__Upper_Save__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_West__Medium_High_Platform__Throw_Drone_Long => {
                 rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_West__Below_Door__Open_Door => {
                 rules::observe_action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_West__Left_of_Switch__Open_Door => {
                 rules::observe_action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_West__Lower_Save__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_East__Moving_Platform__Activate_Ride => {
                 rules::observe_action_ebih__ebih_east__ctx__platform1_moved_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Ride => {
                 rules::observe_action_ebih__ebih_east__ctx__platform2_moved_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_East__Lower_Moving_Platform__Activate_Lift => {
                 rules::observe_action_ebih__ebih_east__ctx__platform2_moved_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Ebih_East__Dispenser__Activate_Lift => {
                 rules::observe_action_ebih__ebih_east__ctx__platform2_moved_set_false(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Hidden_Portal__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift => {
                 rules::observe_action_ebih__drone_room__ctx__platform_moved_set_false(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Drone_Room__Pit_Left__Activate_Lift_But_Get_Off_Early => {
                 rules::observe_action_ebih__drone_room__ctx__platform_moved_set_false(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Drone_Room__Portal_Exit__Activate_Platform => {
                 rules::observe_action_ebih__drone_room__ctx__platform_moved_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Drone_Room__Moving_Platform__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Vertical_Interchange__West_13__Open_Door => {
                 rules::observe_action_ebih__vertical_interchange__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Ebih__Vertical_Interchange__Under_Switch__Unlock_Door_from_Below => {
                 rules::observe_action_ebih__vertical_interchange__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Emergence__Camp_Exterior__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Emergence__Storage__At_Door__Open_Door => {
                 rules::observe_action_emergence__storage__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Emergence__Storage__Portal_Stand__Open_Door => {
                 rules::observe_action_emergence__storage__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__Peak__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__SW_Save__West_11__Open_Door => {
                 rules::observe_action_giguna_breach__sw_save__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__SW_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__Labyrinth__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__East__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__Emergence__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna_Breach__South__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Northeast__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Northeast__Right_Column__Open_Door_From_Afar => {
                 rules::observe_action_giguna__giguna_northeast__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Northeast__Switch__Open_Door => {
                 rules::observe_action_giguna__giguna_northeast__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Caught => {
                 rules::observe_action_giguna__carnelian__ctx__upper_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Carnelian__Upper_Susar__Hack => {
                 rules::observe_action_giguna__carnelian__ctx__upper_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Carnelian__Switch__Open_Door => {
                 rules::observe_action_giguna__carnelian__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Caught => {
                 rules::observe_action_giguna__carnelian__ctx__lower_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Carnelian__Lower_Susar__Hack => {
                 rules::observe_action_giguna__carnelian__ctx__lower_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__West_Caverns__East_Susar__Caught => {
                 rules::observe_action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__West_Caverns__East_Susar__Hack => {
                 rules::observe_action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Base__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
                 rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => {
                 rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => {
                 rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Giguna_Base__Switch_Distance_4__Open_Door => {
                 rules::observe_action_giguna__giguna_base__ctx__door_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Ruins_West__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => {
                 rules::observe_action_giguna__ruins_west__ctx__kishib_handled_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Ruins_Top__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => {
                 rules::observe_action_giguna__ruins_top__ctx__doors_open_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
                 rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => {
                 rules::observe_action_giguna__clouds__ctx__platform_set_true_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_stop__portal_set_giguna_gt_clouds_gt_platform_stop(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => {
                 rules::observe_action_giguna__clouds__ctx__platform_set_true_portal_set_giguna_gt_clouds_gt_platform_stop_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => {
                 rules::observe_action_giguna__clouds__ctx__platform_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => {
                 rules::observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => {
                 rules::observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => {
                 rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => {
                 rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => {
                 rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Hack => {
                 rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Upper_Susar_Jump_from_East__Caught => {
                 rules::observe_action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Carving__Enter_Combo => {
                 rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Hack => {
                 rules::observe_action_giguna__east_caverns__ctx__mid_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Mid_Susar__Caught => {
                 rules::observe_action_giguna__east_caverns__ctx__mid_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Statues_Ledge__Open_Door => {
                 rules::observe_action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Statues_Ledge__Enter_Combo => {
                 rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Switch__Open_Door => {
                 rules::observe_action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__West_16__Open_Door => {
                 rules::observe_action_giguna__east_caverns__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Arc_Passage__Enter_Combo => {
                 rules::observe_action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Hack => {
                 rules::observe_action_giguna__east_caverns__ctx__lower_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__East_Caverns__Lower_Susar__Caught => {
                 rules::observe_action_giguna__east_caverns__ctx__lower_susar_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Gateway__One_Jump__Open_Door => {
                 rules::observe_action_giguna__gateway__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => {
                 rules::observe_action_giguna__gateway__ctx__door_opened_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => {
                 rules::observe_action_giguna__labyrinth__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => {
                 rules::observe_action_giguna__labyrinth__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Labyrinth__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Giguna__Separator__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__South_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__West_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__Guarded_Corridor__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__Save_and_Exit__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__Hammonds_Breach__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Top_Platform => {
                 rules::observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier_Breach__Angry_Lions__North__Summon_Portal_to_Second_Platform => {
                 rules::observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Dock_Outside__Lower_Platforms__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Dock_Outside__Ruins_Platform__Throw_Drone_Up => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Revival__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Revival__Save_Point__Throw_Drone_West => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Vertical_Room__Upper_Switch__Open_Gate => {
                 rules::observe_action_glacier__vertical_room__ctx__upper_gatestone_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Vertical_Room__Lower_Switch__Open_Lower_Gatestones => {
                 rules::observe_action_glacier__vertical_room__ctx__lower_gatestones_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Lower_West => {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Upper_Floor__Move_Portal_to_Note => {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Lower_West => {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Upper_Right_Pedestal__Move_Portal_to_Note => {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Upper_Right_Mid_air__Move_Portal_to_Corner => {
                 rules::observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Switch_from_Ledge__Open_Doors => {
                 rules::observe_action_glacier__ctx__hammonds_doors_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__Switch_Near__Open_Doors => {
                 rules::observe_action_glacier__ctx__hammonds_doors_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Hammonds_End__West_11__Open_Doors => {
                 rules::observe_action_glacier__ctx__hammonds_doors_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
                 rules::observe_action_portal_set_position(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Glacier__Lonely_Bull__West__Open_Door => {
                 rules::observe_action_glacier__lonely_bull__ctx__door_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Interior__Observatory__East_Staircase_Top__Infinite_Climb_with_Hook => {
                 rules::observe_action_mode_set_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Interior__Cave_Behind_Waterfall__Middle__Throw_Drone => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Interior__Facility_Interior__Freight_Elevator__Enter_Emergence => {
                 rules::observe_action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Interior__Emergence_Hangar__Freight_Elevator__Exit_Emergence => {
                 rules::observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar_Breach__Corridor__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => {
                 rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => {
                 rules::observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => {
                 rules::observe_action_irikar__basement_portal__ctx__platform_moved_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => {
                 rules::observe_action_irikar__midwest__ctx__left_platform_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Midwest__Right_Platform_Start__Hack_and_Ride_Platform => {
                 rules::observe_action_irikar__midwest__ctx__right_platform_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Midwest__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Irikar__Beach_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum_Breach__East_Glitch__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum_Breach__Annuna_Gate__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__West_Entrance__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__Waterfalls__Center_Island_Middle__Throw_Drone_Up => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__Save_Room__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__Annuna_Corridor__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Up => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__Annuna_Corridor__Between_Two_Flowers__Throw_Drone_Not_As_High => {
                 rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Uhrum__Emergence_Save__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
         }
     }

@@ -562,14 +562,11 @@ areas:
     - name: East Ledge
       coord: [29.85, 17.5]
       local:
-        - to: Center Shaft Top
-          jumps: 1
-          jump_mvmt: water
         - to: Upper East Left
         - to: Center Shaft Top East
       exits:
         - to: Center Shaft Top
-          req: Slingshot_Hook or Drone_Hover
+          req: Underwater_Movement or Slingshot_Hook or Drone_Hover
           movement: fast_hover
           jumps: 1
           penalties:
@@ -578,7 +575,6 @@ areas:
               jumps: 1
             - when: not Slingshot_Hook or not Drone_Hover
               movement: water
-              jumps: 1
         - to: Center Shaft Top East
           req: Underwater_Movement and Slingshot_Hook
           movement: fast_hover

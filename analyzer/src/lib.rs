@@ -411,7 +411,7 @@ pub mod testlib {
                         if warp.can_access(&$ctx, $world) {
                             warp.prewarp(&mut $ctx, $world);
                             $ctx.set_position(warp.dest(&$ctx, $world), $world);
-                            $ctx.spend(warp.price());
+                            $ctx.spend(&warp.price(&$ctx, $world));
                             warp.postwarp(&mut $ctx, $world);
                             if warp.should_reload() {
                                 $ctx.reload_game($world);

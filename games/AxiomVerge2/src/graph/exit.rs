@@ -270,7 +270,7 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__East_18__ex__East_Ruins__West_1 => true,
             ExitId::Amagi_Breach__Center_Ruins__East_19__ex__Upper_Hallway__West_1 => true,
-            ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => rules::access_slingshot_hook_or_drone_hover(ctx, world),
+            ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => rules::access_underwater_movement_or_slingshot_hook_or_drone_hover(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => rules::access_underwater_movement_and_slingshot_hook(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => rules::access_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::access_nanite_mist(ctx, world),
@@ -3936,7 +3936,7 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
-            ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => rules::observe_access_slingshot_hook_or_drone_hover(ctx, world, full_obs),
+            ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => rules::observe_access_underwater_movement_or_slingshot_hook_or_drone_hover(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => rules::observe_access_underwater_movement_and_slingshot_hook(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => rules::observe_access_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world, full_obs),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
@@ -6852,7 +6852,7 @@ impl world::Accessible for Exit {
                     if rules::access_not_underwater_movement(ctx, world) {
                         1000
 } else if rules::access_not_slingshot_hook_or_not_drone_hover(ctx, world) {
-                        1000
+                        228
                     } else {
                         0
                     }
@@ -14437,7 +14437,7 @@ impl world::Accessible for Exit {
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
-            ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => rules::explain_slingshot_hook_or_drone_hover(ctx, world, edict),
+            ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => rules::explain_underwater_movement_or_slingshot_hook_or_drone_hover(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => rules::explain_underwater_movement_and_slingshot_hook(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Entrance__ex__Passage_Exit_1 => rules::explain_underwater_movement_and_amagi_breach_center_ruins_blocks(ctx, world, edict),
             ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => rules::explain_nanite_mist(ctx, world, edict),

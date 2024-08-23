@@ -143,11 +143,15 @@ impl world::Action for Action {
             _ => SpotId::None,
         }
     }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_effects(&self, ctx: &mut Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
 %% for act in gl.actions()
             ActionId::{{ act.id }} => {
                 rules::observe_action_{{ act.action_id }}(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
 %% if act.act_post
                 rules::observe_action_{{ act.after_id }}(ctx, world, full_obs);
 %% endif

@@ -47,7 +47,7 @@ pub trait Ctx:
     fn collect(&mut self, item: Self::ItemId, world: &Self::World);
     // test helper for items
     fn add_item(&mut self, item: Self::ItemId);
-    // test helper for context vars
+    // test helpers for context vars
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String>;
     fn parse_expect_context(ckey: &str, cval: &Yaml) -> Result<Self::Expectation, String>;
     fn assert_expectations(&self, exps: &Vec<Self::Expectation>) -> Result<(), String>;
@@ -81,13 +81,73 @@ pub trait Ctx:
         observer: &mut Self::Observer,
     );
 
+    /// Mark a location visited. Does not perform collect.
     fn visit(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
+    /// Mark a location unvisited. Mostly used for tests; there is no uncollect.
     fn reset(&mut self, loc_id: <<Self::World as World>::Location as Location>::LocId);
     fn take_exit(&mut self, exit: &<Self::World as World>::Exit, world: &Self::World);
     fn todo(&self, loc: &<Self::World as World>::Location) -> bool {
         !loc.skippable() && !self.visited(loc.id())
     }
     fn visited(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
+
+    /// Performs the collection and records observations made.
+    fn observe_collect(
+        &mut self,
+        item: Self::ItemId,
+        world: &Self::World,
+        observer: &mut Self::Observer,
+    );
+    /// Adds an item without triggering collect rules and records observations made.
+    fn observe_add_item(&mut self, item: Self::ItemId, observer: &mut Self::Observer) {
+        self.add_item(item);
+        observer.observe_item(item);
+    }
+    /// Sets the position and records observations made.
+    fn observe_set_position(
+        &mut self,
+        pos: <<Self::World as World>::Exit as Exit>::SpotId,
+        world: &Self::World,
+        observer: &mut Self::Observer,
+    );
+    /// Spends the resources and records observations made.
+    fn observe_spend(
+        &mut self,
+        cost: &<<Self::World as World>::Location as Accessible>::Currency,
+        observer: &mut Self::Observer,
+    );
+    /// Visits the location and records observations made.
+    fn observe_visit(
+        &mut self,
+        loc_id: <<Self::World as World>::Location as Location>::LocId,
+        observer: &mut Self::Observer,
+    );
+    /// Takes the exit and records observations made.
+    fn observe_take_exit(
+        &mut self,
+        exit: &<Self::World as World>::Exit,
+        world: &Self::World,
+        observer: &mut Self::Observer,
+    );
+
+    /// Reloads the game and records observations made.
+    fn observe_reload_game(&mut self, world: &Self::World, observer: &mut Self::Observer);
+    /// Resets all regions and areas and records observations made.
+    fn observe_reset_all(&mut self, world: &Self::World, observer: &mut Self::Observer);
+    /// Resets a region and records observations made.
+    fn observe_reset_region(
+        &mut self,
+        region_id: Self::RegionId,
+        world: &Self::World,
+        observer: &mut Self::Observer,
+    );
+    /// Resets an area and records observations made.
+    fn observe_reset_area(
+        &mut self,
+        area_id: Self::AreaId,
+        world: &Self::World,
+        observer: &mut Self::Observer,
+    );
 
     fn all_spot_checks(&self, id: <<Self::World as World>::Exit as Exit>::SpotId) -> bool;
     fn all_area_checks(&self, id: Self::AreaId) -> bool;
@@ -111,7 +171,6 @@ pub trait Ctx:
     fn diff(&self, old: &Self) -> String;
 
     /// Observes the access checks and, if they pass, any side effects of the step.
-    /// The effects will be observed first, then the access requirements.
     fn observe_replay<L, E, Wp>(
         &self,
         world: &Self::World,
@@ -128,13 +187,12 @@ pub trait Ctx:
             Currency = <L as Accessible>::Currency,
         >,
     {
+        let mut cur = self.clone();
         match step {
             History::W(wp, dest) => {
                 let warp = world.get_warp(wp);
-                if warp.dest(self, world) == dest && warp.can_access(self, world) {
-                    warp.observe_effects(self, world, observer);
-                    observer.observe_on_entry(self, dest, world);
-                    warp.observe_access(self, world, observer);
+                if warp.dest(self, world) == dest && warp.observe_access(self, world, observer) {
+                    warp.observe_effects(&mut cur, world, observer);
                     true
                 } else {
                     false
@@ -143,10 +201,14 @@ pub trait Ctx:
             History::G(item, loc_id) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
-                if spot_id == self.position() && loc.item() == item && loc.can_access(self, world) {
-                    observer.observe_visit(loc_id);
-                    observer.observe_collect(self, item, world);
-                    loc.observe_access(self, world, observer);
+                observer.observe_visited(loc_id);
+                if spot_id == self.position()
+                    && loc.item() == item
+                    && loc.observe_access(self, world, observer)
+                {
+                    cur.observe_spend(&loc.price(&cur, world), observer);
+                    cur.observe_visit(loc_id, observer);
+                    cur.observe_collect(item, world, observer);
                     true
                 } else {
                     false
@@ -155,11 +217,15 @@ pub trait Ctx:
             History::V(item, loc_id, dest) => {
                 let spot_id = world.get_location_spot(loc_id);
                 let loc = world.get_location(loc_id);
-                if spot_id == self.position() && loc.item() == item && loc.can_access(self, world) {
-                    observer.observe_visit(loc_id);
-                    observer.observe_collect(self, item, world);
-                    observer.observe_on_entry(self, dest, world);
-                    loc.observe_access(self, world, observer);
+                observer.observe_visited(loc_id);
+                if spot_id == self.position()
+                    && loc.item() == item
+                    && loc.observe_access(self, world, observer)
+                {
+                    cur.observe_spend(&loc.price(&cur, world), observer);
+                    cur.observe_visit(loc_id, observer);
+                    cur.observe_collect(item, world, observer);
+                    cur.observe_set_position(dest, world, observer);
                     true
                 } else {
                     false
@@ -168,16 +234,16 @@ pub trait Ctx:
             History::E(exit_id) => {
                 let spot_id = world.get_exit_spot(exit_id);
                 let exit = world.get_exit(exit_id);
-                if spot_id == self.position() && exit.can_access(self, world) {
-                    observer.observe_on_entry(self, exit.dest(), world);
-                    exit.observe_access(self, world, observer);
+                if spot_id == self.position() && exit.observe_access(self, world, observer) {
+                    cur.observe_spend(&exit.price(&cur, world), observer);
+                    cur.observe_take_exit(exit, world, observer);
                     true
                 } else {
                     false
                 }
             }
             History::L(spot_id) => {
-                let movement_state = self.get_movement_state(world);
+                let movement_state = self.observe_movement_state(world, observer);
                 let (best_free, best_mvmts) = Self::World::best_movements(self.position(), spot_id);
                 if self.position() != spot_id
                     && Self::World::same_area(self.position(), spot_id)
@@ -186,8 +252,7 @@ pub trait Ctx:
                             .into_iter()
                             .any(|(m, _)| Self::is_subset(m, movement_state)))
                 {
-                    observer.observe_on_entry(self, spot_id, world);
-                    self.observe_movement_state(world, observer);
+                    cur.observe_set_position(spot_id, world, observer);
                     true
                 } else {
                     false
@@ -197,27 +262,23 @@ pub trait Ctx:
                 let spot_id = world.get_action_spot(act_id);
                 let action = world.get_action(act_id);
                 if (world.is_global_action(act_id) || self.position() == spot_id)
-                    && action.can_access(self, world)
+                    && action.observe_access(self, world, observer)
                 {
-                    action.observe_effects(self, world, observer);
-                    let dest = action.dest(self, world);
-                    if dest != spot_id && dest != <E as Exit>::SpotId::default() {
-                        observer.observe_on_entry(self, dest, world);
-                    }
-                    action.observe_access(self, world, observer);
+                    cur.observe_spend(&action.price(&cur, world), observer);
+                    action.observe_effects(&mut cur, world, observer);
                     true
                 } else {
                     false
                 }
             }
             History::C(spot_id, idx) => {
-                let movement_state = self.get_movement_state(world);
+                let movement_state = self.observe_movement_state(world, observer);
                 let edges = world.get_condensed_edges_from(self.position());
                 let edge = &edges[idx];
-                if edge.dst == spot_id && edge.can_access(world, self, movement_state) {
-                    observer.observe_on_entry(self, spot_id, world);
-                    edge.observe_access(world, self, movement_state, observer);
-                    self.observe_movement_state(world, observer);
+                if edge.dst == spot_id && edge.observe_access(world, self, movement_state, observer)
+                {
+                    // TODO: Should we set position for all spots along the CE?
+                    cur.observe_set_position(spot_id, world, observer);
                     true
                 } else {
                     false
@@ -532,9 +593,9 @@ impl<T: Ctx> ContextWrapper<T> {
         L: Location<Context = T>,
     {
         let dur = loc.time(&self.ctx, world);
+        self.ctx.spend(&loc.price(&self.ctx, world));
         self.ctx.visit(loc.id());
         self.ctx.collect(loc.item(), world);
-        self.ctx.spend(&loc.price(&self.ctx, world));
         if loc.dest() != Default::default() {
             self.ctx.set_position(loc.dest(), world);
             self.append_history(History::V(loc.item(), loc.id(), loc.dest()), dur);
@@ -552,9 +613,9 @@ impl<T: Ctx> ContextWrapper<T> {
         E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         let dur = exit.time(&self.ctx, world);
+        self.ctx.spend(&exit.price(&self.ctx, world));
         self.ctx.set_position(exit.dest(), world);
         self.elapse(dur);
-        self.ctx.spend(&exit.price(&self.ctx, world));
         self.append_history(History::E(exit.id()), dur);
     }
 
@@ -604,9 +665,9 @@ impl<T: Ctx> ContextWrapper<T> {
             "Warp can't lead to SpotId::None: {}",
             warp.id()
         );
+        self.ctx.spend(&warp.price(&self.ctx, world));
         self.ctx.set_position(dest, world);
         self.elapse(dur);
-        self.ctx.spend(&warp.price(&self.ctx, world));
         warp.postwarp(&mut self.ctx, world);
         if warp.should_reload() {
             self.ctx.reload_game(world);
@@ -621,9 +682,9 @@ impl<T: Ctx> ContextWrapper<T> {
         A: Action<Context = T, Currency = <W::Location as Accessible>::Currency>,
     {
         let dur = action.time(&self.ctx, world);
+        self.ctx.spend(&action.price(&self.ctx, world));
         action.perform(&mut self.ctx, world);
         self.elapse(dur);
-        self.ctx.spend(&action.price(&self.ctx, world));
         self.append_history(History::A(action.id()), dur);
     }
 

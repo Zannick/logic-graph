@@ -23,10 +23,10 @@ def serializedATN():
         2,1,2,3,2,143,8,2,1,2,1,2,1,2,1,2,3,2,149,8,2,1,3,1,3,1,3,1,3,1,
         3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,163,8,3,1,4,3,4,166,8,4,1,4,1,
         4,1,4,1,4,1,4,5,4,173,8,4,10,4,12,4,176,9,4,1,4,1,4,3,4,180,8,4,
-        1,4,1,4,1,4,1,4,1,4,1,4,3,4,188,8,4,1,4,1,4,1,4,1,4,1,4,3,4,195,
-        8,4,1,4,1,4,1,4,1,4,1,4,3,4,202,8,4,1,4,1,4,1,4,1,4,1,4,3,4,209,
-        8,4,1,4,1,4,1,4,1,4,1,4,5,4,216,8,4,10,4,12,4,219,9,4,1,4,1,4,3,
-        4,223,8,4,1,4,1,4,1,4,1,4,1,4,5,4,230,8,4,10,4,12,4,233,9,4,1,4,
+        1,4,1,4,1,4,1,4,1,4,5,4,187,8,4,10,4,12,4,190,9,4,1,4,1,4,1,4,3,
+        4,195,8,4,1,4,1,4,1,4,1,4,1,4,1,4,3,4,203,8,4,1,4,1,4,1,4,1,4,1,
+        4,3,4,210,8,4,1,4,1,4,1,4,1,4,1,4,3,4,217,8,4,1,4,1,4,1,4,1,4,1,
+        4,3,4,224,8,4,1,4,1,4,1,4,1,4,1,4,5,4,231,8,4,10,4,12,4,234,9,4,
         1,4,1,4,3,4,238,8,4,1,4,1,4,1,4,3,4,243,8,4,3,4,245,8,4,1,5,1,5,
         1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,5,5,263,
         8,5,10,5,12,5,266,9,5,1,5,1,5,1,5,1,5,1,5,3,5,273,8,5,1,5,1,5,1,
@@ -125,29 +125,29 @@ def serializedATN():
         7,0,0,171,173,5,32,0,0,172,170,1,0,0,0,173,176,1,0,0,0,174,172,1,
         0,0,0,174,175,1,0,0,0,175,177,1,0,0,0,176,174,1,0,0,0,177,245,5,
         2,0,0,178,180,5,23,0,0,179,178,1,0,0,0,179,180,1,0,0,0,180,181,1,
-        0,0,0,181,182,5,35,0,0,182,183,5,1,0,0,183,184,3,40,20,0,184,185,
-        5,2,0,0,185,245,1,0,0,0,186,188,5,23,0,0,187,186,1,0,0,0,187,188,
-        1,0,0,0,188,189,1,0,0,0,189,190,5,35,0,0,190,191,5,1,0,0,191,192,
-        5,37,0,0,192,245,5,2,0,0,193,195,5,23,0,0,194,193,1,0,0,0,194,195,
+        0,0,0,181,182,5,35,0,0,182,183,5,1,0,0,183,188,3,52,26,0,184,185,
+        5,7,0,0,185,187,3,52,26,0,186,184,1,0,0,0,187,190,1,0,0,0,188,186,
+        1,0,0,0,188,189,1,0,0,0,189,191,1,0,0,0,190,188,1,0,0,0,191,192,
+        5,2,0,0,192,245,1,0,0,0,193,195,5,23,0,0,194,193,1,0,0,0,194,195,
         1,0,0,0,195,196,1,0,0,0,196,197,5,35,0,0,197,198,5,1,0,0,198,199,
-        5,39,0,0,199,245,5,2,0,0,200,202,5,23,0,0,201,200,1,0,0,0,201,202,
-        1,0,0,0,202,203,1,0,0,0,203,204,5,35,0,0,204,205,5,1,0,0,205,206,
-        5,40,0,0,206,245,5,2,0,0,207,209,5,23,0,0,208,207,1,0,0,0,208,209,
-        1,0,0,0,209,210,1,0,0,0,210,211,5,35,0,0,211,212,5,1,0,0,212,217,
-        5,36,0,0,213,214,5,7,0,0,214,216,5,36,0,0,215,213,1,0,0,0,216,219,
-        1,0,0,0,217,215,1,0,0,0,217,218,1,0,0,0,218,220,1,0,0,0,219,217,
-        1,0,0,0,220,245,5,2,0,0,221,223,5,23,0,0,222,221,1,0,0,0,222,223,
-        1,0,0,0,223,224,1,0,0,0,224,225,5,35,0,0,225,226,5,1,0,0,226,231,
-        3,52,26,0,227,228,5,7,0,0,228,230,3,52,26,0,229,227,1,0,0,0,230,
-        233,1,0,0,0,231,229,1,0,0,0,231,232,1,0,0,0,232,234,1,0,0,0,233,
-        231,1,0,0,0,234,235,5,2,0,0,235,245,1,0,0,0,236,238,5,23,0,0,237,
-        236,1,0,0,0,237,238,1,0,0,0,238,239,1,0,0,0,239,242,5,35,0,0,240,
-        241,5,1,0,0,241,243,5,2,0,0,242,240,1,0,0,0,242,243,1,0,0,0,243,
-        245,1,0,0,0,244,165,1,0,0,0,244,179,1,0,0,0,244,187,1,0,0,0,244,
-        194,1,0,0,0,244,201,1,0,0,0,244,208,1,0,0,0,244,222,1,0,0,0,244,
-        237,1,0,0,0,245,9,1,0,0,0,246,247,5,26,0,0,247,248,5,1,0,0,248,249,
-        3,0,0,0,249,250,5,2,0,0,250,251,5,5,0,0,251,252,3,0,0,0,252,264,
-        5,6,0,0,253,254,5,27,0,0,254,255,5,26,0,0,255,256,5,1,0,0,256,257,
+        3,40,20,0,199,200,5,2,0,0,200,245,1,0,0,0,201,203,5,23,0,0,202,201,
+        1,0,0,0,202,203,1,0,0,0,203,204,1,0,0,0,204,205,5,35,0,0,205,206,
+        5,1,0,0,206,207,5,37,0,0,207,245,5,2,0,0,208,210,5,23,0,0,209,208,
+        1,0,0,0,209,210,1,0,0,0,210,211,1,0,0,0,211,212,5,35,0,0,212,213,
+        5,1,0,0,213,214,5,39,0,0,214,245,5,2,0,0,215,217,5,23,0,0,216,215,
+        1,0,0,0,216,217,1,0,0,0,217,218,1,0,0,0,218,219,5,35,0,0,219,220,
+        5,1,0,0,220,221,5,40,0,0,221,245,5,2,0,0,222,224,5,23,0,0,223,222,
+        1,0,0,0,223,224,1,0,0,0,224,225,1,0,0,0,225,226,5,35,0,0,226,227,
+        5,1,0,0,227,232,5,36,0,0,228,229,5,7,0,0,229,231,5,36,0,0,230,228,
+        1,0,0,0,231,234,1,0,0,0,232,230,1,0,0,0,232,233,1,0,0,0,233,235,
+        1,0,0,0,234,232,1,0,0,0,235,245,5,2,0,0,236,238,5,23,0,0,237,236,
+        1,0,0,0,237,238,1,0,0,0,238,239,1,0,0,0,239,242,5,35,0,0,240,241,
+        5,1,0,0,241,243,5,2,0,0,242,240,1,0,0,0,242,243,1,0,0,0,243,245,
+        1,0,0,0,244,165,1,0,0,0,244,179,1,0,0,0,244,194,1,0,0,0,244,202,
+        1,0,0,0,244,209,1,0,0,0,244,216,1,0,0,0,244,223,1,0,0,0,244,237,
+        1,0,0,0,245,9,1,0,0,0,246,247,5,26,0,0,247,248,5,1,0,0,248,249,3,
+        0,0,0,249,250,5,2,0,0,250,251,5,5,0,0,251,252,3,0,0,0,252,264,5,
+        6,0,0,253,254,5,27,0,0,254,255,5,26,0,0,255,256,5,1,0,0,256,257,
         3,0,0,0,257,258,5,2,0,0,258,259,5,5,0,0,259,260,3,0,0,0,260,261,
         5,6,0,0,261,263,1,0,0,0,262,253,1,0,0,0,263,266,1,0,0,0,264,262,
         1,0,0,0,264,265,1,0,0,0,265,272,1,0,0,0,266,264,1,0,0,0,267,268,
@@ -325,7 +325,7 @@ def serializedATN():
         852,5,34,0,0,852,857,5,34,0,0,853,854,5,20,0,0,854,855,5,36,0,0,
         855,857,5,34,0,0,856,849,1,0,0,0,856,850,1,0,0,0,856,853,1,0,0,0,
         857,53,1,0,0,0,96,70,77,85,87,95,99,109,134,142,148,162,165,174,
-        179,187,194,201,208,217,222,231,237,242,244,264,272,282,302,328,
+        179,188,194,202,209,216,223,232,237,242,244,264,272,282,302,328,
         346,352,366,375,377,383,395,404,410,422,434,438,450,456,470,479,
         481,487,501,510,512,518,522,534,540,554,563,565,571,585,594,596,
         602,606,632,642,656,666,676,678,691,703,711,713,721,732,736,742,
@@ -1150,6 +1150,13 @@ class RulesParser ( Parser ):
         def NOT(self):
             return self.getToken(RulesParser.NOT, 0)
 
+        def ref(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(RulesParser.RefContext)
+            else:
+                return self.getTypedRuleContext(RulesParser.RefContext,i)
+
+
         def value(self):
             return self.getTypedRuleContext(RulesParser.ValueContext,0)
 
@@ -1168,13 +1175,6 @@ class RulesParser ( Parser ):
                 return self.getTokens(RulesParser.PLACE)
             else:
                 return self.getToken(RulesParser.PLACE, i)
-
-        def ref(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(RulesParser.RefContext)
-            else:
-                return self.getTypedRuleContext(RulesParser.RefContext,i)
-
 
         def getRuleIndex(self):
             return RulesParser.RULE_invoke
@@ -1244,33 +1244,25 @@ class RulesParser ( Parser ):
                 self.state = 182
                 self.match(RulesParser.T__0)
                 self.state = 183
-                self.value()
-                self.state = 184
+                self.ref()
+                self.state = 188
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while _la==7:
+                    self.state = 184
+                    self.match(RulesParser.T__6)
+                    self.state = 185
+                    self.ref()
+                    self.state = 190
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                self.state = 191
                 self.match(RulesParser.T__1)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 187
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==23:
-                    self.state = 186
-                    self.match(RulesParser.NOT)
-
-
-                self.state = 189
-                self.match(RulesParser.FUNC)
-                self.state = 190
-                self.match(RulesParser.T__0)
-                self.state = 191
-                self.match(RulesParser.LIT)
-                self.state = 192
-                self.match(RulesParser.T__1)
-                pass
-
-            elif la_ == 4:
-                self.enterOuterAlt(localctx, 4)
                 self.state = 194
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -1284,92 +1276,100 @@ class RulesParser ( Parser ):
                 self.state = 197
                 self.match(RulesParser.T__0)
                 self.state = 198
-                self.match(RulesParser.INT)
+                self.value()
                 self.state = 199
+                self.match(RulesParser.T__1)
+                pass
+
+            elif la_ == 4:
+                self.enterOuterAlt(localctx, 4)
+                self.state = 202
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if _la==23:
+                    self.state = 201
+                    self.match(RulesParser.NOT)
+
+
+                self.state = 204
+                self.match(RulesParser.FUNC)
+                self.state = 205
+                self.match(RulesParser.T__0)
+                self.state = 206
+                self.match(RulesParser.LIT)
+                self.state = 207
                 self.match(RulesParser.T__1)
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 201
+                self.state = 209
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==23:
-                    self.state = 200
+                    self.state = 208
                     self.match(RulesParser.NOT)
 
 
-                self.state = 203
+                self.state = 211
                 self.match(RulesParser.FUNC)
-                self.state = 204
+                self.state = 212
                 self.match(RulesParser.T__0)
-                self.state = 205
-                self.match(RulesParser.FLOAT)
-                self.state = 206
+                self.state = 213
+                self.match(RulesParser.INT)
+                self.state = 214
                 self.match(RulesParser.T__1)
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 208
+                self.state = 216
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==23:
-                    self.state = 207
+                    self.state = 215
                     self.match(RulesParser.NOT)
 
 
-                self.state = 210
+                self.state = 218
                 self.match(RulesParser.FUNC)
-                self.state = 211
+                self.state = 219
                 self.match(RulesParser.T__0)
-                self.state = 212
-                self.match(RulesParser.PLACE)
-                self.state = 217
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                while _la==7:
-                    self.state = 213
-                    self.match(RulesParser.T__6)
-                    self.state = 214
-                    self.match(RulesParser.PLACE)
-                    self.state = 219
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
-
                 self.state = 220
+                self.match(RulesParser.FLOAT)
+                self.state = 221
                 self.match(RulesParser.T__1)
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 222
+                self.state = 223
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==23:
-                    self.state = 221
+                    self.state = 222
                     self.match(RulesParser.NOT)
 
 
-                self.state = 224
-                self.match(RulesParser.FUNC)
                 self.state = 225
-                self.match(RulesParser.T__0)
+                self.match(RulesParser.FUNC)
                 self.state = 226
-                self.ref()
-                self.state = 231
+                self.match(RulesParser.T__0)
+                self.state = 227
+                self.match(RulesParser.PLACE)
+                self.state = 232
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==7:
-                    self.state = 227
-                    self.match(RulesParser.T__6)
                     self.state = 228
-                    self.ref()
-                    self.state = 233
+                    self.match(RulesParser.T__6)
+                    self.state = 229
+                    self.match(RulesParser.PLACE)
+                    self.state = 234
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                self.state = 234
+                self.state = 235
                 self.match(RulesParser.T__1)
                 pass
 

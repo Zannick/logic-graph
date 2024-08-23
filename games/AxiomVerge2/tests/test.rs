@@ -2,6 +2,8 @@
 
 use analyzer::access::move_to;
 use analyzer::context::{ContextWrapper, Ctx, History, Wrapper};
+use analyzer::matchertrie::IntegerObservation;
+use analyzer::observer::Observer;
 use analyzer::steiner::{build_simple_graph, EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use analyzer::world::{Accessible, Action, Exit, Location, Warp, World as _};
 use analyzer::*;
@@ -9,6 +11,7 @@ use lazy_static::lazy_static;
 use libaxiom_verge2::context::{enums, Context};
 use libaxiom_verge2::graph::*;
 use libaxiom_verge2::items::Item;
+use libaxiom_verge2::observe::*;
 use rmp_serde::{Deserializer, Serializer};
 use serde::{Deserialize, Serialize};
 use serde_json::{Result, Value};
@@ -161,18 +164,21 @@ fn test_move_to() {
         SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
     );
     let exit1 = *WORLD.get_exit(ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1);
-    let exit2 = *WORLD.get_exit(ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_2);
     assert!(exit1.can_access(&ctx, &**WORLD));
-    assert!(!exit2.can_access(&ctx, &**WORLD));
     let e1time = exit1.time(&ctx, &**WORLD);
     assert!(e1time > ltt);
+    assert!(
+        e1time > exit1.base_time(),
+        "Expected a penalty to be applied"
+    );
     let wrapper = ContextWrapper::new(ctx.clone());
     let result = move_to(
         &**WORLD,
         wrapper,
         SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
         &*SPATHS,
-    ).expect("didn't reach dest");
+    )
+    .expect("didn't reach dest");
     assert!(
         result.elapsed() == ltt,
         "Expected move_to to reach dest in {} but got there in {}",
@@ -180,10 +186,17 @@ fn test_move_to() {
         result.elapsed()
     );
 
-    ctx.set_position(SpotId::Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge, &**WORLD);
-    let ltt2 = ctx.local_travel_time(movement_state, SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center);
+    ctx.set_position(
+        SpotId::Amagi_Breach__East_Ruins__High_Rock_Lower_Ledge,
+        &**WORLD,
+    );
+    let ltt2 = ctx.local_travel_time(
+        movement_state,
+        SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center,
+    );
     ctx.set_position(SpotId::Amagi_Breach__East_Ruins__Arch_West, &**WORLD);
-    let exit3 = *WORLD.get_exit(ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1);
+    let exit3 =
+        *WORLD.get_exit(ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__High_Rock_Lower_Ledge_1);
     assert!(exit3.can_access(&ctx, &**WORLD));
     let e3time = exit3.time(&ctx, &**WORLD);
 
@@ -193,7 +206,8 @@ fn test_move_to() {
         wrapper,
         SpotId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Corner_Access,
         &*SPATHS,
-    ).expect("didn't reach dest");
+    )
+    .expect("didn't reach dest");
     assert!(
         result.elapsed() == ltt + ltt2 + e3time,
         "Expected move_to to reach dest in {} but got there in {} ({:?})",
@@ -301,4 +315,60 @@ fn asserde_true() {
     assert!(ctx3
         .get()
         .visited(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown));
+}
+
+#[test]
+fn test_observations() {
+    let mut ctx = Context::default();
+    ctx.energy = 300;
+    ctx.flasks = 1;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
+    ctx.add_item(Item::Fast_Travel);
+    ctx.add_item(Item::Flask);
+    ctx.add_item(Item::Remote_Drone);
+    ctx.add_item(Item::Anuman);
+    ctx.add_item(Item::Nanite_Mist);
+    ctx.set_position(SpotId::Glacier__Revival__Save_Point, &**WORLD); // add map tile
+    ctx.save = SpotId::Glacier__Revival__Save_Point;
+    ctx.set_position(SpotId::Amagi__East_Lake__Arch_West, &**WORLD);
+    ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
+
+    let mut full_obs = FullObservation::default();
+    // Suppose we've already observed some things on this route.
+    full_obs.observe_flask(IntegerObservation::Ge(1));
+    full_obs.observe_mode();
+    full_obs.apply_observations();
+    let action = *WORLD.get_action(ActionId::Global__Become_Drone);
+    assert!(action.observe_access(&ctx, &**WORLD, &mut full_obs));
+
+    action.observe_effects(&mut ctx, &**WORLD, &mut full_obs);
+    full_obs.apply_observations();
+    let vec = full_obs.to_vec(&ctx);
+    // Because we used the updated ctx, we should have observed mode is drone
+    assert!(vec.contains(&OneObservation::Mode(enums::Mode::Drone)));
+
+    ctx.set_position(SpotId::Menu__Kiengir_Map__Glacier_Revival, &**WORLD);
+    let ft = History::E(
+        ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1
+    );
+    assert!(ctx.observe_replay(&**WORLD, ft, &mut full_obs));
+    full_obs.apply_observations();
+    let vec = full_obs.to_vec(&ctx);
+    let strvec = format!("{:?}", vec);
+    assert!(strvec.contains("MAP__GLACIER__REVIVAL__SAVE"), "map should be observed in: {}", strvec);
+
+    ctx.set_position(SpotId::Glacier__Vertical_Room__Peak, &**WORLD);
+    let cskip = History::V(
+        Item::Flask,
+        LocationId::Glacier__Vertical_Room__Peak__Flask_Fast_Travel,
+        SpotId::Menu__Kiengir_Map__Glacier_Vertical_Room_Flask,
+    );
+    assert!(ctx.observe_replay(&**WORLD, cskip, &mut full_obs));
+    full_obs.apply_observations();
+    let vec = full_obs.to_vec(&ctx);
+    let strvec = format!("{:?}", vec);
+    // This is applied to ctx without any changes due to observe_replay.
+    assert!(vec.contains(&OneObservation::FlaskGe(0, true)));
+    assert!(strvec.contains("FAST_TRAVEL"), "fast travel should be observed in: {}", strvec);
 }

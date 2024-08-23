@@ -27228,9 +27228,9 @@ pub fn observe_access_not_within_menu_and_flasks_gt_0(
         RegionId::Menu => false,
         _ => true,
     }) && ({
-        let n: i32 = 0.into();
+        let n = 0 as i32;
         full_obs.observe_flasks(IntegerObservation::Le(n as i8));
-        i32::from(ctx.flasks()) > n
+        (ctx.flasks() as i32) > n
     }))
 }
 pub fn observe_access_not_within_menu_and_invoke_attract_and_portal_ne_invoke_default_and_portal_ne_position(
@@ -28630,381 +28630,639 @@ pub fn observe_access_within_menu_gt_upgrade_menu(
     })
 }
 pub fn observe_action_amagi__gated_community__ctx__dur_esla_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_dur_esla = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_amagi__gated_community__ctx__dur_esla();
+    ctx.set_amagi__gated_community__ctx__dur_esla(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_amagi__main_area__ctx__combo_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_amagi__main_area__ctx__combo();
+    ctx.set_amagi__main_area__ctx__combo(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_amagi__secret_chamber__ctx__east_dur_esla_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_east_dur_esla = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_amagi__secret_chamber__ctx__east_dur_esla();
+    ctx.set_amagi__secret_chamber__ctx__east_dur_esla(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_amagi__secret_chamber__ctx__west_dur_esla_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_west_dur_esla = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_amagi__secret_chamber__ctx__west_dur_esla();
+    ctx.set_amagi__secret_chamber__ctx__west_dur_esla(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__boss_gate__ctx__door_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__boss_gate__ctx__door();
+    ctx.set_annuna__boss_gate__ctx__door(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__east_bridge__ctx__combo_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__east_bridge__ctx__combo();
+    ctx.set_annuna__east_bridge__ctx__combo(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__invisible_enemies__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__invisible_enemies__ctx__door_opened();
+    ctx.set_annuna__invisible_enemies__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__invisible_enemies__ctx__nw_utu_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_nw_utu = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__invisible_enemies__ctx__nw_utu();
+    ctx.set_annuna__invisible_enemies__ctx__nw_utu(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__udug_gate__ctx__door_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__udug_gate__ctx__door();
+    ctx.set_annuna__udug_gate__ctx__door(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__vertical_room__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__vertical_room__ctx__door_opened();
+    ctx.set_annuna__vertical_room__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__west_bridge__ctx__doors_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_doors_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__west_bridge__ctx__doors_opened();
+    ctx.set_annuna__west_bridge__ctx__doors_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_annuna__west_climb__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_annuna__west_climb__ctx__door_opened();
+    ctx.set_annuna__west_climb__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__base_camp__ctx__left_platform_moved_set_false(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__base_camp__ctx__left_platform_moved();
+    ctx.set_ebih__base_camp__ctx__left_platform_moved(false);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__base_camp__ctx__left_platform_moved_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__base_camp__ctx__left_platform_moved();
+    ctx.set_ebih__base_camp__ctx__left_platform_moved(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__drone_room__ctx__platform_moved_set_false(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__drone_room__ctx__platform_moved();
+    ctx.set_ebih__drone_room__ctx__platform_moved(false);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__drone_room__ctx__platform_moved_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__drone_room__ctx__platform_moved();
+    ctx.set_ebih__drone_room__ctx__platform_moved(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__ctx__platform1_moved_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform1_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform1_moved();
+    ctx.set_ebih__ebih_east__ctx__platform1_moved(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__ctx__platform2_moved_set_false(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = false
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform2_moved();
+    ctx.set_ebih__ebih_east__ctx__platform2_moved(false);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_east__ctx__platform2_moved_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform2_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__ebih_east__ctx__platform2_moved();
+    ctx.set_ebih__ebih_east__ctx__platform2_moved(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__ebih_west__ctx__door_open_set_true_if___indra_within_ebih_gt_ebih_west_gt_above_door____indra_set_ebih_gt_ebih_west_gt_below_door_(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true; IF (^indra WITHIN `Ebih > Ebih West > Above Door`) { ^indra = `Ebih > Ebih West > Below Door`; }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_ebih__ebih_west__ctx__door_open();
+    ctx.set_ebih__ebih_west__ctx__door_open(true);
     if {
         full_obs.observe_indra();
         ctx.indra()
     } == SpotId::Ebih__Ebih_West__Above_Door
-    {};
+    {
+        full_obs.clear_indra();
+        ctx.set_indra(SpotId::Ebih__Ebih_West__Below_Door);
+    };
     full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__grid_25_10_12__ctx__door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__grid_25_10_12__ctx__door_open();
+    ctx.set_ebih__grid_25_10_12__ctx__door_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__truck_gate__ctx__door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__truck_gate__ctx__door_open();
+    ctx.set_ebih__truck_gate__ctx__door_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__vertical_interchange__ctx__door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__vertical_interchange__ctx__door_open();
+    ctx.set_ebih__vertical_interchange__ctx__door_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__waterfall__ctx__east_door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_east_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__east_door_open();
+    ctx.set_ebih__waterfall__ctx__east_door_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_ebih__waterfall__ctx__west_door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_west_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_ebih__waterfall__ctx__west_door_open();
+    ctx.set_ebih__waterfall__ctx__west_door_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_emergence__storage__ctx__door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_emergence__storage__ctx__door_open();
+    ctx.set_emergence__storage__ctx__door_open(true);
+    full_obs.strict = old_strict;
 }
-pub fn observe_action_flasks_incr_1(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_flasks_incr_1(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // ^flasks += 1
 }
-pub fn observe_action_flasks_incr_2(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_flasks_incr_2(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // ^flasks += 2
 }
-pub fn observe_action_flasks_incr_4(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_flasks_incr_4(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // ^flasks += 4
 }
 pub fn observe_action_giguna__carnelian__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__door_opened();
+    ctx.set_giguna__carnelian__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__carnelian__ctx__lower_susar_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__lower_susar();
+    ctx.set_giguna__carnelian__ctx__lower_susar(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__carnelian__ctx__upper_susar_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__carnelian__ctx__upper_susar();
+    ctx.set_giguna__carnelian__ctx__upper_susar(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__ctx__platform_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__clouds__ctx__platform();
+    ctx.set_giguna__clouds__ctx__platform(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__ctx__platform_set_true_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_stop__portal_set_giguna_gt_clouds_gt_platform_stop(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true; if (^indra WITHIN ^position) { ^indra = `Giguna > Clouds > Platform Stop`; }; ^portal = `Giguna > Clouds > Platform Stop`;
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_giguna__clouds__ctx__platform();
+    ctx.set_giguna__clouds__ctx__platform(true);
     if {
         full_obs.observe_indra();
         ctx.indra()
     } == {
         full_obs.observe_position();
         ctx.position()
-    } {};
+    } {
+        full_obs.clear_indra();
+        ctx.set_indra(SpotId::Giguna__Clouds__Platform_Stop);
+    }
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__clouds__ctx__platform_set_true_portal_set_giguna_gt_clouds_gt_platform_stop_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform = true; ^portal = `Giguna > Clouds > Platform Stop`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_giguna__clouds__ctx__platform();
+    ctx.set_giguna__clouds__ctx__platform(true);
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Stop);
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__ctx__combo_entered_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_combo_entered = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__combo_entered();
+    ctx.set_giguna__east_caverns__ctx__combo_entered(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__door_opened();
+    ctx.set_giguna__east_caverns__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__ctx__lower_susar_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__lower_susar();
+    ctx.set_giguna__east_caverns__ctx__lower_susar(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__ctx__mid_susar_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_mid_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__mid_susar();
+    ctx.set_giguna__east_caverns__ctx__mid_susar(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__east_caverns__ctx__upper_susar_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__east_caverns__ctx__upper_susar();
+    ctx.set_giguna__east_caverns__ctx__upper_susar(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__gateway__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__gateway__ctx__door_opened();
+    ctx.set_giguna__gateway__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_base__ctx__door_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_base__ctx__door_open();
+    ctx.set_giguna__giguna_base__ctx__door_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__giguna_northeast__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__giguna_northeast__ctx__door_opened();
+    ctx.set_giguna__giguna_northeast__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__labyrinth__ctx__door_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__labyrinth__ctx__door();
+    ctx.set_giguna__labyrinth__ctx__door(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__ruins_top__ctx__doors_open_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_doors_open = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__ruins_top__ctx__doors_open();
+    ctx.set_giguna__ruins_top__ctx__doors_open(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__ruins_west__ctx__kishib_handled_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_kishib_handled = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__ruins_west__ctx__kishib_handled();
+    ctx.set_giguna__ruins_west__ctx__kishib_handled(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna__west_caverns__ctx__east_susar_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_east_susar = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna__west_caverns__ctx__east_susar();
+    ctx.set_giguna__west_caverns__ctx__east_susar(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_giguna_breach__sw_save__ctx__door_opened_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door_opened = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_giguna_breach__sw_save__ctx__door_opened();
+    ctx.set_giguna_breach__sw_save__ctx__door_opened(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__ctx__hammonds_doors_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_hammonds_doors = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__ctx__hammonds_doors();
+    ctx.set_glacier__ctx__hammonds_doors(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__lonely_bull__ctx__door_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_door = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__lonely_bull__ctx__door();
+    ctx.set_glacier__lonely_bull__ctx__door(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__vertical_room__ctx__lower_gatestones_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_lower_gatestones = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__vertical_room__ctx__lower_gatestones();
+    ctx.set_glacier__vertical_room__ctx__lower_gatestones(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_glacier__vertical_room__ctx__upper_gatestone_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_upper_gatestone = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_glacier__vertical_room__ctx__upper_gatestone();
+    ctx.set_glacier__vertical_room__ctx__upper_gatestone(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29017,29 +29275,48 @@ pub fn observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_g
     } == {
         full_obs.observe_position();
         ctx.position()
-    } {};
+    } {
+        full_obs.clear_indra();
+        ctx.set_indra(SpotId::Giguna__Clouds__Platform_Early_Portal);
+    }
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_indra_set_invoke_default(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^indra = $default
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_indra();
+    ctx.set_indra(Default::default());
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $collect(Irikar_Royal_Storage_Wall); $collect(Flask); $visit(`Irikar > Hub > Royal Storage in Wall > Item`); $visit(`Irikar > Hub > Royal Storage By Wall > Shockwave Just The Wall`);
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    rules::observe_action_flasks_incr_1(ctx, world, full_obs);
+    ctx.observe_collect(Item::Irikar_Royal_Storage_Wall, world, full_obs);
+    ctx.observe_collect(Item::Flask, world, full_obs);
+    ctx.observe_visit(
+        LocationId::Irikar__Hub__Royal_Storage_in_Wall__Item,
+        full_obs,
+    );
+    ctx.observe_visit(
+        LocationId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Just_The_Wall,
+        full_obs,
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29050,7 +29327,7 @@ pub fn observe_action_invoke_deploy_drone(
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_center_corridor(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29066,7 +29343,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_cen
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tower_base_east(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29082,7 +29359,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__annuna_gt_east_bridge_gt_tow
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_point(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29093,7 +29370,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_base_camp_gt_save_po
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29104,7 +29381,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_drone_room_gt_tree(
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_entrance(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29120,7 +29397,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__ebih_gt_ebih_west_gt_alcove_
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29131,7 +29408,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kar
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29142,7 +29419,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29153,7 +29430,7 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middl
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_post_portal_save_update(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29164,7 +29441,7 @@ pub fn observe_action_invoke_post_portal_save_update(
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_refill_energy(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
@@ -29174,7 +29451,11 @@ pub fn observe_action_invoke_refill_energy(
     hobserve__refill_energy!(ctx, world, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_reload(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_invoke_reload(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // $reload
     let old_strict = full_obs.strict;
     full_obs.strict = true;
@@ -29182,7 +29463,7 @@ pub fn observe_action_invoke_reload(ctx: &Context, world: &World, full_obs: &mut
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_reset_old_area__newpos(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     newpos: SpotId,
     full_obs: &mut FullObservation,
@@ -29193,7 +29474,11 @@ pub fn observe_action_invoke_reset_old_area__newpos(
     hobserve__reset_old_area!(ctx, world, newpos, full_obs);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_invoke_save(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_invoke_save(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // $save
     let old_strict = full_obs.strict;
     full_obs.strict = true;
@@ -29201,7 +29486,7 @@ pub fn observe_action_invoke_save(ctx: &Context, world: &World, full_obs: &mut F
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_save_last(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     newpos: SpotId,
     full_obs: &mut FullObservation,
@@ -29213,7 +29498,7 @@ pub fn observe_action_invoke_save_last(
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_save_last_invoke_refill_energy(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     newpos: SpotId,
     full_obs: &mut FullObservation,
@@ -29226,128 +29511,255 @@ pub fn observe_action_invoke_save_last_invoke_refill_energy(
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_cavern_refill_station_gt_break_wall_invoke_add_item__amagi_dragon_eye_passage(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`); $add_item(Amagi_Dragon_Eye_Passage);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    ctx.observe_visit(
+        LocationId::Amagi__West_Lake__Cavern_Refill_Station__Break_Wall,
+        full_obs,
+    );
+    ctx.observe_add_item(Item::Amagi_Dragon_Eye_Passage, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Amagi > West Lake > Stronghold Ceiling Left > Knock Down Left Boulder`); $add_item(Amagi_Stronghold_Wall_1); $add_item(Amagi_Stronghold_Boulder_1);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    ctx.observe_visit(
+        LocationId::Amagi__West_Lake__Stronghold_Ceiling_Left__Knock_Down_Left_Boulder,
+        full_obs,
+    );
+    ctx.observe_add_item(Item::Amagi_Stronghold_Wall_1, full_obs);
+    ctx.observe_add_item(Item::Amagi_Stronghold_Boulder_1, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Amagi > West Lake > Stronghold Ceiling Right > Knock Down Right Boulder`); $add_item(Amagi_Stronghold_Wall_2); $add_item(Amagi_Stronghold_Boulder_2);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    ctx.observe_visit(
+        LocationId::Amagi__West_Lake__Stronghold_Ceiling_Right__Knock_Down_Right_Boulder,
+        full_obs,
+    );
+    ctx.observe_add_item(Item::Amagi_Stronghold_Wall_2, full_obs);
+    ctx.observe_add_item(Item::Amagi_Stronghold_Boulder_2, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Ebih > Waterfall > Alcove > Block Left`); $visit(`Ebih > Waterfall > Alcove > Block Right`); $add_item(Ebih_Waterfall_Block_Right); $add_item(Ebih_Waterfall_Block_Left);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    ctx.observe_visit(LocationId::Ebih__Waterfall__Alcove__Block_Left, full_obs);
+    ctx.observe_visit(LocationId::Ebih__Waterfall__Alcove__Block_Right, full_obs);
+    ctx.observe_add_item(Item::Ebih_Waterfall_Block_Right, full_obs);
+    ctx.observe_add_item(Item::Ebih_Waterfall_Block_Left, full_obs);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__giguna_gt_separator_gt_upper_brick_gt_break_bricks_invoke_add_item__giguna_separator_bricks_indra_set_invoke_default(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Giguna > Separator > Upper Brick > Break Bricks`); $add_item(Giguna_Separator_Bricks); ^indra = $default;
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    ctx.observe_visit(
+        LocationId::Giguna__Separator__Upper_Brick__Break_Bricks,
+        full_obs,
+    );
+    ctx.observe_add_item(Item::Giguna_Separator_Bricks, full_obs);
+    full_obs.clear_indra();
+    ctx.set_indra(Default::default());
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_visit__glacier_gt_fortress_gt_inner_center_gt_shockwave_block_invoke_visit__glacier_gt_fortress_gt_button_gt_hit_button_invoke_collect__big_flask_invoke_add_item__glacier_fortress_gate(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // $visit(`Glacier > Fortress > Inner Center > Shockwave Block`); $visit(`Glacier > Fortress > Button > Hit Button`); $collect(Big_Flask); $add_item(Glacier_Fortress_Gate);
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    rules::observe_action_flasks_incr_2(ctx, world, full_obs);
+    ctx.observe_visit(
+        LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block,
+        full_obs,
+    );
+    ctx.observe_visit(LocationId::Glacier__Fortress__Button__Hit_Button, full_obs);
+    ctx.observe_collect(Item::Big_Flask, world, full_obs);
+    ctx.observe_add_item(Item::Glacier_Fortress_Gate, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__basement_portal__ctx__platform_moved_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_platform_moved = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_irikar__basement_portal__ctx__platform_moved();
+    ctx.set_irikar__basement_portal__ctx__platform_moved(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__midwest__ctx__left_platform_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_left_platform = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_irikar__midwest__ctx__left_platform();
+    ctx.set_irikar__midwest__ctx__left_platform(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_irikar__midwest__ctx__right_platform_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_right_platform = true
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_irikar__midwest__ctx__right_platform();
+    ctx.set_irikar__midwest__ctx__right_platform(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_last_set_invoke_default(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^last = $default
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_last();
+    ctx.set_last(Default::default());
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_last_set_position(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^last = ^position
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_last();
+    ctx.set_last({
+        full_obs.observe_position();
+        ctx.position()
+    });
+    full_obs.strict = old_strict;
 }
-pub fn observe_action_mode_set_drone(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_mode_set_drone(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // ^mode = 'drone'
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    ctx.set_mode(enums::Mode::Drone);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_drone_indra_set_position(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'drone'; ^indra = ^position
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    ctx.set_mode(enums::Mode::Drone);
+    full_obs.clear_indra();
+    ctx.set_indra({
+        full_obs.observe_position();
+        ctx.position()
+    });
+    full_obs.strict = old_strict;
 }
-pub fn observe_action_mode_set_indra(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_mode_set_indra(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // ^mode = 'Indra'
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    ctx.set_mode(enums::Mode::Indra);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_mode_set_indra_last_set_indra(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^mode = 'Indra'; ^last = ^indra
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_mode();
+    ctx.set_mode(enums::Mode::Indra);
+    full_obs.clear_last();
+    ctx.set_last({
+        full_obs.observe_indra();
+        ctx.indra()
+    });
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_east(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Amagi > East Lake > Arch East`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Amagi__East_Lake__Arch_East);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Amagi > East Lake > Arch West`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Amagi__East_Lake__Arch_West);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
     hobserve__deploy_drone_and_move!(
         ctx,
         world,
@@ -29357,70 +29769,122 @@ pub fn observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invok
     full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Second Platform`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Glacier_Breach__Angry_Lions__Second_Platform);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_top_platform(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier Breach > Angry Lions > Top Platform`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Glacier_Breach__Angry_Lions__Top_Platform);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_corner(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Corner`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Glacier__Hammonds_End__Corner);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_hammond(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Hammond`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Glacier__Hammonds_End__Hammond);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = `Glacier > Hammond's End > Lower Pedestal West`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal(SpotId::Glacier__Hammonds_End__Lower_Pedestal_West);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_position(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^portal = ^position
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_portal();
+    ctx.set_portal({
+        full_obs.observe_position();
+        ctx.position()
+    });
+    full_obs.strict = old_strict;
 }
-pub fn observe_action_refills_incr_1(ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+pub fn observe_action_refills_incr_1(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
     // ^refills += 1
 }
 pub fn observe_action_save_set_emergence_gt_camp_exterior_gt_save_point(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Emergence > Camp Exterior > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_save();
+    ctx.set_save(SpotId::Emergence__Camp_Exterior__Save_Point);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_save_set_glacier_gt_revival_gt_save_point(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Glacier > Revival > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_save();
+    ctx.set_save(SpotId::Glacier__Revival__Save_Point);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_save_set_uhrum_gt_emergence_save_gt_save_point(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^save = `Uhrum > Emergence Save > Save Point`
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_save();
+    ctx.set_save(SpotId::Uhrum__Emergence_Save__Save_Point);
+    full_obs.strict = old_strict;
 }
 pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(
     ctx: &Context,

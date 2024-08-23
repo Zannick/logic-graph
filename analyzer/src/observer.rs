@@ -6,6 +6,10 @@ use std::fmt::Debug;
 use std::sync::Arc;
 
 /// An Observer tracks a set of observations.
+/// 
+/// Observations must be tracked in reverse. We handle this by providing `observe_` APIs that record
+/// that an observation is being made, and an `apply_observations` function that applies said observations
+/// in reverse order. This way observations can be still recorded in the order they occur.
 pub trait Observer: Debug {
     type Ctx: Ctx;
     type Matcher: MatcherDispatch<
@@ -20,33 +24,20 @@ pub trait Observer: Debug {
     /// Creates a new observation set from a winning state.
     fn from_victory_state(won: &Self::Ctx, world: &<Self::Ctx as Ctx>::World) -> Self;
 
-    /// Updates this observation set to mark that we know whether this location is visited.
-    fn observe_visit(
+    /// Records that we know whether this location is visited.
+    fn observe_visited(
         &mut self,
         loc_id: <<<Self::Ctx as Ctx>::World as World>::Location as Location>::LocId,
     );
 
-    /// Updates this observation set based on any checks that would be made by collect rules.
-    fn observe_collect(
+    /// Records that we know an item was added.
+    fn observe_item(
         &mut self,
-        ctx: &Self::Ctx,
-        item_id: <Self::Ctx as Ctx>::ItemId,
-        world: &<Self::Ctx as Ctx>::World,
+        item: <Self::Ctx as Ctx>::ItemId,
     );
 
-    /// Updates this observation set based on any checks that would be made by on_entry rules.
-    fn observe_on_entry(
-        &mut self,
-        cur: &Self::Ctx,
-        dest: <<<Self::Ctx as Ctx>::World as World>::Exit as Exit>::SpotId,
-        world: &<Self::Ctx as Ctx>::World,
-    );
-
-    /// Updates this observation's bounds based on the difference between two states.
-    ///
-    /// |from| is the state this observation currently refers to, and |to| is the state we want to refer to next.
-    /// (Usually we work backwards, so |to| is the state immediately prior to |from|.)
-    fn update(&mut self, from: &Self::Ctx, to: &Self::Ctx);
+    /// Applies the most recent set of observation updates (from `observe_` functions) in reverse order.
+    fn apply_observations(&mut self);
 
     /// Exports a list of individual property observations for consumption by the matcher trie.
     fn to_vec(&self, ctx: &Self::Ctx) -> Vec<<Self::Ctx as Observable>::PropertyObservation>;
@@ -74,7 +65,7 @@ pub fn record_observations<W, T, L, E, Wp>(
     // The history entries are the steps "in between" the states in full_history, so we should have
     // one more state than history steps.
     assert!(full_history.len() == solution.history.len() + 1);
-    let mut prev = full_history.last().unwrap();
+    let prev = full_history.last().unwrap();
     let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
     let mut pcount = 0;
@@ -107,16 +98,14 @@ pub fn record_observations<W, T, L, E, Wp>(
         .rev()
     {
         // Basic process of iterating backwards:
-        // 1. Update the existing observations for changes.
-        solve.update(prev, state);
-
-        // 2. Observe the history step requirements/effects itself.
+        // 1. Observe the history step requirements/effects itself.
         state.observe_replay(world, *step, &mut solve);
+
+        // 2. Apply the observations in reverse order.
+        solve.apply_observations();
 
         // 3. Insert the new observation list.
         solve_trie.insert(solve.to_vec(state), SolutionSuffix(solution.clone(), idx));
-
-        prev = state;
     }
 }
 
@@ -139,18 +128,18 @@ where
     // The history entries are the steps "in between" the states in full_history, so we should have
     // one more state than history steps.
     assert!(full_history.len() == history.len() + 1);
-    let mut prev = full_history.last().unwrap();
+    let prev = full_history.last().unwrap();
     let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
     let mut obs_list = Vec::new();
 
     for (step, state) in history.iter().zip(full_history.iter()).rev() {
         // Basic process of iterating backwards:
-        // 1. Update the existing observations for changes.
-        solve.update(prev, state);
-
-        // 2. Observe the history step requirements/effects itself.
+        // 1. Observe the history step requirements/effects itself.
         state.observe_replay(world, *step, &mut solve);
+
+        // 2. Apply the observations in reverse order.
+        solve.apply_observations();
 
         // 3. Insert the new observation list.
         match step {
@@ -160,8 +149,6 @@ where
             }
             _ => (),
         }
-
-        prev = state;
     }
     obs_list.reverse();
     obs_list
@@ -184,7 +171,7 @@ pub fn debug_observations<W, T, L, E, Wp>(
     // The history entries are the steps "in between" the states in full_history, so we should have
     // one more state than history steps.
     assert!(full_history.len() == solution.history.len() + 1);
-    let mut prev = full_history.last().unwrap();
+    let prev = full_history.last().unwrap();
     let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
 
     let mut pcount = 0;
@@ -217,15 +204,13 @@ pub fn debug_observations<W, T, L, E, Wp>(
         .rev()
     {
         // Basic process of iterating backwards:
-        // 1. Update the existing observations for changes.
-        solve.update(prev, state);
-
-        // 2. Observe the history step requirements/effects itself.
+        // 1. Observe the history step requirements/effects itself.
         state.observe_replay(world, *step, &mut solve);
+
+        // 2. Apply the observations in reverse order.
+        solve.apply_observations();
 
         // 3. Output what we have.
         println!("{}. {}\n{:?}\n", idx, step, solve.to_vec(state));
-
-        prev = state;
     }
 }

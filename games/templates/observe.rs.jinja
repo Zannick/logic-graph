@@ -76,6 +76,36 @@ impl OneObservation {
     }
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+enum ObservationType {
+    Visit(LocationId),
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles and ctx not in special.ignore_observations
+%% set c = ctx|camelize|camelize
+%% if ctx not in bfp.varmap and t in int_types
+    Observe{{ c }}(IntegerObservation<{{ t }}>),
+    Shift{{ c }}({{ t }}),
+%% else
+    Observe{{ c }},
+%% endif
+    Clear{{ c }},
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort
+%% set c = item|camelize
+%% if item in bfp.varmap
+    Observe{{ c }},
+%% else
+%% set t = ct|get_int_type_for_max
+    Observe{{ c }}(IntegerObservation<{{ t }}>),
+    Shift{{ c }}({{ t }}),
+%% endif
+    Clear{{ c }},
+%% endfor
+
+%% for c1, c2 in swap_pairs
+    Swap{{ c1|camelize|camelize }}And{{ c2|camelize|camelize }},
+%% endfor
+}
+
 
 #[derive(Debug, Default)]
 pub struct FullObservation {
@@ -97,6 +127,7 @@ pub struct FullObservation {
 %% for group in bfp.flag_groups
     cbits{{ loop.index }}: flags::ContextBits{{ loop.index }},
 %% endfor
+    stack: Vec<ObservationType>,
     pub strict: bool,
 }
 
@@ -117,79 +148,51 @@ impl Observer for FullObservation {
         full_obs
     }
 
-    fn observe_visit(&mut self, loc_id: LocationId) {
-        match loc_id {
-%% for canon_id, locs in gl.canon_places.items()
-%% set visit = 'VISITED_' + canon_id
-            LocationId::{{ locs|map(attribute='id')|join(' | LocationId::') }} => {
-                self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
-            }
-%% endfor
-        }
+    fn observe_visited(&mut self, loc_id: LocationId) {
+        self.stack.push(ObservationType::Visit(loc_id));
     }
 
-    fn observe_collect(&mut self, ctx: &Context, item: Item, world: &World) {
+    fn observe_item(&mut self, item: Item) {
         match item {
-%% for item, info in collect.items()
-            Item::{{ item }} => rules::observe_action_{{ info.action_id }}(ctx, world, self),
-%% endfor
-            _ => (),
-        }
-    }
-
-    fn observe_on_entry(&mut self, cur: &Context, dest: SpotId, world: &World) {
-%% for pltype in ['Region', 'Area']
-%% if context_position_watchers[pltype|lower]
-        let {{ pltype|lower }} = get_{{ pltype|lower }}(dest);
-        match {{ pltype|lower }} {
-%% for r in context_position_watchers[pltype|lower]|sort
-%% set place = id_lookup[r]
-%% if place.action_id
-            {{ pltype }}Id::{{ r }} => {
-                if get_{{ pltype|lower }}(cur.position) != {{ pltype|lower }} {
-                    rules::observe_action_{{ place.action_id }}(cur, world, dest, self);
-                }
-            }
-%% endif
-%% endfor
-            _ => (),
-        }
-%% endif
-%% endfor
-%% if context_position_watchers['spot']
-        if cur.position != dest {
-            match dest {
-%% for s in context_position_watchers['spot']|sort
-%% set spot = id_lookup[s]
-%# Reset rules would go here if we want them.
-%%- if spot.action_id
-                SpotId::{{ s }} => {
-                    rules::observe_action_{{ spot.action_id }}(cur, world, dest, self);
-                }
-%% endif
-%% endfor
-                _ => (),
-            }
-        }
-%% endif
-    }
-
-%# We compare all the integer observations since the bounds have to change.-
-%# Otherwise we have to understand all the action rules to reverse them.-
-    fn update(&mut self, from: &Context, to: &Context) {
-%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
-%% if t in int_types
-        if from.{{ ctx }} != to.{{ ctx }} {
-            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
-        }
-%% endif
-%% endfor
-%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% for item in gl.item_max_counts|sort
 %% set ctx = item|lower
-        if from.{{ ctx }} != to.{{ ctx }} {
-            self.{{ ctx }} = self.{{ ctx }}.shift(to.{{ ctx }} - from.{{ ctx }});
-        }
+            Item::{{ item }} => self.{% if item not in bfp.varmap %}observe_shift_{{ ctx }}(1){% else %}clear_{{ ctx }}(){% endif %},
 %% endfor
+            _ => (),
+        }
+    }
+
+    fn apply_observations(&mut self) {
+        while let Some(obs) = self.stack.pop() {
+            match obs {
+                ObservationType::Visit(loc_id) => self.apply_visit(loc_id),
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles and ctx not in special.ignore_observations
+%% set c = ctx|camelize|camelize
+%% if ctx not in bfp.varmap and t in int_types
+                ObservationType::Observe{{ c }}(iobs) => self.apply_observe_{{ ctx }}(iobs),
+                ObservationType::Shift{{ c }}(diff) => self.apply_shift_{{ ctx }}(diff),
+%% else
+                ObservationType::Observe{{ c }} => self.apply_observe_{{ ctx }}(),
+%% endif
+                ObservationType::Clear{{ c }} => self.apply_clear_{{ ctx }}(),
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort
+%% set c = item|camelize
+%% set ctx = item|lower
+%% if item in bfp.varmap
+                ObservationType::Observe{{ c }} => self.apply_observe_{{ ctx }}(),
+%% else
+                ObservationType::Observe{{ c }}(iobs) => self.apply_observe_{{ ctx }}(iobs),
+                ObservationType::Shift{{ c }}(iobs) => self.apply_shift_{{ ctx }}(iobs),
+%% endif
+                ObservationType::Clear{{ c }} => self.apply_clear_{{ ctx }}(),
+%% endfor
+
+%% for c1, c2 in swap_pairs
+                ObservationType::Swap{{ c1|camelize|camelize }}And{{ c2|camelize|camelize }} => self.apply_swap_{{ c1 }}__{{ c2 }}(),
+%% endfor
+            }
+        }
     }
 
     fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
@@ -251,33 +254,111 @@ impl FullObservation {
         fields
     }
 
+    pub fn observe_has_item(&mut self, item: Item) {
+        match item {
+%% for item, ct in gl.item_max_counts.items()|sort
+%% set ctx = item|lower
+%% if item in bfp.varmap
+            Item::{{ item }} => self.observe_{{ ctx }}(),
+%% else
+%% set t = ct|get_int_type_for_max
+            Item::{{ item }} => self.observe_{{ ctx }}(IntegerObservation::Ge(1)),
+%% endif
+%% endfor
+            _ => (),
+        }
+    }
+
 %% for ctx, t in context_types.items() if ctx not in unused_map_tiles
+%% set c = ctx|camelize|camelize
 %% if ctx in special.ignore_observations
     pub fn observe_{{ ctx }}(&self) {}
     pub fn clear_{{ ctx }}(&self) {}
-%% elif ctx in bfp.varmap
-    pub fn observe_{{ ctx }}(&mut self) {
-        self.cbits{{ bfp.varmap[ctx] }}.insert(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
-    }
-    pub fn clear_{{ ctx }}(&mut self) {
-        self.cbits{{ bfp.varmap[ctx] }}.remove(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
-    }
-%% elif t in int_types
+%% elif ctx not in bfp.varmap and t in int_types
     pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
-        if self.strict {
-            self.{{ ctx }} = IntegerObservation::Exact;
-        } else {
-            self.{{ ctx }} = self.{{ ctx }}.combine(obs);
-        }
+        self.stack.push(ObservationType::Observe{{ c }}(if self.strict { IntegerObservation::Exact } else { obs }));
     }
-    pub fn clear_{{ ctx }}(&mut self) {
-        self.{{ ctx }} = IntegerObservation::Unknown;
+    pub fn observe_shift_{{ ctx }}(&mut self, diff: {{ t }}) {
+        self.stack.push(ObservationType::Shift{{ c }}(diff));{# Callers record the correct diff #}
     }
 %% else
     pub fn observe_{{ ctx }}(&mut self) {
+        self.stack.push(ObservationType::Observe{{ c }});
+    }
+%% endif
+%% if ctx not in special.ignore_observations
+    pub fn clear_{{ ctx }}(&mut self) {
+        self.stack.push(ObservationType::Clear{{ c }});
+    }
+%% endif
+%% endfor
+%% for item, ct in gl.item_max_counts.items()|sort
+%% set c = item|camelize
+%% set ctx = item|lower
+%% if item in bfp.varmap
+    pub fn observe_{{ ctx }}(&mut self) {
+        self.stack.push(ObservationType::Observe{{ c }});
+    }
+%% else
+%% set t = ct|get_int_type_for_max
+    pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
+        self.stack.push(ObservationType::Observe{{ c }}(if self.strict { IntegerObservation::Exact } else { obs }));
+    }
+    pub fn observe_shift_{{ ctx }}(&mut self, diff: {{ t }}) {
+        self.stack.push(ObservationType::Shift{{ c }}(diff));{# Callers record the correct diff #}
+    }
+%% endif
+    pub fn clear_{{ ctx }}(&mut self) {
+        self.stack.push(ObservationType::Clear{{ c }});
+    }
+%% endfor
+
+%% for c1, c2 in swap_pairs
+    pub fn swap_{{ c1 }}__{{ c2 }}(&mut self) {
+        self.stack.push(ObservationType::Swap{{ c1|camelize|camelize }}And{{ c2|camelize|camelize }});
+    }
+%% endfor
+
+    fn apply_visit(&mut self, loc_id: LocationId) {
+        match loc_id {
+%% for loc in gl.locations()
+%% set visit = 'VISITED_' + loc.canon_id
+            LocationId::{{ loc.id }} => {
+                self.cbits{{ bfp.varmap[visit] }}.insert(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
+%% for tile in loc.tiles
+%% if tile in used_map_tiles
+                self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% endif
+%% endfor
+            }
+%% endfor
+        }
+    }
+
+%% for ctx, t in context_types.items() if ctx not in unused_map_tiles and ctx not in special.ignore_observations
+%% set c = ctx|camelize|camelize
+%% if ctx in bfp.varmap
+    fn apply_observe_{{ ctx }}(&mut self) {
+        self.cbits{{ bfp.varmap[ctx] }}.insert(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
+    }
+    fn apply_clear_{{ ctx }}(&mut self) {
+        self.cbits{{ bfp.varmap[ctx] }}.remove(flags::ContextBits{{ bfp.varmap[ctx] }}::{{ ctx|upper }});
+    }
+%% elif t in int_types
+    fn apply_observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
+        self.{{ ctx }} = self.{{ ctx }}.combine(obs);
+    }
+    fn apply_shift_{{ ctx }}(&mut self, diff: {{ t }}) {
+        self.{{ ctx }} = self.{{ ctx }}.shift(-diff);{# We reverse the difference only here #}
+    }
+    fn apply_clear_{{ ctx }}(&mut self) {
+        self.{{ ctx }} = IntegerObservation::Unknown;
+    }
+%% else
+    fn apply_observe_{{ ctx }}(&mut self) {
         self.{{ ctx }} = true;
     }
-    pub fn clear_{{ ctx }}(&mut self) {
+    fn apply_clear_{{ ctx }}(&mut self) {
         self.{{ ctx }} = false;
     }
 %% endif
@@ -285,28 +366,28 @@ impl FullObservation {
 %% for item, ct in gl.item_max_counts.items()|sort
 %% set ctx = item|lower
 %% if item in bfp.varmap
-    pub fn observe_{{ ctx }}(&mut self) {
+    fn apply_observe_{{ ctx }}(&mut self) {
         self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
     }
-    pub fn clear_{{ ctx }}(&mut self) {
+    fn apply_clear_{{ ctx }}(&mut self) {
         self.cbits{{ bfp.varmap[item] }}.remove(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
     }
 %% else
-    pub fn observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ ct|get_int_type_for_max }}>) {
-        if self.strict {
-            self.{{ ctx }} = IntegerObservation::Exact;
-        } else {
-            self.{{ ctx }} = self.{{ ctx }}.combine(obs);
-        }
+%% set t = ct|get_int_type_for_max
+    fn apply_observe_{{ ctx }}(&mut self, obs: IntegerObservation<{{ t }}>) {
+        self.{{ ctx }} = self.{{ ctx }}.combine(obs);
     }
-    pub fn clear_{{ ctx }}(&mut self, obs: IntegerObservation<{{ ct|get_int_type_for_max }}>) {
+    fn apply_shift_{{ ctx }}(&mut self, diff: {{ t }}) {
+        self.{{ ctx }} = self.{{ ctx }}.shift(-diff);{# We reverse the difference only here #}
+    }
+    fn apply_clear_{{ ctx }}(&mut self) {
         self.{{ ctx }} = IntegerObservation::Unknown;
     }
 %% endif
 %% endfor
 
 %% for c1, c2 in swap_pairs
-    pub fn swap_{{ c1 }}__{{ c2 }}(&mut self) {
+    fn apply_swap_{{ c1 }}__{{ c2 }}(&mut self) {
 %% if c1 in bfp.varmap or c2 in bfp.varmap
         let c1 = self.{% if c1 in bfp.varmap %}cbits{{ bfp.varmap[c1] }}.contains(flags::ContextBits{{ bfp.varmap[c1] }}::{{ c1|upper }}){% else %}{{ c1 }}{% endif %};
         let c2 = self.{% if c2 in bfp.varmap %}cbits{{ bfp.varmap[c2] }}.contains(flags::ContextBits{{ bfp.varmap[c2] }}::{{ c2|upper }}){% else %}{{ c2 }}{% endif %};

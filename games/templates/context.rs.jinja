@@ -168,45 +168,68 @@ impl context::Ctx for Context {
             _ => 0,
         }
     }
-    fn collect(&mut self, item: Item, world: &World) {
+
+%% macro _collect(observe=False)
+fn {% if observe %}observe_{% endif %}collect(&mut self, item: Item, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
         match item {
 %% for item, ct in gl.item_max_counts.items()|sort
+%% set ctx = item|lower
             Item::{{ item }} => {
 %% if item in bfp.varmap
                 self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+%% if observe
+                full_obs.clear_{{ ctx }}();
+%% endif
 %% else
-                self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+                self.{{ ctx }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+%% if observe
+                full_obs.observe_shift_{{ ctx }}(1);
+%% endif
 %% endif
 %% if item in collect
-                rules::action_{{ collect[item].action_id }}(self, world);
+                rules::{% if observe %}observe_{% endif %}action_{{ collect[item].action_id }}(self, world{% if observe %}, full_obs{% endif %});
 %% endif
             }
 %% endfor
 %% for item, info in collect.items()
 %% if item not in gl.item_max_counts
-            Item::{{ item }} => rules::action_{{ info.action_id }}(self, world),
+            Item::{{ item }} => rules::{% if observe %}observe_{% endif %}action_{{ collect[item].action_id }}(self, world{% if observe %}, full_obs{% endif %}),
 %% endif
 %% endfor
             _ => (),
         }
     }
-%# Uncollect just straight-up doesn't work in this model
+%% endmacro
+    {{ _collect() }}
+    {{ _collect(True) }}
 
-    // test helper for items
-    fn add_item(&mut self, item: Item) {
+%#- Uncollect just straight-up doesn't work in this model
+%% macro _add_item(observe=False)
+fn {% if observe %}observe_{% endif %}add_item(&mut self, item: Item{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
         match item {
 %% for item, ct in gl.item_max_counts.items()|sort
+%% set ctx = item|lower
             Item::{{ item }} => {
 %% if item in bfp.varmap
                 self.cbits{{ bfp.varmap[item] }}.insert(flags::ContextBits{{ bfp.varmap[item] }}::{{ item|upper }});
+%% if observe
+                full_obs.clear_{{ ctx }}();
+%% endif
 %% else
-                self.{{ item|lower }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+                self.{{ ctx }}{% if ct > 1 %} += 1{% else %} = true{% endif %};
+%% if observe
+                full_obs.observe_shift_{{ ctx }}(1);
+%% endif
 %% endif
             }
 %% endfor
             _ => (),
         }
     }
+%% endmacro
+    // test helper for items
+    {{ _add_item() }}
+    {{ _add_item(True) }}
 
     // test helper for context vars
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
@@ -282,8 +305,9 @@ impl context::Ctx for Context {
         }
     }
 
-    fn take_exit(&mut self, exit: &Exit, world: &World) {
-        self.set_position(exit.dest(), world);
+%% macro _take_exit(observe=False)
+fn {% if observe %}observe_{% endif %}take_exit(&mut self, exit: &Exit, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
+        self.{% if observe %}observe_{% endif %}set_position(exit.dest(), world{% if observe %}, full_obs{% endif %});
         match exit.id() {
 %% for ex in gl.exits()|sort(attribute='id')
 %% if ex.tiles
@@ -291,6 +315,9 @@ impl context::Ctx for Context {
 %% for tile in ex.tiles
 %% if tile in used_map_tiles
                 self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% if observe
+                full_obs.clear_{{ tile }}();
+%% endif
 %% endif
 %% endfor
             }
@@ -299,6 +326,9 @@ impl context::Ctx for Context {
             _ => (),
         }
     }
+%% endmacro
+    {{ _take_exit() }}
+    {{ _take_exit(True) }}
 
     fn position(&self) -> SpotId {
         self.position
@@ -306,7 +336,8 @@ impl context::Ctx for Context {
     fn set_position_raw(&mut self, pos: SpotId) {
         self.position = pos;
     }
-    fn set_position(&mut self, pos: SpotId, world: &World) {
+%% macro _set_position(observe=False)
+fn {% if observe %}observe_{% endif %}set_position(&mut self, pos: SpotId, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
 %% for pltype in ['Region', 'Area']
 %% if context_position_watchers[pltype|lower]
         let {{ pltype|lower }} = get_{{ pltype|lower }}(pos);
@@ -321,6 +352,9 @@ impl context::Ctx for Context {
 %% else
                     self.{{ c }} = {{ val }};
 %% endif
+%% if observe
+                    full_obs.clear_{{ c }}();
+%% endif
 %% endfor
 %% for other_region in context_resetters[pltype|lower].get(r, ())
 %% for c, val in context_trigger_rules.reset[pltype|lower][other_region].items()
@@ -329,14 +363,20 @@ impl context::Ctx for Context {
 %% else
                     self.{{ c }} = {{ val }};
 %% endif
+%% if observe
+                    full_obs.clear_{{ c }}();
+%% endif
 %% endfor
 %% endfor
 %% if place.action_id
-                    rules::action_{{ place.action_id }}(self, world, pos);
+                    rules::{% if observe %}observe_{% endif %}action_{{ place.action_id }}(self, world, pos{% if observe %}, full_obs{% endif %});
 %% endif
 %% for tile in place._tiles
 %% if tile in used_map_tiles
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% if observe
+                    full_obs.clear_{{ tile }}();
+%% endif
 %% endif
 %% endfor
                 }
@@ -355,6 +395,9 @@ impl context::Ctx for Context {
 %% for tile in spot._tiles
 %% if tile in used_map_tiles
                     self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% if observe
+                    full_obs.clear_{{ tile }}();
+%% endif
 %% endif
 %% endfor
 %% for c, val in context_trigger_rules.enter['spot'].get(s, {}).items()
@@ -363,10 +406,13 @@ impl context::Ctx for Context {
 %% else
                     self.{{ c }} = {{ val }};
 %% endif
+%% if observe
+                    full_obs.clear_{{ c }}();
+%% endif
 %% endfor
 %# Reset rules would go here if we want them.
 %% if spot.action_id
-                    rules::action_{{ spot.action_id }}(self, world, pos);
+                    rules::{% if observe %}observe_{% endif %}action_{{ spot.action_id }}(self, world, pos{% if observe %}, full_obs{% endif %});
 %% endif
                 }
 %% endfor
@@ -376,14 +422,21 @@ impl context::Ctx for Context {
 %% endif
         self.position = pos;
     }
+%% endmacro
+    {{ _set_position() }}
+    {{ _set_position(True) }}
 
-    fn reload_game(&mut self, world: &World) {
-        self.reset_all(world);
+%% macro _reload(observe=False)
+fn {% if observe %}observe_{% endif %}reload_game(&mut self, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
+        self.{% if observe %}observe_{% endif %}reset_all(world{% if observe %}, full_obs{% endif %});
 %% for c, val in context_trigger_rules.load.global.items()
 %% if c in bfp.varmap
         self.cbits{{ bfp.varmap[c] }}.{% if val and val != 'false' %}insert{% else %}remove{% endif %}(flags::ContextBits{{ bfp.varmap[c] }}::{{ c|upper }});
 %% else
         self.{{ c }} = {{ val }};
+%% endif
+%% if observe
+        full_obs.clear_{{ c }}();
 %% endif
 %% endfor
 %% for pltype in ['Region', 'Area']
@@ -394,12 +447,19 @@ impl context::Ctx for Context {
 %% else
         self.{{ c }} = {{ val }};
 %% endif
+%% if observe
+        full_obs.clear_{{ c }}();
+%% endif
 %% endfor
 %% endfor
 %% endfor
     }
+%% endmacro
+    {{ _reload() }}
+    {{ _reload(True) }}
 
-    fn reset_all(&mut self, world: &World) {
+%% macro _reset_all(observe=False)
+fn {% if observe %}observe_{% endif %}reset_all(&mut self, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
 %% for pltype in ['Region', 'Area']
 %% for ctxs in context_trigger_rules.reset[pltype|lower].values()
 %% for c, val in ctxs.items()
@@ -408,13 +468,20 @@ impl context::Ctx for Context {
 %% else
         self.{{ c }} = {{ val }};
 %% endif
+%% if observe
+        full_obs.clear_{{ c }}();
+%% endif
 %% endfor
 %% endfor
 %% endfor
     }
+%% endmacro
+    {{ _reset_all() }}
+    {{ _reset_all(True) }}
 
+%% macro _reset_places(observe=False)
 %% for pltype in ['Region', 'Area']
-    fn reset_{{ pltype|lower }}(&mut self, {{ pltype|lower }}_id: {{ pltype }}Id, world: &World) {
+fn {% if observe %}observe_{% endif %}reset_{{ pltype|lower }}(&mut self, {{ pltype|lower }}_id: {{ pltype }}Id, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
 %% if context_trigger_rules.reset[pltype|lower]
         match {{ pltype|lower }}_id {
 %% for r, ctxs in context_trigger_rules.reset[pltype|lower].items()
@@ -425,6 +492,9 @@ impl context::Ctx for Context {
 %% else
                 self.{{ c }} = {{ val }};
 %% endif
+%% if observe
+                full_obs.clear_{{ c }}();
+%% endif
 %% endfor
             }
 %% endfor
@@ -433,6 +503,9 @@ impl context::Ctx for Context {
 %% endif
     }
 %% endfor
+%% endmacro
+    {{ _reset_places() }}
+    {{ _reset_places(True) }}
 
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
@@ -450,14 +523,6 @@ impl context::Ctx for Context {
 %% endfor
         }
     }
-    fn spend(&mut self, cost: &Currency) {
-        match cost {
-            Currency::Free => (),
-%% for ptype in price_types
-            Currency::{{ ptype|capitalize }}(c) => self.{{ ptype }} -= *c,
-%% endfor
-        }
-    }
     fn observe_afford(&self, cost: &Currency, full_obs: &mut FullObservation) {
         match cost {
             Currency::Free => (),
@@ -467,7 +532,29 @@ impl context::Ctx for Context {
         }
     }
 
-    fn visit(&mut self, loc_id: LocationId) {
+    fn spend(&mut self, cost: &Currency) {
+        match cost {
+            Currency::Free => (),
+%% for ptype in price_types
+            Currency::{{ ptype|capitalize }}(c) => self.{{ ptype }} -= *c,
+%% endfor
+        }
+    }
+    fn observe_spend(&mut self, cost: &Currency, full_obs: &mut FullObservation) {
+        match cost {
+            Currency::Free => (),
+%% for ptype in price_types
+            Currency::{{ ptype|capitalize }}(c) => {
+                self.{{ ptype }} -= *c;
+                full_obs.observe_shift_{{ ptype }}(-*c);
+            }
+%% endfor
+        }
+    }
+
+%% macro _visit(observe=False)
+    fn {% if observe %}observe_{% endif %}visit(&mut self, loc_id: LocationId{% if observe %}, full_obs: &mut FullObservation{% endif %}) {
+%#-     full_obs.clear_visited(loc_id);  // not useful unless we want to ignore observing visits before we access
         match loc_id {
 %% for loc in gl.locations()
 %% set visit = 'VISITED_' + loc.canon_id
@@ -476,12 +563,19 @@ impl context::Ctx for Context {
 %% for tile in loc.tiles
 %% if tile in used_map_tiles
                 self.cbits{{ bfp.varmap[tile] }}.insert(flags::ContextBits{{ bfp.varmap[tile] }}::{{ tile|upper }});
+%% if observe
+                full_obs.clear_{{ tile }}();
+%% endif
 %% endif
 %% endfor
             }
 %% endfor
         }
     }
+%% endmacro
+    {{ _visit() }}
+    {{ _visit(True) }}
+
     fn reset(&mut self, loc_id: LocationId) {
         match loc_id {
 %% for canon_id, locs in gl.canon_places.items()
@@ -492,7 +586,7 @@ impl context::Ctx for Context {
 %% endfor
         }
     }
-    
+
     fn visited(&self, loc_id: LocationId) -> bool {
         match loc_id {
 %% for canon_id, locs in gl.canon_places.items()

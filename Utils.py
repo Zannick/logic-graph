@@ -31,6 +31,14 @@ BUILTINS = {
     '$collect': 'ctx.collect',
 }
 
+OBSERVER_BUILTINS = {
+    '$collect': 'ctx.observe_collect',
+    '$add_item': 'ctx.observe_add_item',
+    '$reset_region': 'ctx.observe_reset_region',
+    '$reset_area': 'ctx.observe_reset_area',
+    '$visit': 'ctx.observe_visit',
+}
+
 OPS = {
     '==': 'eq',
     '!=': 'ne',

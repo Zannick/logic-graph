@@ -130,7 +130,7 @@ pub trait Action: Accessible {
     fn dest(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::SpotId;
     fn observe_effects(
         &self,
-        ctx: &Self::Context,
+        ctx: &mut Self::Context,
         world: &<Self::Context as Ctx>::World,
         observer: &mut <Self::Context as Ctx>::Observer,
     );
@@ -149,7 +149,7 @@ pub trait Warp: Accessible {
     fn is_bulk_exit(&self) -> bool;
     fn observe_effects(
         &self,
-        ctx: &Self::Context,
+        ctx: &mut Self::Context,
         world: &<Self::Context as Ctx>::World,
         observer: &mut <Self::Context as Ctx>::Observer,
     );

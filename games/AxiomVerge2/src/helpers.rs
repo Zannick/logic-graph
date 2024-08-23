@@ -1816,9 +1816,9 @@ macro_rules! hexplain__more_refills {
 macro_rules! hobserve__more_refills {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
         {
-            let n: i32 = $ctx.count(Item::Power_Matrix).into();
+            let n = $ctx.count(Item::Power_Matrix) as i32;
             $full_obs.observe_refills(IntegerObservation::Ge(n as i8));
-            i32::from($ctx.refills()) < n
+            ($ctx.refills() as i32) < n
         }
     }};
 }
@@ -3624,7 +3624,17 @@ macro_rules! hobserve__save {
             let v = data::realm($ctx.position());
             v == enums::Realm::Breach
         } {
+            $full_obs.clear_breach_save();
+            $ctx.set_breach_save({
+                $full_obs.observe_position();
+                $ctx.position()
+            });
         } else {
+            $full_obs.clear_save();
+            $ctx.set_save({
+                $full_obs.observe_position();
+                $ctx.position()
+            });
         }
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
@@ -3642,6 +3652,11 @@ macro_rules! helper__breach_save {
 #[macro_export]
 macro_rules! hobserve__breach_save {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        $full_obs.clear_breach_save();
+        $ctx.set_breach_save({
+            $full_obs.observe_position();
+            $ctx.position()
+        });
         hobserve__refill_energy!($ctx, $world, $full_obs);
     }};
 }
@@ -3656,7 +3671,10 @@ macro_rules! helper__refill_energy {
 }
 #[macro_export]
 macro_rules! hobserve__refill_energy {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        $full_obs.clear_energy();
+        $ctx.set_energy(helper__max_energy!($ctx, $world));
+    }};
 }
 
 /// $deploy_drone (  )
@@ -3670,7 +3688,15 @@ macro_rules! helper__deploy_drone {
 }
 #[macro_export]
 macro_rules! hobserve__deploy_drone {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        $full_obs.clear_mode();
+        $ctx.set_mode(enums::Mode::Drone);
+        $full_obs.clear_indra();
+        $ctx.set_indra({
+            $full_obs.observe_position();
+            $ctx.position()
+        });
+    }};
 }
 
 /// $deploy_drone_and_move ( TypedVar(name='indrapos', type='SpotId') )
@@ -3684,7 +3710,12 @@ macro_rules! helper__deploy_drone_and_move {
 }
 #[macro_export]
 macro_rules! hobserve__deploy_drone_and_move {
-    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{}};
+    ($ctx:expr, $world:expr, $indrapos:expr, $full_obs:expr) => {{
+        $full_obs.clear_mode();
+        $ctx.set_mode(enums::Mode::Drone);
+        $full_obs.clear_indra();
+        $ctx.set_indra($indrapos);
+    }};
 }
 
 /// $save_last (  )
@@ -3707,7 +3738,13 @@ macro_rules! hobserve__save_last {
             };
             let right = Default::default();
             left == right
-        } {}
+        } {
+            $full_obs.clear_last();
+            $ctx.set_last({
+                $full_obs.observe_position();
+                $ctx.position()
+            });
+        }
     }};
 }
 
@@ -3764,13 +3801,18 @@ macro_rules! hobserve__reset_old_area {
                 $full_obs.observe_position();
                 $ctx.position()
             }) != RegionId::Menu
-            && (get_area($newpos) != get_area($ctx.position())))
+            && (get_area($newpos)
+                != get_area({
+                    $full_obs.observe_position();
+                    $ctx.position()
+                })))
         {
             if get_area($newpos) == {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
             } {
                 $full_obs.swap_portal__prev_portal();
+                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             } else {
                 if {
                     $full_obs.observe_position();
@@ -3783,12 +3825,31 @@ macro_rules! hobserve__reset_old_area {
                         $full_obs.observe_prev_area();
                         $ctx.prev_area()
                     }
-                {}
+                {
+                    $ctx.observe_reset_area(
+                        {
+                            $full_obs.observe_prev_area();
+                            $ctx.prev_area()
+                        },
+                        $world,
+                        $full_obs,
+                    );
+                }
+                $full_obs.clear_prev_portal();
+                $ctx.set_prev_portal({
+                    $full_obs.observe_portal();
+                    $ctx.portal()
+                });
+                $full_obs.clear_portal();
+                $ctx.set_portal(data::portal_start($newpos));
             }
-            let _set = get_area({
+            $full_obs.clear_prev_area();
+            $ctx.set_prev_area(get_area({
                 $full_obs.observe_position();
                 $ctx.position()
-            });
+            }));
+            $full_obs.clear_last();
+            $ctx.set_last(Default::default());
         } else if ({
             $full_obs.observe_position();
             $ctx.position()
@@ -3800,13 +3861,18 @@ macro_rules! hobserve__reset_old_area {
                 }),
                 AreaId::Menu__Kiengir_Map | AreaId::Menu__Breach_Map | AreaId::Menu__Emergence_Map
             )
-            && (get_area($newpos) != get_area($ctx.last())))
+            && (get_area($newpos)
+                != get_area({
+                    $full_obs.observe_last();
+                    $ctx.last()
+                })))
         {
             if get_area($newpos) == {
                 $full_obs.observe_prev_area();
                 $ctx.prev_area()
             } {
                 $full_obs.swap_portal__prev_portal();
+                std::mem::swap(&mut $ctx.portal, &mut $ctx.prev_portal);
             } else {
                 if {
                     $full_obs.observe_last();
@@ -3819,12 +3885,31 @@ macro_rules! hobserve__reset_old_area {
                         $full_obs.observe_prev_area();
                         $ctx.prev_area()
                     }
-                {}
+                {
+                    $ctx.observe_reset_area(
+                        {
+                            $full_obs.observe_prev_area();
+                            $ctx.prev_area()
+                        },
+                        $world,
+                        $full_obs,
+                    );
+                }
+                $full_obs.clear_prev_portal();
+                $ctx.set_prev_portal({
+                    $full_obs.observe_portal();
+                    $ctx.portal()
+                });
+                $full_obs.clear_portal();
+                $ctx.set_portal(data::portal_start($newpos));
             }
-            let _set = get_area({
+            $full_obs.clear_prev_area();
+            $ctx.set_prev_area(get_area({
                 $full_obs.observe_last();
                 $ctx.last()
-            });
+            }));
+            $full_obs.clear_last();
+            $ctx.set_last(Default::default());
         }
     }};
 }
@@ -3855,7 +3940,11 @@ macro_rules! hobserve__post_portal_save_update {
                 let v = data::realm($ctx.position());
                 v == enums::Realm::Breach
             } {
+                $full_obs.clear_breach_save();
+                $ctx.set_breach_save(data::save_point($ctx.position()));
             } else {
+                $full_obs.clear_save();
+                $ctx.set_save(data::save_point($ctx.position()));
             }
         }
     }};
@@ -3871,7 +3960,10 @@ macro_rules! helper__clear_breach_save {
 }
 #[macro_export]
 macro_rules! hobserve__clear_breach_save {
-    ($ctx:expr, $world:expr, $full_obs:expr) => {{}};
+    ($ctx:expr, $world:expr, $full_obs:expr) => {{
+        $full_obs.clear_breach_save();
+        $ctx.set_breach_save(Default::default());
+    }};
 }
 
 /// $reload (  )
@@ -3889,11 +3981,21 @@ macro_rules! helper__reload {
 #[macro_export]
 macro_rules! hobserve__reload {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        let _set = get_area({
+        $full_obs.clear_prev_area();
+        $ctx.set_prev_area(get_area({
             $full_obs.observe_position();
             $ctx.position()
+        }));
+        $full_obs.clear_portal();
+        $ctx.set_portal(data::portal_start($ctx.position()));
+        $full_obs.clear_prev_portal();
+        $ctx.set_prev_portal({
+            $full_obs.observe_portal();
+            $ctx.portal()
         });
         hobserve__refill_energy!($ctx, $world, $full_obs);
+        $full_obs.clear_last();
+        $ctx.set_last(Default::default());
     }};
 }
 

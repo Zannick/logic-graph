@@ -78,7 +78,7 @@ class RustBaseVisitor(RulesVisitor):
                 return 'todo!()'
             return ret
         except:
-            logging.error(f'Encountered exception rendering {self.name}: {self.ctxdict}')
+            logging.error(f'Encountered exception rendering {self.name}')
             raise
         finally:
             self.rettype = last_rettype
@@ -129,7 +129,7 @@ class RustVisitor(RustBaseVisitor):
             places = [str(p)[1:-1] for p in ctx.PLACE()]
             args.extend(construct_place_id(pl) for pl in places)
         elif ctx.ref():
-            args.append(self.visit(ctx.ref()))
+            args.extend(self.visit(r) for r in ctx.ref())
         else:
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
@@ -503,7 +503,7 @@ class RustExplainerVisitor(RustBaseVisitor):
             places = [str(p)[1:-1] for p in ctx.PLACE()]
             args.extend(construct_place_id(pl) for pl in places)
         elif ctx.ref():
-            args.append(self.code_writer.visit(ctx.ref()))
+            args.extend(self.code_writer.visit(r) for r in ctx.ref())
         else:
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
@@ -949,7 +949,9 @@ class RustObservationVisitor(RustBaseVisitor):
         return get_int_type_for_max(self.item_max_counts[item])
 
     def _getObserverFunc(self, func):
-        if func in BUILTINS:
+        if ofunc := OBSERVER_BUILTINS.get(func):
+            return ofunc
+        elif func in BUILTINS:
             return None
         elif func in self.rules:
             return f'robserve__{construct_id(func[1:])}!'
@@ -1004,20 +1006,14 @@ class RustObservationVisitor(RustBaseVisitor):
     def visitInvoke(self, ctx):
         items = ctx.ITEM()
         func = str(ctx.FUNC())
-        # We never need these to be observed.
-        if func in ('$add_item', '$skip', '$visit', '$reset_area', '$reset_region'):
-            return ''
+        ofunc = self._getObserverFunc(func)
         func, args = self._getFuncAndArgs(func)
         if items:
             args.extend(f'Item::{item}' for item in items)
             if func == 'ctx.collect':
-                item = str(items[0])
-                if item in self.collect_funcs:
-                    func = f'rules::observe_action_{self.collect_funcs[item]['action_id']}'
-                    return f'{func}(ctx, world, full_obs)'
-                else:
-                    return ''
+                return f'{ofunc}(Item::{items[0]}, world, full_obs)'
         elif ctx.value():
+            # settings and helper args shouldn't generally need to be observable
             args.append(str(self.code_writer.visit(ctx.value())))
         elif ctx.PLACE():
             places = [str(p)[1:-1] for p in ctx.PLACE()]
@@ -1028,7 +1024,9 @@ class RustObservationVisitor(RustBaseVisitor):
             arg = f'{ctx.LIT() or ctx.INT() or ctx.FLOAT() or ""}'
             if arg:
                 args.append(arg)
-        if ofunc := self._getObserverFunc(str(ctx.FUNC())):
+        if func.startswith('ctx.reset'):
+            args.append('world')
+        if ofunc:
             return f'{ofunc}({", ".join(args)}, full_obs)'
         elif func == 'ctx.count':
             lines = [
@@ -1066,16 +1064,16 @@ class RustObservationVisitor(RustBaseVisitor):
             ref = str(ctx.value().ref().REF()[-1])
             if obs := self._getRefObserver(ref, op=op, var='n'):
                 lines = [
-                    f'let n: i32 = {self.visit(ctx.num())}.into();',
+                    f'let n = {self.visit(ctx.num())} as i32;',
                     obs,
-                    f'i32::from({self._getRefGetter(ref[1:])}) {op} n'
+                    f'({self._getRefGetter(ref[1:])} as i32) {op} n'
                 ]
                 return f'{{ {" ".join(lines)} }}'
             # If we don't have an observation to make (i.e. a constant), fall through
         # Check for baseNum rather than mathNum to avoid annoyances
         if str(ctx.num()).startswith('$count('):
             lines = [
-                f'let v: i32 = {self.visit(ctx.value())}.into();',
+                f'let v = {self.visit(ctx.value())} as i32;',
             ]
             if ctx.num().baseNum():
                 item = str(ctx.num().baseNum().funcNum().ITEM(0))
@@ -1102,8 +1100,8 @@ class RustObservationVisitor(RustBaseVisitor):
         else:
             # Observe exact values.
             lines = [
-                f'let v: i32 = {self.visit(ctx.value())}.into();',
-                f'let n: i32 = {self.visit(ctx.num())}.into();',
+                f'let v = {self.visit(ctx.value())} as i32;',
+                f'let n = {self.visit(ctx.num())} as i32;',
                 f'v {ctx.getChild(1)} n',
             ]
         return f'{{ {" ".join(lines)} }}'
@@ -1188,7 +1186,8 @@ class RustObservationVisitor(RustBaseVisitor):
         getter = self.code_writer.visit(ctx.ref())
         if getter[0] != '$':
             return self.visit(ctx.ref())
-        return f'/* TODO: runtime observe_item */ ctx.has({self.visit(ctx.ref())})'
+        item = self.visit(ctx.ref())
+        return f'{{ full_obs.observe_has_item({item}); ctx.has({item}) }}'
 
     # There's no need to optimize for bitflags here, as the compiler can handle that! Hopefully.
     def visitItemList(self, ctx):
@@ -1236,37 +1235,40 @@ class RustObservationVisitor(RustBaseVisitor):
     visitFuncNum = RustVisitor.visitFuncNum
 
     ## Action-specific
-    # We have to eliminate all the ctx mutations, we're only interested in conditions
     def visitActions(self, ctx):
         return ' '.join(map(str, (self.visit(ch) for ch in ctx.action())))
 
     def visitSet(self, ctx):
         var = str(ctx.REF())[1:]
-        # Setting to a specific value means it does not matter what the value was before.
-        # But we have to apply this before any checks or evaluations... even in conditionals
-        self.resets.append(f'full_obs.clear_{self.ctxdict[var]}();')
-        if ctx.num():
+        if ctx.TRUE():
+            val = 'true'
+        elif ctx.FALSE():
+            val = 'false'
+        elif ctx.ref():
+            val = self.visit(ctx.ref())
+        elif ctx.PLACE():
+            pl = str(ctx.PLACE())[1:-1]
+            val = construct_place_id(pl)
+        elif ctx.num():
             val = self.visit(ctx.num())
-        elif ctx.str_():
-            val = self.visit(ctx.str_(), self._getRefEnum(var))
         else:
-            return ''
-        if 'full_obs' not in val:
-            return ''
-        return f'let _set = {val};'
+            val = self.visit(ctx.str_(), self._getRefEnum(var))
+        # Setting to a specific value means it does not matter what the value was before.
+        return f'full_obs.clear_{self.ctxdict[var]}(); {self._getRefSetter(var)}({val});'
 
     def visitAlter(self, ctx):
         val = self.visit(ctx.num())
         if 'full_obs' not in val:
             return ''
-        return f'{{ let _alter = {val}; }}'
+        varname = self._getRefRaw(str(ctx.REF())[1:])
+        return f'{{ let v = {val}; full_obs.observe_shift_{varname}(v); ctx.{varname} {ctx.BINOP()}= v; }}'
     
     def visitSwap(self, ctx):
         ref1 = str(ctx.REF(0))[1:]
         ref2 = str(ctx.REF(1))[1:]
         if ref2 < ref1:
             ref1, ref2 = ref2, ref1
-        return f'full_obs.swap_{ref1}__{ref2}();'
+        return f'full_obs.swap_{ref1}__{ref2}(); {self.code_writer.visit(ctx)}'
 
     def visitActionHelper(self, ctx):
         return self.visit(ctx.invoke()) + ';'

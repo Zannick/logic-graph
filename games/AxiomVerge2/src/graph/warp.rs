@@ -231,30 +231,39 @@ impl world::Warp for Warp {
             WarpId::Portal => true,
         }
     }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_effects(&self, ctx: &mut Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
             WarpId::BreachSave => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
                 rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::EarthSave => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
                 rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::ExitBreach => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
             }
             WarpId::ExitMenu => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
                 rules::observe_action_last_set_invoke_default(ctx, world, full_obs);
             }
             WarpId::FastTravelBreach => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
             }
             WarpId::FastTravelKiengir => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
             }
             WarpId::MainSave => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
                 rules::observe_action_invoke_reload(ctx, world, full_obs);
             }
             WarpId::Menu => {
                 rules::observe_action_last_set_position(ctx, world, full_obs);
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
             }
             WarpId::Portal => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
                 rules::observe_action_invoke_post_portal_save_update(ctx, world, full_obs);
             }
         }

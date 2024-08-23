@@ -3735,7 +3735,6 @@ digraph AxiomVerge2 {
     Amagi_Breach__Center_Ruins__Center_Shaft_Top -> Amagi_Breach__Center_Ruins__Center_Shaft_Bottom;
     Amagi_Breach__Center_Ruins__Center_Shaft_Top_East -> Amagi_Breach__Center_Ruins__East_Ledge;
     Amagi_Breach__Center_Ruins__Center_Shaft_Top_East -> Amagi_Breach__Center_Ruins__Center_Shaft_Bottom;
-    Amagi_Breach__Center_Ruins__East_Ledge -> Amagi_Breach__Center_Ruins__Center_Shaft_Top;
     Amagi_Breach__Center_Ruins__East_Ledge -> Amagi_Breach__Center_Ruins__Center_Shaft_Top_East;
     Amagi_Breach__Center_Ruins__East_Ledge -> Amagi_Breach__Center_Ruins__Upper_East_Left;
     Amagi_Breach__Center_Ruins__Upper_East_Left -> Amagi_Breach__Center_Ruins__Upper_East_Right;

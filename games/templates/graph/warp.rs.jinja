@@ -126,13 +126,14 @@ impl world::Warp for Warp {
 %% endfor
         }
     }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_effects(&self, ctx: &mut Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
 %% for w in warps.values()|sort(attribute='id')
             WarpId::{{ w.id }} => {
 %% if 'before_id' in w
                 rules::observe_action_{{ w.before_id }}(ctx, world, full_obs);
 %% endif
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
 %% if 'after_id' in w
                 rules::observe_action_{{ w.after_id }}(ctx, world, full_obs);
 %% endif

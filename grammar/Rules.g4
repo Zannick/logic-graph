@@ -42,12 +42,12 @@ meta    : FUNC '(' LIT ',' boolExpr ')'
         ;
 
 invoke  : NOT? FUNC '(' ITEM (',' ITEM)* ')'   // must be 1+ items, 0 handled below
+        | NOT? FUNC '(' ref (',' ref)* ')'
         | NOT? FUNC '(' value ')'
         | NOT? FUNC '(' LIT ')'
         | NOT? FUNC '(' INT ')'
         | NOT? FUNC '(' FLOAT ')'
         | NOT? FUNC '(' PLACE (',' PLACE)* ')'
-        | NOT? FUNC '(' ref (',' ref)* ')'
         | NOT? FUNC ('(' ')')? // essentially a call with no arguments
         ;
 
