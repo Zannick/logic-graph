@@ -48,6 +48,13 @@ The common attributes include:
     *   **jumps**: If the component has a movement, you can make it take additional jumps. This might not add any additional time. 
     *   **jumps_down**: If the component has a movement, you can make it take additional jumps down. This adds a fixed amount of time based on the movement's `jumps_down` time.
 
+> [!TIP]
+> **Penalties** are a hugely useful way to cut down on graph complexity by merging edges or locations together. A good shorthand rule of when to combine is: when the player has functionally no choice (either literally can only use one option or one is strictly better than the others). You can combine two edges (local connections or exits), two locations, or two actions as long as all of these match when appropriate:
+> * They have the same destination (or both are locations with no destinations)
+> * If locations, they have the same **canon location** including the same item
+> * They have the same cost, or use **exit movements** with the same cost type that the player has functionally no choice between (i.e. faster must be cheaper or equal)
+> * If actions, the player has functionally no choice between their effects (they can be different effects, but the **do** rule has to be updated to figure out which to perform)
+
 See the full list of attributes for each component in its own section.
 
 ## Folder organization
