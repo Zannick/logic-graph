@@ -231,6 +231,7 @@ pub struct Search<'a, W, T>
 where
     W: World,
     T: Ctx<World = W> + Debug,
+    W::Location: Location<Context = T>,
 {
     world: &'a W,
     startctx: ContextWrapper<T>,

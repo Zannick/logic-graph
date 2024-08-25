@@ -22,6 +22,8 @@ use rocksdb::{
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
+use std::fmt::Debug;
+use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -75,17 +77,51 @@ pub trait MetricKey<const KEY_SIZE: usize> {
     fn get_total_estimate_from_heap_key(key: &[u8]) -> u32;
 }
 
-pub trait ScoreMetric<S: Copy + Ord, W: World, T: Ctx, const KEY_SIZE: usize>:
-    MetricKey<KEY_SIZE>
-{
-    fn lookup_score(el: &T, db: &HeapDB<W, T>) -> Result<S, Error>;
-    fn score_from_wrapper(el: &ContextWrapper<T>, db: &HeapDB<W, T>) -> S;
-    fn get_heap_key_from_wrapper(
+pub trait EstimatorWrapper<'w, W: World + 'w> {
+    fn estimator(
         &self,
-        db: &HeapDB<W, T>,
-        el: &ContextWrapper<T>,
-    ) -> [u8; KEY_SIZE] {
-        self.get_heap_key(el.get(), Self::score_from_wrapper(el, db))
+    ) -> &ContextScorer<
+        'w,
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    >;
+
+    /// Estimates the remaining time to the goal.
+    fn estimated_remaining_time<T>(&self, ctx: &T) -> u32
+    where
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
+        self.estimator()
+            .estimate_remaining_time(ctx)
+            .try_into()
+            .unwrap()
+    }
+
+    /// Returns the number of unique states we've estimated remaining time for.
+    /// Winning states aren't counted in this.
+    fn estimates(&self) -> usize {
+        self.estimator().estimates()
+    }
+
+    /// Returns the number of cache hits for estimated remaining time.
+    /// Winning states aren't counted in this.
+    fn cached_estimates(&self) -> usize {
+        self.estimator().cached_estimates()
+    }
+}
+
+pub trait ScoreMetric<'w, S: Copy + Debug + Ord, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
+    MetricKey<KEY_SIZE> + EstimatorWrapper<'w, W> + Sized
+{
+    fn new(world: &'w W, startctx: &T) -> Self;
+    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<S, Error>;
+    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> S;
+    fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KEY_SIZE] {
+        self.get_heap_key(el.get(), self.score_from_wrapper(el))
     }
     fn get_heap_key(&self, el: &T, score: S) -> [u8; KEY_SIZE];
     fn new_heap_key(
@@ -97,12 +133,37 @@ pub trait ScoreMetric<S: Copy + Ord, W: World, T: Ctx, const KEY_SIZE: usize>:
     ) -> [u8; KEY_SIZE];
 }
 
-#[derive(Default)]
-pub struct TimeSinceAndElapsed {
+pub struct TimeSinceAndElapsed<'w, W: World> {
     seq: AtomicU32,
+    estimator: ContextScorer<
+        'w,
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    >,
 }
 
-impl MetricKey<16> for TimeSinceAndElapsed {
+impl<'w, W> EstimatorWrapper<'w, W> for TimeSinceAndElapsed<'w, W>
+where
+    W: World + 'w,
+{
+    fn estimator(
+        &self,
+    ) -> &ContextScorer<
+        'w,
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    > {
+        &self.estimator
+    }
+}
+
+impl<'w, W: World> MetricKey<16> for TimeSinceAndElapsed<'w, W> {
     fn get_score_primary_from_heap_key(key: &[u8]) -> u32 {
         u32::from_be_bytes(key[4..8].try_into().unwrap())
     }
@@ -111,22 +172,29 @@ impl MetricKey<16> for TimeSinceAndElapsed {
     }
 }
 
-impl<W, T, L, E> ScoreMetric<Score, W, T, 16> for TimeSinceAndElapsed
+impl<'w, W, T, L, E> ScoreMetric<'w, Score, W, T, 16> for TimeSinceAndElapsed<'w, W>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L, Exit = E> + 'w,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
+    L: Location<Context = T>,
     E: Exit<Context = T>,
 {
-    fn lookup_score(el: &T, db: &HeapDB<W, T>) -> Result<Score, Error> {
-        let (elapsed, time_since) = db.get_best_times(&el)?;
-        Ok((time_since, elapsed + db.estimated_remaining_time(el)))
+    fn new(world: &'w W, startctx: &T) -> Self {
+        Self {
+            seq: 0.into(),
+            estimator: ContextScorer::shortest_paths(world, startctx, 32_768),
+        }
     }
 
-    fn score_from_wrapper(el: &ContextWrapper<T>, db: &HeapDB<W, T>) -> Score {
+    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<Score, Error> {
+        let (elapsed, time_since) = best_times;
+        Ok((time_since, elapsed + self.estimated_remaining_time(el)))
+    }
+
+    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> Score {
         (
             el.time_since_visit(),
-            el.elapsed() + db.estimated_remaining_time(el.get()),
+            el.elapsed() + self.estimated_remaining_time(el.get()),
         )
     }
 
@@ -160,7 +228,14 @@ where
     }
 }
 
-pub struct HeapDB<'w, W: World, T: Ctx> {
+pub struct HeapDB<
+    'w,
+    W: World,
+    T: Ctx,
+    S: Copy + Debug + Ord,
+    const KS: usize,
+    SM: ScoreMetric<'w, S, W, T, KS>,
+> {
     estimator: ContextScorer<
         'w,
         W,
@@ -179,7 +254,8 @@ pub struct HeapDB<'w, W: World, T: Ctx> {
 
     max_time: AtomicU32,
 
-    seq: AtomicU32,
+    metric: SM,
+    _phantom: PhantomData<S>,
     size: AtomicUsize,
     seen: AtomicUsize,
     next: AtomicUsize,
@@ -266,13 +342,26 @@ fn min_merge(
 const MB: usize = 1 << 20;
 const GB: usize = 1 << 30;
 
-impl<'w, W, T, L, E> HeapDB<'w, W, T>
+/// The key for a T (Ctx) in the statedb, and the value in the queue db
+/// are all T itself.
+pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
+    let mut key = Vec::with_capacity(std::mem::size_of::<T>());
+    el.serialize(&mut Serializer::new(&mut key)).unwrap();
+    key
+}
+fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T, Error> {
+    Ok(rmp_serde::from_slice::<T>(buf)?)
+}
+
+impl<'w, W, T, L, E, S, const KS: usize, SM> HeapDB<'w, W, T, S, KS, SM>
 where
     W: World<Location = L, Exit = E> + 'w,
     T: Ctx<World = W>,
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+    S: Copy + Debug + Ord,
+    SM: ScoreMetric<'w, S, W, T, KS>,
 {
     pub fn open<P>(
         p: P,
@@ -280,7 +369,7 @@ where
         world: &'w W,
         startctx: &T,
         solutions: Arc<Mutex<SolutionCollector<T>>>,
-    ) -> Result<HeapDB<'w, W, T>, String>
+    ) -> Result<HeapDB<'w, W, T, S, KS, SM>, String>
     where
         P: AsRef<Path>,
     {
@@ -373,7 +462,8 @@ where
             },
             write_opts,
             max_time: initial_max_time.into(),
-            seq: 0.into(),
+            metric: SM::new(world, startctx),
+            _phantom: PhantomData::default(),
             size: 0.into(),
             seen: 0.into(),
             next: 0.into(),
@@ -400,7 +490,7 @@ where
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {
-        &self.estimator
+        self.metric.estimator()
     }
 
     /// Returns the number of elements in the heap (tracked separately from the db).
@@ -425,7 +515,7 @@ where
     /// Returns the number of unique states we've estimated remaining time for.
     /// Winning states aren't counted in this.
     pub fn estimates(&self) -> usize {
-        self.estimator.estimates()
+        self.metric.estimates()
     }
 
     pub fn db_best(&self, progress: usize) -> u32 {
@@ -490,63 +580,17 @@ where
         self.statedb.cf_handle(NEXT).unwrap()
     }
 
+    pub fn lookup_score(&self, el: &T) -> Result<S, Error> {
+        self.metric.score_from_times(el, self.get_best_times(el)?)
+    }
+
     /// The key for a ContextWrapper<T> in the queue is:
     /// the progress (4 bytes)
     /// the score (4 bytes),
     /// the total time estimate (4 bytes),
     /// a sequence number (4 bytes)
-    fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; 16] {
-        self.get_heap_key(el.get(), el.time_since_visit(), el.elapsed())
-    }
-
-    fn get_heap_key(&self, el: &T, score: u32, elapsed: u32) -> [u8; 16] {
-        let mut key: [u8; 16] = [0; 16];
-        let progress: u32 = el.count_visits() as u32;
-        let est = self.estimated_remaining_time(el);
-        key[0..4].copy_from_slice(&progress.to_be_bytes());
-        key[4..8].copy_from_slice(&score.to_be_bytes());
-        key[8..12].copy_from_slice(&(elapsed + est).to_be_bytes());
-        key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
-        key
-    }
-
-    fn get_score_from_heap_key(key: &[u8]) -> u32 {
-        u32::from_be_bytes(key[4..8].try_into().unwrap())
-    }
-    fn get_total_estimate_from_heap_key(key: &[u8]) -> u32 {
-        u32::from_be_bytes(key[8..12].try_into().unwrap())
-    }
-
-    fn new_heap_key(
-        &self,
-        old_key: &[u8],
-        new_score: u32,
-        old_elapsed: u32,
-        new_elapsed: u32,
-    ) -> [u8; 16] {
-        // This works because the total is an estimated time (requiring deserialization)
-        // plus the actual elapsed time; we can just adjust by the difference in elapsed time
-        let old_total = Self::get_total_estimate_from_heap_key(old_key);
-        let new_total = old_total - old_elapsed + new_elapsed;
-
-        let mut key: [u8; 16] = [0; 16];
-        key[0..4].copy_from_slice(&old_key[0..4]);
-        key[4..8].copy_from_slice(&new_score.to_be_bytes());
-        key[8..12].copy_from_slice(&new_total.to_be_bytes());
-        key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
-        key
-    }
-
-    /// The key for a T (Ctx) in the statedb, and the value in the queue db
-    /// are all T itself.
-    pub(crate) fn serialize_state(el: &T) -> Vec<u8> {
-        let mut key = Vec::with_capacity(std::mem::size_of::<T>());
-        el.serialize(&mut Serializer::new(&mut key)).unwrap();
-        key
-    }
-
-    fn deserialize_state(buf: &[u8]) -> Result<T, Error> {
-        Ok(rmp_serde::from_slice::<T>(buf)?)
+    fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KS] {
+        self.metric.get_heap_key_from_wrapper(el)
     }
 
     fn serialize_data<V>(v: V) -> Vec<u8>
@@ -566,7 +610,7 @@ where
     }
 
     fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>, Error> {
-        let ctx = Self::deserialize_state(value)?;
+        let ctx = deserialize_state(value)?;
         let sd = self
             .get_deserialize_state_data(value)?
             .expect("Got unrecognized state from db!");
@@ -680,7 +724,7 @@ where
             return Ok(());
         }
         let key = self.get_heap_key_from_wrapper(&el);
-        let val = Self::serialize_state(el.get());
+        let val = serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
@@ -689,7 +733,7 @@ where
     pub fn push_from_queue(&self, el: ContextWrapper<T>, score: u32) -> Result<(), Error> {
         let progress = el.get().count_visits();
         let key = self.get_heap_key_from_wrapper(&el);
-        let val = Self::serialize_state(el.get());
+        let val = serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         self.min_db_estimates[progress].fetch_min(score, Ordering::Release);
@@ -728,7 +772,7 @@ where
                 log::debug!("Compacting took {:?}", start.elapsed());
             }
 
-            let el = Self::deserialize_state(&value)?;
+            let el = deserialize_state(&value)?;
             let (elapsed, time_since) = self.get_best_times_raw(&value)?;
             if elapsed > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
@@ -747,7 +791,7 @@ where
                 .unwrap();
             // We use the key's cached version of score since our estimates
             // are based on the keys.
-            let score = Self::get_score_from_heap_key(key.as_ref());
+            let score = SM::get_score_primary_from_heap_key(key.as_ref());
 
             self.reset_estimates_in_range(start_progress, to_progress, score);
 
@@ -780,7 +824,7 @@ where
                 continue;
             }
 
-            let val = Self::serialize_state(&el);
+            let val = serialize_state(&el);
 
             if self.remember_processed_raw(&val).unwrap() {
                 dups += 1;
@@ -789,7 +833,10 @@ where
 
             let progress = el.count_visits();
             mins[progress] = std::cmp::min(mins[progress], time_since);
-            let key = self.get_heap_key(&el, time_since, elapsed);
+            let key = self.metric.get_heap_key(
+                &el,
+                self.metric.score_from_times(&el, (elapsed, time_since))?,
+            );
             batch.put(key, val);
         }
         let new = batch.len();
@@ -833,7 +880,7 @@ where
             let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
             if let Some(item) = iter.next() {
                 let (key, _) = item.unwrap();
-                let score = Self::get_score_from_heap_key(key.as_ref());
+                let score = SM::get_score_primary_from_heap_key(key.as_ref());
                 self.min_db_estimates[p].store(score, Ordering::SeqCst);
             } else {
                 self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
@@ -870,10 +917,10 @@ where
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
-        let score = Self::get_score_from_heap_key(key.as_ref());
+        let score = SM::get_score_primary_from_heap_key(key.as_ref());
         batch.delete(key);
 
-        let el = Self::deserialize_state(&value)?;
+        let el = deserialize_state(&value)?;
         let (elapsed, time_since) = self.get_best_times_raw(&value)?;
         let est = self.estimated_remaining_time(&el);
         let max_time = self.max_time();
@@ -897,11 +944,11 @@ where
             loop {
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
-                    let score = Self::get_score_from_heap_key(key.as_ref());
+                    let score = SM::get_score_primary_from_heap_key(key.as_ref());
                     batch.delete(key);
                     pops += 1;
 
-                    let el = Self::deserialize_state(&value)?;
+                    let el = deserialize_state(&value)?;
                     let (elapsed, time_since) = self.get_best_times_raw(&value)?;
                     let est = self.estimated_remaining_time(&el);
                     let max_time = self.max_time();
@@ -962,7 +1009,7 @@ where
 
     /// Checks whether the given Ctx was already processed into its next states.
     pub fn remember_processed(&self, el: &T) -> Result<bool, Error> {
-        let next_key = Self::serialize_state(el);
+        let next_key = serialize_state(el);
         self.remember_processed_raw(&next_key)
     }
 
@@ -971,7 +1018,7 @@ where
     }
 
     pub fn get_best_times(&self, el: &T) -> Result<(u32, u32), Error> {
-        let state_key = Self::serialize_state(el);
+        let state_key = serialize_state(el);
         self.get_best_times_raw(&state_key)
     }
 
@@ -1055,7 +1102,7 @@ where
                             )
                             .unwrap();
                         // handle solution by just inserting a new one
-                        let ctx = Self::deserialize_state(&new_ctx_key).unwrap();
+                        let ctx = deserialize_state(&new_ctx_key).unwrap();
                         if self.world.won(&ctx) {
                             let sol = Arc::new(Solution {
                                 elapsed: new_elapsed,
@@ -1097,10 +1144,10 @@ where
         prev: &Option<T>,
         state_only: bool,
     ) -> Result<bool, Error> {
-        let state_key = Self::serialize_state(el.get());
+        let state_key = serialize_state(el.get());
 
         let (prev_key, best_elapsed_from_prev) = if let Some(c) = prev {
-            let prev_key = Self::serialize_state(c);
+            let prev_key = serialize_state(c);
             let elapsed = self
                 .get_deserialize_state_data(&prev_key)
                 .unwrap()
@@ -1141,7 +1188,7 @@ where
                 self.statedb
                     .put_cf_opt(
                         self.next_cf(),
-                        Self::serialize_state(p),
+                        serialize_state(p),
                         Self::serialize_next_data(next_entries),
                         &self.write_opts,
                     )
@@ -1174,7 +1221,7 @@ where
 
         vec.sort_by_key(ContextWrapper::elapsed);
         let (prev_key, prev_scoreinfo) = if let Some(c) = prev {
-            let prev_key = Self::serialize_state(c);
+            let prev_key = serialize_state(c);
             let scoreinfo = self
                 .get_deserialize_state_data(&prev_key)
                 .unwrap()
@@ -1184,10 +1231,7 @@ where
             (Vec::new(), None)
         };
 
-        let seeing: Vec<_> = vec
-            .iter()
-            .map(|el| Self::serialize_state(el.get()))
-            .collect();
+        let seeing: Vec<_> = vec.iter().map(|el| serialize_state(el.get())).collect();
 
         let seen_values = self.get_state_values(cf, seeing.iter())?;
 
@@ -1239,7 +1283,7 @@ where
             self.statedb
                 .put_cf_opt(
                     self.next_cf(),
-                    Self::serialize_state(p),
+                    serialize_state(p),
                     Self::serialize_next_data(next_entries),
                     &self.write_opts,
                 )
@@ -1313,7 +1357,9 @@ where
                             .unwrap(),
                     );
                     if known > elapsed {
-                        let new_key = self.new_heap_key(&key, time_since_visit, known, elapsed);
+                        let new_key =
+                            self.metric
+                                .new_heap_key(&key, time_since_visit, known, elapsed);
                         batch.put(new_key, value);
                         batch.delete(&key);
                         rescores += 1;
@@ -1407,7 +1453,7 @@ where
                         depth - existing_depth,
                         existing_depth,
                         hist.into_iter().rev().collect::<Vec<_>>(),
-                        Self::deserialize_state(&state_key)
+                        deserialize_state::<T>(&state_key)
                             .expect("Failed to deserialize while reporting an error")
                     );
                 }
@@ -1434,7 +1480,7 @@ where
             return Err(Error {
                 message: format!(
                     "Could not find state entry for {:?}",
-                    Self::deserialize_state(&state_key)
+                    deserialize_state::<T>(&state_key)
                         .expect("Failed to deserialize while reporting an error")
                 ),
             });
@@ -1464,7 +1510,7 @@ where
                 return Err(Error {
                     message: format!(
                         "Could not find intermediate state entry for {:?}",
-                        Self::deserialize_state(&state_key)
+                        deserialize_state::<T>(&state_key)
                             .expect("Failed to deserialize while reporting an error")
                     ),
                 });
@@ -1476,7 +1522,7 @@ where
     }
 
     pub fn get_history(&self, ctx: &T) -> Result<(Vec<HistoryAlias<T>>, u32), Error> {
-        let state_key = Self::serialize_state(ctx);
+        let state_key = serialize_state(ctx);
         self.get_history_raw(state_key)
     }
 
@@ -1488,7 +1534,7 @@ where
             Ok(Some(*h))
         } else {
             Ok(self
-                .get_deserialize_state_data(&Self::serialize_state(ctx.get()))?
+                .get_deserialize_state_data(&serialize_state(ctx.get()))?
                 .and_then(|sd| sd.hist.last().copied()))
         }
     }

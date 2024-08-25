@@ -1,5 +1,5 @@
 use crate::context::*;
-use crate::db::HeapDB;
+use crate::db::serialize_state;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
@@ -347,7 +347,7 @@ where
                 unused items: ({}) {}\nLocations: total={}, unskipped={}, max visitable={}, max unskipped visitable={}\n",
                 size_of::<T>(),
                 size_of::<ContextWrapper<T>>(),
-                HeapDB::<W, T>::serialize_state(&startctx).len(),
+                serialize_state(&startctx).len(),
                 size_of::<W>(),
                 startctx.diff(&T::default()),
                 world.ruleset(),

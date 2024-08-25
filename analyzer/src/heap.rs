@@ -2,7 +2,7 @@ extern crate plotlib;
 
 use crate::bucket::*;
 use crate::context::*;
-use crate::db::HeapDB;
+use crate::db::{HeapDB, TimeSinceAndElapsed};
 use crate::estimates::ContextScorer;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
@@ -28,10 +28,16 @@ pub(crate) struct HeapElement<T: Ctx> {
 }
 
 pub(crate) type Score = (u32, u32);
-pub struct RocksBackedQueue<'w, W: World, T: Ctx> {
+pub(self) type DbType<'w, W, T> = HeapDB<'w, W, T, Score, 16, TimeSinceAndElapsed<'w, W>>;
+pub struct RocksBackedQueue<'w, W, T>
+where
+    T: Ctx<World = W>,
+    W: World,
+    W::Location: Location<Context = T>,
+{
     // TODO: Make the bucket element just T.
     queue: Mutex<BucketQueue<Segment<T, Score>>>,
-    db: HeapDB<'w, W, T>,
+    db: DbType<'w, W, T>,
     capacity: usize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
@@ -96,7 +102,7 @@ where
         Ok(q)
     }
 
-    pub fn db(&self) -> &HeapDB<W, T> {
+    pub fn db(&self) -> &DbType<'w, W, T> {
         &self.db
     }
 
