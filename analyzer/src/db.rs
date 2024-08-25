@@ -69,6 +69,97 @@ type StateDataAlias<T> = StateData<
     <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
 >;
 
+pub trait MetricKey<const KEY_SIZE: usize> {
+    /// Returns the first sort field of the score.
+    fn get_score_primary_from_heap_key(key: &[u8]) -> u32;
+    fn get_total_estimate_from_heap_key(key: &[u8]) -> u32;
+}
+
+pub trait ScoreMetric<S: Copy + Ord, W: World, T: Ctx, const KEY_SIZE: usize>:
+    MetricKey<KEY_SIZE>
+{
+    fn lookup_score(el: &T, db: &HeapDB<W, T>) -> Result<S, Error>;
+    fn score_from_wrapper(el: &ContextWrapper<T>, db: &HeapDB<W, T>) -> S;
+    fn get_heap_key_from_wrapper(
+        &self,
+        db: &HeapDB<W, T>,
+        el: &ContextWrapper<T>,
+    ) -> [u8; KEY_SIZE] {
+        self.get_heap_key(el.get(), Self::score_from_wrapper(el, db))
+    }
+    fn get_heap_key(&self, el: &T, score: S) -> [u8; KEY_SIZE];
+    fn new_heap_key(
+        &self,
+        old_key: &[u8],
+        new_score: u32,
+        old_elapsed: u32,
+        new_elapsed: u32,
+    ) -> [u8; KEY_SIZE];
+}
+
+#[derive(Default)]
+pub struct TimeSinceAndElapsed {
+    seq: AtomicU32,
+}
+
+impl MetricKey<16> for TimeSinceAndElapsed {
+    fn get_score_primary_from_heap_key(key: &[u8]) -> u32 {
+        u32::from_be_bytes(key[4..8].try_into().unwrap())
+    }
+    fn get_total_estimate_from_heap_key(key: &[u8]) -> u32 {
+        u32::from_be_bytes(key[8..12].try_into().unwrap())
+    }
+}
+
+impl<W, T, L, E> ScoreMetric<Score, W, T, 16> for TimeSinceAndElapsed
+where
+    W: World<Location = L, Exit = E>,
+    T: Ctx<World = W>,
+    L: Location<Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+{
+    fn lookup_score(el: &T, db: &HeapDB<W, T>) -> Result<Score, Error> {
+        let (elapsed, time_since) = db.get_best_times(&el)?;
+        Ok((time_since, elapsed + db.estimated_remaining_time(el)))
+    }
+
+    fn score_from_wrapper(el: &ContextWrapper<T>, db: &HeapDB<W, T>) -> Score {
+        (
+            el.time_since_visit(),
+            el.elapsed() + db.estimated_remaining_time(el.get()),
+        )
+    }
+
+    fn get_heap_key(&self, el: &T, score: Score) -> [u8; 16] {
+        let mut key: [u8; 16] = [0; 16];
+        let progress: u32 = el.count_visits() as u32;
+        key[0..4].copy_from_slice(&progress.to_be_bytes());
+        key[4..8].copy_from_slice(&score.0.to_be_bytes());
+        key[8..12].copy_from_slice(&score.1.to_be_bytes());
+        key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
+        key
+    }
+    fn new_heap_key(
+        &self,
+        old_key: &[u8],
+        new_score: u32,
+        old_elapsed: u32,
+        new_elapsed: u32,
+    ) -> [u8; 16] {
+        // This works because the total is an estimated time (requiring deserialization)
+        // plus the actual elapsed time; we can just adjust by the difference in elapsed time
+        let old_total = Self::get_total_estimate_from_heap_key(old_key);
+        let new_total = old_total - old_elapsed + new_elapsed;
+
+        let mut key: [u8; 16] = [0; 16];
+        key[0..4].copy_from_slice(&old_key[0..4]);
+        key[4..8].copy_from_slice(&new_score.to_be_bytes());
+        key[8..12].copy_from_slice(&new_total.to_be_bytes());
+        key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
+        key
+    }
+}
+
 pub struct HeapDB<'w, W: World, T: Ctx> {
     estimator: ContextScorer<
         'w,
