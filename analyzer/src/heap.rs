@@ -4,7 +4,7 @@ use crate::bucket::*;
 use crate::context::*;
 use crate::db::{HeapDB, HeapMetric};
 use crate::estimates::ContextScorer;
-use crate::scoring::{EstimatedTimeMetric, ScoreMetric, TimeSinceAndElapsed};
+use crate::scoring::{BestTimes, EstimatedTimeMetric, ScoreMetric, TimeSinceAndElapsed};
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
@@ -237,7 +237,7 @@ where
                 let (ctx, &p_max) = queue
                     .peek_segment_max(progress)
                     .ok_or(anyhow!("queue at capacity with no elements"))?;
-                let (elapsed, ..) = self.db.get_best_times(ctx)?;
+                let BestTimes {elapsed, ..} = self.db.get_best_times(ctx)?;
                 if score > p_max || (score == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
                     self.db.push_from_queue(el, total_estimate)?;
@@ -332,7 +332,7 @@ where
                 let (ctx, _) = queue.pop_min().unwrap();
 
                 // Retrieve the best elapsed time.
-                let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
+                let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx)?;
                 let est = self.db.estimated_remaining_time(&ctx);
 
                 let max_time = self.db.max_time();
@@ -520,7 +520,7 @@ where
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             while let Some((ctx, _)) = (pop_func)(&mut queue) {
                 // Retrieve the best elapsed time.
-                let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
+                let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx)?;
                 let est = self.db.estimated_remaining_time(&ctx);
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + est > max_time {
@@ -573,7 +573,7 @@ where
                 }
                 for (ctx, _) in values.into_iter() {
                     // Retrieve the best elapsed time.
-                    let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
+                    let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx)?;
                     let est = self.db.estimated_remaining_time(&ctx);
                     let max_time = self.db.max_time();
                     if elapsed > max_time || elapsed + est > max_time {
@@ -657,7 +657,7 @@ where
                 if higher < lower {
                     while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                         // Retrieve the best elapsed time.
-                        let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
+                        let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx)?;
                         let est = self.db.estimated_remaining_time(&ctx);
                         let max_time = self.db.max_time();
                         if elapsed > max_time || elapsed + est > max_time {
@@ -705,7 +705,7 @@ where
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
                             // Retrieve the best elapsed time.
-                            let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
+                            let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx)?;
                             let est = self.db.estimated_remaining_time(&ctx);
                             let max_time = self.db.max_time();
 
@@ -746,7 +746,7 @@ where
                             // Just grab the next one
                             while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                                 // Retrieve the best elapsed time.
-                                let (elapsed, time_since_visit) = self.db.get_best_times(&ctx)?;
+                                let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx)?;
                                 let est = self.db.estimated_remaining_time(&ctx);
                                 let max_time = self.db.max_time();
                                 if elapsed > max_time || elapsed + est > max_time {
@@ -873,7 +873,7 @@ where
             .min_by_key(|(_, (_, p, score))| (W::NUM_CANON_LOCATIONS - p, score))
         {
             let (ctx, ..) = vec.swap_remove(mi);
-            let (elapsed, time_since_visit) = self.db.get_best_times(&ctx).unwrap();
+            let BestTimes {elapsed, time_since_visit} = self.db.get_best_times(&ctx).unwrap();
             self.internal_extend(vec)?;
             Ok(Some(ContextWrapper::with_times(
                 ctx,

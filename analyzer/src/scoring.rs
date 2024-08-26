@@ -1,11 +1,16 @@
 use crate::context::*;
-use crate::db::Error;
 use crate::estimates::ContextScorer;
 use crate::heap::TimeSinceScore;
 use crate::steiner::*;
 use crate::world::*;
 use std::fmt::Debug;
 use std::sync::atomic::{AtomicU32, Ordering};
+
+#[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+pub struct BestTimes {
+    pub elapsed: u32,
+    pub time_since_visit: u32,
+}
 
 pub trait MetricKey {
     /// Returns the first sort field of the score.
@@ -56,7 +61,7 @@ pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
     type Score: Copy + Debug + Ord;
 
     fn new(world: &'w W, startctx: &T) -> Self;
-    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<Self::Score, Error>;
+    fn score_from_times(&self, el: &T, best_times: BestTimes) -> Self::Score;
     fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> Self::Score;
     fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KEY_SIZE] {
         self.get_heap_key(el.get(), self.score_from_wrapper(el))
@@ -131,9 +136,15 @@ where
     }
 
     // TODO: make a type alias or struct for best times
-    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<TimeSinceScore, Error> {
-        let (elapsed, time_since) = best_times;
-        Ok((time_since, elapsed + self.estimated_remaining_time(el)))
+    fn score_from_times(
+        &self,
+        el: &T,
+        BestTimes {
+            elapsed,
+            time_since_visit: time_since,
+        }: BestTimes,
+    ) -> TimeSinceScore {
+        (time_since, elapsed + self.estimated_remaining_time(el))
     }
 
     fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> TimeSinceScore {
@@ -236,9 +247,8 @@ where
         }
     }
 
-    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<EstimatedTime, Error> {
-        let elapsed = best_times.0;
-        Ok(elapsed + self.estimated_remaining_time(el))
+    fn score_from_times(&self, el: &T, BestTimes { elapsed, .. }: BestTimes) -> EstimatedTime {
+        elapsed + self.estimated_remaining_time(el)
     }
 
     fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> EstimatedTime {

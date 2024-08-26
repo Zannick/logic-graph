@@ -429,7 +429,7 @@ where
     }
 
     pub fn lookup_score(&self, el: &T) -> Result<SM::Score, Error> {
-        self.metric.score_from_times(el, self.get_best_times(el)?)
+        Ok(self.metric.score_from_times(el, self.get_best_times(el)?))
     }
 
     pub fn metric(&self) -> &SM {
@@ -625,7 +625,10 @@ where
             }
 
             let el = deserialize_state(&value)?;
-            let (elapsed, time_since) = self.get_best_times_raw(&value)?;
+            let BestTimes {
+                elapsed,
+                time_since_visit,
+            } = self.get_best_times_raw(&value)?;
             if elapsed > self.max_time() {
                 self.pskips.fetch_add(1, Ordering::Release);
                 continue;
@@ -649,7 +652,7 @@ where
 
             // We don't need to check the elapsed time against statedb,
             // because that's where the elapsed time came from
-            return Ok(Some((el, elapsed, time_since)));
+            return Ok(Some((el, elapsed, time_since_visit)));
         }
 
         self.reset_estimates_in_range_unbounded(start_progress);
@@ -670,7 +673,11 @@ where
         mins.resize(W::NUM_CANON_LOCATIONS, u32::MAX);
 
         for (el, score) in iter {
-            let (elapsed, time_since) = self.get_best_times(&el)?;
+            let best_times = self.get_best_times(&el)?;
+            let BestTimes {
+                elapsed,
+                time_since_visit,
+            } = best_times;
             if elapsed > max_time || self.metric.total_estimate_from_score(score) > max_time {
                 skips += 1;
                 continue;
@@ -684,11 +691,10 @@ where
             }
 
             let progress = el.count_visits();
-            mins[progress] = std::cmp::min(mins[progress], time_since);
-            let key = self.metric.get_heap_key(
-                &el,
-                self.metric.score_from_times(&el, (elapsed, time_since))?,
-            );
+            mins[progress] = std::cmp::min(mins[progress], time_since_visit);
+            let key = self
+                .metric
+                .get_heap_key(&el, self.metric.score_from_times(&el, best_times));
             batch.put(key, val);
         }
         let new = batch.len();
@@ -773,8 +779,9 @@ where
         batch.delete(key);
 
         let el = deserialize_state(&value)?;
-        let (elapsed, time_since) = self.get_best_times_raw(&value)?;
-        let score = self.metric.score_from_times(&el, (elapsed, time_since))?;
+        let best_times = self.get_best_times_raw(&value)?;
+        let BestTimes { elapsed, .. } = best_times;
+        let score = self.metric.score_from_times(&el, best_times);
         let total_est = self.metric.total_estimate_from_score(score);
         let max_time = self.max_time();
         if elapsed > max_time || total_est > max_time {
@@ -802,7 +809,8 @@ where
                     pops += 1;
 
                     let el = deserialize_state(&value)?;
-                    let score = self.metric.score_from_times(&el, (elapsed, time_since))?;
+                    let best_times = self.get_best_times_raw(&value)?;
+                    let score = self.metric.score_from_times(&el, best_times);
                     let total_est = self.metric.total_estimate_from_score(score);
                     let max_time = self.max_time();
                     if elapsed > max_time || total_est > max_time {
@@ -874,16 +882,19 @@ where
         self.dup_pskips.fetch_add(1, Ordering::Release);
     }
 
-    pub fn get_best_times(&self, el: &T) -> Result<(u32, u32), Error> {
+    pub fn get_best_times(&self, el: &T) -> Result<BestTimes, Error> {
         let state_key = serialize_state(el);
         self.get_best_times_raw(&state_key)
     }
 
-    fn get_best_times_raw(&self, state_key: &[u8]) -> Result<(u32, u32), Error> {
+    fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes, Error> {
         let sd = self
             .get_deserialize_state_data(state_key)?
             .expect("Didn't find state data!");
-        Ok((sd.elapsed, sd.time_since_visit))
+        Ok(BestTimes {
+            elapsed: sd.elapsed,
+            time_since_visit: sd.time_since_visit,
+        })
     }
 
     fn record_one_internal(
