@@ -1,5 +1,6 @@
 use crate::access::*;
 use crate::context::*;
+use crate::db::ScoreMetric;
 use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
@@ -1379,7 +1380,7 @@ where
             heap_bests
                 .into_iter()
                 .map(|n| match n {
-                    Some((n, ..)) => n.to_string(),
+                    Some(score) => self.queue.db().metric().score_primary(score).to_string(),
                     None => String::from("-"),
                 })
                 .collect::<Vec<_>>()

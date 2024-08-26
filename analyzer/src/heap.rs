@@ -2,7 +2,7 @@ extern crate plotlib;
 
 use crate::bucket::*;
 use crate::context::*;
-use crate::db::{HeapDB, TimeSinceAndElapsed};
+use crate::db::{EstimatedTimeMetric, HeapDB, HeapMetric, ScoreMetric, TimeSinceAndElapsed};
 use crate::estimates::ContextScorer;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
@@ -27,8 +27,16 @@ pub(crate) struct HeapElement<T: Ctx> {
     pub(crate) el: ContextWrapper<T>,
 }
 
-pub(crate) type Score = (u32, u32);
-pub(self) type DbType<'w, W, T> = HeapDB<'w, W, T, Score, 16, TimeSinceAndElapsed<'w, W>>;
+pub(crate) type TimeSinceScore = (u32, u32);
+#[allow(unused)]
+pub(self) type TimeSinceDbType<'w, W, T> = HeapDB<'w, W, T, 16, TimeSinceAndElapsed<'w, W>>;
+#[allow(unused)]
+pub(self) type ElapsedTimeDb<'w, W, T> = HeapDB<'w, W, T, 12, EstimatedTimeMetric<'w, W>>;
+
+// This type has to be changed to affect the score type.
+pub(self) type DbType<'w, W, T> = ElapsedTimeDb<'w, W, T>;
+// Automatic from DbType
+pub(self) type Score<'w, W, T> = <DbType<'w, W, T> as HeapMetric>::Score;
 pub struct RocksBackedQueue<'w, W, T>
 where
     T: Ctx<World = W>,
@@ -36,7 +44,7 @@ where
     W::Location: Location<Context = T>,
 {
     // TODO: Make the bucket element just T.
-    queue: Mutex<BucketQueue<Segment<T, Score>>>,
+    queue: Mutex<BucketQueue<Segment<T, Score<'w, W, T>>>>,
     db: DbType<'w, W, T>,
     capacity: usize,
     iskips: AtomicUsize,
@@ -146,7 +154,7 @@ where
         self.db.db_bests()
     }
 
-    pub fn heap_bests(&self) -> Vec<Option<Score>> {
+    pub fn heap_bests(&self) -> Vec<Option<Score<'w, W, T>>> {
         let queue = self.queue.lock().unwrap();
         queue.peek_all_buckets_min()
     }
@@ -212,12 +220,12 @@ where
             return Ok(());
         }
 
-        let total_estimate = self.db.total_estimate(&el);
+        let score = self.db.metric().score_from_wrapper(&el);
+        let total_estimate = self.db.metric().total_estimate_from_score(score);
         if total_estimate > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         };
-        let score = (el.time_since_visit(), total_estimate);
         let progress = el.get().count_visits();
         let mut evicted = None;
         {
@@ -256,7 +264,7 @@ where
         Ok(())
     }
 
-    fn evict_to_db(&self, ev: Vec<(T, Score)>, category: &str) -> Result<()> {
+    fn evict_to_db(&self, ev: Vec<(T, Score<'w, W, T>)>, category: &str) -> Result<()> {
         let start = Instant::now();
         self.db.extend_from_queue(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
@@ -268,9 +276,9 @@ where
     /// Removes elements from the max end of each segment in the queue until we reach
     /// the minimum desired evictions.
     fn evict_internal(
-        queue: &mut MutexGuard<BucketQueue<Segment<T, Score>>>,
+        queue: &mut MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
         min_evictions: usize,
-    ) -> Vec<(T, Score)> {
+    ) -> Vec<(T, Score<'w, W, T>)> {
         let evicted = queue.pop_max_proportionally(min_evictions);
         queue.shrink_to_fit();
         evicted
@@ -282,7 +290,7 @@ where
         segment: usize,
         num: usize,
         score_limit: u32,
-    ) -> Result<Vec<(T, usize, Score)>> {
+    ) -> Result<Vec<(T, usize, Score<'w, W, T>)>> {
         log::debug!(
             "Beginning retrieve of {} entries from segment {} and up, we have {} total in the db",
             num,
@@ -293,9 +301,9 @@ where
             .db
             .retrieve(segment, num, score_limit)?
             .into_iter()
-            .map(|(el, elapsed, time_since, est)| {
+            .map(|(el, score)| {
                 let progress = el.count_visits();
-                (el, progress, (time_since, elapsed + est))
+                (el, progress, score)
             })
             .collect();
 
@@ -309,7 +317,10 @@ where
                 let progress = el.count_visits();
                 let db_best = self.db.db_best(progress);
                 // Only when we go a decent bit over
-                if !self.db.is_empty() && db_best < u32::MAX && min_score.0 > db_best * 11 / 10 {
+                if !self.db.is_empty()
+                    && db_best < u32::MAX
+                    && self.db.metric().score_primary(min_score) > db_best * 11 / 10
+                {
                     queue = self.maybe_reshuffle(
                         progress,
                         self.min_reshuffle,
@@ -361,8 +372,8 @@ where
         progress: usize,
         min_to_restore: usize,
         max_to_restore: usize,
-        queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
+        queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let r = self.maybe_reshuffle_locked(progress, min_to_restore, max_to_restore, queue);
             self.retrieving.store(false, Ordering::Release);
@@ -377,8 +388,8 @@ where
         progress: usize,
         min_to_restore: usize,
         max_to_restore: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         let start = Instant::now();
         let num_buckets = queue.approx_num_buckets();
         // Get a decent amount to refill
@@ -392,7 +403,7 @@ where
         let len = queue.len();
         let score_limit = if let Some((lower, upper)) = queue.peek_segment_priority_range(progress)
         {
-            (lower.0 + upper.0) / 2
+            (self.db.metric().score_primary(*lower) + self.db.metric().score_primary(*upper)) / 2
         } else {
             self.max_time()
         };
@@ -424,10 +435,13 @@ where
 
     fn maybe_fetch_for_empty_buckets<'a>(
         &'a self,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         // Runs over all the buckets
-        let Some((min_score, _)) = queue.peek_min().map(|p| *p.1) else {
+        let Some(min_score) = queue
+            .peek_min()
+            .map(|p| self.db.metric().score_primary(*p.1))
+        else {
             return Ok(queue);
         };
         // threshold is 1/8 the difference between min score and a reasonable upper bound,
@@ -475,8 +489,8 @@ where
     fn do_retrieve_and_insert<'a>(
         &'a self,
         segment: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score>>>> {
+        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
@@ -496,7 +510,9 @@ where
 
     fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
-        F: Fn(&mut MutexGuard<BucketQueue<Segment<T, Score>>>) -> Option<(T, Score)>,
+        F: Fn(
+            &mut MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
+        ) -> Option<(T, Score<'w, W, T>)>,
     {
         let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
@@ -541,7 +557,10 @@ where
 
     fn pop_special_multi<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
-        F: Fn(usize, &mut MutexGuard<BucketQueue<Segment<T, Score>>>) -> Vec<(T, Score)>,
+        F: Fn(
+            usize,
+            &mut MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
+        ) -> Vec<(T, Score<'w, W, T>)>,
     {
         let mut vec = Vec::new();
         let mut queue = self.queue.lock().unwrap();
@@ -850,7 +869,7 @@ where
         if let Some((mi, _)) = vec
             .iter()
             .enumerate()
-            .min_by_key(|(_, (_, p, (score, total)))| (W::NUM_CANON_LOCATIONS - p, score, total))
+            .min_by_key(|(_, (_, p, score))| (W::NUM_CANON_LOCATIONS - p, score))
         {
             let (ctx, ..) = vec.swap_remove(mi);
             let (elapsed, time_since_visit) = self.db.get_best_times(&ctx).unwrap();
@@ -882,31 +901,32 @@ where
         &self,
         mut vec: Vec<ContextWrapper<T>>,
         prev: &Option<T>,
-    ) -> Result<Vec<(T, usize, (u32, u32))>> {
+    ) -> Result<Vec<(T, usize, Score<'w, W, T>)>> {
         let mut iskips = 0;
         let keeps = self.db.record_many(&mut vec, prev)?;
         debug_assert!(vec.len() == keeps.len());
         // TODO: Is it inefficient to deconstruct the wrapper here,
         // and then reconstruct the wrapper for the one element we keep,
         // or can we extract it first somehow?
-        let vec: Vec<(T, usize, (u32, u32))> = vec
+        let vec: Vec<(T, usize, Score<'w, W, T>)> = vec
             .into_iter()
             .zip(keeps.into_iter())
             .filter_map(|(el, keep)| {
                 if self.world.won(el.get()) {
                     None
-                } else if el.elapsed() > self.db.max_time()
-                    || self.db.total_estimate(&el) > self.db.max_time()
-                {
-                    iskips += 1;
-                    None
-                } else if keep {
-                    let progress = el.get().count_visits();
-                    let score = el.time_since_visit();
-                    let total = self.db.total_estimate(&el);
-                    Some((el.into_inner(), progress, (score, total)))
                 } else {
-                    None
+                    let score = self.db.metric().score_from_wrapper(&el);
+                    if el.elapsed() > self.db.max_time()
+                        || self.db.metric().total_estimate_from_score(score) > self.db.max_time()
+                    {
+                        iskips += 1;
+                        None
+                    } else if keep {
+                        let progress = el.get().count_visits();
+                        Some((el.into_inner(), progress, score))
+                    } else {
+                        None
+                    }
                 }
             })
             .collect();
@@ -915,7 +935,7 @@ where
         Ok(vec)
     }
 
-    fn internal_extend(&self, vec: Vec<(T, usize, (u32, u32))>) -> Result<()>
+    fn internal_extend(&self, vec: Vec<(T, usize, Score<'w, W, T>)>) -> Result<()>
     where
         T: Ctx<World = W>,
     {
@@ -975,12 +995,12 @@ where
         let mut progresses = Vec::new();
         let mut prog_score = Vec::new();
         let mut prog_estimates = Vec::new();
-        for (progress, _, (time_since, total_estimate)) in queue.iter() {
-            let time_since = *time_since as f64;
-            let total_estimate = *total_estimate as f64;
+        for (progress, _, score) in queue.iter() {
+            let primary = self.db.metric().score_primary(*score) as f64;
+            let total_estimate = self.db.metric().total_estimate_from_score(*score) as f64;
             let progress = progress as f64;
             progresses.push(progress);
-            prog_score.push((progress, time_since));
+            prog_score.push((progress, primary));
             prog_estimates.push((progress, total_estimate));
         }
         let queue_len = queue.len();

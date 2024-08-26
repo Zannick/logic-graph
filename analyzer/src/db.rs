@@ -3,7 +3,7 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
-use crate::heap::Score;
+use crate::heap::TimeSinceScore;
 use crate::solutions::Solution;
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
@@ -23,7 +23,6 @@ use rocksdb::{
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
-use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -71,7 +70,7 @@ type StateDataAlias<T> = StateData<
     <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
 >;
 
-pub trait MetricKey<const KEY_SIZE: usize> {
+pub trait MetricKey {
     /// Returns the first sort field of the score.
     fn get_score_primary_from_heap_key(key: &[u8]) -> u32;
     fn get_total_estimate_from_heap_key(key: &[u8]) -> u32;
@@ -114,16 +113,18 @@ pub trait EstimatorWrapper<'w, W: World + 'w> {
     }
 }
 
-pub trait ScoreMetric<'w, S: Copy + Debug + Ord, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
-    MetricKey<KEY_SIZE> + EstimatorWrapper<'w, W> + Sized
+pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
+    MetricKey + EstimatorWrapper<'w, W> + Sized
 {
+    type Score: Copy + Debug + Ord;
+    
     fn new(world: &'w W, startctx: &T) -> Self;
-    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<S, Error>;
-    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> S;
+    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<Self::Score, Error>;
+    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> Self::Score;
     fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KEY_SIZE] {
         self.get_heap_key(el.get(), self.score_from_wrapper(el))
     }
-    fn get_heap_key(&self, el: &T, score: S) -> [u8; KEY_SIZE];
+    fn get_heap_key(&self, el: &T, score: Self::Score) -> [u8; KEY_SIZE];
     fn new_heap_key(
         &self,
         old_key: &[u8],
@@ -131,6 +132,10 @@ pub trait ScoreMetric<'w, S: Copy + Debug + Ord, W: World + 'w, T: Ctx, const KE
         old_elapsed: u32,
         new_elapsed: u32,
     ) -> [u8; KEY_SIZE];
+
+    // Using &self to avoid trying to provide the metric type in the heap's DbType alias
+    fn total_estimate_from_score(&self, score: Self::Score) -> u32;
+    fn score_primary(&self, score: Self::Score) -> u32;
 }
 
 pub struct TimeSinceAndElapsed<'w, W: World> {
@@ -163,7 +168,7 @@ where
     }
 }
 
-impl<'w, W: World> MetricKey<16> for TimeSinceAndElapsed<'w, W> {
+impl<'w, W: World> MetricKey for TimeSinceAndElapsed<'w, W> {
     fn get_score_primary_from_heap_key(key: &[u8]) -> u32 {
         u32::from_be_bytes(key[4..8].try_into().unwrap())
     }
@@ -172,13 +177,15 @@ impl<'w, W: World> MetricKey<16> for TimeSinceAndElapsed<'w, W> {
     }
 }
 
-impl<'w, W, T, L, E> ScoreMetric<'w, Score, W, T, 16> for TimeSinceAndElapsed<'w, W>
+impl<'w, W, T, L, E> ScoreMetric<'w, W, T, 16> for TimeSinceAndElapsed<'w, W>
 where
     W: World<Location = L, Exit = E> + 'w,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     E: Exit<Context = T>,
 {
+    type Score = TimeSinceScore;
+
     fn new(world: &'w W, startctx: &T) -> Self {
         Self {
             seq: 0.into(),
@@ -186,19 +193,20 @@ where
         }
     }
 
-    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<Score, Error> {
+    // TODO: make a type alias or struct for best times
+    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<TimeSinceScore, Error> {
         let (elapsed, time_since) = best_times;
         Ok((time_since, elapsed + self.estimated_remaining_time(el)))
     }
 
-    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> Score {
+    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> TimeSinceScore {
         (
             el.time_since_visit(),
             el.elapsed() + self.estimated_remaining_time(el.get()),
         )
     }
 
-    fn get_heap_key(&self, el: &T, score: Score) -> [u8; 16] {
+    fn get_heap_key(&self, el: &T, score: TimeSinceScore) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
         let progress: u32 = el.count_visits() as u32;
         key[0..4].copy_from_slice(&progress.to_be_bytes());
@@ -226,15 +234,116 @@ where
         key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
+
+    fn total_estimate_from_score(&self, score: Self::Score) -> u32 {
+        score.1
+    }
+    fn score_primary(&self, score: Self::Score) -> u32 {
+        score.0
+    }
+}
+
+type EstimatedTime = u32;
+pub struct EstimatedTimeMetric<'w, W: World> {
+    seq: AtomicU32,
+    estimator: ContextScorer<
+        'w,
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    >,
+}
+
+impl<'w, W> EstimatorWrapper<'w, W> for EstimatedTimeMetric<'w, W>
+where
+    W: World + 'w,
+{
+    fn estimator(
+        &self,
+    ) -> &ContextScorer<
+        'w,
+        W,
+        <<W as World>::Exit as Exit>::SpotId,
+        <<W as World>::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    > {
+        &self.estimator
+    }
+}
+
+impl<'w, W: World> MetricKey for EstimatedTimeMetric<'w, W> {
+    fn get_score_primary_from_heap_key(key: &[u8]) -> u32 {
+        u32::from_be_bytes(key[4..8].try_into().unwrap())
+    }
+    fn get_total_estimate_from_heap_key(key: &[u8]) -> u32 {
+        u32::from_be_bytes(key[4..8].try_into().unwrap())
+    }
+}
+
+impl<'w, W, T, L, E> ScoreMetric<'w, W, T, 12> for EstimatedTimeMetric<'w, W>
+where
+    W: World<Location = L, Exit = E> + 'w,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+    E: Exit<Context = T>,
+{
+    type Score = EstimatedTime;
+
+    fn new(world: &'w W, startctx: &T) -> Self {
+        Self {
+            seq: 0.into(),
+            estimator: ContextScorer::shortest_paths(world, startctx, 32_768),
+        }
+    }
+
+    fn score_from_times(&self, el: &T, best_times: (u32, u32)) -> Result<EstimatedTime, Error> {
+        let elapsed = best_times.0;
+        Ok(elapsed + self.estimated_remaining_time(el))
+    }
+
+    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> EstimatedTime {
+        el.elapsed() + self.estimated_remaining_time(el.get())
+    }
+
+    fn get_heap_key(&self, el: &T, score: EstimatedTime) -> [u8; 12] {
+        let mut key: [u8; 12] = [0; 12];
+        let progress: u32 = el.count_visits() as u32;
+        key[0..4].copy_from_slice(&progress.to_be_bytes());
+        key[4..8].copy_from_slice(&score.to_be_bytes());
+        key[8..12].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
+        key
+    }
+    fn new_heap_key(
+        &self,
+        old_key: &[u8],
+        new_score: u32,
+        _old_elapsed: u32,
+        _new_elapsed: u32,
+    ) -> [u8; 12] {
+        let mut key: [u8; 12] = [0; 12];
+        key[0..4].copy_from_slice(&old_key[0..4]);
+        key[4..8].copy_from_slice(&new_score.to_be_bytes());
+        key[8..12].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
+        key
+    }
+
+    fn total_estimate_from_score(&self, score: Self::Score) -> u32 {
+        score
+    }
+    fn score_primary(&self, score: Self::Score) -> u32 {
+        score
+    }
 }
 
 pub struct HeapDB<
     'w,
     W: World,
     T: Ctx,
-    S: Copy + Debug + Ord,
     const KS: usize,
-    SM: ScoreMetric<'w, S, W, T, KS>,
+    SM: ScoreMetric<'w, W, T, KS>,
 > {
     estimator: ContextScorer<
         'w,
@@ -255,7 +364,6 @@ pub struct HeapDB<
     max_time: AtomicU32,
 
     metric: SM,
-    _phantom: PhantomData<S>,
     size: AtomicUsize,
     seen: AtomicUsize,
     next: AtomicUsize,
@@ -353,15 +461,31 @@ fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T, Error> {
     Ok(rmp_serde::from_slice::<T>(buf)?)
 }
 
-impl<'w, W, T, L, E, S, const KS: usize, SM> HeapDB<'w, W, T, S, KS, SM>
+// Essentially a workaround for inherent associated types.
+pub trait HeapMetric {
+    type Score: Copy + Debug + Ord;
+}
+
+impl<'w, W, T, L, E, const KS: usize, SM> HeapMetric for HeapDB<'w, W, T, KS, SM>
 where
     W: World<Location = L, Exit = E> + 'w,
     T: Ctx<World = W>,
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
-    S: Copy + Debug + Ord,
-    SM: ScoreMetric<'w, S, W, T, KS>,
+    SM: ScoreMetric<'w, W, T, KS>,
+{
+    type Score = SM::Score;
+}
+
+impl<'w, W, T, L, E, const KS: usize, SM> HeapDB<'w, W, T, KS, SM>
+where
+    W: World<Location = L, Exit = E> + 'w,
+    T: Ctx<World = W>,
+    L: Location<Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+    SM: ScoreMetric<'w, W, T, KS>,
 {
     pub fn open<P>(
         p: P,
@@ -369,7 +493,7 @@ where
         world: &'w W,
         startctx: &T,
         solutions: Arc<Mutex<SolutionCollector<T>>>,
-    ) -> Result<HeapDB<'w, W, T, S, KS, SM>, String>
+    ) -> Result<HeapDB<'w, W, T, KS, SM>, String>
     where
         P: AsRef<Path>,
     {
@@ -463,7 +587,6 @@ where
             write_opts,
             max_time: initial_max_time.into(),
             metric: SM::new(world, startctx),
-            _phantom: PhantomData::default(),
             size: 0.into(),
             seen: 0.into(),
             next: 0.into(),
@@ -580,8 +703,12 @@ where
         self.statedb.cf_handle(NEXT).unwrap()
     }
 
-    pub fn lookup_score(&self, el: &T) -> Result<S, Error> {
+    pub fn lookup_score(&self, el: &T) -> Result<SM::Score, Error> {
         self.metric.score_from_times(el, self.get_best_times(el)?)
+    }
+
+    pub fn metric(&self) -> &SM {
+        &self.metric
     }
 
     /// The key for a ContextWrapper<T> in the queue is:
@@ -807,7 +934,7 @@ where
 
     pub fn extend_from_queue<I>(&self, iter: I) -> Result<(), Error>
     where
-        I: IntoIterator<Item = (T, Score)>,
+        I: IntoIterator<Item = (T, SM::Score)>,
     {
         let mut batch = WriteBatchWithTransaction::<false>::default();
         let max_time = self.max_time();
@@ -819,7 +946,7 @@ where
 
         for (el, score) in iter {
             let (elapsed, time_since) = self.get_best_times(&el)?;
-            if elapsed > max_time || score.1 > max_time {
+            if elapsed > max_time || self.metric.total_estimate_from_score(score) > max_time {
                 skips += 1;
                 continue;
             }
@@ -895,7 +1022,7 @@ where
         start_progress: usize,
         count: usize,
         score_limit: u32,
-    ) -> Result<Vec<(T, u32, u32, u32)>, Error> {
+    ) -> Result<Vec<(T, SM::Score)>, Error> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
@@ -917,26 +1044,27 @@ where
             None => return Ok(Vec::new()),
             Some(el) => el?,
         };
-        let score = SM::get_score_primary_from_heap_key(key.as_ref());
+        let pscore = SM::get_score_primary_from_heap_key(key.as_ref());
         batch.delete(key);
 
         let el = deserialize_state(&value)?;
         let (elapsed, time_since) = self.get_best_times_raw(&value)?;
-        let est = self.estimated_remaining_time(&el);
+        let score = self.metric.score_from_times(&el, (elapsed, time_since))?;
+        let total_est = self.metric.total_estimate_from_score(score);
         let max_time = self.max_time();
-        if elapsed > max_time || elapsed + est > max_time {
+        if elapsed > max_time || total_est > max_time {
             pskips += 1;
         // TODO: Not sure if we need a score limit when score is time_since?
-        } else if score > score_limit {
-            res.push((el, elapsed, time_since, est));
+        } else if pscore > score_limit {
+            res.push((el, score));
             log::debug!(
-                "Returning immediately with one element (score {} > limit {})",
-                score,
+                "Returning immediately with one element (pscore {} > limit {})",
+                pscore,
                 score_limit
             );
             return Ok(res);
         } else {
-            res.push((el, elapsed, time_since, est));
+            res.push((el, score));
         }
 
         let start = Instant::now();
@@ -944,15 +1072,15 @@ where
             loop {
                 if let Some(item) = iter.next() {
                     let (key, value) = item.unwrap();
-                    let score = SM::get_score_primary_from_heap_key(key.as_ref());
+                    let pscore = SM::get_score_primary_from_heap_key(key.as_ref());
                     batch.delete(key);
                     pops += 1;
 
                     let el = deserialize_state(&value)?;
-                    let (elapsed, time_since) = self.get_best_times_raw(&value)?;
-                    let est = self.estimated_remaining_time(&el);
+                    let score = self.metric.score_from_times(&el, (elapsed, time_since))?;
+                    let total_est = self.metric.total_estimate_from_score(score);
                     let max_time = self.max_time();
-                    if elapsed > max_time || elapsed + est > max_time {
+                    if elapsed > max_time || total_est > max_time {
                         pskips += 1;
                         continue;
                     }
@@ -961,11 +1089,11 @@ where
                         continue;
                     }
 
-                    res.push((el, elapsed, time_since, est));
+                    res.push((el, score));
                     if res.len() == count {
                         break 'outer;
                     }
-                    if score > score_limit {
+                    if pscore > score_limit {
                         break 'outer;
                     }
                 } else {
@@ -980,8 +1108,8 @@ where
             pops
         );
 
-        if let Some((el, _, time_since, _)) = res.last() {
-            self.reset_estimates_in_range(start_progress, el.count_visits(), *time_since);
+        if let Some((el, score)) = res.last() {
+            self.reset_estimates_in_range(start_progress, el.count_visits(), self.metric.score_primary(*score));
         } else {
             self.reset_estimates_in_range_unbounded(start_progress);
         }
