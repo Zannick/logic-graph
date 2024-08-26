@@ -2,8 +2,9 @@ extern crate plotlib;
 
 use crate::bucket::*;
 use crate::context::*;
-use crate::db::{EstimatedTimeMetric, HeapDB, HeapMetric, ScoreMetric, TimeSinceAndElapsed};
+use crate::db::{HeapDB, HeapMetric};
 use crate::estimates::ContextScorer;
+use crate::scoring::{EstimatedTimeMetric, ScoreMetric, TimeSinceAndElapsed};
 use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;

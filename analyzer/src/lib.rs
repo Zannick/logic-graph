@@ -28,6 +28,7 @@ pub mod minimize;
 pub mod observer;
 pub mod priority;
 pub mod route;
+pub mod scoring;
 pub mod search;
 pub mod settings;
 pub mod solutions;

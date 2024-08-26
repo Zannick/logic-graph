@@ -1,11 +1,11 @@
 use crate::access::*;
 use crate::context::*;
-use crate::db::ScoreMetric;
 use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::*;
 use crate::observer::{record_observations, Observer};
+use crate::scoring::ScoreMetric;
 use crate::solutions::{Solution, SolutionCollector, SolutionResult};
 use crate::world::*;
 use anyhow::Result;
