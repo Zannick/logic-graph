@@ -70,14 +70,6 @@ type StateDataAlias<T> = StateData<
 >;
 
 pub struct HeapDB<'w, W: World, T: Ctx, const KS: usize, SM: ScoreMetric<'w, W, T, KS>> {
-    estimator: ContextScorer<
-        'w,
-        W,
-        <<W as World>::Exit as Exit>::SpotId,
-        <<W as World>::Location as Location>::LocId,
-        EdgeId<W>,
-        ShortestPaths<NodeId<W>, EdgeId<W>>,
-    >,
     db: DB,
     statedb: DB,
     _cache: Cache,
@@ -290,16 +282,11 @@ where
         let mut write_opts = WriteOptions::default();
         write_opts.disable_wal(true);
 
-        let s = Instant::now();
-        let scorer = ContextScorer::shortest_paths(world, startctx, 32_768);
-        log::info!("Built scorer in {:?}", s.elapsed());
-
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut min_db_estimates = Vec::new();
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
 
         Ok(HeapDB {
-            estimator: scorer,
             db,
             statedb,
             _cache: cache,
@@ -386,7 +373,7 @@ where
     /// Returns the number of cache hits for estimated remaining time.
     /// Winning states aren't counted in this.
     pub fn cached_estimates(&self) -> usize {
-        self.estimator.cached_estimates()
+        self.metric.cached_estimates()
     }
 
     pub fn background_deletes(&self) -> usize {
@@ -530,10 +517,7 @@ where
 
     /// Estimates the remaining time to the goal.
     pub fn estimated_remaining_time(&self, ctx: &T) -> u32 {
-        self.estimator
-            .estimate_remaining_time(ctx)
-            .try_into()
-            .unwrap()
+        self.metric.estimated_remaining_time(ctx)
     }
 
     pub fn estimate_time_to_get(
@@ -545,7 +529,8 @@ where
             i16,
         )>,
     ) -> u32 {
-        self.estimator
+        self.metric
+            .estimator()
             .estimate_time_to_get(ctx, required, subsets)
             .try_into()
             .unwrap()
