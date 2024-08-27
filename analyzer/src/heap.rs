@@ -35,7 +35,7 @@ pub(self) type TimeSinceDbType<'w, W, T> = HeapDB<'w, W, T, 16, TimeSinceAndElap
 pub(self) type ElapsedTimeDb<'w, W, T> = HeapDB<'w, W, T, 12, EstimatedTimeMetric<'w, W>>;
 
 // This type has to be changed to affect the score type.
-pub(self) type DbType<'w, W, T> = ElapsedTimeDb<'w, W, T>;
+pub(self) type DbType<'w, W, T> = TimeSinceDbType<'w, W, T>;
 // Automatic from DbType
 pub(self) type Score<'w, W, T> = <DbType<'w, W, T> as HeapMetric>::Score;
 pub struct RocksBackedQueue<'w, W, T>
