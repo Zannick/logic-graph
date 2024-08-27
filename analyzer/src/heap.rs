@@ -1063,17 +1063,20 @@ where
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
 
-        let p =
-            Plot::new(prog_estimates).point_style(PointStyle::new().marker(PointMarker::Circle));
-        let v = ContinuousView::new()
-            .add(p)
-            .x_label("progress")
-            .y_label("total estimate")
-            .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
-        println!(
-            "Heap total estimates by progress level:\n{}",
-            Page::single(&v).dimensions(90, 10).to_text().unwrap()
-        );
+        // We can avoid an extra graph if the score is just the total estimate only
+        if std::mem::size_of::<Score<'w, W, T>>() > std::mem::size_of::<u32>() {
+            let p = Plot::new(prog_estimates)
+                .point_style(PointStyle::new().marker(PointMarker::Circle));
+            let v = ContinuousView::new()
+                .add(p)
+                .x_label("progress")
+                .y_label("total estimate")
+                .x_range(-1., 1. + W::NUM_CANON_LOCATIONS as f64);
+            println!(
+                "Heap total estimates by progress level:\n{}",
+                Page::single(&v).dimensions(90, 10).to_text().unwrap()
+            );
+        }
 
         let h = Histogram::from_slice(
             processed.as_slice(),
