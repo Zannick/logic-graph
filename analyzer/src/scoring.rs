@@ -10,6 +10,7 @@ use std::sync::atomic::{AtomicU32, Ordering};
 pub struct BestTimes {
     pub elapsed: u32,
     pub time_since_visit: u32,
+    pub estimated_remaining: u32,
 }
 
 pub trait MetricKey {
@@ -61,19 +62,14 @@ pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
     type Score: Copy + Debug + Ord;
 
     fn new(world: &'w W, startctx: &T) -> Self;
-    fn score_from_times(&self, el: &T, best_times: BestTimes) -> Self::Score;
+    fn score_from_times(&self, best_times: BestTimes) -> Self::Score;
     fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> Self::Score;
+    fn score_from_heap_key(&self, key: &[u8]) -> Self::Score;
     fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KEY_SIZE] {
         self.get_heap_key(el.get(), self.score_from_wrapper(el))
     }
     fn get_heap_key(&self, el: &T, score: Self::Score) -> [u8; KEY_SIZE];
-    fn new_heap_key(
-        &self,
-        old_key: &[u8],
-        new_score: u32,
-        old_elapsed: u32,
-        new_elapsed: u32,
-    ) -> [u8; KEY_SIZE];
+    fn new_heap_key(&self, old_key: &[u8], new_score: Self::Score) -> [u8; KEY_SIZE];
 
     // Using &self to avoid trying to provide the metric type in the heap's DbType alias
     fn total_estimate_from_score(&self, score: Self::Score) -> u32;
@@ -138,19 +134,26 @@ where
     // TODO: make a type alias or struct for best times
     fn score_from_times(
         &self,
-        el: &T,
         BestTimes {
             elapsed,
             time_since_visit: time_since,
+            estimated_remaining,
         }: BestTimes,
     ) -> TimeSinceScore {
-        (time_since, elapsed + self.estimated_remaining_time(el))
+        (time_since, elapsed + estimated_remaining)
     }
 
     fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> TimeSinceScore {
         (
             el.time_since_visit(),
             el.elapsed() + self.estimated_remaining_time(el.get()),
+        )
+    }
+
+    fn score_from_heap_key(&self, key: &[u8]) -> TimeSinceScore {
+        (
+            u32::from_be_bytes(key[4..8].try_into().unwrap()),
+            u32::from_be_bytes(key[8..12].try_into().unwrap()),
         )
     }
 
@@ -163,22 +166,11 @@ where
         key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
-    fn new_heap_key(
-        &self,
-        old_key: &[u8],
-        new_score: u32,
-        old_elapsed: u32,
-        new_elapsed: u32,
-    ) -> [u8; 16] {
-        // This works because the total is an estimated time (requiring deserialization)
-        // plus the actual elapsed time; we can just adjust by the difference in elapsed time
-        let old_total = Self::get_total_estimate_from_heap_key(old_key);
-        let new_total = old_total - old_elapsed + new_elapsed;
-
+    fn new_heap_key(&self, old_key: &[u8], new_score: TimeSinceScore) -> [u8; 16] {
         let mut key: [u8; 16] = [0; 16];
         key[0..4].copy_from_slice(&old_key[0..4]);
-        key[4..8].copy_from_slice(&new_score.to_be_bytes());
-        key[8..12].copy_from_slice(&new_total.to_be_bytes());
+        key[4..8].copy_from_slice(&new_score.0.to_be_bytes());
+        key[8..12].copy_from_slice(&new_score.1.to_be_bytes());
         key[12..16].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
@@ -247,12 +239,23 @@ where
         }
     }
 
-    fn score_from_times(&self, el: &T, BestTimes { elapsed, .. }: BestTimes) -> EstimatedTime {
-        elapsed + self.estimated_remaining_time(el)
+    fn score_from_times(
+        &self,
+        BestTimes {
+            elapsed,
+            estimated_remaining,
+            ..
+        }: BestTimes,
+    ) -> EstimatedTime {
+        elapsed + estimated_remaining
     }
 
     fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> EstimatedTime {
         el.elapsed() + self.estimated_remaining_time(el.get())
+    }
+
+    fn score_from_heap_key(&self, key: &[u8]) -> EstimatedTime {
+        u32::from_be_bytes(key[4..8].try_into().unwrap())
     }
 
     fn get_heap_key(&self, el: &T, score: EstimatedTime) -> [u8; 12] {
@@ -263,13 +266,7 @@ where
         key[8..12].copy_from_slice(&self.seq.fetch_add(1, Ordering::AcqRel).to_be_bytes());
         key
     }
-    fn new_heap_key(
-        &self,
-        old_key: &[u8],
-        new_score: u32,
-        _old_elapsed: u32,
-        _new_elapsed: u32,
-    ) -> [u8; 12] {
+    fn new_heap_key(&self, old_key: &[u8], new_score: EstimatedTime) -> [u8; 12] {
         let mut key: [u8; 12] = [0; 12];
         key[0..4].copy_from_slice(&old_key[0..4]);
         key[4..8].copy_from_slice(&new_score.to_be_bytes());
