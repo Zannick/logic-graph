@@ -181,9 +181,6 @@ areas:
         # but in practice this is trickier to make consistent. And the fast_hover might be faster
     - name: Basin
       coord: [6.65, 7.6]
-      local:
-        - to: Wall Right
-          jumps: 2
       locations:
         - name: Flask
           canon: Emergence_Dropoff_Flask
@@ -203,9 +200,11 @@ areas:
           tags: [cskip]
       exits:
         - to: Wall Right
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: Above Wall
       coord: [6.5, 7.1]
       local:
@@ -693,8 +692,6 @@ areas:
               movement: mist1
     - name: Dais Right
       coord: [9.05, 8.55]
-      local:
-        - to: Dais Middle
       locations:
         - name: Shockwave Urn
           canon: Slingshot_Charge
@@ -715,8 +712,10 @@ areas:
           tags: [cskip]
       exits:
         - to: Dais Middle
-          req: $hook
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Tunnel Ledge
           req: $hover
           movement: base
@@ -880,10 +879,6 @@ areas:
       coord: [9.55, 8.4]
       local:
         - to: South
-        - to: Dais Right
-          jumps: 2
-        - to: Tunnel Entrance
-          jumps: 1
       locations:
         - name: Spin Into Tunnel
           canon: Emergence_Storage_Tunnel
@@ -898,9 +893,12 @@ areas:
               tags: [charge_time]
       exits:
         - to: Tunnel Entrance
-          req: $hook
           movement: fast_hover
           jumps: 0.5
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 0.5
         - to: Behind Facade
           req: $hook
           movement: fast_hover
@@ -912,8 +910,10 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
         - to: Dais Right
-          req: $hover
           movement: base
+          penalties:
+            - when: not $hover
+              jumps: 2
     - name: Tunnel Entrance
       coord: [9.65, 8.3]
       local:
@@ -1073,12 +1073,8 @@ areas:
           movement: base
           jumps: 1
           penalties:
-            - when: not $hook
+            - when: not $hook and (not $grab or not Anuman)
               jumps: 1
-        - to: Northeast Ledge
-          req: $grab and Anuman
-          movement: base
-          jumps: 1
     - name: Wall 1 West
       coord: [7.525, 6.85]
       local:  
@@ -1334,6 +1330,13 @@ areas:
         - to: Wall 4 West
           jumps: 1
       locations:
+        - name: Charge Far Through Wall
+          canon: Emergence_Rocks_Fall_Rock_4
+          item: Emergence_Rocks_Fall_Rock_4
+          req: $charge
+          to: Fling Point
+          movement: fling
+          penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Emergence_Rocks_Fall_Rock_4
           item: Emergence_Rocks_Fall_Rock_4
@@ -1429,8 +1432,6 @@ areas:
           jumps: 1
     - name: Fling Point
       coord: [7.8, 8.65]
-      local:
-        - to: East
       exits:
         - to: East
           movement: fast_hover
@@ -1448,7 +1449,6 @@ areas:
       coord: [7.9, 8.75]
       exits:
         - to: Wall 4 East Ledge
-          req: $hook
           movement: fast_hover
           jumps: 1
           penalties:

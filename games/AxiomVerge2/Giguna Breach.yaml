@@ -987,7 +987,6 @@ areas:
         - to: Pipe Entrance
       exits:
         - to: Middle Tier Middle
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
           penalties:
@@ -1106,7 +1105,6 @@ areas:
         - to: Upper Column 1
       exits:
         - to: Rooftop West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalties:
             - when: not Slingshot_Hook or not Drone_Hover
@@ -1511,19 +1509,20 @@ areas:
       local:
         - to: Lower Ledge
           thru: [[19.45, 17.75], [19.45, 18.0]]
-        - to: North
-          jumps: 3
-        - to: Center Ledge
-          jumps: 2
       exits:
         - to: North
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
         - to: Center Ledge
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: North
       coord: [19.5, 17.2]
       local:
@@ -1672,7 +1671,6 @@ areas:
       coord: [17.9, 8.75]
       exits:
         - to: West Rock Ledge
-          req: Slingshot_Hook
           movement: fast_hover
           penalties:
             - when: not Slingshot_Hook
@@ -1730,7 +1728,6 @@ areas:
       coord: [17.9, 12.75]
       exits:
         - to: Button
-          req: Slingshot_Hook and Slingshot_Weapon
           movement: fast_hover
           jumps: 1
           penalties:

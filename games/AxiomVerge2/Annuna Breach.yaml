@@ -32,21 +32,20 @@ areas:
       local:
         - to: West
           jumps: 1
-        - to: Upper Portal Exit
-          jumps: 2
       exits:
         - to: Upper Portal Exit
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
     - name: Upper Portal Exit
       coord: [32.475, 26.6]
       data:
         flipside: Annuna > Smiley Room > Upper Portal Stand
       local:
         - to: West Ground
-        - to: Column East
-          jumps: 1
       exits:
         - to: Northeast Ledge
           req: Slingshot_Hook and Drone_Hover
@@ -63,13 +62,13 @@ areas:
             - when: not Slingshot_Weapon
               add: 0.5  # timing to evade the enemy
         - to: Column East
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: Column East
       coord: [32.8, 26.4]
-      local:
-        - to: Upper Portal Exit
       exits:
         - to: Northeast Ledge
           req: Slingshot_Hook or Drone_Hover
@@ -79,8 +78,10 @@ areas:
             - when: not Drone_Hover
               jumps: 1
         - to: Upper Portal Exit
-          req: Slingshot_Hook and Drone_Hover and Slingshot_Weapon
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover or not Slingshot_Weapon
+              movement: base
         - to: Uhrum Breach > Annuna Gate > Save Point
           req: Slingshot_Hook and Drone_Hover and Slingshot_Weapon
           movement: fast_hover
@@ -127,18 +128,18 @@ areas:
       coord: [33.05, 27.75]
       data:
         flipside: Annuna > Smiley Room > Bottom
-      local:
-        - to: Lower Portal Exit
-          jumps: 3
       locations:
         - name: Health
           item: Health_Fragment
           tags: [standing]
       exits:
         - to: Lower Portal Exit
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
 
 - name: Corner  # MARK: Corner
   on_entry: $reset_old_area(^newpos)
@@ -187,19 +188,20 @@ areas:
     - name: Upper Ledge
       coord: [35.25, 25.35]
       local:
-        - to: North
-          jumps: 1
-        - to: Upper Left
         - to: East Ledge
         - to: Middle Block
       exits:
         - to: Upper Left
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: North
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: East Ledge
       coord: [35.4, 25.75]
       data:
@@ -215,26 +217,27 @@ areas:
       coord: [35.2, 25.9]
       local:
         - to: West Block
-        - to: East Ledge
-          jumps: 1
       exits:
         - to: Upper Ledge
           req: Slingshot_Hook
           movement: base
           jumps: 2
         - to: East Ledge
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
     - name: West Block
       coord: [34.6, 25.9]
       local:
-        - to: Middle Block
         - to: Empty Plinth
       exits:
         - to: Middle Block
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
         - to: West Ledge
           req: Slingshot_Hook or Drone_Hover
           movement: base
@@ -304,21 +307,23 @@ areas:
       data:
         flipside: Annuna > West Bridge > Upper Tier Middle
       local:
-        - to: Center Platform West
         - to: Save Point
       exits:
         - to: Center Platform West
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Center Platform West
       coord: [34.35, 24.3]
       local:
         - to: Bottom Left
-        - to: Center Platform East
       exits:
         - to: Center Platform East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
     - name: Bottom Left
       coord: [34.35, 24.8]
       data:
@@ -377,20 +382,21 @@ areas:
       coord: [39.25, 16.75]
       local:
         - to: Center Hill East
-        - to: East
-          jumps: 1
       exits:
         - to: East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
     - name: East
       coord: [39.9, 16.75]
-      local:
-        - to: East Hill
       exits:
         - to: East Hill
-          req: $spin
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Slingshot_Weapon
+              movement: base
         - to: Gate and Floor > Northwest
           tags: [xdoor]
 
@@ -623,12 +629,13 @@ areas:
       coord: [41.7, 21.7]
       local:
         - to: South
-        - to: Hill East
-          jumps: 1
       exits:
         - to: Hill East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: base
+              jumps: 1
     - name: South
       coord: [41.5, 21.8]
       local:
@@ -798,16 +805,16 @@ areas:
   spots:
     - name: East
       coord: [38.9, 23.55]
-      local:
-        - to: Button
-          jumps: 2
       exits:
         - to: Factory Foyer > West
           tags: [xdoor]
         - to: Button
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
     - name: Button
       coord: [38.3, 23.4]
       data:
@@ -913,13 +920,13 @@ areas:
               movement: mist1
     - name: Save Point
       coord: [34.525, 23.7]
-      local:
-        - to: Tower Base West
-          jumps: 1
       exits:
         - to: Tower Base West
-          req: Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Tower Lower West Ledge
           req: Slingshot_Hook
           movement: fast_hover
@@ -1001,16 +1008,17 @@ areas:
       data:
         flipside: Annuna > West Bridge > Tower West Mid-air
       local:
-        - to: Tower Peak
-          jumps: 2
         - to: Tower Upper West Ledge
         - to: Tower Lower West Ledge
         - to: Save Point
       exits:
         - to: Tower Peak
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Top Platform West
           req: Slingshot_Hook and Drone_Hover
           movement: base
@@ -1057,16 +1065,17 @@ areas:
     - name: Northwest Platform
       coord: [34.75, 21.85]
       local:
-        - to: Northwest Plinth
-          jumps: 2
         - to: Save Point
         - to: Tower Upper West Ledge
         - to: Tower Lower West Ledge
       exits:
         - to: Northwest Plinth
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
         - to: Tower Peak West
           req: Drone_Hover
           movement: base

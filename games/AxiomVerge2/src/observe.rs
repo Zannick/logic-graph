@@ -4873,9 +4873,6 @@ impl FullObservation {
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
@@ -4883,9 +4880,6 @@ impl FullObservation {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
-            LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
@@ -5289,6 +5283,9 @@ impl FullObservation {
             }
             LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
+            }
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
             LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
@@ -5938,9 +5935,6 @@ impl FullObservation {
             LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
-            LocationId::Glacier__Lonely_Bull__Arena__Quick_Gudam => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
-            }
             LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
@@ -6163,9 +6157,6 @@ impl FullObservation {
             LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Quick_Gudam_as_Indra => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
-            }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM_FLASK);
             }
@@ -6373,9 +6364,6 @@ impl FullObservation {
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
-            }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
@@ -6518,9 +6506,6 @@ impl FullObservation {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
-            }
-            LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall => {

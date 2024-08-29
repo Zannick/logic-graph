@@ -310,10 +310,6 @@ areas:
         - to: West Rooftops Upper East
       exits:
         - to: NW Bowl Edifice
-          req: $grab
-          movement: base
-          jumps: 3
-        - to: NW Bowl Edifice
           req: $hook or $grab
           movement: base
           jumps: 1
@@ -1392,15 +1388,14 @@ areas:
         - to: Left Vertical Pipe
       exits:
         - to: Double Pipe Left
-          req: $grab
+          req: $hook or $grab or Anuman
           movement: base
-          jumps: 3
+          jumps: 2
           penalties:
-            - when: not Wall_Climb
+            - when: not $hook and not Anuman and not Wall_Climb
+              jumps: 2
+            - when: not $hook and not Anuman
               jumps: 1
-        - to: Double Pipe Left
-          req: $hook
-          time: 1  # ?
     - name: Left Vertical Pipe
       coord: [10.45, 27.35]
       local:
@@ -1490,7 +1485,10 @@ areas:
           item: Irikar_Gudam
           canon: Irikar_Gudam
           req: $can_damage
-          time: 20  # including 3s explode animation
+          time: 7  # including 3s explode animation
+          penalties:
+            - when: not $boomerang2 or not Ranged_Damage_3 or not $weapon or not Melee_Damage_3 or not Melee_Speed_3
+              add: 13
         - name: Defeat Gudam With Strong Drone
           item: Irikar_Gudam
           canon: Irikar_Gudam
@@ -1504,11 +1502,6 @@ areas:
           price: 200
           time: 1
           penalty_tags: [shockwave, shockwave]
-        - name: Quick Gudam as Indra
-          canon: Irikar_Gudam
-          item: Irikar_Gudam
-          req: $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
-          time: 7
         - name: Boss Reward
           item: Big_Flask
           canon: Irikar_Gudam_Flask

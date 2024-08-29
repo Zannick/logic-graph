@@ -525,7 +525,6 @@ areas:
             - when: not $hook
               jumps: 1
         - to: Door Left
-          req: $hook
           movement: base
           jumps: 1
           penalties:
@@ -2892,7 +2891,6 @@ areas:
           thru: [24.25, 2.7]
       exits:
         - to: East Slope
-          req: $hover
           movement: base
           jumps: 1
           penalties:
@@ -3024,7 +3022,6 @@ areas:
           jumps_down: [0, 4]
       exits:
         - to: Upper Mid-way
-          req: $hook
           movement: base
           jumps: 1.25
           penalties:
@@ -3038,7 +3035,6 @@ areas:
         - to: Above Rocks
       exits:
         - to: Top
-          req: $hook
           movement: base
           jumps: 2
           penalties:
@@ -3879,7 +3875,6 @@ areas:
             - when: not $hook
               jumps: 1
         - to: Below East Gate
-          req: $hook and $hover
           movement: fast_hover
           jumps: 1
           penalties:

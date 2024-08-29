@@ -1021,7 +1021,6 @@ areas:
           movement: base
           jumps: 1
         - to: Center East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
           penalties:
@@ -1216,8 +1215,6 @@ areas:
       coord: [31.2, 26.8]
       local:
         - to: Button
-        - to: Save Point
-          jumps: 1
         - to: Structure West
       exits:
         - to: Building Roof Ledge
@@ -1234,9 +1231,11 @@ areas:
             - when: not Drone_Hover
               movement: base
         - to: Save Point
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook and Drone_Hover
+              movement: base
         - to: Annuna Breach > Smiley > Upper Portal Exit
           req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1537,15 +1536,11 @@ areas:
           canon: Uhrum_Breach_Overgrown_Ruins_Wall
           item: Uhrum_Breach_Overgrown_Ruins_Wall
           to: Wall West
-          movement: drone_blocks_1
-          tags: [event]
-        - name: Smash Through Wall
-          canon: Uhrum_Breach_Overgrown_Ruins_Wall
-          item: Uhrum_Breach_Overgrown_Ruins_Wall
-          req: Drone_Melee_Damage_3
-          to: Wall West
           movement: base
           tags: [event]
+          penalties:
+            - when: not Drone_Melee_Damage_3
+              movement: drone_blocks_1
         - name: Mist Through Wall
           canon: Uhrum_Breach_Overgrown_Ruins_Wall
           item: Uhrum_Breach_Overgrown_Ruins_Wall

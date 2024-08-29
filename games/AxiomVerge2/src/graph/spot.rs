@@ -856,7 +856,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi__Divided_Room__West,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi__Divided_Room__West__ex__Wiggly_Room__East_1, ExitId::Amagi__Divided_Room__West__ex__Wiggly_Room__East_1)),
+        exit_range: Some((ExitId::Amagi__Divided_Room__West__ex__Column_West_1, ExitId::Amagi__Divided_Room__West__ex__Wiggly_Room__East_1)),
         action_range: None,
     },
     SpotDef {
@@ -2020,7 +2020,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi__Wiggly_Room__East_Bottom,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi__Wiggly_Room__East_Bottom__ex__East_Rock_1, ExitId::Amagi__Wiggly_Room__East_Bottom__ex__East_Rock_1)),
         action_range: None,
     },
     SpotDef {
@@ -2062,7 +2062,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi__Wiggly_Room__Midwest_Rock,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi__Wiggly_Room__Midwest_Rock__ex__Cache_1, ExitId::Amagi__Wiggly_Room__Midwest_Rock__ex__Cache_3)),
+        exit_range: Some((ExitId::Amagi__Wiggly_Room__Midwest_Rock__ex__Cache_1, ExitId::Amagi__Wiggly_Room__Midwest_Rock__ex__Cache_2)),
         action_range: None,
     },
     SpotDef {
@@ -3868,7 +3868,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Annuna__Mirror_Match__Plinth_Adjacent,
         loc_range: Some((LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Shockwave_Flask, LocationId::Annuna__Mirror_Match__Plinth_Adjacent__Spin_into_Flask)),
-        exit_range: Some((ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_1, ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_2)),
+        exit_range: Some((ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_1, ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_1)),
         action_range: None,
     },
     SpotDef {
@@ -5026,7 +5026,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Annuna__West_Bridge__Water_Below_Ledge,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Annuna__West_Bridge__Water_Below_Ledge__ex__Water_Ledge_1, ExitId::Annuna__West_Bridge__Water_Below_Ledge__ex__Water_Ledge_1)),
         action_range: None,
     },
     SpotDef {
@@ -5799,7 +5799,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Ebih_Breach__Rock_Block__Rock_East,
-        loc_range: Some((LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All, LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All)),
+        loc_range: Some((LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up, LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All)),
         exit_range: Some((ExitId::Ebih_Breach__Rock_Block__Rock_East__ex__Rock_Southwest_1, ExitId::Ebih_Breach__Rock_Block__Rock_East__ex__West_13_1)),
         action_range: None,
     },
@@ -5811,7 +5811,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Ebih_Breach__Rock_Block__Rock_Top,
-        loc_range: Some((LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down, LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down)),
+        loc_range: Some((LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down, LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down)),
         exit_range: Some((ExitId::Ebih_Breach__Rock_Block__Rock_Top__ex__Rock_East_1, ExitId::Ebih_Breach__Rock_Block__Rock_Top__ex__West_Shaft_Midway_1)),
         action_range: None,
     },
@@ -8457,7 +8457,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Emergence__Rocks_Fall__Wall_4_West_Ledge,
-        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover)),
+        loc_range: Some((LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover)),
         exit_range: Some((ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1, ExitId::Emergence__Rocks_Fall__Wall_4_West_Ledge__ex__Storage__West_Hook_Point_1)),
         action_range: None,
     },
@@ -11200,7 +11200,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Labyrinth__First_Pillar,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1, ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_2)),
+        exit_range: Some((ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1, ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1)),
         action_range: None,
     },
     SpotDef {
@@ -14728,7 +14728,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__Secret_Door,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1, ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Secret_Door__ex__East_11_1, ExitId::Glacier__Vertical_Room__Secret_Door__ex__West_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -15850,7 +15850,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Irikar__Basement_Pipes__Right_Vertical_Pipe,
         loc_range: None,
-        exit_range: Some((ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1, ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_2)),
+        exit_range: Some((ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1, ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1)),
         action_range: None,
     },
     SpotDef {
@@ -16288,7 +16288,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Irikar__Hub__NW_Staircase_Upper,
         loc_range: None,
-        exit_range: Some((ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1, ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_2)),
+        exit_range: Some((ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1, ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1)),
         action_range: None,
     },
     SpotDef {
@@ -19263,7 +19263,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Uhrum_Breach__Overgrown_Ruins__Wall_East,
-        loc_range: Some((LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall, LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall)),
+        loc_range: Some((LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall, LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall)),
         exit_range: Some((ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1, ExitId::Uhrum_Breach__Overgrown_Ruins__Wall_East__ex__Wall_West_1)),
         action_range: None,
     },
@@ -19791,7 +19791,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     },
     SpotDef {
         id: SpotId::Uhrum__Cavern__Wall_Right,
-        loc_range: Some((LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover, LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover)),
+        loc_range: Some((LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall, LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover)),
         exit_range: Some((ExitId::Uhrum__Cavern__Wall_Right__ex__Wall_Left_1, ExitId::Uhrum__Cavern__Wall_Right__ex__West_Ledge_1)),
         action_range: None,
     },
@@ -20962,7 +20962,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1, ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_2)),
+        exit_range: Some((ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1, ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1)),
         action_range: None,
     },
     SpotDef {

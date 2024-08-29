@@ -250,13 +250,14 @@ areas:
         - to: Down Arrow
         - to: Hidden Fork
           thru: [10.3, 23.3]
-        - to: Save Point
-          jumps: 4
       exits:
         - to: Save Point
-          req: Slingshot_Hook and Slingshot_Weapon and Drone_Hover
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook or not Slingshot_Weapon or not Drone_Hover
+              movement: base
+              jumps: 2
 
 - name: Hover Room  # MARK: Hover Room
   on_entry: $reset_old_area(^newpos)
@@ -1116,7 +1117,6 @@ areas:
           jumps: 3
       exits:
         - to: Passage West
-          req: Slingshot_Hook
           movement: fast_hover
           penalties:
             - when: not Slingshot_Hook

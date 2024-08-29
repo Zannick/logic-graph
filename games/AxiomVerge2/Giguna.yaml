@@ -2574,8 +2574,6 @@ areas:
       coord: [15.7, 19.2]
       local:
         - to: Deposit
-        - to: Wingtip
-          jumps: 6
         - to: Rear Gap
           jumps: 7
       locations:
@@ -2587,14 +2585,13 @@ areas:
           tags: [shockwave]
       exits:
         - to: Wingtip
-          req: $hook
           movement: base
           jumps: 4
+          penalties:
+            - when: not $hook
+              jumps: 2
     - name: Deposit
       coord: [15.65, 19.5]
-      local:
-        - to: Deposit Ledge
-          jumps: 2
       locations:
         - name: Flask
           canon: Giguna_Lamassu_Flask
@@ -2614,9 +2611,11 @@ areas:
           tags: [cskip]
       exits:
         - to: Deposit Ledge
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
     - name: East 18
       coord: [15.95, 17.5]
       local:
@@ -3866,10 +3865,6 @@ areas:
         - to: Top East
       exits:
         - to: Rooftop East
-          req: $grab
-          movement: base
-          jumps: 4
-        - to: Rooftop East
           req: $hook or $grab
           movement: base
           jumps: 2
@@ -4540,11 +4535,6 @@ areas:
           movement: base
     - name: Above Rock
       coord: [21.5, 21.3]
-      local:
-        - to: Ledge Above Rock
-          jumps: 2
-        - to: Middle Hill By Switch
-          jumps: 4
       locations:
         - name: Spin Downwards
           canon: Giguna_Vertical_Interchange_Rock
@@ -4569,13 +4559,18 @@ areas:
           req: Giguna_Vertical_Interchange_Rock
           movement: base
         - to: Ledge Above Rock
-          req: $hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Middle Hill By Switch
-          req: $hook
           movement: fast_hover
           jumps: 2
+          penalties:
+            - when: not $hook
+              movement: base
+              jumps: 2
         - to: Ledge Above Rock
           req: Nanite_Mist
           movement: mist2
@@ -5306,15 +5301,15 @@ areas:
     - name: East 21
       coord: [20.95, 20.65]
       local:
-        - to: East Platform
-          jumps: 3
         - to: East Grass Ledge
           jumps: 1
       exits:
         - to: East Platform
-          req: Anuman
           movement: base
           jumps: 2
+          penalties:
+            - when: not Anuman
+              jumps: 1
         - to: Vertical Interchange > West 21
           tags: [xshift]
     - name: East Grass Ledge

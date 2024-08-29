@@ -98,10 +98,6 @@ areas:
         - to: Save Point
       exits:
         - to: Portal Stand
-          req: $grab and $climb
-          movement: base
-          jumps: 7
-        - to: Portal Stand
           req: $hook or ($grab and $climb)
           movement: base
           jumps: 4
@@ -1799,9 +1795,6 @@ areas:
         - to: West Water Nook
         - to: Water Slope
         - to: East 28
-        - to: East Water's Edge
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Center Island East
           req: Underwater_Movement or $hook or $grab
@@ -2217,14 +2210,6 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge Through Wall and Hover
-          canon: Uhrum_Cavern_Wall
-          item: Uhrum_Cavern_Wall
-          req: $chargehover
-          to: West Ledge
-          movement: fast_hover
-          tags: [event]
-          penalty_tags: [charge_time]
         - name: Spin Through Wall
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
@@ -2239,10 +2224,13 @@ areas:
         - name: Spin Through Wall and Hover
           canon: Uhrum_Cavern_Wall
           item: Uhrum_Cavern_Wall
-          req: $spinhover
+          req: $hookhover and (Slingshot_Weapon or Slingshot_Charge)
           to: West Ledge
           movement: fast_hover
           tags: [event]
+          penalties:
+            - when: not Slingshot_Weapon
+              tags: [charge_time]
       exits:
         - to: Wall Left
           req: Uhrum_Cavern_Wall
@@ -3418,7 +3406,6 @@ areas:
           jumps_down: 1
       exits:
         - to: Upper Level Middle
-          req: Anuman
           movement: base
           jumps: 1
           penalties:
@@ -3505,7 +3492,6 @@ areas:
           jumps_down: 1
       exits:
         - to: Roof Middle
-          req: Anuman
           movement: base
           jumps: 1
           penalties:

@@ -489,14 +489,14 @@ areas:
         flipside: Amagi > East Lake > Southeast Column
       local:
         - to: Plinth
-        - to: Arch East
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Arch East
-          req: Slingshot_Hook
+          req: Underwater_Movement or Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
 
 - name: Center Ruins  # MARK: Center Ruins
   on_entry: $reset_old_area(^newpos)
@@ -563,7 +563,6 @@ areas:
       coord: [29.85, 17.5]
       local:
         - to: Upper East Left
-        - to: Center Shaft Top East
       exits:
         - to: Center Shaft Top
           req: Underwater_Movement or Slingshot_Hook or Drone_Hover
@@ -576,8 +575,12 @@ areas:
             - when: not Slingshot_Hook or not Drone_Hover
               movement: water
         - to: Center Shaft Top East
-          req: Underwater_Movement and Slingshot_Hook
           movement: fast_hover
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+            - when: not Slingshot_Hook
+              movement: water
     - name: Upper East Left
       coord: [30.05, 17.95]
       local:
@@ -594,13 +597,15 @@ areas:
       coord: [30.6, 17.95]
       local:
         - to: Upper East Left
-        - to: East 18
-          jumps: 1
       exits:
         - to: East 18
-          req: Underwater_Movement and Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+            - when: not Slingshot_Hook
+              movement: water
     - name: East 18
       coord: [30.9, 17.75]
       local:
@@ -792,14 +797,14 @@ areas:
       coord: [33.8, 14.75]
       local:
         - to: Middle
-        - to: Column
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Column
-          req: Slingshot_Hook
+          req: Underwater_Movement or Slingshot_Hook
           movement: base
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Column
       coord: [33.5, 14.5]
       data:
@@ -883,13 +888,6 @@ areas:
       coord: [34.75, 19.75]
       data:
         flipside: Amagi > Secret Chamber > East Dur-Esla
-      local:
-        - to: Middle West
-          jumps: 3
-          jump_mvmt: water
-        - to: Center Column
-          jumps: 3
-          jump_mvmt: water
       exits:
         - to: Center Column
           req: Nanite_Mist
@@ -898,13 +896,19 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
         - to: Center Column
-          req: Underwater_Movement and Slingshot_Hook
+          req: Underwater_Movement
           movement: water
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
         - to: Middle West
-          req: Underwater_Movement and Slingshot_Hook
+          req: Underwater_Movement
           movement: water
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: South
       coord: [34.5, 19.8]
       local:
@@ -947,15 +951,14 @@ areas:
       coord: [34.5, 20.7]
       data:
         flipside: Amagi > Isolation > Save Point
-      local:
-        - to: North
-          jumps: 2
-          jump_mvmt: water
       exits:
         - to: North
-          req: Slingshot_Hook
-          movement: base
+          req: Underwater_Movement or Slingshot_Hook
+          movement: water
           jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
     - name: Wall East
       coord: [35.125, 20.75]
       data:
@@ -1107,15 +1110,14 @@ areas:
       coord: [26.25, 17.75]
       data:
         flipside: Amagi > West Lake > Mid-water Above Gap
-      local:
-        - to: Button
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Button
-          req: Slingshot_Hook
-          movement: base
+          req: Underwater_Movement or Slingshot_Hook
+          movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Center Platform West
           req: Underwater_Movement and Slingshot_Hook
           movement: water
@@ -1146,9 +1148,6 @@ areas:
       coord: [26.9, 17.35]
       local:
         - to: Button
-        - to: Center Platform
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Gate East
           req: Amagi_Breach_West_Ruins_Gate
@@ -1157,9 +1156,12 @@ areas:
             - when: not Underwater_Movement
               movement: base
         - to: Center Platform
-          req: Underwater_Movement and Slingshot_Hook and Drone_Hover
+          req: Underwater_Movement
           movement: fast_hover
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: not Slingshot_Hook or not Drone_Hover
+              movement: water
         - to: Center Platform West
           req: Underwater_Movement and Slingshot_Hook and Drone_Hover
           movement: fast_hover
@@ -1346,9 +1348,6 @@ areas:
       coord: [31.1, 19.75]
       data:
         flipside: Amagi > Divided Room > Upper Left Corner
-      local:
-        - to: West Ledge
-          jumps: 1
       exits:
         - to: Twisty Passages > East
           tags: [xdoor]
@@ -1357,9 +1356,13 @@ areas:
           movement: fast_hover
           jumps: 1
         - to: West Ledge
-          req: Underwater_Movement and Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement and not Slingshot_Hook
+              movement: base
+            - when: not Slingshot_Hook
+              movement: water
     - name: West Ledge
       coord: [31.3, 19.55]
       data:
@@ -1428,31 +1431,33 @@ areas:
       data:
         flipside: Amagi > Divided Room > Portal East
       local:
-        - to: Empty Plinth
-          jumps: 1
         - to: Middle Bubbles
       exits:
         - to: Empty Plinth
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement and not Slingshot_Hook
+              movement: base
+            - when: not Slingshot_Hook
+              movement: water
     - name: Middle Bubbles
       coord: [31.9, 19.7]
       data:
         flipside: Amagi > Divided Room > Upper Right Corner
       local:
-        - to: Empty Plinth
-          jumps: 1
-          jump_mvmt: water
         - to: East Ledge
           jumps: 1
         - to: East
           jumps: 2
       exits:
         - to: Empty Plinth
-          req: Underwater_Movement and Slingshot_Hook
+          req: Underwater_Movement
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: water
     - name: East
       coord: [32.9, 19.75]
       local:
@@ -1479,18 +1484,15 @@ areas:
       local:
         - to: West
           jumps: 1
-        - to: Column West
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Column West
-          req: Slingshot_Hook
+          req: Underwater_Movement or Slingshot_Hook
           movement: fast_hover
           jumps: 1
           penalties:
             - when: not Underwater_Movement
               movement: base
-            - when: not Drone_Hover
+            - when: not Slingshot_Hook or not Drone_Hover
               movement: water
         # TODO: fast_hover into Center Ruins
     - name: Column West
@@ -1528,15 +1530,14 @@ areas:
           tags: [ydoor]
     - name: East
       coord: [32.9, 18.65]
-      local:
-        - to: Column East
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Column East
-          req: Slingshot_Hook
-          movement: base
+          req: Underwater_Movement or Slingshot_Hook
+          movement: water
           jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
         - to: Split One-Way > West 19
           tags: [xdoor]
 
@@ -1599,14 +1600,15 @@ areas:
       local:
         - to: West 20
         - to: Gate West
-        - to: East Ledge
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: East Ledge
-          req: Slingshot_Hook
-          movement: base
-          jumps: 2
+          req: Underwater_Movement or Slingshot_Hook
+          movement: water
+          jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
     - name: West 20
       coord: [33.1, 19.75]
       local:
@@ -1740,28 +1742,29 @@ areas:
       local:
         - to: Save Point
           jumps: 4
-        - to: Lower East Ledge
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: Lower East Ledge
-          req: Slingshot_Hook
-          movement: base
-          jumps: 2
+          req: Underwater_Movement or Slingshot_Hook
+          movement: water
+          jumps: 1
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
+              jumps: 1
     - name: Save Point
       coord: [30.475, 22.15]
       data:
         flipside: Annuna > Invisible Enemies > Portal Stand
       local:
         - to: Bottom
-        - to: Big Rock West
-          jumps: 2
-          jump_mvmt: water
       exits:
         - to: Big Rock West
-          req: Drone_Hover
-          movement: base
+          req: Underwater_Movement or Drone_Hover
+          movement: water
           jumps: 2
+          penalties:
+            - when: not Underwater_Movement
+              movement: base
       actions:
         - name: Save
           do: $save

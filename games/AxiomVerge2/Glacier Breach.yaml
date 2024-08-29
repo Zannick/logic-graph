@@ -1048,7 +1048,6 @@ areas:
         - to: Mid Tier West
       exits:
         - to: Upper Tier Middle
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalties:
             - when: not Slingshot_Hook or not Drone_Hover
@@ -1068,7 +1067,6 @@ areas:
         - to: Mid Tier East
       exits:
         - to: Upper Tier Middle
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           penalties:
             - when: not Slingshot_Hook or not Drone_Hover

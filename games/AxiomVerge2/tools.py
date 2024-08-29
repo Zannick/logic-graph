@@ -20,6 +20,12 @@ LOC_SPOTS = {spot['id'] for spot in AV2.spots()
 
 UNFLIPPABLE = ('Antarctica', 'Interior', 'Menu')
 
+def get_movement_cost(movement):
+    if m := AV2.exit_movements.get(movement):
+        if 'price_per_sec' in m or 'base_price' in m:
+            return m.get('costs', AV2.default_price_type)
+    return None
+
 def get_spot_graph_coordinates(spot_id):
     spot = AV2.id_lookup[spot_id]
     if 'coord' in spot:    
@@ -61,6 +67,48 @@ def notable_spots_without_map_spot():
         for s in spots
     ])
 
+def find_combinable():
+    for spot in AV2.spots():
+        categories = defaultdict(list)
+        for local in spot.get('local', ()):
+            if 'thru' in local:
+                continue
+            cat = ('move', None, local['to'])
+            categories[cat].append(f'Local movement {spot["fullname"]} -> {local["to"]}')
+        for exit in spot.get('exits', ()):
+            if 'price' in exit:
+                cost = f'{exit["price"]} {exit.get('costs', AV2.default_price_type)}'
+            else:
+                cost = get_movement_cost(exit.get('movement'))
+            cat = ('move', cost, exit['to'])
+            categories[cat].append(exit['fullname'])
+        for loc in spot.get('locations', []) + spot.get('hybrid', []):
+            if 'price' in loc:
+                cost = f'{loc["price"]} {loc.get('costs', AV2.default_price_type)}'
+            else:
+                cost = get_movement_cost(loc.get('movement'))
+            cat = ('loc', cost, loc['item'], loc.get('canon'), loc.get('to'))
+            categories[cat].append(loc['fullname'])
+        for act in spot.get('actions', ()):
+            if 'price' in act:
+                cost = f'{act["price"]} {act.get('costs', AV2.default_price_type)}'
+            else:
+                cost = get_movement_cost(act.get('movement'))
+            cat = ('act', cost, act.get('to'))
+            categories[cat].append(act['fullname'])
+        for cat, places in categories.items():
+            if len(places) > 1:
+                pprint((f'Combinable {cat}:', places))
+
+def penalty_req_conflicts():
+    odd = []
+    for point in AV2.all_points():
+        if 'req' in point and 'penalties' in point:
+            if ' or ' not in point['req']:
+                not_first = f'not {point['req'].split(' and ', 1)[0]}'
+                if any(not_first in p.get('when', '') for p in point['penalties']):
+                    odd.append(point['fullname'])
+    pprint(odd)
 
 def same_coordinates_no_flipside():
     by_coord = defaultdict(list)

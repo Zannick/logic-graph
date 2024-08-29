@@ -24291,9 +24291,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
@@ -24301,9 +24298,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
-            LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
@@ -24707,6 +24701,9 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             }
             LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
+            }
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
             LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
@@ -25356,9 +25353,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
-            LocationId::Glacier__Lonely_Bull__Arena__Quick_Gudam => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
-            }
             LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
@@ -25581,9 +25575,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Quick_Gudam_as_Indra => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
-            }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM_FLASK);
             }
@@ -25791,9 +25782,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
-            }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
@@ -25936,9 +25924,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
-            }
-            LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall => {
@@ -26699,9 +26684,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
             LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
@@ -26709,9 +26691,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => {
-                self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
-            }
-            LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All => {
                 self.cbits6.insert(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
@@ -27115,6 +27094,9 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             }
             LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
+            }
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
             LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
@@ -27764,9 +27746,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
-            LocationId::Glacier__Lonely_Bull__Arena__Quick_Gudam => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
-            }
             LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
@@ -27989,9 +27968,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Quick_Gudam_as_Indra => {
-                self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
-            }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_IRIKAR_GUDAM_FLASK);
             }
@@ -28199,9 +28175,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
-            }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
@@ -28344,9 +28317,6 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall => {
-                self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
-            }
-            LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover => {
                 self.cbits11.insert(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall => {
@@ -28619,7 +28589,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Collection_Skip | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_BREACH_ROCKY_CAGES_FLASK);
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK);
             }
             LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => {
@@ -28712,7 +28682,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3);
             }
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4);
             }
             LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede | LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => {
@@ -28856,7 +28826,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block | LocationId::Glacier__Fortress__Inner_Center__Shockwave_Fast_Travel | LocationId::Glacier__Fortress__Parapet_Crenelle_2__Shockwave_Block | LocationId::Glacier__Fortress__Parapet_Crenelle_2__Shockwave_Fast_Travel | LocationId::Glacier__Fortress__Parapet_Center_East__Shockwave_Block | LocationId::Glacier__Fortress__Parapet_Center_East__Shockwave_Fast_Travel => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GLACIER_FORTRESS_FLASK);
             }
-            LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Quick_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam_With_Strong_Drone => {
+            LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam_With_Strong_Drone => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_GLACIER_GUDAM);
             }
             LocationId::Glacier__Lonely_Bull__Arena__Boss_Reward | LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Boss_Reward => {
@@ -28901,7 +28871,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
                 self.cbits6.remove(flags::ContextBits6::VISITED_BREACH_SIGHT);
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam_With_Strong_Drone | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Quick_Gudam_as_Indra => {
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam_With_Strong_Drone | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_IRIKAR_GUDAM);
             }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Boss_Reward => {
@@ -28931,7 +28901,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Collection_Skip | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Fast_Travel => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_LOCKED_DOWN_FLASK);
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
+            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL);
             }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Collection_Skip | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Fast_Travel => {
@@ -28961,7 +28931,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block | LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_EAST_LAKE_BLOCK);
             }
-            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
+            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
                 self.cbits11.remove(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL);
             }
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {
@@ -29692,7 +29662,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Collection_Skip | LocationId::Ebih_Breach__Rocky_Cages__Cage_Bottom__Flask_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_BREACH_ROCKY_CAGES_FLASK)
             }
-            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Charge_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Charge_and_Break_All | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
+            LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down | LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up | LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_EBIH_BREACH_ROCK_BLOCK_ROCK)
             }
             LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Collection_Skip | LocationId::Ebih_Breach__Rock_Block__East_Tunnel__Flask_Fast_Travel => {
@@ -29785,7 +29755,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall | LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_3)
             }
-            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
+            LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover | LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_ROCKS_FALL_ROCK_4)
             }
             LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede | LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => {
@@ -29929,7 +29899,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Glacier__Fortress__Inner_Center__Shockwave_Block | LocationId::Glacier__Fortress__Inner_Center__Shockwave_Fast_Travel | LocationId::Glacier__Fortress__Parapet_Crenelle_2__Shockwave_Block | LocationId::Glacier__Fortress__Parapet_Crenelle_2__Shockwave_Fast_Travel | LocationId::Glacier__Fortress__Parapet_Center_East__Shockwave_Block | LocationId::Glacier__Fortress__Parapet_Center_East__Shockwave_Fast_Travel => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GLACIER_FORTRESS_FLASK)
             }
-            LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Quick_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam_With_Strong_Drone => {
+            LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam | LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam_With_Strong_Drone => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_GLACIER_GUDAM)
             }
             LocationId::Glacier__Lonely_Bull__Arena__Boss_Reward | LocationId::Glacier__Lonely_Bull__Arena__Shockwave_Boss_Reward => {
@@ -29974,7 +29944,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Irikar__Sight_Room__Item_Pedestal__Urn | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Collection_Skip | LocationId::Irikar__Sight_Room__Item_Pedestal__Urn_Fast_Travel => {
                 self.cbits6.contains(flags::ContextBits6::VISITED_BREACH_SIGHT)
             }
-            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam_With_Strong_Drone | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Quick_Gudam_as_Indra => {
+            LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam | LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam_With_Strong_Drone | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Gudam => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_IRIKAR_GUDAM)
             }
             LocationId::Irikar__Boss_Room__Bulls_Feet__Boss_Reward | LocationId::Irikar__Boss_Room__Bulls_Feet__Shockwave_Boss_Reward => {
@@ -30004,7 +29974,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Collection_Skip | LocationId::Uhrum_Breach__Locked_Down__Item_Behind_Gate__Flask_Fast_Travel => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_LOCKED_DOWN_FLASK)
             }
-            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
+            LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Smash_Through_Wall | LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_BREACH_OVERGROWN_RUINS_WALL)
             }
             LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Collection_Skip | LocationId::Uhrum_Breach__Overgrown_Ruins__Cache__Flask_Fast_Travel => {
@@ -30034,7 +30004,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Uhrum__East_Lake__West_Block__Dislodge_Block | LocationId::Uhrum__East_Lake__East_Block__Dislodge_Block => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_EAST_LAKE_BLOCK)
             }
-            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Charge_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
+            LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall_and_Hover | LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall | LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
                 self.cbits11.contains(flags::ContextBits11::VISITED_UHRUM_CAVERN_WALL)
             }
             LocationId::Uhrum__Annuna_Corridor__Upper_Trees__Remote_Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Collection_Skip | LocationId::Uhrum__Annuna_Corridor__Pedestal__Urn_Fast_Travel => {

@@ -1221,7 +1221,7 @@ areas:
               jumps: 6
             - when: not $hook
               jumps: 4
-        - to: Mid 9
+        - to: West 9
           movement: base
           jumps: 10
           penalties:
@@ -3744,9 +3744,6 @@ areas:
               movement: base
     - name: Parapet Center East
       coord: [38.2, 6.0]
-      local:
-        - to: Parapet Peak
-          jumps: 2
       locations:
         - name: Shockwave Block
           canon: Glacier_Fortress_Flask
@@ -3939,16 +3936,14 @@ areas:
           price: 200
           time: 1
           penalty_tags: [shockwave, shockwave]
-        - name: Quick Gudam
-          canon: Glacier_Gudam
-          item: Glacier_Gudam
-          req: $boomerang2 and Ranged_Damage_3 and $weapon and Melee_Damage_3 and Melee_Speed_3
-          time: 7
         - name: Defeat Gudam
           item: Glacier_Gudam
           canon: Glacier_Gudam
           req: $can_damage
-          time: 20  # including 3s explode animation
+          time: 7  # including 3s explode animation
+          penalties:
+            - when: not $boomerang2 or not Ranged_Damage_3 or not $weapon or not Melee_Damage_3 or not Melee_Speed_3
+              add: 13
         - name: Defeat Gudam With Strong Drone
           item: Glacier_Gudam
           canon: Glacier_Gudam

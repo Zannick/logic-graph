@@ -139,13 +139,13 @@ areas:
       local:
         - to: West 6
           jumps: 1
-        - to: First Rocks
-          jumps: 3
       exits:
         - to: First Rocks
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 1
     - name: First Rocks
       coord: [25.45, 5.2]
       data:
@@ -171,26 +171,26 @@ areas:
       local:
         - to: Second Rocks
           thru: [25.6, 4.8]
-        - to: Upper Mid-way
-          jumps: 2
       exits:
         - to: Upper Mid-way
-          req: Slingshot_Hook
           movement: base
           jumps: 1.25
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 0.75
     - name: Upper Mid-way
       coord: [25.4, 4.425]
       data:
         flipside: Ebih > Drone Pit > Upper Mid-way
       local:
         - to: Above Rocks
-        - to: Top
-          jumps: 4
       exits:
         - to: Top
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
     - name: Top
       coord: [25.3, 3.75]
       data:
@@ -593,8 +593,6 @@ areas:
       coord: [27.65, 12.0]
       local:
         - to: Platform 1
-        - to: Center Rock East
-          jumps: 1
         - to: Southeast Plains
       exits:
         - to: Center Rock East
@@ -701,7 +699,6 @@ areas:
         - to: South Plains
       exits:
         - to: Gate East
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 1
           penalties:
@@ -730,8 +727,6 @@ areas:
     - name: Gate West
       coord: [25.7, 11.55]
       local:
-        - to: Button
-          jumps: 2
         - to: Northwest
           jumps: 2
       exits:
@@ -742,9 +737,12 @@ areas:
           req: Ebih_Breach_In_n_Out_Gate
           movement: base
         - to: Button
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
     - name: Button
       coord: [25.45, 11.3]
       local:
@@ -1700,7 +1698,6 @@ areas:
           jumps: 1
       exits:
         - to: East Turn
-          req: Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
           penalties:
@@ -1805,9 +1802,6 @@ areas:
               jumps: 3
     - name: Rock Top
       coord: [19.625, 12.15]
-      local:
-        - to: West Shaft Midway
-          jumps: 4
       locations:
         - name: Mist Down
           canon: Ebih_Breach_Rock_Block_Rock
@@ -1819,29 +1813,24 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge and Down
-          canon: Ebih_Breach_Rock_Block_Rock
-          item: Ebih_Breach_Rock_Block_Rock
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock Southwest
-          movement: base
-          penalty_tags: [charge_time, charge_time]  # May take multiple attempts to clear it all
-          penalties:
-            - add: 2.0  # airtime
-          tags: [event]
         - name: Spin and Down
           canon: Ebih_Breach_Rock_Block_Rock
           item: Ebih_Breach_Rock_Block_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock Southwest
+          movement: base
           penalties:
             - add: 2.0  # airtime
+            - when: not Slingshot_Weapon
+              tags: [charge_time, charge_time]  # May take multiple attempts to clear it all
           tags: [event]
       exits:
         - to: West Shaft Midway
-          req: Slingshot_Hook
           movement: base
           jumps: 2
+          penalties:
+            - when: not Slingshot_Hook
+              jumps: 2
         - to: Rock Southwest
           req: Ebih_Breach_Rock_Block_Rock
           movement: base
@@ -1888,24 +1877,16 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
           tags: [event]
-        - name: Charge and Break All
-          canon: Ebih_Breach_Rock_Block_Rock
-          item: Ebih_Breach_Rock_Block_Rock
-          req: Slingshot_Hook and Slingshot_Charge
-          to: Rock Southwest
-          movement: base
-          penalty_tags: [charge_time]
-          penalties:
-            - add: 0.5  # airtime
-          tags: [event]
         - name: Spin and Break All
           canon: Ebih_Breach_Rock_Block_Rock
           item: Ebih_Breach_Rock_Block_Rock
-          req: Slingshot_Hook and Slingshot_Weapon
+          req: Slingshot_Hook and (Slingshot_Weapon or Slingshot_Charge)
           to: Rock Southwest
           movement: base
           penalties:
             - add: 0.5  # airtime
+            - when: not Slingshot_Weapon
+              tags: [charge_time]
       exits:
         - to: Rock Southwest
           req: Ebih_Breach_Rock_Block_Rock
@@ -2057,8 +2038,6 @@ areas:
         flipside: Ebih > Peak > Between West Door and Tree
       local:
         - to: South
-        - to: West Lower Step
-          jumps: 2
       exits:
         - to: West Upper Ledge
           req: Nanite_Mist
@@ -2067,9 +2046,12 @@ areas:
             - when: not Mist_Upgrade
               movement: mist1
         - to: West Lower Step
-          req: Slingshot_Hook
           movement: fast_hover
           jumps: 1
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              jumps: 1
     - name: South
       coord: [22.5, 2.8]
       local:
