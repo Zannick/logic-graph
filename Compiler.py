@@ -273,6 +273,7 @@ class GameLogic(object):
         # regions/areas/etc are dicts {name: blah, req: blah} (at whatever level)
         self.regions = self._info['regions']
         num_locs = 0
+        num_locals = 0
         for region in self.regions:
             if 'name' not in region:
                 self._errors.append(f'Region in {region["_filename"]} requires name')
@@ -363,6 +364,7 @@ class GameLogic(object):
                                     spot['local'].extend(lcl)
                                 else:
                                     spot['local'] = list(lcl)
+                        num_locals += len(spot.get('local', ()))
                     # hybrid spots are locations that have dests
                     for loc in spot.get('locations', []) + spot.get('hybrid', []):
                         if 'name' not in loc:
@@ -487,6 +489,7 @@ class GameLogic(object):
 
             num_locs += len(region['loc_ids'])
         self.num_locations = num_locs
+        self.num_locals = num_locals
 
 
     def _handle_penalties(self, info, category:str):
@@ -2120,7 +2123,7 @@ if __name__ == '__main__':
                      f'({len(gl.canon_places)} canon locations), '
                      f'{gl.num_actions} actions, {len(gl.all_items)} items, '
                      f'{len(gl.helpers)} helpers, {len(gl.context_types)} context properties, '
-                     f'{len(gl.warps)} warps, {gl.num_exits} exits, '
+                     f'{len(gl.warps)} warps, {gl.num_exits} exits, {gl.num_locals} local connections, '
                      f'{sum(len(rule.variants) for rule in gl.rules.values())} rule variants, '
                      f'{len(gl.access_funcs)} unique access functions, {len(gl.action_funcs)} unique action funcs, '
                      f'{len(gl.num_funcs)} unique num functions')
