@@ -357,7 +357,7 @@
 * Collect Uhrum_Breach_Annuna_Gate_Gate from Uhrum Breach > Annuna Gate > Button > Hit Button
 * Collect Uhrum_Breach_Locked_Down_Gate from Uhrum Breach > Locked Down > Button > Hit Button
 * Collect Flask from Uhrum Breach > Locked Down > Item Behind Gate > Flask
-* Collect Uhrum_Breach_Overgrown_Ruins_Wall from Uhrum Breach > Overgrown Ruins > Wall East > Smash Through Wall ==> Uhrum Breach > Overgrown Ruins > Wall West
+* Collect Uhrum_Breach_Overgrown_Ruins_Wall from Uhrum Breach > Overgrown Ruins > Wall East > Break Through Wall ==> Uhrum Breach > Overgrown Ruins > Wall West
 * Collect Flask from Uhrum Breach > Overgrown Ruins > Cache > Flask
   ExitBreachWarp
 
@@ -642,7 +642,7 @@
   Move... to Glacier > The Big Drop > West Unstable Footing
   Move... to Glacier > Lonely Bull > Arena
 ! Do Become Indra
-* Collect Glacier_Gudam from Glacier > Lonely Bull > Arena > Quick Gudam
+* Collect Glacier_Gudam from Glacier > Lonely Bull > Arena > Defeat Gudam
 * Collect Big_Flask from Glacier > Lonely Bull > Arena > Shockwave Boss Reward
 ! Do Become Drone
 
