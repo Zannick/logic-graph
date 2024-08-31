@@ -515,10 +515,10 @@ class RustExplainerVisitor(RustBaseVisitor):
                 f'refs.push("{ctx.getText()}")',
                 f'({"!" if ctx.NOT() else ""}res, refs)',
             ]
-            if ctx.ref():
+            for r in ctx.ref():
                 # Insert before the last element
                 lines[-1:-1] = [
-                    f'let mut r = {self.visit(ctx.ref())}',
+                    f'let mut r = {self.visit(r)}',
                     'refs.append(&mut r.1)',
                 ]
         elif func == 'Default::default':

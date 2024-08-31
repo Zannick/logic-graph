@@ -19,6 +19,7 @@ pub struct Action {
     id: ActionId,
     time: u32,
     price: Currency,
+    price_per_sec: Currency,
 }
 
 impl world::Accessible for Action {
@@ -45,7 +46,17 @@ impl world::Accessible for Action {
             _ => 0,
         }
     }
-    fn price(&self) -> &Currency { &self.price }
+    fn base_price(&self) -> &Currency { &self.price }
+    fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
+    fn price(&self, ctx: &Context, world: &World) -> Currency {
+        if self.price_per_sec == Currency::Free {
+            self.price
+        } else {
+            match self.id {
+                _ => self.price + (self.price_per_sec * (self.time(ctx, world) as f32 / 1000.0))
+            }
+        }
+    }
 
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
@@ -85,16 +96,28 @@ impl world::Action for Action {
             _ => SpotId::None,
         }
     }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_effects(&self, ctx: &mut Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
             ActionId::Global__Change_Time => {
                 rules::observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => {
                 rules::observe_action_deku_tree__compass_room__ctx__torch_set_true(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
                 rules::observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
             }
         }
     }
@@ -105,16 +128,19 @@ static ACT_DEFS: [Action; 3] = [
         id: ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch,
         time: 1000,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Action {
         id: ActionId::Global__Change_Time,
         time: 2000,
         price: Currency::Rupees(10),
+        price_per_sec: Currency::Free,
     },
     Action {
         id: ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees,
         time: 20000,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
 ];
 

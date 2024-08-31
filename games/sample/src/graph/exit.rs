@@ -21,6 +21,7 @@ pub struct Exit {
     time: u32,
     dest: SpotId,
     price: Currency,
+    price_per_sec: Currency,
 }
 
 impl world::Accessible for Exit {
@@ -105,7 +106,17 @@ impl world::Accessible for Exit {
             _ => 0,
         }
     }
-    fn price(&self) -> &Currency { &self.price }
+    fn base_price(&self) -> &Currency { &self.price }
+    fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
+    fn price(&self, ctx: &Context, world: &World) -> Currency {
+        if self.price_per_sec == Currency::Free {
+            self.price
+        } else {
+            match self.id {
+                _ => self.price + (self.price_per_sec * (self.time(ctx, world) as f32 / 1000.0))
+            }
+        }
+    }
     
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
@@ -189,288 +200,336 @@ static EXIT_DEFS: [Exit; 48] = [
         time: 2000,
         dest: SpotId::Deku_Tree__Basement_Ledge__Web,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Skull_Room__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_1__Center__ex__Lobby__Center_1,
         time: 6000,
         dest: SpotId::Deku_Tree__Lobby__Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_1__Corner__ex__Basement_Ledge__Block_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Basement_Ledge__Block,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_1__South_Door__ex__Back_Room__South_1,
         time: 20000,
         dest: SpotId::Deku_Tree__Back_Room__South,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_2__Boss_Door__ex__Boss_Room__Entry_1,
         time: 2000,
         dest: SpotId::Deku_Tree__Boss_Room__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_2__Pool__ex__Basement_Ledge__Web_1,
         time: 6000,
         dest: SpotId::Deku_Tree__Basement_Ledge__Web,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_Ledge__Block__ex__Basement_1__Corner_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Basement_1__Corner,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Basement_Ledge__Web__ex__Basement_2__Pool_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Basement_2__Pool,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Compass_Room__Entry__ex__Floor_3__Door_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Floor_3__Door,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Center_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Lower__ex__Lobby__Vines_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Vines,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Center_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Lobby__Entry_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Slingshot_Door__ex__Scrub_Room__Entry_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Scrub_Room__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_1,
         time: 16000,
         dest: SpotId::Deku_Tree__Floor_3__Climb,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Vines__ex__Floor_3__Climb_2,
         time: 10000,
         dest: SpotId::Deku_Tree__Floor_3__Climb,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Center_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Entry_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_2__Vines__ex__Lobby__Vines_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Lobby__Vines,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_3__Door__ex__Compass_Room__Entry_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Compass_Room__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Floor_3__Door__ex__Lobby__Center_1,
         time: 3000,
         dest: SpotId::Deku_Tree__Lobby__Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Lobby__Center__ex__Basement_1__Center_1,
         time: 2000,
         dest: SpotId::Deku_Tree__Basement_1__Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Lobby__Center__ex__Basement_Ledge__Block_1,
         time: 5000,
         dest: SpotId::Deku_Tree__Basement_Ledge__Block,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Lobby__Vines__ex__Floor_2__Lower_1,
         time: 4000,
         dest: SpotId::Deku_Tree__Floor_2__Lower,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Scrub_Room__Entry__ex__Floor_2__Slingshot_Door_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Floor_2__Slingshot_Door,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Scrub_Room__Rear__ex__Slingshot_Room__Entry_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Slingshot_Room__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Skull_Room__Entry__ex__Back_Room__Northwest_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Back_Room__Northwest,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Slingshot_Room__Entry__ex__Scrub_Room__Rear_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Scrub_Room__Rear,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Slingshot_Room__Slingshot__ex__Slingshot_Upper__Ledge_1,
         time: 4000,
         dest: SpotId::Deku_Tree__Slingshot_Upper__Ledge,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Deku_Tree__Slingshot_Upper__Ledge__ex__Slingshot_Room__Slingshot_1,
         time: 1000,
         dest: SpotId::Deku_Tree__Slingshot_Room__Slingshot,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Baba_Corridor__Tree_Side__ex__Outside_Deku_Tree__Entry_1,
         time: 1000,
         dest: SpotId::KF__Outside_Deku_Tree__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Baba_Corridor__Village_Side__ex__Kokiri_Village__Midos_Guardpost_1,
         time: 1000,
         dest: SpotId::KF__Kokiri_Village__Midos_Guardpost,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Boulder_Maze__Entry__ex__Kokiri_Village__Training_Center_1,
         time: 6000,
         dest: SpotId::KF__Kokiri_Village__Training_Center,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Know_it_all_House__Entry__ex__Kokiri_Village__Know_it_all_Porch_1,
         time: 2000,
         dest: SpotId::KF__Kokiri_Village__Know_it_all_Porch,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Know_it_all_Porch__ex__Know_it_all_House__Entry_1,
         time: 2000,
         dest: SpotId::KF__Know_it_all_House__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Links_Porch__ex__Links_House__Entry_1,
         time: 2000,
         dest: SpotId::KF__Links_House__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Midos_Guardpost__ex__Baba_Corridor__Village_Side_1,
         time: 1000,
         dest: SpotId::KF__Baba_Corridor__Village_Side,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Midos_Porch__ex__Midos_House__Entry_1,
         time: 2000,
         dest: SpotId::KF__Midos_House__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Sarias_Porch__ex__Kak__Spider_House__Entry_1,
         time: 2000,
         dest: SpotId::Kak__Spider_House__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Shop_Porch__ex__Shop__Entry_1,
         time: 2000,
         dest: SpotId::KF__Shop__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Kokiri_Village__Training_Center__ex__Boulder_Maze__Entry_1,
         time: 6000,
         dest: SpotId::KF__Boulder_Maze__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Links_House__Entry__ex__Kokiri_Village__Links_Porch_1,
         time: 2000,
         dest: SpotId::KF__Kokiri_Village__Links_Porch,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Midos_House__Entry__ex__Kokiri_Village__Midos_Porch_1,
         time: 2000,
         dest: SpotId::KF__Kokiri_Village__Midos_Porch,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Outside_Deku_Tree__Entry__ex__Baba_Corridor__Tree_Side_1,
         time: 1000,
         dest: SpotId::KF__Baba_Corridor__Tree_Side,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Outside_Deku_Tree__Mouth__ex__Deku_Tree__Lobby__Entry_1,
         time: 2000,
         dest: SpotId::Deku_Tree__Lobby__Entry,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::KF__Shop__Entry__ex__Kokiri_Village__Shop_Porch_1,
         time: 2000,
         dest: SpotId::KF__Kokiri_Village__Shop_Porch,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
     Exit {
         id: ExitId::Kak__Spider_House__Entry__ex__KF__Kokiri_Village__Sarias_Porch_1,
         time: 2000,
         dest: SpotId::KF__Kokiri_Village__Sarias_Porch,
         price: Currency::Free,
+        price_per_sec: Currency::Free,
     },
 ];
 

@@ -57,6 +57,7 @@ impl Add for Currency {
 %% for ptype in price_types
             (Currency::{{ ptype|camelize }}(s), Currency::{{ ptype|camelize }}(o)) => Currency::{{ ptype|camelize }}(s + o),
 %% endfor
+            #[allow(unreachable_patterns)]
             _ => panic!("Cannot add currencies of two different types: {} + {}", self, other),
         }
     }

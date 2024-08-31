@@ -1605,95 +1605,107 @@ pub fn observe_access_invoke_objective(
     robserve__objective!(ctx, world, full_obs)
 }
 pub fn observe_action_deku_tree__compass_room__ctx__torch_set_true(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^_torch = True
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_deku_tree__compass_room__ctx__torch();
+    ctx.set_deku_tree__compass_room__ctx__torch(true);
+    full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $max(^rupees + 20, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    let _set = std::cmp::max(
+    full_obs.clear_rupees();
+    ctx.set_rupees(std::cmp::max(
         {
             full_obs.observe_rupees(IntegerObservation::Exact);
             ctx.rupees()
         } + 20,
         helper__wallet_max!(ctx, world),
-    );
+    ));
     full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $min(^rupees + 1, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    let _set = std::cmp::min(
+    full_obs.clear_rupees();
+    ctx.set_rupees(std::cmp::min(
         {
             full_obs.observe_rupees(IntegerObservation::Exact);
             ctx.rupees()
         } + 1,
         helper__wallet_max!(ctx, world),
-    );
+    ));
     full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $min(^rupees + 50, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    let _set = std::cmp::min(
+    full_obs.clear_rupees();
+    ctx.set_rupees(std::cmp::min(
         {
             full_obs.observe_rupees(IntegerObservation::Exact);
             ctx.rupees()
         } + 50,
         helper__wallet_max!(ctx, world),
-    );
+    ));
     full_obs.strict = old_strict;
 }
 pub fn observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^rupees = $min(^rupees + 5, $wallet_max)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    let _set = std::cmp::min(
+    full_obs.clear_rupees();
+    ctx.set_rupees(std::cmp::min(
         {
             full_obs.observe_rupees(IntegerObservation::Exact);
             ctx.rupees()
         } + 5,
         helper__wallet_max!(ctx, world),
-    );
+    ));
     full_obs.strict = old_strict;
 }
 pub fn observe_action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(
-    ctx: &Context,
+    ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
     // ^tod = MATCH ^tod { 'day' => 'night', 'night' => 'day', _ => 'day' }
     let old_strict = full_obs.strict;
     full_obs.strict = true;
-    let _set = match {
-        full_obs.observe_tod();
-        ctx.tod()
-    } {
-        enums::Tod::Day => enums::Tod::Night,
-        enums::Tod::Night => enums::Tod::Day,
-        _ => enums::Tod::Day,
-    };
+    full_obs.clear_tod();
+    ctx.set_tod(
+        match {
+            full_obs.observe_tod();
+            ctx.tod()
+        } {
+            enums::Tod::Day => enums::Tod::Night,
+            enums::Tod::Night => enums::Tod::Day,
+            _ => enums::Tod::Day,
+        },
+    );
     full_obs.strict = old_strict;
 }

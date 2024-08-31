@@ -46,7 +46,9 @@ impl world::Accessible for Warp {
             _ => 0,
         }
     }
-    fn price(&self) -> &Currency { &self.price }
+    fn base_price(&self) -> &Currency { &self.price }
+    fn price_per_sec(&self) -> &Currency { &Currency::Free }
+    fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }
 
     fn explain_rule(&self, ctx: &Self::Context, world: &World, edict: &mut FxHashMap<&'static str, String>) -> (bool, Vec<&'static str>) {
         match self.id {
@@ -101,11 +103,13 @@ impl world::Warp for Warp {
             WarpId::Save => false,
         }
     }
-    fn observe_effects(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) {
+    fn observe_effects(&self, ctx: &mut Context, world: &World, full_obs: &mut FullObservation) {
         match self.id {
             WarpId::Minuet => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
             }
             WarpId::Save => {
+                ctx.observe_set_position(self.dest(ctx, world), world, full_obs);
             }
         }
     }

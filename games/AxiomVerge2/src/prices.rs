@@ -59,6 +59,7 @@ impl Add for Currency {
             (Currency::Energy(s), Currency::Energy(o)) => Currency::Energy(s + o),
             (Currency::Flasks(s), Currency::Flasks(o)) => Currency::Flasks(s + o),
             (Currency::Refills(s), Currency::Refills(o)) => Currency::Refills(s + o),
+            #[allow(unreachable_patterns)]
             _ => panic!("Cannot add currencies of two different types: {} + {}", self, other),
         }
     }

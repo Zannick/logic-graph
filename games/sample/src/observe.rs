@@ -75,6 +75,89 @@ impl OneObservation {
     }
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+enum ObservationType {
+    Visit(LocationId),
+    ObservePosition,
+    ClearPosition,
+    ObserveChild,
+    ClearChild,
+    ObserveTod,
+    ClearTod,
+    ObserveRupees(IntegerObservation<i32>),
+    ShiftRupees(i32),
+    ClearRupees,
+    ObserveDekuTreeCompassRoomCtxTorch,
+    ClearDekuTreeCompassRoomCtxTorch,
+    ObserveBiggoronSword,
+    ClearBiggoronSword,
+    ObserveBombs,
+    ClearBombs,
+    ObserveBoomerang,
+    ClearBoomerang,
+    ObserveBow,
+    ClearBow,
+    ObserveBuyDekuNut10,
+    ClearBuyDekuNut10,
+    ObserveBuyDekuNut5,
+    ClearBuyDekuNut5,
+    ObserveBuyDekuShield,
+    ClearBuyDekuShield,
+    ObserveBuyDekuStick1,
+    ClearBuyDekuStick1,
+    ObserveDefeatGanon,
+    ClearDefeatGanon,
+    ObserveDefeatGohma,
+    ClearDefeatGohma,
+    ObserveDekuBackRoomWall,
+    ClearDekuBackRoomWall,
+    ObserveDekuBackRoomWeb,
+    ClearDekuBackRoomWeb,
+    ObserveDekuBasementBlock,
+    ClearDekuBasementBlock,
+    ObserveDekuBasementScrubs,
+    ClearDekuBasementScrubs,
+    ObserveDekuBasementSwitch,
+    ClearDekuBasementSwitch,
+    ObserveDekuBasementWeb,
+    ClearDekuBasementWeb,
+    ObserveDekuLobbyWeb,
+    ClearDekuLobbyWeb,
+    ObserveDekuNutDrop,
+    ClearDekuNutDrop,
+    ObserveDekuShieldDrop,
+    ClearDekuShieldDrop,
+    ObserveDekuSlingshotScrub,
+    ClearDekuSlingshotScrub,
+    ObserveDekuStickDrop,
+    ClearDekuStickDrop,
+    ObserveGoldSkulltulaToken(IntegerObservation<i8>),
+    ShiftGoldSkulltulaToken(i8),
+    ClearGoldSkulltulaToken,
+    ObserveHylianShield,
+    ClearHylianShield,
+    ObserveKokiriEmerald,
+    ClearKokiriEmerald,
+    ObserveKokiriSword,
+    ClearKokiriSword,
+    ObserveMagicMeter,
+    ClearMagicMeter,
+    ObserveOcarina,
+    ClearOcarina,
+    ObserveProgressiveWallet(IntegerObservation<i8>),
+    ShiftProgressiveWallet(i8),
+    ClearProgressiveWallet,
+    ObserveShowedMido,
+    ClearShowedMido,
+    ObserveSlingshot,
+    ClearSlingshot,
+    ObserveTriforcePiece(IntegerObservation<i16>),
+    ShiftTriforcePiece(i16),
+    ClearTriforcePiece,
+    ObserveVictory,
+    ClearVictory,
+}
+
 
 #[derive(Debug, Default)]
 pub struct FullObservation {
@@ -91,6 +174,7 @@ pub struct FullObservation {
     // bitflags: optionally a mask
     cbits1: flags::ContextBits1,
     cbits2: flags::ContextBits2,
+    stack: Vec<ObservationType>,
     pub strict: bool,
 }
 
@@ -109,22 +193,480 @@ impl Observer for FullObservation {
         full_obs
     }
 
-    fn observe_visit(&mut self, loc_id: LocationId) {
+    fn observe_visited(&mut self, loc_id: LocationId) {
+        self.stack.push(ObservationType::Visit(loc_id));
+    }
+
+    fn observe_item(&mut self, item: Item) {
+        match item {
+            Item::Biggoron_Sword => self.clear_biggoron_sword(),
+            Item::Bombs => self.clear_bombs(),
+            Item::Boomerang => self.clear_boomerang(),
+            Item::Bow => self.clear_bow(),
+            Item::Buy_Deku_Nut_10 => self.clear_buy_deku_nut_10(),
+            Item::Buy_Deku_Nut_5 => self.clear_buy_deku_nut_5(),
+            Item::Buy_Deku_Shield => self.clear_buy_deku_shield(),
+            Item::Buy_Deku_Stick_1 => self.clear_buy_deku_stick_1(),
+            Item::Defeat_Ganon => self.clear_defeat_ganon(),
+            Item::Defeat_Gohma => self.clear_defeat_gohma(),
+            Item::Deku_Back_Room_Wall => self.clear_deku_back_room_wall(),
+            Item::Deku_Back_Room_Web => self.clear_deku_back_room_web(),
+            Item::Deku_Basement_Block => self.clear_deku_basement_block(),
+            Item::Deku_Basement_Scrubs => self.clear_deku_basement_scrubs(),
+            Item::Deku_Basement_Switch => self.clear_deku_basement_switch(),
+            Item::Deku_Basement_Web => self.clear_deku_basement_web(),
+            Item::Deku_Lobby_Web => self.clear_deku_lobby_web(),
+            Item::Deku_Nut_Drop => self.clear_deku_nut_drop(),
+            Item::Deku_Shield_Drop => self.clear_deku_shield_drop(),
+            Item::Deku_Slingshot_Scrub => self.clear_deku_slingshot_scrub(),
+            Item::Deku_Stick_Drop => self.clear_deku_stick_drop(),
+            Item::Gold_Skulltula_Token => self.observe_shift_gold_skulltula_token(1),
+            Item::Hylian_Shield => self.clear_hylian_shield(),
+            Item::Kokiri_Emerald => self.clear_kokiri_emerald(),
+            Item::Kokiri_Sword => self.clear_kokiri_sword(),
+            Item::Magic_Meter => self.clear_magic_meter(),
+            Item::Ocarina => self.clear_ocarina(),
+            Item::Progressive_Wallet => self.observe_shift_progressive_wallet(1),
+            Item::Showed_Mido => self.clear_showed_mido(),
+            Item::Slingshot => self.clear_slingshot(),
+            Item::Triforce_Piece => self.observe_shift_triforce_piece(1),
+            Item::Victory => self.clear_victory(),
+            _ => (),
+        }
+    }
+
+    fn apply_observations(&mut self) {
+        while let Some(obs) = self.stack.pop() {
+            match obs {
+                ObservationType::Visit(loc_id) => self.apply_visit(loc_id),
+                ObservationType::ObservePosition => self.apply_observe_position(),
+                ObservationType::ClearPosition => self.apply_clear_position(),
+                ObservationType::ObserveChild => self.apply_observe_child(),
+                ObservationType::ClearChild => self.apply_clear_child(),
+                ObservationType::ObserveTod => self.apply_observe_tod(),
+                ObservationType::ClearTod => self.apply_clear_tod(),
+                ObservationType::ObserveRupees(iobs) => self.apply_observe_rupees(iobs),
+                ObservationType::ShiftRupees(diff) => self.apply_shift_rupees(diff),
+                ObservationType::ClearRupees => self.apply_clear_rupees(),
+                ObservationType::ObserveDekuTreeCompassRoomCtxTorch => self.apply_observe_deku_tree__compass_room__ctx__torch(),
+                ObservationType::ClearDekuTreeCompassRoomCtxTorch => self.apply_clear_deku_tree__compass_room__ctx__torch(),
+                ObservationType::ObserveBiggoronSword => self.apply_observe_biggoron_sword(),
+                ObservationType::ClearBiggoronSword => self.apply_clear_biggoron_sword(),
+                ObservationType::ObserveBombs => self.apply_observe_bombs(),
+                ObservationType::ClearBombs => self.apply_clear_bombs(),
+                ObservationType::ObserveBoomerang => self.apply_observe_boomerang(),
+                ObservationType::ClearBoomerang => self.apply_clear_boomerang(),
+                ObservationType::ObserveBow => self.apply_observe_bow(),
+                ObservationType::ClearBow => self.apply_clear_bow(),
+                ObservationType::ObserveBuyDekuNut10 => self.apply_observe_buy_deku_nut_10(),
+                ObservationType::ClearBuyDekuNut10 => self.apply_clear_buy_deku_nut_10(),
+                ObservationType::ObserveBuyDekuNut5 => self.apply_observe_buy_deku_nut_5(),
+                ObservationType::ClearBuyDekuNut5 => self.apply_clear_buy_deku_nut_5(),
+                ObservationType::ObserveBuyDekuShield => self.apply_observe_buy_deku_shield(),
+                ObservationType::ClearBuyDekuShield => self.apply_clear_buy_deku_shield(),
+                ObservationType::ObserveBuyDekuStick1 => self.apply_observe_buy_deku_stick_1(),
+                ObservationType::ClearBuyDekuStick1 => self.apply_clear_buy_deku_stick_1(),
+                ObservationType::ObserveDefeatGanon => self.apply_observe_defeat_ganon(),
+                ObservationType::ClearDefeatGanon => self.apply_clear_defeat_ganon(),
+                ObservationType::ObserveDefeatGohma => self.apply_observe_defeat_gohma(),
+                ObservationType::ClearDefeatGohma => self.apply_clear_defeat_gohma(),
+                ObservationType::ObserveDekuBackRoomWall => self.apply_observe_deku_back_room_wall(),
+                ObservationType::ClearDekuBackRoomWall => self.apply_clear_deku_back_room_wall(),
+                ObservationType::ObserveDekuBackRoomWeb => self.apply_observe_deku_back_room_web(),
+                ObservationType::ClearDekuBackRoomWeb => self.apply_clear_deku_back_room_web(),
+                ObservationType::ObserveDekuBasementBlock => self.apply_observe_deku_basement_block(),
+                ObservationType::ClearDekuBasementBlock => self.apply_clear_deku_basement_block(),
+                ObservationType::ObserveDekuBasementScrubs => self.apply_observe_deku_basement_scrubs(),
+                ObservationType::ClearDekuBasementScrubs => self.apply_clear_deku_basement_scrubs(),
+                ObservationType::ObserveDekuBasementSwitch => self.apply_observe_deku_basement_switch(),
+                ObservationType::ClearDekuBasementSwitch => self.apply_clear_deku_basement_switch(),
+                ObservationType::ObserveDekuBasementWeb => self.apply_observe_deku_basement_web(),
+                ObservationType::ClearDekuBasementWeb => self.apply_clear_deku_basement_web(),
+                ObservationType::ObserveDekuLobbyWeb => self.apply_observe_deku_lobby_web(),
+                ObservationType::ClearDekuLobbyWeb => self.apply_clear_deku_lobby_web(),
+                ObservationType::ObserveDekuNutDrop => self.apply_observe_deku_nut_drop(),
+                ObservationType::ClearDekuNutDrop => self.apply_clear_deku_nut_drop(),
+                ObservationType::ObserveDekuShieldDrop => self.apply_observe_deku_shield_drop(),
+                ObservationType::ClearDekuShieldDrop => self.apply_clear_deku_shield_drop(),
+                ObservationType::ObserveDekuSlingshotScrub => self.apply_observe_deku_slingshot_scrub(),
+                ObservationType::ClearDekuSlingshotScrub => self.apply_clear_deku_slingshot_scrub(),
+                ObservationType::ObserveDekuStickDrop => self.apply_observe_deku_stick_drop(),
+                ObservationType::ClearDekuStickDrop => self.apply_clear_deku_stick_drop(),
+                ObservationType::ObserveGoldSkulltulaToken(iobs) => self.apply_observe_gold_skulltula_token(iobs),
+                ObservationType::ShiftGoldSkulltulaToken(iobs) => self.apply_shift_gold_skulltula_token(iobs),
+                ObservationType::ClearGoldSkulltulaToken => self.apply_clear_gold_skulltula_token(),
+                ObservationType::ObserveHylianShield => self.apply_observe_hylian_shield(),
+                ObservationType::ClearHylianShield => self.apply_clear_hylian_shield(),
+                ObservationType::ObserveKokiriEmerald => self.apply_observe_kokiri_emerald(),
+                ObservationType::ClearKokiriEmerald => self.apply_clear_kokiri_emerald(),
+                ObservationType::ObserveKokiriSword => self.apply_observe_kokiri_sword(),
+                ObservationType::ClearKokiriSword => self.apply_clear_kokiri_sword(),
+                ObservationType::ObserveMagicMeter => self.apply_observe_magic_meter(),
+                ObservationType::ClearMagicMeter => self.apply_clear_magic_meter(),
+                ObservationType::ObserveOcarina => self.apply_observe_ocarina(),
+                ObservationType::ClearOcarina => self.apply_clear_ocarina(),
+                ObservationType::ObserveProgressiveWallet(iobs) => self.apply_observe_progressive_wallet(iobs),
+                ObservationType::ShiftProgressiveWallet(iobs) => self.apply_shift_progressive_wallet(iobs),
+                ObservationType::ClearProgressiveWallet => self.apply_clear_progressive_wallet(),
+                ObservationType::ObserveShowedMido => self.apply_observe_showed_mido(),
+                ObservationType::ClearShowedMido => self.apply_clear_showed_mido(),
+                ObservationType::ObserveSlingshot => self.apply_observe_slingshot(),
+                ObservationType::ClearSlingshot => self.apply_clear_slingshot(),
+                ObservationType::ObserveTriforcePiece(iobs) => self.apply_observe_triforce_piece(iobs),
+                ObservationType::ShiftTriforcePiece(iobs) => self.apply_shift_triforce_piece(iobs),
+                ObservationType::ClearTriforcePiece => self.apply_clear_triforce_piece(),
+                ObservationType::ObserveVictory => self.apply_observe_victory(),
+                ObservationType::ClearVictory => self.apply_clear_victory(),
+            }
+        }
+    }
+
+    fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
+        let mut vec = Vec::with_capacity(self.fields_observed());
+            if self.position {
+                vec.push(OneObservation::Position(ctx.position));
+            }
+            if self.tod {
+                vec.push(OneObservation::Tod(ctx.tod));
+            }
+            match self.rupees {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::RupeesExact(ctx.rupees)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::RupeesEq(i, ctx.rupees == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::RupeesGe(i, ctx.rupees >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::RupeesLe(i, ctx.rupees <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RupeesRange(lo, hi, ctx.rupees >= lo && ctx.rupees <= hi)),
+            }
+            match self.gold_skulltula_token {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::GoldSkulltulaTokenExact(ctx.gold_skulltula_token)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::GoldSkulltulaTokenEq(i, ctx.gold_skulltula_token == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::GoldSkulltulaTokenGe(i, ctx.gold_skulltula_token >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::GoldSkulltulaTokenLe(i, ctx.gold_skulltula_token <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::GoldSkulltulaTokenRange(lo, hi, ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi)),
+            }
+            match self.progressive_wallet {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::ProgressiveWalletExact(ctx.progressive_wallet)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::ProgressiveWalletEq(i, ctx.progressive_wallet == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::ProgressiveWalletGe(i, ctx.progressive_wallet >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::ProgressiveWalletLe(i, ctx.progressive_wallet <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::ProgressiveWalletRange(lo, hi, ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi)),
+            }
+            match self.triforce_piece {
+                IntegerObservation::Unknown => (),
+                IntegerObservation::Exact => vec.push(OneObservation::TriforcePieceExact(ctx.triforce_piece)),
+                IntegerObservation::Eq(i) => vec.push(OneObservation::TriforcePieceEq(i, ctx.triforce_piece == i)),
+                IntegerObservation::Ge(i) => vec.push(OneObservation::TriforcePieceGe(i, ctx.triforce_piece >= i)),
+                IntegerObservation::Le(i) => vec.push(OneObservation::TriforcePieceLe(i, ctx.triforce_piece <= i)),
+                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::TriforcePieceRange(lo, hi, ctx.triforce_piece >= lo && ctx.triforce_piece <= hi)),
+            }
+            if !self.cbits1.is_empty() {
+                vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
+            }
+            if !self.cbits2.is_empty() {
+                vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
+            }
+        vec
+    }
+}
+
+impl FullObservation {
+    fn fields_observed(&self) -> usize {
+        let mut fields = 0;
+        if self.position { fields += 1; }
+        if self.tod { fields += 1; }
+        if self.rupees != IntegerObservation::Unknown { fields += 1; }
+        if self.gold_skulltula_token != IntegerObservation::Unknown { fields += 1; }
+        if self.progressive_wallet != IntegerObservation::Unknown { fields += 1; }
+        if self.triforce_piece != IntegerObservation::Unknown { fields += 1; }
+        if !self.cbits1.is_empty() { fields += 1; }
+        if !self.cbits2.is_empty() { fields += 1; }
+        fields
+    }
+
+    pub fn observe_has_item(&mut self, item: Item) {
+        match item {
+            Item::Biggoron_Sword => self.observe_biggoron_sword(),
+            Item::Bombs => self.observe_bombs(),
+            Item::Boomerang => self.observe_boomerang(),
+            Item::Bow => self.observe_bow(),
+            Item::Buy_Deku_Nut_10 => self.observe_buy_deku_nut_10(),
+            Item::Buy_Deku_Nut_5 => self.observe_buy_deku_nut_5(),
+            Item::Buy_Deku_Shield => self.observe_buy_deku_shield(),
+            Item::Buy_Deku_Stick_1 => self.observe_buy_deku_stick_1(),
+            Item::Defeat_Ganon => self.observe_defeat_ganon(),
+            Item::Defeat_Gohma => self.observe_defeat_gohma(),
+            Item::Deku_Back_Room_Wall => self.observe_deku_back_room_wall(),
+            Item::Deku_Back_Room_Web => self.observe_deku_back_room_web(),
+            Item::Deku_Basement_Block => self.observe_deku_basement_block(),
+            Item::Deku_Basement_Scrubs => self.observe_deku_basement_scrubs(),
+            Item::Deku_Basement_Switch => self.observe_deku_basement_switch(),
+            Item::Deku_Basement_Web => self.observe_deku_basement_web(),
+            Item::Deku_Lobby_Web => self.observe_deku_lobby_web(),
+            Item::Deku_Nut_Drop => self.observe_deku_nut_drop(),
+            Item::Deku_Shield_Drop => self.observe_deku_shield_drop(),
+            Item::Deku_Slingshot_Scrub => self.observe_deku_slingshot_scrub(),
+            Item::Deku_Stick_Drop => self.observe_deku_stick_drop(),
+            Item::Gold_Skulltula_Token => self.observe_gold_skulltula_token(IntegerObservation::Ge(1)),
+            Item::Hylian_Shield => self.observe_hylian_shield(),
+            Item::Kokiri_Emerald => self.observe_kokiri_emerald(),
+            Item::Kokiri_Sword => self.observe_kokiri_sword(),
+            Item::Magic_Meter => self.observe_magic_meter(),
+            Item::Ocarina => self.observe_ocarina(),
+            Item::Progressive_Wallet => self.observe_progressive_wallet(IntegerObservation::Ge(1)),
+            Item::Showed_Mido => self.observe_showed_mido(),
+            Item::Slingshot => self.observe_slingshot(),
+            Item::Triforce_Piece => self.observe_triforce_piece(IntegerObservation::Ge(1)),
+            Item::Victory => self.observe_victory(),
+            _ => (),
+        }
+    }
+
+    pub fn observe_position(&mut self) {
+        self.stack.push(ObservationType::ObservePosition);
+    }
+    pub fn clear_position(&mut self) {
+        self.stack.push(ObservationType::ClearPosition);
+    }
+    pub fn observe_child(&mut self) {
+        self.stack.push(ObservationType::ObserveChild);
+    }
+    pub fn clear_child(&mut self) {
+        self.stack.push(ObservationType::ClearChild);
+    }
+    pub fn observe_tod(&mut self) {
+        self.stack.push(ObservationType::ObserveTod);
+    }
+    pub fn clear_tod(&mut self) {
+        self.stack.push(ObservationType::ClearTod);
+    }
+    pub fn observe_rupees(&mut self, obs: IntegerObservation<i32>) {
+        self.stack.push(ObservationType::ObserveRupees(if self.strict { IntegerObservation::Exact } else { obs }));
+    }
+    pub fn observe_shift_rupees(&mut self, diff: i32) {
+        self.stack.push(ObservationType::ShiftRupees(diff));
+    }
+    pub fn clear_rupees(&mut self) {
+        self.stack.push(ObservationType::ClearRupees);
+    }
+    pub fn observe_deku_tree__compass_room__ctx__torch(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuTreeCompassRoomCtxTorch);
+    }
+    pub fn clear_deku_tree__compass_room__ctx__torch(&mut self) {
+        self.stack.push(ObservationType::ClearDekuTreeCompassRoomCtxTorch);
+    }
+    pub fn observe_biggoron_sword(&mut self) {
+        self.stack.push(ObservationType::ObserveBiggoronSword);
+    }
+    pub fn clear_biggoron_sword(&mut self) {
+        self.stack.push(ObservationType::ClearBiggoronSword);
+    }
+    pub fn observe_bombs(&mut self) {
+        self.stack.push(ObservationType::ObserveBombs);
+    }
+    pub fn clear_bombs(&mut self) {
+        self.stack.push(ObservationType::ClearBombs);
+    }
+    pub fn observe_boomerang(&mut self) {
+        self.stack.push(ObservationType::ObserveBoomerang);
+    }
+    pub fn clear_boomerang(&mut self) {
+        self.stack.push(ObservationType::ClearBoomerang);
+    }
+    pub fn observe_bow(&mut self) {
+        self.stack.push(ObservationType::ObserveBow);
+    }
+    pub fn clear_bow(&mut self) {
+        self.stack.push(ObservationType::ClearBow);
+    }
+    pub fn observe_buy_deku_nut_10(&mut self) {
+        self.stack.push(ObservationType::ObserveBuyDekuNut10);
+    }
+    pub fn clear_buy_deku_nut_10(&mut self) {
+        self.stack.push(ObservationType::ClearBuyDekuNut10);
+    }
+    pub fn observe_buy_deku_nut_5(&mut self) {
+        self.stack.push(ObservationType::ObserveBuyDekuNut5);
+    }
+    pub fn clear_buy_deku_nut_5(&mut self) {
+        self.stack.push(ObservationType::ClearBuyDekuNut5);
+    }
+    pub fn observe_buy_deku_shield(&mut self) {
+        self.stack.push(ObservationType::ObserveBuyDekuShield);
+    }
+    pub fn clear_buy_deku_shield(&mut self) {
+        self.stack.push(ObservationType::ClearBuyDekuShield);
+    }
+    pub fn observe_buy_deku_stick_1(&mut self) {
+        self.stack.push(ObservationType::ObserveBuyDekuStick1);
+    }
+    pub fn clear_buy_deku_stick_1(&mut self) {
+        self.stack.push(ObservationType::ClearBuyDekuStick1);
+    }
+    pub fn observe_defeat_ganon(&mut self) {
+        self.stack.push(ObservationType::ObserveDefeatGanon);
+    }
+    pub fn clear_defeat_ganon(&mut self) {
+        self.stack.push(ObservationType::ClearDefeatGanon);
+    }
+    pub fn observe_defeat_gohma(&mut self) {
+        self.stack.push(ObservationType::ObserveDefeatGohma);
+    }
+    pub fn clear_defeat_gohma(&mut self) {
+        self.stack.push(ObservationType::ClearDefeatGohma);
+    }
+    pub fn observe_deku_back_room_wall(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuBackRoomWall);
+    }
+    pub fn clear_deku_back_room_wall(&mut self) {
+        self.stack.push(ObservationType::ClearDekuBackRoomWall);
+    }
+    pub fn observe_deku_back_room_web(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuBackRoomWeb);
+    }
+    pub fn clear_deku_back_room_web(&mut self) {
+        self.stack.push(ObservationType::ClearDekuBackRoomWeb);
+    }
+    pub fn observe_deku_basement_block(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuBasementBlock);
+    }
+    pub fn clear_deku_basement_block(&mut self) {
+        self.stack.push(ObservationType::ClearDekuBasementBlock);
+    }
+    pub fn observe_deku_basement_scrubs(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuBasementScrubs);
+    }
+    pub fn clear_deku_basement_scrubs(&mut self) {
+        self.stack.push(ObservationType::ClearDekuBasementScrubs);
+    }
+    pub fn observe_deku_basement_switch(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuBasementSwitch);
+    }
+    pub fn clear_deku_basement_switch(&mut self) {
+        self.stack.push(ObservationType::ClearDekuBasementSwitch);
+    }
+    pub fn observe_deku_basement_web(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuBasementWeb);
+    }
+    pub fn clear_deku_basement_web(&mut self) {
+        self.stack.push(ObservationType::ClearDekuBasementWeb);
+    }
+    pub fn observe_deku_lobby_web(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuLobbyWeb);
+    }
+    pub fn clear_deku_lobby_web(&mut self) {
+        self.stack.push(ObservationType::ClearDekuLobbyWeb);
+    }
+    pub fn observe_deku_nut_drop(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuNutDrop);
+    }
+    pub fn clear_deku_nut_drop(&mut self) {
+        self.stack.push(ObservationType::ClearDekuNutDrop);
+    }
+    pub fn observe_deku_shield_drop(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuShieldDrop);
+    }
+    pub fn clear_deku_shield_drop(&mut self) {
+        self.stack.push(ObservationType::ClearDekuShieldDrop);
+    }
+    pub fn observe_deku_slingshot_scrub(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuSlingshotScrub);
+    }
+    pub fn clear_deku_slingshot_scrub(&mut self) {
+        self.stack.push(ObservationType::ClearDekuSlingshotScrub);
+    }
+    pub fn observe_deku_stick_drop(&mut self) {
+        self.stack.push(ObservationType::ObserveDekuStickDrop);
+    }
+    pub fn clear_deku_stick_drop(&mut self) {
+        self.stack.push(ObservationType::ClearDekuStickDrop);
+    }
+    pub fn observe_gold_skulltula_token(&mut self, obs: IntegerObservation<i8>) {
+        self.stack.push(ObservationType::ObserveGoldSkulltulaToken(if self.strict { IntegerObservation::Exact } else { obs }));
+    }
+    pub fn observe_shift_gold_skulltula_token(&mut self, diff: i8) {
+        self.stack.push(ObservationType::ShiftGoldSkulltulaToken(diff));
+    }
+    pub fn clear_gold_skulltula_token(&mut self) {
+        self.stack.push(ObservationType::ClearGoldSkulltulaToken);
+    }
+    pub fn observe_hylian_shield(&mut self) {
+        self.stack.push(ObservationType::ObserveHylianShield);
+    }
+    pub fn clear_hylian_shield(&mut self) {
+        self.stack.push(ObservationType::ClearHylianShield);
+    }
+    pub fn observe_kokiri_emerald(&mut self) {
+        self.stack.push(ObservationType::ObserveKokiriEmerald);
+    }
+    pub fn clear_kokiri_emerald(&mut self) {
+        self.stack.push(ObservationType::ClearKokiriEmerald);
+    }
+    pub fn observe_kokiri_sword(&mut self) {
+        self.stack.push(ObservationType::ObserveKokiriSword);
+    }
+    pub fn clear_kokiri_sword(&mut self) {
+        self.stack.push(ObservationType::ClearKokiriSword);
+    }
+    pub fn observe_magic_meter(&mut self) {
+        self.stack.push(ObservationType::ObserveMagicMeter);
+    }
+    pub fn clear_magic_meter(&mut self) {
+        self.stack.push(ObservationType::ClearMagicMeter);
+    }
+    pub fn observe_ocarina(&mut self) {
+        self.stack.push(ObservationType::ObserveOcarina);
+    }
+    pub fn clear_ocarina(&mut self) {
+        self.stack.push(ObservationType::ClearOcarina);
+    }
+    pub fn observe_progressive_wallet(&mut self, obs: IntegerObservation<i8>) {
+        self.stack.push(ObservationType::ObserveProgressiveWallet(if self.strict { IntegerObservation::Exact } else { obs }));
+    }
+    pub fn observe_shift_progressive_wallet(&mut self, diff: i8) {
+        self.stack.push(ObservationType::ShiftProgressiveWallet(diff));
+    }
+    pub fn clear_progressive_wallet(&mut self) {
+        self.stack.push(ObservationType::ClearProgressiveWallet);
+    }
+    pub fn observe_showed_mido(&mut self) {
+        self.stack.push(ObservationType::ObserveShowedMido);
+    }
+    pub fn clear_showed_mido(&mut self) {
+        self.stack.push(ObservationType::ClearShowedMido);
+    }
+    pub fn observe_slingshot(&mut self) {
+        self.stack.push(ObservationType::ObserveSlingshot);
+    }
+    pub fn clear_slingshot(&mut self) {
+        self.stack.push(ObservationType::ClearSlingshot);
+    }
+    pub fn observe_triforce_piece(&mut self, obs: IntegerObservation<i16>) {
+        self.stack.push(ObservationType::ObserveTriforcePiece(if self.strict { IntegerObservation::Exact } else { obs }));
+    }
+    pub fn observe_shift_triforce_piece(&mut self, diff: i16) {
+        self.stack.push(ObservationType::ShiftTriforcePiece(diff));
+    }
+    pub fn clear_triforce_piece(&mut self) {
+        self.stack.push(ObservationType::ClearTriforcePiece);
+    }
+    pub fn observe_victory(&mut self) {
+        self.stack.push(ObservationType::ObserveVictory);
+    }
+    pub fn clear_victory(&mut self) {
+        self.stack.push(ObservationType::ClearVictory);
+    }
+    fn apply_visit(&mut self, loc_id: LocationId) {
         match loc_id {
-            LocationId::Deku_Tree__Lobby__Center__Web | LocationId::Deku_Tree__Floor_3__Door__Break_Web | LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
-                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
-            }
-            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web | LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
-                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
-            }
-            LocationId::Deku_Tree__Boss_Room__Arena__Gohma | LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
-                self.cbits1.insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
-            }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
             }
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+            }
+            LocationId::Deku_Tree__Lobby__Center__Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
             }
             LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
@@ -137,6 +679,12 @@ impl Observer for FullObservation {
             }
             LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+            }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
+            }
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
             }
             LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
@@ -159,6 +707,9 @@ impl Observer for FullObservation {
             LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
             }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
+            }
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
             }
@@ -171,8 +722,17 @@ impl Observer for FullObservation {
             LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
             }
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
+            }
             LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
             }
             LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
@@ -246,339 +806,238 @@ impl Observer for FullObservation {
         }
     }
 
-    fn observe_collect(&mut self, ctx: &Context, item: Item, world: &World) {
-        match item {
-            Item::Rupee_1 => rules::observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(ctx, world, self),
-            Item::Rupees_5 => rules::observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(ctx, world, self),
-            Item::Rupees_50 => rules::observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(ctx, world, self),
-            _ => (),
-        }
-    }
-
-    fn observe_on_entry(&mut self, cur: &Context, dest: SpotId, world: &World) {
-        let area = get_area(dest);
-        match area {
-            _ => (),
-        }
-    }
-
-
-
-    fn update(&mut self, from: &Context, to: &Context) {
-        if from.rupees != to.rupees {
-            self.rupees = self.rupees.shift(to.rupees - from.rupees);
-        }
-        if from.gold_skulltula_token != to.gold_skulltula_token {
-            self.gold_skulltula_token = self.gold_skulltula_token.shift(to.gold_skulltula_token - from.gold_skulltula_token);
-        }
-        if from.progressive_wallet != to.progressive_wallet {
-            self.progressive_wallet = self.progressive_wallet.shift(to.progressive_wallet - from.progressive_wallet);
-        }
-        if from.triforce_piece != to.triforce_piece {
-            self.triforce_piece = self.triforce_piece.shift(to.triforce_piece - from.triforce_piece);
-        }
-    }
-
-    fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
-        let mut vec = Vec::with_capacity(self.fields_observed());
-            if self.position {
-                vec.push(OneObservation::Position(ctx.position));
-            }
-            if self.tod {
-                vec.push(OneObservation::Tod(ctx.tod));
-            }
-            match self.rupees {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::RupeesExact(ctx.rupees)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::RupeesEq(i, ctx.rupees == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::RupeesGe(i, ctx.rupees >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::RupeesLe(i, ctx.rupees <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RupeesRange(lo, hi, ctx.rupees >= lo && ctx.rupees <= hi)),
-            }
-            match self.gold_skulltula_token {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::GoldSkulltulaTokenExact(ctx.gold_skulltula_token)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::GoldSkulltulaTokenEq(i, ctx.gold_skulltula_token == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::GoldSkulltulaTokenGe(i, ctx.gold_skulltula_token >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::GoldSkulltulaTokenLe(i, ctx.gold_skulltula_token <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::GoldSkulltulaTokenRange(lo, hi, ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi)),
-            }
-            match self.progressive_wallet {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::ProgressiveWalletExact(ctx.progressive_wallet)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::ProgressiveWalletEq(i, ctx.progressive_wallet == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::ProgressiveWalletGe(i, ctx.progressive_wallet >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::ProgressiveWalletLe(i, ctx.progressive_wallet <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::ProgressiveWalletRange(lo, hi, ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi)),
-            }
-            match self.triforce_piece {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::TriforcePieceExact(ctx.triforce_piece)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::TriforcePieceEq(i, ctx.triforce_piece == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::TriforcePieceGe(i, ctx.triforce_piece >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::TriforcePieceLe(i, ctx.triforce_piece <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::TriforcePieceRange(lo, hi, ctx.triforce_piece >= lo && ctx.triforce_piece <= hi)),
-            }
-            if !self.cbits1.is_empty() {
-                vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
-            }
-            if !self.cbits2.is_empty() {
-                vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
-            }
-        vec
-    }
-}
-
-impl FullObservation {
-    fn fields_observed(&self) -> usize {
-        let mut fields = 0;
-        if self.position { fields += 1; }
-        if self.tod { fields += 1; }
-        if self.rupees != IntegerObservation::Unknown { fields += 1; }
-        if self.gold_skulltula_token != IntegerObservation::Unknown { fields += 1; }
-        if self.progressive_wallet != IntegerObservation::Unknown { fields += 1; }
-        if self.triforce_piece != IntegerObservation::Unknown { fields += 1; }
-        if !self.cbits1.is_empty() { fields += 1; }
-        if !self.cbits2.is_empty() { fields += 1; }
-        fields
-    }
-
-    pub fn observe_position(&mut self) {
+    fn apply_observe_position(&mut self) {
         self.position = true;
     }
-    pub fn clear_position(&mut self) {
+    fn apply_clear_position(&mut self) {
         self.position = false;
     }
-    pub fn observe_child(&mut self) {
+    fn apply_observe_child(&mut self) {
         self.cbits1.insert(flags::ContextBits1::CHILD);
     }
-    pub fn clear_child(&mut self) {
+    fn apply_clear_child(&mut self) {
         self.cbits1.remove(flags::ContextBits1::CHILD);
     }
-    pub fn observe_tod(&mut self) {
+    fn apply_observe_tod(&mut self) {
         self.tod = true;
     }
-    pub fn clear_tod(&mut self) {
+    fn apply_clear_tod(&mut self) {
         self.tod = false;
     }
-    pub fn observe_rupees(&mut self, obs: IntegerObservation<i32>) {
-        if self.strict {
-            self.rupees = IntegerObservation::Exact;
-        } else {
-            self.rupees = self.rupees.combine(obs);
-        }
+    fn apply_observe_rupees(&mut self, obs: IntegerObservation<i32>) {
+        self.rupees = self.rupees.combine(obs);
     }
-    pub fn clear_rupees(&mut self) {
+    fn apply_shift_rupees(&mut self, diff: i32) {
+        self.rupees = self.rupees.shift(-diff);
+    }
+    fn apply_clear_rupees(&mut self) {
         self.rupees = IntegerObservation::Unknown;
     }
-    pub fn observe_deku_tree__compass_room__ctx__torch(&mut self) {
+    fn apply_observe_deku_tree__compass_room__ctx__torch(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
     }
-    pub fn clear_deku_tree__compass_room__ctx__torch(&mut self) {
+    fn apply_clear_deku_tree__compass_room__ctx__torch(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
     }
-    pub fn observe_biggoron_sword(&mut self) {
+    fn apply_observe_biggoron_sword(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
     }
-    pub fn clear_biggoron_sword(&mut self) {
+    fn apply_clear_biggoron_sword(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BIGGORON_SWORD);
     }
-    pub fn observe_bombs(&mut self) {
+    fn apply_observe_bombs(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BOMBS);
     }
-    pub fn clear_bombs(&mut self) {
+    fn apply_clear_bombs(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BOMBS);
     }
-    pub fn observe_boomerang(&mut self) {
+    fn apply_observe_boomerang(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BOOMERANG);
     }
-    pub fn clear_boomerang(&mut self) {
+    fn apply_clear_boomerang(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BOOMERANG);
     }
-    pub fn observe_bow(&mut self) {
+    fn apply_observe_bow(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BOW);
     }
-    pub fn clear_bow(&mut self) {
+    fn apply_clear_bow(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BOW);
     }
-    pub fn observe_buy_deku_nut_10(&mut self) {
+    fn apply_observe_buy_deku_nut_10(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
     }
-    pub fn clear_buy_deku_nut_10(&mut self) {
+    fn apply_clear_buy_deku_nut_10(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BUY_DEKU_NUT_10);
     }
-    pub fn observe_buy_deku_nut_5(&mut self) {
+    fn apply_observe_buy_deku_nut_5(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
     }
-    pub fn clear_buy_deku_nut_5(&mut self) {
+    fn apply_clear_buy_deku_nut_5(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BUY_DEKU_NUT_5);
     }
-    pub fn observe_buy_deku_shield(&mut self) {
+    fn apply_observe_buy_deku_shield(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
     }
-    pub fn clear_buy_deku_shield(&mut self) {
+    fn apply_clear_buy_deku_shield(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BUY_DEKU_SHIELD);
     }
-    pub fn observe_buy_deku_stick_1(&mut self) {
+    fn apply_observe_buy_deku_stick_1(&mut self) {
         self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
     }
-    pub fn clear_buy_deku_stick_1(&mut self) {
+    fn apply_clear_buy_deku_stick_1(&mut self) {
         self.cbits1.remove(flags::ContextBits1::BUY_DEKU_STICK_1);
     }
-    pub fn observe_defeat_ganon(&mut self) {
+    fn apply_observe_defeat_ganon(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
     }
-    pub fn clear_defeat_ganon(&mut self) {
+    fn apply_clear_defeat_ganon(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEFEAT_GANON);
     }
-    pub fn observe_defeat_gohma(&mut self) {
+    fn apply_observe_defeat_gohma(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
     }
-    pub fn clear_defeat_gohma(&mut self) {
+    fn apply_clear_defeat_gohma(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEFEAT_GOHMA);
     }
-    pub fn observe_deku_back_room_wall(&mut self) {
+    fn apply_observe_deku_back_room_wall(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
     }
-    pub fn clear_deku_back_room_wall(&mut self) {
+    fn apply_clear_deku_back_room_wall(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
     }
-    pub fn observe_deku_back_room_web(&mut self) {
+    fn apply_observe_deku_back_room_web(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
     }
-    pub fn clear_deku_back_room_web(&mut self) {
+    fn apply_clear_deku_back_room_web(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
     }
-    pub fn observe_deku_basement_block(&mut self) {
+    fn apply_observe_deku_basement_block(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
     }
-    pub fn clear_deku_basement_block(&mut self) {
+    fn apply_clear_deku_basement_block(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
     }
-    pub fn observe_deku_basement_scrubs(&mut self) {
+    fn apply_observe_deku_basement_scrubs(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
     }
-    pub fn clear_deku_basement_scrubs(&mut self) {
+    fn apply_clear_deku_basement_scrubs(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
     }
-    pub fn observe_deku_basement_switch(&mut self) {
+    fn apply_observe_deku_basement_switch(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
     }
-    pub fn clear_deku_basement_switch(&mut self) {
+    fn apply_clear_deku_basement_switch(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
     }
-    pub fn observe_deku_basement_web(&mut self) {
+    fn apply_observe_deku_basement_web(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
     }
-    pub fn clear_deku_basement_web(&mut self) {
+    fn apply_clear_deku_basement_web(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_BASEMENT_WEB);
     }
-    pub fn observe_deku_lobby_web(&mut self) {
+    fn apply_observe_deku_lobby_web(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
     }
-    pub fn clear_deku_lobby_web(&mut self) {
+    fn apply_clear_deku_lobby_web(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_LOBBY_WEB);
     }
-    pub fn observe_deku_nut_drop(&mut self) {
+    fn apply_observe_deku_nut_drop(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
     }
-    pub fn clear_deku_nut_drop(&mut self) {
+    fn apply_clear_deku_nut_drop(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_NUT_DROP);
     }
-    pub fn observe_deku_shield_drop(&mut self) {
+    fn apply_observe_deku_shield_drop(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
     }
-    pub fn clear_deku_shield_drop(&mut self) {
+    fn apply_clear_deku_shield_drop(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_SHIELD_DROP);
     }
-    pub fn observe_deku_slingshot_scrub(&mut self) {
+    fn apply_observe_deku_slingshot_scrub(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
     }
-    pub fn clear_deku_slingshot_scrub(&mut self) {
+    fn apply_clear_deku_slingshot_scrub(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
     }
-    pub fn observe_deku_stick_drop(&mut self) {
+    fn apply_observe_deku_stick_drop(&mut self) {
         self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
     }
-    pub fn clear_deku_stick_drop(&mut self) {
+    fn apply_clear_deku_stick_drop(&mut self) {
         self.cbits1.remove(flags::ContextBits1::DEKU_STICK_DROP);
     }
-    pub fn observe_gold_skulltula_token(&mut self, obs: IntegerObservation<i8>) {
-        if self.strict {
-            self.gold_skulltula_token = IntegerObservation::Exact;
-        } else {
-            self.gold_skulltula_token = self.gold_skulltula_token.combine(obs);
-        }
+    fn apply_observe_gold_skulltula_token(&mut self, obs: IntegerObservation<i8>) {
+        self.gold_skulltula_token = self.gold_skulltula_token.combine(obs);
     }
-    pub fn clear_gold_skulltula_token(&mut self, obs: IntegerObservation<i8>) {
+    fn apply_shift_gold_skulltula_token(&mut self, diff: i8) {
+        self.gold_skulltula_token = self.gold_skulltula_token.shift(-diff);
+    }
+    fn apply_clear_gold_skulltula_token(&mut self) {
         self.gold_skulltula_token = IntegerObservation::Unknown;
     }
-    pub fn observe_hylian_shield(&mut self) {
+    fn apply_observe_hylian_shield(&mut self) {
         self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
     }
-    pub fn clear_hylian_shield(&mut self) {
+    fn apply_clear_hylian_shield(&mut self) {
         self.cbits1.remove(flags::ContextBits1::HYLIAN_SHIELD);
     }
-    pub fn observe_kokiri_emerald(&mut self) {
+    fn apply_observe_kokiri_emerald(&mut self) {
         self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
     }
-    pub fn clear_kokiri_emerald(&mut self) {
+    fn apply_clear_kokiri_emerald(&mut self) {
         self.cbits1.remove(flags::ContextBits1::KOKIRI_EMERALD);
     }
-    pub fn observe_kokiri_sword(&mut self) {
+    fn apply_observe_kokiri_sword(&mut self) {
         self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
     }
-    pub fn clear_kokiri_sword(&mut self) {
+    fn apply_clear_kokiri_sword(&mut self) {
         self.cbits1.remove(flags::ContextBits1::KOKIRI_SWORD);
     }
-    pub fn observe_magic_meter(&mut self) {
+    fn apply_observe_magic_meter(&mut self) {
         self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
     }
-    pub fn clear_magic_meter(&mut self) {
+    fn apply_clear_magic_meter(&mut self) {
         self.cbits1.remove(flags::ContextBits1::MAGIC_METER);
     }
-    pub fn observe_ocarina(&mut self) {
+    fn apply_observe_ocarina(&mut self) {
         self.cbits1.insert(flags::ContextBits1::OCARINA);
     }
-    pub fn clear_ocarina(&mut self) {
+    fn apply_clear_ocarina(&mut self) {
         self.cbits1.remove(flags::ContextBits1::OCARINA);
     }
-    pub fn observe_progressive_wallet(&mut self, obs: IntegerObservation<i8>) {
-        if self.strict {
-            self.progressive_wallet = IntegerObservation::Exact;
-        } else {
-            self.progressive_wallet = self.progressive_wallet.combine(obs);
-        }
+    fn apply_observe_progressive_wallet(&mut self, obs: IntegerObservation<i8>) {
+        self.progressive_wallet = self.progressive_wallet.combine(obs);
     }
-    pub fn clear_progressive_wallet(&mut self, obs: IntegerObservation<i8>) {
+    fn apply_shift_progressive_wallet(&mut self, diff: i8) {
+        self.progressive_wallet = self.progressive_wallet.shift(-diff);
+    }
+    fn apply_clear_progressive_wallet(&mut self) {
         self.progressive_wallet = IntegerObservation::Unknown;
     }
-    pub fn observe_showed_mido(&mut self) {
+    fn apply_observe_showed_mido(&mut self) {
         self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
     }
-    pub fn clear_showed_mido(&mut self) {
+    fn apply_clear_showed_mido(&mut self) {
         self.cbits1.remove(flags::ContextBits1::SHOWED_MIDO);
     }
-    pub fn observe_slingshot(&mut self) {
+    fn apply_observe_slingshot(&mut self) {
         self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
     }
-    pub fn clear_slingshot(&mut self) {
+    fn apply_clear_slingshot(&mut self) {
         self.cbits1.remove(flags::ContextBits1::SLINGSHOT);
     }
-    pub fn observe_triforce_piece(&mut self, obs: IntegerObservation<i16>) {
-        if self.strict {
-            self.triforce_piece = IntegerObservation::Exact;
-        } else {
-            self.triforce_piece = self.triforce_piece.combine(obs);
-        }
+    fn apply_observe_triforce_piece(&mut self, obs: IntegerObservation<i16>) {
+        self.triforce_piece = self.triforce_piece.combine(obs);
     }
-    pub fn clear_triforce_piece(&mut self, obs: IntegerObservation<i16>) {
+    fn apply_shift_triforce_piece(&mut self, diff: i16) {
+        self.triforce_piece = self.triforce_piece.shift(-diff);
+    }
+    fn apply_clear_triforce_piece(&mut self) {
         self.triforce_piece = IntegerObservation::Unknown;
     }
-    pub fn observe_victory(&mut self) {
+    fn apply_observe_victory(&mut self) {
         self.cbits1.insert(flags::ContextBits1::VICTORY);
     }
-    pub fn clear_victory(&mut self) {
+    fn apply_clear_victory(&mut self) {
         self.cbits1.remove(flags::ContextBits1::VICTORY);
     }
 }
@@ -896,6 +1355,35 @@ impl MatcherDispatch for ObservationMatcher {
             (Self::TriforcePieceRange { lo, hi, matcher }, OneObservation::TriforcePieceRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value(*v, value),
             (Self::LookupCBits1 { mask, matcher }, OneObservation::CBits1 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
             (Self::LookupCBits2 { mask, matcher }, OneObservation::CBits2 { mask: mask2, result }) if mask == mask2 => matcher.add_value(*result, value),
+            _ => (),
+        }
+    }
+    fn add_value_if_all(&mut self, obs: &OneObservation, value: Self::Value, test: impl FnMut(&Self::Value) -> bool) {
+        match (self, obs) {
+            (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value_if_all(*v, value, test),
+            (Self::TodLookup(m), OneObservation::Tod(v)) => m.add_value_if_all(*v, value, test),
+            (Self::RupeesLookup(m), OneObservation::RupeesExact(v)) => m.add_value_if_all(*v, value, test),
+            (Self::RupeesEq { eq, matcher }, OneObservation::RupeesEq(eq2, v)) if eq2 == eq => matcher.add_value_if_all(*v, value, test),
+            (Self::RupeesGe { lo, matcher }, OneObservation::RupeesGe(lo2, v)) if lo2 == lo => matcher.add_value_if_all(*v, value, test),
+            (Self::RupeesLe { hi, matcher }, OneObservation::RupeesLe(hi2, v)) if hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::RupeesRange { lo, hi, matcher }, OneObservation::RupeesRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::GoldSkulltulaTokenLookup(m), OneObservation::GoldSkulltulaTokenExact(v)) => m.add_value_if_all(*v, value, test),
+            (Self::GoldSkulltulaTokenEq { eq, matcher }, OneObservation::GoldSkulltulaTokenEq(eq2, v)) if eq2 == eq => matcher.add_value_if_all(*v, value, test),
+            (Self::GoldSkulltulaTokenGe { lo, matcher }, OneObservation::GoldSkulltulaTokenGe(lo2, v)) if lo2 == lo => matcher.add_value_if_all(*v, value, test),
+            (Self::GoldSkulltulaTokenLe { hi, matcher }, OneObservation::GoldSkulltulaTokenLe(hi2, v)) if hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::GoldSkulltulaTokenRange { lo, hi, matcher }, OneObservation::GoldSkulltulaTokenRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::ProgressiveWalletLookup(m), OneObservation::ProgressiveWalletExact(v)) => m.add_value_if_all(*v, value, test),
+            (Self::ProgressiveWalletEq { eq, matcher }, OneObservation::ProgressiveWalletEq(eq2, v)) if eq2 == eq => matcher.add_value_if_all(*v, value, test),
+            (Self::ProgressiveWalletGe { lo, matcher }, OneObservation::ProgressiveWalletGe(lo2, v)) if lo2 == lo => matcher.add_value_if_all(*v, value, test),
+            (Self::ProgressiveWalletLe { hi, matcher }, OneObservation::ProgressiveWalletLe(hi2, v)) if hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::ProgressiveWalletRange { lo, hi, matcher }, OneObservation::ProgressiveWalletRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::TriforcePieceLookup(m), OneObservation::TriforcePieceExact(v)) => m.add_value_if_all(*v, value, test),
+            (Self::TriforcePieceEq { eq, matcher }, OneObservation::TriforcePieceEq(eq2, v)) if eq2 == eq => matcher.add_value_if_all(*v, value, test),
+            (Self::TriforcePieceGe { lo, matcher }, OneObservation::TriforcePieceGe(lo2, v)) if lo2 == lo => matcher.add_value_if_all(*v, value, test),
+            (Self::TriforcePieceLe { hi, matcher }, OneObservation::TriforcePieceLe(hi2, v)) if hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::TriforcePieceRange { lo, hi, matcher }, OneObservation::TriforcePieceRange(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::LookupCBits1 { mask, matcher }, OneObservation::CBits1 { mask: mask2, result }) if mask == mask2 => matcher.add_value_if_all(*result, value, test),
+            (Self::LookupCBits2 { mask, matcher }, OneObservation::CBits2 { mask: mask2, result }) if mask == mask2 => matcher.add_value_if_all(*result, value, test),
             _ => (),
         }
     }

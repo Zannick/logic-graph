@@ -358,6 +358,7 @@ impl context::Ctx for Context {
             _ => 0,
         }
     }
+
     fn collect(&mut self, item: Item, world: &World) {
         match item {
             Item::Biggoron_Sword => {
@@ -463,6 +464,142 @@ impl context::Ctx for Context {
         }
     }
 
+    fn observe_collect(&mut self, item: Item, world: &World, full_obs: &mut FullObservation) {
+        match item {
+            Item::Biggoron_Sword => {
+                self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
+                full_obs.clear_biggoron_sword();
+            }
+            Item::Bombs => {
+                self.cbits1.insert(flags::ContextBits1::BOMBS);
+                full_obs.clear_bombs();
+            }
+            Item::Boomerang => {
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+                full_obs.clear_boomerang();
+            }
+            Item::Bow => {
+                self.cbits1.insert(flags::ContextBits1::BOW);
+                full_obs.clear_bow();
+            }
+            Item::Buy_Deku_Nut_10 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
+                full_obs.clear_buy_deku_nut_10();
+            }
+            Item::Buy_Deku_Nut_5 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
+                full_obs.clear_buy_deku_nut_5();
+            }
+            Item::Buy_Deku_Shield => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
+                full_obs.clear_buy_deku_shield();
+            }
+            Item::Buy_Deku_Stick_1 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
+                full_obs.clear_buy_deku_stick_1();
+            }
+            Item::Defeat_Ganon => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
+                full_obs.clear_defeat_ganon();
+            }
+            Item::Defeat_Gohma => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
+                full_obs.clear_defeat_gohma();
+            }
+            Item::Deku_Back_Room_Wall => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+                full_obs.clear_deku_back_room_wall();
+            }
+            Item::Deku_Back_Room_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+                full_obs.clear_deku_back_room_web();
+            }
+            Item::Deku_Basement_Block => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+                full_obs.clear_deku_basement_block();
+            }
+            Item::Deku_Basement_Scrubs => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+                full_obs.clear_deku_basement_scrubs();
+            }
+            Item::Deku_Basement_Switch => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+                full_obs.clear_deku_basement_switch();
+            }
+            Item::Deku_Basement_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
+                full_obs.clear_deku_basement_web();
+            }
+            Item::Deku_Lobby_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
+                full_obs.clear_deku_lobby_web();
+            }
+            Item::Deku_Nut_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
+                full_obs.clear_deku_nut_drop();
+            }
+            Item::Deku_Shield_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
+                full_obs.clear_deku_shield_drop();
+            }
+            Item::Deku_Slingshot_Scrub => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+                full_obs.clear_deku_slingshot_scrub();
+            }
+            Item::Deku_Stick_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
+                full_obs.clear_deku_stick_drop();
+            }
+            Item::Gold_Skulltula_Token => {
+                self.gold_skulltula_token += 1;
+                full_obs.observe_shift_gold_skulltula_token(1);
+            }
+            Item::Hylian_Shield => {
+                self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
+                full_obs.clear_hylian_shield();
+            }
+            Item::Kokiri_Emerald => {
+                self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
+                full_obs.clear_kokiri_emerald();
+            }
+            Item::Kokiri_Sword => {
+                self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
+                full_obs.clear_kokiri_sword();
+            }
+            Item::Magic_Meter => {
+                self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
+                full_obs.clear_magic_meter();
+            }
+            Item::Ocarina => {
+                self.cbits1.insert(flags::ContextBits1::OCARINA);
+                full_obs.clear_ocarina();
+            }
+            Item::Progressive_Wallet => {
+                self.progressive_wallet += 1;
+                full_obs.observe_shift_progressive_wallet(1);
+            }
+            Item::Showed_Mido => {
+                self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
+                full_obs.clear_showed_mido();
+            }
+            Item::Slingshot => {
+                self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
+                full_obs.clear_slingshot();
+            }
+            Item::Triforce_Piece => {
+                self.triforce_piece += 1;
+                full_obs.observe_shift_triforce_piece(1);
+            }
+            Item::Victory => {
+                self.cbits1.insert(flags::ContextBits1::VICTORY);
+                full_obs.clear_victory();
+            }
+            Item::Rupee_1 => rules::observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(self, world, full_obs),
+            Item::Rupees_5 => rules::observe_action_rupees_set_invoke_min__rupees_add_5_invoke_wallet_max(self, world, full_obs),
+            Item::Rupees_50 => rules::observe_action_rupees_set_invoke_min__rupees_add_50_invoke_wallet_max(self, world, full_obs),
+            _ => (),
+        }
+    }
 
     // test helper for items
     fn add_item(&mut self, item: Item) {
@@ -566,6 +703,141 @@ impl context::Ctx for Context {
             _ => (),
         }
     }
+
+    fn observe_add_item(&mut self, item: Item, full_obs: &mut FullObservation) {
+        match item {
+            Item::Biggoron_Sword => {
+                self.cbits1.insert(flags::ContextBits1::BIGGORON_SWORD);
+                full_obs.clear_biggoron_sword();
+            }
+            Item::Bombs => {
+                self.cbits1.insert(flags::ContextBits1::BOMBS);
+                full_obs.clear_bombs();
+            }
+            Item::Boomerang => {
+                self.cbits1.insert(flags::ContextBits1::BOOMERANG);
+                full_obs.clear_boomerang();
+            }
+            Item::Bow => {
+                self.cbits1.insert(flags::ContextBits1::BOW);
+                full_obs.clear_bow();
+            }
+            Item::Buy_Deku_Nut_10 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_10);
+                full_obs.clear_buy_deku_nut_10();
+            }
+            Item::Buy_Deku_Nut_5 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_NUT_5);
+                full_obs.clear_buy_deku_nut_5();
+            }
+            Item::Buy_Deku_Shield => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_SHIELD);
+                full_obs.clear_buy_deku_shield();
+            }
+            Item::Buy_Deku_Stick_1 => {
+                self.cbits1.insert(flags::ContextBits1::BUY_DEKU_STICK_1);
+                full_obs.clear_buy_deku_stick_1();
+            }
+            Item::Defeat_Ganon => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GANON);
+                full_obs.clear_defeat_ganon();
+            }
+            Item::Defeat_Gohma => {
+                self.cbits1.insert(flags::ContextBits1::DEFEAT_GOHMA);
+                full_obs.clear_defeat_gohma();
+            }
+            Item::Deku_Back_Room_Wall => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WALL);
+                full_obs.clear_deku_back_room_wall();
+            }
+            Item::Deku_Back_Room_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BACK_ROOM_WEB);
+                full_obs.clear_deku_back_room_web();
+            }
+            Item::Deku_Basement_Block => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_BLOCK);
+                full_obs.clear_deku_basement_block();
+            }
+            Item::Deku_Basement_Scrubs => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SCRUBS);
+                full_obs.clear_deku_basement_scrubs();
+            }
+            Item::Deku_Basement_Switch => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_SWITCH);
+                full_obs.clear_deku_basement_switch();
+            }
+            Item::Deku_Basement_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_BASEMENT_WEB);
+                full_obs.clear_deku_basement_web();
+            }
+            Item::Deku_Lobby_Web => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_LOBBY_WEB);
+                full_obs.clear_deku_lobby_web();
+            }
+            Item::Deku_Nut_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_NUT_DROP);
+                full_obs.clear_deku_nut_drop();
+            }
+            Item::Deku_Shield_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_SHIELD_DROP);
+                full_obs.clear_deku_shield_drop();
+            }
+            Item::Deku_Slingshot_Scrub => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_SLINGSHOT_SCRUB);
+                full_obs.clear_deku_slingshot_scrub();
+            }
+            Item::Deku_Stick_Drop => {
+                self.cbits1.insert(flags::ContextBits1::DEKU_STICK_DROP);
+                full_obs.clear_deku_stick_drop();
+            }
+            Item::Gold_Skulltula_Token => {
+                self.gold_skulltula_token += 1;
+                full_obs.observe_shift_gold_skulltula_token(1);
+            }
+            Item::Hylian_Shield => {
+                self.cbits1.insert(flags::ContextBits1::HYLIAN_SHIELD);
+                full_obs.clear_hylian_shield();
+            }
+            Item::Kokiri_Emerald => {
+                self.cbits1.insert(flags::ContextBits1::KOKIRI_EMERALD);
+                full_obs.clear_kokiri_emerald();
+            }
+            Item::Kokiri_Sword => {
+                self.cbits1.insert(flags::ContextBits1::KOKIRI_SWORD);
+                full_obs.clear_kokiri_sword();
+            }
+            Item::Magic_Meter => {
+                self.cbits1.insert(flags::ContextBits1::MAGIC_METER);
+                full_obs.clear_magic_meter();
+            }
+            Item::Ocarina => {
+                self.cbits1.insert(flags::ContextBits1::OCARINA);
+                full_obs.clear_ocarina();
+            }
+            Item::Progressive_Wallet => {
+                self.progressive_wallet += 1;
+                full_obs.observe_shift_progressive_wallet(1);
+            }
+            Item::Showed_Mido => {
+                self.cbits1.insert(flags::ContextBits1::SHOWED_MIDO);
+                full_obs.clear_showed_mido();
+            }
+            Item::Slingshot => {
+                self.cbits1.insert(flags::ContextBits1::SLINGSHOT);
+                full_obs.clear_slingshot();
+            }
+            Item::Triforce_Piece => {
+                self.triforce_piece += 1;
+                full_obs.observe_shift_triforce_piece(1);
+            }
+            Item::Victory => {
+                self.cbits1.insert(flags::ContextBits1::VICTORY);
+                full_obs.clear_victory();
+            }
+            _ => (),
+        }
+    }
+
 
     // test helper for context vars
     fn parse_set_context(&mut self, ckey: &str, cval: &Yaml) -> Result<(), String> {
@@ -936,6 +1208,14 @@ impl context::Ctx for Context {
         }
     }
 
+    fn observe_take_exit(&mut self, exit: &Exit, world: &World, full_obs: &mut FullObservation) {
+        self.observe_set_position(exit.dest(), world, full_obs);
+        match exit.id() {
+            _ => (),
+        }
+    }
+
+
     fn position(&self) -> SpotId {
         self.position
     }
@@ -955,17 +1235,48 @@ impl context::Ctx for Context {
         self.position = pos;
     }
 
+    fn observe_set_position(&mut self, pos: SpotId, world: &World, full_obs: &mut FullObservation) {
+        let area = get_area(pos);
+        match area {
+            AreaId::Deku_Tree__Compass_Room => {
+                if get_area(self.position) != area {
+                    self.cbits1.remove(flags::ContextBits1::DEKU_TREE__COMPASS_ROOM__CTX__TORCH);
+                    full_obs.clear_deku_tree__compass_room__ctx__torch();
+                }
+            }
+            _ => (),
+        }
+        self.position = pos;
+    }
+
+
     fn reload_game(&mut self, world: &World) {
         self.reset_all(world);
     }
 
+    fn observe_reload_game(&mut self, world: &World, full_obs: &mut FullObservation) {
+        self.observe_reset_all(world, full_obs);
+    }
+
+
     fn reset_all(&mut self, world: &World) {
     }
 
+    fn observe_reset_all(&mut self, world: &World, full_obs: &mut FullObservation) {
+    }
+
+
     fn reset_region(&mut self, region_id: RegionId, world: &World) {
     }
-    fn reset_area(&mut self, area_id: AreaId, world: &World) {
+fn reset_area(&mut self, area_id: AreaId, world: &World) {
     }
+
+    fn observe_reset_region(&mut self, region_id: RegionId, world: &World, full_obs: &mut FullObservation) {
+    }
+fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut FullObservation) {
+    }
+
+
     fn can_afford(&self, cost: &Currency) -> bool {
         match cost {
             Currency::Free => true,
@@ -978,12 +1289,6 @@ impl context::Ctx for Context {
             Currency::Rupees(_) => self.rupees as i16,
         }
     }
-    fn spend(&mut self, cost: &Currency) {
-        match cost {
-            Currency::Free => (),
-            Currency::Rupees(c) => self.rupees -= *c,
-        }
-    }
     fn observe_afford(&self, cost: &Currency, full_obs: &mut FullObservation) {
         match cost {
             Currency::Free => (),
@@ -991,7 +1296,23 @@ impl context::Ctx for Context {
         }
     }
 
-    fn visit(&mut self, loc_id: LocationId) {
+    fn spend(&mut self, cost: &Currency) {
+        match cost {
+            Currency::Free => (),
+            Currency::Rupees(c) => self.rupees -= *c,
+        }
+    }
+    fn observe_spend(&mut self, cost: &Currency, full_obs: &mut FullObservation) {
+        match cost {
+            Currency::Free => (),
+            Currency::Rupees(c) => {
+                self.rupees -= *c;
+                full_obs.observe_shift_rupees(-*c);
+            }
+        }
+    }
+
+        fn visit(&mut self, loc_id: LocationId) {
         match loc_id {
             LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
                 self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
@@ -1139,6 +1460,157 @@ impl context::Ctx for Context {
             }
         }
     }
+
+        fn observe_visit(&mut self, loc_id: LocationId, full_obs: &mut FullObservation) {
+        match loc_id {
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS);
+            }
+            LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS);
+            }
+            LocationId::Deku_Tree__Lobby__Center__Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
+            }
+            LocationId::Deku_Tree__Floor_2__Vines__Map_Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST);
+            }
+            LocationId::Deku_Tree__Scrub_Room__Entry__Scrub => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB);
+            }
+            LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST);
+            }
+            LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST);
+            }
+            LocationId::Deku_Tree__Floor_3__Door__Break_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
+            }
+            LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB);
+            }
+            LocationId::Deku_Tree__Compass_Room__Compass__Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST);
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST);
+            }
+            LocationId::Deku_Tree__Compass_Room__Ledge__GS => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS);
+            }
+            LocationId::Deku_Tree__Basement_1__Center__Vines_GS => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Switch => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Gate_GS => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS);
+            }
+            LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB);
+            }
+            LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL);
+            }
+            LocationId::Deku_Tree__Skull_Room__Entry__GS => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS);
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK);
+            }
+            LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB);
+            }
+            LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_DEFEAT_GOHMA);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART);
+            }
+            LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP);
+            }
+            LocationId::KF__Kokiri_Village__Training_Center__Victory => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY);
+            }
+            LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO);
+            }
+            LocationId::KF__Boulder_Maze__Reward__Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__BOULDER_MAZE__REWARD__CHEST);
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Sticks => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS);
+            }
+            LocationId::KF__Baba_Corridor__Deku_Babas__Nuts => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS);
+            }
+            LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE);
+            }
+            LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE);
+            }
+            LocationId::KF__Midos_House__Entry__Top_Left_Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST);
+            }
+            LocationId::KF__Midos_House__Entry__Top_Right_Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST);
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Left_Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST);
+            }
+            LocationId::KF__Midos_House__Entry__Bottom_Right_Chest => {
+                self.cbits1.insert(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST);
+            }
+            LocationId::KF__Shop__Entry__Blue_Rupee => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__BLUE_RUPEE);
+            }
+            LocationId::KF__Shop__Entry__Item_1 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_1);
+            }
+            LocationId::KF__Shop__Entry__Item_2 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_2);
+            }
+            LocationId::KF__Shop__Entry__Item_3 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_3);
+            }
+            LocationId::KF__Shop__Entry__Item_4 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_4);
+            }
+            LocationId::KF__Shop__Entry__Item_5 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_5);
+            }
+            LocationId::KF__Shop__Entry__Item_6 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_6);
+            }
+            LocationId::KF__Shop__Entry__Item_7 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_7);
+            }
+            LocationId::KF__Shop__Entry__Item_8 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_8);
+            }
+            LocationId::Kak__Spider_House__Entry__Skulls_10 => {
+                self.cbits2.insert(flags::ContextBits2::VISITED_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10);
+            }
+        }
+    }
+
+
     fn reset(&mut self, loc_id: LocationId) {
         match loc_id {
             LocationId::Deku_Tree__Lobby__Center__Web | LocationId::Deku_Tree__Floor_3__Door__Break_Web | LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {
@@ -1275,7 +1747,7 @@ impl context::Ctx for Context {
             }
         }
     }
-    
+
     fn visited(&self, loc_id: LocationId) -> bool {
         match loc_id {
             LocationId::Deku_Tree__Lobby__Center__Web | LocationId::Deku_Tree__Floor_3__Door__Break_Web | LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web => {

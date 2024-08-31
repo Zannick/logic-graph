@@ -4,6 +4,7 @@
 
 use serde::{Serialize, Deserialize};
 use std::fmt;
+use std::ops::{Add, Mul};
 
 #[derive(Debug, PartialEq, Eq, Copy, Clone, Default, Hash, Ord, PartialOrd, Serialize, Deserialize)]
 pub enum Currency {
@@ -38,5 +39,28 @@ impl std::str::FromStr for Currency {
             }
         }
         Err(format!("Could not recognize as a Currency: {}", s))
+    }
+}
+
+impl Add for Currency {
+    type Output = Self;
+    fn add(self, other: Self) -> Self {
+        match (self, other) {
+            (Currency::Free, _) => other,
+            (_, Currency::Free) => self,
+            (Currency::Rupees(s), Currency::Rupees(o)) => Currency::Rupees(s + o),
+            #[allow(unreachable_patterns)]
+            _ => panic!("Cannot add currencies of two different types: {} + {}", self, other),
+        }
+    }
+}
+
+impl Mul<f32> for Currency {
+    type Output = Self;
+    fn mul(self, other: f32) -> Self {
+        match self {
+            Currency::Free => self,
+            Currency::Rupees(i) => Currency::Rupees((i as f32 * other) as i32),
+        }
     }
 }
