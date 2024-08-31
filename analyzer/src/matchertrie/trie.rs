@@ -348,6 +348,30 @@ mod test {
                 _ => (),
             }
         }
+        fn add_value_if_all(
+            &mut self,
+            obs: &OneObservedThing,
+            value: Ctx,
+            test: impl FnMut(&Ctx) -> bool,
+        ) {
+            match (self, obs) {
+                (Self::LookupPosition(m), OneObservedThing::Pos(p)) => {
+                    m.add_value_if_all(*p, value, test)
+                }
+                (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => {
+                    m.add_value_if_all(*f, value, test)
+                }
+                (Self::MaskLookupFlag(m, used_mask), OneObservedThing::Flag { mask, result })
+                    if used_mask == mask =>
+                {
+                    m.add_value_if_all(*result, value, test)
+                }
+                (Self::EnoughFlasks(m, x), OneObservedThing::FlasksGe(y, res)) if x == y => {
+                    m.add_value_if_all(*res, value, test)
+                }
+                _ => (),
+            }
+        }
 
         fn nodes(&self) -> Vec<Arc<Mutex<Self::Node>>> {
             match self {

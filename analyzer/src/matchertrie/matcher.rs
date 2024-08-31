@@ -54,10 +54,19 @@ pub trait MatcherDispatch {
         &mut self,
         obs: &<Self::Struct as Observable>::PropertyObservation,
     ) -> Option<Arc<Mutex<Self::Node>>>;
+
+    /// Adds a value to the existing node in this matcher, or creates a new node with the value.
     fn add_value(
         &mut self,
         obs: &<Self::Struct as Observable>::PropertyObservation,
         value: Self::Value,
+    );
+    /// Adds a value as above, but only adds if all values already existing here pass the test.
+    fn add_value_if_all(
+        &mut self,
+        obs: &<Self::Struct as Observable>::PropertyObservation,
+        value: Self::Value,
+        test: impl FnMut(&Self::Value) -> bool,
     );
 
     fn nodes(&self) -> Vec<Arc<Mutex<Self::Node>>>;
@@ -81,6 +90,12 @@ where
     /// Inserts matchers
     fn insert(&mut self, obs: KeyType) -> Arc<Mutex<NodeType>>;
     fn add_value(&mut self, obs: KeyType, value: ValueType);
+    fn add_value_if_all(
+        &mut self,
+        obs: KeyType,
+        value: ValueType,
+        test: impl FnMut(&ValueType) -> bool,
+    );
 
     fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>>;
     fn num_values(&self) -> usize;
@@ -169,6 +184,24 @@ where
         match self.map.get_mut(&obs) {
             Some((_, val)) => {
                 val.insert(value);
+            }
+            None => {
+                self.map
+                    .insert(obs, (Some(Arc::default()), new_hashset_with(value)));
+            }
+        }
+    }
+    fn add_value_if_all(
+        &mut self,
+        obs: KeyType,
+        value: ValueType,
+        test: impl FnMut(&ValueType) -> bool,
+    ) {
+        match self.map.get_mut(&obs) {
+            Some((_, val)) => {
+                if val.iter().all(test) {
+                    val.insert(value);
+                }
             }
             None => {
                 self.map
@@ -303,6 +336,22 @@ where
         };
 
         val.insert(value);
+    }
+    fn add_value_if_all(
+        &mut self,
+        obs: bool,
+        value: ValueType,
+        test: impl FnMut(&ValueType) -> bool,
+    ) {
+        let val = if obs {
+            &mut self.true_values
+        } else {
+            &mut self.false_values
+        };
+
+        if val.iter().all(test) {
+            val.insert(value);
+        }
     }
 
     fn nodes(&self) -> Vec<Arc<Mutex<NodeType>>> {

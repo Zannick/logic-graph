@@ -6,11 +6,11 @@ use std::fmt::Debug;
 use std::sync::Arc;
 
 /// An Observer tracks a set of observations.
-/// 
+///
 /// Observations must be tracked in reverse. We handle this by providing `observe_` APIs that record
 /// that an observation is being made, and an `apply_observations` function that applies said observations
 /// in reverse order. This way observations can be still recorded in the order they occur.
-pub trait Observer: Debug {
+pub trait Observer: Debug + Default {
     type Ctx: Ctx;
     type Matcher: MatcherDispatch<
             Node = Node<Self::Matcher>,
@@ -31,10 +31,7 @@ pub trait Observer: Debug {
     );
 
     /// Records that we know an item was added.
-    fn observe_item(
-        &mut self,
-        item: <Self::Ctx as Ctx>::ItemId,
-    );
+    fn observe_item(&mut self, item: <Self::Ctx as Ctx>::ItemId);
 
     /// Applies the most recent set of observation updates (from `observe_` functions) in reverse order.
     fn apply_observations(&mut self);
@@ -106,6 +103,46 @@ pub fn record_observations<W, T, L, E, Wp>(
 
         // 3. Insert the new observation list.
         solve_trie.insert(solve.to_vec(state), SolutionSuffix(solution.clone(), idx));
+    }
+}
+
+/// Records a non-winning step sequence into the given trie.
+///
+/// This does not need to start from nothing, but the solution provided must be applicable from the starting state.
+pub fn record_short_observations<W, T, L, E, Wp>(
+    startctx: &T,
+    world: &W,
+    solution: Arc<Solution<T>>,
+    short_trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+) where
+    W: World<Location = L, Exit = E, Warp = Wp>,
+    L: Location<Context = T>,
+    T: Ctx<World = W>,
+    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
+    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+{
+    let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
+    // The history entries are the steps "in between" the states in full_history, so we should have
+    // one more state than history steps.
+    assert!(full_history.len() == solution.history.len() + 1);
+    let mut short_obs = T::Observer::default();
+
+    for (idx, (step, state)) in solution
+        .history
+        .iter()
+        .zip(full_history.iter())
+        .enumerate()
+        .rev()
+    {
+        // Basic process of iterating backwards:
+        // 1. Observe the history step requirements/effects itself.
+        state.observe_replay(world, *step, &mut short_obs);
+
+        // 2. Apply the observations in reverse order.
+        short_obs.apply_observations();
+
+        // 3. Insert the new observation list.
+        short_trie.insert(short_obs.to_vec(state), SolutionSuffix(solution.clone(), idx));
     }
 }
 

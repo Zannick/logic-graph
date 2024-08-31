@@ -656,6 +656,34 @@ impl MatcherDispatch for ObservationMatcher {
             _ => (),
         }
     }
+    fn add_value_if_all(&mut self, obs: &OneObservation, value: Self::Value, test: impl FnMut(&Self::Value) -> bool) {
+        match (self, obs) {
+%% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
+%% set c = ctx|camelize|camelize
+%% if t in int_types
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value_if_all(*v, value, test),
+%% else
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}(v)) => m.add_value_if_all(*v, value, test),
+%% endif
+%% endfor
+%% for item in gl.item_max_counts|sort if item not in bfp.varmap
+%% set c = item|camelize
+            (Self::{{ c }}Lookup(m), OneObservation::{{ c }}Exact(v)) => m.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Eq { eq, matcher }, OneObservation::{{ c }}Eq(eq2, v)) if eq2 == eq => matcher.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Ge { lo, matcher }, OneObservation::{{ c }}Ge(lo2, v)) if lo2 == lo => matcher.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Le { hi, matcher }, OneObservation::{{ c }}Le(hi2, v)) if hi2 == hi => matcher.add_value_if_all(*v, value, test),
+            (Self::{{ c }}Range { lo, hi, matcher }, OneObservation::{{ c }}Range(lo2, hi2, v)) if lo2 == lo && hi2 == hi => matcher.add_value_if_all(*v, value, test),
+%% endfor
+%% for group in bfp.flag_groups
+            (Self::LookupCBits{{ loop.index }} { mask, matcher }, OneObservation::CBits{{ loop.index }} { mask: mask2, result }) if mask == mask2 => matcher.add_value_if_all(*result, value, test),
+%% endfor
+            _ => (),
+        }
+    }
 
     fn nodes(&self) -> Vec<Arc<Mutex<Node<Self>>>> {
         match self {
