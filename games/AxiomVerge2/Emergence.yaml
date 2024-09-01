@@ -692,6 +692,8 @@ areas:
               movement: mist1
     - name: Dais Right
       coord: [9.05, 8.55]
+      local:
+        - to: South
       locations:
         - name: Shockwave Urn
           canon: Slingshot_Charge

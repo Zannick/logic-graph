@@ -104,6 +104,13 @@ areas:
           penalties:
             - when: not $hook
               jumps: 3
+        - to: West 26
+          req: $hook or ($grab and $climb)
+          movement: base
+          jumps: 3
+          penalties:
+            - when: not $hook
+              jumps: 1
 
     - name: Southwest Tree
       coord: [19.2, 27.05]
@@ -1175,7 +1182,7 @@ areas:
           req: $hook
           movement: base
           jumps: 2
-        - to: Wall East Platform
+        - to: Wall West Platform
           req: $hook
           movement: base
           jumps: 3

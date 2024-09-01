@@ -2256,11 +2256,14 @@ areas:
         - to: South Left
         - to: South Middle
         - to: South Right
+        - to: Wall Top
+          jumps: 1
     - name: Wall Top
       coord: [11.8, 15.45]
       local:
         - to: Wall Bottom
         - to: Staircase Top
+        - to: Irikar Drop
       exits:
         - to: Railing
           req: $hover
@@ -2276,6 +2279,10 @@ areas:
           thru: [12.55, 16.45]
           jumps_down: [1, 0]
       exits:
+        - to: Wall Top
+          req: $hookhover
+          movement: base
+          jumps: 2
         - to: Wall Top
           req: Nanite_Mist
           movement: mist2
@@ -2408,7 +2415,8 @@ areas:
           movement: platform
         - name: Deploy and Continue to Early Portal
           req: ^_platform and $attract and $can_deploy and Breach_Sight
-          do: ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
+          # Indra will continue on to the final stop
+          do: ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
           to: Platform Early Portal
           movement: platform
     - name: Platform Stop

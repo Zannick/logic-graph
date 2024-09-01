@@ -365,6 +365,8 @@ areas:
               jumps: 1
     - name: East 16
       coord: [30.95, 16.0]
+      local:
+        - to: Northeast Ledge
       exits:
         - to: Gated Community > West 16
           tags: [xshift]
@@ -387,6 +389,8 @@ areas:
           thru: [[30.75, 16.3], [30.75, 18.2]]
         - to: Catwalk Far East
           thru: [30.75, 16.0]
+        - to: Northeast Ledge
+        - to: East 16
     - name: Cache Jump
       coord: [30.5, 15.55]
       local:
@@ -947,7 +951,7 @@ areas:
         - name: Steer Boomerang
           canon: Amagi_Secret_Chamber_Flask
           item: Flask
-          req: $boomerang
+          req: $bs
           to: Middle Ledge
           time: 8  # ?
     - name: Upper Cache

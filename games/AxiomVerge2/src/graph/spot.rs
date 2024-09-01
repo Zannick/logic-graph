@@ -11050,7 +11050,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Helipad__Railing,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1, ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1)),
+        exit_range: Some((ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1, ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2)),
         action_range: None,
     },
     SpotDef {
@@ -20092,7 +20092,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1, ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1)),
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1, ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1)),
         action_range: None,
     },
     SpotDef {
@@ -20962,7 +20962,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
         loc_range: None,
-        exit_range: Some((ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1, ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1)),
+        exit_range: Some((ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1, ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1)),
         action_range: None,
     },
     SpotDef {

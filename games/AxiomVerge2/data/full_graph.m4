@@ -1899,6 +1899,7 @@ digraph AxiomVerge2 {
     Giguna__Helipad__East_16 -> Giguna__Giguna_Base__West_16;
     Giguna__Helipad__Wall_Top -> Giguna__Helipad__Railing;
     Giguna__Helipad__Railing -> Giguna__Helipad__Wall_Top;
+    Giguna__Helipad__Railing -> Giguna__Helipad__Wall_Top;
     Giguna__Helipad__So_Close -> Giguna__Helipad__Tablet_Ledge;
     Giguna__Helipad__So_Close -> Giguna__Helipad__Tablet_Ledge;
     Giguna__Helipad__East_18 -> Giguna__Lamassu__West_18;
@@ -3274,7 +3275,7 @@ digraph AxiomVerge2 {
     Uhrum__Glitchy_Corridor__East_Hookable -> Uhrum__Save_Room__Save_Point;
     Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__East_Glitch_East;
     Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__East_Platform;
-    Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__Wall_East_Platform;
+    Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__Wall_West_Platform;
     Uhrum__Glitchy_Corridor__East_Glitch_East -> Uhrum__Glitchy_Corridor__East_Glitch_West;
     Uhrum__Glitchy_Corridor__East_28 -> Uhrum__Spring__West;
     Uhrum__Grassy_Guardpost__East_23 -> Uhrum__Artillery_Practice__West_23;
@@ -3449,6 +3450,7 @@ digraph AxiomVerge2 {
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__Gate_West_Ledge;
     Uhrum__West_Entrance__Top_West_Ledge -> Uhrum__West_Entrance__Hidden_Passage_Entry;
     Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__Portal_Stand;
+    Uhrum__West_Entrance__Middle_West_Ledge -> Uhrum__West_Entrance__West_26;
     Uhrum__West_Entrance__Southwest_Tree -> Uhrum__West_Entrance__South_Platform;
     Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__Middle_West_Ledge;
     Uhrum__West_Entrance__South_Platform -> Uhrum__West_Entrance__West_27;
@@ -3912,9 +3914,12 @@ digraph AxiomVerge2 {
     Amagi__Main_Area__Northeast_Ledge -> Amagi__Main_Area__Catwalk_Far_East;
     Amagi__Main_Area__Northeast_Ledge -> Amagi__Main_Area__East_18;
     Amagi__Main_Area__Northeast_Ledge -> Amagi__Main_Area__East_16;
+    Amagi__Main_Area__East_16 -> Amagi__Main_Area__Northeast_Ledge;
     Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__East_19;
     Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__Catwalk_Far_East;
     Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__East_18;
+    Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__Northeast_Ledge;
+    Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__East_16;
     Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__Cache_Jump;
     Amagi__Main_Area__Cache_Ledge -> Amagi__Main_Area__Cache;
     Amagi__Main_Area__Cache_Jump -> Amagi__Main_Area__Cache_Ledge;
@@ -6068,6 +6073,7 @@ digraph AxiomVerge2 {
     Emergence__Aquarium__West_Ledge -> Emergence__Aquarium__West_10;
     Emergence__Aquarium__West_10 -> Emergence__Aquarium__West_Ledge;
     Emergence__Storage__South -> Emergence__Storage__Dais_Right;
+    Emergence__Storage__Dais_Right -> Emergence__Storage__South;
     Emergence__Storage__Dais_Middle -> Emergence__Storage__Dais_Right;
     Emergence__Storage__Dais_Middle -> Emergence__Storage__Dais_Left;
     Emergence__Storage__Dais_Left -> Emergence__Storage__Dais_Middle;
@@ -6731,10 +6737,12 @@ digraph AxiomVerge2 {
     Giguna__Helipad__Helicopter -> Giguna__Helipad__Irikar_Drop;
     Giguna__Helipad__Helicopter -> Giguna__Helipad__Wall_Top;
     Giguna__Helipad__East_16 -> Giguna__Helipad__Railing;
+    Giguna__Helipad__Irikar_Drop -> Giguna__Helipad__Wall_Top;
     Giguna__Helipad__Irikar_Drop -> Giguna__Helipad__So_Close;
     Giguna__Helipad__Irikar_Drop -> Giguna__Helipad__South_Left;
     Giguna__Helipad__Irikar_Drop -> Giguna__Helipad__South_Middle;
     Giguna__Helipad__Irikar_Drop -> Giguna__Helipad__South_Right;
+    Giguna__Helipad__Wall_Top -> Giguna__Helipad__Irikar_Drop;
     Giguna__Helipad__Wall_Top -> Giguna__Helipad__Wall_Bottom;
     Giguna__Helipad__Wall_Top -> Giguna__Helipad__Staircase_Top;
     Giguna__Helipad__Railing -> Giguna__Helipad__East_16;

@@ -1928,7 +1928,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
             ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => true,
-            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => true,
@@ -3343,7 +3344,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1 => rules::access_uhrum_east_glitch(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => rules::access_uhrum_east_glitch(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 => rules::access_invoke_hook(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => true,
@@ -3550,6 +3551,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::access_uhrum_west_entrance_lower_wall(ctx, world),
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::access_invoke_hook(ctx, world),
@@ -5061,7 +5063,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::observe_access_giguna_boulder(ctx, world, full_obs),
             ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => rules::observe_access_giguna_boulder(ctx, world, full_obs),
-            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6017,7 +6020,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1 => rules::observe_access_uhrum_east_glitch(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => rules::observe_access_uhrum_east_glitch(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -6177,6 +6180,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::observe_access_uhrum_west_entrance_lower_wall(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::observe_access_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -10465,7 +10469,7 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => {
+                ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         2456
                     } else {
@@ -13481,6 +13485,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         600
@@ -14345,7 +14356,7 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
-                ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -16123,7 +16134,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::explain_giguna_boulder(ctx, world, edict),
             ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => rules::explain_giguna_boulder(ctx, world, edict),
-            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::explain_invoke_hookhover(ctx, world, edict),
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -17079,7 +17091,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1 => rules::explain_uhrum_east_glitch(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => rules::explain_uhrum_east_glitch(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Center_Platform_East_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -17239,6 +17251,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__Lower_Wall_East_1 => rules::explain_uhrum_west_entrance_lower_wall(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => rules::explain_invoke_hook_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Hidden_Passage_Entry_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Gap_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -19096,7 +19109,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_1 => true,
             ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1 => true,
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => true,
-            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => true,
+            ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => true,
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => true,
             ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_1 => true,
             ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1 => true,
@@ -19522,6 +19535,7 @@ impl world::Exit for Exit {
             ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => true,
             ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => true,
             ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => true,
+            ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => true,
             ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => true,
             ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => true,
             ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => true,
@@ -19575,7 +19589,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3697] = [
+static EXIT_DEFS: [Exit; 3699] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -34301,6 +34315,13 @@ static EXIT_DEFS: [Exit; 3697] = [
         id: ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1,
         time: 2456,
         dest: SpotId::Giguna__Helipad__Wall_Top,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2,
+        time: 2456,
+        dest: SpotId::Giguna__Helipad__Wall_Top,
         price: Currency::Energy(5),
         price_per_sec: Currency::Energy(33),
     },
@@ -43846,9 +43867,9 @@ static EXIT_DEFS: [Exit; 3697] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1,
+        id: ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1,
         time: 1800,
-        dest: SpotId::Uhrum__Glitchy_Corridor__Wall_East_Platform,
+        dest: SpotId::Uhrum__Glitchy_Corridor__Wall_West_Platform,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -45291,6 +45312,13 @@ static EXIT_DEFS: [Exit; 3697] = [
         id: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1,
         time: 2400,
         dest: SpotId::Uhrum__West_Entrance__Portal_Stand,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1,
+        time: 1800,
+        dest: SpotId::Uhrum__West_Entrance__West_26,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -46809,7 +46837,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => SpotId::Giguna__Helipad__East_15,
         ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => SpotId::Giguna__Helipad__East_16,
         ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => SpotId::Giguna__Helipad__Wall_Top,
-        ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => SpotId::Giguna__Helipad__Railing,
+        ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 | ExitId:: Giguna__Helipad__Railing__ex__Wall_Top_2 => SpotId::Giguna__Helipad__Railing,
         ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 | ExitId:: Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => SpotId::Giguna__Helipad__So_Close,
         ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => SpotId::Giguna__Helipad__East_18,
         ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => SpotId::Giguna__Helipad__South_Left,
@@ -47684,7 +47712,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__West_Entrance__Hidden_Passage_West__ex__Irikar__Lamassu__Hidden_Passage_East_1 => SpotId::Uhrum__West_Entrance__Hidden_Passage_West,
         ExitId::Uhrum__West_Entrance__West_25__ex__Giguna__Separator__East_25_1 => SpotId::Uhrum__West_Entrance__West_25,
         ExitId::Uhrum__West_Entrance__Top_West_Ledge__ex__Hidden_Passage_Entry_1 | ExitId:: Uhrum__West_Entrance__Top_West_Ledge__ex__Gate_West_1 | ExitId:: Uhrum__West_Entrance__Top_West_Ledge__ex__Gate_West_Ledge_1 => SpotId::Uhrum__West_Entrance__Top_West_Ledge,
-        ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
+        ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 | ExitId:: Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => SpotId::Uhrum__West_Entrance__Middle_West_Ledge,
         ExitId::Uhrum__West_Entrance__Southwest_Tree__ex__South_Platform_1 => SpotId::Uhrum__West_Entrance__Southwest_Tree,
         ExitId::Uhrum__West_Entrance__South_Platform__ex__Middle_West_Ledge_1 | ExitId:: Uhrum__West_Entrance__South_Platform__ex__West_27_1 => SpotId::Uhrum__West_Entrance__South_Platform,
         ExitId::Uhrum__West_Entrance__Save_Point__ex__South_Platform_1 | ExitId:: Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => SpotId::Uhrum__West_Entrance__Save_Point,
@@ -47736,7 +47764,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Glitchy_Corridor__Wall_East__ex__Wall_West_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_East,
         ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Center_Platform_East_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_East_Platform,
         ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => SpotId::Uhrum__Glitchy_Corridor__East_Hookable,
-        ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_East_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West,
+        ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West,
         ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1 => SpotId::Uhrum__Glitchy_Corridor__East_Glitch_East,
         ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1 => SpotId::Uhrum__Glitchy_Corridor__East_28,
         ExitId::Uhrum__Spring__West__ex__Glitchy_Corridor__East_28_1 => SpotId::Uhrum__Spring__West,

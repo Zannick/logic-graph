@@ -2004,7 +2004,7 @@ impl world::Action for Action {
             ActionId::Giguna__Clouds__Platform_Start__Hack_Deploy_Ride_to_Portal => rules::action_giguna__clouds__ctx__platform_set_true_portal_set_giguna_gt_clouds_gt_platform_stop_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(ctx, world),
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Maybe_Get_Off_Early => rules::action_giguna__clouds__ctx__platform_set_true(ctx, world),
             ActionId::Giguna__Clouds__Platform_Early__Continue_to_Early_Portal => rules::action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platform_early_portal__portal_set_giguna_gt_clouds_gt_platform_early_portal(ctx, world),
-            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world),
+            ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => rules::action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(ctx, world),
             ActionId::Giguna__East_Caverns__West_14__Enter_Combo => rules::action_giguna__east_caverns__ctx__combo_entered_set_true(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar__Caught => rules::action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world),
             ActionId::Giguna__East_Caverns__Upper_Susar_Mid_jump__Hack => rules::action_giguna__east_caverns__ctx__upper_susar_set_true(ctx, world),
@@ -3167,7 +3167,7 @@ impl world::Action for Action {
                 }
             }
             ActionId::Giguna__Clouds__Platform_Early__Deploy_and_Continue_to_Early_Portal => {
-                rules::observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(ctx, world, full_obs);
+                rules::observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(ctx, world, full_obs);
                 let dest = self.dest(ctx, world);
                 if dest != SpotId::None {
                     ctx.observe_set_position(dest, world, full_obs);

@@ -3978,13 +3978,13 @@ pub fn action_portal_set_amagi_gt_east_lake_gt_arch_west(ctx: &mut Context, worl
     // ^portal = `Amagi > East Lake > Arch West`
     ctx.set_portal(SpotId::Amagi__East_Lake__Arch_West);
 }
-pub fn action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(
+pub fn action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(
     ctx: &mut Context,
     world: &World,
 ) {
-    // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
+    // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
-    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Early_Portal);
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop);
 }
 pub fn action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
     ctx: &mut Context,
@@ -29874,22 +29874,17 @@ pub fn observe_action_portal_set_amagi_gt_east_lake_gt_arch_west(
     ctx.set_portal(SpotId::Amagi__East_Lake__Arch_West);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_early_portal(
+pub fn observe_action_portal_set_giguna_gt_clouds_gt_platform_early_portal_invoke_deploy_drone_and_move__giguna_gt_clouds_gt_platform_stop(
     ctx: &mut Context,
     world: &World,
     full_obs: &mut FullObservation,
 ) {
-    // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Early Portal`)
+    // ^portal = `Giguna > Clouds > Platform Early Portal`; $deploy_drone_and_move(`Giguna > Clouds > Platform Stop`)
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     full_obs.clear_portal();
     ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
-    hobserve__deploy_drone_and_move!(
-        ctx,
-        world,
-        SpotId::Giguna__Clouds__Platform_Early_Portal,
-        full_obs
-    );
+    hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Clouds__Platform_Stop, full_obs);
     full_obs.strict = old_strict;
 }
 pub fn observe_action_portal_set_glacier_breach_gt_angry_lions_gt_second_platform(
