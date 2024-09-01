@@ -2,8 +2,10 @@
 
 use analyzer::access::*;
 use analyzer::cli::*;
+use analyzer::solutions::SolutionSuffix;
 use analyzer::world::World;
 use clap::Parser;
+use lib{{ package }}::observe::ObservationMatcher;
 use lib{{ package }}::settings;
 use log4rs;
 use std::path::PathBuf;
@@ -20,5 +22,5 @@ fn main() -> Result<(), std::io::Error> {
         panic!("Available items not enough to complete ruleset {}: missing {:?}",
                world.ruleset(), items);
     }
-    run(world.as_ref(), context, routes, &args)
+    run::<_, _, _, ObservationMatcher<SolutionSuffix<_>>>(world.as_ref(), context, routes, &args)
 }

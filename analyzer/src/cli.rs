@@ -4,7 +4,7 @@ use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
 use crate::minimize::*;
-use crate::observer::{debug_observations, record_observations, Observer};
+use crate::observer::{debug_observations, record_observations, TrieMatcher};
 use crate::route::*;
 use crate::search::Search;
 use crate::solutions::{write_graph, SolutionSuffix};
@@ -105,7 +105,7 @@ where
     rstr
 }
 
-pub fn run<W, T, L>(
+pub fn run<W, T, L, TM>(
     world: &W,
     startctx: T,
     mut route_ctxs: Vec<ContextWrapper<T>>,
@@ -115,6 +115,7 @@ where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     log::info!("{:?}", std::env::args());
 
@@ -133,7 +134,7 @@ where
                     }
                 }
             }));
-            let search = Search::new(
+            let search = Search::<W, T, TM>::new(
                 world,
                 startctx,
                 route_ctxs,
@@ -187,8 +188,7 @@ where
                 println!("Route did not win: still need {:?}", left);
                 return Ok(());
             }
-            let mut trie =
-                MatcherTrie::<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>::default();
+            let mut trie = MatcherTrie::<TM, SolutionSuffix<T>>::default();
             let mut solution = ctx.to_solution();
             let orig = solution.clone();
             record_observations(&startctx, world, solution.clone(), 0, &mut trie);

@@ -3,6 +3,7 @@ use crate::matchertrie::*;
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::world::*;
 use std::fmt::Debug;
+use std::hash::Hash;
 use std::sync::Arc;
 
 /// An Observer tracks a set of observations.
@@ -12,11 +13,6 @@ use std::sync::Arc;
 /// in reverse order. This way observations can be still recorded in the order they occur.
 pub trait Observer: Debug + Default {
     type Ctx: Ctx;
-    type Matcher: MatcherDispatch<SolutionSuffix<Self::Ctx>, Node = Node<Self::Matcher, SolutionSuffix<Self::Ctx>>, Struct = Self::Ctx>
-        + Default
-        + Send
-        + Sync
-        + 'static;
 
     /// Creates a new observation set from a winning state.
     fn from_victory_state(won: &Self::Ctx, world: &<Self::Ctx as Ctx>::World) -> Self;
@@ -37,23 +33,35 @@ pub trait Observer: Debug + Default {
     fn to_vec(&self, ctx: &Self::Ctx) -> Vec<<Self::Ctx as Observable>::PropertyObservation>;
 }
 
+pub trait TrieMatcher<ValueType: Clone + Eq + Hash>:
+    MatcherDispatch<ValueType, Node = Node<Self, ValueType>> + Default + Send + Sync + 'static
+{
+}
+impl<TM, ValueType> TrieMatcher<ValueType> for TM
+where
+    TM: MatcherDispatch<ValueType, Node = Node<Self, ValueType>> + Default + Send + Sync + 'static,
+    ValueType: Clone + Eq + Hash,
+{
+}
+
 // This is here to allow benchmarking without a SolutionCollector.
 /// Records a full solution's observations into the solve trie.
 ///
 /// Every state that has visited at least |min_relevant| locations is recorded in the trie,
 /// except for the winning state.
-pub fn record_observations<W, T, L, E, Wp>(
+pub fn record_observations<W, T, L, E, Wp, TM>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
     min_relevant: usize,
-    solve_trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
+    solve_trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) where
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
     Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
     // The history entries are the steps "in between" the states in full_history, so we should have
@@ -106,17 +114,18 @@ pub fn record_observations<W, T, L, E, Wp>(
 /// Records a non-winning step sequence into the given trie.
 ///
 /// This does not need to start from nothing, but the solution provided must be applicable from the starting state.
-pub fn record_short_observations<W, T, L, E, Wp>(
+pub fn record_short_observations<W, T, L, E, Wp, TM>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
-    short_trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
+    short_trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) where
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
     T: Ctx<World = W>,
     E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
     Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
     // The history entries are the steps "in between" the states in full_history, so we should have

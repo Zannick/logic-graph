@@ -134,7 +134,6 @@ pub struct FullObservation {
 
 impl Observer for FullObservation {
     type Ctx = Context;
-    type Matcher = ObservationMatcher<SolutionSuffix<Context>>;
 
     fn from_victory_state(won: &Context, world: &World) -> Self {
         let mut full_obs = Self::default();

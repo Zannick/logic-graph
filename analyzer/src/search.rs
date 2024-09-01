@@ -4,7 +4,7 @@ use crate::estimates;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::*;
-use crate::observer::{record_observations, Observer};
+use crate::observer::{record_observations, TrieMatcher};
 use crate::scoring::ScoreMetric;
 use crate::solutions::{Solution, SolutionCollector, SolutionResult, SolutionSuffix};
 use crate::world::*;
@@ -228,15 +228,16 @@ where
     results
 }
 
-pub struct Search<'a, W, T>
+pub struct Search<'a, W, T, TM>
 where
     W: World,
     T: Ctx<World = W> + Debug,
     W::Location: Location<Context = T>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
-    solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>>,
+    solve_trie: Arc<MatcherTrie<TM, SolutionSuffix<T>>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     solution_cvar: Condvar,
@@ -257,24 +258,24 @@ where
     finished: AtomicBool,
 }
 
-impl<'a, W, T, L, E> Search<'a, W, T>
+impl<'a, W, T, L, E, TM> Search<'a, W, T, TM>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
     E: Exit<Context = T, Currency = L::Currency>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     pub fn new<P>(
         world: &'a W,
         ctx: T,
         routes: Vec<ContextWrapper<T>>,
         db_path: P,
-    ) -> Result<Search<'a, W, T>, std::io::Error>
+    ) -> Result<Search<'a, W, T, TM>, std::io::Error>
     where
         P: AsRef<Path>,
     {
-        let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>> =
-            Arc::default();
+        let solve_trie: Arc<MatcherTrie<TM, SolutionSuffix<T>>> = Arc::default();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",
             "data/previews.txt",
@@ -312,7 +313,13 @@ where
             let max_time = wonctx.elapsed();
             let sol = wonctx.to_solution();
             if solutions.insert_solution(sol.clone(), world).accepted() {
-                record_observations(startctx.get(), world, sol, 1, &solve_trie);
+                record_observations::<_, _, _, _, _, TM>(
+                    startctx.get(),
+                    world,
+                    sol,
+                    1,
+                    &solve_trie,
+                );
             }
             for w in &wins {
                 let sol = w.to_solution();
@@ -617,11 +624,15 @@ where
                 &self.solve_trie,
             );
             if mode != SearchMode::Minimized {
-                return pinpoint_minimize(self.world, self.startctx.get(), solution);
+                return pinpoint_minimize::<_, _, _, _, TM>(
+                    self.world,
+                    self.startctx.get(),
+                    solution,
+                );
             }
         } else if res != SolutionResult::Duplicate && mode != SearchMode::Minimized {
             // Minimize against itself to see if it improves enough for inclusion
-            return pinpoint_minimize(self.world, self.startctx.get(), solution);
+            return pinpoint_minimize::<_, _, _, _, TM>(self.world, self.startctx.get(), solution);
         }
         None
     }

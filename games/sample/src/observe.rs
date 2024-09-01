@@ -12,6 +12,7 @@ use crate::rules;
 use analyzer::matchertrie::*;
 use analyzer::observer::*;
 use analyzer::solutions::{Solution, SolutionSuffix};
+use std::hash::Hash;
 use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -180,7 +181,6 @@ pub struct FullObservation {
 
 impl Observer for FullObservation {
     type Ctx = Context;
-    type Matcher = ObservationMatcher;
 
     fn from_victory_state(won: &Context, world: &World) -> Self {
         let mut full_obs = Self::default();
@@ -1043,104 +1043,103 @@ impl FullObservation {
 }
 
 #[derive(Debug)]
-pub enum ObservationMatcher {
-    PositionLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    TodLookup(LookupMatcher<Node<Self>, enums::Tod, SolutionSuffix<Context>>),
-    RupeesLookup(LookupMatcher<Node<Self>, i32, SolutionSuffix<Context>>),
+pub enum ObservationMatcher<Value: Clone + Eq + Hash> {
+    PositionLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    TodLookup(LookupMatcher<Node<Self, Value>, enums::Tod, Value>),
+    RupeesLookup(LookupMatcher<Node<Self, Value>, i32, Value>),
     RupeesEq {
         eq: i32,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     RupeesGe {
         lo: i32,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     RupeesLe {
         hi: i32,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     RupeesRange {
         lo: i32,
         hi: i32,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     // items
-    GoldSkulltulaTokenLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    GoldSkulltulaTokenLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     GoldSkulltulaTokenEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     GoldSkulltulaTokenGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     GoldSkulltulaTokenLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     GoldSkulltulaTokenRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    ProgressiveWalletLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    ProgressiveWalletLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     ProgressiveWalletEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     ProgressiveWalletGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     ProgressiveWalletLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     ProgressiveWalletRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    TriforcePieceLookup(LookupMatcher<Node<Self>, i16, SolutionSuffix<Context>>),
+    TriforcePieceLookup(LookupMatcher<Node<Self, Value>, i16, Value>),
     TriforcePieceEq {
         eq: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     TriforcePieceGe {
         lo: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     TriforcePieceLe {
         hi: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     TriforcePieceRange {
         lo: i16,
         hi: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     // bitflags
     LookupCBits1 {
         mask: flags::ContextBits1,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits1, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits1, Value>,
     },
     LookupCBits2 {
         mask: flags::ContextBits2,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits2, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits2, Value>,
     },
 }
 
-impl Default for ObservationMatcher {
+impl<Value: Clone + Eq + Hash> Default for ObservationMatcher<Value> {
     fn default() -> Self {
         Self::PositionLookup(LookupMatcher::new())
     }
 }
 
-impl MatcherDispatch for ObservationMatcher {
-    type Node = Node<Self>;
+impl<Value: Clone + Eq + Hash> MatcherDispatch<Value> for ObservationMatcher<Value> {
+    type Node = Node<Self, Value>;
     type Struct = Context;
-    type Value = SolutionSuffix<Context>;
-    fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self>>>, Self) {
+    fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self, Value>>>, Self) {
         match obs {
             &OneObservation::Position(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
@@ -1270,7 +1269,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
+    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self, Value>>>>, Vec<Value>) {
         match self {
             Self::PositionLookup(m) => m.lookup(val.position),
             Self::TodLookup(m) => m.lookup(val.tod),
@@ -1299,7 +1298,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self>>>> {
+    fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self, Value>>>> {
         match (self, obs) {
             (Self::PositionLookup(m), OneObservation::Position(v)) => Some(m.insert(*v)),
             (Self::TodLookup(m), OneObservation::Tod(v)) => Some(m.insert(*v)),
@@ -1329,7 +1328,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn add_value(&mut self, obs: &OneObservation, value: Self::Value) {
+    fn add_value(&mut self, obs: &OneObservation, value: Value) {
         match (self, obs) {
             (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value(*v, value),
             (Self::TodLookup(m), OneObservation::Tod(v)) => m.add_value(*v, value),
@@ -1358,7 +1357,7 @@ impl MatcherDispatch for ObservationMatcher {
             _ => (),
         }
     }
-    fn add_value_if_all(&mut self, obs: &OneObservation, value: Self::Value, test: impl FnMut(&Self::Value) -> bool) {
+    fn add_value_if_all(&mut self, obs: &OneObservation, value: Value, test: impl FnMut(&Value) -> bool) {
         match (self, obs) {
             (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value_if_all(*v, value, test),
             (Self::TodLookup(m), OneObservation::Tod(v)) => m.add_value_if_all(*v, value, test),
@@ -1388,7 +1387,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn nodes(&self) -> Vec<Arc<Mutex<Node<Self>>>> {
+    fn nodes(&self) -> Vec<Arc<Mutex<Node<Self, Value>>>> {
         match self {
             Self::PositionLookup(m) => m.nodes(),
             Self::TodLookup(m) => m.nodes(),

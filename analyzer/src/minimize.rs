@@ -5,7 +5,7 @@ use crate::access::{
 use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
-use crate::observer::{collection_observations, record_observations, Observer};
+use crate::observer::{collection_observations, record_observations, TrieMatcher};
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
@@ -16,7 +16,7 @@ use std::sync::Arc;
 
 /// Attempts to create better solutions by removing sections of the route
 /// based on observations.
-pub fn pinpoint_minimize<W, T, L, E>(
+pub fn pinpoint_minimize<W, T, L, E, TM>(
     world: &W,
     startctx: &T,
     solution: Arc<Solution<T>>,
@@ -26,8 +26,9 @@ where
     T: Ctx<World = W>,
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
-    let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>::default();
+    let mut trie = MatcherTrie::<TM, SolutionSuffix<T>>::default();
     record_observations(startctx, world, solution.clone(), 0, &mut trie);
     trie_minimize(world, startctx, solution, &trie)
 }
@@ -559,17 +560,18 @@ where
 }
 
 /// Use a matcher trie to minimize a solution
-pub fn trie_minimize<W, T, L, E>(
+pub fn trie_minimize<W, T, L, E, TM>(
     world: &W,
     startctx: &T,
     mut best_solution: Arc<Solution<T>>,
-    trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
+    trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let mut replay = ContextWrapper::new(startctx.clone());
     let mut index = 0;
@@ -606,17 +608,18 @@ where
     best
 }
 
-pub fn trie_search<W, T, L, E>(
+pub fn trie_search<W, T, L, E, TM>(
     world: &W,
     ctx: &ContextWrapper<T>,
     max_time: u32,
-    trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
+    trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
     T: Ctx<World = W>,
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let mut queue = VecDeque::from(trie.lookup(ctx.get()));
     let mut best = None;
