@@ -238,18 +238,16 @@ where
     }
 }
 
-pub fn spot_to_graph_node<W, E>(spot_id: E::SpotId) -> NodeId<W>
+pub fn spot_to_graph_node<W>(spot_id: <W::Exit as Exit>::SpotId) -> NodeId<W>
 where
-    W: World<Exit = E>,
-    E: Exit,
+    W: World,
 {
     ExternalNodeId::Spot(spot_id)
 }
 
-pub fn loc_to_graph_node<W, L>(world: &W, loc_id: L::LocId) -> NodeId<W>
+pub fn loc_to_graph_node<W>(world: &W, loc_id: <W::Location as Location>::LocId) -> NodeId<W>
 where
-    W: World<Location = L>,
-    L: Location,
+    W: World,
 {
     let loc = world.get_location(loc_id);
     ExternalNodeId::Canon(loc.canon_id())

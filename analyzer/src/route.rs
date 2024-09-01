@@ -20,11 +20,9 @@ pub(crate) fn find_route_in_solution_string(solution: &str) -> &str {
     solution
 }
 
-pub(crate) fn hist_from_string<W, T, L>(route: &str) -> Result<Vec<HistoryAlias<T>>, String>
+pub(crate) fn hist_from_string<T>(route: &str) -> Result<Vec<HistoryAlias<T>>, String>
 where
-    W: World<Location = L>,
-    T: Ctx<World = W>,
-    L: Location<Context = T>,
+    T: Ctx,
 {
     let mut hist: Vec<HistoryAlias<T>> = Vec::new();
     let route = find_route_in_solution_string(route);
@@ -37,13 +35,9 @@ where
     Ok(hist)
 }
 
-pub(crate) fn histlines_from_string<W, T, L>(
-    route: &str,
-) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
+pub(crate) fn histlines_from_string<T>(route: &str) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
 where
-    W: World<Location = L>,
-    T: Ctx<World = W>,
-    L: Location<Context = T>,
+    T: Ctx,
 {
     let mut hist: Vec<(HistoryAlias<T>, &str)> = Vec::new();
     let route = find_route_in_solution_string(route);
@@ -56,13 +50,11 @@ where
     Ok(hist)
 }
 
-pub(crate) fn histlines_from_yaml_vec<W, T, L>(
+pub(crate) fn histlines_from_yaml_vec<T>(
     route: &Vec<Yaml>,
 ) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
 where
-    W: World<Location = L>,
-    T: Ctx<World = W>,
-    L: Location<Context = T>,
+    T: Ctx,
 {
     let mut hist: Vec<(HistoryAlias<T>, &str)> = Vec::new();
     for el in route {
@@ -78,7 +70,7 @@ where
     Ok(hist)
 }
 
-pub(crate) fn step_from_route<W, T, L>(
+pub(crate) fn step_from_route<W, T>(
     mut ctx: ContextWrapper<T>,
     i: usize,
     h: HistoryAlias<T>,
@@ -86,9 +78,9 @@ pub(crate) fn step_from_route<W, T, L>(
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
+    W::Location: Location<Context = T>,
 {
     let pos = Wrapper::get(&ctx).position();
     let start = Instant::now();
@@ -123,7 +115,7 @@ where
                 })?;
             }
             ctx.try_replay(world, h)
-                    .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
+                .map_err(|s| format!("Could not complete route step {} {}:\n{}", i, h, s))?;
         }
         History::L(spot_id) | History::C(spot_id, ..) => {
             ctx = move_to(world, ctx, spot_id, shortest_paths).map_err(|s| {
@@ -161,35 +153,35 @@ where
     Ok(ctx)
 }
 
-pub fn route_from_string<W, T, L>(
+pub fn route_from_string<W, T>(
     world: &W,
     startctx: &T,
     route: &str,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, (ContextWrapper<T>, String)>
 where
-    W: World<Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
+    W::Location: Location<Context = T>,
 {
     let mut ctx = ContextWrapper::new(startctx.clone());
-    let hist = hist_from_string::<W, T, L>(route).map_err(|e| (ctx.clone(), e))?;
+    let hist = hist_from_string::<T>(route).map_err(|e| (ctx.clone(), e))?;
     for (i, h) in hist.into_iter().enumerate() {
         ctx = step_from_route(ctx.clone(), i, h, world, shortest_paths).map_err(|e| (ctx, e))?;
     }
     Ok(ctx)
 }
 
-pub fn route_from_yaml_string<W, T, L>(
+pub fn route_from_yaml_string<W, T>(
     world: &W,
     startctx: &T,
     route: &Yaml,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
+    W::Location: Location<Context = T>,
 {
     match route {
         Yaml::String(s) => route_from_string(world, startctx, s, shortest_paths).map_err(|e| e.1),
@@ -197,24 +189,24 @@ where
     }
 }
 
-pub fn debug_route<W, T, L, S>(
+pub fn debug_route<W, T>(
     world: &W,
     startctx: &T,
     route: &str,
     scorer: &ContextScorer<
         W,
         <W::Exit as Exit>::SpotId,
-        L::LocId,
+        <W::Location as Location>::LocId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
 ) -> Result<String, String>
 where
-    W: World<Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
+    W::Location: Location<Context = T>,
 {
-    let histlines = histlines_from_string::<W, T, L>(route)?;
+    let histlines = histlines_from_string::<T>(route)?;
     let mut ctx = ContextWrapper::new(startctx.clone());
     let mut output: Vec<String> = Vec::new();
     let steps = histlines.len();

@@ -29,13 +29,11 @@ pub struct ContextScorer<'w, W, S, LI, EI, A> {
     cached_estimates: AtomicUsize,
 }
 
-impl<'w, W, S, L, E, A> ContextScorer<'w, W, S, L::LocId, EdgeId<W>, A>
+impl<'w, W, A>
+    ContextScorer<'w, W, <W::Exit as Exit>::SpotId, <W::Location as Location>::LocId, EdgeId<W>, A>
 where
-    W: World<Location = L, Exit = E>,
-    L: Location,
-    E: Exit<SpotId = S>,
+    W: World,
     A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
-    S: Id + Default,
 {
     fn new<T>(world: &'w W, startctx: &T, cache_size: usize) -> Self
     where
@@ -70,7 +68,7 @@ where
     pub fn estimate_remaining_time<T>(&self, ctx: &T) -> u64
     where
         T: Ctx<World = W>,
-        L: Location<Context = T>,
+        W::Location: Location<Context = T>,
     {
         if self.world.won(ctx) {
             return 0;
@@ -111,7 +109,6 @@ where
     pub fn required_visits<T>(&self, ctx: &T) -> usize
     where
         T: Ctx<World = W>,
-        L: Location<Context = T>,
     {
         self.required_locations
             .iter()
@@ -124,7 +121,6 @@ where
     pub fn remaining_visits<T>(&self, ctx: &T) -> usize
     where
         T: Ctx<World = W>,
-        L: Location<Context = T>,
     {
         self.required_locations
             .iter()
@@ -132,10 +128,9 @@ where
             .count()
     }
 
-    pub fn remaining_locations<T>(&self, ctx: &T) -> Vec<L::LocId>
+    pub fn remaining_locations<T>(&self, ctx: &T) -> Vec<<W::Location as Location>::LocId>
     where
         T: Ctx<World = W>,
-        L: Location<Context = T>,
     {
         self.required_locations
             .iter()
@@ -149,12 +144,12 @@ where
     pub fn estimate_time_to_get<T>(
         &self,
         ctx: &T,
-        required: Vec<<L as Location>::LocId>,
-        subsets: Vec<(HashSet<<L as Location>::LocId, CommonHasher>, i16)>,
+        required: Vec<<W::Location as Location>::LocId>,
+        subsets: Vec<(HashSet<<W::Location as Location>::LocId, CommonHasher>, i16)>,
     ) -> u64
     where
         T: Ctx<World = W>,
-        L: Location<Context = T>,
+        W::Location: Location<Context = T>,
     {
         if required.is_empty() || self.world.won(ctx) {
             return 0;
@@ -192,7 +187,7 @@ where
             }))
             .collect();
 
-        let key: (S, Vec<_>, Vec<_>) = (pos, required, extra_edges);
+        let key: (_, Vec<_>, Vec<_>) = (pos, required, extra_edges);
         let mut locked_map = self.known_costs.lock().unwrap();
         if let Some(&c) = locked_map.get(&key) {
             drop(locked_map);
@@ -213,7 +208,7 @@ where
                 )
             });
             let c = if let Some(ApproxSteiner { arborescence, cost }) = self.algo.compute(
-                spot_to_graph_node::<W, E>(ctx.position()),
+                spot_to_graph_node::<W>(ctx.position()),
                 nodes.collect(),
                 node_subsets.collect(),
                 &key.2,
@@ -250,13 +245,17 @@ where
     }
 }
 
-impl<'w, W, S, L, E>
-    ContextScorer<'w, W, S, L::LocId, EdgeId<W>, ShortestPaths<NodeId<W>, EdgeId<W>>>
+impl<'w, W>
+    ContextScorer<
+        'w,
+        W,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
+        EdgeId<W>,
+        ShortestPaths<NodeId<W>, EdgeId<W>>,
+    >
 where
-    W: World<Location = L, Exit = E>,
-    L: Location,
-    E: Exit<SpotId = S>,
-    S: Id + Default,
+    W: World,
 {
     pub fn shortest_paths<T>(world: &'w W, startctx: &T, cache_size: usize) -> Self
     where

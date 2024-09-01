@@ -62,13 +62,11 @@ where
     world: &'w W,
 }
 
-impl<'w, W, T, L, E> RocksBackedQueue<'w, W, T>
+impl<'w, W, T> RocksBackedQueue<'w, W, T>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+    W::Location: Location<Context = T>,
 {
     pub fn new<P>(
         db_path: P,

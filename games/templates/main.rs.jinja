@@ -22,5 +22,5 @@ fn main() -> Result<(), std::io::Error> {
         panic!("Available items not enough to complete ruleset {}: missing {:?}",
                world.ruleset(), items);
     }
-    run::<_, _, _, ObservationMatcher<SolutionSuffix<_>>>(world.as_ref(), context, routes, &args)
+    run::<_, _, ObservationMatcher<SolutionSuffix<_>>>(world.as_ref(), context, routes, &args)
 }

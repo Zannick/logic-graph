@@ -4,18 +4,22 @@ use crate::new_hashset;
 use crate::world::*;
 use std::collections::HashSet;
 
-pub fn first_spot_with_locations_after_actions<W, T, L, E>(
+pub fn first_spot_with_locations_after_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_depth: i8,
     max_time: u32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
-    W: World<Exit = E, Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = L::Currency>,
-    L: Location<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<
+        SpotId = <W::Exit as Exit>::SpotId,
+        Context = T,
+        Currency = <W::Location as Accessible>::Currency,
+    >,
 {
     let spot_map = accessible_spots(world, ctx, max_time, false);
     let mut orig_vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
@@ -103,12 +107,12 @@ where
         .ok_or(min_spot)
 }
 
-pub fn grab_all<W, T, L, E>(world: &W, ctx: &mut ContextWrapper<T>)
+pub fn grab_all<W, T>(world: &W, ctx: &mut ContextWrapper<T>)
 where
-    W: World<Exit = E, Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     let mut hybrids = Vec::new();
     for loc in world.get_spot_locations(ctx.get().position()) {
@@ -129,17 +133,17 @@ where
     }
 }
 
-fn greedy_internal<W, T, L, E>(
+fn greedy_internal<W, T>(
     world: &W,
     mut ctx: ContextWrapper<T>,
     max_time: u32,
     max_depth: i8,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     while !world.won(ctx.get()) {
         if ctx.elapsed() > max_time {
@@ -156,31 +160,31 @@ where
     Ok(ctx)
 }
 
-pub fn greedy_search<W, T, L, E>(
+pub fn greedy_search<W, T>(
     world: &W,
     ctx: &ContextWrapper<T>,
     max_time: u32,
     max_depth: i8,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     greedy_internal(world, ctx.clone(), max_time, max_depth)
 }
 
-pub fn greedy_search_from<W, T, L, E>(
+pub fn greedy_search_from<W, T>(
     world: &W,
     ctx: &T,
     max_time: u32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     greedy_internal(world, ContextWrapper::new(ctx.clone()), max_time, 2)
 }

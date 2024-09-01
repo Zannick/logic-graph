@@ -59,16 +59,15 @@ where
     }
 }
 
-pub fn expand_exits_astar<W, T, E, H, P>(
+pub fn expand_exits_astar<W, T, H, P>(
     world: &W,
     el: &H,
     max_time: u32,
     spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
@@ -89,16 +88,15 @@ pub fn expand_exits_astar<W, T, E, H, P>(
     }
 }
 
-pub fn expand_actions_astar<W, T, E, H, P>(
+pub fn expand_actions_astar<W, T, H, P>(
     world: &W,
     el: &H,
     max_time: u32,
     spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + Ord + std::hash::Hash,
@@ -124,7 +122,7 @@ pub fn expand_actions_astar<W, T, E, H, P>(
 }
 
 // This is mainly for move_to.
-pub fn expand_local_astar<W, T, E, Wp, H, P>(
+pub fn expand_local_astar<W, T, H, P>(
     world: &W,
     el: &H,
     movement_state: T::MovementState,
@@ -132,11 +130,9 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
     spot_heap: &mut LimitedPriorityQueue<H, T, P, CommonHasher>,
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
 ) where
-    W: World<Exit = E, Warp = Wp>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
 {
@@ -157,7 +153,7 @@ pub fn expand_local_astar<W, T, E, Wp, H, P>(
     }
 }
 
-pub fn expand_astar<W, T, E, Wp, H, P>(
+pub fn expand_astar<W, T, H, P>(
     world: &W,
     el: &H,
     max_time: u32,
@@ -165,11 +161,9 @@ pub fn expand_astar<W, T, E, Wp, H, P>(
     score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
     allow_local: bool,
 ) where
-    W: World<Exit = E, Warp = Wp>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
 {

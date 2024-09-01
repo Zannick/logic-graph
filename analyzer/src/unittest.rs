@@ -602,8 +602,8 @@ where
                     mode,
                     errs,
                     match value {
-                        Yaml::String(s) => histlines_from_string::<W, T, W::Location>(s),
-                        Yaml::Array(v) => histlines_from_yaml_vec::<W, T, W::Location>(v),
+                        Yaml::String(s) => histlines_from_string::<T>(s),
+                        Yaml::Array(v) => histlines_from_yaml_vec::<T>(v),
                         _ => Err(String::from("Expected string or vec for path value")),
                     }
                     .map(|route| TestMode::Route(
@@ -915,7 +915,7 @@ where
     file.read_to_string(&mut route_str)
         .unwrap_or_else(|e| panic!("Couldn't read from file \"{:?}\": {:?}", filename, e));
 
-    let mode = histlines_from_string::<W, T, W::Location>(&route_str).map(|route| {
+    let mode = histlines_from_string::<T>(&route_str).map(|route| {
         TestMode::Route(
             route
                 .into_iter()

@@ -25,8 +25,8 @@ pub trait EstimatorWrapper<'w, W: World + 'w> {
     ) -> &ContextScorer<
         'w,
         W,
-        <<W as World>::Exit as Exit>::SpotId,
-        <<W as World>::Location as Location>::LocId,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >;
@@ -81,8 +81,8 @@ pub struct TimeSinceAndElapsed<'w, W: World> {
     estimator: ContextScorer<
         'w,
         W,
-        <<W as World>::Exit as Exit>::SpotId,
-        <<W as World>::Location as Location>::LocId,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
@@ -97,8 +97,8 @@ where
     ) -> &ContextScorer<
         'w,
         W,
-        <<W as World>::Exit as Exit>::SpotId,
-        <<W as World>::Location as Location>::LocId,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {
@@ -189,8 +189,8 @@ pub struct EstimatedTimeMetric<'w, W: World> {
     estimator: ContextScorer<
         'w,
         W,
-        <<W as World>::Exit as Exit>::SpotId,
-        <<W as World>::Location as Location>::LocId,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
@@ -205,8 +205,8 @@ where
     ) -> &ContextScorer<
         'w,
         W,
-        <<W as World>::Exit as Exit>::SpotId,
-        <<W as World>::Location as Location>::LocId,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {

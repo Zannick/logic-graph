@@ -16,16 +16,16 @@ use std::sync::Arc;
 
 /// Attempts to create better solutions by removing sections of the route
 /// based on observations.
-pub fn pinpoint_minimize<W, T, L, E, TM>(
+pub fn pinpoint_minimize<W, T, L, TM>(
     world: &W,
     startctx: &T,
     solution: Arc<Solution<T>>,
 ) -> Option<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    L: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let mut trie = MatcherTrie::<TM, SolutionSuffix<T>>::default();
@@ -34,16 +34,16 @@ where
 }
 
 /// Produces a map of spots to a list of indices where the route moves into that spot.
-fn get_spot_index_map<W, T, L, E>(
+fn get_spot_index_map<W, T, E>(
     world: &W,
     startctx: &T,
     solution: Arc<Solution<T>>,
 ) -> HashMap<E::SpotId, VecDeque<usize>, CommonHasher>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Exit = E>,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
+    W::Location: Location<Context = T, Currency = E::Currency>,
 {
     let mut replay = ContextWrapper::new(startctx.clone());
     let mut spot_map = new_hashmap();
@@ -88,16 +88,16 @@ where
 }
 
 /// Attempts to reorder segments of the solution that are at the same point.
-pub fn mutate_spot_revisits<W, T, L, E>(
+pub fn mutate_spot_revisits<W, T, L>(
     world: &W,
     startctx: &T,
     solution: Arc<Solution<T>>,
 ) -> Vec<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    L: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
 {
     let mut spot_map = get_spot_index_map(world, startctx, solution.clone());
     spot_map.retain(|_, deq| deq.len() > 2);
@@ -174,10 +174,10 @@ impl<T: Ctx> RangeAndStepTuple<T> for (RangeInclusive<usize>, HistoryAlias<T>, u
     }
 }
 
-fn rediscover_routes<'a, W, T, L, I, RT>(
+fn rediscover_routes<'a, W, T, L, RT>(
     world: &W,
     mut rreplay: ContextWrapper<T>,
-    iter: I,
+    iter: impl Iterator<Item = &'a RT>,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
@@ -188,7 +188,6 @@ where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
-    I: Iterator<Item = &'a RT>,
     RT: 'a + RangeAndStepTuple<T>,
 {
     for tuple in iter {
@@ -226,10 +225,10 @@ where
     Some(rreplay)
 }
 
-fn rediscover_wrapped<'a, W, T, L, I, RT>(
+fn rediscover_wrapped<'a, W, T, L, RT>(
     world: &W,
     rreplay: Option<ContextWrapper<T>>,
-    iter: I,
+    iter: impl Iterator<Item = &'a RT>,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
@@ -240,7 +239,6 @@ where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
-    I: Iterator<Item = &'a RT>,
     RT: 'a + RangeAndStepTuple<T>,
 {
     if let Some(rreplay) = rreplay {
@@ -259,7 +257,7 @@ where
     }
 }
 
-pub fn mutate_collection_steps<W, T, L, E>(
+pub fn mutate_collection_steps<W, T>(
     world: &W,
     startctx: &T,
     max_time: u32,
@@ -269,15 +267,15 @@ pub fn mutate_collection_steps<W, T, L, E>(
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     // [(history range inclusive of the collection step, history step, community)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
-        collection_history_with_range_info::<T, W, L, _>(solution.history.iter().copied())
+        collection_history_with_range_info::<T, _>(solution.history.iter().copied())
             .map(|(r, h)| {
                 (
                     r,
@@ -468,7 +466,7 @@ where
 }
 
 /// Mutate routes between collections by finding a greedy path to the next
-pub fn mutate_greedy_collections<W, T, L, E>(
+pub fn mutate_greedy_collections<W, T, L>(
     world: &W,
     startctx: &T,
     _max_time: u32,
@@ -478,16 +476,15 @@ pub fn mutate_greedy_collections<W, T, L, E>(
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Option<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    L: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
 {
     // [(history index, history step)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
-        collection_history_with_range_info::<T, W, L, _>(solution.history.iter().copied())
-            .collect();
+        collection_history_with_range_info::<T, _>(solution.history.iter().copied()).collect();
     let obs_list = collection_observations(startctx, world, &solution.history);
     let mut replay = ContextWrapper::new(startctx.clone());
 
@@ -560,17 +557,17 @@ where
 }
 
 /// Use a matcher trie to minimize a solution
-pub fn trie_minimize<W, T, L, E, TM>(
+pub fn trie_minimize<W, T, L, TM>(
     world: &W,
     startctx: &T,
     mut best_solution: Arc<Solution<T>>,
     trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) -> Option<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    L: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let mut replay = ContextWrapper::new(startctx.clone());
@@ -608,17 +605,17 @@ where
     best
 }
 
-pub fn trie_search<W, T, L, E, TM>(
+pub fn trie_search<W, T, L, TM>(
     world: &W,
     ctx: &ContextWrapper<T>,
     max_time: u32,
     trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) -> Option<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    L: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let mut queue = VecDeque::from(trie.lookup(ctx.get()));

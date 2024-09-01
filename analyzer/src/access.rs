@@ -18,12 +18,11 @@ static MAX_STATES_FOR_SPOTS: usize = 16_384;
 static MAX_STATES_FOR_LOCS: usize = 16_384;
 
 /// Check whether there are available locations at this position.
-pub fn spot_has_locations<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn spot_has_locations<W, T>(world: &W, ctx: &T) -> bool
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
 {
     world
         .get_spot_locations(ctx.position())
@@ -32,12 +31,11 @@ where
 }
 
 /// Check whether there are available actions at this position, including global actions.
-pub fn spot_has_actions<W, T, L, E>(world: &W, ctx: &T) -> bool
+pub fn spot_has_actions<W, T>(world: &W, ctx: &T) -> bool
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
 {
     world
         .get_global_actions()
@@ -46,19 +44,17 @@ where
         .any(|act| act.can_access(ctx, world))
 }
 
-fn expand<W, T, E, Wp>(
+fn expand<W, T>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
+    spot_map: &HashMap<<W::Exit as Exit>::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
     allow_local: bool,
 ) where
-    W: World<Exit = E, Warp = Wp>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     let movement_state = ctx.get().get_movement_state(world);
     let cedges = world.get_condensed_edges_from(ctx.get().position());
@@ -101,16 +97,15 @@ fn expand<W, T, E, Wp>(
     }
 }
 
-fn expand_exits<W, T, E>(
+fn expand_exits<W, T>(
     world: &W,
     ctx: &ContextWrapper<T>,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
+    spot_map: &HashMap<<W::Exit as Exit>::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
 {
     for exit in world.get_spot_exits(ctx.get().position()) {
@@ -129,19 +124,17 @@ fn expand_exits<W, T, E>(
 }
 
 // This is mainly for move_to which is used from tests.
-fn expand_local<W, T, E, Wp>(
+fn expand_local<W, T>(
     world: &W,
     ctx: &ContextWrapper<T>,
     movement_state: T::MovementState,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
+    spot_map: &HashMap<<W::Exit as Exit>::SpotId, ContextWrapper<T>, CommonHasher>,
     max_time: u32,
     spot_heap: &mut BinaryHeap<Reverse<HeapElement<T>>>,
 ) where
-    W: World<Exit = E, Warp = Wp>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     for &dest in world.get_area_spots(ctx.get().position()) {
         let ltt = ctx.get().local_travel_time(movement_state, dest);
@@ -160,19 +153,16 @@ fn expand_local<W, T, E, Wp>(
 }
 
 /// Explores outward from the current position.
-pub fn accessible_spots<W, T, E>(
+pub fn accessible_spots<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
     allow_local: bool,
-) -> HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>
+) -> HashMap<<W::Exit as Exit>::SpotId, ContextWrapper<T>, CommonHasher>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     // return: spotid -> ctxwrapper
     let mut spot_enum_map = new_hashmap();
@@ -208,19 +198,16 @@ where
 }
 
 /// Finds the shortest route to the given spot, if any, and moves there.
-pub fn move_to<W, T, E>(
+pub fn move_to<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
-    spot: E::SpotId,
+    spot: <W::Exit as Exit>::SpotId,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     if ctx.get().position() == spot {
         return Ok(ctx);
@@ -277,19 +264,16 @@ where
     Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
-pub fn nearest_location_by_heuristic<'w, W, T, L, E, I>(
+pub fn nearest_location_by_heuristic<'w, W, T>(
     world: &W,
     ctx: &T,
-    locs: I,
+    locs: impl Iterator<Item = &'w W::Location>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-) -> Option<&'w L>
+) -> Option<&'w W::Location>
 where
-    W: World<Exit = E, Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = L::Currency>,
-    L: Location<Context = T>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
-    I: Iterator<Item = &'w L>,
+    W::Location: Location<Context = T>,
 {
     let mut origins = new_hashmap();
     origins.insert(ExternalNodeId::Spot(ctx.position()), 0);
@@ -323,7 +307,7 @@ where
     })
 }
 
-pub fn find_nearest_location_with_actions<W, T, E>(
+pub fn find_nearest_location_with_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     max_time: u32,
@@ -331,12 +315,9 @@ pub fn find_nearest_location_with_actions<W, T, E>(
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
 {
     if world
         .get_spot_locations(ctx.get().position())
@@ -430,28 +411,23 @@ where
     Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
-fn access_check_after_actions<W, T, E, A, AccFn, ReqFn>(
+fn access_check_after_actions<W, T, A>(
     world: &W,
     ctx: ContextWrapper<T>,
-    spot: E::SpotId,
+    spot: <W::Exit as Exit>::SpotId,
     check: &A,
-    access: AccFn,
-    is_eligible: ReqFn,
+    access: impl FnOnce(&mut ContextWrapper<T>, &W, &A),
+    is_eligible: impl Fn(&T) -> bool,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     A: Accessible<Context = T>,
-    AccFn: FnOnce(&mut ContextWrapper<T>, &W, &A),
-    ReqFn: Fn(&T) -> bool,
 {
     let goal = ExternalNodeId::Spot(spot);
 
@@ -548,23 +524,19 @@ where
     Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
-pub fn access_location_after_actions<W, T, E, L>(
+pub fn access_location_after_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
-    loc_id: L,
+    loc_id: <W::Location as Location>::LocId,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = L>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    L: Id,
+    W::Location: Location<Context = T>,
 {
     if ctx.get().visited(loc_id) {
         return Ok(ctx);
@@ -587,24 +559,19 @@ where
     )
 }
 
-pub fn access_action_after_actions<W, T, E, A>(
+pub fn access_action_after_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
-    act_id: A,
+    act_id: <W::Action as Action>::ActionId,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Action: Action<Context = T, ActionId = A, SpotId = E::SpotId>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    A: Id,
 {
     let spot = world.get_action_spot(act_id);
     assert!(
@@ -628,25 +595,20 @@ where
 }
 
 /// Same as access_location_after_actions but allows the caller to specify their own check_access function.
-pub fn access_location_after_actions_with_req<W, T, E, L, ReqFn>(
+pub fn access_location_after_actions_with_req<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
-    loc_id: L,
+    loc_id: <W::Location as Location>::LocId,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
-    req: ReqFn,
+    req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    W::Location: Location<Context = T, LocId = L>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    L: Id,
-    ReqFn: Fn(&T) -> bool,
+    W::Location: Location<Context = T>,
 {
     if ctx.get().visited(loc_id) {
         return Ok(ctx);
@@ -670,26 +632,20 @@ where
 }
 
 /// Same as access_action_after_actions but allows the caller to specify their own check_access function.
-pub fn access_action_after_actions_with_req<W, T, E, A, ReqFn>(
+pub fn access_action_after_actions_with_req<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
-    act_id: A,
+    act_id: <W::Action as Action>::ActionId,
     max_time: u32,
     max_depth: usize,
     max_states: usize,
-    req: ReqFn,
+    req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
 ) -> Result<ContextWrapper<T>, String>
 where
-    W: World<Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
-    W::Action: Action<Context = T, ActionId = A, SpotId = E::SpotId>,
-    W::Warp:
-        Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
-    A: Id,
-    ReqFn: Fn(&T) -> bool,
 {
     let spot = world.get_action_spot(act_id);
     assert!(
@@ -712,13 +668,11 @@ where
     )
 }
 
-
-pub fn all_visitable_locations<W, T, L, E>(world: &W, ctx: &T) -> Vec<L::LocId>
+pub fn all_visitable_locations<W, T>(world: &W, ctx: &T) -> Vec<<W::Location as Location>::LocId>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
 {
     world
         .get_spot_locations(ctx.position())
@@ -733,12 +687,12 @@ where
         .collect()
 }
 
-pub fn can_win<W, T, L, E>(world: &W, ctx: &T, max_time: u32) -> Result<(), ContextWrapper<T>>
+pub fn can_win<W, T>(world: &W, ctx: &T, max_time: u32) -> Result<(), ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     let res = greedy_search_from(world, ctx, max_time);
     match res {
@@ -747,12 +701,12 @@ where
     }
 }
 
-pub fn can_win_just_items<W, T, L, E>(world: &W, ctx: &T) -> Result<(), Vec<(T::ItemId, i16)>>
+pub fn can_win_just_items<W, T>(world: &W, ctx: &T) -> Result<(), Vec<(T::ItemId, i16)>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     let mut ctx = ctx.clone();
     for loc in world.get_all_locations() {
@@ -768,12 +722,12 @@ where
     }
 }
 
-pub fn can_win_just_locations<W, T, L, E>(world: &W, ctx: &T) -> Result<(), Vec<(T::ItemId, i16)>>
+pub fn can_win_just_locations<W, T>(world: &W, ctx: &T) -> Result<(), Vec<(T::ItemId, i16)>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T, Currency = E::Currency>,
-    E: Exit<Context = T>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     let mut ctx = ctx.clone();
     let mut found = true;
@@ -793,15 +747,14 @@ where
     Err(world.items_needed(&ctx))
 }
 
-pub fn find_unused_links<W, T, E, Wp>(
+pub fn find_unused_links<W, T>(
     world: &W,
-    spot_map: &HashMap<E::SpotId, ContextWrapper<T>, CommonHasher>,
+    spot_map: &HashMap<<W::Exit as Exit>::SpotId, ContextWrapper<T>, CommonHasher>,
 ) -> String
 where
-    W: World<Exit = E, Warp = Wp>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
 {
     let mut accessible: Vec<_> = spot_map.values().collect();
     accessible.sort_unstable_by_key(|el| el.elapsed());
@@ -835,18 +788,13 @@ where
     vec.join("\n")
 }
 
-fn explain_unused_links<W, T, E, Wp, P>(
-    world: &W,
-    states_seen: HashMap<T, P, CommonHasher>,
-) -> String
+fn explain_unused_links<W, T, P>(world: &W, states_seen: HashMap<T, P, CommonHasher>) -> String
 where
-    W: World<Exit = E, Warp = Wp>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    Wp: Warp<Context = T, SpotId = E::SpotId, Currency = <W::Location as Accessible>::Currency>,
     W::Location: Location<Context = T>,
 {
-    let known_spots: HashSet<E::SpotId, CommonHasher> =
+    let known_spots: HashSet<<W::Exit as Exit>::SpotId, CommonHasher> =
         states_seen.iter().map(|(c, _)| c.position()).collect();
     let mut vec = Vec::new();
     for (ctx, _) in states_seen {

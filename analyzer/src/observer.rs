@@ -49,18 +49,16 @@ where
 ///
 /// Every state that has visited at least |min_relevant| locations is recorded in the trie,
 /// except for the winning state.
-pub fn record_observations<W, T, L, E, Wp, TM>(
+pub fn record_observations<W, T, TM>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
     min_relevant: usize,
     solve_trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) where
-    W: World<Location = L, Exit = E, Warp = Wp>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
@@ -114,17 +112,15 @@ pub fn record_observations<W, T, L, E, Wp, TM>(
 /// Records a non-winning step sequence into the given trie.
 ///
 /// This does not need to start from nothing, but the solution provided must be applicable from the starting state.
-pub fn record_short_observations<W, T, L, E, Wp, TM>(
+pub fn record_short_observations<W, T, TM>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
     short_trie: &MatcherTrie<TM, SolutionSuffix<T>>,
 ) where
-    W: World<Location = L, Exit = E, Warp = Wp>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
@@ -158,17 +154,15 @@ pub fn record_short_observations<W, T, L, E, Wp, TM>(
 /// Returns a route's observation sets for the item acquisition steps.
 ///
 /// These are in the same order as collection_history functions, but will need to be zipped separately.
-pub fn collection_observations<W, T, L, E, Wp>(
+pub fn collection_observations<W, T>(
     startctx: &T,
     world: &W,
     history: &[HistoryAlias<T>],
 ) -> Vec<Vec<T::PropertyObservation>>
 where
-    W: World<Location = L, Exit = E, Warp = Wp>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
 {
     let full_history = history_to_full_series(startctx, world, history.iter().copied());
     // The history entries are the steps "in between" the states in full_history, so we should have
@@ -201,17 +195,15 @@ where
 }
 
 /// Outputs (in reverse order) a route's steps and observations.
-pub fn debug_observations<W, T, L, E, Wp>(
+pub fn debug_observations<W, T>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
     min_relevant: usize,
 ) where
-    W: World<Location = L, Exit = E, Warp = Wp>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+    W::Location: Location<Context = T>,
 {
     let full_history = history_to_full_series(startctx, world, solution.history.iter().copied());
     // The history entries are the steps "in between" the states in full_history, so we should have

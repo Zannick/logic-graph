@@ -255,20 +255,20 @@ where
 
     /// Inserts a solution into the collection and returns a status detailing
     /// whether this solution was accepted and if it's unique.
-    pub fn insert_solution<W, L, E, Wp>(
-        &mut self,
-        solution: Arc<Solution<T>>,
-        world: &W,
-    ) -> SolutionResult
+    pub fn insert_solution<W>(&mut self, solution: Arc<Solution<T>>, world: &W) -> SolutionResult
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         let loc_history: Vec<HistoryAlias<T>> =
-            collection_history::<T, W, L, _>(solution.history.iter().copied()).collect();
+            collection_history::<T, _>(solution.history.iter().copied()).collect();
         let best = if self.count == 0 || solution.elapsed < self.best {
             self.best = solution.elapsed;
             write_graph(world, &self.startctx, &solution.history).unwrap();

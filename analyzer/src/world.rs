@@ -35,7 +35,8 @@ pub trait Accessible: Sync {
     fn price_per_sec(&self) -> &Self::Currency;
     fn price(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::Currency;
     fn is_free(&self) -> bool {
-        *self.base_price() == Self::Currency::default() && *self.price_per_sec() == Self::Currency::default()
+        *self.base_price() == Self::Currency::default()
+            && *self.price_per_sec() == Self::Currency::default()
     }
 
     fn explain_rule(

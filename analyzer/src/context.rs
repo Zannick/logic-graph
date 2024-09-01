@@ -646,13 +646,12 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::C(edge.dst, edge.index), time);
     }
 
-    pub fn warp<W, E, Wp>(&mut self, world: &W, warp: &Wp)
+    pub fn warp<W, Wp>(&mut self, world: &W, warp: &Wp)
     where
-        W: World<Exit = E, Warp = Wp>,
+        W: World<Warp = Wp>,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
         Wp: Warp<
-            SpotId = <E as Exit>::SpotId,
+            SpotId = <W::Exit as Exit>::SpotId,
             Context = T,
             Currency = <W::Location as Accessible>::Currency,
         >,
@@ -661,7 +660,7 @@ impl<T: Ctx> ContextWrapper<T> {
         warp.prewarp(&mut self.ctx, world);
         let dest = warp.dest(&self.ctx, world);
         assert!(
-            dest != <E as Exit>::SpotId::default(),
+            dest != <W::Exit as Exit>::SpotId::default(),
             "Warp can't lead to SpotId::None: {}",
             warp.id()
         );
@@ -688,13 +687,17 @@ impl<T: Ctx> ContextWrapper<T> {
         self.append_history(History::A(action.id()), dur);
     }
 
-    pub fn can_replay<W, L, E, Wp>(&self, world: &W, step: HistoryAlias<T>) -> bool
+    pub fn can_replay<W>(&self, world: &W, step: HistoryAlias<T>) -> bool
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         match step {
             History::W(wp, dest) => {
@@ -741,13 +744,17 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
+    pub fn replay<W>(&mut self, world: &W, step: HistoryAlias<T>)
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         // We skip checking validity ahead of time, i.e. can_access.
         // Some other times we should still assert some possibility.
@@ -807,13 +814,17 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn explain_pre_replay<W, L, E, Wp>(&self, world: &W, step: HistoryAlias<T>) -> String
+    pub fn explain_pre_replay<W>(&self, world: &W, step: HistoryAlias<T>) -> String
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         match step {
             History::W(wp, _) => world.get_warp(wp).explain(self.get(), world),
@@ -867,13 +878,17 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
-    pub fn assert_and_replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>)
+    pub fn assert_and_replay<W>(&mut self, world: &W, step: HistoryAlias<T>)
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         assert!(
             self.can_replay(world, step),
@@ -886,17 +901,17 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Checks whether the replay is possible. If it is, replays the step;
     /// otherwise returns an explanation of the properties evaluated.
-    pub fn try_replay<W, L, E, Wp>(
-        &mut self,
-        world: &W,
-        step: HistoryAlias<T>,
-    ) -> Result<(), String>
+    pub fn try_replay<W>(&mut self, world: &W, step: HistoryAlias<T>) -> Result<(), String>
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         if self.can_replay(world, step) {
             Ok(self.replay(world, step))
@@ -907,17 +922,17 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Returns the replay if all steps are valid in the order presented, or an error message if any step failed.
     /// This consumes the object, so use a clone if you want to keep a copy.
-    pub fn try_replay_all<W, L, E, Wp>(
-        mut self,
-        world: &W,
-        steps: &[HistoryAlias<T>],
-    ) -> Result<Self, String>
+    pub fn try_replay_all<W>(mut self, world: &W, steps: &[HistoryAlias<T>]) -> Result<Self, String>
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         for &step in steps {
             if let Err(s) = self.try_replay(world, step) {
@@ -928,13 +943,17 @@ impl<T: Ctx> ContextWrapper<T> {
     }
 
     /// Returns true and replays if the step is valid, or false with no changes otherwise.
-    pub fn maybe_replay<W, L, E, Wp>(&mut self, world: &W, step: HistoryAlias<T>) -> bool
+    pub fn maybe_replay<W>(&mut self, world: &W, step: HistoryAlias<T>) -> bool
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         if self.can_replay(world, step) {
             self.replay(world, step);
@@ -946,13 +965,17 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Returns true and replays if all steps are valid in the order presented, or false if any step failed.
     /// This mutates the object, so use a clone if you want to keep a copy of the original.
-    pub fn maybe_replay_all<W, L, E, Wp>(&mut self, world: &W, steps: &[HistoryAlias<T>]) -> bool
+    pub fn maybe_replay_all<W>(&mut self, world: &W, steps: &[HistoryAlias<T>]) -> bool
     where
-        W: World<Location = L, Exit = E, Warp = Wp>,
-        L: Location<Context = T>,
+        W: World,
         T: Ctx<World = W>,
-        E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-        Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
+        W::Location: Location<Context = T>,
+        W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+        W::Warp: Warp<
+            SpotId = <W::Exit as Exit>::SpotId,
+            Context = T,
+            Currency = <W::Location as Accessible>::Currency,
+        >,
     {
         for &step in steps {
             if !self.maybe_replay(world, step) {
@@ -1042,12 +1065,12 @@ where
     vec.join("\n")
 }
 
-pub fn collection_history<T, W, L, I>(history: I) -> impl Iterator<Item = HistoryAlias<T>>
+pub fn collection_history<T, W>(
+    history: impl Iterator<Item = HistoryAlias<T>>,
+) -> impl Iterator<Item = HistoryAlias<T>>
 where
-    W: World<Location = L>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    I: Iterator<Item = HistoryAlias<T>>,
 {
     history.filter(|h| match h {
         History::G(..) | History::V(..) => true,
@@ -1056,14 +1079,12 @@ where
     })
 }
 
-pub fn enumerated_collection_history<T, W, L, I>(
-    history: I,
+pub fn enumerated_collection_history<T, W>(
+    history: impl Iterator<Item = HistoryAlias<T>>,
 ) -> impl Iterator<Item = (usize, HistoryAlias<T>)>
 where
-    W: World<Location = L>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    I: Iterator<Item = HistoryAlias<T>>,
 {
     history.enumerate().filter(|h| match h.1 {
         History::G(..) | History::V(..) => true,
@@ -1074,14 +1095,12 @@ where
 
 /// Produces an iterator of collection steps paired with the index range (inclusive) of all the steps
 /// since the last collection.
-pub fn collection_history_with_range_info<T, W, L, I>(
-    history: I,
+pub fn collection_history_with_range_info<T, W>(
+    history: impl Iterator<Item = HistoryAlias<T>>,
 ) -> impl Iterator<Item = (RangeInclusive<usize>, HistoryAlias<T>)>
 where
-    W: World<Location = L>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    I: Iterator<Item = HistoryAlias<T>>,
 {
     let mut previ = 0;
     history.enumerate().filter_map(move |(i, h)| match h {
@@ -1103,14 +1122,21 @@ where
     })
 }
 
-pub fn history_to_full_series<T, W, L, E, Wp, I>(startctx: &T, world: &W, history: I) -> Vec<T>
+pub fn history_to_full_series<T, W>(
+    startctx: &T,
+    world: &W,
+    history: impl Iterator<Item = HistoryAlias<T>>,
+) -> Vec<T>
 where
-    W: World<Location = L, Exit = E, Warp = Wp>,
-    L: Location<Context = T>,
+    W: World,
     T: Ctx<World = W>,
-    E: Exit<Context = T, Currency = <L as Accessible>::Currency>,
-    Wp: Warp<SpotId = <E as Exit>::SpotId, Context = T, Currency = <L as Accessible>::Currency>,
-    I: Iterator<Item = HistoryAlias<T>>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<
+        SpotId = <W::Exit as Exit>::SpotId,
+        Context = T,
+        Currency = <W::Location as Accessible>::Currency,
+    >,
 {
     let mut vec = Vec::new();
     let mut prev = ContextWrapper::new(startctx.clone());

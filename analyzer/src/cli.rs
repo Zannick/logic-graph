@@ -105,16 +105,16 @@ where
     rstr
 }
 
-pub fn run<W, T, L, TM>(
+pub fn run<W, T, TM>(
     world: &W,
     startctx: T,
     mut route_ctxs: Vec<ContextWrapper<T>>,
     args: &Cli,
 ) -> Result<(), std::io::Error>
 where
-    W: World<Location = L>,
+    W: World,
     T: Ctx<World = W>,
-    L: Location<Context = T>,
+    W::Location: Location<Context = T>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     log::info!("{:?}", std::env::args());
@@ -148,9 +148,7 @@ where
             let rstr = read_from_file(route);
             println!(
                 "{}",
-                match debug_route::<W, T, L, <W::Exit as Exit>::SpotId>(
-                    world, &startctx, &rstr, &scorer
-                ) {
+                match debug_route(world, &startctx, &rstr, &scorer) {
                     Ok(s) | Err(s) => s,
                 }
             );

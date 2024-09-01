@@ -55,17 +55,13 @@ fn mode_by_index(index: usize) -> SearchMode {
     }
 }
 
-pub fn explore<W, T, L, E>(
-    world: &W,
-    ctx: ContextWrapper<T>,
-    max_time: u32,
-) -> Vec<ContextWrapper<T>>
+pub fn explore<W, T, L>(world: &W, ctx: ContextWrapper<T>, max_time: u32) -> Vec<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
-    E: Exit<Context = T, Currency = L::Currency>,
-    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = L::Currency>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
+    W::Warp: Warp<Context = T, SpotId = <W::Exit as Exit>::SpotId, Currency = L::Currency>,
 {
     let spot_map = accessible_spots(world, ctx, max_time, false);
     let mut vec: Vec<ContextWrapper<T>> = spot_map.into_values().collect();
@@ -74,12 +70,12 @@ where
     vec
 }
 
-pub fn visit_locations<W, T, L, E>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
+pub fn visit_locations<W, T, L>(world: &W, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
-    E: Exit<Context = T, Currency = L::Currency>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
 {
     let mut result = Vec::new();
     for loc in world.get_spot_locations(ctx.get().position()) {
@@ -94,12 +90,12 @@ where
     result
 }
 
-pub fn activate_actions<W, T, L, E>(world: &W, ctx: &ContextWrapper<T>) -> Vec<ContextWrapper<T>>
+pub fn activate_actions<W, T, L>(world: &W, ctx: &ContextWrapper<T>) -> Vec<ContextWrapper<T>>
 where
-    W: World<Location = L, Exit = E>,
+    W: World<Location = L>,
     T: Ctx<World = W> + Debug,
     L: Location<Context = T>,
-    E: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
     let mut result = Vec::new();
     for act in world.get_global_actions() {
@@ -258,12 +254,12 @@ where
     finished: AtomicBool,
 }
 
-impl<'a, W, T, L, E, TM> Search<'a, W, T, TM>
+impl<'a, W, T, TM> Search<'a, W, T, TM>
 where
-    W: World<Location = L, Exit = E>,
+    W: World,
     T: Ctx<World = W> + Debug,
-    L: Location<Context = T>,
-    E: Exit<Context = T, Currency = L::Currency>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
     pub fn new<P>(
@@ -313,13 +309,7 @@ where
             let max_time = wonctx.elapsed();
             let sol = wonctx.to_solution();
             if solutions.insert_solution(sol.clone(), world).accepted() {
-                record_observations::<_, _, _, _, _, TM>(
-                    startctx.get(),
-                    world,
-                    sol,
-                    1,
-                    &solve_trie,
-                );
+                record_observations::<_, _, TM>(startctx.get(), world, sol, 1, &solve_trie);
             }
             for w in &wins {
                 let sol = w.to_solution();
@@ -624,15 +614,11 @@ where
                 &self.solve_trie,
             );
             if mode != SearchMode::Minimized {
-                return pinpoint_minimize::<_, _, _, _, TM>(
-                    self.world,
-                    self.startctx.get(),
-                    solution,
-                );
+                return pinpoint_minimize::<_, _, _, TM>(self.world, self.startctx.get(), solution);
             }
         } else if res != SolutionResult::Duplicate && mode != SearchMode::Minimized {
             // Minimize against itself to see if it improves enough for inclusion
-            return pinpoint_minimize::<_, _, _, _, TM>(self.world, self.startctx.get(), solution);
+            return pinpoint_minimize::<_, _, _, TM>(self.world, self.startctx.get(), solution);
         }
         None
     }
@@ -1193,7 +1179,7 @@ where
     fn process_one_greedy(
         &self,
         ctx: &ContextWrapper<T>,
-        loc: &L,
+        loc: &W::Location,
         max_time: u32,
         current_mode: SearchMode,
     ) -> anyhow::Result<bool> {
