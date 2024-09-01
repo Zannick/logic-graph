@@ -6,7 +6,7 @@ use crate::matchertrie::*;
 use crate::minimize::*;
 use crate::observer::{record_observations, Observer};
 use crate::scoring::ScoreMetric;
-use crate::solutions::{Solution, SolutionCollector, SolutionResult};
+use crate::solutions::{Solution, SolutionCollector, SolutionResult, SolutionSuffix};
 use crate::world::*;
 use anyhow::Result;
 use log;
@@ -236,7 +236,7 @@ where
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
-    solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>>,
+    solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     queue: RocksBackedQueue<'a, W, T>,
     solution_cvar: Condvar,
@@ -273,7 +273,8 @@ where
     where
         P: AsRef<Path>,
     {
-        let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher>> = Arc::default();
+        let solve_trie: Arc<MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>> =
+            Arc::default();
         let mut solutions = SolutionCollector::<T>::new(
             "data/solutions.txt",
             "data/previews.txt",

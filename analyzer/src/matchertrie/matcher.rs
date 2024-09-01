@@ -32,10 +32,9 @@ pub trait Observable {
 }
 
 /// This is a trait to be implemented on enums with individual matcher types
-pub trait MatcherDispatch {
+pub trait MatcherDispatch<Value> {
     type Node;
     type Struct: Observable;
-    type Value;
     /// Creates a new Matcher for the given Prop and Value.
     fn new(
         obs: &<Self::Struct as Observable>::PropertyObservation,
@@ -45,7 +44,7 @@ pub trait MatcherDispatch {
     fn clear(&mut self);
 
     /// The individual matcher will retrieve a property of the struct provided, and evaluate the value of that property.
-    fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Vec<Self::Value>);
+    fn lookup(&self, val: &Self::Struct) -> (Option<Arc<Mutex<Self::Node>>>, Vec<Value>);
 
     /// Creates a new node in the individual matcher.
     ///
@@ -59,14 +58,14 @@ pub trait MatcherDispatch {
     fn add_value(
         &mut self,
         obs: &<Self::Struct as Observable>::PropertyObservation,
-        value: Self::Value,
+        value: Value,
     );
     /// Adds a value as above, but only adds if all values already existing here pass the test.
     fn add_value_if_all(
         &mut self,
         obs: &<Self::Struct as Observable>::PropertyObservation,
-        value: Self::Value,
-        test: impl FnMut(&Self::Value) -> bool,
+        value: Value,
+        test: impl FnMut(&Value) -> bool,
     );
 
     fn nodes(&self) -> Vec<Arc<Mutex<Self::Node>>>;

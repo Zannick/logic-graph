@@ -8,21 +8,23 @@ use std::sync::{Arc, Mutex, MutexGuard};
 
 // The implementation only works for MatcherDispatch impls that use this Node struct specifically.
 // TODO: Make a Node trait that allow modification and iteration over the matchers.
-pub struct Node<MultiMatcherType> {
+pub struct Node<MultiMatcherType, ValueType> {
     matchers: Vec<MultiMatcherType>,
+    value_marker: PhantomData<ValueType>,
 }
 
-impl<MultiMatcherType> Default for Node<MultiMatcherType> {
+impl<MultiMatcherType, ValueType> Default for Node<MultiMatcherType, ValueType> {
     fn default() -> Self {
         Self {
             matchers: Vec::new(),
+            value_marker: PhantomData::default(),
         }
     }
 }
 
-impl<MultiMatcherType, StructType, ValueType> Debug for Node<MultiMatcherType>
+impl<MultiMatcherType, StructType, ValueType> Debug for Node<MultiMatcherType, ValueType>
 where
-    MultiMatcherType: Debug + MatcherDispatch<Node = Self, Struct = StructType, Value = ValueType>,
+    MultiMatcherType: Debug + MatcherDispatch<ValueType, Node = Self, Struct = StructType>,
     ValueType: Debug,
     StructType: Debug + Observable,
     <StructType as Observable>::PropertyObservation: Debug,
@@ -39,22 +41,24 @@ where
     }
 }
 
-pub struct MatcherTrie<MultiMatcherType> {
+pub struct MatcherTrie<MultiMatcherType, ValueType> {
     root: Arc<Mutex<MultiMatcherType>>,
+    value_marker: PhantomData<ValueType>,
 }
 
-impl<MultiMatcherType> Default for MatcherTrie<MultiMatcherType>
+impl<MultiMatcherType, ValueType> Default for MatcherTrie<MultiMatcherType, ValueType>
 where
     MultiMatcherType: Default,
 {
     fn default() -> Self {
         Self {
             root: Arc::default(),
+            value_marker: PhantomData::default(),
         }
     }
 }
 
-impl<MultiMatcherType> Debug for MatcherTrie<MultiMatcherType>
+impl<MultiMatcherType, ValueType> Debug for MatcherTrie<MultiMatcherType, ValueType>
 where
     MultiMatcherType: Debug,
 {
@@ -66,10 +70,10 @@ where
     }
 }
 
-impl<MultiMatcherType, StructType, ValueType> MatcherTrie<MultiMatcherType>
+impl<MultiMatcherType, StructType, ValueType> MatcherTrie<MultiMatcherType, ValueType>
 where
     MultiMatcherType:
-        MatcherDispatch<Node = Node<MultiMatcherType>, Struct = StructType, Value = ValueType>,
+        MatcherDispatch<ValueType, Node = Node<MultiMatcherType, ValueType>, Struct = StructType>,
     StructType: Observable,
     ValueType: Clone,
 {
@@ -250,10 +254,10 @@ mod test {
     // e.g. one for plain lookup, one for masked lookup, two for cmp (ge/lt or le/gt)...
     #[derive(Debug)]
     enum MatcherMulti {
-        LookupPosition(LookupMatcher<Node<Self>, Position, Ctx>),
-        LookupFlasks(LookupMatcher<Node<Self>, i8, Ctx>),
-        MaskLookupFlag(LookupMatcher<Node<Self>, u16, Ctx>, u16),
-        EnoughFlasks(BooleanMatcher<Node<Self>, Ctx>, i8),
+        LookupPosition(LookupMatcher<Node<Self, Ctx>, Position, Ctx>),
+        LookupFlasks(LookupMatcher<Node<Self, Ctx>, i8, Ctx>),
+        MaskLookupFlag(LookupMatcher<Node<Self, Ctx>, u16, Ctx>, u16),
+        EnoughFlasks(BooleanMatcher<Node<Self, Ctx>, Ctx>, i8),
     }
 
     impl Default for MatcherMulti {
@@ -274,11 +278,10 @@ mod test {
         }
     }
     // That enum needs to have impls of the dispatch trait.
-    impl MatcherDispatch for MatcherMulti {
-        type Node = Node<Self>;
+    impl MatcherDispatch<Ctx> for MatcherMulti {
+        type Node = Node<Self, Ctx>;
         type Struct = Ctx;
-        type Value = Ctx;
-        fn new(obs: &OneObservedThing) -> (Arc<Mutex<Node<Self>>>, Self) {
+        fn new(obs: &OneObservedThing) -> (Arc<Mutex<Node<Self, Ctx>>>, Self) {
             match obs {
                 OneObservedThing::Pos(p) => {
                     let (node, m) = LookupMatcher::new_with(*p);
@@ -308,7 +311,7 @@ mod test {
             }
         }
 
-        fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Ctx>) {
+        fn lookup(&self, val: &Ctx) -> (Option<Arc<Mutex<Node<Self, Ctx>>>>, Vec<Ctx>) {
             match self {
                 Self::LookupPosition(m) => m.lookup(val.pos),
                 Self::LookupFlasks(m) => m.lookup(val.flasks),
@@ -317,7 +320,7 @@ mod test {
             }
         }
 
-        fn insert(&mut self, obs: &OneObservedThing) -> Option<Arc<Mutex<Node<Self>>>> {
+        fn insert(&mut self, obs: &OneObservedThing) -> Option<Arc<Mutex<Node<Self, Ctx>>>> {
             match (self, obs) {
                 (Self::LookupPosition(m), OneObservedThing::Pos(p)) => Some(m.insert(*p)),
                 (Self::LookupFlasks(m), OneObservedThing::Flasks(f)) => Some(m.insert(*f)),
@@ -392,7 +395,7 @@ mod test {
         }
     }
 
-    fn make_trie() -> MatcherTrie<MatcherMulti> {
+    fn make_trie() -> MatcherTrie<MatcherMulti, Ctx> {
         let mut trie = MatcherTrie::default();
         let observations = vec![
             OneObservedThing::Pos(Position::Start),

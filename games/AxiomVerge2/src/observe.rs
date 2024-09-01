@@ -12,6 +12,7 @@ use crate::rules;
 use analyzer::matchertrie::*;
 use analyzer::observer::*;
 use analyzer::solutions::{Solution, SolutionSuffix};
+use std::hash::Hash;
 use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -875,7 +876,7 @@ pub struct FullObservation {
 
 impl Observer for FullObservation {
     type Ctx = Context;
-    type Matcher = ObservationMatcher;
+    type Matcher = ObservationMatcher<SolutionSuffix<Context>>;
 
     fn from_victory_state(won: &Context, world: &World) -> Self {
         let mut full_obs = Self::default();
@@ -8683,219 +8684,218 @@ impl FullObservation {
 }
 
 #[derive(Debug)]
-pub enum ObservationMatcher {
-    PositionLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    EnergyLookup(LookupMatcher<Node<Self>, i16, SolutionSuffix<Context>>),
+pub enum ObservationMatcher<Value: Clone + Eq + Hash> {
+    PositionLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    EnergyLookup(LookupMatcher<Node<Self, Value>, i16, Value>),
     EnergyEq {
         eq: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     EnergyGe {
         lo: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     EnergyLe {
         hi: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     EnergyRange {
         lo: i16,
         hi: i16,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    FlasksLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    FlasksLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     FlasksEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     FlasksGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     FlasksLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     FlasksRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    RefillsLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    RefillsLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     RefillsEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     RefillsGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     RefillsLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     RefillsRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    ModeLookup(LookupMatcher<Node<Self>, enums::Mode, SolutionSuffix<Context>>),
-    SaveLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    BreachSaveLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    IndraLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    LastLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    PortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    PrevPortalLookup(LookupMatcher<Node<Self>, SpotId, SolutionSuffix<Context>>),
-    PrevAreaLookup(LookupMatcher<Node<Self>, AreaId, SolutionSuffix<Context>>),
+    ModeLookup(LookupMatcher<Node<Self, Value>, enums::Mode, Value>),
+    SaveLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    BreachSaveLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    IndraLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    LastLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    PortalLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    PrevPortalLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
+    PrevAreaLookup(LookupMatcher<Node<Self, Value>, AreaId, Value>),
     // items
-    BigFlaskLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    BigFlaskLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     BigFlaskEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     BigFlaskGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     BigFlaskLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     BigFlaskRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    FlaskLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    FlaskLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     FlaskEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     FlaskGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     FlaskLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     FlaskRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    HealthFragmentLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    HealthFragmentLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     HealthFragmentEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     HealthFragmentGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     HealthFragmentLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     HealthFragmentRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    HealthNodeLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    HealthNodeLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     HealthNodeEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     HealthNodeGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     HealthNodeLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     HealthNodeRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
-    PowerMatrixLookup(LookupMatcher<Node<Self>, i8, SolutionSuffix<Context>>),
+    PowerMatrixLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
     PowerMatrixEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     PowerMatrixGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     PowerMatrixLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     PowerMatrixRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     // bitflags
     LookupCBits1 {
         mask: flags::ContextBits1,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits1, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits1, Value>,
     },
     LookupCBits2 {
         mask: flags::ContextBits2,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits2, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits2, Value>,
     },
     LookupCBits3 {
         mask: flags::ContextBits3,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits3, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits3, Value>,
     },
     LookupCBits4 {
         mask: flags::ContextBits4,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits4, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits4, Value>,
     },
     LookupCBits5 {
         mask: flags::ContextBits5,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits5, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits5, Value>,
     },
     LookupCBits6 {
         mask: flags::ContextBits6,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits6, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits6, Value>,
     },
     LookupCBits7 {
         mask: flags::ContextBits7,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits7, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits7, Value>,
     },
     LookupCBits8 {
         mask: flags::ContextBits8,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits8, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits8, Value>,
     },
     LookupCBits9 {
         mask: flags::ContextBits9,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits9, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits9, Value>,
     },
     LookupCBits10 {
         mask: flags::ContextBits10,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits10, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits10, Value>,
     },
     LookupCBits11 {
         mask: flags::ContextBits11,
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits11, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits11, Value>,
     },
 }
 
-impl Default for ObservationMatcher {
+impl<Value: Clone + Eq + Hash> Default for ObservationMatcher<Value> {
     fn default() -> Self {
         Self::PositionLookup(LookupMatcher::new())
     }
 }
 
-impl MatcherDispatch for ObservationMatcher {
-    type Node = Node<Self>;
+impl<Value: Clone + Eq + Hash> MatcherDispatch<Value> for ObservationMatcher<Value> {
+    type Node = Node<Self, Value>;
     type Struct = Context;
-    type Value = SolutionSuffix<Context>;
-    fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self>>>, Self) {
+    fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self, Value>>>, Self) {
         match obs {
             &OneObservation::Position(v) => {
                 let (node, m) = LookupMatcher::new_with(v);
@@ -9205,7 +9205,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
+    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self, Value>>>>, Vec<Value>) {
         match self {
             Self::PositionLookup(m) => m.lookup(val.position),
             Self::EnergyLookup(m) => m.lookup(val.energy),
@@ -9270,7 +9270,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self>>>> {
+    fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self, Value>>>> {
         match (self, obs) {
             (Self::PositionLookup(m), OneObservation::Position(v)) => Some(m.insert(*v)),
             (Self::EnergyLookup(m), OneObservation::EnergyExact(v)) => Some(m.insert(*v)),
@@ -9336,7 +9336,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn add_value(&mut self, obs: &OneObservation, value: Self::Value) {
+    fn add_value(&mut self, obs: &OneObservation, value: Value) {
         match (self, obs) {
             (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value(*v, value),
             (Self::EnergyLookup(m), OneObservation::EnergyExact(v)) => m.add_value(*v, value),
@@ -9401,7 +9401,7 @@ impl MatcherDispatch for ObservationMatcher {
             _ => (),
         }
     }
-    fn add_value_if_all(&mut self, obs: &OneObservation, value: Self::Value, test: impl FnMut(&Self::Value) -> bool) {
+    fn add_value_if_all(&mut self, obs: &OneObservation, value: Value, test: impl FnMut(&Value) -> bool) {
         match (self, obs) {
             (Self::PositionLookup(m), OneObservation::Position(v)) => m.add_value_if_all(*v, value, test),
             (Self::EnergyLookup(m), OneObservation::EnergyExact(v)) => m.add_value_if_all(*v, value, test),
@@ -9467,7 +9467,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn nodes(&self) -> Vec<Arc<Mutex<Node<Self>>>> {
+    fn nodes(&self) -> Vec<Arc<Mutex<Node<Self, Value>>>> {
         match self {
             Self::PositionLookup(m) => m.nodes(),
             Self::EnergyLookup(m) => m.nodes(),

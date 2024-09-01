@@ -12,6 +12,7 @@ use crate::rules;
 use analyzer::matchertrie::*;
 use analyzer::observer::*;
 use analyzer::solutions::{Solution, SolutionSuffix};
+use std::hash::Hash;
 use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -133,7 +134,7 @@ pub struct FullObservation {
 
 impl Observer for FullObservation {
     type Ctx = Context;
-    type Matcher = ObservationMatcher;
+    type Matcher = ObservationMatcher<SolutionSuffix<Context>>;
 
     fn from_victory_state(won: &Context, world: &World) -> Self {
         let mut full_obs = Self::default();
@@ -409,75 +410,74 @@ impl FullObservation {
 }
 
 #[derive(Debug)]
-pub enum ObservationMatcher {
+pub enum ObservationMatcher<Value: Clone + Eq + Hash> {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
+    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value>),
     {{ c }}Eq {
         eq: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     {{ c }}Ge {
         lo: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     {{ c }}Le {
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     {{ c }}Range {
         lo: {{ t }},
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
 %% else
-    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
+    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value>),
 %% endif
 %% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
 %% set c = item|camelize
 %% set t = ct|get_int_type_for_max
-    {{ c }}Lookup(LookupMatcher<Node<Self>, {{ t }}, SolutionSuffix<Context>>),
+    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value>),
     {{ c }}Eq {
         eq: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     {{ c }}Ge {
         lo: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     {{ c }}Le {
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
     {{ c }}Range {
         lo: {{ t }},
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self>, SolutionSuffix<Context>>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value>,
     },
 %% endfor
     // bitflags
 %% for group in bfp.flag_groups
     LookupCBits{{ loop.index }} {
         mask: flags::ContextBits{{ loop.index }},
-        matcher: LookupMatcher<Node<Self>, flags::ContextBits{{ loop.index }}, SolutionSuffix<Context>>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits{{ loop.index }}, Value>,
     },
 %% endfor
 }
 
-impl Default for ObservationMatcher {
+impl<Value: Clone + Eq + Hash> Default for ObservationMatcher<Value> {
     fn default() -> Self {
         Self::PositionLookup(LookupMatcher::new())
     }
 }
 
-impl MatcherDispatch for ObservationMatcher {
-    type Node = Node<Self>;
+impl<Value: Clone + Eq + Hash> MatcherDispatch<Value> for ObservationMatcher<Value> {
+    type Node = Node<Self, Value>;
     type Struct = Context;
-    type Value = SolutionSuffix<Context>;
-    fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self>>>, Self) {
+    fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self, Value>>>, Self) {
         match obs {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
@@ -570,7 +570,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self>>>>, Vec<Self::Value>) {
+    fn lookup(&self, val: &Context) -> (Option<Arc<Mutex<Node<Self, Value>>>>, Vec<Value>) {
         match self {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
@@ -599,7 +599,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self>>>> {
+    fn insert(&mut self, obs: &OneObservation) -> Option<Arc<Mutex<Node<Self, Value>>>> {
         match (self, obs) {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
@@ -628,7 +628,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn add_value(&mut self, obs: &OneObservation, value: Self::Value) {
+    fn add_value(&mut self, obs: &OneObservation, value: Value) {
         match (self, obs) {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
@@ -656,7 +656,7 @@ impl MatcherDispatch for ObservationMatcher {
             _ => (),
         }
     }
-    fn add_value_if_all(&mut self, obs: &OneObservation, value: Self::Value, test: impl FnMut(&Self::Value) -> bool) {
+    fn add_value_if_all(&mut self, obs: &OneObservation, value: Value, test: impl FnMut(&Value) -> bool) {
         match (self, obs) {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
@@ -685,7 +685,7 @@ impl MatcherDispatch for ObservationMatcher {
         }
     }
 
-    fn nodes(&self) -> Vec<Arc<Mutex<Node<Self>>>> {
+    fn nodes(&self) -> Vec<Arc<Mutex<Node<Self, Value>>>> {
         match self {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize

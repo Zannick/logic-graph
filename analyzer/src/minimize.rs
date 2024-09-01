@@ -6,7 +6,7 @@ use crate::context::*;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
 use crate::observer::{collection_observations, record_observations, Observer};
-use crate::solutions::Solution;
+use crate::solutions::{Solution, SolutionSuffix};
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
 use crate::CommonHasher;
@@ -27,7 +27,7 @@ where
     L: Location<Context = T, Currency = E::Currency>,
     E: Exit<Context = T>,
 {
-    let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
+    let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>::default();
     record_observations(startctx, world, solution.clone(), 0, &mut trie);
     trie_minimize(world, startctx, solution, &trie)
 }
@@ -563,7 +563,7 @@ pub fn trie_minimize<W, T, L, E>(
     world: &W,
     startctx: &T,
     mut best_solution: Arc<Solution<T>>,
-    trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+    trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,
@@ -610,7 +610,7 @@ pub fn trie_search<W, T, L, E>(
     world: &W,
     ctx: &ContextWrapper<T>,
     max_time: u32,
-    trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+    trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L, Exit = E>,

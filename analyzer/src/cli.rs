@@ -7,7 +7,7 @@ use crate::minimize::*;
 use crate::observer::{debug_observations, record_observations, Observer};
 use crate::route::*;
 use crate::search::Search;
-use crate::solutions::write_graph;
+use crate::solutions::{write_graph, SolutionSuffix};
 use crate::world::*;
 use clap::{Parser, Subcommand};
 use rustc_hash::FxHashSet;
@@ -187,7 +187,8 @@ where
                 println!("Route did not win: still need {:?}", left);
                 return Ok(());
             }
-            let mut trie = MatcherTrie::<<T::Observer as Observer>::Matcher>::default();
+            let mut trie =
+                MatcherTrie::<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>::default();
             let mut solution = ctx.to_solution();
             let orig = solution.clone();
             record_observations(&startctx, world, solution.clone(), 0, &mut trie);

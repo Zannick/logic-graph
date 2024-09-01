@@ -12,11 +12,8 @@ use std::sync::Arc;
 /// in reverse order. This way observations can be still recorded in the order they occur.
 pub trait Observer: Debug + Default {
     type Ctx: Ctx;
-    type Matcher: MatcherDispatch<
-            Node = Node<Self::Matcher>,
-            Struct = Self::Ctx,
-            Value = SolutionSuffix<Self::Ctx>,
-        > + Default
+    type Matcher: MatcherDispatch<SolutionSuffix<Self::Ctx>, Node = Node<Self::Matcher, SolutionSuffix<Self::Ctx>>, Struct = Self::Ctx>
+        + Default
         + Send
         + Sync
         + 'static;
@@ -50,7 +47,7 @@ pub fn record_observations<W, T, L, E, Wp>(
     world: &W,
     solution: Arc<Solution<T>>,
     min_relevant: usize,
-    solve_trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+    solve_trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
 ) where
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
@@ -113,7 +110,7 @@ pub fn record_short_observations<W, T, L, E, Wp>(
     startctx: &T,
     world: &W,
     solution: Arc<Solution<T>>,
-    short_trie: &MatcherTrie<<T::Observer as Observer>::Matcher>,
+    short_trie: &MatcherTrie<<T::Observer as Observer>::Matcher, SolutionSuffix<T>>,
 ) where
     W: World<Location = L, Exit = E, Warp = Wp>,
     L: Location<Context = T>,
@@ -142,7 +139,10 @@ pub fn record_short_observations<W, T, L, E, Wp>(
         short_obs.apply_observations();
 
         // 3. Insert the new observation list.
-        short_trie.insert(short_obs.to_vec(state), SolutionSuffix(solution.clone(), idx));
+        short_trie.insert(
+            short_obs.to_vec(state),
+            SolutionSuffix(solution.clone(), idx),
+        );
     }
 }
 
