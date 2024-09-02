@@ -189,6 +189,7 @@ class GameLogic(object):
 
         self._info = load_game_yaml(self.game_dir)
         self.game_name = self._info['name']
+        self.examiner = None
         self.helpers = {
             get_func_name(name): {
                 'args': get_func_args(name),
@@ -689,6 +690,7 @@ class GameLogic(object):
         for act in self.global_actions:
             name = act['name']
             act['id'] = construct_id('Global', name)
+            self.id_lookup[act['id']] = act
             if 'req' not in act and 'price' not in act:
                 self._errors.append(f'Global actions must have req or price: {name}')
             elif 'req' in act:
@@ -1165,6 +1167,15 @@ class GameLogic(object):
                         table[s][d][1].append((mkey, t))
         return table
 
+    @cache
+    def is_this_possible(self, id_or_warp_name, spot_id):
+        if not self.examiner:
+            self.examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
+                                            self.data_types, self.data_defaults, self.data_values)
+        info = self.id_lookup.get(id_or_warp_name) or self.warps[id_or_warp_name]
+        name = info.get('fullname', info['name'])
+        return 'pr' not in info or self.examiner.examine(info['pr'].tree, spot_id, name)
+
 
     @cached_property
     def basic_distances(self):
@@ -1182,15 +1193,14 @@ class GameLogic(object):
         # every exit
         # every action with a "to" field
         # every warp/global action with a "to" field to a data value that's a valid spot
+        # TODO: also warps/global actions to specific spots
         data_dests = []
-        examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
-                                   self.data_types, self.data_defaults, self.data_values)
-        for w in self.warps.values():
-            if w['to'][0] == '^' and w['to'][1:] in self.data_values:
-                data_dests.append((w['to'][1:], w))
+        for wname, warp in self.warps.items():
+            if warp['to'][0] == '^' and warp['to'][1:] in self.data_values:
+                data_dests.append((warp['to'][1:], wname, warp['time']))
         for act in self.global_actions:
             if 'to' in act and act['to'][0] == '^' and act['to'][1:] in self.data_values:
-                data_dests.append((act['to'][1:], act))
+                data_dests.append((act['to'][1:], act['id'], act['time']))
         for s in self.spots():
             table[s['id']][s['id']] = 0
             for ex in s.get('exits', []):
@@ -1198,18 +1208,18 @@ class GameLogic(object):
                     raise Exception(f'"time" not defined for exit {ex["fullname"]}')
                 _update(table[s['id']], get_exit_target(ex), float(ex['time']))
             for act in s.get('actions', []):
-                if 'to' in act:
-                    if not act['to'].startswith('^'):
-                        _update(table[s['id']], get_exit_target(act), act['time'])
-                    elif act['to'][1:] in self.data_values:
-                        if dest := self.data_values[act['to'][1:]].get(s['id']):
-                            if dest != 'SpotId::None' and dest != s['fullname']:
-                                _update(table[s['id']], construct_id(dest), act['time'])
-            for d, info in data_dests:
+                if 'to' not in act:
+                    continue
+                if not act['to'].startswith('^'):
+                    _update(table[s['id']], get_exit_target(act), act['time'])
+                elif act['to'][1:] in self.data_values:
+                    if dest := self.data_values[act['to'][1:]].get(s['id']):
+                        if dest != 'SpotId::None' and dest != s['fullname']:
+                            _update(table[s['id']], construct_id(dest), act['time'])
+            for d, id, t in data_dests:
                 if dest := self.data_values[d].get(s['id']):
-                    if (dest != 'SpotId::None' and dest != s['fullname'] and
-                            ('pr' not in info or examiner.examine(info['pr'].tree, s['id'], info['name']))):
-                        _update(table[s['id']], construct_id(dest), info['time'])
+                    if dest != 'SpotId::None' and dest != s['fullname'] and self.is_this_possible(id, s['id']):
+                        _update(table[s['id']], construct_id(dest), t)
             del table[s['id']][s['id']]
 
         return table
@@ -1228,17 +1238,15 @@ class GameLogic(object):
 
         # every warp with bulk_exit: true
         warp_dests = []
-        examiner = PossibleVisitor(self.helpers, self.rules, self.context_types,
-                                   self.data_types, self.data_defaults, self.data_values)
-        for w in self.warps.values():
-            if w.get('bulk_exit') and w['to'][0] != '^':
-                warp_dests.append((construct_id(w['to']), w['time']))
+        for wname, warp in self.warps.items():
+            if warp.get('bulk_exit') and warp['to'][0] != '^':
+                warp_dests.append((wname, construct_id(warp['to']), warp['time']))
         for s in self.spots():
-            for w, t in warp_dests:
-                if s['id'] == w:
+            for warp_name, dest, t in warp_dests:
+                if s['id'] == dest:
                     continue
-                if 'pr' not in w or examiner.examine(w['pr'].tree, s['id'], w['name']):
-                    _update(table[s['id']], w, t)
+                if self.is_this_possible(warp_name, s['id']):
+                    _update(table[s['id']], dest, t)
 
         return table
 
