@@ -249,6 +249,13 @@ pub trait World: Sync {
         <Self::Exit as Exit>::SpotId,
         u32,
     )>;
+    fn free_edges(
+        &self,
+    ) -> Vec<(
+        <Self::Exit as Exit>::SpotId,
+        <Self::Exit as Exit>::SpotId,
+        u32,
+    )>;
 
     fn are_spots_connected(
         &self,

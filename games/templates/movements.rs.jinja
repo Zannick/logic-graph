@@ -130,6 +130,18 @@ pub fn base_edges() -> Vec<(SpotId, SpotId, u32)> {
     BASE_EDGES.to_vec()
 }
 
+static FREE_EDGES: [(SpotId, SpotId, u32); {{ free_distances.values()|map('count')|sum }}] = [
+%% for s, table in free_distances.items()|sort(case_sensitive=True)
+%% for t, time in table.items()|sort(case_sensitive=True)
+    (SpotId::{{ s }}, SpotId::{{ t }}, {{ (time * 1000)|int }}),
+%% endfor
+%% endfor
+];
+
+pub fn free_edges() -> Vec<(SpotId, SpotId, u32)> {
+    FREE_EDGES.to_vec()
+}
+
 type ImprovementsTable = phf::OrderedMap<u8, u32>;
 type BestMovementsFromSpotTable = phf::Map<u64, (Option<u32>, Option<&'static ImprovementsTable>)>;
 type BestMovementsTable = phf::Map<u64, &'static BestMovementsFromSpotTable>;

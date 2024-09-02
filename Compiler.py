@@ -23,6 +23,7 @@ import leidenalg as la
 
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
+from grammar.visitors.PossibleVisitor import Result as PossibleResult
 from FlagProcessor import BitFlagProcessor
 from Utils import *
 
@@ -168,6 +169,8 @@ def get_exit_target(ex):
 def get_exit_target_id(ex):
     return construct_spot_id(*get_spot_reference_names(ex['to'], ex))
 
+def worst_case_penalty_time(point):
+    return float(point['time'] + max((p.get('add', 0) for p in point.get('penalties', ())), default=0))
 
 @contextlib.contextmanager
 def processcontext(*args):
@@ -1193,7 +1196,6 @@ class GameLogic(object):
         # every exit
         # every action with a "to" field
         # every warp/global action with a "to" field to a data value that's a valid spot
-        # TODO: also warps/global actions to specific spots
         data_dests = []
         for wname, warp in self.warps.items():
             if warp['to'][0] == '^' and warp['to'][1:] in self.data_values:
@@ -1237,6 +1239,7 @@ class GameLogic(object):
                 tbl[key] = val
 
         # every warp with bulk_exit: true
+        # TODO: also actions with bulk_exit: true ?
         warp_dests = []
         for wname, warp in self.warps.items():
             if warp.get('bulk_exit') and warp['to'][0] != '^':
@@ -1250,6 +1253,54 @@ class GameLogic(object):
 
         return table
 
+    @cached_property
+    def free_distances(self):
+        """Fully-connected distances with no requirements. Max penalties are assumed."""
+        # initial conditions: x -> y -> t according to what's free movement
+        table = defaultdict(dict, {s: {d: sum(t) for d, t in table.items()}
+                                   for s, table in self.movement_tables[tuple(False for _ in self.non_default_movements)].items()})
+
+        def _update(tbl, key, val):
+            if key in tbl:
+                tbl[key] = min(tbl[key], val)
+            else:
+                tbl[key] = val
+
+        # every exit/action with "to" field with no or "True" req
+        # TODO: every warp/global action with a "to" field that's a valid data value that can evaluate to true
+        # every warp/global action with a "to" field to a data value that's a valid spot
+        data_dests = []
+        for wname, warp in self.warps.items():
+            if warp['to'][0] == '^' and warp['to'][1:] in self.data_values:
+                data_dests.append((warp['to'][1:], wname, warp['time']))
+        for act in self.global_actions:
+            if 'to' in act and act['to'][0] == '^' and act['to'][1:] in self.data_values:
+                data_dests.append((act['to'][1:], act['id'], act['time']))
+
+        for s in self.spots():
+            table[s['id']][s['id']] = 0
+            for ex in s.get('exits', []):
+                if 'req' in ex and ex['req'] not in (True, 'True'):
+                    continue
+                if 'time' not in ex:
+                    raise Exception(f'"time" not defined for exit {ex["fullname"]}')
+                _update(table[s['id']], get_exit_target(ex), worst_case_penalty_time(ex))
+            for act in s.get('actions', []):
+                if 'to' not in act or ('req' in act and act['req'] not in (True, 'True')):
+                    continue
+                if not act['to'].startswith('^'):
+                    _update(table[s['id']], get_exit_target(act), worst_case_penalty_time(act))
+                elif act['to'][1:] in self.data_values:
+                    if dest := self.data_values[act['to'][1:]].get(s['id']):
+                        if dest != 'SpotId::None' and dest != s['fullname']:
+                            _update(table[s['id']], construct_id(dest), worst_case_penalty_time(act))
+            for d, id, t in data_dests:
+                if dest := self.data_values[d].get(s['id']):
+                    if dest != 'SpotId::None' and dest != s['fullname'] and self.is_this_possible(id, s['id']) == PossibleResult.TRUE:
+                        _update(table[s['id']], construct_id(dest), t)
+            del table[s['id']][s['id']]
+
+        return table
 
     @cached_property
     def spots_with_items(self):
@@ -2065,6 +2116,7 @@ class GameLogic(object):
         self.price_types
         self.movements_rev_lookup
         self.base_distances
+        self.free_distances
         self.notable_spot_communities
         self.context_trigger_rules
         self.context_position_watchers

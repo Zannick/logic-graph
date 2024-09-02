@@ -610,6 +610,10 @@ impl world::World for World {
         movements::base_edges()
     }
 
+    fn free_edges(&self) -> Vec<(SpotId, SpotId, u32)> {
+        movements::free_edges()
+    }
+
     fn are_spots_connected(&self, sp1: SpotId, sp2: SpotId) -> bool {
         movements::are_spots_connected(sp1, sp2)
     }
