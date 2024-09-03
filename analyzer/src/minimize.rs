@@ -471,7 +471,7 @@ where
 pub fn mutate_canon_locations<W, T, L>(
     world: &W,
     startctx: &T,
-    max_time: u32,
+    mut max_time: u32,
     max_depth: usize,
     max_states: usize,
     solution: Arc<Solution<T>>,
@@ -484,20 +484,22 @@ where
     W::Exit: Exit<Context = T, Currency = L::Currency>,
 {
     // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
-    let max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
+    max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
     // [(history index, history step)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
         collection_history_with_range_info::<T, _>(solution.history.iter().copied()).collect();
     let mut replay = ContextWrapper::new(startctx.clone());
+    let mut best = None;
 
-    for (coll, (range_a, step)) in collection_hist.iter().enumerate() {
+    let mut count = 0;
+    for (coll, (range, step)) in collection_hist.iter().enumerate() {
         // Clone first, then advance the replay.
-        let replace_collection = replay.clone();
+        let replace_this_collection = replay.clone();
         assert!(
-            replay.maybe_replay_all(world, &solution.history[range_a.clone()]),
+            replay.maybe_replay_all(world, &solution.history[range.clone()]),
             "Could not replay base solution history range {:?}",
-            range_a,
+            range,
         );
 
         let old_loc_id = match step {
@@ -505,16 +507,16 @@ where
             _ => continue,
         };
 
+        let mut found = false;
         // For every other loc id with this canon id
-        for loc_id in W::get_canon_location_ids(world.get_location(*old_loc_id).canon_id())
-        {
+        for loc_id in W::get_canon_location_ids(world.get_location(*old_loc_id).canon_id()) {
             if loc_id == old_loc_id {
                 continue;
             }
             // Search for a way to that alternative location
-            if let Ok(replace_collection) = access_location_after_actions(
+            if let Ok(replaced) = access_location_after_actions(
                 world,
-                replace_collection.clone(),
+                replace_this_collection.clone(),
                 *loc_id,
                 max_time,
                 max_depth,
@@ -524,7 +526,7 @@ where
                 // And if there is such a way, rediscover routes to the same locations in the rest of the route
                 if let Some(reordered) = rediscover_routes(
                     world,
-                    replace_collection,
+                    replaced.clone(),
                     collection_hist[coll + 1..].iter(),
                     max_time,
                     max_depth,
@@ -533,14 +535,38 @@ where
                     shortest_paths,
                 ) {
                     if world.won(reordered.get()) {
-                        return Some(reordered);
+                        max_time = reordered.elapsed().saturating_sub(1);
+                        best = Some(reordered);
+                        replay = replaced;
+                        found = true;
                     }
                 }
             }
         }
+        if found {
+            count += 1;
+        } else {
+            let Some(rreplay) = rediscover_routes(
+                world,
+                replay,
+                collection_hist[coll..=coll].iter(),
+                max_time,
+                max_depth,
+                max_states,
+                &solution.history,
+                shortest_paths,
+            ) else {
+                panic!(
+                    "Could not replay collection step {} (range {:?}) after {} replacements",
+                    coll, range, count
+                );
+            };
+            replay = rreplay;
+        }
     }
+    log::debug!("Replaced {} location(s) with canon equivalents", count);
 
-    None
+    best
 }
 
 /// Mutate routes between collections by finding a greedy path to the next

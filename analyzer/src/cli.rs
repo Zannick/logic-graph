@@ -266,7 +266,7 @@ where
             ) {
                 replans += 1;
                 println!(
-                    "With alternative canon location #{}: {}ms",
+                    "With alternative canon locations #{}: {}ms",
                     replans,
                     alternative.elapsed()
                 );
