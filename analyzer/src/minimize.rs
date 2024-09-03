@@ -493,7 +493,7 @@ where
     let mut best = None;
 
     let mut count = 0;
-    for (coll, (range, step)) in collection_hist.iter().enumerate() {
+    for (coll, (_, step)) in collection_hist.iter().enumerate() {
         // Clone first, then advance the replay.
         let replace_this_collection = replay.clone();
 
@@ -551,10 +551,8 @@ where
                 &solution.history,
                 shortest_paths,
             ) else {
-                panic!(
-                    "Could not replay collection step {} (range {:?}) after {} replacements",
-                    coll, range, count
-                );
+                log::debug!("Replaced {} location(s) with canon equivalents (and then failed to replay further)", count);
+                return best;
             };
             replay = rreplay;
         }
