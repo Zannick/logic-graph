@@ -195,7 +195,7 @@ where
         let step = tuple.step();
         // Attempt to reuse the same direct path if possible.
         let mut ctx = rreplay.clone();
-        if ctx.maybe_replay_all(world, &history[range.clone()]) {
+        if ctx.maybe_replay_all(world, &history[range.clone()]) && ctx.elapsed() <= max_time {
             rreplay = ctx;
             continue;
         }
