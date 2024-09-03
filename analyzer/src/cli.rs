@@ -263,6 +263,7 @@ where
                 8_192,
                 solution.clone(),
                 scorer.get_algo(),
+                |_| {},
             ) {
                 replans += 1;
                 println!(

@@ -1094,13 +1094,15 @@ where
                             MAX_STATES_FOR_ONE_LOC,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
-                        ) {
+                        |min_ctx| {
                             self.recreate_store(
                                 &self.startctx,
                                 min_ctx.recent_history(),
                                 SearchMode::MutateCanonLocations
                             )
                             .unwrap();
+                        }) {
+                            log::debug!("Solution mutator best found was {}ms", min_ctx.elapsed());
                         }
                         log::debug!(
                             "Solution mutator starting revisits for solution {}ms",

@@ -476,6 +476,7 @@ pub fn mutate_canon_locations<W, T, L>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    register_solve: impl Fn(&ContextWrapper<T>) -> (),
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
@@ -530,6 +531,7 @@ where
                     shortest_paths,
                 ) {
                     if world.won(reordered.get()) {
+                        register_solve(&reordered);
                         max_time = reordered.elapsed().saturating_sub(1);
                         best = Some(reordered);
                         replay = replaced;
