@@ -578,9 +578,9 @@ fn {% if observe %}observe_{% endif %}reset_{{ pltype|lower }}(&mut self, {{ plt
 
     fn reset(&mut self, loc_id: LocationId) {
         match loc_id {
-%% for canon_id, locs in gl.canon_places.items()
+%% for canon_id, loc_ids in gl.canon_places.items()
 %% set visit = 'VISITED_' + canon_id
-            LocationId::{{ locs|map(attribute='id')|join(' | LocationId::') }} => {
+            LocationId::{{ loc_ids|join(' | LocationId::') }} => {
                 self.cbits{{ bfp.varmap[visit] }}.remove(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }});
             }
 %% endfor
@@ -589,9 +589,9 @@ fn {% if observe %}observe_{% endif %}reset_{{ pltype|lower }}(&mut self, {{ plt
 
     fn visited(&self, loc_id: LocationId) -> bool {
         match loc_id {
-%% for canon_id, locs in gl.canon_places.items()
+%% for canon_id, loc_ids in gl.canon_places.items()
 %% set visit = 'VISITED_' + canon_id
-            LocationId::{{ locs|map(attribute='id')|join(' | LocationId::') }} => {
+            LocationId::{{ loc_ids|join(' | LocationId::') }} => {
                 self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
             }
 %% endfor

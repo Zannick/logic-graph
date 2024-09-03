@@ -139,6 +139,16 @@ static LOC_DEFS: [Location; {{ num_locations }}] = [
 %% endfor
 ];
 
+%% set cplaces = canon_places.items()|sort(case_sensitive=True)
+%% for cname, loc_ids in cplaces
+static CANON_{{ cname|upper }}: [LocationId; {{ loc_ids|count }}] = [LocationId::{{ loc_ids|join(', LocationId::') }}];
+%% endfor
+static CANON_DEFS: [&'static [LocationId]; {{ cplaces|count }}] = [
+%% for cname, _ in cplaces
+    &CANON_{{ cname|upper }},
+%% endfor
+];
+
 pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     for (k, loc) in LOC_DEFS.iter().enumerate() {
         assert!(k == loc.id.into_usize(),
@@ -159,4 +169,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
 %% endif
 %% endfor
     }
+}
+
+pub fn get_canon_location_ids(canon_id: CanonId) -> &'static [LocationId] {
+    CANON_DEFS[canon_id.into_usize()]
 }

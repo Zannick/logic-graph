@@ -668,6 +668,97 @@ static LOC_DEFS: [Location; 48] = [
     },
 ];
 
+static CANON_DEFEAT_GOHMA: [LocationId; 2] = [LocationId::Deku_Tree__Boss_Room__Arena__Gohma, LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Quick_Kill];
+static CANON_DEKU_BASEMENT_WEB: [LocationId; 2] = [LocationId::Deku_Tree__Basement_1__Corner__Burn_Basement_Web, LocationId::Deku_Tree__Basement_Ledge__Web__Burn_Web];
+static CANON_DEKU_LOBBY_WEB: [LocationId; 3] = [LocationId::Deku_Tree__Lobby__Center__Web, LocationId::Deku_Tree__Floor_3__Door__Break_Web, LocationId::Deku_Tree__Compass_Room__Entry__Burn_Web];
+static CANON_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL: [LocationId; 1] = [LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall];
+static CANON_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB: [LocationId; 1] = [LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web];
+static CANON_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS: [LocationId; 1] = [LocationId::Deku_Tree__Basement_1__Center__Vines_GS];
+static CANON_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST: [LocationId; 1] = [LocationId::Deku_Tree__Basement_1__Corner__Chest];
+static CANON_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS: [LocationId; 1] = [LocationId::Deku_Tree__Basement_1__Corner__Gate_GS];
+static CANON_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH: [LocationId; 1] = [LocationId::Deku_Tree__Basement_1__Corner__Switch];
+static CANON_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS: [LocationId; 1] = [LocationId::Deku_Tree__Basement_2__Boss_Door__Scrubs];
+static CANON_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK: [LocationId; 1] = [LocationId::Deku_Tree__Basement_Ledge__Block__Push_Block];
+static CANON_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP: [LocationId; 1] = [LocationId::Deku_Tree__Boss_Room__Arena__Blue_Warp];
+static CANON_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART: [LocationId; 1] = [LocationId::Deku_Tree__Boss_Room__Arena__Gohma_Heart];
+static CANON_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST: [LocationId; 1] = [LocationId::Deku_Tree__Compass_Room__Compass__Chest];
+static CANON_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST: [LocationId; 1] = [LocationId::Deku_Tree__Compass_Room__Ledge__Chest];
+static CANON_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS: [LocationId; 1] = [LocationId::Deku_Tree__Compass_Room__Ledge__GS];
+static CANON_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST: [LocationId; 1] = [LocationId::Deku_Tree__Floor_2__Vines__Map_Chest];
+static CANON_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS: [LocationId; 1] = [LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Nuts];
+static CANON_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS: [LocationId; 1] = [LocationId::Deku_Tree__Lobby__Center__Deku_Baba_Sticks];
+static CANON_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB: [LocationId; 1] = [LocationId::Deku_Tree__Scrub_Room__Entry__Scrub];
+static CANON_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS: [LocationId; 1] = [LocationId::Deku_Tree__Skull_Room__Entry__GS];
+static CANON_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST: [LocationId; 1] = [LocationId::Deku_Tree__Slingshot_Room__Slingshot__Chest];
+static CANON_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST: [LocationId; 1] = [LocationId::Deku_Tree__Slingshot_Upper__Ledge__Chest];
+static CANON_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS: [LocationId; 1] = [LocationId::KF__Baba_Corridor__Deku_Babas__Nuts];
+static CANON_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS: [LocationId; 1] = [LocationId::KF__Baba_Corridor__Deku_Babas__Sticks];
+static CANON_LOC_KF__BOULDER_MAZE__REWARD__CHEST: [LocationId; 1] = [LocationId::KF__Boulder_Maze__Reward__Chest];
+static CANON_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO: [LocationId; 1] = [LocationId::KF__Kokiri_Village__Midos_Guardpost__Show_Mido];
+static CANON_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY: [LocationId; 1] = [LocationId::KF__Kokiri_Village__Training_Center__Victory];
+static CANON_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST: [LocationId; 1] = [LocationId::KF__Midos_House__Entry__Bottom_Left_Chest];
+static CANON_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST: [LocationId; 1] = [LocationId::KF__Midos_House__Entry__Bottom_Right_Chest];
+static CANON_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST: [LocationId; 1] = [LocationId::KF__Midos_House__Entry__Top_Left_Chest];
+static CANON_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST: [LocationId; 1] = [LocationId::KF__Midos_House__Entry__Top_Right_Chest];
+static CANON_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE: [LocationId; 1] = [LocationId::KF__Outside_Deku_Tree__Left__Gossip_Stone];
+static CANON_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE: [LocationId; 1] = [LocationId::KF__Outside_Deku_Tree__Right__Gossip_Stone];
+static CANON_LOC_KF__SHOP__ENTRY__BLUE_RUPEE: [LocationId; 1] = [LocationId::KF__Shop__Entry__Blue_Rupee];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_1: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_1];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_2: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_2];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_3: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_3];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_4: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_4];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_5: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_5];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_6: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_6];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_7: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_7];
+static CANON_LOC_KF__SHOP__ENTRY__ITEM_8: [LocationId; 1] = [LocationId::KF__Shop__Entry__Item_8];
+static CANON_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10: [LocationId; 1] = [LocationId::Kak__Spider_House__Entry__Skulls_10];
+static CANON_DEFS: [&'static [LocationId]; 44] = [
+    &CANON_DEFEAT_GOHMA,
+    &CANON_DEKU_BASEMENT_WEB,
+    &CANON_DEKU_LOBBY_WEB,
+    &CANON_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL,
+    &CANON_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB,
+    &CANON_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS,
+    &CANON_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST,
+    &CANON_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS,
+    &CANON_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH,
+    &CANON_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS,
+    &CANON_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK,
+    &CANON_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP,
+    &CANON_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART,
+    &CANON_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST,
+    &CANON_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST,
+    &CANON_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS,
+    &CANON_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST,
+    &CANON_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS,
+    &CANON_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS,
+    &CANON_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB,
+    &CANON_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS,
+    &CANON_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST,
+    &CANON_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST,
+    &CANON_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS,
+    &CANON_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS,
+    &CANON_LOC_KF__BOULDER_MAZE__REWARD__CHEST,
+    &CANON_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO,
+    &CANON_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY,
+    &CANON_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST,
+    &CANON_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST,
+    &CANON_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST,
+    &CANON_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST,
+    &CANON_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE,
+    &CANON_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE,
+    &CANON_LOC_KF__SHOP__ENTRY__BLUE_RUPEE,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_1,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_2,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_3,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_4,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_5,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_6,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_7,
+    &CANON_LOC_KF__SHOP__ENTRY__ITEM_8,
+    &CANON_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10,
+];
+
 pub(super) fn build_locations(locations: &mut EnumMap<LocationId, Location>) {
     for (k, loc) in LOC_DEFS.iter().enumerate() {
         assert!(k == loc.id.into_usize(),
@@ -708,4 +799,8 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::KF__Shop__Entry__Blue_Rupee | LocationId::KF__Shop__Entry__Item_1 | LocationId::KF__Shop__Entry__Item_2 | LocationId::KF__Shop__Entry__Item_3 | LocationId::KF__Shop__Entry__Item_4 | LocationId::KF__Shop__Entry__Item_5 | LocationId::KF__Shop__Entry__Item_6 | LocationId::KF__Shop__Entry__Item_7 | LocationId::KF__Shop__Entry__Item_8 => SpotId::KF__Shop__Entry,
         LocationId::Kak__Spider_House__Entry__Skulls_10 => SpotId::Kak__Spider_House__Entry,
     }
+}
+
+pub fn get_canon_location_ids(canon_id: CanonId) -> &'static [LocationId] {
+    CANON_DEFS[canon_id.into_usize()]
 }

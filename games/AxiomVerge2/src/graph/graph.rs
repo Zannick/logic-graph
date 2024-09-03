@@ -5780,6 +5780,9 @@ impl world::World for World {
     fn get_warps(&self) -> &[Warp] { &self.warps.as_slice() }
 
     fn get_all_locations(&self) -> &[Location] { &self.locations.as_slice() }
+    fn get_canon_location_ids(canon_id: CanonId) -> &'static [LocationId] {
+        get_canon_location_ids(canon_id)
+    }
 
     fn get_location_spot(&self, loc_id: LocationId) -> SpotId {
         get_location_spot(loc_id)

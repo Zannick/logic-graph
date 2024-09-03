@@ -389,7 +389,7 @@ class GameLogic(object):
                             area['loc_ids'].append(loc['id'])
                             region['loc_ids'].append(loc['id'])
                             if 'canon' in loc:
-                                self.canon_places[construct_id(loc['canon'])].append(loc)
+                                self.canon_places[construct_id(loc['canon'])].append(loc['id'])
                                 loc['canon_id'] = construct_id(loc['canon'])
                             if 'req' in loc:
                                 loc['pr'] = _parseExpression(
@@ -535,7 +535,7 @@ class GameLogic(object):
                 if cname in self.canon_places:
                     self._errors.append(f'Cannot use canon name {cname!r} which collides with default canon name for {loc["fullname"]}')
                 else:
-                    self.canon_places[cname] = [loc]
+                    self.canon_places[cname] = [loc['id']]
                     loc['canon_id'] = cname
 
 

@@ -191,16 +191,19 @@ pub trait World: Sync {
     fn get_spot_exits(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Exit];
     fn get_spot_actions(&self, spot_id: <Self::Exit as Exit>::SpotId) -> &[Self::Action];
     fn get_global_actions(&self) -> &[Self::Action];
+
     fn get_all_spots(&self) -> &[<Self::Exit as Exit>::SpotId];
     fn same_region(sp1: <Self::Exit as Exit>::SpotId, sp2: <Self::Exit as Exit>::SpotId) -> bool;
     fn same_area(sp1: <Self::Exit as Exit>::SpotId, sp2: <Self::Exit as Exit>::SpotId) -> bool;
-
     fn get_area_spots(
         &self,
         spot_id: <Self::Exit as Exit>::SpotId,
     ) -> &[<Self::Exit as Exit>::SpotId];
     fn get_warps(&self) -> &[Self::Warp];
+
     fn get_all_locations(&self) -> &[Self::Location];
+    fn get_canon_location_ids(canon_id: <Self::Location as Location>::CanonId) -> &'static [<Self::Location as Location>::LocId];
+
     fn get_location_spot(
         &self,
         loc_id: <Self::Location as Location>::LocId,
