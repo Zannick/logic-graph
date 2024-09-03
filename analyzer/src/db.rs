@@ -1202,7 +1202,8 @@ where
                         continue;
                     }
 
-                    let new_score = self.lookup_score_raw(&value)
+                    let new_score = self
+                        .lookup_score_raw(&value)
                         .expect("Error reading state in bg thread");
                     let max_time = self.max_time();
                     if self.metric.total_estimate_from_score(new_score) > max_time {

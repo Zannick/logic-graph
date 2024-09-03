@@ -38,6 +38,7 @@ enum SearchMode {
     MutateSpots,
     MutateCollections,
     MutateGreedySteps,
+    MutateCanonLocations,
     Unknown,
     Similar,
 }
@@ -1078,6 +1079,26 @@ where
                                 &self.startctx,
                                 min_ctx.recent_history(),
                                 SearchMode::MutateGreedySteps,
+                            )
+                            .unwrap();
+                        }
+                        log::debug!(
+                            "Solution mutator starting canon replacement for solution {}ms",
+                            sol.elapsed
+                        );
+                        if let Some(min_ctx) = mutate_canon_locations(
+                            self.world,
+                            self.startctx.get(),
+                            self.queue.max_time(),
+                            4,
+                            MAX_STATES_FOR_ONE_LOC,
+                            sol.clone(),
+                            self.queue.db().scorer().get_algo(),
+                        ) {
+                            self.recreate_store(
+                                &self.startctx,
+                                min_ctx.recent_history(),
+                                SearchMode::MutateCanonLocations
                             )
                             .unwrap();
                         }

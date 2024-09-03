@@ -254,6 +254,27 @@ where
                 }
             }
 
+            let mut replans = 0;
+            while let Some(alternative) = mutate_canon_locations(
+                world,
+                &startctx,
+                solution.elapsed,
+                4,
+                8_192,
+                solution.clone(),
+                scorer.get_algo(),
+            ) {
+                replans += 1;
+                println!(
+                    "With alternative canon location #{}: {}ms",
+                    replans,
+                    alternative.elapsed()
+                );
+                solution = alternative.to_solution();
+                improvements.push(alternative);
+                record_observations(&startctx, world, solution.clone(), 0, &mut trie);
+            }
+
             let mut reorders = 0;
             while let Some(reordered) = mutate_collection_steps(
                 world,

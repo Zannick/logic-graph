@@ -467,6 +467,82 @@ where
     None
 }
 
+/// Mutate routes by replacing collections with other locations but same canon
+pub fn mutate_canon_locations<W, T, L>(
+    world: &W,
+    startctx: &T,
+    max_time: u32,
+    max_depth: usize,
+    max_states: usize,
+    solution: Arc<Solution<T>>,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+) -> Option<ContextWrapper<T>>
+where
+    W: World<Location = L>,
+    T: Ctx<World = W>,
+    L: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = L::Currency>,
+{
+    // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
+    let max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
+    // [(history index, history step)]
+    // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
+    let collection_hist: Vec<_> =
+        collection_history_with_range_info::<T, _>(solution.history.iter().copied()).collect();
+    let mut replay = ContextWrapper::new(startctx.clone());
+
+    for (coll, (range_a, step)) in collection_hist.iter().enumerate() {
+        // Clone first, then advance the replay.
+        let replace_collection = replay.clone();
+        assert!(
+            replay.maybe_replay_all(world, &solution.history[range_a.clone()]),
+            "Could not replay base solution history range {:?}",
+            range_a,
+        );
+
+        let old_loc_id = match step {
+            History::G(_, loc_id) | History::V(_, loc_id, _) => loc_id,
+            _ => continue,
+        };
+
+        // For every other loc id with this canon id
+        for loc_id in W::get_canon_location_ids(world.get_location(*old_loc_id).canon_id())
+        {
+            if loc_id == old_loc_id {
+                continue;
+            }
+            // Search for a way to that alternative location
+            if let Ok(replace_collection) = access_location_after_actions(
+                world,
+                replace_collection.clone(),
+                *loc_id,
+                max_time,
+                max_depth,
+                max_states,
+                shortest_paths,
+            ) {
+                // And if there is such a way, rediscover routes to the same locations in the rest of the route
+                if let Some(reordered) = rediscover_routes(
+                    world,
+                    replace_collection,
+                    collection_hist[coll + 1..].iter(),
+                    max_time,
+                    max_depth,
+                    max_states,
+                    &solution.history,
+                    shortest_paths,
+                ) {
+                    if world.won(reordered.get()) {
+                        return Some(reordered);
+                    }
+                }
+            }
+        }
+    }
+
+    None
+}
+
 /// Mutate routes between collections by finding a greedy path to the next
 pub fn mutate_greedy_collections<W, T, L>(
     world: &W,
