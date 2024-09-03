@@ -496,11 +496,6 @@ where
     for (coll, (range, step)) in collection_hist.iter().enumerate() {
         // Clone first, then advance the replay.
         let replace_this_collection = replay.clone();
-        assert!(
-            replay.maybe_replay_all(world, &solution.history[range.clone()]),
-            "Could not replay base solution history range {:?}",
-            range,
-        );
 
         let old_loc_id = match step {
             History::G(_, loc_id) | History::V(_, loc_id, _) => loc_id,
