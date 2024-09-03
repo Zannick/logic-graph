@@ -503,7 +503,7 @@ where
         expand_astar(
             world,
             &el,
-            u32::MAX,
+            max_time,
             &mut spot_heap,
             &score_func,
             W::same_area(ctx.get().position(), spot),

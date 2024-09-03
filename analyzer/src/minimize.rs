@@ -272,6 +272,8 @@ where
     W::Location: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
 {
+    // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
+    let max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
     // [(history range inclusive of the collection step, history step, community)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
@@ -383,7 +385,7 @@ where
                     &solution.history,
                     shortest_paths,
                 ) {
-                    if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                    if world.won(reordered.get()) {
                         return Some(reordered);
                     }
                 }
@@ -401,7 +403,7 @@ where
                     &solution.history,
                     shortest_paths,
                 ) {
-                    if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                    if world.won(reordered.get()) {
                         return Some(reordered);
                     }
                 }
@@ -419,7 +421,7 @@ where
                     &solution.history,
                     shortest_paths,
                 ) {
-                    if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                    if world.won(reordered.get()) {
                         return Some(reordered);
                     }
                 }
@@ -439,7 +441,7 @@ where
                 &solution.history,
                 shortest_paths,
             ) {
-                if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                if world.won(reordered.get()) {
                     return Some(reordered);
                 }
             }
@@ -455,7 +457,7 @@ where
                 &solution.history,
                 shortest_paths,
             ) {
-                if reordered.elapsed() < solution.elapsed && world.won(reordered.get()) {
+                if world.won(reordered.get()) {
                     return Some(reordered);
                 }
             }
