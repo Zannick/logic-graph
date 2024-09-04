@@ -720,7 +720,6 @@ where
             let elapsed = ctx.elapsed();
             let time_since_visit = ctx.time_since_visit();
             if !next_steps.is_empty() {
-                ctx.assert_and_replay(self.world, *hist);
                 let next = next_steps
                     .into_iter()
                     .filter_map(|vh| {
@@ -732,6 +731,7 @@ where
                         }
                     })
                     .collect::<Vec<_>>();
+                ctx.assert_and_replay(self.world, *hist);
                 self.queue.extend_keep_one(next, &ctx, &prev)?;
                 ctx.remove_history();
             } else {
