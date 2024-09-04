@@ -1034,6 +1034,7 @@ where
                 let qkey = self.metric.get_heap_key(el.get(), score);
                 self.db.put_opt(qkey, state_key, &self.write_opts)?;
                 self.readds.fetch_add(1, Ordering::Release);
+                self.size.fetch_add(1, Ordering::Release);
             }
         }
         Ok(true)
@@ -1137,6 +1138,7 @@ where
                 let qkey = self.metric.get_heap_key(el.get(), score);
                 self.db.put_opt(qkey, state_key, &self.write_opts)?;
                 self.readds.fetch_add(1, Ordering::Release);
+                self.size.fetch_add(1, Ordering::Release);
             }
         }
 
