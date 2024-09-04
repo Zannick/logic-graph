@@ -704,6 +704,11 @@ where
     best
 }
 
+/// Looks up matching entries in the trie and returns the fastest winning state found.
+/// 
+/// The winning state's elapsed time will be the result of replaying the history since
+/// the provided start state, so caller should check the real history of the provided state
+/// to confirm total time.
 pub fn trie_search<W, T, L, TM>(
     world: &W,
     ctx: &ContextWrapper<T>,
@@ -717,22 +722,22 @@ where
     W::Exit: Exit<Context = T, Currency = L::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
 {
-    let mut queue = VecDeque::from(trie.lookup(ctx.get()));
+    let vec = trie.lookup(ctx.get());
     let mut best = None;
     let mut best_elapsed = max_time;
-    'q: while let Some(suffix) = queue.pop_front() {
+    'solves: for suffix in vec {
         let mut r2 = ctx.clone();
         for step in suffix.suffix() {
             if !r2.can_replay(world, *step) {
-                continue 'q;
+                continue 'solves;
             }
             r2.replay(world, *step);
             if r2.elapsed() >= best_elapsed {
-                continue 'q;
+                continue 'solves;
             }
         }
         if !world.won(r2.get()) {
-            continue 'q;
+            continue 'solves;
         }
 
         if r2.elapsed() < best_elapsed {

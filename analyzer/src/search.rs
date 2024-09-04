@@ -360,7 +360,6 @@ where
             524_288,
             4_096,
             16_384,
-            solutions.clone(),
         )
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();
@@ -642,10 +641,10 @@ where
             states
                 .into_iter()
                 .filter_map(|ctx| {
-                    if ctx.elapsed() > max_time {
-                        None
-                    } else if self.world.won(ctx.get()) {
-                        solutions.push(ctx);
+                    if self.world.won(ctx.get()) {
+                        if ctx.elapsed() < max_time {
+                            solutions.push(ctx);
+                        }
                         None
                     } else {
                         Some(ctx)
@@ -677,11 +676,11 @@ where
     }
 
     fn single_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        single_step(self.world, ctx, self.queue.max_time())
+        single_step(self.world, ctx, estimates::UNREASONABLE_TIME)
     }
 
     fn recreate_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        single_step_with_local(self.world, ctx, u32::MAX)
+        single_step_with_local(self.world, ctx, estimates::UNREASONABLE_TIME)
     }
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
@@ -701,6 +700,8 @@ where
         }
     }
 
+    /// Recreates the route from the given starting point, evaluating each state in the route onward if needed,
+    /// and updating all the children of those states in the db.
     fn recreate_store(
         &self,
         startctx: &ContextWrapper<T>,
@@ -714,14 +715,27 @@ where
             if iter.peek().is_none() {
                 break;
             }
-            if self.queue.db().remember_processed(ctx.get()).unwrap() {
+            let next_steps = self.queue.db().get_next_steps(ctx.get()).unwrap();
+            let prev = Some(ctx.get().clone());
+            let elapsed = ctx.elapsed();
+            let time_since_visit = ctx.time_since_visit();
+            if !next_steps.is_empty() {
                 ctx.assert_and_replay(self.world, *hist);
+                let next = next_steps
+                    .into_iter()
+                    .filter_map(|vh| {
+                        if vh.len() > 1 || vh[0] != *hist {
+                            let cc = ctx.clone();
+                            Some(cc.try_replay_all(self.world, &vh).unwrap())
+                        } else {
+                            None
+                        }
+                    })
+                    .collect::<Vec<_>>();
+                self.queue.extend_keep_one(next, &ctx, &prev)?;
                 ctx.remove_history();
             } else {
-                let prev = Some(ctx.get().clone());
-                let elapsed = ctx.elapsed();
-                let time_since_visit = ctx.time_since_visit();
-                let next = self.recreate_step(ctx);
+                let mut next = self.single_step(ctx.clone());
                 if let Some((ci, _)) = next
                     .iter()
                     .enumerate()
@@ -729,7 +743,11 @@ where
                     .min_by_key(|(_, c)| c.elapsed())
                 {
                     // Assumption: no subsequent state leads to victory (aside from the last state?)
-                    ctx = next[ci].clone();
+                    ctx = next.swap_remove(ci);
+                    self.queue.extend_keep_one(next, &ctx, &prev)?;
+                    ctx.remove_history();
+                } else if matches!(hist, History::L(..)) {
+                    ctx.assert_and_replay(self.world, *hist);
                     self.queue.extend_keep_one(next, &ctx, &prev)?;
                     ctx.remove_history();
                 } else {
@@ -1250,8 +1268,13 @@ where
             return Some(Vec::new());
         }
 
-        if let Some(win) = trie_search(self.world, &ctx, self.queue.max_time(), &self.solve_trie) {
-            // Handles recording the solution as well.
+        if let Some(win) = trie_search(
+            self.world,
+            &ctx,
+            estimates::UNREASONABLE_TIME,
+            &self.solve_trie,
+        ) {
+            // Handles recording the solution, updating all steps, and single stepping as well.
             self.recreate_store(&ctx, win.recent_history(), SearchMode::Similar)
                 .unwrap();
             None

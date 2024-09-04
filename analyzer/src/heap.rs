@@ -5,7 +5,6 @@ use crate::context::*;
 use crate::db::{HeapDB, HeapMetric};
 use crate::estimates::ContextScorer;
 use crate::scoring::{BestTimes, EstimatedTimeMetric, ScoreMetric, TimeSinceAndElapsed};
-use crate::solutions::SolutionCollector;
 use crate::steiner::*;
 use crate::world::*;
 use anyhow::{anyhow, Result};
@@ -18,7 +17,7 @@ use plotlib::view::ContinuousView;
 use sort_by_derive::SortBy;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
-use std::sync::{Arc, Mutex, MutexGuard};
+use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
@@ -78,12 +77,11 @@ where
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
-        solutions: Arc<Mutex<SolutionCollector<T>>>,
     ) -> Result<RocksBackedQueue<'w, W, T>, String>
     where
         P: AsRef<Path>,
     {
-        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), solutions)?;
+        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get())?;
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut processed_counts = Vec::new();
         processed_counts.resize_with(max_possible_progress + 1, || 0.into());

@@ -4,7 +4,6 @@ extern crate rocksdb;
 use crate::context::*;
 use crate::estimates::ContextScorer;
 use crate::scoring::*;
-use crate::solutions::{Solution, SolutionCollector};
 use crate::steiner::*;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
@@ -22,9 +21,10 @@ use rocksdb::{
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
+use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
-use std::sync::{Arc, Mutex};
+use std::sync::Mutex;
 use std::time::Instant;
 
 // We need the following in this wrapper impl:
@@ -47,7 +47,10 @@ const BEST: &str = "best";
 const NEXT: &str = "next";
 const TOO_MANY_STEPS: usize = 1024 << 3;
 
-type NextData = (u32, Vec<u8>);
+// This is a vec because we don't guarantee that the recent history in a newly submitted ctx
+// is length 1.
+type NextData<T> = Vec<HistoryAlias<T>>;
+pub type NextSteps<T> = Vec<Vec<HistoryAlias<T>>>;
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 struct StateData<I, S, L, E, A, Wp> {
@@ -70,7 +73,7 @@ type StateDataAlias<T> = StateData<
     <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
 >;
 
-pub struct HeapDB<'w, W: World, T: Ctx, const KS: usize, SM: ScoreMetric<'w, W, T, KS>> {
+pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
     db: DB,
     statedb: DB,
     _cache: Cache,
@@ -98,8 +101,7 @@ pub struct HeapDB<'w, W: World, T: Ctx, const KS: usize, SM: ScoreMetric<'w, W, 
     bg_deletes: AtomicUsize,
 
     retrieve_lock: Mutex<()>,
-    solutions: Arc<Mutex<SolutionCollector<T>>>,
-    world: &'w W,
+    phantom: PhantomData<&'w (W, T)>,
 }
 
 // Final cleanup, done in a separate struct here to ensure it's done
@@ -178,6 +180,21 @@ pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
 fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T, Error> {
     Ok(rmp_serde::from_slice::<T>(buf)?)
 }
+fn serialize_data<V>(v: V) -> Vec<u8>
+where
+    V: Serialize,
+{
+    let mut val = Vec::with_capacity(std::mem::size_of::<V>());
+    v.serialize(&mut Serializer::new(&mut val)).unwrap();
+    val
+}
+
+fn get_obj_from_data<V>(buf: &[u8]) -> Result<V, Error>
+where
+    V: for<'de> Deserialize<'de>,
+{
+    Ok(rmp_serde::from_slice::<V>(buf)?)
+}
 
 // Essentially a workaround for inherent associated types.
 pub trait HeapMetric {
@@ -210,7 +227,6 @@ where
         initial_max_time: u32,
         world: &'w W,
         startctx: &T,
-        solutions: Arc<Mutex<SolutionCollector<T>>>,
     ) -> Result<HeapDB<'w, W, T, KS, SM>, String>
     where
         P: AsRef<Path>,
@@ -312,8 +328,7 @@ where
             min_db_estimates,
             bg_deletes: 0.into(),
             retrieve_lock: Mutex::new(()),
-            solutions,
-            world,
+            phantom: PhantomData,
         })
     }
 
@@ -437,22 +452,6 @@ where
         self.metric.get_heap_key_from_wrapper(el)
     }
 
-    fn serialize_data<V>(v: V) -> Vec<u8>
-    where
-        V: Serialize,
-    {
-        let mut val = Vec::with_capacity(std::mem::size_of::<V>());
-        v.serialize(&mut Serializer::new(&mut val)).unwrap();
-        val
-    }
-
-    fn get_obj_from_data<V>(buf: &[u8]) -> Result<V, Error>
-    where
-        V: for<'de> Deserialize<'de>,
-    {
-        Ok(rmp_serde::from_slice::<V>(buf)?)
-    }
-
     fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>, Error> {
         let ctx = deserialize_state(value)?;
         let sd = self
@@ -467,7 +466,7 @@ where
 
     fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>, Error> {
         match self.statedb.get_cf(self.best_cf(), key)? {
-            Some(slice) => Ok(Some(Self::get_obj_from_data(&slice)?)),
+            Some(slice) => Ok(Some(get_obj_from_data(&slice)?)),
             None => Ok(None),
         }
     }
@@ -489,7 +488,7 @@ where
             .map(|res| match res {
                 Err(e) => Err(e.to_string()),
                 Ok(None) => Ok(None),
-                Ok(Some(slice)) => Ok(Some(Self::get_obj_from_data(&slice).unwrap())),
+                Ok(Some(slice)) => Ok(Some(get_obj_from_data(&slice).unwrap())),
             })
             .collect();
 
@@ -509,13 +508,13 @@ where
         }
     }
 
-    fn serialize_next_data(next_entries: Vec<NextData>) -> Vec<u8> {
-        Self::serialize_data(next_entries)
+    fn serialize_next_data(next_entries: Vec<NextData<T>>) -> Vec<u8> {
+        serialize_data(next_entries)
     }
 
-    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData>, Error> {
+    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData<T>>, Error> {
         match self.statedb.get_cf(self.next_cf(), key)? {
-            Some(slice) => Ok(Self::get_obj_from_data(&slice)?),
+            Some(slice) => Ok(get_obj_from_data(&slice)?),
             None => Ok(Vec::new()),
         }
     }
@@ -858,6 +857,19 @@ where
         self.remember_processed_raw(&next_key)
     }
 
+    fn get_next_steps_raw(&self, key: &[u8]) -> Result<NextSteps<T>, Error> {
+        let cf = self.next_cf();
+        Ok(if self.statedb.key_may_exist_cf(cf, key) {
+            self.get_deserialize_next_data(key)?
+        } else {
+            Vec::new()
+        })
+    }
+
+    pub fn get_next_steps(&self, el: &T) -> Result<NextSteps<T>, Error> {
+        self.get_next_steps_raw(&serialize_state(el))
+    }
+
     pub fn count_duplicate(&self) {
         self.dup_pskips.fetch_add(1, Ordering::Release);
     }
@@ -887,10 +899,10 @@ where
         best_since_visit: u32,
         best_elapsed: u32,
         estimated_remaining: u32,
-        next_entries: &mut Vec<NextData>,
+        next_entries: &mut Vec<NextData<T>>,
     ) {
-        let (hist, dur) = el.remove_history();
-        next_entries.push((dur, state_key.clone()));
+        let (hist, _) = el.remove_history();
+        next_entries.push(hist.clone());
 
         assert!(
             hist.len() < TOO_MANY_STEPS,
@@ -904,7 +916,7 @@ where
             .merge_cf_opt(
                 self.best_cf(),
                 &state_key,
-                Self::serialize_data(StateData {
+                serialize_data(StateData {
                     elapsed: best_elapsed,
                     time_since_visit: best_since_visit,
                     estimated_remaining,
@@ -914,76 +926,6 @@ where
                 &self.write_opts,
             )
             .unwrap();
-
-        let mut to_adjust: Vec<_> = vec![(best_elapsed, best_since_visit, state_key)];
-
-        while let Some((prev_elapsed, prev_since_visit, state_key)) = to_adjust.pop() {
-            // Get all the children of state_key
-            // these are (dur, state) pairs that indicate states you get after el
-            // and how long the transition to that state takes
-            for (new_dur, new_ctx_key) in self.get_deserialize_next_data(&state_key).unwrap() {
-                // new_dur = time after el
-                let new_elapsed = prev_elapsed + new_dur;
-                let new_time_since_visit = prev_since_visit + new_dur;
-                // each child points back at the prev and includes the hist step(s)
-                if let Some(StateData {
-                    elapsed,
-                    time_since_visit,
-                    estimated_remaining,
-                    hist,
-                    prev,
-                }) = self.get_deserialize_state_data(&new_ctx_key).unwrap()
-                {
-                    if new_elapsed < elapsed {
-                        // If this state had a visit, its value (time_since_visit) will be smaller (usually 0).
-                        // We want to store (and propagate downward) this value if so.
-                        let time_since_visit =
-                            std::cmp::min(time_since_visit, new_time_since_visit);
-                        self.statedb
-                            .merge_cf_opt(
-                                self.best_cf(),
-                                &new_ctx_key,
-                                Self::serialize_data(StateData {
-                                    elapsed: new_elapsed,
-                                    time_since_visit,
-                                    // est, hist, and prev don't change
-                                    estimated_remaining,
-                                    hist,
-                                    prev,
-                                }),
-                                &self.write_opts,
-                            )
-                            .unwrap();
-                        // handle solution by just inserting a new one
-                        let ctx = deserialize_state(&new_ctx_key).unwrap();
-                        if self.world.won(&ctx) {
-                            let sol = Arc::new(Solution {
-                                elapsed: new_elapsed,
-                                history: self.get_history_raw(new_ctx_key.clone()).unwrap().0,
-                            });
-                            if self
-                                .solutions
-                                .lock()
-                                .unwrap()
-                                .insert_solution(sol, self.world)
-                                .accepted()
-                            {
-                                log::info!(
-                                    "New solution found by db improvement: {}ms",
-                                    new_elapsed
-                                );
-                            }
-                        }
-
-                        // It doesn't really matter the order in which we update,
-                        // but we shouldn't load everything all at once.
-                        to_adjust.push((new_elapsed, time_since_visit, new_ctx_key));
-                    }
-                }
-                // We don't know what to write in the else case
-                // since we haven't captured hist and prev...
-            }
-        }
     }
 
     /// Stores the underlying Ctx in the seen db with the best known elapsed time and
