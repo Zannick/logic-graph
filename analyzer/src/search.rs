@@ -1385,7 +1385,7 @@ where
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             Greedy stats: org level={}, steps done={}, proc_in={}, proc_out={}\n\
-            skips: push:{} time, {} dups; pop: {} time, {} dups; bgdel={}\n\
+            skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
             {}\n\
@@ -1418,6 +1418,7 @@ where
             dskips,
             pskips,
             dpskips,
+            self.queue.db().readds(),
             self.queue.background_deletes(),
             heap_bests.iter().position(|x| *x != None).unwrap_or(0),
             heap_bests.len().saturating_sub(1),

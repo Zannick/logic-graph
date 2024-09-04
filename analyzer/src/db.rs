@@ -92,6 +92,7 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
     pskips: AtomicUsize,
     dup_iskips: AtomicUsize,
     dup_pskips: AtomicUsize,
+    readds: AtomicUsize,
 
     deletes: AtomicUsize,
     delete: AtomicU64,
@@ -323,6 +324,7 @@ where
             pskips: 0.into(),
             dup_iskips: 0.into(),
             dup_pskips: 0.into(),
+            readds: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
             min_db_estimates,
@@ -409,6 +411,12 @@ where
             self.dup_iskips.load(Ordering::Acquire),
             self.dup_pskips.load(Ordering::Acquire),
         )
+    }
+
+    /// Returns the number of states that were over the max time and then improved below it and
+    /// so re-added to the queue.
+    pub fn readds(&self) -> usize {
+        self.readds.load(Ordering::Acquire)
     }
 
     pub fn max_time(&self) -> u32 {
@@ -892,7 +900,7 @@ where
 
     fn record_one_internal(
         &self,
-        state_key: Vec<u8>,
+        state_key: &Vec<u8>,
         el: &mut ContextWrapper<T>,
         prev: &Vec<u8>,
         // In case the route looped back on itself, we use the best previous times
@@ -915,7 +923,7 @@ where
         self.statedb
             .merge_cf_opt(
                 self.best_cf(),
-                &state_key,
+                state_key,
                 serialize_data(StateData {
                     elapsed: best_elapsed,
                     time_since_visit: best_since_visit,
@@ -941,31 +949,43 @@ where
     ) -> Result<bool, Error> {
         let state_key = serialize_state(el.get());
 
-        let (prev_key, best_elapsed_from_prev) = if let Some(c) = prev {
+        let (prev_key, best_since_from_prev, best_elapsed_from_prev) = if let Some(c) = prev {
             let prev_key = serialize_state(c);
-            let elapsed = self
-                .get_deserialize_state_data(&prev_key)
-                .unwrap()
-                .map_or(el.elapsed(), |sd| sd.elapsed + el.recent_dur());
-            (prev_key, elapsed)
+            if let Some(sd) = self.get_deserialize_state_data(&prev_key).unwrap() {
+                (
+                    prev_key,
+                    // If recent_dur is larger than time_since_visit, then it means
+                    // that we had a visit in the recent history.
+                    // Otherwise, we didn't, so we can just add the recent_dur.
+                    if el.time_since_visit() < el.recent_dur() {
+                        el.time_since_visit()
+                    } else {
+                        sd.time_since_visit + el.recent_dur()
+                    },
+                    sd.elapsed + el.recent_dur(),
+                )
+            } else {
+                (prev_key, el.time_since_visit(), el.elapsed())
+            }
         } else {
-            (Vec::new(), el.elapsed())
+            (Vec::new(), el.time_since_visit(), el.elapsed())
         };
 
-        let (is_new, estimated_remaining) = if let Some(StateData {
+        let (is_new, old_elapsed, estimated_remaining) = if let Some(StateData {
             elapsed,
             estimated_remaining,
             ..
-        }) = self.get_deserialize_state_data(&state_key)?
+        }) =
+            self.get_deserialize_state_data(&state_key)?
         {
             // This is a new state being pushed, as it has new history, hence we skip if equal.
             if elapsed <= best_elapsed_from_prev {
                 self.dup_iskips.fetch_add(1, Ordering::Release);
                 return Ok(false);
             }
-            (false, estimated_remaining)
+            (false, elapsed, estimated_remaining)
         } else {
-            (true, self.metric.estimated_remaining_time(el.get()))
+            (true, 0, self.metric.estimated_remaining_time(el.get()))
         };
         // In every other case (no such state, or we do better than that state),
         // we will rewrite the data.
@@ -973,10 +993,10 @@ where
         // We should also check the StateData for whether we even need to do this
         let mut next_entries = Vec::new();
         self.record_one_internal(
-            state_key,
+            &state_key,
             el,
             &prev_key,
-            0,
+            best_since_from_prev,
             best_elapsed_from_prev,
             estimated_remaining,
             &mut next_entries,
@@ -998,6 +1018,23 @@ where
 
         if is_new {
             self.seen.fetch_add(1, Ordering::Release);
+        } else {
+            let max_time = self.max_time();
+            // If it was an improvement just over the max_time, and it hasn't been processed yet,
+            // add it to the queue
+            if old_elapsed >= max_time
+                && best_elapsed_from_prev < max_time
+                && !self.remember_processed_raw(&state_key)?
+            {
+                let score = self.metric.score_from_times(BestTimes {
+                    elapsed: best_elapsed_from_prev,
+                    time_since_visit: best_since_from_prev,
+                    estimated_remaining,
+                });
+                let qkey = self.metric.get_heap_key(el.get(), score);
+                self.db.put_opt(qkey, state_key, &self.write_opts)?;
+                self.readds.fetch_add(1, Ordering::Release);
+            }
         }
         Ok(true)
     }
@@ -1012,6 +1049,7 @@ where
         vec: &mut Vec<ContextWrapper<T>>,
         prev: &Option<T>,
     ) -> Result<Vec<bool>, Error> {
+        let max_time = self.max_time();
         let mut next_entries = Vec::new();
         let mut results = Vec::with_capacity(vec.len());
         let mut dups = 0;
@@ -1055,7 +1093,7 @@ where
                 } else {
                     (el.time_since_visit(), el.elapsed())
                 };
-            let estimated_remaining = if let Some(StateData {
+            let (old_elapsed, estimated_remaining) = if let Some(StateData {
                 elapsed,
                 estimated_remaining,
                 ..
@@ -1067,15 +1105,15 @@ where
                     dups += 1;
                     continue;
                 }
-                estimated_remaining
+                (elapsed, estimated_remaining)
             } else {
                 new_seen += 1;
-                self.metric.estimated_remaining_time(el.get())
+                (0, self.metric.estimated_remaining_time(el.get()))
             };
             // In every other case (no such state, or we do better than that state),
             // we will rewrite the data.
             self.record_one_internal(
-                state_key,
+                &state_key,
                 el,
                 &prev_key,
                 best_since_visit,
@@ -1084,6 +1122,22 @@ where
                 &mut next_entries,
             );
             results.push(true);
+
+            // If it was an improvement just over the max_time, and it hasn't been processed yet,
+            // add it to the queue
+            if old_elapsed >= max_time
+                && best_elapsed < max_time
+                && !self.remember_processed_raw(&state_key)?
+            {
+                let score = self.metric.score_from_times(BestTimes {
+                    elapsed: best_elapsed,
+                    time_since_visit: best_since_visit,
+                    estimated_remaining,
+                });
+                let qkey = self.metric.get_heap_key(el.get(), score);
+                self.db.put_opt(qkey, state_key, &self.write_opts)?;
+                self.readds.fetch_add(1, Ordering::Release);
+            }
         }
 
         if let Some(p) = prev {
