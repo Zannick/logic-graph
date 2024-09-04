@@ -1111,13 +1111,6 @@ areas:
       data:
         flipside: Amagi > West Lake > Mid-water Above Gap
       exits:
-        - to: Button
-          req: Underwater_Movement or Slingshot_Hook
-          movement: water
-          jumps: 1
-          penalties:
-            - when: not Underwater_Movement
-              movement: base
         - to: Center Platform West
           req: Underwater_Movement and Slingshot_Hook
           movement: water
@@ -1125,7 +1118,6 @@ areas:
     - name: Button
       coord: [26.8, 17.4]
       local:
-        - to: Bottom Middle
         - to: Gate West
           jumps: 1
         - to: Center Platform
@@ -1169,7 +1161,6 @@ areas:
     - name: Gate East
       coord: [27.1, 17.35]
       local:
-        - to: East
         - to: East Platform
           jumps: 1
           jump_mvmt: water
@@ -1185,10 +1176,6 @@ areas:
           movement: fast_hover
           jumps: 2
         - to: Center Platform West
-          req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
-          movement: fast_hover
-          jumps: 2
-        - to: Bottom Middle
           req: Amagi_Breach_West_Ruins_Gate and Underwater_Movement and Slingshot_Hook and Drone_Hover
           movement: fast_hover
           jumps: 2
@@ -1209,10 +1196,6 @@ areas:
               movement: water
     - name: East
       coord: [27.9, 17.75]
-      local:
-        - to: Gate East
-          jumps: 1
-          jump_mvmt: water
       exits:
         - to: East Platform
           req: Slingshot_Hook

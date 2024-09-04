@@ -151,6 +151,7 @@ digraph AxiomVerge2 {
     Amagi__Main_Area__West_Side -> Amagi__Main_Area__Carving;
     Amagi__Main_Area__Platform_2 -> Amagi__Main_Area__West_Shelf;
     Amagi__Main_Area__Carving -> Amagi__Main_Area__Secret_Outcropping;
+    Amagi__Main_Area__Carving -> Amagi__West_Lake__East_Shore;
     Amagi__Main_Area__West_15 -> Amagi__West_Lake__East_15;
     Amagi__Main_Area__Platform_3 -> Amagi__Main_Area__West_18_Hook_Point;
     Amagi__Main_Area__Catwalk_Center -> Amagi__Main_Area__East_Ledge;
@@ -187,6 +188,7 @@ digraph AxiomVerge2 {
     Amagi__Secret_Chamber__Middle_Ledge -> Amagi__Secret_Chamber__Upper_Ledge;
     Amagi__Secret_Chamber__Middle_Ledge -> Amagi__Secret_Chamber__Upper_Ledge;
     Amagi__West_Lake__East_15 -> Amagi__Main_Area__West_15;
+    Amagi__West_Lake__East_Shore -> Amagi__Main_Area__Carving;
     Amagi__West_Lake__Northwest_Platform -> Amagi__West_Lake__West_Cliff;
     Amagi__West_Lake__East_18 -> Amagi__Main_Area__West_18;
     Amagi__West_Lake__East_19 -> Amagi__Main_Area__West_19;
@@ -356,14 +358,12 @@ digraph AxiomVerge2 {
     Amagi_Breach__West_Ruins__West_Platform_Hook_Point -> Amagi_Breach__West_Ruins__Center_Platform;
     Amagi_Breach__West_Ruins__West_Platform_Hook_Point -> Amagi_Breach__West_Ruins__West_Platform;
     Amagi_Breach__West_Ruins__Center_Platform_West -> Amagi_Breach__West_Ruins__West_Platform;
-    Amagi_Breach__West_Ruins__Bottom_Middle -> Amagi_Breach__West_Ruins__Button;
     Amagi_Breach__West_Ruins__Bottom_Middle -> Amagi_Breach__West_Ruins__Center_Platform_West;
     Amagi_Breach__West_Ruins__Button -> Amagi_Breach__West_Ruins__East;
     Amagi_Breach__West_Ruins__Button -> Amagi_Breach__West_Ruins__East_Platform;
     Amagi_Breach__West_Ruins__Gate_West -> Amagi_Breach__West_Ruins__Center_Platform;
     Amagi_Breach__West_Ruins__Gate_West -> Amagi_Breach__West_Ruins__Center_Platform_West;
     Amagi_Breach__West_Ruins__Gate_West -> Amagi_Breach__West_Ruins__Gate_East;
-    Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__Bottom_Middle;
     Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__Center_Platform;
     Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__Center_Platform_West;
     Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__Gate_West;
@@ -3794,13 +3794,10 @@ digraph AxiomVerge2 {
     Amagi_Breach__West_Ruins__Center_Platform -> Amagi_Breach__West_Ruins__Button;
     Amagi_Breach__West_Ruins__Center_Platform -> Amagi_Breach__West_Ruins__Gate_West;
     Amagi_Breach__West_Ruins__Button -> Amagi_Breach__West_Ruins__Center_Platform;
-    Amagi_Breach__West_Ruins__Button -> Amagi_Breach__West_Ruins__Bottom_Middle;
     Amagi_Breach__West_Ruins__Button -> Amagi_Breach__West_Ruins__Gate_West;
     Amagi_Breach__West_Ruins__Gate_West -> Amagi_Breach__West_Ruins__Button;
     Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__East_Platform;
-    Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__East;
     Amagi_Breach__West_Ruins__East_Platform -> Amagi_Breach__West_Ruins__East;
-    Amagi_Breach__West_Ruins__East -> Amagi_Breach__West_Ruins__Gate_East;
     Amagi_Breach__Twisty_Passages__South -> Amagi_Breach__Twisty_Passages__West_Flora;
     Amagi_Breach__Twisty_Passages__West_Flora -> Amagi_Breach__Twisty_Passages__South;
     Amagi_Breach__Twisty_Passages__East_Ledge -> Amagi_Breach__Twisty_Passages__East_Bottom;
@@ -3870,6 +3867,8 @@ digraph AxiomVerge2 {
     Amagi__Main_Area__Platform_2 -> Amagi__Main_Area__East_Ledge;
     Amagi__Main_Area__Platform_2 -> Amagi__Main_Area__Platform_3;
     Amagi__Main_Area__Platform_2 -> Amagi__Main_Area__Catwalk_Center;
+    Amagi__Main_Area__Platform_2 -> Amagi__Main_Area__Flat_Ruin;
+    Amagi__Main_Area__Platform_2 -> Amagi__Main_Area__West_18;
     Amagi__Main_Area__East_Ledge -> Amagi__Main_Area__Platform_2;
     Amagi__Main_Area__East_Ledge -> Amagi__Main_Area__Platform_3;
     Amagi__Main_Area__East_Ledge -> Amagi__Main_Area__Catwalk_Center;
@@ -4027,6 +4026,9 @@ digraph AxiomVerge2 {
     Amagi__West_Lake__East_15 -> Amagi__West_Lake__East_Shore;
     Amagi__West_Lake__East_Shore -> Amagi__West_Lake__East_Bank;
     Amagi__West_Lake__East_Bank -> Amagi__West_Lake__East_Shore;
+    Amagi__West_Lake__East_Bank -> Amagi__West_Lake__Northeast_Platform;
+    Amagi__West_Lake__East_Bank -> Amagi__West_Lake__Upper_Center_Platform;
+    Amagi__West_Lake__East_Bank -> Amagi__West_Lake__Mid_water_Above_Gap;
     Amagi__West_Lake__Northeast_Platform -> Amagi__West_Lake__East_Bank;
     Amagi__West_Lake__Northeast_Platform -> Amagi__West_Lake__Northwest_Platform;
     Amagi__West_Lake__Northeast_Platform -> Amagi__West_Lake__Upper_Center_Platform;

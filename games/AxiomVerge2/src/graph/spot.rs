@@ -736,7 +736,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi_Breach__West_Ruins__Bottom_Middle,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__West_Ruins__Bottom_Middle__ex__Button_1, ExitId::Amagi_Breach__West_Ruins__Bottom_Middle__ex__Center_Platform_West_1)),
+        exit_range: Some((ExitId::Amagi_Breach__West_Ruins__Bottom_Middle__ex__Center_Platform_West_1, ExitId::Amagi_Breach__West_Ruins__Bottom_Middle__ex__Center_Platform_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -772,7 +772,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi_Breach__West_Ruins__Gate_East,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi_Breach__West_Ruins__Gate_East__ex__Bottom_Middle_1, ExitId::Amagi_Breach__West_Ruins__Gate_East__ex__Gate_West_1)),
+        exit_range: Some((ExitId::Amagi_Breach__West_Ruins__Gate_East__ex__Center_Platform_1, ExitId::Amagi_Breach__West_Ruins__Gate_East__ex__Gate_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -1432,7 +1432,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi__Main_Area__Carving,
         loc_range: None,
-        exit_range: Some((ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1, ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1)),
+        exit_range: Some((ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1, ExitId::Amagi__Main_Area__Carving__ex__West_Lake__East_Shore_1)),
         action_range: Some((ActionId::Amagi__Main_Area__Carving__Key_Combo, ActionId::Amagi__Main_Area__Carving__Key_Combo)),
     },
     SpotDef {
@@ -1798,7 +1798,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Amagi__West_Lake__East_Shore,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Amagi__West_Lake__East_Shore__ex__Main_Area__Carving_1, ExitId::Amagi__West_Lake__East_Shore__ex__Main_Area__Carving_1)),
         action_range: None,
     },
     SpotDef {
