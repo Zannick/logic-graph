@@ -1718,7 +1718,9 @@ digraph AxiomVerge2 {
     Giguna__Breachable_Wall__West_Ledge -> Giguna__Breachable_Wall__Cave_Mouth_West;
     Giguna__Breachable_Wall__West_Ledge -> Giguna__Breachable_Wall__Cave_Mouth_West;
     Giguna__Breachable_Wall__West_Ledge -> Irikar__Boss_Room__Healthy_Rooftop;
+    Giguna__Breachable_Wall__Wall_Interior -> Giguna__Breachable_Wall__Cave_Mouth_West;
     Giguna__Breachable_Wall__Cave_Mouth_West -> Giguna__Breachable_Wall__Wall_Interior;
+    Giguna__Breachable_Wall__Cave_Mouth_West -> Giguna__Breachable_Wall__West_Mid_air;
     Giguna__Breachable_Wall__Cave_Mouth_East -> Irikar__Lamassu__Catwalk_Middle;
     Giguna__Breachable_Wall__East_24 -> Giguna__Separator__West_24;
     Giguna__Breachable_Wall__East_Ledge -> Giguna__Separator__Lower_Brick;
@@ -3325,6 +3327,7 @@ digraph AxiomVerge2 {
     Uhrum__Save_Room__East -> Uhrum__Waterfalls__West_27;
     Uhrum__Save_Room__West -> Uhrum__Glitchy_Corridor__East_27;
     Uhrum__Seclusion__Portal_West -> Uhrum__Seclusion__Boome_Range;
+    Uhrum__Seclusion__Portal_West -> Uhrum__Seclusion__Close_Range;
     Uhrum__Seclusion__Portal_West -> Uhrum__Seclusion__Portal_Stand;
     Uhrum__Seclusion__Portal_West -> Uhrum__Seclusion__Shock_Range;
     Uhrum__Seclusion__Portal_East -> Uhrum__Seclusion__Portal_Stand;

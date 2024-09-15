@@ -3898,6 +3898,9 @@ areas:
         - to: Shock Range
           req: $hookhover
           movement: fast_hover
+        - to: Close Range
+          req: $hookhover
+          movement: fast_hover
     - name: Portal Stand
       coord: [22.525, 20.7]
       data:

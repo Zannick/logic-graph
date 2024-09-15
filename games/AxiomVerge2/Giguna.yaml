@@ -5492,6 +5492,10 @@ areas:
           req: $shockwave
           price: 100
           tags: [shockwave]
+      exits:
+        - to: Cave Mouth West
+          req: $hover
+          movement: base
     - name: Cave Mouth West
       coord: [16.7, 23.9]
       data:
@@ -5505,6 +5509,9 @@ areas:
           penalties:
             - when: not Mist_Upgrade
               movement: mist1
+        - to: West Mid-air
+          req: $hover
+          movement: base
     - name: Cave Mouth East
       coord: [16.85, 23.9]
       local:

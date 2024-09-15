@@ -9970,7 +9970,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Breachable_Wall__Cave_Mouth_West,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1, ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1)),
+        exit_range: Some((ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1, ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__West_Mid_air_1)),
         action_range: None,
     },
     SpotDef {
@@ -10000,7 +10000,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Giguna__Breachable_Wall__Wall_Interior,
         loc_range: Some((LocationId::Giguna__Breachable_Wall__Wall_Interior__Flask, LocationId::Giguna__Breachable_Wall__Wall_Interior__Shockwave_Flask)),
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna__Breachable_Wall__Wall_Interior__ex__Cave_Mouth_West_1, ExitId::Giguna__Breachable_Wall__Wall_Interior__ex__Cave_Mouth_West_1)),
         action_range: None,
     },
     SpotDef {
