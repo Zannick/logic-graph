@@ -63,11 +63,7 @@ pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
 
     fn new(world: &'w W, startctx: &T) -> Self;
     fn score_from_times(&self, best_times: BestTimes) -> Self::Score;
-    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> Self::Score;
     fn score_from_heap_key(&self, key: &[u8]) -> Self::Score;
-    fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KEY_SIZE] {
-        self.get_heap_key(el.get(), self.score_from_wrapper(el))
-    }
     fn get_heap_key(&self, el: &T, score: Self::Score) -> [u8; KEY_SIZE];
     fn new_heap_key(&self, old_key: &[u8], new_score: Self::Score) -> [u8; KEY_SIZE];
 
@@ -141,13 +137,6 @@ where
         }: BestTimes,
     ) -> TimeSinceScore {
         (time_since, elapsed + estimated_remaining)
-    }
-
-    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> TimeSinceScore {
-        (
-            el.time_since_visit(),
-            el.elapsed() + self.estimated_remaining_time(el.get()),
-        )
     }
 
     fn score_from_heap_key(&self, key: &[u8]) -> TimeSinceScore {
@@ -248,10 +237,6 @@ where
         }: BestTimes,
     ) -> EstimatedTime {
         elapsed + estimated_remaining
-    }
-
-    fn score_from_wrapper(&self, el: &ContextWrapper<T>) -> EstimatedTime {
-        el.elapsed() + self.estimated_remaining_time(el.get())
     }
 
     fn score_from_heap_key(&self, key: &[u8]) -> EstimatedTime {

@@ -456,8 +456,8 @@ where
     /// the score (4 bytes),
     /// the total time estimate (4 bytes),
     /// a sequence number (4 bytes)
-    fn get_heap_key_from_wrapper(&self, el: &ContextWrapper<T>) -> [u8; KS] {
-        self.metric.get_heap_key_from_wrapper(el)
+    fn get_heap_key_from_wrapper_score(&self, el: &ContextWrapper<T>, score: SM::Score) -> [u8; KS] {
+        self.metric.get_heap_key(el.get(), score)
     }
 
     fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>, Error> {
@@ -548,16 +548,6 @@ where
             .unwrap()
     }
 
-    /// Scores a state based on its elapsed time and its estimated time to the goal.
-    /// Recursively estimates time to the goal based on the closest objective item remaining,
-    /// and stores the information in the db.
-    pub fn total_estimate<R>(&self, el: &R) -> u32
-    where
-        R: Wrapper<T>,
-    {
-        el.elapsed() + self.estimated_remaining_time(el.get())
-    }
-
     /// Pushes an element into the db.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, if the state has been previously processed or previously seen
@@ -572,20 +562,21 @@ where
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        let key = self.get_heap_key_from_wrapper(&el);
+        let key = self.get_heap_key_from_wrapper_score(&el, score);
         let val = serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
         Ok(())
     }
 
-    pub fn push_from_queue(&self, el: ContextWrapper<T>, score: u32) -> Result<(), Error> {
+    pub fn push_from_queue(&self, el: ContextWrapper<T>, score: SM::Score) -> Result<(), Error> {
         let progress = el.get().count_visits();
-        let key = self.get_heap_key_from_wrapper(&el);
+        let key = self.get_heap_key_from_wrapper_score(&el, score);
         let val = serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
-        self.min_db_estimates[progress].fetch_min(score, Ordering::Release);
+        let primary = self.metric.score_primary(score);
+        self.min_db_estimates[progress].fetch_min(primary, Ordering::Release);
         Ok(())
     }
 
