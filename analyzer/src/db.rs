@@ -565,10 +565,10 @@ where
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<(), Error> {
         let max_time = self.max_time();
         // Records the history in the statedb, even if over time.
-        if !self.record_one(&mut el, prev, false)? {
+        let Some(score) = self.record_one(&mut el, prev, false)? else {
             return Ok(());
-        }
-        if el.elapsed() > max_time || self.total_estimate(&el) > max_time {
+        };
+        if el.elapsed() > max_time || self.metric.total_estimate_from_score(score) > max_time {
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
@@ -938,15 +938,14 @@ where
 
     /// Stores the underlying Ctx in the seen db with the best known elapsed time and
     /// its related history is also stored in the db,
-    /// and returns whether this context had that best time.
+    /// and returns the score of the state, or None if it was not the best time (and should be skipped).
     /// The Wrapper object is modified to reference the stored history.
-    /// A `false` value means the state should be skipped.
     pub fn record_one(
         &self,
         el: &mut ContextWrapper<T>,
         prev: &Option<T>,
         state_only: bool,
-    ) -> Result<bool, Error> {
+    ) -> Result<Option<SM::Score>, Error> {
         let state_key = serialize_state(el.get());
 
         let (prev_key, best_since_from_prev, best_elapsed_from_prev) = if let Some(c) = prev {
@@ -981,10 +980,11 @@ where
             // This is a new state being pushed, as it has new history, hence we skip if equal.
             if elapsed <= best_elapsed_from_prev {
                 self.dup_iskips.fetch_add(1, Ordering::Release);
-                return Ok(false);
+                return Ok(None);
             }
             (false, elapsed, estimated_remaining)
         } else {
+            // state not seen before, determine time remaining
             (true, 0, self.metric.estimated_remaining_time(el.get()))
         };
         // In every other case (no such state, or we do better than that state),
@@ -1016,6 +1016,12 @@ where
             }
         }
 
+        let score = self.metric.score_from_times(BestTimes {
+            elapsed: best_elapsed_from_prev,
+            time_since_visit: best_since_from_prev,
+            estimated_remaining,
+        });
+
         if is_new {
             self.seen.fetch_add(1, Ordering::Release);
         } else {
@@ -1026,18 +1032,13 @@ where
                 && best_elapsed_from_prev < max_time
                 && !self.remember_processed_raw(&state_key)?
             {
-                let score = self.metric.score_from_times(BestTimes {
-                    elapsed: best_elapsed_from_prev,
-                    time_since_visit: best_since_from_prev,
-                    estimated_remaining,
-                });
                 let qkey = self.metric.get_heap_key(el.get(), score);
                 self.db.put_opt(qkey, state_key, &self.write_opts)?;
                 self.readds.fetch_add(1, Ordering::Release);
                 self.size.fetch_add(1, Ordering::Release);
             }
         }
-        Ok(true)
+        Ok(Some(score))
     }
 
     /// Stores the underlying Ctx entries in the state db with their respective
@@ -1049,7 +1050,7 @@ where
         &self,
         vec: &mut Vec<ContextWrapper<T>>,
         prev: &Option<T>,
-    ) -> Result<Vec<bool>, Error> {
+    ) -> Result<Vec<Option<SM::Score>>, Error> {
         let max_time = self.max_time();
         let mut next_entries = Vec::new();
         let mut results = Vec::with_capacity(vec.len());
@@ -1102,12 +1103,13 @@ where
             {
                 // This is a new state being pushed, as it has new history, hence we skip if equal.
                 if elapsed <= best_elapsed {
-                    results.push(false);
+                    results.push(None);
                     dups += 1;
                     continue;
                 }
                 (elapsed, estimated_remaining)
             } else {
+                // state not seen before, determine time remaining
                 new_seen += 1;
                 (0, self.metric.estimated_remaining_time(el.get()))
             };
@@ -1122,7 +1124,13 @@ where
                 estimated_remaining,
                 &mut next_entries,
             );
-            results.push(true);
+
+            let score = self.metric.score_from_times(BestTimes {
+                elapsed: best_elapsed,
+                time_since_visit: best_since_visit,
+                estimated_remaining,
+            });
+            results.push(Some(score));
 
             // If it was an improvement just over the max_time, and it hasn't been processed yet,
             // add it to the queue
@@ -1130,11 +1138,6 @@ where
                 && best_elapsed < max_time
                 && !self.remember_processed_raw(&state_key)?
             {
-                let score = self.metric.score_from_times(BestTimes {
-                    elapsed: best_elapsed,
-                    time_since_visit: best_since_visit,
-                    estimated_remaining,
-                });
                 let qkey = self.metric.get_heap_key(el.get(), score);
                 self.db.put_opt(qkey, state_key, &self.write_opts)?;
                 self.readds.fetch_add(1, Ordering::Release);
@@ -1401,10 +1404,14 @@ where
         read_opts.fill_cache(false);
         let iter = self.db.iterator_opt(IteratorMode::Start, read_opts);
         for item in iter {
-            let (_, value) = item?;
+            let (key, value) = item?;
             let el = self.get_queue_entry_wrapper(&value)?;
+            let score = self.metric().score_from_heap_key(&key);
             times.push(el.elapsed().into());
-            time_scores.push((el.elapsed().into(), self.total_estimate(&el).into()));
+            time_scores.push((
+                el.elapsed().into(),
+                self.metric.total_estimate_from_score(score).into(),
+            ));
         }
 
         let h = Histogram::from_slice(times.as_slice(), HistogramBins::Count(70));

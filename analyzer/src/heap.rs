@@ -101,9 +101,6 @@ where
             processed_counts,
             world,
         };
-        let s = Instant::now();
-        let c = q.score(startctx);
-        log::info!("Calculated estimate {} in {:?}", c, s.elapsed());
         Ok(q)
     }
 
@@ -161,10 +158,6 @@ where
         queue.min_priority()
     }
 
-    pub fn score(&self, ctx: &ContextWrapper<T>) -> u32 {
-        self.db.total_estimate(ctx)
-    }
-
     pub fn estimated_remaining_time(&self, ctx: &ContextWrapper<T>) -> u32 {
         self.db.estimated_remaining_time(ctx.get())
     }
@@ -205,9 +198,9 @@ where
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
         let start = Instant::now();
         // Always record the state even if it is over time.
-        if !self.db.record_one(&mut el, prev, false)? {
+        let Some(score) = self.db.record_one(&mut el, prev, false)? else {
             return Ok(());
-        }
+        };
         // Don't bother pushing winning states.
         if self.world.won(el.get()) {
             return Ok(());
@@ -217,7 +210,6 @@ where
             return Ok(());
         }
 
-        let score = self.db.metric().score_from_wrapper(&el);
         let total_estimate = self.db.metric().total_estimate_from_score(score);
         if total_estimate > self.db.max_time() {
             self.iskips.fetch_add(1, Ordering::Release);
@@ -933,19 +925,18 @@ where
             .filter_map(|(el, keep)| {
                 if self.world.won(el.get()) {
                     None
-                } else {
-                    let score = self.db.metric().score_from_wrapper(&el);
+                } else if let Some(score) = keep {
                     if el.elapsed() > self.db.max_time()
                         || self.db.metric().total_estimate_from_score(score) > self.db.max_time()
                     {
                         iskips += 1;
                         None
-                    } else if keep {
+                    } else {
                         let progress = el.get().count_visits();
                         Some((el.into_inner(), progress, score))
-                    } else {
-                        None
                     }
+                } else {
+                    None
                 }
             })
             .collect();
