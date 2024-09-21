@@ -59,7 +59,7 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         let sol = Arc::new(Solution { elapsed: win.elapsed(), history: win.recent_history().to_vec() });
         c.bench_function("trie insert greedy search", |b| {
             b.iter_batched_ref(
-                || MatcherTrie::<ObservationMatcher>::default(),
+                || MatcherTrie::<ObservationMatcher<_>, _>::default(),
                 |trie| record_observations(ctx.get(), &*world, sol.clone(), 1, trie),
                 BatchSize::SmallInput,
             );
