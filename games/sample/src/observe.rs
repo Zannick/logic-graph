@@ -1043,100 +1043,100 @@ impl FullObservation {
 }
 
 #[derive(Debug)]
-pub enum ObservationMatcher<Value: Clone + Eq + Hash> {
-    PositionLookup(LookupMatcher<Node<Self, Value>, SpotId, Value>),
-    TodLookup(LookupMatcher<Node<Self, Value>, enums::Tod, Value>),
-    RupeesLookup(LookupMatcher<Node<Self, Value>, i32, Value>),
+pub enum ObservationMatcher<Value: Clone + Eq + Hash, VS: MatcherStorage<Value>> {
+    PositionLookup(LookupMatcher<Node<Self, Value>, SpotId, Value, VS>),
+    TodLookup(LookupMatcher<Node<Self, Value>, enums::Tod, Value, VS>),
+    RupeesLookup(LookupMatcher<Node<Self, Value>, i32, Value, VS>),
     RupeesEq {
         eq: i32,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     RupeesGe {
         lo: i32,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     RupeesLe {
         hi: i32,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     RupeesRange {
         lo: i32,
         hi: i32,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     // items
-    GoldSkulltulaTokenLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
+    GoldSkulltulaTokenLookup(LookupMatcher<Node<Self, Value>, i8, Value, VS>),
     GoldSkulltulaTokenEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     GoldSkulltulaTokenGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     GoldSkulltulaTokenLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     GoldSkulltulaTokenRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
-    ProgressiveWalletLookup(LookupMatcher<Node<Self, Value>, i8, Value>),
+    ProgressiveWalletLookup(LookupMatcher<Node<Self, Value>, i8, Value, VS>),
     ProgressiveWalletEq {
         eq: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     ProgressiveWalletGe {
         lo: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     ProgressiveWalletLe {
         hi: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     ProgressiveWalletRange {
         lo: i8,
         hi: i8,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
-    TriforcePieceLookup(LookupMatcher<Node<Self, Value>, i16, Value>),
+    TriforcePieceLookup(LookupMatcher<Node<Self, Value>, i16, Value, VS>),
     TriforcePieceEq {
         eq: i16,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     TriforcePieceGe {
         lo: i16,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     TriforcePieceLe {
         hi: i16,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     TriforcePieceRange {
         lo: i16,
         hi: i16,
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     // bitflags
     LookupCBits1 {
         mask: flags::ContextBits1,
-        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits1, Value>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits1, Value, VS>,
     },
     LookupCBits2 {
         mask: flags::ContextBits2,
-        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits2, Value>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits2, Value, VS>,
     },
 }
 
-impl<Value: Clone + Eq + Hash> Default for ObservationMatcher<Value> {
+impl<Value: Clone + Eq + Hash, VS: MatcherStorage<Value>> Default for ObservationMatcher<Value, VS> {
     fn default() -> Self {
         Self::PositionLookup(LookupMatcher::new())
     }
 }
 
-impl<Value: Clone + Eq + Hash> MatcherDispatch<Value> for ObservationMatcher<Value> {
+impl<Value: Clone + Eq + Hash, VS: MatcherStorage<Value>> MatcherDispatch<Value> for ObservationMatcher<Value, VS> {
     type Node = Node<Self, Value>;
     type Struct = Context;
     fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self, Value>>>, Self) {

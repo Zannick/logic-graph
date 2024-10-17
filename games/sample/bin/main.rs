@@ -4,10 +4,12 @@ use analyzer::access::*;
 use analyzer::cli::*;
 use analyzer::solutions::SolutionSuffix;
 use analyzer::world::World;
+use analyzer::CommonHasher;
 use clap::Parser;
 use libsample::observe::ObservationMatcher;
 use libsample::settings;
 use log4rs;
+use std::collections::HashSet;
 use std::path::PathBuf;
 
 fn main() -> Result<(), std::io::Error> {
@@ -22,5 +24,5 @@ fn main() -> Result<(), std::io::Error> {
         panic!("Available items not enough to complete ruleset {}: missing {:?}",
                world.ruleset(), items);
     }
-    run::<_, _, ObservationMatcher<SolutionSuffix<_>>>(world.as_ref(), context, routes, &args)
+    run::<_, _, ObservationMatcher<SolutionSuffix<_>, HashSet<SolutionSuffix<_>, CommonHasher>>>(world.as_ref(), context, routes, &args)
 }
