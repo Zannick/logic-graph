@@ -45,17 +45,22 @@ impl world::Accessible for Warp {
         }
     }
     fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 {
+%% macro _time(observe=False)
+fn {% if observe %}observe_{% endif %}time(&self, ctx: &Context, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) -> u32 {
         self.time
             + match self.id {
 %% for w in warps.values()|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
                 WarpId::{{ w.id }} => {
-                    {{ penalties(w.penalties) }}
+                    {{ penalties(w.penalties, observe) }}
                 }
 %% endfor
             _ => 0,
         }
     }
+%% endmacro
+    {{ _time() }}
+    {{ _time(True) }}
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &Currency::Free }
     fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }

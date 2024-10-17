@@ -1848,7 +1848,24 @@ macro_rules! hexplain__max_energy {
 #[macro_export]
 macro_rules! hobserve__max_energy {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        todo!()
+        if {
+            $full_obs.observe_nano_points_3();
+            $ctx.has(Item::Nano_Points_3)
+        } {
+            450
+        } else if {
+            $full_obs.observe_nano_points_2();
+            $ctx.has(Item::Nano_Points_2)
+        } {
+            400
+        } else if {
+            $full_obs.observe_nano_points();
+            $ctx.has(Item::Nano_Points)
+        } {
+            350
+        } else {
+            300
+        }
     }};
 }
 

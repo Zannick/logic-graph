@@ -834,7 +834,7 @@ impl world::Accessible for Location {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
             LocationId::Amagi__Gated_Community__Button__Hit_Button => rules::observe_access_invoke_can_damage(ctx, world, full_obs),
             LocationId::Amagi__Gated_Community__Upper_East_Ledge__Flask_Collection_Skip => rules::observe_access_invoke_melee_cskip(ctx, world, full_obs),
@@ -1367,6 +1367,7 @@ impl world::Accessible for Location {
         }
     }
     fn base_time(&self) -> u32 { self.time }
+
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
@@ -2334,6 +2335,976 @@ impl world::Accessible for Location {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 {
+        self.time
+            + match self.id {
+                LocationId::Amagi__West_Lake__Stronghold_Rear_Wall__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Amagi__West_Lake__West_Stronghold_Wall__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Amagi_Breach__Center_Ruins__Passage_Entrance__Mist_Through_Passage => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5167
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Amagi_Breach__Center_Ruins__Passage_Exit__Mist_Through_Passage => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5167
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Seals__Breakable_Rock__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Cache__Urn => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Cache__Urn_Collection_Skip => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Cache__Urn_Fast_Travel => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Wall_Left__Break_Through_Wall_with_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Wall_Left__Distant_Urn_Fast_Travel => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Wall_Right__Break_Through_Wall_with_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Siuna_Storage__Within_Range__Remote_Urn_Fast_Travel => {
+                    if rules::observe_access_anuman(ctx, world, full_obs) {
+                        10000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_East__Mist_Through_Inner_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Sniper_Valley__Cavern_Inner_Rock_West__Mist_Through_Inner_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__Mist_Through_Outer_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3684
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Annuna__Sniper_Valley__Cavern_Outer_Rock_West__Mist_Through_Outer_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3684
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih__Ebih_East__Wall_East__Break_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        614
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih__Ebih_East__Wall_West__Break_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        614
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih__Walled_Off__Wall_Left__Break_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih__Walled_Off__Wall_Right__Break_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih__Waterfall__Wall_Left__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih__Waterfall__Wall_Right__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_East__Mist_Up => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        439
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_East__Spin_and_Break_All => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_Southwest__Mist_Up => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_Top__Mist_Down => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Ebih_Breach__Rock_Block__Rock_Top__Spin_and_Down => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Left__Mist_On_Through => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Left__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Left__Mist_Upwards_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Left__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        767
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Right__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Drop_off__Wall_Right__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        767
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        975
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Middle_Ledge__Spin_Through_Wall_2 => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        850
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        614
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        614
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        614
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        614
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_2_East__Mist_Upward_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_2_West__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        592
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        975
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        592
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        533
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        417
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Dual_Path__Base_of_Wall__Mist_into_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Gubi_Lair__Center_Platform__Boss_Reward => {
+                    if rules::observe_access_not_invoke_boomerang(ctx, world, full_obs) {
+                        3000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Hard_Rock__Rock_Left__Enter_Rock_as_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Hard_Rock__Rock_Right__Enter_Rock_as_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Separator__Lower_Brick__Break_Bricks => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Separator__Upper_Brick__Break_Bricks => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Above_Rock__Mist_Downwards => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Above_Rock__Spin_Downwards => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Into_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Mist_Upwards_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Through_Rock => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        650
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_East__Spin_Upward_Through_Rock => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Into_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Mist_Upwards_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Far_Through_Rock => {
+                    if rules::observe_access_not_invoke_spinhover(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Vertical_Interchange__Rock_West__Spin_Through_Rock => {
+                    if rules::observe_access_not_invoke_spin(ctx, world, full_obs) {
+                        650
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Wasteland__Passage_Cache__Mist_through_Horizontal_Passage => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4211
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna__Wasteland__Passage_East__Mist_through_Horizontal_Passage => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4211
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Mist_Up => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Pinkness__Rock_Bottom__Spin_Up => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Pinkness__Rock_Top__Mist_Down => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Pinkness__Rock_Top__Spin_Down => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Robopede__Center__Defeat_Robopede => {
+                    if rules::observe_access_slingshot_weapon_and_drone_hover_and_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        12000
+} else if rules::observe_access_slingshot_weapon_and_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        18000
+} else if rules::observe_access_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        28000
+} else if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        6000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Giguna_Breach__Robopede__West__Defeat_Robopede => {
+                    if rules::observe_access_slingshot_weapon_and_drone_hover_and_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        12000
+} else if rules::observe_access_slingshot_weapon_and_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        18000
+} else if rules::observe_access_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        28000
+} else if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        6000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__Grid_39_40_7_9__Third_Upper_Platform__Fly_by_Flask_Toward_Fortress => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__Lonely_Bull__Arena__Defeat_Gudam => {
+                    if rules::observe_access_not_invoke_boomerang2_or_not_ranged_damage_3_or_not_invoke_weapon_or_not_melee_damage_3_or_not_melee_speed_3(ctx, world, full_obs) {
+                        13000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Left__Mist_Through => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        439
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__Sea_Burial__Breakable_Rock_Right__Mist_Through => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        439
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__The_Big_Drop__Breakable_Rock_Right__Mist_Through => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier__The_Big_Drop__West_14__Mist_Through => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Glacier_Breach__Electric_Arena__Lower_West_Platform__Defeat_Ellag => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        2000
+} else if rules::observe_access_not_drone_melee_speed_3(ctx, world, full_obs) {
+                        5000
+} else if rules::observe_access_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        5000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar__Boss_Room__Bulls_Feet__Defeat_Gudam => {
+                    if rules::observe_access_not_invoke_boomerang2_or_not_ranged_damage_3_or_not_invoke_weapon_or_not_melee_damage_3_or_not_melee_speed_3(ctx, world, full_obs) {
+                        13000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar__Hub__Royal_Storage_By_Wall__Mist_into_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Buried_Treasure__Pillar_Left__Mist_Into_Pillar => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        175
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Buried_Treasure__Pillar_Right__Mist_Into_Pillar => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        175
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Uhrum_Connector__Rock_East__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Uhrum_Connector__Rock_East_Ledge__Spin_Through_Wall_and_Hover => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Uhrum_Connector__Rock_West__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        533
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Irikar_Breach__Uhrum_Connector__Rock_West_Ledge__Spin_Through_Wall_and_Hover => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Cavern__Wall_Left__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Cavern__Wall_Left__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        883
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Cavern__Wall_Right__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        883
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Cavern__Wall_Right__Spin_Through_Wall_and_Hover => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Emergence_Facility__Wall_East_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_Upward_With_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Emergence_Facility__Wall_East_Mid_air__Break_Wall_With_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Emergence_Facility__Wall_West_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Emergence_Facility__Wall_West_Mid_air__Break_Wall_With_Mist => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Glitchy_Corridor__Wall_East__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Glitchy_Corridor__Wall_West__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Rocky_Gate__Wall_East__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Rocky_Gate__Wall_East_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Rocky_Gate__Wall_West__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Rocky_Gate__Wall_West_Ledge__Spin_Through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Waterfalls__Barrier_East__Mist_through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Waterfalls__Barrier_East__Spin_through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Waterfalls__Barrier_West__Mist_through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__Waterfalls__Barrier_West__Spin_through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Lower_Wall_East__Mist_through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Lower_Wall_East__Spin_through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Lower_Wall_West__Mist_through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Lower_Wall_West__Spin_through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Mist_through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Upper_Wall_East__Spin_through_Wall => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum__West_Entrance__Upper_Wall_West__Mist_through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Break_Through_Wall => {
+                    if rules::observe_access_not_drone_melee_damage_3(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_East__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1930
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Overgrown_Ruins__Wall_West__Mist_Through_Wall => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1930
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__Spin_Through_Rock => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Rock_and_Gate__Rock_West__Mist_Through_Rock => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                LocationId::Uhrum_Breach__Rock_and_Gate__South__Spin_Through_Rock => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        850
+                    } else {
+                        0
+                    }
+                }
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {

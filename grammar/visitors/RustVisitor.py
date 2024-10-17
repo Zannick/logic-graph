@@ -1233,6 +1233,7 @@ class RustObservationVisitor(RustBaseVisitor):
     visitRefInPlaceList = RustVisitor.visitRefInPlaceList
     visitRefInFunc = RustVisitor.visitRefInFunc
     visitFuncNum = RustVisitor.visitFuncNum
+    visitCondNum = RustVisitor.visitCondNum
 
     ## Action-specific
     def visitActions(self, ctx):

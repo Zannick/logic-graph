@@ -75,6 +75,29 @@ impl world::Accessible for Warp {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 {
+        self.time
+            + match self.id {
+                WarpId::MainSave => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                WarpId::Portal => {
+                    if rules::observe_access_portal_hidden(ctx, world, full_obs) {
+                        250
+                    } else {
+                        0
+                    }
+                }
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &Currency::Free }
     fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }

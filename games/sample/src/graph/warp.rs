@@ -46,6 +46,15 @@ impl world::Accessible for Warp {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 {
+        self.time
+            + match self.id {
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &Currency::Free }
     fn price(&self, ctx: &Context, world: &World) -> Currency { self.price }

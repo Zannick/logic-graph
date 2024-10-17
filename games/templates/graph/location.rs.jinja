@@ -46,7 +46,7 @@ impl world::Accessible for Location {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
 %% for loc in gl.locations()|selectattr('access_id')|sort(attribute='id')
             LocationId::{{ loc.id }} => rules::observe_access_{{ loc.access_id }}(ctx, world, full_obs),
@@ -55,17 +55,23 @@ impl world::Accessible for Location {
         }
     }
     fn base_time(&self) -> u32 { self.time }
-    fn time(&self, ctx: &Context, world: &World) -> u32 {
+
+%% macro _time(observe=False)
+fn {% if observe %}observe_{% endif %}time(&self, ctx: &Context, world: &World{% if observe %}, full_obs: &mut FullObservation{% endif %}) -> u32 {
         self.time
             + match self.id {
 %% for loc in gl.locations()|selectattr('penalties', 'interesting_penalties')|sort(attribute='id')
                 LocationId::{{ loc.id }} => {
-                    {{ penalties(loc.penalties) }}
+                    {{ penalties(loc.penalties, observe) }}
                 }
 %% endfor
             _ => 0,
         }
     }
+%% endmacro
+    {{ _time() }}
+    {{ _time(true) }}
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {

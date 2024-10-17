@@ -3734,7 +3734,7 @@ impl world::Accessible for Exit {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
             ExitId::Amagi__Divided_Room__Column_East__ex__West_1 => rules::observe_access_underwater_movement_and_invoke_hookhover(ctx, world, full_obs),
             ExitId::Amagi__Divided_Room__Column_East__ex__Wiggly_Room__East_Rock_1 => rules::observe_access_underwater_movement_and_invoke_hookhover(ctx, world, full_obs),
@@ -13821,6 +13821,7521 @@ impl world::Accessible for Exit {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 {
+        self.time
+            + match self.id {
+                ExitId::Amagi__Divided_Room__East__ex__Column_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        772
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        772
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Divided_Room__Portal_East__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Divided_Room__Portal_East_Mid_air__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        501
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Divided_Room__Portal_West__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Divided_Room__Upper_Left_Corner__ex__Wiggly_Room__East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        76
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Divided_Room__Upper_Right_Corner__ex__Liru_Room__West_20_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        49
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Divided_Room__West__ex__Column_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Center_East_Water_Surface_Fast__ex__Arch_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        677
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        130
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Center_Water_Below_Platform_East__ex__Southwest_Brick_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1543
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        846
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__East_Water_Surface__ex__Arch_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1145
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Kum_Abala__ex__Southeast_Column_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        802
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Portal_Ledge__ex__Arch_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        548
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Portal_Ledge__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        577
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Portal_Stand__ex__Portal_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        702
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Portal_Stand__ex__West_17_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        802
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Portal_Stand__ex__West_Platform_3_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        126
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Save_Point__ex__Southeast_Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1947
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Save_Point__ex__Southwest_Column_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1772
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Southeast_Column__ex__Kum_Abala_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        802
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Southwest_Column_Base__ex__Southwest_Column_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Lower_Platform_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3509
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Underwater_Hill__ex__Center_Northeast_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3333
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__Underwater_Hill__ex__East_Hill_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__West_Platform_2_East__ex__West_Platform_1_West_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__East_Lake__West_Platform_2_West__ex__West_Platform_1_West_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        448
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Dur_Esla__ex__Upper_East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Lower_Gate_East__ex__Lower_Gate_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        149
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Lower_Gate_West__ex__Lower_Gate_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        149
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Lower_Gate_West__ex__Platform_3_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Middle_East_Ledge__ex__Upper_East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Middle_East_Ledge__ex__Upper_Gate_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Platform_2_West__ex__Main_Area__Southeast_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        151
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Platform_3_East__ex__Upper_Gate_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Platform_3_East__ex__Upper_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Platform_3_West__ex__Upper_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Upper_East_Ledge__ex__Upper_Gate_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Upper_Gate_East__ex__Upper_Gate_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        149
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Gated_Community__Upper_Gate_West__ex__Upper_Gate_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        149
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__East_Platform_2_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Liru_Room__East_Platform_1_Left__ex__Hidden_Exit_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        70
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Liru_Room__East_Platform_2_Right__ex__Hidden_Exit_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        597
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Carving__ex__Secret_Outcropping_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Catwalk_Center__ex__Platform_3_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1947
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Catwalk_Center__ex__West_18_Hook_Point_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1095
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Catwalk_Far_East__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__East_16__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        126
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__East_18__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Northeast_Ledge__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Platform_2__ex__West_Shelf_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Platform_3__ex__West_18_Hook_Point_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        797
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Shallow_End__ex__Waters_Edge_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__Southeast_Ledge__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Main_Area__West_Side__ex__Carving_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Secret_Chamber__Column__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Secret_Chamber__Column__ex__Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1579
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Secret_Chamber__East_Dur_Esla__ex__Column_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Secret_Chamber__Middle_Ledge__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Secret_Chamber__Middle_Ledge__ex__Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Secret_Chamber__West_Dur_Esla__ex__West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__Northwest_Platform__ex__West_Cliff_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        2000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__Stronghold_Middle_Column__ex__Stronghold_Item_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        299
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__Stronghold_Rear_Wall__ex__Stronghold_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__Stronghold_Rear_Wall__ex__West_Stronghold_Wall_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        126
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__West_Bank__ex__West_Shore_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        2000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__West_Stronghold_Gate__ex__West_Stronghold_Wall_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        398
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__West_Stronghold_Wall__ex__Stronghold_Rear_Wall_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        249
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__West_Lake__West_Stronghold_Wall__ex__West_Stronghold_Gate_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        398
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Below_West_Cache__ex__Cache_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Dur_Esla__ex__Below_West_Cache_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__East_Bottom__ex__East_Rock_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__East_Rock__ex__Portal_Rock_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1002
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        750
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Gate_East__ex__Button_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Gate_East__ex__South_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        199
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Middle_Rock_West__ex__Midwest_Hook_Point_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        902
+} else if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        875
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Midwest_Rock__ex__Cache_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__Midwest_Rock__ex__Cache_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi__Wiggly_Room__South__ex__Gate_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Top__ex__West_Pillar_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        2305
+} else if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        1160
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__East_Ledge__ex__Center_Shaft_Top_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        501
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Passage_Exit__ex__Cache_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Upper_East_Left__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__Upper_East_Right__ex__East_18_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        351
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        53
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__West__ex__West_Pillar_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__West_Pillar__ex__Center_Shaft_Top_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        2305
+} else if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        1160
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Center_Ruins__West_Pillar__ex__West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        249
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Divided__Empty_Plinth__ex__North_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Entrance__Grate_Left__ex__Grate_Right_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Entrance__Grate_Right__ex__Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Arch_West__ex__Northeast_Bubbles_Corner_Access_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Center_Rock_West__ex__Left_Rocky_Pillar_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Left_Rocky_Pillar_West__ex__West_Bubbly_Pillar_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        349
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Northeast_Bubbles_Center__ex__Northeast_Bubbles_Corner_Access_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__Southeast_Rock_Wall__ex__Arch_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        199
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__East_Ruins__West_Bubbly_Platform__ex__West_Bubbly_Pillar_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Fishy_Secrets__Center_Column__ex__Middle_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Fishy_Secrets__Middle_West__ex__Center_Column_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom__ex__Center_Column_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom__ex__Center_Column_2 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Fishy_Secrets__Shaft_Bottom__ex__Middle_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lakebed__Bottom__ex__Lower_East_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lakebed__Save_Point__ex__Big_Rock_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1270
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__Cache__ex__Empty_Plinth_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        249
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__Cache__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        199
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__East_Ledge__ex__Empty_Plinth_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__Empty_Plinth__ex__Cache_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        501
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__Middle_Bubbles__ex__Empty_Plinth_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__West__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Lower_Hallway__West_Ledge__ex__Cache_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__Button__ex__Gate_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        274
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__Column__ex__West_19_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__East_Ledge__ex__Column_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__Gate_West__ex__Button_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        274
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__Gate_West__ex__Lower_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__Lower_Ledge__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__Upper_Middle__ex__Column_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Split_One_Way__West_20__ex__Lower_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Twisty_Passages__East__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        398
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Twisty_Passages__East_Bottom__ex__East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Twisty_Passages__East_Bottom__ex__East_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Twisty_Passages__East_Ledge__ex__East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        398
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Twisty_Passages__East_Ledge__ex__North_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Upper_Hallway__East__ex__Column_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        349
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Upper_Hallway__West_Hook_Point__ex__Column_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        2005
+} else if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        1009
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__Upper_Lake__Near_Column__ex__Column_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Entrance__South__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__Center_Platform_West__ex__West_Platform_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__East__ex__East_Platform_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__East_Platform__ex__Gate_East_1 => {
+                    if rules::observe_access_not_underwater_movement_or_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__Gate_East__ex__Gate_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        199
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__Gate_West__ex__Center_Platform_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__Gate_West__ex__Gate_East_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        199
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__North__ex__West_Platform_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        299
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__West_Platform__ex__Center_Platform_West_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        448
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__West_Platform__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Amagi_Breach__West_Ruins__West_Platform_Hook_Point__ex__West_Platform_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Apocalypse__Northwest_Mid_air__ex__Northwest_Scaffold_2_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Apocalypse__Southwest_Capsule__ex__West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Boss_Gate__East__ex__Grate_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Boss_Gate__Grate_East__ex__East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Boss_Gate__Grate_East__ex__Grate_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Boss_Gate__Grate_West__ex__Grate_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Basement_Corridor__ex__Center_Corridor_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Basement_Corridor__ex__Center_Drop_off_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Below_Cavern__ex__Cavern_Foyer_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Below_Cavern_West__ex__Cavern_Foyer_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Bridge_Top_East__ex__East_24_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__East_Water_Ledge__ex__Lower_East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__East_Water_Ledge__ex__Middle_Water_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        896
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Middle_Water_Ledge__ex__East_Water_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        896
+} else if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Middle_Water_Ledge__ex__Lower_East_Tree_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Tower_Gate__ex__Tower_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Tower_Secret__ex__Tower_Peak_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Upper_West_Gap__ex__West_24_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Upper_West_Partway_East__ex__Tower_Gate_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Upper_West_Partway_East__ex__Tower_West_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Water_Corner__ex__West_Water_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Water_Hill__ex__East_Water_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        946
+} else if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__Water_Hill__ex__Middle_Water_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__West_Water_Ledge__ex__Lower_Gate_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Bridge__West_Water_Ledge__ex__Lower_West_Tree_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Climb__Platform_1_Left__ex__West_25_1 => {
+                    if rules::observe_access_not_invoke_infinite_climb_or_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Hideout__Bottom__ex__Ladder_Middle_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        1200
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__East_Hideout__Ladder_Middle__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        450
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Egg_Room__First_Egg__ex__Second_Egg_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Egg_Room__Second_Egg__ex__Third_Egg_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Egg_Room__Third_Egg__ex__Passage_Entrance_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1579
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Egg_Room__West__ex__First_Egg_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Factory_Access__East_22__ex__Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Factory_Access__Grate_Left__ex__East_22_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Factory_Access__Upper_Platform__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Filter_Teleporter__East_Platform_3__ex__East_Platform_4_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Filter_Teleporter__East_Platform_4__ex__Northeast_Ministair_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Filter_Teleporter__Shaft_Bottom__ex__Shaft_Upper_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Filter_Teleporter__Shaft_Upper_Platform__ex__Shaft_Top_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Filter_Teleporter__Stair_Top__ex__Door_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        849
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        249
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Filter_Teleporter__Stair_Top__ex__Egg_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Final_Cache__Ledge__ex__West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Final_Save__Lower_West__ex__Pillar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Final_Save__Save_Point__ex__Pillar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__East_23__ex__East_Rock_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__East_Rock_Hook_Point__ex__Upper_Passage_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__East_Rock_West__ex__Upper_Passage_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__Portal_Stand__ex__East_Rock_West_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__Switch_Above__ex__Shock_Distance_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__Switch_East__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        731
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Invisible_Enemies__West_Corner__ex__Corner_Cache_1 => {
+                    if rules::observe_access_not_anuman_and___not_invoke_hook_or___slingshot_weapon_and_not_invoke_visited__annuna_gt_invisible_enemies_gt_corner_cache_gt_flask(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Above_Flat_Ground__ex__East_16_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Bottom_East_Ledge__ex__Bottom_Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Bottom_Middle_Ledge__ex__Bottom_West_Ledge_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        450
+} else if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__East_16__ex__Above_Flat_Ground_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__East_16__ex__Flat_Ground_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__East_16__ex__Ledge_By_Grate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Flat_Ground__ex__East_16_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Flat_Ground__ex__Ledge_By_Grate_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__East_16_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Ledge_By_Grate__ex__Lower_Brick_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Lower_Brick_Ledge__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        586
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Lamassu__Upper_Brick_Ledge__ex__East_14_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__East_24__ex__Middle_Rock_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__Eastward__ex__Staircase_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__Middle_Rock_West__ex__Middle_Rock_Tree_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        481
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__Plinth_Adjacent__ex__East_26_Upper_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__Staircase__ex__Eastward_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__Upper_Floor_East__ex__East_24_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        575
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Mirror_Match__Upper_Floor_West__ex__Middle_Rock_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__Lower_Gate_East__ex__Middle_Climb_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__Middle_Climb__ex__Upper_Climb_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__Plinth__ex__Left_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__Plinth__ex__Shaft_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__Upper_Climb__ex__Upper_Gate_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__Upper_Gate_East__ex__West_26_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Remote_Training__West_26__ex__East_Bridge__Basement_Corridor_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        1615
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Seals__East_17_Lower__ex__Lower_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        821
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Seals__East_17_Upper__ex__Lower_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        379
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Seals__Lower_Seal__ex__Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Seals__Middle_Ledge__ex__Upper_Seal_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Seals__Upper_Ledge__ex__East_15_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Smiley_Room__Bottom__ex__Shaft_Middle_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Smiley_Room__Middle_Platform__ex__East_Column_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Smiley_Room__Middle_Platform__ex__Upper_Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Smiley_Room__Shaft_Middle__ex__East_Column_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Smiley_Room__West_Side__ex__Upper_Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Sniper_Valley__Bridge_Upper_Middle__ex__West_24_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Sniper_Valley__Cavern_Outer_Rock_East__ex__Cavern_Inner_Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Sniper_Valley__West_23__ex__Cavern_Outer_Rock_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Twisty_Passages__East_Fork__ex__Northeast_C_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        600
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Twisty_Passages__Northeast_C__ex__Northeast_D_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        849
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Twisty_Passages__Northeast_C__ex__West_Hill_Right_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        555
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Udug_Gate__Grate_East__ex__Grate_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Udug_Gate__Grate_West__ex__Grate_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Udug_Lair__Covered_Bottom__ex__Center_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        550
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Udug_Lair__East__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Udug_Lair__Overhang_Top__ex__Center_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Udug_Lair__Portal_Stand__ex__Mideast_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        378
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Vertical_Room__Lower_Platform_1_Right__ex__Lower_Platform_2_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Vertical_Room__Lower_Platform_2_Left__ex__Gate_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__Vertical_Room__Lower_Platform_2_Right__ex__Gate_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Below_Tunnel__ex__East_Bridge__Below_Cavern_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1580
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Bridge_Top_West__ex__Tower_Gap_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__East_24__ex__Mid_Tunnel_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__East_Almost__ex__East_26_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Far_Below_Tunnel_Wall__ex__East_Bridge__Below_Cavern_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2457
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Far_Below_Tunnel_Wall__ex__Mid_Tunnel_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Lower_Brick_Column_East__ex__Lower_Grassy_Column_West_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        353
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Lower_Grassy_Column_West__ex__Lower_Brick_Column_East_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        353
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Lower_Grassy_Column_West__ex__Lower_Grassy_Column_East_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Lower_Save_Ledge__ex__East_26_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5614
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Lower_Save_Ledge__ex__Lower_Grassy_Column_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Save_Point__ex__Lower_Save_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1160
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_Center__ex__Tower_Base_Door_Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_Center__ex__Tower_Base_West_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_Center__ex__Tower_Level_1_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_Door_Column__ex__Tower_Lower_East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_Door_Column__ex__Tower_Lower_East_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_East__ex__Far_Below_Tunnel_Wall_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_East__ex__Tower_Base_Door_Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_West__ex__Tower_Base_Center_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_West__ex__Tower_Level_1_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1025
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_West__ex__Tower_Middle_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        2400
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Base_West__ex__Tower_Middle_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Gap_West__ex__Bridge_Top_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Gap_West__ex__Tower_Middle_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        2400
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Gap_West__ex__Tower_Middle_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Level_1__ex__Tower_Level_3_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        900
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Level_3__ex__Tower_Level_4_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Lower_East_Ledge__ex__Far_Below_Tunnel_Wall_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Lower_East_Ledge__ex__Tower_Level_3_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Lower_East_Ledge__ex__Tower_Upper_East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Middle_West_Ledge__ex__Tower_Upper_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Middle_West_Ledge__ex__Tower_Upper_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Upper_East_Ledge__ex__Far_Below_Tunnel_Wall_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Upper_East_Ledge__ex__Tower_Peak_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Upper_Middle__ex__Tower_Peak_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Upper_Shaft__ex__Tower_Upper_East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Tower_Upper_Shaft__ex__Tower_Upper_Middle_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Upper_Tier_Below_Gap__ex__Tower_Base_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Upper_Tier_Below_Gap__ex__Tower_Gap_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Bridge__Water_Below_Ledge__ex__Water_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna__West_Climb__Platform_1__ex__Switch_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and___not_invoke_grab_or_not_anuman(ctx, world, full_obs) {
+                        1200
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bottom__Save_Point__ex__Depths__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Northwest_Platform__ex__Northwest_Plinth_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Save_Point__ex__Northwest_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Save_Point__ex__Tower_Base_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        479
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Save_Point__ex__Tower_Lower_West_Ledge_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Save_Point__ex__Tower_Peak_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Save_Point__ex__Tower_Upper_West_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Tower_Base_West__ex__Tower_Lower_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Tower_Lower_West_Ledge__ex__Northwest_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Tower_Lower_West_Ledge__ex__Tower_Peak_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Tower_Lower_West_Ledge__ex__Tower_Upper_West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Tower_Peak_West__ex__Tower_Peak_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Bridge__Tower_Upper_West_Ledge__ex__Northwest_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1667
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Double_Corridor__Center_Platform_East__ex__Center_Platform_West_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        958
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Double_Corridor__Center_Platform_West__ex__Center_Platform_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        958
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Factory_Gate__East__ex__Button_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Rear_Entrance__East__ex__East_Hill_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_slingshot_weapon(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Rear_Entrance__East_Hill__ex__East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Column_East__ex__Northeast_Ledge_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Column_East__ex__Upper_Portal_Exit_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover_or_not_slingshot_weapon(ctx, world, full_obs) {
+                        328
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Drool__ex__Lower_Portal_Exit_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        580
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Northeast_Ledge__ex__Column_East_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Upper_Portal_Exit__ex__Column_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        328
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Upper_Portal_Exit__ex__North_1 => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__Upper_Portal_Exit__ex__Northeast_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Smiley__West_Ground__ex__Upper_Portal_Exit_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__South_Hallway__Hill_West__ex__Hill_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Underbelly__Empty_Plinth__ex__West_Block_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Underbelly__Middle_Block__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Underbelly__Upper_Ledge__ex__North_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Underbelly__Upper_Ledge__ex__Upper_Left_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        857
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Annuna_Breach__Underbelly__West_Block__ex__Middle_Block_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Antarctica__East__Building_1_Entry__ex__Building_2_Upper_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Antarctica__East__Building_2_Entry__ex__Building_2_Upper_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4035
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Base_Camp__Left_Platform_Moved__ex__Top_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Base_Camp__Save_Point__ex__Top_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Base_Camp__West_11__ex__Left_Platform_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Boss_Room__Lower_Tree__ex__Lower_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__By_Garage__East_Platform__ex__Crawlspace_Opening_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__By_Garage__East_Platform__ex__Outcropping_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__By_Garage__Lower_Platform__ex__East_Bush_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__By_Garage__Lower_Platform__ex__West_Bush_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Drone_Pit__Above_Rocks__ex__Upper_Mid_way_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        450
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Drone_Pit__Mid_air__ex__Highest_Point_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Drone_Pit__Upper_Mid_way__ex__Top_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Drone_Pit__West_3__ex__Highest_Point_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2281
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Drone_Room__Pit_Left__ex__West_6_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Drone_Room__Portal_Exit__ex__Moving_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        3750
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Above_the_Trees__ex__High_Above_Flask_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__High_Platform__ex__High_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__High_Platform__ex__Highest_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__High_Platform__ex__West_Face__Lower_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2950
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Highest_Platform__ex__West_Face__Lower_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Lower_Platform__ex__Lower_Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Medium_High_Platform__ex__West_Face__Lower_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Mid_air_near_Flask__ex__Highest_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Middle_Middle__ex__Above_Chute_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Middle_Middle__ex__East_7_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Upper_Save__ex__West_Face__Lower_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__West_12__ex__West_Fork_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__Air_Corner__ex__Tunnel_Entrance_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__Below_East_Gate__ex__Air_Corner_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__Between_Gates__ex__Hidden_Tunnel_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__Button_Corner__ex__Upper_Tunnel_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__East_14__ex__Tunnel_Entrance_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__East_Gate__ex__Air_Corner_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__East_Side__ex__Air_Corner_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__East_Slope__ex__Tunnel_Entrance_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__Tunnel_Interior__ex__Upper_Tunnel_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__West_Side__ex__Below_East_Gate_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Gem_Room__West_Side__ex__West_13_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_25_10_12__Below_Bush__ex__Bush_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_25_10_12__Bush__ex__Mid_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_25_10_12__Hidden_Bush__ex__East_10_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        1200
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__Door_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_25_10_12__Mid_Ledge__ex__West_11_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_26_10_11__Middle_Platform__ex__West_10_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_26_10_11__Under_Ledge__ex__Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Grid_26_10_11__Upper_Platform__ex__West_10_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Guarded_Health__Small_Pond__ex__East_Ruins_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        857
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Hidden_Portal__East_3__ex__High_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2632
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Hidden_Portal__Save_Ledge__ex__High_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Hidden_Portal__Save_Point__ex__High_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Hidden_Portal__Stair_Above_Gate__ex__Save_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Hidden_Portal__Stair_Below_Gate__ex__Gate_Ledge_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Observation_Tower_Room__East_11__ex__Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Observation_Tower_Room__Tower_Top__ex__West_9_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Peak__Observatory_East__ex__Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Peak__Portal_Stand__ex__East_Slope_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        60
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Peak__Tunnel_Entrance__ex__Tunnel_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_climb_and___not_invoke_grab_or_not_anuman(ctx, world, full_obs) {
+                        600
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Blocked_Refill_Station_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Vertical_Interchange__Below_Door__ex__Refill_Station_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Left_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Middle_Ledge__ex__Upper_Slope_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Platform_3__ex__Platform_4_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Platform_5__ex__Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Upper_Left_Ledge__ex__West_12_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1800
+} else if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Upper_Slope__ex__West_12_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1579
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Walled_Off__Wall_Left__ex__West_12_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Left_1 => {
+                    if rules::observe_access_not_ebih_waterfall_block_left(ctx, world, full_obs) {
+                        3500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Alcove__ex__Alcove_Right_1 => {
+                    if rules::observe_access_not_ebih_waterfall_block_right(ctx, world, full_obs) {
+                        250
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Alcove_Left__ex__Alcove_1 => {
+                    if rules::observe_access_not_ebih_waterfall_block_left(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Alcove_Left__ex__Waterfall_Center_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Alcove_Right__ex__Alcove_1 => {
+                    if rules::observe_access_not_ebih_waterfall_block_right(ctx, world, full_obs) {
+                        750
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Below_Tree__ex__Big_Tree_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        586
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Ledge_Below_Hole__ex__Middle_West_Tree_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Middle_West_Tree__ex__West_Main_Path_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Platform__ex__Big_Tree_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__Wall_Right__ex__Lower_West_Tree_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Waterfall__West_Climb__ex__Ledge_Below_Hole_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__West_Face__Lower_Ledge__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Bubble_Bobble__East_11__ex__Tree_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Bubble_Bobble__Tree__ex__Lower_Row_Right_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Bubble_Bobble__Tree__ex__West_10_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        504
+} else if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Connector__West__ex__Column_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Double_Gate__Grate_East__ex__Grate_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Double_Gate__Grate_West__ex__Grate_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Double_Gate__Portal_Stand__ex__North_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Double_Gate__Portal_Stand__ex__Upper_Right_Corner_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        450
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Drone_Tutorial__Above_Rocks__ex__Upper_Mid_way_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        450
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Drone_Tutorial__Bottom__ex__First_Rocks_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Drone_Tutorial__Upper_Mid_way__ex__Top_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Center_Rock_Center__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Center_Rock_West__ex__Northwest_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Center_Rock_West__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Gate_West__ex__Button_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        575
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Northwest_Ledge__ex__Gate_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Platform_2__ex__Center_Rock_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__South_Plains__ex__Mesa_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__In_n_Out__Southeast_Plains__ex__Southeast_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Lake_Gate__Button__ex__Gate_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Lake_Gate__Interior__ex__Gate_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Peak__Column__ex__Save_Point_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Peak__Ground_Near_Door__ex__West_Lower_Step_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Peak__Ground_Near_Door__ex__West_Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Peak__West_Lower_Step__ex__West_Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Peak__West_Upper_Ledge__ex__Ground_Near_Column_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        1513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rock_Block__Bottom_Middle__ex__Rock_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rock_Block__East_Shaft_Bottom__ex__East_Shaft_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rock_Block__Rock_Top__ex__West_Shaft_Midway_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill__ex__West_Shaft_East_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rock_Block__West_Shaft_Upper_Hill__ex__West_Shaft_West_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        996
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__Button__ex__West_Rock_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__Center_East__ex__Middle_Floating_Rock_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__Center_West__ex__West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__Center_West__ex__West_Rock_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__Platform_2__ex__Middle_Floating_Rock_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__Upper_Slope__ex__Northeast_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__West_11__ex__Gate_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__West_Rock__ex__Button_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Rocky_Cages__West_Rock__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Cache__ex__Column_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Column_East__ex__NW_Floating_Rock_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Column_West__ex__North_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East__ex__Large_Floating_Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        429
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_East__ex__Upper_East_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Large_Floating_Rock_West__ex__Column_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        28
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Lower_East_Ledge__ex__Large_Floating_Rock_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__NW_Floating_Rock_East__ex__North_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__South__ex__Column_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__South__ex__Column_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__South__ex__North_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Upper_East_Ledge__ex__Column_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Upper_East_Ledge__ex__NW_Floating_Rock_East_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Snowy_Rocks__Waterfall_Ledge__ex__Column_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Spider_Guards__Button__ex__Northwest_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Spider_Guards__Center_Hover_End__ex__Center_Re_hover_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        175
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Spider_Guards__East_Sand_Pit_East__ex__East_Sand_Pit_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        277
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Switchback__East__ex__West_Turn_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Switchback__East_Turn__ex__West_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Switchback__West_Turn__ex__East_Turn_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__The_Vault__Southwest_Corner__ex__Dais_Center_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__East_2__ex__Highest_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__East_2__ex__Upper_Passage_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__East_6__ex__Middle_Building_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Middle_Building_Ledge__ex__Portal_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Middle_Building_Ledge__ex__Portal_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Passage_High__ex__Passage_Exit_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Passage_Low__ex__Passage_Middle_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Passage_Middle__ex__Passage_High_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Portal_Ledge__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Portal_Stand__ex__East_2_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Portal_Stand__ex__Highest_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Portal_Stand__ex__Upper_Passage_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih_Breach__Vertical_Room__Upper_Passage_Ledge__ex__Highest_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__Bottom_Middle__ex__Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__Mid_water__ex__Under_the_Lip_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__North_Catch__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__North_Catch__ex__Platform_4_Left_1 => {
+                    if rules::observe_access_not_invoke_hover_and_not_invoke_spin(ctx, world, full_obs) {
+                        958
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__Platform_4_Left__ex__North_Catch_1 => {
+                    if rules::observe_access_not_invoke_hover_and_not_invoke_spin(ctx, world, full_obs) {
+                        958
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__Under_the_Lip__ex__North_Catch_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__Under_the_Lip__ex__West_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_11__ex__Under_the_Lip_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_11__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_Hook_Point__ex__Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1034
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_Hook_Point__ex__Mid_water_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_Hook_Point__ex__Under_the_Lip_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_Hook_Point__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Aquarium__West_Mid_air__ex__Under_the_Lip_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Left_Column_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Audience_Chamber__Bottom_Middle__ex__Right_Column_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Audience_Chamber__East_11__ex__Right_Column_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Audience_Chamber__Right_Column__ex__Left_Column_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        857
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Drop_off__Basin__ex__Wall_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Drop_off__Wall_Left__ex__Above_Wall_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Drop_off__Wall_Left__ex__Upper_Right_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Drop_off__West__ex__Wall_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__East__ex__Wall_4_East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Fling_Point__ex__Wall_4_East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Middle_Ledge__ex__Wall_2_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Topmost_Hook_Point__ex__Northeast_Ledge_1 => {
+                    if rules::observe_access_not_invoke_spin_and_not_invoke_hookhover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_1_East__ex__Northeast_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and___not_invoke_grab_or_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_1_Northeast__ex__Northeast_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_2_East__ex__Wall_2_Northwest_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_2_Northwest__ex__Wall_1_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_3_East__ex__Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_3_Northeast__ex__Middle_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Rocks_Fall__Wall_4_West__ex__Lower_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__At_Door__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        14
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__At_Door__ex__Secret_Corner_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__Dais_Left__ex__Wall_Right_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__Dais_Right__ex__Dais_Middle_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        151
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__South__ex__Tunnel_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__Tunnel_Ledge__ex__Dais_Right_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__Tunnel_Ledge__ex__Tunnel_Entrance_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Emergence__Storage__West__ex__Wall_Left_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Filter__Lower_Hallway__West__ex__East_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        908
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Antechamber__Bottom__ex__Left_Wall_Lower_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        60
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Antechamber__Left_Wall_Lower__ex__Left_Wall_Mid_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Antechamber__Left_Wall_Mid__ex__West_15_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Antechamber__Middle_Bricks_Left__ex__West_15_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Antechamber__Middle_Bricks_Right__ex__Statue_Head_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Antechamber__Statue_Head__ex__Middle_Bricks_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Breachable_Wall__Cave_Mouth_West__ex__Wall_Interior_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Breachable_Wall__East_25__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Breachable_Wall__East_25__ex__Portal_Entry_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Breachable_Wall__East_Ledge__ex__Separator__Save_Point_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        581
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Breachable_Wall__West_Ledge__ex__Cave_Mouth_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Cache__Pit__ex__Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Carnelian__Lower_Susar__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Carnelian__Middle_Platforms__ex__East_Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Carnelian__Middle_Platforms__ex__Upper_Susar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Carnelian__West_Ledge__ex__West_10_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__Base_of_Wall__ex__Wall_Top_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__East_Gate__ex__East_Gate_NW_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__In_the_Grass__ex__Wall_Top_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__Midway__ex__Midway_Plateau_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__West_18__ex__West_Gate_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NE_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Dual_Path__West_Gate__ex__West_Gate_NW_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Arc_Ledge__ex__Hidden_Passage_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Arc_Passage__ex__Hidden_Passage_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Carving__ex__East_Side_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Carving__ex__Middle_Rock_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__East_Side__ex__East_Shaft_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Lower_Ledge__ex__Arc_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Mid_Susar__ex__Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Middle_Ledge__ex__Upper_Floor_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Midwest_Ledge__ex__Hidden_Passage_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        3600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Base__West_Grate__ex__West_15_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Northeast__Northeast_Wall__ex__Ebih__Ebih_West__Giguna_Pillar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Northeast__Right_Column__ex__Door_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Giguna_Northeast__Step__ex__West_9_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        3600
+} else if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        470
+} else if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth__Portal_Stand__ex__Middle_Brick_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth__Rocky_Stair__ex__Door_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Drop_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Labyrinth_East__Lower_Middle__ex__Middle_Tree_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1098
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Lamassu__Deposit__ex__Deposit_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Lamassu__Deposit_Ledge__ex__Wingtip_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__Below_Pedestal__ex__NE_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2895
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__Below_Pedestal__ex__Pedestal_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__East_21__ex__East_Platform_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__East_Platform__ex__NE_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__East_Platform__ex__Pedestal_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2632
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__Rock_Upper_Ledge__ex__Grass_Gap_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__Southwest_Cache__ex__Southwest_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Mural__Southwest_Ledge__ex__Lower_Middle_Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2983
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Secrecy__Near_East_Column__ex__East_Column_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Secrecy__Portal_Stand__ex__West_Column_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Above_Rock__ex__Ledge_Above_Rock_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Above_Rock__ex__Ledge_Above_Rock_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Above_Rock__ex__Middle_Hill_By_Switch_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Ledge_Above_Rock__ex__West_21_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Lower_Ledge_1__ex__Lower_Middle_Corner_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Lower_Plateau_Ledge__ex__Lower_Ledge_2_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Lower_West_Slope__ex__Rock_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Lower_West_Slope__ex__Rock_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        702
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Middle_Below_Top__ex__Top_Passage_Bottom_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate__ex__Dead_end_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Middle_Ledge_Below_Gate__ex__Gate_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Middle_Plateau__ex__Middle_Below_Top_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Rock__ex__Ledge_Above_Rock_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Rock__ex__Middle_Hill_By_Switch_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__South__ex__Lower_Plateau_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Southeast_Corner__ex__Lower_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Left_Ledge__ex__Top_Right_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__Ebih__Vertical_Interchange__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__Top_Left_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Middle_Ledge__ex__Top_Right_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Passage_Bottom__ex__Top_Rocky_Outcrop_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Right_Ledge__ex__North_1 => {
+                    if rules::observe_access_invoke_climb_and_not_anuman(ctx, world, full_obs) {
+                        0
+} else if rules::observe_access_invoke_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Vertical_Interchange__Top_Rocky_Ledge__ex__Top_Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Below_Platforms_Center__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2281
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Below_Platforms_Center__ex__Left_Platform_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Ladder_Ledge__ex__Right_Platform_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1 => {
+                    if rules::observe_access_not_invoke_climb(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Mid_air_Near_Cache__ex__Upper_Mid_air_Near_Cache_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Passage_Cache__ex__Lower_Path_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Steeper_Hill__ex__Left_Platform_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Crab_Rave__East__ex__Button_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_slingshot_weapon(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge__ex__Upper_Right_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Deadly_Flora__Middle_Left_Ledge__ex__Middle_Platform_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__East__East_Tunnel__ex__Mid_Tunnel_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__East__East_Tunnel__ex__Upper_Tunnel_Entrance_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__East__Save_Point__ex__North_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Fire_Room__Northeast_Lower_Ledge__ex__Highest_Fire_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Fire_Room__South__ex__Cuesta_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Fork__Center_Ledge_Lower__ex__Center_Ledge_Upper_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Fork__East_14__ex__Center_Ledge_Lower_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Gate_and_Wall__Gate_West__ex__West_Rock_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Gate_and_Wall__Portal_Stand__ex__Brick_Column_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        328
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Gate_and_Wall__Portal_Stand__ex__Button_Right_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        328
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Gate_and_Wall__West_10__ex__West_Rock_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Gate_and_Wall__West_Rock_Ledge__ex__Gate_West_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        295
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Ledge__ex__Middle_Tier_Middle_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        1160
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Labyrinth__Middle_Tier_Middle__ex__Middle_Tier_Upper_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        550
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Labyrinth__Rooftop_East__ex__Rooftop_West_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Labyrinth__Rooftop_West__ex__Rooftop_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Machinery__Bottom__ex__Button_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Machinery__Center_Pillar_West__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        958
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Machinery__East_Ledge__ex__Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Machinery__East_Mid_air__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Machinery__Piston_3_Upper__ex__East_Mid_air_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Machinery__West_Piston_Middle__ex__West_Piston_Entrance_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Lower_Portal__Bottom__ex__East_Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Peak__East_6__ex__Upper_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Peak__Portal__ex__Upper_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Pink_Clouds__Normal_Entry__ex__Corner_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Pinkness__Top_Ledge__ex__West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        295
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Pinkness__Upper_East_Ledge__ex__Top_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Secret_Tunnel__East__ex__Narrow_Point_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Upper_Machinery__Northeast_Scaffold__ex__Top_Scaffold_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Upper_Machinery__Passage_Entrance__ex__Center_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        28
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna_Breach__Upper_Machinery__Passage_Entrance__ex__North_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Angry_Guards__East_11__ex__Gate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Angry_Guards__Gate__ex__East_11_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Angry_Guards__Gate__ex__Ledge_Grab_Room__Gate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        703
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__Above_Grate__ex__Below_Grate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__Below_Grate__ex__Grate_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__Lowest_Stair__ex__Shaft_Bottom_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        575
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__Shaft_Bottom__ex__Below_Grate_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        9000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Apocalypse_Entry__West_15_Lower__ex__Lowest_Stair_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Grate_Left__ex__Portal_Cage_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Lower_Corner__ex__Lower_Slope_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Lower_Slope__ex__Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Portal_Cage__ex__Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Portal_Stand__ex__Lower_Slope_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        324
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Crystals__Upper_Ledge__ex__Top_Corner_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Above_Ruins__ex__Cave_Mouth_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Cave_Gullet__ex__Cave_Throat_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Cave_Treasure__ex__Cave_Esophagus_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__High_Toward_Cave__ex__Cave_Mouth_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Lower_Mid_air__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Mid_Toward_Cave__ex__Cave_Mouth_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Dock_Outside__Upper_West_Hill__ex__Revival__Pillar_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Gate_East_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Mid_Tier_East__ex__Inner_Upper_Tier_East_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Mid_Tier_West__ex__Inner_Upper_Tier_West_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Upper_Tier_East__ex__Inner_Center_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        630
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Inner_Upper_Tier_West__ex__Inner_Center_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_East_Hook_Point_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Center_East__ex__Parapet_Peak_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_Peak_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Crenelle_2__ex__Parapet_West_Hook_Point_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_East_Hook_Point__ex__Parapet_Peak_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        305
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_East_Ledge__ex__Parapet_East_Hook_Point_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        450
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_East_Hook_Point_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_Peak__ex__Parapet_West_Hook_Point_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_Crenelle_2_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_West_Hook_Point__ex__Parapet_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Parapet_West_Ledge__ex__Parapet_West_Hook_Point_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        450
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__Portal_Stand__ex__Inner_East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Fortress__West_Staircase__ex__Inner_Mid_Tier_West_1 => {
+                    if rules::observe_access_mode_eq_drone_and_not_anuman_and_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+} else if rules::observe_access_mode_ne_drone_and_not_anuman(ctx, world, full_obs) {
+                        600
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_31_9_12__Midair__ex__East_10_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3158
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_32_7_10__East_9__ex__Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_32_7_10__Grate_Left__ex__East_9_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Hammonds_End__Upper_Stair__ex__Upper_Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Hammonds_End__West_11__ex__Switch_from_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Inner_Caverns__Southwest_Ledge__ex__West_13_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lake_Main_Entrance__Ledge__ex__Upper_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lake_Main_Entrance__Lower_Platform__ex__Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lake_Main_Entrance__Upper_Platform__ex__Upper_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Cliff_Bottom__ex__Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__East_9__ex__Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Column_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Fork__ex__Gate_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Gate__ex__Angry_Guards__Gate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        703
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Gate__ex__West_11_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Gate_Ledge__ex__Column_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_hover(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Lower_Platform__ex__Upper_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Mid_34__ex__Lower_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Upper_at_Wall__ex__Northwest_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Left__ex__Upper_Grate_Right_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Upper_Grate_Right__ex__Upper_Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__Upper_Mid_air__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Ledge_Grab_Room__West_11__ex__Gate_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lonely_Bull__Air_Duct__ex__Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lonely_Bull__Platform__ex__Air_Duct_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Lonely_Bull__Stone_Ledge__ex__Platform_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        1009
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Peak__Under_West_Cliff__ex__West_Cliff_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Revival__Ledge__ex__West_9_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__West_Basin__ex__Grate_Ledge_1 => {
+                    if rules::observe_access_not_underwater_movement_and_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Sea_Burial__West_Basin__ex__Left_Center_Rock_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__Door_East__ex__Grate_West_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        1513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__East_11__ex__Grate_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__Grate_West__ex__Door_East_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        1513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Secret_Chamber__Upper_East_Ledge__ex__Door_East_1 => {
+                    if rules::observe_access_not_invoke_hook_or_not_invoke_hover(ctx, world, full_obs) {
+                        1513
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__The_Big_Drop__Small_Path__ex__Unstable_Footing_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Below_Upper_Switch__ex__East_14_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Gatestone_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        601
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_17_while_hovering__ex__Lower_Switch_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        398
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_9__ex__Peak_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        470
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        5400
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        4200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        4800
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        3600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Gatestone_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone__ex__Lower_Switch_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Gatestone_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Middle_Gatestone_Left__ex__Lower_Switch_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Peak__ex__Fortress_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Peak__ex__West_8_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        3600
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Secret_Door__ex__West_9_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        3000
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        3600
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Under_Switch__ex__West_9_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab(ctx, world, full_obs) {
+                        3000
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Electric_Arena__East_Ledge__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1228
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Electric_Arena__East_Platforms__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Electric_Arena__North__ex__Stacked_Enemies__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Electric_Arena__Upper_East_Platform__ex__North_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Mid_Tier_East__ex__Upper_Tier_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Mid_Tier_West__ex__Upper_Tier_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Southeast__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Southwest__ex__Southwest_Stair_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Southwest_Stair__ex__Mid_Tier_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Upper_Tier_East__ex__Upper_Tier_Middle_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        630
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Fortress__Upper_Tier_West__ex__Upper_Tier_Middle_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        530
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__East_Hill__ex__East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_Corner__ex__Grate_Interior_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_East__ex__Grate_Interior_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Corner_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        526
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_Southeast_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_Interior__ex__Grate_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_Southeast__ex__Grate_Interior_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Grate_West__ex__Grate_Interior_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        877
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Grate_Work__Southeast__ex__East_Hill_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Spidery_Connector__Button__ex__East_Gate_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Spidery_Connector__East_Mid_air_Lower__ex__East_Mid_air_Upper_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Spidery_Connector__West_Mid_air_Lower__ex__West_Mid_air_Upper_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Stacked_Enemies__Mid_air_East__ex__Fortress__Southeast_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Stacked_Enemies__Mideast__ex__Fortress__Southeast_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Stacked_Enemies__Midwest__ex__Northwest_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__Stacked_Enemies__South__ex__Mid_air_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_slingshot_weapon(ctx, world, full_obs) {
+                        5000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier_Breach__West_Save__West_Ledge__ex__West_11_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Facility_Interior__Middle_Tier_Left__ex__Top_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+} else if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Facility_Interior__Middle_Tier_Right__ex__Top_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Facility_Interior__West_Stairs__ex__Top_Middle_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__East_Staircase_Top__ex__Atop_Structure_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__East_Staircase_Top__ex__Catwalk_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Lower_Tier_Center__ex__East_Staircase_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Lower_Tier_Center__ex__West_Staircase_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Lower_Tier_East__ex__East_Staircase_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Lower_Tier_West_Mid_air__ex__West_Staircase_Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Staircase_Bottom_East__ex__Lower_Tier_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__Staircase_Bottom_West__ex__Lower_Tier_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Observatory__West_Staircase_Top__ex__Atop_Structure_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Interior__Outpost_Interior__Entry__ex__Bookshelf_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_grab_and_not_invoke_climb(ctx, world, full_obs) {
+                        1100
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Airy__Cavern_Mouth__ex__Cavern_Cache_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Airy__Left_Hover_Throw_End__ex__Cavern_Mouth_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4561
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Airy__Right_Hover_Throw_End__ex__Cavern_Mouth_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2281
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Pipes__Bricks_Under_Pipes__ex__Double_Pipe_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Pipes__Lower_Pipe_Under_Ledge__ex__Brick_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Pipes__Right_Vertical_Pipe__ex__Double_Pipe_Left_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman_and_not_wall_climb(ctx, world, full_obs) {
+                        1200
+} else if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Portal__Bottom_Middle__ex__Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Portal__East_28__ex__Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        750
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Basement_Portal__Ledge__ex__East_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Beach_Save__East_28_Platform__ex__Top_Platform_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4561
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__East_Rooftops__Off_the_Edge__ex__Top_Rooftop_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Collapsed_Column_Debris__ex__Lower_Well_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Center__ex__Exposed_Passage_Upper_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Left_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_Upper_Ledge__ex__Ruined_Hallway_Gap_Right_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Exposed_Passage_West__ex__NW_Middle_Building_Left_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Lower_Hallway_West__ex__SW_Building_Hallway_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Lower_Hallway_West__ex__West_26_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__Lower_Well__ex__Exposed_Passage_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Middle_Building_Broken_Outcrop__ex__NW_Middle_Building_Corner_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Middle_Building_Left_Ledge__ex__NW_Middle_Building_West_Entry_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        323
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Middle_Building_Lower_Ledge__ex__NW_Middle_Building_East_Entry_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__NW_Staircase_Upper__ex__NW_Bowl_Edifice_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__SW_Building_Broken_Wall__ex__NW_Middle_Building_Left_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__West_Rim__ex__East_Rim_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_Corner_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Hub__West_Small_Middle_Rooftop__ex__NW_Middle_Building_West_Entry_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1579
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Center_Rock_1_East__ex__Left_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Center_Rock_1_West__ex__Right_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Center_Rock_2_East__ex__Right_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        4700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Center_Rock_2_West__ex__Right_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Center_Rock_3_East__ex__Save_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Center_Rock_3_West__ex__Center_Rock_2_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__East_Rock_1__ex__Save_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Left_Platform_Start__ex__Right_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3684
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Lower_Center_Platform__ex__Lower_Rock_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Lower_East_Platform__ex__The_Long_Rock_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Save_Point__ex__East_25_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        221
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Save_Point__ex__NE_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Small_Rooftop__ex__Right_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        7193
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar__Midwest__Tablet_Platform__ex__Right_Platform_Start_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Basement_Save__Save_West__ex__West_1 => {
+                    if rules::observe_access_not_slingshot_hook_and_not_drone_hover(ctx, world, full_obs) {
+                        1311
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Beach__Crescent_Rock_East__ex__Center_Rock_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Beach__Crescent_Rock_East__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Beach__Crescent_Rock_Top__ex__Center_Rock_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Beach__Crescent_Rock_Top__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Buried_Treasure__Pillar_Bottom__ex__Pillar_Middle_2 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Buried_Treasure__Pillar_Middle__ex__Pillar_Bottom_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Corridor__Center__ex__Passage_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Lower_West_Floor__ex__Lower_West_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Lower_West_Ledge__ex__Lower_West_Floor_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Save_Point__ex__Hidden_Path_Upper_Entry_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Gauntlet__Tank_Ledge__ex__Save_Point_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_slingshot_weapon_or_not_drone_hover(ctx, world, full_obs) {
+                        958
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__Center_Rock_West__ex__Center_Rock_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__East_Rock__ex__Upper_East_Passage_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__East_Sandtrap__ex__East_Tank_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__East_Tank__ex__Upper_East_Passage_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__West_Ledge__ex__West_Rock_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_East__ex__Center_Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Rocky_Dunes__West_Rock_West__ex__Center_Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1009
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        605
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_East__ex__Rock_West_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Uhrum_Connector__V_Rock_West__ex__West_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Irikar_Breach__Worm_Rave__South__ex__Corner_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Emergence_Map__Camp__ex__Emergence__Camp_Exterior__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Amagi_East_Lake__ex__Amagi__East_Lake__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Amagi_Main_Area__ex__Amagi__Main_Area__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Center_Save__ex__Annuna__Center_Save__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Factory_Entrance__ex__Annuna__Factory_Entrance__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Mirror_Match__ex__Annuna__Mirror_Match__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Upper__ex__Annuna__Upper_Save__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Annuna_Vertical_Room__ex__Annuna__Vertical_Room__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_Base_Camp__ex__Ebih__Base_Camp__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_Observatory__ex__Ebih__Hidden_Portal__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_West_Lower__ex__Ebih__Ebih_West__Lower_Save_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_West_Mid__ex__Ebih__Ebih_West__Mid_Save_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Ebih_West_Upper__ex__Ebih__Ebih_West__Upper_Save_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Base__ex__Giguna__Giguna_Base__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Labyrinth__ex__Giguna__Labyrinth__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Northeast__ex__Giguna__Giguna_Northeast__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Ruins_Top__ex__Giguna__Ruins_Top__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Ruins_West__ex__Giguna__Ruins_West__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Giguna_Separator_Save__ex__Giguna__Separator__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Irikar_Beach_Save__ex__Irikar__Beach_Save__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Irikar_Hub__ex__Irikar__Hub__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Irikar_Midwest__ex__Irikar__Midwest__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_Center__ex__Uhrum__Save_Room__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_East__ex__Uhrum__Annuna_Corridor__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_Emergence__ex__Uhrum__Emergence_Save__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Menu__Kiengir_Map__Uhrum_West__ex__Uhrum__West_Entrance__Save_Point_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        2500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Between_Two_Flowers__ex__Lower_Platform_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Block_West__ex__Block_East_1 => {
+                    if rules::observe_access_not_uhrum_annuna_corridor_block(ctx, world, full_obs) {
+                        2000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Lower_Platform__ex__Middle_Platform_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Annuna_Corridor__Middle_Platform__ex__Upper_Platform_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Artillery_Practice__East_Hill__ex__East_Outcrop_West_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        849
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        249
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Cavern__Bottom__ex__Wall_Left_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_invoke_hover_and_not_invoke_grab(ctx, world, full_obs) {
+                        1670
+} else if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        1070
+} else if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        470
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__East_Underwater_Ledge__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__Island_West__ex__East_Block_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        323
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__West_Block__ex__East_Block_1 => {
+                    if rules::observe_access_not_uhrum_east_lake_block(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__East_Lake__West_Wall__ex__West_Block_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__Door__ex__Upper_Level_Middle_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        660
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__East_Approach__ex__Upper_Level_Middle_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__Upper_Level_Middle__ex__Roof_Middle_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Emergence_Facility__West_Approach__ex__Upper_Level_Middle_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        353
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__Center_Platform_East__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__East_23__ex__Small_Column_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_22_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__East_Ledge__ex__West_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Grassy_Guardpost__West_22__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        807
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Gate__East__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        252
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Guardpost__Lower_Mid_air__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1300
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Guardpost__Lower_Step__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Guardpost__Mid_air__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Guardpost__Middle_Step__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Guardpost__Upper_Step__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Rocky_Guardpost__West_23__ex__Lower_Step_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Seclusion__Portal_East__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        14
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Seclusion__Portal_West__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        189
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__Center_Valley__ex__Center_East_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__East_Hill__ex__Upper_Rock_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__Northwest_Platform__ex__Northwest_Door_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__Pond__ex__East_Hill_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Siege_Corridor__Western_Cache__ex__Northwest_Door_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Middle_Ledge__ex__Platform_2_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Platform_1_East__ex__East_23_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1050
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Platform_2_East__ex__Upper_Middle_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Platform_2_West__ex__Upper_Middle_Ledge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Upper_Column_East__ex__North_1 => {
+                    if rules::observe_access_not_anuman(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Amagi__Wiggly_Room__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_1 => {
+                    if rules::observe_access_not_invoke_climb(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Upper_Middle_Ledge__ex__Upper_Column_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        700
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__Upper_Right_Ledge__ex__Upper_Column_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        747
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__West_22__ex__Upper_Column_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Tulip_Tower__West_24__ex__Lower_Column_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
+                        1098
+} else if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Below_Block__ex__Above_Block_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Below_Block__ex__East_26_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        572
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__East_Palm_Tree__ex__Ledge_Above_Palm_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__High_Platform__ex__Northeast_Ledge_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        147
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Ledge_Above_Palm__ex__High_Platform_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__Green_Middle_Ledge_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Sloped_Rock__ex__West_25_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Water_Pillar__ex__Center_Island_East_1 => {
+                    if rules::observe_access_not_invoke_hook_and_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+} else if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__Water_Pillar__ex__East_Waters_Edge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        349
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Platform__ex__Green_Middle_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1144
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__Center_Island_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1649
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Shallow_End__ex__West_Water_Surface_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Wall__ex__West_25_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Water_Ledge__ex__West_Waters_Edge_1 => {
+                    if rules::observe_access_not_underwater_movement(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Waterfalls__West_Water_Nook__ex__West_Water_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Clear_Passage__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        909
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__East_28__ex__Lower_Path_Tree_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        396
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Gate_West__ex__Inner_Dais_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Gate_West_Ledge__ex__Top_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hover(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Lower_Wall_West__ex__South_Platform_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Middle_West_Ledge__ex__West_26_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Portal_Stand__ex__Gate_West_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Sand__ex__Lower_Path_Tree_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Save_Point__ex__Lower_Wall_West_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        1172
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Upper_Fork__ex__Upper_Wall_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__Upper_Wall_West__ex__Portal_Exit_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        411
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__West_Entrance__West_26__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        133
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Building_Roof_Ledge__ex__Structure_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Save_Point_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Button__ex__Structure_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Building_Roof_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Save_Point_1 => {
+                    if rules::observe_access_not_slingshot_hook_and_drone_hover(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Annuna_Gate__Structure__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_drone_hover(ctx, world, full_obs) {
+                        656
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Blob__East_Side__ex__Plinth_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        14
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Blob__West_Side__ex__Plinth_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        189
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Copse__Center_East__ex__Hidden_Passage_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        900
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Copse__Center_West__ex__Center_East_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Copse__Lower_West_Ledge__ex__Center_West_1 => {
+                    if rules::observe_access_not_slingshot_weapon(ctx, world, full_obs) {
+                        500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Glitch__Glitch_West__ex__East_Flower_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__East_Glitch__Wall_East_Platform__ex__Northeast_Flower_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Center_Right_Pillar_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__East_Enemy__ex__Gate_Left_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__Gate_Left__ex__Item_Behind_Gate_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__East_Stone_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__Save_Point__ex__Item_Behind_Gate_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        189
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__South__ex__Center_Right_Pillar_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__West__ex__West_Stone_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__West_Path__ex__South_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Locked_Down__West_Stone_East__ex__West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Overgrown_Ruins__East_Corner__ex__Portal_Stand_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Branches_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        504
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Overgrown_Ruins__Two_Guards__ex__Wall_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        303
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__North_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Center_Area_West__ex__Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__East_Ledge__ex__Rock_East_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        706
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East__ex__Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        706
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_East_Ledge__ex__Rock_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Center_Area_West_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        404
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__North_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__Rock_West__ex__Rock_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        202
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Center_Area_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        450
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Rock_and_Gate__South__ex__Rock_West_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__Save_and_Go__Lower_East_Ledge__ex__Mild_Slope_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        102
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__Center_East_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Copse__Center_Pillar__ex__East_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Copse__Small_Flower__ex__Center_Pillar_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum_Breach__West_Glitch__Middle__ex__Narrow_Glitch_1 => {
+                    if rules::observe_access_not_slingshot_hook_or_not_drone_hover(ctx, world, full_obs) {
+                        454
+                    } else {
+                        0
+                    }
+                }
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {

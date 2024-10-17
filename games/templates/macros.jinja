@@ -3,16 +3,16 @@
 Currency::{% if value and value > 0 %}{{ costs|camelize }}({{ value }}){% else %}Free{% endif %}
 %%- endmacro
 
-%%- macro penalties(penalties)
+%%- macro penalties(penalties, observe=False)
 %% set always, cond = penalties|split_filter_penalties
 %% for pen in always
                     {%- if not loop.first -%} + {% endif %}(rules::num_{{ pen.calc_id }}(ctx, world) * 1000.0).ceil() as u32
 %% endfor
 {%- if always and cond %} + {% endif -%}
 %% for pen in penalties|reject('always_penalty')
-                    {%- if not loop.first -%} } else {% endif %}if {% if pen.access_id %}rules::access_{{ pen.access_id }}(ctx, world){% else %}true{% endif %} {
+                    {%- if not loop.first -%} } else {% endif %}if {% if pen.access_id %}rules::{% if observe %}observe_{% endif %}access_{{ pen.access_id }}(ctx, world{% if observe %}, full_obs{% endif %}){% else %}true{% endif %} {
                         {% if pen.add %}{{ (pen.add * 1000)|round|int }}{% elif not pen.calc_id %}0{% endif %}
-                        {%- if pen.add and pen.calc_id %} + {% endif %}{% if pen.calc_id %}(rules::num_{{ pen.calc_id }}(ctx, world) * 1000.0).ceil() as u32{% endif %}
+                        {%- if pen.add and pen.calc_id %} + {% endif %}{% if pen.calc_id %}(rules::{% if observe %}observe_{% endif %}num_{{ pen.calc_id }}(ctx, world{% if observe %}, full_obs{% endif %}) * 1000.0).ceil() as u32{% endif %}
 %% endfor
 %% if cond
                     } else {

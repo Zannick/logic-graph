@@ -192,6 +192,7 @@ pub trait Ctx:
             History::W(wp, dest) => {
                 let warp = world.get_warp(wp);
                 if warp.dest(self, world) == dest && warp.observe_access(self, world, observer) {
+                    warp.observe_time(self, world, observer);
                     warp.observe_effects(&mut cur, world, observer);
                     true
                 } else {
@@ -206,6 +207,7 @@ pub trait Ctx:
                     && loc.item() == item
                     && loc.observe_access(self, world, observer)
                 {
+                    loc.observe_time(self, world, observer);
                     cur.observe_spend(&loc.price(&cur, world), observer);
                     cur.observe_visit(loc_id, observer);
                     cur.observe_collect(item, world, observer);
@@ -222,6 +224,7 @@ pub trait Ctx:
                     && loc.item() == item
                     && loc.observe_access(self, world, observer)
                 {
+                    loc.observe_time(self, world, observer);
                     cur.observe_spend(&loc.price(&cur, world), observer);
                     cur.observe_visit(loc_id, observer);
                     cur.observe_collect(item, world, observer);
@@ -235,6 +238,7 @@ pub trait Ctx:
                 let spot_id = world.get_exit_spot(exit_id);
                 let exit = world.get_exit(exit_id);
                 if spot_id == self.position() && exit.observe_access(self, world, observer) {
+                    exit.observe_time(self, world, observer);
                     cur.observe_spend(&exit.price(&cur, world), observer);
                     cur.observe_take_exit(exit, world, observer);
                     true
@@ -264,6 +268,7 @@ pub trait Ctx:
                 if (world.is_global_action(act_id) || self.position() == spot_id)
                     && action.observe_access(self, world, observer)
                 {
+                    action.observe_time(self, world, observer);
                     cur.observe_spend(&action.price(&cur, world), observer);
                     action.observe_effects(&mut cur, world, observer);
                     true
@@ -277,6 +282,7 @@ pub trait Ctx:
                 let edge = &edges[idx];
                 if edge.dst == spot_id && edge.observe_access(world, self, movement_state, observer)
                 {
+                    edge.observe_penalties(world, self, observer);
                     // TODO: Should we set position for all spots along the CE?
                     cur.observe_set_position(spot_id, world, observer);
                     true

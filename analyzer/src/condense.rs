@@ -152,6 +152,19 @@ where
         self.reqs.iter().any(|e| W::Exit::has_penalties(*e))
     }
 
+    pub fn observe_penalties<W>(&self, world: &W, ctx: &T, observer: &mut T::Observer)
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        for e in &self.reqs {
+            let ex = world.get_exit(*e);
+            ex.observe_time(ctx, world, observer);
+        }
+    }
+
     pub fn is_empty(&self) -> bool {
         self.movement.is_none() && self.reqs.is_empty()
     }
@@ -214,6 +227,16 @@ where
         W::Location: Location<Context = T>,
     {
         self.reqs.penalty_time(world, ctx) + self.time
+    }
+
+    pub fn observe_penalties<W>(&self, world: &W, ctx: &T, observer: &mut T::Observer)
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Exit: Exit<ExitId = E>,
+        W::Location: Location<Context = T>,
+    {
+        self.reqs.observe_penalties(world, ctx, observer)
     }
 }
 

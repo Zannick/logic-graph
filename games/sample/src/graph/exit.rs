@@ -80,7 +80,7 @@ impl world::Accessible for Exit {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
             ExitId::Deku_Tree__Back_Room__East__ex__Basement_Ledge__Web_1 => rules::observe_access_invoke_is_child(ctx, world, full_obs),
             ExitId::Deku_Tree__Back_Room__Northwest__ex__Skull_Room__Entry_1 => rules::observe_access_deku_back_room_web_and_deku_back_room_wall(ctx, world, full_obs),
@@ -106,6 +106,15 @@ impl world::Accessible for Exit {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 {
+        self.time
+            + match self.id {
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {

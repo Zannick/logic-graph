@@ -247,7 +247,7 @@ impl world::Accessible for Action {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
             ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => rules::observe_access_breach_attractor_and_mode_eq_drone_and_indra_within___glacier_gt_grid_39sub40_7sub9_glacier_gt_revival_glacier_gt_dock_outside_and_portal_eq_portal_start(ctx, world, full_obs),
             ActionId::Amagi__East_Lake__East_15_Flat__Attract_Portal_to_Arch => rules::observe_access_invoke_hover_and_underwater_movement_and_breach_attractor_and_anuman_and_portal_eq_portal_start(ctx, world, full_obs),
@@ -434,6 +434,34 @@ impl world::Accessible for Action {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 { 
+        self.time
+            + match self.id {
+                ActionId::Amagi__East_Lake__Center_Upper_Platform__Move_Portal_Here => {
+                    (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
+
+                }
+                ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => {
+                    if rules::observe_access_not_invoke_allegiance1(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ActionId::Glacier__Angry_Guards__Corner__Move_Portal_Here => {
+                    (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(ctx, world) * 1000.0).ceil() as u32
+
+                }
+                ActionId::Global__Move_Portal_Here => {
+                    (rules::num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(ctx, world) * 1000.0).ceil() as u32
+
+                }
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {

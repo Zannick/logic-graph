@@ -63,4 +63,9 @@ pub fn num_{{ id }}(ctx: &Context, world: &World) -> {{ info.ret or 'u32' }} {
     // {{ info.num.text.strip() }}
     {{ info.num|prToRust(info) }}
 }
+
+pub fn observe_num_{{ id }}(ctx: &Context, world: &World, full_obs: &mut FullObservation) -> {{ info.ret or 'u32' }} {
+    // {{ info.num.text.strip() }}
+    {{ info.num|prToRustObserve(info) }}
+}
 %% endfor

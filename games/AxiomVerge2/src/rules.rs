@@ -30012,6 +30012,26 @@ pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(
     // $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * 0.5
     diagonal_speed_spots(ctx.position(), ctx.portal(), 0.55, 1.0) * 0.5
 }
+
+pub fn observe_num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_0_5(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> f32 {
+    // $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * 0.5
+    diagonal_speed_spots(
+        {
+            full_obs.observe_position();
+            ctx.position()
+        },
+        {
+            full_obs.observe_portal();
+            ctx.portal()
+        },
+        0.55,
+        1.0,
+    ) * 0.5
+}
 pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(
     ctx: &Context,
     world: &World,
@@ -30023,4 +30043,38 @@ pub fn num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_
         } else {
             1.0
         }
+}
+
+pub fn observe_num_invoke_diagonal_speed_spots__position_portal_0_55_1_0_mul_if___indra_eq_position____0_5__else____1_0_(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> f32 {
+    // $diagonal_speed_spots(^position, ^portal, 0.55, 1.0) * IF (^indra == ^position) { 0.5 } ELSE { 1.0 }
+    diagonal_speed_spots(
+        {
+            full_obs.observe_position();
+            ctx.position()
+        },
+        {
+            full_obs.observe_portal();
+            ctx.portal()
+        },
+        0.55,
+        1.0,
+    ) * if {
+        let left = {
+            full_obs.observe_indra();
+            ctx.indra()
+        };
+        let right = {
+            full_obs.observe_position();
+            ctx.position()
+        };
+        left == right
+    } {
+        0.5
+    } else {
+        1.0
+    }
 }

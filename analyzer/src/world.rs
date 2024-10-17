@@ -31,6 +31,12 @@ pub trait Accessible: Sync {
     fn base_time(&self) -> u32;
     /// Actual access time. Must be at least base_time.
     fn time(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> u32;
+    fn observe_time(
+        &self,
+        ctx: &Self::Context,
+        world: &<Self::Context as Ctx>::World,
+        observer: &mut <Self::Context as Ctx>::Observer,
+    ) -> u32;
     fn base_price(&self) -> &Self::Currency;
     fn price_per_sec(&self) -> &Self::Currency;
     fn price(&self, ctx: &Self::Context, world: &<Self::Context as Ctx>::World) -> Self::Currency;
@@ -202,7 +208,9 @@ pub trait World: Sync {
     fn get_warps(&self) -> &[Self::Warp];
 
     fn get_all_locations(&self) -> &[Self::Location];
-    fn get_canon_location_ids(canon_id: <Self::Location as Location>::CanonId) -> &'static [<Self::Location as Location>::LocId];
+    fn get_canon_location_ids(
+        canon_id: <Self::Location as Location>::CanonId,
+    ) -> &'static [<Self::Location as Location>::LocId];
 
     fn get_location_spot(
         &self,

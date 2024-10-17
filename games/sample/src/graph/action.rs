@@ -33,7 +33,7 @@ impl world::Accessible for Action {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::observe_access_invoke_is_child_and_invoke_sticks_and_not_deku_tree__compass_room__ctx__torch(ctx, world, full_obs),
             _ => true,
@@ -46,6 +46,15 @@ impl world::Accessible for Action {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 { 
+        self.time
+            + match self.id {
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {

@@ -86,7 +86,7 @@ impl world::Accessible for Location {
         }
     }
     fn observe_access(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> bool {
-        ctx.observe_afford(&self.price, full_obs);
+        ctx.observe_afford(&self.price(ctx, world), full_obs);
         match self.id {
             LocationId::Deku_Tree__Back_Room__Northwest__Break_Wall => rules::observe_access_deku_back_room_web_and_invoke_can_blast_or_smash(ctx, world, full_obs),
             LocationId::Deku_Tree__Back_Room__Northwest__Burn_Web => rules::observe_access_invoke_has_fire_source_with_torch_or_invoke_can_use__bow(ctx, world, full_obs),
@@ -117,12 +117,22 @@ impl world::Accessible for Location {
         }
     }
     fn base_time(&self) -> u32 { self.time }
+
     fn time(&self, ctx: &Context, world: &World) -> u32 {
         self.time
             + match self.id {
             _ => 0,
         }
     }
+
+    fn observe_time(&self, ctx: &Context, world: &World, full_obs: &mut FullObservation) -> u32 {
+        self.time
+            + match self.id {
+            _ => 0,
+        }
+    }
+
+
     fn base_price(&self) -> &Currency { &self.price }
     fn price_per_sec(&self) -> &Currency { &self.price_per_sec }
     fn price(&self, ctx: &Context, world: &World) -> Currency {
