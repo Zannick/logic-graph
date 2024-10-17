@@ -55,11 +55,7 @@ pub trait MatcherDispatch<Value> {
     ) -> Option<Arc<Mutex<Self::Node>>>;
 
     /// Adds a value to the existing node in this matcher, or creates a new node with the value.
-    fn add_value(
-        &mut self,
-        obs: &<Self::Struct as Observable>::PropertyObservation,
-        value: Value,
-    );
+    fn add_value(&mut self, obs: &<Self::Struct as Observable>::PropertyObservation, value: Value);
     /// Adds a value as above, but only adds if all values already existing here pass the test.
     fn add_value_if_all(
         &mut self,
@@ -100,27 +96,93 @@ where
     fn num_values(&self) -> usize;
 }
 
-#[derive(Default)]
-pub struct LookupMatcher<NodeType, KeyType, ValueType>
-where
-    KeyType: Copy + Eq + Hash,
-    ValueType: Eq + Hash,
-{
-    map: HashMap<
-        KeyType,
-        (
-            Option<Arc<Mutex<NodeType>>>,
-            HashSet<ValueType, CommonHasher>,
-        ),
-        CommonHasher,
-    >,
+pub trait MatcherStorage<ValueType>: Default {
+    fn clear(&mut self);
+    fn iter<'a>(&'a self) -> impl Iterator<Item = &'a ValueType>
+    where
+        ValueType: 'a;
+    fn insert(&mut self, value: ValueType);
+    fn len(&self) -> usize;
 }
 
-impl<NodeType, KeyType, ValueType> Debug for LookupMatcher<NodeType, KeyType, ValueType>
+/// Stores only the minimum value seen.
+impl<V> MatcherStorage<V> for Option<V>
+where
+    V: Ord,
+{
+    fn clear(&mut self) {
+        *self = None;
+    }
+
+    fn iter<'a>(&'a self) -> impl Iterator<Item = &'a V>
+    where
+        V: 'a,
+    {
+        self.as_slice().iter()
+    }
+
+    fn insert(&mut self, value: V) {
+        match &self {
+            None => {
+                *self = Some(value);
+            }
+            Some(v) if &value < v => {
+                *self = Some(value);
+            }
+            _ => {}
+        };
+    }
+
+    fn len(&self) -> usize {
+        if self.is_some() {
+            1
+        } else {
+            0
+        }
+    }
+}
+
+impl<V> MatcherStorage<V> for HashSet<V, CommonHasher>
+where
+    V: Eq + Hash,
+{
+    fn clear(&mut self) {
+        HashSet::clear(self);
+    }
+
+    fn iter<'a>(&'a self) -> impl Iterator<Item = &'a V>
+    where
+        V: 'a,
+    {
+        HashSet::iter(self)
+    }
+
+    fn insert(&mut self, value: V) {
+        HashSet::insert(self, value);
+    }
+
+    fn len(&self) -> usize {
+        HashSet::len(self)
+    }
+}
+
+#[derive(Default)]
+pub struct LookupMatcher<NodeType, KeyType, ValueType, ValueStorage>
+where
+    KeyType: Copy + Eq + Hash,
+    ValueStorage: MatcherStorage<ValueType>,
+{
+    map: HashMap<KeyType, (Option<Arc<Mutex<NodeType>>>, ValueStorage), CommonHasher>,
+    phantom: PhantomData<ValueType>,
+}
+
+impl<NodeType, KeyType, ValueType, ValueStorage> Debug
+    for LookupMatcher<NodeType, KeyType, ValueType, ValueStorage>
 where
     NodeType: Debug,
     KeyType: Debug + Copy + Eq + Hash,
-    ValueType: Debug + Eq + Hash,
+    ValueType: Debug,
+    ValueStorage: Debug + MatcherStorage<ValueType>,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -142,12 +204,13 @@ where
     }
 }
 
-impl<NodeType, KeyType, ValueType> Matcher<NodeType, KeyType, ValueType>
-    for LookupMatcher<NodeType, KeyType, ValueType>
+impl<NodeType, KeyType, ValueType, ValueStorage> Matcher<NodeType, KeyType, ValueType>
+    for LookupMatcher<NodeType, KeyType, ValueType, ValueStorage>
 where
     NodeType: Default,
     KeyType: Copy + Eq + Hash,
-    ValueType: Clone + Eq + Hash,
+    ValueType: Clone,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     fn clear(&mut self) {
         self.map.clear();
@@ -174,7 +237,8 @@ where
             }
             None => {
                 let n: Arc<Mutex<NodeType>> = Arc::default();
-                self.map.insert(obs, (Some(n.clone()), new_hashset()));
+                self.map
+                    .insert(obs, (Some(n.clone()), ValueStorage::default()));
                 n
             }
         }
@@ -185,8 +249,9 @@ where
                 val.insert(value);
             }
             None => {
-                self.map
-                    .insert(obs, (Some(Arc::default()), new_hashset_with(value)));
+                let mut val = ValueStorage::default();
+                val.insert(value);
+                self.map.insert(obs, (Some(Arc::default()), val));
             }
         }
     }
@@ -203,8 +268,9 @@ where
                 }
             }
             None => {
-                self.map
-                    .insert(obs, (Some(Arc::default()), new_hashset_with(value)));
+                let mut val = ValueStorage::default();
+                val.insert(value);
+                self.map.insert(obs, (Some(Arc::default()), val));
             }
         }
     }
@@ -218,14 +284,18 @@ where
     }
 }
 
-impl<NodeType, KeyType, ValueType> LookupMatcher<NodeType, KeyType, ValueType>
+impl<NodeType, KeyType, ValueType, ValueStorage>
+    LookupMatcher<NodeType, KeyType, ValueType, ValueStorage>
 where
     NodeType: Default,
     KeyType: Copy + Eq + Hash,
-    ValueType: Eq + Hash,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     pub fn new() -> Self {
-        Self { map: new_hashmap() }
+        Self {
+            map: new_hashmap(),
+            phantom: PhantomData,
+        }
     }
 
     pub fn contains_key(&self, key: &KeyType) -> bool {
@@ -233,11 +303,13 @@ where
     }
 }
 
-impl<NodeType, KeyType, ValueType> LookupMatcher<NodeType, KeyType, ValueType>
+impl<NodeType, KeyType, ValueType, ValueStorage>
+    LookupMatcher<NodeType, KeyType, ValueType, ValueStorage>
 where
     NodeType: Default,
     KeyType: Copy + Eq + Hash,
-    ValueType: Clone + Eq + Hash,
+    ValueType: Clone,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     pub fn new_with(obs: KeyType) -> (Arc<Mutex<NodeType>>, Self) {
         let mut m = Self::new();
@@ -245,24 +317,31 @@ where
     }
 }
 
+pub type LookupMatcherHashSet<NodeType, KeyType, ValueType> =
+    LookupMatcher<NodeType, KeyType, ValueType, HashSet<ValueType, CommonHasher>>;
+pub type LookupMatcherMin<NodeType, KeyType, ValueType> =
+    LookupMatcher<NodeType, KeyType, ValueType, Option<ValueType>>;
+
 // Comparison matchers are inevitably binary: the test is whether they conform to the comparison.
 // Thus, we defer the actual comparison to the MatcherDispatch, which shall pass the result to
 // this matcher which is essentially a special case lookup with exactly two possible values.
 #[derive(Default)]
-pub struct BooleanMatcher<NodeType, ValueType>
+pub struct BooleanMatcher<NodeType, ValueType, ValueStorage>
 where
-    ValueType: Eq + Hash,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     true_node: Option<Arc<Mutex<NodeType>>>,
-    true_values: HashSet<ValueType, CommonHasher>,
+    true_values: ValueStorage,
     false_node: Option<Arc<Mutex<NodeType>>>,
-    false_values: HashSet<ValueType, CommonHasher>,
+    false_values: ValueStorage,
+    phantom: PhantomData<ValueType>,
 }
 
-impl<NodeType, ValueType> Debug for BooleanMatcher<NodeType, ValueType>
+impl<NodeType, ValueType, ValueStorage> Debug for BooleanMatcher<NodeType, ValueType, ValueStorage>
 where
     NodeType: Debug,
-    ValueType: Debug + Eq + Hash,
+    ValueType: Debug,
+    ValueStorage: Debug + MatcherStorage<ValueType>,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_fmt(format_args!(
@@ -285,10 +364,12 @@ where
     }
 }
 
-impl<NodeType, ValueType> Matcher<NodeType, bool, ValueType> for BooleanMatcher<NodeType, ValueType>
+impl<NodeType, ValueType, ValueStorage> Matcher<NodeType, bool, ValueType>
+    for BooleanMatcher<NodeType, ValueType, ValueStorage>
 where
     NodeType: Default,
-    ValueType: Clone + Eq + Hash,
+    ValueType: Clone,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     fn clear(&mut self) {
         self.true_node = None;
@@ -369,27 +450,34 @@ where
     }
 }
 
-impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType>
+impl<NodeType, ValueType, ValueStorage> BooleanMatcher<NodeType, ValueType, ValueStorage>
 where
-    ValueType: Eq + Hash,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     pub fn new() -> Self {
         Self {
             true_node: None,
-            true_values: new_hashset(),
+            true_values: ValueStorage::default(),
             false_node: None,
-            false_values: new_hashset(),
+            false_values: ValueStorage::default(),
+            phantom: PhantomData,
         }
     }
 }
 
-impl<NodeType, ValueType> BooleanMatcher<NodeType, ValueType>
+impl<NodeType, ValueType, ValueStorage> BooleanMatcher<NodeType, ValueType, ValueStorage>
 where
     NodeType: Default,
-    ValueType: Clone + Eq + Hash,
+    ValueType: Clone,
+    ValueStorage: MatcherStorage<ValueType>,
 {
     pub fn new_with(obs: bool) -> (Arc<Mutex<NodeType>>, Self) {
         let mut m = Self::new();
         (m.insert(obs), m)
     }
 }
+
+pub type BooleanMatcherHashSet<NodeType, ValueType> =
+    BooleanMatcher<NodeType, ValueType, HashSet<ValueType, CommonHasher>>;
+pub type BooleanMatcherMin<NodeType, ValueType> =
+    BooleanMatcher<NodeType, ValueType, Option<ValueType>>;

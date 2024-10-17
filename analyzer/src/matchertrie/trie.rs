@@ -254,10 +254,10 @@ mod test {
     // e.g. one for plain lookup, one for masked lookup, two for cmp (ge/lt or le/gt)...
     #[derive(Debug)]
     enum MatcherMulti {
-        LookupPosition(LookupMatcher<Node<Self, Ctx>, Position, Ctx>),
-        LookupFlasks(LookupMatcher<Node<Self, Ctx>, i8, Ctx>),
-        MaskLookupFlag(LookupMatcher<Node<Self, Ctx>, u16, Ctx>, u16),
-        EnoughFlasks(BooleanMatcher<Node<Self, Ctx>, Ctx>, i8),
+        LookupPosition(LookupMatcherHashSet<Node<Self, Ctx>, Position, Ctx>),
+        LookupFlasks(LookupMatcherHashSet<Node<Self, Ctx>, i8, Ctx>),
+        MaskLookupFlag(LookupMatcherHashSet<Node<Self, Ctx>, u16, Ctx>, u16),
+        EnoughFlasks(BooleanMatcherHashSet<Node<Self, Ctx>, Ctx>, i8),
     }
 
     impl Default for MatcherMulti {

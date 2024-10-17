@@ -409,71 +409,71 @@ impl FullObservation {
 }
 
 #[derive(Debug)]
-pub enum ObservationMatcher<Value: Clone + Eq + Hash> {
+pub enum ObservationMatcher<Value: Clone + Eq + Hash, VS: MatcherStorage<Value>> {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value>),
+    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value, VS>),
     {{ c }}Eq {
         eq: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     {{ c }}Ge {
         lo: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     {{ c }}Le {
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     {{ c }}Range {
         lo: {{ t }},
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
 %% else
-    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value>),
+    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value, VS>),
 %% endif
 %% endfor
     // items
 %% for item, ct in gl.item_max_counts.items()|sort if item not in bfp.varmap
 %% set c = item|camelize
 %% set t = ct|get_int_type_for_max
-    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value>),
+    {{ c }}Lookup(LookupMatcher<Node<Self, Value>, {{ t }}, Value, VS>),
     {{ c }}Eq {
         eq: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     {{ c }}Ge {
         lo: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     {{ c }}Le {
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
     {{ c }}Range {
         lo: {{ t }},
         hi: {{ t }},
-        matcher: BooleanMatcher<Node<Self, Value>, Value>,
+        matcher: BooleanMatcher<Node<Self, Value>, Value, VS>,
     },
 %% endfor
     // bitflags
 %% for group in bfp.flag_groups
     LookupCBits{{ loop.index }} {
         mask: flags::ContextBits{{ loop.index }},
-        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits{{ loop.index }}, Value>,
+        matcher: LookupMatcher<Node<Self, Value>, flags::ContextBits{{ loop.index }}, Value, VS>,
     },
 %% endfor
 }
 
-impl<Value: Clone + Eq + Hash> Default for ObservationMatcher<Value> {
+impl<Value: Clone + Eq + Hash, VS: MatcherStorage<Value>> Default for ObservationMatcher<Value, VS> {
     fn default() -> Self {
         Self::PositionLookup(LookupMatcher::new())
     }
 }
 
-impl<Value: Clone + Eq + Hash> MatcherDispatch<Value> for ObservationMatcher<Value> {
+impl<Value: Clone + Eq + Hash, VS: MatcherStorage<Value>> MatcherDispatch<Value> for ObservationMatcher<Value, VS> {
     type Node = Node<Self, Value>;
     type Struct = Context;
     fn new(obs: &OneObservation) -> (Arc<Mutex<Node<Self, Value>>>, Self) {
