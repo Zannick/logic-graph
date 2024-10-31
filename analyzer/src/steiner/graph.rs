@@ -172,7 +172,7 @@ where
     if !free_edges_only {
         let mut canon = new_hashset();
         nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
-            if startctx.todo(loc) && loc.is_free() {
+            if startctx.todo(loc) {
                 if !canon.contains(&loc.canon_id()) {
                     canon.insert(loc.canon_id());
                     Some(ExternalNodeId::Canon(loc.canon_id()))
