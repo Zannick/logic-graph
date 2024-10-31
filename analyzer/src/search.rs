@@ -391,16 +391,13 @@ where
             mutated: 0.into(),
             finished: false.into(),
         };
-        for w in wins {
-            log::debug!("Recreating winning route...");
+
+        log::debug!("Recreating routes...");
+        wins.extend(others);
+        wins.into_par_iter().for_each(|w| {
             s.recreate_store(&s.startctx, w.recent_history(), SearchMode::Start)
                 .unwrap();
-        }
-        for o in others {
-            log::debug!("Recreating route...");
-            s.recreate_store(&s.startctx, o.recent_history(), SearchMode::Start)
-                .unwrap();
-        }
+        });
         log::info!("Queue starts with {} elements", s.queue.len());
         Ok(s)
     }
