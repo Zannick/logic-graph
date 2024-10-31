@@ -46,7 +46,7 @@ where
             .collect();
         Self {
             world,
-            algo: A::from_graph(build_simple_graph(world, startctx)),
+            algo: A::from_graph(build_simple_graph(world, startctx, false)),
             known_costs: Mutex::new(LruCache::with_hasher(
                 NonZeroUsize::new(cache_size).unwrap(),
                 CommonHasher::default(),
@@ -275,8 +275,24 @@ where
         T: Ctx<World = W>,
     {
         let now = Instant::now();
-        let sp = ShortestPaths::from_graph(build_simple_graph(world, startctx));
+        let sp = ShortestPaths::from_graph(build_simple_graph(world, startctx, false));
         log::info!("Built shortest_paths tree only in {:?}", now.elapsed());
+        sp
+    }
+
+    pub fn shortest_paths_tree_free_edges<T>(
+        world: &'w W,
+        startctx: &T,
+    ) -> ShortestPaths<NodeId<W>, EdgeId<W>>
+    where
+        T: Ctx<World = W>,
+    {
+        let now = Instant::now();
+        let sp = ShortestPaths::from_graph(build_simple_graph(world, startctx, true));
+        log::info!(
+            "Built free edges shortest_paths tree only in {:?}",
+            now.elapsed()
+        );
         sp
     }
 

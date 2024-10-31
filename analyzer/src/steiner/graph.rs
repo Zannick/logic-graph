@@ -151,33 +151,39 @@ where
     Graph { nodes, union }
 }
 
-pub fn build_simple_graph<W, T>(world: &W, startctx: &T) -> SimpleGraph<NodeId<W>, EdgeId<W>>
+pub fn build_simple_graph<W, T>(
+    world: &W,
+    startctx: &T,
+    free_edges_only: bool,
+) -> SimpleGraph<NodeId<W>, EdgeId<W>>
 where
     W: World,
     T: Ctx<World = W>,
 {
     let s = Instant::now();
     let mut nodes = Vec::new();
-    // 3 types of nodes: spots, locations, canon locations
+    // 2 types of nodes: spots, canon locations
     nodes.extend(
         world
             .get_all_spots()
             .iter()
             .map(|s| ExternalNodeId::Spot(*s)),
     );
-    let mut canon = new_hashset();
-    nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
-        if startctx.todo(loc) {
-            if !canon.contains(&loc.canon_id()) {
-                canon.insert(loc.canon_id());
-                Some(ExternalNodeId::Canon(loc.canon_id()))
+    if !free_edges_only {
+        let mut canon = new_hashset();
+        nodes.extend(world.get_all_locations().iter().filter_map(|loc| {
+            if startctx.todo(loc) && loc.is_free() {
+                if !canon.contains(&loc.canon_id()) {
+                    canon.insert(loc.canon_id());
+                    Some(ExternalNodeId::Canon(loc.canon_id()))
+                } else {
+                    None
+                }
             } else {
                 None
             }
-        } else {
-            None
-        }
-    }));
+        }));
+    }
 
     // Edges use the indices of nodes, so we need a map
     let mut node_index_map = new_hashmap();
@@ -188,7 +194,13 @@ where
     // Two types of edges: the spot -> spot connections from base_edges,
     // and spot -> location/canon nodes
     let mut edges = Vec::new();
-    for (s, t, dist) in world.base_edges().into_iter() {
+    for (s, t, dist) in (if free_edges_only {
+        world.free_edges()
+    } else {
+        world.base_edges()
+    })
+    .into_iter()
+    {
         edges.push(Edge {
             id: ExternalEdgeId::Spots(s, t),
             src: node_index_map[&ExternalNodeId::Spot(s)],
@@ -197,24 +209,27 @@ where
         });
     }
 
-    for loc in world.get_all_locations() {
-        if startctx.todo(loc) {
-            let s = world.get_location_spot(loc.id());
-            let t = ExternalNodeId::Canon(loc.canon_id());
-            let id = ExternalEdgeId::Canon(s, loc.canon_id());
-            let wt = loc.base_time() as u64;
-            edges.push(Edge {
-                id,
-                src: node_index_map[&ExternalNodeId::Spot(s)],
-                dst: node_index_map[&t],
-                wt,
-            });
+    if !free_edges_only {
+        for loc in world.get_all_locations() {
+            if startctx.todo(loc) {
+                let s = world.get_location_spot(loc.id());
+                let t = ExternalNodeId::Canon(loc.canon_id());
+                let id = ExternalEdgeId::Canon(s, loc.canon_id());
+                let wt = loc.base_time() as u64;
+                edges.push(Edge {
+                    id,
+                    src: node_index_map[&ExternalNodeId::Spot(s)],
+                    dst: node_index_map[&t],
+                    wt,
+                });
+            }
         }
     }
     log::info!(
-        "Built simple graph of {} nodes and {} edges in {:?}",
+        "Built simple graph of {} nodes and {} {}edges in {:?}",
         nodes.len(),
         edges.len(),
+        if free_edges_only { "free " } else { "" },
         s.elapsed()
     );
     SimpleGraph {

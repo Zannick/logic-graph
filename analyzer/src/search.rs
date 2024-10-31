@@ -1,6 +1,7 @@
 use crate::access::*;
 use crate::context::*;
 use crate::estimates;
+use crate::estimates::ContextScorer;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::*;
@@ -281,6 +282,9 @@ where
         )?;
 
         let startctx = ContextWrapper::new(ctx);
+
+        let _free_sp = ContextScorer::shortest_paths_tree_free_edges(world, startctx.get());
+
         let mut wins = Vec::new();
         let mut others = Vec::new();
         for c in routes {
