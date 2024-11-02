@@ -1155,3 +1155,31 @@ where
     vec.push(prev.into_inner());
     vec
 }
+
+pub fn history_to_full_time_series<T, W>(
+    startctx: &T,
+    world: &W,
+    history: impl Iterator<Item = HistoryAlias<T>>,
+) -> (Vec<(T, HistoryAlias<T>, u32)>, T)
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<
+        SpotId = <W::Exit as Exit>::SpotId,
+        Context = T,
+        Currency = <W::Location as Accessible>::Currency,
+    >,
+{
+    let mut vec = Vec::new();
+    let mut prev = ContextWrapper::new(startctx.clone());
+    for step in history {
+        let mut next = prev.clone();
+        next.assert_and_replay(world, step);
+        let time = next.elapsed() - prev.elapsed();
+        vec.push((prev.into_inner(), step, time));
+        prev = next;
+    }
+    (vec, prev.into_inner())
+}

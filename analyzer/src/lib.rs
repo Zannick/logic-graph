@@ -20,6 +20,7 @@ pub mod cli;
 pub mod condense;
 pub mod context;
 pub mod db;
+pub mod direct;
 pub mod estimates;
 pub mod greedy;
 pub mod heap;

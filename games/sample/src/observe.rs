@@ -193,6 +193,10 @@ impl Observer for FullObservation {
         full_obs
     }
 
+    fn observe_position(&mut self) {
+        self.stack.push(ObservationType::ObservePosition);
+    }
+
     fn observe_visited(&mut self, loc_id: LocationId) {
         self.stack.push(ObservationType::Visit(loc_id));
     }
@@ -323,50 +327,50 @@ impl Observer for FullObservation {
 
     fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
         let mut vec = Vec::with_capacity(self.fields_observed());
-            if self.position {
-                vec.push(OneObservation::Position(ctx.position));
-            }
-            if self.tod {
-                vec.push(OneObservation::Tod(ctx.tod));
-            }
-            match self.rupees {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::RupeesExact(ctx.rupees)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::RupeesEq(i, ctx.rupees == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::RupeesGe(i, ctx.rupees >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::RupeesLe(i, ctx.rupees <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RupeesRange(lo, hi, ctx.rupees >= lo && ctx.rupees <= hi)),
-            }
-            match self.gold_skulltula_token {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::GoldSkulltulaTokenExact(ctx.gold_skulltula_token)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::GoldSkulltulaTokenEq(i, ctx.gold_skulltula_token == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::GoldSkulltulaTokenGe(i, ctx.gold_skulltula_token >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::GoldSkulltulaTokenLe(i, ctx.gold_skulltula_token <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::GoldSkulltulaTokenRange(lo, hi, ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi)),
-            }
-            match self.progressive_wallet {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::ProgressiveWalletExact(ctx.progressive_wallet)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::ProgressiveWalletEq(i, ctx.progressive_wallet == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::ProgressiveWalletGe(i, ctx.progressive_wallet >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::ProgressiveWalletLe(i, ctx.progressive_wallet <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::ProgressiveWalletRange(lo, hi, ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi)),
-            }
-            match self.triforce_piece {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::TriforcePieceExact(ctx.triforce_piece)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::TriforcePieceEq(i, ctx.triforce_piece == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::TriforcePieceGe(i, ctx.triforce_piece >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::TriforcePieceLe(i, ctx.triforce_piece <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::TriforcePieceRange(lo, hi, ctx.triforce_piece >= lo && ctx.triforce_piece <= hi)),
-            }
-            if !self.cbits1.is_empty() {
-                vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
-            }
-            if !self.cbits2.is_empty() {
-                vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
-            }
+        if self.position {
+            vec.push(OneObservation::Position(ctx.position));
+        }
+        if self.tod {
+            vec.push(OneObservation::Tod(ctx.tod));
+        }
+        match self.rupees {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::RupeesExact(ctx.rupees)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::RupeesEq(i, ctx.rupees == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::RupeesGe(i, ctx.rupees >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::RupeesLe(i, ctx.rupees <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RupeesRange(lo, hi, ctx.rupees >= lo && ctx.rupees <= hi)),
+        }
+        match self.gold_skulltula_token {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::GoldSkulltulaTokenExact(ctx.gold_skulltula_token)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::GoldSkulltulaTokenEq(i, ctx.gold_skulltula_token == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::GoldSkulltulaTokenGe(i, ctx.gold_skulltula_token >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::GoldSkulltulaTokenLe(i, ctx.gold_skulltula_token <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::GoldSkulltulaTokenRange(lo, hi, ctx.gold_skulltula_token >= lo && ctx.gold_skulltula_token <= hi)),
+        }
+        match self.progressive_wallet {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::ProgressiveWalletExact(ctx.progressive_wallet)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::ProgressiveWalletEq(i, ctx.progressive_wallet == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::ProgressiveWalletGe(i, ctx.progressive_wallet >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::ProgressiveWalletLe(i, ctx.progressive_wallet <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::ProgressiveWalletRange(lo, hi, ctx.progressive_wallet >= lo && ctx.progressive_wallet <= hi)),
+        }
+        match self.triforce_piece {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::TriforcePieceExact(ctx.triforce_piece)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::TriforcePieceEq(i, ctx.triforce_piece == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::TriforcePieceGe(i, ctx.triforce_piece >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::TriforcePieceLe(i, ctx.triforce_piece <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::TriforcePieceRange(lo, hi, ctx.triforce_piece >= lo && ctx.triforce_piece <= hi)),
+        }
+        if !self.cbits1.is_empty() {
+            vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
+        }
+        if !self.cbits2.is_empty() {
+            vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
+        }
         vec
     }
 }

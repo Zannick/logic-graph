@@ -17,6 +17,9 @@ pub trait Observer: Debug + Default {
     /// Creates a new observation set from a winning state.
     fn from_victory_state(won: &Self::Ctx, world: &<Self::Ctx as Ctx>::World) -> Self;
 
+    /// Records that we know the current position.
+    fn observe_position(&mut self);
+
     /// Records that we know whether this location is visited.
     fn observe_visited(
         &mut self,

@@ -33,6 +33,13 @@ where
         let end_index = self.graph.node_index_map[&end];
         self.paths[start_index][end_index].1
     }
+
+    pub fn min_path(&self, start: V, end: V) -> Vec<E>
+    where E: Copy {
+        let start_index = self.graph.node_index_map[&start];
+        let end_index = self.graph.node_index_map[&end];
+        self.paths[start_index][end_index].0.iter().map(|&e| self.graph.edges[e].id).collect()
+    }
 }
 
 impl<V, E> SteinerAlgo<V, E> for ShortestPaths<V, E>

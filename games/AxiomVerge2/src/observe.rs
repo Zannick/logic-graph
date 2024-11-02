@@ -894,6 +894,10 @@ impl Observer for FullObservation {
         full_obs
     }
 
+    fn observe_position(&mut self) {
+        self.stack.push(ObservationType::ObservePosition);
+    }
+
     fn observe_visited(&mut self, loc_id: LocationId) {
         self.stack.push(ObservationType::Visit(loc_id));
     }
@@ -1813,130 +1817,130 @@ impl Observer for FullObservation {
 
     fn to_vec(&self, ctx: &Context) -> Vec<OneObservation> {
         let mut vec = Vec::with_capacity(self.fields_observed());
-            if self.position {
-                vec.push(OneObservation::Position(ctx.position));
-            }
-            match self.energy {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::EnergyExact(ctx.energy)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::EnergyEq(i, ctx.energy == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::EnergyGe(i, ctx.energy >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::EnergyLe(i, ctx.energy <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::EnergyRange(lo, hi, ctx.energy >= lo && ctx.energy <= hi)),
-            }
-            match self.flasks {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::FlasksExact(ctx.flasks)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::FlasksEq(i, ctx.flasks == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::FlasksGe(i, ctx.flasks >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::FlasksLe(i, ctx.flasks <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlasksRange(lo, hi, ctx.flasks >= lo && ctx.flasks <= hi)),
-            }
-            match self.refills {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::RefillsExact(ctx.refills)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::RefillsEq(i, ctx.refills == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::RefillsGe(i, ctx.refills >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::RefillsLe(i, ctx.refills <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RefillsRange(lo, hi, ctx.refills >= lo && ctx.refills <= hi)),
-            }
-            if self.mode {
-                vec.push(OneObservation::Mode(ctx.mode));
-            }
-            if self.save {
-                vec.push(OneObservation::Save(ctx.save));
-            }
-            if self.breach_save {
-                vec.push(OneObservation::BreachSave(ctx.breach_save));
-            }
-            if self.indra {
-                vec.push(OneObservation::Indra(ctx.indra));
-            }
-            if self.last {
-                vec.push(OneObservation::Last(ctx.last));
-            }
-            if self.portal {
-                vec.push(OneObservation::Portal(ctx.portal));
-            }
-            if self.prev_portal {
-                vec.push(OneObservation::PrevPortal(ctx.prev_portal));
-            }
-            if self.prev_area {
-                vec.push(OneObservation::PrevArea(ctx.prev_area));
-            }
-            match self.big_flask {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::BigFlaskExact(ctx.big_flask)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::BigFlaskEq(i, ctx.big_flask == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::BigFlaskGe(i, ctx.big_flask >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::BigFlaskLe(i, ctx.big_flask <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::BigFlaskRange(lo, hi, ctx.big_flask >= lo && ctx.big_flask <= hi)),
-            }
-            match self.flask {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::FlaskExact(ctx.flask)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::FlaskEq(i, ctx.flask == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::FlaskGe(i, ctx.flask >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::FlaskLe(i, ctx.flask <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlaskRange(lo, hi, ctx.flask >= lo && ctx.flask <= hi)),
-            }
-            match self.health_fragment {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::HealthFragmentExact(ctx.health_fragment)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::HealthFragmentEq(i, ctx.health_fragment == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::HealthFragmentGe(i, ctx.health_fragment >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::HealthFragmentLe(i, ctx.health_fragment <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::HealthFragmentRange(lo, hi, ctx.health_fragment >= lo && ctx.health_fragment <= hi)),
-            }
-            match self.health_node {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::HealthNodeExact(ctx.health_node)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::HealthNodeEq(i, ctx.health_node == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::HealthNodeGe(i, ctx.health_node >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::HealthNodeLe(i, ctx.health_node <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::HealthNodeRange(lo, hi, ctx.health_node >= lo && ctx.health_node <= hi)),
-            }
-            match self.power_matrix {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::PowerMatrixExact(ctx.power_matrix)),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::PowerMatrixEq(i, ctx.power_matrix == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::PowerMatrixGe(i, ctx.power_matrix >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::PowerMatrixLe(i, ctx.power_matrix <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::PowerMatrixRange(lo, hi, ctx.power_matrix >= lo && ctx.power_matrix <= hi)),
-            }
-            if !self.cbits1.is_empty() {
-                vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
-            }
-            if !self.cbits2.is_empty() {
-                vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
-            }
-            if !self.cbits3.is_empty() {
-                vec.push(OneObservation::CBits3{ mask: self.cbits3, result: self.cbits3 & ctx.cbits3 });
-            }
-            if !self.cbits4.is_empty() {
-                vec.push(OneObservation::CBits4{ mask: self.cbits4, result: self.cbits4 & ctx.cbits4 });
-            }
-            if !self.cbits5.is_empty() {
-                vec.push(OneObservation::CBits5{ mask: self.cbits5, result: self.cbits5 & ctx.cbits5 });
-            }
-            if !self.cbits6.is_empty() {
-                vec.push(OneObservation::CBits6{ mask: self.cbits6, result: self.cbits6 & ctx.cbits6 });
-            }
-            if !self.cbits7.is_empty() {
-                vec.push(OneObservation::CBits7{ mask: self.cbits7, result: self.cbits7 & ctx.cbits7 });
-            }
-            if !self.cbits8.is_empty() {
-                vec.push(OneObservation::CBits8{ mask: self.cbits8, result: self.cbits8 & ctx.cbits8 });
-            }
-            if !self.cbits9.is_empty() {
-                vec.push(OneObservation::CBits9{ mask: self.cbits9, result: self.cbits9 & ctx.cbits9 });
-            }
-            if !self.cbits10.is_empty() {
-                vec.push(OneObservation::CBits10{ mask: self.cbits10, result: self.cbits10 & ctx.cbits10 });
-            }
-            if !self.cbits11.is_empty() {
-                vec.push(OneObservation::CBits11{ mask: self.cbits11, result: self.cbits11 & ctx.cbits11 });
-            }
+        if self.position {
+            vec.push(OneObservation::Position(ctx.position));
+        }
+        match self.energy {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::EnergyExact(ctx.energy)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::EnergyEq(i, ctx.energy == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::EnergyGe(i, ctx.energy >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::EnergyLe(i, ctx.energy <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::EnergyRange(lo, hi, ctx.energy >= lo && ctx.energy <= hi)),
+        }
+        match self.flasks {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::FlasksExact(ctx.flasks)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::FlasksEq(i, ctx.flasks == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::FlasksGe(i, ctx.flasks >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::FlasksLe(i, ctx.flasks <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlasksRange(lo, hi, ctx.flasks >= lo && ctx.flasks <= hi)),
+        }
+        match self.refills {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::RefillsExact(ctx.refills)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::RefillsEq(i, ctx.refills == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::RefillsGe(i, ctx.refills >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::RefillsLe(i, ctx.refills <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::RefillsRange(lo, hi, ctx.refills >= lo && ctx.refills <= hi)),
+        }
+        if self.mode {
+            vec.push(OneObservation::Mode(ctx.mode));
+        }
+        if self.save {
+            vec.push(OneObservation::Save(ctx.save));
+        }
+        if self.breach_save {
+            vec.push(OneObservation::BreachSave(ctx.breach_save));
+        }
+        if self.indra {
+            vec.push(OneObservation::Indra(ctx.indra));
+        }
+        if self.last {
+            vec.push(OneObservation::Last(ctx.last));
+        }
+        if self.portal {
+            vec.push(OneObservation::Portal(ctx.portal));
+        }
+        if self.prev_portal {
+            vec.push(OneObservation::PrevPortal(ctx.prev_portal));
+        }
+        if self.prev_area {
+            vec.push(OneObservation::PrevArea(ctx.prev_area));
+        }
+        match self.big_flask {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::BigFlaskExact(ctx.big_flask)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::BigFlaskEq(i, ctx.big_flask == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::BigFlaskGe(i, ctx.big_flask >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::BigFlaskLe(i, ctx.big_flask <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::BigFlaskRange(lo, hi, ctx.big_flask >= lo && ctx.big_flask <= hi)),
+        }
+        match self.flask {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::FlaskExact(ctx.flask)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::FlaskEq(i, ctx.flask == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::FlaskGe(i, ctx.flask >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::FlaskLe(i, ctx.flask <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::FlaskRange(lo, hi, ctx.flask >= lo && ctx.flask <= hi)),
+        }
+        match self.health_fragment {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::HealthFragmentExact(ctx.health_fragment)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::HealthFragmentEq(i, ctx.health_fragment == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::HealthFragmentGe(i, ctx.health_fragment >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::HealthFragmentLe(i, ctx.health_fragment <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::HealthFragmentRange(lo, hi, ctx.health_fragment >= lo && ctx.health_fragment <= hi)),
+        }
+        match self.health_node {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::HealthNodeExact(ctx.health_node)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::HealthNodeEq(i, ctx.health_node == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::HealthNodeGe(i, ctx.health_node >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::HealthNodeLe(i, ctx.health_node <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::HealthNodeRange(lo, hi, ctx.health_node >= lo && ctx.health_node <= hi)),
+        }
+        match self.power_matrix {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::PowerMatrixExact(ctx.power_matrix)),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::PowerMatrixEq(i, ctx.power_matrix == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::PowerMatrixGe(i, ctx.power_matrix >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::PowerMatrixLe(i, ctx.power_matrix <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::PowerMatrixRange(lo, hi, ctx.power_matrix >= lo && ctx.power_matrix <= hi)),
+        }
+        if !self.cbits1.is_empty() {
+            vec.push(OneObservation::CBits1{ mask: self.cbits1, result: self.cbits1 & ctx.cbits1 });
+        }
+        if !self.cbits2.is_empty() {
+            vec.push(OneObservation::CBits2{ mask: self.cbits2, result: self.cbits2 & ctx.cbits2 });
+        }
+        if !self.cbits3.is_empty() {
+            vec.push(OneObservation::CBits3{ mask: self.cbits3, result: self.cbits3 & ctx.cbits3 });
+        }
+        if !self.cbits4.is_empty() {
+            vec.push(OneObservation::CBits4{ mask: self.cbits4, result: self.cbits4 & ctx.cbits4 });
+        }
+        if !self.cbits5.is_empty() {
+            vec.push(OneObservation::CBits5{ mask: self.cbits5, result: self.cbits5 & ctx.cbits5 });
+        }
+        if !self.cbits6.is_empty() {
+            vec.push(OneObservation::CBits6{ mask: self.cbits6, result: self.cbits6 & ctx.cbits6 });
+        }
+        if !self.cbits7.is_empty() {
+            vec.push(OneObservation::CBits7{ mask: self.cbits7, result: self.cbits7 & ctx.cbits7 });
+        }
+        if !self.cbits8.is_empty() {
+            vec.push(OneObservation::CBits8{ mask: self.cbits8, result: self.cbits8 & ctx.cbits8 });
+        }
+        if !self.cbits9.is_empty() {
+            vec.push(OneObservation::CBits9{ mask: self.cbits9, result: self.cbits9 & ctx.cbits9 });
+        }
+        if !self.cbits10.is_empty() {
+            vec.push(OneObservation::CBits10{ mask: self.cbits10, result: self.cbits10 & ctx.cbits10 });
+        }
+        if !self.cbits11.is_empty() {
+            vec.push(OneObservation::CBits11{ mask: self.cbits11, result: self.cbits11 & ctx.cbits11 });
+        }
         vec
     }
 }

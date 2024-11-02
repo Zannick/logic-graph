@@ -148,6 +148,10 @@ impl Observer for FullObservation {
         full_obs
     }
 
+    fn observe_position(&mut self) {
+        self.stack.push(ObservationType::ObservePosition);
+    }
+
     fn observe_visited(&mut self, loc_id: LocationId) {
         self.stack.push(ObservationType::Visit(loc_id));
     }
@@ -200,36 +204,36 @@ impl Observer for FullObservation {
 %% for ctx, t in context_types.items() if ctx not in bfp.varmap and ctx not in unused_map_tiles
 %% set c = ctx|camelize|camelize
 %% if t in int_types
-            match self.{{ ctx }} {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::{{ c }}Exact(ctx.{{ ctx }})),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i, ctx.{{ ctx }} == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }} >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }} <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::{{ c }}Range(lo, hi, ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi)),
-            }
+        match self.{{ ctx }} {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::{{ c }}Exact(ctx.{{ ctx }})),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i, ctx.{{ ctx }} == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }} >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }} <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::{{ c }}Range(lo, hi, ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi)),
+        }
 %% else
-            if self.{{ ctx }} {
-                vec.push(OneObservation::{{ c }}(ctx.{{ ctx }}));
-            }
+        if self.{{ ctx }} {
+            vec.push(OneObservation::{{ c }}(ctx.{{ ctx }}));
+        }
 %% endif
 %% endfor
 %% for item in gl.item_max_counts|sort if item not in bfp.varmap
 %% set c = item|camelize
 %% set ctx = item|lower
-            match self.{{ ctx }} {
-                IntegerObservation::Unknown => (),
-                IntegerObservation::Exact => vec.push(OneObservation::{{ c }}Exact(ctx.{{ ctx }})),
-                IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i, ctx.{{ ctx }} == i)),
-                IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }} >= i)),
-                IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }} <= i)),
-                IntegerObservation::Range(lo, hi) => vec.push(OneObservation::{{ c }}Range(lo, hi, ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi)),
-            }
+        match self.{{ ctx }} {
+            IntegerObservation::Unknown => (),
+            IntegerObservation::Exact => vec.push(OneObservation::{{ c }}Exact(ctx.{{ ctx }})),
+            IntegerObservation::Eq(i) => vec.push(OneObservation::{{ c }}Eq(i, ctx.{{ ctx }} == i)),
+            IntegerObservation::Ge(i) => vec.push(OneObservation::{{ c }}Ge(i, ctx.{{ ctx }} >= i)),
+            IntegerObservation::Le(i) => vec.push(OneObservation::{{ c }}Le(i, ctx.{{ ctx }} <= i)),
+            IntegerObservation::Range(lo, hi) => vec.push(OneObservation::{{ c }}Range(lo, hi, ctx.{{ ctx }} >= lo && ctx.{{ ctx }} <= hi)),
+        }
 %% endfor
 %% for group in bfp.flag_groups
-            if !self.cbits{{ loop.index }}.is_empty() {
-                vec.push(OneObservation::CBits{{ loop.index }}{ mask: self.cbits{{ loop.index }}, result: self.cbits{{ loop.index }} & ctx.cbits{{ loop.index }} });
-            }
+        if !self.cbits{{ loop.index }}.is_empty() {
+            vec.push(OneObservation::CBits{{ loop.index }}{ mask: self.cbits{{ loop.index }}, result: self.cbits{{ loop.index }} & ctx.cbits{{ loop.index }} });
+        }
 %% endfor
         vec
     }
