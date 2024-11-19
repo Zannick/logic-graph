@@ -1,5 +1,7 @@
 use crate::access::*;
 use crate::context::*;
+use crate::direct::DirectPaths;
+use crate::direct::PartialRoute;
 use crate::estimates;
 use crate::estimates::ContextScorer;
 use crate::heap::RocksBackedQueue;
@@ -226,17 +228,19 @@ where
     results
 }
 
-pub struct Search<'a, W, T, TM>
+pub struct Search<'a, W, T, TM, DM>
 where
     W: World,
     T: Ctx<World = W> + Debug,
     W::Location: Location<Context = T>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
     solve_trie: Arc<MatcherTrie<TM, SolutionSuffix<T>>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
+    direct_paths: DirectPaths<W, T, DM>,
     queue: RocksBackedQueue<'a, W, T>,
     solution_cvar: Condvar,
     iters: AtomicUsize,
@@ -256,20 +260,21 @@ where
     finished: AtomicBool,
 }
 
-impl<'a, W, T, TM> Search<'a, W, T, TM>
+impl<'a, W, T, TM, DM> Search<'a, W, T, TM, DM>
 where
     W: World,
     T: Ctx<World = W> + Debug,
     W::Location: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     pub fn new<P>(
         world: &'a W,
         ctx: T,
         routes: Vec<ContextWrapper<T>>,
         db_path: P,
-    ) -> Result<Search<'a, W, T, TM>, std::io::Error>
+    ) -> Result<Search<'a, W, T, TM, DM>, std::io::Error>
     where
         P: AsRef<Path>,
     {
@@ -283,7 +288,8 @@ where
 
         let startctx = ContextWrapper::new(ctx);
 
-        let _free_sp = ContextScorer::shortest_paths_tree_free_edges(world, startctx.get());
+        let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, startctx.get());
+        let direct_paths = DirectPaths::new(free_sp);
 
         let mut wins = Vec::new();
         let mut others = Vec::new();
@@ -373,6 +379,7 @@ where
             startctx,
             solve_trie,
             solutions,
+            direct_paths,
             queue,
             solution_cvar: Condvar::new(),
             iters: 0.into(),

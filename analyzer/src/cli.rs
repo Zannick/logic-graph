@@ -1,5 +1,6 @@
 use crate::context::*;
 use crate::db::serialize_state;
+use crate::direct::PartialRoute;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
@@ -105,7 +106,7 @@ where
     rstr
 }
 
-pub fn run<W, T, TM>(
+pub fn run<W, T, TM, DM>(
     world: &W,
     startctx: T,
     mut route_ctxs: Vec<ContextWrapper<T>>,
@@ -116,6 +117,7 @@ where
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     log::info!("{:?}", std::env::args());
 
@@ -134,7 +136,7 @@ where
                     }
                 }
             }));
-            let search = Search::<W, T, TM>::new(
+            let search = Search::<W, T, TM, DM>::new(
                 world,
                 startctx,
                 route_ctxs,

@@ -27,6 +27,18 @@ pub struct PartialRoute<T: Ctx> {
     pub time: u32,
 }
 
+impl<T: Ctx> PartialOrd for PartialRoute<T> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.time.partial_cmp(&other.time)
+    }
+}
+
+impl<T: Ctx> Ord for PartialRoute<T> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.time.cmp(&other.time)
+    }
+}
+
 impl<T: Ctx> PartialRoute<T> {
     pub fn new(route: Arc<Vec<RouteStep<T>>>, start: usize, end: usize) -> Self {
         let time = route[start..end].iter().map(|rs| rs.time).sum();
