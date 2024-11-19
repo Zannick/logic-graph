@@ -7,7 +7,7 @@ use crate::CommonHasher;
 use crate::{new_hashmap, world::*};
 use std::collections::HashMap;
 use std::fmt::Debug;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 
 // A route is very much like a solution, but we want to track all the step times
 // and cache them together so we can keep just the smallest.
@@ -46,8 +46,7 @@ where
     W::Location: Location<Context = T>,
     TM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
-    // TODO: threadsafe access to the matcher tries
-    map: HashMap<<W::Exit as Exit>::SpotId, MatcherTrie<TM, PartialRoute<T>>, CommonHasher>,
+    map: Mutex<HashMap<<W::Exit as Exit>::SpotId, Arc<MatcherTrie<TM, PartialRoute<T>>>, CommonHasher>>,
     free_sp: ShortestPaths<NodeId<W>, EdgeId<W>>,
 }
 
@@ -64,7 +63,7 @@ where
 {
     pub fn new(free_sp: ShortestPaths<NodeId<W>, EdgeId<W>>) -> Self {
         Self {
-            map: new_hashmap(),
+            map: Mutex::new(new_hashmap()),
             free_sp,
         }
     }
@@ -84,22 +83,26 @@ where
         dest: <W::Exit as Exit>::SpotId,
         ctx: &T,
     ) -> Option<PartialRoute<T>> {
-        self.map[&dest]
+        self.map.lock().unwrap()[&dest]
             .lookup(ctx)
             .into_iter()
             .min_by_key(|pr| pr.time)
     }
 
     pub fn insert_route(
-        &mut self,
+        &self,
         dest: <W::Exit as Exit>::SpotId,
         startctx: &T,
         world: &W,
         history: &[HistoryAlias<T>],
     ) {
-        if !self.map.contains_key(&dest) {
-            self.map.insert(dest, MatcherTrie::default());
+        let mut map = self.map.lock().unwrap();
+        if !map.contains_key(&dest) {
+            map.insert(dest, Arc::new(MatcherTrie::default()));
         }
+        
+        let trie = map[&dest].clone();
+        drop(map);
 
         let (full_series, _) =
             history_to_full_time_series(startctx, world, history.iter().copied());
@@ -114,7 +117,6 @@ where
         // For partial routes, we don't need any initial observation at all.
         let mut solve = <T::Observer as Default>::default();
 
-        let trie = &self.map[&dest];
         let mut total_time = 0;
         for (idx, (state, step, time)) in full_series.iter().enumerate().rev() {
             // Basic process of iterating backwards:
