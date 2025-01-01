@@ -58,7 +58,9 @@ where
     W::Location: Location<Context = T>,
     TM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
-    map: Mutex<HashMap<<W::Exit as Exit>::SpotId, Arc<MatcherTrie<TM, PartialRoute<T>>>, CommonHasher>>,
+    map: Mutex<
+        HashMap<<W::Exit as Exit>::SpotId, Arc<MatcherTrie<TM, PartialRoute<T>>>, CommonHasher>,
+    >,
     free_sp: ShortestPaths<NodeId<W>, EdgeId<W>>,
 }
 
@@ -95,7 +97,8 @@ where
         dest: <W::Exit as Exit>::SpotId,
         ctx: &T,
     ) -> Option<PartialRoute<T>> {
-        self.map.lock().unwrap()[&dest]
+        // Clone the RC and avoid holding the map lock
+        { self.map.lock().unwrap()[&dest].clone() }
             .lookup(ctx)
             .into_iter()
             .min_by_key(|pr| pr.time)
@@ -112,7 +115,7 @@ where
         if !map.contains_key(&dest) {
             map.insert(dest, Arc::new(MatcherTrie::default()));
         }
-        
+
         let trie = map[&dest].clone();
         drop(map);
 
