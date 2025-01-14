@@ -1392,10 +1392,12 @@ where
         let db_bests = self.queue.db().db_bests();
         let db_best_max = db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0);
         let needed = self.world.items_needed(ctx.get());
+        let (direct_size, direct_values) = self.direct_paths.totals();
         println!(
             "--- Round {} (solutions={}, unique={}, mut={}, limit={}ms, best={}ms) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
+            direct paths: hits={}, min hits={}, improves={}; size={}, values={}\n\
             Greedy stats: org level={}, steps done={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
@@ -1422,6 +1424,11 @@ where
             self.queue.cached_estimates(),
             self.queue.evictions(),
             self.queue.retrievals(),
+            self.direct_paths.hits.load(Ordering::Acquire),
+            self.direct_paths.min_hits.load(Ordering::Acquire),
+            self.direct_paths.improves.load(Ordering::Acquire),
+            direct_size,
+            direct_values,
             self.organic_level.load(Ordering::Acquire),
             self.greedies.load(Ordering::Acquire),
             self.greedy_in_comm.load(Ordering::Acquire),

@@ -15,6 +15,7 @@ use crate::{new_hashmap, CommonHasher};
 use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap, HashSet};
+use std::sync::atomic::Ordering;
 
 static INITIAL_CAPACITY: usize = 1_024;
 static MAX_STATES_FOR_SPOTS: usize = 16_384;
@@ -483,11 +484,13 @@ where
 
     let best = direct_paths.shortest_known_route_to(spot, ctx.get());
     if let Some(p) = &best {
+        direct_paths.hits.fetch_add(1, Ordering::Release);
         // Given a previous best, we may be able to stop immediately if it is the absolute minimum
         // Otherwise we just use that route as a cap on max_time.
         max_time = std::cmp::min(max_time, ctx.elapsed() + p.time);
         if let Some(score) = score_func(&ctx) {
             if score.0 >= max_time {
+                direct_paths.min_hits.fetch_add(1, Ordering::Release);
                 // Recreate the partial route
                 return p.replay(world, &ctx).and_then(|mut res| {
                     if is_eligible(res.get()) {
@@ -528,6 +531,9 @@ where
         if is_eligible(ctx.get()) {
             // Only insert into direct_paths if strictly better
             if best.is_none() || ctx.elapsed() < max_time {
+                if best.is_some() {
+                    direct_paths.improves.fetch_add(1, Ordering::Release);
+                }
                 direct_paths.insert_route(spot, startctx.get(), world, ctx.recent_history());
             }
             let mut newctx = ctx.clone();

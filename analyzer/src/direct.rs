@@ -8,6 +8,7 @@ use crate::CommonHasher;
 use crate::{new_hashmap, world::*};
 use std::collections::HashMap;
 use std::fmt::Debug;
+use std::sync::atomic::AtomicUsize;
 use std::sync::{Arc, Mutex};
 
 pub struct DirectPaths<W, T, TM>
@@ -21,6 +22,9 @@ where
         HashMap<<W::Exit as Exit>::SpotId, Arc<MatcherTrie<TM, PartialRoute<T>>>, CommonHasher>,
     >,
     free_sp: ShortestPaths<NodeId<W>, EdgeId<W>>,
+    pub hits: AtomicUsize,
+    pub min_hits: AtomicUsize,
+    pub improves: AtomicUsize,
 }
 
 // Given a route A -> B -> ... -> X
@@ -38,6 +42,9 @@ where
         Self {
             map: Mutex::new(new_hashmap()),
             free_sp,
+            hits: 0.into(),
+            min_hits: 0.into(),
+            improves: 0.into(),
         }
     }
 
@@ -114,5 +121,13 @@ where
                 },
             );
         }
+    }
+
+    pub fn totals(&self) -> (usize, usize) {
+        let tries: Vec<_> = self.map.lock().unwrap().values().cloned().collect();
+        (
+            tries.iter().map(|trie| trie.size()).sum(),
+            tries.iter().map(|trie| trie.num_values()).sum(),
+        )
     }
 }
