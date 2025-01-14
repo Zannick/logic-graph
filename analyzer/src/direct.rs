@@ -70,13 +70,15 @@ where
         world: &W,
         history: &[HistoryAlias<T>],
     ) {
-        let mut map = self.map.lock().unwrap();
-        if !map.contains_key(&dest) {
-            map.insert(dest, Arc::new(MatcherTrie::default()));
-        }
+        // Lock the map while retrieving the trie pointer
+        let trie = {
+            let mut map = self.map.lock().unwrap();
+            if !map.contains_key(&dest) {
+                map.insert(dest, Arc::new(MatcherTrie::default()));
+            }
 
-        let trie = map[&dest].clone();
-        drop(map);
+            map[&dest].clone()
+        };
 
         let (full_series, _) =
             history_to_full_time_series(startctx, world, history.iter().copied());

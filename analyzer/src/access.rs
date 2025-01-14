@@ -484,8 +484,8 @@ where
     let best = direct_paths.shortest_known_route_to(spot, ctx.get());
     if let Some(p) = &best {
         // Given a previous best, we may be able to stop immediately if it is the absolute minimum
-        // Otherwise we just use that route as our max_time.
-        max_time = ctx.elapsed() + p.time;
+        // Otherwise we just use that route as a cap on max_time.
+        max_time = std::cmp::min(max_time, ctx.elapsed() + p.time);
         if let Some(score) = score_func(&ctx) {
             if score.0 >= max_time {
                 // Recreate the partial route
@@ -509,11 +509,13 @@ where
         max_states,
     );
 
+    let startctx = ctx.clone();
+
     if let Some(score) = score_func(&ctx) {
         let unique_key = ctx.get().clone();
         spot_heap.push(
             CtxWithActionCounter {
-                el: ctx.clone(),
+                el: ctx,
                 counter: 0,
             },
             unique_key,
@@ -524,6 +526,10 @@ where
     while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
         if is_eligible(ctx.get()) {
+            // Only insert into direct_paths if strictly better
+            if best.is_none() || ctx.elapsed() < max_time {
+                direct_paths.insert_route(spot, startctx.get(), world, ctx.recent_history());
+            }
             let mut newctx = ctx.clone();
             access(&mut newctx, world, check);
             return Ok(newctx);
@@ -559,7 +565,7 @@ where
 
     if let Some(p) = best {
         // Recreate the partial route
-        p.replay(world, &ctx).and_then(|mut res| {
+        p.replay(world, &startctx).and_then(|mut res| {
             if is_eligible(res.get()) {
                 access(&mut res, world, check);
                 Ok(res)
