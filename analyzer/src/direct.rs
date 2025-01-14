@@ -64,7 +64,7 @@ where
         ctx: &T,
     ) -> Option<PartialRoute<T>> {
         // Clone the RC and avoid holding the map lock
-        { self.map.lock().unwrap()[&dest].clone() }
+        { self.map.lock().unwrap().get(&dest)?.clone() }
             .lookup(ctx)
             .into_iter()
             .min_by_key(|pr| pr.time)
