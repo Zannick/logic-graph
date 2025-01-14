@@ -504,6 +504,8 @@ where
                 });
             }
         }
+    } else if let Some(free_time) = direct_paths.min_free_time_to(spot, ctx.get().position()) {
+        max_time = std::cmp::min(max_time, ctx.elapsed() + free_time);
     }
 
     // Using A* and allowing backtracking
