@@ -3,9 +3,11 @@ use crate::access::{
     access_location_after_actions, access_location_after_actions_with_req,
 };
 use crate::context::*;
+use crate::direct::DirectPaths;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
 use crate::observer::{collection_observations, record_observations, TrieMatcher};
+use crate::route::PartialRoute;
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
@@ -174,7 +176,7 @@ impl<T: Ctx> RangeAndStepTuple<T> for (RangeInclusive<usize>, HistoryAlias<T>, u
     }
 }
 
-fn rediscover_routes<'a, W, T, L, RT>(
+fn rediscover_routes<'a, W, T, L, RT, DM>(
     world: &W,
     mut rreplay: ContextWrapper<T>,
     iter: impl Iterator<Item = &'a RT>,
@@ -183,12 +185,14 @@ fn rediscover_routes<'a, W, T, L, RT>(
     max_states: usize,
     history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     RT: 'a + RangeAndStepTuple<T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     for tuple in iter {
         let range = tuple.range();
@@ -208,6 +212,7 @@ where
                 max_depth,
                 max_states,
                 shortest_paths,
+                direct_paths,
             ),
             History::G(.., loc_id) => access_location_after_actions(
                 world,
@@ -217,6 +222,7 @@ where
                 max_depth,
                 max_states,
                 shortest_paths,
+                direct_paths,
             ),
             _ => return None,
         }
@@ -225,7 +231,7 @@ where
     Some(rreplay)
 }
 
-fn rediscover_wrapped<'a, W, T, L, RT>(
+fn rediscover_wrapped<'a, W, T, L, RT, DM>(
     world: &W,
     rreplay: Option<ContextWrapper<T>>,
     iter: impl Iterator<Item = &'a RT>,
@@ -234,12 +240,14 @@ fn rediscover_wrapped<'a, W, T, L, RT>(
     max_states: usize,
     history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     RT: 'a + RangeAndStepTuple<T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if let Some(rreplay) = rreplay {
         rediscover_routes(
@@ -251,13 +259,14 @@ where
             max_states,
             history,
             shortest_paths,
+            direct_paths,
         )
     } else {
         None
     }
 }
 
-pub fn mutate_collection_steps<W, T>(
+pub fn mutate_collection_steps<W, T, DM>(
     world: &W,
     startctx: &T,
     max_time: u32,
@@ -265,12 +274,14 @@ pub fn mutate_collection_steps<W, T>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
     let max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
@@ -354,6 +365,7 @@ where
                 max_states,
                 &solution.history,
                 shortest_paths,
+                direct_paths,
             );
             reorder_full = rediscover_wrapped(
                 world,
@@ -364,6 +376,7 @@ where
                 max_states,
                 &solution.history,
                 shortest_paths,
+                direct_paths,
             );
             cprev_justa = coll_ci;
             cprev_full = coll_ci;
@@ -384,6 +397,7 @@ where
                     max_states,
                     &solution.history,
                     shortest_paths,
+                    direct_paths,
                 ) {
                     if world.won(reordered.get()) {
                         return Some(reordered);
@@ -402,6 +416,7 @@ where
                     max_states,
                     &solution.history,
                     shortest_paths,
+                    direct_paths,
                 ) {
                     if world.won(reordered.get()) {
                         return Some(reordered);
@@ -420,6 +435,7 @@ where
                     max_states,
                     &solution.history,
                     shortest_paths,
+                    direct_paths,
                 ) {
                     if world.won(reordered.get()) {
                         return Some(reordered);
@@ -440,6 +456,7 @@ where
                 max_states,
                 &solution.history,
                 shortest_paths,
+                direct_paths,
             ) {
                 if world.won(reordered.get()) {
                     return Some(reordered);
@@ -456,6 +473,7 @@ where
                 max_states,
                 &solution.history,
                 shortest_paths,
+                direct_paths,
             ) {
                 if world.won(reordered.get()) {
                     return Some(reordered);
@@ -468,7 +486,7 @@ where
 }
 
 /// Mutate routes by replacing collections with other locations but same canon
-pub fn mutate_canon_locations<W, T, L>(
+pub fn mutate_canon_locations<W, T, L, DM>(
     world: &W,
     startctx: &T,
     mut max_time: u32,
@@ -476,6 +494,7 @@ pub fn mutate_canon_locations<W, T, L>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
     register_solve: impl Fn(&ContextWrapper<T>) -> (),
 ) -> Option<ContextWrapper<T>>
 where
@@ -483,6 +502,7 @@ where
     T: Ctx<World = W>,
     L: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = L::Currency>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
     max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
@@ -518,6 +538,7 @@ where
                 max_depth,
                 max_states,
                 shortest_paths,
+                direct_paths,
             ) {
                 // And if there is such a way, rediscover routes to the same locations in the rest of the route
                 if let Some(reordered) = rediscover_routes(
@@ -529,6 +550,7 @@ where
                     max_states,
                     &solution.history,
                     shortest_paths,
+                    direct_paths,
                 ) {
                     if world.won(reordered.get()) {
                         register_solve(&reordered);
@@ -552,6 +574,7 @@ where
                 max_states,
                 &solution.history,
                 shortest_paths,
+                direct_paths,
             ) else {
                 log::debug!("Replaced {} location(s) with canon equivalents (and then failed to replay further)", count);
                 return best;
@@ -565,7 +588,7 @@ where
 }
 
 /// Mutate routes between collections by finding a greedy path to the next
-pub fn mutate_greedy_collections<W, T, L>(
+pub fn mutate_greedy_collections<W, T, L, DM>(
     world: &W,
     startctx: &T,
     _max_time: u32,
@@ -573,12 +596,14 @@ pub fn mutate_greedy_collections<W, T, L>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = L::Currency>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     // [(history index, history step)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
@@ -605,6 +630,7 @@ where
                 max_states,
                 |c| c.matches_all(observations),
                 shortest_paths,
+                direct_paths,
             ),
             History::G(.., loc_id) | History::V(_, loc_id, _) => {
                 access_location_after_actions_with_req(
@@ -620,6 +646,7 @@ where
                             && c.matches_all(observations)
                     },
                     shortest_paths,
+                    direct_paths,
                 )
             }
             _ => continue,
@@ -640,7 +667,9 @@ where
 
         // Even if it's not the same, we matched the observations just before the collection, and performed
         // the same collection, so we should be able to replay the rest.
-        if let Ok(best) = attempt.try_replay_all(world, &solution.history[range_a.end() + 1..]) {
+        if let Ok(best) =
+            attempt.try_replay_all(world, solution.history[range_a.end() + 1..].iter())
+        {
             if best.elapsed() < solution.elapsed && world.won(best.get()) {
                 return Some(best);
             }
@@ -705,7 +734,7 @@ where
 }
 
 /// Looks up matching entries in the trie and returns the fastest winning state found.
-/// 
+///
 /// The winning state's elapsed time will be the result of replaying the history since
 /// the provided start state, so caller should check the real history of the provided state
 /// to confirm total time.

@@ -1,6 +1,6 @@
 use crate::context::*;
 use crate::db::serialize_state;
-use crate::direct::PartialRoute;
+use crate::direct::DirectPaths;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
@@ -180,6 +180,8 @@ where
         Commands::Minimize { route } => {
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
+            let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, &startctx);
+            let direct_paths = DirectPaths::<W, T, DM>::new(free_sp);
             let mut ctx =
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
                     .unwrap();
@@ -219,6 +221,7 @@ where
                 8_192,
                 solution.clone(),
                 scorer.get_algo(),
+                &direct_paths,
             ) {
                 ctx = better;
                 println!(
@@ -265,6 +268,7 @@ where
                 8_192,
                 solution.clone(),
                 scorer.get_algo(),
+                &direct_paths,
                 |_| {},
             ) {
                 replans += 1;
@@ -287,6 +291,7 @@ where
                 8_192,
                 solution.clone(),
                 scorer.get_algo(),
+                &direct_paths,
             ) {
                 reorders += 1;
                 println!(

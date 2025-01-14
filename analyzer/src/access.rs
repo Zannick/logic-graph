@@ -2,9 +2,12 @@
 
 use crate::a_star::*;
 use crate::context::*;
+use crate::direct::DirectPaths;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
+use crate::observer::TrieMatcher;
 use crate::priority::LimitedPriorityQueue;
+use crate::route::PartialRoute;
 use crate::steiner::graph::ExternalNodeId;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use crate::world::*;
@@ -411,27 +414,30 @@ where
     Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
 }
 
-fn access_check_after_actions<W, T, A>(
+fn access_check_after_actions<W, T, A, DM>(
     world: &W,
     ctx: ContextWrapper<T>,
     spot: <W::Exit as Exit>::SpotId,
     check: &A,
     access: impl FnOnce(&mut ContextWrapper<T>, &W, &A),
     is_eligible: impl Fn(&T) -> bool,
-    max_time: u32,
+    mut max_time: u32,
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     A: Accessible<Context = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     let goal = ExternalNodeId::Spot(spot);
 
     type DistanceScore = (u32, OrderedFloat<f32>);
+
     let score_func = |ctx: &ContextWrapper<T>| -> Option<DistanceScore> {
         if !shortest_paths
             .graph()
@@ -475,6 +481,28 @@ where
             .map(|(u, f)| (u + ctx.elapsed(), f))
     };
 
+    let best = direct_paths.shortest_known_route_to(spot, ctx.get());
+    if let Some(p) = &best {
+        // Given a previous best, we may be able to stop immediately if it is the absolute minimum
+        // Otherwise we just use that route as our max_time.
+        max_time = ctx.elapsed() + p.time;
+        if let Some(score) = score_func(&ctx) {
+            if score.0 >= max_time {
+                // Recreate the partial route
+                return p.replay(world, &ctx).and_then(|mut res| {
+                    if is_eligible(res.get()) {
+                        access(&mut res, world, check);
+                        Ok(res)
+                    } else {
+                        Err(format!(
+                            "best partial route is shortest path but was ineligible for access"
+                        ))
+                    }
+                });
+            }
+        }
+    }
+
     // Using A* and allowing backtracking
     let mut spot_heap = LimitedPriorityQueue::with_capacity_and_limit(
         std::cmp::min(INITIAL_CAPACITY, max_states),
@@ -485,7 +513,7 @@ where
         let unique_key = ctx.get().clone();
         spot_heap.push(
             CtxWithActionCounter {
-                el: ctx,
+                el: ctx.clone(),
                 counter: 0,
             },
             unique_key,
@@ -514,17 +542,39 @@ where
         }
 
         if spot_heap.is_expired() {
-            return Err(format!(
-                "Excessive A* search stopping at {} states explored",
-                spot_heap.total_seen()
-            ));
+            if best.is_none() {
+                return Err(format!(
+                    "Excessive A* search stopping at {} states explored",
+                    spot_heap.total_seen()
+                ));
+            } else {
+                log::warn!(
+                    "Excessive A* search stopping at {} states explored but we have a best to return",
+                    spot_heap.total_seen()
+                );
+                break;
+            }
         }
     }
 
-    Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
+    if let Some(p) = best {
+        // Recreate the partial route
+        p.replay(world, &ctx).and_then(|mut res| {
+            if is_eligible(res.get()) {
+                access(&mut res, world, check);
+                Ok(res)
+            } else {
+                Err(format!(
+                    "best partial route is shortest path but was ineligible for access"
+                ))
+            }
+        })
+    } else {
+        Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
+    }
 }
 
-pub fn access_location_after_actions<W, T>(
+pub fn access_location_after_actions<W, T, DM>(
     world: &W,
     ctx: ContextWrapper<T>,
     loc_id: <W::Location as Location>::LocId,
@@ -532,11 +582,13 @@ pub fn access_location_after_actions<W, T>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
         return Ok(ctx);
@@ -556,10 +608,11 @@ where
         max_depth,
         max_states,
         shortest_paths,
+        direct_paths,
     )
 }
 
-pub fn access_action_after_actions<W, T>(
+pub fn access_action_after_actions<W, T, DM>(
     world: &W,
     ctx: ContextWrapper<T>,
     act_id: <W::Action as Action>::ActionId,
@@ -567,11 +620,13 @@ pub fn access_action_after_actions<W, T>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     let spot = world.get_action_spot(act_id);
     assert!(
@@ -591,11 +646,12 @@ where
         max_depth,
         max_states,
         shortest_paths,
+        direct_paths,
     )
 }
 
 /// Same as access_location_after_actions but allows the caller to specify their own check_access function.
-pub fn access_location_after_actions_with_req<W, T>(
+pub fn access_location_after_actions_with_req<W, T, DM>(
     world: &W,
     ctx: ContextWrapper<T>,
     loc_id: <W::Location as Location>::LocId,
@@ -604,11 +660,13 @@ pub fn access_location_after_actions_with_req<W, T>(
     max_states: usize,
     req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
         return Ok(ctx);
@@ -628,11 +686,12 @@ where
         max_depth,
         max_states,
         shortest_paths,
+        direct_paths,
     )
 }
 
 /// Same as access_action_after_actions but allows the caller to specify their own check_access function.
-pub fn access_action_after_actions_with_req<W, T>(
+pub fn access_action_after_actions_with_req<W, T, DM>(
     world: &W,
     ctx: ContextWrapper<T>,
     act_id: <W::Action as Action>::ActionId,
@@ -641,11 +700,13 @@ pub fn access_action_after_actions_with_req<W, T>(
     max_states: usize,
     req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
 ) -> Result<ContextWrapper<T>, String>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     let spot = world.get_action_spot(act_id);
     assert!(
@@ -665,6 +726,7 @@ where
         max_depth,
         max_states,
         shortest_paths,
+        direct_paths,
     )
 }
 

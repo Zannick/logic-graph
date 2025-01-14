@@ -1,6 +1,7 @@
 use crate::context::{history_to_full_time_series, Ctx, HistoryAlias};
 use crate::matchertrie::MatcherTrie;
 use crate::observer::{Observer, TrieMatcher};
+use crate::route::{PartialRoute, RouteStep};
 use crate::steiner::graph::ExternalNodeId;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::CommonHasher;
@@ -8,48 +9,6 @@ use crate::{new_hashmap, world::*};
 use std::collections::HashMap;
 use std::fmt::Debug;
 use std::sync::{Arc, Mutex};
-
-// A route is very much like a solution, but we want to track all the step times
-// and cache them together so we can keep just the smallest.
-// TODO: Maybe we should do this for solutions as well?
-
-#[derive(Clone, Debug, Eq, Hash, PartialEq)]
-pub struct RouteStep<T: Ctx> {
-    pub step: HistoryAlias<T>,
-    pub time: u32,
-}
-
-#[derive(Clone, Eq, Hash, PartialEq)]
-pub struct PartialRoute<T: Ctx> {
-    pub route: Arc<Vec<RouteStep<T>>>,
-    pub start: usize,
-    pub end: usize,
-    pub time: u32,
-}
-
-impl<T: Ctx> PartialOrd for PartialRoute<T> {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        self.time.partial_cmp(&other.time)
-    }
-}
-
-impl<T: Ctx> Ord for PartialRoute<T> {
-    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        self.time.cmp(&other.time)
-    }
-}
-
-impl<T: Ctx> PartialRoute<T> {
-    pub fn new(route: Arc<Vec<RouteStep<T>>>, start: usize, end: usize) -> Self {
-        let time = route[start..end].iter().map(|rs| rs.time).sum();
-        Self {
-            route,
-            start,
-            end,
-            time,
-        }
-    }
-}
 
 pub struct DirectPaths<W, T, TM>
 where

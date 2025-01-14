@@ -928,7 +928,7 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Returns the replay if all steps are valid in the order presented, or an error message if any step failed.
     /// This consumes the object, so use a clone if you want to keep a copy.
-    pub fn try_replay_all<W>(mut self, world: &W, steps: &[HistoryAlias<T>]) -> Result<Self, String>
+    pub fn try_replay_all<'a, W>(mut self, world: &W, steps: impl Iterator<Item = &'a HistoryAlias<T>>) -> Result<Self, String>
     where
         W: World,
         T: Ctx<World = W>,

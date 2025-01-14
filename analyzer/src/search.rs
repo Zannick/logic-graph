@@ -1,13 +1,13 @@
 use crate::access::*;
 use crate::context::*;
 use crate::direct::DirectPaths;
-use crate::direct::PartialRoute;
 use crate::estimates;
 use crate::estimates::ContextScorer;
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::*;
 use crate::observer::{record_observations, TrieMatcher};
+use crate::route::PartialRoute;
 use crate::scoring::ScoreMetric;
 use crate::solutions::{Solution, SolutionCollector, SolutionResult, SolutionSuffix};
 use crate::world::*;
@@ -455,7 +455,7 @@ where
         mode: SearchMode,
     ) -> Arc<Solution<T>> {
         let mut confirm = self.startctx.clone();
-        confirm = confirm.try_replay_all(self.world, &history).unwrap();
+        confirm = confirm.try_replay_all(self.world, history.iter()).unwrap();
         if confirm.elapsed() == elapsed {
             return confirm.into_solution();
         }
@@ -511,7 +511,7 @@ where
                     db_elapsed
                 );
                 let mut partial = self.startctx.clone();
-                partial = partial.try_replay_all(self.world, &db_hist).unwrap();
+                partial = partial.try_replay_all(self.world, db_hist.iter()).unwrap();
                 if partial.elapsed() != db_elapsed {
                     log::debug!(
                         "Replaying partial still does not match: {}ms vs {}ms",
@@ -527,7 +527,7 @@ where
 
                 let retry = self.startctx.clone();
                 let solution = retry
-                    .try_replay_all(self.world, &history)
+                    .try_replay_all(self.world, history.iter())
                     .unwrap()
                     .into_solution();
                 log::debug!(
@@ -733,7 +733,7 @@ where
                     .filter_map(|vh| {
                         if vh.len() > 1 || vh[0] != *hist {
                             let cc = ctx.clone();
-                            Some(cc.try_replay_all(self.world, &vh).unwrap())
+                            Some(cc.try_replay_all(self.world, vh.iter()).unwrap())
                         } else {
                             None
                         }
@@ -1100,6 +1100,7 @@ where
                             MAX_STATES_FOR_ONE_LOC,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
+                            &self.direct_paths,
                         ) {
                             self.recreate_store(
                                 &self.startctx,
@@ -1120,6 +1121,7 @@ where
                             MAX_STATES_FOR_ONE_LOC,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
+                            &self.direct_paths,
                         |min_ctx| {
                             self.recreate_store(
                                 &self.startctx,
@@ -1164,6 +1166,7 @@ where
                             MAX_STATES_FOR_ONE_LOC,
                             sol,
                             self.queue.db().scorer().get_algo(),
+                            &self.direct_paths,
                         ) {
                             log::debug!(
                                 "Solution mutator got a reordered solution for solution {}ms",
@@ -1244,6 +1247,7 @@ where
             },
             MAX_STATES_FOR_ONE_LOC,
             self.queue.db().scorer().get_algo(),
+            &self.direct_paths,
         );
         let found = res.is_ok();
         match res {

@@ -2,7 +2,7 @@
 
 use analyzer::access::*;
 use analyzer::cli::*;
-use analyzer::direct::PartialRoute;
+use analyzer::route::PartialRoute;
 use analyzer::solutions::SolutionSuffix;
 use analyzer::world::World;
 use analyzer::CommonHasher;

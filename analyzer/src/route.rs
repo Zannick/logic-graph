@@ -5,11 +5,67 @@ use crate::steiner::graph::*;
 use crate::steiner::*;
 use crate::world::{Exit, Location, World};
 use lazy_static::lazy_static;
+use std::hash::Hash;
 use std::str::FromStr;
+use std::sync::Arc;
 use std::time::{Duration, Instant};
 use yaml_rust::Yaml;
 
 static IN_FULL: &str = "\nin full:\n";
+
+// A route is very much like a solution, but we want to track all the step times
+// and cache them together so we can keep just the smallest.
+// TODO: Maybe we should do this for solutions as well?
+
+#[derive(Clone, Debug, Eq, Hash, PartialEq)]
+pub struct RouteStep<T: Ctx> {
+    pub step: HistoryAlias<T>,
+    pub time: u32,
+}
+
+#[derive(Clone, Eq, Hash, PartialEq)]
+pub struct PartialRoute<T: Ctx> {
+    pub route: Arc<Vec<RouteStep<T>>>,
+    pub start: usize,
+    pub end: usize,
+    pub time: u32,
+}
+
+impl<T: Ctx> PartialOrd for PartialRoute<T> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.time.partial_cmp(&other.time)
+    }
+}
+
+impl<T: Ctx> Ord for PartialRoute<T> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.time.cmp(&other.time)
+    }
+}
+
+impl<T: Ctx> PartialRoute<T> {
+    pub fn new(route: Arc<Vec<RouteStep<T>>>, start: usize, end: usize) -> Self {
+        let time = route[start..end].iter().map(|rs| rs.time).sum();
+        Self {
+            route,
+            start,
+            end,
+            time,
+        }
+    }
+
+    pub fn replay<W>(&self, world: &W, ctx: &ContextWrapper<T>) -> Result<ContextWrapper<T>, String>
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
+        ctx.clone().try_replay_all(
+            world,
+            self.route[self.start..self.end].iter().map(|rs| &rs.step),
+        )
+    }
+}
 
 pub(crate) fn find_route_in_solution_string(solution: &str) -> &str {
     if solution.starts_with("Solution") {
