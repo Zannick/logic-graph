@@ -568,10 +568,6 @@ where
                     spot_heap.total_seen()
                 ));
             } else {
-                log::warn!(
-                    "Excessive A* search stopping at {} states explored but we have a best to return",
-                    spot_heap.total_seen()
-                );
                 break;
             }
         }
