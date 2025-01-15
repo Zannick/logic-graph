@@ -515,6 +515,7 @@ where
     );
 
     let startctx = ctx.clone();
+    let hist_start = startctx.recent_history().len();
 
     if let Some(score) = score_func(&ctx) {
         let unique_key = ctx.get().clone();
@@ -536,7 +537,12 @@ where
                 if best.is_some() {
                     direct_paths.improves.fetch_add(1, Ordering::Release);
                 }
-                direct_paths.insert_route(spot, startctx.get(), world, ctx.recent_history());
+                direct_paths.insert_route(
+                    spot,
+                    startctx.get(),
+                    world,
+                    &ctx.recent_history()[hist_start..],
+                );
             }
             let mut newctx = ctx.clone();
             access(&mut newctx, world, check);
