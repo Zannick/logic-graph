@@ -97,8 +97,9 @@ where
         );
 
         // For solutions, the initial observation is the victory condition.
-        // For partial routes, we don't need any initial observation at all.
+        // For partial routes, we don't need any initial observation at all (except position for the root).
         let mut solve = <T::Observer as Default>::default();
+        solve.observe_position();
 
         let mut total_time = 0;
         for (idx, (state, step, time)) in full_series.iter().enumerate().rev() {

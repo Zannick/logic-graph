@@ -105,7 +105,10 @@ where
     pub fn insert(&self, observations: Vec<StructType::PropertyObservation>, value: ValueType) {
         if let Some((first, rest)) = observations.split_first() {
             if let Some((last, most)) = rest.split_last() {
-                let mut current_node = self.root.lock().unwrap().insert(first).unwrap();
+                let mut current_node =
+                    self.root.lock().unwrap().insert(first).unwrap_or_else(|| {
+                        panic!("Expected first observation to match root, got {:?}", first);
+                    });
 
                 'observe: for obs in most.into_iter() {
                     let mut locked_node = current_node.lock().unwrap();
