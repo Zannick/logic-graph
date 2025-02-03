@@ -7,7 +7,7 @@ use std::collections::HashSet;
 pub fn first_spot_with_locations_after_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
-    max_depth: i8,
+    max_depth: usize,
     max_time: u32,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
@@ -137,7 +137,7 @@ fn greedy_internal<W, T>(
     world: &W,
     mut ctx: ContextWrapper<T>,
     max_time: u32,
-    max_depth: i8,
+    max_depth: usize,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World,
@@ -164,7 +164,7 @@ pub fn greedy_search<W, T>(
     world: &W,
     ctx: &ContextWrapper<T>,
     max_time: u32,
-    max_depth: i8,
+    max_depth: usize,
 ) -> Result<ContextWrapper<T>, ContextWrapper<T>>
 where
     W: World,

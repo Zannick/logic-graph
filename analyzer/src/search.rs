@@ -236,6 +236,28 @@ where
     results
 }
 
+#[derive(Copy, Clone)]
+pub struct SearchOptions {
+    pub mutate_max_depth: usize,
+    pub mutate_max_states: usize,
+    pub local_max_depth: usize,
+    pub local_max_states: usize,
+    pub greedy_max_depth: usize,
+    pub greedy_max_states: usize,
+}
+impl Default for SearchOptions {
+    fn default() -> Self {
+        SearchOptions {
+            mutate_max_depth: MAX_DEPTH_FOR_ONE_LOC,
+            mutate_max_states: MAX_STATES_FOR_ONE_LOC,
+            local_max_depth: MAX_DEPTH_FOR_ONE_LOC,
+            local_max_states: MAX_STATES_FOR_ONE_LOC,
+            greedy_max_depth: MAX_GREEDY_DEPTH,
+            greedy_max_states: MAX_STATES_FOR_ONE_LOC,
+        }
+    }
+}
+
 pub struct Search<'a, W, T, TM, DM>
 where
     W: World,
@@ -251,6 +273,9 @@ where
     direct_paths: DirectPaths<W, T, DM>,
     queue: RocksBackedQueue<'a, W, T>,
     solution_cvar: Condvar,
+    options: SearchOptions,
+
+    // stats
     iters: AtomicUsize,
     deadends: AtomicU32,
     greedies: AtomicUsize,
@@ -282,6 +307,7 @@ where
         ctx: T,
         routes: Vec<ContextWrapper<T>>,
         db_path: P,
+        options: SearchOptions,
     ) -> Result<Search<'a, W, T, TM, DM>, std::io::Error>
     where
         P: AsRef<Path>,
@@ -390,6 +416,7 @@ where
             direct_paths,
             queue,
             solution_cvar: Condvar::new(),
+            options,
             iters: 0.into(),
             deadends: 0.into(),
             held: 0.into(),
@@ -1104,8 +1131,8 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            MAX_DEPTH_FOR_ONE_LOC,
-                            MAX_STATES_FOR_ONE_LOC,
+                            self.options.mutate_max_depth,
+                            self.options.mutate_max_states,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
                             &self.direct_paths,
@@ -1125,8 +1152,8 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            MAX_DEPTH_FOR_ONE_LOC,
-                            MAX_STATES_FOR_ONE_LOC,
+                            self.options.mutate_max_depth,
+                            self.options.mutate_max_states,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
                             &self.direct_paths,
@@ -1170,8 +1197,8 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            MAX_DEPTH_FOR_ONE_LOC,
-                            MAX_STATES_FOR_ONE_LOC,
+                            self.options.mutate_max_depth,
+                            self.options.mutate_max_states,
                             sol,
                             self.queue.db().scorer().get_algo(),
                             &self.direct_paths,
@@ -1249,11 +1276,11 @@ where
             loc.id(),
             max_time,
             if current_mode == SearchMode::GreedyMax {
-                MAX_GREEDY_DEPTH
+                self.options.greedy_max_depth
             } else {
-                MAX_DEPTH_FOR_ONE_LOC
+                self.options.mutate_max_depth
             },
-            MAX_STATES_FOR_ONE_LOC,
+            self.options.mutate_max_states,
             self.queue.db().scorer().get_algo(),
             &self.direct_paths,
         );

@@ -7,7 +7,7 @@ use crate::matchertrie::MatcherTrie;
 use crate::minimize::*;
 use crate::observer::{debug_observations, record_observations, TrieMatcher};
 use crate::route::*;
-use crate::search::Search;
+use crate::search::{Search, SearchOptions};
 use crate::solutions::{write_graph, SolutionSuffix};
 use crate::world::*;
 use clap::{Parser, Subcommand};
@@ -19,7 +19,9 @@ use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
 
-static MUTATE_MAX_DEPTH: usize = 4;
+static DEFAULT_MAX_DEPTH: usize = 4;
+static GREEDY_MAX_DEPTH: usize = 9;
+static SEARCH_MAX_STATES: usize = 16_384;
 static MUTATE_MAX_STATES: usize = 8_192;
 
 #[derive(Parser)]
@@ -57,6 +59,30 @@ pub enum Commands {
         /// Directory in which to place the databases
         #[arg(long, value_name = "DIR")]
         db: Option<PathBuf>,
+
+        /// Max number of actions in a single local search step
+        #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
+        local_max_depth: usize,
+
+        /// Max number of actions in a single local mutate step
+        #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
+        mutate_max_depth: usize,
+
+        /// Max number of actions in a single local greedy search step
+        #[arg(long, default_value_t = GREEDY_MAX_DEPTH)]
+        greedy_max_depth: usize,
+
+        /// Max number of states to process in a single local search step
+        #[arg(long, default_value_t = SEARCH_MAX_STATES)]
+        local_max_states: usize,
+
+        /// Max number of states to process in a single local mutate step
+        #[arg(long, default_value_t = SEARCH_MAX_STATES)]
+        mutate_max_states: usize,
+
+        /// Max number of states to process in a single local search step
+        #[arg(long, default_value_t = SEARCH_MAX_STATES)]
+        greedy_max_states: usize,
     },
 
     /// evaluates a route and shows stepwise diffs
@@ -71,6 +97,10 @@ pub enum Commands {
         /// text file with route to start from
         #[arg(value_name = "FILE")]
         route: Option<PathBuf>,
+
+        /// Max number of actions in a single step
+        #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
+        max_depth: usize,
     },
 
     /// Attempts to minimize the given route (must be a winning route)
@@ -78,6 +108,14 @@ pub enum Commands {
         /// text file with winning route
         #[arg(value_name = "FILE")]
         route: PathBuf,
+
+        /// Max number of actions in a single local mutate step
+        #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
+        max_depth: usize,
+
+        /// Max number of states to process in a single local mutate step
+        #[arg(long, default_value_t = MUTATE_MAX_STATES)]
+        max_states: usize,
     },
 
     /// Creates a graph file of the given route (must be a winning route)
@@ -125,7 +163,16 @@ where
     log::info!("{:?}", std::env::args());
 
     match &args.command {
-        Commands::Search { routes, db } => {
+        Commands::Search {
+            routes,
+            db,
+            mutate_max_depth,
+            local_max_depth,
+            greedy_max_depth,
+            local_max_states,
+            mutate_max_states,
+            greedy_max_states,
+        } => {
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
 
@@ -144,6 +191,14 @@ where
                 startctx,
                 route_ctxs,
                 db.as_ref().unwrap_or(&".db".into()),
+                SearchOptions {
+                    mutate_max_depth: *mutate_max_depth,
+                    mutate_max_states: *mutate_max_states,
+                    local_max_depth: *local_max_depth,
+                    local_max_states: *local_max_states,
+                    greedy_max_depth: *greedy_max_depth,
+                    greedy_max_states: *greedy_max_states,
+                },
             )?;
             search.search()
         }
@@ -159,14 +214,14 @@ where
             );
             Ok(())
         }
-        Commands::Greedy { route } => {
+        Commands::Greedy { route, max_depth } => {
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let result = if let Some(r) = route {
                 let ctx =
                     route_from_string(world, &startctx, &read_from_file(r), scorer.get_algo())
                         .unwrap();
-                greedy_search(world, &ctx, u32::MAX, 2)
+                greedy_search(world, &ctx, u32::MAX, *max_depth)
             } else {
                 greedy_search_from(world, &startctx, u32::MAX)
             };
@@ -180,7 +235,7 @@ where
             }
             Ok(())
         }
-        Commands::Minimize { route } => {
+        Commands::Minimize { route , max_depth, max_states} => {
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, &startctx);
@@ -220,8 +275,8 @@ where
                 world,
                 &startctx,
                 solution.elapsed,
-                MUTATE_MAX_DEPTH,
-                MUTATE_MAX_STATES,
+                *max_depth,
+                *max_states,
                 solution.clone(),
                 scorer.get_algo(),
                 &direct_paths,
@@ -267,8 +322,8 @@ where
                 world,
                 &startctx,
                 solution.elapsed,
-                MUTATE_MAX_DEPTH,
-                MUTATE_MAX_STATES,
+                *max_depth,
+                *max_states,
                 solution.clone(),
                 scorer.get_algo(),
                 &direct_paths,
@@ -290,8 +345,8 @@ where
                 world,
                 &startctx,
                 solution.elapsed,
-                MUTATE_MAX_DEPTH,
-                MUTATE_MAX_STATES,
+                *max_depth,
+                *max_states,
                 solution.clone(),
                 scorer.get_algo(),
                 &direct_paths,
