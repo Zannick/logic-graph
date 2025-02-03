@@ -22,7 +22,15 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
+static MAX_DEPTH_FOR_ONE_LOC: usize = 4;
+static MAX_GREEDY_DEPTH: usize = 9;
 static MAX_STATES_FOR_ONE_LOC: usize = 16_384;
+
+static QUEUE_CAPACITY: usize = 2_097_152;
+static QUEUE_MIN_PER_EVICTION: usize = 262_144;
+static QUEUE_MAX_PER_EVICTION: usize = 524_288;
+static QUEUE_MIN_PER_RESHUFFLE: usize = 4_096;
+static QUEUE_MAX_PER_RESHUFFLE: usize = 16_384;
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 enum SearchMode {
@@ -365,11 +373,11 @@ where
             world,
             &startctx,
             initial_max_time,
-            2_097_152,
-            262_144,
-            524_288,
-            4_096,
-            16_384,
+            QUEUE_CAPACITY,
+            QUEUE_MIN_PER_EVICTION,
+            QUEUE_MAX_PER_EVICTION,
+            QUEUE_MIN_PER_RESHUFFLE,
+            QUEUE_MAX_PER_RESHUFFLE,
         )
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();
@@ -1096,7 +1104,7 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            4,
+                            MAX_DEPTH_FOR_ONE_LOC,
                             MAX_STATES_FOR_ONE_LOC,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
@@ -1117,7 +1125,7 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            4,
+                            MAX_DEPTH_FOR_ONE_LOC,
                             MAX_STATES_FOR_ONE_LOC,
                             sol.clone(),
                             self.queue.db().scorer().get_algo(),
@@ -1162,7 +1170,7 @@ where
                             self.world,
                             self.startctx.get(),
                             self.queue.max_time(),
-                            4,
+                            MAX_DEPTH_FOR_ONE_LOC,
                             MAX_STATES_FOR_ONE_LOC,
                             sol,
                             self.queue.db().scorer().get_algo(),
@@ -1241,9 +1249,9 @@ where
             loc.id(),
             max_time,
             if current_mode == SearchMode::GreedyMax {
-                9
+                MAX_GREEDY_DEPTH
             } else {
-                4
+                MAX_DEPTH_FOR_ONE_LOC
             },
             MAX_STATES_FOR_ONE_LOC,
             self.queue.db().scorer().get_algo(),

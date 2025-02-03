@@ -19,6 +19,9 @@ use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
 
+static MUTATE_MAX_DEPTH: usize = 4;
+static MUTATE_MAX_STATES: usize = 8_192;
+
 #[derive(Parser)]
 #[command(about = "Graph algorithm analysis", long_about = None)]
 pub struct Cli {
@@ -217,8 +220,8 @@ where
                 world,
                 &startctx,
                 solution.elapsed,
-                4,
-                8_192,
+                MUTATE_MAX_DEPTH,
+                MUTATE_MAX_STATES,
                 solution.clone(),
                 scorer.get_algo(),
                 &direct_paths,
@@ -264,8 +267,8 @@ where
                 world,
                 &startctx,
                 solution.elapsed,
-                4,
-                8_192,
+                MUTATE_MAX_DEPTH,
+                MUTATE_MAX_STATES,
                 solution.clone(),
                 scorer.get_algo(),
                 &direct_paths,
@@ -287,8 +290,8 @@ where
                 world,
                 &startctx,
                 solution.elapsed,
-                4,
-                8_192,
+                MUTATE_MAX_DEPTH,
+                MUTATE_MAX_STATES,
                 solution.clone(),
                 scorer.get_algo(),
                 &direct_paths,
