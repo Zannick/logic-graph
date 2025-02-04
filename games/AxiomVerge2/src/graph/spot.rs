@@ -14344,7 +14344,7 @@ static SPOT_DEFS: [SpotDef; 3504] = [
     SpotDef {
         id: SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
         loc_range: Some((LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown, LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown)),
-        exit_range: None,
+        exit_range: Some((ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1, ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1)),
         action_range: None,
     },
     SpotDef {

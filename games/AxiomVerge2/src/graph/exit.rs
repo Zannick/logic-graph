@@ -2635,6 +2635,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::access_glacier_sea_burial_rock(ctx, world),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::access_glacier_sea_burial_rock(ctx, world),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1 => rules::access_amashilama(ctx, world),
             ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1 => true,
             ExitId::Glacier__Sea_Burial__East_14__ex__The_Big_Drop__West_14_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::access_invoke_hover(ctx, world),
@@ -5538,6 +5539,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::observe_access_glacier_sea_burial_rock(ctx, world, full_obs),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1 => rules::observe_access_amashilama(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::observe_access_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, full_obs),
@@ -24118,6 +24120,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Revival__West_9__ex__Overhang_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Left__ex__Breakable_Rock_Right_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Breakable_Rock_Right__ex__Breakable_Rock_Left_1 => rules::explain_glacier_sea_burial_rock(ctx, world, edict),
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1 => rules::explain_amashilama(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Left__ex__Grate_Right_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => rules::explain_underwater_movement_or_invoke_hook_or_invoke_grab(ctx, world, edict),
@@ -27103,7 +27106,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3702] = [
+static EXIT_DEFS: [Exit; 3703] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -46215,6 +46218,13 @@ static EXIT_DEFS: [Exit; 3702] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1,
+        time: 47150,
+        dest: SpotId::Glacier__Revival__Save_Point,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Glacier__Sea_Burial__Deep_Cache__ex__Right_Center_Rock_1,
         time: 3000,
         dest: SpotId::Glacier__Sea_Burial__Right_Center_Rock,
@@ -54672,6 +54682,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__The_Big_Drop__West_14__ex__Sea_Burial__East_14_1 | ExitId:: Glacier__The_Big_Drop__West_14__ex__Breakable_Rock_Right_1 => SpotId::Glacier__The_Big_Drop__West_14,
         ExitId::Glacier__The_Big_Drop__Breakable_Rock_Right__ex__West_14_1 | ExitId:: Glacier__The_Big_Drop__Breakable_Rock_Right__ex__Unstable_Footing_1 => SpotId::Glacier__The_Big_Drop__Breakable_Rock_Right,
         ExitId::Glacier__The_Big_Drop__West_11_Door__ex__Hammonds_End__East_11_Door_1 | ExitId:: Glacier__The_Big_Drop__West_11_Door__ex__East_1 => SpotId::Glacier__The_Big_Drop__West_11_Door,
+        ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1 => SpotId::Glacier__Sea_Burial__Collapsing_Ceiling,
         ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => SpotId::Glacier__Sea_Burial__West_13,
         ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => SpotId::Glacier__Sea_Burial__Grate_Ledge,
         ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 | ExitId:: Glacier__Sea_Burial__Grate_Right__ex__Grate_Left_1 => SpotId::Glacier__Sea_Burial__Grate_Right,

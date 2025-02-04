@@ -10147,6 +10147,7 @@ impl world::World for World {
             ExitId::Glacier__Revival__Pillar_Step__ex__Dock_Outside__Upper_West_Hill_1 => true,
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Platform_1 => true,
             ExitId::Glacier__Revival__Mid_air__ex__Dock_Outside__Ruins_Stairs_1 => true,
+            ExitId::Glacier__Sea_Burial__Collapsing_Ceiling__ex__Glacier__Revival__Save_Point_1 => true,
             ExitId::Glacier__Sea_Burial__West_13__ex__Boomerang_Antechamber__East_13_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Ledge__ex__Left_Center_Rock_1 => true,
             ExitId::Glacier__Sea_Burial__Grate_Right__ex__Grate_Ledge_1 => true,

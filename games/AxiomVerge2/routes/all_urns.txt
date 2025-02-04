@@ -3,7 +3,7 @@
 * Collect Station_Power from Antarctica > Power Room > Switch > Flip
   EarthSavewarp to Antarctica > East > Save Point
 * Collect Compass from Glacier > Compass Room > Center > Table
-* Collect Amashilama from Glacier > Sea Burial > Collapsing Ceiling > Drown ==> Glacier > Revival > Save Point
+* Collect Amashilama from Glacier > Sea Burial > Collapsing Ceiling > Drown
 * Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
 * Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
 * Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab

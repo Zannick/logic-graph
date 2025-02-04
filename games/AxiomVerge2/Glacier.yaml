@@ -624,11 +624,14 @@ areas:
   spots:
     - name: Collapsing Ceiling
       coord: [40.95, 12.9]
-      hybrid:
+      locations:
         - name: Drown  # This is technically the next grid over, but it's a cutscene really
-          to: Glacier > Revival > Save Point
-          req: NOT Amashilama
           item: Amashilama
+          tags: [story]
+          time: 0
+      exits:
+        - to: Glacier > Revival > Save Point
+          req: Amashilama
           time: 47.15
     - name: West 13
       coord: [39.05, 12.75]

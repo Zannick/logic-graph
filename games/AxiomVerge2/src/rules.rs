@@ -284,6 +284,10 @@ pub fn access_amagi_wiggly_room_gate(ctx: &Context, world: &World) -> bool {
     // Amagi_Wiggly_Room_Gate
     ctx.has(Item::Amagi_Wiggly_Room_Gate)
 }
+pub fn access_amashilama(ctx: &Context, world: &World) -> bool {
+    // Amashilama
+    ctx.has(Item::Amashilama)
+}
 pub fn access_annuna__boss_gate__ctx__door(ctx: &Context, world: &World) -> bool {
     // ^_door
     ctx.annuna__boss_gate__ctx__door()
@@ -5368,6 +5372,18 @@ pub fn explain_amagi_wiggly_room_gate(
         let h = ctx.has(Item::Amagi_Wiggly_Room_Gate);
         edict.insert("Amagi_Wiggly_Room_Gate", format!("{}", h));
         (h, vec!["Amagi_Wiggly_Room_Gate"])
+    }
+}
+pub fn explain_amashilama(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Amashilama
+    {
+        let h = ctx.has(Item::Amashilama);
+        edict.insert("Amashilama", format!("{}", h));
+        (h, vec!["Amashilama"])
     }
 }
 pub fn explain_annuna__boss_gate__ctx__door(
@@ -21399,6 +21415,17 @@ pub fn observe_access_amagi_wiggly_room_gate(
     {
         full_obs.observe_amagi_wiggly_room_gate();
         ctx.has(Item::Amagi_Wiggly_Room_Gate)
+    }
+}
+pub fn observe_access_amashilama(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Amashilama
+    {
+        full_obs.observe_amashilama();
+        ctx.has(Item::Amashilama)
     }
 }
 pub fn observe_access_annuna__boss_gate__ctx__door(
