@@ -14,7 +14,7 @@ use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
-use std::collections::{BinaryHeap, HashMap, HashSet};
+use std::collections::{BinaryHeap, HashMap};
 use std::sync::atomic::Ordering;
 
 static INITIAL_CAPACITY: usize = 1_024;
@@ -267,8 +267,9 @@ where
     }
 
     Err(format!(
-        "Ran out of elements with {} iters left",
-        spot_heap.capacity_left()
+        "Ran out of elements with {} iters left. Visits:\n{}",
+        spot_heap.capacity_left(),
+        report_keys_seen(spot_heap.into_unique_key_map())
     ))
 }
 
@@ -425,8 +426,9 @@ where
     }
 
     Err(format!(
-        "Ran out of elements with {} iters left",
-        spot_heap.capacity_left()
+        "Ran out of elements with {} iters left. Visits:\n{}",
+        spot_heap.capacity_left(),
+        report_keys_seen(spot_heap.into_unique_key_map())
     ))
 }
 
@@ -607,8 +609,9 @@ where
     } else {
         direct_paths.deadends.fetch_add(1, Ordering::Release);
         Err(format!(
-            "Ran out of elements with {} iters left",
-            spot_heap.capacity_left()
+            "Ran out of elements with {} iters left. Visits:\n{}",
+            spot_heap.capacity_left(),
+            report_keys_seen(spot_heap.into_unique_key_map())
         ))
     }
 }
@@ -989,46 +992,22 @@ where
     vec.join("\n")
 }
 
-fn explain_unused_links<W, T, P>(world: &W, states_seen: HashMap<T, P, CommonHasher>) -> String
+fn report_keys_seen<K, P>(spots_seen: HashMap<(K, usize), P, CommonHasher>) -> String
 where
-    W: World,
-    T: Ctx<World = W>,
-    W::Location: Location<Context = T>,
+    K: std::hash::Hash + std::fmt::Display + Eq + Ord,
 {
-    let known_spots: HashSet<<W::Exit as Exit>::SpotId, CommonHasher> =
-        states_seen.iter().map(|(c, _)| c.position()).collect();
-    let mut vec = Vec::new();
-    for (ctx, _) in states_seen {
-        let movements = ctx.get_movement_state(world);
-        for spot in world.get_area_spots(ctx.position()) {
-            if !known_spots.contains(spot) {
-                for ce in world.get_condensed_edges_from(ctx.position()) {
-                    if ce.dst == *spot {
-                        vec.push(format!(
-                            "CE not available from {}: {:?}\n{}",
-                            ctx.position(),
-                            ce,
-                            ce.explain(world, &ctx, movements)
-                        ));
-                    }
-                }
-            }
-        }
-
-        for exit in world.get_spot_exits(ctx.position()) {
-            if !known_spots.contains(&exit.dest()) {
-                vec.push(format!(
-                    "{}: exit not usable:\n{}",
-                    exit.id(),
-                    exit.explain(&ctx, world)
-                ));
-            }
+    let mut heatmap = new_hashmap();
+    for ((s, _), _) in spots_seen {
+        if let Some(ct) = heatmap.get_mut(&s) {
+            *ct += 1;
+        } else {
+            heatmap.insert(s, 1);
         }
     }
-    if vec.len() > 20 {
-        let excess = vec.len() - 20;
-        vec.truncate(20);
-        vec.push(format!("...and {} more", excess));
-    }
-    vec.join("\n")
+    let mut vec: Vec<(_, usize)> = heatmap.into_iter().collect();
+    vec.sort_unstable();
+    vec.into_iter()
+        .map(|(s, ct)| format!("{}: {}", s, ct))
+        .collect::<Vec<_>>()
+        .join("\n")
 }

@@ -60,15 +60,15 @@ pub enum Commands {
         #[arg(long, value_name = "DIR")]
         db: Option<PathBuf>,
 
-        /// Max number of actions in a single local search step
+        /// Max number of actions/warps in a single local search step
         #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
         local_max_depth: usize,
 
-        /// Max number of actions in a single local mutate step
+        /// Max number of actions/warps in a single local mutate step
         #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
         mutate_max_depth: usize,
 
-        /// Max number of actions in a single local greedy search step
+        /// Max number of actions/warps in a single local greedy search step
         #[arg(long, default_value_t = GREEDY_MAX_DEPTH)]
         greedy_max_depth: usize,
 
@@ -98,7 +98,7 @@ pub enum Commands {
         #[arg(value_name = "FILE")]
         route: Option<PathBuf>,
 
-        /// Max number of actions in a single step
+        /// Max number of actions/warps in a single step
         #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
         max_depth: usize,
     },
@@ -109,7 +109,7 @@ pub enum Commands {
         #[arg(value_name = "FILE")]
         route: PathBuf,
 
-        /// Max number of actions in a single local mutate step
+        /// Max number of actions/warps in a single local mutate step
         #[arg(long, default_value_t = DEFAULT_MAX_DEPTH)]
         max_depth: usize,
 
