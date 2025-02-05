@@ -279,6 +279,7 @@ where
     iters: AtomicUsize,
     deadends: AtomicU32,
     greedies: AtomicUsize,
+    greedy_misses: AtomicUsize,
     greedy_in_comm: AtomicUsize,
     greedy_out_comm: AtomicUsize,
     held: AtomicUsize,
@@ -421,6 +422,7 @@ where
             deadends: 0.into(),
             held: 0.into(),
             greedies: 0.into(),
+            greedy_misses: 0.into(),
             greedy_in_comm: 0.into(),
             greedy_out_comm: 0.into(),
             last_clean: 0.into(),
@@ -961,6 +963,7 @@ where
                                     });
 
                                 let max_time = self.queue.max_time();
+                                let found = AtomicBool::default();
 
                                 rayon::join(
                                     || {
@@ -972,7 +975,10 @@ where
                                                 max_time,
                                                 current_mode,
                                             ) {
-                                                Ok(true) => incr_organic(progress),
+                                                Ok(true) => {
+                                                    found.store(true, Ordering::Release);
+                                                    incr_organic(progress)
+                                                }
                                                 Err(e) => greedy_error(e),
                                                 _ => (),
                                             }
@@ -989,7 +995,10 @@ where
                                                     max_time,
                                                     current_mode,
                                                 ) {
-                                                    Ok(true) => Some(incr_organic(progress)),
+                                                    Ok(true) => {
+                                                        found.store(true, Ordering::Release);
+                                                        Some(incr_organic(progress))
+                                                    }
                                                     Err(e) => {
                                                         greedy_error(e);
                                                         None
@@ -1004,6 +1013,9 @@ where
                                 );
 
                                 self.greedies.fetch_add(1, Ordering::Release);
+                                if !found.load(Ordering::Acquire) {
+                                    self.greedy_misses.fetch_add(1, Ordering::Release);
+                                }
                             });
                         } else {
                             let results: Vec<_> = items
