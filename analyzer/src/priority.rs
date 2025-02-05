@@ -12,6 +12,9 @@ use std::hash::{BuildHasher, Hash};
 /// Pushing an item that has already been added to the queue will have no effect if the priority is equal or higher
 /// to the minimum priority seen for that item's unique key previously. If the priority is lower and the element is
 /// still in the queue, its priority will be updated without increasing the queue length.
+/// 
+/// If there can be multiple elements with the same unique key, any existing elements still in the queue when a
+/// lower priority element with the same unique key is added will remain there.
 pub struct LimitedPriorityQueue<I: Eq + Hash, J: Clone + Eq + Hash, P: Ord, H = CommonHasher> {
     min_pmap: HashMap<J, P, H>,
     queue: DoublePriorityQueue<I, P, H>,

@@ -1,9 +1,12 @@
 #![allow(unused)]
 
-use analyzer::access::move_to;
+use analyzer::access::{access_location_after_actions_heatmap, move_to};
 use analyzer::context::{ContextWrapper, Ctx, History, Wrapper};
+use analyzer::direct::DirectPaths;
+use analyzer::estimates::ContextScorer;
 use analyzer::matchertrie::IntegerObservation;
 use analyzer::observer::Observer;
+use analyzer::route::PartialRoute;
 use analyzer::steiner::{build_simple_graph, EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use analyzer::world::{Accessible, Action, Exit, Location, Warp, World as _};
 use analyzer::*;
@@ -26,7 +29,17 @@ lazy_static! {
         world
     };
     static ref SPATHS: ShortestPaths<NodeId<World>, EdgeId<World>> =
-        ShortestPaths::from_graph(build_simple_graph(&**WORLD, &Context::default()));
+        { ShortestPaths::from_graph(build_simple_graph(&**WORLD, &Context::default(), false)) };
+    static ref DIRECT_PATHS: DirectPaths<
+        World,
+        Context,
+        ObservationMatcher<PartialRoute<Context>, Option<PartialRoute<Context>>>,
+    > = {
+        DirectPaths::new(ContextScorer::shortest_paths_tree_free_edges(
+            &**WORLD,
+            &Context::default(),
+        ))
+    };
 }
 
 #[test]
@@ -349,14 +362,17 @@ fn test_observations() {
     assert!(vec.contains(&OneObservation::Mode(enums::Mode::Drone)));
 
     ctx.set_position(SpotId::Menu__Kiengir_Map__Glacier_Revival, &**WORLD);
-    let ft = History::E(
-        ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1
-    );
+    let ft =
+        History::E(ExitId::Menu__Kiengir_Map__Glacier_Revival__ex__Glacier__Revival__Save_Point_1);
     assert!(ctx.observe_replay(&**WORLD, ft, &mut full_obs));
     full_obs.apply_observations();
     let vec = full_obs.to_vec(&ctx);
     let strvec = format!("{:?}", vec);
-    assert!(strvec.contains("MAP__GLACIER__REVIVAL__SAVE"), "map should be observed in: {}", strvec);
+    assert!(
+        strvec.contains("MAP__GLACIER__REVIVAL__SAVE"),
+        "map should be observed in: {}",
+        strvec
+    );
 
     ctx.set_position(SpotId::Glacier__Vertical_Room__Peak, &**WORLD);
     let cskip = History::V(
@@ -370,5 +386,60 @@ fn test_observations() {
     let strvec = format!("{:?}", vec);
     // This is applied to ctx without any changes due to observe_replay.
     assert!(vec.contains(&OneObservation::FlaskGe(0, true)));
-    assert!(strvec.contains("FAST_TRAVEL"), "fast travel should be observed in: {}", strvec);
+    assert!(
+        strvec.contains("FAST_TRAVEL"),
+        "fast travel should be observed in: {}",
+        strvec
+    );
+}
+
+#[test]
+fn test_greedy_step() {
+    let mut ctx = Context::default();
+    ctx.energy = 300;
+    ctx.flasks = 10;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
+    ctx.add_item(Item::Fast_Travel);
+    ctx.add_item(Item::Flask);
+    ctx.add_item(Item::Remote_Drone);
+    ctx.add_item(Item::Anuman);
+    ctx.add_item(Item::Nanite_Mist);
+    ctx.add_item(Item::Exit_Breach);
+    ctx.add_item(Item::Breach_Sight);
+    ctx.add_item(Item::Breach_Attractor);
+    ctx.add_item(Item::Shockwave);
+    ctx.add_item(Item::Drone_Hover);
+    ctx.add_item(Item::Slingshot_Hook);
+    ctx.add_item(Item::Slingshot_Charge);
+    ctx.add_item(Item::Nano_Lattice_2);
+    ctx.add_item(Item::Glacier_Breach_Spidery_Connector_Gate);
+    ctx.set_mode(enums::Mode::Drone);
+    ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
+    // add map tiles
+    ctx.set_position(SpotId::Glacier__Revival__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Annuna__Upper_Save__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Annuna__Center_Save__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Ebih__Base_Camp__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Irikar__Hub__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Giguna__Ruins_Top__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Giguna_Breach__Peak__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Glacier_Breach__South_Save__Save_Point, &**WORLD);
+    ctx.set_position(SpotId::Glacier_Breach__West_Save__Save_Point, &**WORLD);
+
+    ctx.set_position(SpotId::Annuna__Egg_Room__Corner_Platform, &**WORLD);
+    ctx.set_position(SpotId::Annuna__Egg_Room__East, &**WORLD);
+    ctx.save = SpotId::Irikar__Hub__Save_Point;
+
+    access_location_after_actions_heatmap(
+        &**WORLD,
+        ContextWrapper::new(ctx),
+        LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn,
+        1u32 << 20,
+        5,
+        32768,
+        &SPATHS,
+        &DIRECT_PATHS,
+    )
+    .unwrap();
 }

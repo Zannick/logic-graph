@@ -247,7 +247,7 @@ where
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_SPOTS);
 
     if let Some(score) = score_func(&ctx) {
-        let unique_key = ctx.get().clone();
+        let unique_key = (ctx.get().position(), 0);
         spot_heap.push(ctx, unique_key, score);
     }
 
@@ -262,10 +262,14 @@ where
             &mut spot_heap,
             &score_func,
             W::same_area(ctx.get().position(), spot),
+            true,
         );
     }
 
-    Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
+    Err(format!(
+        "Ran out of elements with {} iters left",
+        spot_heap.capacity_left()
+    ))
 }
 
 pub fn nearest_location_by_heuristic<'w, W, T>(
@@ -385,7 +389,7 @@ where
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_LOCS);
 
     if let Some(score) = score_func(&ctx) {
-        let unique_key = ctx.get().clone();
+        let unique_key = (ctx.get().position(), 0);
         spot_heap.push(
             CtxWithActionCounter {
                 el: ctx,
@@ -405,14 +409,25 @@ where
         {
             return Ok(el.el);
         }
-        expand_astar(world, &el, max_time, &mut spot_heap, &score_func, false);
+        expand_astar(
+            world,
+            &el,
+            max_time,
+            &mut spot_heap,
+            &score_func,
+            false,
+            el.can_continue(max_depth),
+        );
 
         if el.can_continue(max_depth) {
             expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func);
         }
     }
 
-    Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
+    Err(format!(
+        "Ran out of elements with {} iters left",
+        spot_heap.capacity_left()
+    ))
 }
 
 fn access_check_after_actions<W, T, A, DM>(
@@ -421,7 +436,7 @@ fn access_check_after_actions<W, T, A, DM>(
     spot: <W::Exit as Exit>::SpotId,
     check: &A,
     access: impl FnOnce(&mut ContextWrapper<T>, &W, &A),
-    is_eligible: impl Fn(&T) -> bool,
+    mut is_eligible: impl FnMut(&T) -> bool,
     mut max_time: u32,
     max_depth: usize,
     max_states: usize,
@@ -519,7 +534,7 @@ where
     let hist_start = startctx.recent_history().len();
 
     if let Some(score) = score_func(&ctx) {
-        let unique_key = ctx.get().clone();
+        let unique_key = (ctx.get().position(), 0);
         spot_heap.push(
             CtxWithActionCounter {
                 el: ctx,
@@ -556,6 +571,7 @@ where
             &mut spot_heap,
             &score_func,
             W::same_area(ctx.get().position(), spot),
+            el.can_continue(max_depth),
         );
 
         if el.can_continue(max_depth) {
@@ -590,7 +606,10 @@ where
         })
     } else {
         direct_paths.deadends.fetch_add(1, Ordering::Release);
-        Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
+        Err(format!(
+            "Ran out of elements with {} iters left",
+            spot_heap.capacity_left()
+        ))
     }
 }
 
@@ -748,6 +767,106 @@ where
         shortest_paths,
         direct_paths,
     )
+}
+
+// Provides a counter of spots checked
+pub fn access_location_after_actions_heatmap<W, T, DM>(
+    world: &W,
+    ctx: ContextWrapper<T>,
+    loc_id: <W::Location as Location>::LocId,
+    max_time: u32,
+    max_depth: usize,
+    max_states: usize,
+    shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
+    direct_paths: &DirectPaths<W, T, DM>,
+) -> Result<ContextWrapper<T>, String>
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
+{
+    if ctx.get().visited(loc_id) {
+        return Ok(ctx);
+    }
+
+    let spot = world.get_location_spot(loc_id);
+    let loc = world.get_location(loc_id);
+    let mut heatmap = new_hashmap();
+    let start = ctx.get().position();
+    let _ctx = ctx.get().clone();
+    let goal = ExternalNodeId::Spot(spot);
+    type DistanceScore = (u32, OrderedFloat<f32>);
+
+    let res = access_check_after_actions(
+        world,
+        ctx,
+        spot,
+        loc,
+        ContextWrapper::visit,
+        |c| {
+            if let Some(ct) = heatmap.get_mut(&c.position()) {
+                *ct += 1;
+            } else {
+                heatmap.insert(c.position(), 1);
+            }
+            c.position() == spot && loc.can_access(c, world)
+        },
+        max_time,
+        max_depth,
+        max_states,
+        shortest_paths,
+        direct_paths,
+    );
+    let mut vec: Vec<(_, usize)> = heatmap.into_iter().collect();
+    vec.sort_unstable();
+    println!(
+        "Heatmap ({} -> {}, max depth {}, max states {})",
+        start, spot, max_depth, max_states
+    );
+    let len = vec.len();
+    let mut tct = 0;
+    for (s, ct) in vec {
+        let mut scores: Vec<Option<DistanceScore>> = vec![shortest_paths
+            .min_distance(ExternalNodeId::Spot(s), goal)
+            .map(|u| {
+                (
+                    u.try_into().unwrap(),
+                    OrderedFloat(W::spot_distance(s, spot)),
+                )
+            })];
+        // We need to take into account contextual warps which aren't otherwise part
+        // of a normal shortest paths graph. We do that by measuring the shortest path
+        // from their destination and adding in the warp time.
+        // TODO: Only do this on contextual warps.
+        for warp in world.get_warps() {
+            scores.push(
+                shortest_paths
+                    .min_distance(ExternalNodeId::Spot(warp.dest(&_ctx, world)), goal)
+                    .map(|u| {
+                        (
+                            warp.time(&_ctx, world) + <u64 as TryInto<u32>>::try_into(u).unwrap(),
+                            OrderedFloat(W::spot_distance(s, spot)),
+                        )
+                    }),
+            );
+        }
+        let sc = scores.into_iter().filter_map(|u| u).min();
+
+        println!(
+            "{} ({}): {}",
+            s,
+            if let Some((m, d)) = sc {
+                format!("{}, {}", m, d)
+            } else {
+                String::from("None")
+            },
+            ct
+        );
+        tct += ct;
+    }
+    println!("Total {} keys, {} states", len, tct);
+    res
 }
 
 pub fn all_visitable_locations<W, T>(world: &W, ctx: &T) -> Vec<<W::Location as Location>::LocId>
