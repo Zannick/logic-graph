@@ -1278,12 +1278,12 @@ where
             if current_mode == SearchMode::GreedyMax {
                 self.options.greedy_max_depth
             } else {
-                self.options.mutate_max_depth
+                self.options.local_max_depth
             },
             if current_mode == SearchMode::GreedyMax {
                 self.options.greedy_max_states
             } else {
-                self.options.mutate_max_states
+                self.options.local_max_states
             },
             self.queue.db().scorer().get_algo(),
             &self.direct_paths,
