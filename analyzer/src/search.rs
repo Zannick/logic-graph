@@ -894,7 +894,7 @@ where
                     SearchMode::Greedy => self
                         .queue
                         .pop_round_robin(self.organic_level.load(Ordering::Acquire) / 2),
-                    SearchMode::GreedyMax => self.queue.pop_max_progress(1),
+                    SearchMode::GreedyMax => self.queue.pop_max_progress(2),
                     SearchMode::Mode(n) => self.queue.pop_mode(n),
                     _ => self.queue.pop_round_robin(0),
                 };
@@ -1280,7 +1280,11 @@ where
             } else {
                 self.options.mutate_max_depth
             },
-            self.options.mutate_max_states,
+            if current_mode == SearchMode::GreedyMax {
+                self.options.greedy_max_states
+            } else {
+                self.options.mutate_max_states
+            },
             self.queue.db().scorer().get_algo(),
             &self.direct_paths,
         );
@@ -1432,7 +1436,7 @@ where
             "--- Round {} (solutions={}, unique={}, mut={}, limit={}ms, best={}ms) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
-            direct paths: hits={}, min hits={}, improves={}; size={}, values={}\n\
+            direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; size={}, values={}\n\
             Greedy stats: org level={}, steps done={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
@@ -1462,6 +1466,9 @@ where
             self.direct_paths.hits.load(Ordering::Acquire),
             self.direct_paths.min_hits.load(Ordering::Acquire),
             self.direct_paths.improves.load(Ordering::Acquire),
+            self.direct_paths.fails.load(Ordering::Acquire),
+            self.direct_paths.expires.load(Ordering::Acquire),
+            self.direct_paths.deadends.load(Ordering::Acquire),
             direct_size,
             direct_values,
             self.organic_level.load(Ordering::Acquire),

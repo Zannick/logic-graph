@@ -497,6 +497,7 @@ where
                         access(&mut res, world, check);
                         Ok(res)
                     } else {
+                        direct_paths.fails.fetch_add(1, Ordering::Release);
                         Err(format!(
                             "best partial route is shortest path but was ineligible for access"
                         ))
@@ -562,6 +563,7 @@ where
         }
 
         if spot_heap.is_expired() {
+            direct_paths.expires.fetch_add(1, Ordering::Release);
             if best.is_none() {
                 return Err(format!(
                     "Excessive A* search stopping at {} states explored",
@@ -580,12 +582,14 @@ where
                 access(&mut res, world, check);
                 Ok(res)
             } else {
+                direct_paths.fails.fetch_add(1, Ordering::Release);
                 Err(format!(
                     "best partial route is shortest path but was ineligible for access"
                 ))
             }
         })
     } else {
+        direct_paths.deadends.fetch_add(1, Ordering::Release);
         Err(explain_unused_links(world, spot_heap.into_unique_key_map()))
     }
 }

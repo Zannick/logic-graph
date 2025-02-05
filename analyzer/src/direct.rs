@@ -25,6 +25,10 @@ where
     pub hits: AtomicUsize,
     pub min_hits: AtomicUsize,
     pub improves: AtomicUsize,
+
+    pub fails: AtomicUsize,
+    pub expires: AtomicUsize,
+    pub deadends: AtomicUsize,
 }
 
 // Given a route A -> B -> ... -> X
@@ -45,6 +49,9 @@ where
             hits: 0.into(),
             min_hits: 0.into(),
             improves: 0.into(),
+            fails: 0.into(),
+            expires: 0.into(),
+            deadends: 0.into(),
         }
     }
 
