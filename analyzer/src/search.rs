@@ -1449,7 +1449,7 @@ where
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; size={}, values={}\n\
-            Greedy stats: org level={}, steps done={}, proc_in={}, proc_out={}\n\
+            Greedy stats: org level={}, steps done={}, misses={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
@@ -1485,6 +1485,7 @@ where
             direct_values,
             self.organic_level.load(Ordering::Acquire),
             self.greedies.load(Ordering::Acquire),
+            self.greedy_misses.load(Ordering::Acquire),
             self.greedy_in_comm.load(Ordering::Acquire),
             self.greedy_out_comm.load(Ordering::Acquire),
             iskips,
