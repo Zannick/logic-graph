@@ -8075,6 +8075,7 @@ impl std::str::FromStr for SpotId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "None" => Ok(SpotId::None),
             "Amagi Breach > Center Ruins > Cache" => Ok(SpotId::Amagi_Breach__Center_Ruins__Cache),
             "Amagi Breach > Center Ruins > Center Shaft Bottom" => Ok(SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom),
             "Amagi Breach > Center Ruins > Center Shaft Top" => Ok(SpotId::Amagi_Breach__Center_Ruins__Center_Shaft_Top),

@@ -34,8 +34,13 @@ impl std::str::FromStr for {{ name }} {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+%% if default or default_value
+            "{{ default_value }}"{% if allow_lower %} | "{{ default_value | lower }}"{% endif %} => Ok({{ name }}::{{ default_value|construct_id|camelize if camelize else default_value }}),
+%% endif
 %% for v in values
+%% if not default_value or (v.id or v|construct_id) != default_value|construct_id
             "{{ v.fullname or v.name or v }}"{% if allow_lower %} | "{{ (v.fullname or v.name or v)|lower }}"{% endif %} => Ok({{ name }}::{{ v.id or (v|construct_id if not camelize else v|construct_id|camelize) }}),
+%% endif
 %% endfor
             _ => Err(format!("Could not recognize as a {{ name }}: {}", s)),
         }

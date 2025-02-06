@@ -40,8 +40,8 @@ impl std::str::FromStr for Mode {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Drone" | "drone" => Ok(Mode::Drone),
             "Indra" | "indra" => Ok(Mode::Indra),
+            "Drone" | "drone" => Ok(Mode::Drone),
             _ => Err(format!("Could not recognize as a Mode: {}", s)),
         }
     }
@@ -77,11 +77,11 @@ impl std::str::FromStr for Realm {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "Main" | "main" => Ok(Realm::Main),
             "Breach" | "breach" => Ok(Realm::Breach),
             "Emergence" | "emergence" => Ok(Realm::Emergence),
             "Filter" | "filter" => Ok(Realm::Filter),
             "Interior" | "interior" => Ok(Realm::Interior),
-            "Main" | "main" => Ok(Realm::Main),
             "Map" | "map" => Ok(Realm::Map),
             "Menu" | "menu" => Ok(Realm::Menu),
             _ => Err(format!("Could not recognize as a Realm: {}", s)),

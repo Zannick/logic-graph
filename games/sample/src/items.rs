@@ -158,6 +158,7 @@ impl std::str::FromStr for Item {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "None" => Ok(Item::None),
             "Arrows_10" => Ok(Item::Arrows_10),
             "Biggoron_Sword" => Ok(Item::Biggoron_Sword),
             "Blue_Fire_Arrows" => Ok(Item::Blue_Fire_Arrows),

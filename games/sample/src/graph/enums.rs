@@ -244,6 +244,7 @@ impl std::str::FromStr for SpotId {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "None" => Ok(SpotId::None),
             "Deku Tree > Back Room > East" => Ok(SpotId::Deku_Tree__Back_Room__East),
             "Deku Tree > Back Room > Northwest" => Ok(SpotId::Deku_Tree__Back_Room__Northwest),
             "Deku Tree > Back Room > South" => Ok(SpotId::Deku_Tree__Back_Room__South),

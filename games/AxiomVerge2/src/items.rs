@@ -522,6 +522,7 @@ impl std::str::FromStr for Item {
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
+            "None" => Ok(Item::None),
             "Aansur" => Ok(Item::Aansur),
             "Amagi_Breach_Center_Ruins_Blocks" => Ok(Item::Amagi_Breach_Center_Ruins_Blocks),
             "Amagi_Breach_Lower_Hallway_Gate" => Ok(Item::Amagi_Breach_Lower_Hallway_Gate),
