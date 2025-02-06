@@ -245,9 +245,10 @@ where
     // Using A* and allowing backtracking
     let mut spot_heap =
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_SPOTS);
+    let key_func = |ctx: &ContextWrapper<T>| ctx.get().position();
 
     if let Some(score) = score_func(&ctx) {
-        let unique_key = (ctx.get().position(), 0);
+        let unique_key = key_func(&ctx);
         spot_heap.push(ctx, unique_key, score);
     }
 
@@ -261,6 +262,7 @@ where
             u32::MAX,
             &mut spot_heap,
             &score_func,
+            &key_func,
             W::same_area(ctx.get().position(), spot),
             true,
         );
@@ -351,7 +353,7 @@ where
         return Ok(ctx);
     }
 
-    let score_func = |ctx: &ContextWrapper<T>| -> Option<u32> {
+    let score_func_ctx = |ctx: &ContextWrapper<T>| -> Option<u32> {
         let mut origins = new_hashmap();
         origins.insert(ExternalNodeId::Spot(ctx.get().position()), 0);
         // We need to take into account contextual warps which aren't otherwise part
@@ -384,21 +386,20 @@ where
 
         min
     };
+    let score_func = |el: &CtxWithActionCounter<T>| score_func_ctx(&el.el);
+    let key_func = &CtxWithActionCounter::unique_spot;
 
     // Using A* and allowing backtracking
     let mut spot_heap =
         LimitedPriorityQueue::with_capacity_and_limit(INITIAL_CAPACITY, MAX_STATES_FOR_LOCS);
 
-    if let Some(score) = score_func(&ctx) {
-        let unique_key = (ctx.get().position(), 0);
-        spot_heap.push(
-            CtxWithActionCounter {
-                el: ctx,
-                counter: 0,
-            },
-            unique_key,
-            score,
-        );
+    if let Some(score) = score_func_ctx(&ctx) {
+        let item = CtxWithActionCounter {
+            el: ctx,
+            counter: 0,
+        };
+        let unique_key = key_func(&item);
+        spot_heap.push(item, unique_key, score);
     }
 
     while let Some((el, _)) = spot_heap.pop() {
@@ -416,19 +417,20 @@ where
             max_time,
             &mut spot_heap,
             &score_func,
+            &key_func,
             false,
             el.can_continue(max_depth),
         );
 
         if el.can_continue(max_depth) {
-            expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func);
+            expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func, &key_func);
         }
     }
 
     Err(format!(
         "Ran out of elements with {} iters left. Visits:\n{}",
         spot_heap.capacity_left(),
-        report_keys_seen(spot_heap.into_unique_key_map())
+        report_keys_seen_depth(spot_heap.into_unique_key_map())
     ))
 }
 
@@ -456,7 +458,7 @@ where
 
     type DistanceScore = (u32, OrderedFloat<f32>);
 
-    let score_func = |ctx: &ContextWrapper<T>| -> Option<DistanceScore> {
+    let score_func_ctx = |ctx: &ContextWrapper<T>| -> Option<DistanceScore> {
         if !shortest_paths
             .graph()
             .node_index_map
@@ -498,6 +500,7 @@ where
             .min()
             .map(|(u, f)| (u + ctx.elapsed(), f))
     };
+    let score_func = |el: &CtxWithActionCounter<T>| score_func_ctx(&el.el);
 
     let best = direct_paths.shortest_known_route_to(spot, ctx.get());
     if let Some(p) = &best {
@@ -505,7 +508,7 @@ where
         // Given a previous best, we may be able to stop immediately if it is the absolute minimum
         // Otherwise we just use that route as a cap on max_time.
         max_time = std::cmp::min(max_time, ctx.elapsed() + p.time);
-        if let Some(score) = score_func(&ctx) {
+        if let Some(score) = score_func_ctx(&ctx) {
             if score.0 >= max_time {
                 direct_paths.min_hits.fetch_add(1, Ordering::Release);
                 // Recreate the partial route
@@ -534,17 +537,15 @@ where
 
     let startctx = ctx.clone();
     let hist_start = startctx.recent_history().len();
+    let key_func = &CtxWithActionCounter::unique_spot;
 
-    if let Some(score) = score_func(&ctx) {
-        let unique_key = (ctx.get().position(), 0);
-        spot_heap.push(
-            CtxWithActionCounter {
-                el: ctx,
-                counter: 0,
-            },
-            unique_key,
-            score,
-        );
+    let item = CtxWithActionCounter {
+        el: ctx,
+        counter: 0,
+    };
+    if let Some(score) = score_func(&item) {
+        let unique_key = key_func(&item);
+        spot_heap.push(item, unique_key, score);
     }
 
     while let Some((el, _)) = spot_heap.pop() {
@@ -572,12 +573,13 @@ where
             max_time,
             &mut spot_heap,
             &score_func,
+            &key_func,
             W::same_area(ctx.get().position(), spot),
             el.can_continue(max_depth),
         );
 
         if el.can_continue(max_depth) {
-            expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func);
+            expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func, &key_func);
         }
 
         if spot_heap.is_expired() {
@@ -611,7 +613,7 @@ where
         Err(format!(
             "Ran out of elements with {} iters left. Visits:\n{}",
             spot_heap.capacity_left(),
-            report_keys_seen(spot_heap.into_unique_key_map())
+            report_keys_seen_depth(spot_heap.into_unique_key_map())
         ))
     }
 }
@@ -992,7 +994,27 @@ where
     vec.join("\n")
 }
 
-fn report_keys_seen<K, P>(spots_seen: HashMap<(K, usize), P, CommonHasher>) -> String
+fn report_keys_seen<K, P>(spots_seen: HashMap<K, P, CommonHasher>) -> String
+where
+    K: std::hash::Hash + std::fmt::Display + Eq + Ord,
+{
+    let mut heatmap = new_hashmap();
+    for (s, _) in spots_seen {
+        if let Some(ct) = heatmap.get_mut(&s) {
+            *ct += 1;
+        } else {
+            heatmap.insert(s, 1);
+        }
+    }
+    let mut vec: Vec<(_, usize)> = heatmap.into_iter().collect();
+    vec.sort_unstable();
+    vec.into_iter()
+        .map(|(s, ct)| format!("{}: {}", s, ct))
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+fn report_keys_seen_depth<K, P>(spots_seen: HashMap<(K, usize), P, CommonHasher>) -> String
 where
     K: std::hash::Hash + std::fmt::Display + Eq + Ord,
 {

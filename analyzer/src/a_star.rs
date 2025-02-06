@@ -69,23 +69,20 @@ where
     }
 }
 
-pub fn expand_exits_astar<W, T, H, P>(
+pub fn expand_exits_astar<W, T, H, P, K>(
     world: &W,
     el: &H,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<
-        H,
-        (<<W as World>::Exit as Exit>::SpotId, usize),
-        P,
-        CommonHasher,
-    >,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
+    spot_heap: &mut LimitedPriorityQueue<H, K, P, CommonHasher>,
+    score_func: &impl Fn(&H) -> Option<P>,
+    key_func: &impl Fn(&H) -> K,
 ) where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
+    K: Clone + Eq + std::hash::Hash,
 {
     let ctx = el.ctx();
     for exit in world.get_spot_exits(ctx.get().position()) {
@@ -94,9 +91,9 @@ pub fn expand_exits_astar<W, T, H, P>(
             newctx.exit(world, exit);
             let elapsed = newctx.elapsed();
             if elapsed <= max_time {
-                if let Some(score) = score_func(&newctx) {
-                    let item = el.copy_update(newctx);
-                    let unique_key = item.unique_spot();
+                let item = el.copy_update(newctx);
+                if let Some(score) = score_func(&item) {
+                    let unique_key = key_func(&item);
                     spot_heap.push(item, unique_key, score);
                 }
             }
@@ -104,23 +101,20 @@ pub fn expand_exits_astar<W, T, H, P>(
     }
 }
 
-pub fn expand_actions_astar<W, T, H, P>(
+pub fn expand_actions_astar<W, T, H, P, K>(
     world: &W,
     el: &H,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<
-        H,
-        (<<W as World>::Exit as Exit>::SpotId, usize),
-        P,
-        CommonHasher,
-    >,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
+    spot_heap: &mut LimitedPriorityQueue<H, K, P, CommonHasher>,
+    score_func: &impl Fn(&H) -> Option<P>,
+    key_func: &impl Fn(&H) -> K,
 ) where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + Ord + std::hash::Hash,
+    K: Clone + Eq + std::hash::Hash,
 {
     let ctx = el.ctx();
     for act in world
@@ -133,9 +127,9 @@ pub fn expand_actions_astar<W, T, H, P>(
             newctx.activate(world, act);
             let elapsed = newctx.elapsed();
             if elapsed <= max_time {
-                if let Some(score) = score_func(&newctx) {
-                    let item = el.new_incr(newctx);
-                    let unique_key = item.unique_spot();
+                let item = el.new_incr(newctx);
+                if let Some(score) = score_func(&item) {
+                    let unique_key = key_func(&item);
                     spot_heap.push(item, unique_key, score);
                 }
             }
@@ -144,24 +138,21 @@ pub fn expand_actions_astar<W, T, H, P>(
 }
 
 // This is mainly for move_to.
-pub fn expand_local_astar<W, T, H, P>(
+pub fn expand_local_astar<W, T, H, P, K>(
     world: &W,
     el: &H,
     movement_state: T::MovementState,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<
-        H,
-        (<<W as World>::Exit as Exit>::SpotId, usize),
-        P,
-        CommonHasher,
-    >,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
+    spot_heap: &mut LimitedPriorityQueue<H, K, P, CommonHasher>,
+    score_func: &impl Fn(&H) -> Option<P>,
+    key_func: &impl Fn(&H) -> K,
 ) where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
+    K: Clone + Eq + std::hash::Hash,
 {
     let ctx = el.ctx();
     for &dest in world.get_area_spots(ctx.get().position()) {
@@ -171,9 +162,9 @@ pub fn expand_local_astar<W, T, H, P>(
             newctx.move_local(world, dest, ltt);
             let elapsed = newctx.elapsed();
             if elapsed <= max_time {
-                if let Some(score) = score_func(&newctx) {
-                    let item = el.copy_update(newctx);
-                    let unique_key = item.unique_spot();
+                let item = el.copy_update(newctx);
+                if let Some(score) = score_func(&item) {
+                    let unique_key = key_func(&item);
                     spot_heap.push(item, unique_key, score);
                 }
             }
@@ -181,17 +172,13 @@ pub fn expand_local_astar<W, T, H, P>(
     }
 }
 
-pub fn expand_astar<W, T, H, P>(
+pub fn expand_astar<W, T, H, P, K>(
     world: &W,
     el: &H,
     max_time: u32,
-    spot_heap: &mut LimitedPriorityQueue<
-        H,
-        (<<W as World>::Exit as Exit>::SpotId, usize),
-        P,
-        CommonHasher,
-    >,
-    score_func: &impl Fn(&ContextWrapper<T>) -> Option<P>,
+    spot_heap: &mut LimitedPriorityQueue<H, K, P, CommonHasher>,
+    score_func: &impl Fn(&H) -> Option<P>,
+    key_func: &impl Fn(&H) -> K,
     allow_local: bool,
     allow_warps: bool,
 ) where
@@ -200,6 +187,7 @@ pub fn expand_astar<W, T, H, P>(
     W::Location: Location<Context = T>,
     H: CtxWrapper<T>,
     P: Clone + std::fmt::Debug + Ord + std::hash::Hash,
+    K: Clone + Eq + std::hash::Hash,
 {
     let ctx = el.ctx();
     let movement_state = ctx.get().get_movement_state(world);
@@ -211,22 +199,38 @@ pub fn expand_astar<W, T, H, P>(
                 newctx.move_condensed_edge(world, ce);
                 let elapsed = newctx.elapsed();
                 if elapsed <= max_time {
-                    if let Some(score) = score_func(&newctx) {
-                        let item = el.copy_update(newctx);
-                        let unique_key = item.unique_spot();
+                    let item = el.copy_update(newctx);
+                    if let Some(score) = score_func(&item) {
+                        let unique_key = key_func(&item);
                         spot_heap.push(item, unique_key, score);
                     }
                 }
             }
         }
         if allow_local {
-            expand_local_astar(world, el, movement_state, max_time, spot_heap, score_func);
+            expand_local_astar(
+                world,
+                el,
+                movement_state,
+                max_time,
+                spot_heap,
+                score_func,
+                key_func,
+            );
         }
     } else {
-        expand_local_astar(world, el, movement_state, max_time, spot_heap, score_func);
+        expand_local_astar(
+            world,
+            el,
+            movement_state,
+            max_time,
+            spot_heap,
+            score_func,
+            key_func,
+        );
     }
 
-    expand_exits_astar(world, el, max_time, spot_heap, score_func);
+    expand_exits_astar(world, el, max_time, spot_heap, score_func, key_func);
 
     if allow_warps {
         for warp in world.get_warps() {
@@ -235,9 +239,9 @@ pub fn expand_astar<W, T, H, P>(
                 newctx.warp(world, warp);
                 let elapsed = newctx.elapsed();
                 if elapsed <= max_time {
-                    if let Some(score) = score_func(&newctx) {
-                        let item = el.new_incr(newctx);
-                        let unique_key = item.unique_spot();
+                    let item = el.new_incr(newctx);
+                    if let Some(score) = score_func(&item) {
+                        let unique_key = key_func(&item);
                         spot_heap.push(item, unique_key, score);
                     }
                 }
