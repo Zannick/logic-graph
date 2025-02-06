@@ -1847,6 +1847,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__West_16__ex__Door_1 => rules::access_giguna__east_caverns__ctx__door_opened(ctx, world),
             ExitId::Giguna__East_Caverns__West_17__ex__Dual_Path__East_17_1 => true,
             ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
+            ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1 => true,
             ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => rules::access_giguna_gateway_block(ctx, world),
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => rules::access_giguna_gateway_block_and___invoke_hook_or_invoke_grab(ctx, world),
@@ -1929,6 +1930,9 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => true,
             ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
+            ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1 => true,
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::access_nanite_mist(ctx, world),
@@ -1937,6 +1941,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => true,
             ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => true,
             ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => true,
+            ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Labyrinth__Door__ex__Middle_Brick_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Labyrinth__Door_Ledge__ex__Door_1 => rules::access_giguna__labyrinth__ctx__door(ctx, world),
@@ -2030,22 +2036,43 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Rooftop_Gutter_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Ledge_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Way_Up_High_1 => rules::access_invoke_hookhover(ctx, world),
-            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::access_invoke_grab_or_invoke_hover_or_invoke_hook(ctx, world),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Small_Passage_West_1 => rules::access_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(ctx, world),
             ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 => true,
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__Ruins_Top__Small_Passage_West__ex__Save_Point_1 => rules::access_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(ctx, world),
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
-            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::access_invoke_grab_or_invoke_hover_or_invoke_hook(ctx, world),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 => true,
             ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => rules::access_giguna__ruins_top__ctx__doors_open(ctx, world),
             ExitId::Giguna__Ruins_Top__West_7__ex__West_Pillar_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => rules::access_giguna__ruins_top__ctx__doors_open(ctx, world),
             ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => rules::access_giguna__ruins_top__ctx__doors_open(ctx, world),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_1 => rules::access_invoke_infinite_climb(ctx, world),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Upper_Ledge_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Small_Passage_West_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => true,
-            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::access_invoke_grab(ctx, world),
+            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => true,
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => rules::access_invoke_grab_and_giguna__ruins_west__ctx__kishib_handled(ctx, world),
             ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_1 => rules::access_invoke_hover(ctx, world),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__Ruins_West__Upper_Ledge__ex__Ruins_Top__West_Pillar_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1 => true,
             ExitId::Giguna__Secrecy__East_Column__ex__West_Column_West_1 => rules::access_invoke_hook_or_invoke_hover(ctx, world),
             ExitId::Giguna__Secrecy__Near_East_Column__ex__East_Column_1 => rules::access_nanite_mist(ctx, world),
@@ -2194,7 +2221,11 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1 => true,
+            ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => rules::access_nanite_mist(ctx, world),
+            ExitId::Giguna__West_Tower__East_7__ex__Ruins_West__West_7_1 => true,
+            ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1 => true,
+            ExitId::Giguna__West_Tower__Top__ex__East_7_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => true,
             ExitId::Giguna_Breach__Antechamber__South__ex__Crab_Rave__North_1 => true,
             ExitId::Giguna_Breach__Antechamber__South__ex__North_1 => rules::access_slingshot_hook(ctx, world),
@@ -5003,6 +5034,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1 => rules::observe_access_giguna__east_caverns__ctx__upper_susar(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__West_16__ex__Door_1 => rules::observe_access_giguna__east_caverns__ctx__door_opened(ctx, world, full_obs),
             ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => rules::observe_access_giguna_gateway_block(ctx, world, full_obs),
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => rules::observe_access_giguna_gateway_block_and___invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => rules::observe_access_giguna_gateway_block_and___invoke_hook_or_invoke_grab(ctx, world, full_obs),
@@ -5067,10 +5099,15 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::observe_access_giguna_boulder(ctx, world, full_obs),
             ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => rules::observe_access_giguna_boulder(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Labyrinth__Door__ex__Middle_Brick_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Labyrinth__Door_Ledge__ex__Door_1 => rules::observe_access_giguna__labyrinth__ctx__door(ctx, world, full_obs),
@@ -5134,18 +5171,39 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Rooftop_Gutter_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Ledge_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Way_Up_High_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::observe_access_invoke_grab_or_invoke_hover_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Small_Passage_West_1 => rules::observe_access_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Small_Passage_West__ex__Save_Point_1 => rules::observe_access_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
-            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::observe_access_invoke_grab_or_invoke_hover_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => rules::observe_access_giguna__ruins_top__ctx__doors_open(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__West_7__ex__West_Pillar_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => rules::observe_access_giguna__ruins_top__ctx__doors_open(ctx, world, full_obs),
             ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => rules::observe_access_giguna__ruins_top__ctx__doors_open(ctx, world, full_obs),
-            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_1 => rules::observe_access_invoke_infinite_climb(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Upper_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Small_Passage_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => rules::observe_access_invoke_grab_and_giguna__ruins_west__ctx__kishib_handled(ctx, world, full_obs),
             ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__Upper_Ledge__ex__Ruins_Top__West_Pillar_1 => rules::observe_access_invoke_hookhover(ctx, world, full_obs),
+            ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Secrecy__East_Column__ex__West_Column_West_1 => rules::observe_access_invoke_hook_or_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Secrecy__Near_East_Column__ex__East_Column_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Secrecy__Near_East_Column__ex__West_Column_West_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -5267,6 +5325,9 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__West_Tower__Top__ex__East_7_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna_Breach__Antechamber__South__ex__North_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Ascent__Bottom__ex__Top_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
             ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1 => rules::observe_access_slingshot_hook(ctx, world, full_obs),
@@ -10333,6 +10394,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         600
@@ -10468,6 +10536,27 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        3500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        5200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         2456
@@ -10478,6 +10567,20 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        5100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1600
                     } else {
                         0
                     }
@@ -10624,9 +10727,23 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1200
                     } else {
                         0
                     }
@@ -10638,9 +10755,93 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        800
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        1059
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => {
+                    if rules::access_not_slingshot_hook(ctx, world) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        2632
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1700
                     } else {
                         0
                     }
@@ -10916,6 +11117,27 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        6800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        3400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Tower__Top__ex__East_7_1 => {
+                    if rules::access_not_mist_upgrade(ctx, world) {
+                        1800
                     } else {
                         0
                     }
@@ -17846,6 +18068,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1754
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         600
@@ -17981,6 +18210,27 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3500
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2105
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => {
                     if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
                         2456
@@ -17991,6 +18241,20 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => {
                     if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
                         351
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        5100
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
                     } else {
                         0
                     }
@@ -18137,9 +18401,23 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1200
                     } else {
                         0
                     }
@@ -18151,9 +18429,93 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1053
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        1059
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => {
+                    if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
+                        757
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        0
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2632
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        2456
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1700
                     } else {
                         0
                     }
@@ -18429,6 +18791,27 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        6800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        3400
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Tower__Top__ex__East_7_1 => {
+                    if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
+                        1800
                     } else {
                         0
                     }
@@ -21861,6 +22244,9 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
@@ -21870,10 +22256,25 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Giguna_Northeast__Shaft_Bottom__ex__Gate_Right_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
+                ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
                 ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna__Mural__Below_Pedestal__ex__NE_Ledge_2 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -21895,6 +22296,36 @@ impl world::Accessible for Exit {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna__Secrecy__Near_East_Column__ex__East_Column_1 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -21940,6 +22371,15 @@ impl world::Accessible for Exit {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__West_Tower__Southwest__ex__Top_1 if rules::access_not_mist_upgrade(ctx, world) => {
+                    Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
+                }
+                ExitId::Giguna__West_Tower__Top__ex__East_7_1 if rules::access_not_mist_upgrade(ctx, world) => {
                     Currency::Energy(5) + (Currency::Energy(33) * (self.time(ctx, world) as f32 / 1000.0))
                 }
                 ExitId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge__ex__Upper_Right_Ledge_1 if rules::access_not_mist_upgrade(ctx, world) => {
@@ -23584,6 +24024,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__East_Caverns__Upper_Susar_Mid_jump__ex__Top_Past_Susar_1 => rules::explain_giguna__east_caverns__ctx__upper_susar(ctx, world, edict),
             ExitId::Giguna__East_Caverns__West_16__ex__Door_1 => rules::explain_giguna__east_caverns__ctx__door_opened(ctx, world, edict),
             ExitId::Giguna__East_Caverns__West_Grass__ex__Lower_Ledge_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Gateway__Block_Left__ex__Block_Lowered_1 => rules::explain_giguna_gateway_block(ctx, world, edict),
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => rules::explain_giguna_gateway_block_and___invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => rules::explain_giguna_gateway_block_and___invoke_hook_or_invoke_grab(ctx, world, edict),
@@ -23648,10 +24089,15 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Giguna__Hard_Rock__Rock_Left__ex__Rock_Center_1 => rules::explain_giguna_boulder(ctx, world, edict),
             ExitId::Giguna__Hard_Rock__Rock_Right__ex__Rock_Center_1 => rules::explain_giguna_boulder(ctx, world, edict),
+            ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Labyrinth__Door__ex__Middle_Brick_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Labyrinth__Door_Ledge__ex__Door_1 => rules::explain_giguna__labyrinth__ctx__door(ctx, world, edict),
@@ -23715,18 +24161,39 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Rooftop_Gutter_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Ledge_1 => rules::explain_invoke_hookhover(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Way_Up_High_1 => rules::explain_invoke_hookhover(ctx, world, edict),
-            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 => rules::explain_invoke_grab_or_invoke_hover_or_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Small_Passage_West_1 => rules::explain_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Small_Passage_West__ex__Save_Point_1 => rules::explain_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
-            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => rules::explain_invoke_grab_or_invoke_hover_or_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__West_7__ex__West_Door_1 => rules::explain_giguna__ruins_top__ctx__doors_open(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__West_7__ex__West_Pillar_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__West_Door__ex__Entryway_1 => rules::explain_giguna__ruins_top__ctx__doors_open(ctx, world, edict),
             ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 => rules::explain_giguna__ruins_top__ctx__doors_open(ctx, world, edict),
-            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::explain_invoke_grab(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_1 => rules::explain_invoke_infinite_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Upper_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Small_Passage_West_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => rules::explain_invoke_grab_and_giguna__ruins_west__ctx__kishib_handled(ctx, world, edict),
             ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_1 => rules::explain_invoke_hookhover(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_1 => rules::explain_invoke_hover(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__Upper_Ledge__ex__Ruins_Top__West_Pillar_1 => rules::explain_invoke_hookhover(ctx, world, edict),
+            ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Secrecy__East_Column__ex__West_Column_West_1 => rules::explain_invoke_hook_or_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Secrecy__Near_East_Column__ex__East_Column_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Secrecy__Near_East_Column__ex__West_Column_West_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -23848,6 +24315,9 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__West_Tower__Top__ex__East_7_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna_Breach__Antechamber__South__ex__North_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Ascent__Bottom__ex__Top_1 => rules::explain_slingshot_hook(ctx, world, edict),
             ExitId::Giguna_Breach__Central__East_9__ex__East_Brick_1 => rules::explain_slingshot_hook(ctx, world, edict),
@@ -25538,6 +26008,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1 => true,
             ExitId::Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1 => true,
             ExitId::Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1 => true,
+            ExitId::Giguna__West_Tower__East_7__ex__Ruins_West__West_7_1 => true,
             ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1 => true,
             ExitId::Giguna_Breach__Antechamber__North__ex__Fire_Room__South_1 => true,
             ExitId::Giguna_Breach__Antechamber__South__ex__Crab_Rave__North_1 => true,
@@ -26607,6 +27078,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Hidden_Passage_West_2 => true,
             ExitId::Giguna__East_Caverns__Statues_Ledge__ex__Midwest_Ledge_1 => true,
             ExitId::Giguna__East_Caverns__Upper_Passage_East__ex__Top_Ledge_1 => true,
+            ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => true,
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Left_1 => true,
             ExitId::Giguna__Gateway__Block_Lowered__ex__Block_Right_1 => true,
             ExitId::Giguna__Gateway__Far_Ledge__ex__Flask_Ledge_1 => true,
@@ -26626,8 +27098,13 @@ impl world::Exit for Exit {
             ExitId::Giguna__Gubi_Lair__East_Tree__ex__East_15_1 => true,
             ExitId::Giguna__Gubi_Lair__Grass_by_Wall__ex__Center_West_Sapling_1 => true,
             ExitId::Giguna__Gubi_Lair__Shaft_Bottom__ex__Pedestal_1 => true,
+            ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => true,
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => true,
+            ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 => true,
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => true,
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => true,
+            ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => true,
+            ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => true,
             ExitId::Giguna__Labyrinth__Empty_Plinth__ex__Upper_Level_Ledge_1 => true,
             ExitId::Giguna__Labyrinth__First_Pillar__ex__Rooftop_East_1 => true,
             ExitId::Giguna__Labyrinth__Middle_Brick__ex__Lower_Tier_West_1 => true,
@@ -26648,9 +27125,23 @@ impl world::Exit for Exit {
             ExitId::Giguna__Ruins_East__Cliff__ex__Ledge_1 => true,
             ExitId::Giguna__Ruins_East__Pillar__ex__Way_Up_High_1 => true,
             ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 => true,
+            ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 => true,
             ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 => true,
+            ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => true,
             ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 => true,
+            ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 => true,
             ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => true,
+            ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => true,
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => true,
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 => true,
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 => true,
+            ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => true,
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => true,
+            ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 => true,
+            ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 => true,
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => true,
+            ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 => true,
+            ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => true,
             ExitId::Giguna__Secrecy__Near_East_Column__ex__East_Column_1 => true,
             ExitId::Giguna__Secrecy__Portal_Stand__ex__West_Column_West_2 => true,
             ExitId::Giguna__Separator__Lower_Brick__ex__Upper_Brick_1 => true,
@@ -26690,6 +27181,9 @@ impl world::Exit for Exit {
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 => true,
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_1 => true,
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => true,
+            ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => true,
+            ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => true,
+            ExitId::Giguna__West_Tower__Top__ex__East_7_1 => true,
             ExitId::Giguna_Breach__Crab_Rave__East__ex__Button_1 => true,
             ExitId::Giguna_Breach__Deadly_Flora__Lower_Right_Ledge__ex__Upper_Right_Ledge_1 => true,
             ExitId::Giguna_Breach__Deadly_Flora__Middle_Left_Ledge__ex__Middle_Platform_1 => true,
@@ -27106,7 +27600,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3703] = [
+static EXIT_DEFS: [Exit; 3734] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -41262,6 +41756,13 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1,
+        time: 2754,
+        dest: SpotId::Giguna__West_Caverns__West_13,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1,
         time: 1500,
         dest: SpotId::Giguna__Helipad__North,
@@ -41836,6 +42337,27 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1,
+        time: 4450,
+        dest: SpotId::Giguna__Far_Corner__South,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1,
+        time: 6150,
+        dest: SpotId::Giguna__Far_Corner__South,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1,
+        time: 2105,
+        dest: SpotId::Giguna__Helipad__Helicopter,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__Helipad__Lowest_Ledge__ex__Clouds__North_Under_Ledge_1,
         time: 830,
         dest: SpotId::Giguna__Clouds__North_Under_Ledge,
@@ -41890,6 +42412,20 @@ static EXIT_DEFS: [Exit; 3703] = [
         dest: SpotId::Giguna__Clouds__North_Right,
         price: Currency::Free,
         price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1,
+        time: 6050,
+        dest: SpotId::Giguna__Far_Corner__South,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1,
+        time: 1600,
+        dest: SpotId::Giguna__Helipad__Helicopter,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1,
@@ -42550,6 +43086,20 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2,
+        time: 1053,
+        dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__Save_Point__ex__Small_Passage_West_1,
+        time: 1053,
+        dest: SpotId::Giguna__Ruins_Top__Small_Passage_West,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1,
         time: 600,
         dest: SpotId::Giguna__Ruins_Top__Switch,
@@ -42557,9 +43107,23 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1,
+        time: 1200,
+        dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1,
         time: 1500,
         dest: SpotId::Giguna__Ruins_Top__Interior_Ledge,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__Small_Passage_West__ex__Save_Point_1,
+        time: 1053,
+        dest: SpotId::Giguna__Ruins_Top__Save_Point,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -42571,6 +43135,13 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_2,
+        time: 800,
+        dest: SpotId::Giguna__Ruins_Top__Rooftop_West,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1,
         time: 1200,
         dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
@@ -42578,9 +43149,44 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2,
+        time: 800,
+        dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1,
         time: 1053,
         dest: SpotId::Giguna__Ruins_Top__Rooftop_West,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2,
+        time: 1053,
+        dest: SpotId::Giguna__Ruins_Top__Rooftop_West,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1,
+        time: 2975,
+        dest: SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1,
+        time: 3725,
+        dest: SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1,
+        time: 2975,
+        dest: SpotId::Giguna__Ruins_West__Upper_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -42620,6 +43226,41 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_1,
+        time: 3456,
+        dest: SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2,
+        time: 3456,
+        dest: SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Upper_Ledge_1,
+        time: 3456,
+        dest: SpotId::Giguna__Ruins_West__Upper_Ledge,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__West_Pillar__ex__Small_Passage_West_1,
+        time: 600,
+        dest: SpotId::Giguna__Ruins_Top__Small_Passage_West,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1,
+        time: 1600,
+        dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1,
         time: 1350,
         dest: SpotId::Giguna__Ruins_Top__West_7,
@@ -42628,7 +43269,7 @@ static EXIT_DEFS: [Exit; 3703] = [
     },
     Exit {
         id: ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1,
-        time: 1200,
+        time: 1228,
         dest: SpotId::Giguna__Ruins_West__Upper_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
@@ -42653,6 +43294,48 @@ static EXIT_DEFS: [Exit; 3703] = [
         dest: SpotId::Giguna__Ruins_West__Lower_Ledge,
         price: Currency::Free,
         price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_1,
+        time: 3632,
+        dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2,
+        time: 3632,
+        dest: SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_1,
+        time: 3456,
+        dest: SpotId::Giguna__Ruins_Top__West_Pillar,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2,
+        time: 3456,
+        dest: SpotId::Giguna__Ruins_Top__West_Pillar,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_West__Upper_Ledge__ex__Ruins_Top__West_Pillar_1,
+        time: 3456,
+        dest: SpotId::Giguna__Ruins_Top__West_Pillar,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1,
+        time: 1700,
+        dest: SpotId::Giguna__Ruins_West__Rooftop_West_Edge,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1,
@@ -43691,11 +44374,39 @@ static EXIT_DEFS: [Exit; 3703] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1,
+        time: 7750,
+        dest: SpotId::Giguna__West_Tower__Southwest,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
+        id: ExitId::Giguna__West_Tower__East_7__ex__Ruins_West__West_7_1,
+        time: 1350,
+        dest: SpotId::Giguna__Ruins_West__West_7,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Tower__Southwest__ex__Top_1,
+        time: 3400,
+        dest: SpotId::Giguna__West_Tower__Top,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
+    },
+    Exit {
         id: ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1,
         time: 830,
         dest: SpotId::Giguna__West_Caverns__Northwest,
         price: Currency::Free,
         price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Tower__Top__ex__East_7_1,
+        time: 1800,
+        dest: SpotId::Giguna__West_Tower__East_7,
+        price: Currency::Energy(5),
+        price_per_sec: Currency::Energy(33),
     },
     Exit {
         id: ExitId::Glacier_Breach__Angry_Lions__North__ex__Grate_Work__Southeast_1,
@@ -54293,7 +55004,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1 | ExitId:: Giguna__West_Caverns__East_Susar__ex__East_12_1 => SpotId::Giguna__West_Caverns__East_Susar,
         ExitId::Giguna__West_Caverns__East_12__ex__Wasteland__West_12_1 => SpotId::Giguna__West_Caverns__East_12,
         ExitId::Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1 => SpotId::Giguna__West_Caverns__East_13,
-        ExitId::Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1 => SpotId::Giguna__West_Caverns__West_13,
+        ExitId::Giguna__West_Caverns__West_13__ex__Far_Corner__East_13_1 | ExitId:: Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => SpotId::Giguna__West_Caverns__West_13,
         ExitId::Giguna__Wasteland__West_12__ex__West_Caverns__East_12_1 => SpotId::Giguna__Wasteland__West_12,
         ExitId::Giguna__Wasteland__West_13__ex__West_Caverns__East_13_1 => SpotId::Giguna__Wasteland__West_13,
         ExitId::Giguna__Wasteland__Middle_Cliff__ex__Upper_Cliff_1 => SpotId::Giguna__Wasteland__Middle_Cliff,
@@ -54361,10 +55072,13 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__Ruins_West__East_9__ex__Ruins_Center__West_9_1 => SpotId::Giguna__Ruins_West__East_9,
         ExitId::Giguna__Ruins_West__Nook__ex__Lower_Ledge_1 => SpotId::Giguna__Ruins_West__Nook,
         ExitId::Giguna__Ruins_West__Lower_Ledge__ex__Upper_Ledge_1 => SpotId::Giguna__Ruins_West__Lower_Ledge,
+        ExitId::Giguna__Ruins_West__Upper_Ledge__ex__Ruins_Top__West_Pillar_1 => SpotId::Giguna__Ruins_West__Upper_Ledge,
         ExitId::Giguna__Ruins_West__East_7__ex__Upper_Ledge_1 | ExitId:: Giguna__Ruins_West__East_7__ex__Ruins_Top__West_7_1 => SpotId::Giguna__Ruins_West__East_7,
-        ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1 => SpotId::Giguna__Ruins_West__West_7,
+        ExitId::Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_1 | ExitId:: Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_1 | ExitId:: Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__West_Pillar_2 | ExitId:: Giguna__Ruins_West__Rooftop_East_Edge__ex__Ruins_Top__Turret_Balcony_West_2 => SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
+        ExitId::Giguna__Ruins_West__West_7__ex__West_Tower__East_7_1 | ExitId:: Giguna__Ruins_West__West_7__ex__Rooftop_West_Edge_1 => SpotId::Giguna__Ruins_West__West_7,
         ExitId::Giguna__Ruins_Top__West_7__ex__Ruins_West__East_7_1 | ExitId:: Giguna__Ruins_Top__West_7__ex__West_Door_1 | ExitId:: Giguna__Ruins_Top__West_7__ex__West_Pillar_1 => SpotId::Giguna__Ruins_Top__West_7,
         ExitId::Giguna__Ruins_Top__West_Door__ex__West_7_1 | ExitId:: Giguna__Ruins_Top__West_Door__ex__Entryway_1 => SpotId::Giguna__Ruins_Top__West_Door,
+        ExitId::Giguna__Ruins_Top__West_Pillar__ex__Small_Passage_West_1 | ExitId:: Giguna__Ruins_Top__West_Pillar__ex__Turret_Balcony_West_1 | ExitId:: Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Upper_Ledge_1 | ExitId:: Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_1 | ExitId:: Giguna__Ruins_Top__West_Pillar__ex__Ruins_West__Rooftop_East_Edge_2 => SpotId::Giguna__Ruins_Top__West_Pillar,
         ExitId::Giguna__Ruins_Top__Entryway__ex__West_Door_1 => SpotId::Giguna__Ruins_Top__Entryway,
         ExitId::Giguna__Ruins_Top__Portal_Left__ex__Small_Ledge_1 => SpotId::Giguna__Ruins_Top__Portal_Left,
         ExitId::Giguna__Ruins_Top__Small_Ledge__ex__Interior_Ledge_1 => SpotId::Giguna__Ruins_Top__Small_Ledge,
@@ -54372,17 +55086,24 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__Ruins_Top__Interior_Ledge__ex__Portal_1 | ExitId:: Giguna__Ruins_Top__Interior_Ledge__ex__Upper_Tunnel_1 => SpotId::Giguna__Ruins_Top__Interior_Ledge,
         ExitId::Giguna__Ruins_Top__East_Door__ex__Portal_1 | ExitId:: Giguna__Ruins_Top__East_Door__ex__East_7_1 => SpotId::Giguna__Ruins_Top__East_Door,
         ExitId::Giguna__Ruins_Top__East_7__ex__East_Door_1 | ExitId:: Giguna__Ruins_Top__East_7__ex__Ruins_East__West_7_1 => SpotId::Giguna__Ruins_Top__East_7,
-        ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 => SpotId::Giguna__Ruins_Top__Save_Point,
-        ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 | ExitId:: Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 => SpotId::Giguna__Ruins_Top__Switch,
-        ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Rooftop_Gutter_1 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Way_Up_High_1 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Ledge_1 => SpotId::Giguna__Ruins_Top__Rooftop_West,
+        ExitId::Giguna__Ruins_Top__Save_Point__ex__Switch_1 | ExitId:: Giguna__Ruins_Top__Save_Point__ex__Small_Passage_West_1 | ExitId:: Giguna__Ruins_Top__Save_Point__ex__Turret_Balcony_East_1 => SpotId::Giguna__Ruins_Top__Save_Point,
+        ExitId::Giguna__Ruins_Top__Small_Passage_West__ex__Save_Point_1 => SpotId::Giguna__Ruins_Top__Small_Passage_West,
+        ExitId::Giguna__Ruins_Top__Switch__ex__Rooftop_West_1 | ExitId:: Giguna__Ruins_Top__Switch__ex__Rooftop_West_2 | ExitId:: Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_1 | ExitId:: Giguna__Ruins_Top__Switch__ex__Turret_Balcony_East_2 => SpotId::Giguna__Ruins_Top__Switch,
+        ExitId::Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_1 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Turret_Balcony_East_2 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Rooftop_Gutter_1 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Way_Up_High_1 | ExitId:: Giguna__Ruins_Top__Rooftop_West__ex__Ruins_East__Ledge_1 => SpotId::Giguna__Ruins_Top__Rooftop_West,
         ExitId::Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_1 | ExitId:: Giguna__Ruins_Top__Rooftop_East__ex__Ruins_East__Way_Up_High_2 => SpotId::Giguna__Ruins_Top__Rooftop_East,
         ExitId::Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Way_Up_High_1 | ExitId:: Giguna__Ruins_Top__Rooftop_Gutter__ex__Ruins_East__Pillar_1 => SpotId::Giguna__Ruins_Top__Rooftop_Gutter,
-        ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 => SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
-        ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1 => SpotId::Giguna__West_Tower__Southwest,
+        ExitId::Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_1 | ExitId:: Giguna__Ruins_Top__Turret_Balcony_East__ex__Rooftop_West_2 => SpotId::Giguna__Ruins_Top__Turret_Balcony_East,
+        ExitId::Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_East_Edge_1 | ExitId:: Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Rooftop_West_Edge_1 | ExitId:: Giguna__Ruins_Top__Turret_Balcony_West__ex__Giguna__Ruins_West__Upper_Ledge_1 => SpotId::Giguna__Ruins_Top__Turret_Balcony_West,
+        ExitId::Giguna__West_Tower__East_7__ex__Ruins_West__West_7_1 => SpotId::Giguna__West_Tower__East_7,
+        ExitId::Giguna__West_Tower__Top__ex__East_7_1 => SpotId::Giguna__West_Tower__Top,
+        ExitId::Giguna__West_Tower__Southwest__ex__West_Caverns__Northwest_1 | ExitId:: Giguna__West_Tower__Southwest__ex__Top_1 => SpotId::Giguna__West_Tower__Southwest,
+        ExitId::Giguna__Far_Corner__Grass__ex__West_Caverns__West_13_1 => SpotId::Giguna__Far_Corner__Grass,
         ExitId::Giguna__Far_Corner__South__ex__Helipad__North_1 => SpotId::Giguna__Far_Corner__South,
         ExitId::Giguna__Helipad__East_15__ex__Giguna_Base__West_15_1 => SpotId::Giguna__Helipad__East_15,
+        ExitId::Giguna__Helipad__Helicopter__ex__Far_Corner__South_1 => SpotId::Giguna__Helipad__Helicopter,
         ExitId::Giguna__Helipad__East_16__ex__Giguna_Base__West_16_1 => SpotId::Giguna__Helipad__East_16,
-        ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => SpotId::Giguna__Helipad__Wall_Top,
+        ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 | ExitId:: Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => SpotId::Giguna__Helipad__Irikar_Drop,
+        ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 | ExitId:: Giguna__Helipad__Wall_Top__ex__Helicopter_1 | ExitId:: Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => SpotId::Giguna__Helipad__Wall_Top,
         ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 | ExitId:: Giguna__Helipad__Railing__ex__Wall_Top_2 => SpotId::Giguna__Helipad__Railing,
         ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 | ExitId:: Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => SpotId::Giguna__Helipad__So_Close,
         ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => SpotId::Giguna__Helipad__East_18,

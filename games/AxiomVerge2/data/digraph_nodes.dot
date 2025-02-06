@@ -2135,7 +2135,7 @@
             Giguna__East_Caverns__East_17 [label = "", pos = "62.85,-27.166667!"];
         }
         {
-            Giguna__Far_Corner__East_13 [label = "", pos = "35.85,-20.5!"];
+            Giguna__Far_Corner__East_13 [label = "", pos = "35.85,-20.166667!"];
             Giguna__Far_Corner__Grass [label = "", pos = "34.65,-21.5!"];
             Giguna__Far_Corner__South [label = "", pos = "34.2,-21.5!"];
         }
@@ -2360,6 +2360,7 @@
             Giguna__Ruins_Top__East_Door [label = "", pos = "47.175,-11.25!"];
             Giguna__Ruins_Top__East_7 [label = "", pos = "47.85,-11.333333!"];
             Giguna__Ruins_Top__Save_Point [label = "", pos = "44.4,-9.666667!"];
+            Giguna__Ruins_Top__Small_Passage_West [label = "", pos = "43.5,-9.75!"];
             Giguna__Ruins_Top__Switch [label = "", pos = "44.85,-9.333333!"];
             Giguna__Ruins_Top__Rooftop_West [label = "", pos = "45.3,-8.666667!"];
             Giguna__Ruins_Top__Rooftop_East [label = "", pos = "46.8,-8.666667!"];

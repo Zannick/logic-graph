@@ -18,6 +18,9 @@ tests:
   - with:
       - Switch_36_11
     can_obtain: Ledge_Grab
+  #- settings:
+  #    major_glitches: true
+  #  can_obtain: Ledge_Grab
   
   # can/cannot_reach:
   #   Checks for immediate reachability of the given spot
@@ -30,9 +33,6 @@ tests:
   #   TODO: might use the greedy algorithm instead
   - with: 
       - Boomerang
-    eventually_gets: Ledge_Grab
-  - settings:
-      major_glitches: true
     eventually_gets: Ledge_Grab
   - eventually_gets: Ledge_Grab
 

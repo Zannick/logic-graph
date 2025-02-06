@@ -133,14 +133,14 @@ tests:
     context:
       flasks: 1
       prev_area: Glacier > Vertical Room
-      last: SpotId::None
+      last: None
     path:
       - Ebih > Base Camp > East 12
       - Menu > Upgrade Menu > Physiology
       - Ebih > Base Camp > East 12
     expect:
       prev_area: Glacier > Grid 31,9-12
-      last: SpotId::None
+      last: None
 
   - name: prev_area_after_menu_hop
     start: Glacier > Grid 31,9-12 > Observation Tower L4
@@ -149,7 +149,7 @@ tests:
     context:
       flasks: 1
       prev_area: Glacier > Vertical Room
-      last: SpotId::None
+      last: None
     path:
       - Glacier > Grid 31,9-12 > West 12
       - Ebih > Base Camp > East 12
@@ -158,7 +158,7 @@ tests:
       - Ebih > Base Camp > East 12
     expect:
       prev_area: Glacier > Grid 31,9-12
-      last: SpotId::None
+      last: None
 
   - name: collection_skip
     start: Ebih > Drone Room > Item

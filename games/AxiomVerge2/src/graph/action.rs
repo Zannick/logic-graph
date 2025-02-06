@@ -170,7 +170,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Ruins_Top__Save_Point__Save => true,
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::access_invoke_open(ctx, world),
-            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::access_invoke_grab_and_invoke_can_deploy(ctx, world),
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => rules::access_not_giguna__ruins_west__ctx__kishib_handled_and___invoke_allegiance1_or_invoke_shockwave(ctx, world),
             ActionId::Giguna__Ruins_West__Save_Point__Save => true,
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world),
@@ -358,7 +358,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Labyrinth__Door_Ledge__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Giguna__Labyrinth__Switch_Ledge__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Ruins_Top__Switch__Open_Doors => rules::observe_access_invoke_open(ctx, world, full_obs),
-            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_invoke_grab_and_invoke_can_deploy(ctx, world, full_obs),
+            ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Giguna__Ruins_West__Lower_Ledge__Hack_Destroy_Kishib => rules::observe_access_not_giguna__ruins_west__ctx__kishib_handled_and___invoke_allegiance1_or_invoke_shockwave(ctx, world, full_obs),
             ActionId::Giguna__Separator__Platform__Deploy_to_Switch => rules::observe_access_invoke_can_deploy_and___drone_hover_or_slingshot_hook(ctx, world, full_obs),
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::observe_access_invoke_can_deploy_and_slingshot_hook(ctx, world, full_obs),
@@ -1458,7 +1458,7 @@ impl world::Accessible for Action {
                 (ret, tags)
             }
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => {
-                let (ret, mut tags) = rules::explain_invoke_grab_and_invoke_can_deploy(ctx, world, edict);
+                let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Giguna > Ruins West > Rooftop East Edge"));

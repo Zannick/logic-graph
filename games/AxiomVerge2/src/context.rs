@@ -3147,6 +3147,7 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Ruins_Top__Rooftop_West => SpotId::Giguna__Ruins_Top__Portal,
         SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna__Ruins_Top__Portal,
         SpotId::Giguna__Ruins_Top__Small_Ledge => SpotId::Giguna__Ruins_Top__Portal,
+        SpotId::Giguna__Ruins_Top__Small_Passage_West => SpotId::Giguna__Ruins_Top__Portal,
         SpotId::Giguna__Ruins_Top__Switch => SpotId::Giguna__Ruins_Top__Portal,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_East => SpotId::Giguna__Ruins_Top__Portal,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_West => SpotId::Giguna__Ruins_Top__Portal,
@@ -4166,6 +4167,7 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Ruins_Top__Rooftop_West => SpotId::Giguna__Ruins_Top__Save_Point,
         SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Giguna__Ruins_Top__Save_Point,
         SpotId::Giguna__Ruins_Top__Small_Ledge => SpotId::Giguna__Ruins_Top__Save_Point,
+        SpotId::Giguna__Ruins_Top__Small_Passage_West => SpotId::Giguna__Ruins_Top__Save_Point,
         SpotId::Giguna__Ruins_Top__Switch => SpotId::Giguna__Ruins_Top__Save_Point,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_East => SpotId::Giguna__Ruins_Top__Save_Point,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_West => SpotId::Giguna__Ruins_Top__Save_Point,
@@ -5179,6 +5181,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Ruins_Top__Rooftop_West => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Flask,
         SpotId::Giguna__Ruins_Top__Save_Point => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_Top__Small_Ledge => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top_Portal,
+        SpotId::Giguna__Ruins_Top__Small_Passage_West => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_Top__Switch => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_East => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
         SpotId::Giguna__Ruins_Top__Turret_Balcony_West => SpotId::Menu__Kiengir_Map__Giguna_Ruins_Top,
@@ -16747,6 +16750,10 @@ impl context::Ctx for Context {
                 SpotId::Giguna__Ruins_Top__Small_Ledge => {
 
                 }
+                SpotId::Giguna__Ruins_Top__Small_Passage_West => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
+
+                }
                 SpotId::Giguna__Ruins_Top__Switch => {
                     self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
 
@@ -21851,6 +21858,11 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Giguna__Ruins_Top__Small_Ledge => {
+
+                }
+                SpotId::Giguna__Ruins_Top__Small_Passage_West => {
+                    self.cbits1.insert(flags::ContextBits1::MAP__GIGUNA__RUINS_TOP__SAVE);
+                    full_obs.clear_map__giguna__ruins_top__save();
 
                 }
                 SpotId::Giguna__Ruins_Top__Switch => {

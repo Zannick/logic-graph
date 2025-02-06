@@ -1,0 +1,435 @@
+name: AccessTests
+all:
+  start: Glacier > Revival > Save Point
+  with:
+    - Amagi_Breach_Center_Ruins_Blocks
+    - Amagi_Breach_Lower_Hallway_Gate
+    - Amagi_Breach_Split_Gate
+    - Amagi_Breach_West_Ruins_Gate
+    - Amagi_Dragon_Eye_Passage
+    - Amagi_Gated_Community_Gate
+    - Amagi_Stronghold_Boulder_1
+    - Amagi_Stronghold_Boulder_2
+    - Amagi_Stronghold_Boulder_And_Wall_2
+    - Amagi_Stronghold_Left_Wall
+    - Amagi_Stronghold_Wall_1
+    - Amagi_Stronghold_Wall_2
+    - Amagi_Stronghold_Wall_And_Boulder_1
+    - Amagi_West_Lake_Gate
+    - Amagi_West_Lake_Surface_Wall
+    - Amagi_Wiggly_Room_Gate
+    - Amashilama
+    - Annuna_Breach_Factory_Gate
+    - Annuna_Breach_Upper_Gate
+    - Annuna_Double_Trouble_Bosses
+    - Annuna_East_Bridge_Gate
+    - Annuna_Lower_Gate
+    - Annuna_Mirror_Match_Switch
+    - Annuna_Remote_Training_Gate
+    - Annuna_Vertical_Room_Gate
+    - Anuman
+    - Apocalypse_Seals_Wall
+    - Big_Flask
+    - Boomerang
+    - Breach_Attractor
+    - Breach_Sight
+    - Compass
+    - Defeat_Indra
+    - Defeat_MUS_A_M20
+    - Drone_Hover
+    - Ebih_Alu
+    - Ebih_Breach_Double_Gate_Gate
+    - Ebih_Breach_In_n_Out_Gate
+    - Ebih_Breach_Lake_Gate
+    - Ebih_Breach_Rock_Block_Rock
+    - Ebih_Breach_Rocky_Cages_Gate
+    - Ebih_Breach_Spider_Guards_Gate
+    - Ebih_East_Wall
+    - Ebih_Gem_Room_Gate
+    - Ebih_Hidden_Portal_Gate
+    - Ebih_Interchange_Block
+    - Ebih_Interchange_Gate
+    - Ebih_Walled_Off_Wall
+    - Ebih_Waterfall_Block_Left
+    - Ebih_Waterfall_Block_Right
+    - Ebih_Waterfall_Both_Blocks
+    - Ebih_Waterfall_Wall
+    - Ebih_West_Block
+    - Ellag
+    - Emergence_Dropoff_Wall
+    - Emergence_Rocks_Fall_Rock_1
+    - Emergence_Rocks_Fall_Rock_2
+    - Emergence_Rocks_Fall_Rock_3
+    - Emergence_Rocks_Fall_Rock_4
+    - Emergence_Storage_Rock
+    - Emergence_Storage_Tunnel
+    - Exit_Breach
+    - Fast_Travel
+    - Flask
+    - Giguna_Boulder
+    - Giguna_Breach_Crab_Rave_Gate
+    - Giguna_Breach_Gate_and_Wall_Gate
+    - Giguna_Breach_Lower_Machinery_Gate
+    - Giguna_Breach_Pinkness_Rock
+    - Giguna_Dual_Path_Switch
+    - Giguna_Dual_Path_Wall
+    - Giguna_Gateway_Block
+    - Giguna_Gateway_Gate
+    - Giguna_Gubi
+    - Giguna_Labyrinth_Gate
+    - Giguna_Northeast_Gate
+    - Giguna_Separator_Bricks
+    - Giguna_Vertical_Interchange_Gate
+    - Giguna_Vertical_Interchange_Rock
+    - Giguna_Wasteland_Door
+    - Giguna_Wasteland_Passage_H
+    - Glacier_Big_Drop_Rock
+    - Glacier_Breach_Spidery_Connector_Gate
+    - Glacier_Fortress_Bomberang
+    - Glacier_Fortress_Gate
+    - Glacier_Gudam
+    - Glacier_Sea_Burial_Rock
+    - Hammond_Auth
+    - Ice_Axe
+    - Infect
+    - Infect_L1
+    - Infect_L2
+    - Infect_L3
+    - Infection_Range
+    - Infection_Range_2
+    - Infection_Range_3
+    - Irikar_Breach_Buried_Treasure_Pillar
+    - Irikar_Breach_Uhrum_Connector_Wall
+    - Irikar_Gudam
+    - Irikar_Royal_Storage_Wall
+    - Ledge_Grab
+    - Nanite_Mist
+    - Remote_Drone
+    - Robopede
+    - Shockwave
+    - Siuna_Storage_Wall
+    - Slingshot_Charge
+    - Slingshot_Hook
+    - Slingshot_Weapon
+    - Sniper_Valley_Rock_1
+    - Sniper_Valley_Rock_2
+    - Station_Power
+    - Switch_36_11
+    - Switch_40_12
+    - Two_Big_Flasks
+    - Uhrum_Annuna_Corridor_Block
+    - Uhrum_Breach_Annuna_Gate_Gate
+    - Uhrum_Breach_Locked_Down_Gate
+    - Uhrum_Breach_Overgrown_Ruins_Wall
+    - Uhrum_Breach_Rock_and_Gate_Gate
+    - Uhrum_Breach_Rock_and_Gate_Rock
+    - Uhrum_Cavern_Wall
+    - Uhrum_East_Glitch
+    - Uhrum_East_Lake_Block
+    - Uhrum_Emergence_Wall
+    - Uhrum_Glitchy_Corridor_Rock
+    - Uhrum_Rocky_Gate_Rock
+    - Uhrum_Waterfall_Wall
+    - Uhrum_Waterfalls_Block
+    - Uhrum_West_Entrance_Gate
+    - Uhrum_West_Entrance_Lower_Wall
+    - Uhrum_West_Entrance_Upper_Wall
+    - Uhrum_West_Glitch
+    - Underwater_Movement
+    - Wall_Climb
+  context:
+    mode: drone
+    save: Glacier > Revival > Save Point
+    energy: 300
+    amagi__gated_community__ctx__dur_esla: true
+    amagi__main_area__ctx__combo: true
+    amagi__secret_chamber__ctx__east_dur_esla: true
+    amagi__secret_chamber__ctx__west_dur_esla: true
+    annuna__boss_gate__ctx__door: true
+    annuna__east_bridge__ctx__combo: true
+    annuna__invisible_enemies__ctx__door_opened: true
+    annuna__invisible_enemies__ctx__nw_utu: true
+    annuna__udug_gate__ctx__door: true
+    annuna__vertical_room__ctx__door_opened: true
+    annuna__west_bridge__ctx__doors_opened: true
+    annuna__west_climb__ctx__door_opened: true
+    ebih__ebih_west__ctx__door_open: true
+    ebih__grid_25_10_12__ctx__door_open: true
+    ebih__truck_gate__ctx__door_open: true
+    ebih__vertical_interchange__ctx__door_open: true
+    ebih__waterfall__ctx__east_door_open: true
+    ebih__waterfall__ctx__west_door_open: true
+    emergence__storage__ctx__door_open: true
+    giguna__carnelian__ctx__door_opened: true
+    giguna__carnelian__ctx__lower_susar: true
+    giguna__carnelian__ctx__upper_susar: true
+    giguna__east_caverns__ctx__combo_entered: true
+    giguna__east_caverns__ctx__door_opened: true
+    giguna__east_caverns__ctx__lower_susar: true
+    giguna__east_caverns__ctx__mid_susar: true
+    giguna__east_caverns__ctx__upper_susar: true
+    giguna__gateway__ctx__door_opened: true
+    giguna__giguna_base__ctx__door_open: true
+    giguna__giguna_northeast__ctx__door_opened: true
+    giguna__labyrinth__ctx__door: true
+    giguna__ruins_top__ctx__doors_open: true
+    giguna__ruins_west__ctx__kishib_handled: true
+    giguna__west_caverns__ctx__east_susar: true
+    giguna_breach__sw_save__ctx__door_opened: true
+    glacier__ctx__hammonds_doors: true
+    glacier__lonely_bull__ctx__door: true
+    glacier__the_big_drop__ctx__bridge_open: true
+    glacier__vertical_room__ctx__lower_gatestones: true
+    glacier__vertical_room__ctx__upper_gatestone: true
+    map__amagi__east_lake__save: true
+    map__amagi__main_area__save: true
+    map__amagi_breach__divided__save: true
+    map__amagi_breach__east_entrance__save: true
+    map__amagi_breach__east_ruins__save: true
+    map__amagi_breach__upper_lake__save: true
+    map__annuna__center_save__save: true
+    map__annuna__factory_entrance__save: true
+    map__annuna__mirror_match__save: true
+    map__annuna__upper_save__save: true
+    map__annuna__vertical_room__save: true
+    map__annuna_breach__bottom__save: true
+    map__annuna_breach__bridge__save: true
+    map__annuna_breach__double_corridor__save: true
+    map__annuna_breach__enclosed__save: true
+    map__annuna_breach__north_hallway__save: true
+    map__annuna_breach__rear_entrance__save: true
+    map__ebih__base_camp__save: true
+    map__ebih__ebih_west__lower_save: true
+    map__ebih__ebih_west__mid_save: true
+    map__ebih__ebih_west__upper_save: true
+    map__ebih__hidden_portal__save: true
+    map__ebih_breach__in_n_out__save: true
+    map__ebih_breach__peak__save: true
+    map__ebih_breach__portals_101__save: true
+    map__ebih_breach__rock_block__save: true
+    map__emergence__camp_exterior__save: true
+    map__giguna__giguna_base__save: true
+    map__giguna__giguna_northeast__save: true
+    map__giguna__labyrinth__save: true
+    map__giguna__ruins_top__save: true
+    map__giguna__ruins_west__save: true
+    map__giguna__separator__save: true
+    map__giguna_breach__east__save: true
+    map__giguna_breach__labyrinth__save: true
+    map__giguna_breach__peak__save: true
+    map__giguna_breach__south__save: true
+    map__giguna_breach__sw_save__save: true
+    map__glacier__revival__save: true
+    map__glacier_breach__guarded_corridor__save: true
+    map__glacier_breach__hammonds_breach__save: true
+    map__glacier_breach__save_and_exit__save: true
+    map__glacier_breach__south_save__save: true
+    map__glacier_breach__west_save__save: true
+    map__irikar__beach_save__save: true
+    map__irikar__hub__save: true
+    map__irikar__midwest__save: true
+    map__irikar_breach__basement_save__save: true
+    map__irikar_breach__corridor__save: true
+    map__irikar_breach__gauntlet__save: true
+    map__irikar_breach__save_room__save: true
+    map__uhrum__annuna_corridor__save: true
+    map__uhrum__emergence_save__save: true
+    map__uhrum__save_room__save: true
+    map__uhrum__west_entrance__save: true
+    map__uhrum_breach__annuna_gate__save: true
+    map__uhrum_breach__east_glitch__save: true
+    map__uhrum_breach__locked_down__save: true
+    map__uhrum_breach__save_and_go__save: true
+
+tests:
+  # Flasks and health
+  - can_access: Amagi > Gated Community > Upper East Ledge > Flask
+  - can_access: Amagi > Main Area > Cache > Item
+  - can_access: Amagi > Main Area > Way Off To The Side > Item
+  - can_access: Amagi > Secret Chamber > Enclosed Cache > Flask
+  - can_access: Amagi > Secret Chamber > Upper Cache > Health
+  - can_access: Amagi > West Lake > Cavern Eye > Item
+  - can_access: Amagi Breach > Center Ruins > Cache > Flask
+  - can_access: Amagi Breach > Divided > Wall East > Health
+  - can_access: Amagi Breach > East Entrance > Upper Slope > Item
+  - can_access: Amagi Breach > East Ruins > Northeast Bubbles Corner Access > Item
+  - can_access: Amagi Breach > Upper Lake > Column > Health
+  - can_access: Amagi Breach > West Ruins > Center Platform > Flask
+  - can_access: Amagi Breach > West Ruins > East Platform > Health
+  - can_access: Annuna > East Bridge > Cavern Cache > Flask
+  - can_access: Annuna > East Bridge > Tower Secret > Item
+  - can_access: Annuna > East Hideout > Bottom > Flask
+  - can_access: Annuna > Egg Room > Cache > Flask
+  - can_access: Annuna > Filter Teleporter > Shaft Bottom > Flask
+  - can_access: Annuna > Final Cache > Cache > Flask
+  - can_access: Annuna > Invisible Enemies > Corner Cache > Flask
+  - can_access: Annuna > Mirror Match > Plinth > Item
+  - can_access: Annuna > Secret Passage > Wall East > Flask
+  - can_access: Annuna > Sniper Valley > Cavern Cache > Item
+  - can_access: Annuna > Udug Lair > West Ditch > Health
+  - can_access: Annuna Breach > Factory Foyer > West Flower > Flask
+  - can_access: Annuna Breach > Lower Gate > Flower Cache > Flask
+  - can_access: Ebih > Base Camp > Top Platform > Item
+  - can_access: Ebih > Boss Room > East Ledge > Item
+  - can_access: Ebih > By Garage > Crawlspace > Fragment
+  - can_access: Ebih > Drone Pit > Pit > Item
+  - can_access: Ebih > Ebih East > Dispenser > Vend
+  - can_access: Ebih > Ebih West > Highest Platform > Flask
+  - can_access: Ebih > Gem Room > Between Gates > Gem
+  - can_access: Ebih > Gem Room > Hidden Cache > Flask
+  - can_access: Ebih > Grid 25,10-12 > Hidden Bush > Behind Bush
+  - can_access: Ebih > Guarded Health > West Basin > Health
+  - can_access: Ebih > Party Central > East Trough > Flask
+  - can_access: Ebih > West Face > Lower Ledge > Flask
+  - can_access: Ebih Breach > Rock Block > East Tunnel > Flask
+  - can_access: Ebih Breach > Rocky Cages > Cage Bottom > Flask
+  - can_access: Ebih Breach > Snowy Rocks > Cache > Flask
+  - can_access: Ebih Breach > Spider Guards > East Sand Pit > Flask
+  - can_access: Ebih Breach > Vertical Room > Cache > Flask
+  - can_access: Giguna > Breachable Wall > Wall Interior > Flask
+  - can_access: Giguna > Cache > Pit > Item
+  - can_access: Giguna > Dual Path > Wall Secret > Health
+  - can_access: Giguna > East Caverns > Hidden Passage Center > Hidden Flask
+  - can_access: Giguna > Far Corner > Grass > Obscured Item
+  - can_access: Giguna > Gateway > Flask Ledge > Item
+  - can_access: Giguna > Giguna Northeast > Vault > Item
+  - can_access: Giguna > Lamassu > Deposit > Flask
+  - can_access: Giguna > Mural > Enclosed Cache > Flask
+  - can_access: Giguna > Ruins East > Way Up High > Item
+  - can_access: Giguna > Secrecy > East Column > Flask
+  - can_access: Giguna > Vertical Interchange > Dead-end > Flask
+  - can_access: Giguna > Wasteland > Door Right > Health
+  - can_access: Giguna > Wasteland > Upper Cache > Flask
+  - can_access: Giguna Breach > Chimney > Cache > Flask
+  - can_access: Giguna Breach > Cubby > Rocks > Health
+  - can_access: Giguna Breach > Crab Rave > A Crab's Treasure > Flask
+  - can_access: Giguna Breach > Gate and Wall > Walled Off > Health
+  - can_access: Giguna Breach > Labyrinth > Pipe Cache > Flask
+  - can_access: Giguna Breach > Lower Machinery > Bottom > Flask
+  - can_access: Glacier > Dock Outside > Cave Treasure > Item
+  - can_access: Glacier > Fortress > Inner Center > Health
+  - can_access: Glacier > Grid 39-40,7-9 > Floating Rock > Item
+  - can_access: Glacier > Hammond's End > Between Center Doors > Health
+  - can_access: Glacier > Lake Main Entrance > Cache > Flask
+  - can_access: Glacier > Peak > Bird's Eye > Item
+  - can_access: Glacier > Revival > Pillar > Health
+  - can_access: Glacier > Sea Burial > Deep Cache > Health
+  - can_access: Glacier > Sliced Cavern > Upper Middle > Health
+  - can_access: Glacier > Vertical Room > Peak > Flask
+  - can_access: Glacier Breach > Grate Work > Grate Interior > Item
+  - can_access: Glacier Breach > Spidery Connector > Midway > Flask
+  - can_access: Interior > Ebih Cave > Entry > Health
+  - can_access: Interior > Observatory > Catwalk > Flask
+  - can_access: Interior > Uhrum Waterfall Cave > Cache > Flask
+  - can_access: Irikar > Airy > Cavern Cache > Flask
+  - can_access: Irikar > Boss Room > Healthy Rooftop > Health
+  - can_access: Irikar > Hub > Royal Storage in Wall > Item
+  - can_access: Irikar > Midwest > Right Platform Start > Flask
+  - can_access: Irikar Breach > Beach > Cache > Flask
+  - can_access: Irikar Breach > Buried Treasure > Pillar Bottom > Health
+  - can_access: Irikar Breach > Gauntlet > Hidden Path Reward > Item
+  - can_access: Irikar Breach > Rocky Dunes > Ditch > Health
+  - can_access: Irikar Breach > Uhrum Connector > Sand Swarm > Flask
+  - can_access: Irikar Breach > Worm Rave > Corner > Item
+  - can_access: Uhrum > Annuna Corridor > Statue > Item
+  - can_access: Uhrum > Emergence Facility > Balcony > Flask
+  - can_access: Uhrum > Glitchy Corridor > Behind West Glitch > Flask
+  - can_access: Uhrum > Seclusion > Close Range > Flask
+  - can_access: Uhrum > Siege Corridor > Center Box > Box
+  - can_access: Uhrum > Spring > Center > Health
+  - can_access: Uhrum > Waterfalls > Ceiling Cache > Flask
+  - can_access: Uhrum Breach > East Copse > Hidden Cache > Flask
+  - can_access: Uhrum Breach > East Glitch > Northeast Flower > Health
+  - can_access: Uhrum Breach > Overgrown Ruins > Cache > Flask
+
+  # special
+  - start: Amagi > Wiggly Room > East Chamber
+    context:
+      portal: Amagi > Wiggly Room > East Chamber
+    can_access: Amagi Breach > Twisty Passages > Closed Chamber > Flask
+  - start: Annuna > Smiley Room > Bottom
+    context:
+      portal: Annuna > Smiley Room > Bottom
+    can_access: Annuna Breach > Smiley > Drool > Health
+  - start: Annuna > West Bridge > Tower Upper Middle
+    context:
+      portal: Annuna > West Bridge > Tower Upper Middle
+    can_access: Annuna Breach > Bridge > Tower Upper Interior > Flask
+  - start: Giguna > Clouds > Platform Stop
+    context:
+      portal: Giguna > Clouds > Platform Stop
+    can_access: Giguna > Clouds > Cache > Item
+  - context:
+      mode: Indra
+    with:
+      - Mist_Upgrade
+    can_access: Glacier > Fortress > Parapet Center East > Shockwave Block
+  - start: Glacier > Angry Guards > Corner
+    context:
+      portal: Glacier > Angry Guards > Corner
+    can_access: Glacier Breach > Floaters > Hidden > Flask
+  
+  - start: Emergence > Camp Exterior > Save Point
+    can_access: Emergence > Audience Chamber > Cache > Flask
+  - start: Emergence > Camp Exterior > Save Point
+    can_access: Emergence > Drop-off > Basin > Flask
+  - start: Emergence > Camp Exterior > Save Point
+    can_access: Giguna Breach > Emergence > Corner > Flask
+
+  # Optional upgrades
+  - can_obtain: Boomerang_Upgrade
+  - can_obtain: Bronze_Axe
+  - can_obtain: Carnelian_Ring
+  - can_obtain: Diviners_Gem
+  - can_obtain: Double_Axe
+  - can_obtain: Ensis_Bracelet
+  - can_obtain: Eye_Ring
+  - can_obtain: Halusan
+  - can_obtain: Melee_Charge
+  - can_obtain: Nano_Lattice_1
+  - can_obtain: Nano_Lattice_2
+  - can_obtain: Nano_Lattice_3
+  - can_obtain: Remote_Boomerang
+  - can_obtain: Royal_Dagger
+  - can_obtain: Royal_Ring
+  - can_obtain: Sickle_Sword
+  - can_obtain: Udusan
+
+  # Lore
+  - can_obtain: Aansur
+  - can_obtain: Becoming_An_Arm
+  - can_obtain: Beware_the_Patternmind
+  - can_obtain: Bounty_List
+  - can_obtain: Building_of_the_School
+  - can_obtain: Commemorative_Speech
+  - can_obtain: Companies_Layoff
+  - can_obtain: Dangerous_Ideas
+  - can_obtain: Dear_Ernest
+  - can_obtain: Destruction_Pogrom
+  - can_obtain: Dr_Gloria
+  - can_obtain: Family_Tragedy
+  - can_obtain: Forbidden_Knowledge
+  - can_obtain: Freedom_from_Aansur
+  - can_obtain: Goodbye
+  - can_obtain: Heretics_Granddaughter
+  - can_obtain: Heretics_Tablet
+  - can_obtain: Journal_2049_10_29
+  - can_obtain: Kazakh_Assault
+  - can_obtain: Lament_for_Fools
+  - can_obtain: Letter_from_Trace
+  - can_obtain: Notes_2053_02_27
+  - can_obtain: Plague_of_Thoughts
+  - can_obtain: Re_Does_Technology
+  - can_obtain: Record_Losses
+  - can_obtain: Researchers_Missing
+  - can_obtain: Sagiga_on_the_Worldstream
+  - can_obtain: Storm_Bomb
+  - can_obtain: Submarine_Progress
+  - can_obtain: Suspension_Bridge
+  - can_obtain: Terminal_Breakthrough_1
+  - can_obtain: Terminal_Breakthrough_2
+  - can_obtain: The_Eternal_Arm
+  - can_obtain: The_Ideal_Kiengir
+  - can_obtain: The_Student
+  - can_obtain: Under_Siege
+  - can_obtain: Urgent_Message

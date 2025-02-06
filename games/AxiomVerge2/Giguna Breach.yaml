@@ -1002,6 +1002,7 @@ areas:
         - to: Lower Tier East
         - to: Pipe Entrance
           thru: [18.55, 19.7]
+        - to: East 20
     - name: East 20
       coord: [18.9, 19.75]
       local:

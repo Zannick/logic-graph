@@ -1304,10 +1304,6 @@ pub fn access_invoke_grab_and_giguna__ruins_west__ctx__kishib_handled(
     // $grab and ^_kishib_handled
     (helper__grab!(ctx, world) && ctx.giguna__ruins_west__ctx__kishib_handled())
 }
-pub fn access_invoke_grab_and_invoke_can_deploy(ctx: &Context, world: &World) -> bool {
-    // $grab and $can_deploy
-    (helper__grab!(ctx, world) && helper__can_deploy!(ctx, world))
-}
 pub fn access_invoke_grab_and_invoke_climb(ctx: &Context, world: &World) -> bool {
     // $grab and $climb
     (helper__grab!(ctx, world) && helper__climb!(ctx, world))
@@ -1327,6 +1323,10 @@ pub fn access_invoke_grab_or_invoke_climb(ctx: &Context, world: &World) -> bool 
 pub fn access_invoke_grab_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $grab or $hook
     (helper__grab!(ctx, world) || helper__hook!(ctx, world))
+}
+pub fn access_invoke_grab_or_invoke_hover_or_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // $grab or $hover or $hook
+    ((helper__grab!(ctx, world) || helper__hover!(ctx, world)) || helper__hook!(ctx, world))
 }
 pub fn access_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $hook
@@ -2294,6 +2294,13 @@ pub fn access_mode_eq_drone_and_giguna__east_caverns__ctx__combo_entered(
 ) -> bool {
     // ^mode == 'drone' and ^_combo_entered
     (ctx.mode() == enums::Mode::Drone && ctx.giguna__east_caverns__ctx__combo_entered())
+}
+pub fn access_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(
+    ctx: &Context,
+    world: &World,
+) -> bool {
+    // ^mode == 'drone' and ^_doors_open
+    (ctx.mode() == enums::Mode::Drone && ctx.giguna__ruins_top__ctx__doors_open())
 }
 pub fn access_mode_eq_drone_and_giguna_dual_path_wall(ctx: &Context, world: &World) -> bool {
     // ^mode == 'drone' and Giguna_Dual_Path_Wall
@@ -9848,33 +9855,6 @@ pub fn explain_invoke_grab_and_giguna__ruins_west__ctx__kishib_handled(
         }
     }
 }
-pub fn explain_invoke_grab_and_invoke_can_deploy(
-    ctx: &Context,
-    world: &World,
-    edict: &mut FxHashMap<&'static str, String>,
-) -> (bool, Vec<&'static str>) {
-    // $grab and $can_deploy
-    {
-        let mut left = {
-            let (res, mut refs) = hexplain__grab!(ctx, world, edict);
-            edict.insert("$grab", format!("{:?}", res));
-            refs.push("$grab");
-            (res, refs)
-        };
-        if !left.0 {
-            left
-        } else {
-            let mut right = {
-                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
-                edict.insert("$can_deploy", format!("{:?}", res));
-                refs.push("$can_deploy");
-                (res, refs)
-            };
-            left.1.append(&mut right.1);
-            (right.0, left.1)
-        }
-    }
-}
 pub fn explain_invoke_grab_and_invoke_climb(
     ctx: &Context,
     world: &World,
@@ -9993,6 +9973,47 @@ pub fn explain_invoke_grab_or_invoke_hook(
             edict.insert("$grab", format!("{:?}", res));
             refs.push("$grab");
             (res, refs)
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_invoke_hover_or_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or $hover or $hook
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__hover!(ctx, world, edict);
+                    edict.insert("$hover", format!("{:?}", res));
+                    refs.push("$hover");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
         };
         if left.0 {
             left
@@ -14894,6 +14915,38 @@ pub fn explain_mode_eq_drone_and_giguna__east_caverns__ctx__combo_entered(
                     format!("{:?}", r),
                 );
                 (r, vec!["^giguna__east_caverns__ctx__combo_entered"])
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ^mode == 'drone' and ^_doors_open
+    {
+        let mut left = {
+            let mut refs = vec!["^mode"];
+            let mut left = {
+                let r = ctx.mode();
+                edict.insert("^mode", format!("{:?}", r));
+                (r, vec!["^mode"])
+            };
+            let right = enums::Mode::Drone;
+            edict.insert("^mode", format!("{}", left.0));
+            refs.append(&mut left.1);
+            (left.0 == right, refs)
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let r = ctx.giguna__ruins_top__ctx__doors_open();
+                edict.insert("^giguna__ruins_top__ctx__doors_open", format!("{:?}", r));
+                (r, vec!["^giguna__ruins_top__ctx__doors_open"])
             };
             left.1.append(&mut right.1);
             (right.0, left.1)
@@ -23801,14 +23854,6 @@ pub fn observe_access_invoke_grab_and_giguna__ruins_west__ctx__kishib_handled(
             ctx.giguna__ruins_west__ctx__kishib_handled()
         }))
 }
-pub fn observe_access_invoke_grab_and_invoke_can_deploy(
-    ctx: &Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) -> bool {
-    // $grab and $can_deploy
-    (hobserve__grab!(ctx, world, full_obs) && (hobserve__can_deploy!(ctx, world, full_obs)))
-}
 pub fn observe_access_invoke_grab_and_invoke_climb(
     ctx: &Context,
     world: &World,
@@ -23855,6 +23900,15 @@ pub fn observe_access_invoke_grab_or_invoke_hook(
 ) -> bool {
     // $grab or $hook
     (hobserve__grab!(ctx, world, full_obs) || hobserve__hook!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_grab_or_invoke_hover_or_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or $hover or $hook
+    ((hobserve__grab!(ctx, world, full_obs) || hobserve__hover!(ctx, world, full_obs))
+        || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_invoke_hook(
     ctx: &Context,
@@ -26013,6 +26067,23 @@ pub fn observe_access_mode_eq_drone_and_giguna__east_caverns__ctx__combo_entered
     } && ({
         full_obs.observe_giguna__east_caverns__ctx__combo_entered();
         ctx.giguna__east_caverns__ctx__combo_entered()
+    }))
+}
+pub fn observe_access_mode_eq_drone_and_giguna__ruins_top__ctx__doors_open(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ^mode == 'drone' and ^_doors_open
+    ({
+        let v = {
+            full_obs.observe_mode();
+            ctx.mode()
+        };
+        v == enums::Mode::Drone
+    } && ({
+        full_obs.observe_giguna__ruins_top__ctx__doors_open();
+        ctx.giguna__ruins_top__ctx__doors_open()
     }))
 }
 pub fn observe_access_mode_eq_drone_and_giguna_dual_path_wall(

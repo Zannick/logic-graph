@@ -695,6 +695,14 @@ areas:
       exits:
         - to: Far Corner > East 13
           tags: [xshift]
+        - to: West Tower > Southwest
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              penalty_tags: [mist2.2, -mist1.2]
 
 - name: Wasteland  # MARK: Wasteland
   on_entry: $reset_old_area(^newpos)
@@ -1880,12 +1888,22 @@ areas:
         - to: Lower Ledge
         - to: Platform
         - to: East 7
+      exits:
+        - to: Ruins Top > West Pillar
+          req: $hookhover
+          movement: base
+          jumps: 2
+          penalty_tags: [xshift, -base.1]
     - name: East 7
       coord: [13.95, 6.7]
       exits:
         - to: Upper Ledge
-          req: $grab
-          time: 1.2
+          req: $hook or $grab
+          movement: base
+          jumps: 1
+          penalties:
+            - when: not $hook
+              jumps: 1
         - to: Ruins Top > West 7
           tags: [xshift]
     
@@ -1894,16 +1912,47 @@ areas:
       local:
         - to: Rooftop West Edge
           jumps: 1
-        # I mean... we *could* jump back down, but why?
+        - to: Upper Ledge
+      exits:
+        - to: Ruins Top > West Pillar
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins Top > Turret Balcony West
+          req: $hookhover
+          movement: base
+          jumps: 2
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins Top > West Pillar
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+        - to: Ruins Top > Turret Balcony West
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Rooftop West Edge
       coord: [13.3, 5.45]
       local:
         - to: West 7
+        - to: Rooftop East Edge
     - name: West 7
       coord: [13.05, 6.3]
       exits:
         - to: West Tower > East 7
           tags: [xshift]
+        - to: Rooftop West Edge
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Ruins Top  # MARK: Ruins Top
   on_entry: $reset_old_area(^newpos)
@@ -1950,6 +1999,33 @@ areas:
       local:
         - to: West 7
         - to: Entryway
+      exits:
+        - to: Small Passage West
+          req: $hook
+          movement: fast_hover
+          jumps: 1
+        - to: Turret Balcony West
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+        - to: Ruins West > Upper Ledge
+          req: $hover
+          movement: base
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins West > Rooftop East Edge
+          req: $infinite_climb
+          movement: base
+          jumps: 3
+          penalty_tags: [xshift, -base.1]
+        - to: Ruins West > Rooftop East Edge
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Entryway
       coord: [14.45, 6.75]
       local:
@@ -2057,11 +2133,29 @@ areas:
           penalties:
             - when: not $hook
               movement: base
+        - to: Small Passage West
+          req: ^mode == 'drone' and ^_doors_open
+          movement: base
+        - to: Turret Balcony East
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
       actions:
         - name: Save
           do: $save
           tags: [save]
-      # TODO: move through the small passage with the drone
+    - name: Small Passage West
+      coord: [14.5, 5.85]
+      local:
+        - to: West Pillar
+        - to: Entryway
+      exits:
+        - to: Save Point
+          req: ^mode == 'drone' and ^_doors_open
+          movement: base
+          jumps: 1
     - name: Switch
       coord: [14.95, 5.6]
       local:
@@ -2079,6 +2173,12 @@ areas:
           penalties:
             - when: not $hook
               jumps: 1
+        - to: Rooftop West
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Turret Balcony East
           req: $hook or $grab
           movement: base
@@ -2086,6 +2186,12 @@ areas:
           penalties:
             - when: not $hook
               jumps: 2
+        - to: Turret Balcony East
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Rooftop West
       coord: [15.1, 5.2]
       local:
@@ -2093,9 +2199,14 @@ areas:
         - to: Rooftop East
       exits:
         - to: Turret Balcony East
-          req: $grab
+          req: $grab or $hover or $hook
           movement: base
-          jumps: 2
+        - to: Turret Balcony East
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
         - to: Rooftop Gutter
           req: $hookhover
           movement: fast_hover
@@ -2145,20 +2256,51 @@ areas:
       local:
         - to: Turret Balcony West
         - to: Switch
+        - to: Save Point
       exits:
         - to: Rooftop West
-          req: $grab
+          req: $grab or $hover or $hook
           movement: base
-          jumps: 2
+        - to: Rooftop West
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Turret Balcony West
       coord: [14.35, 5.2]
       local:
         - to: West Pillar
         - to: Entryway
         - to: West 7
+      exits:
+        - to: Giguna > Ruins West > Rooftop East Edge
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              penalty_tags: [fast_hover.1, -base.1]
+        - to: Giguna > Ruins West > Rooftop West Edge
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              penalty_tags: [fast_hover.1, -base.1]
+        - to: Giguna > Ruins West > Upper Ledge
+          req: $hover
+          movement: fast_hover
+          penalty_tags: [xshift, -fast_hover.1]
+          penalties:
+            - when: not Slingshot_Hook
+              movement: base
+              penalty_tags: [fast_hover.1, -base.1]
       actions:
         - name: Throw Drone onto Tower
-          req: $grab and $can_deploy
+          req: $can_deploy
           do: $deploy_drone_and_move(`Giguna > Ruins Top > West 7`)
           to: Giguna > Ruins West > Rooftop East Edge
           time: 3.8
@@ -2176,6 +2318,9 @@ areas:
       coord: [12.95, 6.3]
       local:
         - to: Top
+      exits:
+        - to: Ruins West > West 7
+          tags: [xshift]
     - name: Top
       coord: [12.6, 7.2]
       local:
@@ -2185,11 +2330,24 @@ areas:
         - name: Tablet
           item: The_Ideal_Kiengir
           tags: [standing]
+      exits:
+        - to: East 7
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: Southwest
       coord: [12.2, 8.9]
       exits:
         - to: West Caverns > Northwest
           tags: [yshift]
+        - to: Top
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
 
 - name: Far Corner  # MARK: Far Corner
   on_entry: $reset_old_area(^newpos)
@@ -2197,7 +2355,7 @@ areas:
     map_spot: Menu > Kiengir Map > Giguna Far Corner
   spots:
     - name: East 13
-      coord: [11.95, 12.3]
+      coord: [11.95, 12.1]
       local:
         - to: Grass
     - name: Grass
@@ -2208,8 +2366,18 @@ areas:
         - name: Obscured Item
           item: Flask
           tags: [flask]
+      exits:
+        - to: West Caverns > West 13
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -base.1]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
     - name: South
       coord: [11.4, 12.9]  # TODO: yshifts should be at .95/.05 as well!
+      local:
+        - to: Grass
       exits:
         - to: Helipad > North
           tags: [yfade]
@@ -2242,6 +2410,15 @@ areas:
         - to: East 15
         - to: Wall Top
         - to: Irikar Drop
+      exits:
+        - to: Far Corner > South
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              penalty_tags: [mist2.2, -mist1.2]
     - name: East 16
       coord: [12.95, 15.85]
       local:
@@ -2258,6 +2435,21 @@ areas:
         - to: South Right
         - to: Wall Top
           jumps: 1
+      exits:
+        - to: Helicopter
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+        - to: Far Corner > South
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              penalty_tags: [mist2.2, -mist1.2]
     - name: Wall Top
       coord: [11.8, 15.45]
       local:
@@ -2268,6 +2460,20 @@ areas:
         - to: Railing
           req: $hover
           movement: base
+        - to: Helicopter
+          req: Nanite_Mist
+          movement: mist2
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+        - to: Far Corner > South
+          req: Nanite_Mist
+          movement: mist2
+          penalty_tags: [xshift, -mist2.2]
+          penalties:
+            - when: not Mist_Upgrade
+              movement: mist1
+              penalty_tags: [mist2.2, -mist1.2]
     - name: Railing
       coord: [12.5, 15.85]
       local:
