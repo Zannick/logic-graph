@@ -636,25 +636,25 @@ where
             }
         }
 
-        match (test_name, mode) {
-            (Some(tn), Some(m)) => {
-                return Ok(Unittest {
-                    name: String::from(tn),
-                    initial: ctx,
-                    mode: m,
-                    expects,
-                });
-            }
-            (None, Some(m)) => {
-                return Ok(Unittest {
-                    name: default_name(yaml),
-                    initial: ctx,
-                    mode: m,
-                    expects,
-                });
-            }
-            (_, None) => {
-                if errs.is_empty() {
+        if errs.is_empty() {
+            match (test_name, mode) {
+                (Some(tn), Some(m)) => {
+                    return Ok(Unittest {
+                        name: String::from(tn),
+                        initial: ctx,
+                        mode: m,
+                        expects,
+                    });
+                }
+                (None, Some(m)) => {
+                    return Ok(Unittest {
+                        name: default_name(yaml),
+                        initial: ctx,
+                        mode: m,
+                        expects,
+                    });
+                }
+                (_, None) => {
                     errs.push(format!("{}: No test declared", test_name.unwrap_or(name)));
                 }
             }
