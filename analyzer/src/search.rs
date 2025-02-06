@@ -279,6 +279,7 @@ where
     iters: AtomicUsize,
     deadends: AtomicU32,
     greedies: AtomicUsize,
+    greedy_retries: AtomicUsize,
     greedy_misses: AtomicUsize,
     greedy_in_comm: AtomicUsize,
     greedy_out_comm: AtomicUsize,
@@ -422,6 +423,7 @@ where
             deadends: 0.into(),
             held: 0.into(),
             greedies: 0.into(),
+            greedy_retries: 0.into(),
             greedy_misses: 0.into(),
             greedy_in_comm: 0.into(),
             greedy_out_comm: 0.into(),
@@ -1282,24 +1284,41 @@ where
         max_time: u32,
         current_mode: SearchMode,
     ) -> anyhow::Result<bool> {
-        let res = access_location_after_actions(
-            self.world,
-            ctx.clone(),
-            loc.id(),
-            max_time,
-            if current_mode == SearchMode::GreedyMax {
-                self.options.greedy_max_depth
-            } else {
-                self.options.local_max_depth
-            },
-            if current_mode == SearchMode::GreedyMax {
-                self.options.greedy_max_states
-            } else {
-                self.options.local_max_states
-            },
-            self.queue.db().scorer().get_algo(),
-            &self.direct_paths,
-        );
+        let res = if current_mode == SearchMode::GreedyMax {
+            access_location_after_actions(
+                self.world,
+                ctx.clone(),
+                loc.id(),
+                max_time,
+                self.options.greedy_max_depth / 2,
+                self.options.greedy_max_states / 2,
+                self.queue.db().scorer().get_algo(),
+                &self.direct_paths,
+            )
+            .or_else(|_| {
+                access_location_after_actions(
+                    self.world,
+                    ctx.clone(),
+                    loc.id(),
+                    max_time,
+                    self.options.greedy_max_depth,
+                    self.options.greedy_max_states,
+                    self.queue.db().scorer().get_algo(),
+                    &self.direct_paths,
+                )
+            })
+        } else {
+            access_location_after_actions(
+                self.world,
+                ctx.clone(),
+                loc.id(),
+                max_time,
+                self.options.local_max_depth,
+                self.options.local_max_states,
+                self.queue.db().scorer().get_algo(),
+                &self.direct_paths,
+            )
+        };
         let found = res.is_ok();
         match res {
             Ok(mut c) => {
@@ -1449,7 +1468,7 @@ where
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; size={}, values={}\n\
-            Greedy stats: org level={}, steps done={}, misses={}, proc_in={}, proc_out={}\n\
+            Greedy stats: org level={}, steps done={}, retries={}, misses={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
@@ -1485,6 +1504,7 @@ where
             direct_values,
             self.organic_level.load(Ordering::Acquire),
             self.greedies.load(Ordering::Acquire),
+            self.greedy_retries.load(Ordering::Acquire),
             self.greedy_misses.load(Ordering::Acquire),
             self.greedy_in_comm.load(Ordering::Acquire),
             self.greedy_out_comm.load(Ordering::Acquire),
