@@ -1296,6 +1296,7 @@ where
                 &self.direct_paths,
             )
             .or_else(|_| {
+                self.greedy_retries.fetch_add(1, Ordering::Release);
                 access_location_after_actions(
                     self.world,
                     ctx.clone(),
