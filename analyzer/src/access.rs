@@ -537,7 +537,7 @@ where
 
     let startctx = ctx.clone();
     let hist_start = startctx.recent_history().len();
-    let key_func = &CtxWithActionCounter::unique_spot;
+    let key_func = |c: &CtxWithActionCounter<T>| c.ctx().get().clone();
 
     let item = CtxWithActionCounter {
         el: ctx,
@@ -611,9 +611,8 @@ where
     } else {
         direct_paths.deadends.fetch_add(1, Ordering::Release);
         Err(format!(
-            "Ran out of elements with {} iters left. Visits:\n{}",
+            "Ran out of elements with {} iters left.",
             spot_heap.capacity_left(),
-            report_keys_seen_depth(spot_heap.into_unique_key_map())
         ))
     }
 }
