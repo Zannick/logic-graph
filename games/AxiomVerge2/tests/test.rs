@@ -434,10 +434,10 @@ fn test_greedy_step() {
     access_location_after_actions_heatmap(
         &**WORLD,
         ContextWrapper::new(ctx),
-        LocationId::Ebih_Breach__The_Vault__Dais_Center__Urn,
+        LocationId::Amagi_Breach__Upper_Lake__Column__Health,
         1u32 << 20,
-        5,
-        32768,
+        4,
+        65536 * 8,
         &SPATHS,
         &DIRECT_PATHS,
     )

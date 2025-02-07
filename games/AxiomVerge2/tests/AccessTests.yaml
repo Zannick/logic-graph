@@ -343,6 +343,7 @@ tests:
   - can_access: Uhrum Breach > Overgrown Ruins > Cache > Flask
 
   # special
+  - can_reach: Amagi > Wiggly Room > East Chamber
   - start: Amagi > Wiggly Room > East Chamber
     context:
       portal: Amagi > Wiggly Room > East Chamber
