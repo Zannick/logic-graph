@@ -1285,29 +1285,36 @@ where
         current_mode: SearchMode,
     ) -> anyhow::Result<bool> {
         let res = if current_mode == SearchMode::GreedyMax {
-            access_location_after_actions(
+            match access_location_after_actions(
                 self.world,
                 ctx.clone(),
                 loc.id(),
                 max_time,
                 self.options.greedy_max_depth / 2,
-                self.options.greedy_max_states / 2,
+                self.options.greedy_max_states,
                 self.queue.db().scorer().get_algo(),
                 &self.direct_paths,
-            )
-            .or_else(|_| {
-                self.greedy_retries.fetch_add(1, Ordering::Release);
-                access_location_after_actions(
-                    self.world,
-                    ctx.clone(),
-                    loc.id(),
-                    max_time,
-                    self.options.greedy_max_depth,
-                    self.options.greedy_max_states,
-                    self.queue.db().scorer().get_algo(),
-                    &self.direct_paths,
-                )
-            })
+            ) {
+                AccessResult::ReachedSpot(_)
+                | AccessResult::CachedPathWithoutAccess(_)
+                | AccessResult::Expired(_)
+                | AccessResult::Deadended(_)
+                | AccessResult::Error(_) => {
+                    self.greedy_retries.fetch_add(1, Ordering::Release);
+                    access_location_after_actions(
+                        self.world,
+                        ctx.clone(),
+                        loc.id(),
+                        max_time,
+                        self.options.greedy_max_depth,
+                        self.options.greedy_max_states,
+                        self.queue.db().scorer().get_algo(),
+                        &self.direct_paths,
+                    )
+                }
+                // Success or min cases
+                res => res,
+            }
         } else {
             access_location_after_actions(
                 self.world,
@@ -1320,12 +1327,18 @@ where
                 &self.direct_paths,
             )
         };
-        let found = res.is_ok();
+        let found = res.is_success();
         match res {
-            Ok(mut c) => {
+            AccessResult::SuccessfulAccess(mut c)
+            | AccessResult::CachedPathMinSuccess(mut c)
+            | AccessResult::CachedPathMinWithoutAccess(mut c)
+            | AccessResult::CachedPathSuccess(mut c)
+            | AccessResult::CachedPathWithoutAccess(mut c)
+            | AccessResult::ReachedSpot(mut c) => {
                 let hist = c.remove_history().0;
                 if !hist.is_empty() {
-                    self.recreate_store(&ctx, &hist, current_mode).map(|_| true)
+                    self.recreate_store(&ctx, &hist, current_mode)
+                        .map(|_| found)
                 } else {
                     Ok(found)
                 }

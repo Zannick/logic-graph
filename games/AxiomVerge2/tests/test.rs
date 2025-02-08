@@ -441,5 +441,6 @@ fn test_greedy_step() {
         &SPATHS,
         &DIRECT_PATHS,
     )
+    .result()
     .unwrap();
 }

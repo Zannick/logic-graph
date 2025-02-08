@@ -1,7 +1,4 @@
-use crate::access::{
-    access_action_after_actions, access_action_after_actions_with_req,
-    access_location_after_actions, access_location_after_actions_with_req,
-};
+use crate::access::*;
 use crate::context::*;
 use crate::direct::DirectPaths;
 use crate::matchertrie::MatcherTrie;
@@ -226,7 +223,7 @@ where
             ),
             _ => return None,
         }
-        .ok()?;
+        .ok(true)?;
     }
     Some(rreplay)
 }
@@ -530,7 +527,7 @@ where
                 continue;
             }
             // Search for a way to that alternative location
-            if let Ok(replaced) = access_location_after_actions(
+            if let Some(replaced) = access_location_after_actions(
                 world,
                 replace_this_collection.clone(),
                 *loc_id,
@@ -539,7 +536,9 @@ where
                 max_states,
                 shortest_paths,
                 direct_paths,
-            ) {
+            )
+            .ok(true)
+            {
                 // And if there is such a way, rediscover routes to the same locations in the rest of the route
                 if let Some(reordered) = rediscover_routes(
                     world,
@@ -620,7 +619,9 @@ where
             "Could not replay base solution history range {:?}",
             range_a,
         );
-        let Ok(attempt) = (match step {
+        let (AccessResult::SuccessfulAccess(attempt)
+        | AccessResult::CachedPathMinSuccess(attempt)
+        | AccessResult::CachedPathSuccess(attempt)) = (match step {
             History::A(act_id) => access_action_after_actions_with_req(
                 world,
                 attempt,
@@ -650,7 +651,8 @@ where
                 )
             }
             _ => continue,
-        }) else {
+        })
+        else {
             continue;
         };
         // If the attempt isn't faster, we don't care. Usually it should find the same route and be equal.

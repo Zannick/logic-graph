@@ -434,6 +434,71 @@ where
     ))
 }
 
+pub enum AccessResult<T>
+where
+    T: Ctx,
+{
+    SuccessfulAccess(ContextWrapper<T>),
+    ReachedSpot(ContextWrapper<T>),
+    CachedPathMinSuccess(ContextWrapper<T>),
+    CachedPathMinWithoutAccess(ContextWrapper<T>),
+    CachedPathSuccess(ContextWrapper<T>),
+    CachedPathWithoutAccess(ContextWrapper<T>),
+    AlreadyDone(ContextWrapper<T>),
+    Expired(String),
+    Deadended(String),
+    Error(String),
+}
+
+impl<T: Ctx> AccessResult<T> {
+    pub fn is_success(&self) -> bool {
+        matches!(
+            self,
+            AccessResult::SuccessfulAccess(..)
+                | AccessResult::CachedPathMinSuccess(..)
+                | AccessResult::CachedPathSuccess(..)
+        )
+    }
+
+    pub fn ok(self, access: bool) -> Option<ContextWrapper<T>> {
+        if access {
+            match self {
+                AccessResult::SuccessfulAccess(c)
+                | AccessResult::CachedPathMinSuccess(c)
+                | AccessResult::CachedPathSuccess(c)
+                | AccessResult::AlreadyDone(c) => Some(c),
+                _ => None,
+            }
+        } else {
+            match self {
+                AccessResult::SuccessfulAccess(c)
+                | AccessResult::ReachedSpot(c)
+                | AccessResult::CachedPathMinSuccess(c)
+                | AccessResult::CachedPathMinWithoutAccess(c)
+                | AccessResult::CachedPathSuccess(c)
+                | AccessResult::CachedPathWithoutAccess(c)
+                | AccessResult::AlreadyDone(c) => Some(c),
+                _ => None,
+            }
+        }
+    }
+
+    pub fn result(self) -> Result<ContextWrapper<T>, String> {
+        match self {
+            AccessResult::SuccessfulAccess(c)
+            | AccessResult::ReachedSpot(c)
+            | AccessResult::CachedPathMinSuccess(c)
+            | AccessResult::CachedPathMinWithoutAccess(c)
+            | AccessResult::CachedPathSuccess(c)
+            | AccessResult::CachedPathWithoutAccess(c)
+            | AccessResult::AlreadyDone(c) => Ok(c),
+            AccessResult::Expired(e) | AccessResult::Deadended(e) | AccessResult::Error(e) => {
+                Err(e)
+            }
+        }
+    }
+}
+
 fn access_check_after_actions<W, T, A, DM>(
     world: &W,
     ctx: ContextWrapper<T>,
@@ -446,7 +511,7 @@ fn access_check_after_actions<W, T, A, DM>(
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
     direct_paths: &DirectPaths<W, T, DM>,
-) -> Result<ContextWrapper<T>, String>
+) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -506,23 +571,24 @@ where
     if let Some(p) = &best {
         direct_paths.hits.fetch_add(1, Ordering::Release);
         // Given a previous best, we may be able to stop immediately if it is the absolute minimum
-        // Otherwise we just use that route as a cap on max_time.
+        // Otherwise we just use that route as a cap on max_time (which excludes location access)
         max_time = std::cmp::min(max_time, ctx.elapsed() + p.time);
         if let Some(score) = score_func_ctx(&ctx) {
             if score.0 >= max_time {
                 direct_paths.min_hits.fetch_add(1, Ordering::Release);
                 // Recreate the partial route
-                return p.replay(world, &ctx).and_then(|mut res| {
-                    if is_eligible(res.get()) {
-                        access(&mut res, world, check);
-                        Ok(res)
-                    } else {
-                        direct_paths.fails.fetch_add(1, Ordering::Release);
-                        Err(format!(
-                            "best partial route is shortest path but was ineligible for access"
-                        ))
+                return match p.replay(world, &ctx) {
+                    Ok(mut res) => {
+                        if is_eligible(res.get()) {
+                            access(&mut res, world, check);
+                            AccessResult::CachedPathMinSuccess(res)
+                        } else {
+                            direct_paths.fails.fetch_add(1, Ordering::Release);
+                            AccessResult::CachedPathMinWithoutAccess(res)
+                        }
                     }
-                });
+                    Err(e) => AccessResult::Error(e),
+                };
             }
         }
     } else if let Some(free_time) = direct_paths.min_free_time_to(spot, ctx.get().position()) {
@@ -548,11 +614,13 @@ where
         spot_heap.push(item, unique_key, score);
     }
 
+    let mut reached_spot = None;
+
     while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
         if is_eligible(ctx.get()) {
             // Only insert into direct_paths if strictly better
-            if best.is_none() || ctx.elapsed() < max_time {
+            if best.is_none() && reached_spot.is_none() {
                 if best.is_some() {
                     direct_paths.improves.fetch_add(1, Ordering::Release);
                 }
@@ -564,8 +632,23 @@ where
                 );
             }
             let mut newctx = ctx.clone();
+            // access time is not counted in the max_time checks
             access(&mut newctx, world, check);
-            return Ok(newctx);
+            return AccessResult::SuccessfulAccess(newctx);
+        } else if ctx.get().position() == spot {
+            // Only insert into direct_paths if strictly better
+            if best.is_none() && reached_spot.is_none() {
+                if best.is_some() {
+                    direct_paths.improves.fetch_add(1, Ordering::Release);
+                }
+                direct_paths.insert_route(
+                    spot,
+                    startctx.get(),
+                    world,
+                    &ctx.recent_history()[hist_start..],
+                );
+                reached_spot = Some(ctx.clone());
+            }
         }
         expand_astar(
             world,
@@ -581,36 +664,38 @@ where
         if el.can_continue(max_depth) {
             expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func, &key_func);
         }
+    }
 
-        if spot_heap.is_expired() {
-            direct_paths.expires.fetch_add(1, Ordering::Release);
-            if best.is_none() {
-                return Err(format!(
-                    "Excessive A* search stopping at {} states explored",
-                    spot_heap.total_seen()
-                ));
-            } else {
-                break;
-            }
+    if spot_heap.is_expired() {
+        direct_paths.expires.fetch_add(1, Ordering::Release);
+        if best.is_none() && reached_spot.is_none() {
+            return AccessResult::Expired(format!(
+                "Excessive A* search stopping at {} states explored",
+                spot_heap.total_seen()
+            ));
         }
     }
 
     if let Some(p) = best {
         // Recreate the partial route
-        p.replay(world, &startctx).and_then(|mut res| {
-            if is_eligible(res.get()) {
-                access(&mut res, world, check);
-                Ok(res)
-            } else {
-                direct_paths.fails.fetch_add(1, Ordering::Release);
-                Err(format!(
-                    "best partial route is shortest path but was ineligible for access"
-                ))
+        match p.replay(world, &startctx) {
+            Ok(mut res) => {
+                if is_eligible(res.get()) {
+                    access(&mut res, world, check);
+                    AccessResult::CachedPathSuccess(res)
+                } else if let Some(without) = reached_spot {
+                    AccessResult::ReachedSpot(without)
+                } else {
+                    AccessResult::CachedPathWithoutAccess(res)
+                }
             }
-        })
+            Err(e) => AccessResult::Error(e),
+        }
+    } else if let Some(without) = reached_spot {
+        AccessResult::ReachedSpot(without)
     } else {
         direct_paths.deadends.fetch_add(1, Ordering::Release);
-        Err(format!(
+        AccessResult::Deadended(format!(
             "Ran out of elements with {} iters left.",
             spot_heap.capacity_left(),
         ))
@@ -626,7 +711,7 @@ pub fn access_location_after_actions<W, T, DM>(
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
     direct_paths: &DirectPaths<W, T, DM>,
-) -> Result<ContextWrapper<T>, String>
+) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -634,7 +719,7 @@ where
     DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
-        return Ok(ctx);
+        return AccessResult::AlreadyDone(ctx);
     }
 
     let spot = world.get_location_spot(loc_id);
@@ -664,7 +749,7 @@ pub fn access_action_after_actions<W, T, DM>(
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
     direct_paths: &DirectPaths<W, T, DM>,
-) -> Result<ContextWrapper<T>, String>
+) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -704,7 +789,7 @@ pub fn access_location_after_actions_with_req<W, T, DM>(
     req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
     direct_paths: &DirectPaths<W, T, DM>,
-) -> Result<ContextWrapper<T>, String>
+) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -712,7 +797,7 @@ where
     DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
-        return Ok(ctx);
+        return AccessResult::AlreadyDone(ctx);
     }
 
     let spot = world.get_location_spot(loc_id);
@@ -744,7 +829,7 @@ pub fn access_action_after_actions_with_req<W, T, DM>(
     req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
     direct_paths: &DirectPaths<W, T, DM>,
-) -> Result<ContextWrapper<T>, String>
+) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -783,7 +868,7 @@ pub fn access_location_after_actions_heatmap<W, T, DM>(
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
     direct_paths: &DirectPaths<W, T, DM>,
-) -> Result<ContextWrapper<T>, String>
+) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -791,7 +876,7 @@ where
     DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
-        return Ok(ctx);
+        return AccessResult::AlreadyDone(ctx);
     }
 
     let spot = world.get_location_spot(loc_id);
