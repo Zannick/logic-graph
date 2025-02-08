@@ -620,7 +620,7 @@ where
         let ctx = &el.el;
         if is_eligible(ctx.get()) {
             // Only insert into direct_paths if strictly better
-            if best.is_none() && reached_spot.is_none() {
+            if reached_spot.is_none() {
                 if best.is_some() {
                     direct_paths.improves.fetch_add(1, Ordering::Release);
                 }
@@ -637,7 +637,7 @@ where
             return AccessResult::SuccessfulAccess(newctx);
         } else if ctx.get().position() == spot {
             // Only insert into direct_paths if strictly better
-            if best.is_none() && reached_spot.is_none() {
+            if reached_spot.is_none() {
                 if best.is_some() {
                     direct_paths.improves.fetch_add(1, Ordering::Release);
                 }
