@@ -3778,6 +3778,15 @@ pub fn action_if___indra_within_position____indra_set_giguna_gt_clouds_gt_platfo
     }
     ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
 }
+pub fn action_if___refills_lt_invoke_count__power_matrix____refills_incr_1_(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // IF (^refills < $count(Power_Matrix)) { ^refills += 1; }
+    if Into::<i32>::into(ctx.refills()) < ctx.count(Item::Power_Matrix).into() {
+        ctx.refills += 1;
+    }
+}
 pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
@@ -4029,10 +4038,6 @@ pub fn action_portal_set_glacier_gt_hammonds_end_gt_lower_pedestal_west(
 pub fn action_portal_set_position(ctx: &mut Context, world: &World) {
     // ^portal = ^position
     ctx.set_portal(ctx.position());
-}
-pub fn action_refills_incr_1(ctx: &mut Context, world: &World) {
-    // ^refills += 1
-    ctx.refills += 1;
 }
 pub fn action_save_set_emergence_gt_camp_exterior_gt_save_point(ctx: &mut Context, world: &World) {
     // ^save = `Emergence > Camp Exterior > Save Point`
@@ -29505,6 +29510,21 @@ pub fn observe_action_if___indra_within_position____indra_set_giguna_gt_clouds_g
     ctx.set_portal(SpotId::Giguna__Clouds__Platform_Early_Portal);
     full_obs.strict = old_strict;
 }
+pub fn observe_action_if___refills_lt_invoke_count__power_matrix____refills_incr_1_(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // IF (^refills < $count(Power_Matrix)) { ^refills += 1; }
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    if {
+        let n = ctx.count(Item::Power_Matrix) as i32;
+        full_obs.observe_refills(IntegerObservation::Ge(n as i8));
+        (ctx.refills() as i32) < n
+    } {};
+    full_obs.strict = old_strict;
+}
 pub fn observe_action_indra_set_invoke_default(
     ctx: &mut Context,
     world: &World,
@@ -30059,13 +30079,6 @@ pub fn observe_action_portal_set_position(
         ctx.position()
     });
     full_obs.strict = old_strict;
-}
-pub fn observe_action_refills_incr_1(
-    ctx: &mut Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // ^refills += 1
 }
 pub fn observe_action_save_set_emergence_gt_camp_exterior_gt_save_point(
     ctx: &mut Context,

@@ -7567,7 +7567,7 @@ impl context::Ctx for Context {
             Item::Wall_Climb => {
                 self.cbits5.insert(flags::ContextBits5::WALL_CLIMB);
             }
-            Item::Power_Core => rules::action_refills_incr_1(self, world),
+            Item::Power_Core => rules::action_if___refills_lt_invoke_count__power_matrix____refills_incr_1_(self, world),
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(self, world),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(self, world),
             Item::Ebih_Waterfall_Both_Blocks => rules::action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(self, world),
@@ -8460,7 +8460,7 @@ impl context::Ctx for Context {
                 self.cbits5.insert(flags::ContextBits5::WALL_CLIMB);
                 full_obs.clear_wall_climb();
             }
-            Item::Power_Core => rules::observe_action_refills_incr_1(self, world, full_obs),
+            Item::Power_Core => rules::observe_action_if___refills_lt_invoke_count__power_matrix____refills_incr_1_(self, world, full_obs),
             Item::Amagi_Stronghold_Wall_And_Boulder_1 => rules::observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_left_gt_knock_down_left_boulder_invoke_add_item__amagi_stronghold_wall_1_invoke_add_item__amagi_stronghold_boulder_1(self, world, full_obs),
             Item::Amagi_Stronghold_Boulder_And_Wall_2 => rules::observe_action_invoke_visit__amagi_gt_west_lake_gt_stronghold_ceiling_right_gt_knock_down_right_boulder_invoke_add_item__amagi_stronghold_wall_2_invoke_add_item__amagi_stronghold_boulder_2(self, world, full_obs),
             Item::Ebih_Waterfall_Both_Blocks => rules::observe_action_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_left_invoke_visit__ebih_gt_waterfall_gt_alcove_gt_block_right_invoke_add_item__ebih_waterfall_block_right_invoke_add_item__ebih_waterfall_block_left(self, world, full_obs),

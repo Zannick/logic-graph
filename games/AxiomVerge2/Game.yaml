@@ -338,7 +338,7 @@ helpers:  # MARK: helpers
   $range2: Infection_Range_3 or (Infection_Range_2 and ^mode != 'drone')
   $range3: Infection_Range_3 and ^mode != 'drone'
 
-  $more_refills: ^refills < $count(Power_Matrix)
+  $more_refills: "true"
 
   $max_energy:num: IF (Nano_Points_3) { 450 } ELSE IF (Nano_Points_2) { 400 } ELSE IF (Nano_Points) { 350 } ELSE { 300 }
 
@@ -466,7 +466,7 @@ collect:  # MARK: collect
   Infect: $refill_energy
   Health_Fragment: $refill_energy
   Health_Node: $refill_energy
-  Power_Core: ^refills += 1
+  Power_Core: IF (^refills < $count(Power_Matrix)) { ^refills += 1; }
   Defeat_MUS_A_M20:
     $visit(`Amagi > West Lake > Cavern Refill Station > Break Wall`);
     $add_item(Amagi_Dragon_Eye_Passage);

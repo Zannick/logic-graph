@@ -1782,44 +1782,23 @@ macro_rules! hobserve__range3 {
 }
 
 /// $more_refills (  )
-/// ^refills < $count(Power_Matrix)
+/// true
 #[macro_export]
 macro_rules! helper__more_refills {
     ($ctx:expr, $world:expr) => {{
-        Into::<i32>::into($ctx.refills()) < $ctx.count(Item::Power_Matrix).into()
+        true
     }};
 }
 #[macro_export]
 macro_rules! hexplain__more_refills {
     ($ctx:expr, $world:expr, $edict:expr) => {{
-        {
-            let mut refs = vec!["^refills", "$count(Power_Matrix)"];
-            let mut left = {
-                let r = $ctx.refills();
-                $edict.insert("^refills", format!("{:?}", r));
-                (r, vec!["^refills"])
-            };
-            let mut right = {
-                let f = $ctx.count(Item::Power_Matrix);
-                $edict.insert("$count(Power_Matrix)", format!("{}", f));
-                (f, vec!["$count(Power_Matrix)"])
-            };
-            $edict.insert("^refills", format!("{:?}", left.0));
-            $edict.insert("$count(Power_Matrix)", format!("{:?}", right.0));
-            refs.append(&mut left.1);
-            refs.append(&mut right.1);
-            (Into::<i32>::into(left.0) < right.0.into(), refs)
-        }
+        (true, vec![])
     }};
 }
 #[macro_export]
 macro_rules! hobserve__more_refills {
     ($ctx:expr, $world:expr, $full_obs:expr) => {{
-        {
-            let n = $ctx.count(Item::Power_Matrix) as i32;
-            $full_obs.observe_refills(IntegerObservation::Ge(n as i8));
-            ($ctx.refills() as i32) < n
-        }
+        true
     }};
 }
 
