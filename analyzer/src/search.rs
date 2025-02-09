@@ -279,8 +279,8 @@ where
     iters: AtomicUsize,
     deadends: AtomicU32,
     greedies: AtomicUsize,
-    greedy_retries: AtomicUsize,
     greedy_misses: AtomicUsize,
+    greedy_spots_only: AtomicUsize,
     greedy_in_comm: AtomicUsize,
     greedy_out_comm: AtomicUsize,
     held: AtomicUsize,
@@ -880,7 +880,7 @@ where
                 && workers_done.load(Ordering::Acquire) < num_workers
             {
                 let iters = self.iters.load(Ordering::Acquire);
-                let current_mode = if iters < 500_000 {
+                let current_mode = if iters < 200_000 {
                     SearchMode::Standard
                 } else if mode == SearchMode::Dependent {
                     self.choose_mode(iters)
@@ -1285,36 +1285,16 @@ where
         current_mode: SearchMode,
     ) -> anyhow::Result<bool> {
         let res = if current_mode == SearchMode::GreedyMax {
-            match access_location_after_actions(
+            access_location_after_actions(
                 self.world,
                 ctx.clone(),
                 loc.id(),
                 max_time,
-                self.options.greedy_max_depth / 2,
+                self.options.greedy_max_depth,
                 self.options.greedy_max_states,
                 self.queue.db().scorer().get_algo(),
                 &self.direct_paths,
-            ) {
-                AccessResult::ReachedSpot(_)
-                | AccessResult::CachedPathWithoutAccess(_)
-                | AccessResult::Expired(_)
-                | AccessResult::Deadended(_)
-                | AccessResult::Error(_) => {
-                    self.greedy_retries.fetch_add(1, Ordering::Release);
-                    access_location_after_actions(
-                        self.world,
-                        ctx.clone(),
-                        loc.id(),
-                        max_time,
-                        self.options.greedy_max_depth,
-                        self.options.greedy_max_states,
-                        self.queue.db().scorer().get_algo(),
-                        &self.direct_paths,
-                    )
-                }
-                // Success or min cases
-                res => res,
-            }
+            )
         } else {
             access_location_after_actions(
                 self.world,
@@ -1335,6 +1315,9 @@ where
             | AccessResult::CachedPathSuccess(mut c)
             | AccessResult::CachedPathWithoutAccess(mut c)
             | AccessResult::ReachedSpot(mut c) => {
+                if !found {
+                    self.greedy_spots_only.fetch_add(1, Ordering::Release);
+                }
                 let hist = c.remove_history().0;
                 if !hist.is_empty() {
                     self.recreate_store(&ctx, &hist, current_mode)
@@ -1482,7 +1465,7 @@ where
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; size={}, values={}\n\
-            Greedy stats: org level={}, steps done={}, retries={}, misses={}, proc_in={}, proc_out={}\n\
+            Greedy stats: org level={}, steps done={}, misses={}, spots={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
@@ -1518,8 +1501,8 @@ where
             direct_values,
             self.organic_level.load(Ordering::Acquire),
             self.greedies.load(Ordering::Acquire),
-            self.greedy_retries.load(Ordering::Acquire),
             self.greedy_misses.load(Ordering::Acquire),
+            self.greedy_spots_only.load(Ordering::Acquire),
             self.greedy_in_comm.load(Ordering::Acquire),
             self.greedy_out_comm.load(Ordering::Acquire),
             iskips,
