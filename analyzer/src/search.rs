@@ -291,6 +291,7 @@ where
     organic_solution: AtomicBool,
     any_solution: AtomicBool,
     organic_level: AtomicUsize,
+    last_organic_improvement: AtomicUsize,
     mutated: AtomicUsize,
     finished: AtomicBool,
 }
@@ -434,6 +435,7 @@ where
             organic_solution: false.into(),
             any_solution: AtomicBool::new(!wins.is_empty()),
             organic_level: 0.into(),
+            last_organic_improvement: 0.into(),
             mutated: 0.into(),
             finished: false.into(),
         };
@@ -868,11 +870,13 @@ where
                     self.finished.store(true, Ordering::Release);
                 }
             };
-            let incr_organic = |progress| {
+            let incr_organic = |progress, iters| {
                 let org = self.organic_level.load(Ordering::Acquire);
                 if org == progress || Some(org) <= self.queue.min_progress() {
                     self.organic_level
                         .fetch_max(progress + 1, Ordering::Release);
+                    self.last_organic_improvement
+                        .fetch_max(iters, Ordering::Release);
                 }
             };
 
@@ -976,10 +980,11 @@ where
                                                 loc,
                                                 max_time,
                                                 current_mode,
+                                                iters,
                                             ) {
                                                 Ok(true) => {
                                                     found.store(true, Ordering::Release);
-                                                    incr_organic(progress)
+                                                    incr_organic(progress, iters)
                                                 }
                                                 Err(e) => greedy_error(e),
                                                 _ => (),
@@ -996,10 +1001,11 @@ where
                                                     loc,
                                                     max_time,
                                                     current_mode,
+                                                    iters,
                                                 ) {
                                                     Ok(true) => {
                                                         found.store(true, Ordering::Release);
-                                                        Some(incr_organic(progress))
+                                                        Some(incr_organic(progress, iters))
                                                     }
                                                     Err(e) => {
                                                         greedy_error(e);
@@ -1036,8 +1042,7 @@ where
                                                 .iter()
                                                 .any(|c| c.get().count_visits() == visits + 1)
                                         {
-                                            self.organic_level
-                                                .fetch_max(visits + 1, Ordering::Release);
+                                            incr_organic(visits, iters);
                                         }
 
                                         if let Err(e) =
@@ -1283,15 +1288,22 @@ where
         loc: &W::Location,
         max_time: u32,
         current_mode: SearchMode,
+        iters: usize,
     ) -> anyhow::Result<bool> {
         let res = if current_mode == SearchMode::GreedyMax {
+            // scale max depth and max states up if we haven't seen a lot for a while
+            let last = self.last_organic_improvement.load(Ordering::Acquire);
+            let time_since = std::cmp::min(iters.saturating_sub(last), 1_024_576);
             access_location_after_actions(
                 self.world,
                 ctx.clone(),
                 loc.id(),
                 max_time,
-                self.options.greedy_max_depth,
-                self.options.greedy_max_states,
+                std::cmp::max(1, self.options.greedy_max_depth * time_since / 1_024_576),
+                std::cmp::max(
+                    self.options.greedy_max_states / 16,
+                    self.options.greedy_max_states * time_since / 1_024_576,
+                ),
                 self.queue.db().scorer().get_algo(),
                 &self.direct_paths,
             )
