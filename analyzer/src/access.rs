@@ -638,6 +638,17 @@ where
                 return AccessResult::ReachedSpot(el.el);
             }
         }
+
+        if spot_heap.is_expired() {
+            direct_paths.expires.fetch_add(1, Ordering::Release);
+            if best.is_none() {
+                return AccessResult::Expired(format!(
+                    "Excessive A* search stopping at {} states explored",
+                    spot_heap.total_seen()
+                ));
+            }
+        }
+
         expand_astar(
             world,
             &el,
@@ -651,16 +662,6 @@ where
 
         if el.can_continue(max_depth) {
             expand_actions_astar(world, &el, max_time, &mut spot_heap, &score_func, &key_func);
-        }
-    }
-
-    if spot_heap.is_expired() {
-        direct_paths.expires.fetch_add(1, Ordering::Release);
-        if best.is_none() {
-            return AccessResult::Expired(format!(
-                "Excessive A* search stopping at {} states explored",
-                spot_heap.total_seen()
-            ));
         }
     }
 
@@ -715,7 +716,7 @@ where
         spot,
         loc,
         ContextWrapper::visit,
-        |c| c.position() == spot && loc.can_access(c, world),
+        |c| loc.can_access(c, world),
         max_time,
         max_depth,
         max_states,
@@ -753,7 +754,7 @@ where
         spot,
         act,
         ContextWrapper::activate,
-        |c| c.position() == spot && act.can_access(c, world),
+        |c| act.can_access(c, world),
         max_time,
         max_depth,
         max_states,
