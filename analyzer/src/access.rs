@@ -614,13 +614,11 @@ where
         spot_heap.push(item, unique_key, score);
     }
 
-    let mut reached_spot = None;
-
     while let Some((el, _)) = spot_heap.pop() {
         let ctx = &el.el;
-        if is_eligible(ctx.get()) {
+        if ctx.get().position() == spot {
             // Only insert into direct_paths if strictly better
-            if reached_spot.is_none() {
+            if ctx.elapsed() < max_time {
                 if best.is_some() {
                     direct_paths.improves.fetch_add(1, Ordering::Release);
                 }
@@ -631,23 +629,13 @@ where
                     &ctx.recent_history()[hist_start..],
                 );
             }
-            let mut newctx = ctx.clone();
-            // access time is not counted in the max_time checks
-            access(&mut newctx, world, check);
-            return AccessResult::SuccessfulAccess(newctx);
-        } else if ctx.get().position() == spot {
-            // Only insert into direct_paths if strictly better
-            if reached_spot.is_none() {
-                if best.is_some() {
-                    direct_paths.improves.fetch_add(1, Ordering::Release);
-                }
-                direct_paths.insert_route(
-                    spot,
-                    startctx.get(),
-                    world,
-                    &ctx.recent_history()[hist_start..],
-                );
-                reached_spot = Some(ctx.clone());
+            if is_eligible(ctx.get()) {
+                let mut newctx = ctx.clone();
+                // access time is not counted in the max_time checks
+                access(&mut newctx, world, check);
+                return AccessResult::SuccessfulAccess(newctx);
+            } else {
+                return AccessResult::ReachedSpot(el.el);
             }
         }
         expand_astar(
@@ -668,7 +656,7 @@ where
 
     if spot_heap.is_expired() {
         direct_paths.expires.fetch_add(1, Ordering::Release);
-        if best.is_none() && reached_spot.is_none() {
+        if best.is_none() {
             return AccessResult::Expired(format!(
                 "Excessive A* search stopping at {} states explored",
                 spot_heap.total_seen()
@@ -683,16 +671,12 @@ where
                 if is_eligible(res.get()) {
                     access(&mut res, world, check);
                     AccessResult::CachedPathSuccess(res)
-                } else if let Some(without) = reached_spot {
-                    AccessResult::ReachedSpot(without)
                 } else {
                     AccessResult::CachedPathWithoutAccess(res)
                 }
             }
             Err(e) => AccessResult::Error(e),
         }
-    } else if let Some(without) = reached_spot {
-        AccessResult::ReachedSpot(without)
     } else {
         direct_paths.deadends.fetch_add(1, Ordering::Release);
         AccessResult::Deadended(format!(
