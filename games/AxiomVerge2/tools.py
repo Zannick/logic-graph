@@ -1,10 +1,14 @@
 from collections import defaultdict
+import hashlib
 import math
 import os
+import pathlib
 from pprint import pprint
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+ROOT = (pathlib.Path(__file__).parent / '../..').resolve()
+sys.path.append(str(ROOT))
+SRCDIR = pathlib.Path(__file__).parent / 'src'
 from Compiler import GameLogic, treeToString
 from Utils import construct_id
 
@@ -290,6 +294,12 @@ def many_partitions(g):
             for spot in group:
                 spot_lookup[spot][k] = (len(group), group)
     return d, spot_lookup
+
+def hash_src_files():
+    for fn in SRCDIR.glob('**/*.rs'):
+        with fn.open('rb') as f:
+            h = hashlib.file_digest(f, hashlib.sha256)
+        print(h.hexdigest(), fn.relative_to(ROOT).as_posix())
 
 if __name__ == '__main__':
     print('Loaded game logic in var AV2')

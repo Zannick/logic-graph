@@ -2161,6 +2161,11 @@ class GameLogic(object):
         cmd = ['rustfmt'] + reformat_files
         subprocess.run(cmd)
 
+        gamedir = pathlib.Path(self.game_dir)
+        vstr = hash_src_files(gamedir)
+        with open(gamedir / 'src/VERSION', 'w') as f:
+            f.write(vstr)
+
 
 if __name__ == '__main__':
     cmd = argparse.ArgumentParser()

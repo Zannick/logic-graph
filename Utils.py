@@ -1,9 +1,12 @@
+import hashlib
 import logging
 import os
+import pathlib
 import re
 from typing import Any
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
+ROOT_DIR = pathlib.Path(__file__).parent.resolve()
 logging.basicConfig(level=logging.INFO, format='{relativeCreated:09.2f} {levelname}: {message}', style='{')
 
 # To be replaced with standard functions instead of helpers
@@ -196,3 +199,10 @@ def split_filter_penalties(penalties):
             cond.append(p)
     return always, cond
 
+def hash_src_files(game_dir: pathlib.Path) -> str:
+    s = []
+    for fn in (game_dir / 'src').glob('**/*.rs'):
+        with fn.open('rb') as f:
+            h = hashlib.file_digest(f, hashlib.sha256)
+        s.append(f'{h.hexdigest()} {fn.relative_to(ROOT_DIR).as_posix()}')
+    return '\n'.join(s)
