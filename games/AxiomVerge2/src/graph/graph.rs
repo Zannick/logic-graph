@@ -5470,6 +5470,7 @@ impl world::World for World {
     type Action = Action;
     type Warp = Warp;
     const NUM_CANON_LOCATIONS: usize = 356;
+    const VERSION: &'static str = crate::version::VERSION;
 
     fn new() -> Box<Self> {
         let mut world: Box<Self> = bytemuck::zeroed_box();

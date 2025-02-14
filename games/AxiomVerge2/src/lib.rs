@@ -16,3 +16,4 @@ pub mod observe;
 pub mod prices;
 mod rules;
 pub mod settings;
+mod version;

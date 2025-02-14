@@ -180,6 +180,7 @@ pub trait World: Sync {
         Currency = <Self::Location as Accessible>::Currency,
     >;
     const NUM_CANON_LOCATIONS: usize;
+    const VERSION: &'static str;
 
     fn new() -> Box<Self>;
 

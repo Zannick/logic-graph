@@ -2163,8 +2163,10 @@ class GameLogic(object):
 
         gamedir = pathlib.Path(self.game_dir)
         vstr = hash_src_files(gamedir)
-        with open(gamedir / 'src/VERSION', 'w') as f:
-            f.write(vstr)
+        short = hashlib.sha256(vstr.encode('utf-8')).hexdigest()
+        with open(gamedir / 'src/version.rs', 'w', encoding='utf-8') as f:
+            f.write(env.get_template('version.rs.jinja').render(long_version=vstr, short_version=short,
+                                                                gl=self, **self.__dict__))
 
 
 if __name__ == '__main__':
