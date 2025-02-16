@@ -140,11 +140,8 @@ pub fn read_from_file<P>(p: &P) -> String
 where
     P: AsRef<Path> + Debug,
 {
-    let mut file = File::open(p).unwrap_or_else(|e| panic!("Couldn't open file {:?}: {:?}", p, e));
-    let mut rstr = String::new();
-    file.read_to_string(&mut rstr)
-        .unwrap_or_else(|e| panic!("Couldn't read from file {:?}: {:?}", p, e));
-    rstr
+    std::fs::read_to_string(p)
+        .unwrap_or_else(|e| panic!("Couldn't read from file {:?}: {:?}", p, e))
 }
 
 pub fn run<W, T, TM, DM>(
@@ -235,7 +232,11 @@ where
             }
             Ok(())
         }
-        Commands::Minimize { route , max_depth, max_states} => {
+        Commands::Minimize {
+            route,
+            max_depth,
+            max_states,
+        } => {
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, &startctx);
