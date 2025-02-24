@@ -1,10 +1,8 @@
-#![allow(unused)]
-
 use super::matcher::{MatcherDispatch, Observable};
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::marker::PhantomData;
-use std::sync::{Arc, Mutex, MutexGuard};
+use std::sync::{Arc, Mutex};
 
 // The implementation only works for MatcherDispatch impls that use this Node struct specifically.
 // TODO: Make a Node trait that allow modification and iteration over the matchers.
@@ -85,10 +83,10 @@ where
     /// Performs a lookup for all states similar to this one.
     pub fn lookup(&self, similar: &StructType) -> Vec<ValueType> {
         let (node, mut vec) = self.root.lock().unwrap().lookup(similar);
-        if let Some(mut node) = node {
+        if let Some(node) = node {
             let mut node_queue = VecDeque::new();
             node_queue.push_back(node);
-            'outer: while let Some(node) = node_queue.pop_front() {
+            while let Some(node) = node_queue.pop_front() {
                 let locked_node = node.lock().unwrap();
                 for matcher in locked_node.matchers.iter() {
                     let (inner, val) = matcher.lookup(similar);
@@ -207,6 +205,7 @@ mod test {
     };
 
     #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+    #[allow(unused)]
     enum Position {
         Start,
         Middle,
@@ -399,7 +398,7 @@ mod test {
     }
 
     fn make_trie() -> MatcherTrie<MatcherMulti, Ctx> {
-        let mut trie = MatcherTrie::default();
+        let trie = MatcherTrie::default();
         let observations = vec![
             OneObservedThing::Pos(Position::Start),
             OneObservedThing::Flag {
@@ -464,7 +463,7 @@ mod test {
         } else {
             panic!("First matcher on node 2 is wrong type");
         }
-        let (node3, val) = lock2.matchers[0].lookup(&CTX_TEST_1);
+        let (_, val) = lock2.matchers[0].lookup(&CTX_TEST_1);
 
         assert_eq!(vec![CTX_1.clone()], val);
     }
@@ -524,7 +523,7 @@ mod test {
         } else {
             panic!("First matcher on node 2 is wrong type");
         }
-        let (node4, val) = lock3.matchers[0].lookup(&CTX_2);
+        let (_, val) = lock3.matchers[0].lookup(&CTX_2);
 
         assert_eq!(vec![CTX_2.clone()], val);
     }
@@ -558,7 +557,7 @@ mod test {
 
     #[test]
     fn multiple() {
-        let mut trie = make_trie();
+        let trie = make_trie();
         let observations = vec![
             OneObservedThing::Pos(Position::Start),
             OneObservedThing::Flag {
