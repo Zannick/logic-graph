@@ -14,8 +14,6 @@ use clap::{Parser, Subcommand};
 use rustc_hash::FxHashSet;
 use similar::TextDiff;
 use std::fmt::Debug;
-use std::fs::File;
-use std::io::Read;
 use std::mem::size_of;
 use std::path::{Path, PathBuf};
 

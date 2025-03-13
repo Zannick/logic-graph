@@ -21,6 +21,7 @@ use rocksdb::{
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
+use std::io::Write;
 use std::marker::PhantomData;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
@@ -64,6 +65,16 @@ struct StateData<I, S, L, E, A, Wp> {
     prev: Vec<u8>,
 }
 
+impl<I, S, L, E, A, Wp> StateData<I, S, L, E, A, Wp> {
+    pub fn best_times(&self) -> BestTimes {
+        BestTimes {
+            elapsed: self.elapsed,
+            time_since_visit: self.time_since_visit,
+            estimated_remaining: self.estimated_remaining,
+        }
+    }
+}
+
 type StateDataAlias<T> = StateData<
     <T as Ctx>::ItemId,
     <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
@@ -85,6 +96,7 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
     max_time: AtomicU32,
 
     metric: SM,
+    recovery: bool,
     size: AtomicUsize,
     seen: AtomicUsize,
     next: AtomicUsize,
@@ -138,6 +150,14 @@ impl From<rmp_serde::decode::Error> for Error {
     fn from(value: rmp_serde::decode::Error) -> Self {
         Error {
             message: format!("{:?}", value),
+        }
+    }
+}
+
+impl From<std::io::Error> for Error {
+    fn from(value: std::io::Error) -> Self {
+        Error {
+            message: value.to_string(),
         }
     }
 }
@@ -228,7 +248,7 @@ where
         initial_max_time: u32,
         world: &'w W,
         startctx: &T,
-    ) -> Result<HeapDB<'w, W, T, KS, SM>, String>
+    ) -> Result<HeapDB<'w, W, T, KS, SM>, Error>
     where
         P: AsRef<Path>,
     {
@@ -267,11 +287,27 @@ where
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
+        let mut vpath = path.clone();
         path.push("queue");
         path2.push("states");
+        vpath.push("VERSION");
+
+        let version_match =
+            std::fs::exists(&vpath)? && std::fs::read_to_string(&vpath)? == W::VERSION;
+        if !version_match {
+            print!("Detected db version mismatch. Proceed to delete dbs and start over? (y/N) ");
+            std::io::stdout().flush().unwrap();
+            let mut str = String::default();
+            std::io::stdin().read_line(&mut str).unwrap();
+            assert!(str.starts_with(&['y', 'Y']), "Exiting without deleting dbs");
+            let _ = DB::destroy(&opts, &path);
+            let _ = DB::destroy(&opts2, &path2);
+            std::fs::write(&vpath, W::VERSION)?;
+        } else {
+            log::debug!("Restoring some queue elements from existing db");
+        }
 
         // 1 + 2 = 3 GiB roughly for this db
-        let _ = DB::destroy(&opts, &path);
         let db = DB::open(&opts, &path)?;
 
         opts2.set_merge_operator_associative("min", min_merge);
@@ -294,7 +330,6 @@ where
         let nextcf = ColumnFamilyDescriptor::new(NEXT, cf_opts);
 
         // Same 1 + 2 = 3 GiB for this one
-        let _ = DB::destroy(&opts2, &path2);
         let statedb = DB::open_cf_descriptors(&opts2, &path2, vec![bestcf, nextcf])?;
 
         let mut write_opts = WriteOptions::default();
@@ -303,6 +338,14 @@ where
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut min_db_estimates = Vec::new();
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
+
+        let seen = if version_match {
+            statedb
+                .property_int_value("estimate-num-keys")?
+                .unwrap_or(0) as usize
+        } else {
+            0
+        };
 
         Ok(HeapDB {
             db,
@@ -317,8 +360,9 @@ where
             write_opts,
             max_time: initial_max_time.into(),
             metric: SM::new(world, startctx),
+            recovery: version_match,
             size: 0.into(),
-            seen: 0.into(),
+            seen: seen.into(),
             next: 0.into(),
             iskips: 0.into(),
             pskips: 0.into(),
@@ -456,7 +500,11 @@ where
     /// the score (4 bytes),
     /// the total time estimate (4 bytes),
     /// a sequence number (4 bytes)
-    fn get_heap_key_from_wrapper_score(&self, el: &ContextWrapper<T>, score: SM::Score) -> [u8; KS] {
+    fn get_heap_key_from_wrapper_score(
+        &self,
+        el: &ContextWrapper<T>,
+        score: SM::Score,
+    ) -> [u8; KS] {
         self.metric.get_heap_key(el.get(), score)
     }
 
@@ -882,11 +930,7 @@ where
         let sd = self
             .get_deserialize_state_data(state_key)?
             .expect("Didn't find state data!");
-        Ok(BestTimes {
-            elapsed: sd.elapsed,
-            time_since_visit: sd.time_since_visit,
-            estimated_remaining: sd.estimated_remaining,
-        })
+        Ok(sd.best_times())
     }
 
     fn record_one_internal(
