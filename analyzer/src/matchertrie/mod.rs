@@ -1,3 +1,4 @@
+mod db;
 mod matcher;
 mod observe;
 mod trie;

@@ -270,6 +270,10 @@ mod test {
 
     impl Observable for Ctx {
         type PropertyObservation = OneObservedThing;
+
+        fn root_observation(&self) -> Self::PropertyObservation {
+            OneObservedThing::Pos(self.pos)
+        }
         fn matches(&self, obs: &OneObservedThing) -> bool {
             match *obs {
                 OneObservedThing::Pos(p) => self.pos == p,

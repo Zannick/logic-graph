@@ -6435,6 +6435,9 @@ impl Default for Context {
 impl analyzer::matchertrie::Observable for Context {
     type PropertyObservation = OneObservation;
 
+    fn root_observation(&self) -> OneObservation {
+        OneObservation::Position(self.position)
+    }
     fn matches(&self, obs: &OneObservation) -> bool {
         obs.matches(self)
     }

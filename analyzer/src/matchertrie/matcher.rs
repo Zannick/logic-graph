@@ -25,6 +25,7 @@ use std::sync::{Arc, Mutex};
 pub trait Observable {
     type PropertyObservation: Debug;
 
+    fn root_observation(&self) -> Self::PropertyObservation;
     fn matches(&self, obs: &Self::PropertyObservation) -> bool;
     fn matches_all(&self, observations: &[Self::PropertyObservation]) -> bool {
         observations.into_iter().all(|obs| self.matches(obs))
