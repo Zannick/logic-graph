@@ -1497,3 +1497,54 @@ where
         ))
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::StateData;
+    use crate::context::History;
+
+    type GenericStateData = StateData::<u8, u8, u8, u8, u8, u8>;
+
+    #[test]
+    fn test_merge() {
+        let sd1 = GenericStateData {
+            elapsed: 123456,
+            time_since_visit: 789,
+            estimated_remaining: 6543,
+            hist: Vec::new(),
+            prev: Vec::new(),
+        };
+
+        let sd2 = GenericStateData {
+            elapsed: 1111111,
+            time_since_visit: 111,
+            estimated_remaining: 1111,
+            hist: vec![History::A(3)],
+            prev: Vec::new(),
+        };
+
+        let sd3 = GenericStateData {
+            elapsed: 1111111,
+            time_since_visit: 7,
+            estimated_remaining: 1211,
+            hist: vec![History::A(3)],
+            prev: Vec::new(),
+        };
+
+        let sd1_mp = super::serialize_data(sd1);
+        let sd2_mp = super::serialize_data(sd2);
+        let sd3_mp = super::serialize_data(sd3);
+
+        println!("{:?}\n{:?}\n{:?}", sd1_mp, sd2_mp, sd3_mp);
+
+        assert!(
+            sd1_mp < sd2_mp,
+            "Serialized data with less elapsed_time is greater lexicographically"
+        );
+
+        assert!(
+            sd3_mp < sd2_mp,
+            "Serialized data with less time_since is greater lexicographically"
+        );
+    }
+}
