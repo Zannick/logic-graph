@@ -161,6 +161,7 @@ pub fn collection_observations<W, T>(
     startctx: &T,
     world: &W,
     history: &[HistoryAlias<T>],
+    victory: bool,
 ) -> Vec<Vec<T::PropertyObservation>>
 where
     W: World,
@@ -172,7 +173,11 @@ where
     // one more state than history steps.
     assert!(full_history.len() == history.len() + 1);
     let prev = full_history.last().unwrap();
-    let mut solve = <T::Observer as Observer>::from_victory_state(prev, world);
+    let mut solve = if victory {
+        <T::Observer as Observer>::from_victory_state(prev, world)
+    } else {
+        T::Observer::default()
+    };
 
     let mut obs_list = Vec::new();
 

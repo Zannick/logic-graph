@@ -608,7 +608,7 @@ where
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
         collection_history_with_range_info::<T, _>(solution.history.iter().copied()).collect();
-    let obs_list = collection_observations(startctx, world, &solution.history);
+    let obs_list = collection_observations(startctx, world, &solution.history, true);
     let mut replay = ContextWrapper::new(startctx.clone());
 
     for ((range_a, step), observations) in collection_hist.iter().zip(obs_list.iter()) {

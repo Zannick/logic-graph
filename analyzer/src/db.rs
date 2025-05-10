@@ -3,6 +3,9 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
+use crate::matchertrie::{MatcherRocksDb, MatcherTrieDb};
+use crate::observer::collection_observations;
+use crate::route::{PartialRoute, RouteStep};
 use crate::scoring::*;
 use crate::steiner::*;
 use crate::world::*;
@@ -46,6 +49,8 @@ struct HeapDBOptions {
 
 const BEST: &str = "best";
 const NEXT: &str = "next";
+const ROUTE: &str = "route";
+const TRIE: &str = "trie";
 const TOO_MANY_STEPS: usize = 1024 << 3;
 
 // This is a vec because we don't guarantee that the recent history in a newly submitted ctx
@@ -1305,6 +1310,41 @@ where
         Ok(())
     }
 
+    pub fn restore(&self) {
+        if !self.recovery {
+            return;
+        }
+
+        let state_snapshot = self.statedb.snapshot();
+
+        self.reset_estimates_actual();
+        let mut iter_opts = ReadOptions::default();
+        iter_opts.fill_cache(false);
+        let iter = state_snapshot.iterator_cf_opt(self.best_cf(), iter_opts, IteratorMode::Start);
+        let next_cf = self.next_cf();
+        for state_el in iter {
+            let (key, val) = state_el.unwrap();
+            if state_snapshot
+                .get_pinned_cf(next_cf, key.as_ref())
+                .is_ok_and(|o| o.is_some())
+            {
+                self.next.fetch_add(1, Ordering::Release);
+            } else {
+                let state: T = get_obj_from_data(key.as_ref()).unwrap();
+                let data: StateDataAlias<T> = get_obj_from_data(val.as_ref()).unwrap();
+                let score = self.metric().score_from_times(data.best_times());
+                let heap_key_min = self.metric().get_heap_key(&state, score);
+                if self
+                    .db
+                    .put_opt(&heap_key_min, val.as_ref(), &self.write_opts)
+                    .is_ok()
+                {
+                    self.size.fetch_add(1, Ordering::Release);
+                }
+            }
+        }
+    }
+
     fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<(), Error> {
         if let Some(StateData { hist, prev, .. }) = self.get_deserialize_state_data(state_key)? {
             if let Some(StateData {
@@ -1495,5 +1535,181 @@ where
             SizeFormatter::new(self._state_cache.get_usage(), BINARY),
             SizeFormatter::new(self._state_cache.get_pinned_usage(), BINARY),
         ))
+    }
+}
+
+#[derive(Clone, Debug, Eq, Hash, PartialEq, Serialize, Deserialize)]
+struct SavedRoute {
+    pub time: u32,
+    pub route_id: usize,
+    pub route_start: usize,
+    pub route_end: usize,
+}
+
+impl PartialOrd for SavedRoute {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.time.partial_cmp(&other.time)
+    }
+}
+
+impl Ord for SavedRoute {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.time.cmp(&other.time)
+    }
+}
+
+pub struct RouteDb<T>
+where
+    T: Ctx,
+    T::PropertyObservation: Serialize + for<'a> Deserialize<'a>,
+{
+    db: MatcherRocksDb<T, SavedRoute>,
+    _cache: Cache,
+    phantom: PhantomData<T>,
+
+    next_route_id: AtomicUsize,
+}
+
+impl<T> RouteDb<T>
+where
+    T: Ctx,
+    T::PropertyObservation: Serialize + for<'a> Deserialize<'a>,
+{
+    pub fn open<P>(p: P, delete_first: bool) -> anyhow::Result<Self>
+    where
+        P: AsRef<Path>,
+    {
+        let mut opts = Options::default();
+        opts.create_if_missing(true);
+        // change compression options?
+        // 4 write buffers at 256 MiB = 1 GiB
+        opts.set_write_buffer_size(256 * MB);
+        opts.set_max_write_buffer_number(4);
+        opts.set_target_file_size_base(128 * 1024 * 1024);
+        // use half the logical cores, clamp between 2 and 32
+        opts.increase_parallelism(std::cmp::max(
+            2,
+            std::cmp::min(num_cpus::get() / 2, 32).try_into().unwrap(),
+        ));
+        opts.set_max_background_jobs(4);
+
+        let mut env = Env::new().unwrap();
+        env.set_low_priority_background_threads(3);
+        opts.set_env(&env);
+        opts.set_max_open_files(512);
+
+        let mut block_opts = BlockBasedOptions::default();
+        // blockdb caches = 2 GiB
+        let cache = Cache::new_lru_cache(2 * GB);
+        block_opts.set_block_cache(&cache);
+        block_opts.set_block_size(16 * 1024);
+        block_opts.set_cache_index_and_filter_blocks(true);
+        block_opts.set_pin_l0_filter_and_index_blocks_in_cache(true);
+        block_opts.set_ribbon_filter(9.9);
+        opts.set_block_based_table_factory(&block_opts);
+
+        let cf_opts = opts.clone();
+        let mut cf_opts_trie = opts.clone();
+        cf_opts_trie.set_merge_operator_associative("min", min_merge);
+
+        opts.set_memtable_whole_key_filtering(true);
+        opts.create_missing_column_families(true);
+
+        let mut path = p.as_ref().to_owned();
+        path.push("routes");
+        if delete_first {
+            let _ = DB::destroy(&opts, &path);
+        }
+
+        let routecf = ColumnFamilyDescriptor::new(ROUTE, cf_opts);
+        let triecf = ColumnFamilyDescriptor::new(TRIE, cf_opts_trie);
+        let db = DB::open_cf_descriptors(&opts, &path, vec![routecf, triecf])?;
+
+        let next_route_id = if !delete_first {
+            // Read last key of route table to get next id
+            let mut iter = db.raw_iterator_cf(db.cf_handle(ROUTE).unwrap());
+            iter.seek_to_last();
+            let key = iter.key();
+            if let Some(id_raw) = key {
+                // ROUTE cf keys are pairs (route id: usize, index: usize)
+                get_obj_from_data::<(usize, usize)>(id_raw).unwrap().0 + 1
+            } else {
+                1
+            }
+        } else {
+            1
+        };
+
+        Ok(RouteDb {
+            db: MatcherRocksDb::from_db_cf(db, TRIE),
+            _cache: cache,
+            phantom: PhantomData::default(),
+            next_route_id: next_route_id.into(),
+        })
+    }
+
+    fn route_cf(&self) -> &ColumnFamily {
+        self.db.db().cf_handle(ROUTE).unwrap()
+    }
+
+    fn trie_cf(&self) -> &ColumnFamily {
+        self.db.db().cf_handle(TRIE).unwrap()
+    }
+
+    pub fn num_routes(&self) -> usize {
+        self.next_route_id.load(Ordering::Acquire)
+    }
+
+    pub fn insert_route<W>(
+        &self,
+        startctx: &T,
+        world: &W,
+        dest: <W::Exit as Exit>::SpotId,
+        route: &PartialRoute<T>,
+    ) -> usize
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
+        let route_id = self.next_route_id.fetch_add(1, Ordering::Acquire);
+        let prefix = serialize_data(dest);
+
+        // 1. Batch-write keys like "{route_id}:{idx}" for each individual step
+        // 2. For each observation set along the route, record "{dest}:{oset}" -> SavedRoute
+
+        let mut batch = WriteBatchWithTransaction::<false>::default();
+        let route_cf = self.route_cf();
+        for (i, step) in route.iter().enumerate() {
+            batch.put_cf(
+                route_cf,
+                serialize_data((route_id, i)),
+                serialize_data(step),
+            );
+        }
+        self.db.db().write(batch).unwrap();
+
+        let observations = collection_observations(
+            startctx,
+            world,
+            &route.route.iter().map(|rs| rs.step).collect::<Vec<_>>(),
+            false,
+        );
+        let mut batch = WriteBatchWithTransaction::<false>::default();
+        let end = route.route.len();
+        let mut time = 0;
+        for (i, (rs, obs)) in route.iter().zip(observations).enumerate() {
+            let saved = SavedRoute {
+                route_id,
+                route_start: i,
+                route_end: end,
+                time: route.time - time,
+            };
+            time += rs.time;
+            self.db.insert_batch(&mut batch, obs, saved, &prefix);
+        }
+        self.db.db().write(batch).unwrap();
+
+        route_id
     }
 }

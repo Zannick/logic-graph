@@ -99,7 +99,7 @@ where
         let route: Arc<Vec<_>> = Arc::new(
             full_series
                 .iter()
-                .map(|&(_, step, time)| RouteStep { step, time })
+                .map(|&(_, step, time)| RouteStep::<T> { step, time })
                 .collect(),
         );
 

@@ -3,8 +3,9 @@ use crate::context::*;
 use crate::estimates::ContextScorer;
 use crate::steiner::graph::*;
 use crate::steiner::*;
-use crate::world::{Exit, Location, World};
+use crate::world::*;
 use lazy_static::lazy_static;
+use serde::{Deserialize, Serialize};
 use std::hash::Hash;
 use std::str::FromStr;
 use std::sync::Arc;
@@ -17,11 +18,20 @@ static IN_FULL: &str = "\nin full:\n";
 // and cache them together so we can keep just the smallest.
 // TODO: Maybe we should do this for solutions as well?
 
-#[derive(Clone, Debug, Eq, Hash, PartialEq)]
-pub struct RouteStep<T: Ctx> {
-    pub step: HistoryAlias<T>,
+#[derive(Clone, Debug, Eq, Hash, PartialEq, Serialize, Deserialize)]
+pub struct RouteStepRaw<I, S, L, E, A, Wp> {
+    pub step: History<I, S, L, E, A, Wp>,
     pub time: u32,
 }
+
+pub type RouteStep<T> = RouteStepRaw<
+    <T as Ctx>::ItemId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    <<<T as Ctx>::World as World>::Location as Location>::LocId,
+    <<<T as Ctx>::World as World>::Exit as Exit>::ExitId,
+    <<<T as Ctx>::World as World>::Action as Action>::ActionId,
+    <<<T as Ctx>::World as World>::Warp as Warp>::WarpId,
+>;
 
 #[derive(Clone, Eq, Hash, PartialEq)]
 pub struct PartialRoute<T: Ctx> {
@@ -64,6 +74,10 @@ impl<T: Ctx> PartialRoute<T> {
             world,
             self.route[self.start..self.end].iter().map(|rs| &rs.step),
         )
+    }
+
+    pub fn iter(&self) -> impl Iterator<Item = &RouteStep<T>> {
+        self.route.iter().skip(self.start).take(self.end.saturating_sub(self.start))
     }
 }
 
