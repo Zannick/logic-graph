@@ -157,6 +157,7 @@ where
             for (i, ser_obs) in splits[2..].iter().enumerate() {
                 let obs: StructType::PropertyObservation = get_obj_from_data(ser_obs).unwrap();
                 if !similar.matches(&obs) {
+                    // copy the whole of the key up to the previous obs
                     let mut new_key: Vec<_> = splits[0..=i + 1].join(&SEPARATOR);
                     new_key.push(SEPARATOR + 1);
                     // Implicitly dropping the item

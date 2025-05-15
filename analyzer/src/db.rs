@@ -26,6 +26,7 @@ use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
 use std::io::Write;
 use std::marker::PhantomData;
+use std::ops::Range;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering};
 use std::sync::Mutex;
@@ -1708,8 +1709,36 @@ where
             time += rs.time;
             self.db.insert_batch(&mut batch, obs, saved, &prefix);
         }
+        // Should we put every subroute in? just the ones from the start or to the end? or only the end?
+
         self.db.db().write(batch).unwrap();
 
         route_id
+    }
+
+    pub fn best_known_route(
+        &self,
+        startctx: &T,
+        dest: <<<T as Ctx>::World as World>::Exit as Exit>::SpotId,
+    ) -> Result<Option<Vec<RouteStep<T>>>> {
+        let prefix = serialize_data(dest);
+        let routes = self.db.lookup(startctx, &prefix);
+        if let Some(sr) = routes.iter().min_by_key(|sr| sr.time) {
+            let route_cf = self.route_cf();
+            let steps = self.db.db().multi_get_cf(
+                Range {
+                    start: sr.route_start,
+                    end: sr.route_end,
+                }
+                .map(|idx| (route_cf, serialize_data((sr.route_id, idx)))),
+            );
+            let mut vec = Vec::with_capacity(sr.route_end - sr.route_start);
+            for step in steps {
+                vec.push(get_obj_from_data::<RouteStep<T>>(&step?.unwrap())?);
+            }
+            Ok(Some(vec))
+        } else {
+            Ok(None)
+        }
     }
 }
