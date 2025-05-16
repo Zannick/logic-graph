@@ -40,7 +40,7 @@ pub mod world;
 pub mod testlib;
 pub mod unittest;
 
-pub type CommonHasher = std::hash::BuildHasherDefault<rustc_hash::FxHasher>;
+pub type CommonHasher = rustc_hash::FxBuildHasher;
 pub fn new_hashmap<T, U>() -> std::collections::HashMap<T, U, CommonHasher> {
     rustc_hash::FxHashMap::default()
 }
