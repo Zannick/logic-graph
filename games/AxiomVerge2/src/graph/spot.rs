@@ -8517,7 +8517,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     },
     SpotDef {
         id: SpotId::Emergence__Storage__Tunnel_Entrance,
-        loc_range: Some((LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock, LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock)),
+        loc_range: Some((LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock, LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock)),
         exit_range: Some((ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1, ExitId::Emergence__Storage__Tunnel_Entrance__ex__Behind_Facade_1)),
         action_range: None,
     },
