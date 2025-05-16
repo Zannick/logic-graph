@@ -365,7 +365,7 @@ where
         min_to_restore: usize,
         max_to_restore: usize,
         queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let r = self.maybe_reshuffle_locked(progress, min_to_restore, max_to_restore, queue);
             self.retrieving.store(false, Ordering::Release);
@@ -381,7 +381,7 @@ where
         min_to_restore: usize,
         max_to_restore: usize,
         mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         let start = Instant::now();
         let num_buckets = queue.approx_num_buckets();
         // Get a decent amount to refill
@@ -428,7 +428,7 @@ where
     fn maybe_fetch_for_empty_buckets<'a>(
         &'a self,
         mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         // Runs over all the buckets
         let Some(min_score) = queue
             .peek_min()
