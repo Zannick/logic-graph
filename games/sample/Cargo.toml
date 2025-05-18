@@ -36,11 +36,6 @@ serde_json = "*"
 name = "bench"
 harness = false
 
-[profile.release]
-debug = true
-lto = "fat"
-panic = "abort"
-
 [[test]]
 name = "unittest"
 path = "tests/unittest.rs"

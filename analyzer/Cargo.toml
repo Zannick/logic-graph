@@ -25,7 +25,7 @@ plotlib = ">=0.5"
 priority-queue = "*"
 rayon = "*"
 regex = "*"
-rocksdb = { version = ">=0.21", default-features = false, features = ["snappy", "zstd"] }
+rocksdb = { version = "=0.22", default-features = false, features = ["snappy", "zstd"] }
 rmp-serde = "*"
 rustc-hash = "*"
 similar = "*"

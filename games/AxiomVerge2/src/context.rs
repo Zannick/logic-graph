@@ -6680,6 +6680,7 @@ impl context::Ctx for Context {
             _ => false,
         }
     }
+
     fn count(&self, item: Item) -> i16 {
         match item {
             Item::Aansur => self.cbits2.contains(flags::ContextBits2::AANSUR).into(),
@@ -24666,6 +24667,9 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
+            LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
+            }
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
@@ -27059,6 +27063,9 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
+            LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
+            }
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
@@ -28685,7 +28692,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK);
             }
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.remove(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {
@@ -29758,7 +29765,7 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
             LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall | LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall | LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_ROCK)
             }
-            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
+            LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel | LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock | LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.contains(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL)
             }
             LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Mist_Upward_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_1_West__Charge_Through_Wall | LocationId::Emergence__Rocks_Fall__Wall_2_Northwest__Spin_Through_Wall_1 => {

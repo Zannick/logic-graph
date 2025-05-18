@@ -382,6 +382,7 @@ impl world::Accessible for Location {
             LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel => rules::access_invoke_boomerang_and_fast_travel(ctx, world),
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => rules::access_invoke_shockwave(ctx, world),
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => rules::access_nanite_mist(ctx, world),
+            LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => rules::access_invoke_shockwave(ctx, world),
             LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::access_invoke_spin_or_invoke_charge(ctx, world),
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => rules::access_nanite_mist(ctx, world),
             LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::access_invoke_spin_or_invoke_charge(ctx, world),
@@ -1074,6 +1075,7 @@ impl world::Accessible for Location {
             LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel => rules::observe_access_invoke_boomerang_and_fast_travel(ctx, world, full_obs),
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => rules::observe_access_nanite_mist(ctx, world, full_obs),
             LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::observe_access_invoke_spin_or_invoke_charge(ctx, world, full_obs),
@@ -3865,6 +3867,7 @@ impl world::Accessible for Location {
             LocationId::Emergence__Storage__Dais_Right__Remote_Urn_Fast_Travel => rules::explain_invoke_boomerang_and_fast_travel(ctx, world, edict),
             LocationId::Emergence__Storage__Dais_Right__Shockwave_Urn => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => rules::explain_nanite_mist(ctx, world, edict),
+            LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => rules::explain_invoke_shockwave(ctx, world, edict),
             LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
             LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => rules::explain_nanite_mist(ctx, world, edict),
             LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => rules::explain_invoke_spin_or_invoke_charge(ctx, world, edict),
@@ -4176,7 +4179,7 @@ impl Location {
     }
 }
 
-static LOC_DEFS: [Location; 796] = [
+static LOC_DEFS: [Location; 797] = [
     Location {
         id: LocationId::Amagi_Breach__Center_Ruins__Cache__Flask,
         canonical: CanonId::Amagi_Breach_Center_Ruins_Flask,
@@ -7645,6 +7648,16 @@ static LOC_DEFS: [Location; 796] = [
         price_per_sec: Currency::Energy(33),
         time: 351,
         dest: SpotId::Emergence__Storage__Behind_Facade,
+        skippable: false,
+    },
+    Location {
+        id: LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock,
+        canonical: CanonId::Emergence_Storage_Tunnel,
+        item: Item::Emergence_Storage_Tunnel,
+        price: Currency::Energy(100),
+        price_per_sec: Currency::Free,
+        time: 3500,
+        dest: SpotId::None,
         skippable: false,
     },
     Location {
@@ -12208,7 +12221,7 @@ static CANON_EMERGENCE_ROCKS_FALL_ROCK_2: [LocationId; 6] = [LocationId::Emergen
 static CANON_EMERGENCE_ROCKS_FALL_ROCK_3: [LocationId; 4] = [LocationId::Emergence__Rocks_Fall__Wall_3_Northeast__Mist_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_3_West__Mist_Upwards_Through_Wall, LocationId::Emergence__Rocks_Fall__Lower_Ledge__Spin_Through_Wall];
 static CANON_EMERGENCE_ROCKS_FALL_ROCK_4: [LocationId; 6] = [LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Charge_Far_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_West_Ledge__Spin_Through_Wall_and_Hover, LocationId::Emergence__Rocks_Fall__Wall_4_West__Mist_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_East__Mist_Through_Wall, LocationId::Emergence__Rocks_Fall__Wall_4_East_Ledge__Spin_Through_Wall];
 static CANON_EMERGENCE_STORAGE_ROCK: [LocationId; 4] = [LocationId::Emergence__Storage__Wall_Right_Ledge__Spin_Through_Wall, LocationId::Emergence__Storage__Wall_Right__Mist_Through_Wall, LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall, LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall];
-static CANON_EMERGENCE_STORAGE_TUNNEL: [LocationId; 3] = [LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel, LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock, LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock];
+static CANON_EMERGENCE_STORAGE_TUNNEL: [LocationId; 4] = [LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel, LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock, LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock, LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock];
 static CANON_ESCAPE: [LocationId; 1] = [LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape];
 static CANON_EXIT_BREACH: [LocationId; 3] = [LocationId::Amagi_Breach__East_Ruins__Plinth__Urn, LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Collection_Skip, LocationId::Amagi_Breach__East_Ruins__Plinth__Urn_Fast_Travel];
 static CANON_FAST_TRAVEL: [LocationId; 2] = [LocationId::Irikar__Beach_Save__Top_Platform__Urn, LocationId::Uhrum__Siege_Corridor__Upper_Rock_Item__Urn];
@@ -13077,7 +13090,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
         LocationId::Emergence__Storage__Wall_Left__Mist_Through_Wall => SpotId::Emergence__Storage__Wall_Left,
         LocationId::Emergence__Storage__Wall_Left_Ledge__Spin_Through_Wall => SpotId::Emergence__Storage__Wall_Left_Ledge,
         LocationId::Emergence__Storage__Tunnel_Ledge__Spin_Into_Tunnel => SpotId::Emergence__Storage__Tunnel_Ledge,
-        LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => SpotId::Emergence__Storage__Tunnel_Entrance,
+        LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock | LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => SpotId::Emergence__Storage__Tunnel_Entrance,
         LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => SpotId::Emergence__Storage__Behind_Facade,
         LocationId::Emergence__Rocks_Fall__Wall_1_Northeast__Mist_Through_Rock => SpotId::Emergence__Rocks_Fall__Wall_1_Northeast,
         LocationId::Emergence__Rocks_Fall__Wall_1_East__Mist_Through_Rock => SpotId::Emergence__Rocks_Fall__Wall_1_East,

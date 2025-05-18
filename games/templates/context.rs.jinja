@@ -146,7 +146,7 @@ impl context::Ctx for Context {
     type Expectation = Expectation;
     const NUM_ITEMS: u32 = {{ gl.item_max_counts|count }};
 
-%# we might not need has/count, if we reference the parameter directly in rules
+%# we might not need has/count, if we reference the parameter directly in rules -
     fn has(&self, item: Item) -> bool {
         match item {
 %% for item, ct in gl.item_max_counts.items()|sort
@@ -159,6 +159,7 @@ impl context::Ctx for Context {
             _ => false,
         }
     }
+
     fn count(&self, item: Item) -> i16 {
         match item {
 %% for item, ct in gl.item_max_counts.items()|sort

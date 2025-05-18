@@ -324,6 +324,7 @@ impl context::Ctx for Context {
             _ => false,
         }
     }
+
     fn count(&self, item: Item) -> i16 {
         match item {
             Item::Biggoron_Sword => self.cbits1.contains(flags::ContextBits1::BIGGORON_SWORD).into(),

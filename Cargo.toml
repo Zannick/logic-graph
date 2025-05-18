@@ -1,0 +1,13 @@
+[workspace]
+resolver = "3"
+
+members = [
+    "analyzer",
+    "games/AxiomVerge2",
+    "games/sample",
+]
+
+[profile.release]
+debug = true
+lto = "fat"
+panic = "abort"

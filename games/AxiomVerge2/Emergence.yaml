@@ -930,6 +930,12 @@ areas:
           penalties:
             - when: not Mist_Upgrade
               movement: mist1
+        - name: Shockwave Rock
+          canon: Emergence_Storage_Tunnel
+          item: Emergence_Storage_Tunnel
+          req: $shockwave
+          price: 100
+          tags: [shockwave]
       exits:
         - to: Behind Facade
           req: Emergence_Storage_Tunnel

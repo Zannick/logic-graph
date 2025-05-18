@@ -10,8 +10,9 @@ use analyzer::greedy::*;
 use analyzer::matchertrie::MatcherTrie;
 use analyzer::observer::record_observations;
 use analyzer::route::route_from_string;
-use analyzer::solutions::Solution;
+use analyzer::solutions::{Solution, SolutionSuffix};
 use analyzer::world::World as _;
+use analyzer::CommonHasher;
 use criterion::{black_box, criterion_group, criterion_main, BatchSize, Criterion};
 use enum_map::EnumMap;
 use libsample::context::Context;
@@ -19,6 +20,7 @@ use libsample::graph::{RuleVictory, World};
 use libsample::items::Item;
 use libsample::observe::ObservationMatcher;
 use rustc_hash::FxHashSet;
+use std::collections::HashSet;
 use std::path::PathBuf;
 use std::sync::Arc;
 
@@ -27,10 +29,14 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     world.condense_graph();
     world.update_skippable_locations();
     let mut ctx = Context::default();
-    c.bench_function("can_win_from_scratch", |b| b.iter(|| can_win(&*world, &ctx, u32::MAX)));
+    c.bench_function("can_win_from_scratch", |b| {
+        b.iter(|| can_win(&*world, &ctx, u32::MAX))
+    });
 
     let ctx = ContextWrapper::new(Context::default());
-    c.bench_function("greedy search", |b| b.iter(|| greedy_search(&*world, &ctx, u32::MAX, 2)));
+    c.bench_function("greedy search", |b| {
+        b.iter(|| greedy_search(&*world, &ctx, u32::MAX, 2))
+    });
 
     let mut dir = PathBuf::from(file!());
     dir.pop();
@@ -48,17 +54,27 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     if !routes.is_empty() {
         let shortest_paths = ContextScorer::shortest_paths_tree_only(&*world, ctx.get());
         c.bench_function("load routes", |b| {
-            b.iter(|| for rstr in &routes {
-                route_from_string(&*world, ctx.get(), rstr, &shortest_paths).unwrap();
+            b.iter(|| {
+                for rstr in &routes {
+                    route_from_string(&*world, ctx.get(), rstr, &shortest_paths).unwrap();
+                }
             })
         });
     }
 
     if let Ok(win) = greedy_search(&*world, &ctx, u32::MAX, 2) {
-        let sol = Arc::new(Solution { elapsed: win.elapsed(), history: win.recent_history().to_vec() });
+        let sol = Arc::new(Solution {
+            elapsed: win.elapsed(),
+            history: win.recent_history().to_vec(),
+        });
         c.bench_function("trie insert greedy search", |b| {
             b.iter_batched_ref(
-                || MatcherTrie::<ObservationMatcher<_>, _>::default(),
+                || {
+                    MatcherTrie::<
+                        ObservationMatcher<_, FxHashSet<SolutionSuffix<Context>>>,
+                        _,
+                    >::default()
+                },
                 |trie| record_observations(ctx.get(), &*world, sol.clone(), 1, trie),
                 BatchSize::SmallInput,
             );

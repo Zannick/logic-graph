@@ -5237,6 +5237,9 @@ impl FullObservation {
             LocationId::Emergence__Storage__Tunnel_Entrance__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
+            LocationId::Emergence__Storage__Tunnel_Entrance__Shockwave_Rock => {
+                self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
+            }
             LocationId::Emergence__Storage__Behind_Facade__Mist_Through_Rock => {
                 self.cbits7.insert(flags::ContextBits7::VISITED_EMERGENCE_STORAGE_TUNNEL);
             }
