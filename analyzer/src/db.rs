@@ -3,7 +3,7 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
-use crate::matchertrie::{MatcherRocksDb, MatcherTrieDb, SEPARATOR};
+use crate::matchertrie::{MatcherRocksDb, MatcherTrieDb};
 use crate::observer::short_observations;
 use crate::route::{PartialRoute, RouteStep};
 use crate::scoring::*;
@@ -16,7 +16,7 @@ use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
-use rmp_serde::Serializer;
+use rmp_serde::{Deserializer, Serializer};
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, Env, IteratorMode,
     MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
@@ -1693,19 +1693,14 @@ where
     }
 
     pub fn trie_key(key: &[u8]) -> String {
-        let v: Vec<_> = key.split(|&n| n == SEPARATOR).collect();
-        format!(
-            "{:?}/{}",
-            get_obj_from_data::<<<T::World as World>::Exit as Exit>::SpotId>(v[0]).unwrap(),
-            v.into_iter()
-                .skip(1)
-                .map(|obs| format!(
-                    "{:?}",
-                    get_obj_from_data::<T::PropertyObservation>(obs).unwrap()
-                ))
-                .collect::<Vec<_>>()
-                .join(":")
-        )
+        let mut de = Deserializer::from_read_ref(key);
+        let spot: <<T::World as World>::Exit as Exit>::SpotId =
+            Deserialize::deserialize(&mut de).unwrap();
+        let mut vec = Vec::<T::PropertyObservation>::new();
+        while let Ok(obs) = Deserialize::deserialize(&mut de) {
+            vec.push(obs);
+        }
+        format!("{:?}/{:?}", spot, vec)
     }
 
     pub fn num_routes(&self) -> usize {

@@ -1,15 +1,18 @@
 #![allow(unused)]
 
 use analyzer::access::{access_location_after_actions_heatmap, move_to};
-use analyzer::context::{ContextWrapper, Ctx, History, Wrapper};
+use analyzer::context::{history_to_partial_route, ContextWrapper, Ctx, History, Wrapper};
+use analyzer::db::RouteDb;
 use analyzer::direct::DirectPaths;
 use analyzer::estimates::ContextScorer;
 use analyzer::matchertrie::IntegerObservation;
 use analyzer::observer::Observer;
 use analyzer::route::PartialRoute;
 use analyzer::steiner::{build_simple_graph, EdgeId, NodeId, ShortestPaths, SteinerAlgo};
+use analyzer::testlib::db::{all_keys_cf, TestRouteDb};
 use analyzer::world::{Accessible, Action, Exit, Location, Warp, World as _};
 use analyzer::*;
+use base64::prelude::*;
 use lazy_static::lazy_static;
 use libaxiom_verge2::context::{enums, Context};
 use libaxiom_verge2::graph::*;
@@ -449,4 +452,56 @@ fn test_greedy_step() {
     )
     .result()
     .unwrap();
+}
+
+#[test]
+fn test_route_db() {
+    let db = TestRouteDb::<Context>::default();
+    let mut ctx = Context::default();
+    ctx.energy = 300;
+    ctx.flasks = 10;
+    ctx.add_item(Item::Amashilama);
+    ctx.add_item(Item::Ice_Axe);
+    ctx.add_item(Item::Fast_Travel);
+    ctx.add_item(Item::Flask);
+    ctx.add_item(Item::Infect);
+    ctx.add_item(Item::Remote_Drone);
+    ctx.add_item(Item::Anuman);
+    ctx.add_item(Item::Nanite_Mist);
+    ctx.add_item(Item::Exit_Breach);
+    ctx.add_item(Item::Breach_Sight);
+    ctx.add_item(Item::Breach_Attractor);
+    ctx.add_item(Item::Shockwave);
+    ctx.add_item(Item::Drone_Hover);
+    ctx.add_item(Item::Slingshot_Hook);
+    ctx.add_item(Item::Slingshot_Charge);
+    ctx.add_item(Item::Nano_Lattice_2);
+    ctx.add_item(Item::Glacier_Breach_Spidery_Connector_Gate);
+    ctx.add_item(Item::Hammond_Auth);
+    ctx.set_mode(enums::Mode::Drone);
+    ctx.visit(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown);
+
+    ctx.set_position(SpotId::Annuna__Filter_Teleporter__Egg, &**WORLD);
+    let ctx2 = move_to(
+        &**WORLD,
+        ContextWrapper::new(ctx.clone()),
+        SpotId::Annuna__Lamassu__Portal_Stand,
+        &*SPATHS,
+    )
+    .unwrap();
+
+    let route = history_to_partial_route(&ctx, &**WORLD, ctx2.recent_history().iter().copied());
+    db.rdb.insert_route(
+        &ctx,
+        &**WORLD,
+        SpotId::Annuna__Lamassu__Portal_Stand,
+        &route,
+    );
+
+    let r1 = db
+        .rdb
+        .best_known_route(&ctx, SpotId::Annuna__Lamassu__Portal_Stand)
+        .unwrap()
+        .expect("No route to Annuna > Lamassu > Portal Stand found in db!");
+    assert_eq!(&r1, &*route.route);
 }

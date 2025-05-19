@@ -1,10 +1,9 @@
 #![allow(unused)]
 
 use analyzer::access::move_to;
-use analyzer::context::{history_to_partial_route, ContextWrapper, Wrapper};
-use analyzer::db::{serialize_data, RouteDb};
+use analyzer::context::{history_to_partial_route, ContextWrapper, Ctx, Wrapper};
+use analyzer::db::RouteDb;
 use analyzer::estimates::ContextScorer;
-use analyzer::matchertrie::SEPARATOR;
 use analyzer::route::route_from_string;
 use analyzer::testlib::db::all_keys_cf;
 use analyzer::testlib::db::TestRouteDb;
@@ -12,13 +11,16 @@ use analyzer::world::World;
 use base64::prelude::*;
 use libsample::context::Context;
 use libsample::graph;
-use libsample::observe::OneObservation;
+use libsample::items::Item;
 
 #[test]
 fn test_route_db() {
     let db = TestRouteDb::<Context>::default();
     let world = graph::World::new();
-    let startctx = Context::default();
+    let mut startctx = Context::default();
+    startctx.add_item(Item::Kokiri_Sword);
+    startctx.add_item(Item::Buy_Deku_Shield);
+    startctx.add_item(Item::Showed_Mido);
     let scorer = ContextScorer::shortest_paths(&*world, &startctx, 32_768);
 
     let ctx = move_to(
@@ -133,38 +135,4 @@ fn test_route_db() {
         .unwrap()
         .expect("No route to Boulder Maze Reward after non-improvement?!");
     assert_ne!(&r3, &*route.route);
-
-    let tkeys: Vec<_> = all_keys_cf(db.rdb.internal_db(), db.rdb.trie_cf()).collect();
-    println!("{} Trie keys:", tkeys.len());
-    for k in &tkeys {
-        println!(
-            "{} ({:?}): {}",
-            BASE64_STANDARD_NO_PAD.encode(k),
-            k,
-            RouteDb::<Context>::trie_key(&*k)
-        );
-    }
-
-    let p0: Vec<_> = tkeys[0].split(|n| n == &SEPARATOR).collect();
-    let k0 = rmp_serde::from_slice::<OneObservation>(p0[1]).unwrap();
-    let mut all_k0: Vec<_> = p0
-        .iter()
-        .skip(1)
-        .map(|p| rmp_serde::from_slice::<OneObservation>(p).unwrap())
-        .collect();
-    let three_k0 = vec![k0.clone(), k0.clone(), k0.clone()];
-    let two_k0 = vec![k0.clone(), k0];
-    println!("{:?}\n{:?}", &all_k0, serialize_data(&all_k0));
-    println!("{:?}\n{:?}", &two_k0, serialize_data(&two_k0));
-    println!("{:?}\n{:?}", &three_k0, serialize_data(&three_k0));
-    let mut many: Vec<_> = tkeys
-        .last()
-        .unwrap()
-        .split(|n| n == &SEPARATOR)
-        .skip(1)
-        .map(|p| rmp_serde::from_slice::<OneObservation>(p).unwrap())
-        .collect();
-    many.append(&mut all_k0);
-    println!("{:?}\n{:?}", &many, serialize_data(&many));
-    println!("{:?} {:?}", serialize_data(255u8), serialize_data(255u16));
 }

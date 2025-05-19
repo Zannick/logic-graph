@@ -1,11 +1,13 @@
 #![allow(unused)]
 
 use super::matcher::{MatcherDispatch, Observable};
-use rmp_serde::Serializer;
+use rmp_serde::{Deserializer, Serializer};
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, Env, IteratorMode,
     MergeOperands, Options, PrefixRange, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
+use serde::de::{Deserializer as _, SeqAccess, Visitor};
+use serde::ser::{SerializeSeq, SerializeTuple, Serializer as _};
 use serde::{Deserialize, Serialize};
 use std::collections::VecDeque;
 use std::fmt::Debug;
@@ -14,8 +16,6 @@ use std::path::Path;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 
-// TODO: A single-byte separator is insufficient.
-pub const SEPARATOR: u8 = 255;
 const MB: usize = 1 << 20;
 const GB: usize = 1 << 30;
 
@@ -139,34 +139,48 @@ where
         // and thus skip to exactly the right one.
         let root = similar.root_observation();
         let mut results = Vec::new();
-        let mut vec = prefix.clone();
-        vec.push(SEPARATOR);
-        vec.extend(serialize_data(root));
+
+        let mut buf = prefix.clone();
+        let mut ser = Serializer::new(&mut buf);
+        root.serialize(&mut ser);
+        println!(
+            "Starting at {:?} with prefix {:?} and key {:?}",
+            root, prefix, &buf
+        );
+        // no sequence termination
 
         let mut iter_opts = ReadOptions::default();
         iter_opts.set_tailing(true);
         iter_opts.fill_cache(false);
         // Takes care of the partitionable root observation and ending when we don't match anymore.
-        iter_opts.set_iterate_range(PrefixRange(vec.clone()));
+        iter_opts.set_iterate_range(PrefixRange(buf.clone()));
         let mut iter = self.db.raw_iterator_cf_opt(self.cf(), iter_opts);
         iter.seek_to_first();
 
         'db_iter: while iter.valid() {
             let (key, value) = iter.item().unwrap();
-            let splits: Vec<_> = key.split(|&n| n == SEPARATOR).collect();
 
-            for (i, ser_obs) in splits[2..].iter().enumerate() {
-                let obs: StructType::PropertyObservation = get_obj_from_data(ser_obs).unwrap();
+            println!("Reading key {:?}", &key[prefix.len()..]);
+            let mut de = Deserializer::from_read_ref(&key[prefix.len()..]);
+            let mut vec = Vec::new();
+            while let Ok(obs) = Deserialize::deserialize(&mut de) {
                 if !similar.matches(&obs) {
-                    // copy the whole of the key up to the previous obs
-                    let mut new_key: Vec<_> = splits[0..=i + 1].join(&SEPARATOR);
-                    new_key.push(SEPARATOR);
+                    vec.push(obs);
+                    println!("Keeping {} observations and skipping the next", vec.len());
+                    let mut new_key = prefix.clone();
+                    let mut ser = Serializer::new(&mut new_key);
+                    for obs in vec {
+                        obs.serialize(&mut ser).unwrap();
+                    }
                     new_key.push(std::u8::MAX);
-                    // Implicitly dropping the item
+                    // Implicitly dropping the last observation
                     iter.seek(new_key);
                     continue 'db_iter;
+                } else {
+                    vec.push(obs);
                 }
             }
+            println!("Got one!");
             results.push(get_obj_from_data::<ValueType>(value).unwrap());
             iter.next();
         }
@@ -180,14 +194,14 @@ where
         value: ValueType,
         prefix: &Vec<u8>,
     ) {
-        let mut sections = Vec::with_capacity(observations.len() + 1);
-        sections.push(prefix.clone());
+        let mut buf = prefix.clone();
+        let mut ser = Serializer::new(&mut buf);
         for obs in observations {
-            sections.push(serialize_data(obs));
+            obs.serialize(&mut ser).unwrap();
         }
-        let key = sections.join(&SEPARATOR);
+
         self.db
-            .merge_cf(self.cf(), key, serialize_data(value))
+            .merge_cf(self.cf(), buf, serialize_data(value))
             .expect("Error updating matcher table");
     }
 
@@ -198,13 +212,12 @@ where
         value: ValueType,
         prefix: &Vec<u8>,
     ) {
-        let mut sections = Vec::with_capacity(observations.len() + 1);
-        sections.push(prefix.clone());
+        let mut buf = prefix.clone();
+        let mut ser = Serializer::new(&mut buf);
         for obs in observations {
-            sections.push(serialize_data(obs));
+            obs.serialize(&mut ser).unwrap();
         }
-        let key = sections.join(&SEPARATOR);
-        batch.merge_cf(self.cf(), key, serialize_data(value));
+        batch.merge_cf(self.cf(), buf, serialize_data(value));
     }
 
     fn size(&self) -> usize {
