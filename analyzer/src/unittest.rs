@@ -12,7 +12,7 @@ use regex::Regex;
 use std::fmt;
 use std::fs::File;
 use std::io::Read;
-use std::path::PathBuf;
+use std::path::Path;
 use std::str::FromStr;
 use std::sync::Arc;
 use yaml_rust::*;
@@ -829,7 +829,7 @@ where
 
 pub fn parse_test_file<W, T>(
     world: Arc<Box<W>>,
-    filename: &PathBuf,
+    filename: &Path,
     shortest_paths: Arc<Box<ShortestPaths<NodeId<W>, EdgeId<W>>>>,
 ) -> Vec<Trial>
 where
@@ -897,7 +897,7 @@ where
 
 pub fn parse_route_file<W, T>(
     world: Arc<Box<W>>,
-    filename: &PathBuf,
+    filename: &Path,
     shortest_paths: Arc<Box<ShortestPaths<NodeId<W>, EdgeId<W>>>>,
 ) -> Trial
 where
@@ -936,7 +936,7 @@ where
 
 pub fn run_test_file<W, T>(
     world: Arc<Box<W>>,
-    filename: &PathBuf,
+    filename: &Path,
     shortest_paths: Arc<Box<ShortestPaths<NodeId<W>, EdgeId<W>>>>,
 ) where
     T: Ctx<World = W> + 'static,
@@ -948,7 +948,7 @@ pub fn run_test_file<W, T>(
     run(&args, tests); //.exit_if_failed();
 }
 
-pub fn run_all_tests_in_dir<W, T>(dirname: &PathBuf, route_dir: Option<&PathBuf>)
+pub fn run_all_tests_in_dir<W, T>(dirname: &Path, route_dir: Option<&Path>)
 where
     T: Ctx<World = W> + 'static,
     W: World + Send + 'static,
@@ -964,7 +964,7 @@ where
     let wp = Arc::new(world);
     let mut tests = Vec::new();
 
-    for entry in std::fs::read_dir(dirname).unwrap() {
+    for entry in std::fs::read_dir(dirname).expect(&format!("{:?}", dirname)) {
         let path = entry.unwrap().path();
         let ext = path.extension().and_then(|s| s.to_str());
         if matches!(ext, Some("yaml")) {

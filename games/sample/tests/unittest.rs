@@ -3,17 +3,14 @@
 use analyzer::unittest::*;
 use libsample::context::Context;
 use libsample::graph::World;
-use std::path::PathBuf;
+use std::path::Path;
 
 fn main() {
-    let mut dir = PathBuf::from(file!());
-    dir.pop();
-    let mut routedir = dir.clone();
-    routedir.pop();
-    routedir.push("routes");
-    let pb = &PathBuf::from("settings/log4unittest.yml");
+    let dir = Path::new("tests");
+    let routedir = Path::new("routes");
+    let pb = Path::new("settings/log4unittest.yml");
     if pb.exists() {
         log4rs::init_file(pb, Default::default()).unwrap();
     }
-    run_all_tests_in_dir::<World, Context>(&dir, Some(&routedir));
+    run_all_tests_in_dir::<World, Context>(dir, Some(&routedir));
 }
