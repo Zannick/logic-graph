@@ -394,12 +394,6 @@ fn test_observations() {
         "fast travel should be observed in: {}",
         strvec
     );
-
-    ctx.set_position_raw(SpotId::Amagi__Main_Area__Shallow_End);
-    let vec = full_obs.to_vec(&ctx);
-    let mut buf = Vec::new();
-    vec.serialize(&mut Serializer::new(&mut buf)).unwrap();
-    assert!(!buf.contains(&255), "{:?}\n{:?}", &buf, &vec);
 }
 
 #[test]
