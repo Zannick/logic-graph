@@ -1,4 +1,5 @@
 pub mod heap;
+pub mod db;
 
 pub use heap::LimitedHeap;
 

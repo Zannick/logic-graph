@@ -1,5 +1,6 @@
 use crate::condense::CondensedEdge;
 use crate::observer::Observer;
+use crate::route::{PartialRoute, RouteStep};
 use crate::solutions::Solution;
 use crate::world::*;
 use bitflags::Flags;
@@ -928,7 +929,11 @@ impl<T: Ctx> ContextWrapper<T> {
 
     /// Returns the replay if all steps are valid in the order presented, or an error message if any step failed.
     /// This consumes the object, so use a clone if you want to keep a copy.
-    pub fn try_replay_all<'a, W>(mut self, world: &W, steps: impl Iterator<Item = &'a HistoryAlias<T>>) -> Result<Self, String>
+    pub fn try_replay_all<'a, W>(
+        mut self,
+        world: &W,
+        steps: impl Iterator<Item = &'a HistoryAlias<T>>,
+    ) -> Result<Self, String>
     where
         W: World,
         T: Ctx<World = W>,
@@ -1128,6 +1133,9 @@ where
     })
 }
 
+/// Produces a vector of all states along the entire history of steps.
+///
+/// Includes the final state as the last element of the vector.
 pub fn history_to_full_series<T, W>(
     startctx: &T,
     world: &W,
@@ -1156,6 +1164,9 @@ where
     vec
 }
 
+/// Produces a vector of each state along the entire history of steps, along with each step and its elapsed time.
+///
+/// Returns that vector and the state at the end of the history.
 pub fn history_to_full_time_series<T, W>(
     startctx: &T,
     world: &W,
@@ -1182,4 +1193,43 @@ where
         prev = next;
     }
     (vec, prev.into_inner())
+}
+
+/// Calculates per-step timings of the given history.
+pub fn history_to_partial_route<T, W>(
+    startctx: &T,
+    world: &W,
+    history: impl Iterator<Item = HistoryAlias<T>>,
+) -> PartialRoute<T>
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<
+        SpotId = <W::Exit as Exit>::SpotId,
+        Context = T,
+        Currency = <W::Location as Accessible>::Currency,
+    >,
+{
+    let mut vec = Vec::new();
+    let mut prev = ContextWrapper::new(startctx.clone());
+    let mut time = 0;
+    for step in history {
+        let mut next = prev.clone();
+        next.assert_and_replay(world, step);
+        vec.push(RouteStep::<T> {
+            step,
+            time: next.elapsed() - time,
+        });
+        time = next.elapsed();
+        prev = next;
+    }
+    let end = vec.len();
+    PartialRoute {
+        route: Arc::new(vec),
+        start: 0,
+        end,
+        time,
+    }
 }

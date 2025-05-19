@@ -28,6 +28,7 @@ yaml-rust = "*"
 zstd = "*"
 
 [dev-dependencies]
+base64 = "*"
 criterion = "*"
 rmp-serde = "*"
 serde_json = "*"

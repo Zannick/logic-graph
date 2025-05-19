@@ -3,8 +3,8 @@ extern crate rocksdb;
 
 use crate::context::*;
 use crate::estimates::ContextScorer;
-use crate::matchertrie::{MatcherRocksDb, MatcherTrieDb};
-use crate::observer::collection_observations;
+use crate::matchertrie::{MatcherRocksDb, MatcherTrieDb, SEPARATOR};
+use crate::observer::short_observations;
 use crate::route::{PartialRoute, RouteStep};
 use crate::scoring::*;
 use crate::steiner::*;
@@ -194,6 +194,7 @@ fn min_merge(
     }
 }
 
+const KB: usize = 1 << 10;
 const MB: usize = 1 << 20;
 const GB: usize = 1 << 30;
 
@@ -207,7 +208,7 @@ pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
 fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T, Error> {
     Ok(rmp_serde::from_slice::<T>(buf)?)
 }
-fn serialize_data<V>(v: V) -> Vec<u8>
+pub fn serialize_data<V>(v: V) -> Vec<u8>
 where
     V: Serialize,
 {
@@ -1576,17 +1577,14 @@ where
     T: Ctx,
     T::PropertyObservation: Serialize + for<'a> Deserialize<'a>,
 {
-    pub fn open<P>(p: P, delete_first: bool) -> anyhow::Result<Self>
-    where
-        P: AsRef<Path>,
-    {
+    pub fn default_options() -> (Options, Cache) {
         let mut opts = Options::default();
         opts.create_if_missing(true);
         // change compression options?
         // 4 write buffers at 256 MiB = 1 GiB
         opts.set_write_buffer_size(256 * MB);
         opts.set_max_write_buffer_number(4);
-        opts.set_target_file_size_base(128 * 1024 * 1024);
+        opts.set_target_file_size_base(128 * MB as u64);
         // use half the logical cores, clamp between 2 and 32
         opts.increase_parallelism(std::cmp::max(
             2,
@@ -1603,12 +1601,40 @@ where
         // blockdb caches = 2 GiB
         let cache = Cache::new_lru_cache(2 * GB);
         block_opts.set_block_cache(&cache);
-        block_opts.set_block_size(16 * 1024);
+        block_opts.set_block_size(16 * KB);
         block_opts.set_cache_index_and_filter_blocks(true);
         block_opts.set_pin_l0_filter_and_index_blocks_in_cache(true);
         block_opts.set_ribbon_filter(9.9);
         opts.set_block_based_table_factory(&block_opts);
+        (opts, cache)
+    }
 
+    pub fn test_options() -> (Options, Cache) {
+        let mut opts = Options::default();
+        opts.create_if_missing(true);
+        opts.set_write_buffer_size(4 * KB);
+        opts.set_max_write_buffer_number(4);
+
+        let mut block_opts = BlockBasedOptions::default();
+        let cache = Cache::new_lru_cache(16 * KB);
+        block_opts.set_block_cache(&cache);
+        block_opts.set_block_size(1 * KB);
+        block_opts.set_cache_index_and_filter_blocks(true);
+        block_opts.set_pin_l0_filter_and_index_blocks_in_cache(true);
+        block_opts.set_ribbon_filter(9.9);
+        opts.set_block_based_table_factory(&block_opts);
+        (opts, cache)
+    }
+
+    pub fn open<P>(
+        p: P,
+        mut opts: Options,
+        cache: Cache,
+        delete_first: bool,
+    ) -> anyhow::Result<Self>
+    where
+        P: AsRef<Path>,
+    {
         let cf_opts = opts.clone();
         let mut cf_opts_trie = opts.clone();
         cf_opts_trie.set_merge_operator_associative("min", min_merge);
@@ -1649,12 +1675,37 @@ where
         })
     }
 
-    fn route_cf(&self) -> &ColumnFamily {
+    pub fn route_cf(&self) -> &ColumnFamily {
         self.db.db().cf_handle(ROUTE).unwrap()
     }
 
-    fn trie_cf(&self) -> &ColumnFamily {
+    pub fn trie_cf(&self) -> &ColumnFamily {
         self.db.db().cf_handle(TRIE).unwrap()
+    }
+
+    // for testing
+    pub fn internal_db(&self) -> &DB {
+        self.db.db()
+    }
+
+    pub fn route_key(key: &[u8]) -> (usize, usize) {
+        get_obj_from_data::<(usize, usize)>(key).unwrap()
+    }
+
+    pub fn trie_key(key: &[u8]) -> String {
+        let v: Vec<_> = key.split(|&n| n == SEPARATOR).collect();
+        format!(
+            "{:?}/{}",
+            get_obj_from_data::<<<T::World as World>::Exit as Exit>::SpotId>(v[0]).unwrap(),
+            v.into_iter()
+                .skip(1)
+                .map(|obs| format!(
+                    "{:?}",
+                    get_obj_from_data::<T::PropertyObservation>(obs).unwrap()
+                ))
+                .collect::<Vec<_>>()
+                .join(":")
+        )
     }
 
     pub fn num_routes(&self) -> usize {
@@ -1690,14 +1741,15 @@ where
         }
         self.db.db().write(batch).unwrap();
 
-        let observations = collection_observations(
+        let observations = short_observations(
             startctx,
             world,
-            &route.route.iter().map(|rs| rs.step).collect::<Vec<_>>(),
+            &route.iter().map(|rs| rs.step).collect::<Vec<_>>(),
+            false,
             false,
         );
         let mut batch = WriteBatchWithTransaction::<false>::default();
-        let end = route.route.len();
+        let end = route.end;
         let mut time = 0;
         for (i, (rs, obs)) in route.iter().zip(observations).enumerate() {
             let saved = SavedRoute {
@@ -1710,7 +1762,6 @@ where
             self.db.insert_batch(&mut batch, obs, saved, &prefix);
         }
         // Should we put every subroute in? just the ones from the start or to the end? or only the end?
-
         self.db.db().write(batch).unwrap();
 
         route_id
@@ -1748,7 +1799,7 @@ mod test {
     use super::StateData;
     use crate::context::History;
 
-    type GenericStateData = StateData::<u8, u8, u8, u8, u8, u8>;
+    type GenericStateData = StateData<u8, u8, u8, u8, u8, u8>;
 
     #[test]
     fn test_merge() {

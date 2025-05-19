@@ -12,10 +12,11 @@ use crate::rules;
 use analyzer::matchertrie::*;
 use analyzer::observer::*;
 use analyzer::solutions::{Solution, SolutionSuffix};
+use serde::{Deserialize, Serialize};
 use std::hash::Hash;
 use std::sync::{Arc, Mutex};
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize)]
 pub enum OneObservation {
     Position(SpotId),
     Tod(enums::Tod),

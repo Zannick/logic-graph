@@ -7,7 +7,6 @@ use rocksdb::{
     MergeOperands, Options, PrefixRange, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
-
 use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::marker::PhantomData;
@@ -15,7 +14,8 @@ use std::path::Path;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 
-const SEPARATOR: u8 = ':' as u8;
+// TODO: A single-byte separator is insufficient.
+pub const SEPARATOR: u8 = 255;
 const MB: usize = 1 << 20;
 const GB: usize = 1 << 30;
 
@@ -149,6 +149,7 @@ where
         // Takes care of the partitionable root observation and ending when we don't match anymore.
         iter_opts.set_iterate_range(PrefixRange(vec.clone()));
         let mut iter = self.db.raw_iterator_cf_opt(self.cf(), iter_opts);
+        iter.seek_to_first();
 
         'db_iter: while iter.valid() {
             let (key, value) = iter.item().unwrap();
@@ -159,7 +160,8 @@ where
                 if !similar.matches(&obs) {
                     // copy the whole of the key up to the previous obs
                     let mut new_key: Vec<_> = splits[0..=i + 1].join(&SEPARATOR);
-                    new_key.push(SEPARATOR + 1);
+                    new_key.push(SEPARATOR);
+                    new_key.push(std::u8::MAX);
                     // Implicitly dropping the item
                     iter.seek(new_key);
                     continue 'db_iter;

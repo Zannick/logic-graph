@@ -17,6 +17,13 @@ pub trait Observer: Debug + Default {
     /// Creates a new observation set from a winning state.
     fn from_victory_state(won: &Self::Ctx, world: &<Self::Ctx as Ctx>::World) -> Self;
 
+    /// Creates a new observation set from a goal position.
+    fn from_position() -> Self {
+        let mut s = Self::default();
+        s.observe_position();
+        s
+    }
+
     /// Records that we know the current position.
     fn observe_position(&mut self);
 
@@ -157,11 +164,12 @@ pub fn record_short_observations<W, T, TM>(
 /// Returns a route's observation sets for the item acquisition steps.
 ///
 /// These are in the same order as collection_history functions, but will need to be zipped separately.
-pub fn collection_observations<W, T>(
+pub fn short_observations<W, T>(
     startctx: &T,
     world: &W,
     history: &[HistoryAlias<T>],
     victory: bool,
+    collect_only: bool,
 ) -> Vec<Vec<T::PropertyObservation>>
 where
     W: World,
@@ -176,7 +184,7 @@ where
     let mut solve = if victory {
         <T::Observer as Observer>::from_victory_state(prev, world)
     } else {
-        T::Observer::default()
+        <T::Observer as Observer>::from_position()
     };
 
     let mut obs_list = Vec::new();
@@ -190,12 +198,16 @@ where
         solve.apply_observations();
 
         // 3. Insert the new observation list.
-        match step {
-            History::G(..) | History::V(..) => obs_list.push(solve.to_vec(state)),
-            History::A(act_id) if W::action_has_visit(*act_id) => {
-                obs_list.push(solve.to_vec(state))
+        if !collect_only {
+            obs_list.push(solve.to_vec(state))
+        } else {
+            match step {
+                History::G(..) | History::V(..) => obs_list.push(solve.to_vec(state)),
+                History::A(act_id) if W::action_has_visit(*act_id) => {
+                    obs_list.push(solve.to_vec(state))
+                }
+                _ => (),
             }
-            _ => (),
         }
     }
     obs_list.reverse();

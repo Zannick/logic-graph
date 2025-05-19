@@ -3,7 +3,7 @@ use crate::context::*;
 use crate::direct::DirectPaths;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
-use crate::observer::{collection_observations, record_observations, TrieMatcher};
+use crate::observer::{short_observations, record_observations, TrieMatcher};
 use crate::route::PartialRoute;
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
@@ -608,7 +608,7 @@ where
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)
     let collection_hist: Vec<_> =
         collection_history_with_range_info::<T, _>(solution.history.iter().copied()).collect();
-    let obs_list = collection_observations(startctx, world, &solution.history, true);
+    let obs_list = short_observations(startctx, world, &solution.history, true, true);
     let mut replay = ContextWrapper::new(startctx.clone());
 
     for ((range_a, step), observations) in collection_hist.iter().zip(obs_list.iter()) {
