@@ -1,13 +1,12 @@
 use crate::access::*;
 use crate::context::*;
-use crate::direct::DirectPaths;
-use crate::estimates;
-use crate::estimates::ContextScorer;
+use crate::db::RouteDb;
+use crate::direct::DirectPathsDb;
+use crate::estimates::{ContextScorer, UNREASONABLE_TIME};
 use crate::heap::RocksBackedQueue;
 use crate::matchertrie::*;
 use crate::minimize::*;
 use crate::observer::{record_observations, TrieMatcher};
-use crate::route::PartialRoute;
 use crate::scoring::ScoreMetric;
 use crate::solutions::{Solution, SolutionCollector, SolutionResult, SolutionSuffix};
 use crate::world::*;
@@ -259,19 +258,18 @@ impl Default for SearchOptions {
     }
 }
 
-pub struct Search<'a, W, T, TM, DM>
+pub struct Search<'a, W, T, TM>
 where
     W: World,
     T: Ctx<World = W> + Debug,
     W::Location: Location<Context = T>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     world: &'a W,
     startctx: ContextWrapper<T>,
     solve_trie: Arc<MatcherTrie<TM, SolutionSuffix<T>>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
-    direct_paths: DirectPaths<W, T, DM>,
+    direct_paths: DirectPathsDb<W, T>,
     queue: RocksBackedQueue<'a, W, T>,
     solution_cvar: Condvar,
     options: SearchOptions,
@@ -297,14 +295,13 @@ where
     finished: AtomicBool,
 }
 
-impl<'a, W, T, TM, DM> Search<'a, W, T, TM, DM>
+impl<'a, W, T, TM> Search<'a, W, T, TM>
 where
     W: World,
     T: Ctx<World = W> + Debug,
     W::Location: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
     TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     pub fn new<P>(
         world: &'a W,
@@ -312,7 +309,7 @@ where
         routes: Vec<ContextWrapper<T>>,
         db_path: P,
         options: SearchOptions,
-    ) -> Result<Search<'a, W, T, TM, DM>, std::io::Error>
+    ) -> Result<Search<'a, W, T, TM>, std::io::Error>
     where
         P: AsRef<Path>,
     {
@@ -327,7 +324,6 @@ where
         let startctx = ContextWrapper::new(ctx);
 
         let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, startctx.get());
-        let direct_paths = DirectPaths::new(free_sp);
 
         let mut wins = Vec::new();
         let mut others = Vec::new();
@@ -388,7 +384,7 @@ where
             }
             max_time + max_time / 128
         } else {
-            estimates::UNREASONABLE_TIME
+            UNREASONABLE_TIME
         };
         log::info!(
             "Minimization results: {} solutions, {} others",
@@ -429,6 +425,13 @@ where
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();
         log::info!("Max time to consider is now: {}ms", queue.max_time());
+
+        let mut path = db_path.as_ref().to_owned();
+        path.push("routes");
+        let (ropts, rcache) = RouteDb::<T>::default_options();
+        let route_db = RouteDb::<T>::open(path, ropts, rcache, delete_dbs).unwrap();
+        let direct_paths = DirectPathsDb::new(free_sp, route_db);
+
         let s = Search {
             world,
             startctx,
@@ -743,11 +746,11 @@ where
     }
 
     fn single_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        single_step(self.world, ctx, estimates::UNREASONABLE_TIME)
+        single_step(self.world, ctx, UNREASONABLE_TIME)
     }
 
     fn recreate_step(&self, ctx: ContextWrapper<T>) -> Vec<ContextWrapper<T>> {
-        single_step_with_local(self.world, ctx, estimates::UNREASONABLE_TIME)
+        single_step_with_local(self.world, ctx, UNREASONABLE_TIME)
     }
 
     fn choose_mode(&self, iters: usize) -> SearchMode {
@@ -1377,12 +1380,7 @@ where
             return Some(Vec::new());
         }
 
-        if let Some(win) = trie_search(
-            self.world,
-            &ctx,
-            estimates::UNREASONABLE_TIME,
-            &self.solve_trie,
-        ) {
+        if let Some(win) = trie_search(self.world, &ctx, UNREASONABLE_TIME, &self.solve_trie) {
             // Handles recording the solution, updating all steps, and single stepping as well.
             self.recreate_store(&ctx, win.recent_history(), SearchMode::Similar)
                 .unwrap();
@@ -1489,12 +1487,12 @@ where
         let db_bests = self.queue.db().db_bests();
         let db_best_max = db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0);
         let needed = self.world.items_needed(ctx.get());
-        let (direct_size, direct_values) = self.direct_paths.totals();
+        let (num_routes, trie_size) = self.direct_paths.totals();
         println!(
             "--- Round {} (solutions={}, unique={}, mut={}, limit={}ms, best={}ms) ---\n\
             Stats: heap={}; pending={}; db={}; total={}; seen={}; proc={}; dead-end={}\n\
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
-            direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; size={}, values={}\n\
+            direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; routes={}, trie size={}\n\
             Greedy stats: org level={}, steps done={}, misses={}, spots={}, proc_in={}, proc_out={}\n\
             skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
             heap: [{}..={}] mins: {}\n\
@@ -1527,8 +1525,8 @@ where
             self.direct_paths.fails.load(Ordering::Acquire),
             self.direct_paths.expires.load(Ordering::Acquire),
             self.direct_paths.deadends.load(Ordering::Acquire),
-            direct_size,
-            direct_values,
+            num_routes,
+            trie_size,
             self.organic_level.load(Ordering::Acquire),
             self.greedies.load(Ordering::Acquire),
             self.greedy_misses.load(Ordering::Acquire),

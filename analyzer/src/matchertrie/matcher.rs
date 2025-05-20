@@ -13,6 +13,7 @@
 #![allow(unused)]
 
 use crate::{new_hashmap, new_hashset, new_hashset_with, CommonHasher};
+use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
 use std::hash::Hash;
@@ -23,7 +24,7 @@ use std::sync::{Arc, Mutex};
 
 /// Trait that marks the associated property-and-value type for observations.
 pub trait Observable {
-    type PropertyObservation: Debug;
+    type PropertyObservation: Debug + Serialize + for<'de> Deserialize<'de>;
 
     fn root_observation(&self) -> Self::PropertyObservation;
     fn matches(&self, obs: &Self::PropertyObservation) -> bool;

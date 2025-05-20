@@ -1,6 +1,6 @@
 use crate::context::*;
 use crate::db::serialize_state;
-use crate::direct::DirectPaths;
+use crate::direct::DirectPathsMap;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
 use crate::matchertrie::MatcherTrie;
@@ -181,7 +181,7 @@ where
                     }
                 }
             }));
-            let search = Search::<W, T, TM, DM>::new(
+            let search = Search::<W, T, TM>::new(
                 world,
                 startctx,
                 route_ctxs,
@@ -238,7 +238,7 @@ where
             // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, &startctx);
-            let direct_paths = DirectPaths::<W, T, DM>::new(free_sp);
+            let direct_paths = DirectPathsMap::<W, T, DM>::new(free_sp);
             let mut ctx =
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())
                     .unwrap();

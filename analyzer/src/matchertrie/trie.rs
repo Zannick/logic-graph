@@ -199,12 +199,13 @@ where
 mod test {
     use super::*;
     use crate::matchertrie::matcher::*;
+    use serde::{Deserialize, Serialize};
     use std::{
         ops::Deref,
         sync::{Arc, Mutex},
     };
 
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
     #[allow(unused)]
     enum Position {
         Start,
@@ -243,7 +244,7 @@ mod test {
     };
 
     // An enum with a list of properties and observations internals. Bitflags have both a mask and result.
-    #[derive(Clone, Copy, Debug)]
+    #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
     enum OneObservedThing {
         Pos(Position),
         Flasks(i8),

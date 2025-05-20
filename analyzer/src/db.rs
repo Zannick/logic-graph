@@ -1699,6 +1699,10 @@ where
         self.next_route_id.load(Ordering::Acquire)
     }
 
+    pub fn trie_size(&self) -> usize {
+        self.db.size()
+    }
+
     pub fn insert_route<W>(
         &self,
         startctx: &T,

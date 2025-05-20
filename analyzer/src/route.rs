@@ -77,7 +77,17 @@ impl<T: Ctx> PartialRoute<T> {
     }
 
     pub fn iter(&self) -> impl Iterator<Item = &RouteStep<T>> {
-        self.route.iter().skip(self.start).take(self.end.saturating_sub(self.start))
+        self.route
+            .iter()
+            .skip(self.start)
+            .take(self.end.saturating_sub(self.start))
+    }
+}
+
+impl<T: Ctx> From<Vec<RouteStep<T>>> for PartialRoute<T> {
+    fn from(value: Vec<RouteStep<T>>) -> Self {
+        let end = value.len();
+        PartialRoute::new(Arc::new(value), 0, end)
     }
 }
 

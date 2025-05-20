@@ -4,7 +4,6 @@ use crate::direct::DirectPaths;
 use crate::matchertrie::MatcherTrie;
 use crate::new_hashmap;
 use crate::observer::{short_observations, record_observations, TrieMatcher};
-use crate::route::PartialRoute;
 use crate::solutions::{Solution, SolutionSuffix};
 use crate::steiner::{EdgeId, NodeId, ShortestPaths};
 use crate::world::*;
@@ -173,7 +172,7 @@ impl<T: Ctx> RangeAndStepTuple<T> for (RangeInclusive<usize>, HistoryAlias<T>, u
     }
 }
 
-fn rediscover_routes<'a, W, T, L, RT, DM>(
+fn rediscover_routes<'a, W, T, L, RT>(
     world: &W,
     mut rreplay: ContextWrapper<T>,
     iter: impl Iterator<Item = &'a RT>,
@@ -182,14 +181,13 @@ fn rediscover_routes<'a, W, T, L, RT, DM>(
     max_states: usize,
     history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     RT: 'a + RangeAndStepTuple<T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     for tuple in iter {
         let range = tuple.range();
@@ -228,7 +226,7 @@ where
     Some(rreplay)
 }
 
-fn rediscover_wrapped<'a, W, T, L, RT, DM>(
+fn rediscover_wrapped<'a, W, T, L, RT>(
     world: &W,
     rreplay: Option<ContextWrapper<T>>,
     iter: impl Iterator<Item = &'a RT>,
@@ -237,14 +235,13 @@ fn rediscover_wrapped<'a, W, T, L, RT, DM>(
     max_states: usize,
     history: &Vec<HistoryAlias<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     RT: 'a + RangeAndStepTuple<T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if let Some(rreplay) = rreplay {
         rediscover_routes(
@@ -263,7 +260,7 @@ where
     }
 }
 
-pub fn mutate_collection_steps<W, T, DM>(
+pub fn mutate_collection_steps<W, T>(
     world: &W,
     startctx: &T,
     max_time: u32,
@@ -271,14 +268,13 @@ pub fn mutate_collection_steps<W, T, DM>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
     let max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
@@ -483,7 +479,7 @@ where
 }
 
 /// Mutate routes by replacing collections with other locations but same canon
-pub fn mutate_canon_locations<W, T, L, DM>(
+pub fn mutate_canon_locations<W, T, L>(
     world: &W,
     startctx: &T,
     mut max_time: u32,
@@ -491,7 +487,7 @@ pub fn mutate_canon_locations<W, T, L, DM>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
     register_solve: impl Fn(&ContextWrapper<T>) -> (),
 ) -> Option<ContextWrapper<T>>
 where
@@ -499,7 +495,6 @@ where
     T: Ctx<World = W>,
     L: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = L::Currency>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     // Restrict max time to being strictly less than the given solution, since we'll only return if we improve anyway.
     max_time = std::cmp::min(max_time, solution.elapsed.saturating_sub(1));
@@ -587,7 +582,7 @@ where
 }
 
 /// Mutate routes between collections by finding a greedy path to the next
-pub fn mutate_greedy_collections<W, T, L, DM>(
+pub fn mutate_greedy_collections<W, T, L>(
     world: &W,
     startctx: &T,
     _max_time: u32,
@@ -595,14 +590,13 @@ pub fn mutate_greedy_collections<W, T, L, DM>(
     max_states: usize,
     solution: Arc<Solution<T>>,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> Option<ContextWrapper<T>>
 where
     W: World<Location = L>,
     T: Ctx<World = W>,
     L: Location<Context = T>,
     W::Exit: Exit<Context = T, Currency = L::Currency>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     // [(history index, history step)]
     // to recreate the state just before this step, we would replay [..index] (i.e. exclusive)

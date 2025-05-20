@@ -5,9 +5,7 @@ use crate::context::*;
 use crate::direct::DirectPaths;
 use crate::greedy::greedy_search_from;
 use crate::heap::HeapElement;
-use crate::observer::TrieMatcher;
 use crate::priority::LimitedPriorityQueue;
-use crate::route::PartialRoute;
 use crate::steiner::graph::ExternalNodeId;
 use crate::steiner::{EdgeId, NodeId, ShortestPaths, SteinerAlgo};
 use crate::world::*;
@@ -15,7 +13,6 @@ use crate::{new_hashmap, CommonHasher};
 use ordered_float::OrderedFloat;
 use std::cmp::Reverse;
 use std::collections::{BinaryHeap, HashMap};
-use std::sync::atomic::Ordering;
 
 static INITIAL_CAPACITY: usize = 1_024;
 static MAX_STATES_FOR_SPOTS: usize = 16_384;
@@ -499,7 +496,7 @@ impl<T: Ctx> AccessResult<T> {
     }
 }
 
-fn access_check_after_actions<W, T, A, DM>(
+fn access_check_after_actions<W, T, A>(
     world: &W,
     ctx: ContextWrapper<T>,
     spot: <W::Exit as Exit>::SpotId,
@@ -510,14 +507,13 @@ fn access_check_after_actions<W, T, A, DM>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
     A: Accessible<Context = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     let goal = ExternalNodeId::Spot(spot);
 
@@ -569,13 +565,13 @@ where
 
     let best = direct_paths.shortest_known_route_to(spot, ctx.get());
     if let Some(p) = &best {
-        direct_paths.hits.fetch_add(1, Ordering::Release);
+        direct_paths.count_hit();
         // Given a previous best, we may be able to stop immediately if it is the absolute minimum
         // Otherwise we just use that route as a cap on max_time (which excludes location access)
         max_time = std::cmp::min(max_time, ctx.elapsed() + p.time);
         if let Some(score) = score_func_ctx(&ctx) {
             if score.0 >= max_time {
-                direct_paths.min_hits.fetch_add(1, Ordering::Release);
+                direct_paths.count_min_hit();
                 // Recreate the partial route
                 return match p.replay(world, &ctx) {
                     Ok(mut res) => {
@@ -583,7 +579,7 @@ where
                             access(&mut res, world, check);
                             AccessResult::CachedPathMinSuccess(res)
                         } else {
-                            direct_paths.fails.fetch_add(1, Ordering::Release);
+                            direct_paths.count_fail();
                             AccessResult::CachedPathMinWithoutAccess(res)
                         }
                     }
@@ -620,7 +616,7 @@ where
             // Only insert into direct_paths if strictly better
             if ctx.elapsed() < max_time {
                 if best.is_some() {
-                    direct_paths.improves.fetch_add(1, Ordering::Release);
+                    direct_paths.count_improvement();
                 }
                 direct_paths.insert_route(
                     spot,
@@ -640,7 +636,7 @@ where
         }
 
         if spot_heap.is_expired() {
-            direct_paths.expires.fetch_add(1, Ordering::Release);
+            direct_paths.count_expire();
             if best.is_none() {
                 return AccessResult::Expired(format!(
                     "Excessive A* search stopping at {} states explored",
@@ -679,7 +675,7 @@ where
             Err(e) => AccessResult::Error(e),
         }
     } else {
-        direct_paths.deadends.fetch_add(1, Ordering::Release);
+        direct_paths.count_dead_end();
         AccessResult::Deadended(format!(
             "Ran out of elements with {} iters left.",
             spot_heap.capacity_left(),
@@ -687,7 +683,7 @@ where
     }
 }
 
-pub fn access_location_after_actions<W, T, DM>(
+pub fn access_location_after_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     loc_id: <W::Location as Location>::LocId,
@@ -695,13 +691,12 @@ pub fn access_location_after_actions<W, T, DM>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
         return AccessResult::AlreadyDone(ctx);
@@ -725,7 +720,7 @@ where
     )
 }
 
-pub fn access_action_after_actions<W, T, DM>(
+pub fn access_action_after_actions<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     act_id: <W::Action as Action>::ActionId,
@@ -733,13 +728,12 @@ pub fn access_action_after_actions<W, T, DM>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     let spot = world.get_action_spot(act_id);
     assert!(
@@ -764,7 +758,7 @@ where
 }
 
 /// Same as access_location_after_actions but allows the caller to specify their own check_access function.
-pub fn access_location_after_actions_with_req<W, T, DM>(
+pub fn access_location_after_actions_with_req<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     loc_id: <W::Location as Location>::LocId,
@@ -773,13 +767,12 @@ pub fn access_location_after_actions_with_req<W, T, DM>(
     max_states: usize,
     req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
         return AccessResult::AlreadyDone(ctx);
@@ -804,7 +797,7 @@ where
 }
 
 /// Same as access_action_after_actions but allows the caller to specify their own check_access function.
-pub fn access_action_after_actions_with_req<W, T, DM>(
+pub fn access_action_after_actions_with_req<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     act_id: <W::Action as Action>::ActionId,
@@ -813,13 +806,12 @@ pub fn access_action_after_actions_with_req<W, T, DM>(
     max_states: usize,
     req: impl Fn(&T) -> bool,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     let spot = world.get_action_spot(act_id);
     assert!(
@@ -844,7 +836,7 @@ where
 }
 
 // Provides a counter of spots checked
-pub fn access_location_after_actions_heatmap<W, T, DM>(
+pub fn access_location_after_actions_heatmap<W, T>(
     world: &W,
     ctx: ContextWrapper<T>,
     loc_id: <W::Location as Location>::LocId,
@@ -852,13 +844,12 @@ pub fn access_location_after_actions_heatmap<W, T, DM>(
     max_depth: usize,
     max_states: usize,
     shortest_paths: &ShortestPaths<NodeId<W>, EdgeId<W>>,
-    direct_paths: &DirectPaths<W, T, DM>,
+    direct_paths: &impl DirectPaths<W, T>,
 ) -> AccessResult<T>
 where
     W: World,
     T: Ctx<World = W>,
     W::Location: Location<Context = T>,
-    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
 {
     if ctx.get().visited(loc_id) {
         return AccessResult::AlreadyDone(ctx);

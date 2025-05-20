@@ -3,7 +3,7 @@
 use analyzer::access::{access_location_after_actions_heatmap, move_to};
 use analyzer::context::{history_to_partial_route, ContextWrapper, Ctx, History, Wrapper};
 use analyzer::db::RouteDb;
-use analyzer::direct::DirectPaths;
+use analyzer::direct::DirectPathsMap;
 use analyzer::estimates::ContextScorer;
 use analyzer::matchertrie::IntegerObservation;
 use analyzer::observer::Observer;
@@ -33,12 +33,12 @@ lazy_static! {
     };
     static ref SPATHS: ShortestPaths<NodeId<World>, EdgeId<World>> =
         { ShortestPaths::from_graph(build_simple_graph(&**WORLD, &Context::default(), false)) };
-    static ref DIRECT_PATHS: DirectPaths<
+    static ref DIRECT_PATHS: DirectPathsMap<
         World,
         Context,
         ObservationMatcher<PartialRoute<Context>, Option<PartialRoute<Context>>>,
     > = {
-        DirectPaths::new(ContextScorer::shortest_paths_tree_free_edges(
+        DirectPathsMap::new(ContextScorer::shortest_paths_tree_free_edges(
             &**WORLD,
             &Context::default(),
         ))
@@ -442,7 +442,7 @@ fn test_greedy_step() {
         4,
         65536 * 8,
         &SPATHS,
-        &DIRECT_PATHS,
+        &*DIRECT_PATHS,
     )
     .result()
     .unwrap();
