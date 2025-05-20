@@ -256,7 +256,7 @@ where
             let _ = DB::destroy(&opts, &path);
             let _ = DB::destroy(&opts2, &path2);
             false
-        } else if std::fs::exists(&path)? {
+        } else if std::fs::exists(&path2)? {
             log::debug!("Restoring some queue elements from existing db");
             true
         } else {
