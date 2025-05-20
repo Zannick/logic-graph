@@ -10,7 +10,7 @@ use crate::scoring::*;
 use crate::steiner::*;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
-use anyhow::Result;
+use anyhow::{Error, Result};
 use humansize::{SizeFormatter, BINARY};
 use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
@@ -130,49 +130,6 @@ impl Drop for HeapDBOptions {
     }
 }
 
-#[derive(Debug)]
-pub struct Error {
-    pub message: String,
-}
-
-impl std::fmt::Display for Error {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> Result<(), std::fmt::Error> {
-        write!(f, "{:?}", self)
-    }
-}
-
-impl std::error::Error for Error {}
-
-impl From<rocksdb::Error> for Error {
-    fn from(value: rocksdb::Error) -> Self {
-        Error {
-            message: value.into(),
-        }
-    }
-}
-
-impl From<rmp_serde::decode::Error> for Error {
-    fn from(value: rmp_serde::decode::Error) -> Self {
-        Error {
-            message: format!("{:?}", value),
-        }
-    }
-}
-
-impl From<std::io::Error> for Error {
-    fn from(value: std::io::Error) -> Self {
-        Error {
-            message: value.to_string(),
-        }
-    }
-}
-
-impl From<Error> for String {
-    fn from(value: Error) -> Self {
-        value.message
-    }
-}
-
 fn min_merge(
     _new_key: &[u8],
     existing_val: Option<&[u8]>,
@@ -204,7 +161,7 @@ pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
     el.serialize(&mut Serializer::new(&mut key)).unwrap();
     key
 }
-fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T, Error> {
+fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T> {
     Ok(rmp_serde::from_slice::<T>(buf)?)
 }
 pub fn serialize_data<V>(v: V) -> Vec<u8>
@@ -216,7 +173,7 @@ where
     val
 }
 
-fn get_obj_from_data<V>(buf: &[u8]) -> Result<V, Error>
+fn get_obj_from_data<V>(buf: &[u8]) -> Result<V>
 where
     V: for<'de> Deserialize<'de>,
 {
@@ -255,7 +212,7 @@ where
         world: &'w W,
         startctx: &T,
         delete_first: bool,
-    ) -> Result<HeapDB<'w, W, T, KS, SM>, Error>
+    ) -> Result<HeapDB<'w, W, T, KS, SM>>
     where
         P: AsRef<Path>,
     {
@@ -338,11 +295,9 @@ where
         let mut min_db_estimates = Vec::new();
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
 
-        let seen = 
-            statedb
-                .property_int_value("estimate-num-keys")?
-                .unwrap_or(0) as usize
-        ;
+        let seen = statedb
+            .property_int_value("estimate-num-keys")?
+            .unwrap_or(0) as usize;
 
         Ok(HeapDB {
             db,
@@ -480,11 +435,11 @@ where
         self.statedb.cf_handle(NEXT).unwrap()
     }
 
-    pub fn lookup_score(&self, el: &T) -> Result<SM::Score, Error> {
+    pub fn lookup_score(&self, el: &T) -> Result<SM::Score> {
         Ok(self.metric.score_from_times(self.get_best_times(el)?))
     }
 
-    pub fn lookup_score_raw(&self, key: &[u8]) -> Result<SM::Score, Error> {
+    pub fn lookup_score_raw(&self, key: &[u8]) -> Result<SM::Score> {
         Ok(self.metric.score_from_times(self.get_best_times_raw(key)?))
     }
 
@@ -505,7 +460,7 @@ where
         self.metric.get_heap_key(el.get(), score)
     }
 
-    fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>, Error> {
+    fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>> {
         let ctx = deserialize_state(value)?;
         let sd = self
             .get_deserialize_state_data(value)?
@@ -517,7 +472,7 @@ where
         ))
     }
 
-    fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>, Error> {
+    fn get_deserialize_state_data(&self, key: &[u8]) -> Result<Option<StateDataAlias<T>>> {
         match self.statedb.get_cf(self.best_cf(), key)? {
             Some(slice) => Ok(Some(get_obj_from_data(&slice)?)),
             None => Ok(None),
@@ -528,7 +483,7 @@ where
         &self,
         cf: &ColumnFamily,
         state_keys: I,
-    ) -> Result<Vec<Option<StateDataAlias<T>>>, Error>
+    ) -> Result<Vec<Option<StateDataAlias<T>>>>
     where
         I: Iterator<Item = &'a Vec<u8>>,
     {
@@ -553,9 +508,7 @@ where
             })
             .collect();
         if !error.is_empty() {
-            Err(Error {
-                message: error.join("; "),
-            })
+            Err(Error::msg(error.join("; ")))
         } else {
             Ok(parsed.into_iter().map(|res| res.unwrap()).collect())
         }
@@ -565,7 +518,7 @@ where
         serialize_data(next_entries)
     }
 
-    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData<T>>, Error> {
+    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData<T>>> {
         match self.statedb.get_cf(self.next_cf(), key)? {
             Some(slice) => Ok(get_obj_from_data(&slice)?),
             None => Ok(Vec::new()),
@@ -597,7 +550,7 @@ where
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, if the state has been previously processed or previously seen
     /// with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<(), Error> {
+    pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
         let max_time = self.max_time();
         // Records the history in the statedb, even if over time.
         let Some(score) = self.record_one(&mut el, prev, false)? else {
@@ -614,7 +567,7 @@ where
         Ok(())
     }
 
-    pub fn push_from_queue(&self, el: ContextWrapper<T>, score: SM::Score) -> Result<(), Error> {
+    pub fn push_from_queue(&self, el: ContextWrapper<T>, score: SM::Score) -> Result<()> {
         let progress = el.get().count_visits();
         let key = self.get_heap_key_from_wrapper_score(&el, score);
         let val = serialize_state(el.get());
@@ -694,7 +647,7 @@ where
         Ok(None)
     }
 
-    pub fn extend_from_queue<I>(&self, iter: I) -> Result<(), Error>
+    pub fn extend_from_queue<I>(&self, iter: I) -> Result<()>
     where
         I: IntoIterator<Item = (T, SM::Score)>,
     {
@@ -781,9 +734,8 @@ where
         start_progress: usize,
         count: usize,
         score_limit: u32,
-    ) -> Result<Vec<(T, SM::Score)>, Error> {
+    ) -> Result<Vec<(T, SM::Score)>> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
-        let mut res = Vec::with_capacity(count);
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
         tail_opts.set_iterate_lower_bound(
@@ -806,6 +758,7 @@ where
         let pscore = SM::get_score_primary_from_heap_key(key.as_ref());
         batch.delete(key);
 
+        let mut res = Vec::with_capacity(count);
         let el = deserialize_state(&value)?;
         let score = self.lookup_score_raw(&value)?;
         let max_time = self.max_time();
@@ -887,7 +840,7 @@ where
         Ok(res)
     }
 
-    fn remember_processed_raw(&self, key: &[u8]) -> Result<bool, Error> {
+    fn remember_processed_raw(&self, key: &[u8]) -> Result<bool> {
         let cf = self.next_cf();
         Ok(
             self.statedb.key_may_exist_cf(cf, key)
@@ -896,12 +849,12 @@ where
     }
 
     /// Checks whether the given Ctx was already processed into its next states.
-    pub fn remember_processed(&self, el: &T) -> Result<bool, Error> {
+    pub fn remember_processed(&self, el: &T) -> Result<bool> {
         let next_key = serialize_state(el);
         self.remember_processed_raw(&next_key)
     }
 
-    fn get_next_steps_raw(&self, key: &[u8]) -> Result<NextSteps<T>, Error> {
+    fn get_next_steps_raw(&self, key: &[u8]) -> Result<NextSteps<T>> {
         let cf = self.next_cf();
         Ok(if self.statedb.key_may_exist_cf(cf, key) {
             self.get_deserialize_next_data(key)?
@@ -910,7 +863,7 @@ where
         })
     }
 
-    pub fn get_next_steps(&self, el: &T) -> Result<NextSteps<T>, Error> {
+    pub fn get_next_steps(&self, el: &T) -> Result<NextSteps<T>> {
         self.get_next_steps_raw(&serialize_state(el))
     }
 
@@ -918,12 +871,12 @@ where
         self.dup_pskips.fetch_add(1, Ordering::Release);
     }
 
-    pub fn get_best_times(&self, el: &T) -> Result<BestTimes, Error> {
+    pub fn get_best_times(&self, el: &T) -> Result<BestTimes> {
         let state_key = serialize_state(el);
         self.get_best_times_raw(&state_key)
     }
 
-    fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes, Error> {
+    fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes> {
         let sd = self
             .get_deserialize_state_data(state_key)?
             .expect("Didn't find state data!");
@@ -977,7 +930,7 @@ where
         el: &mut ContextWrapper<T>,
         prev: &Option<T>,
         state_only: bool,
-    ) -> Result<Option<SM::Score>, Error> {
+    ) -> Result<Option<SM::Score>> {
         let state_key = serialize_state(el.get());
 
         let (prev_key, best_since_from_prev, best_elapsed_from_prev) = if let Some(c) = prev {
@@ -1082,7 +1035,7 @@ where
         &self,
         vec: &mut Vec<ContextWrapper<T>>,
         prev: &Option<T>,
-    ) -> Result<Vec<Option<SM::Score>>, Error> {
+    ) -> Result<Vec<Option<SM::Score>>> {
         let max_time = self.max_time();
         let mut next_entries = Vec::new();
         let mut results = Vec::with_capacity(vec.len());
@@ -1194,7 +1147,7 @@ where
         Ok(results)
     }
 
-    pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), Error> {
+    pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<()> {
         let mut start_key: Option<Box<[u8]>> = None;
 
         let mut end = false;
@@ -1337,7 +1290,7 @@ where
         }
     }
 
-    fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<(), Error> {
+    fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<()> {
         if let Some(StateData { hist, prev, .. }) = self.get_deserialize_state_data(state_key)? {
             if let Some(StateData {
                 hist: hist2,
@@ -1358,7 +1311,7 @@ where
         Ok(())
     }
 
-    fn detect_cycle(&self, mut state_key: Vec<u8>) -> Result<(), Error> {
+    fn detect_cycle(&self, mut state_key: Vec<u8>) -> Result<()> {
         let mut states_found: HashMap<Vec<u8>, usize, CommonHasher> = new_hashmap();
         let mut depth = 0;
         let mut hist_vec = Vec::new();
@@ -1387,10 +1340,7 @@ where
         }
     }
 
-    fn get_history_raw(
-        &self,
-        mut state_key: Vec<u8>,
-    ) -> Result<(Vec<HistoryAlias<T>>, u32), Error> {
+    fn get_history_raw(&self, mut state_key: Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)> {
         assert!(self.quick_detect_2cycle(&state_key).is_ok());
         let mut vec = Vec::new();
         let Some(StateData {
@@ -1400,13 +1350,11 @@ where
             ..
         }) = self.get_deserialize_state_data(&state_key)?
         else {
-            return Err(Error {
-                message: format!(
-                    "Could not find state entry for {:?}",
-                    deserialize_state::<T>(&state_key)
-                        .expect("Failed to deserialize while reporting an error")
-                ),
-            });
+            return Err(Error::msg(format!(
+                "Could not find state entry for {:?}",
+                deserialize_state::<T>(&state_key)
+                    .expect("Failed to deserialize while reporting an error")
+            )));
         };
         while !prev.is_empty() {
             assert!(
@@ -1430,13 +1378,11 @@ where
                 hist = next.hist;
                 prev = next.prev;
             } else {
-                return Err(Error {
-                    message: format!(
-                        "Could not find intermediate state entry for {:?}",
-                        deserialize_state::<T>(&state_key)
-                            .expect("Failed to deserialize while reporting an error")
-                    ),
-                });
+                return Err(Error::msg(format!(
+                    "Could not find intermediate state entry for {:?}",
+                    deserialize_state::<T>(&state_key)
+                        .expect("Failed to deserialize while reporting an error")
+                )));
             }
         }
 
@@ -1444,7 +1390,7 @@ where
         Ok((vec.into_iter().flatten().collect(), elapsed))
     }
 
-    pub fn get_history(&self, ctx: &T) -> Result<(Vec<HistoryAlias<T>>, u32), Error> {
+    pub fn get_history(&self, ctx: &T) -> Result<(Vec<HistoryAlias<T>>, u32)> {
         let state_key = serialize_state(ctx);
         self.get_history_raw(state_key)
     }
@@ -1452,7 +1398,7 @@ where
     pub fn get_last_history_step(
         &self,
         ctx: &ContextWrapper<T>,
-    ) -> Result<Option<HistoryAlias<T>>, Error> {
+    ) -> Result<Option<HistoryAlias<T>>> {
         if let Some(h) = ctx.recent_history().last() {
             Ok(Some(*h))
         } else {
@@ -1462,7 +1408,7 @@ where
         }
     }
 
-    pub fn print_graphs(&self) -> Result<(), Error> {
+    pub fn print_graphs(&self) -> Result<()> {
         let size = self.size.load(Ordering::Acquire);
         let max_time = self.max_time.load(Ordering::Acquire);
         let mut times: Vec<f64> = Vec::with_capacity(size);
@@ -1504,7 +1450,7 @@ where
         Ok(())
     }
 
-    pub fn get_memory_usage_stats(&self) -> Result<String, Error> {
+    pub fn get_memory_usage_stats(&self) -> Result<String> {
         let dbstats = perf::get_memory_usage_stats(Some(&[&self.db]), Some(&[&self._cache]))?;
         let statestats =
             perf::get_memory_usage_stats(Some(&[&self.statedb]), Some(&[&self._state_cache]))?;

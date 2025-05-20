@@ -78,7 +78,7 @@ where
         min_reshuffle: usize,
         max_reshuffle: usize,
         delete_dbs: bool,
-    ) -> Result<RocksBackedQueue<'w, W, T>, String>
+    ) -> Result<RocksBackedQueue<'w, W, T>>
     where
         P: AsRef<Path>,
     {
@@ -983,8 +983,8 @@ where
         Ok(())
     }
 
-    pub fn db_cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<(), String> {
-        Ok(self.db.cleanup(batch_size, exit_signal)?)
+    pub fn db_cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<()> {
+        self.db.cleanup(batch_size, exit_signal)
     }
 
     pub fn skip_stats(&self) -> (usize, usize, usize, usize) {

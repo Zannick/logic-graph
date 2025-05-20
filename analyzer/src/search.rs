@@ -1213,6 +1213,9 @@ where
                         }) {
                             log::debug!("Solution mutator best found was {}ms", min_ctx.elapsed());
                         }
+                        if self.finished.load(Ordering::Acquire) {
+                            return;
+                        }
                         log::debug!(
                             "Solution mutator starting revisits for solution {}ms",
                             sol.elapsed
@@ -1233,6 +1236,9 @@ where
                                 )
                                 .unwrap();
                             }
+                        }
+                        if self.finished.load(Ordering::Acquire) {
+                            return;
                         }
                         log::debug!(
                             "Solution mutator starting reordering for solution {}ms",
@@ -1266,10 +1272,10 @@ where
                             );
                         }
                         self.mutated.fetch_add(1, Ordering::Release);
-                        sols = self.solutions.lock().unwrap();
                         if self.finished.load(Ordering::Acquire) {
                             return;
                         }
+                        sols = self.solutions.lock().unwrap();
                     }
                     (sols, _) = self
                         .solution_cvar
