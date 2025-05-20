@@ -261,8 +261,6 @@ where
     {
         let mut opts = Options::default();
         opts.create_if_missing(true);
-        // For now, the db should be deleted.
-        opts.set_error_if_exists(true);
         // change compression options?
         // 4 write buffers at 256 MiB = 1 GiB
         opts.set_write_buffer_size(256 * MB);
