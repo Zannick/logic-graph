@@ -318,6 +318,7 @@ where
             "data/solutions.txt",
             "data/previews.txt",
             "data/best.txt",
+            "data/best-prev.txt",
             &ctx,
         )?;
 

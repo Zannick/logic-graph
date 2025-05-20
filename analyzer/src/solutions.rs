@@ -9,6 +9,7 @@ use std::cmp::Reverse;
 use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, Write};
+use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Instant;
@@ -195,6 +196,7 @@ where
     path: &'static str,
     previews: &'static str,
     best_file: &'static str,
+    best_prev: &'static str,
     startctx: T,
     file: File,
     count: usize,
@@ -210,6 +212,7 @@ where
         sols_file: &'static str,
         previews_file: &'static str,
         best_file: &'static str,
+        best_prev: &'static str,
         startctx: &T,
     ) -> io::Result<SolutionCollector<T>> {
         // Clear entries out of the solutions dir before starting
@@ -227,6 +230,7 @@ where
             previews: previews_file,
             startctx: startctx.clone(),
             best_file,
+            best_prev,
             count: 0,
             best: 0,
             pending: false,
@@ -439,6 +443,9 @@ where
     }
 
     pub fn write_best(&mut self) -> io::Result<()> {
+        if Path::new(self.best_file).exists() {
+            std::fs::rename(self.best_file, self.best_prev)?;
+        }
         let mut file = File::create(self.best_file)?;
         let sol = self.get_best();
         Self::write_one(&mut file, 0, 0, &sol, self.best)
