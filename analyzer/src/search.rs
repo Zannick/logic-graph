@@ -16,6 +16,7 @@ use log;
 use rayon::prelude::*;
 use similar::TextDiff;
 use std::fmt::Debug;
+use std::io::Write;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
@@ -397,8 +398,24 @@ where
 
         let solutions = Arc::new(Mutex::new(solutions));
 
+        let mut vpath = db_path.as_ref().to_owned();
+        vpath.push("VERSION");
+        let version_diff =
+            std::fs::exists(&vpath)? && std::fs::read_to_string(&vpath)? != W::VERSION;
+        let delete_dbs = if version_diff {
+            print!("Detected db version mismatch. Proceed to delete dbs and start over? (y/N) ");
+            std::io::stdout().flush().unwrap();
+            let mut str = String::default();
+            std::io::stdin().read_line(&mut str).unwrap();
+            assert!(str.starts_with(&['y', 'Y']), "Exiting without deleting dbs");
+            std::fs::write(&vpath, W::VERSION)?;
+            true
+        } else {
+            false
+        };
+
         let queue = RocksBackedQueue::new(
-            db_path,
+            db_path.as_ref(),
             world,
             &startctx,
             initial_max_time,
@@ -407,6 +424,7 @@ where
             QUEUE_MAX_PER_EVICTION,
             QUEUE_MIN_PER_RESHUFFLE,
             QUEUE_MAX_PER_RESHUFFLE,
+            delete_dbs,
         )
         .unwrap();
         queue.push(startctx.clone(), &None).unwrap();

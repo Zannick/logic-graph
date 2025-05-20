@@ -77,11 +77,12 @@ where
         max_evictions: usize,
         min_reshuffle: usize,
         max_reshuffle: usize,
+        delete_dbs: bool,
     ) -> Result<RocksBackedQueue<'w, W, T>, String>
     where
         P: AsRef<Path>,
     {
-        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get())?;
+        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), delete_dbs)?;
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut processed_counts = Vec::new();
         processed_counts.resize_with(max_possible_progress + 1, || 0.into());

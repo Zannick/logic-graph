@@ -24,7 +24,6 @@ use rocksdb::{
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::fmt::Debug;
-use std::io::Write;
 use std::marker::PhantomData;
 use std::ops::Range;
 use std::path::{Path, PathBuf};
@@ -255,6 +254,7 @@ where
         initial_max_time: u32,
         world: &'w W,
         startctx: &T,
+        delete_first: bool,
     ) -> Result<HeapDB<'w, W, T, KS, SM>, Error>
     where
         P: AsRef<Path>,
@@ -294,25 +294,19 @@ where
 
         let mut path = p.as_ref().to_owned();
         let mut path2 = path.clone();
-        let mut vpath = path.clone();
         path.push("queue");
         path2.push("states");
-        vpath.push("VERSION");
 
-        let version_match =
-            std::fs::exists(&vpath)? && std::fs::read_to_string(&vpath)? == W::VERSION;
-        if !version_match {
-            print!("Detected db version mismatch. Proceed to delete dbs and start over? (y/N) ");
-            std::io::stdout().flush().unwrap();
-            let mut str = String::default();
-            std::io::stdin().read_line(&mut str).unwrap();
-            assert!(str.starts_with(&['y', 'Y']), "Exiting without deleting dbs");
+        let recovery = if delete_first {
             let _ = DB::destroy(&opts, &path);
             let _ = DB::destroy(&opts2, &path2);
-            std::fs::write(&vpath, W::VERSION)?;
-        } else {
+            false
+        } else if std::fs::exists(&path)? {
             log::debug!("Restoring some queue elements from existing db");
-        }
+            true
+        } else {
+            false
+        };
 
         // 1 + 2 = 3 GiB roughly for this db
         let db = DB::open(&opts, &path)?;
@@ -346,13 +340,11 @@ where
         let mut min_db_estimates = Vec::new();
         min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
 
-        let seen = if version_match {
+        let seen = 
             statedb
                 .property_int_value("estimate-num-keys")?
                 .unwrap_or(0) as usize
-        } else {
-            0
-        };
+        ;
 
         Ok(HeapDB {
             db,
@@ -367,7 +359,7 @@ where
             write_opts,
             max_time: initial_max_time.into(),
             metric: SM::new(world, startctx),
-            recovery: version_match,
+            recovery,
             size: 0.into(),
             seen: seen.into(),
             next: 0.into(),
