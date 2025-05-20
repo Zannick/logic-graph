@@ -786,7 +786,13 @@ where
                     batch.delete(key);
                     pops += 1;
 
-                    let el = deserialize_state(&value)?;
+                    let el = match deserialize_state(&value) {
+                        Ok(el) => el,
+                        Err(e) => {
+                            log::error!("Corrupt value in queue: {}\n{:?}", e, value);
+                            continue;
+                        }
+                    };
                     let score = self.lookup_score_raw(&value)?;
                     let max_time = self.max_time();
                     if self.metric.total_estimate_from_score(score) > max_time {
