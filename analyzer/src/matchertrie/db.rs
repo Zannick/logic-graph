@@ -143,10 +143,6 @@ where
         let mut buf = prefix.clone();
         let mut ser = Serializer::new(&mut buf);
         root.serialize(&mut ser);
-        println!(
-            "Starting at {:?} with prefix {:?} and key {:?}",
-            root, prefix, &buf
-        );
         // no sequence termination
 
         let mut iter_opts = ReadOptions::default();
@@ -160,13 +156,11 @@ where
         'db_iter: while iter.valid() {
             let (key, value) = iter.item().unwrap();
 
-            println!("Reading key {:?}", &key[prefix.len()..]);
             let mut de = Deserializer::from_read_ref(&key[prefix.len()..]);
             let mut vec = Vec::new();
             while let Ok(obs) = Deserialize::deserialize(&mut de) {
                 if !similar.matches(&obs) {
                     vec.push(obs);
-                    println!("Keeping {} observations and skipping the next", vec.len());
                     let mut new_key = prefix.clone();
                     let mut ser = Serializer::new(&mut new_key);
                     for obs in vec {
@@ -180,7 +174,6 @@ where
                     vec.push(obs);
                 }
             }
-            println!("Got one!");
             results.push(get_obj_from_data::<ValueType>(value).unwrap());
             iter.next();
         }
