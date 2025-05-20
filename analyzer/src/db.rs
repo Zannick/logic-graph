@@ -101,7 +101,7 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
     max_time: AtomicU32,
 
     metric: SM,
-    recovery: bool,
+    recovery: AtomicBool,
     size: AtomicUsize,
     seen: AtomicUsize,
     next: AtomicUsize,
@@ -312,7 +312,7 @@ where
             write_opts,
             max_time: initial_max_time.into(),
             metric: SM::new(world, startctx),
-            recovery,
+            recovery: recovery.into(),
             size: 0.into(),
             seen: seen.into(),
             next: 0.into(),
@@ -349,6 +349,10 @@ where
 
     pub fn is_empty(&self) -> bool {
         self.size.load(Ordering::Acquire) == 0
+    }
+
+    pub fn recovery(&self) -> bool {
+        self.recovery.load(Ordering::Acquire)
     }
 
     /// Returns the number of unique states we've seen so far (tracked separately from the db).
@@ -1262,7 +1266,7 @@ where
     }
 
     pub fn restore(&self) {
-        if !self.recovery {
+        if !self.recovery.load(Ordering::Acquire) {
             return;
         }
 
@@ -1294,6 +1298,9 @@ where
                 }
             }
         }
+
+        self.recovery.store(false, Ordering::Release);
+        log::info!("Finished scanning state table for restore");
     }
 
     fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<()> {

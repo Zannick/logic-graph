@@ -1169,6 +1169,9 @@ where
                             )
                             .unwrap();
                         }
+                        if self.finished.load(Ordering::Acquire) {
+                            return;
+                        }
                         log::debug!(
                             "Solution mutator starting greedy-collection-steps for solution {}ms",
                             sol.elapsed
@@ -1189,6 +1192,9 @@ where
                                 SearchMode::MutateGreedySteps,
                             )
                             .unwrap();
+                        }
+                        if self.finished.load(Ordering::Acquire) {
+                            return;
                         }
                         log::debug!(
                             "Solution mutator starting canon replacement for solution {}ms",
@@ -1286,6 +1292,18 @@ where
                     }
                 }
             });
+
+            if self.queue.is_empty() && self.queue.db().recovery() {
+                log::debug!("Waiting a bit for queue recovery...");
+                std::thread::sleep(Duration::from_secs(10));
+                for _ in 0..9 {
+                    if !self.queue.db().is_empty() || !self.queue.db().recovery() {
+                        break;
+                    }
+                    std::thread::sleep(Duration::from_secs(10));
+                }
+                assert!(!self.queue.db().is_empty(), "No queue recovery in 100 seconds, giving up");
+            }
 
             rayon::scope(|sc2| {
                 for i in 0..num_workers {
