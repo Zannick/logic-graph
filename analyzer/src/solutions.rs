@@ -435,7 +435,6 @@ where
     pub fn write_previews_if_pending(&mut self) -> io::Result<()> {
         if self.pending {
             self.pending = false;
-            self.write_best().unwrap();
             self.write_previews()
         } else {
             Ok(())
