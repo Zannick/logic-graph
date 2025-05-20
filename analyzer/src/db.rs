@@ -1287,7 +1287,7 @@ where
                 let heap_key_min = self.metric().get_heap_key(&state, score);
                 if self
                     .db
-                    .put_opt(&heap_key_min, val.as_ref(), &self.write_opts)
+                    .put_opt(&heap_key_min, serialize_state(&state), &self.write_opts)
                     .is_ok()
                 {
                     self.size.fetch_add(1, Ordering::Release);

@@ -295,9 +295,10 @@ fn asserde_true() {
         .serialize(&mut Serializer::new(&mut buf2))
         .unwrap();
     println!(
-        "Serialized Context ({} bytes) as mp: {} bytes",
+        "Serialized Context ({} bytes) as mp: {} bytes: {:?}",
         std::mem::size_of::<Context>(),
-        buf2.len()
+        buf2.len(),
+        buf2
     );
 
     println!(
