@@ -1122,6 +1122,11 @@ where
         };
 
         rayon::scope(|scope| {
+            // Background queue restore
+            scope.spawn(|_| {
+                self.queue.db().restore();
+            });
+
             // Background db cleanup thread
             scope.spawn(|_| {
                 let sleep_time = Duration::from_secs(10);
