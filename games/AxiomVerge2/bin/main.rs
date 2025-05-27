@@ -13,6 +13,13 @@ use log4rs;
 use std::collections::HashSet;
 use std::path::PathBuf;
 
+#[cfg(not(target_env = "msvc"))]
+use tikv_jemallocator::Jemalloc;
+
+#[cfg(not(target_env = "msvc"))]
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
 fn main() -> Result<(), std::io::Error> {
     let args = Cli::parse();
     log4rs::init_file(

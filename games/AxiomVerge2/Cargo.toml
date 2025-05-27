@@ -27,6 +27,9 @@ serde_repr = "*"
 yaml-rust = "*"
 zstd = "*"
 
+[target.'cfg(not(target_env = "msvc"))'.dependencies]
+tikv-jemallocator = "0.6"
+
 [dev-dependencies]
 base64 = "*"
 criterion = "*"
