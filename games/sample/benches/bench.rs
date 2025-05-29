@@ -38,12 +38,8 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         b.iter(|| greedy_search(&*world, &ctx, u32::MAX, 2))
     });
 
-    let mut dir = PathBuf::from(file!());
-    dir.pop();
-    dir.pop();
-    dir.push("routes");
     let mut routes = Vec::new();
-    for entry in std::fs::read_dir(dir).unwrap() {
+    for entry in std::fs::read_dir("routes").unwrap() {
         let path = entry.unwrap().path();
         let ext = path.extension().and_then(|s| s.to_str());
         if matches!(ext, Some("txt")) {
