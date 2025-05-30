@@ -24,45 +24,50 @@ use std::time::{Duration, Instant};
 
 #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
 mod jemalloc {
-use tokio::net::TcpListener;
-use tokio::runtime::Runtime;
+    use tokio::net::TcpListener;
+    use tokio::runtime::Runtime;
 
-use axum::{body::Body, http::header::CONTENT_TYPE, http::StatusCode, response::{IntoResponse, Response}};
+    use axum::{
+        body::Body,
+        http::header::CONTENT_TYPE,
+        http::StatusCode,
+        response::{IntoResponse, Response},
+    };
 
-pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
-    let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
-    require_profiling_activated(&prof_ctl)?;
-    let pprof = prof_ctl
-        .dump_pprof()
-        .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
-    Ok(pprof)
-}
-
-pub async fn handle_get_heap_flamegraph() -> Result<impl IntoResponse, (StatusCode, String)> {
-    let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
-    require_profiling_activated(&prof_ctl)?;
-    let svg = prof_ctl
-        .dump_flamegraph()
-        .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
-    Response::builder()
-        .header(CONTENT_TYPE, "image/svg+xml")
-        .body(Body::from(svg))
-        .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))
-}
-
-/// Checks whether jemalloc profiling is activated an returns an error response if not.
-fn require_profiling_activated(
-    prof_ctl: &jemalloc_pprof::JemallocProfCtl,
-) -> Result<(), (StatusCode, String)> {
-    if prof_ctl.activated() {
-        Ok(())
-    } else {
-        Err((
-            axum::http::StatusCode::FORBIDDEN,
-            "heap profiling not activated".into(),
-        ))
+    pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
+        let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
+        require_profiling_activated(&prof_ctl)?;
+        let pprof = prof_ctl
+            .dump_pprof()
+            .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
+        Ok(pprof)
     }
-}
+
+    pub async fn handle_get_heap_flamegraph() -> Result<impl IntoResponse, (StatusCode, String)> {
+        let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
+        require_profiling_activated(&prof_ctl)?;
+        let svg = prof_ctl
+            .dump_flamegraph()
+            .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
+        Response::builder()
+            .header(CONTENT_TYPE, "image/svg+xml")
+            .body(Body::from(svg))
+            .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))
+    }
+
+    /// Checks whether jemalloc profiling is activated an returns an error response if not.
+    fn require_profiling_activated(
+        prof_ctl: &jemalloc_pprof::JemallocProfCtl,
+    ) -> Result<(), (StatusCode, String)> {
+        if prof_ctl.activated() {
+            Ok(())
+        } else {
+            Err((
+                axum::http::StatusCode::FORBIDDEN,
+                "heap profiling not activated".into(),
+            ))
+        }
+    }
 }
 
 static MAX_DEPTH_FOR_ONE_LOC: usize = 4;
