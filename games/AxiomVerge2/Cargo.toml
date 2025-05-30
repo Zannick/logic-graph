@@ -12,6 +12,15 @@ path = "src/lib.rs"
 name = "axiom_verge2"
 path = "bin/main.rs"
 
+[[bench]]
+name = "bench"
+harness = false
+
+[[test]]
+name = "unittest"
+path = "tests/unittest.rs"
+harness = false
+
 [dependencies]
 analyzer = { path = "../../analyzer" }
 bitflags = { version = "2.*", features = ["serde"] }
@@ -33,11 +42,9 @@ criterion = "*"
 rmp-serde = "*"
 serde_json = "*"
 
-[[bench]]
-name = "bench"
-harness = false
+[target.'cfg(not(target_env = "msvc"))'.dependencies]
+jemalloc_pprof = { version = "*", optional = true }
+tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"], optional = true }
 
-[[test]]
-name = "unittest"
-path = "tests/unittest.rs"
-harness = false
+[features]
+jemalloc = ["dep:jemalloc_pprof", "dep:tikv-jemallocator", "analyzer/jemalloc"]
