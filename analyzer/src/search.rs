@@ -22,14 +22,13 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
-#[cfg(not(target_env = "msvc"))]
+#[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
+mod jemalloc {
 use tokio::net::TcpListener;
 use tokio::runtime::Runtime;
 
-#[cfg(not(target_env = "msvc"))]
 use axum::{body::Body, http::header::CONTENT_TYPE, http::StatusCode, response::{IntoResponse, Response}};
 
-#[cfg(not(target_env = "msvc"))]
 pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
     let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
     require_profiling_activated(&prof_ctl)?;
@@ -39,7 +38,6 @@ pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)
     Ok(pprof)
 }
 
-#[cfg(not(target_env = "msvc"))]
 pub async fn handle_get_heap_flamegraph() -> Result<impl IntoResponse, (StatusCode, String)> {
     let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
     require_profiling_activated(&prof_ctl)?;
@@ -53,7 +51,6 @@ pub async fn handle_get_heap_flamegraph() -> Result<impl IntoResponse, (StatusCo
 }
 
 /// Checks whether jemalloc profiling is activated an returns an error response if not.
-#[cfg(not(target_env = "msvc"))]
 fn require_profiling_activated(
     prof_ctl: &jemalloc_pprof::JemallocProfCtl,
 ) -> Result<(), (StatusCode, String)> {
@@ -65,6 +62,7 @@ fn require_profiling_activated(
             "heap profiling not activated".into(),
         ))
     }
+}
 }
 
 static MAX_DEPTH_FOR_ONE_LOC: usize = 4;
@@ -1166,14 +1164,14 @@ where
             );
         };
         // Profiler handler
-        let rt = Runtime::new()?;
-        #[cfg(not(target_env = "msvc"))]
+        let rt = tokio::runtime::Runtime::new()?;
+        #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
         rt.spawn(async {
             let app = axum::Router::new()
-                .route("/debug/pprof/heap", axum::routing::get(handle_get_heap))
+                .route("/debug/pprof/heap", axum::routing::get(jemalloc::handle_get_heap))
                 .route(
                     "/debug/pprof/flamegraph",
-                    axum::routing::get(handle_get_heap_flamegraph),
+                    axum::routing::get(jemalloc::handle_get_heap_flamegraph),
                 );
 
             // run our app with hyper, listening globally on port 3000
