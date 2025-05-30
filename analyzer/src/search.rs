@@ -21,12 +21,15 @@ use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
+
+#[cfg(not(target_env = "msvc"))]
 use tokio::net::TcpListener;
 use tokio::runtime::Runtime;
 
-use axum::http::StatusCode;
-use axum::response::IntoResponse;
+#[cfg(not(target_env = "msvc"))]
+use axum::{body::Body, http::header::CONTENT_TYPE, http::StatusCode, response::{IntoResponse, Response}};
 
+#[cfg(not(target_env = "msvc"))]
 pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
     let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
     require_profiling_activated(&prof_ctl)?;
@@ -36,7 +39,21 @@ pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)
     Ok(pprof)
 }
 
+#[cfg(not(target_env = "msvc"))]
+pub async fn handle_get_heap_flamegraph() -> Result<impl IntoResponse, (StatusCode, String)> {
+    let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
+    require_profiling_activated(&prof_ctl)?;
+    let svg = prof_ctl
+        .dump_flamegraph()
+        .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
+    Response::builder()
+        .header(CONTENT_TYPE, "image/svg+xml")
+        .body(Body::from(svg))
+        .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))
+}
+
 /// Checks whether jemalloc profiling is activated an returns an error response if not.
+#[cfg(not(target_env = "msvc"))]
 fn require_profiling_activated(
     prof_ctl: &jemalloc_pprof::JemallocProfCtl,
 ) -> Result<(), (StatusCode, String)> {
@@ -1150,9 +1167,14 @@ where
         };
         // Profiler handler
         let rt = Runtime::new()?;
+        #[cfg(not(target_env = "msvc"))]
         rt.spawn(async {
-            let app =
-                axum::Router::new().route("/debug/pprof/heap", axum::routing::get(handle_get_heap));
+            let app = axum::Router::new()
+                .route("/debug/pprof/heap", axum::routing::get(handle_get_heap))
+                .route(
+                    "/debug/pprof/flamegraph",
+                    axum::routing::get(handle_get_heap_flamegraph),
+                );
 
             // run our app with hyper, listening globally on port 3000
             let listener = TcpListener::bind("0.0.0.0:3000").await.unwrap();
