@@ -26,9 +26,11 @@ serde = { version = ">=1.0", features = ["derive"] }
 serde_repr = "*"
 yaml-rust = "*"
 zstd = "*"
+jemalloc_pprof = "*"
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
-tikv-jemallocator = "0.6"
+tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"] }
+
 
 [dev-dependencies]
 base64 = "*"

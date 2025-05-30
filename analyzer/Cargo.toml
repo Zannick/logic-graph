@@ -35,6 +35,10 @@ serde = { version = ">=1.0", features = ["derive", "rc"] }
 sort_by_derive = ">=0.1.10"
 tera = { version = "1", default-features = false }
 yaml-rust = "*"
+jemalloc_pprof = "*"
+tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"] }
+tokio = { version = "*", features = ["net", "rt"] }
+axum = "*"
 
 # For tests
 libtest-mimic = "*"
