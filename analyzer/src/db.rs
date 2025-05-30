@@ -31,6 +31,15 @@ use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, AtomicUsize, Ordering}
 use std::sync::Mutex;
 use std::time::Instant;
 
+const KB: usize = 1 << 10;
+const MB: usize = 1 << 20;
+const GB: usize = 1 << 30;
+const BEST: &str = "best";
+const NEXT: &str = "next";
+const ROUTE: &str = "route";
+const TRIE: &str = "trie";
+const TOO_MANY_STEPS: usize = 1024 << 3;
+
 // We need the following in this wrapper impl:
 // 1. The queue db is mainly iterated over, via either
 //    getting the minimum-score element (i.e. iterating from start)
@@ -42,16 +51,56 @@ use std::time::Instant;
 // 2. next: (Ctx, history step) -> (elapsed, Ctx)
 // 3. best: Ctx -> (elapsed, history step, prev Ctx)
 
-struct HeapDBOptions {
-    opts: Options,
-    path: PathBuf,
+fn min_merge(
+    _new_key: &[u8],
+    existing_val: Option<&[u8]>,
+    operands: &MergeOperands,
+) -> Option<Vec<u8>> {
+    if let Some(res) = operands.iter().min() {
+        if let Some(v) = existing_val {
+            if res < v {
+                Some(res.into())
+            } else {
+                Some(v.into())
+            }
+        } else {
+            Some(res.into())
+        }
+    } else {
+        existing_val.map(|v| v.into())
+    }
 }
 
-const BEST: &str = "best";
-const NEXT: &str = "next";
-const ROUTE: &str = "route";
-const TRIE: &str = "trie";
-const TOO_MANY_STEPS: usize = 1024 << 3;
+/// The key for a T (Ctx) in the statedb, and the value in the queue db
+/// are all T itself.
+pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
+    let mut key = Vec::with_capacity(std::mem::size_of::<T>());
+    el.serialize(&mut Serializer::new(&mut key)).unwrap();
+    key
+}
+fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T> {
+    Ok(rmp_serde::from_slice::<T>(buf)?)
+}
+pub fn serialize_data<V>(v: V) -> Vec<u8>
+where
+    V: Serialize,
+{
+    let mut val = Vec::with_capacity(std::mem::size_of::<V>());
+    v.serialize(&mut Serializer::new(&mut val)).unwrap();
+    val
+}
+
+fn get_obj_from_data<V>(buf: &[u8]) -> Result<V>
+where
+    V: for<'de> Deserialize<'de>,
+{
+    Ok(rmp_serde::from_slice::<V>(buf)?)
+}
+
+// Essentially a workaround for inherent associated types.
+pub trait HeapMetric {
+    type Score: Copy + Debug + Ord;
+}
 
 // This is a vec because we don't guarantee that the recent history in a newly submitted ctx
 // is length 1.
@@ -94,8 +143,6 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
     statedb: DB,
     _cache: Cache,
     _state_cache: Cache,
-    _opts: HeapDBOptions,
-    _state_opts: HeapDBOptions,
     write_opts: WriteOptions,
 
     max_time: AtomicU32,
@@ -120,69 +167,6 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
 
     retrieve_lock: Mutex<()>,
     phantom: PhantomData<&'w (W, T)>,
-}
-
-// Final cleanup, done in a separate struct here to ensure it's done
-// after the db is dropped.
-impl Drop for HeapDBOptions {
-    fn drop(&mut self) {
-        let _ = DB::destroy(&self.opts, &self.path);
-    }
-}
-
-fn min_merge(
-    _new_key: &[u8],
-    existing_val: Option<&[u8]>,
-    operands: &MergeOperands,
-) -> Option<Vec<u8>> {
-    if let Some(res) = operands.iter().min() {
-        if let Some(v) = existing_val {
-            if res < v {
-                Some(res.into())
-            } else {
-                Some(v.into())
-            }
-        } else {
-            Some(res.into())
-        }
-    } else {
-        existing_val.map(|v| v.into())
-    }
-}
-
-const KB: usize = 1 << 10;
-const MB: usize = 1 << 20;
-const GB: usize = 1 << 30;
-
-/// The key for a T (Ctx) in the statedb, and the value in the queue db
-/// are all T itself.
-pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
-    let mut key = Vec::with_capacity(std::mem::size_of::<T>());
-    el.serialize(&mut Serializer::new(&mut key)).unwrap();
-    key
-}
-fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T> {
-    Ok(rmp_serde::from_slice::<T>(buf)?)
-}
-pub fn serialize_data<V>(v: V) -> Vec<u8>
-where
-    V: Serialize,
-{
-    let mut val = Vec::with_capacity(std::mem::size_of::<V>());
-    v.serialize(&mut Serializer::new(&mut val)).unwrap();
-    val
-}
-
-fn get_obj_from_data<V>(buf: &[u8]) -> Result<V>
-where
-    V: for<'de> Deserialize<'de>,
-{
-    Ok(rmp_serde::from_slice::<V>(buf)?)
-}
-
-// Essentially a workaround for inherent associated types.
-pub trait HeapMetric {
-    type Score: Copy + Debug + Ord;
 }
 
 impl<'w, W, T, L, E, const KS: usize, SM> HeapMetric for HeapDB<'w, W, T, KS, SM>
@@ -304,11 +288,6 @@ where
             statedb,
             _cache: cache,
             _state_cache: blockdb_cache,
-            _opts: HeapDBOptions { opts, path },
-            _state_opts: HeapDBOptions {
-                opts: opts2,
-                path: path2,
-            },
             write_opts,
             max_time: initial_max_time.into(),
             metric: SM::new(world, startctx),
