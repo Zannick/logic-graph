@@ -3,11 +3,13 @@ use crate::db::serialize_state;
 use crate::direct::DirectPathsMap;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
+use crate::heap::MetricType;
 use crate::matchertrie::MatcherTrie;
 use crate::minimize::*;
 use crate::observer::{debug_observations, record_observations, TrieMatcher};
 use crate::route::*;
 use crate::search::{Search, SearchOptions};
+use crate::scoring::{EstimatorWrapper, ScoreMetric};
 use crate::solutions::{write_graph, SolutionSuffix};
 use crate::world::*;
 use clap::{Parser, Subcommand};
@@ -169,11 +171,11 @@ where
             greedy_max_states,
         } => {
             // This duplicates the creation later by the heap wrapper.
-            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
+            let metric = MetricType::new(world, &startctx);
 
             route_ctxs.extend(routes.into_iter().map(|route| {
                 let rstr = read_from_file(route);
-                match route_from_string(world, &startctx, &rstr, scorer.get_algo()) {
+                match route_from_string(world, &startctx, &rstr, metric.estimator().get_algo()) {
                     Ok(r) => r,
                     Err((r, e)) => {
                         log::error!("Using partial route from {:?}: {}", route, e);
@@ -185,6 +187,7 @@ where
                 world,
                 startctx,
                 route_ctxs,
+                metric,
                 db.as_ref().unwrap_or(&".db".into()),
                 SearchOptions {
                     mutate_max_depth: *mutate_max_depth,
@@ -198,7 +201,6 @@ where
             search.search()
         }
         Commands::Route { route, .. } => {
-            // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let rstr = read_from_file(route);
             println!(
@@ -210,7 +212,6 @@ where
             Ok(())
         }
         Commands::Greedy { route, max_depth } => {
-            // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let result = if let Some(r) = route {
                 let ctx =
@@ -235,7 +236,6 @@ where
             max_depth,
             max_states,
         } => {
-            // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let free_sp = ContextScorer::shortest_paths_tree_free_edges(world, &startctx);
             let direct_paths = DirectPathsMap::<W, T, DM>::new(free_sp);
@@ -391,7 +391,6 @@ where
             Ok(())
         }
         Commands::Draw { route } => {
-            // This duplicates the creation later by the heap wrapper.
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let ctx =
                 route_from_string(world, &startctx, &read_from_file(route), scorer.get_algo())

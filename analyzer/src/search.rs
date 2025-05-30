@@ -3,7 +3,7 @@ use crate::context::*;
 use crate::db::RouteDb;
 use crate::direct::DirectPathsDb;
 use crate::estimates::{ContextScorer, UNREASONABLE_TIME};
-use crate::heap::RocksBackedQueue;
+use crate::heap::{MetricType, RocksBackedQueue};
 use crate::matchertrie::*;
 use crate::minimize::*;
 use crate::observer::{record_observations, TrieMatcher};
@@ -355,6 +355,7 @@ where
         world: &'a W,
         ctx: T,
         routes: Vec<ContextWrapper<T>>,
+        metric: MetricType<'a, W>,
         db_path: P,
         options: SearchOptions,
     ) -> Result<Search<'a, W, T, TM>, std::io::Error>
@@ -462,7 +463,7 @@ where
         let queue = RocksBackedQueue::new(
             db_path.as_ref(),
             world,
-            &startctx,
+            metric,
             initial_max_time,
             QUEUE_CAPACITY,
             QUEUE_MIN_PER_EVICTION,
@@ -1173,7 +1174,10 @@ where
         #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
         rt.spawn(async {
             let app = axum::Router::new()
-                .route("/debug/pprof/heap", axum::routing::get(jemalloc::handle_get_heap))
+                .route(
+                    "/debug/pprof/heap",
+                    axum::routing::get(jemalloc::handle_get_heap),
+                )
                 .route(
                     "/debug/pprof/flamegraph",
                     axum::routing::get(jemalloc::handle_get_heap_flamegraph),

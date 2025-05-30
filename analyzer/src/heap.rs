@@ -33,7 +33,8 @@ pub(self) type TimeSinceDbType<'w, W, T> = HeapDB<'w, W, T, 16, TimeSinceAndElap
 #[allow(unused)]
 pub(self) type ElapsedTimeDb<'w, W, T> = HeapDB<'w, W, T, 12, EstimatedTimeMetric<'w, W>>;
 
-// This type has to be changed to affect the score type.
+// These types have to be changed to affect the score type.
+pub(crate) type MetricType<'w, W> = TimeSinceAndElapsed<'w, W>;
 pub(self) type DbType<'w, W, T> = TimeSinceDbType<'w, W, T>;
 // Automatic from DbType
 pub(self) type Score<'w, W, T> = <DbType<'w, W, T> as HeapMetric>::Score;
@@ -70,7 +71,7 @@ where
     pub fn new<P>(
         db_path: P,
         world: &'w W,
-        startctx: &ContextWrapper<T>,
+        metric: MetricType<'w, W>,
         initial_max_time: u32,
         max_capacity: usize,
         min_evictions: usize,
@@ -82,7 +83,7 @@ where
     where
         P: AsRef<Path>,
     {
-        let db = HeapDB::open(db_path, initial_max_time, world, startctx.get(), delete_dbs)?;
+        let db = HeapDB::open(db_path, initial_max_time, metric, delete_dbs)?;
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut processed_counts = Vec::new();
         processed_counts.resize_with(max_possible_progress + 1, || 0.into());

@@ -193,8 +193,7 @@ where
     pub fn open<P>(
         p: P,
         initial_max_time: u32,
-        world: &'w W,
-        startctx: &T,
+        metric: SM,
         delete_first: bool,
     ) -> Result<HeapDB<'w, W, T, KS, SM>>
     where
@@ -290,7 +289,7 @@ where
             _state_cache: blockdb_cache,
             write_opts,
             max_time: initial_max_time.into(),
-            metric: SM::new(world, startctx),
+            metric,
             recovery: recovery.into(),
             size: 0.into(),
             seen: seen.into(),
