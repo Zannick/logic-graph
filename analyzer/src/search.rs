@@ -21,7 +21,6 @@ use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
-use tikv_jemallocator::Jemalloc;
 use tokio::net::TcpListener;
 use tokio::runtime::Runtime;
 
@@ -1156,7 +1155,7 @@ where
                 axum::Router::new().route("/debug/pprof/heap", axum::routing::get(handle_get_heap));
 
             // run our app with hyper, listening globally on port 3000
-            let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+            let listener = TcpListener::bind("0.0.0.0:3000").await.unwrap();
             axum::serve(listener, app).await.unwrap();
         });
         rayon::scope(|scope| {
