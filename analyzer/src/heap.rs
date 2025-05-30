@@ -27,7 +27,6 @@ pub(crate) struct HeapElement<T: Ctx> {
     pub(crate) el: ContextWrapper<T>,
 }
 
-pub(crate) type TimeSinceScore = (u32, u32);
 #[allow(unused)]
 pub(self) type TimeSinceDbType<'w, W, T> = HeapDB<'w, W, T, 16, TimeSinceAndElapsed<'w, W>>;
 #[allow(unused)]

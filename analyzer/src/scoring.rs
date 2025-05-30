@@ -1,10 +1,11 @@
 use crate::context::*;
 use crate::estimates::ContextScorer;
-use crate::heap::TimeSinceScore;
 use crate::steiner::*;
 use crate::world::*;
 use std::fmt::Debug;
 use std::sync::atomic::{AtomicU32, Ordering};
+
+pub(crate) type TimeSinceScore = (u32, u32);
 
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
 pub struct BestTimes {
@@ -102,7 +103,7 @@ where
     }
 }
 
-impl<'w, W: World> MetricKey for TimeSinceAndElapsed<'w, W> {
+impl<'w, W: World> MetricKey for TimeSinceAndElapsed<'w, W> {    
     fn get_score_primary_from_heap_key(key: &[u8]) -> u32 {
         u32::from_be_bytes(key[4..8].try_into().unwrap())
     }
