@@ -25,10 +25,8 @@ use std::time::{Duration, Instant};
 #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
 mod jemalloc {
     use axum::{
-        body::Body,
-        http::header::CONTENT_TYPE,
         http::StatusCode,
-        response::{IntoResponse, Response},
+        response::{IntoResponse},
     };
 
     pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
