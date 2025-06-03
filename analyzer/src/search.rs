@@ -24,9 +24,6 @@ use std::time::{Duration, Instant};
 
 #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
 mod jemalloc {
-    use tokio::net::TcpListener;
-    use tokio::runtime::Runtime;
-
     use axum::{
         body::Body,
         http::header::CONTENT_TYPE,
@@ -41,18 +38,6 @@ mod jemalloc {
             .dump_pprof()
             .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
         Ok(pprof)
-    }
-
-    pub async fn handle_get_heap_flamegraph() -> Result<impl IntoResponse, (StatusCode, String)> {
-        let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
-        require_profiling_activated(&prof_ctl)?;
-        let svg = prof_ctl
-            .dump_flamegraph()
-            .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
-        Response::builder()
-            .header(CONTENT_TYPE, "image/svg+xml")
-            .body(Body::from(svg))
-            .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))
     }
 
     /// Checks whether jemalloc profiling is activated an returns an error response if not.
@@ -1177,14 +1162,10 @@ where
                 .route(
                     "/debug/pprof/heap",
                     axum::routing::get(jemalloc::handle_get_heap),
-                )
-                .route(
-                    "/debug/pprof/flamegraph",
-                    axum::routing::get(jemalloc::handle_get_heap_flamegraph),
                 );
 
             // run our app with hyper, listening globally on port 3000
-            let listener = TcpListener::bind("0.0.0.0:3000").await.unwrap();
+            let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
             axum::serve(listener, app).await.unwrap();
         });
         rayon::scope(|scope| {
