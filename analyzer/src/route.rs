@@ -277,6 +277,7 @@ pub fn debug_route<W, T>(
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,

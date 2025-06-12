@@ -314,6 +314,7 @@ where
         W,
         <<W as World>::Exit as Exit>::SpotId,
         <<W as World>::Location as Location>::LocId,
+        <<W as World>::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {

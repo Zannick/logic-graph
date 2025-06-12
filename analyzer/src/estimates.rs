@@ -5,6 +5,7 @@ use crate::steiner::*;
 use crate::world::*;
 use crate::CommonHasher;
 use lru::LruCache;
+use rustc_hash::FxHashSet;
 use std::collections::HashSet;
 use std::num::NonZeroUsize;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -16,7 +17,7 @@ pub const UNREASONABLE_TIME: u32 = 1 << 30;
 // What we basically need is a helper that contains the necessary cache elements
 // for scoring, that the DB can fall back to. Probably better than bloating the
 // DB struct and functionality.
-pub struct ContextScorer<'w, W, S, LI, EI, A> {
+pub struct ContextScorer<'w, W, S, LI, CI, EI, A> {
     // the cache is a map from start point and remaining locations to u64
     // but we also hold the Algo which contains precalculations for generating
     world: &'w W,
@@ -24,13 +25,22 @@ pub struct ContextScorer<'w, W, S, LI, EI, A> {
 
     known_costs: Mutex<LruCache<(S, Vec<LI>, Vec<Edge<EI>>), u64, CommonHasher>>,
     required_locations: Vec<LI>,
+    canon_locations: FxHashSet<CI>,
 
     estimates: AtomicUsize,
     cached_estimates: AtomicUsize,
 }
 
 impl<'w, W, A>
-    ContextScorer<'w, W, <W::Exit as Exit>::SpotId, <W::Location as Location>::LocId, EdgeId<W>, A>
+    ContextScorer<
+        'w,
+        W,
+        <W::Exit as Exit>::SpotId,
+        <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
+        EdgeId<W>,
+        A,
+    >
 where
     W: World,
     A: SteinerAlgo<NodeId<W>, EdgeId<W>>,
@@ -44,6 +54,10 @@ where
             .into_iter()
             .flat_map(|(item, _)| world.get_item_locations(item))
             .collect();
+        let canon_locations: FxHashSet<_> = required_locations
+            .iter()
+            .map(|loc_id| W::get_canon_location_id(*loc_id))
+            .collect();
         Self {
             world,
             algo: A::from_graph(build_simple_graph(world, startctx, false)),
@@ -52,6 +66,7 @@ where
                 CommonHasher::default(),
             )),
             required_locations,
+            canon_locations,
             estimates: 0.into(),
             cached_estimates: 0.into(),
         }
@@ -110,9 +125,9 @@ where
     where
         T: Ctx<World = W>,
     {
-        self.required_locations
+        self.canon_locations
             .iter()
-            .filter(|&loc_id| ctx.visited(*loc_id))
+            .filter(|&canon_id| ctx.visited_canon(*canon_id))
             .count()
     }
 
@@ -251,6 +266,7 @@ impl<'w, W>
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >

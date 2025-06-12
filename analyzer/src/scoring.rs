@@ -28,6 +28,7 @@ pub trait EstimatorWrapper<'w, W: World + 'w> {
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >;
@@ -80,6 +81,7 @@ pub struct TimeSinceAndElapsed<'w, W: World> {
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
@@ -96,6 +98,7 @@ where
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {
@@ -103,7 +106,7 @@ where
     }
 }
 
-impl<'w, W: World> MetricKey for TimeSinceAndElapsed<'w, W> {    
+impl<'w, W: World> MetricKey for TimeSinceAndElapsed<'w, W> {
     fn get_score_primary_from_heap_key(key: &[u8]) -> u32 {
         u32::from_be_bytes(key[4..8].try_into().unwrap())
     }
@@ -181,6 +184,7 @@ pub struct EstimatedTimeMetric<'w, W: World> {
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
@@ -197,6 +201,7 @@ where
         W,
         <W::Exit as Exit>::SpotId,
         <W::Location as Location>::LocId,
+        <W::Location as Location>::CanonId,
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     > {
