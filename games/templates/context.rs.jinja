@@ -602,6 +602,17 @@ fn {% if observe %}observe_{% endif %}reset_{{ pltype|lower }}(&mut self, {{ plt
         }
     }
 
+    fn visited_canon(&self, canon_id: CanonId) -> bool {
+        match canon_id {
+%% for canon_id in gl.canon_places
+%% set visit = 'VISITED_' + canon_id
+            CanonId::{{ canon_id }} => {
+                self.cbits{{ bfp.varmap[visit] }}.contains(flags::ContextBits{{ bfp.varmap[visit] }}::{{ visit|upper }})
+            }
+%% endfor
+        }
+    }
+
 %% for ptype in ['Spot', 'Area', 'Region']
     fn all_{{ ptype|lower }}_checks(&self, id: {{ ptype }}Id) -> bool {
         false

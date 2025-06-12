@@ -91,6 +91,10 @@ pub trait Ctx:
         !loc.skippable() && !self.visited(loc.id())
     }
     fn visited(&self, loc_id: <<Self::World as World>::Location as Location>::LocId) -> bool;
+    fn visited_canon(
+        &self,
+        canon_id: <<Self::World as World>::Location as Location>::CanonId,
+    ) -> bool;
 
     /// Performs the collection and records observations made.
     fn observe_collect(

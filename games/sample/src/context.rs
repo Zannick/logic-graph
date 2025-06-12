@@ -1889,6 +1889,143 @@ fn observe_reset_area(&mut self, area_id: AreaId, world: &World, full_obs: &mut 
         }
     }
 
+    fn visited_canon(&self, canon_id: CanonId) -> bool {
+        match canon_id {
+            CanonId::Deku_Lobby_Web => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_DEKU_LOBBY_WEB)
+            }
+            CanonId::Deku_Basement_Web => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_DEKU_BASEMENT_WEB)
+            }
+            CanonId::Defeat_Gohma => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_DEFEAT_GOHMA)
+            }
+            CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Sticks => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_STICKS)
+            }
+            CanonId::Loc_Deku_Tree__Lobby__Center__Deku_Baba_Nuts => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__LOBBY__CENTER__DEKU_BABA_NUTS)
+            }
+            CanonId::Loc_Deku_Tree__Floor_2__Vines__Map_Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__FLOOR_2__VINES__MAP_CHEST)
+            }
+            CanonId::Loc_Deku_Tree__Scrub_Room__Entry__Scrub => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SCRUB_ROOM__ENTRY__SCRUB)
+            }
+            CanonId::Loc_Deku_Tree__Slingshot_Room__Slingshot__Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_ROOM__SLINGSHOT__CHEST)
+            }
+            CanonId::Loc_Deku_Tree__Slingshot_Upper__Ledge__Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SLINGSHOT_UPPER__LEDGE__CHEST)
+            }
+            CanonId::Loc_Deku_Tree__Compass_Room__Compass__Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__COMPASS__CHEST)
+            }
+            CanonId::Loc_Deku_Tree__Compass_Room__Ledge__Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__CHEST)
+            }
+            CanonId::Loc_Deku_Tree__Compass_Room__Ledge__GS => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__COMPASS_ROOM__LEDGE__GS)
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Center__Vines_GS => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CENTER__VINES_GS)
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Corner__Switch => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__SWITCH)
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Corner__Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__CHEST)
+            }
+            CanonId::Loc_Deku_Tree__Basement_1__Corner__Gate_GS => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_1__CORNER__GATE_GS)
+            }
+            CanonId::Loc_Deku_Tree__Back_Room__Northwest__Burn_Web => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BURN_WEB)
+            }
+            CanonId::Loc_Deku_Tree__Back_Room__Northwest__Break_Wall => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BACK_ROOM__NORTHWEST__BREAK_WALL)
+            }
+            CanonId::Loc_Deku_Tree__Skull_Room__Entry__GS => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__SKULL_ROOM__ENTRY__GS)
+            }
+            CanonId::Loc_Deku_Tree__Basement_Ledge__Block__Push_Block => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_LEDGE__BLOCK__PUSH_BLOCK)
+            }
+            CanonId::Loc_Deku_Tree__Basement_2__Boss_Door__Scrubs => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BASEMENT_2__BOSS_DOOR__SCRUBS)
+            }
+            CanonId::Loc_Deku_Tree__Boss_Room__Arena__Gohma_Heart => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__GOHMA_HEART)
+            }
+            CanonId::Loc_Deku_Tree__Boss_Room__Arena__Blue_Warp => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_DEKU_TREE__BOSS_ROOM__ARENA__BLUE_WARP)
+            }
+            CanonId::Loc_KF__Kokiri_Village__Training_Center__Victory => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__TRAINING_CENTER__VICTORY)
+            }
+            CanonId::Loc_KF__Kokiri_Village__Midos_Guardpost__Show_Mido => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__KOKIRI_VILLAGE__MIDOS_GUARDPOST__SHOW_MIDO)
+            }
+            CanonId::Loc_KF__Boulder_Maze__Reward__Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__BOULDER_MAZE__REWARD__CHEST)
+            }
+            CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Sticks => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__STICKS)
+            }
+            CanonId::Loc_KF__Baba_Corridor__Deku_Babas__Nuts => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__BABA_CORRIDOR__DEKU_BABAS__NUTS)
+            }
+            CanonId::Loc_KF__Outside_Deku_Tree__Left__Gossip_Stone => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__LEFT__GOSSIP_STONE)
+            }
+            CanonId::Loc_KF__Outside_Deku_Tree__Right__Gossip_Stone => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__OUTSIDE_DEKU_TREE__RIGHT__GOSSIP_STONE)
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Top_Left_Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_LEFT_CHEST)
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Top_Right_Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__TOP_RIGHT_CHEST)
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Bottom_Left_Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_LEFT_CHEST)
+            }
+            CanonId::Loc_KF__Midos_House__Entry__Bottom_Right_Chest => {
+                self.cbits1.contains(flags::ContextBits1::VISITED_LOC_KF__MIDOS_HOUSE__ENTRY__BOTTOM_RIGHT_CHEST)
+            }
+            CanonId::Loc_KF__Shop__Entry__Blue_Rupee => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__BLUE_RUPEE)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_1 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_1)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_2 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_2)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_3 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_3)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_4 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_4)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_5 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_5)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_6 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_6)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_7 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_7)
+            }
+            CanonId::Loc_KF__Shop__Entry__Item_8 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KF__SHOP__ENTRY__ITEM_8)
+            }
+            CanonId::Loc_Kak__Spider_House__Entry__Skulls_10 => {
+                self.cbits2.contains(flags::ContextBits2::VISITED_LOC_KAK__SPIDER_HOUSE__ENTRY__SKULLS_10)
+            }
+        }
+    }
+
     fn all_spot_checks(&self, id: SpotId) -> bool {
         false
     }

@@ -202,6 +202,8 @@ def split_filter_penalties(penalties):
 def hash_src_files(game_dir: pathlib.Path) -> str:
     s = []
     for fn in (game_dir / 'src').glob('**/*.rs'):
+        if fn == (game_dir / 'src' / 'version.rs'):
+            continue
         with fn.open('rb') as f:
             h = hashlib.file_digest(f, hashlib.sha256)
         s.append(f'{h.hexdigest()} {fn.relative_to(ROOT_DIR).as_posix()}')
