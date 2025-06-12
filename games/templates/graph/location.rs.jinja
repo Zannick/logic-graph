@@ -180,3 +180,7 @@ pub fn get_location_spot(loc_id: LocationId) -> SpotId {
 pub fn get_canon_location_ids(canon_id: CanonId) -> &'static [LocationId] {
     CANON_DEFS[canon_id.into_usize()]
 }
+
+pub fn get_canon_location_id(loc_id: LocationId) -> CanonId {
+    LOC_DEFS[loc_id.into_usize()].canonical
+}

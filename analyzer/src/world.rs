@@ -212,6 +212,9 @@ pub trait World: Sync {
     fn get_canon_location_ids(
         canon_id: <Self::Location as Location>::CanonId,
     ) -> &'static [<Self::Location as Location>::LocId];
+    fn get_canon_location_id(
+        loc_id: <Self::Location as Location>::LocId,
+    ) -> <Self::Location as Location>::CanonId;
 
     fn get_location_spot(
         &self,

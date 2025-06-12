@@ -5785,6 +5785,9 @@ impl world::World for World {
     fn get_canon_location_ids(canon_id: CanonId) -> &'static [LocationId] {
         get_canon_location_ids(canon_id)
     }
+    fn get_canon_location_id(loc_id: LocationId) -> CanonId {
+        get_canon_location_id(loc_id)
+    }
 
     fn get_location_spot(&self, loc_id: LocationId) -> SpotId {
         get_location_spot(loc_id)
