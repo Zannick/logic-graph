@@ -121,6 +121,9 @@ where
         )
     }
 
+    /// Number of objective canon locations visited.
+    /// 
+    /// The sum of this number + `remaining_visits` may decrease as visits increase.
     pub fn required_visits<T>(&self, ctx: &T) -> usize
     where
         T: Ctx<World = W>,
