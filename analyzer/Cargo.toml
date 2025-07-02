@@ -44,9 +44,15 @@ tokio = { version = "*", features = ["net", "rt", "rt-multi-thread"] }
 libtest-mimic = "*"
 tempfile = "*"
 
+# For mysql
+diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true}
+[target.'cfg(target_env = "msvc")'.dependencies]
+mysqlclient-sys = { version = "0.4", features = ["bundled"], optional = true}
+
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 jemalloc_pprof = { version = "*", optional = true }
 tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"], optional = true }
 
 [features]
 jemalloc = ["dep:jemalloc_pprof", "dep:tikv-jemallocator"]
+mysql = ["dep:diesel"]
