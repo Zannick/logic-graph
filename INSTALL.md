@@ -21,7 +21,16 @@ GRANT FILE ON *.* TO 'logic_graph'@'localhost';
 
 and add the directory to your MySQL config file. For example, if I'm running in Linux and want to store the data on a mounted device `/mnt/e`, I would add this to my `/etc/mysql/mysql.conf` file:
 
-```
+```conf
 [mysql]
 innodb_directories=/mnt/e/.mysql
+```
+
+Before you run with mysql enabled in any game's directory, first run:
+
+```bash
+$ diesel setup
+$ diesel migration run
+Running migration 1_create
+$
 ```
