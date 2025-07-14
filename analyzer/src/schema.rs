@@ -1,7 +1,7 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    axiom_verge2_states (raw_state) {
+    db_states (raw_state) {
         raw_state -> Blob,
         progress -> Unsigned<Integer>,
         elapsed -> Unsigned<Integer>,

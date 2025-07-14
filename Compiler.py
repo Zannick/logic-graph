@@ -2127,7 +2127,7 @@ class GameLogic(object):
         self.num_locations
         self.sorted_spots = sorted(self.spots(), key=lambda s: s['id'])
         files = {
-            '.': ['Cargo.toml'],
+            '.': ['Cargo.toml', '.env'],
             'data': ['digraph.mmd', 'graph_map.sh', 'digraph_nodes.dot', 'full_graph.m4'],
             'src': ['lib.rs', 'items.rs', 'helpers.rs', 'context.rs',
                     'observe.rs', 'prices.rs', 'rules.rs', 'movements.rs', 'settings.rs',

@@ -45,7 +45,8 @@ libtest-mimic = "*"
 tempfile = "*"
 
 # For mysql
-diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true}
+diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true }
+dotenvy = { version = "*", optional = true }
 [target.'cfg(target_env = "msvc")'.dependencies]
 mysqlclient-sys = { version = "0.4", features = ["bundled"], optional = true}
 
@@ -55,4 +56,4 @@ tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_ma
 
 [features]
 jemalloc = ["dep:jemalloc_pprof", "dep:tikv-jemallocator"]
-mysql = ["dep:diesel"]
+mysql = ["dep:diesel", "dep:dotenvy"]

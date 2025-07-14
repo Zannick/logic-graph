@@ -1,5 +1,5 @@
 
-CREATE TABLE axiom_verge2_states (
+CREATE TABLE db_states (
     raw_state BLOB NOT NULL, -- serialized Context
     progress INTEGER UNSIGNED NOT NULL DEFAULT 0, -- usize
     elapsed INTEGER UNSIGNED NOT NULL DEFAULT 0, -- u32
@@ -13,4 +13,4 @@ CREATE TABLE axiom_verge2_states (
     PRIMARY KEY(raw_state(256)),
     INDEX(progress, won, processed, time_since_visit, (elapsed + estimated_remaining))
 )
-DATA DIRECTORY = "/mnt/e/.mysql";
+DATA DIRECTORY = "/mnt/e/.mysql";  -- should be locally set by the user

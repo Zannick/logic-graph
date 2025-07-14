@@ -15,7 +15,5 @@ pub mod movements;
 pub mod observe;
 pub mod prices;
 mod rules;
-#[cfg(feature = "mysql")]
-pub mod schema;
 pub mod settings;
 mod version;

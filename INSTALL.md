@@ -4,13 +4,11 @@ To install with MySQL support, you will need:
 - libmysqlclient-dev
 - diesel-cli (via cargo)
 
-In MySQL, you will need a database `logic_graph`, a user `logic_graph`, and permissions granted to user `'logic_graph'@'localhost'`. As root:
+In MySQL, you will need to create a user `logic_graph` and grant appropriate permissions to it. As root:
 
 ```sql
-CREATE DATABASE logic_graph;
 CREATE USER 'logic_graph'@'localhost';
-GRANT FILE ON *.* TO 'logic_graph'@'localhost';
-GRANT ALL ON `logic\_graph`.* TO 'logic_graph'@'localhost';
+GRANT ALL ON `logic\_graph\_%`.* TO 'logic_graph'@'localhost';
 ```
 
 You can use roles but they will have to be set as default roles for diesel-cli.

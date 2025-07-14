@@ -36,6 +36,11 @@ pub mod solutions;
 pub mod steiner;
 pub mod world;
 
+#[cfg(feature = "mysql")]
+pub mod models;
+#[cfg(feature = "mysql")]
+pub mod schema;
+
 // test-only
 pub mod testlib;
 pub mod unittest;

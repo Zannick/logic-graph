@@ -8,8 +8,8 @@ use crate::matchertrie::MatcherTrie;
 use crate::minimize::*;
 use crate::observer::{debug_observations, record_observations, TrieMatcher};
 use crate::route::*;
-use crate::search::{Search, SearchOptions};
 use crate::scoring::{EstimatorWrapper, ScoreMetric};
+use crate::search::{Search, SearchOptions};
 use crate::solutions::{write_graph, SolutionSuffix};
 use crate::world::*;
 use clap::{Parser, Subcommand};
@@ -134,6 +134,9 @@ pub enum Commands {
 
     /// provides debug info about the binary
     Info,
+
+    /// interacts with the mysql table
+    Mysql,
 }
 
 pub fn read_from_file<P>(p: &P) -> String
@@ -444,5 +447,61 @@ where
             );
             Ok(())
         }
+        Commands::Mysql => {
+            #[cfg(feature = "mysql")]
+            {
+                run_mysql::<W, T, TM, DM>(world, startctx, route_ctxs, args).unwrap();
+                Ok(())
+            }
+            #[cfg(not(feature = "mysql"))]
+            {
+                panic!("Command \"mysql\" requires building with feature \"mysql\"")
+            }
+        }
     }
+}
+
+#[allow(unused)]
+#[cfg(feature = "mysql")]
+pub fn run_mysql<W, T, TM, DM>(
+    world: &W,
+    startctx: T,
+    mut route_ctxs: Vec<ContextWrapper<T>>,
+    args: &Cli,
+) -> Result<(), anyhow::Error>
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    TM: TrieMatcher<SolutionSuffix<T>, Struct = T>,
+    DM: TrieMatcher<PartialRoute<T>, Struct = T>,
+{
+    use crate::models::*;
+    use crate::schema::db_states::dsl::*;
+    use diesel::debug_query;
+    use diesel::dsl::{sql, DuplicatedKeys};
+    use diesel::mysql::Mysql;
+    use diesel::prelude::*;
+    use diesel::sql_types::{Integer, Unsigned};
+
+    let state = serialize_state(&startctx);
+
+    let new_elapsed = 5;
+
+    let mut q = diesel::update(db_states.filter(raw_state.eq(state.clone())))
+        .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),));
+    println!("{}", debug_query::<Mysql, _>(&q));
+
+    let new_value = DBState {
+        raw_state: state,
+        ..Default::default()
+    };
+    let q2 = diesel::insert_into(db_states)
+        .values(new_value)
+        .on_conflict(DuplicatedKeys)
+        .do_update()
+        .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),));
+    println!("{}", debug_query::<Mysql, _>(&q2));
+
+    Ok(())
 }
