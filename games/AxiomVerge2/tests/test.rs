@@ -2,7 +2,7 @@
 
 use analyzer::access::{access_location_after_actions_heatmap, move_to};
 use analyzer::context::{history_to_partial_route, ContextWrapper, Ctx, History, Wrapper};
-use analyzer::db::RouteDb;
+use analyzer::db::{serialize_data, RouteDb};
 use analyzer::direct::DirectPathsMap;
 use analyzer::estimates::ContextScorer;
 use analyzer::matchertrie::IntegerObservation;
@@ -332,6 +332,20 @@ fn asserde_true() {
     assert!(ctx3
         .get()
         .visited(LocationId::Glacier__Sea_Burial__Collapsing_Ceiling__Drown));
+
+    ctx.append_history(History::L(SpotId::Glacier__Revival__Save_Point), 5);
+
+    let hslice = ctx.recent_history();
+    let buf1 = serialize_data(hslice);
+    let hvec = hslice.to_vec();
+    let buf2 = serialize_data(hvec);
+    println!(
+        "Serialized history\nslice ({} bytes): {:?}\nvec ({} bytes): {:?}",
+        buf1.len(),
+        buf1,
+        buf2.len(),
+        buf2
+    );
 }
 
 #[test]

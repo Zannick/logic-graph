@@ -1,12 +1,24 @@
+use crate::context::{ContextWrapper, Ctx, Wrapper};
+use crate::db::{serialize_data, serialize_state};
+use crate::schema::db_states::dsl::*;
+use crate::scoring::ScoreMetric;
+use crate::world::{Location, World};
+use diesel::dsl::{not, DuplicatedKeys};
 use diesel::expression::functions::*;
+use diesel::mysql::Mysql;
 use diesel::prelude::*;
 use diesel::sql_types::*;
 use dotenvy::dotenv;
 use std::env;
+use std::marker::PhantomData;
 
 define_sql_function!(
     #[sql_name = "IF"]
     fn sqlif<T: SingleValue>(cond: Bool, case_true: T, case_false: T) -> T
+);
+define_sql_function! (
+    #[sql_name = "VALUES"]
+    fn insertvalues<T: SingleValue>(v: T) -> T
 );
 
 pub fn establish_connection() -> MysqlConnection {
@@ -19,7 +31,7 @@ pub fn establish_connection() -> MysqlConnection {
 
 #[derive(Default, Queryable, Selectable, Insertable)]
 #[diesel(table_name = crate::schema::db_states)]
-#[diesel(check_for_backend(diesel::mysql::Mysql))]
+#[diesel(check_for_backend(Mysql))]
 pub struct DBState {
     pub raw_state: Vec<u8>,
     pub progress: u32,
@@ -31,4 +43,136 @@ pub struct DBState {
     pub won: bool,
     pub hist: Option<Vec<u8>>,
     pub prev: Option<Vec<u8>>,
+    pub next_steps: Option<Vec<u8>>,
+}
+
+pub struct MySQLDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
+    conn: MysqlConnection, // TODO: connection pool?
+    metric: SM,
+    phantom: PhantomData<&'w (W, T)>,
+}
+
+impl<'w, W, T, const KS: usize, SM> MySQLDB<'w, W, T, KS, SM>
+where
+    W: World + 'w,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    SM: ScoreMetric<'w, W, T, KS>,
+{
+    pub fn connect(metric: SM) -> Self {
+        Self {
+            conn: establish_connection(),
+            metric,
+            phantom: PhantomData::default(),
+        }
+    }
+
+    pub fn encode(
+        &self,
+        ctx: &ContextWrapper<T>,
+        is_solution: bool,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+    ) -> DBState {
+        let h = ctx.recent_history();
+        DBState {
+            raw_state: serialize_state(ctx.get()),
+            progress: ctx.get().progress(),
+            elapsed: ctx.elapsed(),
+            time_since_visit: ctx.time_since_visit(),
+            estimated_remaining: self.metric.estimated_remaining_time(ctx.get()),
+            won: is_solution,
+            hist: if h.is_empty() {
+                None
+            } else {
+                Some(serialize_data(h))
+            },
+            prev: serialized_prev,
+            queued: queue,
+            ..Default::default()
+        }
+    }
+
+    pub fn insert_one(
+        &mut self,
+        ctx: &ContextWrapper<T>,
+        is_solution: bool,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+    ) -> QueryResult<usize> {
+        let value = self.encode(ctx, is_solution, serialized_prev, queue);
+        let new_elapsed = value.elapsed;
+        diesel::insert_into(db_states)
+            .values(value)
+            .on_conflict(DuplicatedKeys)
+            .do_update()
+            .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),))
+            .execute(&mut self.conn)
+    }
+
+    /// Insert/update both a processed state and its subsequent states.
+    /// It's assumed that all subsequent states will be queued.
+    pub fn insert_processed(
+        &mut self,
+        ctx: &ContextWrapper<T>,
+        world: &W,
+        next_states: &Vec<ContextWrapper<T>>,
+    ) -> QueryResult<usize> {
+        let parent_state = serialize_state(ctx.get());
+        let mut next_hists = Vec::new();
+        let mut values = Vec::new();
+        for next_state in next_states {
+            next_hists.push(next_state.recent_history());
+            values.push(self.encode(
+                next_state,
+                world.won(next_state.get()),
+                Some(parent_state.clone()),
+                true,
+            ));
+        }
+
+        let inserts = diesel::insert_into(db_states)
+            .values(values)
+            .on_conflict(DuplicatedKeys)
+            .do_update()
+            .set((
+                // Overwrite elapsed, time_since, hist, and prev if elapsed is better.
+                elapsed.eq(sqlif(
+                    elapsed.gt(insertvalues(elapsed)),
+                    insertvalues(elapsed),
+                    elapsed,
+                )),
+                time_since_visit.eq(sqlif(
+                    elapsed.gt(insertvalues(elapsed)),
+                    insertvalues(time_since_visit),
+                    time_since_visit,
+                )),
+                hist.eq(sqlif(
+                    elapsed.gt(insertvalues(elapsed)),
+                    insertvalues(hist),
+                    hist,
+                )),
+                prev.eq(sqlif(
+                    elapsed.gt(insertvalues(elapsed)),
+                    insertvalues(prev),
+                    prev,
+                )),
+                // If the state was already processed, then it will not be queued.
+                // Otherwise, we set it to what we have this time.
+                queued.eq(not(processed).and(insertvalues(queued))),
+                // Other fields will not change with a better path:
+                // progress, estimated_remaining, won, next_steps
+            ))
+            .execute(&mut self.conn)?;
+
+        // Update in a separate command so we don't need to add conditions on these sets for the above
+        // insert-on-duplicate-keys-update entries which will never need to update these fields.
+        let updates = diesel::update(db_states.filter(raw_state.eq(parent_state)))
+            .set((
+                processed.eq(true),
+                next_steps.eq(serialize_data(next_hists)),
+            ))
+            .execute(&mut self.conn)?;
+        Ok(inserts + updates)
+    }
 }

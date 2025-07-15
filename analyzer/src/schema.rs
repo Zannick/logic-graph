@@ -12,5 +12,6 @@ diesel::table! {
         won -> Bool,
         hist -> Nullable<Blob>,
         prev -> Nullable<Blob>,
+        next_steps -> Nullable<Blob>,
     }
 }

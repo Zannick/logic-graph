@@ -90,6 +90,10 @@ pub enum Commands {
         /// text file with route
         #[arg(value_name = "FILE")]
         route: PathBuf,
+
+        /// Record the states in the mysql database. Requires building with --features mysql
+        #[arg(short, long)]
+        import: bool,
     },
 
     /// performs a greedy search and exits
@@ -203,15 +207,30 @@ where
             )?;
             search.search()
         }
-        Commands::Route { route, .. } => {
+        Commands::Route { route, import, .. } => {
+            #[cfg(not(feature = "mysql"))]
+            if *import {
+                panic!("Using --import/-i with command `route` requires building with `--features mysql`");
+            }
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
             let rstr = read_from_file(route);
+            let mut vec = Vec::new();
             println!(
                 "{}",
-                match debug_route(world, &startctx, &rstr, &scorer) {
+                match debug_route(
+                    world,
+                    &startctx,
+                    &rstr,
+                    &scorer,
+                    if *import { Some(&mut vec) } else { None },
+                ) {
                     Ok(s) | Err(s) => s,
                 }
             );
+            #[cfg(feature = "mysql")]
+            if *import {
+                
+            }
             Ok(())
         }
         Commands::Greedy { route, max_depth } => {
@@ -502,6 +521,9 @@ where
         .do_update()
         .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),));
     println!("{}", debug_query::<Mysql, _>(&q2));
+
+    let mut conn = establish_connection();
+    q2.execute(&mut conn);
 
     Ok(())
 }

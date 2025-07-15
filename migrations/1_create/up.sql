@@ -10,6 +10,7 @@ CREATE TABLE db_states (
     won BOOLEAN NOT NULL DEFAULT false,
     hist BLOB,  -- serialized Vec<History>>
     prev BLOB,  -- serialized Context (which should be left serialized for prev lookup)
+    next_steps BLOB,  -- serialized Vec<Vec<History>>>
     PRIMARY KEY(raw_state(256)),
     INDEX(progress, won, processed, time_since_visit, (elapsed + estimated_remaining))
 )

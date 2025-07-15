@@ -28,7 +28,7 @@ innodb_directories=/mnt/e/.mysql
 
 Before you run with mysql enabled in any game's directory, first run:
 
-```bash
+```
 $ diesel setup
 $ diesel migration run
 Running migration 1_create

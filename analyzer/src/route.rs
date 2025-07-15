@@ -281,6 +281,7 @@ pub fn debug_route<W, T>(
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
+    mut stages: Option<&mut Vec<ContextWrapper<T>>>,
 ) -> Result<String, String>
 where
     W: World,
@@ -294,6 +295,9 @@ where
     let start = Instant::now();
 
     for (i, (h, line)) in histlines.into_iter().enumerate() {
+        if let Some(ref mut s ) = stages {
+            s.push(ctx.clone());
+        }
         output.push(format!("== {}. {} ==", i + 1, line));
         let mut next = step_from_route(ctx.clone(), i, h, world, scorer.get_algo())?;
         output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
@@ -308,6 +312,9 @@ where
             el + est
         ));
         ctx = next;
+    }
+    if let Some(ref mut s) = stages {
+        s.push(ctx.clone());
     }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
     if !world.won(ctx.get()) {
