@@ -90,10 +90,13 @@ pub enum Commands {
         /// text file with route
         #[arg(value_name = "FILE")]
         route: PathBuf,
+    },
 
-        /// Record the states in the mysql database. Requires building with --features mysql
-        #[arg(short, long)]
-        import: bool,
+    /// Copies a route into the db. Requires building with --features mysql
+    Import {
+        /// text file with route
+        #[arg(value_name = "FILE")]
+        route: PathBuf,
     },
 
     /// performs a greedy search and exits
@@ -207,29 +210,27 @@ where
             )?;
             search.search()
         }
-        Commands::Route { route, import, .. } => {
-            #[cfg(not(feature = "mysql"))]
-            if *import {
-                panic!("Using --import/-i with command `route` requires building with `--features mysql`");
-            }
-            let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
+        Commands::Route { route, .. } => {
+            let metric = MetricType::new(world, &startctx);
             let rstr = read_from_file(route);
-            let mut vec = Vec::new();
             println!(
                 "{}",
-                match debug_route(
-                    world,
-                    &startctx,
-                    &rstr,
-                    &scorer,
-                    if *import { Some(&mut vec) } else { None },
-                ) {
+                match debug_route(world, &startctx, &rstr, metric.estimator(),) {
                     Ok(s) | Err(s) => s,
                 }
             );
+            Ok(())
+        }
+        Commands::Import { route } => {
+            #[cfg(not(feature = "mysql"))]
+            panic!("Command `import` requires building with `--features mysql`");
+
             #[cfg(feature = "mysql")]
-            if *import {
-                
+            {
+                let metric = MetricType::new(world, &startctx);
+                let rstr = read_from_file(route);
+                let proc = recreate_from_string(world, &startctx, &rstr, metric).unwrap();
+                log::debug!("Processed {} steps into sql db", proc);
             }
             Ok(())
         }
@@ -509,10 +510,10 @@ where
 
     let mut q = diesel::update(db_states.filter(raw_state.eq(state.clone())))
         .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),));
-    println!("{}", debug_query::<Mysql, _>(&q));
+    println!("1. {}", debug_query::<Mysql, _>(&q));
 
     let new_value = DBState {
-        raw_state: state,
+        raw_state: state.clone(),
         ..Default::default()
     };
     let q2 = diesel::insert_into(db_states)
@@ -520,10 +521,13 @@ where
         .on_conflict(DuplicatedKeys)
         .do_update()
         .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),));
-    println!("{}", debug_query::<Mysql, _>(&q2));
+    println!("2. {}", debug_query::<Mysql, _>(&q2));
 
-    let mut conn = establish_connection();
-    q2.execute(&mut conn);
+    let q3 = db_states.find(&state);
+    let q4 = q3.select((prev, hist)).select(elapsed);
+
+    println!("3. {}", debug_query::<Mysql, _>(&q3));
+    println!("4. {}", debug_query::<Mysql, _>(&q4));
 
     Ok(())
 }

@@ -1,7 +1,7 @@
 use crate::context::{ContextWrapper, Ctx, Wrapper};
-use crate::db::{serialize_data, serialize_state};
+use crate::db::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
 use crate::schema::db_states::dsl::*;
-use crate::scoring::ScoreMetric;
+use crate::scoring::{BestTimes, ScoreMetric};
 use crate::world::{Location, World};
 use diesel::dsl::{not, DuplicatedKeys};
 use diesel::expression::functions::*;
@@ -30,8 +30,7 @@ pub fn establish_connection() -> MysqlConnection {
 }
 
 #[derive(Default, Queryable, Selectable, Insertable)]
-#[diesel(table_name = crate::schema::db_states)]
-#[diesel(check_for_backend(Mysql))]
+#[diesel(table_name = crate::schema::db_states, check_for_backend(Mysql))]
 pub struct DBState {
     pub raw_state: Vec<u8>,
     pub progress: u32,
@@ -46,7 +45,7 @@ pub struct DBState {
     pub next_steps: Option<Vec<u8>>,
 }
 
-pub struct MySQLDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
+pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
     conn: MysqlConnection, // TODO: connection pool?
     metric: SM,
     phantom: PhantomData<&'w (W, T)>,
@@ -88,7 +87,7 @@ where
                 Some(serialize_data(h))
             },
             prev: serialized_prev,
-            queued: queue,
+            queued: !is_solution && queue,
             ..Default::default()
         }
     }
@@ -106,12 +105,24 @@ where
             .values(value)
             .on_conflict(DuplicatedKeys)
             .do_update()
-            .set((elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),))
+            .set((
+                elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),
+                time_since_visit.eq(sqlif(
+                    elapsed.gt(new_elapsed),
+                    insertvalues(time_since_visit),
+                    time_since_visit,
+                )),
+                hist.eq(sqlif(elapsed.gt(new_elapsed), insertvalues(hist), hist)),
+                prev.eq(sqlif(elapsed.gt(new_elapsed), insertvalues(prev), prev)),
+                // If the state was already processed, then it will not be queued.
+                // Otherwise, we set it to what we have this time.
+                queued.eq(not(processed).and(insertvalues(queued))),
+            ))
             .execute(&mut self.conn)
     }
 
     /// Insert/update both a processed state and its subsequent states.
-    /// It's assumed that all subsequent states will be queued.
+    /// It's assumed that all subsequent states will be queued if new.
     pub fn insert_processed(
         &mut self,
         ctx: &ContextWrapper<T>,
@@ -175,4 +186,109 @@ where
             .execute(&mut self.conn)?;
         Ok(inserts + updates)
     }
+
+    pub fn get_best_times(&mut self, state: &T) -> QueryResult<BestTimes> {
+        queries::get_best_times(&serialize_state(state)).first(&mut self.conn)
+    }
+
+    pub fn get_next_steps(&mut self, state: &T) -> QueryResult<Option<NextSteps<T>>> {
+        queries::get_next_steps(&serialize_state(state))
+            .first(&mut self.conn)
+            .map(|data: Option<Vec<u8>>| {
+                if let Some(buf) = &data {
+                    Some(get_obj_from_data::<NextSteps<T>>(buf).unwrap())
+                } else {
+                    None
+                }
+            })
+    }
+
+    pub fn has_next_steps(&mut self, state: &T) -> QueryResult<bool> {
+        queries::has_next_steps(&serialize_state(state)).first(&mut self.conn)
+    }
+}
+
+mod queries {
+    use crate::models::DBState;
+    use crate::schema::db_states::dsl::*;
+    use crate::scoring::BestTimes;
+    use diesel::dsl::{AsSelect, Find, IsNotNull, Select};
+    use diesel::mysql::Mysql;
+    use diesel::prelude::*;
+    use diesel::sql_types::*;
+
+    type Lookup<'a> = Find<db_states, &'a Vec<u8>>;
+    type GetBest<'a> = Select<Lookup<'a>, AsSelect<BestTimes, Mysql>>;
+    type GetNextSteps<'a> = Select<Lookup<'a>, next_steps>;
+    type HasNextSteps<'a> = Select<Lookup<'a>, IsNotNull<next_steps>>;
+    type GetProcessed<'a> = Select<Lookup<'a>, processed>;
+    type GetPrevHist<'a> = Select<Lookup<'a>, (prev, hist)>;
+    type GetElapsedPrevHist<'a> = Select<Lookup<'a>, (elapsed, prev, hist)>;
+
+    define_sql_function!(
+        #[sql_name = "IF"]
+        fn sqlif<T: SingleValue>(cond: Bool, case_true: T, case_false: T) -> T
+    );
+    define_sql_function! (
+        #[sql_name = "VALUES"]
+        fn insertvalues<T: SingleValue>(v: T) -> T
+    );
+
+    pub fn lookup_state(key: &Vec<u8>) -> Lookup {
+        db_states.find(key)
+    }
+
+    pub fn get_best_times(key: &Vec<u8>) -> GetBest {
+        lookup_state(key).select(BestTimes::as_select())
+    }
+
+    pub fn get_next_steps(key: &Vec<u8>) -> GetNextSteps {
+        db_states.find(key).select(next_steps)
+    }
+
+    pub fn has_next_steps(key: &Vec<u8>) -> HasNextSteps {
+        db_states.find(key).select(next_steps.is_not_null())
+    }
+
+    pub fn get_processed(key: &Vec<u8>) -> GetProcessed {
+        lookup_state(key).select(processed)
+    }
+
+    pub fn get_prev_hist(key: &Vec<u8>) -> GetPrevHist {
+        lookup_state(key).select((prev, hist))
+    }
+
+    pub fn get_elapsed_prev_hist(key: &Vec<u8>) -> GetElapsedPrevHist {
+        lookup_state(key).select((elapsed, prev, hist))
+    }
+
+    #[diesel::dsl::auto_type]
+    pub fn is_queued() -> _ {
+        queued.eq(true)
+    }
+
+    #[diesel::dsl::auto_type]
+    pub fn unprocessed() -> _ {
+        processed.eq(false)
+    }
+
+    /*
+    Recursive query for history
+    WITH FullHistory(raw_state, prev, hist, elapsed, step)
+    AS (
+       -- Anchor definition = the end state
+       SELECT raw_state, prev, hist, elapsed, 0 AS step
+         FROM db_states
+         WHERE raw_state = ?
+       UNION ALL
+       -- Recursive definition = the state pointed to by the previous state's prev
+       SELECT raw_state, prev, hist, elapsed, step + 1
+       FROM db_states as db
+       INNER JOIN FullHistory as fh
+           ON db.raw_state = fh.prev
+    )
+    SELECT raw_state, prev, hist, elapsed, step
+    FROM FullHistory
+    ORDER BY step DESC  -- first state to last
+    */
 }

@@ -1,6 +1,8 @@
 use crate::access::move_to;
 use crate::context::*;
 use crate::estimates::ContextScorer;
+#[cfg(feature = "mysql")]
+use crate::scoring::ScoreMetric;
 use crate::steiner::graph::*;
 use crate::steiner::*;
 use crate::world::*;
@@ -100,6 +102,7 @@ pub(crate) fn find_route_in_solution_string(solution: &str) -> &str {
     solution
 }
 
+/// Parses the history into a list.
 pub(crate) fn hist_from_string<T>(route: &str) -> Result<Vec<HistoryAlias<T>>, String>
 where
     T: Ctx,
@@ -115,6 +118,7 @@ where
     Ok(hist)
 }
 
+/// Parses the history into a list including the original text of each line.
 pub(crate) fn histlines_from_string<T>(route: &str) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
 where
     T: Ctx,
@@ -130,6 +134,7 @@ where
     Ok(hist)
 }
 
+/// Parses the history into a list including the original text of each line.
 pub(crate) fn histlines_from_yaml_vec<T>(
     route: &Vec<Yaml>,
 ) -> Result<Vec<(HistoryAlias<T>, &str)>, String>
@@ -281,7 +286,6 @@ pub fn debug_route<W, T>(
         EdgeId<W>,
         ShortestPaths<NodeId<W>, EdgeId<W>>,
     >,
-    mut stages: Option<&mut Vec<ContextWrapper<T>>>,
 ) -> Result<String, String>
 where
     W: World,
@@ -295,9 +299,6 @@ where
     let start = Instant::now();
 
     for (i, (h, line)) in histlines.into_iter().enumerate() {
-        if let Some(ref mut s ) = stages {
-            s.push(ctx.clone());
-        }
         output.push(format!("== {}. {} ==", i + 1, line));
         let mut next = step_from_route(ctx.clone(), i, h, world, scorer.get_algo())?;
         output.push(history_str::<T, _>(next.remove_history().0.into_iter()));
@@ -313,9 +314,6 @@ where
         ));
         ctx = next;
     }
-    if let Some(ref mut s) = stages {
-        s.push(ctx.clone());
-    }
     output.push(format!("Elapsed: {}ms", ctx.elapsed()));
     if !world.won(ctx.get()) {
         output.push(format!(
@@ -329,4 +327,59 @@ where
         start.elapsed() / steps as u32
     );
     Ok(output.join("\n"))
+}
+
+#[cfg(feature = "mysql")]
+pub fn recreate_from_string<'w, W, T, const KS: usize, SM>(
+    world: &W,
+    startctx: &T,
+    route: &str,
+    metric: SM,
+) -> Result<usize, String>
+where
+    W: World + 'w,
+    T: Ctx<World = W> + 'w,
+    W::Location: Location<Context = T>,
+    SM: ScoreMetric<'w, W, T, KS>,
+{
+    use crate::estimates::UNREASONABLE_TIME;
+    use crate::models::MySQLDB;
+    use crate::search::single_step;
+    use diesel::result::Error::NotFound;
+
+    let mut route =
+        route_from_string(world, startctx, route, metric.estimator().get_algo()).map_err(|(_, e)| e)?;
+    // full step-by-step history
+    let hist = route.remove_history().0;
+    let mut ctx = ContextWrapper::new(startctx.clone());
+
+    let mut db = MySQLDB::connect(metric);
+    let mut iter = hist.into_iter().peekable();
+    let mut proc = 0;
+    log::debug!("Beginning recreate for writes to sql db");
+    while let Some(h) = iter.next() {
+        match db.has_next_steps(ctx.get()) {
+            Ok(true) => {
+                // state is already processed, we don't need to redo it
+            }
+            Ok(false) | Err(NotFound) => {
+                // process state
+                let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
+                let res = db.insert_processed(&ctx, world, &next);
+                if let Err(e) = res {
+                    log::info!("Processed {} states before error detected", proc);
+                    return Err(e.to_string());
+                }
+                proc += 1;
+            }
+            Err(e) => {
+                log::info!("Processed {} states before error detected", proc);
+                return Err(e.to_string());
+            }
+        }
+        ctx.assert_and_replay(world, h);
+        ctx.remove_history();
+    }
+
+    Ok(proc)
 }

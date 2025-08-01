@@ -8,6 +8,8 @@ use std::sync::atomic::{AtomicU32, Ordering};
 pub(crate) type TimeSinceScore = (u32, u32);
 
 #[derive(Copy, Clone, Debug, Eq, Hash, PartialEq)]
+#[cfg_attr(feature = "mysql", derive(diesel::Selectable, diesel::Queryable))]
+#[cfg_attr(feature = "mysql", diesel(table_name = crate::schema::db_states, check_for_backend(diesel::mysql::Mysql)))]
 pub struct BestTimes {
     pub elapsed: u32,
     pub time_since_visit: u32,

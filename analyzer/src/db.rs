@@ -90,7 +90,7 @@ where
     val
 }
 
-fn get_obj_from_data<V>(buf: &[u8]) -> Result<V>
+pub fn get_obj_from_data<V>(buf: &[u8]) -> Result<V>
 where
     V: for<'de> Deserialize<'de>,
 {
@@ -105,7 +105,7 @@ pub trait HeapMetric {
 // This is a vec because we don't guarantee that the recent history in a newly submitted ctx
 // is length 1.
 type NextData<T> = Vec<HistoryAlias<T>>;
-pub type NextSteps<T> = Vec<Vec<HistoryAlias<T>>>;
+pub type NextSteps<T> = Vec<NextData<T>>;
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 struct StateData<I, S, L, E, A, Wp> {
