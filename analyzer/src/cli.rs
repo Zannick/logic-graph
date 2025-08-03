@@ -97,6 +97,10 @@ pub enum Commands {
         /// text file with route
         #[arg(value_name = "FILE")]
         route: PathBuf,
+
+        /// Process states along the way (time consuming)
+        #[arg(long, short)]
+        process: bool,
     },
 
     /// performs a greedy search and exits
@@ -221,7 +225,7 @@ where
             );
             Ok(())
         }
-        Commands::Import { route } => {
+        Commands::Import { route, process } => {
             #[cfg(not(feature = "mysql"))]
             panic!("Command `import` requires building with `--features mysql`");
 
@@ -229,8 +233,12 @@ where
             {
                 let metric = MetricType::new(world, &startctx);
                 let rstr = read_from_file(route);
-                let proc = recreate_from_string(world, &startctx, &rstr, metric).unwrap();
-                log::debug!("Processed {} steps into sql db", proc);
+                let proc = recreate_from_string(world, &startctx, &rstr, metric, *process).unwrap();
+                if *process {
+                    log::debug!("Processed {} steps into sql db", proc);
+                } else {
+                    log::debug!("Inserted or updated {} steps into sql db", proc);
+                }
             }
             Ok(())
         }

@@ -122,6 +122,7 @@ where
     }
 
     /// Insert/update both a processed state and its subsequent states.
+    /// Assumes the processed state has already been committed.
     /// It's assumed that all subsequent states will be queued if new.
     pub fn insert_processed(
         &mut self,
@@ -208,6 +209,7 @@ where
     }
 }
 
+#[allow(unused)]
 mod queries {
     use crate::models::DBState;
     use crate::schema::db_states::dsl::*;
@@ -274,21 +276,41 @@ mod queries {
 
     /*
     Recursive query for history
-    WITH FullHistory(raw_state, prev, hist, elapsed, step)
+    WITH RECURSIVE FullHistory(raw_state, prev, hist, elapsed)
     AS (
-       -- Anchor definition = the end state
-       SELECT raw_state, prev, hist, elapsed, 0 AS step
-         FROM db_states
-         WHERE raw_state = ?
-       UNION ALL
-       -- Recursive definition = the state pointed to by the previous state's prev
-       SELECT raw_state, prev, hist, elapsed, step + 1
-       FROM db_states as db
-       INNER JOIN FullHistory as fh
-           ON db.raw_state = fh.prev
+      -- Anchor definition = the end state
+      SELECT raw_state, prev, hist, elapsed
+        FROM db_states
+        WHERE raw_state = ?
+      UNION DISTINCT
+      -- Recursive definition = the state pointed to by the previous state's prev
+      SELECT db.raw_state, db.prev, db.hist, db.elapsed
+      FROM db_states as db
+      INNER JOIN FullHistory as fh
+        ON db.raw_state = fh.prev
     )
-    SELECT raw_state, prev, hist, elapsed, step
+    SELECT raw_state, prev, hist, elapsed
     FROM FullHistory
-    ORDER BY step DESC  -- first state to last
+    ORDER BY elapsed
+
+    If the first result isn't the starting state, there's a recursive loop in the states
+    that needs to be fixed.
+
+    Recursive update
+    WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed)
+    AS (
+      -- Anchor definition = the updated state
+      SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed
+        FROM db_states
+        WHERE raw_state = ?
+      UNION DISTINCT
+      -- Recursive definition = the states that point to earlier states via prev
+      SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.elapsed + db.step_time AS new_elapsed
+      FROM db_states AS db
+      INNER JOIN Downstream AS prior
+        ON db.prev = prior.raw_state
+    )
+    UPDATE Downstream
+    SET elapsed = new_elapsed
     */
 }

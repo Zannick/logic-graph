@@ -335,6 +335,7 @@ pub fn recreate_from_string<'w, W, T, const KS: usize, SM>(
     startctx: &T,
     route: &str,
     metric: SM,
+    process: bool,
 ) -> Result<usize, String>
 where
     W: World + 'w,
@@ -342,44 +343,74 @@ where
     W::Location: Location<Context = T>,
     SM: ScoreMetric<'w, W, T, KS>,
 {
+    use crate::db::serialize_state;
     use crate::estimates::UNREASONABLE_TIME;
     use crate::models::MySQLDB;
     use crate::search::single_step;
     use diesel::result::Error::NotFound;
+    use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
+    use std::io::{stderr, Write};
 
-    let mut route =
-        route_from_string(world, startctx, route, metric.estimator().get_algo()).map_err(|(_, e)| e)?;
+    let mut route = route_from_string(world, startctx, route, metric.estimator().get_algo())
+        .map_err(|(_, e)| e)?;
     // full step-by-step history
     let hist = route.remove_history().0;
     let mut ctx = ContextWrapper::new(startctx.clone());
 
     let mut db = MySQLDB::connect(metric);
-    let mut iter = hist.into_iter().peekable();
+    db.insert_one(&ctx, false, None, false)
+        .map_err(|e| e.to_string())?;
     let mut proc = 0;
-    log::debug!("Beginning recreate for writes to sql db");
-    while let Some(h) = iter.next() {
-        match db.has_next_steps(ctx.get()) {
-            Ok(true) => {
-                // state is already processed, we don't need to redo it
-            }
-            Ok(false) | Err(NotFound) => {
-                // process state
-                let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
-                let res = db.insert_processed(&ctx, world, &next);
-                if let Err(e) = res {
-                    log::info!("Processed {} states before error detected", proc);
+    let pbar = ProgressBar::new(hist.len() as u64)
+        .with_style(
+            ProgressStyle::with_template(
+                "{msg} {wide_bar} {pos}/{len} {elapsed_precise}/{duration_precise}\n",
+            )
+            .unwrap(),
+        )
+        .with_message("Recreating...")
+        .with_finish(indicatif::ProgressFinish::WithMessage(
+            std::borrow::Cow::Borrowed("Recreated route in"),
+        ));
+    if process {
+        log::debug!("Beginning recreate with processing for writes to sql db");
+        for h in hist.into_iter().progress_with(pbar) {
+            match db.has_next_steps(ctx.get()) {
+                Ok(true) => {
+                    // state is already processed, we don't need to redo it
+                }
+                Ok(false) | Err(NotFound) => {
+                    // process state
+                    let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
+                    let res = db.insert_processed(&ctx, world, &next);
+                    if let Err(e) = res {
+                        log::error!("Processed {} states before error detected", proc);
+                        return Err(e.to_string());
+                    }
+                    proc += 1;
+                }
+                Err(e) => {
+                    log::error!("Processed {} states before error detected", proc);
                     return Err(e.to_string());
                 }
-                proc += 1;
             }
-            Err(e) => {
-                log::info!("Processed {} states before error detected", proc);
+            ctx.assert_and_replay(world, h);
+            ctx.remove_history();
+        }
+    } else {
+        log::debug!("Beginning recreate for writes to sql db");
+        for h in hist.into_iter().progress_with(pbar) {
+            let prev = serialize_state(ctx.get());
+            ctx.assert_and_replay(world, h);
+            if let Err(e) = db.insert_one(&ctx, world.won(ctx.get()), Some(prev), true) {
+                log::error!("Inserted {} states before error detected", proc);
                 return Err(e.to_string());
             }
+            ctx.remove_history();
+            proc += 1;
         }
-        ctx.assert_and_replay(world, h);
-        ctx.remove_history();
     }
+    writeln!(stderr()).unwrap();
 
     Ok(proc)
 }
