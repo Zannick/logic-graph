@@ -836,7 +836,7 @@ where
                     .collect::<Vec<_>>();
                 ctx.assert_and_replay(self.world, *hist);
                 self.queue.extend_keep_one(next, &ctx, &prev)?;
-                ctx.remove_history();
+                ctx.clear_history();
             } else {
                 let mut next = self.single_step(ctx.clone());
                 if let Some((ci, _)) = next
@@ -848,11 +848,11 @@ where
                     // Assumption: no subsequent state leads to victory (aside from the last state?)
                     ctx = next.swap_remove(ci);
                     self.queue.extend_keep_one(next, &ctx, &prev)?;
-                    ctx.remove_history();
+                    ctx.clear_history();
                 } else if matches!(hist, History::L(..)) {
                     ctx.assert_and_replay(self.world, *hist);
                     self.queue.extend_keep_one(next, &ctx, &prev)?;
-                    ctx.remove_history();
+                    ctx.clear_history();
                 } else {
                     // We didn't find the desired state.
                     // Check whether this is a no-op. If so, we can skip pushing states into the queue,
@@ -861,7 +861,7 @@ where
                     if ctx.can_replay(self.world, *hist) {
                         let c = ctx.get().clone();
                         ctx.replay(self.world, *hist);
-                        ctx.remove_history();
+                        ctx.clear_history();
                         if ctx.get() == &c {
                             continue;
                         }

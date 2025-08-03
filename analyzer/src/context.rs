@@ -567,6 +567,10 @@ impl<T: Ctx> ContextWrapper<T> {
         }
     }
 
+    pub fn clone_without_history(&self) -> ContextWrapper<T> {
+        Self::with_times(self.ctx.clone(), self.elapsed, self.time_since_visit)
+    }
+
     pub fn append_history(&mut self, step: HistoryAlias<T>, dur: u32) {
         self.hist.push(step);
         self.hist_dur += dur;
@@ -580,6 +584,12 @@ impl<T: Ctx> ContextWrapper<T> {
         self.hist_dur
     }
 
+    pub fn clear_history(&mut self) {
+        self.hist.clear();
+        self.hist_dur = 0;
+    }
+
+    #[must_use = "Use .clear_history if the history is not important"]
     pub fn remove_history(&mut self) -> (Vec<HistoryAlias<T>>, u32) {
         let r = self.hist.clone();
         self.hist = Vec::new();
@@ -1157,14 +1167,13 @@ where
     >,
 {
     let mut vec = Vec::new();
-    let mut prev = ContextWrapper::new(startctx.clone());
+    let mut ctx = ContextWrapper::new(startctx.clone());
     for step in history {
-        let mut next = prev.clone();
-        next.assert_and_replay(world, step);
-        vec.push(prev.into_inner());
-        prev = next;
+        vec.push(ctx.get().clone());
+        ctx.clear_history();
+        ctx.assert_and_replay(world, step);
     }
-    vec.push(prev.into_inner());
+    vec.push(ctx.into_inner());
     vec
 }
 
@@ -1190,10 +1199,9 @@ where
     let mut vec = Vec::new();
     let mut prev = ContextWrapper::new(startctx.clone());
     for step in history {
-        let mut next = prev.clone();
+        let mut next = prev.clone_without_history();
         next.assert_and_replay(world, step);
-        let time = next.elapsed() - prev.elapsed();
-        vec.push((prev.into_inner(), step, time));
+        vec.push((prev.into_inner(), step, next.recent_dur()));
         prev = next;
     }
     (vec, prev.into_inner())
@@ -1217,23 +1225,20 @@ where
     >,
 {
     let mut vec = Vec::new();
-    let mut prev = ContextWrapper::new(startctx.clone());
-    let mut time = 0;
+    let mut ctx = ContextWrapper::new(startctx.clone());
     for step in history {
-        let mut next = prev.clone();
-        next.assert_and_replay(world, step);
+        ctx.clear_history();
+        ctx.assert_and_replay(world, step);
         vec.push(RouteStep::<T> {
             step,
-            time: next.elapsed() - time,
+            time: ctx.recent_dur(),
         });
-        time = next.elapsed();
-        prev = next;
     }
     let end = vec.len();
     PartialRoute {
         route: Arc::new(vec),
         start: 0,
         end,
-        time,
+        time: ctx.elapsed(),
     }
 }

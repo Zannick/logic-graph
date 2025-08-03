@@ -3,9 +3,12 @@
 use super::approx::*;
 use super::graph::*;
 use crate::{new_hashset, CommonHasher};
+use indicatif::{ProgressBar, ProgressStyle};
 use pheap::PairingHeap;
 use std::collections::HashSet;
 use std::fmt::Debug;
+use std::io::{stderr, Write};
+use std::time::Duration;
 
 macro_rules! chain_index {
     ($list1:expr, $list2:expr, $index:expr) => {{
@@ -35,10 +38,16 @@ where
     }
 
     pub fn min_path(&self, start: V, end: V) -> Vec<E>
-    where E: Copy {
+    where
+        E: Copy,
+    {
         let start_index = self.graph.node_index_map[&start];
         let end_index = self.graph.node_index_map[&end];
-        self.paths[start_index][end_index].0.iter().map(|&e| self.graph.edges[e].id).collect()
+        self.paths[start_index][end_index]
+            .0
+            .iter()
+            .map(|&e| self.graph.edges[e].id)
+            .collect()
     }
 }
 
@@ -66,6 +75,24 @@ where
         for (i, e) in graph.edges.iter().enumerate() {
             edges_by_start[e.src].push(i);
         }
+
+        let pbar = ProgressBar::new(graph.nodes.len() as u64)
+            .with_message("Building shortest paths table...")
+            .with_style(
+                ProgressStyle::with_template(
+                    "{msg} {spinner} {elapsed_precise}/{duration_precise}\n",
+                )
+                .unwrap()
+                // https://github.com/sindresorhus/cli-spinners dots12
+                .tick_strings(&[
+                    "⢀⠀", "⡀⠀", "⠄⠀", "⢂⠀", "⡂⠀", "⠅⠀", "⢃⠀", "⡃⠀", "⠍⠀", "⢋⠀", "⡋⠀", "⠍⠁", "⢋⠁",
+                    "⡋⠁", "⠍⠉", "⠋⠉", "⠋⠉", "⠉⠙", "⠉⠙", "⠉⠩", "⠈⢙", "⠈⡙", "⢈⠩", "⡀⢙", "⠄⡙", "⢂⠩",
+                    "⡂⢘", "⠅⡘", "⢃⠨", "⡃⢐", "⠍⡐", "⢋⠠", "⡋⢀", "⠍⡁", "⢋⠁", "⡋⠁", "⠍⠉", "⠋⠉", "⠋⠉",
+                    "⠉⠙", "⠉⠙", "⠉⠩", "⠈⢙", "⠈⡙", "⠈⠩", "⠀⢙", "⠀⡙", "⠀⠩", "⠀⢘", "⠀⡘", "⠀⠨", "⠀⢐",
+                    "⠀⡐", "⠀⠠", "⠀⢀", "⠀⡀", ""
+                ]),
+            );
+        pbar.enable_steady_tick(Duration::from_millis(80));
 
         // Dijkstra's is better for sparse graphs
         // |E| is about 4-5x |V|; in dense graphs |E| would be prop. to |V| ** 2
@@ -127,7 +154,11 @@ where
                     }
                 }
             }
+            pbar.inc(1);
         }
+        pbar.set_style(ProgressStyle::with_template("{msg} {elapsed_precise}").unwrap());
+        pbar.finish_with_message(std::borrow::Cow::Borrowed("Built shortest paths table in"));
+        writeln!(stderr()).unwrap();
         Self { graph, paths }
     }
 
