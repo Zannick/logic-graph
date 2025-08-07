@@ -61,7 +61,7 @@ pub trait EstimatorWrapper<'w, W: World + 'w> {
 }
 
 pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
-    MetricKey + EstimatorWrapper<'w, W> + Sized
+    MetricKey + EstimatorWrapper<'w, W> + Sized + Sync
 {
     type Score: Copy + Debug + Ord;
 

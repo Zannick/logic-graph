@@ -16,7 +16,8 @@ disjoint-hash-set = "*"
 disjoint-sets = "*"
 enum-map = { version = ">=2.7.2" }
 humansize = { version = ">=2.1", features = ["no_alloc"] }
-indicatif = { version = "*", features = ["improved_unicode"] }
+indicatif = { version = "*", features = ["improved_unicode", "rayon"] }
+itertools = "*"
 lazy_static = "*"
 log = "*"
 lru = "*"

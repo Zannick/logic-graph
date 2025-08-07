@@ -1177,6 +1177,36 @@ where
     vec
 }
 
+/// Produces a vector of all states along the entire history of steps, with timing and step history included via the wrapper.
+/// 
+/// Includes the final state as the last element of the vector.
+pub fn history_to_full_data_series<T, W>(
+    startctx: &T,
+    world: &W,
+    history: impl Iterator<Item = HistoryAlias<T>>,
+) -> Vec<ContextWrapper<T>>
+where
+    W: World,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    W::Exit: Exit<Context = T, Currency = <W::Location as Accessible>::Currency>,
+    W::Warp: Warp<
+        SpotId = <W::Exit as Exit>::SpotId,
+        Context = T,
+        Currency = <W::Location as Accessible>::Currency,
+    >,
+{
+    let mut vec = Vec::new();
+    let mut ctx = ContextWrapper::new(startctx.clone());
+    for step in history {
+        vec.push(ctx.clone());
+        ctx.clear_history();
+        ctx.assert_and_replay(world, step);
+    }
+    vec.push(ctx);
+    vec
+}
+
 /// Produces a vector of each state along the entire history of steps, along with each step and its elapsed time.
 ///
 /// Returns that vector and the state at the end of the history.

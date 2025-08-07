@@ -1,7 +1,7 @@
 use crate::context::{ContextWrapper, Ctx, Wrapper};
 use crate::db::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
 use crate::schema::db_states::dsl::*;
-use crate::scoring::{BestTimes, ScoreMetric};
+use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
 use crate::world::{Location, World};
 use diesel::dsl::{not, DuplicatedKeys};
 use diesel::expression::functions::*;
@@ -9,6 +9,7 @@ use diesel::mysql::Mysql;
 use diesel::prelude::*;
 use diesel::sql_types::*;
 use dotenvy::dotenv;
+use rayon::prelude::*;
 use std::env;
 use std::marker::PhantomData;
 
@@ -45,6 +46,39 @@ pub struct DBState {
     pub next_steps: Option<Vec<u8>>,
 }
 
+impl DBState {
+    pub fn from_ctx<'w, W, T>(
+        ctx: &ContextWrapper<T>,
+        is_solution: bool,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+        metric: &impl EstimatorWrapper<'w, W>,
+    ) -> DBState
+    where
+        W: World + 'w,
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
+        let h = ctx.recent_history();
+        DBState {
+            raw_state: serialize_state(ctx.get()),
+            progress: ctx.get().progress(),
+            elapsed: ctx.elapsed(),
+            time_since_visit: ctx.time_since_visit(),
+            estimated_remaining: metric.estimated_remaining_time(ctx.get()),
+            won: is_solution,
+            hist: if h.is_empty() {
+                None
+            } else {
+                Some(serialize_data(h))
+            },
+            prev: serialized_prev,
+            queued: !is_solution && queue,
+            ..Default::default()
+        }
+    }
+}
+
 pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
     conn: MysqlConnection, // TODO: connection pool?
     metric: SM,
@@ -66,30 +100,8 @@ where
         }
     }
 
-    pub fn encode(
-        &self,
-        ctx: &ContextWrapper<T>,
-        is_solution: bool,
-        serialized_prev: Option<Vec<u8>>,
-        queue: bool,
-    ) -> DBState {
-        let h = ctx.recent_history();
-        DBState {
-            raw_state: serialize_state(ctx.get()),
-            progress: ctx.get().progress(),
-            elapsed: ctx.elapsed(),
-            time_since_visit: ctx.time_since_visit(),
-            estimated_remaining: self.metric.estimated_remaining_time(ctx.get()),
-            won: is_solution,
-            hist: if h.is_empty() {
-                None
-            } else {
-                Some(serialize_data(h))
-            },
-            prev: serialized_prev,
-            queued: !is_solution && queue,
-            ..Default::default()
-        }
+    pub fn metric(&self) -> &SM {
+        &self.metric
     }
 
     pub fn insert_one(
@@ -99,7 +111,7 @@ where
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
     ) -> QueryResult<usize> {
-        let value = self.encode(ctx, is_solution, serialized_prev, queue);
+        let value = DBState::from_ctx(ctx, is_solution, serialized_prev, queue, &self.metric);
         let new_elapsed = value.elapsed;
         diesel::insert_into(db_states)
             .values(value)
@@ -121,29 +133,8 @@ where
             .execute(&mut self.conn)
     }
 
-    /// Insert/update both a processed state and its subsequent states.
-    /// Assumes the processed state has already been committed.
-    /// It's assumed that all subsequent states will be queued if new.
-    pub fn insert_processed(
-        &mut self,
-        ctx: &ContextWrapper<T>,
-        world: &W,
-        next_states: &Vec<ContextWrapper<T>>,
-    ) -> QueryResult<usize> {
-        let parent_state = serialize_state(ctx.get());
-        let mut next_hists = Vec::new();
-        let mut values = Vec::new();
-        for next_state in next_states {
-            next_hists.push(next_state.recent_history());
-            values.push(self.encode(
-                next_state,
-                world.won(next_state.get()),
-                Some(parent_state.clone()),
-                true,
-            ));
-        }
-
-        let inserts = diesel::insert_into(db_states)
+    pub fn insert_batch(&mut self, values: Vec<DBState>) -> QueryResult<usize> {
+        diesel::insert_into(db_states)
             .values(values)
             .on_conflict(DuplicatedKeys)
             .do_update()
@@ -175,7 +166,37 @@ where
                 // Other fields will not change with a better path:
                 // progress, estimated_remaining, won, next_steps
             ))
-            .execute(&mut self.conn)?;
+            .execute(&mut self.conn)
+    }
+
+    /// Insert/update both a processed state and its subsequent states.
+    /// Assumes the processed state has already been committed.
+    /// It's assumed that all subsequent states will be queued if new.
+    pub fn insert_processed(
+        &mut self,
+        ctx: &ContextWrapper<T>,
+        world: &W,
+        next_states: &Vec<ContextWrapper<T>>,
+    ) -> QueryResult<usize> {
+        let parent_state = serialize_state(ctx.get());
+        let mut next_hists = Vec::new();
+        for next_state in next_states {
+            next_hists.push(next_state.recent_history());
+        }
+        let values = next_states
+            .into_par_iter()
+            .map(|s| {
+                DBState::from_ctx(
+                    s,
+                    world.won(s.get()),
+                    Some(parent_state.clone()),
+                    true,
+                    &self.metric,
+                )
+            })
+            .collect::<Vec<_>>();
+
+        let inserts = self.insert_batch(values)?;
 
         // Update in a separate command so we don't need to add conditions on these sets for the above
         // insert-on-duplicate-keys-update entries which will never need to update these fields.
@@ -214,18 +235,10 @@ mod queries {
     use crate::models::DBState;
     use crate::schema::db_states::dsl::*;
     use crate::scoring::BestTimes;
-    use diesel::dsl::{AsSelect, Find, IsNotNull, Select};
+    use diesel::dsl::{auto_type, exists, select, AsSelect};
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
     use diesel::sql_types::*;
-
-    type Lookup<'a> = Find<db_states, &'a Vec<u8>>;
-    type GetBest<'a> = Select<Lookup<'a>, AsSelect<BestTimes, Mysql>>;
-    type GetNextSteps<'a> = Select<Lookup<'a>, next_steps>;
-    type HasNextSteps<'a> = Select<Lookup<'a>, IsNotNull<next_steps>>;
-    type GetProcessed<'a> = Select<Lookup<'a>, processed>;
-    type GetPrevHist<'a> = Select<Lookup<'a>, (prev, hist)>;
-    type GetElapsedPrevHist<'a> = Select<Lookup<'a>, (elapsed, prev, hist)>;
 
     define_sql_function!(
         #[sql_name = "IF"]
@@ -236,40 +249,59 @@ mod queries {
         fn insertvalues<T: SingleValue>(v: T) -> T
     );
 
-    pub fn lookup_state(key: &Vec<u8>) -> Lookup {
+    #[auto_type(type_case = "PascalCase")]
+    pub fn lookup_state<'a>(key: &'a Vec<u8>) -> _ {
         db_states.find(key)
     }
 
-    pub fn get_best_times(key: &Vec<u8>) -> GetBest {
-        lookup_state(key).select(BestTimes::as_select())
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_best_times<'a>(key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select::<AsSelect<BestTimes, Mysql>>(BestTimes::as_select())
     }
 
-    pub fn get_next_steps(key: &Vec<u8>) -> GetNextSteps {
-        db_states.find(key).select(next_steps)
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_next_steps<'a>(key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select(next_steps)
     }
 
-    pub fn has_next_steps(key: &Vec<u8>) -> HasNextSteps {
-        db_states.find(key).select(next_steps.is_not_null())
+    #[auto_type(type_case = "PascalCase")]
+    pub fn has_next_steps<'a> (key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select(next_steps.is_not_null())
     }
 
-    pub fn get_processed(key: &Vec<u8>) -> GetProcessed {
-        lookup_state(key).select(processed)
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_processed<'a>(key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select(processed)
     }
 
-    pub fn get_prev_hist(key: &Vec<u8>) -> GetPrevHist {
-        lookup_state(key).select((prev, hist))
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_prev_hist<'a>(key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select((prev, hist))
     }
 
-    pub fn get_elapsed_prev_hist(key: &Vec<u8>) -> GetElapsedPrevHist {
-        lookup_state(key).select((elapsed, prev, hist))
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_elapsed_prev_hist<'a>(key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select((elapsed, prev, hist))
     }
 
-    #[diesel::dsl::auto_type]
+    #[auto_type(type_case = "PascalCase")]
+    pub fn row_exists<'a>(key: &'a Vec<u8>) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        select(exists(row.select(1i32.into_sql::<Integer>())))
+    }
+
+    #[auto_type(type_case = "PascalCase")]
     pub fn is_queued() -> _ {
         queued.eq(true)
     }
 
-    #[diesel::dsl::auto_type]
+    #[auto_type(type_case = "PascalCase")]
     pub fn unprocessed() -> _ {
         processed.eq(false)
     }

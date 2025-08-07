@@ -225,6 +225,7 @@ where
             );
             Ok(())
         }
+        #[cfg_attr(not(feature = "mysql"), allow(unused))]
         Commands::Import { route, process } => {
             #[cfg(not(feature = "mysql"))]
             panic!("Command `import` requires building with `--features mysql`");
@@ -239,8 +240,8 @@ where
                 } else {
                     log::debug!("Inserted or updated {} steps into sql db", proc);
                 }
+                Ok(())
             }
-            Ok(())
         }
         Commands::Greedy { route, max_depth } => {
             let scorer = ContextScorer::shortest_paths(world, &startctx, 32_768);
@@ -507,7 +508,7 @@ where
     use crate::models::*;
     use crate::schema::db_states::dsl::*;
     use diesel::debug_query;
-    use diesel::dsl::{sql, DuplicatedKeys};
+    use diesel::dsl::{exists, sql, DuplicatedKeys};
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
     use diesel::sql_types::{Integer, Unsigned};
@@ -536,6 +537,9 @@ where
 
     println!("3. {}", debug_query::<Mysql, _>(&q3));
     println!("4. {}", debug_query::<Mysql, _>(&q4));
+
+    let q5 = diesel::select(exists(db_states.find(&state).select(1.into_sql::<Integer>())));
+    println!("5. {}", debug_query::<Mysql, _>(&q5));
 
     Ok(())
 }
