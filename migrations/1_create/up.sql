@@ -5,6 +5,7 @@ CREATE TABLE db_states (
     elapsed INTEGER UNSIGNED NOT NULL DEFAULT 0, -- u32
     time_since_visit INTEGER UNSIGNED NOT NULL DEFAULT 0, -- u32
     estimated_remaining INTEGER UNSIGNED NOT NULL DEFAULT 0,  -- u32
+    step_time INTEGER UNSIGNED NOT NULL DEFAULT 0,  -- u32
     processed BOOLEAN NOT NULL DEFAULT false,
     queued BOOLEAN NOT NULL DEFAULT false,
     won BOOLEAN NOT NULL DEFAULT false,

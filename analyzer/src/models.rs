@@ -38,12 +38,26 @@ pub struct DBState {
     pub elapsed: u32,
     pub time_since_visit: u32,
     pub estimated_remaining: u32,
+    pub step_time: u32,
     pub processed: bool,
     pub queued: bool,
     pub won: bool,
     pub hist: Option<Vec<u8>>,
     pub prev: Option<Vec<u8>>,
     pub next_steps: Option<Vec<u8>>,
+}
+
+#[derive(QueryableByName)]
+#[diesel(check_for_backend(Mysql))]
+pub struct DownstreamState {
+    #[diesel(sql_type = Binary)]
+    pub state: Vec<u8>,
+    #[diesel(sql_type = Unsigned<Integer>)]
+    pub old_elapsed: u32,
+    #[diesel(sql_type = Unsigned<Integer>)]
+    pub new_elapsed: u32,
+    #[diesel(sql_type = Unsigned<Integer>)]
+    pub incr: u32,
 }
 
 impl DBState {
@@ -66,6 +80,7 @@ impl DBState {
             elapsed: ctx.elapsed(),
             time_since_visit: ctx.time_since_visit(),
             estimated_remaining: metric.estimated_remaining_time(ctx.get()),
+            step_time: ctx.recent_dur(),
             won: is_solution,
             hist: if h.is_empty() {
                 None
@@ -108,8 +123,8 @@ where
         let mut conn =
             MysqlConnection::establish("mysql://logic_graph@localhost/logic_graph__unittest")
                 .expect("Could not connect to mysql server");
-        conn.run_pending_migrations(MIGRATIONS)
-            .expect("Could not create table");
+        conn.revert_all_migrations(MIGRATIONS).unwrap();
+        conn.run_pending_migrations(MIGRATIONS).unwrap();
         conn.begin_test_transaction().unwrap();
         Self {
             conn,
@@ -147,6 +162,11 @@ where
                     insertvalues(time_since_visit),
                     time_since_visit,
                 )),
+                step_time.eq(sqlif(
+                    elapsed.gt(new_elapsed),
+                    insertvalues(step_time),
+                    step_time,
+                )),
                 hist.eq(sqlif(elapsed.gt(new_elapsed), insertvalues(hist), hist)),
                 prev.eq(sqlif(elapsed.gt(new_elapsed), insertvalues(prev), prev)),
                 // If the state was already processed, then it will not be queued.
@@ -172,6 +192,11 @@ where
                     elapsed.gt(insertvalues(elapsed)),
                     insertvalues(time_since_visit),
                     time_since_visit,
+                )),
+                step_time.eq(sqlif(
+                    elapsed.gt(insertvalues(elapsed)),
+                    insertvalues(step_time),
+                    step_time,
                 )),
                 hist.eq(sqlif(
                     elapsed.gt(insertvalues(elapsed)),
@@ -251,6 +276,34 @@ where
     pub fn has_next_steps(&mut self, state: &T) -> QueryResult<bool> {
         queries::has_next_steps(&serialize_state(state)).first(&mut self.conn)
     }
+
+    pub fn exists(&mut self, state: &T) -> QueryResult<bool> {
+        queries::row_exists(&serialize_state(state)).first(&mut self.conn)
+    }
+
+    pub fn improve_downstream(&mut self, state: &T) -> QueryResult<usize> {
+        queries::improve_downstream()
+            .bind::<Blob, _>(&serialize_state(state))
+            .execute(&mut self.conn)
+    }
+
+    pub fn test_downstream(&mut self, state: &T) -> QueryResult<Vec<(T, u32, u32, u32)>> {
+        queries::test_downstream()
+            .bind::<Blob, _>(&serialize_state(state))
+            .load(&mut self.conn)
+            .map(|vec: Vec<DownstreamState>| {
+                vec.into_iter()
+                    .map(|ds| {
+                        (
+                            get_obj_from_data::<T>(&ds.state).unwrap(),
+                            ds.old_elapsed,
+                            ds.new_elapsed,
+                            ds.incr,
+                        )
+                    })
+                    .collect::<Vec<_>>()
+            })
+    }
 }
 
 #[allow(unused)]
@@ -259,8 +312,10 @@ mod queries {
     use crate::schema::db_states::dsl::*;
     use crate::scoring::BestTimes;
     use diesel::dsl::{auto_type, exists, select, AsSelect};
+    use diesel::expression::UncheckedBind;
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
+    use diesel::query_builder::SqlQuery;
     use diesel::sql_types::*;
 
     define_sql_function!(
@@ -368,4 +423,44 @@ mod queries {
     UPDATE Downstream
     SET elapsed = new_elapsed
     */
+
+    fn downstream() -> SqlQuery {
+        diesel::sql_query(
+            r#"
+            WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed)
+            AS (
+            -- Anchor definition = the updated state
+            SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed
+                FROM db_states
+                WHERE raw_state = ?
+            UNION DISTINCT
+            -- Recursive definition = the states that point to earlier states via prev
+            SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.new_elapsed + db.step_time AS new_elapsed
+            FROM db_states AS db
+            INNER JOIN Downstream AS prior
+                ON db.prev = prior.raw_state
+            )
+            "#,
+        )
+    }
+
+    pub fn test_downstream() -> SqlQuery {
+        downstream().sql(
+            r#"
+            SELECT raw_state AS state, elapsed AS old_elapsed, new_elapsed, step_time AS incr FROM Downstream
+            ORDER BY new_elapsed
+            "#,
+        )
+    }
+
+    pub fn improve_downstream() -> SqlQuery {
+        downstream().sql(
+            r#"
+            -- Perform the update on the states we've selected and paired with improved times (or equal times)
+            UPDATE db_states
+            INNER JOIN Downstream AS res ON db_states.raw_state = res.raw_state
+            SET db_states.elapsed = res.new_elapsed
+            "#,
+        )
+    }
 }

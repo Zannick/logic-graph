@@ -7,6 +7,7 @@ diesel::table! {
         elapsed -> Unsigned<Integer>,
         time_since_visit -> Unsigned<Integer>,
         estimated_remaining -> Unsigned<Integer>,
+        step_time -> Unsigned<Integer>,
         processed -> Bool,
         queued -> Bool,
         won -> Bool,

@@ -140,14 +140,19 @@ fn test_route_db() {
 #[cfg(feature = "mysql")]
 #[test]
 fn test_mysql() {
+    use std::time::Instant;
+
     use analyzer::{
+        context::{history_to_full_data_series, History},
         models::{DBState, MySQLDB},
+        new_hashmap,
         route::import_route_to_mysql,
         schema::db_states::dsl,
         scoring::{EstimatorWrapper, ScoreMetric, TimeSinceAndElapsed},
     };
     use diesel::QueryDsl;
     use diesel::RunQueryDsl;
+    use libsample::graph::SpotId;
 
     let world = graph::World::new();
     let mut startctx = Context::default();
@@ -177,10 +182,106 @@ fn test_mysql() {
 
     let mut db = MySQLDB::with_test_connection(metric);
 
-    let hist = ctx.remove_history().0;
-    
-    db.insert_one(&ContextWrapper::new(startctx.clone()), false, None, false).unwrap();
-    import_route_to_mysql(&*world, &startctx, &hist, &mut db, None);
-    let steps = hist.len() + 1;
-    assert_eq!(steps, dsl::db_states.count().get_result::<i64>(db.connection()).unwrap() as usize);
+    let hist1 = ctx.remove_history().0;
+
+    db.insert_one(&ContextWrapper::new(startctx.clone()), false, None, false)
+        .unwrap();
+    import_route_to_mysql(&*world, &startctx, &hist1, &mut db, None);
+    let steps = hist1.len() + 1;
+    assert_eq!(
+        steps,
+        dsl::db_states
+            .count()
+            .get_result::<i64>(db.connection())
+            .unwrap() as usize
+    );
+
+    // the state in the better route is already in the db, but the time in the route is better
+    assert!(db.exists(faster.get()).unwrap());
+    assert!(faster.elapsed() < db.get_best_times(faster.get()).unwrap().elapsed);
+
+    // now we add that route
+    let hist2 = faster.remove_history().0;
+    import_route_to_mysql(&*world, &startctx, &hist2, &mut db, None);
+    // it updates some matching rows rather than insert new ones
+    let steps2 = hist2.len() + 1;
+    assert!(
+        steps + steps2
+            > dsl::db_states
+                .count()
+                .get_result::<i64>(db.connection())
+                .unwrap() as usize
+    );
+
+    // the state in question has a better time
+    assert!(faster.elapsed() == db.get_best_times(faster.get()).unwrap().elapsed);
+
+    // remaining states do not
+    let best_route = history_to_full_data_series(
+        &startctx,
+        &*world,
+        hist2.iter().copied().chain(
+            hist1
+                .iter()
+                .skip_while(|h| **h != History::L(SpotId::KF__Kokiri_Village__Midos_Porch))
+                .skip(1)
+                .copied(),
+        ),
+    );
+    assert_eq!(
+        best_route.last().unwrap().get(),
+        ctx.get(),
+        "Routes did not meet up"
+    );
+    // full_data_series is off by one due to start state at idx 0
+    assert_eq!(faster.get(), best_route[hist2.len()].get());
+    for i in hist2.len() + 1..best_route.len() {
+        assert!(
+            best_route[i].elapsed() < db.get_best_times(best_route[i].get()).unwrap().elapsed,
+            "Step {} was not an improvement despite step {} improvement",
+            i,
+            hist2.len()
+        );
+    }
+
+    let res = db.test_downstream(faster.get()).unwrap();
+    // include the state that changed
+    assert_eq!(
+        res.len(),
+        best_route.len() - hist2.len(),
+        "Did not find the right number of downstream states"
+    );
+    for ((raw, old, new, incr), wrapper) in res.iter().zip(best_route.iter().skip(hist2.len())) {
+        assert_eq!(raw, wrapper.get(), "States not aligned.");
+        assert_eq!(
+            *new,
+            wrapper.elapsed(),
+            "State's new elapsed time not as expected in sql"
+        );
+        assert!(
+            raw == faster.get() || old > new,
+            "State meant to be improved is not improved: old={} new={}",
+            old,
+            new
+        );
+    }
+
+    // run the improvement. it should update exactly the later states
+    assert_eq!(
+        best_route.len() - hist2.len(),
+        db.improve_downstream(faster.get()).unwrap()
+    );
+    for i in hist2.len()..best_route.len() {
+        let exp = best_route[i].elapsed();
+        let act = db.get_best_times(best_route[i].get()).unwrap().elapsed;
+        assert_eq!(
+            exp,
+            act,
+            "Step {} doesn't match after improvement (updated step {}): ctx={}, db={}",
+            i,
+            hist2.len(),
+            exp,
+            act,
+        );
+    }
 }
