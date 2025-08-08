@@ -26,6 +26,7 @@ analyzer = { path = "../../analyzer" }
 bitflags = { version = "2.*", features = ["serde"] }
 bytemuck = { version = "1.*", features = ["extern_crate_alloc", "min_const_generics"] }
 clap = { version = "4.*", features = ["derive"] }
+diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true}
 enum-map = { version = ">=2.7.2", features = ["serde"] }
 lazy_static = "*"
 log4rs = "*"
@@ -35,7 +36,6 @@ serde = { version = ">=1.0", features = ["derive"] }
 serde_repr = "*"
 yaml-rust = "*"
 zstd = "*"
-diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true}
 
 [dev-dependencies]
 base64 = "*"

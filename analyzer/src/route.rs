@@ -8,7 +8,6 @@ use crate::steiner::*;
 use crate::world::*;
 use itertools::Itertools;
 use lazy_static::lazy_static;
-use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::hash::Hash;
 use std::str::FromStr;
@@ -345,12 +344,11 @@ where
     W::Location: Location<Context = T>,
     SM: ScoreMetric<'w, W, T, KS>,
 {
-    use crate::db::serialize_state;
     use crate::estimates::UNREASONABLE_TIME;
-    use crate::models::{DBState, MySQLDB};
+    use crate::models::MySQLDB;
     use crate::search::single_step;
     use diesel::result::Error::NotFound;
-    use indicatif::{ParallelProgressIterator, ProgressBar, ProgressIterator, ProgressStyle};
+    use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
     use std::io::{stderr, Write};
 
     let mut route = route_from_string(world, startctx, route, metric.estimator().get_algo())
@@ -401,20 +399,41 @@ where
         }
     } else {
         log::debug!("Beginning recreate for writes to sql db");
-        let full_history = history_to_full_data_series(startctx, world, hist.into_iter());
-        let full_pairs = full_history.iter().tuple_windows().collect::<Vec<_>>();
-        let metric = db.metric();
-        let states = full_pairs
-            .into_par_iter()
-            .progress_with(pbar)
-            .map(|(prev, ctx)| {
-                let prev = serialize_state(prev.get());
-                DBState::from_ctx(&ctx, world.won(ctx.get()), Some(prev), true, metric)
-            })
-            .collect::<Vec<_>>();
-        db.insert_batch(states).unwrap();
+        import_route_to_mysql(world, startctx, &hist, &mut db, Some(pbar));
     }
     writeln!(stderr()).unwrap();
 
     Ok(proc)
+}
+
+#[cfg(feature = "mysql")]
+pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
+    world: &W,
+    startctx: &T,
+    hist: &[HistoryAlias<T>],
+    db: &mut crate::models::MySQLDB<'w, W, T, KS, SM>,
+    pbar: Option<indicatif::ProgressBar>,
+) where
+    W: World + 'w,
+    T: Ctx<World = W> + 'w,
+    W::Location: Location<Context = T>,
+    SM: ScoreMetric<'w, W, T, KS>,
+{
+    use crate::db::serialize_state;
+    use crate::models::DBState;
+    use indicatif::{ParallelProgressIterator, ProgressBar};
+    use rayon::prelude::*;
+
+    let full_history = history_to_full_data_series(startctx, world, hist.iter().copied());
+    let full_pairs = full_history.iter().tuple_windows().collect::<Vec<_>>();
+    let metric = db.metric();
+    let states = full_pairs
+        .into_par_iter()
+        .progress_with(pbar.unwrap_or(ProgressBar::hidden()))
+        .map(|(prev, ctx)| {
+            let prev = serialize_state(prev.get());
+            DBState::from_ctx(&ctx, world.won(ctx.get()), Some(prev), true, metric)
+        })
+        .collect::<Vec<_>>();
+    db.insert_batch(states).unwrap();
 }

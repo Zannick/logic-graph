@@ -26,6 +26,7 @@ analyzer = { path = "../../analyzer" }
 bitflags = { version = "2.*", features = ["serde"] }
 bytemuck = { version = "1.*", features = ["extern_crate_alloc", "min_const_generics"] }
 clap = { version = "4.*", features = ["derive"] }
+diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true}
 enum-map = { version = ">=2.7.2", features = ["serde"] }
 lazy_static = "*"
 log4rs = "*"
@@ -48,4 +49,5 @@ tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_ma
 
 [features]
 jemalloc = ["dep:jemalloc_pprof", "dep:tikv-jemallocator", "analyzer/jemalloc"]
+mysql = ["dep:diesel", "analyzer/mysql"]
 

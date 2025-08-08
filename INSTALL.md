@@ -26,11 +26,19 @@ and add the directory to your MySQL config file. For example, if I'm running in 
 innodb_directories=/mnt/e/.mysql
 ```
 
-Before you run with mysql enabled in any game's directory, first run:
+Before you run with mysql enabled in a game's subdirectory, first run:
 
 ```
 $ diesel setup
 $ diesel migration run
 Running migration 1_create
 $
+```
+
+This must be done once for each game you wish to run against.
+
+For unittests, in lieu of a migration, simply create the db once:
+
+```sql
+CREATE DB logic_graph__unittest;
 ```

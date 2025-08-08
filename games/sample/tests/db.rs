@@ -136,3 +136,51 @@ fn test_route_db() {
         .expect("No route to Boulder Maze Reward after non-improvement?!");
     assert_ne!(&r3, &*route.route);
 }
+
+#[cfg(feature = "mysql")]
+#[test]
+fn test_mysql() {
+    use analyzer::{
+        models::{DBState, MySQLDB},
+        route::import_route_to_mysql,
+        schema::db_states::dsl,
+        scoring::{EstimatorWrapper, ScoreMetric, TimeSinceAndElapsed},
+    };
+    use diesel::QueryDsl;
+    use diesel::RunQueryDsl;
+
+    let world = graph::World::new();
+    let mut startctx = Context::default();
+
+    let metric = TimeSinceAndElapsed::new(&*world, &startctx);
+
+    // slight inefficiency
+    let route1 = r#"
+    * Collect Kokiri_Sword from KF > Boulder Maze > Reward > Chest
+      Move... to KF > Kokiri Village > Mido's Guardpost
+    ! Do KF > Kokiri Village > Mido's Porch > Gather Rupees
+    ! Do KF > Kokiri Village > Mido's Porch > Gather Rupees
+    * Collect Buy_Deku_Shield from KF > Shop > Entry > Item 1
+    * Collect Showed_Mido from KF > Kokiri Village > Mido's Guardpost > Show Mido
+    "#;
+
+    // improvement to state in the middle of the route
+    let route2 = r#"
+    * Collect Kokiri_Sword from KF > Boulder Maze > Reward > Chest
+      Move... to KF > Kokiri Village > Mido's Porch
+    "#;
+
+    let mut ctx =
+        route_from_string(&*world, &startctx, route1, metric.estimator().get_algo()).unwrap();
+    let mut faster =
+        route_from_string(&*world, &startctx, route2, metric.estimator().get_algo()).unwrap();
+
+    let mut db = MySQLDB::with_test_connection(metric);
+
+    let hist = ctx.remove_history().0;
+    
+    db.insert_one(&ContextWrapper::new(startctx.clone()), false, None, false).unwrap();
+    import_route_to_mysql(&*world, &startctx, &hist, &mut db, None);
+    let steps = hist.len() + 1;
+    assert_eq!(steps, dsl::db_states.count().get_result::<i64>(db.connection()).unwrap() as usize);
+}

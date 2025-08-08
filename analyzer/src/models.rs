@@ -100,6 +100,29 @@ where
         }
     }
 
+    /// Opens a DB connection and starts a test transaction to it, ensuring that no changes are made during the test.
+    pub fn with_test_connection(metric: SM) -> Self {
+        use diesel_migrations::*;
+        const MIGRATIONS: EmbeddedMigrations = embed_migrations!();
+
+        let mut conn =
+            MysqlConnection::establish("mysql://logic_graph@localhost/logic_graph__unittest")
+                .expect("Could not connect to mysql server");
+        conn.run_pending_migrations(MIGRATIONS)
+            .expect("Could not create table");
+        conn.begin_test_transaction().unwrap();
+        Self {
+            conn,
+            metric,
+            phantom: PhantomData::default(),
+        }
+    }
+
+    // test-only, for making raw queries
+    pub fn connection(&mut self) -> &mut MysqlConnection {
+        &mut self.conn
+    }
+
     pub fn metric(&self) -> &SM {
         &self.metric
     }
@@ -267,7 +290,7 @@ mod queries {
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn has_next_steps<'a> (key: &'a Vec<u8>) -> _ {
+    pub fn has_next_steps<'a>(key: &'a Vec<u8>) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select(next_steps.is_not_null())
     }
