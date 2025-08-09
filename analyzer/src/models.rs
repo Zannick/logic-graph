@@ -1,4 +1,4 @@
-use crate::context::{ContextWrapper, Ctx, Wrapper};
+use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
 use crate::db::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
@@ -30,7 +30,7 @@ pub fn establish_connection() -> MysqlConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-#[derive(Default, Queryable, Selectable, Insertable)]
+#[derive(Debug, Default, Queryable, Selectable, Insertable)]
 #[diesel(table_name = crate::schema::db_states, check_for_backend(Mysql))]
 pub struct DBState {
     pub raw_state: Vec<u8>,
@@ -47,18 +47,130 @@ pub struct DBState {
     pub next_steps: Option<Vec<u8>>,
 }
 
-#[derive(QueryableByName)]
-#[diesel(check_for_backend(Mysql))]
-pub struct DownstreamState {
-    #[diesel(sql_type = Binary)]
-    pub state: Vec<u8>,
-    #[diesel(sql_type = Unsigned<Integer>)]
-    pub old_elapsed: u32,
-    #[diesel(sql_type = Unsigned<Integer>)]
-    pub new_elapsed: u32,
-    #[diesel(sql_type = Unsigned<Integer>)]
-    pub incr: u32,
+// Importing all of db_states::dsl prevents naming things the same, so we define these
+// in submod to not need to make different names
+mod q {
+    use crate::context::{Ctx, HistoryAlias};
+    use crate::db::get_obj_from_data;
+    use diesel::mysql::Mysql;
+    use diesel::prelude::*;
+    use diesel::sql_types::*;
+
+    #[derive(Debug, Eq, PartialEq)]
+    pub struct DBEntry<T>
+    where
+        T: Ctx,
+    {
+        pub state: T,
+        pub progress: u32,
+        pub elapsed: u32,
+        pub time_since_visit: u32,
+        pub estimated_remaining: u32,
+        pub step_time: u32,
+        pub processed: bool,
+        pub queued: bool,
+        pub won: bool,
+        pub hist: Option<Vec<HistoryAlias<T>>>,
+        pub prev: Option<T>,
+        pub next_steps: Option<Vec<Vec<HistoryAlias<T>>>>,
+    }
+
+    impl<T> From<super::DBState> for DBEntry<T>
+    where
+        T: Ctx,
+    {
+        fn from(value: super::DBState) -> Self {
+            Self {
+                state: get_obj_from_data(&value.raw_state).unwrap(),
+                progress: value.progress,
+                elapsed: value.elapsed,
+                time_since_visit: value.time_since_visit,
+                estimated_remaining: value.estimated_remaining,
+                step_time: value.step_time,
+                processed: value.processed,
+                queued: value.queued,
+                won: value.won,
+                prev: value.prev.map(|buf| get_obj_from_data(&buf).unwrap()),
+                hist: value.hist.map(|buf| get_obj_from_data(&buf).unwrap()),
+                next_steps: value.next_steps.map(|buf| get_obj_from_data(&buf).unwrap()),
+            }
+        }
+    }
+
+    #[derive(QueryableByName)]
+    #[diesel(check_for_backend(Mysql))]
+    pub struct DownstreamState {
+        #[diesel(sql_type = Blob)]
+        pub raw_state: Vec<u8>,
+        #[diesel(sql_type = Unsigned<Integer>)]
+        pub old_elapsed: u32,
+        #[diesel(sql_type = Unsigned<Integer>)]
+        pub new_elapsed: u32,
+        #[diesel(sql_type = Unsigned<Integer>)]
+        pub step_time: u32,
+    }
+
+    #[derive(Debug)]
+    pub struct DownstreamEntry<T> {
+        pub state: T,
+        pub old_elapsed: u32,
+        pub new_elapsed: u32,
+        pub step_time: u32,
+    }
+
+    impl<T> From<DownstreamState> for DownstreamEntry<T>
+    where
+        T: Ctx,
+    {
+        fn from(value: DownstreamState) -> Self {
+            Self {
+                state: get_obj_from_data(&value.raw_state).unwrap(),
+                old_elapsed: value.old_elapsed,
+                new_elapsed: value.new_elapsed,
+                step_time: value.step_time,
+            }
+        }
+    }
+
+    #[derive(QueryableByName)]
+    #[diesel(check_for_backend(Mysql))]
+    pub struct HistoryState {
+        #[diesel(sql_type = Blob)]
+        pub raw_state: Vec<u8>,
+        #[diesel(sql_type = Nullable<Blob>)]
+        pub prev: Option<Vec<u8>>,
+        #[diesel(sql_type = Nullable<Blob>)]
+        pub hist: Option<Vec<u8>>,
+        #[diesel(sql_type = Unsigned<Integer>)]
+        pub elapsed: u32,
+    }
+
+    #[derive(Debug)]
+    pub struct HistoryEntry<T>
+    where
+        T: Ctx,
+    {
+        pub state: T,
+        pub prev: Option<T>,
+        pub hist: Option<Vec<HistoryAlias<T>>>,
+        pub elapsed: u32,
+    }
+
+    impl<T> From<HistoryState> for HistoryEntry<T>
+    where
+        T: Ctx,
+    {
+        fn from(value: HistoryState) -> Self {
+            Self {
+                state: get_obj_from_data(&value.raw_state).unwrap(),
+                prev: value.prev.map(|buf| get_obj_from_data(&buf).unwrap()),
+                hist: value.hist.map(|buf| get_obj_from_data(&buf).unwrap()),
+                elapsed: value.elapsed,
+            }
+        }
+    }
 }
+pub use q::*;
 
 impl DBState {
     pub fn from_ctx<'w, W, T>(
@@ -157,7 +269,6 @@ where
             .on_conflict(DuplicatedKeys)
             .do_update()
             .set((
-                elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),
                 time_since_visit.eq(sqlif(
                     elapsed.gt(new_elapsed),
                     insertvalues(time_since_visit),
@@ -170,6 +281,8 @@ where
                 )),
                 hist.eq(sqlif(elapsed.gt(new_elapsed), insertvalues(hist), hist)),
                 prev.eq(sqlif(elapsed.gt(new_elapsed), insertvalues(prev), prev)),
+                // must be last as updated values are visible in later changes
+                elapsed.eq(sqlif(elapsed.gt(new_elapsed), new_elapsed, elapsed)),
                 // If the state was already processed, then it will not be queued.
                 // Otherwise, we set it to what we have this time.
                 queued.eq(not(processed).and(insertvalues(queued))),
@@ -184,11 +297,6 @@ where
             .do_update()
             .set((
                 // Overwrite elapsed, time_since, hist, and prev if elapsed is better.
-                elapsed.eq(sqlif(
-                    elapsed.gt(insertvalues(elapsed)),
-                    insertvalues(elapsed),
-                    elapsed,
-                )),
                 time_since_visit.eq(sqlif(
                     elapsed.gt(insertvalues(elapsed)),
                     insertvalues(time_since_visit),
@@ -208,6 +316,12 @@ where
                     elapsed.gt(insertvalues(elapsed)),
                     insertvalues(prev),
                     prev,
+                )),
+                // must be last as updated values are visible in later changes
+                elapsed.eq(sqlif(
+                    elapsed.gt(insertvalues(elapsed)),
+                    insertvalues(elapsed),
+                    elapsed,
                 )),
                 // If the state was already processed, then it will not be queued.
                 // Otherwise, we set it to what we have this time.
@@ -258,8 +372,28 @@ where
         Ok(inserts + updates)
     }
 
+    pub fn get_record(&mut self, state: &T) -> QueryResult<DBEntry<T>> {
+        queries::lookup_state(&serialize_state(state))
+            .first(&mut self.conn)
+            .map(|row: DBState| row.into())
+    }
+
     pub fn get_best_times(&mut self, state: &T) -> QueryResult<BestTimes> {
         queries::get_best_times(&serialize_state(state)).first(&mut self.conn)
+    }
+
+    pub fn get_prev_hist(
+        &mut self,
+        state: &T,
+    ) -> QueryResult<(Option<T>, Option<Vec<HistoryAlias<T>>>)> {
+        queries::get_prev_hist(&serialize_state(state))
+            .first(&mut self.conn)
+            .map(|(p, h): (Option<Vec<u8>>, Option<Vec<u8>>)| {
+                (
+                    p.map(|buf| get_obj_from_data(&buf).unwrap()),
+                    h.map(|buf| get_obj_from_data(&buf).unwrap()),
+                )
+            })
     }
 
     pub fn get_next_steps(&mut self, state: &T) -> QueryResult<Option<NextSteps<T>>> {
@@ -282,27 +416,27 @@ where
         queries::row_exists(&serialize_state(state)).first(&mut self.conn)
     }
 
+    pub fn full_history(&mut self, state: &T) -> QueryResult<Vec<HistoryEntry<T>>> {
+        queries::full_history()
+            .bind::<Blob, _>(&serialize_state(state))
+            .load(&mut self.conn)
+            .map(|vec| vec.into_iter().map(|hs: HistoryState| hs.into()).collect())
+    }
+
     pub fn improve_downstream(&mut self, state: &T) -> QueryResult<usize> {
         queries::improve_downstream()
             .bind::<Blob, _>(&serialize_state(state))
             .execute(&mut self.conn)
     }
 
-    pub fn test_downstream(&mut self, state: &T) -> QueryResult<Vec<(T, u32, u32, u32)>> {
+    pub fn test_downstream(&mut self, state: &T) -> QueryResult<Vec<DownstreamEntry<T>>> {
         queries::test_downstream()
             .bind::<Blob, _>(&serialize_state(state))
             .load(&mut self.conn)
-            .map(|vec: Vec<DownstreamState>| {
+            .map(|vec| {
                 vec.into_iter()
-                    .map(|ds| {
-                        (
-                            get_obj_from_data::<T>(&ds.state).unwrap(),
-                            ds.old_elapsed,
-                            ds.new_elapsed,
-                            ds.incr,
-                        )
-                    })
-                    .collect::<Vec<_>>()
+                    .map(|ds: DownstreamState| ds.into())
+                    .collect()
             })
     }
 }
@@ -385,45 +519,30 @@ mod queries {
         processed.eq(false)
     }
 
-    /*
-    Recursive query for history
-    WITH RECURSIVE FullHistory(raw_state, prev, hist, elapsed)
-    AS (
-      -- Anchor definition = the end state
-      SELECT raw_state, prev, hist, elapsed
-        FROM db_states
-        WHERE raw_state = ?
-      UNION DISTINCT
-      -- Recursive definition = the state pointed to by the previous state's prev
-      SELECT db.raw_state, db.prev, db.hist, db.elapsed
-      FROM db_states as db
-      INNER JOIN FullHistory as fh
-        ON db.raw_state = fh.prev
-    )
-    SELECT raw_state, prev, hist, elapsed
-    FROM FullHistory
-    ORDER BY elapsed
-
-    If the first result isn't the starting state, there's a recursive loop in the states
-    that needs to be fixed.
-
-    Recursive update
-    WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed)
-    AS (
-      -- Anchor definition = the updated state
-      SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed
-        FROM db_states
-        WHERE raw_state = ?
-      UNION DISTINCT
-      -- Recursive definition = the states that point to earlier states via prev
-      SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.elapsed + db.step_time AS new_elapsed
-      FROM db_states AS db
-      INNER JOIN Downstream AS prior
-        ON db.prev = prior.raw_state
-    )
-    UPDATE Downstream
-    SET elapsed = new_elapsed
-    */
+    pub fn full_history() -> SqlQuery {
+        // If the first result isn't the starting state, there's a recursive loop in the states
+        // that needs to be fixed.
+        diesel::sql_query(
+            r#"
+            WITH RECURSIVE FullHistory(raw_state, prev, hist, elapsed)
+            AS (
+            -- Anchor definition = the end state
+            SELECT raw_state, prev, hist, elapsed
+                FROM db_states
+                WHERE raw_state = ?
+            UNION DISTINCT
+            -- Recursive definition = the state pointed to by the previous state's prev
+            SELECT db.raw_state, db.prev, db.hist, db.elapsed
+            FROM db_states as db
+            INNER JOIN FullHistory as fh
+                ON db.raw_state = fh.prev
+            )
+            SELECT raw_state, prev, hist, elapsed
+            FROM FullHistory
+            ORDER BY elapsed
+            "#,
+        )
+    }
 
     fn downstream() -> SqlQuery {
         diesel::sql_query(
@@ -448,7 +567,7 @@ mod queries {
     pub fn test_downstream() -> SqlQuery {
         downstream().sql(
             r#"
-            SELECT raw_state AS state, elapsed AS old_elapsed, new_elapsed, step_time AS incr FROM Downstream
+            SELECT raw_state, elapsed AS old_elapsed, new_elapsed, step_time FROM Downstream
             ORDER BY new_elapsed
             "#,
         )

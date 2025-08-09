@@ -431,8 +431,8 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
         .into_par_iter()
         .progress_with(pbar.unwrap_or(ProgressBar::hidden()))
         .map(|(prev, ctx)| {
-            let prev = serialize_state(prev.get());
-            DBState::from_ctx(&ctx, world.won(ctx.get()), Some(prev), true, metric)
+            let sprev = serialize_state(prev.get());
+            DBState::from_ctx(&ctx, world.won(ctx.get()), Some(sprev), true, metric)
         })
         .collect::<Vec<_>>();
     db.insert_batch(states).unwrap();

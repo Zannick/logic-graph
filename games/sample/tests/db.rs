@@ -144,7 +144,7 @@ fn test_mysql() {
 
     use analyzer::{
         context::{history_to_full_data_series, History},
-        models::{DBState, MySQLDB},
+        models::{DBState, HistoryEntry, MySQLDB},
         new_hashmap,
         route::import_route_to_mysql,
         schema::db_states::dsl,
@@ -200,6 +200,8 @@ fn test_mysql() {
     assert!(db.exists(faster.get()).unwrap());
     assert!(faster.elapsed() < db.get_best_times(faster.get()).unwrap().elapsed);
 
+    let old_record = db.get_record(faster.get()).unwrap();
+
     // now we add that route
     let hist2 = faster.remove_history().0;
     import_route_to_mysql(&*world, &startctx, &hist2, &mut db, None);
@@ -215,6 +217,13 @@ fn test_mysql() {
 
     // the state in question has a better time
     assert!(faster.elapsed() == db.get_best_times(faster.get()).unwrap().elapsed);
+    let new_record = db.get_record(faster.get()).unwrap();
+    assert_ne!(old_record, new_record, "Record not updated at all");
+    assert_eq!(
+        old_record.state, new_record.state,
+        "Records aren't for the same state"
+    );
+    assert_ne!(old_record.prev, new_record.prev);
 
     // remaining states do not
     let best_route = history_to_full_data_series(
@@ -251,18 +260,18 @@ fn test_mysql() {
         best_route.len() - hist2.len(),
         "Did not find the right number of downstream states"
     );
-    for ((raw, old, new, incr), wrapper) in res.iter().zip(best_route.iter().skip(hist2.len())) {
-        assert_eq!(raw, wrapper.get(), "States not aligned.");
+    for (ds_entry, wrapper) in res.iter().zip(best_route.iter().skip(hist2.len())) {
+        assert_eq!(&ds_entry.state, wrapper.get(), "States not aligned.");
         assert_eq!(
-            *new,
+            ds_entry.new_elapsed,
             wrapper.elapsed(),
             "State's new elapsed time not as expected in sql"
         );
         assert!(
-            raw == faster.get() || old > new,
+            &ds_entry.state == faster.get() || ds_entry.old_elapsed > ds_entry.new_elapsed,
             "State meant to be improved is not improved: old={} new={}",
-            old,
-            new
+            ds_entry.old_elapsed,
+            ds_entry.new_elapsed,
         );
     }
 
@@ -284,4 +293,54 @@ fn test_mysql() {
             act,
         );
     }
+
+    // get the full history of the final state
+    let history = db.full_history(ctx.get()).unwrap();
+    let mut state_id_map = new_hashmap();
+    let mut next_id = 0;
+    let mut missing = Vec::new();
+    for h in &history {
+        if !state_id_map.contains_key(&h.state) {
+            state_id_map.insert(&h.state, next_id);
+            next_id += 1;
+        }
+        if let Some(p) = &h.prev {
+            if !state_id_map.contains_key(p) {
+                state_id_map.insert(p, next_id);
+                missing.push(next_id);
+                next_id += 1;
+            }
+        }
+    }
+
+    assert!(
+        missing.is_empty(),
+        "Some prevs were not encountered or appeared later in the list: {:?}",
+        missing
+    );
+
+    for (i, he) in history.iter().enumerate() {
+        if i == 0 {
+            assert_eq!(None, he.prev);
+            assert_eq!(None, he.hist);
+            assert_eq!(0, he.elapsed);
+        } else {
+            assert_eq!(
+                he.prev.as_ref().unwrap(),
+                &history[i - 1].state,
+                "State {} ({:?}, {}) does not point to state {} ",
+                i,
+                he.hist,
+                he.elapsed,
+                i - 1,
+            );
+            assert_ne!(None, he.hist, "State {} has no step info", i);
+        }
+    }
+
+    assert_eq!(best_route.len(), history.len());
+    assert_eq!(
+        best_route.last().unwrap().get(),
+        &history.last().unwrap().state
+    );
 }
