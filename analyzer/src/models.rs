@@ -123,7 +123,8 @@ where
         let mut conn =
             MysqlConnection::establish("mysql://logic_graph@localhost/logic_graph__unittest")
                 .expect("Could not connect to mysql server");
-        conn.revert_all_migrations(MIGRATIONS).unwrap();
+        // dropping the table will fail if it doesn't exist
+        let _ = conn.revert_all_migrations(MIGRATIONS);
         conn.run_pending_migrations(MIGRATIONS).unwrap();
         conn.begin_test_transaction().unwrap();
         Self {
