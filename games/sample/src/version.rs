@@ -8,9 +8,9 @@ c8ca5ce5ec9b4345d1c19cb766833a835d98c852d59a0765ed924ba911a78970 games/sample/sr
 8bf6f9f9955dce5ab285bb04e7d5c5e1df630698aa62481d552522452147d20d games/sample/src/movements.rs
 dbbe86ed61c7b0fae2bbabc89256aedd53cbb9164989621dcc8d55262017e0b7 games/sample/src/observe.rs
 99fddfe93693ed4c95171dd5782d9a2bafd62a3f69ea8a53bd4d243e637e60ba games/sample/src/prices.rs
-20b5ca9c1788f235d2af569ffc0afc85fce6a7a4471bf8e1065ae083be0921ec games/sample/src/rules.rs
+3ab9200739c750052f975cee198ef240a673877eb6d6eb1d1e616f6c7ca2cedc games/sample/src/rules.rs
 dbc5b91f93a9caceb6865290517bf56e9e3ea604df3065165ecbe7acec1ae32a games/sample/src/settings.rs
-8dd407fdc97083dd6ebe7c851f2776b00b5cbae36294c78c3bf96c8043e09b01 games/sample/src/graph/action.rs
+580f135ae00eee5c89bc5d7f76dd66dbbd1735e28841947e31c4b926b321a87b games/sample/src/graph/action.rs
 d786f1b608cf731ab5a13e03fdb1b04a29be528a8008a35405e0a7f582fa600e games/sample/src/graph/community.rs
 793b3d8a2782064ec388e8fe689a83489d382e9dc02374b575843a87f6af1fcb games/sample/src/graph/coord.rs
 c3e907d9de957857617fdfbb2a069c8babe01254dc4a5c05298c1e191d27bc27 games/sample/src/graph/enums.rs
@@ -22,4 +22,4 @@ d361d68846820535292123d722bb6ac20324e5c19833ea6b56ef3271b23ececa games/sample/sr
 f2a4c7ea0a5fe94740747217f34a83efbfc6782ec14f5f4b855dffb787315256 games/sample/src/graph/warp.rs
 */
 
-pub const VERSION: &'static str = "9cb82249d0f15c69a3eeb495636fd59b4517a88c31182c32ec84065e0c63c03f";
+pub const VERSION: &'static str = "c7e3ff4024dd0b30f22b6faff7fcf8057a87311f8e9a2289fc622f03d72c629a";

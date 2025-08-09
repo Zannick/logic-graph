@@ -57,7 +57,7 @@ areas:
       actions:
         - name: Gather Rupees
           time: 20
-          do: ^rupees = $max(^rupees + 20, $wallet_max)
+          do: ^rupees = $min(^rupees + 20, $wallet_max)
       exits:
         - to: Mido's House > Entry
           tags: [load, interior]

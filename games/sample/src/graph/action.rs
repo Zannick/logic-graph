@@ -90,7 +90,7 @@ impl world::Action for Action {
         match self.id {
             ActionId::Global__Change_Time => rules::action_tod_set_match_tod____day_setgt_night_night_setgt_day___setgt_day_(ctx, world),
             ActionId::Deku_Tree__Compass_Room__Entry__Light_Torch => rules::action_deku_tree__compass_room__ctx__torch_set_true(ctx, world),
-            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => rules::action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world),
+            ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => rules::action_rupees_set_invoke_min__rupees_add_20_invoke_wallet_max(ctx, world),
         };
         let dest = self.dest(ctx, world);
         if dest != SpotId::None {
@@ -122,7 +122,7 @@ impl world::Action for Action {
                 }
             }
             ActionId::KF__Kokiri_Village__Midos_Porch__Gather_Rupees => {
-                rules::observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(ctx, world, full_obs);
+                rules::observe_action_rupees_set_invoke_min__rupees_add_20_invoke_wallet_max(ctx, world, full_obs);
                 let dest = self.dest(ctx, world);
                 if dest != SpotId::None {
                     ctx.observe_set_position(dest, world, full_obs);

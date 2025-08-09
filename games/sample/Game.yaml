@@ -101,8 +101,8 @@ helpers:
 collect:
   Rupee_1: ^rupees = $min(^rupees + 1, $wallet_max)
   Rupees_5: ^rupees = $min(^rupees + 5, $wallet_max)
-    #Rupees_10: ^rupees = $max(^rupees + 10, $wallet_max)
-    #Rupees_20: ^rupees = $max(^rupees + 20, $wallet_max)
+    #Rupees_10: ^rupees = $min(^rupees + 10, $wallet_max)
+    #Rupees_20: ^rupees = $min(^rupees + 20, $wallet_max)
   Rupees_50: ^rupees = $min(^rupees + 50, $wallet_max)
 
 

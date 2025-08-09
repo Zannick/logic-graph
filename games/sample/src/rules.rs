@@ -222,16 +222,6 @@ pub fn action_deku_tree__compass_room__ctx__torch_set_true(ctx: &mut Context, wo
     // ^_torch = True
     ctx.set_deku_tree__compass_room__ctx__torch(true);
 }
-pub fn action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
-    ctx: &mut Context,
-    world: &World,
-) {
-    // ^rupees = $max(^rupees + 20, $wallet_max)
-    ctx.set_rupees(std::cmp::max(
-        ctx.rupees() + 20,
-        helper__wallet_max!(ctx, world),
-    ));
-}
 pub fn action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
     ctx: &mut Context,
     world: &World,
@@ -239,6 +229,16 @@ pub fn action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
     // ^rupees = $min(^rupees + 1, $wallet_max)
     ctx.set_rupees(std::cmp::min(
         ctx.rupees() + 1,
+        helper__wallet_max!(ctx, world),
+    ));
+}
+pub fn action_rupees_set_invoke_min__rupees_add_20_invoke_wallet_max(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // ^rupees = $min(^rupees + 20, $wallet_max)
+    ctx.set_rupees(std::cmp::min(
+        ctx.rupees() + 20,
         helper__wallet_max!(ctx, world),
     ));
 }
@@ -1616,24 +1616,6 @@ pub fn observe_action_deku_tree__compass_room__ctx__torch_set_true(
     ctx.set_deku_tree__compass_room__ctx__torch(true);
     full_obs.strict = old_strict;
 }
-pub fn observe_action_rupees_set_invoke_max__rupees_add_20_invoke_wallet_max(
-    ctx: &mut Context,
-    world: &World,
-    full_obs: &mut FullObservation,
-) {
-    // ^rupees = $max(^rupees + 20, $wallet_max)
-    let old_strict = full_obs.strict;
-    full_obs.strict = true;
-    full_obs.clear_rupees();
-    ctx.set_rupees(std::cmp::max(
-        {
-            full_obs.observe_rupees(IntegerObservation::Exact);
-            ctx.rupees()
-        } + 20,
-        helper__wallet_max!(ctx, world),
-    ));
-    full_obs.strict = old_strict;
-}
 pub fn observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
     ctx: &mut Context,
     world: &World,
@@ -1648,6 +1630,24 @@ pub fn observe_action_rupees_set_invoke_min__rupees_add_1_invoke_wallet_max(
             full_obs.observe_rupees(IntegerObservation::Exact);
             ctx.rupees()
         } + 1,
+        helper__wallet_max!(ctx, world),
+    ));
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_rupees_set_invoke_min__rupees_add_20_invoke_wallet_max(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // ^rupees = $min(^rupees + 20, $wallet_max)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    full_obs.clear_rupees();
+    ctx.set_rupees(std::cmp::min(
+        {
+            full_obs.observe_rupees(IntegerObservation::Exact);
+            ctx.rupees()
+        } + 20,
         helper__wallet_max!(ctx, world),
     ));
     full_obs.strict = old_strict;
