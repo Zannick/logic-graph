@@ -541,5 +541,10 @@ where
     let q5 = diesel::select(exists(db_states.find(&state).select(1.into_sql::<Integer>())));
     println!("5. {}", debug_query::<Mysql, _>(&q5));
 
+    let mut state2 = state.clone();
+    state2[2] += 2;
+    let q6 = raw_state.eq_any(vec![&state, &state2]);
+    println!("6. {}", debug_query::<Mysql, _>(&q6));
+
     Ok(())
 }

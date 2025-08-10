@@ -253,7 +253,7 @@ fn test_mysql() {
         );
     }
 
-    let res = db.test_downstream(faster.get()).unwrap();
+    let res = db.test_downstream(&vec![faster.get()]).unwrap();
     // include the state that changed
     assert_eq!(
         res.len(),
@@ -278,7 +278,7 @@ fn test_mysql() {
     // run the improvement. it should update exactly the later states
     assert_eq!(
         best_route.len() - hist2.len(),
-        db.improve_downstream(faster.get()).unwrap()
+        db.improve_downstream(&vec![faster.get()]).unwrap()
     );
     for i in hist2.len()..best_route.len() {
         let exp = best_route[i].elapsed();

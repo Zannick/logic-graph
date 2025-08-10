@@ -47,6 +47,40 @@ pub struct DBState {
     pub next_steps: Option<Vec<u8>>,
 }
 
+impl DBState {
+    pub fn from_ctx<'w, W, T>(
+        ctx: &ContextWrapper<T>,
+        is_solution: bool,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+        metric: &impl EstimatorWrapper<'w, W>,
+    ) -> DBState
+    where
+        W: World + 'w,
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
+        let h = ctx.recent_history();
+        DBState {
+            raw_state: serialize_state(ctx.get()),
+            progress: ctx.get().progress(),
+            elapsed: ctx.elapsed(),
+            time_since_visit: ctx.time_since_visit(),
+            estimated_remaining: metric.estimated_remaining_time(ctx.get()),
+            step_time: ctx.recent_dur(),
+            won: is_solution,
+            hist: if h.is_empty() {
+                None
+            } else {
+                Some(serialize_data(h))
+            },
+            prev: serialized_prev,
+            queued: !is_solution && queue,
+            ..Default::default()
+        }
+    }
+}
+
 // Importing all of db_states::dsl prevents naming things the same, so we define these
 // in submod to not need to make different names
 mod q {
@@ -107,6 +141,8 @@ mod q {
         #[diesel(sql_type = Unsigned<Integer>)]
         pub new_elapsed: u32,
         #[diesel(sql_type = Unsigned<Integer>)]
+        pub new_time_since_visit: u32,
+        #[diesel(sql_type = Unsigned<Integer>)]
         pub step_time: u32,
     }
 
@@ -115,6 +151,7 @@ mod q {
         pub state: T,
         pub old_elapsed: u32,
         pub new_elapsed: u32,
+        pub new_time_since_visit: u32,
         pub step_time: u32,
     }
 
@@ -127,6 +164,7 @@ mod q {
                 state: get_obj_from_data(&value.raw_state).unwrap(),
                 old_elapsed: value.old_elapsed,
                 new_elapsed: value.new_elapsed,
+                new_time_since_visit: value.new_time_since_visit,
                 step_time: value.step_time,
             }
         }
@@ -171,40 +209,6 @@ mod q {
     }
 }
 pub use q::*;
-
-impl DBState {
-    pub fn from_ctx<'w, W, T>(
-        ctx: &ContextWrapper<T>,
-        is_solution: bool,
-        serialized_prev: Option<Vec<u8>>,
-        queue: bool,
-        metric: &impl EstimatorWrapper<'w, W>,
-    ) -> DBState
-    where
-        W: World + 'w,
-        T: Ctx<World = W>,
-        W::Location: Location<Context = T>,
-    {
-        let h = ctx.recent_history();
-        DBState {
-            raw_state: serialize_state(ctx.get()),
-            progress: ctx.get().progress(),
-            elapsed: ctx.elapsed(),
-            time_since_visit: ctx.time_since_visit(),
-            estimated_remaining: metric.estimated_remaining_time(ctx.get()),
-            step_time: ctx.recent_dur(),
-            won: is_solution,
-            hist: if h.is_empty() {
-                None
-            } else {
-                Some(serialize_data(h))
-            },
-            prev: serialized_prev,
-            queued: !is_solution && queue,
-            ..Default::default()
-        }
-    }
-}
 
 pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
     conn: MysqlConnection, // TODO: connection pool?
@@ -423,21 +427,29 @@ where
             .map(|vec| vec.into_iter().map(|hs: HistoryState| hs.into()).collect())
     }
 
-    pub fn improve_downstream(&mut self, state: &T) -> QueryResult<usize> {
-        queries::improve_downstream()
-            .bind::<Blob, _>(&serialize_state(state))
-            .execute(&mut self.conn)
+    /// Recursively update the times for the states downstream from the given states.
+    /// 
+    /// This is guaranteed safe and correct if no given state that had an improvement to pass
+    /// downstream is in another given state's downstream, which should automatically be the case as long as
+    /// as the given states passed in together are from the same "next" cohort of a processed state.
+    pub fn improve_downstream(&mut self, states: &[&T]) -> QueryResult<usize> {
+        let mut q = queries::improve_downstream(states.len()).into_boxed();
+        for state in states {
+            q = q.bind::<Blob, _>(serialize_state(*state))
+        }
+        q.execute(&mut self.conn)
     }
 
-    pub fn test_downstream(&mut self, state: &T) -> QueryResult<Vec<DownstreamEntry<T>>> {
-        queries::test_downstream()
-            .bind::<Blob, _>(&serialize_state(state))
-            .load(&mut self.conn)
-            .map(|vec| {
-                vec.into_iter()
-                    .map(|ds: DownstreamState| ds.into())
-                    .collect()
-            })
+    pub fn test_downstream(&mut self, states: &[&T]) -> QueryResult<Vec<DownstreamEntry<T>>> {
+        let mut q = queries::test_downstream(states.len()).into_boxed();
+        for state in states {
+            q = q.bind::<Blob, _>(serialize_state(*state));
+        }
+        q.load(&mut self.conn).map(|vec| {
+            vec.into_iter()
+                .map(|ds: DownstreamState| ds.into())
+                .collect()
+        })
     }
 }
 
@@ -450,7 +462,7 @@ mod queries {
     use diesel::expression::UncheckedBind;
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
-    use diesel::query_builder::SqlQuery;
+    use diesel::query_builder::{QueryFragment, SqlQuery};
     use diesel::sql_types::*;
 
     define_sql_function!(
@@ -544,42 +556,54 @@ mod queries {
         )
     }
 
-    fn downstream() -> SqlQuery {
-        diesel::sql_query(
+    fn downstream(n: usize) -> SqlQuery {
+        // We can support performing downstream updates from multiple states
+        // as long as they are not in each other's downstreams
+        // because each is the root of its own subtree, so they cannot share any downstream states
+        // without being fully contained in another subtree.
+        // As long as the states are from the same "next" cohort of a processed state, then if one of them
+        // is updated, it's guaranteed to be a root directly under that processed state. And if one is not
+        // updated, then it will not generate changes in the recursive part of the query thanks to the WHERE condition
+        // even if it is in another downstream.
+        // And we leave mysql in autocommit mode to ensure that all statements are transactions
+        diesel::sql_query(format!(
             r#"
-            WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed)
+            WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed, new_time_since_visit)
             AS (
-            -- Anchor definition = the updated state
-            SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed
+            -- Anchor definition = the updated states
+            SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed, time_since_visit as new_time_since_visit
                 FROM db_states
-                WHERE raw_state = ?
-            UNION DISTINCT
+                WHERE raw_state in ({})
+            UNION
             -- Recursive definition = the states that point to earlier states via prev
-            SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.new_elapsed + db.step_time AS new_elapsed
+            SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.new_elapsed + db.step_time AS new_elapsed,
+                IF(db.time_since_visit = 0, 0, prior.time_since_visit + db.step_time) AS new_time_since_visit
             FROM db_states AS db
             INNER JOIN Downstream AS prior
                 ON db.prev = prior.raw_state
+            WHERE prior.new_elapsed + db.step_time < db.elapsed
             )
             "#,
-        )
+            vec!["?"; n].join(", ")
+        ))
     }
 
-    pub fn test_downstream() -> SqlQuery {
-        downstream().sql(
+    pub fn test_downstream(n: usize) -> SqlQuery {
+        downstream(n).sql(
             r#"
-            SELECT raw_state, elapsed AS old_elapsed, new_elapsed, step_time FROM Downstream
+            SELECT raw_state, elapsed AS old_elapsed, new_elapsed, new_time_since_visit, step_time FROM Downstream
             ORDER BY new_elapsed
             "#,
         )
     }
 
-    pub fn improve_downstream() -> SqlQuery {
-        downstream().sql(
+    pub fn improve_downstream(n: usize) -> SqlQuery {
+        downstream(n).sql(
             r#"
-            -- Perform the update on the states we've selected and paired with improved times (or equal times)
+            -- Perform the update on the states we've selected and paired with improved times
             UPDATE db_states
             INNER JOIN Downstream AS res ON db_states.raw_state = res.raw_state
-            SET db_states.elapsed = res.new_elapsed
+            SET db_states.elapsed = res.new_elapsed, db_states.time_since_visit = res.new_time_since_visit
             "#,
         )
     }
