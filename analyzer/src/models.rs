@@ -10,8 +10,11 @@ use diesel::prelude::*;
 use diesel::sql_types::*;
 use dotenvy::dotenv;
 use rayon::prelude::*;
+use rustc_hash::FxHashMap;
 use std::env;
 use std::marker::PhantomData;
+
+const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
 
 define_sql_function!(
     #[sql_name = "IF"]
@@ -60,13 +63,36 @@ impl DBState {
         T: Ctx<World = W>,
         W::Location: Location<Context = T>,
     {
+        Self::from_ctx_with_raw(
+            serialize_state(ctx.get()),
+            ctx,
+            is_solution,
+            serialized_prev,
+            queue,
+            metric.estimated_remaining_time(ctx.get()),
+        )
+    }
+
+    pub fn from_ctx_with_raw<W, T>(
+        raw: Vec<u8>,
+        ctx: &ContextWrapper<T>,
+        is_solution: bool,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+        estimated_time_remaining: u32,
+    ) -> DBState
+    where
+        W: World,
+        T: Ctx<World = W>,
+        W::Location: Location<Context = T>,
+    {
         let h = ctx.recent_history();
         DBState {
-            raw_state: serialize_state(ctx.get()),
+            raw_state: raw,
             progress: ctx.get().progress(),
             elapsed: ctx.elapsed(),
             time_since_visit: ctx.time_since_visit(),
-            estimated_remaining: metric.estimated_remaining_time(ctx.get()),
+            estimated_remaining: estimated_time_remaining,
             step_time: ctx.recent_dur(),
             won: is_solution,
             hist: if h.is_empty() {
@@ -259,6 +285,53 @@ where
         &self.metric
     }
 
+    pub fn encode_one_for_upsert(
+        &mut self,
+        ctx: &ContextWrapper<T>,
+        is_solution: bool,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+    ) -> DBState {
+        let key = serialize_state(ctx.get());
+        let est = if self.exists_raw(&key).unwrap() {
+            INVALID_ESTIMATE
+        } else {
+            self.metric.estimated_remaining_time(ctx.get())
+        };
+        DBState::from_ctx_with_raw(key, ctx, is_solution, serialized_prev, queue, est)
+    }
+
+    pub fn encode_many_for_upsert(
+        &mut self,
+        ctxs: &Vec<ContextWrapper<T>>,
+        world: &W,
+        serialized_prev: Option<Vec<u8>>,
+        queue: bool,
+    ) -> Vec<DBState> {
+        let keys = ctxs
+            .iter()
+            .map(|c| serialize_state(c.get()))
+            .collect::<Vec<_>>();
+        let emap = FxHashMap::from_iter(self.get_estimates(&keys).unwrap());
+        keys.into_par_iter()
+            .zip(ctxs.into_par_iter())
+            .map(|(key, ctx)| {
+                let est = emap
+                    .get(&key)
+                    .copied()
+                    .unwrap_or_else(|| self.metric.estimated_remaining_time(ctx.get()));
+                DBState::from_ctx_with_raw(
+                    key,
+                    ctx,
+                    world.won(ctx.get()),
+                    serialized_prev.clone(),
+                    queue,
+                    est,
+                )
+            })
+            .collect()
+    }
+
     pub fn insert_one(
         &mut self,
         ctx: &ContextWrapper<T>,
@@ -400,6 +473,10 @@ where
         queries::get_best_times(&serialize_state(state)).first(&mut self.conn)
     }
 
+    pub fn get_estimates(&mut self, keys: &[Vec<u8>]) -> QueryResult<Vec<(Vec<u8>, u32)>> {
+        queries::get_estimates(keys).load(&mut self.conn)
+    }
+
     pub fn get_prev_hist(
         &mut self,
         state: &T,
@@ -431,7 +508,11 @@ where
     }
 
     pub fn exists(&mut self, state: &T) -> QueryResult<bool> {
-        queries::row_exists(&serialize_state(state)).first(&mut self.conn)
+        self.exists_raw(&serialize_state(state))
+    }
+
+    pub fn exists_raw(&mut self, key: &Vec<u8>) -> QueryResult<bool> {
+        queries::row_exists(key).first(&mut self.conn)
     }
 
     pub fn full_history(&mut self, state: &T) -> QueryResult<Vec<HistoryEntry<T>>> {
@@ -543,6 +624,13 @@ mod queries {
     #[auto_type(type_case = "PascalCase")]
     pub fn unprocessed() -> _ {
         processed.eq(false)
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_estimates<'a>(keys: &'a [Vec<u8>]) -> _ {
+        db_states
+            .filter(raw_state.eq_any(keys))
+            .select((raw_state, estimated_remaining))
     }
 
     pub fn full_history() -> SqlQuery {
