@@ -98,7 +98,13 @@ impl DBState {
             hist: if h.is_empty() {
                 None
             } else {
-                Some(serialize_data(h))
+                assert!(
+                    h.len() == 1,
+                    "States encoded in DB must have at most one hist entry, got: {} ({:?})",
+                    h.len(),
+                    h
+                );
+                Some(serialize_data(h[0]))
             },
             prev: serialized_prev,
             queued: !is_solution && queue,
@@ -130,9 +136,9 @@ mod q {
         pub processed: bool,
         pub queued: bool,
         pub won: bool,
-        pub hist: Option<Vec<HistoryAlias<T>>>,
+        pub hist: Option<HistoryAlias<T>>,
         pub prev: Option<T>,
-        pub next_steps: Option<Vec<Vec<HistoryAlias<T>>>>,
+        pub next_steps: Option<Vec<HistoryAlias<T>>>,
     }
 
     impl<T> From<super::DBState> for DBEntry<T>
@@ -216,7 +222,7 @@ mod q {
     {
         pub state: T,
         pub prev: Option<T>,
-        pub hist: Option<Vec<HistoryAlias<T>>>,
+        pub hist: Option<HistoryAlias<T>>,
         pub elapsed: u32,
     }
 
@@ -421,7 +427,14 @@ where
         let parent_state = serialize_state(ctx.get());
         let mut next_hists = Vec::new();
         for next_state in next_states {
-            next_hists.push(next_state.recent_history());
+            let h = next_state.recent_history();
+            assert!(
+                h.len() == 1,
+                "Next states encoded in DB must have exactly one hist entry, got: {} ({:?})",
+                h.len(),
+                h
+            );
+            next_hists.push(h[0]);
         }
         let values = next_states
             .into_par_iter()
@@ -480,7 +493,7 @@ where
     pub fn get_prev_hist(
         &mut self,
         state: &T,
-    ) -> QueryResult<(Option<T>, Option<Vec<HistoryAlias<T>>>)> {
+    ) -> QueryResult<(Option<T>, Option<HistoryAlias<T>>)> {
         queries::get_prev_hist(&serialize_state(state))
             .first(&mut self.conn)
             .map(|(p, h): (Option<Vec<u8>>, Option<Vec<u8>>)| {
