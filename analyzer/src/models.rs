@@ -311,7 +311,7 @@ where
         &mut self,
         ctxs: &Vec<ContextWrapper<T>>,
         world: &W,
-        serialized_prev: Option<Vec<u8>>,
+        serialized_prev: Option<&Vec<u8>>,
         queue: bool,
     ) -> Vec<DBState> {
         let keys = ctxs
@@ -330,7 +330,7 @@ where
                     key,
                     ctx,
                     world.won(ctx.get()),
-                    serialized_prev.clone(),
+                    serialized_prev.cloned(),
                     queue,
                     est,
                 )
@@ -436,18 +436,7 @@ where
             );
             next_hists.push(h[0]);
         }
-        let values = next_states
-            .into_par_iter()
-            .map(|s| {
-                DBState::from_ctx(
-                    s,
-                    world.won(s.get()),
-                    Some(parent_state.clone()),
-                    true,
-                    &self.metric,
-                )
-            })
-            .collect::<Vec<_>>();
+        let values = self.encode_many_for_upsert(next_states, world, Some(&parent_state), true);
 
         let inserts = self.insert_batch(&values)?;
 
