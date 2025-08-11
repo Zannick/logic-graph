@@ -294,7 +294,7 @@ where
             .execute(&mut self.conn)
     }
 
-    pub fn insert_batch(&mut self, values: Vec<DBState>) -> QueryResult<usize> {
+    pub fn insert_batch(&mut self, values: &Vec<DBState>) -> QueryResult<usize> {
         diesel::insert_into(db_states)
             .values(values)
             .on_conflict(DuplicatedKeys)
@@ -344,7 +344,7 @@ where
         ctx: &ContextWrapper<T>,
         world: &W,
         next_states: &Vec<ContextWrapper<T>>,
-    ) -> QueryResult<usize> {
+    ) -> QueryResult<(Vec<DBState>, usize)> {
         let parent_state = serialize_state(ctx.get());
         let mut next_hists = Vec::new();
         for next_state in next_states {
@@ -363,7 +363,7 @@ where
             })
             .collect::<Vec<_>>();
 
-        let inserts = self.insert_batch(values)?;
+        let inserts = self.insert_batch(&values)?;
 
         // Update in a separate command so we don't need to add conditions on these sets for the above
         // insert-on-duplicate-keys-update entries which will never need to update these fields.
@@ -373,7 +373,21 @@ where
                 next_steps.eq(serialize_data(next_hists)),
             ))
             .execute(&mut self.conn)?;
-        Ok(inserts + updates)
+        Ok((values, inserts + updates))
+    }
+
+    pub fn insert_processed_and_improve(
+        &mut self,
+        ctx: &ContextWrapper<T>,
+        world: &W,
+        next_states: &Vec<ContextWrapper<T>>,
+    ) -> QueryResult<usize> {
+        let (values, count) = self.insert_processed(ctx, world, next_states)?;
+        let mut q = queries::improve_downstream(values.len()).into_boxed();
+        for value in values {
+            q = q.bind::<Blob, _>(value.raw_state);
+        }
+        Ok(count + q.execute(&mut self.conn)?)
     }
 
     pub fn get_record(&mut self, state: &T) -> QueryResult<DBEntry<T>> {
@@ -428,7 +442,7 @@ where
     }
 
     /// Recursively update the times for the states downstream from the given states.
-    /// 
+    ///
     /// This is guaranteed safe and correct if no given state that had an improvement to pass
     /// downstream is in another given state's downstream, which should automatically be the case as long as
     /// as the given states passed in together are from the same "next" cohort of a processed state.

@@ -435,5 +435,5 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
             DBState::from_ctx(&ctx, world.won(ctx.get()), Some(sprev), true, metric)
         })
         .collect::<Vec<_>>();
-    db.insert_batch(states).unwrap();
+    db.insert_batch(&states).unwrap();
 }
