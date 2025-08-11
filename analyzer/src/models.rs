@@ -577,7 +577,7 @@ mod queries {
             UNION
             -- Recursive definition = the states that point to earlier states via prev
             SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.new_elapsed + db.step_time AS new_elapsed,
-                IF(db.time_since_visit = 0, 0, prior.time_since_visit + db.step_time) AS new_time_since_visit
+                IF(db.time_since_visit = 0, 0, prior.new_time_since_visit + db.step_time) AS new_time_since_visit
             FROM db_states AS db
             INNER JOIN Downstream AS prior
                 ON db.prev = prior.raw_state

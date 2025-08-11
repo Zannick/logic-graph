@@ -260,6 +260,7 @@ fn test_mysql() {
         best_route.len() - hist2.len(),
         "Did not find the right number of downstream states"
     );
+    let mut time_since = new_record.time_since_visit;
     for (ds_entry, wrapper) in res.iter().zip(best_route.iter().skip(hist2.len())) {
         assert_eq!(&ds_entry.state, wrapper.get(), "States not aligned.");
         assert_eq!(
@@ -272,6 +273,17 @@ fn test_mysql() {
             "State meant to be improved is not improved: old={} new={}",
             ds_entry.old_elapsed,
             ds_entry.new_elapsed,
+        );
+        time_since = if wrapper.time_since_visit() == 0 {
+            0
+        } else {
+            time_since + wrapper.recent_dur()
+        };
+        assert_eq!(
+            ds_entry.new_time_since_visit,
+            wrapper.time_since_visit(),
+            "State's new_time_since_visit doesn't match wrapper value, calculated {}",
+            time_since
         );
     }
 
