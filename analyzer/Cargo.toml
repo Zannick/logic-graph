@@ -47,7 +47,7 @@ libtest-mimic = "*"
 tempfile = "*"
 
 # For mysql
-diesel = { version = "2.*", default-features = false, features = ["mysql"], optional = true }
+diesel = { version = "2.*", default-features = false, features = ["mysql", "r2d2"], optional = true }
 diesel_migrations = { version = "*", optional = true }
 dotenvy = { version = "*", optional = true }
 [target.'cfg(target_env = "msvc")'.dependencies]

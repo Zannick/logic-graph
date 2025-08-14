@@ -181,43 +181,63 @@ fn test_mysql() {
         route_from_string(&*world, &startctx, route2, metric.estimator().get_algo()).unwrap();
 
     let mut db = MySQLDB::with_test_connection(metric);
+    let mut conn = db.get_sticky_connection();
 
     let hist1 = ctx.remove_history().0;
 
-    db.insert_one(&ContextWrapper::new(startctx.clone()), false, None, false)
-        .unwrap();
-    import_route_to_mysql(&*world, &startctx, &hist1, &mut db, None);
+    db.insert_one(
+        &ContextWrapper::new(startctx.clone()),
+        false,
+        None,
+        false,
+        &mut conn,
+    )
+    .unwrap();
+    import_route_to_mysql(&*world, &startctx, &hist1, &db, &mut conn);
+
     let steps = hist1.len() + 1;
     assert_eq!(
         steps,
         dsl::db_states
             .count()
-            .get_result::<i64>(db.connection())
+            .get_result::<i64>(db.sticky(&mut conn))
             .unwrap() as usize
     );
 
     // the state in the better route is already in the db, but the time in the route is better
-    assert!(db.exists(faster.get()).unwrap());
-    assert!(faster.elapsed() < db.get_best_times(faster.get()).unwrap().elapsed);
+    assert!(db.exists(faster.get(), &mut conn).unwrap());
+    let oldbest = db.get_best_times(faster.get(), &mut conn).unwrap().elapsed;
+    assert!(faster.elapsed() < oldbest);
 
-    let old_record = db.get_record(faster.get()).unwrap();
+    let old_record = db.get_record(faster.get(), &mut conn).unwrap();
 
     // now we add that route
     let hist2 = faster.remove_history().0;
-    import_route_to_mysql(&*world, &startctx, &hist2, &mut db, None);
+
+    import_route_to_mysql(&*world, &startctx, &hist2, &db, &mut conn);
+
     // it updates some matching rows rather than insert new ones
     let steps2 = hist2.len() + 1;
     assert!(
         steps + steps2
             > dsl::db_states
                 .count()
-                .get_result::<i64>(db.connection())
+                .get_result::<i64>(db.sticky(&mut conn))
                 .unwrap() as usize
     );
 
     // the state in question has a better time
-    assert!(faster.elapsed() == db.get_best_times(faster.get()).unwrap().elapsed);
-    let new_record = db.get_record(faster.get()).unwrap();
+    let newbest = db.get_best_times(faster.get(), &mut conn).unwrap().elapsed;
+    let new_record = db.get_record(faster.get(), &mut conn).unwrap();
+    assert!(
+        faster.elapsed() == newbest,
+        "state did not improve: was {}, now {}, expected {}\nold: {:?}\nnew: {:?}",
+        oldbest,
+        newbest,
+        faster.elapsed(),
+        old_record,
+        new_record
+    );
     assert_ne!(old_record, new_record, "Record not updated at all");
     assert_eq!(
         old_record.state, new_record.state,
@@ -246,14 +266,17 @@ fn test_mysql() {
     assert_eq!(faster.get(), best_route[hist2.len()].get());
     for i in hist2.len() + 1..best_route.len() {
         assert!(
-            best_route[i].elapsed() < db.get_best_times(best_route[i].get()).unwrap().elapsed,
+            best_route[i].elapsed()
+                < db.get_best_times(best_route[i].get(), &mut conn)
+                    .unwrap()
+                    .elapsed,
             "Step {} was not an improvement despite step {} improvement",
             i,
             hist2.len()
         );
     }
 
-    let res = db.test_downstream(&vec![faster.get()]).unwrap();
+    let res = db.test_downstream(&vec![faster.get()], &mut conn).unwrap();
     // include the state that changed
     assert_eq!(
         res.len(),
@@ -290,11 +313,15 @@ fn test_mysql() {
     // run the improvement. it should update exactly the later states
     assert_eq!(
         best_route.len() - hist2.len(),
-        db.improve_downstream(&vec![faster.get()]).unwrap()
+        db.improve_downstream(&vec![faster.get()], &mut conn)
+            .unwrap()
     );
     for i in hist2.len()..best_route.len() {
         let exp = best_route[i].elapsed();
-        let act = db.get_best_times(best_route[i].get()).unwrap().elapsed;
+        let act = db
+            .get_best_times(best_route[i].get(), &mut conn)
+            .unwrap()
+            .elapsed;
         assert_eq!(
             exp,
             act,
@@ -307,7 +334,7 @@ fn test_mysql() {
     }
 
     // get the full history of the final state
-    let history = db.full_history(ctx.get()).unwrap();
+    let history = db.full_history(ctx.get(), &mut conn).unwrap();
     let mut state_id_map = new_hashmap();
     let mut next_id = 0;
     let mut missing = Vec::new();

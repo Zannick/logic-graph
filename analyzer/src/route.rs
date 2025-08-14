@@ -357,32 +357,32 @@ where
     let hist = route.remove_history().0;
     let mut ctx = ContextWrapper::new(startctx.clone());
 
-    let mut db = MySQLDB::connect(metric);
-    db.insert_one(&ctx, false, None, false)
+    let db = MySQLDB::connect(metric);
+    db.insert_one(&ctx, false, None, false, &mut db.get_sticky_connection())
         .map_err(|e| e.to_string())?;
     let mut proc = 0;
-    let pbar = ProgressBar::new(hist.len() as u64)
-        .with_style(
-            ProgressStyle::with_template(
-                "{msg} {wide_bar} {pos}/{len} {elapsed_precise}/{duration_precise}\n",
-            )
-            .unwrap(),
-        )
-        .with_message("Recreating...")
-        .with_finish(indicatif::ProgressFinish::WithMessage(
-            std::borrow::Cow::Borrowed("Recreated route in"),
-        ));
     if process {
+        let pbar = ProgressBar::new(hist.len() as u64)
+            .with_style(
+                ProgressStyle::with_template(
+                    "{msg} {wide_bar} {pos}/{len} {elapsed_precise}/{duration_precise}\n",
+                )
+                .unwrap(),
+            )
+            .with_message("Recreating...")
+            .with_finish(indicatif::ProgressFinish::WithMessage(
+                std::borrow::Cow::Borrowed("Recreated route in"),
+            ));
         log::debug!("Beginning recreate with processing for writes to sql db");
         for h in hist.into_iter().progress_with(pbar) {
-            match db.has_next_steps(ctx.get()) {
+            match db.has_next_steps(ctx.get(), &mut db.get_sticky_connection()) {
                 Ok(true) => {
                     // state is already processed, we don't need to redo it
                 }
                 Ok(false) | Err(NotFound) => {
                     // process state
                     let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
-                    let res = db.insert_processed(&ctx, world, &next);
+                    let res = db.insert_processed_and_improve(&ctx, world, &next);
                     if let Err(e) = res {
                         log::error!("Processed {} states before error detected", proc);
                         return Err(e.to_string());
@@ -399,7 +399,7 @@ where
         }
     } else {
         log::debug!("Beginning recreate for writes to sql db");
-        import_route_to_mysql(world, startctx, &hist, &mut db, Some(pbar));
+        import_route_to_mysql(world, startctx, &hist, &db, &mut db.get_sticky_connection());
     }
     writeln!(stderr()).unwrap();
 
@@ -411,8 +411,8 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
     world: &W,
     startctx: &T,
     hist: &[HistoryAlias<T>],
-    db: &mut crate::models::MySQLDB<'w, W, T, KS, SM>,
-    pbar: Option<indicatif::ProgressBar>,
+    db: &crate::models::MySQLDB<'w, W, T, KS, SM>,
+    conn: &mut crate::models::StickyConnection,
 ) where
     W: World + 'w,
     T: Ctx<World = W> + 'w,
@@ -420,20 +420,14 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
     SM: ScoreMetric<'w, W, T, KS>,
 {
     use crate::db::serialize_state;
-    use crate::models::DBState;
-    use indicatif::{ParallelProgressIterator, ProgressBar};
-    use rayon::prelude::*;
 
     let full_history = history_to_full_data_series(startctx, world, hist.iter().copied());
-    let full_pairs = full_history.iter().tuple_windows().collect::<Vec<_>>();
-    let metric = db.metric();
-    let states = full_pairs
-        .into_par_iter()
-        .progress_with(pbar.unwrap_or(ProgressBar::hidden()))
-        .map(|(prev, ctx)| {
-            let sprev = serialize_state(prev.get());
-            DBState::from_ctx(&ctx, world.won(ctx.get()), Some(sprev), true, metric)
-        })
+    let mut full_pairs = full_history
+        .iter()
+        .tuple_windows()
+        .map(|(prev, ctx)| (ctx, Some(serialize_state(prev.get()))))
         .collect::<Vec<_>>();
-    db.insert_batch(&states).unwrap();
+    full_pairs.push((&full_history[0], None));  // first state
+    let states = db.encode_many_for_upsert(full_pairs, world, true, conn);
+    db.insert_batch(&states, conn).unwrap();
 }

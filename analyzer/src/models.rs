@@ -7,6 +7,7 @@ use diesel::dsl::{not, DuplicatedKeys};
 use diesel::expression::functions::*;
 use diesel::mysql::Mysql;
 use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, Pool, PooledConnection};
 use diesel::sql_types::*;
 use dotenvy::dotenv;
 use rayon::prelude::*;
@@ -15,6 +16,7 @@ use std::env;
 use std::marker::PhantomData;
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
+const TEST_DATABASE_URL: &'static str = "mysql://logic_graph@localhost/logic_graph__unittest";
 
 define_sql_function!(
     #[sql_name = "IF"]
@@ -24,6 +26,11 @@ define_sql_function! (
     #[sql_name = "VALUES"]
     fn insertvalues<T: SingleValue>(v: T) -> T
 );
+
+pub fn env_database_url() -> String {
+    dotenv().ok();
+    env::var("DATABASE_URL").expect("DATABASE_URL must be set")
+}
 
 pub fn establish_connection() -> MysqlConnection {
     dotenv().ok();
@@ -242,8 +249,12 @@ mod q {
 }
 pub use q::*;
 
+pub type MysqlPoolConnection = PooledConnection<ConnectionManager<MysqlConnection>>;
+
+pub type StickyConnection = Option<MysqlPoolConnection>;
+
 pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
-    conn: MysqlConnection, // TODO: connection pool?
+    pool: Pool<ConnectionManager<MysqlConnection>>,
     metric: SM,
     phantom: PhantomData<&'w (W, T)>,
 }
@@ -256,8 +267,12 @@ where
     SM: ScoreMetric<'w, W, T, KS>,
 {
     pub fn connect(metric: SM) -> Self {
+        let manager = ConnectionManager::new(env_database_url());
         Self {
-            conn: establish_connection(),
+            pool: Pool::builder()
+                .max_size(rayon::current_num_threads() as u32)
+                .build(manager)
+                .expect("Could not build MySQL connection pool"),
             metric,
             phantom: PhantomData::default(),
         }
@@ -268,23 +283,36 @@ where
         use diesel_migrations::*;
         const MIGRATIONS: EmbeddedMigrations = embed_migrations!();
 
-        let mut conn =
-            MysqlConnection::establish("mysql://logic_graph@localhost/logic_graph__unittest")
-                .expect("Could not connect to mysql server");
+        let manager = ConnectionManager::new(TEST_DATABASE_URL);
+        let db = Self {
+            pool: Pool::builder()
+                .max_size(1)
+                .build(manager)
+                .expect("Could not build MySQL connection pool"),
+            metric,
+            phantom: PhantomData::default(),
+        };
+
+        let mut conn = db.pool.get().unwrap();
         // dropping the table will fail if it doesn't exist
         let _ = conn.revert_all_migrations(MIGRATIONS);
         conn.run_pending_migrations(MIGRATIONS).unwrap();
         conn.begin_test_transaction().unwrap();
-        Self {
-            conn,
-            metric,
-            phantom: PhantomData::default(),
-        }
+        db
     }
 
-    // test-only, for making raw queries
-    pub fn connection(&mut self) -> &mut MysqlConnection {
-        &mut self.conn
+    /// Returns an object that will lazily get a pool connection and hold onto it until dropped.
+    /// 
+    /// Most functions that interact with the DB will take a &mut StickyConnection so the caller
+    /// can use the same connection across multiple calls. Otherwise provide `&mut StickyConnection::None`
+    /// or `&mut db.get_sticky_connection()` to get a pool connection that will be returned after the call.
+    pub fn get_sticky_connection(&self) -> StickyConnection {
+        StickyConnection::None
+    }
+
+    /// Initializes the StickyConnection if necessary and returns the pool connection inside it.
+    pub fn sticky<'a>(&self, conn: &'a mut StickyConnection) -> &'a mut MysqlPoolConnection {
+        conn.get_or_insert_with(|| self.pool.get().expect("Failed to get a pool connection"))
     }
 
     pub fn metric(&self) -> &SM {
@@ -292,15 +320,16 @@ where
     }
 
     pub fn encode_one_for_upsert(
-        &mut self,
+        &self,
         ctx: &ContextWrapper<T>,
         is_solution: bool,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
+        conn: &mut StickyConnection,
     ) -> DBState {
         let key = serialize_state(ctx.get());
-        let est = if self.exists_raw(&key).unwrap() {
-            INVALID_ESTIMATE
+        let est = if self.exists_raw(&key, conn).unwrap() {
+            INVALID_ESTIMATE  // shouldn't be written to the db
         } else {
             self.metric.estimated_remaining_time(ctx.get())
         };
@@ -308,44 +337,38 @@ where
     }
 
     pub fn encode_many_for_upsert(
-        &mut self,
-        ctxs: &Vec<ContextWrapper<T>>,
+        &self,
+        ctxs_prevs: Vec<(&ContextWrapper<T>, Option<Vec<u8>>)>,
         world: &W,
-        serialized_prev: Option<&Vec<u8>>,
         queue: bool,
+        conn: &mut StickyConnection,
     ) -> Vec<DBState> {
-        let keys = ctxs
+        let keys = ctxs_prevs
             .iter()
-            .map(|c| serialize_state(c.get()))
+            .map(|(ctx, _)| serialize_state(ctx.get()))
             .collect::<Vec<_>>();
-        let emap = FxHashMap::from_iter(self.get_estimates(&keys).unwrap());
+        let emap = FxHashMap::from_iter(self.get_estimates(&keys, conn).unwrap());
         keys.into_par_iter()
-            .zip(ctxs.into_par_iter())
-            .map(|(key, ctx)| {
+            .zip(ctxs_prevs)
+            .map(|(key, (ctx, sprev))| {
                 let est = emap
                     .get(&key)
                     .copied()
                     .unwrap_or_else(|| self.metric.estimated_remaining_time(ctx.get()));
-                DBState::from_ctx_with_raw(
-                    key,
-                    ctx,
-                    world.won(ctx.get()),
-                    serialized_prev.cloned(),
-                    queue,
-                    est,
-                )
+                DBState::from_ctx_with_raw(key, ctx, world.won(ctx.get()), sprev, queue, est)
             })
             .collect()
     }
 
     pub fn insert_one(
-        &mut self,
+        &self,
         ctx: &ContextWrapper<T>,
         is_solution: bool,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
+        conn: &mut StickyConnection,
     ) -> QueryResult<usize> {
-        let value = DBState::from_ctx(ctx, is_solution, serialized_prev, queue, &self.metric);
+        let value = self.encode_one_for_upsert(ctx, is_solution, serialized_prev, queue, conn);
         let new_elapsed = value.elapsed;
         diesel::insert_into(db_states)
             .values(value)
@@ -370,10 +393,14 @@ where
                 // Otherwise, we set it to what we have this time.
                 queued.eq(not(processed).and(insertvalues(queued))),
             ))
-            .execute(&mut self.conn)
+            .execute(self.sticky(conn))
     }
 
-    pub fn insert_batch(&mut self, values: &Vec<DBState>) -> QueryResult<usize> {
+    pub fn insert_batch(
+        &self,
+        values: &Vec<DBState>,
+        conn: &mut StickyConnection,
+    ) -> QueryResult<usize> {
         diesel::insert_into(db_states)
             .values(values)
             .on_conflict(DuplicatedKeys)
@@ -412,17 +439,18 @@ where
                 // Other fields will not change with a better path:
                 // progress, estimated_remaining, won, next_steps
             ))
-            .execute(&mut self.conn)
+            .execute(self.sticky(conn))
     }
 
     /// Insert/update both a processed state and its subsequent states.
     /// Assumes the processed state has already been committed.
     /// It's assumed that all subsequent states will be queued if new.
     pub fn insert_processed(
-        &mut self,
+        &self,
         ctx: &ContextWrapper<T>,
         world: &W,
         next_states: &Vec<ContextWrapper<T>>,
+        conn: &mut StickyConnection,
     ) -> QueryResult<(Vec<DBState>, usize)> {
         let parent_state = serialize_state(ctx.get());
         let mut next_hists = Vec::new();
@@ -436,9 +464,17 @@ where
             );
             next_hists.push(h[0]);
         }
-        let values = self.encode_many_for_upsert(next_states, world, Some(&parent_state), true);
+        let values = self.encode_many_for_upsert(
+            next_states
+                .iter()
+                .zip(std::iter::repeat(Some(&parent_state).cloned()))
+                .collect(),
+            world,
+            true,
+            conn,
+        );
 
-        let inserts = self.insert_batch(&values)?;
+        let inserts = self.insert_batch(&values, conn)?;
 
         // Update in a separate command so we don't need to add conditions on these sets for the above
         // insert-on-duplicate-keys-update entries which will never need to update these fields.
@@ -447,44 +483,50 @@ where
                 processed.eq(true),
                 next_steps.eq(serialize_data(next_hists)),
             ))
-            .execute(&mut self.conn)?;
+            .execute(self.sticky(conn))?;
         Ok((values, inserts + updates))
     }
 
     pub fn insert_processed_and_improve(
-        &mut self,
+        &self,
         ctx: &ContextWrapper<T>,
         world: &W,
         next_states: &Vec<ContextWrapper<T>>,
     ) -> QueryResult<usize> {
-        let (values, count) = self.insert_processed(ctx, world, next_states)?;
+        let mut conn = self.get_sticky_connection();
+        let (values, count) = self.insert_processed(ctx, world, next_states, &mut conn)?;
         let mut q = queries::improve_downstream(values.len()).into_boxed();
         for value in values {
             q = q.bind::<Blob, _>(value.raw_state);
         }
-        Ok(count + q.execute(&mut self.conn)?)
+        Ok(count + q.execute(self.sticky(&mut conn))?)
     }
 
-    pub fn get_record(&mut self, state: &T) -> QueryResult<DBEntry<T>> {
+    pub fn get_record(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<DBEntry<T>> {
         queries::lookup_state(&serialize_state(state))
-            .first(&mut self.conn)
+            .first(self.sticky(conn))
             .map(|row: DBState| row.into())
     }
 
-    pub fn get_best_times(&mut self, state: &T) -> QueryResult<BestTimes> {
-        queries::get_best_times(&serialize_state(state)).first(&mut self.conn)
+    pub fn get_best_times(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<BestTimes> {
+        queries::get_best_times(&serialize_state(state)).first(self.sticky(conn))
     }
 
-    pub fn get_estimates(&mut self, keys: &[Vec<u8>]) -> QueryResult<Vec<(Vec<u8>, u32)>> {
-        queries::get_estimates(keys).load(&mut self.conn)
+    pub fn get_estimates(
+        &self,
+        keys: &[Vec<u8>],
+        conn: &mut StickyConnection,
+    ) -> QueryResult<Vec<(Vec<u8>, u32)>> {
+        queries::get_estimates(keys).load(self.sticky(conn))
     }
 
     pub fn get_prev_hist(
-        &mut self,
+        &self,
         state: &T,
+        conn: &mut StickyConnection,
     ) -> QueryResult<(Option<T>, Option<HistoryAlias<T>>)> {
         queries::get_prev_hist(&serialize_state(state))
-            .first(&mut self.conn)
+            .first(self.sticky(conn))
             .map(|(p, h): (Option<Vec<u8>>, Option<Vec<u8>>)| {
                 (
                     p.map(|buf| get_obj_from_data(&buf).unwrap()),
@@ -493,9 +535,13 @@ where
             })
     }
 
-    pub fn get_next_steps(&mut self, state: &T) -> QueryResult<Option<NextSteps<T>>> {
+    pub fn get_next_steps(
+        &self,
+        state: &T,
+        conn: &mut StickyConnection,
+    ) -> QueryResult<Option<NextSteps<T>>> {
         queries::get_next_steps(&serialize_state(state))
-            .first(&mut self.conn)
+            .first(self.sticky(conn))
             .map(|data: Option<Vec<u8>>| {
                 if let Some(buf) = &data {
                     Some(get_obj_from_data::<NextSteps<T>>(buf).unwrap())
@@ -505,22 +551,26 @@ where
             })
     }
 
-    pub fn has_next_steps(&mut self, state: &T) -> QueryResult<bool> {
-        queries::has_next_steps(&serialize_state(state)).first(&mut self.conn)
+    pub fn has_next_steps(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<bool> {
+        queries::has_next_steps(&serialize_state(state)).first(self.sticky(conn))
     }
 
-    pub fn exists(&mut self, state: &T) -> QueryResult<bool> {
-        self.exists_raw(&serialize_state(state))
+    pub fn exists(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<bool> {
+        self.exists_raw(&serialize_state(state), conn)
     }
 
-    pub fn exists_raw(&mut self, key: &Vec<u8>) -> QueryResult<bool> {
-        queries::row_exists(key).first(&mut self.conn)
+    pub fn exists_raw(&self, key: &Vec<u8>, conn: &mut StickyConnection) -> QueryResult<bool> {
+        queries::row_exists(key).first(self.sticky(conn))
     }
 
-    pub fn full_history(&mut self, state: &T) -> QueryResult<Vec<HistoryEntry<T>>> {
+    pub fn full_history(
+        &self,
+        state: &T,
+        conn: &mut StickyConnection,
+    ) -> QueryResult<Vec<HistoryEntry<T>>> {
         queries::full_history()
             .bind::<Blob, _>(&serialize_state(state))
-            .load(&mut self.conn)
+            .load(self.sticky(conn))
             .map(|vec| vec.into_iter().map(|hs: HistoryState| hs.into()).collect())
     }
 
@@ -529,20 +579,28 @@ where
     /// This is guaranteed safe and correct if no given state that had an improvement to pass
     /// downstream is in another given state's downstream, which should automatically be the case as long as
     /// as the given states passed in together are from the same "next" cohort of a processed state.
-    pub fn improve_downstream(&mut self, states: &[&T]) -> QueryResult<usize> {
+    pub fn improve_downstream(
+        &self,
+        states: &[&T],
+        conn: &mut StickyConnection,
+    ) -> QueryResult<usize> {
         let mut q = queries::improve_downstream(states.len()).into_boxed();
         for state in states {
             q = q.bind::<Blob, _>(serialize_state(*state))
         }
-        q.execute(&mut self.conn)
+        q.execute(self.sticky(conn))
     }
 
-    pub fn test_downstream(&mut self, states: &[&T]) -> QueryResult<Vec<DownstreamEntry<T>>> {
+    pub fn test_downstream(
+        &self,
+        states: &[&T],
+        conn: &mut StickyConnection,
+    ) -> QueryResult<Vec<DownstreamEntry<T>>> {
         let mut q = queries::test_downstream(states.len()).into_boxed();
         for state in states {
             q = q.bind::<Blob, _>(serialize_state(*state));
         }
-        q.load(&mut self.conn).map(|vec| {
+        q.load(self.sticky(conn)).map(|vec| {
             vec.into_iter()
                 .map(|ds: DownstreamState| ds.into())
                 .collect()
