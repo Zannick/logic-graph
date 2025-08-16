@@ -506,7 +506,7 @@ where
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
         let max_time = self.max_time();
         // Records the history in the statedb, even if over time.
-        let Some(score) = self.record_one(&mut el, prev, false)? else {
+        let Some(score) = self.record_one(&mut el, prev)? else {
             return Ok(());
         };
         if el.elapsed() > max_time || self.metric.total_estimate_from_score(score) > max_time {
@@ -888,7 +888,6 @@ where
         &self,
         el: &mut ContextWrapper<T>,
         prev: &Option<T>,
-        state_only: bool,
     ) -> Result<Option<SM::Score>> {
         let state_key = serialize_state(el.get());
 
@@ -945,20 +944,6 @@ where
             estimated_remaining,
             &mut next_entries,
         );
-
-        if let Some(p) = prev {
-            if !state_only {
-                self.statedb
-                    .put_cf_opt(
-                        self.next_cf(),
-                        serialize_state(p),
-                        Self::serialize_next_data(next_entries),
-                        &self.write_opts,
-                    )
-                    .unwrap();
-                self.next.fetch_add(1, Ordering::Release);
-            }
-        }
 
         let score = self.metric.score_from_times(BestTimes {
             elapsed: best_elapsed_from_prev,

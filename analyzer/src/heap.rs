@@ -200,7 +200,7 @@ where
     pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
         let start = Instant::now();
         // Always record the state even if it is over time.
-        let Some(score) = self.db.record_one(&mut el, prev, false)? else {
+        let Some(score) = self.db.record_one(&mut el, prev)? else {
             return Ok(());
         };
         // Don't bother pushing winning states.

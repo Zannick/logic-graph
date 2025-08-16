@@ -6,7 +6,6 @@ use crate::scoring::ScoreMetric;
 use crate::steiner::graph::*;
 use crate::steiner::*;
 use crate::world::*;
-use itertools::Itertools;
 use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
 use std::hash::Hash;
@@ -420,6 +419,7 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
     SM: ScoreMetric<'w, W, T, KS>,
 {
     use crate::storage::serialize_state;
+    use itertools::Itertools;
 
     let full_history = history_to_full_data_series(startctx, world, hist.iter().copied());
     let mut full_pairs = full_history

@@ -650,7 +650,7 @@ where
         // But if prev is true, we must only record the state, since
         // recording `next` requires all the states at once.
         if prev.is_some() {
-            self.queue.db().record_one(ctx, prev, true).unwrap();
+            self.queue.db().record_one(ctx, prev).unwrap();
         }
 
         if !matches!(mode, SearchMode::Similar | SearchMode::Minimized) {
