@@ -237,6 +237,8 @@ where
                 let proc = recreate_from_string(world, &startctx, &rstr, metric, *process).unwrap();
                 if *process {
                     log::debug!("Processed {} steps into sql db", proc);
+                } else {
+                    log::debug!("Successfully recreated in db");
                 }
                 Ok(())
             }
