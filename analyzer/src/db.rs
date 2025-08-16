@@ -8,6 +8,7 @@ use crate::observer::short_observations;
 use crate::route::{PartialRoute, RouteStep};
 use crate::scoring::*;
 use crate::steiner::*;
+use crate::storage::*;
 use crate::world::*;
 use crate::{new_hashmap, CommonHasher};
 use anyhow::{Error, Result};
@@ -16,7 +17,7 @@ use plotlib::page::Page;
 use plotlib::repr::{Histogram, HistogramBins, Plot};
 use plotlib::style::{PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
-use rmp_serde::{Deserializer, Serializer};
+use rmp_serde::Deserializer;
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, Env, IteratorMode,
     MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
@@ -71,41 +72,10 @@ fn min_merge(
     }
 }
 
-/// The key for a T (Ctx) in the statedb, and the value in the queue db
-/// are all T itself.
-pub(crate) fn serialize_state<T: Ctx>(el: &T) -> Vec<u8> {
-    let mut key = Vec::with_capacity(std::mem::size_of::<T>());
-    el.serialize(&mut Serializer::new(&mut key)).unwrap();
-    key
-}
-fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T> {
-    Ok(rmp_serde::from_slice::<T>(buf)?)
-}
-pub fn serialize_data<V>(v: V) -> Vec<u8>
-where
-    V: Serialize,
-{
-    let mut val = Vec::with_capacity(std::mem::size_of::<V>());
-    v.serialize(&mut Serializer::new(&mut val)).unwrap();
-    val
-}
-
-pub fn get_obj_from_data<V>(buf: &[u8]) -> Result<V>
-where
-    V: for<'de> Deserialize<'de>,
-{
-    Ok(rmp_serde::from_slice::<V>(buf)?)
-}
-
 // Essentially a workaround for inherent associated types.
 pub trait HeapMetric {
     type Score: Copy + Debug + Ord;
 }
-
-// This is a vec because we don't guarantee that the recent history in a newly submitted ctx
-// is length 1.
-type NextData<T> = Vec<HistoryAlias<T>>;
-pub type NextSteps<T> = Vec<NextData<T>>;
 
 #[derive(Clone, Debug, Eq, PartialEq, Hash, Serialize, Deserialize)]
 struct StateData<I, S, L, E, A, Wp> {
@@ -497,11 +467,11 @@ where
         }
     }
 
-    fn serialize_next_data(next_entries: Vec<NextData<T>>) -> Vec<u8> {
+    fn serialize_next_data(next_entries: NextSteps<T>) -> Vec<u8> {
         serialize_data(next_entries)
     }
 
-    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<Vec<NextData<T>>> {
+    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<NextSteps<T>> {
         match self.statedb.get_cf(self.next_cf(), key)? {
             Some(slice) => Ok(get_obj_from_data(&slice)?),
             None => Ok(Vec::new()),
@@ -561,7 +531,7 @@ where
         Ok(())
     }
 
-    pub fn pop(&self, start_progress: usize) -> anyhow::Result<Option<(T, u32, u32)>> {
+    pub fn pop(&self, start_progress: usize) -> Result<Option<(T, u32, u32)>> {
         let _retrieve_lock = self.retrieve_lock.lock().unwrap();
         let mut tail_opts = ReadOptions::default();
         tail_opts.set_tailing(true);
@@ -711,7 +681,7 @@ where
     }
 
     /// Retrieves up to `count` elements from the database, removing them.
-    /// Elements are returned as a tuple (T, elapsed time, score, estimated remaining time)
+    /// Elements are returned as a tuple (T, score)
     pub fn retrieve(
         &self,
         start_progress: usize,
@@ -881,7 +851,7 @@ where
         best_since_visit: u32,
         best_elapsed: u32,
         estimated_remaining: u32,
-        next_entries: &mut Vec<NextData<T>>,
+        next_entries: &mut NextSteps<T>,
     ) {
         let (hist, _) = el.remove_history();
         next_entries.push(hist.clone());
@@ -1032,6 +1002,7 @@ where
         let mut new_seen = 0;
         let cf = self.best_cf();
 
+        // sorting doesn't have an advantage except when states are identical
         vec.sort_by_key(ContextWrapper::elapsed);
         let (prev_key, prev_scoreinfo) = if let Some(c) = prev {
             let prev_key = serialize_state(c);

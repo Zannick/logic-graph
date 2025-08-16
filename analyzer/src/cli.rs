@@ -1,5 +1,4 @@
 use crate::context::*;
-use crate::db::serialize_state;
 use crate::direct::DirectPathsMap;
 use crate::estimates::ContextScorer;
 use crate::greedy::*;
@@ -11,6 +10,7 @@ use crate::route::*;
 use crate::scoring::{EstimatorWrapper, ScoreMetric};
 use crate::search::{Search, SearchOptions};
 use crate::solutions::{write_graph, SolutionSuffix};
+use crate::storage::serialize_state;
 use crate::world::*;
 use clap::{Parser, Subcommand};
 use rustc_hash::FxHashSet;
@@ -237,8 +237,6 @@ where
                 let proc = recreate_from_string(world, &startctx, &rstr, metric, *process).unwrap();
                 if *process {
                     log::debug!("Processed {} steps into sql db", proc);
-                } else {
-                    log::debug!("Inserted or updated {} steps into sql db", proc);
                 }
                 Ok(())
             }
@@ -538,7 +536,9 @@ where
     println!("3. {}", debug_query::<Mysql, _>(&q3));
     println!("4. {}", debug_query::<Mysql, _>(&q4));
 
-    let q5 = diesel::select(exists(db_states.find(&state).select(1.into_sql::<Integer>())));
+    let q5 = diesel::select(exists(
+        db_states.find(&state).select(1.into_sql::<Integer>()),
+    ));
     println!("5. {}", debug_query::<Mysql, _>(&q5));
 
     let mut state2 = state.clone();

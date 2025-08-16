@@ -34,6 +34,7 @@ pub mod search;
 pub mod settings;
 pub mod solutions;
 pub mod steiner;
+pub mod storage;
 pub mod world;
 
 #[cfg(feature = "mysql")]

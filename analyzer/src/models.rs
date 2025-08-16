@@ -1,7 +1,7 @@
 use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
-use crate::db::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
+use crate::storage::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
 use crate::world::{Location, World};
 use diesel::dsl::{not, DuplicatedKeys};
 use diesel::expression::functions::*;
@@ -124,7 +124,7 @@ impl DBState {
 // in submod to not need to make different names
 mod q {
     use crate::context::{Ctx, HistoryAlias};
-    use crate::db::get_obj_from_data;
+    use crate::storage::get_obj_from_data;
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
     use diesel::sql_types::*;
@@ -302,7 +302,7 @@ where
     }
 
     /// Returns an object that will lazily get a pool connection and hold onto it until dropped.
-    /// 
+    ///
     /// Most functions that interact with the DB will take a &mut StickyConnection so the caller
     /// can use the same connection across multiple calls. Otherwise provide `&mut StickyConnection::None`
     /// or `&mut db.get_sticky_connection()` to get a pool connection that will be returned after the call.
@@ -329,7 +329,7 @@ where
     ) -> DBState {
         let key = serialize_state(ctx.get());
         let est = if self.exists_raw(&key, conn).unwrap() {
-            INVALID_ESTIMATE  // shouldn't be written to the db
+            INVALID_ESTIMATE // shouldn't be written to the db
         } else {
             self.metric.estimated_remaining_time(ctx.get())
         };

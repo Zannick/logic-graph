@@ -2,13 +2,14 @@
 
 use analyzer::access::{access_location_after_actions_heatmap, move_to};
 use analyzer::context::{history_to_partial_route, ContextWrapper, Ctx, History, Wrapper};
-use analyzer::db::{serialize_data, RouteDb};
+use analyzer::db::RouteDb;
 use analyzer::direct::DirectPathsMap;
 use analyzer::estimates::ContextScorer;
 use analyzer::matchertrie::IntegerObservation;
 use analyzer::observer::Observer;
 use analyzer::route::PartialRoute;
 use analyzer::steiner::{build_simple_graph, EdgeId, NodeId, ShortestPaths, SteinerAlgo};
+use analyzer::storage::serialize_data;
 use analyzer::testlib::db::{all_keys_cf, TestRouteDb};
 use analyzer::world::{Accessible, Action, Exit, Location, Warp, World as _};
 use analyzer::*;

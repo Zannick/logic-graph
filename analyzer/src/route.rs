@@ -419,7 +419,7 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
     W::Location: Location<Context = T>,
     SM: ScoreMetric<'w, W, T, KS>,
 {
-    use crate::db::serialize_state;
+    use crate::storage::serialize_state;
 
     let full_history = history_to_full_data_series(startctx, world, hist.iter().copied());
     let mut full_pairs = full_history
@@ -427,7 +427,7 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
         .tuple_windows()
         .map(|(prev, ctx)| (ctx, Some(serialize_state(prev.get()))))
         .collect::<Vec<_>>();
-    full_pairs.push((&full_history[0], None));  // first state
+    full_pairs.push((&full_history[0], None)); // first state
     let states = db.encode_many_for_upsert(full_pairs, world, true, conn);
     db.insert_batch(&states, conn).unwrap();
 }

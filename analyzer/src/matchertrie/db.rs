@@ -1,6 +1,7 @@
 #![allow(unused)]
 
 use super::matcher::{MatcherDispatch, Observable};
+use crate::storage::{get_obj_from_data, serialize_data};
 use rmp_serde::{Deserializer, Serializer};
 use rocksdb::{
     perf, BlockBasedOptions, Cache, ColumnFamily, ColumnFamilyDescriptor, Env, IteratorMode,
@@ -21,22 +22,6 @@ const GB: usize = 1 << 30;
 
 const ROUTE: &str = "route";
 const TRIE: &str = "trie";
-
-fn serialize_data<V>(v: V) -> Vec<u8>
-where
-    V: Serialize,
-{
-    let mut val = Vec::with_capacity(std::mem::size_of::<V>());
-    v.serialize(&mut Serializer::new(&mut val)).unwrap();
-    val
-}
-
-fn get_obj_from_data<V>(buf: &[u8]) -> Result<V, anyhow::Error>
-where
-    V: for<'de> Deserialize<'de>,
-{
-    Ok(rmp_serde::from_slice::<V>(buf)?)
-}
 
 fn min_merge<V>(
     _new_key: &[u8],
