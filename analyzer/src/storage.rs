@@ -25,7 +25,7 @@ pub(crate) fn deserialize_state<T: Ctx>(buf: &[u8]) -> Result<T> {
     Ok(rmp_serde::from_slice::<T>(buf)?)
 }
 
-pub(crate) fn serialize_data<V>(v: V) -> Vec<u8>
+pub fn serialize_data<V>(v: V) -> Vec<u8>
 where
     V: Serialize,
 {
