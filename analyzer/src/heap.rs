@@ -197,7 +197,7 @@ where
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
+    pub fn push(&self, mut el: ContextWrapper<T>, prev: Option<&T>) -> Result<()> {
         let start = Instant::now();
         // Always record the state even if it is over time.
         let Some(score) = self.db.record_one(&mut el, prev)? else {
@@ -815,7 +815,7 @@ where
     /// elements with elapsed time greater than the allowed maximum
     /// or having been processed before.
     /// All elements must have the same prior state (supplied in prev).
-    pub fn extend<I>(&self, iter: I, prev: &Option<T>) -> Result<()>
+    pub fn extend<I>(&self, iter: I, prev: &T) -> Result<()>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
@@ -843,7 +843,7 @@ where
         &self,
         mut elements: Vec<ContextWrapper<T>>,
         keep: &ContextWrapper<T>,
-        prev: &Option<T>,
+        prev: &T,
     ) -> Result<()> {
         elements.push(keep.clone());
         let mut vec = self.handle_extend_group(elements, prev)?;
@@ -864,7 +864,7 @@ where
     /// highest progress/lowest score is returned instead of being added to the queue.
     ///
     /// All elements must have the same prior state (supplied in prev).
-    pub fn extend_get_best<I>(&self, iter: I, prev: &Option<T>) -> Result<Option<ContextWrapper<T>>>
+    pub fn extend_get_best<I>(&self, iter: I, prev: &T) -> Result<Option<ContextWrapper<T>>>
     where
         I: IntoIterator<Item = ContextWrapper<T>>,
     {
@@ -897,23 +897,10 @@ where
         }
     }
 
-    /// Like calling extend multiple times with different values for prev,
-    /// but only enters the critical section once.
-    pub fn extend_groups<I>(&self, iter: I) -> Result<()>
-    where
-        I: IntoIterator<Item = (Vec<ContextWrapper<T>>, Option<T>)>,
-    {
-        let mut vec = Vec::new();
-        for (v, prev) in iter {
-            vec.extend(self.handle_extend_group(v, &prev)?);
-        }
-        self.internal_extend(vec)
-    }
-
     fn handle_extend_group(
         &self,
         mut vec: Vec<ContextWrapper<T>>,
-        prev: &Option<T>,
+        prev: &T,
     ) -> Result<Vec<(T, usize, Score<'w, W, T>)>> {
         let mut iskips = 0;
         let keeps = self.db.record_many(&mut vec, prev)?;

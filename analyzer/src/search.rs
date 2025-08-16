@@ -456,7 +456,7 @@ where
             delete_dbs,
         )
         .unwrap();
-        queue.push(startctx.clone(), &None).unwrap();
+        queue.push(startctx.clone(), None).unwrap();
         log::info!("Max time to consider is now: {}ms", queue.max_time());
 
         let mut path = db_path.as_ref().to_owned();
@@ -641,7 +641,7 @@ where
     fn handle_one_solution_and_minimize(
         &self,
         ctx: &mut ContextWrapper<T>,
-        prev: &Option<T>,
+        prev: Option<&T>,
         mode: SearchMode,
     ) -> Option<ContextWrapper<T>> {
         // If prev is None we don't know the prev state
@@ -726,7 +726,7 @@ where
         None
     }
 
-    fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: &Option<T>, mode: SearchMode) {
+    fn handle_solution(&self, ctx: &mut ContextWrapper<T>, prev: Option<&T>, mode: SearchMode) {
         if let Some(ctx) = self.handle_one_solution_and_minimize(ctx, prev, mode) {
             let solution = ctx.into_solution();
             self.recreate_store(&self.startctx, &solution.history, SearchMode::Minimized)
@@ -761,17 +761,17 @@ where
     fn extend_and_handle_solutions(
         &self,
         states: Vec<ContextWrapper<T>>,
-        prev: &Option<T>,
+        prev: &T,
         mode: SearchMode,
     ) -> anyhow::Result<()> {
         let (next, solutions) = self.extract_solutions(states);
         rayon::join(
-            move || self.queue.extend(next, prev),
+            move || self.queue.extend(next, &prev),
             move || {
                 for mut ctx in solutions {
                     // The state is added to the db in handle_solution
                     // and the ctx no longer has history attached.
-                    self.handle_solution(&mut ctx, prev, mode);
+                    self.handle_solution(&mut ctx, Some(&prev), mode);
                 }
             },
         )
@@ -819,7 +819,7 @@ where
                 break;
             }
             let next_steps = self.queue.db().get_next_steps(ctx.get()).unwrap();
-            let prev = Some(ctx.get().clone());
+            let prev = ctx.get().clone();
             let elapsed = ctx.elapsed();
             let time_since_visit = ctx.time_since_visit();
             if !next_steps.is_empty() {
@@ -857,7 +857,7 @@ where
                     // We didn't find the desired state.
                     // Check whether this is a no-op. If so, we can skip pushing states into the queue,
                     // since next iteration will regenerate them.
-                    ctx = ContextWrapper::with_times(prev.unwrap(), elapsed, time_since_visit);
+                    ctx = ContextWrapper::with_times(prev, elapsed, time_since_visit);
                     if ctx.can_replay(self.world, *hist) {
                         let c = ctx.get().clone();
                         ctx.replay(self.world, *hist);
@@ -880,7 +880,7 @@ where
                 }
             }
         }
-        let prev = Some(ctx.get().clone());
+        let prev = ctx.get().clone();
         let next = self.recreate_step(ctx);
         self.extend_and_handle_solutions(next, &prev, mode)
     }
@@ -1001,7 +1001,7 @@ where
                                     .collect();
                                 if remaining.is_empty() {
                                     if self.world.won(ctx.get()) {
-                                        self.handle_solution(&mut ctx, &None, SearchMode::Unknown);
+                                        self.handle_solution(&mut ctx, None, SearchMode::Unknown);
                                     } else {
                                         self.deadends.fetch_add(1, Ordering::Release);
                                     }
@@ -1089,7 +1089,7 @@ where
                                     }
                                     let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
                                     let visits = ctx.get().count_visits();
-                                    let prev = Some(ctx.get().clone());
+                                    let prev = ctx.get().clone();
                                     if let Some(vec) = self.process_one(ctx, iters, &start) {
                                         if visits == self.organic_level.load(Ordering::Acquire)
                                             && vec
@@ -1452,7 +1452,7 @@ where
 
         if ctx.get().count_visits() >= W::NUM_CANON_LOCATIONS {
             if self.world.won(ctx.get()) {
-                self.handle_solution(&mut ctx, &None, SearchMode::Unknown);
+                self.handle_solution(&mut ctx, None, SearchMode::Unknown);
             } else {
                 self.deadends.fetch_add(1, Ordering::Release);
             }

@@ -503,7 +503,7 @@ where
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, if the state has been previously processed or previously seen
     /// with an equal or lower elapsed time, does nothing.
-    pub fn push(&self, mut el: ContextWrapper<T>, prev: &Option<T>) -> Result<()> {
+    pub fn push(&self, mut el: ContextWrapper<T>, prev: Option<&T>) -> Result<()> {
         let max_time = self.max_time();
         // Records the history in the statedb, even if over time.
         let Some(score) = self.record_one(&mut el, prev)? else {
@@ -887,7 +887,7 @@ where
     pub fn record_one(
         &self,
         el: &mut ContextWrapper<T>,
-        prev: &Option<T>,
+        prev: Option<&T>,
     ) -> Result<Option<SM::Score>> {
         let state_key = serialize_state(el.get());
 
@@ -978,7 +978,7 @@ where
     pub fn record_many(
         &self,
         vec: &mut Vec<ContextWrapper<T>>,
-        prev: &Option<T>,
+        prev: &T,
     ) -> Result<Vec<Option<SM::Score>>> {
         let max_time = self.max_time();
         let mut next_entries = Vec::new();
@@ -989,16 +989,11 @@ where
 
         // sorting doesn't have an advantage except when states are identical
         vec.sort_by_key(ContextWrapper::elapsed);
-        let (prev_key, prev_scoreinfo) = if let Some(c) = prev {
-            let prev_key = serialize_state(c);
-            let scoreinfo = self
-                .get_deserialize_state_data(&prev_key)
-                .unwrap()
-                .map(|sd| (sd.time_since_visit, sd.elapsed));
-            (prev_key, scoreinfo)
-        } else {
-            (Vec::new(), None)
-        };
+        let prev_key = serialize_state(prev);
+        let prev_scoreinfo = self
+            .get_deserialize_state_data(&prev_key)
+            .unwrap()
+            .map(|sd| (sd.time_since_visit, sd.elapsed));
 
         let seeing: Vec<_> = vec.iter().map(|el| serialize_state(el.get())).collect();
 
@@ -1075,17 +1070,15 @@ where
             }
         }
 
-        if let Some(p) = prev {
-            self.statedb
-                .put_cf_opt(
-                    self.next_cf(),
-                    serialize_state(p),
-                    Self::serialize_next_data(next_entries),
-                    &self.write_opts,
-                )
-                .unwrap();
-            self.next.fetch_add(1, Ordering::Release);
-        }
+        self.statedb
+            .put_cf_opt(
+                self.next_cf(),
+                prev_key,
+                Self::serialize_next_data(next_entries),
+                &self.write_opts,
+            )
+            .unwrap();
+        self.next.fetch_add(1, Ordering::Release);
 
         self.dup_iskips.fetch_add(dups, Ordering::Release);
         self.seen.fetch_add(new_seen, Ordering::Release);

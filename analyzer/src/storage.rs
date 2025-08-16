@@ -181,7 +181,7 @@ where
     fn record_one(
         &self,
         el: &mut ContextWrapper<T>,
-        prev: &Option<T>,
+        prev: Option<&T>,
     ) -> Result<Option<SM::Score>>;
 
     /// Records the processing of a state and the generated children of that state.
