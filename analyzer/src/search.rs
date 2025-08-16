@@ -9,6 +9,7 @@ use crate::minimize::*;
 use crate::observer::{record_observations, TrieMatcher};
 use crate::scoring::ScoreMetric;
 use crate::solutions::{Solution, SolutionCollector, SolutionResult, SolutionSuffix};
+use crate::storage::ContextDB;
 use crate::world::*;
 use anyhow::Result;
 use log;
@@ -530,12 +531,12 @@ where
 
     fn min_progress(&self) -> usize {
         if let Some(qmp) = self.queue.min_progress() {
-            if let Some(dbmp) = self.queue.db().min_progress() {
+            if let Some(dbmp) = self.queue.db().min_preserved_progress() {
                 std::cmp::min(qmp, dbmp)
             } else {
                 qmp
             }
-        } else if let Some(dbmp) = self.queue.db().min_progress() {
+        } else if let Some(dbmp) = self.queue.db().min_preserved_progress() {
             dbmp
         } else {
             1
@@ -985,7 +986,7 @@ where
                         {
                             items.into_par_iter().for_each(|mut ctx| {
                                 self.held.fetch_sub(1, Ordering::Release);
-                                if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                                if self.queue.db().was_processed(ctx.get()).unwrap() {
                                     return;
                                 }
                                 let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
@@ -1084,7 +1085,7 @@ where
                                 .into_par_iter()
                                 .filter_map(|ctx| {
                                     self.held.fetch_sub(1, Ordering::Release);
-                                    if self.queue.db().remember_processed(ctx.get()).unwrap() {
+                                    if self.queue.db().was_processed(ctx.get()).unwrap() {
                                         return None;
                                     }
                                     let iters = self.iters.fetch_add(1, Ordering::AcqRel) + 1;
@@ -1563,7 +1564,7 @@ where
         let pending = self.held.load(Ordering::Acquire);
         // TODO: heap+db range [min bucket, max bucket]
         let heap_bests = self.queue.heap_bests();
-        let db_bests = self.queue.db().db_bests();
+        let db_bests = self.queue.db().preserved_bests();
         let db_best_max = db_bests.iter().rposition(|x| *x != u32::MAX).unwrap_or(0);
         let needed = self.world.items_needed(ctx.get());
         let (num_routes, trie_size) = self.direct_paths.totals();

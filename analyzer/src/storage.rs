@@ -46,7 +46,7 @@ where
 /// Conceptually, a state can be:
 ///     - *queued* if it is in the in-memory heap
 ///     - *processed* if its child states have been created (only needs to happen once per state ever)
-///     - *unqueued and unprocessed* if it is not in the in-memory but should still be retrievable to queue
+///     - *preserved* if it is *unqueued* and *unprocessed*; not in the in-memory queue but should still be retrievable
 pub trait ContextDB<'w, W, T, const KS: usize, SM>: Sync
 where
     W: World + 'w,
@@ -87,18 +87,18 @@ where
     /// Returns the number of processed states in the db.
     fn processed(&self) -> usize;
 
-    /// Returns the score of the best queued element at the given progress level in the db.
+    /// Returns the score of the best preserved element at the given progress level in the db.
     ///
-    /// A score of `u32::MAX` means there are no queued elements at that progress level.
-    fn queue_best(&self, progress: usize) -> u32;
+    /// A score of `u32::MAX` means there are no preserved elements at that progress level.
+    fn preserved_best(&self, progress: usize) -> u32;
 
-    /// Returns the scores of the best queued element at each progress level in the db.
+    /// Returns the scores of the best preserved element at each progress level in the db.
     ///
-    /// A score of `u32::MAX` means there are no queued elements at that progress level.
-    fn queue_bests(&self) -> Vec<u32>;
+    /// A score of `u32::MAX` means there are no preserved elements at that progress level.
+    fn preserved_bests(&self) -> Vec<u32>;
 
-    /// Returns the first progress level at which there are queued elements in the db.
-    fn min_progress(&self) -> Option<usize>;
+    /// Returns the first progress level at which there are preserved elements in the db.
+    fn min_preserved_progress(&self) -> Option<usize>;
 
     /// Print data graphs.
     fn print_graphs(&self) -> Result<()>;
@@ -124,6 +124,10 @@ where
     fn get_best_times(&self, el: &T) -> Result<BestTimes> {
         self.get_best_times_raw(&serialize_state(el))
     }
+
+    /// Lookup the state's estimated remaining time in the db, or consult
+    /// the metric's estimator.
+    fn estimated_remaining_time(&self, ctx: &T) -> u32;
 
     /// Returns the best score recorded for the given encoded state.
     fn lookup_score_raw(&self, key: &[u8]) -> Result<SM::Score> {
@@ -152,14 +156,16 @@ where
 
     // Writes
 
-    /// Pushes an element into the db and marks it as unqueued and unprocessed.
-    fn push(&self, el: ContextWrapper<T>, prev: &Option<T>) -> Result<()>;
+    /// Pushes an element into the db and marks it as preserved (unqueued and unprocessed).
+    fn push(&self, el: ContextWrapper<T>, prev: Option<&T>) -> Result<()>;
 
-    /// Retrieves a single unqueued element and marks it as queued.
+    /// Retrieves a single preserved element, marks it as queued, and returns it wrapped for processing.
     /// It will be the one with the lowest score at the lowest progress level that's >= `start_progress`.
-    fn pop(&self, start_progress: usize) -> Result<Option<(T, SM::Score)>>;
+    /// 
+    /// Returns `Ok(None)` if there are no preserved elements in the db.
+    fn pop(&self, start_progress: usize) -> Result<Option<ContextWrapper<T>>>;
 
-    /// Marks the given elements as not queued and ensures they are stored
+    /// Marks the given elements as not queued and ensures they are preserved
     /// for eventual retrieval.
     fn evict(&self, iter: impl IntoIterator<Item = (T, SM::Score)>) -> Result<()>;
 

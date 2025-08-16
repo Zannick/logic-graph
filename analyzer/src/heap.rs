@@ -6,6 +6,7 @@ use crate::db::{HeapDB, HeapMetric};
 use crate::estimates::ContextScorer;
 use crate::scoring::{BestTimes, EstimatedTimeMetric, ScoreMetric, TimeSinceAndElapsed};
 use crate::steiner::*;
+use crate::storage::ContextDB;
 use crate::world::*;
 use anyhow::{anyhow, Result};
 use bucket_queue::{Bucket, BucketQueue, Queue};
@@ -147,7 +148,7 @@ where
     }
 
     pub fn db_bests(&self) -> Vec<u32> {
-        self.db.db_bests()
+        self.db.preserved_bests()
     }
 
     pub fn heap_bests(&self) -> Vec<Option<Score<'w, W, T>>> {
@@ -257,7 +258,7 @@ where
 
     fn evict_to_db(&self, ev: Vec<(T, Score<'w, W, T>)>, category: &str) -> Result<()> {
         let start = Instant::now();
-        self.db.extend_from_queue(ev)?;
+        self.db.evict(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
         log::debug!("{}:evict to db took {:?}", category, start.elapsed());
         log::debug!("{}", self.db.get_memory_usage_stats().unwrap());
@@ -306,7 +307,7 @@ where
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((el, &min_score)) = queue.peek_min() {
                 let progress = el.count_visits();
-                let db_best = self.db.db_best(progress);
+                let db_best = self.db.preserved_best(progress);
                 // Only when we go a decent bit over
                 if !self.db.is_empty()
                     && db_best < u32::MAX
@@ -333,7 +334,7 @@ where
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
-                if self.db.remember_processed(&ctx)? {
+                if self.db.was_processed(&ctx)? {
                     self.db.count_duplicate();
                     continue;
                 }
@@ -350,11 +351,12 @@ where
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
                 } else {
-                    return Ok(self.db.pop(0)?.map(|(el, elapsed, time_since_visit)| {
-                        let progress = el.count_visits();
+                    let ctx = self.db.pop(0)?;
+                    if let Some(c) = &ctx {
+                        let progress = c.get().count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                        ContextWrapper::with_times(el, elapsed, time_since_visit)
-                    }));
+                    }
+                    return Ok(ctx);
                 }
             }
         }
@@ -401,7 +403,7 @@ where
         } else {
             self.max_time()
         };
-        if score_limit < self.db.db_best(progress) {
+        if score_limit < self.db.preserved_best(progress) {
             return Ok(queue);
         }
         if self.capacity - len < num_to_restore {
@@ -523,7 +525,7 @@ where
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
-                if self.db.remember_processed(&ctx)? {
+                if self.db.was_processed(&ctx)? {
                     self.db.count_duplicate();
                     continue;
                 }
@@ -540,10 +542,10 @@ where
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
-                } else if let Some((ctx, elapsed, time_since_visit)) = self.db.pop(0)? {
-                    let progress = ctx.count_visits();
+                } else if let Some(ctx) = self.db.pop(0)? {
+                    let progress = ctx.get().count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                    vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
+                    vec.push(ctx);
                 } else {
                     return Ok(vec);
                 }
@@ -579,7 +581,7 @@ where
                         self.pskips.fetch_add(1, Ordering::Release);
                         continue;
                     }
-                    if self.db.remember_processed(&ctx)? {
+                    if self.db.was_processed(&ctx)? {
                         self.db.count_duplicate();
                         continue;
                     }
@@ -597,10 +599,10 @@ where
                 if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                     queue = self.do_retrieve_and_insert(0, queue)?;
                     self.retrieving.store(false, Ordering::Release);
-                } else if let Some((ctx, elapsed, time_since_visit)) = self.db.pop(0)? {
-                    let progress = ctx.count_visits();
+                } else if let Some(ctx) = self.db.pop(0)? {
+                    let progress = ctx.get().count_visits();
                     self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                    vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
+                    vec.push(ctx);
                 } else {
                     return Ok(vec);
                 }
@@ -666,7 +668,7 @@ where
                             self.pskips.fetch_add(1, Ordering::Release);
                             continue;
                         }
-                        if self.db.remember_processed(&ctx)? {
+                        if self.db.was_processed(&ctx)? {
                             self.db.count_duplicate();
                             continue;
                         }
@@ -702,7 +704,7 @@ where
                         if b.is_empty_bucket() {
                             continue;
                         }
-                        let db_best = self.db.db_best(segment);
+                        let db_best = self.db.preserved_best(segment);
                         while let Some((ctx, _)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
@@ -730,7 +732,7 @@ where
                                 self.pskips.fetch_add(1, Ordering::Release);
                                 continue;
                             }
-                            if self.db.remember_processed(&ctx)? {
+                            if self.db.was_processed(&ctx)? {
                                 self.db.count_duplicate();
                                 continue;
                             }
@@ -761,7 +763,7 @@ where
                                     self.pskips.fetch_add(1, Ordering::Release);
                                     continue;
                                 }
-                                if self.db.remember_processed(&ctx)? {
+                                if self.db.was_processed(&ctx)? {
                                     self.db.count_duplicate();
                                     continue;
                                 }
@@ -796,14 +798,10 @@ where
                     if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
                         queue = self.do_retrieve_and_insert(0, queue)?;
                         self.retrieving.store(false, Ordering::Release);
-                    } else if let Some((el, elapsed, time_since_visit)) = self.db.pop(0)? {
-                        let progress = el.count_visits();
+                    } else if let Some(ctx) = self.db.pop(0)? {
+                        let progress = ctx.get().count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
-                        return Ok(vec![ContextWrapper::with_times(
-                            el,
-                            elapsed,
-                            time_since_visit,
-                        )]);
+                        return Ok(vec![ctx]);
                     }
                 }
             }
