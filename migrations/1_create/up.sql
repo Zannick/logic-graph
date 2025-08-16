@@ -9,7 +9,7 @@ CREATE TABLE db_states (
     processed BOOLEAN NOT NULL DEFAULT false,
     queued BOOLEAN NOT NULL DEFAULT false,
     won BOOLEAN NOT NULL DEFAULT false,
-    hist BLOB,  -- serialized History
+    hist TINYBLOB,  -- serialized History
     prev BLOB,  -- serialized Context (which should be left serialized for prev lookup)
     next_steps BLOB,  -- serialized Vec<History> (exactly one step per child state)  TODO: do we really need this?
     PRIMARY KEY(raw_state(256)),
