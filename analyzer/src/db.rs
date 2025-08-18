@@ -21,7 +21,7 @@ use rocksdb::{
     MergeOperands, Options, ReadOptions, WriteBatchWithTransaction, WriteOptions, DB,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use std::fmt::Debug;
 use std::marker::PhantomData;
 use std::ops::Range;
@@ -158,6 +158,8 @@ where
     W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
     SM: ScoreMetric<'w, W, T, KS> + 'w,
 {
+    const NAME: &'static str = "RocksDB";
+
     fn metric(&self) -> &SM {
         &self.metric
     }
@@ -234,6 +236,18 @@ where
         );
 
         Ok(())
+    }
+
+    fn extra_stats(&self) -> String {
+        format!(
+            "skips: push: {} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}",
+            self.iskips.load(Ordering::Acquire),
+            self.dup_iskips.load(Ordering::Acquire),
+            self.pskips.load(Ordering::Acquire),
+            self.dup_pskips.load(Ordering::Acquire),
+            self.readds.load(Ordering::Acquire),
+            self.bg_deletes.load(Ordering::Acquire)
+        )
     }
 
     fn max_time(&self) -> u32 {
@@ -328,7 +342,7 @@ where
             self.iskips.fetch_add(1, Ordering::Release);
             return Ok(());
         }
-        let key = self.get_heap_key_from_wrapper_score(&el, score);
+        let key = self.metric.get_heap_key(el.get(), score);
         let val = serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
         self.size.fetch_add(1, Ordering::Release);
@@ -772,6 +786,48 @@ where
         self.seen.fetch_add(new_seen, Ordering::Release);
         Ok(results)
     }
+
+    fn recovery(&self) -> bool {
+        self.recovery.load(Ordering::Acquire)
+    }
+
+    fn restore(&self) {
+        if !self.recovery.load(Ordering::Acquire) {
+            return;
+        }
+
+        let state_snapshot = self.statedb.snapshot();
+
+        self.reset_estimates_actual();
+        let mut iter_opts = ReadOptions::default();
+        iter_opts.fill_cache(false);
+        let iter = state_snapshot.iterator_cf_opt(self.best_cf(), iter_opts, IteratorMode::Start);
+        let next_cf = self.next_cf();
+        for state_el in iter {
+            let (key, val) = state_el.unwrap();
+            if state_snapshot
+                .get_pinned_cf(next_cf, key.as_ref())
+                .is_ok_and(|o| o.is_some())
+            {
+                self.next.fetch_add(1, Ordering::Release);
+            } else {
+                let state: T = get_obj_from_data(key.as_ref()).unwrap();
+                let data: StateDataAlias<T> = get_obj_from_data(val.as_ref()).unwrap();
+                let score = self.metric().score_from_times(data.best_times());
+                let heap_key_min = self.metric().get_heap_key(&state, score);
+                if self
+                    .db
+                    .put_opt(&heap_key_min, serialize_state(&state), &self.write_opts)
+                    .is_ok()
+                {
+                    self.size.fetch_add(1, Ordering::Release);
+                }
+            }
+        }
+
+        self.recovery.store(false, Ordering::Release);
+        log::info!("Finished scanning state table for restore");
+    }
 }
 
 impl<'w, W, T, L, E, const KS: usize, SM> HeapDB<'w, W, T, KS, SM>
@@ -901,66 +957,12 @@ where
         })
     }
 
-    pub fn recovery(&self) -> bool {
-        self.recovery.load(Ordering::Acquire)
-    }
-
-    /// Returns the number of unique states we've estimated remaining time for.
-    /// Winning states aren't counted in this.
-    pub fn estimates(&self) -> usize {
-        self.metric.estimates()
-    }
-
-    /// Returns the number of cache hits for estimated remaining time.
-    /// Winning states aren't counted in this.
-    pub fn cached_estimates(&self) -> usize {
-        self.metric.cached_estimates()
-    }
-
-    pub fn background_deletes(&self) -> usize {
-        self.bg_deletes.load(Ordering::Acquire)
-    }
-
-    /// Returns details about the number of states we've skipped (tracked separately from the db).
-    /// Specifically:
-    ///   1) states not added (on push) to the db due to exceeding max time,
-    ///   2) states not returned (on pop) from the db due to exceeding max time,
-    ///   3) states not added (on push) to the db due to being duplicates with worse times,
-    ///   4) states not returned (on pop) from the db due to being duplicates with worse times.
-    pub fn skip_stats(&self) -> (usize, usize, usize, usize) {
-        (
-            self.iskips.load(Ordering::Acquire),
-            self.pskips.load(Ordering::Acquire),
-            self.dup_iskips.load(Ordering::Acquire),
-            self.dup_pskips.load(Ordering::Acquire),
-        )
-    }
-
-    /// Returns the number of states that were over the max time and then improved below it and
-    /// so re-added to the queue.
-    pub fn readds(&self) -> usize {
-        self.readds.load(Ordering::Acquire)
-    }
-
     fn best_cf(&self) -> &ColumnFamily {
         self.statedb.cf_handle(BEST).unwrap()
     }
 
     fn next_cf(&self) -> &ColumnFamily {
         self.statedb.cf_handle(NEXT).unwrap()
-    }
-
-    /// The key for a ContextWrapper<T> in the queue is:
-    /// the progress (4 bytes)
-    /// the score (4 bytes),
-    /// the total time estimate (4 bytes),
-    /// a sequence number (4 bytes)
-    fn get_heap_key_from_wrapper_score(
-        &self,
-        el: &ContextWrapper<T>,
-        score: SM::Score,
-    ) -> [u8; KS] {
-        self.metric.get_heap_key(el.get(), score)
     }
 
     fn get_queue_entry_wrapper(&self, value: &[u8]) -> Result<ContextWrapper<T>> {
@@ -1028,33 +1030,6 @@ where
         }
     }
 
-    pub fn estimate_time_to_get(
-        &self,
-        ctx: &T,
-        required: Vec<<<W as World>::Location as Location>::LocId>,
-        subsets: Vec<(
-            HashSet<<<W as World>::Location as Location>::LocId, CommonHasher>,
-            i16,
-        )>,
-    ) -> u32 {
-        self.metric
-            .estimator()
-            .estimate_time_to_get(ctx, required, subsets)
-            .try_into()
-            .unwrap()
-    }
-
-    pub fn push_from_queue(&self, el: ContextWrapper<T>, score: SM::Score) -> Result<()> {
-        let progress = el.get().count_visits();
-        let key = self.get_heap_key_from_wrapper_score(&el, score);
-        let val = serialize_state(el.get());
-        self.db.put_opt(key, val, &self.write_opts)?;
-        self.size.fetch_add(1, Ordering::Release);
-        let primary = self.metric.score_primary(score);
-        self.min_db_estimates[progress].fetch_min(primary, Ordering::Release);
-        Ok(())
-    }
-
     /// Resets some min_db_estimates based on removed elements in a range.
     fn reset_estimates_in_range(&self, start_progress: usize, to_progress: usize, score: u32) {
         self.min_db_estimates[to_progress].store(score, Ordering::SeqCst);
@@ -1104,10 +1079,6 @@ where
         self.get_next_steps_raw(&serialize_state(el))
     }
 
-    pub fn count_duplicate(&self) {
-        self.dup_pskips.fetch_add(1, Ordering::Release);
-    }
-
     fn record_one_internal(
         &self,
         state_key: &Vec<u8>,
@@ -1144,14 +1115,6 @@ where
                 &self.write_opts,
             )
             .unwrap();
-    }
-
-    pub fn record_many(
-        &self,
-        states: &mut Vec<ContextWrapper<T>>,
-        prev: &T,
-    ) -> Result<Vec<Option<SM::Score>>> {
-        self.record_processed(prev, states)
     }
 
     pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<()> {
@@ -1260,44 +1223,6 @@ where
             }
         }
         Ok(())
-    }
-
-    pub fn restore(&self) {
-        if !self.recovery.load(Ordering::Acquire) {
-            return;
-        }
-
-        let state_snapshot = self.statedb.snapshot();
-
-        self.reset_estimates_actual();
-        let mut iter_opts = ReadOptions::default();
-        iter_opts.fill_cache(false);
-        let iter = state_snapshot.iterator_cf_opt(self.best_cf(), iter_opts, IteratorMode::Start);
-        let next_cf = self.next_cf();
-        for state_el in iter {
-            let (key, val) = state_el.unwrap();
-            if state_snapshot
-                .get_pinned_cf(next_cf, key.as_ref())
-                .is_ok_and(|o| o.is_some())
-            {
-                self.next.fetch_add(1, Ordering::Release);
-            } else {
-                let state: T = get_obj_from_data(key.as_ref()).unwrap();
-                let data: StateDataAlias<T> = get_obj_from_data(val.as_ref()).unwrap();
-                let score = self.metric().score_from_times(data.best_times());
-                let heap_key_min = self.metric().get_heap_key(&state, score);
-                if self
-                    .db
-                    .put_opt(&heap_key_min, serialize_state(&state), &self.write_opts)
-                    .is_ok()
-                {
-                    self.size.fetch_add(1, Ordering::Release);
-                }
-            }
-        }
-
-        self.recovery.store(false, Ordering::Release);
-        log::info!("Finished scanning state table for restore");
     }
 
     fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<()> {

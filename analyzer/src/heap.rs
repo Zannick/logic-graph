@@ -4,7 +4,9 @@ use crate::bucket::*;
 use crate::context::*;
 use crate::db::{HeapDB, HeapMetric};
 use crate::estimates::ContextScorer;
-use crate::scoring::{BestTimes, EstimatedTimeMetric, ScoreMetric, TimeSinceAndElapsed};
+use crate::scoring::{
+    BestTimes, EstimatedTimeMetric, EstimatorWrapper, ScoreMetric, TimeSinceAndElapsed,
+};
 use crate::steiner::*;
 use crate::storage::ContextDB;
 use crate::world::*;
@@ -50,6 +52,7 @@ where
     capacity: usize,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
+    dup_pskips: AtomicUsize,
     min_evictions: usize,
     max_evictions: usize,
     min_reshuffle: usize,
@@ -93,6 +96,7 @@ where
             capacity: max_capacity,
             iskips: 0.into(),
             pskips: 0.into(),
+            dup_pskips: 0.into(),
             min_evictions,
             max_evictions,
             min_reshuffle,
@@ -139,12 +143,16 @@ where
         self.db.seen()
     }
 
+    /// Returns the number of unique states we've estimated remaining time for.
+    /// Winning states aren't counted in this.
     pub fn estimates(&self) -> usize {
-        self.db.estimates()
+        self.db.metric().estimates()
     }
 
+    /// Returns the number of cache hits for estimated remaining time.
+    /// Winning states aren't counted in this.
     pub fn cached_estimates(&self) -> usize {
-        self.db.cached_estimates()
+        self.db.metric().cached_estimates()
     }
 
     pub fn db_bests(&self) -> Vec<u32> {
@@ -191,10 +199,6 @@ where
         self.retrievals.load(Ordering::Acquire)
     }
 
-    pub fn background_deletes(&self) -> usize {
-        self.db.background_deletes()
-    }
-
     /// Pushes an element into the queue.
     /// If the element's elapsed time is greater than the allowed maximum,
     /// or, the state has been previously seen with an equal or lower elapsed time, does nothing.
@@ -231,7 +235,7 @@ where
                 let BestTimes { elapsed, .. } = self.db.get_best_times(ctx)?;
                 if score > p_max || (score == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
-                    self.db.push_from_queue(el, score)?;
+                    self.db.evict(std::iter::once((el.into_inner(), score)))?;
                 } else {
                     let evictions = std::cmp::min(
                         self.max_evictions,
@@ -335,7 +339,7 @@ where
                     continue;
                 }
                 if self.db.was_processed(&ctx)? {
-                    self.db.count_duplicate();
+                    self.dup_pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
@@ -526,7 +530,7 @@ where
                     continue;
                 }
                 if self.db.was_processed(&ctx)? {
-                    self.db.count_duplicate();
+                    self.dup_pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
                 let progress = ctx.count_visits();
@@ -582,7 +586,7 @@ where
                         continue;
                     }
                     if self.db.was_processed(&ctx)? {
-                        self.db.count_duplicate();
+                        self.dup_pskips.fetch_add(1, Ordering::Release);
                         continue;
                     }
                     let progress = ctx.count_visits();
@@ -669,7 +673,7 @@ where
                             continue;
                         }
                         if self.db.was_processed(&ctx)? {
-                            self.db.count_duplicate();
+                            self.dup_pskips.fetch_add(1, Ordering::Release);
                             continue;
                         }
                         let progress = ctx.count_visits();
@@ -733,7 +737,7 @@ where
                                 continue;
                             }
                             if self.db.was_processed(&ctx)? {
-                                self.db.count_duplicate();
+                                self.dup_pskips.fetch_add(1, Ordering::Release);
                                 continue;
                             }
 
@@ -764,7 +768,7 @@ where
                                     continue;
                                 }
                                 if self.db.was_processed(&ctx)? {
-                                    self.db.count_duplicate();
+                                    self.dup_pskips.fetch_add(1, Ordering::Release);
                                     continue;
                                 }
                                 let progress = ctx.count_visits();
@@ -901,7 +905,7 @@ where
         prev: &T,
     ) -> Result<Vec<(T, usize, Score<'w, W, T>)>> {
         let mut iskips = 0;
-        let keeps = self.db.record_many(&mut vec, prev)?;
+        let keeps = self.db.record_processed(prev, &mut vec)?;
         debug_assert!(vec.len() == keeps.len());
         // TODO: Is it inefficient to deconstruct the wrapper here,
         // and then reconstruct the wrapper for the one element we keep,
@@ -973,13 +977,11 @@ where
         self.db.cleanup(batch_size, exit_signal)
     }
 
-    pub fn skip_stats(&self) -> (usize, usize, usize, usize) {
-        let (iskips, pskips, dup_iskips, dup_pskips) = self.db.skip_stats();
+    pub fn skip_stats(&self) -> (usize, usize, usize) {
         (
-            self.iskips.load(Ordering::Acquire) + iskips,
-            self.pskips.load(Ordering::Relaxed) + pskips,
-            dup_iskips,
-            dup_pskips,
+            self.iskips.load(Ordering::Acquire),
+            self.pskips.load(Ordering::Relaxed),
+            self.dup_pskips.load(Ordering::Acquire),
         )
     }
 

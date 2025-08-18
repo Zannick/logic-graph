@@ -53,6 +53,11 @@ where
     T: Ctx<World = W>,
     SM: ScoreMetric<'w, W, T, KS> + 'w,
 {
+    const NAME: &'static str;
+    fn name(&self) -> &'static str {
+        Self::NAME
+    }
+
     // Scoring
 
     /// Returns a reference to the metric used for scoring.
@@ -102,6 +107,9 @@ where
 
     /// Print data graphs.
     fn print_graphs(&self) -> Result<()>;
+
+    /// Get extra stats details about actions performed or not performed.
+    fn extra_stats(&self) -> String;
 
     // Time
 
@@ -202,4 +210,15 @@ where
         prev: &T,
         states: &mut Vec<ContextWrapper<T>>,
     ) -> Result<Vec<Option<SM::Score>>>;
+
+    // Recovery
+
+    /// Whether the db is in recovery.
+    /// This should return false after `restore()` completes, but can be read from a separate thread.
+    fn recovery(&self) -> bool;
+
+    /// Perform any necessary actions to recover the database from an unexpected showdown
+    /// (such as marking queued elements as unqueued, as we've likely lost the queue; or
+    /// recalculating db-wide analytics; etc).
+    fn restore(&self);
 }

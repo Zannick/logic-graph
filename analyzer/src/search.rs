@@ -1364,15 +1364,18 @@ where
             self.finished.store(true, Ordering::Release);
             self.solution_cvar.notify_all();
         });
-        let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
+        let (iskips, pskips, dpskips) = self.queue.skip_stats();
         log::info!(
-            "Finished after {} rounds ({} dead-ends), skipped {}+{} pushes + {}+{} pops: {}",
+            "Finished after {} rounds ({} dead-ends)\nHeap: skipped {} pushes + {}+{} pops\n\
+            {}: {}\n\
+            Result: {}",
             self.iters.load(Ordering::Acquire),
             self.deadends.load(Ordering::Acquire),
             iskips,
-            dskips,
             pskips,
             dpskips,
+            self.queue.db().name(),
+            self.queue.db().extra_stats(),
             match res.into_inner().unwrap() {
                 Ok(_) => String::from("emptied queue"),
                 Err(s) => s.to_string(),
@@ -1559,7 +1562,7 @@ where
         if iters == 100_000 || iters % 1_000_000 == 0 {
             self.queue.print_queue_histogram();
         }
-        let (iskips, pskips, dskips, dpskips) = self.queue.skip_stats();
+        let (iskips, pskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();
         let pending = self.held.load(Ordering::Acquire);
         // TODO: heap+db range [min bucket, max bucket]
@@ -1574,7 +1577,8 @@ where
             trie size={}, depth={}, values={}; estimates={}; cached={}; evictions={}; retrievals={}\n\
             direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; routes={}, trie size={}\n\
             Greedy stats: org level={}, steps done={}, misses={}, spots={}, proc_in={}, proc_out={}\n\
-            skips: push:{} time, {} dups; pop: {} time, {} dups; readds={}; bgdel={}\n\
+            Heap skips: push {} time; pop: {} time, {} dups\n\
+            {}: {}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
             {}\n\
@@ -1614,11 +1618,10 @@ where
             self.greedy_in_comm.load(Ordering::Acquire),
             self.greedy_out_comm.load(Ordering::Acquire),
             iskips,
-            dskips,
             pskips,
             dpskips,
-            self.queue.db().readds(),
-            self.queue.background_deletes(),
+            self.queue.db().name(),
+            self.queue.db().extra_stats(),
             heap_bests.iter().position(|x| *x != None).unwrap_or(0),
             heap_bests.len().saturating_sub(1),
             heap_bests

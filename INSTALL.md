@@ -9,6 +9,8 @@ In MySQL, you will need to create a user `logic_graph` and grant appropriate per
 ```sql
 CREATE USER 'logic_graph'@'localhost';
 GRANT ALL ON `logic\_graph\_%`.* TO 'logic_graph'@'localhost';
+GRANT SELECT ON `sys`.* TO 'logic_graph'@'localhost';
+GRANT SELECT ON `performance_schema`.* TO 'logic_graph'@'localhost';
 ```
 
 You can use roles but they will have to be set as default roles for diesel-cli.
