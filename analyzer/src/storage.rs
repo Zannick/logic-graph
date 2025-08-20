@@ -47,6 +47,7 @@ where
 ///     - *queued* if it is in the in-memory heap
 ///     - *processed* if its child states have been created (only needs to happen once per state ever)
 ///     - *preserved* if it is *unqueued* and *unprocessed*; not in the in-memory queue but should still be retrievable
+///     - *available* if it is preserved and under the max time limit (states over the limit won't be counted in some functions)
 pub trait ContextDB<'w, W, T, const KS: usize, SM>: Sync
 where
     W: World + 'w,

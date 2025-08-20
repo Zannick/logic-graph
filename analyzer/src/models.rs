@@ -3,7 +3,7 @@ use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
 use crate::storage::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
 use crate::world::{Location, World};
-use diesel::dsl::{not, DuplicatedKeys};
+use diesel::dsl::{min, not, DuplicatedKeys};
 use diesel::expression::functions::*;
 use diesel::mysql::Mysql;
 use diesel::prelude::*;
@@ -568,8 +568,16 @@ where
         state: &T,
         conn: &mut StickyConnection,
     ) -> QueryResult<Vec<HistoryEntry<T>>> {
+        self.full_history_raw(&serialize_state(state), conn)
+    }
+
+    pub fn full_history_raw(
+        &self,
+        key: &[u8],
+        conn: &mut StickyConnection,
+    ) -> QueryResult<Vec<HistoryEntry<T>>> {
         queries::full_history()
-            .bind::<Blob, _>(&serialize_state(state))
+            .bind::<Blob, _>(key)
             .load(self.sticky(conn))
             .map(|vec| vec.into_iter().map(|hs: HistoryState| hs.into()).collect())
     }
@@ -630,48 +638,61 @@ mod queries {
     );
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn lookup_state<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn lookup_state<'a>(key: &'a [u8]) -> _ {
         db_states.find(key)
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_best_times<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn get_best_times<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select::<AsSelect<BestTimes, Mysql>>(BestTimes::as_select())
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_next_steps<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn get_next_steps<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select(next_steps)
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn has_next_steps<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn has_next_steps<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select(next_steps.is_not_null())
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_processed<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn get_processed<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select(processed)
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_prev_hist<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn get_prev_hist<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select((prev, hist))
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_elapsed_prev_hist<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn get_elapsed_prev_hist<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select((elapsed, prev, hist))
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn row_exists<'a>(key: &'a Vec<u8>) -> _ {
+    pub fn get_estimate<'a>(key: &'a [u8]) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select(estimated_remaining)
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_estimates<'a>(keys: &'a [Vec<u8>]) -> _ {
+        db_states
+            .filter(raw_state.eq_any(keys))
+            .select((raw_state, estimated_remaining))
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn row_exists<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         select(exists(row.select(1i32.into_sql::<Integer>())))
     }
@@ -687,10 +708,21 @@ mod queries {
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_estimates<'a>(keys: &'a [Vec<u8>]) -> _ {
-        db_states
-            .filter(raw_state.eq_any(keys))
-            .select((raw_state, estimated_remaining))
+    pub fn preserved() -> _ {
+        let q: IsQueued = is_queued();
+        let u: Unprocessed = unprocessed();
+        q.and(u)
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn available(max_time: u32) -> _ {
+        let p: Preserved = preserved();
+        p.and(elapsed.lt(max_time))
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn score() -> _ {
+        elapsed + estimated_remaining
     }
 
     pub fn full_history() -> SqlQuery {
