@@ -1645,7 +1645,7 @@ where
                 .join(", "),
             ctx.info(
                 self.queue.estimated_remaining_time(ctx),
-                self.queue.db().get_last_history_step(ctx).unwrap()
+                self.queue.db().get_last_history_step_wrapper(ctx).unwrap()
             ),
             if needed.len() > 10 {
                 format!("{:?} + {} more types", needed[..10].to_vec(), needed.len() - 10)

@@ -58,7 +58,7 @@ where
         Self::NAME
     }
 
-    // Scoring
+    // region: Scoring
 
     /// Returns a reference to the metric used for scoring.
     fn metric(&self) -> &SM;
@@ -77,10 +77,11 @@ where
     > {
         self.metric().estimator()
     }
+    // endregion
 
-    // Stats
+    // region: Stats
 
-    /// Returns the number of elements in the queue.
+    /// Returns the number of preserved elements in the queue.
     fn len(&self) -> usize;
     fn is_empty(&self) -> bool {
         self.len() == 0
@@ -110,8 +111,9 @@ where
 
     /// Get extra stats details about actions performed or not performed.
     fn extra_stats(&self) -> String;
+    // endregion
 
-    // Time
+    // region: Time
 
     /// Max allowable time for a route.
     /// 
@@ -123,8 +125,9 @@ where
     fn set_lenient_max_time(&self, max_time: u32) {
         self.set_max_time(max_time + (max_time / 1024))
     }
+    // endregion
 
-    // Reads
+    // region: Reads
 
     /// Returns the best times recorded to reach the given encoded state.
     fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes>;
@@ -156,11 +159,28 @@ where
     }
 
     /// Returns the best route in the db to reach the given encoded state, and the route's total elapsed time.
-    fn get_history_raw(&self, state_key: Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)>;
+    fn get_history_raw(&self, state_key: &Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)>;
     /// Returns the best route in the db to reach the given state, and the route's total elapsed time.
     fn get_history(&self, el: &T) -> Result<(Vec<HistoryAlias<T>>, u32)> {
-        self.get_history_raw(serialize_state(el))
+        self.get_history_raw(&serialize_state(el))
     }
+    /// Returns the last step in the history of a state.
+    fn get_last_history_step(
+        &self,
+        el: &T,
+    ) -> Result<Option<HistoryAlias<T>>>;
+    /// Returns the last step in the history of a wrapped state (which might be in the wrapper).
+    fn get_last_history_step_wrapper(
+        &self,
+        ctx: &ContextWrapper<T>,
+    ) -> Result<Option<HistoryAlias<T>>> {
+        if let Some(h) = ctx.recent_history().last() {
+            Ok(Some(*h))
+        } else {
+            self.get_last_history_step(ctx.get())
+        }
+    }
+    // endregion
 
     // Writes
 

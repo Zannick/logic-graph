@@ -278,23 +278,26 @@ where
         )
     }
 
-    fn get_history_raw(&self, mut state_key: Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)> {
-        assert!(self.quick_detect_2cycle(&state_key).is_ok());
+    fn get_history_raw(&self, state_key: &Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)> {
+        assert!(self.quick_detect_2cycle(state_key).is_ok());
         let mut vec = Vec::new();
         let Some(StateData {
             elapsed,
             mut hist,
             mut prev,
             ..
-        }) = self.get_deserialize_state_data(&state_key)?
+        }) = self.get_deserialize_state_data(state_key)?
         else {
             return Err(Error::msg(format!(
                 "Could not find state entry for {:?}",
-                deserialize_state::<T>(&state_key)
+                deserialize_state::<T>(state_key)
                     .expect("Failed to deserialize while reporting an error")
             )));
         };
+        // hold the previous prev value so it doesn't fall out of scope while we reference it.
+        let mut state_holder = None;
         while !prev.is_empty() {
+            let key = state_holder.as_ref().unwrap_or(state_key);
             assert!(
                 hist.len() < TOO_MANY_STEPS,
                 "History entry found in statedb way too long: {}. Last 24:\n{:?}",
@@ -302,7 +305,7 @@ where
                 hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
             );
             if vec.len() >= TOO_MANY_STEPS {
-                assert!(self.detect_cycle(state_key).is_ok());
+                assert!(self.detect_cycle(&key).is_ok());
             }
             assert!(
                 vec.len() < TOO_MANY_STEPS,
@@ -310,15 +313,15 @@ where
                 vec.len(),
                 vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
             );
-            state_key = prev;
-            vec.push(hist);
-            if let Some(next) = self.get_deserialize_state_data(&state_key)? {
+            if let Some(next) = self.get_deserialize_state_data(&key)? {
+                vec.push(hist);
                 hist = next.hist;
+                state_holder.replace(prev);
                 prev = next.prev;
             } else {
                 return Err(Error::msg(format!(
                     "Could not find intermediate state entry for {:?}",
-                    deserialize_state::<T>(&state_key)
+                    deserialize_state::<T>(&key)
                         .expect("Failed to deserialize while reporting an error")
                 )));
             }
@@ -326,6 +329,12 @@ where
 
         vec.reverse();
         Ok((vec.into_iter().flatten().collect(), elapsed))
+    }
+
+    fn get_last_history_step(&self, el: &T) -> Result<Option<HistoryAlias<T>>> {
+        Ok(self
+            .get_deserialize_state_data(&serialize_state(el))?
+            .and_then(|sd| sd.hist.last().copied()))
     }
 
     /// Pushes an element into the db.
@@ -1246,15 +1255,16 @@ where
         Ok(())
     }
 
-    fn detect_cycle(&self, mut state_key: Vec<u8>) -> Result<()> {
+    fn detect_cycle(&self, state_key: &Vec<u8>) -> Result<()> {
         let mut states_found: HashMap<Vec<u8>, usize, CommonHasher> = new_hashmap();
         let mut depth = 0;
         let mut hist_vec = Vec::new();
+        // hold the previous prev value so it doesn't fall out of scope while we reference it.
+        let mut state_holder = None;
         loop {
-            states_found.insert(state_key.clone(), depth);
-            if let Some(StateData { hist, prev, .. }) =
-                self.get_deserialize_state_data(&state_key)?
-            {
+            let key = state_holder.as_ref().unwrap_or(state_key);
+            states_found.insert(key.clone(), depth);
+            if let Some(StateData { hist, prev, .. }) = self.get_deserialize_state_data(key)? {
                 hist_vec.push(hist);
                 depth += 1;
                 if let Some(existing_depth) = states_found.get(&prev) {
@@ -1264,27 +1274,14 @@ where
                         depth - existing_depth,
                         existing_depth,
                         hist.into_iter().rev().collect::<Vec<_>>(),
-                        deserialize_state::<T>(&state_key)
+                        deserialize_state::<T>(key)
                             .expect("Failed to deserialize while reporting an error")
                     );
                 }
-                state_key = prev;
+                state_holder.replace(prev);
             } else {
                 return Ok(());
             }
-        }
-    }
-
-    pub fn get_last_history_step(
-        &self,
-        ctx: &ContextWrapper<T>,
-    ) -> Result<Option<HistoryAlias<T>>> {
-        if let Some(h) = ctx.recent_history().last() {
-            Ok(Some(*h))
-        } else {
-            Ok(self
-                .get_deserialize_state_data(&serialize_state(ctx.get()))?
-                .and_then(|sd| sd.hist.last().copied()))
         }
     }
 
