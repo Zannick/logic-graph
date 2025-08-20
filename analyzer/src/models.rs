@@ -73,7 +73,6 @@ impl DBState {
         Self::from_ctx_with_raw(
             serialize_state(ctx.get()),
             ctx,
-            is_solution,
             serialized_prev,
             queue,
             metric.estimated_remaining_time(ctx.get()),
@@ -83,7 +82,6 @@ impl DBState {
     pub fn from_ctx_with_raw<W, T>(
         raw: Vec<u8>,
         ctx: &ContextWrapper<T>,
-        is_solution: bool,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
         estimated_time_remaining: u32,
@@ -101,7 +99,7 @@ impl DBState {
             time_since_visit: ctx.time_since_visit(),
             estimated_remaining: estimated_time_remaining,
             step_time: ctx.recent_dur(),
-            won: is_solution,
+            won: ctx.won(),
             hist: if h.is_empty() {
                 None
             } else {
@@ -114,7 +112,7 @@ impl DBState {
                 Some(serialize_data(h[0]))
             },
             prev: serialized_prev,
-            queued: !is_solution && queue,
+            queued: !ctx.won() && queue,
             ..Default::default()
         }
     }
@@ -322,7 +320,6 @@ where
     pub fn encode_one_for_upsert(
         &self,
         ctx: &ContextWrapper<T>,
-        is_solution: bool,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
         conn: &mut StickyConnection,
@@ -333,13 +330,12 @@ where
         } else {
             self.metric.estimated_remaining_time(ctx.get())
         };
-        DBState::from_ctx_with_raw(key, ctx, is_solution, serialized_prev, queue, est)
+        DBState::from_ctx_with_raw(key, ctx, serialized_prev, queue, est)
     }
 
     pub fn encode_many_for_upsert(
         &self,
         ctxs_prevs: Vec<(&ContextWrapper<T>, Option<Vec<u8>>)>,
-        world: &W,
         queue: bool,
         conn: &mut StickyConnection,
     ) -> Vec<DBState> {
@@ -355,7 +351,7 @@ where
                     .get(&key)
                     .copied()
                     .unwrap_or_else(|| self.metric.estimated_remaining_time(ctx.get()));
-                DBState::from_ctx_with_raw(key, ctx, world.won(ctx.get()), sprev, queue, est)
+                DBState::from_ctx_with_raw(key, ctx, sprev, queue, est)
             })
             .collect()
     }
@@ -363,12 +359,11 @@ where
     pub fn insert_one(
         &self,
         ctx: &ContextWrapper<T>,
-        is_solution: bool,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
         conn: &mut StickyConnection,
     ) -> QueryResult<usize> {
-        let value = self.encode_one_for_upsert(ctx, is_solution, serialized_prev, queue, conn);
+        let value = self.encode_one_for_upsert(ctx, serialized_prev, queue, conn);
         let new_elapsed = value.elapsed;
         diesel::insert_into(db_states)
             .values(value)
@@ -448,7 +443,6 @@ where
     pub fn insert_processed(
         &self,
         ctx: &ContextWrapper<T>,
-        world: &W,
         next_states: &Vec<ContextWrapper<T>>,
         conn: &mut StickyConnection,
     ) -> QueryResult<(Vec<DBState>, usize)> {
@@ -469,7 +463,6 @@ where
                 .iter()
                 .zip(std::iter::repeat(Some(&parent_state).cloned()))
                 .collect(),
-            world,
             true,
             conn,
         );
@@ -490,11 +483,10 @@ where
     pub fn insert_processed_and_improve(
         &self,
         ctx: &ContextWrapper<T>,
-        world: &W,
         next_states: &Vec<ContextWrapper<T>>,
     ) -> QueryResult<usize> {
         let mut conn = self.get_sticky_connection();
-        let (values, count) = self.insert_processed(ctx, world, next_states, &mut conn)?;
+        let (values, count) = self.insert_processed(ctx, next_states, &mut conn)?;
         let mut q = queries::improve_downstream(values.len()).into_boxed();
         for value in values {
             q = q.bind::<Blob, _>(value.raw_state);

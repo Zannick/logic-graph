@@ -357,7 +357,7 @@ where
     let mut ctx = ContextWrapper::new(startctx.clone());
 
     let db = MySQLDB::connect(metric);
-    db.insert_one(&ctx, false, None, false, &mut db.get_sticky_connection())
+    db.insert_one(&ctx, None, false, &mut db.get_sticky_connection())
         .map_err(|e| e.to_string())?;
     let mut proc = 0;
     if process {
@@ -381,7 +381,7 @@ where
                 Ok(false) | Err(NotFound) => {
                     // process state
                     let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
-                    let res = db.insert_processed_and_improve(&ctx, world, &next);
+                    let res = db.insert_processed_and_improve(&ctx, &next);
                     if let Err(e) = res {
                         log::error!("Processed {} states before error detected", proc);
                         return Err(e.to_string());
@@ -428,6 +428,6 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
         .map(|(prev, ctx)| (ctx, Some(serialize_state(prev.get()))))
         .collect::<Vec<_>>();
     full_pairs.push((&full_history[0], None)); // first state
-    let states = db.encode_many_for_upsert(full_pairs, world, true, conn);
+    let states = db.encode_many_for_upsert(full_pairs, true, conn);
     db.insert_batch(&states, conn).unwrap();
 }

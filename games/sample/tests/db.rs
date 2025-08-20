@@ -186,7 +186,6 @@ fn test_mysql() {
 
     db.insert_one(
         &ContextWrapper::new(startctx.clone()),
-        false,
         None,
         false,
         &mut conn,
