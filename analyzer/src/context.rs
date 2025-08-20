@@ -495,6 +495,7 @@ pub trait Wrapper<T> {
     fn get(&self) -> &T;
     fn elapsed(&self) -> u32;
     fn time_since_visit(&self) -> u32;
+    fn won(&self) -> bool;
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
@@ -504,6 +505,7 @@ pub struct BaseContextWrapper<T, I, S, L, E, A, Wp> {
     time_since_visit: u32,
     hist_dur: u32,
     hist: Vec<History<I, S, L, E, A, Wp>>,
+    won: bool,
 }
 
 pub type ContextWrapper<T> = BaseContextWrapper<
@@ -526,6 +528,9 @@ impl<T: Ctx> Wrapper<T> for ContextWrapper<T> {
     fn time_since_visit(&self) -> u32 {
         self.time_since_visit
     }
+    fn won(&self) -> bool {
+        self.won
+    }
 }
 
 impl<T: Ctx> ContextWrapper<T> {
@@ -536,6 +541,7 @@ impl<T: Ctx> ContextWrapper<T> {
             time_since_visit: 0,
             hist_dur: 0,
             hist: Vec::new(),
+            won: false,
         }
     }
 
@@ -564,6 +570,7 @@ impl<T: Ctx> ContextWrapper<T> {
             time_since_visit,
             hist_dur: 0,
             hist: Vec::new(),
+            won: false,
         }
     }
 
@@ -596,6 +603,10 @@ impl<T: Ctx> ContextWrapper<T> {
         let hist_dur = self.hist_dur;
         self.hist_dur = 0;
         (r, hist_dur)
+    }
+
+    pub fn set_won(&mut self) {
+        self.won = true;
     }
 
     fn elapse(&mut self, t: u32) {

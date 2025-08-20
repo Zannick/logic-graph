@@ -25,10 +25,7 @@ use std::time::{Duration, Instant};
 
 #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
 mod jemalloc {
-    use axum::{
-        http::StatusCode,
-        response::{IntoResponse},
-    };
+    use axum::{http::StatusCode, response::IntoResponse};
 
     pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
         let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
@@ -361,11 +358,12 @@ where
 
         let mut wins = Vec::new();
         let mut others = Vec::new();
-        for c in routes {
+        for mut c in routes {
             if world.won(c.get()) {
+                c.set_won();
                 wins.push(c);
             } else {
-                others.push(c)
+                others.push(c);
             }
         }
 
@@ -744,8 +742,9 @@ where
         (
             states
                 .into_iter()
-                .filter_map(|ctx| {
+                .filter_map(|mut ctx| {
                     if self.world.won(ctx.get()) {
+                        ctx.set_won();
                         if ctx.elapsed() < max_time {
                             solutions.push(ctx);
                         }
@@ -1002,6 +1001,7 @@ where
                                     .collect();
                                 if remaining.is_empty() {
                                     if self.world.won(ctx.get()) {
+                                        ctx.set_won();
                                         self.handle_solution(&mut ctx, None, SearchMode::Unknown);
                                     } else {
                                         self.deadends.fetch_add(1, Ordering::Release);
@@ -1157,11 +1157,10 @@ where
         let rt = tokio::runtime::Runtime::new()?;
         #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
         rt.spawn(async {
-            let app = axum::Router::new()
-                .route(
-                    "/debug/pprof/heap",
-                    axum::routing::get(jemalloc::handle_get_heap),
-                );
+            let app = axum::Router::new().route(
+                "/debug/pprof/heap",
+                axum::routing::get(jemalloc::handle_get_heap),
+            );
 
             // run our app with hyper, listening globally on port 3000
             let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
@@ -1456,6 +1455,7 @@ where
 
         if ctx.get().count_visits() >= W::NUM_CANON_LOCATIONS {
             if self.world.won(ctx.get()) {
+                ctx.set_won();
                 self.handle_solution(&mut ctx, None, SearchMode::Unknown);
             } else {
                 self.deadends.fetch_add(1, Ordering::Release);
