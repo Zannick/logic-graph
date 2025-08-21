@@ -60,7 +60,6 @@ pub struct DBState {
 impl DBState {
     pub fn from_ctx<'w, W, T>(
         ctx: &ContextWrapper<T>,
-        is_solution: bool,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
         metric: &impl EstimatorWrapper<'w, W>,
