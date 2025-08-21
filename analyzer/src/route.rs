@@ -381,7 +381,7 @@ where
                 Ok(false) | Err(NotFound) => {
                     // process state
                     let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
-                    let res = db.insert_processed_and_improve(&ctx, &next);
+                    let res = db.insert_processed_and_improve(ctx.get(), &next);
                     if let Err(e) = res {
                         log::error!("Processed {} states before error detected", proc);
                         return Err(e.to_string());

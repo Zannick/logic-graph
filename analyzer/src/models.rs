@@ -1,19 +1,22 @@
 use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
-use crate::storage::{get_obj_from_data, serialize_data, serialize_state, NextSteps};
+use crate::storage::{get_obj_from_data, serialize_data, serialize_state, ContextDB, NextSteps};
 use crate::world::{Location, World};
+use anyhow::Result;
 use diesel::dsl::{min, not, DuplicatedKeys};
 use diesel::expression::functions::*;
 use diesel::mysql::Mysql;
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool, PooledConnection};
+use diesel::result::Error::NotFound;
 use diesel::sql_types::*;
 use dotenvy::dotenv;
 use rayon::prelude::*;
 use rustc_hash::FxHashMap;
 use std::env;
 use std::marker::PhantomData;
+use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
 const TEST_DATABASE_URL: &'static str = "mysql://logic_graph@localhost/logic_graph__unittest";
@@ -254,6 +257,284 @@ pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
     pool: Pool<ConnectionManager<MysqlConnection>>,
     metric: SM,
     phantom: PhantomData<&'w (W, T)>,
+    max_time: AtomicU32,
+    recovery: AtomicBool,
+}
+
+impl<'w, W, T, const KS: usize, SM> ContextDB<'w, W, T, KS, SM> for MySQLDB<'w, W, T, KS, SM>
+where
+    W: World + 'w,
+    T: Ctx<World = W>,
+    W::Location: Location<Context = T>,
+    SM: ScoreMetric<'w, W, T, KS> + 'w,
+{
+    const NAME: &'static str = "MySQLDB";
+
+    fn metric(&self) -> &SM {
+        &self.metric
+    }
+
+    // region: Stats
+    fn len(&self) -> usize {
+        db_states
+            .filter(queries::preserved())
+            .count()
+            .get_result::<i64>(&mut self.pool_connection())
+            .unwrap() as usize
+    }
+
+    fn seen(&self) -> usize {
+        db_states
+            .count()
+            .get_result::<i64>(&mut self.pool_connection())
+            .unwrap() as usize
+    }
+
+    fn processed(&self) -> usize {
+        db_states
+            .filter(processed.eq(true))
+            .count()
+            .get_result::<i64>(&mut self.pool_connection())
+            .unwrap() as usize
+    }
+
+    fn preserved_best(&self, prog: usize) -> u32 {
+        db_states
+            .filter(
+                progress
+                    .eq(prog as u32)
+                    .and(queries::available(self.max_time())),
+            )
+            // "best" uses the score primary, which is time_since for TimeSinceAndElapsed
+            // and the estimated total time for EstimatedTimeMetric
+            .select(min(time_since_visit))
+            .first::<Option<u32>>(&mut self.pool_connection())
+            .unwrap()
+            .unwrap_or(u32::MAX)
+    }
+
+    fn preserved_bests(&self) -> Vec<u32> {
+        let mut bests = vec![u32::MAX; W::NUM_CANON_LOCATIONS];
+        for (prog, score) in db_states
+            .filter(queries::available(self.max_time()))
+            .group_by(progress)
+            // Ideally this would be changeable to the current MetricType primary
+            // (we can't do min on a tuple) but writing a type is hard. TODO: features?
+            .select((progress, min(time_since_visit)))
+            .get_results::<(u32, Option<u32>)>(&mut self.pool_connection())
+            .unwrap()
+        {
+            if let Some(sc) = score {
+                bests[prog as usize] = sc;
+            }
+        }
+        bests
+    }
+
+    fn min_preserved_progress(&self) -> Option<usize> {
+        db_states
+            .filter(queries::preserved())
+            .select(min(progress))
+            .first::<Option<u32>>(&mut self.pool_connection())
+            .unwrap()
+            .map(|u| u as usize)
+    }
+
+    fn print_graphs(&self) -> Result<()> {
+        todo!()
+    }
+
+    fn extra_stats(&self) -> String {
+        todo!()
+    }
+    // endregion: Stats
+
+    // region: Time
+
+    fn max_time(&self) -> u32 {
+        self.max_time.load(Ordering::Acquire)
+    }
+    fn set_max_time(&self, max_time: u32) {
+        self.max_time.fetch_min(max_time, Ordering::Release);
+    }
+    // endregion
+
+    // region: Reads
+
+    fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes> {
+        Ok(queries::get_best_times(state_key).first(&mut self.pool_connection())?)
+    }
+
+    fn estimated_remaining_time(&self, ctx: &T) -> u32 {
+        queries::get_estimate(&serialize_state(ctx))
+            .first(&mut self.pool_connection())
+            .unwrap_or_else(|err| {
+                assert!(
+                    matches!(err, NotFound),
+                    "Unexpected error reading estimated_remaining: {}",
+                    err
+                );
+                // We don't initiate a write to db in this case
+                // because we assume the state will be added directly later
+                self.metric.estimated_remaining_time(ctx)
+            })
+    }
+
+    fn was_processed_raw(&self, key: &[u8]) -> Result<bool> {
+        Ok(queries::get_processed(key).first(&mut self.pool_connection())?)
+    }
+
+    fn get_history_raw(&self, state_key: &Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)> {
+        let entries = self.full_history_raw(state_key, &mut self.get_sticky_connection())?;
+        let total_time = entries.last().map_or(0, |entry| entry.elapsed);
+        Ok((
+            entries.into_iter().filter_map(|entry| entry.hist).collect(),
+            total_time,
+        ))
+    }
+
+    fn get_last_history_step(&self, el: &T) -> Result<Option<HistoryAlias<T>>> {
+        let hist_raw = queries::lookup_state(&serialize_state(el))
+            .select(hist)
+            .first::<Option<Vec<u8>>>(&mut self.pool_connection())?;
+        Ok(hist_raw.map(|r| get_obj_from_data(&r).unwrap()))
+    }
+    // endregion
+
+    // region: Writes
+
+    fn push(&self, el: ContextWrapper<T>, parent: Option<&T>) -> Result<()> {
+        let mut conn = self.get_sticky_connection();
+        let dbst = self
+            .insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?
+            .0;
+        self.improve_downstream_raw(&[&dbst.raw_state], &mut conn)?;
+        Ok(())
+    }
+
+    fn pop(&self, start_progress: usize) -> Result<Option<ContextWrapper<T>>> {
+        let mut conn = self.get_sticky_connection();
+        let (state, best) = match queries::best_available(1, start_progress as u32, self.max_time())
+            .select((raw_state, BestTimes::as_select()))
+            .first::<(Vec<u8>, BestTimes)>(self.sticky(&mut conn))
+        {
+            Ok(s) => s,
+            Err(NotFound) => return Ok(None),
+            Err(e) => return Err(e.into()),
+        };
+        let ctx = ContextWrapper::with_times(
+            get_obj_from_data(&state).unwrap(),
+            best.elapsed,
+            best.time_since_visit,
+        );
+        diesel::update(queries::lookup_state(&state))
+            .set(queued.eq(true))
+            .execute(self.sticky(&mut conn))?;
+        Ok(Some(ctx))
+    }
+
+    fn evict(&self, iter: impl IntoIterator<Item = (T, SM::Score)>) -> Result<()> {
+        // We don't have the full state information, so instead we'll assume that all evicted items
+        // have been stored previously. As such, just set them all as unqueued.
+        diesel::update(queries::lookup_many(
+            &iter
+                .into_iter()
+                .map(|(t, _)| serialize_state(&t))
+                .collect::<Vec<_>>(),
+        ))
+        .set(queued.eq(false))
+        .execute(&mut self.pool_connection())?;
+        Ok(())
+    }
+
+    fn retrieve(
+        &self,
+        start_progress: usize,
+        count: usize,
+        score_limit: u32,
+    ) -> Result<Vec<(T, SM::Score)>> {
+        let mut conn = self.get_sticky_connection();
+        let sts = queries::best_available(count as i64, start_progress as u32, self.max_time())
+            .filter(queries::estimated_total().le(score_limit))
+            .select((raw_state, BestTimes::as_select()))
+            .load::<(Vec<u8>, BestTimes)>(self.sticky(&mut conn))?;
+        let res = sts
+            .iter()
+            .map(|(rs, bests)| {
+                (
+                    get_obj_from_data(&rs).unwrap(),
+                    SM::score_from_times(*bests),
+                )
+            })
+            .collect();
+
+        // After reconstructing the state objects, we can reuse the raw states to update the db.
+        let just_states = sts.into_iter().map(|(s, _)| s).collect::<Vec<_>>();
+        diesel::update(queries::lookup_many(&just_states))
+            .set(queued.eq(true))
+            .execute(self.sticky(&mut conn))?;
+        Ok(res)
+    }
+
+    fn record_one(
+        &self,
+        el: &mut ContextWrapper<T>,
+        parent: Option<&T>,
+    ) -> Result<Option<SM::Score>> {
+        let mut conn = self.get_sticky_connection();
+        let (dbst, _) =
+            self.insert_one(&el, parent.map(|p| serialize_state(p)), true, &mut conn)?;
+        self.improve_downstream_raw(&[&dbst.raw_state], &mut conn)?;
+        let best_times = queries::get_best_times(&dbst.raw_state).first(self.sticky(&mut conn))?;
+        // estimated time cannot change, so we only have to compare elapsed
+
+        Ok(Some(SM::score_from_times(best_times)))
+    }
+
+    fn record_processed(
+        &self,
+        parent: &T,
+        states: &mut Vec<ContextWrapper<T>>,
+    ) -> Result<Vec<Option<SM::Score>>> {
+        let mut conn = self.get_sticky_connection();
+        let dbsts = self.insert_processed_and_improve(parent, states)?.0;
+        // TODO: pass serialized states by reference? like &[&Vec<u8>] instead of &[Vec<u8>]
+        let keys = dbsts
+            .iter()
+            .map(|dbst| dbst.raw_state.clone())
+            .collect::<Vec<_>>();
+
+        // Retrieve the best times of each child state to see if we have the best time
+        let emap = FxHashMap::from_iter(
+            queries::get_bests(&keys).load::<(Vec<u8>, BestTimes)>(self.sticky(&mut conn))?,
+        );
+        Ok(dbsts
+            .into_iter()
+            .map(|dbst| {
+                let new_best = emap.get(&dbst.raw_state).unwrap();
+                if dbst.elapsed > new_best.elapsed {
+                    // not improved
+                    None
+                } else {
+                    Some(SM::score_from_times(*new_best))
+                }
+            })
+            .collect())
+    }
+
+    fn recovery(&self) -> bool {
+        self.recovery.load(Ordering::Acquire)
+    }
+
+    fn restore(&self) {
+        self.recovery.store(true, Ordering::Release);
+        diesel::update(db_states.filter(queued.eq(true)))
+            .set(queued.eq(false))
+            .execute(&mut self.pool_connection())
+            .unwrap();
+        self.recovery.store(false, Ordering::Release);
+    }
+    // endregion
 }
 
 impl<'w, W, T, const KS: usize, SM> MySQLDB<'w, W, T, KS, SM>
@@ -272,6 +553,8 @@ where
                 .expect("Could not build MySQL connection pool"),
             metric,
             phantom: PhantomData::default(),
+            max_time: u32::MAX.into(),
+            recovery: false.into(),
         }
     }
 
@@ -288,6 +571,8 @@ where
                 .expect("Could not build MySQL connection pool"),
             metric,
             phantom: PhantomData::default(),
+            max_time: u32::MAX.into(),
+            recovery: false.into(),
         };
 
         let mut conn = db.pool.get().unwrap();
@@ -310,6 +595,10 @@ where
     /// Initializes the StickyConnection if necessary and returns the pool connection inside it.
     pub fn sticky<'a>(&self, conn: &'a mut StickyConnection) -> &'a mut MysqlPoolConnection {
         conn.get_or_insert_with(|| self.pool.get().expect("Failed to get a pool connection"))
+    }
+
+    fn pool_connection(&self) -> MysqlPoolConnection {
+        self.pool.get().expect("Failed to get a pool connection")
     }
 
     pub fn metric(&self) -> &SM {
@@ -355,17 +644,18 @@ where
             .collect()
     }
 
+    // Constructs a row for the given state, commits it to the database, and returns it to the caller.
     pub fn insert_one(
         &self,
         ctx: &ContextWrapper<T>,
         serialized_prev: Option<Vec<u8>>,
         queue: bool,
         conn: &mut StickyConnection,
-    ) -> QueryResult<usize> {
+    ) -> QueryResult<(DBState, usize)> {
         let value = self.encode_one_for_upsert(ctx, serialized_prev, queue, conn);
         let new_elapsed = value.elapsed;
-        diesel::insert_into(db_states)
-            .values(value)
+        let res = diesel::insert_into(db_states)
+            .values(&value)
             .on_conflict(DuplicatedKeys)
             .do_update()
             .set((
@@ -387,7 +677,8 @@ where
                 // Otherwise, we set it to what we have this time.
                 queued.eq(not(processed).and(insertvalues(queued))),
             ))
-            .execute(self.sticky(conn))
+            .execute(self.sticky(conn))?;
+        Ok((value, res))
     }
 
     pub fn insert_batch(
@@ -441,11 +732,11 @@ where
     /// It's assumed that all subsequent states will be queued if new.
     pub fn insert_processed(
         &self,
-        ctx: &ContextWrapper<T>,
+        proc: &T,
         next_states: &Vec<ContextWrapper<T>>,
         conn: &mut StickyConnection,
     ) -> QueryResult<(Vec<DBState>, usize)> {
-        let parent_state = serialize_state(ctx.get());
+        let parent_state = serialize_state(proc);
         let mut next_hists = Vec::new();
         for next_state in next_states {
             let h = next_state.recent_history();
@@ -481,16 +772,17 @@ where
 
     pub fn insert_processed_and_improve(
         &self,
-        ctx: &ContextWrapper<T>,
+        proc: &T,
         next_states: &Vec<ContextWrapper<T>>,
-    ) -> QueryResult<usize> {
+    ) -> QueryResult<(Vec<DBState>, usize)> {
         let mut conn = self.get_sticky_connection();
-        let (values, count) = self.insert_processed(ctx, next_states, &mut conn)?;
+        let (values, count) = self.insert_processed(proc, next_states, &mut conn)?;
         let mut q = queries::improve_downstream(values.len()).into_boxed();
-        for value in values {
-            q = q.bind::<Blob, _>(value.raw_state);
+        for value in &values {
+            q = q.bind::<Blob, _>(&value.raw_state);
         }
-        Ok(count + q.execute(self.sticky(&mut conn))?)
+        let count = count + q.execute(self.sticky(&mut conn))?;
+        Ok((values, count))
     }
 
     pub fn get_record(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<DBEntry<T>> {
@@ -499,16 +791,28 @@ where
             .map(|row: DBState| row.into())
     }
 
-    pub fn get_best_times(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<BestTimes> {
-        queries::get_best_times(&serialize_state(state)).first(self.sticky(conn))
-    }
-
     pub fn get_estimates(
         &self,
         keys: &[Vec<u8>],
         conn: &mut StickyConnection,
     ) -> QueryResult<Vec<(Vec<u8>, u32)>> {
         queries::get_estimates(keys).load(self.sticky(conn))
+    }
+
+    pub fn get_best_conn(
+        &self,
+        state: &T,
+        conn: &mut StickyConnection,
+    ) -> Result<BestTimes> {
+        Ok(queries::get_best_times(&serialize_state(state)).first(self.sticky(conn))?)
+    }
+
+    pub fn get_best_conn_raw(
+        &self,
+        state_key: &[u8],
+        conn: &mut StickyConnection,
+    ) -> Result<BestTimes> {
+        Ok(queries::get_best_times(state_key).first(self.sticky(conn))?)
     }
 
     pub fn get_prev_hist(
@@ -576,8 +880,8 @@ where
     /// Recursively update the times for the states downstream from the given states.
     ///
     /// This is guaranteed safe and correct if no given state that had an improvement to pass
-    /// downstream is in another given state's downstream, which should automatically be the case as long as
-    /// as the given states passed in together are from the same "next" cohort of a processed state.
+    /// downstream is in another given state's downstream, which should automatically be the case
+    /// because those improved states are now immediate descendants of the updated states.
     pub fn improve_downstream(
         &self,
         states: &[&T],
@@ -586,6 +890,23 @@ where
         let mut q = queries::improve_downstream(states.len()).into_boxed();
         for state in states {
             q = q.bind::<Blob, _>(serialize_state(*state))
+        }
+        q.execute(self.sticky(conn))
+    }
+
+    /// Recursively update the times for the states downstream from the given encoded states.
+    ///
+    /// This is guaranteed safe and correct if no given state that had an improvement to pass
+    /// downstream is in another given state's downstream, which should automatically be the case
+    /// because those improved states are now immediate descendants of the updated states.
+    pub fn improve_downstream_raw(
+        &self,
+        states: &[&Vec<u8>],
+        conn: &mut StickyConnection,
+    ) -> QueryResult<usize> {
+        let mut q = queries::improve_downstream(states.len()).into_boxed();
+        for state in states {
+            q = q.bind::<Blob, _>(*state)
         }
         q.execute(self.sticky(conn))
     }
@@ -634,6 +955,11 @@ mod queries {
     }
 
     #[auto_type(type_case = "PascalCase")]
+    pub fn lookup_many<'a>(keys: &'a [Vec<u8>]) -> _ {
+        db_states.filter(raw_state.eq_any(keys))
+    }
+
+    #[auto_type(type_case = "PascalCase")]
     pub fn get_best_times<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select::<AsSelect<BestTimes, Mysql>>(BestTimes::as_select())
@@ -676,16 +1002,21 @@ mod queries {
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_estimates<'a>(keys: &'a [Vec<u8>]) -> _ {
-        db_states
-            .filter(raw_state.eq_any(keys))
-            .select((raw_state, estimated_remaining))
-    }
-
-    #[auto_type(type_case = "PascalCase")]
     pub fn row_exists<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         select(exists(row.select(1i32.into_sql::<Integer>())))
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_estimates<'a>(keys: &'a [Vec<u8>]) -> _ {
+        let rows: LookupMany<'a> = lookup_many(keys);
+        rows.select((raw_state, estimated_remaining))
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_bests<'a>(keys: &'a [Vec<u8>]) -> _ {
+        let rows: LookupMany<'a> = lookup_many(keys);
+        rows.select::<(raw_state, AsSelect<BestTimes, Mysql>)>((raw_state, BestTimes::as_select()))
     }
 
     #[auto_type(type_case = "PascalCase")]
@@ -700,9 +1031,8 @@ mod queries {
 
     #[auto_type(type_case = "PascalCase")]
     pub fn preserved() -> _ {
-        let q: IsQueued = is_queued();
-        let u: Unprocessed = unprocessed();
-        q.and(u)
+        let unp: Unprocessed = unprocessed();
+        unp.and(queued.eq(false))
     }
 
     #[auto_type(type_case = "PascalCase")]
@@ -712,8 +1042,24 @@ mod queries {
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn score() -> _ {
+    pub fn estimated_total() -> _ {
         elapsed + estimated_remaining
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn time_since_and_estimated_total() -> _ {
+        let sc: EstimatedTotal = estimated_total();
+        (time_since_visit, sc)
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn best_available(n: i64, min_progress: u32, max_time: u32) -> _ {
+        let av: Available = available(max_time);
+        let sc: EstimatedTotal = estimated_total();
+        db_states
+            .filter(av.and(progress.ge(min_progress)))
+            .order_by((progress, sc))
+            .limit(n)
     }
 
     pub fn full_history() -> SqlQuery {

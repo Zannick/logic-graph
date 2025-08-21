@@ -131,8 +131,10 @@ where
     // region: Reads
 
     /// Returns the best times recorded to reach the given encoded state.
+    /// May only be called with an encoded state known to exist in the db.
     fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes>;
     /// Returns the best times recorded to reach the given state.
+    /// May only be called with a state known to exist in the db.
     fn get_best_times(&self, el: &T) -> Result<BestTimes> {
         self.get_best_times_raw(&serialize_state(el))
     }
@@ -180,7 +182,9 @@ where
 
     // Writes
 
-    /// Pushes an element into the db and marks it as preserved (unqueued and unprocessed).
+    /// Records an element in the db and (if new) marks it as preserved (unqueued and unprocessed).
+    /// 
+    /// See `record_one` for adding an element and marking it as queued instead.
     fn push(&self, el: ContextWrapper<T>, prev: Option<&T>) -> Result<()>;
 
     /// Retrieves a single preserved element, marks it as queued, and returns it wrapped for processing.
@@ -190,24 +194,27 @@ where
     fn pop(&self, start_progress: usize) -> Result<Option<ContextWrapper<T>>>;
 
     /// Marks the given elements as not queued and ensures they are preserved
-    /// for eventual retrieval.
+    /// for eventual retrieval. Requires that these elements have been recorded previously.
     fn evict(&self, iter: impl IntoIterator<Item = (T, SM::Score)>) -> Result<()>;
 
     /// Retrieves up to `count` elements from the database, starting from the given progress level,
-    /// marking them as queued. Elements returned will not exceed the given score limit.
+    /// marking them as queued. Elements returned will not exceed the given total estimated time limit.
     fn retrieve(
         &self,
         start_progress: usize,
         count: usize,
-        score_limit: u32,
+        time_limit: u32,
     ) -> Result<Vec<(T, SM::Score)>>;
 
-    /// Records the state, potentially updating its score if the state has been seen previously.
+    /// Records the state, potentially updating its score if the state has been seen previously,
+    /// and marking it as queued if it is new.
     ///
     /// Returns the score of the state if this was the best score seen so far,
     /// or None otherwise (suggesting the state does not need to be requeued).
     ///
-    /// The state will be modified to clear the saved history.
+    /// The state object will be modified to clear the saved history.
+    /// 
+    /// See `push` for recording an element and marking it unqueued instead.
     fn record_one(&self, el: &mut ContextWrapper<T>, prev: Option<&T>)
         -> Result<Option<SM::Score>>;
 

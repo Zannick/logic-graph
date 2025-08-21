@@ -5,6 +5,7 @@ use analyzer::context::{history_to_partial_route, ContextWrapper, Ctx, Wrapper};
 use analyzer::db::RouteDb;
 use analyzer::estimates::ContextScorer;
 use analyzer::route::route_from_string;
+use analyzer::storage::ContextDB;
 use analyzer::testlib::db::{all_keys_cf, TestRouteDb};
 use analyzer::world::World;
 use base64::prelude::*;
@@ -204,7 +205,7 @@ fn test_mysql() {
 
     // the state in the better route is already in the db, but the time in the route is better
     assert!(db.exists(faster.get(), &mut conn).unwrap());
-    let oldbest = db.get_best_times(faster.get(), &mut conn).unwrap().elapsed;
+    let oldbest = db.get_best_conn(faster.get(), &mut conn).unwrap().elapsed;
     assert!(faster.elapsed() < oldbest);
 
     let old_record = db.get_record(faster.get(), &mut conn).unwrap();
@@ -225,7 +226,7 @@ fn test_mysql() {
     );
 
     // the state in question has a better time
-    let newbest = db.get_best_times(faster.get(), &mut conn).unwrap().elapsed;
+    let newbest = db.get_best_conn(faster.get(), &mut conn).unwrap().elapsed;
     let new_record = db.get_record(faster.get(), &mut conn).unwrap();
     assert!(
         faster.elapsed() == newbest,
@@ -265,7 +266,7 @@ fn test_mysql() {
     for i in hist2.len() + 1..best_route.len() {
         assert!(
             best_route[i].elapsed()
-                < db.get_best_times(best_route[i].get(), &mut conn)
+                < db.get_best_conn(best_route[i].get(), &mut conn)
                     .unwrap()
                     .elapsed,
             "Step {} was not an improvement despite step {} improvement",
@@ -317,7 +318,7 @@ fn test_mysql() {
     for i in hist2.len()..best_route.len() {
         let exp = best_route[i].elapsed();
         let act = db
-            .get_best_times(best_route[i].get(), &mut conn)
+            .get_best_conn(best_route[i].get(), &mut conn)
             .unwrap()
             .elapsed;
         assert_eq!(

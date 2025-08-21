@@ -63,7 +63,7 @@ pub trait EstimatorWrapper<'w, W: World + 'w> {
 pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
     MetricKey + EstimatorWrapper<'w, W> + Sized + Sync
 {
-    type Score: Copy + Debug + Ord;
+    type Score: Copy + Debug + Ord + Send;
 
     fn new(world: &'w W, startctx: &T) -> Self;
     fn score_from_times(best_times: BestTimes) -> Self::Score;
@@ -76,6 +76,7 @@ pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
     fn score_primary(score: Self::Score) -> u32;
 }
 
+// TODO: rename
 pub struct TimeSinceAndElapsed<'w, W: World> {
     seq: AtomicU32,
     estimator: ContextScorer<
