@@ -656,7 +656,7 @@ where
             &mut next_entries,
         );
 
-        let score = self.metric.score_from_times(BestTimes {
+        let score = SM::score_from_times(BestTimes {
             elapsed: best_elapsed_from_prev,
             time_since_visit: best_since_from_prev,
             estimated_remaining,
@@ -761,7 +761,7 @@ where
                 &mut next_entries,
             );
 
-            let score = self.metric.score_from_times(BestTimes {
+            let score = SM::score_from_times(BestTimes {
                 elapsed: best_elapsed,
                 time_since_visit: best_since_visit,
                 estimated_remaining,
@@ -822,7 +822,7 @@ where
             } else {
                 let state: T = get_obj_from_data(key.as_ref()).unwrap();
                 let data: StateDataAlias<T> = get_obj_from_data(val.as_ref()).unwrap();
-                let score = self.metric().score_from_times(data.best_times());
+                let score = SM::score_from_times(data.best_times());
                 let heap_key_min = self.metric().get_heap_key(&state, score);
                 if self
                     .db

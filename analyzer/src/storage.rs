@@ -42,7 +42,7 @@ where
 }
 
 /// Common functionality all DBs must support.
-/// 
+///
 /// Conceptually, a state can be:
 ///     - *queued* if it is in the in-memory heap
 ///     - *processed* if its child states have been created (only needs to happen once per state ever)
@@ -117,7 +117,7 @@ where
     // region: Time
 
     /// Max allowable time for a route.
-    /// 
+    ///
     /// States with scores that exceed this should not be processed.
     fn max_time(&self) -> u32;
     /// Sets the max time to the given limit.
@@ -143,13 +143,11 @@ where
 
     /// Returns the best score recorded for the given encoded state.
     fn lookup_score_raw(&self, key: &[u8]) -> Result<SM::Score> {
-        Ok(self
-            .metric()
-            .score_from_times(self.get_best_times_raw(key)?))
+        Ok(SM::score_from_times(self.get_best_times_raw(key)?))
     }
     /// Returns the best score recorded for the given state.
     fn lookup_score(&self, el: &T) -> Result<SM::Score> {
-        Ok(self.metric().score_from_times(self.get_best_times(el)?))
+        Ok(SM::score_from_times(self.get_best_times(el)?))
     }
 
     /// Returns whether the given encoded state has been processed.
@@ -166,10 +164,7 @@ where
         self.get_history_raw(&serialize_state(el))
     }
     /// Returns the last step in the history of a state.
-    fn get_last_history_step(
-        &self,
-        el: &T,
-    ) -> Result<Option<HistoryAlias<T>>>;
+    fn get_last_history_step(&self, el: &T) -> Result<Option<HistoryAlias<T>>>;
     /// Returns the last step in the history of a wrapped state (which might be in the wrapper).
     fn get_last_history_step_wrapper(
         &self,
@@ -190,7 +185,7 @@ where
 
     /// Retrieves a single preserved element, marks it as queued, and returns it wrapped for processing.
     /// It will be the one with the lowest score at the lowest progress level that's >= `start_progress`.
-    /// 
+    ///
     /// Returns `Ok(None)` if there are no preserved elements in the db.
     fn pop(&self, start_progress: usize) -> Result<Option<ContextWrapper<T>>>;
 
@@ -199,7 +194,7 @@ where
     fn evict(&self, iter: impl IntoIterator<Item = (T, SM::Score)>) -> Result<()>;
 
     /// Retrieves up to `count` elements from the database, starting from the given progress level,
-    /// marking them as queued.
+    /// marking them as queued. Elements returned will not exceed the given score limit.
     fn retrieve(
         &self,
         start_progress: usize,
@@ -208,22 +203,19 @@ where
     ) -> Result<Vec<(T, SM::Score)>>;
 
     /// Records the state, potentially updating its score if the state has been seen previously.
-    /// 
+    ///
     /// Returns the score of the state if this was the best score seen so far,
     /// or None otherwise (suggesting the state does not need to be requeued).
-    /// 
+    ///
     /// The state will be modified to clear the saved history.
-    fn record_one(
-        &self,
-        el: &mut ContextWrapper<T>,
-        prev: Option<&T>,
-    ) -> Result<Option<SM::Score>>;
+    fn record_one(&self, el: &mut ContextWrapper<T>, prev: Option<&T>)
+        -> Result<Option<SM::Score>>;
 
     /// Records the processing of a state and the generated children of that state.
-    /// 
+    ///
     /// Returns for each state its score, if it was the best score seen so far,
     /// or None otherwise (suggesting the state does not need to be requeued).
-    /// 
+    ///
     /// The states will be modified to clear their saved histories, and the list of states
     /// may be sorted.
     fn record_processed(

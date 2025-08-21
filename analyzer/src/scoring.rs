@@ -66,7 +66,7 @@ pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
     type Score: Copy + Debug + Ord;
 
     fn new(world: &'w W, startctx: &T) -> Self;
-    fn score_from_times(&self, best_times: BestTimes) -> Self::Score;
+    fn score_from_times(best_times: BestTimes) -> Self::Score;
     fn score_from_heap_key(&self, key: &[u8]) -> Self::Score;
     fn get_heap_key(&self, el: &T, score: Self::Score) -> [u8; KEY_SIZE];
     fn new_heap_key(&self, old_key: &[u8], new_score: Self::Score) -> [u8; KEY_SIZE];
@@ -135,7 +135,6 @@ where
 
     // TODO: make a type alias or struct for best times
     fn score_from_times(
-        &self,
         BestTimes {
             elapsed,
             time_since_visit: time_since,
@@ -237,7 +236,6 @@ where
     }
 
     fn score_from_times(
-        &self,
         BestTimes {
             elapsed,
             estimated_remaining,
