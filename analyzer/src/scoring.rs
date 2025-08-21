@@ -73,7 +73,7 @@ pub trait ScoreMetric<'w, W: World + 'w, T: Ctx, const KEY_SIZE: usize>:
 
     // Using &self to avoid trying to provide the metric type in the heap's DbType alias
     fn total_estimate_from_score(&self, score: Self::Score) -> u32;
-    fn score_primary(&self, score: Self::Score) -> u32;
+    fn score_primary(score: Self::Score) -> u32;
 }
 
 pub struct TimeSinceAndElapsed<'w, W: World> {
@@ -172,7 +172,7 @@ where
     fn total_estimate_from_score(&self, score: Self::Score) -> u32 {
         score.1
     }
-    fn score_primary(&self, score: Self::Score) -> u32 {
+    fn score_primary(score: Self::Score) -> u32 {
         score.0
     }
 }
@@ -268,7 +268,7 @@ where
     fn total_estimate_from_score(&self, score: Self::Score) -> u32 {
         score
     }
-    fn score_primary(&self, score: Self::Score) -> u32 {
+    fn score_primary(score: Self::Score) -> u32 {
         score
     }
 }

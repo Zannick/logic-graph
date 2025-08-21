@@ -1627,7 +1627,7 @@ where
             heap_bests
                 .into_iter()
                 .map(|n| match n {
-                    Some(score) => self.queue.db().metric().score_primary(score).to_string(),
+                    Some(score) => MetricType::<W>::score_primary(score).to_string(),
                     None => String::from("-"),
                 })
                 .collect::<Vec<_>>()

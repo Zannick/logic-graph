@@ -455,7 +455,7 @@ where
             }
 
             let progress = el.count_visits();
-            mins[progress] = std::cmp::min(mins[progress], self.metric.score_primary(score));
+            mins[progress] = std::cmp::min(mins[progress], SM::score_primary(score));
             let key = self.metric.get_heap_key(&el, score);
             batch.put(key, val);
         }
@@ -572,7 +572,7 @@ where
             self.reset_estimates_in_range(
                 start_progress,
                 el.count_visits(),
-                self.metric.score_primary(*score),
+                SM::score_primary(*score),
             );
         } else {
             self.reset_estimates_in_range_unbounded(start_progress);

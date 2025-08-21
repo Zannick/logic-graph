@@ -315,7 +315,7 @@ where
                 // Only when we go a decent bit over
                 if !self.db.is_empty()
                     && db_best < u32::MAX
-                    && self.db.metric().score_primary(min_score) > db_best * 11 / 10
+                    && MetricType::<'w, W>::score_primary(min_score) > db_best * 11 / 10
                 {
                     queue = self.maybe_reshuffle(
                         progress,
@@ -403,7 +403,7 @@ where
         let len = queue.len();
         let score_limit = if let Some((lower, upper)) = queue.peek_segment_priority_range(progress)
         {
-            (self.db.metric().score_primary(*lower) + self.db.metric().score_primary(*upper)) / 2
+            (MetricType::<'w, W>::score_primary(*lower) + MetricType::<'w, W>::score_primary(*upper)) / 2
         } else {
             self.max_time()
         };
@@ -440,7 +440,7 @@ where
         // Runs over all the buckets
         let Some(min_score) = queue
             .peek_min()
-            .map(|p| self.db.metric().score_primary(*p.1))
+            .map(|p| MetricType::<'w, W>::score_primary(*p.1))
         else {
             return Ok(queue);
         };
@@ -995,7 +995,7 @@ where
         let mut prog_score = Vec::new();
         let mut prog_estimates = Vec::new();
         for (progress, _, score) in queue.iter() {
-            let primary = self.db.metric().score_primary(*score) as f64;
+            let primary = MetricType::<'w, W>::score_primary(*score) as f64;
             let total_estimate = self.db.metric().total_estimate_from_score(*score) as f64;
             let progress = progress as f64;
             progresses.push(progress);
