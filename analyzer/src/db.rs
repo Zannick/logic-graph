@@ -300,10 +300,11 @@ where
                     .expect("Failed to deserialize while reporting an error")
             )));
         };
-        // hold the previous prev value so it doesn't fall out of scope while we reference it.
-        let mut state_holder = None;
         while !hist.is_empty() {
-            let key = state_holder.as_ref().unwrap_or(state_key);
+            vec.push(hist[0]);
+            // loop state:
+            // - current { hist, prev }
+            // - next (prev) { ... }
             assert!(
                 hist.len() == 1,
                 "History entry found in statedb too long: {}. Last 4:\n{:?}",
@@ -311,7 +312,7 @@ where
                 hist.iter().skip(hist.len() - 4).collect::<Vec<_>>()
             );
             if vec.len() >= TOO_MANY_STEPS {
-                assert!(self.detect_cycle(&key).is_ok());
+                assert!(self.detect_cycle(&prev).is_ok());
             }
             assert!(
                 vec.len() < TOO_MANY_STEPS,
@@ -319,15 +320,21 @@ where
                 vec.len(),
                 vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
             );
-            if let Some(next) = self.get_deserialize_state_data(&key)? {
-                vec.push(hist[0]);
+            if let Some(next) = self.get_deserialize_state_data(&prev)? {
+                if next.prev == prev {
+                    assert!(self.detect_cycle(&prev).is_ok());
+                }
+                assert!(
+                    !matches!(hist[0], History::A(_)) || hist != next.hist,
+                    "Consecutive states have same hist: {}",
+                    hist[0]
+                );
                 hist = next.hist;
-                state_holder.replace(prev);
                 prev = next.prev;
             } else {
                 return Err(Error::msg(format!(
                     "Could not find intermediate state entry for {:?}",
-                    deserialize_state::<T>(&key)
+                    deserialize_state::<T>(&prev)
                         .expect("Failed to deserialize while reporting an error")
                 )));
             }
