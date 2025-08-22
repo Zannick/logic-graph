@@ -827,6 +827,8 @@ where
                 self.queue.push(ctx.clone(), Some(&prev)).unwrap();
                 ctx.clear_history();
             } else {
+                // Do we actually need to process each state along the way, or is it merely more advantageous
+                // to do so now, instead of waiting for these states to come up in the queue?
                 let mut next = self.single_step(ctx.clone());
                 if let Some((ci, _)) = next
                     .iter()
@@ -834,7 +836,7 @@ where
                     .filter(|(_, c)| c.recent_history().last() == Some(hist))
                     .min_by_key(|(_, c)| c.elapsed())
                 {
-                    // Assumption: no subsequent state leads to victory (aside from the last state?)
+                    // Assumption: the kept state is not a solution (other solutions are filtered out in the queue)
                     ctx = next.swap_remove(ci);
                     self.queue.extend_keep_one(next, &ctx, &prev)?;
                     ctx.clear_history();

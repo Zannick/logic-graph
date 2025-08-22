@@ -258,9 +258,15 @@ where
         self.max_time.fetch_min(max_time, Ordering::Release);
     }
 
-    // TODO: prefer reading from the db
     fn estimated_remaining_time(&self, ctx: &T) -> u32 {
-        self.metric.estimated_remaining_time(ctx)
+        if let Some(sd) = self
+            .get_deserialize_state_data(&serialize_state(ctx))
+            .unwrap()
+        {
+            sd.estimated_remaining
+        } else {
+            self.metric.estimated_remaining_time(ctx)
+        }
     }
 
     fn get_best_times_raw(&self, state_key: &[u8]) -> Result<BestTimes> {
