@@ -664,7 +664,6 @@ where
         let iters = self.iters.load(Ordering::Acquire);
 
         let (history, elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
-        println!("Retrieved solution starting with {:?}", &history[..10]);
 
         let solution = self.confirm_solution_time(ctx, history, elapsed, mode);
         let elapsed = solution.elapsed;
