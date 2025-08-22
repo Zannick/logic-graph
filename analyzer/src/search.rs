@@ -3,7 +3,7 @@ use crate::context::*;
 use crate::db::RouteDb;
 use crate::direct::DirectPathsDb;
 use crate::estimates::{ContextScorer, UNREASONABLE_TIME};
-use crate::heap::{MetricType, RocksBackedQueue};
+use crate::heap::{DbBackedQueue, MetricType};
 use crate::matchertrie::*;
 use crate::minimize::*;
 use crate::observer::{record_observations, TrieMatcher};
@@ -299,7 +299,7 @@ where
     solve_trie: Arc<MatcherTrie<TM, SolutionSuffix<T>>>,
     solutions: Arc<Mutex<SolutionCollector<T>>>,
     direct_paths: DirectPathsDb<W, T>,
-    queue: RocksBackedQueue<'a, W, T>,
+    queue: DbBackedQueue<'a, W, T>,
     solution_cvar: Condvar,
     options: SearchOptions,
 
@@ -442,7 +442,7 @@ where
             false
         };
 
-        let queue = RocksBackedQueue::new(
+        let queue = DbBackedQueue::new(
             db_path.as_ref(),
             world,
             metric,
@@ -1167,6 +1167,7 @@ where
             });
 
             // Background db cleanup thread
+            #[cfg(not(feature = "mysql"))]
             scope.spawn(|_| {
                 let sleep_time = Duration::from_secs(10);
                 while !self.finished.load(Ordering::Acquire) {
@@ -1175,7 +1176,7 @@ where
                         sleep(sleep_time);
                         continue;
                     }
-                    self.queue.db_cleanup(65_536, &self.finished).unwrap();
+                    self.queue.db().cleanup(65_536, &self.finished).unwrap();
                 }
             });
 

@@ -1,8 +1,9 @@
 use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
+use crate::db::HeapMetric;
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
 use crate::storage::{get_obj_from_data, serialize_data, serialize_state, ContextDB};
-use crate::world::{Location, World};
+use crate::world::{Exit, Location, Warp, World};
 use anyhow::Result;
 use diesel::dsl::{min, not, DuplicatedKeys};
 use diesel::expression::functions::*;
@@ -256,6 +257,18 @@ pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
     phantom: PhantomData<&'w (W, T)>,
     max_time: AtomicU32,
     recovery: AtomicBool,
+}
+
+impl<'w, W, T, L, E, const KS: usize, SM> HeapMetric for MySQLDB<'w, W, T, KS, SM>
+where
+    W: World<Location = L, Exit = E> + 'w,
+    T: Ctx<World = W>,
+    L: Location<Context = T, Currency = E::Currency>,
+    E: Exit<Context = T>,
+    W::Warp: Warp<Context = T, SpotId = E::SpotId, Currency = E::Currency>,
+    SM: ScoreMetric<'w, W, T, KS>,
+{
+    type Score = SM::Score;
 }
 
 impl<'w, W, T, const KS: usize, SM> ContextDB<'w, W, T, KS, SM> for MySQLDB<'w, W, T, KS, SM>
@@ -774,7 +787,7 @@ where
 
         // Update in a separate command so we don't need to add conditions on these sets for the above
         // insert-on-duplicate-keys-update entries which will never need to update these fields.
-        let updates = diesel::update(db_states.filter(raw_state.eq(parent_state)))
+        let updates = diesel::update(queries::lookup_state(&parent_state))
             .set((processed.eq(true),))
             .execute(self.sticky(conn))?;
         Ok((values, inserts + updates))
@@ -787,6 +800,10 @@ where
     ) -> QueryResult<(Vec<DBState>, usize)> {
         let mut conn = self.get_sticky_connection();
         let (values, count) = self.insert_processed(proc, next_states, &mut conn)?;
+
+        // Should we improve from proc only, rather than its child states, in case proc was improved
+        // while we were processing it? The rocksdb code looks up the processed state to check for improvements
+        // before recording the child states.
         let mut q = queries::improve_downstream(values.len()).into_boxed();
         for value in &values {
             q = q.bind::<Blob, _>(&value.raw_state);
@@ -810,7 +827,7 @@ where
     }
 
     pub fn get_best_conn(&self, state: &T, conn: &mut StickyConnection) -> Result<BestTimes> {
-        Ok(queries::get_best_times(&serialize_state(state)).first(self.sticky(conn))?)
+        self.get_best_conn_raw(&serialize_state(state), conn)
     }
 
     pub fn get_best_conn_raw(

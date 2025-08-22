@@ -4,6 +4,8 @@ use crate::bucket::*;
 use crate::context::*;
 use crate::db::{HeapDB, HeapMetric};
 use crate::estimates::ContextScorer;
+#[cfg(feature = "mysql")]
+use crate::models::MySQLDB;
 use crate::scoring::{
     BestTimes, EstimatedTimeMetric, EstimatorWrapper, ScoreMetric, TimeSinceAndElapsed,
 };
@@ -31,16 +33,27 @@ pub(crate) struct HeapElement<T: Ctx> {
 }
 
 #[allow(unused)]
-pub(self) type TimeSinceDbType<'w, W, T> = HeapDB<'w, W, T, 16, TimeSinceAndElapsed<'w, W>>;
+pub(self) type TimeSinceRocksDb<'w, W, T> = HeapDB<'w, W, T, 16, TimeSinceAndElapsed<'w, W>>;
 #[allow(unused)]
-pub(self) type ElapsedTimeDb<'w, W, T> = HeapDB<'w, W, T, 12, EstimatedTimeMetric<'w, W>>;
+pub(self) type ElapsedTimeRocksDb<'w, W, T> = HeapDB<'w, W, T, 12, EstimatedTimeMetric<'w, W>>;
+
+#[allow(unused)]
+#[cfg(feature = "mysql")]
+pub(self) type TimeSinceMySQLDB<'w, W, T> = MySQLDB<'w, W, T, 16, TimeSinceAndElapsed<'w, W>>;
+#[allow(unused)]
+#[cfg(feature = "mysql")]
+pub(self) type ElapsedTimeMySQLDB<'w, W, T> = MySQLDB<'w, W, T, 12, EstimatedTimeMetric<'w, W>>;
 
 // These types have to be changed to affect the score type.
 pub(crate) type MetricType<'w, W> = TimeSinceAndElapsed<'w, W>;
-pub(self) type DbType<'w, W, T> = TimeSinceDbType<'w, W, T>;
+
+#[cfg(not(feature = "mysql"))]
+pub(self) type DbType<'w, W, T> = TimeSinceRocksDb<'w, W, T>;
+#[cfg(feature = "mysql")]
+pub(self) type DbType<'w, W, T> = TimeSinceMySQLDB<'w, W, T>;
 // Automatic from DbType
 pub(self) type Score<'w, W, T> = <DbType<'w, W, T> as HeapMetric>::Score;
-pub struct RocksBackedQueue<'w, W, T>
+pub struct DbBackedQueue<'w, W, T>
 where
     T: Ctx<World = W>,
     W: World,
@@ -65,7 +78,7 @@ where
     world: &'w W,
 }
 
-impl<'w, W, T> RocksBackedQueue<'w, W, T>
+impl<'w, W, T> DbBackedQueue<'w, W, T>
 where
     W: World,
     T: Ctx<World = W>,
@@ -82,15 +95,18 @@ where
         min_reshuffle: usize,
         max_reshuffle: usize,
         delete_dbs: bool,
-    ) -> Result<RocksBackedQueue<'w, W, T>>
+    ) -> Result<DbBackedQueue<'w, W, T>>
     where
         P: AsRef<Path>,
     {
+        #[cfg(not(feature = "mysql"))]
         let db = HeapDB::open(db_path, initial_max_time, metric, delete_dbs)?;
+        #[cfg(feature = "mysql")]
+        let db = MySQLDB::connect(metric);
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
         let mut processed_counts = Vec::new();
         processed_counts.resize_with(max_possible_progress + 1, || 0.into());
-        let q = RocksBackedQueue {
+        let q = DbBackedQueue {
             queue: Mutex::new(BucketQueue::new()),
             db,
             capacity: max_capacity,
@@ -265,6 +281,7 @@ where
         self.db.evict(ev)?;
         self.evictions.fetch_add(1, Ordering::Release);
         log::debug!("{}:evict to db took {:?}", category, start.elapsed());
+        #[cfg(not(feature = "mysql"))]
         log::debug!("{}", self.db.get_memory_usage_stats().unwrap());
         Ok(())
     }
@@ -403,7 +420,9 @@ where
         let len = queue.len();
         let score_limit = if let Some((lower, upper)) = queue.peek_segment_priority_range(progress)
         {
-            (MetricType::<'w, W>::score_primary(*lower) + MetricType::<'w, W>::score_primary(*upper)) / 2
+            (MetricType::<'w, W>::score_primary(*lower)
+                + MetricType::<'w, W>::score_primary(*upper))
+                / 2
         } else {
             self.max_time()
         };
@@ -971,10 +990,6 @@ where
         }
 
         Ok(())
-    }
-
-    pub fn db_cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<()> {
-        self.db.cleanup(batch_size, exit_signal)
     }
 
     pub fn skip_stats(&self) -> (usize, usize, usize) {

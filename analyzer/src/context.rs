@@ -717,6 +717,7 @@ impl<T: Ctx> ContextWrapper<T> {
         action.perform(&mut self.ctx, world);
         self.elapse(dur);
         self.append_history(History::A(action.id()), dur);
+        // TODO: Should this reset time_since if it visited a canon location?
     }
 
     pub fn can_replay<W>(&self, world: &W, step: HistoryAlias<T>) -> bool
