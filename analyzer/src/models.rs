@@ -5,7 +5,7 @@ use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
 use crate::storage::{get_obj_from_data, serialize_data, serialize_state, ContextDB};
 use crate::world::{Exit, Location, Warp, World};
 use anyhow::Result;
-use diesel::dsl::{min, not, DuplicatedKeys};
+use diesel::dsl::{max, min, not, DuplicatedKeys};
 use diesel::expression::functions::*;
 use diesel::mysql::Mysql;
 use diesel::prelude::*;
@@ -18,6 +18,7 @@ use rustc_hash::FxHashMap;
 use std::env;
 use std::marker::PhantomData;
 use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
+use textplots::{Chart, Plot, Shape};
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
 const TEST_DATABASE_URL: &'static str = "mysql://logic_graph@localhost/logic_graph__unittest";
@@ -29,6 +30,10 @@ define_sql_function!(
 define_sql_function! (
     #[sql_name = "VALUES"]
     fn insertvalues<T: SingleValue>(v: T) -> T
+);
+define_sql_function!(
+    #[sql_name = "FLOOR"]
+    fn floor(val: Float) -> Integer;
 );
 
 pub fn env_database_url() -> String {
@@ -244,6 +249,15 @@ mod q {
             }
         }
     }
+
+    #[derive(QueryableByName)]
+    #[diesel(check_for_backend(Mysql))]
+    pub struct Bucket {
+        #[diesel(sql_type = Integer)]
+        pub bucket_id: i32,
+        #[diesel(sql_type = BigInt)]
+        pub count: i64,
+    }
 }
 pub use q::*;
 
@@ -358,7 +372,51 @@ where
         // other potential ideas
         // processed % per progress level
         // time_since heatmap per progress
-        todo!()
+        let mut conn = self.get_sticky_connection();
+        let (max_e, min_e) = db_states
+            .filter(processed.eq(false))
+            .select((max(elapsed), min(elapsed)))
+            .first::<(Option<u32>, Option<u32>)>(self.sticky(&mut conn))
+            .unwrap();
+        let Some(max_e) = max_e else {
+            println!("No unprocessed states in sql db");
+            return Ok(());
+        };
+        let max_e = max_e as f32;
+        let min_e = min_e.unwrap() as f32;
+        let num_bins = 70f32;
+        let bucket_width = (max_e - min_e + 1.0) / num_bins;
+        let time_buckets = diesel::sql_query(
+            r#"
+            SELECT
+                FLOOR(elapsed / ?) AS bucket,
+                COUNT(*)
+            FROM db_states
+            WHERE
+                processed = FALSE
+            GROUP BY bucket
+            ORDER BY bucket
+        "#,
+        )
+        .bind::<Float, _>(bucket_width)
+        .load::<Bucket>(self.sticky(&mut conn))?;
+
+        // We may be missing empty buckets
+        let mut bins = vec![0.0f32; time_buckets.last().unwrap().bucket_id as usize + 1];
+        for bucket in time_buckets {
+            bins[bucket.bucket_id as usize] = bucket.count as f32;
+        }
+        Chart::new(132, 28, 0.0, max_e)
+            .lineplot(&Shape::Bars(
+                &bins
+                    .into_iter()
+                    .enumerate()
+                    .map(|(bn, ct)| (min_e + (bn as f32) * bucket_width, ct))
+                    .collect::<Vec<_>>(),
+            ))
+            .nice();
+
+        Ok(())
     }
 
     fn extra_stats(&self) -> String {
