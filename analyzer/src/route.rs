@@ -341,12 +341,12 @@ where
     W: World + 'w,
     T: Ctx<World = W> + 'w,
     W::Location: Location<Context = T>,
-    SM: ScoreMetric<'w, W, T, KS>,
+    SM: ScoreMetric<'w, W, T, KS> + 'w,
 {
     use crate::estimates::UNREASONABLE_TIME;
     use crate::models::MySQLDB;
     use crate::search::single_step;
-    use diesel::result::Error::NotFound;
+    use crate::storage::ContextDB;
     use indicatif::{ProgressBar, ProgressIterator, ProgressStyle};
     use std::io::{stderr, Write};
 
@@ -374,11 +374,11 @@ where
             ));
         log::debug!("Beginning recreate with processing for writes to sql db");
         for h in hist.into_iter().progress_with(pbar) {
-            match db.has_next_steps(ctx.get(), &mut db.get_sticky_connection()) {
+            match db.was_processed(ctx.get()) {
                 Ok(true) => {
                     // state is already processed, we don't need to redo it
                 }
-                Ok(false) | Err(NotFound) => {
+                Ok(false) => {
                     // process state
                     let next = single_step(world, ctx.clone(), UNREASONABLE_TIME);
                     let res = db.insert_processed_and_improve(ctx.get(), &next);

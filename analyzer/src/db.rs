@@ -221,17 +221,17 @@ where
             .x_label("elapsed time")
             .x_range(0., max_time.into());
         println!(
-            "Current heap contents:\n{}",
+            "Current queuedb contents:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
         let p = Plot::new(time_scores).point_style(PointStyle::new().marker(PointMarker::Circle));
         let v = ContinuousView::new()
             .add(p)
             .x_label("elapsed time")
-            .y_label("score")
+            .y_label("total estimated")
             .x_range(0., max_time.into());
         println!(
-            "Heap scores by time:\n{}",
+            "Queuedb total estimates by elapsed:\n{}",
             Page::single(&v).dimensions(90, 10).to_text().unwrap()
         );
 
@@ -645,7 +645,6 @@ where
         // we will rewrite the data.
 
         // We should also check the StateData for whether we even need to do this
-        let mut next_entries = Vec::new();
         self.record_one_internal(
             &state_key,
             el,
@@ -653,7 +652,6 @@ where
             best_since_from_prev,
             best_elapsed_from_prev,
             estimated_remaining,
-            &mut next_entries,
         );
 
         let score = SM::score_from_times(BestTimes {
@@ -692,7 +690,6 @@ where
         vec: &mut Vec<ContextWrapper<T>>,
     ) -> Result<Vec<Option<SM::Score>>> {
         let max_time = self.max_time();
-        let mut next_entries = Vec::new();
         let mut results = Vec::with_capacity(vec.len());
         let mut dups = 0;
         let mut new_seen = 0;
@@ -758,7 +755,6 @@ where
                 best_since_visit,
                 best_elapsed,
                 estimated_remaining,
-                &mut next_entries,
             );
 
             let score = SM::score_from_times(BestTimes {
@@ -785,7 +781,7 @@ where
             .put_cf_opt(
                 self.next_cf(),
                 prev_key,
-                Self::serialize_next_data(next_entries),
+                &[1], // placeholder
                 &self.write_opts,
             )
             .unwrap();
@@ -1028,17 +1024,6 @@ where
         }
     }
 
-    fn serialize_next_data(next_entries: NextSteps<T>) -> Vec<u8> {
-        serialize_data(next_entries)
-    }
-
-    fn get_deserialize_next_data(&self, key: &[u8]) -> Result<NextSteps<T>> {
-        match self.statedb.get_cf(self.next_cf(), key)? {
-            Some(slice) => Ok(get_obj_from_data(&slice)?),
-            None => Ok(Vec::new()),
-        }
-    }
-
     /// Resets some min_db_estimates based on removed elements in a range.
     fn reset_estimates_in_range(&self, start_progress: usize, to_progress: usize, score: u32) {
         self.min_db_estimates[to_progress].store(score, Ordering::SeqCst);
@@ -1075,19 +1060,6 @@ where
         }
     }
 
-    fn get_next_steps_raw(&self, key: &[u8]) -> Result<NextSteps<T>> {
-        let cf = self.next_cf();
-        Ok(if self.statedb.key_may_exist_cf(cf, key) {
-            self.get_deserialize_next_data(key)?
-        } else {
-            Vec::new()
-        })
-    }
-
-    pub fn get_next_steps(&self, el: &T) -> Result<NextSteps<T>> {
-        self.get_next_steps_raw(&serialize_state(el))
-    }
-
     fn record_one_internal(
         &self,
         state_key: &Vec<u8>,
@@ -1097,10 +1069,8 @@ where
         best_since_visit: u32,
         best_elapsed: u32,
         estimated_remaining: u32,
-        next_entries: &mut NextSteps<T>,
     ) {
         let (hist, _) = el.remove_history();
-        next_entries.push(hist.clone());
 
         assert!(
             hist.len() < TOO_MANY_STEPS,

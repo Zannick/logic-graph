@@ -803,7 +803,7 @@ where
         }
     }
 
-    /// Recreates the route from the given starting point, evaluating each state in the route onward if needed,
+    /// Recreates the route from the given starting point, processing each state in the route onward if needed,
     /// and updating all the children of those states in the db.
     fn recreate_store(
         &self,
@@ -818,24 +818,13 @@ where
             if iter.peek().is_none() {
                 break;
             }
-            let next_steps = self.queue.db().get_next_steps(ctx.get()).unwrap();
+            let proc = self.queue.db().was_processed(ctx.get()).unwrap();
             let prev = ctx.get().clone();
             let elapsed = ctx.elapsed();
             let time_since_visit = ctx.time_since_visit();
-            if !next_steps.is_empty() {
-                let next = next_steps
-                    .into_iter()
-                    .filter_map(|vh| {
-                        if vh.len() > 1 || vh[0] != *hist {
-                            let cc = ctx.clone();
-                            Some(cc.try_replay_all(self.world, vh.iter()).unwrap())
-                        } else {
-                            None
-                        }
-                    })
-                    .collect::<Vec<_>>();
+            if proc {
                 ctx.assert_and_replay(self.world, *hist);
-                self.queue.extend_keep_one(next, &ctx, &prev)?;
+                self.queue.push(ctx.clone(), Some(&prev)).unwrap();
                 ctx.clear_history();
             } else {
                 let mut next = self.single_step(ctx.clone());

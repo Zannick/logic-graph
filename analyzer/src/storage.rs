@@ -7,11 +7,6 @@ use anyhow::Result;
 use rmp_serde::Serializer;
 use serde::{Deserialize, Serialize};
 
-// This is a vec because we don't guarantee that the recent history in a newly submitted ctx
-// is length 1. TODO: fix
-type NextData<T> = Vec<HistoryAlias<T>>;
-/// The data type of a state's next info.
-pub type NextSteps<T> = Vec<NextData<T>>;
 
 /// The key for a T (Ctx) in the statedb, and the value in the queue db
 /// are all T itself.

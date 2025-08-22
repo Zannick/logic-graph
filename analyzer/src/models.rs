@@ -1,7 +1,7 @@
 use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
-use crate::storage::{get_obj_from_data, serialize_data, serialize_state, ContextDB, NextSteps};
+use crate::storage::{get_obj_from_data, serialize_data, serialize_state, ContextDB};
 use crate::world::{Location, World};
 use anyhow::Result;
 use diesel::dsl::{min, not, DuplicatedKeys};
@@ -57,7 +57,6 @@ pub struct DBState {
     pub won: bool,
     pub hist: Option<Vec<u8>>,
     pub prev: Option<Vec<u8>>,
-    pub next_steps: Option<Vec<u8>>,
 }
 
 impl DBState {
@@ -145,7 +144,6 @@ mod q {
         pub won: bool,
         pub hist: Option<HistoryAlias<T>>,
         pub prev: Option<T>,
-        pub next_steps: Option<Vec<HistoryAlias<T>>>,
     }
 
     impl<T> From<super::DBState> for DBEntry<T>
@@ -165,7 +163,6 @@ mod q {
                 won: value.won,
                 prev: value.prev.map(|buf| get_obj_from_data(&buf).unwrap()),
                 hist: value.hist.map(|buf| get_obj_from_data(&buf).unwrap()),
-                next_steps: value.next_steps.map(|buf| get_obj_from_data(&buf).unwrap()),
             }
         }
     }
@@ -341,11 +338,34 @@ where
     }
 
     fn print_graphs(&self) -> Result<()> {
+        // graphs the other db provides:
+        // preserved elements count by elapsed time (histogram)
+        // preserved elements estimated time by elapsed time (histogram)
+
+        // other potential ideas
+        // processed % per progress level
+        // time_since heatmap per progress
         todo!()
     }
 
     fn extra_stats(&self) -> String {
-        todo!()
+        // the rocksdb counts skips by the db manager itself, as well as
+        // readds (improvements to a state that brings it under max time)
+        // and background deletes from the queue.
+        // we don't need to count any of that here.
+        let mut conn = self.get_sticky_connection();
+
+        // this is similar, though.
+        let over_limit = db_states
+            .filter(
+                (elapsed + estimated_remaining)
+                    .ge(self.max_time())
+                    .and(not(processed)),
+            )
+            .count()
+            .get_result::<i64>(self.sticky(&mut conn))
+            .unwrap();
+        format!("over time: {}", over_limit)
     }
     // endregion: Stats
 
@@ -381,7 +401,11 @@ where
     }
 
     fn was_processed_raw(&self, key: &[u8]) -> Result<bool> {
-        Ok(queries::get_processed(key).first(&mut self.pool_connection())?)
+        match queries::get_processed(key).first(&mut self.pool_connection()) {
+            Err(NotFound) => Ok(false),
+            Ok(b) => Ok(b),
+            Err(s) => Err(s)?,
+        }
     }
 
     fn get_history_raw(&self, state_key: &Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)> {
@@ -722,7 +746,7 @@ where
                 // Otherwise, we set it to what we have this time.
                 queued.eq(not(processed).and(insertvalues(queued))),
                 // Other fields will not change with a better path:
-                // progress, estimated_remaining, won, next_steps
+                // progress, estimated_remaining, won
             ))
             .execute(self.sticky(conn))
     }
@@ -737,17 +761,6 @@ where
         conn: &mut StickyConnection,
     ) -> QueryResult<(Vec<DBState>, usize)> {
         let parent_state = serialize_state(proc);
-        let mut next_hists = Vec::new();
-        for next_state in next_states {
-            let h = next_state.recent_history();
-            assert!(
-                h.len() == 1,
-                "Next states encoded in DB must have exactly one hist entry, got: {} ({:?})",
-                h.len(),
-                h
-            );
-            next_hists.push(h[0]);
-        }
         let values = self.encode_many_for_upsert(
             next_states
                 .iter()
@@ -762,10 +775,7 @@ where
         // Update in a separate command so we don't need to add conditions on these sets for the above
         // insert-on-duplicate-keys-update entries which will never need to update these fields.
         let updates = diesel::update(db_states.filter(raw_state.eq(parent_state)))
-            .set((
-                processed.eq(true),
-                next_steps.eq(serialize_data(next_hists)),
-            ))
+            .set((processed.eq(true),))
             .execute(self.sticky(conn))?;
         Ok((values, inserts + updates))
     }
@@ -799,11 +809,7 @@ where
         queries::get_estimates(keys).load(self.sticky(conn))
     }
 
-    pub fn get_best_conn(
-        &self,
-        state: &T,
-        conn: &mut StickyConnection,
-    ) -> Result<BestTimes> {
+    pub fn get_best_conn(&self, state: &T, conn: &mut StickyConnection) -> Result<BestTimes> {
         Ok(queries::get_best_times(&serialize_state(state)).first(self.sticky(conn))?)
     }
 
@@ -828,26 +834,6 @@ where
                     h.map(|buf| get_obj_from_data(&buf).unwrap()),
                 )
             })
-    }
-
-    pub fn get_next_steps(
-        &self,
-        state: &T,
-        conn: &mut StickyConnection,
-    ) -> QueryResult<Option<NextSteps<T>>> {
-        queries::get_next_steps(&serialize_state(state))
-            .first(self.sticky(conn))
-            .map(|data: Option<Vec<u8>>| {
-                if let Some(buf) = &data {
-                    Some(get_obj_from_data::<NextSteps<T>>(buf).unwrap())
-                } else {
-                    None
-                }
-            })
-    }
-
-    pub fn has_next_steps(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<bool> {
-        queries::has_next_steps(&serialize_state(state)).first(self.sticky(conn))
     }
 
     pub fn exists(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<bool> {
@@ -963,18 +949,6 @@ mod queries {
     pub fn get_best_times<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select::<AsSelect<BestTimes, Mysql>>(BestTimes::as_select())
-    }
-
-    #[auto_type(type_case = "PascalCase")]
-    pub fn get_next_steps<'a>(key: &'a [u8]) -> _ {
-        let row: LookupState<'a> = lookup_state(key);
-        row.select(next_steps)
-    }
-
-    #[auto_type(type_case = "PascalCase")]
-    pub fn has_next_steps<'a>(key: &'a [u8]) -> _ {
-        let row: LookupState<'a> = lookup_state(key);
-        row.select(next_steps.is_not_null())
     }
 
     #[auto_type(type_case = "PascalCase")]
