@@ -937,9 +937,7 @@ where
 
     /// Recursively update the times for the states downstream from the given state.
     pub fn improve_downstream(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<usize> {
-        queries::improve_downstream()
-            .bind::<Blob, _>(serialize_state(state))
-            .execute(self.sticky(conn))
+        self.improve_downstream_raw(&serialize_state(state), conn)
     }
 
     /// Recursively update the times for the states downstream from the given encoded states.

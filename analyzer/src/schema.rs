@@ -11,7 +11,7 @@ diesel::table! {
         processed -> Bool,
         queued -> Bool,
         won -> Bool,
-        hist -> Nullable<Blob>,
+        hist -> Nullable<Tinyblob>,
         prev -> Nullable<Blob>,
     }
 }
