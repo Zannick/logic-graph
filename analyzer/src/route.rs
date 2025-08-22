@@ -428,6 +428,7 @@ pub fn import_route_to_mysql<'w, W, T, const KS: usize, SM>(
         .map(|(prev, ctx)| (ctx, Some(serialize_state(prev.get()))))
         .collect::<Vec<_>>();
     full_pairs.push((&full_history[0], None)); // first state
-    let states = db.encode_many_for_upsert(full_pairs, true, conn);
+    let mut states = db.encode_many_for_upsert(full_pairs, true, conn);
+    states.sort();
     db.insert_batch(&states, conn).unwrap();
 }

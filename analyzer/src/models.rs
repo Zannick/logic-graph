@@ -49,7 +49,7 @@ pub fn establish_connection() -> MysqlConnection {
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
 
-#[derive(Debug, Default, Queryable, Selectable, Insertable)]
+#[derive(Debug, Default, Queryable, Selectable, Insertable, Eq, PartialEq, Ord, PartialOrd)]
 #[diesel(table_name = crate::schema::db_states, check_for_backend(Mysql))]
 pub struct DBState {
     pub raw_state: Vec<u8>,
@@ -832,7 +832,7 @@ where
         conn: &mut StickyConnection,
     ) -> QueryResult<(Vec<DBState>, usize)> {
         let parent_state = serialize_state(proc);
-        let values = self.encode_many_for_upsert(
+        let mut values = self.encode_many_for_upsert(
             next_states
                 .iter()
                 .zip(std::iter::repeat(Some(&parent_state).cloned()))
@@ -840,6 +840,7 @@ where
             true,
             conn,
         );
+        values.sort();
 
         let inserts = self.insert_batch(&values, conn)?;
 
