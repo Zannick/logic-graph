@@ -1152,9 +1152,10 @@ mod queries {
             WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed, new_time_since_visit)
             AS (
             -- Anchor definition = the updated states
-            SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed, time_since_visit as new_time_since_visit
+            (SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed, time_since_visit as new_time_since_visit
                 FROM db_states
                 WHERE raw_state in ({})
+                FOR UPDATE OF db_states)
             UNION
             -- Recursive definition = the states that point to earlier states via prev
             SELECT db.raw_state, db.prev, db.elapsed, db.step_time, prior.new_elapsed + db.step_time AS new_elapsed,
@@ -1163,6 +1164,7 @@ mod queries {
             INNER JOIN Downstream AS prior
                 ON db.prev = prior.raw_state
             WHERE prior.new_elapsed + db.step_time < db.elapsed
+            FOR UPDATE OF db
             )
             "#,
             vec!["?"; n].join(", ")
