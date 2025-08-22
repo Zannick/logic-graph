@@ -503,7 +503,7 @@ where
         let dbst = self
             .insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?
             .0;
-        self.improve_downstream_raw(&[&dbst.raw_state], &mut conn)?;
+        self.improve_downstream_raw(&dbst.raw_state, &mut conn)?;
         Ok(())
     }
 
@@ -579,7 +579,7 @@ where
         let mut conn = self.get_sticky_connection();
         let (dbst, _) =
             self.insert_one(&el, parent.map(|p| serialize_state(p)), true, &mut conn)?;
-        self.improve_downstream_raw(&[&dbst.raw_state], &mut conn)?;
+        self.improve_downstream_raw(&dbst.raw_state, &mut conn)?;
         let best_times = queries::get_best_times(&dbst.raw_state).first(self.sticky(&mut conn))?;
         // estimated time cannot change, so we only have to compare elapsed
 
@@ -863,11 +863,7 @@ where
         // Should we improve from proc only, rather than its child states, in case proc was improved
         // while we were processing it? The rocksdb code looks up the processed state to check for improvements
         // before recording the child states.
-        let mut q = queries::improve_downstream(values.len()).into_boxed();
-        for value in &values {
-            q = q.bind::<Blob, _>(&value.raw_state);
-        }
-        let count = count + q.execute(self.sticky(&mut conn))?;
+        let count = count + self.improve_downstream(proc, &mut conn)?;
         Ok((values, count))
     }
 
@@ -939,54 +935,37 @@ where
             .map(|vec| vec.into_iter().map(|hs: HistoryState| hs.into()).collect())
     }
 
-    /// Recursively update the times for the states downstream from the given states.
-    ///
-    /// This is guaranteed safe and correct if no given state that had an improvement to pass
-    /// downstream is in another given state's downstream, which should automatically be the case
-    /// because those improved states are now immediate descendants of the updated states.
-    pub fn improve_downstream(
-        &self,
-        states: &[&T],
-        conn: &mut StickyConnection,
-    ) -> QueryResult<usize> {
-        let mut q = queries::improve_downstream(states.len()).into_boxed();
-        for state in states {
-            q = q.bind::<Blob, _>(serialize_state(*state))
-        }
-        q.execute(self.sticky(conn))
+    /// Recursively update the times for the states downstream from the given state.
+    pub fn improve_downstream(&self, state: &T, conn: &mut StickyConnection) -> QueryResult<usize> {
+        queries::improve_downstream()
+            .bind::<Blob, _>(serialize_state(state))
+            .execute(self.sticky(conn))
     }
 
     /// Recursively update the times for the states downstream from the given encoded states.
-    ///
-    /// This is guaranteed safe and correct if no given state that had an improvement to pass
-    /// downstream is in another given state's downstream, which should automatically be the case
-    /// because those improved states are now immediate descendants of the updated states.
     pub fn improve_downstream_raw(
         &self,
-        states: &[&Vec<u8>],
+        state: &[u8],
         conn: &mut StickyConnection,
     ) -> QueryResult<usize> {
-        let mut q = queries::improve_downstream(states.len()).into_boxed();
-        for state in states {
-            q = q.bind::<Blob, _>(*state)
-        }
-        q.execute(self.sticky(conn))
+        queries::improve_downstream()
+            .bind::<Blob, _>(&state)
+            .execute(self.sticky(conn))
     }
 
     pub fn test_downstream(
         &self,
-        states: &[&T],
+        state: &T,
         conn: &mut StickyConnection,
     ) -> QueryResult<Vec<DownstreamEntry<T>>> {
-        let mut q = queries::test_downstream(states.len()).into_boxed();
-        for state in states {
-            q = q.bind::<Blob, _>(serialize_state(*state));
-        }
-        q.load(self.sticky(conn)).map(|vec| {
-            vec.into_iter()
-                .map(|ds: DownstreamState| ds.into())
-                .collect()
-        })
+        queries::test_downstream()
+            .bind::<Blob, _>(serialize_state(state))
+            .load(self.sticky(conn))
+            .map(|vec| {
+                vec.into_iter()
+                    .map(|ds: DownstreamState| ds.into())
+                    .collect()
+            })
     }
 }
 
@@ -1137,7 +1116,7 @@ mod queries {
         )
     }
 
-    fn downstream(n: usize) -> SqlQuery {
+    fn downstream() -> SqlQuery {
         // We can support performing downstream updates from multiple states
         // as long as they are not in each other's downstreams
         // because each is the root of its own subtree, so they cannot share any downstream states
@@ -1147,14 +1126,14 @@ mod queries {
         // updated, then it will not generate changes in the recursive part of the query thanks to the WHERE condition
         // even if it is in another downstream.
         // And we leave mysql in autocommit mode to ensure that all statements are transactions
-        diesel::sql_query(format!(
+        diesel::sql_query(
             r#"
             WITH RECURSIVE Downstream(raw_state, prev, elapsed, step_time, new_elapsed, new_time_since_visit)
             AS (
             -- Anchor definition = the updated states
             (SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed, time_since_visit as new_time_since_visit
                 FROM db_states
-                WHERE raw_state in ({})
+                WHERE raw_state = ?
                 FOR UPDATE OF db_states)
             UNION
             -- Recursive definition = the states that point to earlier states via prev
@@ -1167,12 +1146,11 @@ mod queries {
             FOR UPDATE OF db
             )
             "#,
-            vec!["?"; n].join(", ")
-        ))
+        )
     }
 
-    pub fn test_downstream(n: usize) -> SqlQuery {
-        downstream(n).sql(
+    pub fn test_downstream() -> SqlQuery {
+        downstream().sql(
             r#"
             SELECT raw_state, elapsed AS old_elapsed, new_elapsed, new_time_since_visit, step_time FROM Downstream
             ORDER BY new_elapsed
@@ -1180,8 +1158,8 @@ mod queries {
         )
     }
 
-    pub fn improve_downstream(n: usize) -> SqlQuery {
-        downstream(n).sql(
+    pub fn improve_downstream() -> SqlQuery {
+        downstream().sql(
             r#"
             -- Perform the update on the states we've selected and paired with improved times
             UPDATE db_states
