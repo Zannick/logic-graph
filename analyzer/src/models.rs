@@ -1144,6 +1144,10 @@ mod queries {
                 ON db.prev = prior.raw_state
             WHERE prior.new_elapsed + db.step_time < db.elapsed
             FOR UPDATE OF db
+            ), SortedDownstream(raw_state, prev, elapsed, step_time, new_elapsed, new_time_since_visit)
+            AS (
+            SELECT * FROM Downstream
+            ORDER BY raw_state
             )
             "#,
         )
@@ -1152,7 +1156,7 @@ mod queries {
     pub fn test_downstream() -> SqlQuery {
         downstream().sql(
             r#"
-            SELECT raw_state, elapsed AS old_elapsed, new_elapsed, new_time_since_visit, step_time FROM Downstream
+            SELECT raw_state, elapsed AS old_elapsed, new_elapsed, new_time_since_visit, step_time FROM SortedDownstream
             ORDER BY new_elapsed
             "#,
         )
@@ -1163,7 +1167,7 @@ mod queries {
             r#"
             -- Perform the update on the states we've selected and paired with improved times
             UPDATE db_states
-            INNER JOIN Downstream AS res ON db_states.raw_state = res.raw_state
+            INNER JOIN SortedDownstream AS res ON db_states.raw_state = res.raw_state
             SET db_states.elapsed = res.new_elapsed, db_states.time_since_visit = res.new_time_since_visit
             "#,
         )
