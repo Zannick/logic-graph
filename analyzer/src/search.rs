@@ -548,8 +548,11 @@ where
         elapsed: u32,
         mode: SearchMode,
     ) -> Arc<Solution<T>> {
-        let mut confirm = self.startctx.clone();
-        confirm = confirm.try_replay_all(self.world, history.iter()).unwrap();
+        let confirm = self
+            .startctx
+            .clone()
+            .try_replay_all(self.world, history.iter())
+            .unwrap();
         if confirm.elapsed() == elapsed {
             return confirm.into_solution();
         }
@@ -661,6 +664,7 @@ where
         let iters = self.iters.load(Ordering::Acquire);
 
         let (history, elapsed) = self.queue.db().get_history(ctx.get()).unwrap();
+        println!("Retrieved solution starting with {:?}", &history[..10]);
 
         let solution = self.confirm_solution_time(ctx, history, elapsed, mode);
         let elapsed = solution.elapsed;

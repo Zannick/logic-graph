@@ -891,15 +891,17 @@ impl<T: Ctx> ContextWrapper<T> {
                 let mvs = self.ctx.get_movement_state(world);
                 if idx >= vce.len() {
                     format!(
-                        "Invalid CE index {} vs len {} at {}",
+                        "Invalid CE index {} (dst: {}) vs len {} at {}\nPreviously: {:?}",
                         idx,
+                        spot_id,
                         vce.len(),
-                        self.ctx.position()
+                        self.ctx.position(),
+                        self.recent_history(),
                     )
                 } else if vce[idx].dst != spot_id {
                     format!(
                         "CE index {} is spot {} and not {}",
-                        idx, vce[idx].dst, spot_id
+                        idx, vce[idx].dst, spot_id,
                     )
                 } else if !vce[idx].can_access(world, self.get(), mvs) {
                     vce[idx].explain(world, self.get(), mvs)
@@ -1189,7 +1191,7 @@ where
 }
 
 /// Produces a vector of all states along the entire history of steps, with timing and step history included via the wrapper.
-/// 
+///
 /// Includes the final state as the last element of the vector.
 pub fn history_to_full_data_series<T, W>(
     startctx: &T,

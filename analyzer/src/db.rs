@@ -302,13 +302,13 @@ where
         };
         // hold the previous prev value so it doesn't fall out of scope while we reference it.
         let mut state_holder = None;
-        while !prev.is_empty() {
+        while !hist.is_empty() {
             let key = state_holder.as_ref().unwrap_or(state_key);
             assert!(
-                hist.len() < TOO_MANY_STEPS,
-                "History entry found in statedb way too long: {}. Last 24:\n{:?}",
+                hist.len() == 1,
+                "History entry found in statedb too long: {}. Last 4:\n{:?}",
                 hist.len(),
-                hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
+                hist.iter().skip(hist.len() - 4).collect::<Vec<_>>()
             );
             if vec.len() >= TOO_MANY_STEPS {
                 assert!(self.detect_cycle(&key).is_ok());
@@ -320,7 +320,7 @@ where
                 vec.iter().skip(vec.len() - 24).collect::<Vec<_>>()
             );
             if let Some(next) = self.get_deserialize_state_data(&key)? {
-                vec.push(hist);
+                vec.push(hist[0]);
                 hist = next.hist;
                 state_holder.replace(prev);
                 prev = next.prev;
@@ -334,7 +334,7 @@ where
         }
 
         vec.reverse();
-        Ok((vec.into_iter().flatten().collect(), elapsed))
+        Ok((vec, elapsed))
     }
 
     fn get_last_history_step(&self, el: &T) -> Result<Option<HistoryAlias<T>>> {
@@ -608,6 +608,7 @@ where
     ) -> Result<Option<SM::Score>> {
         let state_key = serialize_state(el.get());
 
+        // Look up the prev state and recalculate time_since and elapsed in case prev was improved since
         let (prev_key, best_since_from_prev, best_elapsed_from_prev) = if let Some(c) = prev {
             let prev_key = serialize_state(c);
             if let Some(sd) = self.get_deserialize_state_data(&prev_key).unwrap() {
@@ -718,6 +719,7 @@ where
             .zip(seeing.into_iter())
             .zip(seen_values.into_iter())
         {
+            // Look up the prev state and recalculate time_since and elapsed in case prev was improved since
             let (best_since_visit, best_elapsed) =
                 if let Some((p_since_visit, p_elapsed)) = prev_scoreinfo {
                     (
@@ -1079,10 +1081,10 @@ where
         let (hist, _) = el.remove_history();
 
         assert!(
-            hist.len() < TOO_MANY_STEPS,
-            "Generated a state with way too much history: {}. Last 24:\n{:?}",
+            hist.len() <= 1,
+            "Generated a state with too much history: {}. Last 4:\n{:?}",
             hist.len(),
-            hist.iter().skip(hist.len() - 24).collect::<Vec<_>>()
+            hist.iter().skip(hist.len() - 4).collect::<Vec<_>>()
         );
 
         // This is the only part of the chain where the hist and prev are changed
