@@ -864,10 +864,15 @@ impl<T: Ctx> ContextWrapper<T> {
             History::G(item_id, loc_id) | History::V(item_id, loc_id, _) => {
                 let loc = world.get_location(loc_id);
                 let e = loc.explain(self.get(), world);
+                let spot_id = world.get_location_spot(loc_id);
                 if item_id != loc.item() {
                     format!("{}\nItem does not match: {}", e, loc.item())
+                } else if spot_id != self.ctx.position() {
+                    format!("{}\nNot at current spot: {} (at {})", e, spot_id, self.ctx.position())
+                } else if self.ctx.visited(loc_id) {
+                    format!("{}\nAlready visited {}", e, loc_id)
                 } else {
-                    e
+                    format!("{}\nUnknown error. Previously: {:?}", e, self.recent_history())
                 }
             }
             History::E(exit_id) => world.get_exit(exit_id).explain(self.get(), world),
