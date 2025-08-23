@@ -868,11 +868,11 @@ impl<T: Ctx> ContextWrapper<T> {
                 if item_id != loc.item() {
                     format!("{}\nItem does not match: {}", e, loc.item())
                 } else if spot_id != self.ctx.position() {
-                    format!("{}\nNot at current spot: {} (at {})", e, spot_id, self.ctx.position())
+                    format!("{}\nNot at current spot: {}", e, spot_id)
                 } else if self.ctx.visited(loc_id) {
                     format!("{}\nAlready visited {}", e, loc_id)
                 } else {
-                    format!("{}\nUnknown error. Previously: {:?}", e, self.recent_history())
+                    format!("{}\nUnknown error.", e)
                 }
             }
             History::E(exit_id) => world.get_exit(exit_id).explain(self.get(), world),
@@ -897,12 +897,10 @@ impl<T: Ctx> ContextWrapper<T> {
                 let mvs = self.ctx.get_movement_state(world);
                 if idx >= vce.len() {
                     format!(
-                        "Invalid CE index {} (dst: {}) vs len {} at {}\nPreviously: {:?}",
+                        "Invalid CE index {} (dst: {}) vs len {}",
                         idx,
                         spot_id,
                         vce.len(),
-                        self.ctx.position(),
-                        self.recent_history(),
                     )
                 } else if vce[idx].dst != spot_id {
                     format!(
@@ -956,7 +954,12 @@ impl<T: Ctx> ContextWrapper<T> {
         if self.can_replay(world, step) {
             Ok(self.replay(world, step))
         } else {
-            Err(self.explain_pre_replay(world, step))
+            Err(format!(
+                "{}\nAt {}. Previously: {:?}",
+                self.ctx.position(),
+                self.explain_pre_replay(world, step),
+                self.recent_history(),
+            ))
         }
     }
 
