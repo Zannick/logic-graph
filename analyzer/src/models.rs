@@ -18,6 +18,7 @@ use rustc_hash::FxHashMap;
 use std::env;
 use std::marker::PhantomData;
 use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
+use std::time::Instant;
 use textplots::{Chart, Plot, Shape};
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
@@ -547,12 +548,13 @@ where
         count: usize,
         score_limit: u32,
     ) -> Result<Vec<(T, SM::Score)>> {
+        let start = Instant::now();
         let mut conn = self.get_sticky_connection();
         let sts = queries::best_available(count as i64, start_progress as u32, self.max_time())
             .filter(queries::estimated_total().le(score_limit))
             .select((raw_state, BestTimes::as_select()))
             .load::<(Vec<u8>, BestTimes)>(self.sticky(&mut conn))?;
-        let res = sts
+        let res: Vec<(T, SM::Score)> = sts
             .iter()
             .map(|(rs, bests)| {
                 (
@@ -567,6 +569,7 @@ where
         diesel::update(queries::lookup_many(&just_states))
             .set(queued.eq(true))
             .execute(self.sticky(&mut conn))?;
+        log::debug!("Retrieved {} elements from mysql in {:?}", res.len(), start.elapsed());
         Ok(res)
     }
 
