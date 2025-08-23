@@ -868,7 +868,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 if item_id != loc.item() {
                     format!("{}\nItem does not match: {}", e, loc.item())
                 } else if spot_id != self.ctx.position() {
-                    format!("{}\nNot at current spot: {}", e, spot_id)
+                    format!("{}\nLocation at spot: {}", e, spot_id)
                 } else if self.ctx.visited(loc_id) {
                     format!("{}\nAlready visited {}", e, loc_id)
                 } else {
@@ -910,7 +910,7 @@ impl<T: Ctx> ContextWrapper<T> {
                 } else if !vce[idx].can_access(world, self.get(), mvs) {
                     vce[idx].explain(world, self.get(), mvs)
                 } else {
-                    String::from("")
+                    String::from("Unknown error")
                 }
             }
         }
