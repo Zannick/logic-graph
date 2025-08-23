@@ -503,7 +503,6 @@ where
         let dbst = self
             .insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?
             .0;
-        self.improve_downstream_raw(&dbst.raw_state, &mut conn)?;
         Ok(())
     }
 
@@ -579,7 +578,6 @@ where
         let mut conn = self.get_sticky_connection();
         let (dbst, _) =
             self.insert_one(&el, parent.map(|p| serialize_state(p)), true, &mut conn)?;
-        self.improve_downstream_raw(&dbst.raw_state, &mut conn)?;
         let best_times = queries::get_best_times(&dbst.raw_state).first(self.sticky(&mut conn))?;
         // estimated time cannot change, so we only have to compare elapsed
 
@@ -592,7 +590,7 @@ where
         states: &mut Vec<ContextWrapper<T>>,
     ) -> Result<Vec<Option<SM::Score>>> {
         let mut conn = self.get_sticky_connection();
-        let dbsts = self.insert_processed_and_improve(parent, states)?.0;
+        let dbsts = self.insert_processed(parent, states, &mut conn)?.0;
         // TODO: pass serialized states by reference? like &[&Vec<u8>] instead of &[Vec<u8>]
         let keys = dbsts
             .iter()
@@ -1065,7 +1063,7 @@ mod queries {
     #[auto_type(type_case = "PascalCase")]
     pub fn available(max_time: u32) -> _ {
         let p: Preserved = preserved();
-        p.and(elapsed.lt(max_time))
+        p.and((elapsed + estimated_remaining).lt(max_time))
     }
 
     #[auto_type(type_case = "PascalCase")]
