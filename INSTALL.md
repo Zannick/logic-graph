@@ -1,8 +1,17 @@
+# MySQL support
+
 To install with MySQL support, you will need:
 
 - mysql
 - libmysqlclient-dev
 - diesel-cli (via cargo)
+
+Update the default parameters in your config file (e.g. `/etc/mysql/mysql.cnf` for Linux):
+
+```conf
+[mysql]
+cte_max_recursion_depth=100000
+```
 
 In MySQL, you will need to create a user `logic_graph` and grant appropriate permissions to it. As root:
 
@@ -15,13 +24,15 @@ GRANT SELECT ON `performance_schema`.* TO 'logic_graph'@'localhost';
 
 You can use roles but they will have to be set as default roles for diesel-cli.
 
+## Changing data directory
+
 If you wish to store your data in a directory other than the default for your MySQL installation (such as on a different type of storage device), you must grant the `FILE` permission to the user:
 
 ```sql
 GRANT FILE ON *.* TO 'logic_graph'@'localhost';
 ```
 
-and add the directory to your MySQL config file. For example, if I'm running in Linux and want to store the data on a mounted device `/mnt/e`, I would add this to my `/etc/mysql/mysql.conf` file:
+and add the directory to your MySQL config file. For example, if I'm running in Linux and want to store the data on a mounted device `/mnt/e`, I would add this to my `/etc/mysql/mysql.cnf` file, under the same `[mysqld]` section as above:
 
 ```conf
 [mysql]

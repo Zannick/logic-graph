@@ -1131,7 +1131,7 @@ mod queries {
             -- Anchor definition = the updated states
             (SELECT raw_state, prev, elapsed, step_time, elapsed AS new_elapsed, time_since_visit as new_time_since_visit
                 FROM db_states
-                WHERE raw_state = ?
+                WHERE prev = ?
                 FOR UPDATE OF db_states)
             UNION
             -- Recursive definition = the states that point to earlier states via prev
