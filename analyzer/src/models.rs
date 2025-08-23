@@ -1094,22 +1094,22 @@ mod queries {
         // that needs to be fixed.
         diesel::sql_query(
             r#"
-            WITH RECURSIVE FullHistory(raw_state, prev, hist, elapsed)
+            WITH RECURSIVE FullHistory(raw_state, prev, hist, elapsed, ri)
             AS (
             -- Anchor definition = the end state
-            SELECT raw_state, prev, hist, elapsed
+            SELECT raw_state, prev, hist, elapsed, 0 AS ri
                 FROM db_states
                 WHERE raw_state = ?
             UNION DISTINCT
             -- Recursive definition = the state pointed to by the previous state's prev
-            SELECT db.raw_state, db.prev, db.hist, db.elapsed
+            SELECT db.raw_state, db.prev, db.hist, db.elapsed, fh.ri + 1 AS ri
             FROM db_states as db
             INNER JOIN FullHistory as fh
                 ON db.raw_state = fh.prev
             )
             SELECT raw_state, prev, hist, elapsed
             FROM FullHistory
-            ORDER BY elapsed
+            ORDER BY ri DESC
             "#,
         )
     }
