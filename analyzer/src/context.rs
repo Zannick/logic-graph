@@ -956,8 +956,8 @@ impl<T: Ctx> ContextWrapper<T> {
         } else {
             Err(format!(
                 "{}\nAt {}. Previously: {:?}",
-                self.ctx.position(),
                 self.explain_pre_replay(world, step),
+                self.ctx.position(),
                 self.recent_history(),
             ))
         }
