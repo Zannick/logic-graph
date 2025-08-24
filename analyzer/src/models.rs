@@ -570,7 +570,11 @@ where
         diesel::update(queries::lookup_many(&just_states))
             .set(queued.eq(true))
             .execute(self.sticky(&mut conn))?;
-        log::debug!("Retrieved {} elements from mysql in {:?}", res.len(), start.elapsed());
+        log::debug!(
+            "Retrieved {} elements from mysql in {:?}",
+            res.len(),
+            start.elapsed()
+        );
         Ok(res)
     }
 
@@ -645,7 +649,7 @@ where
         let manager = ConnectionManager::new(env_database_url());
         Self {
             pool: Pool::builder()
-                .max_size(rayon::current_num_threads() as u32)
+                .max_size(rayon::current_num_threads() as u32 * 2)
                 .build(manager)
                 .expect("Could not build MySQL connection pool"),
             metric,

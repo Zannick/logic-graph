@@ -16,9 +16,9 @@ CREATE TABLE db_states (
     INDEX(processed, queued),
     INDEX(queued),
     INDEX(won),
-    INDEX(elapsed),
-    INDEX((elapsed + estimated_remaining)),
-    INDEX(time_since_visit),
-    INDEX(prev(256))
+    INDEX(elapsed) USING BTREE,
+    INDEX((elapsed + estimated_remaining)) USING BTREE,
+    INDEX(time_since_visit) USING BTREE,
+    INDEX(prev(256)) USING HASH
 )
 DATA DIRECTORY = "/mnt/e/.mysql";  -- should be locally set by the user
