@@ -18,7 +18,7 @@ use rustc_hash::FxHashMap;
 use std::env;
 use std::marker::PhantomData;
 use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
-use std::time::Instant;
+use std::time::{Duration, Instant};
 use textplots::{Chart, Plot, Shape};
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
@@ -501,9 +501,7 @@ where
 
     fn push(&self, el: ContextWrapper<T>, parent: Option<&T>) -> Result<()> {
         let mut conn = self.get_sticky_connection();
-        let dbst = self
-            .insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?
-            .0;
+        self.insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?;
         Ok(())
     }
 
@@ -695,11 +693,16 @@ where
 
     /// Initializes the StickyConnection if necessary and returns the pool connection inside it.
     pub fn sticky<'a>(&self, conn: &'a mut StickyConnection) -> &'a mut MysqlPoolConnection {
-        conn.get_or_insert_with(|| self.pool.get().expect("Failed to get a pool connection"))
+        conn.get_or_insert_with(|| self.pool_connection())
     }
 
     fn pool_connection(&self) -> MysqlPoolConnection {
-        self.pool.get().expect("Failed to get a pool connection")
+        let start = Instant::now();
+        let p = self.pool.get().expect("Failed to get a pool connection");
+        if start.elapsed() > Duration::from_secs(1) {
+            log::debug!("Long delay for a connection: {:?}", start.elapsed());
+        }
+        p
     }
 
     pub fn metric(&self) -> &SM {
@@ -787,7 +790,8 @@ where
         values: &Vec<DBState>,
         conn: &mut StickyConnection,
     ) -> QueryResult<usize> {
-        diesel::insert_into(db_states)
+        let start = Instant::now();
+        let res = diesel::insert_into(db_states)
             .values(values)
             .on_conflict(DuplicatedKeys)
             .do_update()
@@ -825,7 +829,11 @@ where
                 // Other fields will not change with a better path:
                 // progress, estimated_remaining, won
             ))
-            .execute(self.sticky(conn))
+            .execute(self.sticky(conn));
+        if start.elapsed() > Duration::from_secs(1) {
+            log::debug!("Log batch insert write: {:?}", start.elapsed());
+        }
+        res
     }
 
     /// Insert/update both a processed state and its subsequent states.
