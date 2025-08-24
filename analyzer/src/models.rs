@@ -551,7 +551,8 @@ where
         let start = Instant::now();
         let mut conn = self.get_sticky_connection();
         let sts = queries::best_available(count as i64, start_progress as u32, self.max_time())
-            .filter(queries::estimated_total().le(score_limit))
+            // score limit applies to the score primary which for now is time_since for TimeSinceAndElapsed
+            .filter(time_since_visit.le(score_limit))
             .select((raw_state, BestTimes::as_select()))
             .load::<(Vec<u8>, BestTimes)>(self.sticky(&mut conn))?;
         let res: Vec<(T, SM::Score)> = sts
