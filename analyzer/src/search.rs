@@ -885,11 +885,6 @@ where
         let num_threads = rayon::current_num_threads();
         let num_workers = (num_cpus::get() * 2 + 1) / 3;
         let res = Mutex::new(Ok(()));
-        log::info!(
-            "Starting search with {} workers ({} threads)",
-            num_workers,
-            num_threads
-        );
 
         struct AtExit<'a> {
             flag: &'a AtomicBool,
@@ -1348,6 +1343,11 @@ where
                 );
             }
 
+            log::info!(
+                "Starting search with {} workers ({} threads)",
+                num_workers,
+                num_threads
+            );
             rayon::scope(|sc2| {
                 for i in 0..num_workers {
                     sc2.spawn(move |_| run_worker(i));

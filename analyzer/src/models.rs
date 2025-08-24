@@ -1,5 +1,6 @@
 use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
 use crate::db::HeapMetric;
+use crate::estimates::UNREASONABLE_TIME;
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
 use crate::storage::{
@@ -315,7 +316,6 @@ where
         self.cached_estimates.processed.load(Ordering::Acquire)
     }
 
-
     fn preserved_best(&self, prog: usize) -> u32 {
         self.cached_estimates.min_estimates[prog].load(Ordering::Acquire)
     }
@@ -407,7 +407,12 @@ where
             .count()
             .get_result::<i64>(self.sticky(&mut conn))
             .unwrap();
-        format!("over time: {}", over_limit)
+        let broken = db_states
+            .filter((elapsed + estimated_remaining).ge(UNREASONABLE_TIME))
+            .count()
+            .get_result::<i64>(self.sticky(&mut conn))
+            .unwrap();
+        format!("over time: {}; unreasonable: {}", over_limit, broken)
     }
 
     fn reset_all_cached_estimates(&self) {
@@ -679,6 +684,7 @@ where
     }
 
     fn restore(&self) {
+        log::debug!("Starting restore");
         self.recovery.store(true, Ordering::Release);
         diesel::update(db_states.filter(queued.eq(true)))
             .set(queued.eq(false))
@@ -686,6 +692,10 @@ where
             .unwrap();
         self.reset_all_cached_estimates();
         self.recovery.store(false, Ordering::Release);
+        log::debug!(
+            "Finished restore: mysql db ready for retrievals with {} elements",
+            self.len()
+        );
     }
     // endregion
 }
@@ -940,7 +950,9 @@ where
         let updates = diesel::update(queries::lookup_state(&parent_state))
             .set((processed.eq(true),))
             .execute(self.sticky(conn))?;
-        self.cached_estimates.processed.fetch_add(1, Ordering::Release);
+        self.cached_estimates
+            .processed
+            .fetch_add(1, Ordering::Release);
         Ok((values, inserts + updates))
     }
 
