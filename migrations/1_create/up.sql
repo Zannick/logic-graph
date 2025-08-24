@@ -13,7 +13,7 @@ CREATE TABLE db_states (
     prev BLOB,  -- serialized Context (which should be left serialized for prev lookup)
     PRIMARY KEY(raw_state(256)),
     INDEX(progress),
-    INDEX(processed),
+    INDEX(processed, queued),
     INDEX(queued),
     INDEX(won),
     INDEX(elapsed),
