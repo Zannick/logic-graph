@@ -2,7 +2,9 @@ use crate::context::{ContextWrapper, Ctx, HistoryAlias, Wrapper};
 use crate::db::HeapMetric;
 use crate::schema::db_states::dsl::*;
 use crate::scoring::{BestTimes, EstimatorWrapper, ScoreMetric};
-use crate::storage::{get_obj_from_data, serialize_data, serialize_state, ContextDB};
+use crate::storage::{
+    get_obj_from_data, serialize_data, serialize_state, CachedEstimates, ContextDB,
+};
 use crate::world::{Exit, Location, Warp, World};
 use anyhow::Result;
 use diesel::dsl::{max, min, not, DuplicatedKeys};
@@ -272,6 +274,7 @@ pub struct MySQLDB<'w, W, T, const KS: usize, SM> {
     phantom: PhantomData<&'w (W, T)>,
     max_time: AtomicU32,
     recovery: AtomicBool,
+    cached_estimates: CachedEstimates,
 }
 
 impl<'w, W, T, L, E, const KS: usize, SM> HeapMetric for MySQLDB<'w, W, T, KS, SM>
@@ -301,68 +304,35 @@ where
 
     // region: Stats
     fn len(&self) -> usize {
-        db_states
-            .filter(queries::preserved())
-            .count()
-            .get_result::<i64>(&mut self.pool_connection())
-            .unwrap() as usize
+        self.cached_estimates.size.load(Ordering::Acquire)
     }
 
     fn seen(&self) -> usize {
-        db_states
-            .count()
-            .get_result::<i64>(&mut self.pool_connection())
-            .unwrap() as usize
+        self.cached_estimates.seen.load(Ordering::Acquire)
     }
 
     fn processed(&self) -> usize {
-        db_states
-            .filter(processed.eq(true))
-            .count()
-            .get_result::<i64>(&mut self.pool_connection())
-            .unwrap() as usize
+        self.cached_estimates.processed.load(Ordering::Acquire)
     }
 
+
     fn preserved_best(&self, prog: usize) -> u32 {
-        db_states
-            .filter(
-                progress
-                    .eq(prog as u32)
-                    .and(queries::available(self.max_time())),
-            )
-            // "best" uses the score primary, which is time_since for TimeSinceAndElapsed
-            // and the estimated total time for EstimatedTimeMetric
-            .select(min(time_since_visit))
-            .first::<Option<u32>>(&mut self.pool_connection())
-            .unwrap()
-            .unwrap_or(u32::MAX)
+        self.cached_estimates.min_estimates[prog].load(Ordering::Acquire)
     }
 
     fn preserved_bests(&self) -> Vec<u32> {
-        let mut bests = vec![u32::MAX; W::NUM_CANON_LOCATIONS];
-        for (prog, score) in db_states
-            .filter(queries::available(self.max_time()))
-            .group_by(progress)
-            // Ideally this would be changeable to the current MetricType primary
-            // (we can't do min on a tuple) but writing a type is hard. TODO: features?
-            .select((progress, min(time_since_visit)))
-            .get_results::<(u32, Option<u32>)>(&mut self.pool_connection())
-            .unwrap()
-        {
-            if let Some(sc) = score {
-                bests[prog as usize] = sc;
-            }
-        }
-        bests
+        self.cached_estimates
+            .min_estimates
+            .iter()
+            .map(|a| a.load(Ordering::Acquire))
+            .collect()
     }
 
     fn min_preserved_progress(&self) -> Option<usize> {
-        db_states
-            .filter(queries::preserved())
-            .select(min(progress))
-            .first::<Option<u32>>(&mut self.pool_connection())
-            .unwrap()
-            .map(|u| u as usize)
+        self.cached_estimates
+            .min_estimates
+            .iter()
+            .position(|a| a.load(Ordering::Acquire) != u32::MAX)
     }
 
     fn print_graphs(&self) -> Result<()> {
@@ -439,6 +409,50 @@ where
             .unwrap();
         format!("over time: {}", over_limit)
     }
+
+    fn reset_all_cached_estimates(&self) {
+        self.cached_estimates.size.store(
+            db_states
+                .filter(queries::preserved())
+                .count()
+                .get_result::<i64>(&mut self.pool_connection())
+                .unwrap() as usize,
+            Ordering::SeqCst,
+        );
+        self.cached_estimates.seen.store(
+            db_states
+                .count()
+                .get_result::<i64>(&mut self.pool_connection())
+                .unwrap() as usize,
+            Ordering::SeqCst,
+        );
+        self.cached_estimates.processed.store(
+            db_states
+                .filter(processed.eq(true))
+                .count()
+                .get_result::<i64>(&mut self.pool_connection())
+                .unwrap() as usize,
+            Ordering::SeqCst,
+        );
+
+        let mut bests = vec![u32::MAX; W::NUM_CANON_LOCATIONS + 1];
+        for (prog, score) in db_states
+            .filter(queries::available(self.max_time()))
+            .group_by(progress)
+            // Ideally this would be changeable to the current MetricType primary
+            // (we can't do min on a tuple) but writing a type is hard. TODO: features?
+            .select((progress, min(time_since_visit)))
+            .get_results::<(u32, Option<u32>)>(&mut self.pool_connection())
+            .unwrap()
+        {
+            if let Some(sc) = score {
+                bests[prog as usize] = sc;
+            }
+        }
+        for (est, min) in self.cached_estimates.min_estimates.iter().zip(bests) {
+            est.store(min, Ordering::SeqCst);
+        }
+    }
     // endregion: Stats
 
     // region: Time
@@ -501,7 +515,8 @@ where
 
     fn push(&self, el: ContextWrapper<T>, parent: Option<&T>) -> Result<()> {
         let mut conn = self.get_sticky_connection();
-        self.insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?;
+        self.insert_one(&el, parent.map(|p| serialize_state(p)), false, &mut conn)?
+            .1;
         Ok(())
     }
 
@@ -515,28 +530,49 @@ where
             Err(NotFound) => return Ok(None),
             Err(e) => return Err(e.into()),
         };
-        let ctx = ContextWrapper::with_times(
+        let ctx = ContextWrapper::<T>::with_times(
             get_obj_from_data(&state).unwrap(),
             best.elapsed,
             best.time_since_visit,
         );
+        self.cached_estimates.reset_estimates_in_range(
+            start_progress,
+            ctx.get().count_visits(),
+            SM::score_primary(SM::score_from_times(best)),
+        );
         diesel::update(queries::lookup_state(&state))
             .set(queued.eq(true))
             .execute(self.sticky(&mut conn))?;
+        self.cached_estimates.size.fetch_sub(1, Ordering::Release);
         Ok(Some(ctx))
     }
 
     fn evict(&self, iter: impl IntoIterator<Item = (T, SM::Score)>) -> Result<()> {
         // We don't have the full state information, so instead we'll assume that all evicted items
         // have been stored previously. As such, just set them all as unqueued.
-        diesel::update(queries::lookup_many(
+        let mut mins = vec![u32::MAX; W::NUM_CANON_LOCATIONS + 1];
+        let res = diesel::update(queries::lookup_many(
             &iter
                 .into_iter()
-                .map(|(t, _)| serialize_state(&t))
+                .map(|(t, sc)| {
+                    let p = t.count_visits();
+                    mins[p] = std::cmp::min(mins[p], SM::score_primary(sc));
+                    serialize_state(&t)
+                })
                 .collect::<Vec<_>>(),
         ))
         .set(queued.eq(false))
         .execute(&mut self.pool_connection())?;
+
+        for (est, min) in self
+            .cached_estimates
+            .min_estimates
+            .iter()
+            .zip(mins.into_iter())
+        {
+            est.fetch_min(min, Ordering::Release);
+        }
+        self.cached_estimates.size.fetch_add(res, Ordering::Release);
         Ok(())
     }
 
@@ -563,6 +599,19 @@ where
             })
             .collect();
 
+        if let Some((t, sc)) = res.last() {
+            self.cached_estimates.reset_estimates_in_range(
+                start_progress,
+                t.count_visits(),
+                SM::score_primary(*sc),
+            );
+        } else {
+            // No results
+            self.cached_estimates
+                .reset_estimates_in_range_unbounded(start_progress);
+            return Ok(res);
+        }
+
         // After reconstructing the state objects, we can reuse the raw states to update the db.
         let just_states = sts.into_iter().map(|(s, _)| s).collect::<Vec<_>>();
         diesel::update(queries::lookup_many(&just_states))
@@ -573,6 +622,9 @@ where
             res.len(),
             start.elapsed()
         );
+        self.cached_estimates
+            .size
+            .fetch_sub(just_states.len(), Ordering::Release);
         Ok(res)
     }
 
@@ -582,8 +634,9 @@ where
         parent: Option<&T>,
     ) -> Result<Option<SM::Score>> {
         let mut conn = self.get_sticky_connection();
-        let (dbst, _) =
-            self.insert_one(&el, parent.map(|p| serialize_state(p)), true, &mut conn)?;
+        let dbst = self
+            .insert_one(&el, parent.map(|p| serialize_state(p)), true, &mut conn)?
+            .0;
         let best_times = queries::get_best_times(&dbst.raw_state).first(self.sticky(&mut conn))?;
         // estimated time cannot change, so we only have to compare elapsed
 
@@ -631,6 +684,7 @@ where
             .set(queued.eq(false))
             .execute(&mut self.pool_connection())
             .unwrap();
+        self.reset_all_cached_estimates();
         self.recovery.store(false, Ordering::Release);
     }
     // endregion
@@ -654,6 +708,7 @@ where
             phantom: PhantomData::default(),
             max_time: u32::MAX.into(),
             recovery: false.into(),
+            cached_estimates: CachedEstimates::new(W::NUM_CANON_LOCATIONS + 1),
         }
     }
 
@@ -672,6 +727,7 @@ where
             phantom: PhantomData::default(),
             max_time: u32::MAX.into(),
             recovery: false.into(),
+            cached_estimates: CachedEstimates::new(W::NUM_CANON_LOCATIONS + 1),
         };
 
         let mut conn = db.pool.get().unwrap();
@@ -782,6 +838,14 @@ where
                 queued.eq(not(processed).and(insertvalues(queued))),
             ))
             .execute(self.sticky(conn))?;
+
+        // a value of 2 means the row was updated
+        if res == 1 {
+            if !queue {
+                self.cached_estimates.size.fetch_add(1, Ordering::Release);
+            }
+            self.cached_estimates.seen.fetch_add(1, Ordering::Release);
+        }
         Ok((value, res))
     }
 
@@ -829,11 +893,24 @@ where
                 // Other fields will not change with a better path:
                 // progress, estimated_remaining, won
             ))
-            .execute(self.sticky(conn));
-        if start.elapsed() > Duration::from_secs(1) {
-            log::debug!("Log batch insert write: {:?}", start.elapsed());
+            .execute(self.sticky(conn))?;
+        // result = 1 for insert, 2 for update, so res - values.len() = number of updated keys.
+        let inserts = (values.len() * 2).saturating_sub(res);
+        if inserts > 0 {
+            self.cached_estimates
+                .seen
+                .fetch_add(inserts, Ordering::Release);
+            // we shouldn't have a mix of queuing
+            if !values[0].queued {
+                self.cached_estimates
+                    .size
+                    .fetch_add(inserts, Ordering::Release);
+            }
         }
-        res
+        if start.elapsed() > Duration::from_secs(1) {
+            log::debug!("Long batch insert write: {:?}", start.elapsed());
+        }
+        Ok(res)
     }
 
     /// Insert/update both a processed state and its subsequent states.
@@ -863,6 +940,7 @@ where
         let updates = diesel::update(queries::lookup_state(&parent_state))
             .set((processed.eq(true),))
             .execute(self.sticky(conn))?;
+        self.cached_estimates.processed.fetch_add(1, Ordering::Release);
         Ok((values, inserts + updates))
     }
 

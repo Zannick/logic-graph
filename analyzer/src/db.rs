@@ -117,9 +117,7 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
 
     metric: SM,
     recovery: AtomicBool,
-    size: AtomicUsize,
-    seen: AtomicUsize,
-    next: AtomicUsize,
+    cached_estimates: CachedEstimates,
     iskips: AtomicUsize,
     pskips: AtomicUsize,
     dup_iskips: AtomicUsize,
@@ -128,8 +126,6 @@ pub struct HeapDB<'w, W: World + 'w, T: Ctx, const KS: usize, SM> {
 
     deletes: AtomicUsize,
     delete: AtomicU64,
-
-    min_db_estimates: Vec<AtomicU32>,
 
     bg_deletes: AtomicUsize,
 
@@ -166,38 +162,40 @@ where
 
     /// Returns the number of elements in the heap (tracked separately from the db).
     fn len(&self) -> usize {
-        self.size.load(Ordering::Acquire)
+        self.cached_estimates.size.load(Ordering::Acquire)
     }
 
     /// Returns the number of unique states we've seen so far (tracked separately from the db).
     fn seen(&self) -> usize {
-        self.seen.load(Ordering::Acquire)
+        self.cached_estimates.seen.load(Ordering::Acquire)
     }
 
     /// Returns the number of processed states (with children) (tracked separately from the db).
     fn processed(&self) -> usize {
-        self.next.load(Ordering::Acquire)
+        self.cached_estimates.processed.load(Ordering::Acquire)
     }
 
     fn preserved_best(&self, progress: usize) -> u32 {
-        self.min_db_estimates[progress].load(Ordering::Acquire)
+        self.cached_estimates.min_estimates[progress].load(Ordering::Acquire)
     }
 
     fn preserved_bests(&self) -> Vec<u32> {
-        self.min_db_estimates
+        self.cached_estimates
+            .min_estimates
             .iter()
             .map(|a| a.load(Ordering::Acquire))
             .collect()
     }
 
     fn min_preserved_progress(&self) -> Option<usize> {
-        self.min_db_estimates
+        self.cached_estimates
+            .min_estimates
             .iter()
             .position(|a| a.load(Ordering::Acquire) != u32::MAX)
     }
 
     fn print_graphs(&self) -> Result<()> {
-        let size = self.size.load(Ordering::Acquire);
+        let size = self.cached_estimates.size.load(Ordering::Acquire);
         let max_time = self.max_time.load(Ordering::Acquire);
         let mut times: Vec<f64> = Vec::with_capacity(size);
         let mut time_scores: Vec<(f64, f64)> = Vec::with_capacity(size);
@@ -248,6 +246,26 @@ where
             self.readds.load(Ordering::Acquire),
             self.bg_deletes.load(Ordering::Acquire)
         )
+    }
+
+    /// Peeks in the db to reset min_db_estimates
+    fn reset_all_cached_estimates(&self) {
+        for p in 0..=W::NUM_CANON_LOCATIONS {
+            let progress: u32 = p.try_into().unwrap();
+            let mut tail_opts = ReadOptions::default();
+            tail_opts.set_tailing(true);
+            tail_opts.set_pin_data(true);
+            tail_opts.set_iterate_lower_bound(progress.to_be_bytes());
+            tail_opts.set_iterate_upper_bound((progress + 1).to_be_bytes());
+            let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
+            if let Some(item) = iter.next() {
+                let (key, _) = item.unwrap();
+                let score = SM::get_score_primary_from_heap_key(key.as_ref());
+                self.cached_estimates.min_estimates[p].store(score, Ordering::SeqCst);
+            } else {
+                self.cached_estimates.min_estimates[p].store(u32::MAX, Ordering::SeqCst);
+            }
+        }
     }
 
     fn max_time(&self) -> u32 {
@@ -367,7 +385,7 @@ where
         let key = self.metric.get_heap_key(el.get(), score);
         let val = serialize_state(el.get());
         self.db.put_opt(key, val, &self.write_opts)?;
-        self.size.fetch_add(1, Ordering::Release);
+        self.cached_estimates.size.fetch_add(1, Ordering::Release);
         Ok(())
     }
 
@@ -393,7 +411,7 @@ where
             // Ignore error
             let _ = self.db.delete_opt(&key, &self.write_opts);
             self.delete.fetch_max(raw, Ordering::Release);
-            self.size.fetch_sub(1, Ordering::Release);
+            self.cached_estimates.size.fetch_sub(1, Ordering::Release);
 
             if ndeletes % 20000 == 0 {
                 let start = Instant::now();
@@ -428,7 +446,7 @@ where
             // are based on the keys.
             let score = SM::get_score_primary_from_heap_key(key.as_ref());
 
-            self.reset_estimates_in_range(start_progress, to_progress, score);
+            self.cached_estimates.reset_estimates_in_range(start_progress, to_progress, score);
 
             // We don't need to check the elapsed time against statedb,
             // because that's where the elapsed time came from
@@ -439,7 +457,7 @@ where
             )));
         }
 
-        self.reset_estimates_in_range_unbounded(start_progress);
+        self.cached_estimates.reset_estimates_in_range_unbounded(start_progress);
 
         Ok(None)
     }
@@ -474,13 +492,13 @@ where
         }
         let new = batch.len();
         self.db.write_opt(batch, &self.write_opts)?;
-        for (est, min) in self.min_db_estimates.iter().zip(mins.into_iter()) {
+        for (est, min) in self.cached_estimates.min_estimates.iter().zip(mins.into_iter()) {
             est.fetch_min(min, Ordering::Release);
         }
 
         self.pskips.fetch_add(skips, Ordering::Release);
         self.dup_pskips.fetch_add(dups, Ordering::Release);
-        self.size.fetch_add(new, Ordering::Release);
+        self.cached_estimates.size.fetch_add(new, Ordering::Release);
 
         Ok(())
     }
@@ -582,13 +600,13 @@ where
         );
 
         if let Some((el, score)) = res.last() {
-            self.reset_estimates_in_range(
+            self.cached_estimates.reset_estimates_in_range(
                 start_progress,
                 el.count_visits(),
                 SM::score_primary(*score),
             );
         } else {
-            self.reset_estimates_in_range_unbounded(start_progress);
+            self.cached_estimates.reset_estimates_in_range_unbounded(start_progress);
         }
 
         // Ignore/assert errors once we start deleting.
@@ -597,7 +615,7 @@ where
         self.db.write_opt(batch, &self.write_opts).unwrap();
         log::trace!("Deletes completed in {:?}", start.elapsed());
 
-        self.size.fetch_sub(pops, Ordering::Release);
+        self.cached_estimates.size.fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
         self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
 
@@ -675,7 +693,7 @@ where
         });
 
         if is_new {
-            self.seen.fetch_add(1, Ordering::Release);
+            self.cached_estimates.seen.fetch_add(1, Ordering::Release);
         } else {
             let max_time = self.max_time();
             // If it was an improvement just over the max_time, and it hasn't been processed yet,
@@ -687,7 +705,7 @@ where
                 let qkey = self.metric.get_heap_key(el.get(), score);
                 self.db.put_opt(qkey, state_key, &self.write_opts)?;
                 self.readds.fetch_add(1, Ordering::Release);
-                self.size.fetch_add(1, Ordering::Release);
+                self.cached_estimates.size.fetch_add(1, Ordering::Release);
             }
         }
         Ok(Some(score))
@@ -788,7 +806,7 @@ where
                 let qkey = self.metric.get_heap_key(el.get(), score);
                 self.db.put_opt(qkey, state_key, &self.write_opts)?;
                 self.readds.fetch_add(1, Ordering::Release);
-                self.size.fetch_add(1, Ordering::Release);
+                self.cached_estimates.size.fetch_add(1, Ordering::Release);
             }
         }
 
@@ -800,10 +818,10 @@ where
                 &self.write_opts,
             )
             .unwrap();
-        self.next.fetch_add(1, Ordering::Release);
+        self.cached_estimates.processed.fetch_add(1, Ordering::Release);
 
         self.dup_iskips.fetch_add(dups, Ordering::Release);
-        self.seen.fetch_add(new_seen, Ordering::Release);
+        self.cached_estimates.seen.fetch_add(new_seen, Ordering::Release);
         Ok(results)
     }
 
@@ -818,7 +836,7 @@ where
 
         let state_snapshot = self.statedb.snapshot();
 
-        self.reset_estimates_actual();
+        self.reset_all_cached_estimates();
         let mut iter_opts = ReadOptions::default();
         iter_opts.fill_cache(false);
         let iter = state_snapshot.iterator_cf_opt(self.best_cf(), iter_opts, IteratorMode::Start);
@@ -829,7 +847,7 @@ where
                 .get_pinned_cf(next_cf, key.as_ref())
                 .is_ok_and(|o| o.is_some())
             {
-                self.next.fetch_add(1, Ordering::Release);
+                self.cached_estimates.processed.fetch_add(1, Ordering::Release);
             } else {
                 let state: T = get_obj_from_data(key.as_ref()).unwrap();
                 let data: StateDataAlias<T> = get_obj_from_data(val.as_ref()).unwrap();
@@ -840,7 +858,7 @@ where
                     .put_opt(&heap_key_min, serialize_state(&state), &self.write_opts)
                     .is_ok()
                 {
-                    self.size.fetch_add(1, Ordering::Release);
+                    self.cached_estimates.size.fetch_add(1, Ordering::Release);
                 }
             }
         }
@@ -944,12 +962,12 @@ where
         write_opts.disable_wal(true);
 
         let max_possible_progress = W::NUM_CANON_LOCATIONS;
-        let mut min_db_estimates = Vec::new();
-        min_db_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
 
+        let cached_estimates = CachedEstimates::new(max_possible_progress);
         let seen = statedb
             .property_int_value("estimate-num-keys")?
             .unwrap_or(0) as usize;
+        cached_estimates.seen.store(seen, Ordering::Release);
 
         Ok(HeapDB {
             db,
@@ -960,9 +978,7 @@ where
             max_time: initial_max_time.into(),
             metric,
             recovery: recovery.into(),
-            size: 0.into(),
-            seen: seen.into(),
-            next: 0.into(),
+            cached_estimates,
             iskips: 0.into(),
             pskips: 0.into(),
             dup_iskips: 0.into(),
@@ -970,7 +986,6 @@ where
             readds: 0.into(),
             deletes: 0.into(),
             delete: 0.into(),
-            min_db_estimates,
             bg_deletes: 0.into(),
             retrieve_lock: Mutex::new(()),
             phantom: PhantomData,
@@ -1036,42 +1051,6 @@ where
             Err(Error::msg(error.join("; ")))
         } else {
             Ok(parsed.into_iter().map(|res| res.unwrap()).collect())
-        }
-    }
-
-    /// Resets some min_db_estimates based on removed elements in a range.
-    fn reset_estimates_in_range(&self, start_progress: usize, to_progress: usize, score: u32) {
-        self.min_db_estimates[to_progress].store(score, Ordering::SeqCst);
-        // If we went far enough that we got another progress level, the other ones have nothing left.
-        for p in start_progress..to_progress {
-            self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
-        }
-    }
-
-    /// Resets some min_db_estimates based on never finding more elements.
-    fn reset_estimates_in_range_unbounded(&self, start_progress: usize) {
-        for p in start_progress..=W::NUM_CANON_LOCATIONS {
-            self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
-        }
-    }
-
-    /// Peeks in the db to reset min_db_estimates
-    fn reset_estimates_actual(&self) {
-        for p in 0..=W::NUM_CANON_LOCATIONS {
-            let progress: u32 = p.try_into().unwrap();
-            let mut tail_opts = ReadOptions::default();
-            tail_opts.set_tailing(true);
-            tail_opts.set_pin_data(true);
-            tail_opts.set_iterate_lower_bound(progress.to_be_bytes());
-            tail_opts.set_iterate_upper_bound((progress + 1).to_be_bytes());
-            let mut iter = self.db.iterator_opt(IteratorMode::Start, tail_opts);
-            if let Some(item) = iter.next() {
-                let (key, _) = item.unwrap();
-                let score = SM::get_score_primary_from_heap_key(key.as_ref());
-                self.min_db_estimates[p].store(score, Ordering::SeqCst);
-            } else {
-                self.min_db_estimates[p].store(u32::MAX, Ordering::SeqCst);
-            }
         }
     }
 
@@ -1180,12 +1159,12 @@ where
             }
             start_key = iter.next().map(|p| p.unwrap().0);
             self.db.write_opt(batch, &self.write_opts).unwrap();
-            self.reset_estimates_actual();
+            self.reset_all_cached_estimates();
             drop(_retrieve_lock);
             if end && count == batch_size {
                 log::debug!(
                     "Bg thread reached end at round start, left in db: {}",
-                    self.size.load(Ordering::Acquire)
+                    self.cached_estimates.size.load(Ordering::Acquire)
                 );
                 empty_passes += 1;
                 assert!(
@@ -1200,7 +1179,7 @@ where
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
             self.bg_deletes
                 .fetch_add(pskips + dup_pskips, Ordering::Release);
-            self.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
+            self.cached_estimates.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
             if pskips > 0 || dup_pskips > 0 || rescores > 0 {
                 log::debug!(
                     "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",

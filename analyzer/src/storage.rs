@@ -6,7 +6,7 @@ use crate::world::*;
 use anyhow::Result;
 use rmp_serde::Serializer;
 use serde::{Deserialize, Serialize};
-
+use std::sync::atomic::{AtomicU32, AtomicUsize, Ordering};
 
 /// The key for a T (Ctx) in the statedb, and the value in the queue db
 /// are all T itself.
@@ -34,6 +34,44 @@ where
     V: for<'de> Deserialize<'de>,
 {
     Ok(rmp_serde::from_slice::<V>(buf)?)
+}
+
+pub struct CachedEstimates {
+    pub size: AtomicUsize,
+    pub seen: AtomicUsize,
+    pub processed: AtomicUsize,
+    pub min_estimates: Vec<AtomicU32>,
+}
+
+impl CachedEstimates {
+    pub fn new(max_possible_progress: usize) -> CachedEstimates {
+        let mut min_estimates = Vec::new();
+        min_estimates.resize_with(max_possible_progress + 1, || u32::MAX.into());
+        Self {
+            size: 0.into(),
+            seen: 0.into(),
+            processed: 0.into(),
+            min_estimates,
+        }
+    }
+}
+
+impl CachedEstimates {
+    /// Resets some min_estimates based on removed elements in a range.
+    pub fn reset_estimates_in_range(&self, start_progress: usize, to_progress: usize, score: u32) {
+        self.min_estimates[to_progress].store(score, Ordering::SeqCst);
+        // If we went far enough that we got another progress level, the other ones have nothing left.
+        for est in &self.min_estimates[start_progress..to_progress] {
+            est.store(u32::MAX, Ordering::SeqCst);
+        }
+    }
+
+    /// Resets some min_estimates based on never finding more elements.
+    pub fn reset_estimates_in_range_unbounded(&self, start_progress: usize) {
+        for est in &self.min_estimates[start_progress..] {
+            est.store(u32::MAX, Ordering::SeqCst);
+        }
+    }
 }
 
 /// Common functionality all DBs must support.
@@ -107,6 +145,9 @@ where
 
     /// Get extra stats details about actions performed or not performed.
     fn extra_stats(&self) -> String;
+
+    /// Reset cached estimates.
+    fn reset_all_cached_estimates(&self);
     // endregion
 
     // region: Time
@@ -178,7 +219,7 @@ where
     // Writes
 
     /// Records an element in the db and (if new) marks it as preserved (unqueued and unprocessed).
-    /// 
+    ///
     /// See `record_one` for adding an element and marking it as queued instead.
     fn push(&self, el: ContextWrapper<T>, prev: Option<&T>) -> Result<()>;
 
@@ -208,7 +249,7 @@ where
     /// or None otherwise (suggesting the state does not need to be requeued).
     ///
     /// The state object will be modified to clear the saved history.
-    /// 
+    ///
     /// See `push` for recording an element and marking it unqueued instead.
     fn record_one(&self, el: &mut ContextWrapper<T>, prev: Option<&T>)
         -> Result<Option<SM::Score>>;
