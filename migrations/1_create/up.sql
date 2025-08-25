@@ -12,13 +12,9 @@ CREATE TABLE db_states (
     hist TINYBLOB,  -- serialized History
     prev BLOB,  -- serialized Context (which should be left serialized for prev lookup)
     PRIMARY KEY(raw_state(256)),
-    INDEX(progress),
-    INDEX(processed, queued),
-    INDEX(queued),
+    -- This index is used by retrieve (all 5), pop (first 4), and others often use 1-3.
+    INDEX(processed, queued, (elapsed + estimated_remaining), progress, time_since_visit),
     INDEX(won),
-    INDEX(elapsed) USING BTREE,
-    INDEX((elapsed + estimated_remaining)) USING BTREE,
-    INDEX(time_since_visit) USING BTREE,
-    INDEX(prev(256)) USING HASH
+    INDEX(prev(256))
 )
 DATA DIRECTORY = "/mnt/e/.mysql";  -- should be locally set by the user
