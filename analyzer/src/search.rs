@@ -1162,16 +1162,14 @@ where
             });
 
             // Background db cleanup thread
-            #[cfg(not(feature = "mysql"))]
             scope.spawn(|_| {
                 let sleep_time = Duration::from_secs(10);
                 while !self.finished.load(Ordering::Acquire) {
                     let len = self.queue.db_len();
-                    if len < 1_000_000 {
-                        sleep(sleep_time);
-                        continue;
+                    if len >= 1_000_000 {
+                        self.queue.db().cleanup(&self.finished).unwrap();
                     }
-                    self.queue.db().cleanup(65_536, &self.finished).unwrap();
+                    sleep(sleep_time);
                 }
             });
 

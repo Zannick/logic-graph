@@ -825,6 +825,115 @@ where
         Ok(results)
     }
 
+    fn cleanup(&self, exit_signal: &AtomicBool) -> Result<()> {
+        const BATCH_SIZE: usize = 65536;
+        let mut start_key: Option<Box<[u8]>> = None;
+
+        let mut end = false;
+        let mut empty_passes = 0;
+        while !end && !exit_signal.load(Ordering::Acquire) {
+            let mut iter_opts = ReadOptions::default();
+            iter_opts.set_tailing(true);
+            iter_opts.fill_cache(false);
+            let start_progress = if let Some(skey) = start_key {
+                let p = u32::from_be_bytes(
+                    <[u8] as AsRef<[u8]>>::as_ref(&skey[0..4])
+                        .try_into()
+                        .unwrap(),
+                );
+                iter_opts.set_iterate_lower_bound(skey);
+                p
+            } else {
+                0
+            };
+            let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
+
+            let mut batch = WriteBatchWithTransaction::<false>::default();
+            let mut pskips = 0;
+            let mut dup_pskips = 0;
+            let mut rescores = 0;
+            let mut count = BATCH_SIZE;
+            let mut compact = false;
+            let _retrieve_lock = self.retrieve_lock.lock().unwrap();
+
+            while count > 0 {
+                if let Some(item) = iter.next() {
+                    let (key, value) = item.unwrap();
+                    count -= 1;
+
+                    if self.was_processed_raw(&value)? {
+                        batch.delete(key);
+                        dup_pskips += 1;
+                        continue;
+                    }
+
+                    let new_score = self
+                        .lookup_score_raw(&value)
+                        .expect("Error reading state in bg thread");
+                    let max_time = self.max_time();
+                    if self.metric.total_estimate_from_score(new_score) > max_time {
+                        batch.delete(key);
+                        pskips += 1;
+                        continue;
+                    }
+
+                    let old_score = self.metric.score_from_heap_key(&key);
+                    if old_score > new_score {
+                        let new_key = self.metric.new_heap_key(&key, new_score);
+                        batch.put(new_key, value);
+                        batch.delete(&key);
+                        rescores += 1;
+                    }
+                    if !compact && self._cache.get_usage() > 2 * GB {
+                        compact = true;
+                    }
+                } else {
+                    compact = true;
+                    end = true;
+                    break;
+                }
+            }
+            start_key = iter.next().map(|p| p.unwrap().0);
+            self.db.write_opt(batch, &self.write_opts).unwrap();
+            self.reset_all_cached_estimates();
+            drop(_retrieve_lock);
+            if end && count == BATCH_SIZE {
+                log::debug!(
+                    "Bg thread reached end at round start, left in db: {}",
+                    self.cached_estimates.size.load(Ordering::Acquire)
+                );
+                empty_passes += 1;
+                assert!(
+                    empty_passes < 10,
+                    "Bg thread encountered too many empty passes in a row"
+                );
+                std::thread::sleep(std::time::Duration::from_secs(2));
+            } else {
+                empty_passes = 0;
+            }
+            self.pskips.fetch_add(pskips, Ordering::Release);
+            self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
+            self.bg_deletes
+                .fetch_add(pskips + dup_pskips, Ordering::Release);
+            self.cached_estimates.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
+            if pskips > 0 || dup_pskips > 0 || rescores > 0 {
+                log::debug!(
+                    "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",
+                    start_progress,
+                    pskips,
+                    dup_pskips,
+                    rescores
+                );
+            }
+            if compact {
+                let start = Instant::now();
+                self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
+                log::debug!("Bg thread compacting took {:?}", start.elapsed());
+            }
+        }
+        Ok(())
+    }
+
     fn recovery(&self) -> bool {
         self.recovery.load(Ordering::Acquire)
     }
@@ -1088,114 +1197,6 @@ where
                 &self.write_opts,
             )
             .unwrap();
-    }
-
-    pub fn cleanup(&self, batch_size: usize, exit_signal: &AtomicBool) -> Result<()> {
-        let mut start_key: Option<Box<[u8]>> = None;
-
-        let mut end = false;
-        let mut empty_passes = 0;
-        while !end && !exit_signal.load(Ordering::Acquire) {
-            let mut iter_opts = ReadOptions::default();
-            iter_opts.set_tailing(true);
-            iter_opts.fill_cache(false);
-            let start_progress = if let Some(skey) = start_key {
-                let p = u32::from_be_bytes(
-                    <[u8] as AsRef<[u8]>>::as_ref(&skey[0..4])
-                        .try_into()
-                        .unwrap(),
-                );
-                iter_opts.set_iterate_lower_bound(skey);
-                p
-            } else {
-                0
-            };
-            let mut iter = self.db.iterator_opt(IteratorMode::Start, iter_opts);
-
-            let mut batch = WriteBatchWithTransaction::<false>::default();
-            let mut pskips = 0;
-            let mut dup_pskips = 0;
-            let mut rescores = 0;
-            let mut count = batch_size;
-            let mut compact = false;
-            let _retrieve_lock = self.retrieve_lock.lock().unwrap();
-
-            while count > 0 {
-                if let Some(item) = iter.next() {
-                    let (key, value) = item.unwrap();
-                    count -= 1;
-
-                    if self.was_processed_raw(&value)? {
-                        batch.delete(key);
-                        dup_pskips += 1;
-                        continue;
-                    }
-
-                    let new_score = self
-                        .lookup_score_raw(&value)
-                        .expect("Error reading state in bg thread");
-                    let max_time = self.max_time();
-                    if self.metric.total_estimate_from_score(new_score) > max_time {
-                        batch.delete(key);
-                        pskips += 1;
-                        continue;
-                    }
-
-                    let old_score = self.metric.score_from_heap_key(&key);
-                    if old_score > new_score {
-                        let new_key = self.metric.new_heap_key(&key, new_score);
-                        batch.put(new_key, value);
-                        batch.delete(&key);
-                        rescores += 1;
-                    }
-                    if !compact && self._cache.get_usage() > 2 * GB {
-                        compact = true;
-                    }
-                } else {
-                    compact = true;
-                    end = true;
-                    break;
-                }
-            }
-            start_key = iter.next().map(|p| p.unwrap().0);
-            self.db.write_opt(batch, &self.write_opts).unwrap();
-            self.reset_all_cached_estimates();
-            drop(_retrieve_lock);
-            if end && count == batch_size {
-                log::debug!(
-                    "Bg thread reached end at round start, left in db: {}",
-                    self.cached_estimates.size.load(Ordering::Acquire)
-                );
-                empty_passes += 1;
-                assert!(
-                    empty_passes < 10,
-                    "Bg thread encountered too many empty passes in a row"
-                );
-                std::thread::sleep(std::time::Duration::from_secs(2));
-            } else {
-                empty_passes = 0;
-            }
-            self.pskips.fetch_add(pskips, Ordering::Release);
-            self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
-            self.bg_deletes
-                .fetch_add(pskips + dup_pskips, Ordering::Release);
-            self.cached_estimates.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
-            if pskips > 0 || dup_pskips > 0 || rescores > 0 {
-                log::debug!(
-                    "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",
-                    start_progress,
-                    pskips,
-                    dup_pskips,
-                    rescores
-                );
-            }
-            if compact {
-                let start = Instant::now();
-                self.db.compact_range(None::<&[u8]>, None::<&[u8]>);
-                log::debug!("Bg thread compacting took {:?}", start.elapsed());
-            }
-        }
-        Ok(())
     }
 
     fn quick_detect_2cycle(&self, state_key: &Vec<u8>) -> Result<()> {

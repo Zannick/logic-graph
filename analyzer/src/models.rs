@@ -679,6 +679,11 @@ where
             .collect())
     }
 
+    fn cleanup(&self, _exit_signal: &AtomicBool) -> Result<()> {
+        self.reset_all_cached_estimates();
+        Ok(())
+    }
+
     fn recovery(&self) -> bool {
         self.recovery.load(Ordering::Acquire)
     }

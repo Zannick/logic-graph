@@ -6,7 +6,7 @@ use crate::world::*;
 use anyhow::Result;
 use rmp_serde::Serializer;
 use serde::{Deserialize, Serialize};
-use std::sync::atomic::{AtomicU32, AtomicUsize, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, AtomicUsize, Ordering};
 
 /// The key for a T (Ctx) in the statedb, and the value in the queue db
 /// are all T itself.
@@ -267,7 +267,11 @@ where
         states: &mut Vec<ContextWrapper<T>>,
     ) -> Result<Vec<Option<SM::Score>>>;
 
-    // Recovery
+    // Cleanup and recovery
+
+    /// Periodic maintenance or background tasks to maintain the database should be done here.
+    /// If long-running, the exit_signal can be used to check whether to exit.
+    fn cleanup(&self, exit_signal: &AtomicBool) -> Result<()>;
 
     /// Whether the db is in recovery.
     /// This should return false after `restore()` completes, but can be read from a separate thread.
