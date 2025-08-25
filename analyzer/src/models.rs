@@ -623,8 +623,8 @@ where
 
         // After reconstructing the state objects, we can reuse the raw states to update the db.
         let just_states = sts.into_iter().map(|(s, _)| s).collect::<Vec<_>>();
-        for i in 0..(just_states.len() / 5) {
-            diesel::update(queries::lookup_many(&just_states[i * 5..(i + 1) * 5]))
+        for chunk in just_states.chunks(25) {
+            diesel::update(queries::lookup_many(&chunk))
                 .set(queued.eq(true))
                 .execute(self.sticky(&mut conn))?;
         }
