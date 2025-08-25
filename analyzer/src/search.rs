@@ -455,6 +455,7 @@ where
             delete_dbs,
         )
         .unwrap();
+        queue.db().reset_all_cached_estimates();
         queue.push(startctx.clone(), None).unwrap();
         log::info!("Max time to consider is now: {}ms", queue.max_time());
 
