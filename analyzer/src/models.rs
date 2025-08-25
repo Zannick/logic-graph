@@ -258,7 +258,7 @@ mod q {
     #[diesel(check_for_backend(Mysql))]
     pub struct Bucket {
         #[diesel(sql_type = Integer)]
-        pub bucket_id: i32,
+        pub bucket: i32,
         #[diesel(sql_type = BigInt)]
         pub count: i64,
     }
@@ -361,7 +361,7 @@ where
             r#"
             SELECT
                 FLOOR(elapsed / ?) AS bucket,
-                COUNT(*)
+                COUNT(*) AS count
             FROM db_states
             WHERE
                 processed = FALSE
@@ -373,9 +373,9 @@ where
         .load::<Bucket>(self.sticky(&mut conn))?;
 
         // We may be missing empty buckets
-        let mut bins = vec![0.0f32; time_buckets.last().unwrap().bucket_id as usize + 1];
+        let mut bins = vec![0.0f32; time_buckets.last().unwrap().bucket as usize + 1];
         for bucket in time_buckets {
-            bins[bucket.bucket_id as usize] = bucket.count as f32;
+            bins[bucket.bucket as usize] = bucket.count as f32;
         }
         Chart::new(132, 28, 0.0, max_e)
             .lineplot(&Shape::Bars(
