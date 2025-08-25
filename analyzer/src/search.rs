@@ -1374,6 +1374,7 @@ where
             }
         );
         self.queue.print_queue_histogram();
+        let _ = self.queue.db().print_graphs();
         rt.shutdown_background();
         self.solutions.lock().unwrap().export()
     }
@@ -1554,6 +1555,7 @@ where
         }
         if iters == 100_000 || iters % 1_000_000 == 0 {
             self.queue.print_queue_histogram();
+            self.queue.db().print_graphs().unwrap();
         }
         let (iskips, pskips, dpskips) = self.queue.skip_stats();
         let max_time = self.queue.max_time();

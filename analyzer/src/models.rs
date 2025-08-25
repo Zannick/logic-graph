@@ -499,6 +499,10 @@ where
         }
     }
 
+    fn get_best_times_processed_raw(&self, state_key: &[u8]) -> Result<(BestTimes, bool)> {
+        Ok(queries::get_best_times_processed(state_key).first(&mut self.pool_connection())?)
+    }
+
     fn get_history_raw(&self, state_key: &Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)> {
         let entries = self.full_history_raw(state_key, &mut self.get_sticky_connection())?;
         let total_time = entries.last().map_or(0, |entry| entry.elapsed);
@@ -1117,6 +1121,12 @@ mod queries {
     pub fn get_processed<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select(processed)
+    }
+
+    #[auto_type(type_case = "PascalCase")]
+    pub fn get_best_times_processed<'a>(key: &'a [u8]) -> _ {
+        let row: LookupState<'a> = lookup_state(key);
+        row.select::<(AsSelect<BestTimes, Mysql>, processed)>((BestTimes::as_select(), processed))
     }
 
     #[auto_type(type_case = "PascalCase")]

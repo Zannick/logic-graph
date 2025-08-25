@@ -195,6 +195,17 @@ where
         self.was_processed_raw(&serialize_state(el))
     }
 
+    /// Returns both whether the state was processed and what its best recorded times were.
+    /// May only be called with an encoded state known to exist in the db.
+    fn get_best_times_processed_raw(&self, state_key: &[u8]) -> Result<(BestTimes, bool)> {
+        Ok((self.get_best_times_raw(state_key)?, self.was_processed_raw(state_key)?))
+    }
+    /// Returns both whether the state was processed and what its best recorded times were.
+    /// May only be called with a state known to exist in the db.
+    fn get_best_times_processed(&self, el: &T) -> Result<(BestTimes, bool)> {
+        self.get_best_times_processed_raw(&serialize_state(el))
+    }
+
     /// Returns the best route in the db to reach the given encoded state, and the route's total elapsed time.
     fn get_history_raw(&self, state_key: &Vec<u8>) -> Result<(Vec<HistoryAlias<T>>, u32)>;
     /// Returns the best route in the db to reach the given state, and the route's total elapsed time.

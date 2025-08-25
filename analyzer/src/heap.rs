@@ -343,19 +343,23 @@ where
                 }
                 let (ctx, _) = queue.pop_min().unwrap();
 
-                // Retrieve the best elapsed time.
-                let BestTimes {
-                    elapsed,
-                    time_since_visit,
-                    estimated_remaining,
-                } = self.db.get_best_times(&ctx)?;
+                // Retrieve the best elapsed time and its processed state in one request,
+                // to avoid multiple db trips holding the queue lock.
+                let (
+                    BestTimes {
+                        elapsed,
+                        time_since_visit,
+                        estimated_remaining,
+                    },
+                    processed,
+                ) = self.db.get_best_times_processed(&ctx)?;
 
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
-                if self.db.was_processed(&ctx)? {
+                if processed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
@@ -537,18 +541,22 @@ where
         let mut queue = self.queue.lock().unwrap();
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             while let Some((ctx, _)) = (pop_func)(&mut queue) {
-                // Retrieve the best elapsed time.
-                let BestTimes {
-                    elapsed,
-                    time_since_visit,
-                    estimated_remaining,
-                } = self.db.get_best_times(&ctx)?;
+                // Retrieve the best elapsed time and its processed state in one request,
+                // to avoid multiple db trips holding the queue lock.
+                let (
+                    BestTimes {
+                        elapsed,
+                        time_since_visit,
+                        estimated_remaining,
+                    },
+                    processed,
+                ) = self.db.get_best_times_processed(&ctx)?;
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
-                if self.db.was_processed(&ctx)? {
+                if processed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
                     continue;
                 }
@@ -593,18 +601,22 @@ where
                     break;
                 }
                 for (ctx, _) in values.into_iter() {
-                    // Retrieve the best elapsed time.
-                    let BestTimes {
-                        elapsed,
-                        time_since_visit,
-                        estimated_remaining,
-                    } = self.db.get_best_times(&ctx)?;
+                    // Retrieve the best elapsed time and its processed state in one request,
+                    // to avoid multiple db trips holding the queue lock.
+                    let (
+                        BestTimes {
+                            elapsed,
+                            time_since_visit,
+                            estimated_remaining,
+                        },
+                        processed,
+                    ) = self.db.get_best_times_processed(&ctx)?;
                     let max_time = self.db.max_time();
                     if elapsed > max_time || elapsed + estimated_remaining > max_time {
                         self.pskips.fetch_add(1, Ordering::Release);
                         continue;
                     }
-                    if self.db.was_processed(&ctx)? {
+                    if processed {
                         self.dup_pskips.fetch_add(1, Ordering::Release);
                         continue;
                     }
@@ -680,18 +692,22 @@ where
             if let (Some(lower), Some(higher)) = (prev, next) {
                 if higher < lower {
                     while let Some((ctx, _)) = queue.pop_segment_min(segment) {
-                        // Retrieve the best elapsed time.
-                        let BestTimes {
-                            elapsed,
-                            time_since_visit,
-                            estimated_remaining,
-                        } = self.db.get_best_times(&ctx)?;
+                        // Retrieve the best elapsed time and its processed state in one request,
+                        // to avoid multiple db trips holding the queue lock.
+                        let (
+                            BestTimes {
+                                elapsed,
+                                time_since_visit,
+                                estimated_remaining,
+                            },
+                            processed,
+                        ) = self.db.get_best_times_processed(&ctx)?;
                         let max_time = self.db.max_time();
                         if elapsed > max_time || elapsed + estimated_remaining > max_time {
                             self.pskips.fetch_add(1, Ordering::Release);
                             continue;
                         }
-                        if self.db.was_processed(&ctx)? {
+                        if processed {
                             self.dup_pskips.fetch_add(1, Ordering::Release);
                             continue;
                         }
@@ -731,12 +747,16 @@ where
                         while let Some((ctx, _)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
-                            // Retrieve the best elapsed time.
-                            let BestTimes {
-                                elapsed,
-                                time_since_visit,
-                                estimated_remaining,
-                            } = self.db.get_best_times(&ctx)?;
+                            // Retrieve the best elapsed time and its processed state in one request,
+                            // to avoid multiple db trips holding the queue lock.
+                            let (
+                                BestTimes {
+                                    elapsed,
+                                    time_since_visit,
+                                    estimated_remaining,
+                                },
+                                processed,
+                            ) = self.db.get_best_times_processed(&ctx)?;
                             let max_time = self.db.max_time();
 
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
@@ -755,7 +775,7 @@ where
                                 self.pskips.fetch_add(1, Ordering::Release);
                                 continue;
                             }
-                            if self.db.was_processed(&ctx)? {
+                            if processed {
                                 self.dup_pskips.fetch_add(1, Ordering::Release);
                                 continue;
                             }
@@ -775,18 +795,22 @@ where
 
                             // Just grab the next one
                             while let Some((ctx, _)) = queue.pop_segment_min(segment) {
-                                // Retrieve the best elapsed time.
-                                let BestTimes {
-                                    elapsed,
-                                    time_since_visit,
-                                    estimated_remaining,
-                                } = self.db.get_best_times(&ctx)?;
+                                // Retrieve the best elapsed time and its processed state in one request,
+                                // to avoid multiple db trips holding the queue lock.
+                                let (
+                                    BestTimes {
+                                        elapsed,
+                                        time_since_visit,
+                                        estimated_remaining,
+                                    },
+                                    processed,
+                                ) = self.db.get_best_times_processed(&ctx)?;
                                 let max_time = self.db.max_time();
                                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                                     self.pskips.fetch_add(1, Ordering::Release);
                                     continue;
                                 }
-                                if self.db.was_processed(&ctx)? {
+                                if processed {
                                     self.dup_pskips.fetch_add(1, Ordering::Release);
                                     continue;
                                 }
