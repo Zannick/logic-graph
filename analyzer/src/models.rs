@@ -22,7 +22,7 @@ use std::env;
 use std::marker::PhantomData;
 use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 use std::time::{Duration, Instant};
-use textplots::{Chart, Plot, Shape};
+use textplots::{Chart, LabelBuilder, LabelFormat, Plot, Shape, TickDisplay, TickDisplayBuilder};
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
 const TEST_DATABASE_URL: &'static str = "mysql://logic_graph@localhost/logic_graph__unittest";
@@ -377,7 +377,8 @@ where
         for bucket in time_buckets {
             bins[bucket.bucket as usize] = bucket.count as f32;
         }
-        Chart::new(132, 28, 0.0, max_e)
+        println!("elapsed time distribution in db");
+        Chart::new(160, 100, 0.0, max_e)
             .lineplot(&Shape::Bars(
                 &bins
                     .into_iter()
@@ -385,6 +386,9 @@ where
                     .map(|(bn, ct)| (min_e + (bn as f32) * bucket_width, ct))
                     .collect::<Vec<_>>(),
             ))
+            .x_label_format(LabelFormat::Value)
+            .y_label_format(LabelFormat::Value)
+            .y_tick_display(TickDisplay::Sparse)
             .nice();
 
         Ok(())
