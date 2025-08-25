@@ -623,9 +623,11 @@ where
 
         // After reconstructing the state objects, we can reuse the raw states to update the db.
         let just_states = sts.into_iter().map(|(s, _)| s).collect::<Vec<_>>();
-        diesel::update(queries::lookup_many(&just_states))
-            .set(queued.eq(true))
-            .execute(self.sticky(&mut conn))?;
+        for i in 0..(just_states.len() / 5) {
+            diesel::update(queries::lookup_many(&just_states[i * 5..(i + 1) * 5]))
+                .set(queued.eq(true))
+                .execute(self.sticky(&mut conn))?;
+        }
         log::debug!(
             "Retrieved {} elements from mysql in {:?}",
             res.len(),
@@ -1087,7 +1089,7 @@ mod queries {
     use diesel::dsl::{auto_type, exists, select, AsSelect};
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
-    use diesel::query_builder::{SqlQuery};
+    use diesel::query_builder::SqlQuery;
     use diesel::sql_types::*;
 
     define_sql_function!(
