@@ -1082,14 +1082,12 @@ where
 
 #[allow(unused)]
 mod queries {
-    use crate::models::DBState;
     use crate::schema::db_states::dsl::*;
     use crate::scoring::BestTimes;
     use diesel::dsl::{auto_type, exists, select, AsSelect};
-    use diesel::expression::UncheckedBind;
     use diesel::mysql::Mysql;
     use diesel::prelude::*;
-    use diesel::query_builder::{QueryFragment, SqlQuery};
+    use diesel::query_builder::{SqlQuery};
     use diesel::sql_types::*;
 
     define_sql_function!(
@@ -1136,12 +1134,6 @@ mod queries {
     }
 
     #[auto_type(type_case = "PascalCase")]
-    pub fn get_elapsed_prev_hist<'a>(key: &'a [u8]) -> _ {
-        let row: LookupState<'a> = lookup_state(key);
-        row.select((elapsed, prev, hist))
-    }
-
-    #[auto_type(type_case = "PascalCase")]
     pub fn get_estimate<'a>(key: &'a [u8]) -> _ {
         let row: LookupState<'a> = lookup_state(key);
         row.select(estimated_remaining)
@@ -1163,11 +1155,6 @@ mod queries {
     pub fn get_bests<'a>(keys: &'a [Vec<u8>]) -> _ {
         let rows: LookupMany<'a> = lookup_many(keys);
         rows.select::<(raw_state, AsSelect<BestTimes, Mysql>)>((raw_state, BestTimes::as_select()))
-    }
-
-    #[auto_type(type_case = "PascalCase")]
-    pub fn is_queued() -> _ {
-        queued.eq(true)
     }
 
     #[auto_type(type_case = "PascalCase")]
