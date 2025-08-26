@@ -1333,7 +1333,7 @@ where
             }
         );
         self.queue.print_queue_histogram();
-        // db graphs are very slow
+        // db graphs are very slow since it scans the whole table.
         // let _ = self.queue.db().print_graphs();
         self.solutions.lock().unwrap().export()
     }
@@ -1532,6 +1532,7 @@ where
             direct paths: hits={}, min hits={}, improves={}, fails={}, expires={}, deadends={}; routes={}, trie size={}\n\
             Greedy stats: org level={}, steps done={}, misses={}, spots={}, proc_in={}, proc_out={}\n\
             Heap skips: push {} time; pop: {} time, {} dups\n\
+            queue lock timings: {}\n\
             {}: {}\n\
             heap: [{}..={}] mins: {}\n\
             db: [{}..={}] mins: {}\n\
@@ -1574,6 +1575,7 @@ where
             iskips,
             pskips,
             dpskips,
+            self.queue.timing_stats(),
             self.queue.db().name(),
             self.queue.db().extra_stats(),
             heap_bests.iter().position(|x| *x != None).unwrap_or(0),

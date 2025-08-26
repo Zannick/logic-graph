@@ -11,6 +11,7 @@ use crate::scoring::{
 };
 use crate::steiner::*;
 use crate::storage::ContextDB;
+use crate::timing::WallTimeStats;
 use crate::world::*;
 use anyhow::{anyhow, Result};
 use bucket_queue::{Bucket, BucketQueue, Queue};
@@ -76,6 +77,11 @@ where
     // Locked by queue!
     processed_counts: Vec<AtomicUsize>,
     world: &'w W,
+
+    // timers
+    locked_get_best_timer: WallTimeStats,
+    locked_get_best_proc_timer: WallTimeStats,
+    relock_timer: WallTimeStats,
 }
 
 impl<'w, W, T> DbBackedQueue<'w, W, T>
@@ -122,6 +128,9 @@ where
             retrieving: false.into(),
             processed_counts,
             world,
+            locked_get_best_timer: Default::default(),
+            locked_get_best_proc_timer: Default::default(),
+            relock_timer: Default::default(),
         };
         Ok(q)
     }
@@ -148,7 +157,7 @@ where
     }
 
     pub fn len(&self) -> usize {
-        self.queue.lock().unwrap().len() + self.db.len()
+        self.db.len() + self.queue.lock().unwrap().len()
     }
 
     pub fn db_len(&self) -> usize {
@@ -248,7 +257,9 @@ where
                 let (ctx, &p_max) = queue
                     .peek_segment_max(progress)
                     .ok_or(anyhow!("queue at capacity with no elements"))?;
+                let start = Instant::now();
                 let BestTimes { elapsed, .. } = self.db.get_best_times(ctx)?;
+                self.locked_get_best_timer.record(start.elapsed());
                 if score > p_max || (score == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
                     drop(queue);
@@ -344,6 +355,7 @@ where
                 }
                 let (ctx, _) = queue.pop_min().unwrap();
 
+                let start = Instant::now();
                 // Retrieve the best elapsed time and its processed state in one request,
                 // to avoid multiple db trips holding the queue lock.
                 let (
@@ -354,6 +366,7 @@ where
                     },
                     processed,
                 ) = self.db.get_best_times_processed(&ctx)?;
+                self.locked_get_best_proc_timer.record(start.elapsed());
 
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
@@ -448,7 +461,9 @@ where
         }
         let res = self.retrieve(progress, num_to_restore, score_limit)?;
         self.retrievals.fetch_add(1, Ordering::Release);
+        let start = Instant::now();
         queue = self.queue.lock().unwrap();
+        self.relock_timer.record(start.elapsed());
         if !res.is_empty() {
             queue.extend(res);
             log::debug!("Reshuffle took total {:?}", start.elapsed());
@@ -525,7 +540,9 @@ where
         );
         drop(queue);
         let res = self.retrieve(segment, num_to_restore, self.max_time())?;
+        let lt = Instant::now();
         queue = self.queue.lock().unwrap();
+        self.relock_timer.record(lt.elapsed());
         queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);
         log::debug!("Retrieval took total {:?}", start.elapsed());
@@ -544,6 +561,7 @@ where
             while let Some((ctx, _)) = (pop_func)(&mut queue) {
                 // Retrieve the best elapsed time and its processed state in one request,
                 // to avoid multiple db trips holding the queue lock.
+                let start = Instant::now();
                 let (
                     BestTimes {
                         elapsed,
@@ -552,6 +570,7 @@ where
                     },
                     processed,
                 ) = self.db.get_best_times_processed(&ctx)?;
+                self.locked_get_best_proc_timer.record(start.elapsed());
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
@@ -604,6 +623,7 @@ where
                 for (ctx, _) in values.into_iter() {
                     // Retrieve the best elapsed time and its processed state in one request,
                     // to avoid multiple db trips holding the queue lock.
+                    let start = Instant::now();
                     let (
                         BestTimes {
                             elapsed,
@@ -612,6 +632,7 @@ where
                         },
                         processed,
                     ) = self.db.get_best_times_processed(&ctx)?;
+                    self.locked_get_best_proc_timer.record(start.elapsed());
                     let max_time = self.db.max_time();
                     if elapsed > max_time || elapsed + estimated_remaining > max_time {
                         self.pskips.fetch_add(1, Ordering::Release);
@@ -695,6 +716,7 @@ where
                     while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                         // Retrieve the best elapsed time and its processed state in one request,
                         // to avoid multiple db trips holding the queue lock.
+                        let start = Instant::now();
                         let (
                             BestTimes {
                                 elapsed,
@@ -703,6 +725,7 @@ where
                             },
                             processed,
                         ) = self.db.get_best_times_processed(&ctx)?;
+                        self.locked_get_best_proc_timer.record(start.elapsed());
                         let max_time = self.db.max_time();
                         if elapsed > max_time || elapsed + estimated_remaining > max_time {
                             self.pskips.fetch_add(1, Ordering::Release);
@@ -750,6 +773,7 @@ where
                         {
                             // Retrieve the best elapsed time and its processed state in one request,
                             // to avoid multiple db trips holding the queue lock.
+                            let start = Instant::now();
                             let (
                                 BestTimes {
                                     elapsed,
@@ -758,6 +782,7 @@ where
                                 },
                                 processed,
                             ) = self.db.get_best_times_processed(&ctx)?;
+                            self.locked_get_best_proc_timer.record(start.elapsed());
                             let max_time = self.db.max_time();
 
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
@@ -798,6 +823,7 @@ where
                             while let Some((ctx, _)) = queue.pop_segment_min(segment) {
                                 // Retrieve the best elapsed time and its processed state in one request,
                                 // to avoid multiple db trips holding the queue lock.
+                                let start = Instant::now();
                                 let (
                                     BestTimes {
                                         elapsed,
@@ -806,6 +832,7 @@ where
                                     },
                                     processed,
                                 ) = self.db.get_best_times_processed(&ctx)?;
+                                self.locked_get_best_proc_timer.record(start.elapsed());
                                 let max_time = self.db.max_time();
                                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                                     self.pskips.fetch_add(1, Ordering::Release);
@@ -1022,6 +1049,13 @@ where
             self.iskips.load(Ordering::Acquire),
             self.pskips.load(Ordering::Relaxed),
             self.dup_pskips.load(Ordering::Acquire),
+        )
+    }
+
+    pub fn timing_stats(&self) -> String {
+        format!(
+            "get_best (locked): {:?} get_best_proc (locked): {:?} relocks: {:?}",
+            self.locked_get_best_timer, self.locked_get_best_proc_timer, self.relock_timer,
         )
     }
 
