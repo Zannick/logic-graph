@@ -1333,7 +1333,8 @@ where
             }
         );
         self.queue.print_queue_histogram();
-        let _ = self.queue.db().print_graphs();
+        // db graphs are very slow
+        // let _ = self.queue.db().print_graphs();
         self.solutions.lock().unwrap().export()
     }
 
