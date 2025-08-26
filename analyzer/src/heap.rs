@@ -251,6 +251,7 @@ where
                 let BestTimes { elapsed, .. } = self.db.get_best_times(ctx)?;
                 if score > p_max || (score == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
+                    drop(queue);
                     self.db.evict(std::iter::once((el.into_inner(), score)))?;
                 } else {
                     let evictions = std::cmp::min(
