@@ -26,6 +26,8 @@ use textplots::{Chart, LabelBuilder, LabelFormat, Plot, Shape, TickDisplay, Tick
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
 const TEST_DATABASE_URL: &'static str = "mysql://logic_graph@localhost/logic_graph__unittest";
+const EVICT_CHUNK_SIZE: usize = 100;
+const RETRIEVE_CHUNK_SIZE: usize = 100;
 
 define_sql_function!(
     #[sql_name = "IF"]
@@ -564,18 +566,23 @@ where
         // We don't have the full state information, so instead we'll assume that all evicted items
         // have been stored previously. As such, just set them all as unqueued.
         let mut mins = vec![u32::MAX; W::NUM_CANON_LOCATIONS + 1];
-        let res = diesel::update(queries::lookup_many(
-            &iter
-                .into_iter()
-                .map(|(t, sc)| {
-                    let p = t.count_visits();
-                    mins[p] = std::cmp::min(mins[p], SM::score_primary(sc));
-                    serialize_state(&t)
-                })
-                .collect::<Vec<_>>(),
-        ))
-        .set(queued.eq(false))
-        .execute(&mut self.pool_connection())?;
+        let mut conn = self.get_sticky_connection();
+
+        let raw_states = iter
+            .into_iter()
+            .map(|(t, sc)| {
+                let p = t.count_visits();
+                mins[p] = std::cmp::min(mins[p], SM::score_primary(sc));
+                serialize_state(&t)
+            })
+            .collect::<Vec<_>>();
+
+        let mut res = 0;
+        for chunk in raw_states.chunks(EVICT_CHUNK_SIZE) {
+            res += diesel::update(queries::lookup_many(chunk))
+                .set(queued.eq(false))
+                .execute(self.sticky(&mut conn))?;
+        }
 
         for (est, min) in self
             .cached_estimates
@@ -627,7 +634,7 @@ where
 
         // After reconstructing the state objects, we can reuse the raw states to update the db.
         let just_states = sts.into_iter().map(|(s, _)| s).collect::<Vec<_>>();
-        for chunk in just_states.chunks(25) {
+        for chunk in just_states.chunks(RETRIEVE_CHUNK_SIZE) {
             diesel::update(queries::lookup_many(&chunk))
                 .set(queued.eq(true))
                 .execute(self.sticky(&mut conn))?;
