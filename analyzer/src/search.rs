@@ -431,10 +431,8 @@ where
         queue.push(startctx.clone(), None).unwrap();
         log::info!("Max time to consider is now: {}ms", queue.max_time());
 
-        let mut path = db_path.as_ref().to_owned();
-        path.push("routes");
         let (ropts, rcache) = RouteDb::<T>::default_options();
-        let route_db = RouteDb::<T>::open(path, ropts, rcache, delete_dbs).unwrap();
+        let route_db = RouteDb::<T>::open(db_path, ropts, rcache, delete_dbs).unwrap();
         let direct_paths = DirectPathsDb::new(free_sp, route_db);
 
         let s = Search {
