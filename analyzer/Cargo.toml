@@ -39,7 +39,7 @@ tera = { version = "1", default-features = false }
 textplots = "*"
 yaml-rust = "*"
 
-# For profiling handler
+# For profiling handlers
 axum = "*"
 tokio = { version = "*", features = ["net", "rt", "rt-multi-thread"] }
 
@@ -57,6 +57,7 @@ mysqlclient-sys = { version = "0.4", features = ["bundled"], optional = true}
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 jemalloc_pprof = { version = "*", optional = true }
 tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"], optional = true }
+pprof = { version = "*", features = ["cpp", "prost-codec"] }
 
 [features]
 jemalloc = ["dep:jemalloc_pprof", "dep:tikv-jemallocator"]

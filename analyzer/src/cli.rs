@@ -173,7 +173,12 @@ where
 {
     log::info!("{:?}", std::env::args());
 
-    match &args.command {
+    // Profiler handlers
+    let rt = tokio::runtime::Runtime::new()?;
+    #[cfg(not(target_env = "msvc"))]
+    crate::prof::start_profile_handlers(&rt);
+
+    let res = match &args.command {
         Commands::Search {
             routes,
             db,
@@ -487,7 +492,10 @@ where
                 panic!("Command \"mysql\" requires building with feature \"mysql\"")
             }
         }
-    }
+    };
+
+    rt.shutdown_background();
+    res
 }
 
 #[allow(unused)]

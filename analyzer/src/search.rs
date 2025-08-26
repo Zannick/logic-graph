@@ -23,34 +23,6 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
-#[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
-mod jemalloc {
-    use axum::{http::StatusCode, response::IntoResponse};
-
-    pub async fn handle_get_heap() -> Result<impl IntoResponse, (StatusCode, String)> {
-        let mut prof_ctl = jemalloc_pprof::PROF_CTL.as_ref().unwrap().lock().await;
-        require_profiling_activated(&prof_ctl)?;
-        let pprof = prof_ctl
-            .dump_pprof()
-            .map_err(|err| (StatusCode::INTERNAL_SERVER_ERROR, err.to_string()))?;
-        Ok(pprof)
-    }
-
-    /// Checks whether jemalloc profiling is activated an returns an error response if not.
-    fn require_profiling_activated(
-        prof_ctl: &jemalloc_pprof::JemallocProfCtl,
-    ) -> Result<(), (StatusCode, String)> {
-        if prof_ctl.activated() {
-            Ok(())
-        } else {
-            Err((
-                axum::http::StatusCode::FORBIDDEN,
-                "heap profiling not activated".into(),
-            ))
-        }
-    }
-}
-
 static MAX_DEPTH_FOR_ONE_LOC: usize = 4;
 static MAX_GREEDY_DEPTH: usize = 9;
 static MAX_STATES_FOR_ONE_LOC: usize = 16_384;
@@ -1143,19 +1115,7 @@ where
                 workers_done.load(Ordering::Acquire)
             );
         };
-        // Profiler handler
-        let rt = tokio::runtime::Runtime::new()?;
-        #[cfg(all(feature = "jemalloc", not(target_env = "msvc")))]
-        rt.spawn(async {
-            let app = axum::Router::new().route(
-                "/debug/pprof/heap",
-                axum::routing::get(jemalloc::handle_get_heap),
-            );
 
-            // run our app with hyper, listening globally on port 3000
-            let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-            axum::serve(listener, app).await.unwrap();
-        });
         rayon::scope(|scope| {
             // Background queue restore
             scope.spawn(|_| {
@@ -1376,7 +1336,6 @@ where
         );
         self.queue.print_queue_histogram();
         let _ = self.queue.db().print_graphs();
-        rt.shutdown_background();
         self.solutions.lock().unwrap().export()
     }
 

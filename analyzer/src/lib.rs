@@ -28,6 +28,8 @@ pub mod matchertrie;
 pub mod minimize;
 pub mod observer;
 pub mod priority;
+#[cfg(not(target_env = "msvc"))]
+pub mod prof;
 pub mod route;
 pub mod scoring;
 pub mod search;
