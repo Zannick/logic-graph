@@ -26,8 +26,8 @@ use textplots::{Chart, LabelBuilder, LabelFormat, Plot, Shape, TickDisplay, Tick
 
 const INVALID_ESTIMATE: u32 = crate::estimates::UNREASONABLE_TIME + 3;
 const TEST_DATABASE_URL: &'static str = "mysql://logic_graph@localhost/logic_graph__unittest";
-const EVICT_CHUNK_SIZE: usize = 100;
-const RETRIEVE_CHUNK_SIZE: usize = 100;
+const EVICT_CHUNK_SIZE: usize = 10;
+const RETRIEVE_CHUNK_SIZE: usize = 10;
 
 define_sql_function!(
     #[sql_name = "IF"]
