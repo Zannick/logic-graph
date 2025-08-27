@@ -12,7 +12,7 @@ use crate::scoring::{
 use crate::steiner::*;
 use crate::storage::serialize_state;
 use crate::storage::ContextDB;
-use crate::timing::WallTimeStats;
+use crate::timing::{TimingMutex, TimingMutexGuard, WallTimeStats};
 use crate::world::*;
 use anyhow::{anyhow, Result};
 use bucket_queue::{Bucket, BucketQueue, Queue};
@@ -24,7 +24,6 @@ use plotlib::view::ContinuousView;
 use sort_by_derive::SortBy;
 use std::path::Path;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
-use std::sync::{Mutex, MutexGuard};
 use std::time::Instant;
 
 #[derive(Debug, SortBy)]
@@ -62,7 +61,7 @@ where
     W::Location: Location<Context = T>,
 {
     // TODO: Make the bucket element just T.
-    queue: Mutex<BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    queue: TimingMutex<BucketQueue<Segment<T, Score<'w, W, T>>>>,
     db: DbType<'w, W, T>,
     capacity: usize,
     iskips: AtomicUsize,
@@ -81,6 +80,14 @@ where
 
     // timers
     relock_timer: WallTimeStats,
+    push_timer: WallTimeStats,
+    pop_timer: WallTimeStats,
+    post_retrieve_timer: WallTimeStats,
+    pop_special_timer: WallTimeStats,
+    pop_special_multi_timer: WallTimeStats,
+    pop_local_min_timer: WallTimeStats,
+    pop_round_robin_timer: WallTimeStats,
+    extend_timer: WallTimeStats,
 }
 
 impl<'w, W, T> DbBackedQueue<'w, W, T>
@@ -112,7 +119,7 @@ where
         let mut processed_counts = Vec::new();
         processed_counts.resize_with(max_possible_progress + 1, || 0.into());
         let q = DbBackedQueue {
-            queue: Mutex::new(BucketQueue::new()),
+            queue: TimingMutex::new(BucketQueue::new()),
             db,
             capacity: max_capacity,
             iskips: 0.into(),
@@ -128,6 +135,14 @@ where
             processed_counts,
             world,
             relock_timer: Default::default(),
+            push_timer: Default::default(),
+            pop_timer: Default::default(),
+            post_retrieve_timer: Default::default(),
+            pop_special_timer: Default::default(),
+            pop_special_multi_timer: Default::default(),
+            pop_local_min_timer: Default::default(),
+            pop_round_robin_timer: Default::default(),
+            extend_timer: Default::default(),
         };
         Ok(q)
     }
@@ -247,7 +262,7 @@ where
         let progress = el.get().count_visits();
         let mut evicted = None;
         {
-            let mut queue = self.queue.lock().unwrap();
+            let mut queue = self.queue.track_lock(&self.push_timer).unwrap();
 
             if queue.len() == self.capacity {
                 // compare to the last element, aka the MAX
@@ -271,7 +286,7 @@ where
                         std::cmp::max(self.min_evictions, self.capacity / 2),
                     );
                     let start = Instant::now();
-                    queue = self.queue.lock().unwrap();
+                    queue = self.queue.track_lock(&self.push_timer).unwrap();
                     self.relock_timer.record(start.elapsed());
 
                     evicted = Some(Self::evict_internal(&mut queue, evictions));
@@ -305,7 +320,7 @@ where
     /// Removes elements from the max end of each segment in the queue until we reach
     /// the minimum desired evictions.
     fn evict_internal(
-        queue: &mut MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
+        queue: &mut TimingMutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
         min_evictions: usize,
     ) -> Vec<(T, Score<'w, W, T>)> {
         let evicted = queue.pop_max_proportionally(min_evictions);
@@ -340,7 +355,7 @@ where
     }
 
     pub fn pop(&self) -> Result<Option<ContextWrapper<T>>> {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.track_lock(&self.pop_timer).unwrap();
         while !queue.is_empty() || !self.db.is_empty() {
             while let Some((el, &min_score)) = queue.peek_min() {
                 let progress = el.count_visits();
@@ -375,12 +390,12 @@ where
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
-                    queue = self.queue.lock().unwrap();
+                    queue = self.queue.track_lock(&self.pop_timer).unwrap();
                     continue;
                 }
                 if processed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
-                    queue = self.queue.lock().unwrap();
+                    queue = self.queue.track_lock(&self.pop_timer).unwrap();
                     continue;
                 }
                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
@@ -413,8 +428,8 @@ where
         progress: usize,
         min_to_restore: usize,
         max_to_restore: usize,
-        queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+        queue: TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         if !self.retrieving.fetch_or(true, Ordering::AcqRel) {
             let r = self.maybe_reshuffle_locked(progress, min_to_restore, max_to_restore, queue);
             self.retrieving.store(false, Ordering::Release);
@@ -429,8 +444,8 @@ where
         progress: usize,
         min_to_restore: usize,
         max_to_restore: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+        mut queue: TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         let start = Instant::now();
         let num_buckets = queue.approx_num_buckets();
         // Get a decent amount to refill
@@ -468,7 +483,7 @@ where
         let res = self.retrieve(progress, num_to_restore, score_limit)?;
         self.retrievals.fetch_add(1, Ordering::Release);
         let start = Instant::now();
-        queue = self.queue.lock().unwrap();
+        queue = self.queue.track_lock(&self.post_retrieve_timer).unwrap();
         self.relock_timer.record(start.elapsed());
         if !res.is_empty() {
             queue.extend(res);
@@ -480,8 +495,8 @@ where
 
     fn maybe_fetch_for_empty_buckets<'a>(
         &'a self,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+        mut queue: TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         // Runs over all the buckets
         let Some(min_score) = queue
             .peek_min()
@@ -534,8 +549,8 @@ where
     fn do_retrieve_and_insert<'a>(
         &'a self,
         segment: usize,
-        mut queue: MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
-    ) -> Result<MutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
+        mut queue: TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>,
+    ) -> Result<TimingMutexGuard<'a, BucketQueue<Segment<T, Score<'w, W, T>>>>> {
         let start = Instant::now();
         let num_to_restore = std::cmp::max(
             self.min_reshuffle,
@@ -547,7 +562,7 @@ where
         drop(queue);
         let res = self.retrieve(segment, num_to_restore, self.max_time())?;
         let lt = Instant::now();
-        queue = self.queue.lock().unwrap();
+        queue = self.queue.track_lock(&self.post_retrieve_timer).unwrap();
         self.relock_timer.record(lt.elapsed());
         queue.extend(res);
         self.retrievals.fetch_add(1, Ordering::Release);
@@ -558,11 +573,11 @@ where
     fn pop_special<F>(&self, n: usize, pop_func: F) -> Result<Vec<ContextWrapper<T>>>
     where
         F: Fn(
-            &mut MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
+            &mut TimingMutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
         ) -> Option<(T, Score<'w, W, T>)>,
     {
         let mut vec = Vec::new();
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.track_lock(&self.pop_special_timer).unwrap();
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             while let Some((ctx, _)) = (pop_func)(&mut queue) {
                 // Release the lock while we inspect the result
@@ -580,12 +595,12 @@ where
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
-                    queue = self.queue.lock().unwrap();
+                    queue = self.queue.track_lock(&self.pop_special_timer).unwrap();
                     continue;
                 }
                 if processed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
-                    queue = self.queue.lock().unwrap();
+                    queue = self.queue.track_lock(&self.pop_special_timer).unwrap();
                     continue;
                 }
                 let progress = ctx.count_visits();
@@ -596,7 +611,7 @@ where
                     return Ok(vec);
                 }
                 let start = Instant::now();
-                queue = self.queue.lock().unwrap();
+                queue = self.queue.track_lock(&self.pop_special_timer).unwrap();
                 self.relock_timer.record(start.elapsed());
             }
             // Retrieve some from db
@@ -620,11 +635,14 @@ where
     where
         F: Fn(
             usize,
-            &mut MutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
+            &mut TimingMutexGuard<BucketQueue<Segment<T, Score<'w, W, T>>>>,
         ) -> Vec<(T, Score<'w, W, T>)>,
     {
         let mut vec = Vec::new();
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self
+            .queue
+            .track_lock(&self.pop_special_multi_timer)
+            .unwrap();
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             loop {
                 let values = (pop_func)(n - vec.len(), &mut queue);
@@ -662,7 +680,10 @@ where
                     return Ok(vec);
                 }
                 let start = Instant::now();
-                queue = self.queue.lock().unwrap();
+                queue = self
+                    .queue
+                    .track_lock(&self.pop_special_multi_timer)
+                    .unwrap();
                 self.relock_timer.record(start.elapsed());
             }
             // Retrieve some from db
@@ -711,7 +732,7 @@ where
 
     pub fn pop_local_minima(&self) -> Result<Vec<ContextWrapper<T>>> {
         let mut vec = Vec::new();
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.track_lock(&self.pop_local_min_timer).unwrap();
         if queue.is_empty() {
             return Ok(vec);
         }
@@ -743,19 +764,19 @@ where
                         let max_time = self.db.max_time();
                         if elapsed > max_time || elapsed + estimated_remaining > max_time {
                             self.pskips.fetch_add(1, Ordering::Release);
-                            queue = self.queue.lock().unwrap();
+                            queue = self.queue.track_lock(&self.pop_local_min_timer).unwrap();
                             continue;
                         }
                         if processed {
                             self.dup_pskips.fetch_add(1, Ordering::Release);
-                            queue = self.queue.lock().unwrap();
+                            queue = self.queue.track_lock(&self.pop_local_min_timer).unwrap();
                             continue;
                         }
                         let progress = ctx.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                         let start = Instant::now();
-                        queue = self.queue.lock().unwrap();
+                        queue = self.queue.track_lock(&self.pop_local_min_timer).unwrap();
                         self.relock_timer.record(start.elapsed());
                         continue 'next;
                     }
@@ -768,7 +789,7 @@ where
     }
 
     pub fn pop_round_robin(&self, min_priority: usize) -> Result<Vec<ContextWrapper<T>>> {
-        let mut queue = self.queue.lock().unwrap();
+        let mut queue = self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
         let mut did_retrieve = false;
         queue = self.maybe_fetch_for_empty_buckets(queue)?;
         while !queue.is_empty() || !self.db.is_empty() {
@@ -818,12 +839,12 @@ where
 
                             if elapsed > max_time || elapsed + estimated_remaining > max_time {
                                 self.pskips.fetch_add(1, Ordering::Release);
-                                queue = self.queue.lock().unwrap();
+                                queue = self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
                                 continue;
                             }
                             if processed {
                                 self.dup_pskips.fetch_add(1, Ordering::Release);
-                                queue = self.queue.lock().unwrap();
+                                queue = self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
                                 continue;
                             }
 
@@ -831,7 +852,7 @@ where
                             self.processed_counts[progress].fetch_add(1, Ordering::Release);
                             vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
                             let start = Instant::now();
-                            queue = self.queue.lock().unwrap();
+                            queue = self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
                             self.relock_timer.record(start.elapsed());
                             continue 'next;
                         }
@@ -860,12 +881,14 @@ where
                                 let max_time = self.db.max_time();
                                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                                     self.pskips.fetch_add(1, Ordering::Release);
-                                    queue = self.queue.lock().unwrap();
+                                    queue =
+                                        self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
                                     continue;
                                 }
                                 if processed {
                                     self.dup_pskips.fetch_add(1, Ordering::Release);
-                                    queue = self.queue.lock().unwrap();
+                                    queue =
+                                        self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
                                     continue;
                                 }
                                 let progress = ctx.count_visits();
@@ -876,7 +899,7 @@ where
                                     time_since_visit,
                                 ));
                                 let start = Instant::now();
-                                queue = self.queue.lock().unwrap();
+                                queue = self.queue.track_lock(&self.pop_round_robin_timer).unwrap();
                                 self.relock_timer.record(start.elapsed());
                                 continue 'next;
                             }
@@ -1043,7 +1066,7 @@ where
         let mut evicted = None;
         let start: Instant;
         {
-            let mut queue = self.queue.lock().unwrap();
+            let mut queue = self.queue.track_lock(&self.extend_timer).unwrap();
             start = Instant::now();
             let len = queue.len();
             if len + vec.len() > self.capacity {
@@ -1083,8 +1106,16 @@ where
 
     pub fn timing_stats(&self) -> String {
         format!(
-            "relocks: {:?}",
+            "relocks: {:?}, push: {:?}, pop: {:?}, pop sp: {:?}, pop spm: {:?}, pop local: {:?}, pop rr: {:?}, post ret: {:?}, extend: {:?}",
             self.relock_timer,
+            self.push_timer,
+            self.pop_timer,
+            self.pop_special_timer,
+            self.pop_special_multi_timer,
+            self.pop_local_min_timer,
+            self.pop_round_robin_timer,
+            self.post_retrieve_timer,
+            self.extend_timer,
         )
     }
 
