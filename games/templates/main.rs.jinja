@@ -25,7 +25,7 @@ pub static malloc_conf: &[u8] = b"prof:true,prof_active:true,lg_prof_sample:19\0
 fn main() -> Result<(), std::io::Error> {
     let args = Cli::parse();
     log4rs::init_file(
-        args.logconfig().unwrap_or(&PathBuf::from("settings/log4rs.yml")),
+        args.logconfig().unwrap_or(&PathBuf::from("../log4rs.yml")),
         Default::default()
     ).unwrap();
     let (world, context, routes) =
