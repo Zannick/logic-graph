@@ -10,6 +10,7 @@ use crate::scoring::{
     BestTimes, EstimatedTimeMetric, EstimatorWrapper, ScoreMetric, TimeSinceAndElapsed,
 };
 use crate::steiner::*;
+use crate::storage::serialize_state;
 use crate::storage::ContextDB;
 use crate::timing::WallTimeStats;
 use crate::world::*;
@@ -79,8 +80,6 @@ where
     world: &'w W,
 
     // timers
-    locked_get_best_timer: WallTimeStats,
-    locked_get_best_proc_timer: WallTimeStats,
     relock_timer: WallTimeStats,
 }
 
@@ -128,8 +127,6 @@ where
             retrieving: false.into(),
             processed_counts,
             world,
-            locked_get_best_timer: Default::default(),
-            locked_get_best_proc_timer: Default::default(),
             relock_timer: Default::default(),
         };
         Ok(q)
@@ -257,19 +254,26 @@ where
                 let (ctx, &p_max) = queue
                     .peek_segment_max(progress)
                     .ok_or(anyhow!("queue at capacity with no elements"))?;
-                let start = Instant::now();
-                let BestTimes { elapsed, .. } = self.db.get_best_times(ctx)?;
-                self.locked_get_best_timer.record(start.elapsed());
+                let raw = serialize_state(ctx);
+                let p_max = p_max.clone();
+
+                // Release the lock while we inspect the result.
+                // We needed to get copies of ctx and p_max first.
+                drop(queue);
+                let BestTimes { elapsed, .. } = self.db.get_best_times_raw(&raw)?;
                 if score > p_max || (score == p_max && el.elapsed() >= elapsed) {
                     // Lower priority (or equal but later), evict the new item immediately
-                    drop(queue);
                     self.db.evict(std::iter::once((el.into_inner(), score)))?;
                 } else {
+                    // New item is better, evict some old_items.
                     let evictions = std::cmp::min(
                         self.max_evictions,
-                        std::cmp::max(self.min_evictions, queue.len() / 2),
+                        std::cmp::max(self.min_evictions, self.capacity / 2),
                     );
-                    // New item is better, evict some old_items.
+                    let start = Instant::now();
+                    queue = self.queue.lock().unwrap();
+                    self.relock_timer.record(start.elapsed());
+
                     evicted = Some(Self::evict_internal(&mut queue, evictions));
                     queue.push(el.into_inner(), progress, score);
                 }
@@ -355,9 +359,10 @@ where
                 }
                 let (ctx, _) = queue.pop_min().unwrap();
 
-                let start = Instant::now();
+                // Release the lock while we inspect the result
+                drop(queue);
                 // Retrieve the best elapsed time and its processed state in one request,
-                // to avoid multiple db trips holding the queue lock.
+                // to avoid multiple db trips.
                 let (
                     BestTimes {
                         elapsed,
@@ -366,15 +371,16 @@ where
                     },
                     processed,
                 ) = self.db.get_best_times_processed(&ctx)?;
-                self.locked_get_best_proc_timer.record(start.elapsed());
 
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
+                    queue = self.queue.lock().unwrap();
                     continue;
                 }
                 if processed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
+                    queue = self.queue.lock().unwrap();
                     continue;
                 }
                 self.processed_counts[progress].fetch_add(1, Ordering::Release);
@@ -559,9 +565,10 @@ where
         let mut queue = self.queue.lock().unwrap();
         while vec.len() < n && (!queue.is_empty() || !self.db.is_empty()) {
             while let Some((ctx, _)) = (pop_func)(&mut queue) {
+                // Release the lock while we inspect the result
+                drop(queue);
                 // Retrieve the best elapsed time and its processed state in one request,
-                // to avoid multiple db trips holding the queue lock.
-                let start = Instant::now();
+                // to avoid multiple db trips.
                 let (
                     BestTimes {
                         elapsed,
@@ -570,14 +577,15 @@ where
                     },
                     processed,
                 ) = self.db.get_best_times_processed(&ctx)?;
-                self.locked_get_best_proc_timer.record(start.elapsed());
                 let max_time = self.db.max_time();
                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                     self.pskips.fetch_add(1, Ordering::Release);
+                    queue = self.queue.lock().unwrap();
                     continue;
                 }
                 if processed {
                     self.dup_pskips.fetch_add(1, Ordering::Release);
+                    queue = self.queue.lock().unwrap();
                     continue;
                 }
                 let progress = ctx.count_visits();
@@ -587,6 +595,9 @@ where
                 if vec.len() == n {
                     return Ok(vec);
                 }
+                let start = Instant::now();
+                queue = self.queue.lock().unwrap();
+                self.relock_timer.record(start.elapsed());
             }
             // Retrieve some from db
             if !self.db.is_empty() {
@@ -620,10 +631,11 @@ where
                 if values.is_empty() {
                     break;
                 }
+                // Release the lock while we inspect the results
+                drop(queue);
                 for (ctx, _) in values.into_iter() {
                     // Retrieve the best elapsed time and its processed state in one request,
-                    // to avoid multiple db trips holding the queue lock.
-                    let start = Instant::now();
+                    // to avoid multiple db trips.
                     let (
                         BestTimes {
                             elapsed,
@@ -632,7 +644,6 @@ where
                         },
                         processed,
                     ) = self.db.get_best_times_processed(&ctx)?;
-                    self.locked_get_best_proc_timer.record(start.elapsed());
                     let max_time = self.db.max_time();
                     if elapsed > max_time || elapsed + estimated_remaining > max_time {
                         self.pskips.fetch_add(1, Ordering::Release);
@@ -650,6 +661,9 @@ where
                 if vec.len() >= n {
                     return Ok(vec);
                 }
+                let start = Instant::now();
+                queue = self.queue.lock().unwrap();
+                self.relock_timer.record(start.elapsed());
             }
             // Retrieve some from db
             if !self.db.is_empty() {
@@ -714,9 +728,10 @@ where
             if let (Some(lower), Some(higher)) = (prev, next) {
                 if higher < lower {
                     while let Some((ctx, _)) = queue.pop_segment_min(segment) {
+                        // Release the lock while we inspect the result
+                        drop(queue);
                         // Retrieve the best elapsed time and its processed state in one request,
-                        // to avoid multiple db trips holding the queue lock.
-                        let start = Instant::now();
+                        // to avoid multiple db trips.
                         let (
                             BestTimes {
                                 elapsed,
@@ -725,19 +740,23 @@ where
                             },
                             processed,
                         ) = self.db.get_best_times_processed(&ctx)?;
-                        self.locked_get_best_proc_timer.record(start.elapsed());
                         let max_time = self.db.max_time();
                         if elapsed > max_time || elapsed + estimated_remaining > max_time {
                             self.pskips.fetch_add(1, Ordering::Release);
+                            queue = self.queue.lock().unwrap();
                             continue;
                         }
                         if processed {
                             self.dup_pskips.fetch_add(1, Ordering::Release);
+                            queue = self.queue.lock().unwrap();
                             continue;
                         }
                         let progress = ctx.count_visits();
                         self.processed_counts[progress].fetch_add(1, Ordering::Release);
                         vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
+                        let start = Instant::now();
+                        queue = self.queue.lock().unwrap();
+                        self.relock_timer.record(start.elapsed());
                         continue 'next;
                     }
                 }
@@ -771,9 +790,10 @@ where
                         while let Some((ctx, _)) =
                             queue.bucket_for_removing(segment).unwrap().pop_min()
                         {
+                            // Release the lock while we inspect the result
+                            drop(queue);
                             // Retrieve the best elapsed time and its processed state in one request,
-                            // to avoid multiple db trips holding the queue lock.
-                            let start = Instant::now();
+                            // to avoid multiple db trips.
                             let (
                                 BestTimes {
                                     elapsed,
@@ -782,7 +802,6 @@ where
                                 },
                                 processed,
                             ) = self.db.get_best_times_processed(&ctx)?;
-                            self.locked_get_best_proc_timer.record(start.elapsed());
                             let max_time = self.db.max_time();
 
                             // We won't actually use what is added here right away, unless we drop the element we just popped.
@@ -799,16 +818,21 @@ where
 
                             if elapsed > max_time || elapsed + estimated_remaining > max_time {
                                 self.pskips.fetch_add(1, Ordering::Release);
+                                queue = self.queue.lock().unwrap();
                                 continue;
                             }
                             if processed {
                                 self.dup_pskips.fetch_add(1, Ordering::Release);
+                                queue = self.queue.lock().unwrap();
                                 continue;
                             }
 
                             let progress = ctx.count_visits();
                             self.processed_counts[progress].fetch_add(1, Ordering::Release);
                             vec.push(ContextWrapper::with_times(ctx, elapsed, time_since_visit));
+                            let start = Instant::now();
+                            queue = self.queue.lock().unwrap();
+                            self.relock_timer.record(start.elapsed());
                             continue 'next;
                         }
                         if db_best < u32::MAX {
@@ -821,9 +845,10 @@ where
 
                             // Just grab the next one
                             while let Some((ctx, _)) = queue.pop_segment_min(segment) {
+                                // Release the lock while we inspect the result
+                                drop(queue);
                                 // Retrieve the best elapsed time and its processed state in one request,
-                                // to avoid multiple db trips holding the queue lock.
-                                let start = Instant::now();
+                                // to avoid multiple db trips.
                                 let (
                                     BestTimes {
                                         elapsed,
@@ -832,14 +857,15 @@ where
                                     },
                                     processed,
                                 ) = self.db.get_best_times_processed(&ctx)?;
-                                self.locked_get_best_proc_timer.record(start.elapsed());
                                 let max_time = self.db.max_time();
                                 if elapsed > max_time || elapsed + estimated_remaining > max_time {
                                     self.pskips.fetch_add(1, Ordering::Release);
+                                    queue = self.queue.lock().unwrap();
                                     continue;
                                 }
                                 if processed {
                                     self.dup_pskips.fetch_add(1, Ordering::Release);
+                                    queue = self.queue.lock().unwrap();
                                     continue;
                                 }
                                 let progress = ctx.count_visits();
@@ -849,6 +875,9 @@ where
                                     elapsed,
                                     time_since_visit,
                                 ));
+                                let start = Instant::now();
+                                queue = self.queue.lock().unwrap();
+                                self.relock_timer.record(start.elapsed());
                                 continue 'next;
                             }
                         }
@@ -1054,8 +1083,8 @@ where
 
     pub fn timing_stats(&self) -> String {
         format!(
-            "get_best (locked): {:?} get_best_proc (locked): {:?} relocks: {:?}",
-            self.locked_get_best_timer, self.locked_get_best_proc_timer, self.relock_timer,
+            "relocks: {:?}",
+            self.relock_timer,
         )
     }
 
