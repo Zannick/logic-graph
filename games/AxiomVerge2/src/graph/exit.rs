@@ -3403,7 +3403,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1 => rules::access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1 => rules::access_uhrum_glitchy_corridor_rock(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => rules::access_uhrum_glitchy_corridor_rock_and_invoke_hookhover(ctx, world),
-            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::access_uhrum_glitchy_corridor_rock(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Entrance__East_28_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::access_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::access_invoke_hover(ctx, world),
@@ -6116,7 +6116,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1 => rules::observe_access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1 => rules::observe_access_uhrum_glitchy_corridor_rock(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => rules::observe_access_uhrum_glitchy_corridor_rock_and_invoke_hookhover(ctx, world, full_obs),
-            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::observe_access_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world, full_obs),
+            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::observe_access_uhrum_glitchy_corridor_rock(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::observe_access_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 => rules::observe_access_mode_eq_drone_and_uhrum_west_glitch(ctx, world, full_obs),
@@ -13350,6 +13350,13 @@ impl world::Accessible for Exit {
                 ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        378
                     } else {
                         0
                     }
@@ -21049,6 +21056,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        378
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => {
                     if rules::observe_access_not_invoke_hook_and_not_anuman(ctx, world, full_obs) {
                         396
@@ -25156,7 +25170,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1 => rules::explain_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West__ex__Wall_East_1 => rules::explain_uhrum_glitchy_corridor_rock(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Save_Room__Save_Point_1 => rules::explain_uhrum_glitchy_corridor_rock_and_invoke_hookhover(ctx, world, edict),
-            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::explain_uhrum_glitchy_corridor_rock_and_invoke_hook(ctx, world, edict),
+            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => rules::explain_uhrum_glitchy_corridor_rock(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => rules::explain_invoke_hook_or_anuman_or_invoke_hover_or_invoke_grab(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Entrance__Lower_Path_Tree_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__Behind_West_Glitch_1 => rules::explain_mode_eq_drone_and_uhrum_west_glitch(ctx, world, edict),
@@ -27560,6 +27574,7 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Platform__ex__Wall_West_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__Wall_West_Platform__ex__Wall_East_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__West_28__ex__West_Glitch_Ledge_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_Ledge__ex__West_Pillar_West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__West_Glitch_West__ex__West_Glitch_Ledge_1 => true,

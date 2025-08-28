@@ -14,7 +14,7 @@ db05ce702fd28243c7f4ac11b15577127519356903e828d9acdeb5b2e7915b20 games/AxiomVerg
 eb4a588f60a1d3912593568af4ce58d330f7a4834ce79fe90384155deba69c0c games/AxiomVerge2/src/graph/community.rs
 0ad7982913e67ea3f1fa4b8bbdbd3e2e6529c893dc92cd28f0f378d22f2fbfda games/AxiomVerge2/src/graph/coord.rs
 0cbb010aa048d7604038ea34283c9a972e65c1f7c9b2210d3a38ab6a8fb8073a games/AxiomVerge2/src/graph/enums.rs
-8f8692c1aba1122b8bff755d80292efefaf4e97e30f5fa2ba3dbd57f460e230e games/AxiomVerge2/src/graph/exit.rs
+ca88e466106ce63379ae4b54aa73325f88fb5d077d50c6fa1a8b844adf599720 games/AxiomVerge2/src/graph/exit.rs
 5a29f18b613b4a69790a87a687bfdedf9ba6372418210dce9e8095e071f4e7c7 games/AxiomVerge2/src/graph/graph.rs
 4bab9623c49a4811dc87ba7563ef65d171d2de18c137ede1b7f1ceef2071f369 games/AxiomVerge2/src/graph/location.rs
 c3b254dfb4b596cbf0b0a907df8b46e75d5779ceb3ac237c59d8cbf5ce856c06 games/AxiomVerge2/src/graph/mod.rs
@@ -22,4 +22,4 @@ c3b254dfb4b596cbf0b0a907df8b46e75d5779ceb3ac237c59d8cbf5ce856c06 games/AxiomVerg
 3e8e5751c479f38a631a319882f5e87877aed2c6757a709fb057d84610db7948 games/AxiomVerge2/src/graph/warp.rs
 */
 
-pub const VERSION: &'static str = "6a653d8b68e2bc80bd7921ad46c802f9161d345bae19a81135eacbe29c037d84";
+pub const VERSION: &'static str = "fb25ac278681f00fd851480349357ba3638b1883e308ccebd8e9539a63ae4305";

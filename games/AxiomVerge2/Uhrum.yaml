@@ -1066,8 +1066,11 @@ areas:
         - to: East Glitch West
       exits:
         - to: Wall East Platform
-          req: Uhrum_Glitchy_Corridor_Rock and $hook
+          req: Uhrum_Glitchy_Corridor_Rock
           movement: fast_hover
+          penalties:
+            - when: not $hook
+              movement: base
         - to: Save Room > Save Point
           req: Uhrum_Glitchy_Corridor_Rock and $hookhover
           movement: fast_hover
