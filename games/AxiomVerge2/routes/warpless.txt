@@ -1,0 +1,96 @@
+* Collect Ice_Axe from Antarctica > Shed > Interior > Shelf
+* Collect Station_Power from Antarctica > Power Room > Switch > Flip
+* Collect Compass from Glacier > Compass Room > Center > Table
+* Collect Amashilama from Glacier > Sea Burial > Collapsing Ceiling > Drown
+* Collect Boomerang from Glacier > Boomerang Room > Pedestal > Item
+* Collect Switch_36_11 from Glacier > Vertical Room > Under Switch > Switch
+* Collect Ledge_Grab from Glacier > Ledge Grab Room > Cliff Bottom > Quick Grab
+* Collect Infect from Ebih > Ebih East > Lower Moving Platform > Remote Urn
+! Do Ebih > Ebih East > Lower Moving Platform > Activate Lift
+! Do Ebih > Ebih East > Moving Platform > Activate Ride
+! Do Ebih > Drone Room > Portal Exit > Activate Platform
+* Collect Remote_Drone from Ebih > Drone Room > Middle Platform > Urn Quick Grab ==> Ebih > Drone Room > Portal
+! Do Ebih > Drone Room > Pit Left > Activate Lift
+
+  Move... to Ebih > Ebih West > Mid Save
+! Do Deploy Drone
+* Collect Underwater_Movement from Amagi > Liru Room > Shrine > Item
+* Collect Shockwave from Amagi > West Lake > Stronghold Item > Item
+! Do Recall Drone
+
+* Collect Ebih_West_Block from Ebih > Ebih West > Block Left > Break Block
+  Move... to Ebih > Ebih West > Above Door
+! Do Deploy Drone
+! Do Ebih > Ebih West > Below Door > Open Door
+! Do Recall Drone
+
+! Do Giguna > Giguna Base > Stone Knob > Throw Drone
+* Collect Wall_Climb from Giguna > Giguna Base > Ruin > Item
+! Do Recall Drone
+
+! Do Giguna > Carnelian > Lower Susar > Hack
+! Do Giguna > Ruins West > Lower Ledge > Hack/Destroy Kishib
+  Move... to Giguna > Ruins Top > Portal Left
+! Do Deploy Drone
+  Move... to Giguna > Ruins Top > Portal
+  Portalwarp to Giguna Breach > Peak > Save Point
+* Collect Slingshot_Hook from Giguna Breach > Slingshot > Ravine > Urn
+
+  Move... to Giguna Breach > Peak > Portal
+  Portalwarp to Giguna > Ruins Top > Save Point
+! Do Giguna > Ruins Top > Switch > Open Doors
+! Do Recall Drone
+! Do Giguna > Giguna Northeast > Save Point > Save
+! Do Giguna > Carnelian > Upper Susar > Hack
+  Move... to Irikar > Hub > North Above Portal
+! Do Deploy Drone
+* Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
+! Do Recall Drone
+! Do Deploy Drone
+  Move... to Irikar > Hub > Portal Stand
+  Portalwarp to Irikar Breach > Gauntlet > Save Point
+* Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
+  Move... to Irikar Breach > Exit Corridor > Portal Stand
+  Portalwarp to Irikar > Abandoned Room > Empty Pedestal
+! Do Recall Drone
+
+  Move... to Uhrum > West Entrance > South Platform
+! Do Deploy Drone
+! Do Interior > Facility Interior > Freight Elevator > Enter Emergence
+* Collect Slingshot_Charge from Emergence > Storage > Dais Middle > Urn
+! Do Recall Drone
+! Do Deploy Drone
+* Collect Uhrum_West_Entrance_Lower_Wall from Uhrum > West Entrance > Lower Wall West > Spin through Wall
+! Do Recall Drone
+  Move... to Uhrum > Glitchy Corridor > East Platform
+! Do Deploy Drone
+* Collect Uhrum_Glitchy_Corridor_Rock from Uhrum > Glitchy Corridor > East Platform > Charge Through Wall
+! Do Recall Drone
+* Collect Uhrum_Waterfalls_Block from Uhrum > Waterfalls > Below Block > Shockwave Block
+! Do Deploy Drone
+* Collect Anuman from Uhrum > Annuna Corridor > Pedestal > Urn
+! Do Uhrum > Annuna Corridor > Save Point > Save
+! Do Become Indra
+* Collect Uhrum_Annuna_Corridor_Block from Uhrum > Annuna Corridor > Block West > Dislodge Block
+! Do Become Drone
+
+* Collect Hammond_Auth from Filter > Core > Terminal East > Authorize Hammond
+! Do Glacier > Vertical Room > Lower Switch > Open Lower Gatestones
+* Collect Breach_Attractor from Glacier > Crystals > Lower Corner > Item
+
+  Move... to Annuna > Lamassu > Portal Stand
+  Portalwarp to Glacier Breach > South Save > Save Point
+  Move... to Glacier Breach > Save and Exit > Portal Stand
+  Portalwarp to Glacier > Hammond's End > Upper Right Pedestal
+! Do Glacier > Hammond's End > Upper Right Pedestal > Move Portal to Lower West
+! Do Glacier Breach > Angry Lions > North > Summon Portal to Second Platform
+  Portalwarp to Annuna > Siuna Storage > Second Platform
+  Move... to Annuna > Siuna Storage > Wall Right
+! Do Become Indra
+* Collect Siuna_Storage_Wall from Annuna > Siuna Storage > Wall Right > Break Wall as Indra
+* Collect Nanite_Mist from Annuna > Siuna Storage > Within Range > Remote Urn
+! Do Become Drone
+
+* Collect Health_Fragment from Glacier > Sea Burial > Deep Cache > Health
+* Collect Apocalypse_Bomb from Annuna > Apocalypse > Center Scaffold West > Boss Fight
+* Collect Escape from Glacier > Apocalypse Entry > Grate Ledge > Escape
