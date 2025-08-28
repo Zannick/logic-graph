@@ -1941,6 +1941,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => true,
             ExitId::Giguna__Helipad__South_Middle__ex__Clouds__North_Middle_1 => true,
             ExitId::Giguna__Helipad__South_Right__ex__Clouds__North_Right_1 => true,
+            ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1 => rules::access_invoke_shockwave(ctx, world),
             ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::access_invoke_hover(ctx, world),
@@ -5106,6 +5107,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::observe_access_nanite_mist(ctx, world, full_obs),
+            ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1 => rules::observe_access_invoke_shockwave(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => rules::observe_access_nanite_mist(ctx, world, full_obs),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
@@ -24096,6 +24098,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => rules::explain_nanite_mist(ctx, world, edict),
+            ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1 => rules::explain_invoke_shockwave(ctx, world, edict),
             ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__Wall_Top__ex__Helicopter_1 => rules::explain_nanite_mist(ctx, world, edict),
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => rules::explain_invoke_hover(ctx, world, edict),
@@ -27600,7 +27603,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3734] = [
+static EXIT_DEFS: [Exit; 3735] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -42414,6 +42417,13 @@ static EXIT_DEFS: [Exit; 3734] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1,
+        time: 10000,
+        dest: SpotId::Giguna__Helipad__Wall_Top,
+        price: Currency::Energy(100),
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1,
         time: 6050,
         dest: SpotId::Giguna__Far_Corner__South,
@@ -55105,6 +55115,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__Helipad__Irikar_Drop__ex__Helicopter_1 | ExitId:: Giguna__Helipad__Irikar_Drop__ex__Far_Corner__South_1 => SpotId::Giguna__Helipad__Irikar_Drop,
         ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 | ExitId:: Giguna__Helipad__Wall_Top__ex__Helicopter_1 | ExitId:: Giguna__Helipad__Wall_Top__ex__Far_Corner__South_1 => SpotId::Giguna__Helipad__Wall_Top,
         ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 | ExitId:: Giguna__Helipad__Railing__ex__Wall_Top_2 => SpotId::Giguna__Helipad__Railing,
+        ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1 => SpotId::Giguna__Helipad__Wall_Bottom,
         ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 | ExitId:: Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => SpotId::Giguna__Helipad__So_Close,
         ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => SpotId::Giguna__Helipad__East_18,
         ExitId::Giguna__Helipad__South_Left__ex__Clouds__North_Left_1 => SpotId::Giguna__Helipad__South_Left,

@@ -1908,6 +1908,7 @@ digraph AxiomVerge2 {
     Giguna__Helipad__Wall_Top -> Giguna__Helipad__Railing;
     Giguna__Helipad__Railing -> Giguna__Helipad__Wall_Top;
     Giguna__Helipad__Railing -> Giguna__Helipad__Wall_Top;
+    Giguna__Helipad__Wall_Bottom -> Giguna__Helipad__Wall_Top;
     Giguna__Helipad__So_Close -> Giguna__Helipad__Tablet_Ledge;
     Giguna__Helipad__So_Close -> Giguna__Helipad__Tablet_Ledge;
     Giguna__Helipad__East_18 -> Giguna__Lamassu__West_18;

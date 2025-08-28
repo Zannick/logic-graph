@@ -11092,7 +11092,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Giguna__Helipad__Wall_Bottom,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1, ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1)),
         action_range: None,
     },
     SpotDef {

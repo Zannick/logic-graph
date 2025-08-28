@@ -2499,7 +2499,12 @@ areas:
       coord: [11.9, 16.7]
       local:
         - to: Staircase Top
-        # TODO: balloon boost
+      exits:
+        - to: Wall Top
+          req: $shockwave  # Balloon Boost
+          price: 100
+          time: 10
+          tags: [shockwave]
     - name: So Close!
       coord: [11.4, 16.65]
       local:

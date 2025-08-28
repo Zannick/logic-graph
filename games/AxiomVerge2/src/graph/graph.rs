@@ -9457,6 +9457,7 @@ impl world::World for World {
             ExitId::Giguna__Helipad__Wall_Top__ex__Railing_1 => true,
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_1 => true,
             ExitId::Giguna__Helipad__Railing__ex__Wall_Top_2 => true,
+            ExitId::Giguna__Helipad__Wall_Bottom__ex__Wall_Top_1 => true,
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_1 => true,
             ExitId::Giguna__Helipad__So_Close__ex__Tablet_Ledge_2 => true,
             ExitId::Giguna__Helipad__East_18__ex__Lamassu__West_18_1 => true,
