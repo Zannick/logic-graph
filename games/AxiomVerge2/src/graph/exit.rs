@@ -2158,7 +2158,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Center_Plains_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Lower_Platform_West_1 => rules::access_invoke_hook_and_invoke_hover(ctx, world),
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
-            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
+            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::access_invoke_grab_or_invoke_climb_or_invoke_hook(ctx, world),
             ExitId::Giguna__Wasteland__Center_Platform_East__ex__Passage_East_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__Wasteland__Center_Platform_East__ex__Switch_Ledge_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__Wasteland__Center_Platform_West__ex__Left_Platform_East_1 => rules::access_invoke_hook(ctx, world),
@@ -5280,7 +5280,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Center_Plains_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Lower_Platform_West_1 => rules::observe_access_invoke_hook_and_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
-            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
+            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::observe_access_invoke_grab_or_invoke_climb_or_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Center_Platform_East__ex__Passage_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Center_Platform_East__ex__Switch_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__Wasteland__Center_Platform_West__ex__Left_Platform_East_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
@@ -8838,7 +8838,7 @@ impl world::Accessible for Exit {
                     }
                 }
                 ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => {
-                    if rules::access_not_invoke_hook(ctx, world) {
+                    if rules::access_mode_ne_drone(ctx, world) {
                         323
                     } else {
                         0
@@ -11070,6 +11070,13 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        498
                     } else {
                         0
                     }
@@ -16526,7 +16533,7 @@ impl world::Accessible for Exit {
                     }
                 }
                 ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => {
-                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
                         323
                     } else {
                         0
@@ -18758,6 +18765,13 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        498
                     } else {
                         0
                     }
@@ -24306,7 +24320,7 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Center_Plains_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Lower_Platform_West_1 => rules::explain_invoke_hook_and_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
-            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
+            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => rules::explain_invoke_grab_or_invoke_climb_or_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Wasteland__Center_Platform_East__ex__Passage_East_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__Wasteland__Center_Platform_East__ex__Switch_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__Wasteland__Center_Platform_West__ex__Left_Platform_East_1 => rules::explain_invoke_hook(ctx, world, edict),
@@ -27224,6 +27238,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__Wasteland__Below_Platforms_Center__ex__Left_Platform_East_2 => true,
             ExitId::Giguna__Wasteland__Bluff_by_Door__ex__Door_Left_1 => true,
             ExitId::Giguna__Wasteland__Cache_Ledge__ex__Upper_Cache_1 => true,
+            ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1 => true,
             ExitId::Giguna__Wasteland__East_Ledge__ex__East_12_1 => true,
             ExitId::Giguna__Wasteland__Ladder_Ledge__ex__Right_Platform_East_1 => true,
             ExitId::Giguna__Wasteland__Lower_Path_Right__ex__Lower_Cliff_1 => true,
@@ -43988,7 +44003,7 @@ static EXIT_DEFS: [Exit; 3742] = [
     },
     Exit {
         id: ExitId::Giguna__Wasteland__Center_Plains__ex__Steeper_Hill_1,
-        time: 1200,
+        time: 702,
         dest: SpotId::Giguna__Wasteland__Steeper_Hill,
         price: Currency::Free,
         price_per_sec: Currency::Free,

@@ -6667,6 +6667,7 @@ digraph AxiomVerge2 {
     Giguna__Wasteland__Switch_Approach -> Giguna__Wasteland__Switch;
     Giguna__Wasteland__Switch -> Giguna__Wasteland__Switch_Approach;
     Giguna__Giguna_Base__East_14 -> Giguna__Giguna_Base__Stone_Knob;
+    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__East_14;
     Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Middle_Platform;
     Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Kari;
     Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Stone_Knob;

@@ -995,9 +995,12 @@ areas:
           jumps: 1
       exits:
         - to: Steeper Hill
-          req: $grab or $climb
+          req: $grab or $climb or $hook
           movement: base
-          jumps: 2
+          jumps: 1
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 1
     - name: West Plains
       coord: [17.0, 13.6]
       local:
@@ -1394,6 +1397,8 @@ areas:
     - name: Stone Knob
       coord: [14.55, 13.9]
       local:
+        - to: East 14
+          jumps: 1
         - to: Kari
           thru: [14.35, 14.1]
         - to: Middle Platform

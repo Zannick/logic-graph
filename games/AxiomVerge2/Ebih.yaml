@@ -1356,7 +1356,7 @@ areas:
           movement: base
           jumps: 1
           penalties:
-            - when: not $hook
+            - when: ^mode != 'drone'
               jumps: 1
     - name: Alcove
       coord: [19.175, 9.75]

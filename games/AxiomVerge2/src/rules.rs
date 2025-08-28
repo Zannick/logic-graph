@@ -1324,6 +1324,10 @@ pub fn access_invoke_grab_or_invoke_climb(ctx: &Context, world: &World) -> bool 
     // $grab or $climb
     (helper__grab!(ctx, world) || helper__climb!(ctx, world))
 }
+pub fn access_invoke_grab_or_invoke_climb_or_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // $grab or $climb or $hook
+    ((helper__grab!(ctx, world) || helper__climb!(ctx, world)) || helper__hook!(ctx, world))
+}
 pub fn access_invoke_grab_or_invoke_hook(ctx: &Context, world: &World) -> bool {
     // $grab or $hook
     (helper__grab!(ctx, world) || helper__hook!(ctx, world))
@@ -10004,6 +10008,47 @@ pub fn explain_invoke_grab_or_invoke_climb(
                 let (res, mut refs) = hexplain__climb!(ctx, world, edict);
                 edict.insert("$climb", format!("{:?}", res));
                 refs.push("$climb");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain_invoke_grab_or_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // $grab or $climb or $hook
+    {
+        let mut left = {
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        };
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
                 (res, refs)
             };
             left.1.append(&mut right.1);
@@ -23951,6 +23996,15 @@ pub fn observe_access_invoke_grab_or_invoke_climb(
 ) -> bool {
     // $grab or $climb
     (hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+}
+pub fn observe_access_invoke_grab_or_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // $grab or $climb or $hook
+    ((hobserve__grab!(ctx, world, full_obs) || hobserve__climb!(ctx, world, full_obs))
+        || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access_invoke_grab_or_invoke_hook(
     ctx: &Context,
