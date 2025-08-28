@@ -20104,7 +20104,7 @@ static SPOT_DEFS: [SpotDef; 3509] = [
     SpotDef {
         id: SpotId::Uhrum__Glitchy_Corridor__East_27,
         loc_range: Some((LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall, LocationId::Uhrum__Glitchy_Corridor__East_27__Charge_Through_Wall_and_Hover)),
-        exit_range: None,
+        exit_range: Some((ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1, ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1)),
         action_range: None,
     },
     SpotDef {

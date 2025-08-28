@@ -3314,6 +3314,7 @@ digraph AxiomVerge2 {
     Uhrum__Glitchy_Corridor__Wall_East_Platform -> Uhrum__Glitchy_Corridor__Wall_West_Platform;
     Uhrum__Glitchy_Corridor__East_Hookable -> Uhrum__Save_Room__East;
     Uhrum__Glitchy_Corridor__East_Hookable -> Uhrum__Save_Room__Save_Point;
+    Uhrum__Glitchy_Corridor__East_27 -> Uhrum__Save_Room__West;
     Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__East_Glitch_East;
     Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__East_Platform;
     Uhrum__Glitchy_Corridor__East_Glitch_West -> Uhrum__Glitchy_Corridor__Wall_West_Platform;

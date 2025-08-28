@@ -1172,6 +1172,9 @@ areas:
           jumps: 1
           tags: [event]
         # It's not as easy to spin through the wall?
+      exits:
+        - to: Save Room > West
+          tags: [xshift]
 
     - name: East Glitch West
       coord: [24.4, 27.4]

@@ -10852,6 +10852,7 @@ impl world::World for World {
             ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1 => true,

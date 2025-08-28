@@ -3382,6 +3382,7 @@ impl world::Accessible for Exit {
             ExitId::Uhrum__Glitchy_Corridor__Center_Platform_East__ex__West_Pillar_East_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__Center_Platform_West__ex__East_Glitch_West_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__Center_Platform_West__ex__Wall_West_Platform_1 => rules::access_invoke_hookhover(ctx, world),
+            ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1 => rules::access_uhrum_east_glitch(ctx, world),
             ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => rules::access_uhrum_east_glitch(ctx, world),
@@ -26483,6 +26484,7 @@ impl world::Exit for Exit {
             ExitId::Uhrum__Emergence_Facility__West__ex__Emergence_Save__East_1 => true,
             ExitId::Uhrum__Emergence_Save__East__ex__Emergence_Facility__West_1 => true,
             ExitId::Uhrum__Emergence_Save__West__ex__Grassy_Guardpost__East_22_1 => true,
+            ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__East_Ledge__ex__East_Platform_1 => true,
             ExitId::Uhrum__Glitchy_Corridor__Middle_Lower__ex__East_Ledge_1 => true,
@@ -27684,7 +27686,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3742] = [
+static EXIT_DEFS: [Exit; 3743] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -52228,6 +52230,13 @@ static EXIT_DEFS: [Exit; 3742] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1,
+        time: 1350,
+        dest: SpotId::Uhrum__Save_Room__West,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1,
         time: 1350,
         dest: SpotId::Uhrum__Spring__West,
@@ -56178,6 +56187,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Uhrum__Glitchy_Corridor__Wall_East__ex__Wall_West_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_East,
         ExitId::Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Wall_West_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__Wall_East_Platform__ex__Center_Platform_East_1 => SpotId::Uhrum__Glitchy_Corridor__Wall_East_Platform,
         ExitId::Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__Save_Point_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Hookable__ex__Save_Room__East_1 => SpotId::Uhrum__Glitchy_Corridor__East_Hookable,
+        ExitId::Uhrum__Glitchy_Corridor__East_27__ex__Save_Room__West_1 => SpotId::Uhrum__Glitchy_Corridor__East_27,
         ExitId::Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Glitch_West__ex__Wall_West_Platform_1 | ExitId:: Uhrum__Glitchy_Corridor__East_Glitch_West__ex__East_Glitch_East_1 => SpotId::Uhrum__Glitchy_Corridor__East_Glitch_West,
         ExitId::Uhrum__Glitchy_Corridor__East_Glitch_East__ex__East_Glitch_West_1 => SpotId::Uhrum__Glitchy_Corridor__East_Glitch_East,
         ExitId::Uhrum__Glitchy_Corridor__East_28__ex__Spring__West_1 => SpotId::Uhrum__Glitchy_Corridor__East_28,
