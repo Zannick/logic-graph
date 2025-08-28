@@ -871,8 +871,10 @@ impl<T: Ctx> ContextWrapper<T> {
                     format!("{}\nLocation at spot: {}", e, spot_id)
                 } else if self.ctx.visited(loc_id) {
                     format!("{}\nAlready visited {}", e, loc_id)
-                } else {
+                } else if e.is_empty() {
                     format!("{}\nUnknown error.", e)
+                } else {
+                    e
                 }
             }
             History::E(exit_id) => world.get_exit(exit_id).explain(self.get(), world),
