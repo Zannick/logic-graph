@@ -5235,6 +5235,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__West_Caverns__Column_1_Top_Left => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core,
         SpotId::Giguna__West_Caverns__Column_1_Top_Right => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
         SpotId::Giguna__West_Caverns__Column_2_Top => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
+        SpotId::Giguna__West_Caverns__Midshaft_Left => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
         SpotId::Giguna__West_Caverns__Northwest => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Core,
         SpotId::Giguna__West_Caverns__Top_Gap_Left => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
         SpotId::Giguna__West_Caverns__Top_Gap_Right => SpotId::Menu__Kiengir_Map__Giguna_Caverns_Matrix,
@@ -16928,6 +16929,9 @@ impl context::Ctx for Context {
                 SpotId::Giguna__West_Caverns__Column_2_Top => {
 
                 }
+                SpotId::Giguna__West_Caverns__Midshaft_Left => {
+
+                }
                 SpotId::Giguna__West_Caverns__Northwest => {
 
                 }
@@ -22048,6 +22052,9 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Giguna__West_Caverns__Column_2_Top => {
+
+                }
+                SpotId::Giguna__West_Caverns__Midshaft_Left => {
 
                 }
                 SpotId::Giguna__West_Caverns__Northwest => {

@@ -2492,6 +2492,10 @@
             Giguna__West_Caverns__Column_1_Top_Left [label = "", pos = "39.0,-15.5!"];
             Giguna__West_Caverns__Cache [label = "", pos = "39.3,-16.333333!"];
             Giguna__West_Caverns__Bush [label = "", pos = "37.5,-16.333333!"];
+            Giguna__West_Caverns__Midshaft_Left [label = "", pos = "40.35,-16.416667!"];
+            Giguna__West_Caverns__Midshaft_Right [label = "", pos = "40.95,-16.75!"];
+            Giguna__West_Caverns__Left_Grass [label = "", pos = "38.4,-18.166667!"];
+            Giguna__West_Caverns__Left_Stair [label = "", pos = "37.8,-20.0!"];
             Giguna__West_Caverns__Tunnel_Bottom [label = "", pos = "44.4,-19.083333!"];
             Giguna__West_Caverns__Tunnel_Fork [label = "", pos = "44.1,-19.5!"];
             Giguna__West_Caverns__East_Susar [label = "", pos = "44.4,-19.583333!"];

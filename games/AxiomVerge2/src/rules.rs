@@ -58,6 +58,10 @@ pub fn access___invoke_grab_and_invoke_climb_or___invoke_hook_and_invoke_hover(
     ((helper__grab!(ctx, world) && helper__climb!(ctx, world))
         || (helper__hook!(ctx, world) && helper__hover!(ctx, world)))
 }
+pub fn access___invoke_grab_and_invoke_climb_or_invoke_hook(ctx: &Context, world: &World) -> bool {
+    // ($grab and $climb) or $hook
+    ((helper__grab!(ctx, world) && helper__climb!(ctx, world)) || helper__hook!(ctx, world))
+}
 pub fn access___invoke_hook_and_invoke_hover_or_invoke_infinite_climb(
     ctx: &Context,
     world: &World,
@@ -4248,6 +4252,47 @@ pub fn explain___invoke_grab_and_invoke_climb_or___invoke_hook_and_invoke_hover(
                     (right.0, left.1)
                 }
             });
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
+    }
+}
+pub fn explain___invoke_grab_and_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // ($grab and $climb) or $hook
+    {
+        let mut left = ({
+            let mut left = {
+                let (res, mut refs) = hexplain__grab!(ctx, world, edict);
+                edict.insert("$grab", format!("{:?}", res));
+                refs.push("$grab");
+                (res, refs)
+            };
+            if !left.0 {
+                left
+            } else {
+                let mut right = {
+                    let (res, mut refs) = hexplain__climb!(ctx, world, edict);
+                    edict.insert("$climb", format!("{:?}", res));
+                    refs.push("$climb");
+                    (res, refs)
+                };
+                left.1.append(&mut right.1);
+                (right.0, left.1)
+            }
+        });
+        if left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__hook!(ctx, world, edict);
+                edict.insert("$hook", format!("{:?}", res));
+                refs.push("$hook");
+                (res, refs)
+            };
             left.1.append(&mut right.1);
             (right.0, left.1)
         }
@@ -21016,6 +21061,15 @@ pub fn observe_access___invoke_grab_and_invoke_climb_or___invoke_hook_and_invoke
     // ($grab and $climb) or ($hook and $hover)
     ((hobserve__grab!(ctx, world, full_obs) && (hobserve__climb!(ctx, world, full_obs)))
         || (hobserve__hook!(ctx, world, full_obs) && (hobserve__hover!(ctx, world, full_obs))))
+}
+pub fn observe_access___invoke_grab_and_invoke_climb_or_invoke_hook(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // ($grab and $climb) or $hook
+    ((hobserve__grab!(ctx, world, full_obs) && (hobserve__climb!(ctx, world, full_obs)))
+        || hobserve__hook!(ctx, world, full_obs))
 }
 pub fn observe_access___invoke_hook_and_invoke_hover_or_invoke_infinite_climb(
     ctx: &Context,

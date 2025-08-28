@@ -576,6 +576,8 @@ areas:
         - to: Column 2 Top
           jumps: 1
         - to: Top Gap Left
+        - to: Midshaft Left
+        - to: Left Grass
       exits:
         - to: Column 1 Top Right
           req: $hover
@@ -588,6 +590,7 @@ areas:
           jumps: 1
         - to: Column 1 Top Right
           jumps: 1
+        - to: Midshaft Left
     - name: Column 1 Top Right
       coord: [13.35, 9.3]
       local:
@@ -627,6 +630,62 @@ areas:
           item: Power_Core
           req: $more_refills
           tags: [standing]
+
+    - name: Midshaft Left
+      coord: [13.45, 9.85]
+      local:
+        - to: Midshaft Right
+        - to: Left Grass
+      exits:
+        - to: Top Gap Left
+          req: ($grab and $climb) or $hook
+          movement: base
+          jumps: 1
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 1
+        - to: Top Gap Right
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+    - name: Midshaft Right
+      coord: [13.65, 10.05]
+      local:
+        - to: Left Grass
+      exits:
+        - to: Midshaft Left
+          req: $grab or $hook
+          movement: base
+          jumps: 1
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 1
+        - to: Top Gap Left
+          req: $hook
+          movement: fast_hover
+          jumps: 2
+    - name: Left Grass
+      coord: [12.8, 10.9]
+      local:
+        - to: Left Stair  # imprecise
+      exits:
+        - to: Midshaft Right
+          req: $grab or $hook
+          movement: base
+          jumps: 5
+        - to: Midshaft Left
+          req: $hook
+          movement: base
+          jumps: 6
+    - name: Left Stair
+      coord: [12.6, 12.0]
+      local:
+        - to: East 13
+      exits:
+        - to: Left Grass
+          req: $grab and $climb
+          movement: base
+          jumps: 7
 
     - name: Tunnel Bottom
       coord: [14.8, 11.45]
@@ -682,6 +741,9 @@ areas:
           tags: [xshift]
     - name: East 13
       coord: [14.95, 12.75]
+      local:
+        - to: Left Stair
+          jumps: 6
       exits:
         - to: Wasteland > West 13
           tags: [xshift]

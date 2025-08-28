@@ -1310,7 +1310,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1 => rules::access_not_ebih_interchange_block(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => rules::access_invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => rules::access_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world),
-            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => rules::access_invoke_climb(ctx, world),
+            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_East_1 => rules::access_invoke_climb(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 => rules::access_mode_eq_drone(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => rules::access_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => rules::access_mode_eq_drone(ctx, world),
@@ -2216,6 +2216,13 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__East_13__ex__Wasteland__West_13_1 => true,
             ExitId::Giguna__West_Caverns__East_Susar__ex__East_12_1 => rules::access_giguna__west_caverns__ctx__east_susar(ctx, world),
             ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1 => rules::access_giguna__west_caverns__ctx__east_susar(ctx, world),
+            ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Left_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Right_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 => rules::access___invoke_grab_and_invoke_climb_or_invoke_hook(ctx, world),
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Right_1 => rules::access_invoke_hook(ctx, world),
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 => rules::access_invoke_grab_or_invoke_hook(ctx, world),
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Top_Gap_Left_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1 => rules::access_invoke_climb(ctx, world),
             ExitId::Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1 => rules::access_invoke_hover(ctx, world),
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
@@ -4671,7 +4678,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1 => rules::observe_access_not_ebih_interchange_block(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => rules::observe_access_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => rules::observe_access_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world, full_obs),
-            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
+            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_East_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => rules::observe_access_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => rules::observe_access_mode_eq_drone(ctx, world, full_obs),
@@ -5322,6 +5329,13 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__East_10__ex__Column_2_Top_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__East_Susar__ex__East_12_1 => rules::observe_access_giguna__west_caverns__ctx__east_susar(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1 => rules::observe_access_giguna__west_caverns__ctx__east_susar(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Right_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 => rules::observe_access___invoke_grab_and_invoke_climb_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Right_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 => rules::observe_access_invoke_grab_or_invoke_hook(ctx, world, full_obs),
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Top_Gap_Left_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
@@ -11112,6 +11126,20 @@ impl world::Accessible for Exit {
                 ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1000
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        498
                     } else {
                         0
                     }
@@ -18790,6 +18818,20 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        498
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         1200
@@ -23662,7 +23704,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Vertical_Interchange__East_Tunnel__ex__Refill_Station_1 => rules::explain_not_ebih_interchange_block(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => rules::explain_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 => rules::explain_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world, edict),
-            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => rules::explain_invoke_climb(ctx, world, edict),
+            ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_East_1 => rules::explain_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 => rules::explain_mode_eq_drone(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Door_West_1 => rules::explain_invoke_hook_or_invoke_grab_or_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Vertical_Interchange__Passage_West__ex__Passage_East_1 => rules::explain_mode_eq_drone(ctx, world, edict),
@@ -24313,6 +24355,13 @@ impl world::Accessible for Exit {
             ExitId::Giguna__West_Caverns__East_10__ex__Column_2_Top_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__West_Caverns__East_Susar__ex__East_12_1 => rules::explain_giguna__west_caverns__ctx__east_susar(ctx, world, edict),
             ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1 => rules::explain_giguna__west_caverns__ctx__east_susar(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Right_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 => rules::explain___invoke_grab_and_invoke_climb_or_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Right_1 => rules::explain_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 => rules::explain_invoke_grab_or_invoke_hook(ctx, world, edict),
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Top_Gap_Left_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1 => rules::explain_invoke_climb(ctx, world, edict),
             ExitId::Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
@@ -27183,6 +27232,8 @@ impl world::Exit for Exit {
             ExitId::Giguna__Wasteland__Steeper_Hill__ex__Left_Platform_East_1 => true,
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Cache_Ledge_1 => true,
             ExitId::Giguna__Wasteland__Upper_Mid_air_Near_Cache__ex__Upper_Cache_1 => true,
+            ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 => true,
+            ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 => true,
             ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => true,
             ExitId::Giguna__West_Caverns__West_13__ex__West_Tower__Southwest_1 => true,
             ExitId::Giguna__West_Tower__Southwest__ex__Top_1 => true,
@@ -27603,7 +27654,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3735] = [
+static EXIT_DEFS: [Exit; 3742] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -38063,9 +38114,9 @@ static EXIT_DEFS: [Exit; 3735] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1,
-        time: 1000,
-        dest: SpotId::Ebih__Vertical_Interchange__Door_West,
+        id: ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_East_1,
+        time: 1200,
+        dest: SpotId::Ebih__Vertical_Interchange__Door_East,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -44338,6 +44389,55 @@ static EXIT_DEFS: [Exit; 3735] = [
         id: ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1,
         time: 600,
         dest: SpotId::Giguna__West_Caverns__Tunnel_Fork,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Left_1,
+        time: 3600,
+        dest: SpotId::Giguna__West_Caverns__Midshaft_Left,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Right_1,
+        time: 3000,
+        dest: SpotId::Giguna__West_Caverns__Midshaft_Right,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1,
+        time: 4200,
+        dest: SpotId::Giguna__West_Caverns__Left_Grass,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1,
+        time: 600,
+        dest: SpotId::Giguna__West_Caverns__Top_Gap_Left,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Right_1,
+        time: 1200,
+        dest: SpotId::Giguna__West_Caverns__Top_Gap_Right,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1,
+        time: 702,
+        dest: SpotId::Giguna__West_Caverns__Midshaft_Left,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Top_Gap_Left_1,
+        time: 1200,
+        dest: SpotId::Giguna__West_Caverns__Top_Gap_Left,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -54716,7 +54816,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Ebih__Vertical_Interchange__Door_West__ex__Door_1 => SpotId::Ebih__Vertical_Interchange__Door_West,
         ExitId::Ebih__Vertical_Interchange__Door__ex__Door_West_1 | ExitId:: Ebih__Vertical_Interchange__Door__ex__Door_East_1 => SpotId::Ebih__Vertical_Interchange__Door,
         ExitId::Ebih__Vertical_Interchange__Door_East__ex__Door_1 => SpotId::Ebih__Vertical_Interchange__Door_East,
-        ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 | ExitId:: Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1 => SpotId::Ebih__Vertical_Interchange__Passage_East,
+        ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1 | ExitId:: Ebih__Vertical_Interchange__Passage_East__ex__Door_East_1 => SpotId::Ebih__Vertical_Interchange__Passage_East,
         ExitId::Ebih__Vertical_Interchange__East_13__ex__Gem_Room__West_13_1 => SpotId::Ebih__Vertical_Interchange__East_13,
         ExitId::Ebih__Vertical_Interchange__Middle_Descent__ex__Passage_East_1 | ExitId:: Ebih__Vertical_Interchange__Middle_Descent__ex__East_13_1 => SpotId::Ebih__Vertical_Interchange__Middle_Descent,
         ExitId::Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Middle_Drop_1 | ExitId:: Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Refill_Station_1 | ExitId:: Ebih__Vertical_Interchange__Cliff_by_Refill__ex__Blocked_Refill_Station_1 => SpotId::Ebih__Vertical_Interchange__Cliff_by_Refill,
@@ -55009,6 +55109,10 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__West_Caverns__East_10__ex__Carnelian__West_10_1 | ExitId:: Giguna__West_Caverns__East_10__ex__Column_2_Top_1 => SpotId::Giguna__West_Caverns__East_10,
         ExitId::Giguna__West_Caverns__Small_Staircase__ex__East_10_1 => SpotId::Giguna__West_Caverns__Small_Staircase,
         ExitId::Giguna__West_Caverns__Top_Gap_Right__ex__Column_1_Top_Right_1 => SpotId::Giguna__West_Caverns__Top_Gap_Right,
+        ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1 | ExitId:: Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Right_1 => SpotId::Giguna__West_Caverns__Midshaft_Left,
+        ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1 | ExitId:: Giguna__West_Caverns__Midshaft_Right__ex__Top_Gap_Left_1 => SpotId::Giguna__West_Caverns__Midshaft_Right,
+        ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Right_1 | ExitId:: Giguna__West_Caverns__Left_Grass__ex__Midshaft_Left_1 => SpotId::Giguna__West_Caverns__Left_Grass,
+        ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1 => SpotId::Giguna__West_Caverns__Left_Stair,
         ExitId::Giguna__West_Caverns__Tunnel_Bottom__ex__Tunnel_Entrance_1 => SpotId::Giguna__West_Caverns__Tunnel_Bottom,
         ExitId::Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Bottom_1 | ExitId:: Giguna__West_Caverns__Tunnel_Fork__ex__Tunnel_Entrance_1 => SpotId::Giguna__West_Caverns__Tunnel_Fork,
         ExitId::Giguna__West_Caverns__East_Susar__ex__Tunnel_Fork_1 | ExitId:: Giguna__West_Caverns__East_Susar__ex__East_12_1 => SpotId::Giguna__West_Caverns__East_Susar,

@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3505] = [
+static SPOT_DEFS: [SpotDef; 3509] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Cache,
@@ -7690,7 +7690,7 @@ static SPOT_DEFS: [SpotDef; 3505] = [
     SpotDef {
         id: SpotId::Ebih__Vertical_Interchange__Passage_East,
         loc_range: None,
-        exit_range: Some((ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_West_1, ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1)),
+        exit_range: Some((ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Door_East_1, ExitId::Ebih__Vertical_Interchange__Passage_East__ex__Passage_West_1)),
         action_range: None,
     },
     SpotDef {
@@ -12419,6 +12419,30 @@ static SPOT_DEFS: [SpotDef; 3505] = [
         id: SpotId::Giguna__West_Caverns__Higher_Ledge,
         loc_range: None,
         exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__West_Caverns__Left_Grass,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Left_1, ExitId::Giguna__West_Caverns__Left_Grass__ex__Midshaft_Right_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__West_Caverns__Left_Stair,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1, ExitId::Giguna__West_Caverns__Left_Stair__ex__Left_Grass_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__West_Caverns__Midshaft_Left,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Left_1, ExitId::Giguna__West_Caverns__Midshaft_Left__ex__Top_Gap_Right_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__West_Caverns__Midshaft_Right,
+        loc_range: None,
+        exit_range: Some((ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Midshaft_Left_1, ExitId::Giguna__West_Caverns__Midshaft_Right__ex__Top_Gap_Left_1)),
         action_range: None,
     },
     SpotDef {

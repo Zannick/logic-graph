@@ -2053,6 +2053,10 @@ subgraph Giguna
         Giguna__West_Caverns__Column_1_Top_Left(Column 1 Top Left);
         Giguna__West_Caverns__Cache(Cache);
         Giguna__West_Caverns__Bush(Bush);
+        Giguna__West_Caverns__Midshaft_Left(Midshaft Left);
+        Giguna__West_Caverns__Midshaft_Right(Midshaft Right);
+        Giguna__West_Caverns__Left_Grass(Left Grass);
+        Giguna__West_Caverns__Left_Stair(Left Stair);
         Giguna__West_Caverns__Tunnel_Bottom(Tunnel Bottom);
         Giguna__West_Caverns__Tunnel_Fork(Tunnel Fork);
         Giguna__West_Caverns__East_Susar(East Susar);
@@ -5332,7 +5336,7 @@ Ebih__Vertical_Interchange__East_Tunnel --> Ebih__Vertical_Interchange__Blocked_
 Ebih__Vertical_Interchange__East_Tunnel --> Ebih__Vertical_Interchange__Refill_Station
 Ebih__Vertical_Interchange__Middle_Descent --> Ebih__Vertical_Interchange__East_13
 Ebih__Vertical_Interchange__Middle_Descent --> Ebih__Vertical_Interchange__Passage_East
-Ebih__Vertical_Interchange__Passage_East --> Ebih__Vertical_Interchange__Door_West
+Ebih__Vertical_Interchange__Passage_East --> Ebih__Vertical_Interchange__Door_East
 Ebih__Vertical_Interchange__Passage_East <--> Ebih__Vertical_Interchange__Passage_West
 Ebih__Vertical_Interchange__Passage_West --> Ebih__Vertical_Interchange__Door_West
 Ebih__Vertical_Interchange__South --> Ebih__Vertical_Interchange__Below_Door
@@ -5985,6 +5989,13 @@ Giguna__Wasteland__West_13 <--> Giguna__West_Caverns__East_13
 Giguna__West_Caverns__East_10 --> Giguna__West_Caverns__Column_2_Top
 Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__East_12
 Giguna__West_Caverns__East_Susar --> Giguna__West_Caverns__Tunnel_Fork
+Giguna__West_Caverns__Left_Grass --> Giguna__West_Caverns__Midshaft_Left
+Giguna__West_Caverns__Left_Grass --> Giguna__West_Caverns__Midshaft_Right
+Giguna__West_Caverns__Left_Stair --> Giguna__West_Caverns__Left_Grass
+Giguna__West_Caverns__Midshaft_Left --> Giguna__West_Caverns__Top_Gap_Left
+Giguna__West_Caverns__Midshaft_Left --> Giguna__West_Caverns__Top_Gap_Right
+Giguna__West_Caverns__Midshaft_Right --> Giguna__West_Caverns__Midshaft_Left
+Giguna__West_Caverns__Midshaft_Right --> Giguna__West_Caverns__Top_Gap_Left
 Giguna__West_Caverns__Small_Staircase --> Giguna__West_Caverns__East_10
 Giguna__West_Caverns__Top_Gap_Right --> Giguna__West_Caverns__Column_1_Top_Right
 Giguna__West_Caverns__Tunnel_Bottom --> Giguna__West_Caverns__Tunnel_Entrance

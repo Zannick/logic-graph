@@ -3382,8 +3382,10 @@ areas:
         - to: Passage West
           req: ^mode == 'drone'
           movement: base
-        - to: Door West
+        - to: Door East
           req: $climb
+          movement: base
+          jumps: 2
     - name: East 13
       coord: [21.95, 12.75]
       local:
