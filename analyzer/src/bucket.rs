@@ -369,8 +369,7 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
         if let Some(min) = self.min_priority() {
             let max = self.max_priority().unwrap();
             let mut vec = Vec::with_capacity(min_pops + max - min + 1);
-            let factor = (self.len_queue() + min_pops - 1) / min_pops;
-            assert!(factor > 1);
+            let factor = std::cmp::max((self.len_queue() + min_pops - 1) / min_pops, 2);
             for segment in min..=max {
                 // pop 1/factor of each segment with at least that many elements.
                 // and round up.
