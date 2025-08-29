@@ -446,7 +446,8 @@ where
             // are based on the keys.
             let score = SM::get_score_primary_from_heap_key(key.as_ref());
 
-            self.cached_estimates.reset_estimates_in_range(start_progress, to_progress, score);
+            self.cached_estimates
+                .reset_estimates_in_range(start_progress, to_progress, score);
 
             // We don't need to check the elapsed time against statedb,
             // because that's where the elapsed time came from
@@ -457,7 +458,8 @@ where
             )));
         }
 
-        self.cached_estimates.reset_estimates_in_range_unbounded(start_progress);
+        self.cached_estimates
+            .reset_estimates_in_range_unbounded(start_progress);
 
         Ok(None)
     }
@@ -492,7 +494,12 @@ where
         }
         let new = batch.len();
         self.db.write_opt(batch, &self.write_opts)?;
-        for (est, min) in self.cached_estimates.min_estimates.iter().zip(mins.into_iter()) {
+        for (est, min) in self
+            .cached_estimates
+            .min_estimates
+            .iter()
+            .zip(mins.into_iter())
+        {
             est.fetch_min(min, Ordering::Release);
         }
 
@@ -528,7 +535,12 @@ where
         let mut dup_pskips = 0;
 
         let (key, value) = match iter.next() {
-            None => return Ok(Vec::new()),
+            None => {
+                log::debug!("Reached end of queue db without finding elements");
+                self.cached_estimates
+                    .reset_estimates_in_range_unbounded(start_progress);
+                return Ok(Vec::new());
+            }
             Some(el) => el?,
         };
         let pscore = SM::get_score_primary_from_heap_key(key.as_ref());
@@ -606,7 +618,8 @@ where
                 SM::score_primary(*score),
             );
         } else {
-            self.cached_estimates.reset_estimates_in_range_unbounded(start_progress);
+            self.cached_estimates
+                .reset_estimates_in_range_unbounded(start_progress);
         }
 
         // Ignore/assert errors once we start deleting.
@@ -615,7 +628,9 @@ where
         self.db.write_opt(batch, &self.write_opts).unwrap();
         log::trace!("Deletes completed in {:?}", start.elapsed());
 
-        self.cached_estimates.size.fetch_sub(pops, Ordering::Release);
+        self.cached_estimates
+            .size
+            .fetch_sub(pops, Ordering::Release);
         self.pskips.fetch_add(pskips, Ordering::Release);
         self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
 
@@ -818,10 +833,14 @@ where
                 &self.write_opts,
             )
             .unwrap();
-        self.cached_estimates.processed.fetch_add(1, Ordering::Release);
+        self.cached_estimates
+            .processed
+            .fetch_add(1, Ordering::Release);
 
         self.dup_iskips.fetch_add(dups, Ordering::Release);
-        self.cached_estimates.seen.fetch_add(new_seen, Ordering::Release);
+        self.cached_estimates
+            .seen
+            .fetch_add(new_seen, Ordering::Release);
         Ok(results)
     }
 
@@ -915,7 +934,9 @@ where
             self.dup_pskips.fetch_add(dup_pskips, Ordering::Release);
             self.bg_deletes
                 .fetch_add(pskips + dup_pskips, Ordering::Release);
-            self.cached_estimates.size.fetch_sub(pskips + dup_pskips, Ordering::Release);
+            self.cached_estimates
+                .size
+                .fetch_sub(pskips + dup_pskips, Ordering::Release);
             if pskips > 0 || dup_pskips > 0 || rescores > 0 {
                 log::debug!(
                     "Background thread (from prog={}): {} expired, {} duplicate, {} rescored",
@@ -956,7 +977,9 @@ where
                 .get_pinned_cf(next_cf, key.as_ref())
                 .is_ok_and(|o| o.is_some())
             {
-                self.cached_estimates.processed.fetch_add(1, Ordering::Release);
+                self.cached_estimates
+                    .processed
+                    .fetch_add(1, Ordering::Release);
             } else {
                 let state: T = get_obj_from_data(key.as_ref()).unwrap();
                 let data: StateDataAlias<T> = get_obj_from_data(val.as_ref()).unwrap();
