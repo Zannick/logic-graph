@@ -176,6 +176,7 @@ pub struct CondensedEdge<T: Ctx, S, E> {
     time: u32,
     pub index: usize,
     reqs: Requirements<T, E>,
+    path: Vec<S>,
 }
 
 impl<T, S, E> CondensedEdge<T, S, E>
@@ -238,6 +239,10 @@ where
     {
         self.reqs.observe_penalties(world, ctx, observer)
     }
+
+    pub fn midpoints(&self) -> &[S] {
+        &self.path
+    }
 }
 
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
@@ -245,6 +250,22 @@ enum HeapEdge<M, S, E> {
     Base(S, u32),
     Move(M, S, u32),
     Exit(E),
+}
+
+impl<M, S, E> HeapEdge<M, S, E> {
+    pub fn dst<W>(&self, world: &W) -> S
+    where
+        W: World,
+        W::Exit: Exit<ExitId = E, SpotId = S>,
+        S: Copy,
+        E: Copy,
+    {
+        match &self {
+            &HeapEdge::Base(s, _) => *s,
+            &HeapEdge::Move(_, s, _) => *s,
+            &HeapEdge::Exit(e) => world.get_exit(*e).dest(),
+        }
+    }
 }
 
 /// Creates a map of condensed edges, keyed by SpotIds.
@@ -287,13 +308,15 @@ where
             }
         }
 
-        for (dst, (path, time)) in best {
+        for (dst, (mut path, time)) in best {
             if !path.is_empty() && world.spot_of_interest(dst) {
+                path.pop(); // dst
                 let mut ce = CondensedEdge {
                     dst,
                     time,
                     index: 0,
                     reqs: Requirements::default(),
+                    path,
                 };
                 if let Some(v) = condensed.get_mut(&start) {
                     ce.index = v.len();
@@ -345,6 +368,11 @@ where
                     time: t,
                     index: 0,
                     reqs,
+                    path: path
+                        .into_iter()
+                        .map(|he| he.dst(world))
+                        .take_while(|dst| *dst != cur)
+                        .collect(),
                 };
                 if let Some(vec) = condensed.get_mut(&start) {
                     if !ce.reqs.is_empty() {

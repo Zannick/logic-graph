@@ -48,6 +48,18 @@ where
     W::Location: Location<Context = T>,
 {
     let now = Instant::now();
+
+    #[derive(serde::Serialize)]
+    struct EdgeInfo {
+        src: String,
+        dst: String,
+        idx: i32,
+        subidx: String,
+        is_warp: bool,
+        text: String,
+        lastc: bool,
+    }
+
     let mut edges = Vec::new();
     let mut spots = Vec::new();
     let mut ctx = ContextWrapper::new(startctx.clone());
@@ -80,13 +92,45 @@ where
         if ctx.get().position() != spot || matches!(h, History::A(..)) {
             if world.should_draw_spot(spot) {
                 if world.should_draw_spot(ctx.get().position()) {
-                    edges.push((
-                        format!("{:?}", spot),
-                        format!("{:?}", ctx.get().position()),
-                        i,
-                        is_warp,
-                        recent.join("\\n"),
-                    ));
+                    if let History::C(_, idx) = h {
+                        let cedge = &world.get_condensed_edges_from(spot)[*idx];
+                        let mut mp = spot;
+                        let maxlen = (cedge.midpoints().len() + 1).checked_ilog10().unwrap_or(0)
+                            as usize
+                            + 1;
+
+                        for (mi, next) in cedge.midpoints().iter().enumerate() {
+                            edges.push(EdgeInfo {
+                                src: format!("{:?}", mp),
+                                dst: format!("{:?}", next),
+                                idx: i,
+                                subidx: format!("{:0w$}", mi + 1, w = maxlen),
+                                is_warp: false,
+                                text: String::from(""),
+                                lastc: false,
+                            });
+                            mp = *next;
+                        }
+                        edges.push(EdgeInfo {
+                            src: format!("{:?}", mp),
+                            dst: format!("{:?}", ctx.get().position()),
+                            idx: i,
+                            subidx: format!("{}", cedge.midpoints().len() + 1),
+                            is_warp: false,
+                            text: recent.join("\\n"),
+                            lastc: true,
+                        });
+                    } else {
+                        edges.push(EdgeInfo {
+                            src: format!("{:?}", spot),
+                            dst: format!("{:?}", ctx.get().position()),
+                            idx: i,
+                            subidx: String::from(""),
+                            is_warp,
+                            text: recent.join("\\n"),
+                            lastc: false,
+                        });
+                    }
                     i += 1;
                     recent.clear();
                     if is_warp {
@@ -99,13 +143,15 @@ where
                 && world.should_draw_spot(ctx.get().position())
             {
                 // Draw the edge
-                edges.push((
-                    format!("{:?}", last_real_spot),
-                    format!("{:?}", ctx.get().position()),
-                    i,
-                    true,
-                    recent.join("\\n"),
-                ));
+                edges.push(EdgeInfo {
+                    src: format!("{:?}", last_real_spot),
+                    dst: format!("{:?}", ctx.get().position()),
+                    idx: i,
+                    subidx: String::from(""),
+                    is_warp: true,
+                    text: recent.join("\\n"),
+                    lastc: false,
+                });
                 i += 1;
                 recent.clear();
             }

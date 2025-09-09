@@ -5,7 +5,7 @@ digraph solution {
 
     edge[penwidth=3.0, fontsize=28];
 {% for edge in edges %}
-    {{ edge.0 }} -> {{ edge.1 }} [{% if edge.3 or "\n" in edge.4 %}label="{{ edge.2 }}. {{ edge.4 }}", color=chartreuse{% else %}label="{{ edge.2 }}"{% endif %}{% if edge.4 is starting_with("!") %}, color=white{% endif %}];
+    {{ edge.src }} -> {{ edge.dst }} [{% if edge.is_warp or "\n" in edge.text %}label="{{ edge.idx }}. {{ edge.text }}", color=chartreuse{% elif edge.subidx %}label="{{ edge.idx }}.{{ edge.subidx }}",fontsize=14,{% if not edge.lastc %}arrowhead=dot,headclip=false,{% endif %}arrowsize=0.4,penwidth=2.25{% else %}label="{{ edge.idx }}"{% endif %}{% if edge.text is starting_with("!") %}, color=white{% endif %}];
 {%- endfor %}
 
 {% for spot in spots %}

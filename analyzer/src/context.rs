@@ -672,6 +672,9 @@ impl<T: Ctx> ContextWrapper<T> {
         E: Exit<Context = T>,
         W::Location: Location<Context = T>,
     {
+        for spot in edge.midpoints() {
+            self.ctx.set_position(*spot, world);
+        }
         self.ctx.set_position(edge.dst, world);
         let time = edge.time(world, self.get());
         self.elapse(time);
