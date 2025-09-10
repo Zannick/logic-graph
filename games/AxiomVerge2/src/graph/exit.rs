@@ -1881,8 +1881,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => rules::access_giguna__giguna_base__ctx__door_open(ctx, world),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => rules::access_invoke_hover(ctx, world),
-            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1 => rules::access_invoke_grab(ctx, world),
             ExitId::Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => rules::access_invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 => rules::access_invoke_climb(ctx, world),
@@ -5070,8 +5070,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => rules::observe_access_giguna__giguna_base__ctx__door_open(ctx, world, full_obs),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
-            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1 => rules::observe_access_invoke_grab(ctx, world, full_obs),
             ExitId::Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => rules::observe_access_invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 => rules::observe_access_invoke_climb(ctx, world, full_obs),
@@ -10460,7 +10460,7 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => {
+                ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         600
                     } else {
@@ -18162,7 +18162,7 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
-                ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => {
+                ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 => {
                     if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
                         600
                     } else {
@@ -24124,8 +24124,8 @@ impl world::Accessible for Exit {
             ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => rules::explain_giguna__giguna_base__ctx__door_open(ctx, world, edict),
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 => rules::explain_invoke_hover(ctx, world, edict),
-            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1 => rules::explain_invoke_grab(ctx, world, edict),
             ExitId::Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => rules::explain_invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 => rules::explain_invoke_climb(ctx, world, edict),
@@ -27167,7 +27167,7 @@ impl world::Exit for Exit {
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Kari_1 => true,
             ExitId::Giguna__Giguna_Base__Below_Gate__ex__Middle_Platform_1 => true,
             ExitId::Giguna__Giguna_Base__Lower_Fork__ex__Below_Gate_1 => true,
-            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 => true,
+            ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 => true,
             ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1 => true,
             ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1 => true,
             ExitId::Giguna__Giguna_Base__West_15__ex__West_Grate_1 => true,
@@ -42080,16 +42080,16 @@ static EXIT_DEFS: [Exit; 3743] = [
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1,
-        time: 4200,
-        dest: SpotId::Giguna__Giguna_Base__Staircase_Top,
+        id: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1,
+        time: 1800,
+        dest: SpotId::Giguna__Giguna_Base__Northeast_Cliff,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
     Exit {
-        id: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1,
-        time: 1800,
-        dest: SpotId::Giguna__Giguna_Base__Stone_Knob,
+        id: ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1,
+        time: 4200,
+        dest: SpotId::Giguna__Giguna_Base__Staircase_Top,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -55197,7 +55197,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Giguna__Giguna_Base__Right_Pillar__ex__Left_Pillar_1 => SpotId::Giguna__Giguna_Base__Right_Pillar,
         ExitId::Giguna__Giguna_Base__Left_Pillar__ex__Right_Pillar_1 => SpotId::Giguna__Giguna_Base__Left_Pillar,
         ExitId::Giguna__Giguna_Base__Ruin__ex__Right_Pillar_1 | ExitId:: Giguna__Giguna_Base__Ruin__ex__Left_Pillar_1 => SpotId::Giguna__Giguna_Base__Ruin,
-        ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Middle_Platform,
+        ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Northeast_Cliff_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1 | ExitId:: Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Middle_Platform,
         ExitId::Giguna__Giguna_Base__Kari__ex__Below_Gate_1 => SpotId::Giguna__Giguna_Base__Kari,
         ExitId::Giguna__Giguna_Base__Building_Entry__ex__Interior__Outpost_Interior__Entry_1 => SpotId::Giguna__Giguna_Base__Building_Entry,
         ExitId::Giguna__Giguna_Base__Staircase_Top__ex__Left_Pillar_1 => SpotId::Giguna__Giguna_Base__Staircase_Top,

@@ -1110,6 +1110,7 @@ areas:
         - to: Center Main Path
           jumps: 2
         - to: Below Tree
+          thru: [23.7, 7.9]
         - to: Platform
     - name: Below Tree
       coord: [23.8, 8.3]
@@ -1519,6 +1520,12 @@ areas:
           jumps: 2
         - to: Above Chute
           thru: [20.5, 6.0]
+        - to: Middle Middle
+          thru: [[20.3, 6.5], [20.2, 7.0]]
+          jumps_down: [1, 0, 0]
+        - to: Middle Cliff
+          thru: [20.3, 6.5]
+          jumps_down: [1, 0]
       exits:
         - to: Highest Platform
           req: $hover
@@ -1665,6 +1672,10 @@ areas:
           jumps: 2
         - to: Alcove Entrance
         - to: Above Alcove
+        - to: Mid Save
+          thru: [20.0, 8.1]
+        - to: Block Left
+          thru: [20.0, 8.1]
 
     - name: Giguna Pillar
       coord: [19.3, 8.4]

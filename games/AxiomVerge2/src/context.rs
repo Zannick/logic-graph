@@ -4095,6 +4095,7 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Giguna__Giguna_Base__Left_Pillar => SpotId::Giguna__Giguna_Base__Save_Point,
         SpotId::Giguna__Giguna_Base__Lower_Fork => SpotId::Giguna__Giguna_Base__Save_Point,
         SpotId::Giguna__Giguna_Base__Middle_Platform => SpotId::Giguna__Giguna_Base__Save_Point,
+        SpotId::Giguna__Giguna_Base__Northeast_Cliff => SpotId::Giguna__Giguna_Base__Save_Point,
         SpotId::Giguna__Giguna_Base__Right_Pillar => SpotId::Giguna__Giguna_Base__Save_Point,
         SpotId::Giguna__Giguna_Base__Ruin => SpotId::Giguna__Giguna_Base__Save_Point,
         SpotId::Giguna__Giguna_Base__Save_Point => SpotId::Giguna__Giguna_Base__Save_Point,

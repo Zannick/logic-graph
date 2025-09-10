@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3509] = [
+static SPOT_DEFS: [SpotDef; 3510] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Cache,
@@ -10684,7 +10684,13 @@ static SPOT_DEFS: [SpotDef; 3509] = [
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Middle_Platform,
         loc_range: None,
-        exit_range: Some((ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1, ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Stone_Knob_1)),
+        exit_range: Some((ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Below_Gate_1, ExitId::Giguna__Giguna_Base__Middle_Platform__ex__Staircase_Top_1)),
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Giguna__Giguna_Base__Northeast_Cliff,
+        loc_range: None,
+        exit_range: None,
         action_range: None,
     },
     SpotDef {
@@ -10721,7 +10727,7 @@ static SPOT_DEFS: [SpotDef; 3509] = [
         id: SpotId::Giguna__Giguna_Base__Stone_Knob,
         loc_range: None,
         exit_range: Some((ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1, ExitId::Giguna__Giguna_Base__Stone_Knob__ex__Upper_Cliff_1)),
-        action_range: Some((ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone, ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone)),
+        action_range: Some((ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone, ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall)),
     },
     SpotDef {
         id: SpotId::Giguna__Giguna_Base__Switch_Distance_1,

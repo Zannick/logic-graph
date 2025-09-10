@@ -157,6 +157,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
             ActionId::Giguna__Giguna_Base__Save_Point__Save => true,
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::access_invoke_can_deploy(ctx, world),
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::access_invoke_open(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::access_invoke_open_and_invoke_range1(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::access_invoke_open_and_invoke_range2(ctx, world),
@@ -348,6 +349,7 @@ impl world::Accessible for Action {
             ActionId::Giguna__Gateway__Flask_Ledge__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Gateway__One_Jump__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::observe_access_invoke_open(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::observe_access_invoke_open_and_invoke_range1(ctx, world, full_obs),
             ActionId::Giguna__Giguna_Base__Switch_Distance_3__Open_Door => rules::observe_access_invoke_open_and_invoke_range2(ctx, world, full_obs),
@@ -1367,6 +1369,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Upper Cliff"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => {
                 let (ret, mut tags) = rules::explain_invoke_open(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -2017,7 +2028,8 @@ impl world::Action for Action {
             ActionId::Giguna__West_Caverns__East_Susar__Caught => rules::action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world),
             ActionId::Giguna__West_Caverns__East_Susar__Hack => rules::action_giguna__west_caverns__ctx__east_susar_set_true(ctx, world),
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => rules::action_invoke_deploy_drone_and_move__giguna_gt_wasteland_gt_middle_path(ctx, world),
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(ctx, world),
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => rules::action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(ctx, world),
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => rules::action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_northeast_cliff(ctx, world),
             ActionId::Giguna__Giguna_Base__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
             ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => rules::action_giguna__giguna_base__ctx__door_open_set_true(ctx, world),
@@ -2159,6 +2171,7 @@ impl world::Action for Action {
             ActionId::Giguna__Giguna_Northeast__Gate_Left__Throw_Drone => SpotId::Giguna__Giguna_Northeast__Gate_Vent,
             ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => SpotId::Giguna__West_Caverns__Higher_Ledge,
             ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => SpotId::Giguna__Wasteland__West_12,
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => SpotId::Giguna__Giguna_Base__Upper_Cliff,
             ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => SpotId::Giguna__Giguna_Base__Upper_Cliff,
             ActionId::Giguna__Ruins_Top__Turret_Balcony_West__Throw_Drone_onto_Tower => SpotId::Giguna__Ruins_West__Rooftop_East_Edge,
             ActionId::Giguna__Clouds__Platform_Start__Hack_and_Ride_to_Portal => SpotId::Giguna__Clouds__Platform_Stop,
@@ -3089,8 +3102,15 @@ impl world::Action for Action {
                     ctx.observe_set_position(dest, world, full_obs);
                 }
             }
-            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => {
                 rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
+            }
+            ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => {
+                rules::observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_northeast_cliff(ctx, world, full_obs);
                 let dest = self.dest(ctx, world);
                 if dest != SpotId::None {
                     ctx.observe_set_position(dest, world, full_obs);
@@ -3723,7 +3743,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 217] = [
+static ACT_DEFS: [Action; 218] = [
     Action {
         id: ActionId::Amagi_Breach__Divided__Save_Point__Save,
         time: 1300,
@@ -4547,6 +4567,12 @@ static ACT_DEFS: [Action; 217] = [
         price_per_sec: Currency::Free,
     },
     Action {
+        id: ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall,
+        time: 1000,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Action {
         id: ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door,
         time: 500,
         price: Currency::Free,
@@ -5149,7 +5175,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Giguna__West_Caverns__Small_Platform__Throw_Drone_Up => SpotId::Giguna__West_Caverns__Small_Platform,
         ActionId::Giguna__West_Caverns__East_Susar__Caught | ActionId::Giguna__West_Caverns__East_Susar__Hack => SpotId::Giguna__West_Caverns__East_Susar,
         ActionId::Giguna__Wasteland__Middle_Cliff__Throw_Drone => SpotId::Giguna__Wasteland__Middle_Cliff,
-        ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone => SpotId::Giguna__Giguna_Base__Stone_Knob,
+        ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone | ActionId::Giguna__Giguna_Base__Stone_Knob__Throw_Drone_And_Fall => SpotId::Giguna__Giguna_Base__Stone_Knob,
         ActionId::Giguna__Giguna_Base__Save_Point__Save => SpotId::Giguna__Giguna_Base__Save_Point,
         ActionId::Giguna__Giguna_Base__Switch_Distance_1__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_1,
         ActionId::Giguna__Giguna_Base__Switch_Distance_2__Open_Door => SpotId::Giguna__Giguna_Base__Switch_Distance_2,

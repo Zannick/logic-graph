@@ -35,6 +35,7 @@ areas:
         - to: Portal Stand
         - to: NW Middle Building Corner
         - to: West Rooftops Upper East
+        - to: NW Roof
     - name: Northwest Above Bowl
       coord: [12.25, 20.1]
       local:

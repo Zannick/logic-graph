@@ -3855,6 +3855,13 @@ pub fn action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kari(
     // $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
     helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari);
 }
+pub fn action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_northeast_cliff(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $deploy_drone_and_move(`Giguna > Giguna Base > Northeast Cliff`)
+    helper__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Northeast_Cliff);
+}
 pub fn action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(
     ctx: &mut Context,
     world: &World,
@@ -29755,6 +29762,22 @@ pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_kar
     let old_strict = full_obs.strict;
     full_obs.strict = true;
     hobserve__deploy_drone_and_move!(ctx, world, SpotId::Giguna__Giguna_Base__Kari, full_obs);
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_giguna_base_gt_northeast_cliff(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $deploy_drone_and_move(`Giguna > Giguna Base > Northeast Cliff`)
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    hobserve__deploy_drone_and_move!(
+        ctx,
+        world,
+        SpotId::Giguna__Giguna_Base__Northeast_Cliff,
+        full_obs
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_deploy_drone_and_move__giguna_gt_ruins_top_gt_west_7(

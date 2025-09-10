@@ -704,7 +704,7 @@ areas:
       local:
         - to: East Susar
         - to: East 13
-          thru: [14.5, 11.75]
+          thru: [[14.5, 11.75], [14.5, 12.1]]
       exits:
         - to: Tunnel Bottom
           req: $grab
@@ -1399,10 +1399,7 @@ areas:
       local:
         - to: East 14
           jumps: 1
-        - to: Kari
-          thru: [14.35, 14.1]
-        - to: Middle Platform
-          thru: [14.35, 14.1]
+        - to: Northeast Cliff
       exits:
         - to: Upper Cliff
           req: $hook or ($grab and $climb)
@@ -1412,19 +1409,34 @@ areas:
             - when: not $hook
               jumps: 2
       actions:
-        - name: Throw Drone
+        - name: Throw Drone And Fall
           req: $can_deploy
           do: $deploy_drone_and_move(`Giguna > Giguna Base > Kari`)
           to: Upper Cliff
+        - name: Throw Drone 
+          req: $can_deploy
+          do: $deploy_drone_and_move(`Giguna > Giguna Base > Northeast Cliff`)
+          to: Upper Cliff
+    - name: Northeast Cliff
+      coord: [14.4, 14.0]
+      local:
+        - to: Stone Knob
+          jumps: 1
+        - to: Kari
+        - to: Middle Platform
+        - to: Building Entry
+          thru: [14.375, 14.5]
     - name: Upper Cliff
       coord: [14.25, 13.55]
       local:
+        - to: Right Pillar
+        - to: Northeast Cliff
         - to: Stone Knob
         - to: Kari
-          thru: [14.35, 14.1]
+          thru: [14.375, 14.5]
         - to: Middle Platform
-          thru: [14.35, 14.1]
-        - to: Right Pillar
+        - to: Building Entry
+          thru: [14.375, 14.5]
     - name: Right Pillar
       coord: [13.9, 13.6]
       local:
@@ -1462,7 +1474,7 @@ areas:
         - to: Kari
         - to: Building Entry
       exits:
-        - to: Stone Knob
+        - to: Northeast Cliff
           req: $hook or $grab
           movement: base
           jumps: 3

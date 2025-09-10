@@ -1849,8 +1849,8 @@ digraph AxiomVerge2 {
     Giguna__Giguna_Base__Ruin -> Giguna__Giguna_Base__Left_Pillar;
     Giguna__Giguna_Base__Ruin -> Giguna__Giguna_Base__Right_Pillar;
     Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Below_Gate;
+    Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Northeast_Cliff;
     Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Staircase_Top;
-    Giguna__Giguna_Base__Middle_Platform -> Giguna__Giguna_Base__Stone_Knob;
     Giguna__Giguna_Base__Kari -> Giguna__Giguna_Base__Below_Gate;
     Giguna__Giguna_Base__Staircase_Top -> Giguna__Giguna_Base__Left_Pillar;
     Giguna__Giguna_Base__West_Grate -> Giguna__Giguna_Base__West_15;
@@ -5666,6 +5666,8 @@ digraph AxiomVerge2 {
     Ebih__Ebih_West__High_Ledge -> Ebih__Ebih_West__Upper_Save;
     Ebih__Ebih_West__High_Ledge -> Ebih__Ebih_West__High_Platform;
     Ebih__Ebih_West__High_Ledge -> Ebih__Ebih_West__East_6;
+    Ebih__Ebih_West__High_Ledge -> Ebih__Ebih_West__Middle_Middle;
+    Ebih__Ebih_West__High_Ledge -> Ebih__Ebih_West__Middle_Cliff;
     Ebih__Ebih_West__East_6 -> Ebih__Ebih_West__High_Ledge;
     Ebih__Ebih_West__Highest_Platform -> Ebih__Ebih_West__Alcove_Entrance;
     Ebih__Ebih_West__Highest_Platform -> Ebih__Ebih_West__Block_Left;
@@ -5685,8 +5687,10 @@ digraph AxiomVerge2 {
     Ebih__Ebih_West__East_8 -> Ebih__Ebih_West__Middle_Middle;
     Ebih__Ebih_West__Middle_Middle -> Ebih__Ebih_West__East_8;
     Ebih__Ebih_West__Middle_Middle -> Ebih__Ebih_West__Middle_Cliff;
+    Ebih__Ebih_West__Middle_Cliff -> Ebih__Ebih_West__Mid_Save;
     Ebih__Ebih_West__Middle_Cliff -> Ebih__Ebih_West__Alcove_Entrance;
     Ebih__Ebih_West__Middle_Cliff -> Ebih__Ebih_West__Above_Alcove;
+    Ebih__Ebih_West__Middle_Cliff -> Ebih__Ebih_West__Block_Left;
     Ebih__Ebih_West__Middle_Cliff -> Ebih__Ebih_West__Middle_Middle;
     Ebih__Ebih_West__Giguna_Pillar -> Ebih__Ebih_West__Above_Alcove;
     Ebih__Ebih_West__Block_Right -> Ebih__Ebih_West__Refill_Station;
@@ -6669,12 +6673,17 @@ digraph AxiomVerge2 {
     Giguna__Wasteland__Switch -> Giguna__Wasteland__Switch_Approach;
     Giguna__Giguna_Base__East_14 -> Giguna__Giguna_Base__Stone_Knob;
     Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__East_14;
-    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Middle_Platform;
-    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Kari;
+    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Northeast_Cliff;
+    Giguna__Giguna_Base__Northeast_Cliff -> Giguna__Giguna_Base__Stone_Knob;
+    Giguna__Giguna_Base__Northeast_Cliff -> Giguna__Giguna_Base__Middle_Platform;
+    Giguna__Giguna_Base__Northeast_Cliff -> Giguna__Giguna_Base__Kari;
+    Giguna__Giguna_Base__Northeast_Cliff -> Giguna__Giguna_Base__Building_Entry;
     Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Stone_Knob;
+    Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Northeast_Cliff;
     Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Right_Pillar;
     Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Middle_Platform;
     Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Kari;
+    Giguna__Giguna_Base__Upper_Cliff -> Giguna__Giguna_Base__Building_Entry;
     Giguna__Giguna_Base__Right_Pillar -> Giguna__Giguna_Base__Upper_Cliff;
     Giguna__Giguna_Base__Right_Pillar -> Giguna__Giguna_Base__Ruin;
     Giguna__Giguna_Base__Left_Pillar -> Giguna__Giguna_Base__Ruin;
@@ -8052,6 +8061,7 @@ digraph AxiomVerge2 {
     Irikar__Hub__Northwest -> Irikar__Hub__West_Small_Middle_Rooftop;
     Irikar__Hub__Northwest -> Irikar__Hub__West_Rooftops_Upper_Middle;
     Irikar__Hub__Northwest -> Irikar__Hub__West_Rooftops_Upper_East;
+    Irikar__Hub__North_Above_Portal -> Irikar__Hub__NW_Roof;
     Irikar__Hub__North_Above_Portal -> Irikar__Hub__Portal_Stand;
     Irikar__Hub__North_Above_Portal -> Irikar__Hub__NW_Middle_Building_Corner;
     Irikar__Hub__North_Above_Portal -> Irikar__Hub__West_Rooftops_Upper_East;
@@ -9159,6 +9169,7 @@ digraph AxiomVerge2 {
     Giguna__Clouds__Platform_Start -> Giguna__Clouds__Platform_Stop;
     Giguna__Clouds__Platform_Early -> Giguna__Clouds__Platform_Early_Portal;
     Giguna__Clouds__Platform_Early -> Giguna__Clouds__Platform_Early_Portal;
+    Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Upper_Cliff;
     Giguna__Giguna_Base__Stone_Knob -> Giguna__Giguna_Base__Upper_Cliff;
     Giguna__Giguna_Northeast__Gate_Left -> Giguna__Giguna_Northeast__Gate_Vent;
     Giguna__Ruins_Top__Turret_Balcony_West -> Giguna__Ruins_West__Rooftop_East_Edge;
