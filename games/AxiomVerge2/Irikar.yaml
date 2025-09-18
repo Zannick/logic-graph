@@ -211,6 +211,7 @@ areas:
       local:
         - to: Sat Tower Roof West
         - to: Sat Tower Northeast
+        - to: Sat Tower Lower Exterior
     - name: Sat Tower West Valley
       coord: [13.15, 21.2]
       local:
@@ -218,6 +219,9 @@ areas:
           jumps: 5
         - to: Sat Tower Roof West
           jumps: 4
+        - to: Sat Tower Roof East
+          thru: [13.5, 20.5]
+          jumps: [4, 0]
     - name: Sat Tower Northeast
       coord: [13.95, 20.7]
       exits:
@@ -1106,7 +1110,16 @@ areas:
     - name: Above Room North
       coord: [14.65, 23.1]
       local:
+        - to: Above Room Stable
         - to: Above Room East
+    - name: Above Room Stable
+      coord: [14.65, 23.3]
+      local:
+        - to: Above Room East
+        - to: Portal
+          thru: [14.55, 23.4]
+        - to: Item Pedestal
+          thru: [14.55, 23.4]
     - name: Above Room East
       coord: [14.95, 23.4]
       exits:

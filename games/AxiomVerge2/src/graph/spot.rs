@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3510] = [
+static SPOT_DEFS: [SpotDef; 3511] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Cache,
@@ -16899,6 +16899,12 @@ static SPOT_DEFS: [SpotDef; 3510] = [
     },
     SpotDef {
         id: SpotId::Irikar__Sight_Room__Above_Room_North,
+        loc_range: None,
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar__Sight_Room__Above_Room_Stable,
         loc_range: None,
         exit_range: None,
         action_range: None,

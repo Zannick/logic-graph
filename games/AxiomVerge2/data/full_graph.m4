@@ -8090,8 +8090,10 @@ digraph AxiomVerge2 {
     Irikar__Hub__Sat_Tower_Roof_West -> Irikar__Hub__Sat_Tower_West_Valley;
     Irikar__Hub__Sat_Tower_Roof_East -> Irikar__Hub__Sat_Tower_Roof_West;
     Irikar__Hub__Sat_Tower_Roof_East -> Irikar__Hub__Sat_Tower_Northeast;
+    Irikar__Hub__Sat_Tower_Roof_East -> Irikar__Hub__Sat_Tower_Lower_Exterior;
     Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__East_Rim;
     Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__Sat_Tower_Roof_West;
+    Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__Sat_Tower_Roof_East;
     Irikar__Hub__Sat_Tower_Middle_Ledge -> Irikar__Hub__Bowl_Hole;
     Irikar__Hub__Sat_Tower_Middle_Ledge -> Irikar__Hub__Sat_Tower_Lower_Right_Ledge;
     Irikar__Hub__Sat_Tower_Middle_Ledge -> Irikar__Hub__Sat_Tower_Lower_Left_Ledge;
@@ -8225,7 +8227,11 @@ digraph AxiomVerge2 {
     Irikar__Sight_Room__Lower_Ledge -> Irikar__Sight_Room__Item_Pedestal;
     Irikar__Sight_Room__Portal -> Irikar__Sight_Room__Item_Pedestal;
     Irikar__Sight_Room__Item_Pedestal -> Irikar__Sight_Room__Portal;
+    Irikar__Sight_Room__Above_Room_North -> Irikar__Sight_Room__Above_Room_Stable;
     Irikar__Sight_Room__Above_Room_North -> Irikar__Sight_Room__Above_Room_East;
+    Irikar__Sight_Room__Above_Room_Stable -> Irikar__Sight_Room__Portal;
+    Irikar__Sight_Room__Above_Room_Stable -> Irikar__Sight_Room__Item_Pedestal;
+    Irikar__Sight_Room__Above_Room_Stable -> Irikar__Sight_Room__Above_Room_East;
     Irikar__Sight_Room__Northwest -> Irikar__Sight_Room__Portal;
     Irikar__Sight_Room__Northwest -> Irikar__Sight_Room__Item_Pedestal;
     Irikar__Abandoned_Room__Empty_Pedestal -> Irikar__Abandoned_Room__Corner_Core;

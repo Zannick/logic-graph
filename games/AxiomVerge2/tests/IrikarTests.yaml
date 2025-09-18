@@ -1,0 +1,22 @@
+name: IrikarTests
+all:
+  with:
+    - Ice_Axe
+    - Amashilama
+    - Boomerang
+    - Ledge_Grab
+    - Infect
+    - Remote_Drone
+    - Wall_Climb
+    - Slingshot_Hook
+  context:
+    energy: 300
+
+tests:
+  - name: Go Over Top
+  - start: Giguna > Clouds > Platform Start
+    route: |
+      ! Do Giguna > Clouds > Platform Start > Hack and Maybe Get Off Early
+        Move... to Irikar > Sight Room > Above Room Stable
+      ! Do Deploy Drone
+      * Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn

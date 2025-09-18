@@ -3425,6 +3425,7 @@
             Irikar__Sight_Room__Portal [label = "", pos = "43.575,-42.25!"];
             Irikar__Sight_Room__Item_Pedestal [label = "", pos = "44.4,-42.666667!"];
             Irikar__Sight_Room__Above_Room_North [label = "", pos = "43.95,-38.5!"];
+            Irikar__Sight_Room__Above_Room_Stable [label = "", pos = "43.95,-38.833333!"];
             Irikar__Sight_Room__Above_Room_East [label = "", pos = "44.85,-39.0!"];
             Irikar__Sight_Room__Northwest [label = "", pos = "42.15,-38.5!"];
         }
