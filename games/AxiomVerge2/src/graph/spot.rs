@@ -23,7 +23,7 @@ struct SpotDef {
     action_range: Option<(ActionId, ActionId)>,
 }
 
-static SPOT_DEFS: [SpotDef; 3511] = [
+static SPOT_DEFS: [SpotDef; 3512] = [
     SpotDef { id: SpotId::None, loc_range: None, exit_range: None, action_range: None },
     SpotDef {
         id: SpotId::Amagi_Breach__Center_Ruins__Cache,
@@ -16235,7 +16235,7 @@ static SPOT_DEFS: [SpotDef; 3511] = [
         id: SpotId::Irikar__Hub__East_Rim,
         loc_range: None,
         exit_range: Some((ExitId::Irikar__Hub__East_Rim__ex__Airy__Lower_Throw_End_1, ExitId::Irikar__Hub__East_Rim__ex__West_Rim_2)),
-        action_range: Some((ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High, ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low)),
+        action_range: Some((ActionId::Irikar__Hub__East_Rim__Throw_Drone_East, ActionId::Irikar__Hub__East_Rim__Throw_Drone_West)),
     },
     SpotDef {
         id: SpotId::Irikar__Hub__Exposed_Passage_Center,
@@ -16504,6 +16504,12 @@ static SPOT_DEFS: [SpotDef; 3511] = [
     SpotDef {
         id: SpotId::Irikar__Hub__Sat_Tower_Top_Ledge,
         loc_range: Some((LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet, LocationId::Irikar__Hub__Sat_Tower_Top_Ledge__Tablet)),
+        exit_range: None,
+        action_range: None,
+    },
+    SpotDef {
+        id: SpotId::Irikar__Hub__Sat_Tower_West_Slope,
+        loc_range: None,
         exit_range: None,
         action_range: None,
     },

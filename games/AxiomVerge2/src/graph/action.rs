@@ -224,8 +224,10 @@ impl world::Accessible for Action {
             ActionId::Irikar__Beach_Save__Save_Point__Save => true,
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_East => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => rules::access_invoke_can_deploy(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => true,
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::access_invoke_can_deploy_and_drone_hover(ctx, world),
@@ -396,8 +398,10 @@ impl world::Accessible for Action {
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => rules::observe_access_invoke_activate(ctx, world, full_obs),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave_and_not_invoke_visited__irikar_gt_hub_gt_collapsed_column_gt_shockwave_to_get_item(ctx, world, full_obs),
             ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_East => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => rules::observe_access_invoke_can_deploy(ctx, world, full_obs),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::observe_access_not_irikar_royal_storage_wall_and_invoke_shockwave(ctx, world, full_obs),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low => rules::observe_access_invoke_can_deploy_and_drone_hover(ctx, world, full_obs),
@@ -1792,6 +1796,15 @@ impl world::Accessible for Action {
                 }
                 (ret, tags)
             }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_East => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Sat Tower West Slope"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => {
                 let (ret, mut tags) = rules::explain_invoke_can_deploy_and_drone_hover(ctx, world, edict);
                 let dest = world::Action::dest(self, ctx, world);
@@ -1806,6 +1819,15 @@ impl world::Accessible for Action {
                 let dest = world::Action::dest(self, ctx, world);
                 if dest != SpotId::None {
                     edict.insert("dest", format!("{} ({})", dest, "Airy > South Center"));
+                    tags.push("dest");
+                }
+                (ret, tags)
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => {
+                let (ret, mut tags) = rules::explain_invoke_can_deploy(ctx, world, edict);
+                let dest = world::Action::dest(self, ctx, world);
+                if dest != SpotId::None {
+                    edict.insert("dest", format!("{} ({})", dest, "Bowl Top Platform"));
                     tags.push("dest");
                 }
                 (ret, tags)
@@ -2101,6 +2123,8 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_East => rules::action_invoke_deploy_drone(ctx, world),
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => rules::action_invoke_deploy_drone(ctx, world),
             ActionId::Irikar__Hub__Save_Point__Save => rules::action_invoke_save(ctx, world),
             ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
             ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => rules::action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(ctx, world),
@@ -2199,6 +2223,8 @@ impl world::Action for Action {
             ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Airy__South_Center,
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High => SpotId::Irikar__Airy__Right_Hover_Throw_End,
             ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Airy__South_Center,
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_East => SpotId::Irikar__Hub__Sat_Tower_West_Slope,
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => SpotId::Irikar__Hub__Bowl_Top_Platform,
             ActionId::Irikar__Hub__Collapsed_Column_Debris__Throw_Drone_and_Hover => SpotId::Irikar__Hub__Lower_Hallway_West,
             ActionId::Irikar__Basement_Portal__Moving_Platform_Start__Activate_Platform => SpotId::Irikar__Basement_Portal__Moving_Platform_End,
             ActionId::Irikar__Midwest__Left_Platform_Start__Hack_and_Ride => SpotId::Irikar__Midwest__Left_Platform_Dest,
@@ -3613,6 +3639,20 @@ impl world::Action for Action {
                     ctx.observe_set_position(dest, world, full_obs);
                 }
             }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_East => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
+            }
+            ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => {
+                rules::observe_action_invoke_deploy_drone(ctx, world, full_obs);
+                let dest = self.dest(ctx, world);
+                if dest != SpotId::None {
+                    ctx.observe_set_position(dest, world, full_obs);
+                }
+            }
             ActionId::Irikar__Hub__Save_Point__Save => {
                 rules::observe_action_invoke_save(ctx, world, full_obs);
                 let dest = self.dest(ctx, world);
@@ -3743,7 +3783,7 @@ impl world::Action for Action {
     }
 }
 
-static ACT_DEFS: [Action; 218] = [
+static ACT_DEFS: [Action; 220] = [
     Action {
         id: ActionId::Amagi_Breach__Divided__Save_Point__Save,
         time: 1300,
@@ -4939,6 +4979,12 @@ static ACT_DEFS: [Action; 218] = [
         price_per_sec: Currency::Free,
     },
     Action {
+        id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_East,
+        time: 1375,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Action {
         id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High,
         time: 6725,
         price: Currency::Free,
@@ -4947,6 +4993,12 @@ static ACT_DEFS: [Action; 218] = [
     Action {
         id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low,
         time: 6600,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Action {
+        id: ActionId::Irikar__Hub__East_Rim__Throw_Drone_West,
+        time: 1000,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -5232,7 +5284,7 @@ pub fn get_action_spot(act_id: ActionId) -> SpotId {
         ActionId::Irikar_Breach__Basement_Save__Save_Point__Save => SpotId::Irikar_Breach__Basement_Save__Save_Point,
         ActionId::Irikar_Breach__Corridor__Save_Point__Save => SpotId::Irikar_Breach__Corridor__Save_Point,
         ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Far_East_Low | ActionId::Irikar__Hub__West_Rim__Throw_Drone_Further_East_and_Low => SpotId::Irikar__Hub__West_Rim,
-        ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low => SpotId::Irikar__Hub__East_Rim,
+        ActionId::Irikar__Hub__East_Rim__Throw_Drone_East | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_High | ActionId::Irikar__Hub__East_Rim__Throw_Drone_Far_East_Low | ActionId::Irikar__Hub__East_Rim__Throw_Drone_West => SpotId::Irikar__Hub__East_Rim,
         ActionId::Irikar__Hub__Save_Point__Save => SpotId::Irikar__Hub__Save_Point,
         ActionId::Irikar__Hub__Royal_Storage_By_Wall__Shockwave_Wall => SpotId::Irikar__Hub__Royal_Storage_By_Wall,
         ActionId::Irikar__Hub__Collapsed_Column__Shockwave_Wall => SpotId::Irikar__Hub__Collapsed_Column,

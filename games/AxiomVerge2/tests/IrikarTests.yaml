@@ -9,14 +9,40 @@ all:
     - Remote_Drone
     - Wall_Climb
     - Slingshot_Hook
+    - Shockwave
   context:
     energy: 300
 
 tests:
   - name: Go Over Top
-  - start: Giguna > Clouds > Platform Start
+    start: Giguna > Clouds > Platform Start
     route: |
       ! Do Giguna > Clouds > Platform Start > Hack and Maybe Get Off Early
         Move... to Irikar > Sight Room > Above Room Stable
       ! Do Deploy Drone
       * Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
+      ! Do Recall Drone
+        Move... to Irikar > Boss Room > Bull's Feet
+
+  - name: Balloon Boost
+    start: Giguna > Giguna Base > Save Point
+    can_reach: Giguna > Clouds > Platform Start
+
+  - name: Throw and Go Over Top
+    start: Giguna > Clouds > Platform Start
+    route: |
+      ! Do Giguna > Clouds > Platform Start > Hack and Maybe Get Off Early
+        Move... to Irikar > Hub > East Rim
+      ! Do Irikar > Hub > East Rim > Throw Drone East
+      * Collect Breach_Sight from Irikar > Sight Room > Item Pedestal > Urn
+      ! Do Recall Drone
+      ! Do Irikar > Hub > East Rim > Throw Drone West
+        Move... to Irikar > Hub > Portal Stand
+        Portalwarp
+      * Collect Drone_Hover from Irikar Breach > Hover Room > Bottom > Item
+        Move... to Irikar Breach > Exit Corridor > Portal Stand
+        Portalwarp to Irikar > Abandoned Room > Empty Pedestal
+      ! Do Recall Drone
+        Move... to Irikar > Sight Room > Above Room Stable
+        Move... to Irikar > Boss Room > Bull's Feet
+

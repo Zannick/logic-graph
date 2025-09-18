@@ -3311,6 +3311,7 @@
             Irikar__Hub__Sat_Tower_Roof_West [label = "", pos = "40.2,-34.166667!"];
             Irikar__Hub__Sat_Tower_Roof_East [label = "", pos = "40.95,-34.166667!"];
             Irikar__Hub__Sat_Tower_West_Valley [label = "", pos = "39.45,-35.333333!"];
+            Irikar__Hub__Sat_Tower_West_Slope [label = "", pos = "40.05,-35.0!"];
             Irikar__Hub__Sat_Tower_Northeast [label = "", pos = "41.85,-34.5!"];
             Irikar__Hub__Sat_Tower_Middle_Ledge [label = "", pos = "40.2,-37.666667!"];
             Irikar__Hub__Sat_Tower_Floating_Platform [label = "", pos = "40.5,-36.75!"];

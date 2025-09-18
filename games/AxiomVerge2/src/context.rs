@@ -3298,6 +3298,7 @@ pub fn portal_start(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Sat_Tower_Roof_East => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__Sat_Tower_Roof_West => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar__Hub__Portal_Stand,
+        SpotId::Irikar__Hub__Sat_Tower_West_Slope => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__Save_Point => SpotId::Irikar__Hub__Portal_Stand,
         SpotId::Irikar__Hub__West_23 => SpotId::Irikar__Hub__Portal_Stand,
@@ -3602,6 +3603,7 @@ pub fn portal_hidden(spot_id: SpotId) -> bool {
         SpotId::Irikar__Hub__Sat_Tower_Roof_East => true,
         SpotId::Irikar__Hub__Sat_Tower_Roof_West => true,
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => true,
+        SpotId::Irikar__Hub__Sat_Tower_West_Slope => true,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => true,
         SpotId::Irikar__Hub__Save_Point => true,
         SpotId::Irikar__Hub__West_23 => true,
@@ -4312,6 +4314,7 @@ pub fn save_point(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Sat_Tower_Roof_East => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__Sat_Tower_Roof_West => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Irikar__Hub__Save_Point,
+        SpotId::Irikar__Hub__Sat_Tower_West_Slope => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__Save_Point => SpotId::Irikar__Hub__Save_Point,
         SpotId::Irikar__Hub__West_23 => SpotId::Irikar__Hub__Save_Point,
@@ -5435,6 +5438,7 @@ pub fn map_spot(spot_id: SpotId) -> SpotId {
         SpotId::Irikar__Hub__Ruined_Hallway_Gap_Right => SpotId::Menu__Kiengir_Map__Irikar_Well,
         SpotId::Irikar__Hub__SW_Building_Top_Platform => SpotId::Menu__Kiengir_Map__Irikar_10_25,
         SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => SpotId::Menu__Kiengir_Map__Commemorative_Speech,
+        SpotId::Irikar__Hub__Sat_Tower_West_Slope => SpotId::Menu__Kiengir_Map__Commemorative_Speech,
         SpotId::Irikar__Hub__Sat_Tower_West_Valley => SpotId::Menu__Kiengir_Map__Commemorative_Speech,
         SpotId::Irikar__Hub__Save_Point => SpotId::Menu__Kiengir_Map__Irikar_Hub,
         SpotId::Irikar__Hub__West_25 => SpotId::Menu__Kiengir_Map__Irikar_10_25,
@@ -17619,6 +17623,9 @@ impl context::Ctx for Context {
                 SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => {
 
                 }
+                SpotId::Irikar__Hub__Sat_Tower_West_Slope => {
+
+                }
                 SpotId::Irikar__Hub__Sat_Tower_West_Valley => {
 
                 }
@@ -22778,6 +22785,9 @@ impl context::Ctx for Context {
 
                 }
                 SpotId::Irikar__Hub__Sat_Tower_Top_Ledge => {
+
+                }
+                SpotId::Irikar__Hub__Sat_Tower_West_Slope => {
 
                 }
                 SpotId::Irikar__Hub__Sat_Tower_West_Valley => {

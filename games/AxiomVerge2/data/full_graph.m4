@@ -8072,6 +8072,7 @@ digraph AxiomVerge2 {
     Irikar__Hub__Northeast_Above_Bowl -> Irikar__Hub__Sat_Tower_West_Valley;
     Irikar__Hub__West_Rim -> Irikar__Hub__Bowl_Top_Platform;
     Irikar__Hub__West_Rim -> Irikar__Hub__NW_Bowl_Edifice;
+    Irikar__Hub__East_Rim -> Irikar__Hub__Bowl_Top_Platform;
     Irikar__Hub__East_Rim -> Irikar__Hub__Save_Point;
     Irikar__Hub__East_Rim -> Irikar__Hub__Bowl_Hole;
     Irikar__Hub__East_Rim -> Irikar__Hub__Sat_Tower_West_Valley;
@@ -8093,7 +8094,8 @@ digraph AxiomVerge2 {
     Irikar__Hub__Sat_Tower_Roof_East -> Irikar__Hub__Sat_Tower_Lower_Exterior;
     Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__East_Rim;
     Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__Sat_Tower_Roof_West;
-    Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__Sat_Tower_Roof_East;
+    Irikar__Hub__Sat_Tower_West_Valley -> Irikar__Hub__Sat_Tower_West_Slope;
+    Irikar__Hub__Sat_Tower_West_Slope -> Irikar__Hub__Sat_Tower_Roof_West;
     Irikar__Hub__Sat_Tower_Middle_Ledge -> Irikar__Hub__Bowl_Hole;
     Irikar__Hub__Sat_Tower_Middle_Ledge -> Irikar__Hub__Sat_Tower_Lower_Right_Ledge;
     Irikar__Hub__Sat_Tower_Middle_Ledge -> Irikar__Hub__Sat_Tower_Lower_Left_Ledge;
@@ -9198,8 +9200,10 @@ digraph AxiomVerge2 {
     Irikar__Hub__West_Rim -> Irikar__Airy__Left_Hover_Throw_End;
     Irikar__Hub__West_Rim -> Irikar__Airy__Lower_Throw_End;
     Irikar__Hub__West_Rim -> Irikar__Airy__South_Center;
+    Irikar__Hub__East_Rim -> Irikar__Hub__Sat_Tower_West_Slope;
     Irikar__Hub__East_Rim -> Irikar__Airy__Right_Hover_Throw_End;
     Irikar__Hub__East_Rim -> Irikar__Airy__South_Center;
+    Irikar__Hub__East_Rim -> Irikar__Hub__Bowl_Top_Platform;
     Irikar__Hub__Collapsed_Column_Debris -> Irikar__Hub__Lower_Hallway_West;
     Irikar__Midwest__Left_Platform_Start -> Irikar__Midwest__Left_Platform_Dest;
     Irikar__Midwest__Right_Platform_Start -> Irikar__Midwest__Right_Platform_Dest;

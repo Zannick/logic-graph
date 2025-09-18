@@ -91,6 +91,7 @@ areas:
         - to: Bowl Hole
           jumps_down: 1
         - to: Sat Tower West Valley
+        - to: Bowl Top Platform
       exits:
         - to: Sat Tower Roof West
           req: $hover
@@ -126,6 +127,16 @@ areas:
           do: $deploy_drone
           movement: fast_hover
           penalty_tags: [xshift, -fast_hover.1]
+        - name: Throw Drone East
+          req: $can_deploy
+          to: Sat Tower West Slope
+          do: $deploy_drone
+          movement: fast_hover
+        - name: Throw Drone West
+          req: $can_deploy
+          to: Bowl Top Platform
+          do: $deploy_drone
+          movement: fast_hover
     - name: Bowl Top Platform
       coord: [12.4, 20.85]
       local:
@@ -219,9 +230,13 @@ areas:
           jumps: 5
         - to: Sat Tower Roof West
           jumps: 4
-        - to: Sat Tower Roof East
-          thru: [13.5, 20.5]
-          jumps: [4, 0]
+        - to: Sat Tower West Slope
+          jumps: 1
+    - name: Sat Tower West Slope
+      coord: [13.35, 21.0]
+      local:
+        - to: Sat Tower Roof West
+          jumps: 2.5
     - name: Sat Tower Northeast
       coord: [13.95, 20.7]
       exits:
