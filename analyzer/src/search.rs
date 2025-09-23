@@ -798,7 +798,9 @@ where
             let time_since_visit = ctx.time_since_visit();
             if proc {
                 ctx.assert_and_replay(self.world, *hist);
-                self.queue.push(ctx.clone(), Some(&prev)).unwrap();
+                if !self.queue.db().was_processed(ctx.get()).unwrap() {
+                    self.queue.push(ctx.clone(), Some(&prev)).unwrap();
+                }
                 ctx.clear_history();
             } else {
                 // Do we actually need to process each state along the way, or is it merely more advantageous

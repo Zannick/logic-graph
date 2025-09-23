@@ -289,7 +289,10 @@ where
                     queue = self.queue.track_lock(&self.push_timer).unwrap();
                     self.relock_timer.record(start.elapsed());
 
-                    evicted = Some(Self::evict_internal(&mut queue, evictions));
+                    // Recheck eviction criteria after reobtaining lock
+                    if queue.len() == self.capacity {
+                        evicted = Some(Self::evict_internal(&mut queue, evictions));
+                    }
                     queue.push(el.into_inner(), progress, score);
                 }
             } else {

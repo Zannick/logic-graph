@@ -337,19 +337,21 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
     /// Round-robin eviction of `min_pops` elements across all segments.
     /// Will not completely empty any segment. Requires that the queue has at least
     /// `min_pops` elements, plus one for each non-empty segment.
-    fn pop_max_round_robin(&mut self, min_pops: usize) -> Vec<(B::Item, P)> {
-        if let Some(min) = self.min_priority() {
+    fn pop_max_round_robin(&mut self, mut min_pops: usize) -> Vec<(B::Item, P)> {
+        if let Some(mut min) = self.min_priority() {
             let max = self.max_priority().unwrap();
             let mut vec = Vec::with_capacity(min_pops);
             let mut segment = min;
-            assert!(
-                self.len_queue() > min_pops + max - min,
-                "Not enough in queue for {} pops: have min={} max={} len={}",
-                min_pops,
-                min,
-                max,
-                self.len_queue()
-            );
+            if self.len_queue() <= min_pops + max - min {
+                log::warn!(
+                    "Not enough in queue for {} pops: have min={} max={} len={}",
+                    min_pops,
+                    min,
+                    max,
+                    self.len_queue()
+                );
+                min_pops = self.len_queue() - max + min - 1;
+            }
             while vec.len() < min_pops {
                 if let Some(bucket) = self.bucket_for_replacing(segment) {
                     if bucket.len_bucket() > 1 {
@@ -357,7 +359,24 @@ pub trait SegmentedBucketQueue<'b, B: SegmentBucket<P> + 'b, P: Ord>: Queue<B> {
                         self.items_replaced(segment, 1, 0);
                     }
                 }
-                segment = if segment == max { min } else { segment + 1 };
+                segment = if segment == max {
+                    // The first bucket with multiple items
+                    let Some(next) = (min..=max)
+                        .skip_while(|bi| {
+                            self.bucket_for_peeking(*bi)
+                                .map(|bucket| bucket.len_bucket())
+                                .unwrap_or(0)
+                                <= 1
+                        })
+                        .next()
+                    else {
+                        break;
+                    };
+                    min = next;  // we won't need to check below this one next time
+                    min
+                } else {
+                    segment + 1
+                };
             }
             vec
         } else {
