@@ -987,6 +987,12 @@ areas:
           penalties:
             - when: not Mist_Upgrade
               movement: mist1
+        - to: Lower Floor
+          movement: fast_hover
+          penalties:
+            - when: not $hookhover
+              movement: base
+              jumps_down: 1
 
     # Southeast
     - name: Under Scaffolding
@@ -1046,18 +1052,25 @@ areas:
   spots:
     - name: East
       coord: [38.95, 8.65]
-      local:
-        - to: West
-          jumps: 4
       exits:
+        - to: West
+          movement: fast_hover
+          penalties:
+            - when: not $hookhover
+              movement: base
+              jumps: 4
         - to: Grid 39-40,7-9 > West
           tags: [xshift]
     - name: West
       coord: [37.05, 8.75]
-      local:
-        - to: East
-          jumps: 4
       exits:
+        - to: East
+          movement: fast_hover
+          jumps: 1
+          penalties:
+            - when: not $hookhover
+              movement: base
+              jumps: 3
         - to: Vertical Room > East 9
           tags: [xshift]
 
@@ -1163,6 +1176,13 @@ areas:
               jumps: 8
             - when: not $hook
               jumps: 6
+        - to: East 9
+          req: $hook or $grab
+          movement: base
+          jumps: 10
+          penalties:
+            - when: not $hook
+              jumps: 7
         - to: Secret Door
           req: ^_hammonds_doors
           movement: base
@@ -2583,6 +2603,19 @@ areas:
           penalties:
             - when: not $hook
               movement: base
+      actions:
+        - name: Throw to Win
+          req: Apocalypse_Bomb and $can_deploy
+          to: Terminal
+          do: $collect(Escape); $visit(`Glacier > Apocalypse Entry > Grate Ledge > Escape`);
+          movement: base
+          jumps: 1
+        - name: Throw to Grate
+          req: $can_deploy
+          to: Above Grate
+          do: $deploy_drone
+          movement: fast_hover
+
     - name: Above Grate
       coord: [44.55, 10.2]
       exits:

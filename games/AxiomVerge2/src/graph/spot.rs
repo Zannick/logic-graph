@@ -13199,7 +13199,7 @@ static SPOT_DEFS: [SpotDef; 3512] = [
         id: SpotId::Glacier__Apocalypse_Entry__Grate_Ledge,
         loc_range: Some((LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape, LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape)),
         exit_range: Some((ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1, ExitId::Glacier__Apocalypse_Entry__Grate_Ledge__ex__Terminal_1)),
-        action_range: None,
+        action_range: Some((ActionId::Glacier__Apocalypse_Entry__Grate_Ledge__Throw_to_Grate, ActionId::Glacier__Apocalypse_Entry__Grate_Ledge__Throw_to_Win)),
     },
     SpotDef {
         id: SpotId::Glacier__Apocalypse_Entry__Lowest_Stair,
@@ -13684,13 +13684,13 @@ static SPOT_DEFS: [SpotDef; 3512] = [
     SpotDef {
         id: SpotId::Glacier__Grid_37_38_9__East,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1, ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1)),
+        exit_range: Some((ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1, ExitId::Glacier__Grid_37_38_9__East__ex__West_1)),
         action_range: None,
     },
     SpotDef {
         id: SpotId::Glacier__Grid_37_38_9__West,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1, ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1)),
+        exit_range: Some((ExitId::Glacier__Grid_37_38_9__West__ex__East_1, ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1)),
         action_range: None,
     },
     SpotDef {
@@ -13756,7 +13756,7 @@ static SPOT_DEFS: [SpotDef; 3512] = [
     SpotDef {
         id: SpotId::Glacier__Grid_39_40_7_9__West,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1, ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1)),
+        exit_range: Some((ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1, ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1)),
         action_range: None,
     },
     SpotDef {
@@ -14722,7 +14722,7 @@ static SPOT_DEFS: [SpotDef; 3512] = [
     SpotDef {
         id: SpotId::Glacier__Vertical_Room__Mid_11,
         loc_range: None,
-        exit_range: Some((ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1, ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1)),
+        exit_range: Some((ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1, ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1)),
         action_range: None,
     },
     SpotDef {

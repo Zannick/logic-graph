@@ -2527,6 +2527,8 @@ digraph AxiomVerge2 {
     Glacier__Grid_32_7_10__East_9 -> Glacier__Grid_32_7_10__Grate_Left;
     Glacier__Grid_32_7_10__East_9 -> Glacier__Ledge_Grab_Room__West_9;
     Glacier__Grid_37_38_9__East -> Glacier__Grid_39_40_7_9__West;
+    Glacier__Grid_37_38_9__East -> Glacier__Grid_37_38_9__West;
+    Glacier__Grid_37_38_9__West -> Glacier__Grid_37_38_9__East;
     Glacier__Grid_37_38_9__West -> Glacier__Vertical_Room__East_9;
     Glacier__Grid_39_40_7_9__Upper_East -> Glacier__Revival__West_8;
     Glacier__Grid_39_40_7_9__First_Upper_Platform -> Glacier__Revival__Save_Point;
@@ -2541,6 +2543,7 @@ digraph AxiomVerge2 {
     Glacier__Grid_39_40_7_9__Upper_Scaffolding -> Glacier__Grid_39_40_7_9__Fortress_Wall;
     Glacier__Grid_39_40_7_9__West -> Glacier__Grid_39_40_7_9__Fortress_Ledge;
     Glacier__Grid_39_40_7_9__West -> Glacier__Grid_37_38_9__East;
+    Glacier__Grid_39_40_7_9__West -> Glacier__Grid_39_40_7_9__Lower_Floor;
     Glacier__Grid_39_40_7_9__Under_Scaffolding -> Glacier__Grid_39_40_7_9__East_9;
     Glacier__Grid_39_40_7_9__Under_Scaffolding -> Glacier__Grid_39_40_7_9__Fortress_Wall;
     Glacier__Grid_39_40_7_9__Under_Scaffolding -> Glacier__Grid_39_40_7_9__Upper_Scaffolding;
@@ -2703,6 +2706,7 @@ digraph AxiomVerge2 {
     Glacier__Vertical_Room__West_9 -> Glacier__Vertical_Room__Secret_Door;
     Glacier__Vertical_Room__Mid_9 -> Glacier__Vertical_Room__Peak;
     Glacier__Vertical_Room__Mid_9 -> Glacier__Vertical_Room__Secret_Door;
+    Glacier__Vertical_Room__Mid_11 -> Glacier__Vertical_Room__East_9;
     Glacier__Vertical_Room__Mid_11 -> Glacier__Vertical_Room__Mid_9;
     Glacier__Vertical_Room__Mid_11 -> Glacier__Vertical_Room__Secret_Door;
     Glacier__Vertical_Room__Mid_11 -> Glacier__Vertical_Room__West_9;
@@ -7476,8 +7480,6 @@ digraph AxiomVerge2 {
     Glacier__Grid_39_40_7_9__Under_Scaffolding -> Glacier__Grid_39_40_7_9__Lower_Floor;
     Glacier__Grid_39_40_7_9__Lower_Floor -> Glacier__Grid_39_40_7_9__West;
     Glacier__Grid_39_40_7_9__East_9 -> Glacier__Grid_39_40_7_9__Lower_Floor;
-    Glacier__Grid_37_38_9__East -> Glacier__Grid_37_38_9__West;
-    Glacier__Grid_37_38_9__West -> Glacier__Grid_37_38_9__East;
     Glacier__Vertical_Room__East_9 -> Glacier__Vertical_Room__West_9;
     Glacier__Vertical_Room__East_9 -> Glacier__Vertical_Room__Mid_9;
     Glacier__Vertical_Room__East_9 -> Glacier__Vertical_Room__Mid_11;
@@ -9184,6 +9186,8 @@ digraph AxiomVerge2 {
     Giguna__Separator__Platform -> Giguna__Separator__Switch;
     Giguna__Wasteland__Middle_Cliff -> Giguna__Wasteland__West_12;
     Giguna__West_Caverns__Small_Platform -> Giguna__West_Caverns__Higher_Ledge;
+    Glacier__Apocalypse_Entry__Grate_Ledge -> Glacier__Apocalypse_Entry__Above_Grate;
+    Glacier__Apocalypse_Entry__Grate_Ledge -> Glacier__Apocalypse_Entry__Terminal;
     Glacier__Dock_Outside__Lower_Platforms -> Glacier__Dock_Outside__Lower_Mid_air;
     Glacier__Dock_Outside__Ruins_Platform -> Glacier__Dock_Outside__Above_Ruins;
     Glacier__Hammonds_End__Upper_Floor -> Glacier__Hammonds_End__Upper_Right_Mid_air;

@@ -488,6 +488,10 @@ pub fn access_apocalypse_bomb(ctx: &Context, world: &World) -> bool {
     // Apocalypse_Bomb
     ctx.has(Item::Apocalypse_Bomb)
 }
+pub fn access_apocalypse_bomb_and_invoke_can_deploy(ctx: &Context, world: &World) -> bool {
+    // Apocalypse_Bomb and $can_deploy
+    (ctx.has(Item::Apocalypse_Bomb) && helper__can_deploy!(ctx, world))
+}
 pub fn access_block_fast_travel_and_invoke_shockwave_and_fast_travel(
     ctx: &Context,
     world: &World,
@@ -3799,6 +3803,14 @@ pub fn action_indra_set_invoke_default(ctx: &mut Context, world: &World) {
     // ^indra = $default
     ctx.set_indra(Default::default());
 }
+pub fn action_invoke_collect__escape_invoke_visit__glacier_gt_apocalypse_entry_gt_grate_ledge_gt_escape(
+    ctx: &mut Context,
+    world: &World,
+) {
+    // $collect(Escape); $visit(`Glacier > Apocalypse Entry > Grate Ledge > Escape`);
+    ctx.collect(Item::Escape, world);
+    ctx.visit(LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape);
+}
 pub fn action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(
     ctx: &mut Context,
     world: &World,
@@ -6404,6 +6416,32 @@ pub fn explain_apocalypse_bomb(
         let h = ctx.has(Item::Apocalypse_Bomb);
         edict.insert("Apocalypse_Bomb", format!("{}", h));
         (h, vec!["Apocalypse_Bomb"])
+    }
+}
+pub fn explain_apocalypse_bomb_and_invoke_can_deploy(
+    ctx: &Context,
+    world: &World,
+    edict: &mut FxHashMap<&'static str, String>,
+) -> (bool, Vec<&'static str>) {
+    // Apocalypse_Bomb and $can_deploy
+    {
+        let mut left = {
+            let h = ctx.has(Item::Apocalypse_Bomb);
+            edict.insert("Apocalypse_Bomb", format!("{}", h));
+            (h, vec!["Apocalypse_Bomb"])
+        };
+        if !left.0 {
+            left
+        } else {
+            let mut right = {
+                let (res, mut refs) = hexplain__can_deploy!(ctx, world, edict);
+                edict.insert("$can_deploy", format!("{:?}", res));
+                refs.push("$can_deploy");
+                (res, refs)
+            };
+            left.1.append(&mut right.1);
+            (right.0, left.1)
+        }
     }
 }
 pub fn explain_block_fast_travel_and_invoke_shockwave_and_fast_travel(
@@ -22054,6 +22092,17 @@ pub fn observe_access_apocalypse_bomb(
         ctx.has(Item::Apocalypse_Bomb)
     }
 }
+pub fn observe_access_apocalypse_bomb_and_invoke_can_deploy(
+    ctx: &Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) -> bool {
+    // Apocalypse_Bomb and $can_deploy
+    ({
+        full_obs.observe_apocalypse_bomb();
+        ctx.has(Item::Apocalypse_Bomb)
+    } && (hobserve__can_deploy!(ctx, world, full_obs)))
+}
 pub fn observe_access_block_fast_travel_and_invoke_shockwave_and_fast_travel(
     ctx: &Context,
     world: &World,
@@ -29650,6 +29699,21 @@ pub fn observe_action_indra_set_invoke_default(
     full_obs.strict = true;
     full_obs.clear_indra();
     ctx.set_indra(Default::default());
+    full_obs.strict = old_strict;
+}
+pub fn observe_action_invoke_collect__escape_invoke_visit__glacier_gt_apocalypse_entry_gt_grate_ledge_gt_escape(
+    ctx: &mut Context,
+    world: &World,
+    full_obs: &mut FullObservation,
+) {
+    // $collect(Escape); $visit(`Glacier > Apocalypse Entry > Grate Ledge > Escape`);
+    let old_strict = full_obs.strict;
+    full_obs.strict = true;
+    ctx.observe_collect(Item::Escape, world, full_obs);
+    ctx.observe_visit(
+        LocationId::Glacier__Apocalypse_Entry__Grate_Ledge__Escape,
+        full_obs,
+    );
     full_obs.strict = old_strict;
 }
 pub fn observe_action_invoke_collect__irikar_royal_storage_wall_invoke_collect__flask_invoke_visit__irikar_gt_hub_gt_royal_storage_in_wall_gt_item_invoke_visit__irikar_gt_hub_gt_royal_storage_by_wall_gt_shockwave_just_the_wall(

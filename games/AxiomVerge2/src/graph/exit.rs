@@ -2550,6 +2550,8 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grate_Left_Upper_1 => rules::access_invoke_hookhover(ctx, world),
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => true,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => true,
+            ExitId::Glacier__Grid_37_38_9__East__ex__West_1 => true,
+            ExitId::Glacier__Grid_37_38_9__West__ex__East_1 => true,
             ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => rules::access_invoke_hover(ctx, world),
@@ -2570,6 +2572,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Grid_39_40_7_9__Upper_Scaffolding__ex__Fortress_Wall_1 => rules::access_invoke_hover_and_anuman_and_wall_climb(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => rules::access_nanite_mist(ctx, world),
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1 => true,
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => true,
             ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => true,
             ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1 => true,
@@ -2740,6 +2743,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => rules::access_invoke_hook(ctx, world),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => rules::access_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => rules::access_underwater_movement_and_invoke_hook_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1 => rules::access_invoke_hook_or_invoke_grab(ctx, world),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => true,
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => rules::access_glacier__ctx__hammonds_doors(ctx, world),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => true,
@@ -5660,6 +5664,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => rules::observe_access_invoke_hook(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => rules::observe_access_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => rules::observe_access_underwater_movement_and_invoke_hook_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world, full_obs),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::observe_access_invoke_hook_or_invoke_grab(ctx, world, full_obs),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => rules::observe_access_glacier__ctx__hammonds_doors(ctx, world, full_obs),
@@ -11755,6 +11760,20 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Grid_37_38_9__East__ex__West_1 => {
+                    if rules::access_not_invoke_hookhover(ctx, world) {
+                        1917
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_37_38_9__West__ex__East_1 => {
+                    if rules::access_not_invoke_hookhover(ctx, world) {
+                        1917
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         1228
@@ -11786,6 +11805,13 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => {
                     if rules::access_not_mist_upgrade(ctx, world) {
                         3800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1 => {
+                    if rules::access_not_invoke_hookhover(ctx, world) {
+                        1614
                     } else {
                         0
                     }
@@ -12133,6 +12159,13 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => {
                     if rules::access_not_slingshot_hook(ctx, world) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1 => {
+                    if rules::access_not_invoke_hook(ctx, world) {
+                        4200
                     } else {
                         0
                     }
@@ -19457,6 +19490,20 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Glacier__Grid_37_38_9__East__ex__West_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        1917
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_37_38_9__West__ex__East_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        1917
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => {
                     if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
                         1228
@@ -19488,6 +19535,13 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => {
                     if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
                         3800
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1 => {
+                    if rules::observe_access_not_invoke_hookhover(ctx, world, full_obs) {
+                        1614
                     } else {
                         0
                     }
@@ -19835,6 +19889,13 @@ impl world::Accessible for Exit {
                 ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => {
                     if rules::observe_access_not_slingshot_hook(ctx, world, full_obs) {
                         1200
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1 => {
+                    if rules::observe_access_not_invoke_hook(ctx, world, full_obs) {
+                        4200
                     } else {
                         0
                     }
@@ -24714,6 +24775,7 @@ impl world::Accessible for Exit {
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__Lower_Switch_1 => rules::explain_invoke_hook(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Lower_Gatestone__ex__South_1 => rules::explain_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1 => rules::explain_underwater_movement_and_invoke_hook_and_glacier__vertical_room__ctx__lower_gatestones(ctx, world, edict),
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 => rules::explain_invoke_hook_or_invoke_grab(ctx, world, edict),
             ExitId::Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => rules::explain_glacier__ctx__hammonds_doors(ctx, world, edict),
@@ -26224,6 +26286,8 @@ impl world::Exit for Exit {
             ExitId::Glacier__Grid_32_7_10__East_9__ex__Ledge_Grab_Room__West_9_1 => true,
             ExitId::Glacier__Grid_32_7_10__West_9__ex__Grid_31_9_12__East_9_1 => true,
             ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => true,
+            ExitId::Glacier__Grid_37_38_9__East__ex__West_1 => true,
+            ExitId::Glacier__Grid_37_38_9__West__ex__East_1 => true,
             ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__First_Upper_Platform__ex__Revival__Save_Point_1 => true,
@@ -26231,6 +26295,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Parapet_East_Ledge_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Upper_East__ex__Revival__West_8_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1 => true,
             ExitId::Glacier__Grid_42_10__East__ex__Grid_43_10_11__Top_1 => true,
             ExitId::Glacier__Grid_42_10__West__ex__Revival__Lower_East_1 => true,
             ExitId::Glacier__Grid_43_10_11__East__ex__Apocalypse_Entry__West_10_1 => true,
@@ -27352,11 +27417,14 @@ impl world::Exit for Exit {
             ExitId::Glacier__Grid_32_7_10__Grate_Left_Upper__ex__East_9_1 => true,
             ExitId::Glacier__Grid_32_7_10__Left_Rock__ex__Column_1 => true,
             ExitId::Glacier__Grid_32_7_10__West_10__ex__Left_Rock_1 => true,
+            ExitId::Glacier__Grid_37_38_9__East__ex__West_1 => true,
+            ExitId::Glacier__Grid_37_38_9__West__ex__East_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Floating_Rock__ex__Fortress_Ledge_2 => true,
             ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => true,
             ExitId::Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1 => true,
             ExitId::Glacier__Hammonds_End__Lower_Grate_Left__ex__Lower_Grate_Right_1 => true,
             ExitId::Glacier__Hammonds_End__Lower_Grate_Right__ex__Lower_Grate_Left_1 => true,
             ExitId::Glacier__Hammonds_End__Upper_Grate_Right__ex__Upper_Grate_Left_1 => true,
@@ -27406,6 +27474,7 @@ impl world::Exit for Exit {
             ExitId::Glacier__Vertical_Room__East_Corner__ex__East_12_1 => true,
             ExitId::Glacier__Vertical_Room__Fortress_Ledge__ex__Fortress__Parapet_West_Ledge_1 => true,
             ExitId::Glacier__Vertical_Room__Fortress_Wall__ex__Fortress_Ledge_1 => true,
+            ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1 => true,
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 => true,
             ExitId::Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => true,
             ExitId::Glacier__Vertical_Room__Mid_11__ex__West_9_1 => true,
@@ -27686,7 +27755,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3743] = [
+static EXIT_DEFS: [Exit; 3747] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -46203,6 +46272,20 @@ static EXIT_DEFS: [Exit; 3743] = [
         price_per_sec: Currency::Free,
     },
     Exit {
+        id: ExitId::Glacier__Grid_37_38_9__East__ex__West_1,
+        time: 4750,
+        dest: SpotId::Glacier__Grid_37_38_9__West,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Glacier__Grid_37_38_9__West__ex__East_1,
+        time: 4750,
+        dest: SpotId::Glacier__Grid_37_38_9__East,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
         id: ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1,
         time: 1350,
         dest: SpotId::Glacier__Vertical_Room__East_9,
@@ -46339,6 +46422,13 @@ static EXIT_DEFS: [Exit; 3743] = [
         id: ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1,
         time: 1350,
         dest: SpotId::Glacier__Grid_37_38_9__East,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1,
+        time: 4000,
+        dest: SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -47529,6 +47619,13 @@ static EXIT_DEFS: [Exit; 3743] = [
         id: ExitId::Glacier__Vertical_Room__Lower_Switch__ex__Middle_Gatestone_1,
         time: 2000,
         dest: SpotId::Glacier__Vertical_Room__Middle_Gatestone,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Glacier__Vertical_Room__Mid_11__ex__East_9_1,
+        time: 6000,
+        dest: SpotId::Glacier__Vertical_Room__East_9,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -55576,16 +55673,16 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Floating_Rock_1 | ExitId:: Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Gate_East_1 | ExitId:: Glacier__Grid_39_40_7_9__Fortress_Ledge__ex__Fortress__Parapet_East_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Fortress_Ledge,
         ExitId::Glacier__Grid_39_40_7_9__Fortress_Wall__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__Fortress_Wall,
         ExitId::Glacier__Grid_39_40_7_9__Upper_Scaffolding__ex__Fortress_Wall_1 => SpotId::Glacier__Grid_39_40_7_9__Upper_Scaffolding,
-        ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 | ExitId:: Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 => SpotId::Glacier__Grid_39_40_7_9__West,
+        ExitId::Glacier__Grid_39_40_7_9__West__ex__Grid_37_38_9__East_1 | ExitId:: Glacier__Grid_39_40_7_9__West__ex__Fortress_Ledge_1 | ExitId:: Glacier__Grid_39_40_7_9__West__ex__Lower_Floor_1 => SpotId::Glacier__Grid_39_40_7_9__West,
         ExitId::Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Upper_Scaffolding_1 | ExitId:: Glacier__Grid_39_40_7_9__Under_Scaffolding__ex__Fortress_Wall_1 => SpotId::Glacier__Grid_39_40_7_9__Under_Scaffolding,
         ExitId::Glacier__Grid_39_40_7_9__Lower_Floor__ex__East_9_1 | ExitId:: Glacier__Grid_39_40_7_9__Lower_Floor__ex__Under_Scaffolding_1 => SpotId::Glacier__Grid_39_40_7_9__Lower_Floor,
         ExitId::Glacier__Grid_39_40_7_9__East_9__ex__Revival__West_9_1 | ExitId:: Glacier__Grid_39_40_7_9__East_9__ex__Under_Scaffolding_1 => SpotId::Glacier__Grid_39_40_7_9__East_9,
-        ExitId::Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => SpotId::Glacier__Grid_37_38_9__East,
-        ExitId::Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => SpotId::Glacier__Grid_37_38_9__West,
+        ExitId::Glacier__Grid_37_38_9__East__ex__West_1 | ExitId:: Glacier__Grid_37_38_9__East__ex__Grid_39_40_7_9__West_1 => SpotId::Glacier__Grid_37_38_9__East,
+        ExitId::Glacier__Grid_37_38_9__West__ex__East_1 | ExitId:: Glacier__Grid_37_38_9__West__ex__Vertical_Room__East_9_1 => SpotId::Glacier__Grid_37_38_9__West,
         ExitId::Glacier__Vertical_Room__East_9__ex__Grid_37_38_9__West_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__East_9__ex__Fortress_Ledge_1 => SpotId::Glacier__Vertical_Room__East_9,
         ExitId::Glacier__Vertical_Room__West_9__ex__Ledge_Grab_Room__East_9_1 | ExitId:: Glacier__Vertical_Room__West_9__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__West_9,
         ExitId::Glacier__Vertical_Room__Mid_9__ex__Peak_1 | ExitId:: Glacier__Vertical_Room__Mid_9__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Mid_9,
-        ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__West_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Mid_11,
+        ExitId::Glacier__Vertical_Room__Mid_11__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__West_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__East_9_1 | ExitId:: Glacier__Vertical_Room__Mid_11__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Mid_11,
         ExitId::Glacier__Vertical_Room__Under_Switch__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__West_9_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__Past_Gate_1 | ExitId:: Glacier__Vertical_Room__Under_Switch__ex__Secret_Door_1 => SpotId::Glacier__Vertical_Room__Under_Switch,
         ExitId::Glacier__Vertical_Room__Past_Gate__ex__Under_Switch_1 | ExitId:: Glacier__Vertical_Room__Past_Gate__ex__Ledge_Grab_Room__East_11_1 => SpotId::Glacier__Vertical_Room__Past_Gate,
         ExitId::Glacier__Vertical_Room__Secret_Door__ex__Mid_9_1 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__West_9_1 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__East_11_1 | ExitId:: Glacier__Vertical_Room__Secret_Door__ex__Under_Switch_1 => SpotId::Glacier__Vertical_Room__Secret_Door,
