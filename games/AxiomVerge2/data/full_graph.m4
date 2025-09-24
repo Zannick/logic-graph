@@ -1109,6 +1109,7 @@ digraph AxiomVerge2 {
     Ebih__Ebih_East__East_Mid_air -> Ebih__Observation_Tower_Room__West_Mid_air;
     Ebih__Ebih_West__East_10 -> Ebih__Waterfall__West_10;
     Ebih__Ebih_West__Alcove_Entrance -> Ebih__Ebih_West__Above_Alcove;
+    Ebih__Ebih_West__Above_Alcove -> Ebih__Ebih_West__Giguna_Pillar;
     Ebih__Ebih_West__East_9 -> Ebih__Waterfall__West_9;
     Ebih__Ebih_West__Block_Left -> Ebih__Ebih_West__Alcove_Entrance;
     Ebih__Ebih_West__Block_Left -> Ebih__Ebih_West__Block_Right;

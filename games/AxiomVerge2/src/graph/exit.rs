@@ -1137,6 +1137,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_East__West_7__ex__Waterfall__East_7_1 => true,
             ExitId::Ebih__Ebih_East__West_8__ex__Waterfall__East_8_1 => true,
             ExitId::Ebih__Ebih_East__West_9__ex__Waterfall__East_9_1 => true,
+            ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => rules::access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Below_Door_1 => rules::access_ebih__ebih_west__ctx__door_open(ctx, world),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Refill_Station_1 => rules::access_not_ebih__ebih_west__ctx__door_open_or_invoke_grab(ctx, world),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Small_Gap_1 => rules::access_not_ebih__ebih_west__ctx__door_open(ctx, world),
@@ -4557,6 +4558,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_East__Moving_Platform__ex__East_Ledge_1 => rules::observe_access_invoke_hover(ctx, world, full_obs),
             ExitId::Ebih__Ebih_East__Wall_East__ex__Wall_West_1 => rules::observe_access_ebih_east_wall(ctx, world, full_obs),
             ExitId::Ebih__Ebih_East__Wall_West__ex__Wall_East_1 => rules::observe_access_ebih_east_wall(ctx, world, full_obs),
+            ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => rules::observe_access_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, full_obs),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Below_Door_1 => rules::observe_access_ebih__ebih_west__ctx__door_open(ctx, world, full_obs),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Refill_Station_1 => rules::observe_access_not_ebih__ebih_west__ctx__door_open_or_invoke_grab(ctx, world, full_obs),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Small_Gap_1 => rules::observe_access_not_ebih__ebih_west__ctx__door_open(ctx, world, full_obs),
@@ -8832,6 +8834,13 @@ impl world::Accessible for Exit {
                 ExitId::Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1 => {
                     if rules::access_not_invoke_hook(ctx, world) {
                         600
+                    } else {
+                        0
+                    }
+                }
+                ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => {
+                    if rules::access_mode_ne_drone(ctx, world) {
+                        1200
                     } else {
                         0
                     }
@@ -16566,6 +16575,13 @@ impl world::Accessible for Exit {
                         0
                     }
                 }
+                ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => {
+                    if rules::observe_access_mode_ne_drone(ctx, world, full_obs) {
+                        1200
+                    } else {
+                        0
+                    }
+                }
                 ExitId::Ebih__Ebih_West__Above_the_Trees__ex__High_Above_Flask_2 => {
                     if rules::observe_access_not_mist_upgrade(ctx, world, full_obs) {
                         1754
@@ -23668,6 +23684,7 @@ impl world::Accessible for Exit {
             ExitId::Ebih__Ebih_East__Moving_Platform__ex__East_Ledge_1 => rules::explain_invoke_hover(ctx, world, edict),
             ExitId::Ebih__Ebih_East__Wall_East__ex__Wall_West_1 => rules::explain_ebih_east_wall(ctx, world, edict),
             ExitId::Ebih__Ebih_East__Wall_West__ex__Wall_East_1 => rules::explain_ebih_east_wall(ctx, world, edict),
+            ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => rules::explain_invoke_hook_or___invoke_grab_and_invoke_climb(ctx, world, edict),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Below_Door_1 => rules::explain_ebih__ebih_west__ctx__door_open(ctx, world, edict),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Refill_Station_1 => rules::explain_not_ebih__ebih_west__ctx__door_open_or_invoke_grab(ctx, world, edict),
             ExitId::Ebih__Ebih_West__Above_Door__ex__Small_Gap_1 => rules::explain_not_ebih__ebih_west__ctx__door_open(ctx, world, edict),
@@ -26999,6 +27016,7 @@ impl world::Exit for Exit {
             ExitId::Ebih__Ebih_East__Dispenser__ex__Lower_Center_Pillar_1 => true,
             ExitId::Ebih__Ebih_East__East_9__ex__East_Hill_1 => true,
             ExitId::Ebih__Ebih_East__Ledge_End__ex__East_Ledge_1 => true,
+            ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => true,
             ExitId::Ebih__Ebih_West__Above_the_Trees__ex__High_Above_Flask_2 => true,
             ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => true,
             ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => true,
@@ -27755,7 +27773,7 @@ impl world::Exit for Exit {
     }
 }
 
-static EXIT_DEFS: [Exit; 3747] = [
+static EXIT_DEFS: [Exit; 3748] = [
     Exit {
         id: ExitId::Amagi_Breach__Center_Ruins__Center_Shaft_Bottom__ex__Center_Shaft_Top_1,
         time: 2200,
@@ -37000,6 +37018,13 @@ static EXIT_DEFS: [Exit; 3747] = [
         id: ExitId::Ebih__Ebih_East__West_9__ex__Waterfall__East_9_1,
         time: 1350,
         dest: SpotId::Ebih__Waterfall__East_9,
+        price: Currency::Free,
+        price_per_sec: Currency::Free,
+    },
+    Exit {
+        id: ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1,
+        time: 2400,
+        dest: SpotId::Ebih__Ebih_West__Giguna_Pillar,
         price: Currency::Free,
         price_per_sec: Currency::Free,
     },
@@ -54849,6 +54874,7 @@ pub fn get_exit_spot(exit_id: ExitId) -> SpotId {
         ExitId::Ebih__Waterfall__Ledge_Below_East_Door__ex__East_Horizontal_Door_1 => SpotId::Ebih__Waterfall__Ledge_Below_East_Door,
         ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1 => SpotId::Ebih__Ebih_West__East_10,
         ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => SpotId::Ebih__Ebih_West__Alcove_Entrance,
+        ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => SpotId::Ebih__Ebih_West__Above_Alcove,
         ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1 => SpotId::Ebih__Ebih_West__East_9,
         ExitId::Ebih__Ebih_West__Block_Left__ex__Mid_Save_1 | ExitId:: Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 | ExitId:: Ebih__Ebih_West__Block_Left__ex__Block_Right_1 => SpotId::Ebih__Ebih_West__Block_Left,
         ExitId::Ebih__Ebih_West__East_7__ex__Waterfall__West_7_1 => SpotId::Ebih__Ebih_West__East_7,

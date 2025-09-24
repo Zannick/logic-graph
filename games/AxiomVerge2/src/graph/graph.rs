@@ -8672,6 +8672,7 @@ impl world::World for World {
             ExitId::Ebih__Ebih_East__East_Mid_air__ex__Observation_Tower_Room__West_Mid_air_1 => true,
             ExitId::Ebih__Ebih_West__East_10__ex__Waterfall__West_10_1 => true,
             ExitId::Ebih__Ebih_West__Alcove_Entrance__ex__Above_Alcove_1 => true,
+            ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1 => true,
             ExitId::Ebih__Ebih_West__East_9__ex__Waterfall__West_9_1 => true,
             ExitId::Ebih__Ebih_West__Block_Left__ex__Alcove_Entrance_1 => true,
             ExitId::Ebih__Ebih_West__Block_Left__ex__Block_Right_1 => true,

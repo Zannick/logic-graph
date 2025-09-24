@@ -6772,7 +6772,7 @@ static SPOT_DEFS: [SpotDef; 3512] = [
     SpotDef {
         id: SpotId::Ebih__Ebih_West__Above_Alcove,
         loc_range: None,
-        exit_range: None,
+        exit_range: Some((ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1, ExitId::Ebih__Ebih_West__Above_Alcove__ex__Giguna_Pillar_1)),
         action_range: None,
     },
     SpotDef {

@@ -1372,6 +1372,14 @@ areas:
       local:
         - to: Alcove Entrance
         - to: Mid Save
+      exits:
+        - to: Giguna Pillar
+          req: $hook or ($grab and $climb)
+          movement: base
+          jumps: 4
+          penalties:
+            - when: ^mode != 'drone'
+              jumps: 2
     - name: East 9
       coord: [20.95, 8.8]
       local:
