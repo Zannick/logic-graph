@@ -1,3 +1,4 @@
 rules:
   objective: Any%
 allow_warps: false
+minor_glitches: true
