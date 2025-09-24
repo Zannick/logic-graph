@@ -460,7 +460,6 @@ areas:
         - to: Lower Susar
       exits:
         - to: West 10
-          req: $hook or $grab
           movement: base
           jumps: 1
           penalties:
