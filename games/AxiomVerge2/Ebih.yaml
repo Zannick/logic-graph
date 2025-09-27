@@ -155,7 +155,7 @@ areas:
       coord: [28.05, 11.5]
       exits:
         - to: By Garage > East 12
-          tags: [xshift]
+          tags: [xshift, oneway]
     - name: Left Platform
       coord: [28.7, 10.8]
       exits:
@@ -237,6 +237,7 @@ areas:
         - to: East Platform
           jumps: 2
         - to: Garage Entry
+        - to: East Below Platforms
       exits:
         - to: Base Camp > West 13
           tags: [xshift]
@@ -245,6 +246,8 @@ areas:
       local:
         - to: Garage Entry
         - to: East 13
+        - to: East Below Platforms
+          jumps_down: 2
       exits:
         - to: Crawlspace Opening
           req: $hook or $grab
@@ -303,6 +306,8 @@ areas:
         - to: Garage Entry
           jumps_down: 1
         - to: East 13
+        - to: West Below Platforms
+          jumps_down: 2
       exits:
         - to: East Bush
           req: $hook or $grab or $climb
@@ -2132,7 +2137,7 @@ areas:
       coord: [26.95, 7.4]
       exits:
         - to: Observation Tower Room > West Mid-air
-          tags: [xshift]
+          tags: [xshift, oneway]
     - name: North
       coord: [26.2, 6.1]
       local:
@@ -2565,6 +2570,7 @@ areas:
         - to: Lower Ledge
       exits:
         - to: Drone Room > West 6
+          tags: [xshift]
     - name: East 4
       coord: [23.95, 3.8]
       local:
@@ -2572,6 +2578,7 @@ areas:
         - to: High Platform
       exits:
         - to: Drone Room > West 4
+          tags: [xshift]
     - name: East Ledge
       coord: [23.85, 4.5]
       local:
@@ -3130,7 +3137,7 @@ areas:
       coord: [25.95, 4.1]
       exits:
         - to: Open Air > Northeast
-          tags: [xshift]
+          tags: [xshift, oneway]
 
 - name: Open Air
   on_entry: $reset_old_area(^newpos)
@@ -3147,7 +3154,7 @@ areas:
       coord: [26.2, 5.9]
       exits:
         - to: Ebih East > North
-          tags: [xshift]
+          tags: [xshift, oneway]
 
 - name: Grid 26,10-11  # MARK: Grid 26,10-11
   on_entry: $reset_old_area(^newpos)

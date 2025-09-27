@@ -1422,6 +1422,9 @@ areas:
         - to: Hill East
         - to: Lower Cage East
           jumps: 3
+        - to: Upper Slope
+          thru: [23.5, 9.4]
+          jumps: [2, 0]
       exits:
         - to: Northeast
           req: Drone_Hover

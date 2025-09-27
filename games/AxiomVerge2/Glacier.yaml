@@ -531,7 +531,7 @@ areas:
       exits:
         - to: Sea Burial > Collapsing Ceiling
           req: NOT Amashilama
-          tags: [xshift]
+          tags: [xshift, oneway]
       # other access is dependent on Amashilama, so leave isolated for now.
     - name: Water Surface Right
       coord: [41.7, 12.9]
@@ -2305,6 +2305,8 @@ areas:
     - name: West 10
       coord: [32.05, 9.275]
       exits:
+        - to: Grid 31,9-12 > East 10
+          tags: [xshift]
         - to: Left Rock
           req: $hook or $grab
           movement: base

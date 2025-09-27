@@ -312,6 +312,7 @@ areas:
         - to: Initial Drop
       exits:
         - to: Hover Room > East
+          tags: [xdoor]
     - name: Initial Drop
       coord: [13.2, 22.3]
       local:
@@ -1150,7 +1151,7 @@ areas:
           jumps: 1
       exits:
         - to: Gauntlet > West 26
-          tags: [xshift]
+          tags: [xdoor]
 
 - name: Uhrum Connector  # MARK: Uhrum Connector
   on_entry: $reset_old_area(^newpos)

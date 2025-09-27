@@ -320,6 +320,9 @@ areas:
           jumps: 1
         - to: Upper Corner
           jumps: 2
+      exits:
+        - to: Zappers > West
+          tags: [xdoor]
     - name: Further In
       coord: [36.8, 12.7]
       local:
@@ -371,7 +374,7 @@ areas:
     - name: East
       coord: [35.9, 13.75]
       exits:
-        - to: Control > East
+        - to: Control > West
           tags: [xdoor]
         - to: West
           req: $hook

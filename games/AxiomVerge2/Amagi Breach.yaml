@@ -1204,6 +1204,8 @@ areas:
           penalties:
             - when: not Underwater_Movement
               movement: base
+        - to: Center Ruins > West
+          tags: [xdoor]
 
 - name: Twisty Passages  # MARK: Twisty Passages
   on_entry: $reset_old_area(^newpos)

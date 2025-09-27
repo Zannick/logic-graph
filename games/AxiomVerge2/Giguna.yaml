@@ -2436,6 +2436,9 @@ areas:
       coord: [11.95, 12.1]
       local:
         - to: Grass
+      exits:
+        - to: West Caverns > West 13
+          tags: [xshift]
     - name: Grass
       coord: [11.55, 12.9]
       local:
@@ -3775,6 +3778,7 @@ areas:
         - to: East Grass
       exits:
         - to: Vertical Interchange > West 17
+          tags: [xshift]
 
 - name: Gateway  # MARK: Gateway
   on_entry: $reset_old_area(^newpos)
@@ -3794,6 +3798,7 @@ areas:
         - to: Passage Entry
       exits:
         - to: Dual Path > East 18
+          tags: [xshift]
     - name: Passage Entry
       coord: [19.3, 17.8]
       local:

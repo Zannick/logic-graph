@@ -847,7 +847,7 @@ areas:
       local:
         - to: Lower West Ledge
       exits:
-        - to: Mirror Match > East 26 Lower
+        - to: Mirror Match > East 26 Upper
           tags: [xshift]
         - to: Lower Brick Column West
           req: $hover
@@ -1580,7 +1580,7 @@ areas:
         - to: West Staircase Lower West
           jumps: 1
       exits:
-        - to: West Bridge > East 25 Upper
+        - to: West Bridge > East 25 Lower
           tags: [xshift]
     - name: West Under Gap
       coord: [37.25, 24.3]
@@ -2985,6 +2985,9 @@ areas:
         - to: Upper Platform
           jumps: 1
         - to: Upper Doorway
+      exits:
+        - to: Spider Room > West
+          tags: [xshift]
     - name: Upper Platform
       coord: [40.65, 17.4]
       local:

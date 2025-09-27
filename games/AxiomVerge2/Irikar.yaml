@@ -241,7 +241,7 @@ areas:
       coord: [13.95, 20.7]
       exits:
         - to: Airy > Northwest
-          tags: [xshift]
+          tags: [xshift, oneway]
     - name: Sat Tower Middle Ledge
       coord: [13.4, 22.6]
       local:
@@ -302,7 +302,7 @@ areas:
       coord: [13.95, 23.1]
       exits:
         - to: Sight Room > Northwest
-          tags: [xshift]
+          tags: [xshift, oneway]
     #endregion
 
     #region Northwest Building/Portal
@@ -909,7 +909,7 @@ areas:
       coord: [10.05, 22.8]
       exits:
         - to: Midwest > East 23
-          tags: [xshift]
+          tags: [xshift, oneway]
     - name: West Rooftops Upper Staircase
       coord: [10.4, 22.3]
       local:
@@ -1139,7 +1139,7 @@ areas:
       coord: [14.95, 23.4]
       exits:
         - to: East Rooftops > Upper West
-          tags: [xshift]
+          tags: [xshift, oneway]
     - name: Northwest
       coord: [14.05, 23.1]
       local:

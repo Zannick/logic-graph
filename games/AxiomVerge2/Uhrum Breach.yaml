@@ -896,7 +896,8 @@ areas:
         - to: Bottom West
       exits:
         - to: South Slime > East
-          tags: [xdoor]
+          movement: base
+          penalty_tags: [xdoor, -base.2]
 
     - name: Center West
       coord: [26.7, 26.9]
@@ -1286,6 +1287,8 @@ areas:
         - to: Button
           req: Slingshot_Hook
           movement: fast_hover
+        - to: Annuna Breach > Smiley > West
+          tags: [xdoor]
 
 - name: Locked Down  # MARK: Locked Down
   on_entry: $reset_old_area(^newpos)

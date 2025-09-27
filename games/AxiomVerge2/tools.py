@@ -9,7 +9,7 @@ import sys
 ROOT = (pathlib.Path(__file__).parent / '../..').resolve()
 sys.path.append(str(ROOT))
 SRCDIR = pathlib.Path(__file__).parent / 'src'
-from Compiler import GameLogic, treeToString
+from Compiler import GameLogic, get_exit_target
 from Utils import construct_id
 
 import igraph as ig
@@ -291,6 +291,31 @@ def missing_shockwave_price():
     for point in AV2.all_points():
         if 'req' in point and '$shockwave' in point['req'] and 'price' not in point:
             missing.append(point['fullname'])
+    if not missing:
+        print('All set!')
+    else:
+        pprint(missing)
+
+def missing_reverse_exits():
+    missing = []
+    for exit in AV2.exits():
+        t = exit.get('tags', ())
+        if 'oneway' in t or 'req' in exit:
+            continue
+        if 'xshift' in t or 'xdoor' in t:
+            exit_spot = construct_id(exit['region'], exit['area'], exit['spot'])
+            sp = get_exit_target(exit)
+            spot = AV2.id_lookup[sp]
+            for ex in spot.get('exits', ()):
+                if get_exit_target(ex) != exit_spot:
+                    continue
+                if 'xshift' in t and 'xshift' not in ex.get('tags', ()):
+                    missing.append(f"{exit['fullname']} reverse: {ex['fullname']} missing xshift tag")
+                elif 'xdoor' in t and 'xdoor' not in ex.get('tags', ()):
+                    missing.append(f"{exit['fullname']} reverse: {ex['fullname']} missing xdoor tag")
+                break
+            else:
+                missing.append(f"{exit['fullname']} missing a reverse edge from {spot['fullname']}")
     if not missing:
         print('All set!')
     else:

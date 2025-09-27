@@ -133,7 +133,7 @@ areas:
           item: Record_Losses
           req: $can_damage
           time: 2
-          tag: [standing]
+          tags: [standing]
 
 - name: Ebih Cave  # MARK: Ebih Cave
   on_entry: $reset_old_area(^newpos)

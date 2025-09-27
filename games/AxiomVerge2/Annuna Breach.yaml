@@ -414,6 +414,9 @@ areas:
         flipside: Annuna > Vertical Room > West 17
       local:
         - to: East 18
+      exits:
+        - to: Rear Entrance > East
+          tags: [xdoor]
     - name: East 18
       coord: [40.9, 17.6]
       exits:
@@ -422,7 +425,7 @@ areas:
           movement: base
           jumps: 4
         - to: Ambushes > West 18
-          tag: [xdoor]
+          tags: [xdoor]
     - name: East 19
       coord: [40.9, 18.6]
       local:
