@@ -14,6 +14,7 @@ from Utils import construct_id
 
 import igraph as ig
 import leidenalg as la
+import networkx as nx
 
 AV2 = GameLogic('AxiomVerge2')
 
@@ -23,6 +24,84 @@ LOC_SPOTS = {spot['id'] for spot in AV2.spots()
              or ('actions' in spot and any('$visit' in a['do'] for a in spot['actions']))}
 
 UNFLIPPABLE = ('Antarctica', 'Interior', 'Menu')
+
+class UnionFind:
+    def __init__(self, ids):
+        self.parent = {i: i for i in ids}
+        self.size = {i: 1 for i in ids}
+
+    def representative(self, sp):
+        p = self.parent[sp]
+        flatten = []
+        while p != self.parent[p]:
+            flatten.append(sp)
+            sp = p
+            p = self.parent[sp]
+        for sp in flatten:
+            self.parent[sp] = p
+        return p
+    
+    def set_size(self, sp):
+        return self.size[self.representative(sp)]
+    
+    def sets(self):
+        return [(sp, self.size[sp]) for sp, p in self.parent.items() if sp == p]
+    
+    def nontrivial_sets(self):
+        return [(x, y) for x,y in self.sets() if y > 1]
+    
+    def trivial_sets(self):
+        return [x for x,y in self.sets() if y == 1]
+    
+    def union(self, sp1, sp2):
+        p1 = self.representative(sp1)
+        p2 = self.representative(sp2)
+
+        if p1 == p2:
+            return
+        if self.size[p1] < self.size[p2]:
+            self.parent[p1] = p2
+            self.size[p2] += self.size[p1]
+        else:
+            self.parent[p2] = p1
+            self.size[p1] += self.size[p2]
+
+    def flatten(self):
+        for sp in self.parent:
+            self.representative(sp)
+
+    def full_set(self, sp):
+        self.flatten()
+        common = self.parent[sp]
+        return [sp for sp, p in self.parent.items() if p == common]
+        
+
+def merge_free():
+    uf = UnionFind([sp['id'] for sp in AV2.spots()])
+    fd = AV2.free_distances
+    for sp1, dmap in fd.items():
+        for sp2 in dmap:
+            if sp1 < sp2 and sp1 in fd.get(sp2, {}):
+                uf.union(sp1, sp2)
+    # Spots that go to a single union with any free edge can be merged into it
+    # only if it has nothing interesting: no locations, no actions, no map tiles not in the union
+    #for sp in AV2.spots():
+    #    sp = sp['id']
+    #    neighbors = {uf.representative(sp2) for sp2 in AV2.base_distances[sp]}
+    #    if len(neighbors) == 1 and fd.get(sp):  # test fd is nonempty since fd is a subset of bd
+    #        uf.union(sp, neighbors.pop())
+
+    # Look for free cycles (above found 2-cycles)
+    dg = nx.DiGraph()
+    dg.add_nodes_from(uf.parent.values())
+    for sp1, dmap in fd.items():
+        s = uf.representative(sp1)
+        dg.add_edges_from((s, uf.representative(t)) for t in dmap)
+    for cycle in nx.simple_cycles(dg):
+        for s in cycle[1:]:
+            uf.union(cycle[0], s)
+    return uf
+
 
 def get_movement_cost(movement):
     if m := AV2.exit_movements.get(movement):
