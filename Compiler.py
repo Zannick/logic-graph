@@ -1180,6 +1180,35 @@ class GameLogic(object):
         return 'pr' not in info or self.examiner.examine(info['pr'].tree, spot_id, name)
 
 
+    def translate_dest(self, info, spot_id):
+        if info['to'][0] == '^':
+            d = info['to'][1:]
+            if d in self.data_values:
+                dest = self.data_values[d].get(spot_id)
+                if dest != 'SpotId::None':
+                    return construct_id(*place_to_names(dest))
+            return info['to']  # context value can't be translated
+        return get_exit_target(info)
+
+
+    def edges_from(self, spot_id):
+        sp = self.id_lookup[spot_id]
+
+        def valid_data_dest(info):
+            if info['to'][0] == '^':
+                d = info['to'][1:]
+                if d in self.data_values:
+                    targ = self.data_values[d].get(spot_id)
+                    return targ != 'SpotId::None' and targ != sp['fullname']
+            return True
+        
+        return ((self.translate_dest(info, spot_id), info) for info in itertools.chain(
+            sp.get('exits', []),
+            (act for act in sp.get('actions', []) if 'to' in act),
+            (act for act in self.global_actions if 'to' in act and valid_data_dest(act) and self.is_this_possible(act['id'], spot_id)),
+            (wp for wn, wp in self.warps.items() if valid_data_dest(wp) and self.is_this_possible(wn, spot_id))
+        ))
+
     @cached_property
     def basic_distances(self):
         """Fixed distances from movements, exits, and exit-like warps and actions."""

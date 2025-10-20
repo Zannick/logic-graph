@@ -81,15 +81,10 @@ class StringVisitor(RulesVisitor):
         s = f'Setting:{ctx.SETTING()}'
         if ctx.LIT():
             s += f'[{ctx.LIT()}]'
-        if ctx.NOT():
-            return f'NOT[ {s} ]'
         return s
 
     def visitArgument(self, ctx):
-        arg = f'Arg:{self.visit(ctx.ref())}'
-        if ctx.NOT():
-            return f'NOT[ {arg} ]'
-        return arg
+        return f'Arg:{self.visit(ctx.ref())}'
 
     def visitRef(self, ctx):
         ref = str(ctx.REF()[-1])[1:]

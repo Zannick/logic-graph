@@ -9,7 +9,7 @@ import sys
 ROOT = (pathlib.Path(__file__).parent / '../..').resolve()
 sys.path.append(str(ROOT))
 SRCDIR = pathlib.Path(__file__).parent / 'src'
-from Compiler import GameLogic, get_exit_target
+from Compiler import GameLogic, get_exit_target, LOCAL_REFERENCE_RE
 from Utils import construct_id
 
 import igraph as ig
@@ -74,7 +74,13 @@ class UnionFind:
         self.flatten()
         common = self.parent[sp]
         return [sp for sp, p in self.parent.items() if p == common]
-        
+
+    def clique_map(self):
+        cm = defaultdict(list)
+        for sp, p in self.parent.items():
+            cm[p].append(sp)
+        return cm
+
 
 def merge_free():
     uf = UnionFind([sp['id'] for sp in AV2.spots()])
@@ -101,6 +107,44 @@ def merge_free():
         for s in cycle[1:]:
             uf.union(cycle[0], s)
     return uf
+
+# find all edges between cliques, so we can build a representative
+# we might not need to analyze the context that much, if we can make a new ContextAccess type
+# that contains bitflags/IntComps for access stuff
+
+def make_edge_lists(uf: UnionFind):
+    cliques = uf.clique_map()
+    free_conns = defaultdict(set)
+    edges = defaultdict(lambda: defaultdict(set))
+    for c1, cset in cliques.items():
+        for s1 in cset:
+            if s1 in AV2.free_distances:
+                free_conns[c1].update(uf.representative(s) for s in AV2.free_distances[s1])
+                free_conns[c1].discard(c1)
+            for s2, edge in AV2.edges_from(s1):
+                # for now, skip context edges that aren't pre-calculated data
+                if s2[0] == '^':
+                    continue
+                c2 = uf.representative(s2)
+                if c2 == c1:
+                    continue
+                if 'req' not in edge:
+                    continue
+                text = edge['req']
+                if '^_' in text:
+                    sp = AV2.id_lookup[s1]
+                    def replace(m):
+                        return '^' + AV2.lookup_local_context(m.group(1), sp['region'], sp['area'])
+                    text = LOCAL_REFERENCE_RE.sub(replace, text)
+                edges[c1][c2].add(text)
+        # at this point we have all the edges from c1, now we just combine them. For each c2:
+        # - if it's free, it's free.
+        # - if there's more than one, combine it via OR
+        # - but first split all the ones that are ORs to get the bool atoms, then we can deduplicate
+        # - if any atoms are ANDs that contain other atoms, we can discard them: A OR (A AND B) => A
+        # - if any are fully negations (may be hard to tell), the whole is true: A OR NOT A => True
+        # - might also want to check for any rearranged atoms like A AND B is the same as B AND A
+    return free_conns, edges
 
 
 def get_movement_cost(movement):
