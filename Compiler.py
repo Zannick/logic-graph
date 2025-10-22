@@ -10,6 +10,7 @@ import pathlib
 import re
 import subprocess
 import sys
+from typing import Dict
 import yaml
 # TODO: pyspellchecker to check for issues with item names
 
@@ -143,8 +144,8 @@ def str_to_rusttype(val: str, t: str) -> str:
     return val
 
 
-def treeToString(tree: antlr4.ParserRuleContext):
-    return StringVisitor().visit(tree)
+def treeToString(tree: antlr4.ParserRuleContext, local_ctx: Dict[str, str] = None):
+    return StringVisitor(ctxdict=local_ctx).visit(tree)
 
 
 def get_spot_reference_names(target, source):
@@ -1886,18 +1887,20 @@ class GameLogic(object):
             d[ctx] = t
         return d
 
-    def get_default_ctx(self):
+    @cached_property
+    def default_ctx(self):
         return {c: c for c in itertools.chain(self.context_values, self.data_defaults)
                 if '__ctx__' not in c}
+    
+    def get_default_ctx(self):
+        # clone the dict so it isn't modified by callers
+        return self.default_ctx.copy()
 
-    def get_local_ctx(self, info):
+    @cache
+    def _local_ctx(self, region, area):
         d = self.get_default_ctx()
-        if 'region' not in info:
-            return d
-        area = info.get('area') or info['name']
-
-        levels = [construct_id(info['region']).lower(),
-                  construct_id(info['region'], area).lower()]
+        levels = [construct_id(region).lower(),
+                  construct_id(region, area).lower()]
         for cname in self.context_values:
             if '__ctx__' not in cname:
                 continue
@@ -1906,6 +1909,12 @@ class GameLogic(object):
             if pref in levels:
                 d[local] = cname
         return d
+
+    def get_local_ctx(self, info):
+        if 'region' not in info:
+            return self.get_default_ctx()
+        area = info.get('area') or info['name']
+        return self._local_ctx(info['region'], area)
 
     def translate_ctx(self, ctx, info):
         if 'region' not in info or ctx[0] != '_':
