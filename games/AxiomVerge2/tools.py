@@ -5,11 +5,13 @@ import os
 import pathlib
 from pprint import pprint
 import sys
+from typing import Any, Dict, List, Tuple
 
 ROOT = (pathlib.Path(__file__).parent / '../..').resolve()
 sys.path.append(str(ROOT))
 SRCDIR = pathlib.Path(__file__).parent / 'src'
-from Compiler import GameLogic, get_exit_target, LOCAL_REFERENCE_RE
+from grammar import RulesParser
+from Compiler import GameLogic, get_exit_target, treeToString, LOCAL_REFERENCE_RE
 from Utils import construct_id
 
 import igraph as ig
@@ -115,8 +117,12 @@ def merge_free():
 def make_edge_lists(uf: UnionFind):
     cliques = uf.clique_map()
     free_conns = defaultdict(set)
-    edges = defaultdict(lambda: defaultdict(set))
+    edges = {}
+    edge_texts = defaultdict(dict)
+    count = 0
+    trim = 0
     for c1, cset in cliques.items():
+        ext = edges[c1] = defaultdict(list)
         for s1 in cset:
             if s1 in AV2.free_distances:
                 free_conns[c1].update(uf.representative(s) for s in AV2.free_distances[s1])
@@ -136,7 +142,12 @@ def make_edge_lists(uf: UnionFind):
                     def replace(m):
                         return '^' + AV2.lookup_local_context(m.group(1), sp['region'], sp['area'])
                     text = LOCAL_REFERENCE_RE.sub(replace, text)
-                edges[c1][c2].add(text)
+                    edge['reqlr'] = text
+                    edge['pr'].tree.local_ctx = AV2.get_local_ctx(edge)
+                else:
+                    # Any shared objects may have this overwritten, but then again, they should all be None if shared
+                    edge['pr'].tree.local_ctx = None
+                ext[c2].append(edge['pr'].tree)
         # at this point we have all the edges from c1, now we just combine them. For each c2:
         # - if it's free, it's free.
         # - if there's more than one, combine it via OR
@@ -144,8 +155,109 @@ def make_edge_lists(uf: UnionFind):
         # - if any atoms are ANDs that contain other atoms, we can discard them: A OR (A AND B) => A
         # - if any are fully negations (may be hard to tell), the whole is true: A OR NOT A => True
         # - might also want to check for any rearranged atoms like A AND B is the same as B AND A
-    return free_conns, edges
+        for c2, atoms in ext.items():
+            if not atoms:
+                continue
+            text = f'{c1} -> {c2}: OR[ {" , ".join(treeToString(atom, atom.local_ctx) for atom in atoms)} ]'
+            clist = cfold(atoms)
+            ocount = len(clist)
+            clist = list(filter(None, clist))
+            trim += ocount - len(clist)
+            if not clist:
+                print(text, '=> True')
+                free_conns[c1].add(c2)
+            elif clist == [False]:
+                print(text, '=> False')
+            else:
+                if len(clist) == 1:
+                    t2 = treeToString(clist[0], clist[0].local_ctx)
+                else:
+                    t2 = f'OR [ {" , ".join(treeToString(atom, atom.local_ctx) for atom in clist)} ]'
+                if text != t2:
+                    if 'None' in t2 or ocount > len(clist):
+                        print(text, '=>', t2)
+                    count += 1
+                edge_texts[c1][c2] = t2
 
+    print(f'{count} clique-clique edges improved, with {trim} trims')
+    return free_conns, edges, edge_texts
+
+
+def cfold(orlist: List[Dict[str, Any]]):
+    atoms = []
+    texts = set()
+    queue = [c for c in orlist]
+    empty = True
+
+    def add_if_unique(atom):
+        text = treeToString(atom, atom.local_ctx)
+        if text not in texts:
+            texts.add(text)
+            atoms.append(atom)
+
+    while queue:
+        tree = queue.pop(0)
+        if not isinstance(tree, RulesParser.BoolExprContext):
+            add_if_unique(tree)
+            continue
+        if tree.TRUE():
+            return []
+        if tree.FALSE():
+            empty = False
+            continue
+        if tree.OR():
+            s1, s2 = tree.boolExpr()
+            s1.local_ctx = s2.local_ctx = tree.local_ctx
+            queue.append(s1)
+            queue.append(s2)
+            continue
+        add_if_unique(tree)
+
+    if not atoms:
+        return [] if empty else [empty]
+
+    # Now go back and check ANDs and NOTs
+    for i, atom in enumerate(atoms):
+        if not isinstance(atom, RulesParser.BoolExprContext):
+            continue
+        # If we have both A and NOT A in our OR atoms, the whole result (A or NOT A) is true.
+        if atom.NOT():
+            text = treeToString(atom.getChild(0), atom.local_ctx)
+            if text in texts:
+                return []
+        # If we have an atom A in an AND expression, like A or (A AND B), we can remove the whole AND term
+        # and just keep A.
+        if atom.AND():
+            atom.children = atom.children[::-1]
+            rev = treeToString(atom, atom.local_ctx)
+            atom.children = atom.children[::-1]
+            # (A AND B) or (B AND A) => A AND B
+            # Assuming we don't have A AND A ever
+            if rev in texts:
+                t1 = treeToString(atom.getChild(0), atom.local_ctx)
+                t2 = treeToString(atom.getChild(1), atom.local_ctx)
+                if t1 > t2:  # Only keep the one where t1 < t2
+                    atoms[i] = None
+                continue
+            queue = list(atom.getChildren())
+            while queue:
+                c = queue.pop(0)
+                if isinstance(c, RulesParser.BoolExprContext):
+                    if c.AND():
+                        queue.extend(c.getChildren())
+                        continue
+                    # for an OR, we have to test each of them
+                    if c.OR():
+                        # (A or B or ((A or B) and C)
+                        if all(treeToString(orchild, atom.local_ctx) in texts for orchild in c.getChildren()):
+                            atoms[i] = None
+                            break
+                text = treeToString(c, atom.local_ctx)
+                if text in texts:
+                    atoms[i] = None
+    
+    return atoms
+    
 
 def get_movement_cost(movement):
     if m := AV2.exit_movements.get(movement):
