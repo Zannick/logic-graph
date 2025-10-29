@@ -25,6 +25,7 @@ import leidenalg as la
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
 from grammar.visitors.PossibleVisitor import Result as PossibleResult
+from Context import *
 from FlagProcessor import BitFlagProcessor
 from Utils import *
 
@@ -253,6 +254,9 @@ class GameLogic(object):
         self.special = self._info.get('special', {})
         self.data = self._info.get('data', {})
         self.data_defaults = self._info.get('data', {})
+        self.data_table: Dict[str, DataInfo[Any]] = {}
+        self.context_table: Dict[str, ContextInfo[Any]] = {}
+        self.setting_table: Dict[str, ContextInfo[Any]] = {}
         self.map_defs = self._info.get('map', {})
         self.named_spots = set()
         self.process_regions()
@@ -1547,35 +1551,18 @@ class GameLogic(object):
         return d
 
 
-    def handle_typehint_config(self, category, d):
-        def _apply_override(s, t, info, text):
-            if declared := info.get('type'):
-                if declared != t:
-                    logging.warning(f'{category} {s} type {declared} overridden by {text} ({t})')
-            info['type'] = t
-
+    def handle_typehint_config(self, category: str, d: Dict[str, Dict], table: Dict[str, ContextInfo[Any]]):
         for s, info in d.items():
             if disallowed := info.keys() - TYPEHINT_FIELDS:
                 self._errors.append(f'Unrecognized fields on {category} {s}: {", ".join(disallowed)}')
                 continue
-            if m := info.get('max', 0):
-                t = config_type(m)
-                _apply_override(s, t, info, f'max: {m}')
-                if t == 'int':
-                    info['rust_type'] = get_int_type_for_max(m)
-            elif opts := info.get('opts', ()):
-                t, *types = {config_type(o) for o in opts}
-                if types:
-                    self._errors.append(f'{category} {s} options are mixed types: {t}, {", ".join(types)}')
-                    continue
-                _apply_override(s, t, info, f'opts, e.g. {opts[0]}')
-                if t == 'int':
-                    info['rust_type'] = get_int_type_for_max(max(opts))
-            elif 'type' not in info:
-                self._errors.append(f'{category} {s} must declare one of: type, max, opts')
+            try:
+                table[s] = make_context_info(s, category, info.get('type'), info.get('default'), info.get('opts'), info.get('max'))
+            except ValueError as v:
+                self._errors.append(v)
                 continue
-            if 'rust_type' not in info:
-                info['rust_type'] = ctx_types.get(info['type'], info['type'])
+            info['rust_type'] = table[s].rust_type
+            info['type'] = table[s].value_type
 
         return d
 
@@ -1583,7 +1570,7 @@ class GameLogic(object):
     def settings(self):
         sd = self._info.get('settings', {})
 
-        return self.handle_typehint_config('Setting', sd)
+        return self.handle_typehint_config('Setting', sd, self.setting_table)
 
 
     def check_all(self):
@@ -1859,7 +1846,7 @@ class GameLogic(object):
 
     @cached_property
     def context_type_hints(self):
-        return self.handle_typehint_config('Context', self._info.get('context', {}))
+        return self.handle_typehint_config('Context', self._info.get('context', {}), self.context_table)
 
     @cached_property
     def context_types(self):
