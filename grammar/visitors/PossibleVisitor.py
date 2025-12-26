@@ -140,7 +140,7 @@ class PossibleVisitor(RulesVisitor):
             # if func == 'get_area'
             if func == '$default':
                 if not self.rettype:
-                    logging.warning(f'No rettype for $default invocation')
+                    logging.warning(f'No rettype for $default invocation: {self.name}')
                     return Result.UNCERTAIN
                 if self.rettype == bool:
                     return Result.FALSE
@@ -285,7 +285,7 @@ class PossibleVisitor(RulesVisitor):
     def visitRefEqInvoke(self, ctx):
         val1 = self.visit(ctx.ref())
         refname = str(ctx.ref().REF()[-1])[1:]
-        val2 = self.visit(ctx.invoke(), rettype=self.data_types.get(refname))
+        val2 = self.visit(ctx.invoke(), rettype=self.context_types.get(refname, self.data_types.get(refname)))
         return self._refEq(val1, val2, str(ctx.getChild(1)))
 
 
@@ -299,7 +299,7 @@ class PossibleVisitor(RulesVisitor):
     def visitOneArgument(self, ctx):
         ref = self.visit(ctx.ref())
         refname = str(ctx.ref().REF()[-1])[1:]
-        # TODO: Can there even be data typed as Item?
+        # TODO: Can there even be data or context typed as Item?
         if refname in self.data_types and self.data_types[refname] != 'Item':
             return ref
         return Result.UNCERTAIN

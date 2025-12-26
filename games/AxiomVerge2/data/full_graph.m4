@@ -368,6 +368,7 @@ digraph AxiomVerge2 {
     Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__Center_Platform_West;
     Amagi_Breach__West_Ruins__Gate_East -> Amagi_Breach__West_Ruins__Gate_West;
     Amagi_Breach__West_Ruins__East_Platform -> Amagi_Breach__West_Ruins__Gate_East;
+    Amagi_Breach__West_Ruins__East -> Amagi_Breach__Center_Ruins__West;
     Amagi_Breach__West_Ruins__East -> Amagi_Breach__West_Ruins__East_Platform;
     Annuna__Apocalypse__West -> Annuna__Final_Save__East;
     Annuna__Apocalypse__Northwest_Mid_air -> Annuna__Apocalypse__Northwest_Scaffold_2_West;
@@ -405,7 +406,7 @@ digraph AxiomVerge2 {
     Annuna__Center_Save__West_Floor -> Annuna__Twisty_Passages__East_Floor;
     Annuna__Center_Save__West_Catwalk -> Annuna__Twisty_Passages__East_Catwalk;
     Annuna__Double_Trouble__West -> Annuna__Boss_Gate__East;
-    Annuna__East_Bridge__West_25_Lower -> Annuna__West_Bridge__East_25_Upper;
+    Annuna__East_Bridge__West_25_Lower -> Annuna__West_Bridge__East_25_Lower;
     Annuna__East_Bridge__West_Under_Gap -> Annuna__East_Bridge__Upper_West_Gap;
     Annuna__East_Bridge__West_Under_Gap -> Annuna__East_Bridge__Upper_West_Gap_East;
     Annuna__East_Bridge__West_Under_Gap -> Annuna__West_Bridge__East_25_Upper;
@@ -784,6 +785,7 @@ digraph AxiomVerge2 {
     Annuna__Vertical_Room__Middle_West_Shaft -> Annuna__Vertical_Room__Middle_Ministair;
     Annuna__Vertical_Room__Middle_West_Shaft -> Annuna__Vertical_Room__Save_Point_Left;
     Annuna__Vertical_Room__Middle_Platform_2 -> Annuna__Vertical_Room__Upper_Doorway;
+    Annuna__Vertical_Room__East_18 -> Annuna__Spider_Room__West;
     Annuna__Vertical_Room__Upper_Platform -> Annuna__Vertical_Room__Near_Upper_Ledge;
     Annuna__Vertical_Room__Upper_Platform -> Annuna__Vertical_Room__Upper_Cache;
     Annuna__Vertical_Room__Upper_Cache -> Annuna__Vertical_Room__West_17;
@@ -814,7 +816,7 @@ digraph AxiomVerge2 {
     Annuna__West_Bridge__East_25_Upper -> Annuna__West_Bridge__Upper_Tier_Middle;
     Annuna__West_Bridge__West_26_Lower -> Annuna__Mirror_Match__East_26_Lower;
     Annuna__West_Bridge__West_26_Upper -> Annuna__West_Bridge__Lower_Brick_Column_West;
-    Annuna__West_Bridge__West_26_Upper -> Annuna__Mirror_Match__East_26_Lower;
+    Annuna__West_Bridge__West_26_Upper -> Annuna__Mirror_Match__East_26_Upper;
     Annuna__West_Bridge__Lower_West_Mid_air -> Annuna__West_Bridge__Lower_Brick_Column_West;
     Annuna__West_Bridge__Lower_West_Ledge -> Annuna__West_Bridge__Lower_Brick_Column_West;
     Annuna__West_Bridge__Lower_West_Ledge -> Annuna__Mirror_Match__Plinth_Adjacent;
@@ -969,6 +971,7 @@ digraph AxiomVerge2 {
     Annuna_Breach__Factory_Gate__Column_West -> Annuna_Breach__Factory_Gate__Gate_West;
     Annuna_Breach__Factory_Gate__West -> Annuna_Breach__Bridge__East;
     Annuna_Breach__Factory_Gate__West -> Annuna_Breach__Factory_Gate__Column_East;
+    Annuna_Breach__Gate_and_Floor__Northwest -> Annuna_Breach__Rear_Entrance__East;
     Annuna_Breach__Gate_and_Floor__East_18 -> Annuna_Breach__Ambushes__West_18;
     Annuna_Breach__Gate_and_Floor__East_18 -> Annuna_Breach__Gate_and_Floor__Northwest;
     Annuna_Breach__Gate_and_Floor__East_19 -> Annuna_Breach__Ambushes__West_19;
@@ -1685,6 +1688,7 @@ digraph AxiomVerge2 {
     Emergence__Storage__At_Door -> Emergence__Storage__Portal_Stand;
     Emergence__Storage__At_Door -> Emergence__Storage__Secret_Corner;
     Emergence__Storage__Portal_Stand -> Emergence__Storage__At_Door;
+    Filter__Core__East -> Filter__Upper_Hallway__West;
     Filter__Core__Bottom -> Filter__Core__Terminal_East;
     Filter__Core__Terminal_East -> Filter__Core__Catwalk_West;
     Filter__Core__Terminal_West -> Filter__Core__West;
@@ -1818,6 +1822,7 @@ digraph AxiomVerge2 {
     Giguna__East_Caverns__Lower_Susar -> Giguna__East_Caverns__Under_Lower_Ledge;
     Giguna__East_Caverns__East_Grass -> Giguna__East_Caverns__East_17;
     Giguna__East_Caverns__East_17 -> Giguna__Vertical_Interchange__West_17;
+    Giguna__Far_Corner__East_13 -> Giguna__West_Caverns__West_13;
     Giguna__Far_Corner__Grass -> Giguna__West_Caverns__West_13;
     Giguna__Far_Corner__South -> Giguna__Helipad__North;
     Giguna__Gateway__West_18 -> Giguna__Dual_Path__East_18;
@@ -2400,6 +2405,7 @@ digraph AxiomVerge2 {
     Giguna_Breach__SW_Save__North -> Giguna_Breach__Below_Chimney__Southwest;
     Giguna_Breach__SW_Save__Lower_Platform -> Giguna_Breach__SW_Save__Side_Door;
     Giguna_Breach__SW_Save__Side_Door -> Giguna_Breach__SW_Save__West_11;
+    Giguna_Breach__SW_Save__West_11 -> Giguna_Breach__Deadly_Flora__East;
     Giguna_Breach__SW_Save__West_11 -> Giguna_Breach__SW_Save__Side_Door;
     Giguna_Breach__SW_Save__Save_Point -> Giguna_Breach__SW_Save__Lower_Platform;
     Giguna_Breach__SW_Save__East_12 -> Giguna_Breach__SW_Save__Lower_Platform;
@@ -2522,6 +2528,7 @@ digraph AxiomVerge2 {
     Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_32_7_10__Column;
     Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_32_7_10__Grate_Left_Upper;
     Glacier__Grid_32_7_10__West_9 -> Glacier__Grid_31_9_12__East_9;
+    Glacier__Grid_32_7_10__West_10 -> Glacier__Grid_31_9_12__East_10;
     Glacier__Grid_32_7_10__West_10 -> Glacier__Grid_32_7_10__Left_Rock;
     Glacier__Grid_32_7_10__Grate_Left -> Glacier__Grid_32_7_10__East_9;
     Glacier__Grid_32_7_10__Grate_Left_Upper -> Glacier__Grid_32_7_10__East_9;
@@ -2767,9 +2774,10 @@ digraph AxiomVerge2 {
     Glacier_Breach__Angry_Lions__North -> Glacier_Breach__Grate_Work__Southeast;
     Glacier_Breach__Angry_Lions__Second_Platform -> Glacier_Breach__Angry_Lions__Top_Platform;
     Glacier_Breach__Angry_Lions__Portal_Stand -> Glacier_Breach__Angry_Lions__Top_Platform;
+    Glacier_Breach__Control__East -> Glacier_Breach__Zappers__West;
     Glacier_Breach__Control__Upper_Corner -> Glacier_Breach__Control__Lower_Corner;
     Glacier_Breach__Control__West -> Glacier_Breach__Crystals__East;
-    Glacier_Breach__Crystals__East -> Glacier_Breach__Control__East;
+    Glacier_Breach__Crystals__East -> Glacier_Breach__Control__West;
     Glacier_Breach__Crystals__East -> Glacier_Breach__Crystals__West;
     Glacier_Breach__Crystals__West -> Glacier_Breach__Floaters__East;
     Glacier_Breach__Electric_Arena__West -> Glacier_Breach__Piano_Roll__East_10;
@@ -3556,6 +3564,7 @@ digraph AxiomVerge2 {
     Uhrum_Breach__Annuna_Gate__Button -> Annuna_Breach__Smiley__Upper_Portal_Exit;
     Uhrum_Breach__Annuna_Gate__Button -> Uhrum_Breach__Annuna_Gate__Save_Point;
     Uhrum_Breach__Annuna_Gate__Button -> Uhrum_Breach__Annuna_Gate__Structure;
+    Uhrum_Breach__Annuna_Gate__East -> Annuna_Breach__Smiley__West;
     Uhrum_Breach__Annuna_Gate__East -> Uhrum_Breach__Annuna_Gate__Button;
     Uhrum_Breach__Annuna_Gate__East -> Uhrum_Breach__Annuna_Gate__Structure;
     Uhrum_Breach__Blob__West_Side -> Giguna_Breach__Secret_Tunnel__East;
@@ -5345,6 +5354,7 @@ digraph AxiomVerge2 {
     Ebih_Breach__Rocky_Cages__Hill_East -> Ebih_Breach__Rocky_Cages__Middle_Floating_Rock;
     Ebih_Breach__Rocky_Cages__Platform_2 -> Ebih_Breach__Rocky_Cages__East;
     Ebih_Breach__Rocky_Cages__Platform_2 -> Ebih_Breach__Rocky_Cages__Hill_East;
+    Ebih_Breach__Rocky_Cages__Platform_2 -> Ebih_Breach__Rocky_Cages__Upper_Slope;
     Ebih_Breach__Rocky_Cages__Platform_2 -> Ebih_Breach__Rocky_Cages__Lower_Cage_East;
     Ebih_Breach__Rocky_Cages__Northeast -> Ebih_Breach__Rocky_Cages__Platform_2;
     Ebih_Breach__Rocky_Cages__Northeast -> Ebih_Breach__Rocky_Cages__Upper_Slope;
@@ -5471,8 +5481,10 @@ digraph AxiomVerge2 {
     Ebih__Base_Camp__Top_Platform -> Ebih__Base_Camp__Tent_Entry;
     Ebih__By_Garage__East_13 -> Ebih__By_Garage__East_Platform;
     Ebih__By_Garage__East_13 -> Ebih__By_Garage__Garage_Entry;
+    Ebih__By_Garage__East_13 -> Ebih__By_Garage__East_Below_Platforms;
     Ebih__By_Garage__East_Platform -> Ebih__By_Garage__East_13;
     Ebih__By_Garage__East_Platform -> Ebih__By_Garage__Garage_Entry;
+    Ebih__By_Garage__East_Platform -> Ebih__By_Garage__East_Below_Platforms;
     Ebih__By_Garage__Crawlspace_Opening -> Ebih__By_Garage__East_13;
     Ebih__By_Garage__Crawlspace_Opening -> Ebih__By_Garage__East_Platform;
     Ebih__By_Garage__Crawlspace_Opening -> Ebih__By_Garage__Outcropping;
@@ -5484,6 +5496,7 @@ digraph AxiomVerge2 {
     Ebih__By_Garage__East_Bush -> Ebih__By_Garage__Lower_Platform;
     Ebih__By_Garage__East_Bush -> Ebih__By_Garage__West_Bush;
     Ebih__By_Garage__Lower_Platform -> Ebih__By_Garage__East_13;
+    Ebih__By_Garage__Lower_Platform -> Ebih__By_Garage__West_Below_Platforms;
     Ebih__By_Garage__Lower_Platform -> Ebih__By_Garage__Garage_Entry;
     Ebih__By_Garage__West_Bush -> Ebih__By_Garage__East_Bush;
     Ebih__By_Garage__West_Bush -> Ebih__By_Garage__Lower_Platform;

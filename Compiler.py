@@ -10,6 +10,7 @@ import pathlib
 import re
 import subprocess
 import sys
+from typing import Dict
 import yaml
 # TODO: pyspellchecker to check for issues with item names
 
@@ -24,6 +25,7 @@ import leidenalg as la
 from grammar import parseRule, parseAction, ParseResult
 from grammar.visitors import *
 from grammar.visitors.PossibleVisitor import Result as PossibleResult
+from Context import *
 from FlagProcessor import BitFlagProcessor
 from Utils import *
 
@@ -143,8 +145,8 @@ def str_to_rusttype(val: str, t: str) -> str:
     return val
 
 
-def treeToString(tree: antlr4.ParserRuleContext):
-    return StringVisitor().visit(tree)
+def treeToString(tree: antlr4.ParserRuleContext, local_ctx: Dict[str, str] = None):
+    return StringVisitor(ctxdict=local_ctx).visit(tree)
 
 
 def get_spot_reference_names(target, source):
@@ -252,6 +254,9 @@ class GameLogic(object):
         self.special = self._info.get('special', {})
         self.data = self._info.get('data', {})
         self.data_defaults = self._info.get('data', {})
+        self.data_table: Dict[str, DataInfo[Any]] = {}
+        self.context_table: Dict[str, ContextInfo[Any]] = {}
+        self.setting_table: Dict[str, ContextInfo[Any]] = {}
         self.map_defs = self._info.get('map', {})
         self.named_spots = set()
         self.process_regions()
@@ -1180,6 +1185,35 @@ class GameLogic(object):
         return 'pr' not in info or self.examiner.examine(info['pr'].tree, spot_id, name)
 
 
+    def translate_dest(self, info, spot_id):
+        if info['to'][0] == '^':
+            d = info['to'][1:]
+            if d in self.data_values:
+                dest = self.data_values[d].get(spot_id)
+                if dest != 'SpotId::None':
+                    return construct_id(*place_to_names(dest))
+            return info['to']  # context value can't be translated
+        return get_exit_target(info)
+
+
+    def edges_from(self, spot_id):
+        sp = self.id_lookup[spot_id]
+
+        def valid_data_dest(info):
+            if info['to'][0] == '^':
+                d = info['to'][1:]
+                if d in self.data_values:
+                    targ = self.data_values[d].get(spot_id)
+                    return targ != 'SpotId::None' and targ != sp['fullname']
+            return True
+        
+        return ((self.translate_dest(info, spot_id), info) for info in itertools.chain(
+            sp.get('exits', []),
+            (act for act in sp.get('actions', []) if 'to' in act),
+            (act for act in self.global_actions if 'to' in act and valid_data_dest(act) and self.is_this_possible(act['id'], spot_id)),
+            (wp for wn, wp in self.warps.items() if valid_data_dest(wp) and self.is_this_possible(wn, spot_id))
+        ))
+
     @cached_property
     def basic_distances(self):
         """Fixed distances from movements, exits, and exit-like warps and actions."""
@@ -1517,35 +1551,18 @@ class GameLogic(object):
         return d
 
 
-    def handle_typehint_config(self, category, d):
-        def _apply_override(s, t, info, text):
-            if declared := info.get('type'):
-                if declared != t:
-                    logging.warning(f'{category} {s} type {declared} overridden by {text} ({t})')
-            info['type'] = t
-
+    def handle_typehint_config(self, category: str, d: Dict[str, Dict], table: Dict[str, ContextInfo[Any]]):
         for s, info in d.items():
             if disallowed := info.keys() - TYPEHINT_FIELDS:
                 self._errors.append(f'Unrecognized fields on {category} {s}: {", ".join(disallowed)}')
                 continue
-            if m := info.get('max', 0):
-                t = config_type(m)
-                _apply_override(s, t, info, f'max: {m}')
-                if t == 'int':
-                    info['rust_type'] = get_int_type_for_max(m)
-            elif opts := info.get('opts', ()):
-                t, *types = {config_type(o) for o in opts}
-                if types:
-                    self._errors.append(f'{category} {s} options are mixed types: {t}, {", ".join(types)}')
-                    continue
-                _apply_override(s, t, info, f'opts, e.g. {opts[0]}')
-                if t == 'int':
-                    info['rust_type'] = get_int_type_for_max(max(opts))
-            elif 'type' not in info:
-                self._errors.append(f'{category} {s} must declare one of: type, max, opts')
+            try:
+                table[s] = make_context_info(s, category, info.get('type'), info.get('default'), info.get('opts'), info.get('max'))
+            except ValueError as v:
+                self._errors.append(v)
                 continue
-            if 'rust_type' not in info:
-                info['rust_type'] = ctx_types.get(info['type'], info['type'])
+            info['rust_type'] = table[s].rust_type
+            info['type'] = table[s].value_type
 
         return d
 
@@ -1553,7 +1570,7 @@ class GameLogic(object):
     def settings(self):
         sd = self._info.get('settings', {})
 
-        return self.handle_typehint_config('Setting', sd)
+        return self.handle_typehint_config('Setting', sd, self.setting_table)
 
 
     def check_all(self):
@@ -1829,7 +1846,7 @@ class GameLogic(object):
 
     @cached_property
     def context_type_hints(self):
-        return self.handle_typehint_config('Context', self._info.get('context', {}))
+        return self.handle_typehint_config('Context', self._info.get('context', {}), self.context_table)
 
     @cached_property
     def context_types(self):
@@ -1857,18 +1874,20 @@ class GameLogic(object):
             d[ctx] = t
         return d
 
-    def get_default_ctx(self):
+    @cached_property
+    def default_ctx(self):
         return {c: c for c in itertools.chain(self.context_values, self.data_defaults)
                 if '__ctx__' not in c}
+    
+    def get_default_ctx(self):
+        # clone the dict so it isn't modified by callers
+        return self.default_ctx.copy()
 
-    def get_local_ctx(self, info):
+    @cache
+    def _local_ctx(self, region, area):
         d = self.get_default_ctx()
-        if 'region' not in info:
-            return d
-        area = info.get('area') or info['name']
-
-        levels = [construct_id(info['region']).lower(),
-                  construct_id(info['region'], area).lower()]
+        levels = [construct_id(region).lower(),
+                  construct_id(region, area).lower()]
         for cname in self.context_values:
             if '__ctx__' not in cname:
                 continue
@@ -1877,6 +1896,12 @@ class GameLogic(object):
             if pref in levels:
                 d[local] = cname
         return d
+
+    def get_local_ctx(self, info):
+        if 'region' not in info:
+            return self.get_default_ctx()
+        area = info.get('area') or info['name']
+        return self._local_ctx(info['region'], area)
 
     def translate_ctx(self, ctx, info):
         if 'region' not in info or ctx[0] != '_':

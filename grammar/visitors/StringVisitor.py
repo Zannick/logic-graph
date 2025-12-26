@@ -3,7 +3,13 @@ from grammar import RulesParser, RulesVisitor
 
 class StringVisitor(RulesVisitor):
 
-    def visitBoolExpr(self, ctx):
+    def __init__(self, ctxdict=None):
+        self.ctxdict = ctxdict or {}
+    
+    def _getRefRaw(self, ref):
+        return self.ctxdict.get(ref, ref)
+
+    def visitBoolExpr(self, ctx: RulesParser.BoolExprContext):
         try:
             if ctx.OR():
                 return f'OR[ {self.visit(ctx.boolExpr(0))} , {self.visit(ctx.boolExpr(1))} ]'
@@ -81,18 +87,13 @@ class StringVisitor(RulesVisitor):
         s = f'Setting:{ctx.SETTING()}'
         if ctx.LIT():
             s += f'[{ctx.LIT()}]'
-        if ctx.NOT():
-            return f'NOT[ {s} ]'
         return s
 
     def visitArgument(self, ctx):
-        arg = f'Arg:{self.visit(ctx.ref())}'
-        if ctx.NOT():
-            return f'NOT[ {arg} ]'
-        return arg
+        return f'Arg:{self.visit(ctx.ref())}'
 
     def visitRef(self, ctx):
-        ref = str(ctx.REF()[-1])[1:]
+        ref = self._getRefRaw(str(ctx.REF()[-1])[1:])
         if len(ctx.REF()) == 2:
             return f'[Ref:{ref} At Ref:{str(ctx.REF(0))[1:]}]'
         if ctx.PLACE():
@@ -135,3 +136,9 @@ class StringVisitor(RulesVisitor):
     def visitItemList(self, ctx):
         els = list(map(str, ctx.FUNC())) + [self.visit(item) for item in ctx.item()]
         return f'[{", ".join(els)}]'
+
+    def visitSomewhere(self, ctx):
+        return f'({"NOT " if ctx.NOT() else ""}WITHIN {" , ".join(str(p) for p in ctx.PLACE())})'
+    
+    def visitRefInPlaceName(self, ctx):
+        return f'(Arg:{self.visit(ctx.ref())} {"NOT " if ctx.NOT() else ""}WITHIN {ctx.PLACE()})'
