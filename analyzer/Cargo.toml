@@ -52,7 +52,7 @@ diesel = { version = "2.*", default-features = false, features = ["mysql", "r2d2
 diesel_migrations = { version = "*", optional = true }
 dotenvy = { version = "*", optional = true }
 [target.'cfg(target_env = "msvc")'.dependencies]
-mysqlclient-sys = { version = "0.4", features = ["bundled"], optional = true}
+mysqlclient-sys = { version = "0.5", features = ["bundled"], optional = true}
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 jemalloc_pprof = { version = "*", optional = true }
