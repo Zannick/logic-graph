@@ -56,7 +56,7 @@ mysqlclient-sys = { version = "0.5", features = ["bundled"], optional = true}
 
 [target.'cfg(not(target_env = "msvc"))'.dependencies]
 jemalloc_pprof = { version = "*", optional = true }
-tikv-jemallocator = { version = "0.6.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"], optional = true }
+tikv-jemallocator = { version = "0.7.0", features = ["profiling", "unprefixed_malloc_on_supported_platforms"], optional = true }
 pprof = { version = "*", features = ["cpp", "prost-codec"] }
 
 [features]
